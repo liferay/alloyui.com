@@ -5,3 +5,5 @@
 3. `git submodule update --init`
 4. `npm install lib/yuidocjs`
 5. `lib/yuidocjs/lib/cli.js -c resources/docs/config.json`
+
+PS: Maybe this [grunt task](https://github.com/gruntjs/grunt-contrib-yuidoc/) can help.
