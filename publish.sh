@@ -6,4 +6,4 @@
 # Commit changes to gh-pages branch: git add . && git commit -m "update" && git push origin gh-pages
 # Goes back to master branch: git checkout master
 
-jekyll && git checkout gh-pages && git rm -rf . && mv _site/* . && rm -rf _site && git add . && git commit -m "update" && git push origin gh-pages && git checkout master
+jekyll && git checkout gh-pages && git rm -rf . && mv _site/* . && rm -rf _site && git add . && git commit -m "Regenerate" && git push origin gh-pages && git checkout master
