@@ -6,14 +6,14 @@ module Jekyll
       @dir  = dir
       @name = "index.html"
 
-      self.read_yaml(File.join(base, '_layouts'), 'example.html')
+      self.read_yaml(File.join(base, '_layouts'), 'examples.html')
       self.data['example'] = self.get_example(site)
       self.process(@name)
     end
 
     def get_example(site)
       {}.tap do |example|
-        Dir['_example/*.yml'].each do |path|
+        Dir['examples/*.yml'].each do |path|
           name   = File.basename(path, '.yml')
           config = YAML.load(File.read(File.join(@base, path)))
           type   = config['type']
@@ -50,11 +50,11 @@ module Jekyll
 
     # Loops through the list of example pages and processes each one.
     def write_example(site)
-      if Dir.exists?('_example')
-        Dir.chdir('_example')
+      if Dir.exists?('examples')
+        Dir.chdir('examples')
         Dir["*.yml"].each do |path|
           name = File.basename(path, '.yml')
-          self.write_single_demo_index(site, "_example/#{path}", name)
+          self.write_single_demo_index(site, "examples/#{path}", name)
         end
 
         Dir.chdir(site.source)
@@ -63,7 +63,7 @@ module Jekyll
     end
 
     def write_example_index(site)
-      example = ListDemoIndex.new(site, site.source, "/example")
+      example = ListDemoIndex.new(site, site.source, "/examples")
       example.render(site.layouts, site.site_payload)
       example.write(site.dest)
 
@@ -72,7 +72,7 @@ module Jekyll
     end
 
     def write_single_demo_index(site, path, name)
-      single_demo = SingleDemoIndex.new(site, site.source, "/example/#{name}", path)
+      single_demo = SingleDemoIndex.new(site, site.source, "/examples/#{name}", path)
 
       if single_demo.data['active']
         single_demo.render(site.layouts, site.site_payload)
