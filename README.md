@@ -22,6 +22,10 @@ Then go to the project's folder:
 
 	cd alloyui.com
 
+Initialize the submodule:
+
+  git submodule update --init
+
 And finally run:
 
 	make run
