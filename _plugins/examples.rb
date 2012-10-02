@@ -6,7 +6,7 @@ module Jekyll
       @dir  = dir
       @name = "index.html"
 
-      self.read_yaml(File.join(base, '_layouts'), 'examples.html')
+      self.read_yaml(File.join(base, '_layouts'), 'list-example.html')
       self.data['example'] = self.get_example(site)
       self.process(@name)
     end
