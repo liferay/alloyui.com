@@ -5,7 +5,7 @@ layout: default
 <div id="page-examples">
 
   <section class="intro">
-    <img src="{{ site.path }}/assets/img/logo.png" alt="AlloyUI - Logo" class="logo">
+    <img src="/assets/img/logo.png" alt="AlloyUI - Logo" class="logo">
     <h1>AlloyUI</h1>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,<br> sed do eiusmod
     tempor incididunt ut labore et dolore<br> magna aliqua. Ut enim ad minim veniam.</p>
@@ -13,15 +13,38 @@ layout: default
 
   <nav>
     <ul>
-      <li>-- Other demos --</li>
+      <li>Other demos</li>
       {% for example in page.examples %}
-      <li><a href="#">{{ example.name }}</a></li>
+      <li><a href="{{ example.source }}" class="iframe-link">{{ example.name }}</a></li>
       {% endfor %}
     </ul>
   </nav>
 
   <div class="demo-single">
-    <iframe src="{{ site.path }}/{{ page.source }}" frameborder="0"></iframe>
+    <iframe src="{{ page.examples[0].source }}" frameborder="0"></iframe>
   </div>
 
 </div>
+
+<script src="http://yui.yahooapis.com/3.7.2/build/yui/yui-min.js"></script>
+<script>
+YUI().use('node', function (Y) {
+
+    var iframe = Y.one('iframe'),
+        iframeLink = Y.all('.iframe-link');
+
+    iframeLink.on('click', function (e) {
+
+      var iframeSrc = iframe.getAttribute('src'),
+          iframeLinkHref = e.currentTarget.getAttribute('href');
+
+      if (iframeLinkHref != iframeSrc) {
+        iframe.setAttribute('src', iframeLinkHref);
+      }
+
+      e.preventDefault();
+
+    });
+
+});
+</script>
