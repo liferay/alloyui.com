@@ -24,7 +24,7 @@ Then go to the project's folder:
 
 Initialize the submodule:
 
-  git submodule update --init
+	git submodule update --init
 
 And finally run:
 
