@@ -3,7 +3,7 @@ install:
 	@echo "\n~ Jekyll installed!\n"
 
 run:
-	@jekyll --server --auto --base-url '/alloyui.com/'
+	@jekyll --server --auto
 
 build:
 	@jekyll
