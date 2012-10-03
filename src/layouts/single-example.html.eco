@@ -1,5 +1,48 @@
 ---
 layout: default
 ---
-<h1><%= @document.title %></h1>
-<div><%- @content %></div>
+
+<div class="page" id="page-examples">
+
+  <nav>
+    <ul>
+      <li>Other examples</li>
+      <% for example in @getCollection('documents').sortArray('title':1): %>
+        <% if example.url.indexOf('/examples') == 0: %>
+          <% if example.url.match('^((?!assets).)*$') && example.url != @document.url: %>
+            <li><a href="<%= example.url %>" class="iframe-link"><%= example.filename %></a></li>
+          <% end %>
+        <% end %>
+      <% end %>
+    </ul>
+  </nav>
+
+  <div class="demo-single">
+    <%- @content %>
+  </div>
+
+</div>
+
+  <script src="http://yui.yahooapis.com/3.7.2/build/yui/yui-min.js"></script>
+  <script>
+  YUI().use('node', function (Y) {
+
+    var iframe = Y.one('iframe'),
+        iframeLink = Y.all('.iframe-link');
+
+      iframeLink.on('click', function (e) {
+
+        var iframeSrc = iframe.getAttribute('src'),
+            iframeLinkHref = e.currentTarget.getAttribute('href');
+
+        if (iframeLinkHref != iframeSrc) {
+          iframe.setAttribute('src', iframeLinkHref);
+        }
+
+        e.preventDefault();
+
+      });
+
+  });
+  </script>
+
