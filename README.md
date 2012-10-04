@@ -10,6 +10,10 @@ We use [DocPad](https://github.com/bevry/docpad), a static generator in NodeJS.
 
 [Install NodeJS](https://github.com/bevry/community/wiki/Installing-Node), if you don't have it yet.
 
+Install DocPad globally:
+
+	sudo npm install -fg docpad@6.7
+
 Once NodeJS is installed, you just need to clone the project:
 
 	git clone git@github.com:zenorocha/alloyui.com.git
