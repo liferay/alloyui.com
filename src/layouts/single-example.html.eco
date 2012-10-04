@@ -6,16 +6,16 @@ layout: default
 
   <nav>
     <ul>
-      <li>Other examples</li>
-      <li><a href="basic.html" class="iframe-link">Basic</a></li>
-      <li><a href="real-world.html" class="iframe-link">Real World</a></li>
-      <!-- <% for example in @getCollection('documents').sortArray('title':1): %>
+      <li>Related examples</li>
+
+      <% for example in @getCollection('documents').sortArray('title':1): %>
         <% if example.url.indexOf('/examples') == 0: %>
-          <% if example.url.match('^((?!assets).)*$') && example.url != @document.url: %>
-            <li><a href="<%= example.url %>" class="iframe-link"><%= example.filename %></a></li>
+          <% if example.tags == @document.tags: %>
+            <li><a href="<%= example.url %>" class="iframe-link"><%= example.title %></a></li>
           <% end %>
         <% end %>
-      <% end %> -->
+      <% end %>
+
     </ul>
   </nav>
 
@@ -24,27 +24,3 @@ layout: default
   </div>
 
 </div>
-
-  <script src="http://yui.yahooapis.com/3.7.2/build/yui/yui-min.js"></script>
-  <script>
-  YUI().use('node', function (Y) {
-
-    var iframe = Y.one('iframe'),
-        iframeLink = Y.all('.iframe-link');
-
-      iframeLink.on('click', function (e) {
-
-        var iframeSrc = iframe.getAttribute('src'),
-            iframeLinkHref = e.currentTarget.getAttribute('href');
-
-        if (iframeLinkHref != iframeSrc) {
-          iframe.setAttribute('src', iframeLinkHref);
-        }
-
-        e.preventDefault();
-
-      });
-
-  });
-  </script>
-
