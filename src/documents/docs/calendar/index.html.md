@@ -1,6 +1,7 @@
 ---
 layout: single-doc
 title: Calendar Overview
+tags: 'calendar'
 ---
 
 # Calendar Overview

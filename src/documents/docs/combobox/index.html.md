@@ -1,6 +1,7 @@
 ---
 layout: single-doc
 title: Combobox Overview
+tags: 'combobox'
 ---
 
 # Combobox Overview

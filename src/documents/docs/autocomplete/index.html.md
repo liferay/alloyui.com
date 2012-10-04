@@ -1,6 +1,7 @@
 ---
 layout: single-doc
 title: AutoComplete Overview
+tags: 'autocomplete'
 ---
 
 # AutoComplete Overview
