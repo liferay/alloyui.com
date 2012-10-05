@@ -1,0 +1,26 @@
+---
+layout: default
+---
+
+<div class="page" id="page-examples">
+
+  <nav>
+    <ul>
+      <li>Related examples</li>
+
+      <% for example in @getCollection('documents').sortArray('title':1): %>
+        <% if example.url.indexOf('/examples') == 0: %>
+          <% if example.tags == @document.tags: %>
+            <li><a href="<%= example.url %>" class="iframe-link"><%= example.title %></a></li>
+          <% end %>
+        <% end %>
+      <% end %>
+
+    </ul>
+  </nav>
+
+  <div class="single-doc">
+    <%- @content %>
+  </div>
+
+</div>

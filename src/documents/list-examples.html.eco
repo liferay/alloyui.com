@@ -1,0 +1,36 @@
+---
+layout: default
+---
+
+<div class="page" id="page-examples">
+
+  <nav>
+    <ul>
+      <li>Category X</li>
+      <li>Category Y</li>
+      <li>Category Z</li>
+      <li>Category W</li>
+    </ul>
+  </nav>
+
+  <div class="list-examples">
+
+    <% for example in @getCollection('documents').sortArray('title':1): %>
+      <% if example.url.indexOf('/examples') == 0: %>
+        <% if example.category: %>
+
+          <section class="example">
+            <a href="<%= example.url %>"><%= example.category %></a>
+            <a href="<%= example.url %>">
+              <img src="<%= example.thumbnail %>" alt="<%= example.category %>" />
+            </a>
+            <p><%= example.description %></p>
+          </section>
+
+        <% end %>
+      <% end %>
+    <% end %>
+
+  </div>
+
+</div>

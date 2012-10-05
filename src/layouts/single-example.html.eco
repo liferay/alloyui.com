@@ -1,0 +1,42 @@
+---
+layout: default
+---
+
+<div class="page" id="page-examples">
+
+  <nav>
+    <ul>
+      <li>Related examples</li>
+
+      <% for example in @getCollection('documents').sortArray('title':1): %>
+        <% if example.url.indexOf('/examples') == 0: %>
+          <% if example.tags == @document.tags: %>
+            <li><a href="<%= example.url %>" class="iframe-link"><%= example.title %></a></li>
+          <% end %>
+        <% end %>
+      <% end %>
+
+    </ul>
+  </nav>
+
+  <div class="single-example">
+    <%- @content %>
+  </div>
+
+  <div class="editor-container">
+    <div id="editor"></div>
+  </div>
+
+</div>
+
+<script>
+  AUI().ready('aui-ace-editor', function(A) {
+
+    var editor = new A.AceEditor({
+        contentBox: '#editor',
+        mode: 'javascript',
+        value: A.one('#snippet').getHTML()
+    }).render();
+
+  });
+</script>

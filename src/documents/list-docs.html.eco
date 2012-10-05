@@ -1,0 +1,48 @@
+---
+layout: default
+---
+
+<div class="page" id="page-docs">
+
+  <nav>
+    <ul>
+
+    <% for docs in @getCollection('documents').sortArray('title':1): %>
+      <% if docs.url.indexOf('/docs') == 0: %>
+          <li><a href="<%= docs.url %>"><%= docs.title %></a></li>
+      <% end %>
+    <% end %>
+
+    </ul>
+  </nav>
+
+  <div class="docs">
+
+    <h1>First Steps</h1>
+
+    <h4>1. Copy and paste</h4>
+
+    <pre><code>// Put the YUI seed file on your page.
+&lt;script src="http://yui.yahooapis.com/3.7.2/build/yui/yui-min.js"&gt;&lt;/script&gt;</pre></code>
+
+    <p>The YUI seed file is an ultra-small bit of JavaScript that enables you to load any YUI component on your page.</p>
+
+    <h4>2. Start using YUI!</h4>
+
+    <pre><code>&lt;script&gt;
+// Create a YUI sandbox on your page.
+YUI().use('node', 'event', function (Y) {
+    // The Node and Event modules are loaded and ready to use.
+    // Your code goes here!
+});
+&lt;/script&gt;</code></pre>
+
+    <p>Create a YUI instance, called a "sandbox", to use any YUI component. Each YUI sandbox has its own instance of YUI (that's the Y parameter that gets passed to the callback function) and its own set of activated modules, so it won't conflict with other sandboxes on the same page. Any variables you declare inside your sandbox will only be available in that sandbox and won't pollute the global scope.</p>
+
+    <p>When creating your YUI sandbox, specify the modules you'd like to use. In this example, we're using the node and event modules. Then, from inside the sandbox, you can access the Node and Event APIs via the Y instance.</p>
+
+    <p>YUI will manage all dependency calculations for the modules you need and load the JavaScript onto your page in a single, combined request. Your code inside the sandbox will execute as soon as all the requested YUI modules are loaded onto the page.</p>
+
+  </div>
+
+</div>
