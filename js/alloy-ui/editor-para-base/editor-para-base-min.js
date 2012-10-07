@@ -1,0 +1,8 @@
+/*
+Copyright (c) 2010, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.com/yui/license.html
+version: 3.7.1pr1
+build: 3.7.1pr1
+*/
+YUI.add("editor-para-base",function(a,l){var i=function(){i.superclass.constructor.apply(this,arguments);},k="host",e="body",c="nodeChange",j="parentNode",b=e+" > p",g="p",f="<br>",h="firstChild",d="li";a.extend(i,a.Base,{_fixFirstPara:function(){var q=this.get(k),s=q.getInstance(),r,t,m=s.config.doc.body,p=m.innerHTML,o=((p.length)?true:false);if(p===f){p="";o=false;}m.innerHTML="<"+g+">"+p+s.EditorSelection.CURSOR+"</"+g+">";t=s.one(b);r=new s.EditorSelection();r.selectNode(t,true,o);},_afterEditorReady:function(){var n=this.get(k),o=n.getInstance(),m;if(o){o.EditorSelection.filterBlocks();m=o.EditorSelection.DEFAULT_BLOCK_TAG;b=e+" > "+m;g=m;}},_afterContentChange:function(){var m=this.get(k),n=m.getInstance();if(n&&n.EditorSelection){n.EditorSelection.filterBlocks();}},_afterPaste:function(){var m=this.get(k),o=m.getInstance(),n=new o.EditorSelection();a.later(50,m,function(){o.EditorSelection.filterBlocks();});},initializer:function(){var m=this.get(k);if(m.editorBR){a.error("Can not plug EditorPara and EditorBR at the same time.");return;}m.after("ready",a.bind(this._afterEditorReady,this));m.after("contentChange",a.bind(this._afterContentChange,this));if(a.Env.webkit){m.after("dom:paste",a.bind(this._afterPaste,this));}}},{NAME:"editorParaBase",NS:"editorParaBase",ATTRS:{host:{value:false}}});a.namespace("Plugin");a.Plugin.EditorParaBase=i;},"3.7.1pr1",{"requires":["editor-base"]});
