@@ -31,3 +31,7 @@ And finally run:
 	docpad run
 
 Now you can see the website running in `http://localhost:9778/` :D
+
+## Deploy
+
+Just run `sh publish.sh` and then go to [zenorocha.github.com/alloyui.com](http://zenorocha.github.com/alloyui.com/)
