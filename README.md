@@ -24,11 +24,11 @@ Then go to the project's folder:
 
 Install dependencies:
 
-	docpad install
+	ant install
 
 And finally run:
 
-	docpad run
+	ant run
 
 Now you can see the website running in `http://localhost:9778/` :D
 
