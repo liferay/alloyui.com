@@ -12,7 +12,7 @@ We use [DocPad](https://github.com/bevry/docpad), a static generator in NodeJS.
 
 Install DocPad globally:
 
-	sudo npm install -fg docpad@6.7
+	sudo npm install -fg docpad@6.8
 
 Once NodeJS is installed, you just need to clone the project:
 
@@ -24,7 +24,7 @@ Then go to the project's folder:
 
 Install dependencies:
 
-	npm install .
+	docpad install
 
 And finally run:
 
