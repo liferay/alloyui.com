@@ -18,10 +18,23 @@
     </target>
 
     <target name="run">
+
+      <if>
+        <not>
+          <available file="${root}/node_modules" />
+        </not>
+        <then>
+          <exec executable="docpad" dir="${root}">
+            <arg value="install" />
+          </exec>
+        </then>
+      </if>
+
       <echo>Running DocPad</echo>
       <exec executable="docpad" dir="${root}">
         <arg value="run" />
       </exec>
+
     </target>
 
     <target name="clean">
