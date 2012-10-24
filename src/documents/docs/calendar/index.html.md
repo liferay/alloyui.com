@@ -1,6 +1,6 @@
 ---
 layout: single-doc
-title: Calendar Overview
+title: Calendar
 tags: 'calendar'
 ---
 

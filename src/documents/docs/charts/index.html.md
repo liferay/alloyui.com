@@ -1,6 +1,6 @@
 ---
 layout: single-doc
-title: Charts Overview
+title: Charts
 tags: 'charts'
 ---
 

@@ -1,6 +1,6 @@
 ---
 layout: single-doc
-title: Combobox Overview
+title: Combobox
 tags: 'combobox'
 ---
 
