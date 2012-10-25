@@ -2,20 +2,25 @@
 
 ## Components
 
-<!--***Done***
+***Done***
+* [AUI] Autocomplete
 
-* [YUI] Autocomplete
--->
 ***Todo***
 
-* **[YUI]** Autocomplete
-* **[AUI]** Calendar
+* **[YUI]** IO e **[AUI]** IO.request
 * **[AUI]** Carousel
-* **[AUI]** Diagram Builder
 * **[AUI]** Image Gallery
-* **[AUI]** Scheduler
-* **[AUI]** Tabs
-* **[AUI]** Textboxlist
 * **[AUI]** Tooltip
+* **[AUI]** Textboxlist
+* **[AUI]** Scheduler
+* **[AUI]** Diagram Builder
 * **[AUI]** Dialog (Panel)
-* **[AUI]** Button
+* **[YUI]** Button
+* **[YUI]** Calendar
+
+Future
+* [YUI] Autocomplete
+* **[YUI]** Tabs
+
+Removed
+* **[AUI]** Tabs
