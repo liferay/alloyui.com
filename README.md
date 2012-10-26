@@ -1,6 +1,6 @@
 # AlloyUI - Website
 
-This is a working in progress of [AlloyUI's](https://github.com/liferay/alloy-ui/) website.
+This is a working in progress of [AlloyUI's](https://github.com/liferay/alloy-ui/) website. Check the [Roadmap here](https://github.com/zenorocha/alloyui.com/wiki/Roadmap).
 
 If you are having any problem with the library, please create an issue on [liferay/alloy-ui](https://github.com/liferay/alloy-ui/) repository.
 
@@ -24,7 +24,11 @@ We use [DocPad](https://github.com/bevry/docpad), a static generator in NodeJS.
 
 		cd alloyui.com
 
-5. And finally run:
+5. Install dependencies:
+
+		ant install
+
+6. And finally run:
 
 		ant run
 
