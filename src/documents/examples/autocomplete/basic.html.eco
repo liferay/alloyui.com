@@ -15,7 +15,18 @@ category: AutoComplete
 <div id="myAutoComplete"></div>
 
 <script id="snippet">
-  <%- @partial('examples/autocomplete/basic.html.eco') %>
+  AUI().use('aui-autocomplete', function(A) {
+
+    var continents = ['America', 'Europe', 'Asia', 'Africa', 'Oceania', 'Antarctica'];
+
+    var autoComplete = new A.AutoComplete({
+      contentBox: '#myAutoComplete',
+      dataSource: continents
+    });
+
+    autoComplete.render();
+
+  });
 </script>
 
 <div class="editor-container">
@@ -34,9 +45,3 @@ category: AutoComplete
 });</code></pre>
   </div>
 </div>
-
-<p>This works!</p>
-<code><%- @partial('examples/autocomplete/basic.html.eco') %></code>
-
-<p>This doesn't work</p>
-<pre><code><%- @partial('examples/autocomplete/basic.html.eco') %></code></pre>
