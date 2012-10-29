@@ -21,6 +21,21 @@ module.exports =
         getUrl: (document) ->
             return @site.url + (document.url or document.get?('url'))
 
+        # Read File
+        readFile: (relativePath) ->
+            fsUtil = require('fs')
+            path = @document.fullDirPath+'/'+relativePath
+            result = fsUtil.readFileSync(path)
+            if result instanceof Error
+                throw result
+            else
+                return result.toString()
+
+        # Code File
+        codeFile: (relativePath,language) ->
+            contents = @readFile(relativePath)
+            return """<pre><code class="#{language}">#{contents}</code></pre>"""
+
     # =================================
     # Environments
 
