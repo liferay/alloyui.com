@@ -5,8 +5,6 @@ AUI().use('aui-autocomplete', function(A) {
   var autoComplete = new A.AutoComplete({
     contentBox: '#myAutoComplete',
     dataSource: continents
-  });
-
-  autoComplete.render();
+  }).render();
 
 });
