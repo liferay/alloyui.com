@@ -14,7 +14,7 @@ AUI().ready('aui-io-request', function(A) {
       return v;
     };
 
-    var io = A.io.request('assets/content.json', {
+    var io = A.io.request('data/content.json', {
 
         autoLoad: false,
         // arguments: {
@@ -70,7 +70,7 @@ AUI().ready('aui-io-request', function(A) {
       }
     );
 
-    // io.set('uri', 'assets/content.json');
+    // io.set('uri', 'data/content.json');
     // io.start();
 
     // Extras
@@ -83,7 +83,7 @@ AUI().ready('aui-io-request', function(A) {
         io.set('cache', cache.get('checked'));
         io.set('method', method.val());
         io.set('dataType', dataType.val());
-        io.set('uri', 'assets/content.' + dataType.val());
+        io.set('uri', 'data/content.' + dataType.val());
 
         io.start();
       }
