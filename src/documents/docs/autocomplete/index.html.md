@@ -32,7 +32,7 @@ Create a HTML element:
 <div id="myAutoComplete"></div>
 ```
 
-Now create a new instance of AutoComplete component, then tell to `contentBox` where it's going to be attached and populate some suggestions by adding a simple JavaScript array to `dataSource`.
+Now create a new instance of AutoComplete component, then tell to `contentBox` where it's going to be attached and populate some suggestions by adding a simple JavaScript array to `dataSource`. Finally, let's render it!
 
 ``` javascript
 AUI().use('aui-autocomplete', function(A) {
@@ -40,22 +40,7 @@ AUI().use('aui-autocomplete', function(A) {
   var autoComplete = new A.AutoComplete({
     contentBox: '#myAutoComplete',
     dataSource: ['America', 'Europe', 'Asia']
-  });
-
-});
-```
-
-Finally, let's render it!
-
-``` javascript
-AUI().use('aui-autocomplete', function(A) {
-
-  var autoComplete = new A.AutoComplete({
-    contentBox: '#myAutoComplete',
-    dataSource: ['America', 'Europe', 'Asia']
-  });
-
-  autoComplete.render();
+  }).render();
 
 });
 ```
@@ -75,9 +60,7 @@ AUI().use('aui-autocomplete', function(A) {
     contentBox: '#myAutoComplete',
     dataSource: ['America', 'Europe', 'Asia']
     delimChar: ','
-  });
-
-  autoComplete.render();
+  }).render();
 
 });
 ```
@@ -92,9 +75,7 @@ AUI().use('aui-autocomplete', function(A) {
     dataSource: ['America', 'Europe', 'Asia']
     delimChar: ',',
     typeAhead: true,
-  });
-
-  autoComplete.render();
+  }).render();
 
 });
 ```
@@ -118,19 +99,9 @@ AUI().use('aui-autocomplete', function(A) {
     schema: {
       resultFields: ['key', 'name', 'description']
     }
-  });
+  }).render();
 
 });
 ```
 
 For more information about configuration, check the <a href="#">API Docs</a>.
-
-<!-- #### AutoComplete suggestions
-
-There are two primary ways to provide the AutoComplete suggestions: From a local array; From a remote data service; Locally defined values are best for small, fixed sets of suggestions. Remote suggestions should be used for larger data sets. When used with the DataSource component, filtering large remote data services can be pushed to the server as well, maximizing client-side performance.
-
-#### Local Suggestions
-
-To configure and provide AutoComplete suggestions locally, you can either pass an array directly to its constructor or you can set the dataSource property to an local array.
-
-Directly initialize suggestions in constructor -->
