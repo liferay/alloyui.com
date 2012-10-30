@@ -63,8 +63,6 @@ AUI().use('aui-autocomplete', function(A) {
     delimChar: ',',
     typeAhead: true,
     contentBox: '#myAutoComplete'
-  });
-
-  autoComplete.render();
+  }).render();
 
 });
