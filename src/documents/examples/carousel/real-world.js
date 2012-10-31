@@ -5,7 +5,7 @@ AUI().ready('aui-carousel', function(A) {
       width: 680,
       height: 254,
       activeIndex: 'rand',
-      intervalTime: 2,
+      intervalTime: 2
       // nodeMenu: '#customMenu',
       // nodeMenuItemSelector: 'li'
   }).render();
