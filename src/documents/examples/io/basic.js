@@ -10,6 +10,6 @@ AUI().use('io', function (A) {
   function complete(id, out, args) {
       var data = out.responseText;
       alert(data);
-  };
+  }
 
 });
