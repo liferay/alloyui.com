@@ -37,3 +37,10 @@ Now you can see the website running in `http://localhost:9778/` :D
 ## Deploy
 
 Just run `sh publish.sh` and then go to [zenorocha.github.com/alloyui.com](http://zenorocha.github.com/alloyui.com/)
+
+## JSHint
+
+Before any commit, please run [JSHint](http://jshint.com/) with the configurations proposed by [yui-lint](https://github.com/yui/yui-lint).
+
+* To do that just go to yui-lint folder: `cd node_modules/yui-lint`
+* Then create this symbolic link: `ln -s $PWD/jshint.json ~/.jshintrc`
