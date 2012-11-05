@@ -1,20 +1,25 @@
 AUI().ready('aui-io-request', function(A) {
 
-    var demoNode = A.one('#demo');
-    var cache = A.one('#cache');
-    var dataType = A.one('#dataType');
-    var method = A.one('#method');
+    var io,
 
-    var log = function(msg) {
-      demoNode.append(msg + '<br/>');
-    };
+        demoNode = A.one('#demo'),
+        cache = A.one('#cache'),
+        dataType = A.one('#dataType'),
+        method = A.one('#method'),
+
+        startConnection = A.one('#startConnection'),
+        stopConnection = A.one('#stopConnection');
+
+        log = function(msg) {
+          demoNode.append(msg + '<br/>');
+        };
 
     YUI.AUI.namespace('defaults.io').uriFormatter = function(v) {
       // set a default formatter for the URI parameter
       return v;
     };
 
-    var io = A.io.request('data/content.json', {
+    io = A.io.request('data/content.json', {
 
         autoLoad: false,
         // arguments: {
@@ -46,8 +51,8 @@ AUI().ready('aui-io-request', function(A) {
             // console.log( this.get('transaction') );
             // console.log( this.get('responseData') );
             // event.halt();
-            var data = this.get('responseData');
-            var out = (dataType.val() == 'json') ? A.JSON.stringify(data) : data;
+            data = this.get('responseData');
+            out = (dataType.val() === 'json') ? A.JSON.stringify(data) : data;
             alert(data);
 
             log('success: ' + out);
@@ -74,9 +79,6 @@ AUI().ready('aui-io-request', function(A) {
     // io.start();
 
     // Extras
-
-    var startConnection = A.one('#startConnection');
-    var stopConnection = A.one('#stopConnection');
 
     startConnection.on('click',
       function(event) {

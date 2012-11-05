@@ -12,7 +12,7 @@ AUI().ready('aui-io-request', 'node', function(A) {
             states = data.states;
 
         // interates on all states to create a new <option> on that <select>
-        for (var i = 0; i < states.length; i++) {
+        for (i = 0; i < states.length; i++) {
           A.one('#state').append('<option value="' + states[i].code + '">' + states[i].name + '</option>');
         }
 
@@ -28,7 +28,7 @@ AUI().ready('aui-io-request', 'node', function(A) {
       if (cityCode !== '') {
 
         // create a new asynchonous request to grab the correspondent cities of that state
-        var cityRequest = A.io.request('data/' + cityCode + '.json', {
+        cityRequest = A.io.request('data/' + cityCode + '.json', {
 
           dataType: 'json',
           on: {
@@ -40,7 +40,7 @@ AUI().ready('aui-io-request', 'node', function(A) {
                   options = '';
 
               // interates on all states to create a new <option> on that <select>
-              for (var i = 0; i < cities.length; i++) {
+              for (i = 0; i < cities.length; i++) {
                 options += '<option value="' + cities[i].name + '">' + cities[i].name + '</option>';
               }
 
