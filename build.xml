@@ -32,6 +32,29 @@
       </exec>
     </target>
 
+    <target name="update">
+      <echo>Submodule Update</echo>
+      <exec executable="git" dir="${root}">
+        <arg value="submodule" />
+        <arg value="update" />
+        <arg value="--init" />
+      </exec>
+      <exec executable="git" dir="lib/aui-lint">
+        <arg value="pull" />
+        <arg value="origin" />
+        <arg value="master" />
+      </exec>
+      <exec executable="git" dir="${root}">
+        <arg value="add" />
+        <arg value="lib/aui-lint" />
+      </exec>
+      <exec executable="git" dir="${root}">
+        <arg value="commit" />
+        <arg value="-m" />
+        <arg value="'Submodule update'" />
+      </exec>
+    </target>
+
     <target name="run">
       <if>
         <not>
