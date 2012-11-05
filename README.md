@@ -36,9 +36,10 @@ Now you can see the website running in `http://localhost:9778/` :D
 
 ## JSHint
 
-Before any commit, please run [JSHint](http://jshint.com/) with the preferences proposed by [yui-lint](https://github.com/yui/yui-lint).
+Before any commit, please run [JSHint](http://jshint.com/) with the preferences proposed by [aui-lint](https://github.com/zenorocha/aui-lint) that were adapted from [yui-lint](https://github.com/yui/yui-lint).
 
-* To do that just go to yui-lint folder: `cd node_modules/yui-lint`
+* To do that, get the git submodule that contains all preferences: `git submodule update --init`
+* Go to aui-lint folder: `cd lib/aui-lint`
 * Then create this symbolic link: `ln -s $PWD/jshint.json ~/.jshintrc`
 * Now you can lint using your terminal like `jshint example.js`, a [sublime text plugin](https://github.com/uipoet/sublime-jshint) or any of those [other solutions](http://www.jshint.com/platforms/).
 
