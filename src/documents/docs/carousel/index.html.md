@@ -51,4 +51,38 @@ AUI().ready('aui-carousel', function(A) {
 });
 ```
 
-[See it live.](../../examples/carousel/)
+[See it live.](../../examples/carousel/basic.html)
+
+#### Configuring Carousel
+
+There are some other options that you can pass to your Carousel instance.
+
+For example, you can set the first image that will appear by defining a `activeIndex` - any number or `rand` (random value)to indicate the image.
+
+``` javascript
+AUI().ready('aui-carousel', function(A) {
+
+  var carousel = new A.Carousel({
+      contentBox: '#demo',
+      width: 680,
+      height: 254,
+      activeIndex: 'rand'
+  }).render();
+
+});
+```
+
+Also, you can set the duration between images on cycling process by changing the value of `intervalTime`.
+
+``` javascript
+AUI().ready('aui-carousel', function(A) {
+
+  var carousel = new A.Carousel({
+      contentBox: '#demo',
+      width: 680,
+      height: 254,
+      intervalTime: 2
+  }).render();
+
+});
+```
