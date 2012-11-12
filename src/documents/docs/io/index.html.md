@@ -80,4 +80,4 @@ AUI().use('aui-io-request', function (A) {
 });
 ```
 
-
+For more information about configuration, check the <a href="#">API Docs</a>.

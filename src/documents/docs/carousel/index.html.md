@@ -86,3 +86,5 @@ AUI().ready('aui-carousel', function(A) {
 
 });
 ```
+
+For more information about configuration, check the <a href="#">API Docs</a>.
