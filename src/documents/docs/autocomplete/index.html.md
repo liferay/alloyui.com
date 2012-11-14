@@ -58,7 +58,7 @@ AUI().use('aui-autocomplete', function(A) {
 
   var autoComplete = new A.AutoComplete({
     contentBox: '#myAutoComplete',
-    dataSource: ['America', 'Europe', 'Asia']
+    dataSource: ['America', 'Europe', 'Asia'],
     delimChar: ','
   }).render();
 
@@ -72,7 +72,7 @@ AUI().use('aui-autocomplete', function(A) {
 
   var autoComplete = new A.AutoComplete({
     contentBox: '#myAutoComplete',
-    dataSource: ['America', 'Europe', 'Asia']
+    dataSource: ['America', 'Europe', 'Asia'],
     delimChar: ',',
     typeAhead: true,
   }).render();
