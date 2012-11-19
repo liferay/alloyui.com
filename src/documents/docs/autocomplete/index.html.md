@@ -47,6 +47,10 @@ AUI().use('aui-autocomplete', function(A) {
 
 [See it live.](../../examples/autocomplete/)
 
+<div class="note">
+  Note: you could also use `boundingBox`, not only `contentBox` to be initialized. Read more about the [differences between them](https://github.com/liferay/alloy-ui/wiki/FAQs).
+</div>
+
 #### Configuring AutoComplete
 
 There are some other options that you can pass to your AutoComplete instance.
