@@ -47,6 +47,10 @@ AUI().use('aui-textboxlist', function(A) {
 
 [See it live.](../../examples/textboxlist/)
 
+<div class="note">
+  Note: you could also use `boundingBox`, not only `contentBox` to be initialized. Read more about the [differences between them](https://github.com/liferay/alloy-ui/wiki/FAQs).
+</div>
+
 #### Configuring Textbox List
 
 There are some other options that you can pass to your Textbox List instance.
