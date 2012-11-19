@@ -68,9 +68,9 @@ AUI().ready('aui-carousel', function(A) {
 
   var carousel = new A.Carousel({
       contentBox: '#demo',
+      activeIndex: 'rand',
       width: 680,
-      height: 254,
-      activeIndex: 'rand'
+      height: 254
   }).render();
 
 });
@@ -83,9 +83,9 @@ AUI().ready('aui-carousel', function(A) {
 
   var carousel = new A.Carousel({
       contentBox: '#demo',
+      intervalTime: 2,
       width: 680,
-      height: 254,
-      intervalTime: 2
+      height: 254
   }).render();
 
 });
