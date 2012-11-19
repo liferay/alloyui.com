@@ -1,15 +1,14 @@
-AUI().use('io', function (A) {
+AUI().use('aui-io-request', function (A) {
 
-  // Make an HTTP request to this URI.
-  var request = A.io("assets/content.html");
+  A.io.request('data/content.html', {
 
-  // Define a function to handle the response data.
-  function complete(id, out, args) {
-      var data = out.responseText;
-      alert(data);
-  }
+    on: {
+      success: function() {
+        var data = this.get('responseData');
+        alert(data);
+      }
+    }
 
-  // Subscribe to event "io:complete" and define an event handler "complete".
-  A.on('io:complete', complete);
+  });
 
 });
