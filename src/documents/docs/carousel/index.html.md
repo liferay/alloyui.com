@@ -53,6 +53,10 @@ AUI().ready('aui-carousel', function(A) {
 
 [See it live.](../../examples/carousel/basic.html)
 
+<div class="note">
+  Note: you could also use `boundingBox`, not only `contentBox` to be initialized. Read more about the [differences between them](https://github.com/liferay/alloy-ui/wiki/FAQs).
+</div>
+
 #### Configuring Carousel
 
 There are some other options that you can pass to your Carousel instance.
