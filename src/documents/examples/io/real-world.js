@@ -1,7 +1,7 @@
 AUI().use('aui-io-request', 'node', function(A) {
 
   // create a new asynchonous request to grab all states
-  stateRequest = A.io.request('data/states.json', {
+  A.io.request('data/states.json', {
 
     dataType: 'json',
     on: {
