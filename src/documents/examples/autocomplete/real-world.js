@@ -55,14 +55,14 @@ AUI().use('aui-autocomplete', function(A) {
   ],
 
   autoComplete = new A.AutoComplete({
+    contentBox: '#myAutoComplete'
     dataSource: states,
+    delimChar: ',',
+    matchKey: 'name',
     schema: {
       resultFields: ['key', 'name', 'description']
     },
-    matchKey: 'name',
-    delimChar: ',',
-    typeAhead: true,
-    contentBox: '#myAutoComplete'
+    typeAhead: true
   }).render();
 
 });
