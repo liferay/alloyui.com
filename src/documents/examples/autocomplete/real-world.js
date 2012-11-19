@@ -55,7 +55,7 @@ AUI().use('aui-autocomplete', function(A) {
   ],
 
   autoComplete = new A.AutoComplete({
-    contentBox: '#myAutoComplete'
+    contentBox: '#myAutoComplete',
     dataSource: states,
     delimChar: ',',
     matchKey: 'name',
