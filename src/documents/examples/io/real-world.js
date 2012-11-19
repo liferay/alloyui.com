@@ -1,7 +1,7 @@
-AUI().ready('aui-io-request', 'node', function(A) {
+AUI().use('aui-io-request', 'node', function(A) {
 
   // create a new asynchonous request to grab all states
-  var stateRequest = A.io.request('data/states.json', {
+  stateRequest = A.io.request('data/states.json', {
 
     dataType: 'json',
     on: {
@@ -28,7 +28,7 @@ AUI().ready('aui-io-request', 'node', function(A) {
       if (cityCode !== '') {
 
         // create a new asynchonous request to grab the correspondent cities of that state
-        cityRequest = A.io.request('data/' + cityCode + '.json', {
+        A.io.request('data/' + cityCode + '.json', {
 
           dataType: 'json',
           on: {
