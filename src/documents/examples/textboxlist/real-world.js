@@ -9,10 +9,10 @@ AUI().ready('aui-textboxlist', function(A) {
   var textboxlist = new A.TextboxList({
     contentBox: '#demo',
     dataSource: states,
+    matchKey: 'name',
     schema: {
       resultFields: ['key', 'name', 'description']
     },
-    matchKey: 'name',
     typeAhead: true,
     width: 600
   }).render();
