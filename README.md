@@ -4,6 +4,13 @@ This is a working in progress of [AlloyUI's](https://github.com/liferay/alloy-ui
 
 If you are having any problem with the library, please create an issue on [liferay/alloy-ui](https://github.com/liferay/alloy-ui/) repository.
 
+## Table of contents
+
+* [How it works?](#how-it-works)
+* [Getting started](#getting-started)
+* [Deploy](#deploy)
+* [Contribute](#contribute)
+
 ## How it works?
 
 We use [DocPad](https://github.com/bevry/docpad), a static generator in NodeJS.
@@ -34,16 +41,38 @@ We use [DocPad](https://github.com/bevry/docpad), a static generator in NodeJS.
 
 Now you can see the website running in `http://localhost:9778/` :D
 
-## JSHint
 
-Before any commit, please run [JSHint](http://jshint.com/) with the preferences proposed by [aui-lint](https://github.com/zenorocha/aui-lint) that were adapted from [yui-lint](https://github.com/yui/yui-lint).
+## Deploy
+
+Just run `sh publish.sh` and then go to [zenorocha.github.com/alloyui.com](http://zenorocha.github.com/alloyui.com/)
+
+## Contribute
+
+Before any commit, please be sure to:
+
+### Sort configuration attributes in logical order
+
+1. DOM manipulation
+2. Specific module logics in alphabetical order
+3. Style configurations
+
+For example:
+
+```
+var carousel = new A.Carousel({
+    contentBox: '#demo', // 1. DOM manipulation
+    activeIndex: 'rand', // 2. Specific module logics in alphabetical order
+    intervalTime: 2, // 2. Specific module logics in alphabetical order
+    width: 680, // 3. Style configurations
+    height: 254 // 3. Style configurations
+}).render();
+```
+
+### Run JSHint
+
+Run [JSHint](http://jshint.com/) with the preferences proposed by [aui-lint](https://github.com/zenorocha/aui-lint) that were adapted from [yui-lint](https://github.com/yui/yui-lint).
 
 * To do that, get the git submodule that contains all preferences: `git submodule update --init`
 * Go to aui-lint folder: `cd lib/aui-lint`
 * Then create this symbolic link: `ln -s $PWD/jshint.json ~/.jshintrc`
 * Now you can lint using your terminal like `jshint example.js`, a [sublime text plugin](https://github.com/uipoet/sublime-jshint) or any of those [other solutions](http://www.jshint.com/platforms/).
-
-
-## Deploy
-
-Just run `sh publish.sh` and then go to [zenorocha.github.com/alloyui.com](http://zenorocha.github.com/alloyui.com/)
