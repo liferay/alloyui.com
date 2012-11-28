@@ -8,6 +8,8 @@ tags: 'autocomplete'
 
 The AutoComplete component provides suggestions while users type into the field.
 
+---
+
 #### Getting Started
 
 First load the seed file, if you haven't yet.
@@ -23,6 +25,7 @@ AUI().use('aui-autocomplete', function(A) {
   // code goes here
 });
 ```
+---
 
 #### Using AutoComplete
 
@@ -45,11 +48,12 @@ AUI().use('aui-autocomplete', function(A) {
 });
 ```
 
-[See it live.](../../examples/autocomplete/)
-
-<div class="note">
-  Note: you could also use `boundingBox`, not only `contentBox` to be initialized. Read more about the [differences between them](https://github.com/liferay/alloy-ui/wiki/FAQs).
+<div class="alert alert-info">
+  <strong>Note:</strong> you could also use `boundingBox`, not only `contentBox` to be initialized.<br>
+  Read more about the [differences between them](https://github.com/liferay/alloy-ui/wiki/FAQs).
 </div>
+
+---
 
 #### Configuring AutoComplete
 

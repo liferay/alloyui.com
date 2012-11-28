@@ -8,6 +8,8 @@ tags: 'carousel'
 
 The Carousel component provides an interactive way of cycling through elements.
 
+---
+
 #### Getting Started
 
 First load the seed file, if you haven't yet.
@@ -23,6 +25,8 @@ AUI().use('aui-carousel', function(A) {
   // code goes here
 });
 ```
+
+---
 
 #### Using Carousel
 
@@ -51,11 +55,12 @@ AUI().ready('aui-carousel', function(A) {
 });
 ```
 
-[See it live.](../../examples/carousel/basic.html)
-
-<div class="note">
-  Note: you could also use `boundingBox`, not only `contentBox` to be initialized. Read more about the [differences between them](https://github.com/liferay/alloy-ui/wiki/FAQs).
+<div class="alert alert-info">
+  <strong>Note:</strong> you could also use `boundingBox`, not only `contentBox` to be initialized.<br>
+  Read more about the [differences between them](https://github.com/liferay/alloy-ui/wiki/FAQs).
 </div>
+
+---
 
 #### Configuring Carousel
 

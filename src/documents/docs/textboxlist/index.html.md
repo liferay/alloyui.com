@@ -8,6 +8,8 @@ tags: 'textboxlist'
 
 The Textbox List component display users choices to them as graphic choices.
 
+---
+
 #### Getting Started
 
 First load the seed file, if you haven't yet.
@@ -23,6 +25,8 @@ AUI().use('aui-textboxlist', function(A) {
   // code goes here
 });
 ```
+
+---
 
 #### Using Textbox List
 
@@ -45,11 +49,12 @@ AUI().use('aui-textboxlist', function(A) {
 });
 ```
 
-[See it live.](../../examples/textboxlist/)
-
-<div class="note">
-  Note: you could also use `boundingBox`, not only `contentBox` to be initialized. Read more about the [differences between them](https://github.com/liferay/alloy-ui/wiki/FAQs).
+<div class="alert alert-info">
+  <strong>Note:</strong> you could also use `boundingBox`, not only `contentBox` to be initialized.<br>
+  Read more about the [differences between them](https://github.com/liferay/alloy-ui/wiki/FAQs).
 </div>
+
+---
 
 #### Configuring Textbox List
 

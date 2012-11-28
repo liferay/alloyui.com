@@ -1,12 +1,14 @@
 ---
 layout: single-doc
-title: AutoComplete
-tags: 'autocomplete'
+title: Dialog
+tags: 'dialog'
 ---
 
 # Dialog
 
 The Dialog component displays information to a user in an inline dialog that can be dragged, stacked, or presented as a modal.
+
+---
 
 #### Getting Started
 
@@ -24,6 +26,8 @@ AUI().use('aui-dialog', function(A) {
 });
 ```
 
+---
+
 #### Using Dialog
 
 Let's create a new instance of Dialog component, then write some content into `bodyContent` and define a `title` for this dialog box. Finally, let's render it!
@@ -39,7 +43,7 @@ AUI().use('aui-dialog', function(A) {
 });
 ```
 
-[See it live.](../../examples/dialog/)
+---
 
 #### Configuring Dialog
 

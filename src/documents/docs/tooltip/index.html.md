@@ -8,6 +8,8 @@ tags: 'tooltip'
 
 The Tooltip component give users contextual information or content, such as help text or images.
 
+---
+
 #### Getting Started
 
 First load the seed file, if you haven't yet.
@@ -23,6 +25,8 @@ AUI().use('aui-tooltip', function(A) {
   // code goes here
 });
 ```
+
+---
 
 #### Using Tooltip
 
@@ -45,7 +49,7 @@ AUI().ready('aui-tooltip', function(A) {
 });
 ```
 
-[See it live.](../../examples/tooltip/)
+---
 
 #### Configuring Tooltip
 

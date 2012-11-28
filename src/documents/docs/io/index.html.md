@@ -8,6 +8,8 @@ tags: 'io'
 
 The I/O component allows you to make asynchronous HTTP (Ajax) requests.
 
+---
+
 #### Getting Started
 
 First load the seed file, if you haven't yet.
@@ -23,6 +25,8 @@ AUI().use('aui-io-request', function (A) {
   // code goes here
 });
 ```
+
+---
 
 #### Using I/O
 
@@ -41,6 +45,8 @@ AUI().use('aui-io-request', function (A) {
 
 });
 ```
+
+---
 
 #### Configuring I/O
 
