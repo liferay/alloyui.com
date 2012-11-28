@@ -2,24 +2,26 @@
 layout: default
 ---
 
-<div class="page" id="page-examples">
+<div class="container">
 
-  <nav>
-    <ul>
-      <li>Related examples</li>
-
+  <div class="span3 bs-docs-sidebar">
+    <p class="related">Related examples</p>
+    <ul class="nav nav-list bs-docs-sidenav affix-top">
       <% for example in @getCollection('documents').sortArray('title':1): %>
         <% if example.url.indexOf('/examples') == 0: %>
           <% if example.tags == @document.tags: %>
-            <li><a href="<%= @site.url %><%= example.url %>" class="iframe-link"><%= example.title %></a></li>
+            <% if example.title == @document.title: %>
+            <li class="active"><a href="<%= @site.url %><%= example.url %>" class="iframe-link"><i class="icon-chevron-right"></i> <%= example.title %></a></li>
+            <% else: %>
+            <li><a href="<%= @site.url %><%= example.url %>" class="iframe-link"><i class="icon-chevron-right"></i> <%= example.title %></a></li>
+            <% end %>
           <% end %>
         <% end %>
       <% end %>
-
     </ul>
-  </nav>
+  </div>
 
-  <div class="single-example">
+  <div class="span9">
     <%- @content %>
   </div>
 

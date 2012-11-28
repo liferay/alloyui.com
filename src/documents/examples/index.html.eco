@@ -2,35 +2,24 @@
 layout: default
 ---
 
-<div class="page" id="page-examples">
+<div class="container">
 
-  <nav>
-    <ul>
-      <li>Category X</li>
-      <li>Category Y</li>
-      <li>Category Z</li>
-      <li>Category W</li>
-    </ul>
-  </nav>
-
-  <div class="list-examples">
-
-    <% for example in @getCollection('documents').sortArray('title':1): %>
+    <% for example in @getCollection('documents').sortArray('title':0): %>
       <% if example.url.indexOf('/examples') == 0: %>
         <% if example.category: %>
 
-          <section class="example">
-            <a href="<%= @site.url %><%= example.url %>"><%= example.category %></a>
+          <div class="span4 example">
+            <h2><a href="<%= @site.url %><%= example.url %>"><%= example.category %></a></h2>
             <a href="<%= @site.url %><%= example.url %>">
-              <img src="<%= example.thumbnail %>" alt="<%= example.category %>" />
+              <!-- <img src="<%= example.thumbnail %>" alt="<%= example.category %>" /> -->
+              <img src="" alt="<%= example.category %>" />
             </a>
             <p><%= example.description %></p>
-          </section>
+            <p><a class="btn" href="<%= @site.url %><%= example.url %>">View examples &raquo;</a></p>
+          </div>
 
         <% end %>
       <% end %>
     <% end %>
-
-  </div>
 
 </div>
