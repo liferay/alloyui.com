@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+
+<project name="build-common-web" xmlns:antelope="antlib:ise.antelope.tasks">
+    <import file="build-common.xml" />
+
+    <property name="temp.dir" value="${project.dir}/_temp" />
+
+    <target name="clean">
+        <delete dir="docroot/WEB-INF/classes" />
+        <delete dir="${temp.dir}" failonerror="false" />
+        <delete file="${project.dir}/${war.file}.war" failonerror="false" />
+    </target>
+
+    <target name="deploy" depends="clean, war">
+        <var name="dest.dir" value="${app.server.portal.dir}" />
+
+        <if>
+            <equals arg1="${deploy.liferay.source}" arg2="true" />
+            <then>
+                <var name="dest.dir" value="${lp.source.dir}/portal-web/third-party" />
+            </then>
+        </if>
+
+        <copy todir="${dest.dir}">
+            <fileset dir="${project.dir}" includes="*.war" />
+        </copy>
+    </target>
+
+    <target name="war" depends="compile"></target>
+</project>

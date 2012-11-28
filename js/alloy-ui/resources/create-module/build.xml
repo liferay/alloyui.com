@@ -1,0 +1,160 @@
+<?xml version="1.0"?>
+
+<project name="Alloy" default="release" xmlns:a="antlib:ise.antelope.tasks">
+    <property name="project.dir" value="../.."/>
+
+    <import file="build-common.xml" />
+
+    <property name="src.dir" value="${project.dir}/src" />
+    <property name="demo.dir" value="${project.dir}/demos" />
+    <property name="resources.dir" value="${project.dir}/resources" />
+    <property name="javascript.src.dir" value="${src.dir}" />
+
+    <target name="create-module">
+        <propertyregex
+            property="module.base.name"
+            input="${module.name}"
+            regexp="aui-"
+            replace=""
+            global="false"
+            defaultValue="${module.name}"
+        />
+
+        <camelize input="${module.base.name}" property="module.base.name.camelcase" />
+
+        <a:stringutil string="${module.base.name}" property="module.base.name.constant">
+            <a:uppercase/>
+            <a:replace regex="-" replacement="_" />
+        </a:stringutil>
+
+        <property name="module.demo.dir" value="${demo.dir}/${module.base.name}" />
+        <property name="module.src.dir" value="${javascript.src.dir}/${module.name}" />
+        <property name="module.js.dir" value="${module.src.dir}/js" />
+        <property name="module.css.dir" value="${module.src.dir}/assets" />
+
+        <if>
+            <available file="${module.demo.dir}" />
+            <then>
+                <echo message="${module.demo.dir} already exists." />
+            </then>
+            <else>
+                <mkdir dir="${module.demo.dir}" />
+                <mkdir dir="${module.src.dir}" />
+                <mkdir dir="${module.css.dir}" />
+                <mkdir dir="${module.js.dir}" />
+
+                <copy todir="${module.demo.dir}">
+                    <fileset dir="${resources.dir}/create-module/templates/">
+                        <include name="**/module_template.*" />
+                    </fileset>
+                </copy>
+
+                <move todir="${module.demo.dir}">
+                    <fileset dir="${module.demo.dir}">
+                        <include name="**/module_template.*"/>
+                    </fileset>
+
+                    <mapper type="glob" from="module_template.*" to="${module.name}.*"/>
+                </move>
+
+                <replace dir="${module.demo.dir}">
+                    <replacefilter token="@module.name@" value="${module.name}" />
+                    <replacefilter token="@module.base.name@" value="${module.base.name}" />
+                    <replacefilter token="@module.base.name.constant@" value="${module.base.name.constant}" />
+                    <replacefilter token="@module.base.name.camelcase@" value="${module.base.name.camelcase}" />
+                </replace>
+
+                <!-- Demo index file -->
+                <move
+                    file="${module.demo.dir}/${module.name}.html"
+                    tofile="${module.demo.dir}/index.html"
+                    overwrite="no"
+                />
+
+                <!-- CSS file -->
+                <move
+                    file="${module.demo.dir}/${module.name}.css"
+                    tofile="${module.css.dir}/${module.name}-core.css"
+                    overwrite="no"
+                />
+
+                <!-- JS file -->
+                <move
+                    file="${module.demo.dir}/${module.name}.js"
+                    tofile="${module.js.dir}/${module.name}.js"
+                    overwrite="no"
+                />
+
+                <!-- XML build file -->
+                <move
+                    file="${module.demo.dir}/${module.name}.xml"
+                    tofile="${module.src.dir}/build.xml"
+                    overwrite="no"
+                />
+
+                <!-- Properties file -->
+                <move
+                    file="${module.demo.dir}/${module.name}.properties"
+                    tofile="${module.src.dir}/build.properties"
+                    overwrite="no"
+                />
+
+                <!-- Building module -->
+                <subant target="all">
+                    <fileset
+                        dir="${project.dir}/src/${module.name}"
+                        includes="**/build.xml"
+                    />
+                </subant>
+
+                <!-- Regenerating module list on aui-base -->
+                <unset regex="^ant\.file\..*|module\.name$" />
+                <subant target="build-modules">
+                    <fileset
+                        dir="../.."
+                        includes="build.xml"
+                    />
+                </subant>
+            </else>
+        </if>
+    </target>
+
+    <target name="delete-module">
+        <propertyregex
+            property="module.base.name"
+            input="${module.name}"
+            regexp="aui-"
+            replace=""
+            global="false"
+            defaultValue="${module.name}"
+        />
+
+        <property name="module.demo.dir" value="${demo.dir}/${module.base.name}" />
+        <property name="module.src.dir" value="${javascript.src.dir}/${module.name}" />
+        <property name="module.js.dir" value="${module.src.dir}/js" />
+        <property name="module.css.dir" value="${module.src.dir}/assets" />
+
+        <if>
+            <available file="${module.demo.dir}" />
+            <then>
+                <delete dir="${project.dir}/build/${module.name}" />
+                <delete dir="${module.demo.dir}" />
+                <delete dir="${module.src.dir}" />
+                <delete dir="${module.js.dir}" />
+                <delete dir="${module.css.dir}" />
+
+                <!-- Regenerating module list on aui-base -->
+                <unset regex="^ant\.file\..*|module\.name$" />
+                <subant target="build-modules">
+                    <fileset
+                        dir="../.."
+                        includes="build.xml"
+                    />
+                </subant>
+            </then>
+            <else>
+                <echo message="Module ${module.name} doesn't exists." />
+            </else>
+        </if>
+    </target>
+</project>
