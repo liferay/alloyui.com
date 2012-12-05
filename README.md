@@ -94,6 +94,6 @@ Just run `sh publish.sh` and then go to [zenorocha.github.com/alloyui.com](http:
 
 So do you want to help us? That's pretty awesome!
 
-We are very happy to accept external contributions to the project in the form of feedback, bug reports or pull requests :)
+We are very happy to accept external contributions in the form of feedback, bug reports or pull requests :)
 
 [Go ahead and read our guide](http://zenorocha.github.com/alloyui.com/contributing).
