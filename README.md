@@ -92,31 +92,8 @@ Just run `sh publish.sh` and then go to [zenorocha.github.com/alloyui.com](http:
 
 ## Contribute
 
-Before any commit, please be sure to:
+So do you want to help us? That's pretty awesome!
 
-### Sort configuration attributes in logical order
+We are very happy to accept external contributions to the project in the form of feedback, bug reports or pull requests :)
 
-1. DOM manipulation
-2. Specific module logics in alphabetical order
-3. Style configurations
-
-For example:
-
-```
-var carousel = new A.Carousel({
-    contentBox: '#demo', // 1. DOM manipulation
-    activeIndex: 'rand', // 2. Specific module logics in alphabetical order
-    intervalTime: 2, // 2. Specific module logics in alphabetical order
-    width: 680, // 3. Style configurations
-    height: 254 // 3. Style configurations
-}).render();
-```
-
-### Run JSHint
-
-Run [JSHint](http://jshint.com/) with the preferences proposed by [aui-lint](https://github.com/zenorocha/aui-lint) that were adapted from [yui-lint](https://github.com/yui/yui-lint).
-
-* To do that, get the git submodule that contains all preferences: `git submodule update --init`
-* Go to aui-lint folder: `cd lib/aui-lint`
-* Then create this symbolic link: `ln -s $PWD/jshint.json ~/.jshintrc`
-* Now you can lint using your terminal like `jshint example.js`, a [sublime text plugin](https://github.com/uipoet/sublime-jshint) or any of those [other solutions](http://www.jshint.com/platforms/).
+[Go ahead and read our guide](http://alloyui.com/contributing).
