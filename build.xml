@@ -81,9 +81,68 @@
   </target>
 
   <target name="deploy">
-    <exec executable="sh" dir="${root}">
-      <arg value="publish.sh" />
+    <if>
+      <not>
+        <available file="${root}/node_modules" type="dir"/>
+      </not>
+      <then>
+        <echo>Install dependencies</echo>
+        <exec executable="docpad" dir="${root}">
+          <arg value="install" />
+        </exec>
+      </then>
+    </if>
+    <echo>Build the website locally</echo>
+    <exec executable="docpad" dir="${root}">
+      <arg value="generate" />
     </exec>
+    <echo>Go to the gh-pages branch</echo>
+    <exec executable="git" dir="${root}">
+      <arg value="checkout" />
+      <arg value="gh-pages" />
+    </exec>
+    <echo>Remove all files under version control</echo>
+    <exec executable="git" dir="${root}">
+      <arg value="rm" />
+      <arg value="-rf" />
+      <arg value="." />
+    </exec>
+    <echo>Move files from folder out to root</echo>
+    <exec executable="mv" dir="${root}">
+      <arg value="out/*" />
+      <arg value="." />
+    </exec>
+    <echo>Remove out folder</echo>
+    <exec executable="rm" dir="${root}">
+      <arg value="-rf" />
+      <arg value="out" />
+    </exec>
+    <echo>Remove node_modules folder</echo>
+    <exec executable="rm" dir="${root}">
+      <arg value="-rf" />
+      <arg value="node_modules" />
+    </exec>
+    <echo>Commit changes to gh-pages branch</echo>
+    <exec executable="git" dir="${root}">
+      <arg value="add" />
+      <arg value="." />
+    </exec>
+    <exec executable="git" dir="${root}">
+      <arg value="commit" />
+      <arg value="-m" />
+      <arg value="'Regenerate'" />
+    </exec>
+    <exec executable="git" dir="${root}">
+      <arg value="push" />
+      <arg value="origin" />
+      <arg value="gh-pages" />
+    </exec>
+    <echo>Goes back to master branch</echo>
+    <exec executable="git" dir="${root}">
+      <arg value="checkout" />
+      <arg value="master" />
+    </exec>
+
   </target>
 
   <target name="clean">
