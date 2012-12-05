@@ -32,11 +32,7 @@ We use [DocPad](https://github.com/bevry/docpad), a static generator in NodeJS.
 
 		cd alloyui.com
 
-5. Install dependencies:
-
-		ant install
-
-6. And finally run:
+5. And finally run:
 
 		ant run
 
