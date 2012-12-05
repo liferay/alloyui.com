@@ -1,94 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="alloyui.com" default="local" xmlns:antelope="antlib:ise.antelope.tasks" basedir=".">
 
-    <property name="root" value="." />
+  <property name="root" value="." />
 
-    <path id="lib.classpath">
-      <fileset dir="lib" includes="*.jar" />
-    </path>
+  <path id="lib.classpath">
+    <fileset dir="lib" includes="*.jar" />
+  </path>
 
-    <taskdef classpathref="lib.classpath" resource="net/sf/antcontrib/antlib.xml" />
-    <taskdef classpathref="lib.classpath" resource="ise/antelope/tasks/antlib.xml" uri="antlib:ise.antelope.tasks" />
-    <taskdef name="jshint" classpath="${basedir}/lib/ant-jshint-0.3.3-deps.jar" classname="com.philmander.jshint.JsHintAntTask" />
+  <taskdef classpathref="lib.classpath" resource="net/sf/antcontrib/antlib.xml" />
+  <taskdef classpathref="lib.classpath" resource="ise/antelope/tasks/antlib.xml" uri="antlib:ise.antelope.tasks" />
+  <taskdef name="jshint" classpath="${basedir}/lib/ant-jshint-0.3.3-deps.jar" classname="com.philmander.jshint.JsHintAntTask" />
 
-    <target name="install">
-      <echo>Installing DocPad</echo>
-      <exec executable="docpad" dir="${root}">
-        <arg value="install" />
-      </exec>
-    </target>
+  <target name="install">
+    <echo>Installing DocPad</echo>
+    <exec executable="docpad" dir="${root}">
+      <arg value="install" />
+    </exec>
+  </target>
 
-    <target name="jshint">
-      <echo>Running JSHint</echo>
-      <jshint dir="${basedir}/src/documents/examples" includes="**/*.js" optionsFile="${basedir}/lib/aui-lint/jshint.json" />
-    </target>
+  <target name="jshint">
+    <echo>Running JSHint</echo>
+    <jshint dir="${basedir}/src/documents/examples" includes="**/*.js" optionsFile="${basedir}/lib/aui-lint/jshint.json" />
+  </target>
 
-    <target name="generate">
-      <echo>Generating DocPad</echo>
-      <exec executable="docpad" dir="${root}">
-        <arg value="generate --env static" />
-      </exec>
-    </target>
+  <target name="generate">
+    <echo>Generating DocPad</echo>
+    <exec executable="docpad" dir="${root}">
+      <arg value="generate --env static" />
+    </exec>
+  </target>
 
-    <target name="update">
-      <echo>Submodules Update</echo>
-      <exec executable="git" dir="${root}">
-        <arg value="submodule" />
-        <arg value="update" />
-        <arg value="--init" />
-      </exec>
-      <exec executable="git" dir="lib/aui-lint">
-        <arg value="pull" />
-        <arg value="origin" />
-        <arg value="master" />
-      </exec>
-      <exec executable="git" dir="${root}">
-        <arg value="add" />
-        <arg value="lib/aui-lint" />
-      </exec>
-      <exec executable="git" dir="src/files/js/alloy-ui">
-        <arg value="pull" />
-        <arg value="origin" />
-        <arg value="master" />
-      </exec>
-      <exec executable="git" dir="${root}">
-        <arg value="add" />
-        <arg value="src/files/js/alloy-ui" />
-      </exec>
-      <exec executable="git" dir="${root}">
-        <arg value="commit" />
-        <arg value="-m" />
-        <arg value="Submodules update" />
-      </exec>
-    </target>
+  <target name="update">
+    <echo>Submodules Update</echo>
+    <exec executable="git" dir="${root}">
+      <arg value="submodule" />
+      <arg value="update" />
+      <arg value="--init" />
+    </exec>
+    <exec executable="git" dir="lib/aui-lint">
+      <arg value="pull" />
+      <arg value="origin" />
+      <arg value="master" />
+    </exec>
+    <exec executable="git" dir="${root}">
+      <arg value="add" />
+      <arg value="lib/aui-lint" />
+    </exec>
+    <exec executable="git" dir="src/files/js/alloy-ui">
+      <arg value="pull" />
+      <arg value="origin" />
+      <arg value="master" />
+    </exec>
+    <exec executable="git" dir="${root}">
+      <arg value="add" />
+      <arg value="src/files/js/alloy-ui" />
+    </exec>
+    <exec executable="git" dir="${root}">
+      <arg value="commit" />
+      <arg value="-m" />
+      <arg value="Submodules update" />
+    </exec>
+  </target>
 
-    <target name="run">
-      <if>
-        <not>
-          <available file="${root}/node_modules" type="dir"/>
-        </not>
-        <then>
-          <echo>Installing DocPad</echo>
-          <exec executable="docpad" dir="${root}">
-            <arg value="install" />
-          </exec>
-        </then>
-      </if>
-      <echo>Running DocPad</echo>
-      <exec executable="docpad" dir="${root}">
-        <arg value="run" />
-      </exec>
-    </target>
+  <target name="run">
+    <if>
+      <not>
+        <available file="${root}/node_modules" type="dir"/>
+      </not>
+      <then>
+        <echo>Installing DocPad</echo>
+        <exec executable="docpad" dir="${root}">
+          <arg value="install" />
+        </exec>
+      </then>
+    </if>
+    <echo>Running DocPad</echo>
+    <exec executable="docpad" dir="${root}">
+      <arg value="run" />
+    </exec>
+  </target>
 
-    <target name="deploy">
-      <exec executable="sh" dir="${root}">
-        <arg value="publish.sh" />
-      </exec>
-    </target>
+  <target name="deploy">
+    <exec executable="sh" dir="${root}">
+      <arg value="publish.sh" />
+    </exec>
+  </target>
 
-    <target name="clean">
-      <delete dir="node_modules" />
-      <delete dir="out" />
-    </target>
+  <target name="clean">
+    <delete dir="node_modules" />
+    <delete dir="out" />
+  </target>
 
 </project>
