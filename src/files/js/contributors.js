@@ -1,33 +1,22 @@
-AUI().use('aui-io-request', 'node', function(A) {
+AUI().use('jsonp', 'node',function (A) {
 
-  A.io.request('https://api.github.com/repos/liferay/alloy-ui/contributors?callback=?', {
-    dataType: 'json',
-    on: {
-      success: function() {
+  var githubAPI = 'https://api.github.com/repos/liferay/alloy-ui/contributors?callback={callback}',
+      template  = '<a class="project-contributor" href="http://github.com/{login}" title="@{login}">' +
+                  '  <img src="{avatar_url}" width="50" height="50" alt="@{login}">' +
+                  '</a>';
 
-        MEMBER = '<a class="project-contributor" href="#{url}" title="@#{login}">' +
-                 '  <img src="#{avatar}" width="50" height="50" alt="@#{login}">' +
-                 '</a>';
+  function handleJSONP(response) {
 
-        var data = this.get('responseData');
+    var contributorsHTML = '';
 
-        if (data && data.length > 0) {
-
-          var members = "";
-
-          for ( var i = 0; i < data.length ; i++ ) {
-
-            members += MEMBER.replace("#{avatar}", data[i].avatar_url)
-                             .replace("#{login}", data[i].login)
-                             .replace("#{url}", data[i].url)
-                             .replace("api.", "")
-                             .replace("users/", "");
-          }
-
-          A.one('#contributors').append(members);
-
-        }
-      }
+    for( var i = 0; i < response.data.length; i++ ) {
+      contributorsHTML += A.Lang.sub(template, response.data[i]);
     }
-  });
+
+    A.one("#contributors").setHTML(contributorsHTML);
+
+  }
+
+  A.jsonp(githubAPI, handleJSONP);
+
 });
