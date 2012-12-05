@@ -96,4 +96,4 @@ So do you want to help us? That's pretty awesome!
 
 We are very happy to accept external contributions to the project in the form of feedback, bug reports or pull requests :)
 
-[Go ahead and read our guide](http://alloyui.com/contributing).
+[Go ahead and read our guide](http://zenorocha.github.com/alloyui.com/contributing).
