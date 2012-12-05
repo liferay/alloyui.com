@@ -6,6 +6,8 @@ module.exports =
 
     templateData:
 
+        cdn: 'http://deploy.alloyui.com/build/aui/aui.js'
+
         # -----------------------------
         # Site Information
 

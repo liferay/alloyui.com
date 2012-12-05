@@ -15,7 +15,7 @@ The I/O component allows you to make asynchronous HTTP (Ajax) requests.
 First load the seed file, if you haven't yet.
 
 ``` html
-<script src="http://cdn.alloyui.com/3.2.8/aui.min.js"></script>
+<script src="<%= @cdn %>"></script>
 ```
 
 Then initialize AlloyUI and load the I/O module.

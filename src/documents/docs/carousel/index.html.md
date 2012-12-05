@@ -15,7 +15,7 @@ The Carousel component provides an interactive way of cycling through elements.
 First load the seed file, if you haven't yet.
 
 ``` html
-<script src="http://cdn.alloyui.com/3.2.8/aui.min.js"></script>
+<script src="<%= @cdn %>"></script>
 ```
 
 Then initialize AlloyUI and load the Carousel module.
