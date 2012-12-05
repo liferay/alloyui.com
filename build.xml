@@ -110,15 +110,16 @@
       <arg value="." />
     </exec>
     <echo>Move files from folder out to root</echo>
-    <exec executable="mv" dir="${root}">
-      <arg value="out/*" />
-      <arg value="." />
-    </exec>
-    <echo>Remove out folder</echo>
+    <move todir="${root}">
+      <fileset dir="out">
+        <filename name="**/*"/>
+      </fileset>
+    </move>
+    <!-- <echo>Remove out folder</echo>
     <exec executable="rm" dir="${root}">
       <arg value="-rf" />
       <arg value="out" />
-    </exec>
+    </exec> -->
     <echo>Remove node_modules folder</echo>
     <exec executable="rm" dir="${root}">
       <arg value="-rf" />
