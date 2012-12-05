@@ -1,6 +1,6 @@
 AUI().use('aui-io-request', 'node', function(A) {
 
-  A.io.request('https://api.github.com/repos/liferay/alloy-ui/contributors', {
+  A.io.request('https://api.github.com/repos/liferay/alloy-ui/contributors?callback=?', {
     dataType: 'json',
     on: {
       success: function() {
