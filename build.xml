@@ -24,6 +24,17 @@
   </target> -->
 
   <target name="generate">
+    <if>
+      <not>
+        <available file="${root}/node_modules" type="dir"/>
+      </not>
+      <then>
+        <echo>Installing Dependencies</echo>
+        <exec executable="docpad" dir="${root}">
+          <arg value="install" />
+        </exec>
+      </then>
+    </if>
     <echo>Build the website locally</echo>
     <exec executable="docpad" dir="${root}">
       <arg value="generate" />
