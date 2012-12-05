@@ -12,53 +12,21 @@
   <taskdef name="jshint" classpath="${basedir}/lib/ant-jshint-0.3.3-deps.jar" classname="com.philmander.jshint.JsHintAntTask" />
 
   <target name="install">
-    <echo>Installing DocPad</echo>
+    <echo>Installing Dependencies</echo>
     <exec executable="docpad" dir="${root}">
       <arg value="install" />
     </exec>
   </target>
 
-  <target name="jshint">
+  <!-- <target name="jshint">
     <echo>Running JSHint</echo>
-    <jshint dir="${basedir}/src/documents/examples" includes="**/*.js" optionsFile="${basedir}/lib/aui-lint/jshint.json" />
-  </target>
+    <jshint dir="${basedir}/src/documents/examples" includes="**/*.js" optionsFile="${basedir}/.jshintrc" />
+  </target> -->
 
   <target name="generate">
-    <echo>Generating DocPad</echo>
+    <echo>Build the website locally</echo>
     <exec executable="docpad" dir="${root}">
       <arg value="generate --env static" />
-    </exec>
-  </target>
-
-  <target name="update">
-    <echo>Submodules Update</echo>
-    <exec executable="git" dir="${root}">
-      <arg value="submodule" />
-      <arg value="update" />
-      <arg value="--init" />
-    </exec>
-    <exec executable="git" dir="lib/aui-lint">
-      <arg value="pull" />
-      <arg value="origin" />
-      <arg value="master" />
-    </exec>
-    <exec executable="git" dir="${root}">
-      <arg value="add" />
-      <arg value="lib/aui-lint" />
-    </exec>
-    <exec executable="git" dir="src/files/js/alloy-ui">
-      <arg value="pull" />
-      <arg value="origin" />
-      <arg value="master" />
-    </exec>
-    <exec executable="git" dir="${root}">
-      <arg value="add" />
-      <arg value="src/files/js/alloy-ui" />
-    </exec>
-    <exec executable="git" dir="${root}">
-      <arg value="commit" />
-      <arg value="-m" />
-      <arg value="Submodules update" />
     </exec>
   </target>
 
@@ -68,7 +36,7 @@
         <available file="${root}/node_modules" type="dir"/>
       </not>
       <then>
-        <echo>Installing DocPad</echo>
+        <echo>Installing Dependencies</echo>
         <exec executable="docpad" dir="${root}">
           <arg value="install" />
         </exec>
