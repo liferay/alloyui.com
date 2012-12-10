@@ -6,15 +6,12 @@ If you are having any problem with the library, please create an issue on [lifer
 
 ## Table of contents
 
-* [How it works?](#how-it-works)
 * [Contribute](#contribute)
+* [How it works?](#how-it-works)
+* [Dependencies](#dependencies)
 * [Getting started](#getting-started)
 * [Structure](#structure)
 * [Deploy](#deploy)
-
-## How it works?
-
-We use [DocPad](https://github.com/bevry/docpad), a static generator in NodeJS.
 
 ## Contribute
 
@@ -24,25 +21,25 @@ We are very happy to accept external contributions in the form of feedback, bug 
 
 [Go ahead and read our guide](http://liferay.github.com/alloyui.com/contributing).
 
-## Getting started
+## How it works?
+
+We use [DocPad](https://github.com/bevry/docpad), a static generator in NodeJS.
+
+## Dependencies
 
 1. [Install NodeJS](https://github.com/bevry/community/wiki/Installing-Node), if you don't have it yet.
 
-2. Install DocPad globally:
+2. Install DocPad globally: `sudo npm install -fg docpad@6.11`
 
-		sudo npm install -fg docpad@6.11
+## Getting started
 
-3. Once NodeJS is installed, you just need to clone the project:
+Once you have dependencies installed, you just need to:
 
-		git clone git@github.com:liferay/alloyui.com.git
+1. Clone the project: `git clone git@github.com:liferay/alloyui.com.git`
 
-4. Then go to the project's folder:
+2. Then go to the project's folder: `cd alloyui.com`
 
-		cd alloyui.com
-
-5. And finally run:
-
-		ant run
+3. And finally run: `ant run`
 
 Now you can see the website running in `http://localhost:9778/` :D
 
