@@ -15,6 +15,7 @@ module.exports =
 
             # Site Production URL
             url: 'http://labs.zenorocha.com/alloyui.com'
+            assets: 'http://labs.zenorocha.com/alloyui.com/website'
 
         # -----------------------------
         # Helpers
@@ -46,3 +47,4 @@ module.exports =
             templateData:
                 site:
                     url: 'http://localhost:9778'
+                    assets: 'http://localhost:9778/website'
