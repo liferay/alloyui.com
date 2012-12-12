@@ -14,8 +14,8 @@ module.exports =
         site:
 
             # Site Production URL
-            url: 'http://labs.zenorocha.com/alloyui.com'
-            assets: 'http://labs.zenorocha.com/alloyui.com/website'
+            url: 'http://liferay.github.com/alloyui.com'
+            assets: 'http://liferay.github.com/alloyui.com/website'
 
         # -----------------------------
         # Helpers
