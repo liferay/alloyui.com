@@ -1,6 +1,6 @@
 # AlloyUI - Website
 
-This is a working in progress of [AlloyUI's](https://github.com/liferay/alloy-ui/) website. Check the [Roadmap here](https://github.com/liferay/alloyui.com/wiki/Roadmap).
+This is a working in progress of [AlloyUI's](https://github.com/liferay/alloy-ui/) website. Check the [Status here](https://github.com/liferay/alloyui.com/wiki/Status).
 
 If you are having any problem with the library, please create an issue on [liferay/alloy-ui](https://github.com/liferay/alloy-ui/) repository.
 
