@@ -43,7 +43,6 @@
               <li><a href="http://liferay.github.com/alloyui.com/tutorials/">Tutorials</a></li>
               <li><a href="http://deploy.alloyui.com/api/">API Docs</a></li>
               <li><a href="http://deploy.alloyui.com/docs/">Rosseta Stone</a></li>
-              <li><a href="http://liferay.github.com/alloyui.com/discussion/">Discussion</a></li>
               <li><a href="http://liferay.github.com/alloyui.com/contributing/">Contributing</a></li>
               <li><a href="http://liferay.github.com/alloyui.com/about/">About</a></li>
             </ul>
@@ -60,44 +59,6 @@
     <ul class="nav nav-list bs-docs-sidenav affix-top">
       
         
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
           
             <li><a href="http://liferay.github.com/alloyui.com/tutorials/autocomplete/index.html" class="iframe-link"><i class="icon-chevron-right"></i> AutoComplete</a></li>
           
@@ -108,9 +69,77 @@
         
       
         
-          
-            <li><a href="http://liferay.github.com/alloyui.com/tutorials/dialog/index.html" class="iframe-link"><i class="icon-chevron-right"></i> Dialog</a></li>
-          
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
         
       
         
@@ -135,46 +164,14 @@
       
         
           
-            <li><a href="http://liferay.github.com/alloyui.com/tutorials/carousel/index.html" class="iframe-link"><i class="icon-chevron-right"></i> Carousel</a></li>
+            <li><a href="http://liferay.github.com/alloyui.com/tutorials/dialog/index.html" class="iframe-link"><i class="icon-chevron-right"></i> Dialog</a></li>
           
         
       
         
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
+          
+            <li><a href="http://liferay.github.com/alloyui.com/tutorials/carousel/index.html" class="iframe-link"><i class="icon-chevron-right"></i> Carousel</a></li>
+          
         
       
         
@@ -286,29 +283,56 @@
 
     <pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"http://deploy.alloyui.com/build/aui/aui.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></pre>
 
-    <p>The YUI seed file is an ultra-small bit of JavaScript that enables you to load any YUI component on your page.</p>
+    <p>This is an ultra-small bit of JavaScript that enables you to load any AlloyUI component on your page.</p>
 
     <hr>
 
-    <h4>2. Start using YUI!</h4>
+    <h4>2. Getting started!</h4>
 
-    <pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript">
-<span class="comment">// Create a YUI sandbox on your page.</span>
-YUI().use(<span class="string">'node'</span>, <span class="string">'event'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(Y)</span> {</span>
-    <span class="comment">// The Node and Event modules are loaded and ready to use.</span>
-    <span class="comment">// Your code goes here!</span>
-});
-</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></pre>
+    <p>Let's create an AUI instance and do some simple stuff, like capturing a DOM element and attaching a click event to it. Then let's run some transitions!</p>
 
-    <p>Create a YUI instance, called a "sandbox", to use any YUI component. Each YUI sandbox has its own instance of YUI (that's the Y parameter that gets passed to the callback function) and its own set of activated modules, so it won't conflict with other sandboxes on the same page. Any variables you declare inside your sandbox will only be available in that sandbox and won't pollute the global scope.</p>
+    <pre class="highlighted"><code class="actionscript">AUI().<span class="keyword">use</span>(<span class="string">'node'</span>, <span class="string">'transition'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(A)</span> {</span>
 
-    <p>When creating your YUI sandbox, specify the modules you'd like to use. In this example, we're using the node and event modules. Then, from inside the sandbox, you can access the Node and Event APIs via the Y instance.</p>
+  A.one(<span class="string">'.btn'</span>).on(<span class="string">'click'</span>, <span class="keyword">function</span>() {
+    <span class="keyword">this</span>.transition({ height: <span class="number">0</span>, padding: <span class="number">0</span> });
+  });
 
-    <p>YUI will manage all dependency calculations for the modules you need and load the JavaScript onto your page in a single, combined request. Your code inside the sandbox will execute as soon as all the requested YUI modules are loaded onto the page.</p>
+});</code></pre>
+
+    <button id="try-btn" class="btn btn-large btn-block btn-primary" type="button">Try me now!</button>
+
+    <hr>
+
+    <h4>3. Using a UI component</h4>
+
+    <p>Now let's take advantage of all the power that AlloyUI has and use one the UI components.</p>
+
+    <pre class="highlighted"><code class="javascript">AUI().ready(<span class="string">'aui-tooltip'</span>, <span class="keyword">function</span>(A) {
+
+  <span class="keyword">var</span> tooltip = <span class="keyword">new</span> A.Tooltip({
+    trigger: <span class="string">'#tooltip'</span>,
+    bodyContent: <span class="string">'&lt;object width="560" height="340"&gt;&lt;param name="movie" value="http://www.youtube.com/v/KzorZ1CO6Vs&amp;hl=en&amp;fs=1&amp;"&gt;&lt;/param&gt;&lt;param name="allowFullScreen" value="true"&gt;&lt;/param&gt;&lt;param name="allowscriptaccess" value="always"&gt;&lt;/param&gt;&lt;embed src="http://www.youtube.com/v/KzorZ1CO6Vs&amp;hl=en&amp;fs=1&amp;" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="560" height="340"&gt;&lt;/embed&gt;&lt;/object&gt;'</span>
+  }).render();
+
+});</code></pre>
+
+    <p style="text-align: center; font-size: 16px; font-weight: bold;"><a href="#" id="tooltip">Hover for a simple tooltip</a></p>
 
   </div>
 
+  <div class="row">
+    <div class="span12 title">
+      <p class="call">and this is just the beginning!</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <p style="text-align: center; margin-bottom: 25px;">AlloyUI have more than 60 components! Go ahead and navigate between them using the list on the left.</p>
+  </div>
+
 </div>
+
+<script src="http://liferay.github.com/alloyui.com/js/tutorial-demo.js"></script>
     </div>
 
     <div id="push"></div>
