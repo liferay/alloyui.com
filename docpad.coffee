@@ -14,7 +14,7 @@ module.exports =
         site:
 
             # Site Production URL
-            url: 'http://labs.zenorocha.com/alloyui.com/'
+            url: 'http://labs.zenorocha.com/alloyui.com'
 
         # -----------------------------
         # Helpers
