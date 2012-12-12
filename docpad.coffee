@@ -17,6 +17,9 @@ module.exports =
             url: 'http://liferay.github.com/alloyui.com'
             assets: 'http://liferay.github.com/alloyui.com/website'
 
+            # Site Description
+            description: 'Alloy is a UI framework that provides a consistent and simple API for building high scalable applications across all three levels of the browser: structure, style and behavior.'
+
         # -----------------------------
         # Helpers
 
