@@ -13,12 +13,13 @@ module.exports =
 
         site:
 
-            # Site Production URL
+            # Basic info
+            title: 'AlloyUI'
+            description: 'Alloy is a UI framework that provides a consistent and simple API for building high scalable applications across all three levels of the browser: structure, style and behavior.'
+
+            # Production URL
             url: 'http://liferay.github.com/alloyui.com'
             assets: 'http://liferay.github.com/alloyui.com/website'
-
-            # Site Description
-            description: 'Alloy is a UI framework that provides a consistent and simple API for building high scalable applications across all three levels of the browser: structure, style and behavior.'
 
         # -----------------------------
         # Helpers
@@ -41,6 +42,17 @@ module.exports =
         codeFile: (relativePath,language) ->
             contents = @readFile(relativePath)
             return """<pre><code class="#{language}">#{contents}</code></pre>"""
+
+    # =================================
+    # Collections
+
+    collections:
+
+      # Get all tutorials sorted by alphabetical order
+      tutorials: -> @getCollection("documents").findAll({url:$startsWith:'/tutorials'}, [title:1])
+
+      # Get all examples sorted by alphabetical order
+      examples: -> @getCollection("documents").findAll({url:$startsWith:'/examples'}, [title:1])
 
     # =================================
     # Environments

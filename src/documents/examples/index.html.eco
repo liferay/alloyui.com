@@ -12,20 +12,16 @@ layout: default
 
 <div class="container">
 
-    <% for example in @getCollection('documents').sortArray('title':0): %>
-      <% if example.url.indexOf('/examples') == 0: %>
-        <% if example.category: %>
-
-          <div class="span4 example">
-            <h2><a href="<%= @site.url %><%= example.url %>"><%= example.category %></a></h2>
-            <a href="<%= @site.url %><%= example.url %>">
-              <img src="<%= @site.assets %>/img/<%= example.thumbnail %>" alt="<%= example.category %>" />
-            </a>
-            <p><%= example.description %></p>
-            <p><a class="btn" href="<%= @site.url %><%= example.url %>">View examples &raquo;</a></p>
-          </div>
-
-        <% end %>
+    <% for example in @getCollection("examples").toJSON(): %>
+      <% if example.category: %>
+        <div class="span4 example">
+          <h2><a href="<%= @site.url %><%= example.url %>"><%= example.category %></a></h2>
+          <a href="<%= @site.url %><%= example.url %>">
+            <img src="<%= @site.assets %>/img/<%= example.thumbnail %>" alt="<%= example.category %>" />
+          </a>
+          <p><%= example.description %></p>
+          <p><a class="btn" href="<%= @site.url %><%= example.url %>">View examples &raquo;</a></p>
+        </div>
       <% end %>
     <% end %>
 

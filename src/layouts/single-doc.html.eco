@@ -16,25 +16,21 @@ layout: default
 
     <p class="related">Related examples</p>
     <ul class="nav nav-list bs-docs-sidenav affix-top">
-      <% for example in @getCollection('documents').sortArray('title':1): %>
-        <% if example.url.indexOf('/examples') == 0: %>
-          <% if example.tags == @document.tags: %>
-            <li><a href="<%= @site.url %><%= example.url %>" class="iframe-link"><i class="icon-chevron-right"></i> <%= example.title %></a></li>
-          <% end %>
+      <% for example in @getCollection("examples").toJSON(): %>
+        <% if example.tags == @document.tags: %>
+          <li><a href="<%= @site.url %><%= example.url %>" class="iframe-link"><i class="icon-chevron-right"></i> <%= example.title %></a></li>
         <% end %>
       <% end %>
     </ul>
 
     <p class="related">List of components</p>
     <ul class="nav nav-list bs-docs-sidenav affix-top">
-      <% for tutorial in @getCollection('documents').sortArray('title':1): %>
-        <% if tutorial.url.indexOf('/tutorials') == 0: %>
-          <% if tutorial.title: %>
-            <% if tutorial.title == @document.title: %>
-              <li class="active"><a href="<%= @site.url %><%= tutorial.url %>" class="iframe-link"><i class="icon-chevron-right"></i> <%= tutorial.title %></a></li>
-              <% else: %>
-              <li><a href="<%= @site.url %><%= tutorial.url %>" class="iframe-link"><i class="icon-chevron-right"></i> <%= tutorial.title %></a></li>
-            <% end %>
+      <% for tutorial in @getCollection("tutorials").toJSON(): %>
+        <% if tutorial.title: %>
+          <% if tutorial.title == @document.title: %>
+            <li class="active"><a href="<%= @site.url %><%= tutorial.url %>" class="iframe-link"><i class="icon-chevron-right"></i> <%= tutorial.title %></a></li>
+            <% else: %>
+            <li><a href="<%= @site.url %><%= tutorial.url %>" class="iframe-link"><i class="icon-chevron-right"></i> <%= tutorial.title %></a></li>
           <% end %>
         <% end %>
       <% end %>
