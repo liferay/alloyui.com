@@ -7,8 +7,8 @@ AUI().ready('aui-form-validator', function(A) {
 
     rules: {
       picture: {
-        required: true,
-        acceptFiles: 'jpg, gif, png'
+        acceptFiles: 'jpg, gif, png',
+        required: true
       },
       age: {
         customRule: true,
@@ -16,36 +16,36 @@ AUI().ready('aui-form-validator', function(A) {
         range: [18, 50]
       },
       email: {
-        required: true,
-        email: true
+        email: true,
+        required: true
       },
       emailConfirmation: {
-        required: true,
         email: true,
-        equalTo: '#email1'
-      },
-      url: {
-        url: true
+        equalTo: '#email1',
+        required: true
       },
       gender: {
         required: true
       },
-      'type[]': {
-          required: true
-      },
       lastName: {
         required: true,
-        rangeLength: [2,50]
+        rangeLength: [2, 50]
       },
       name: {
         required: true,
-        rangeLength: [2,50]
+        rangeLength: [2, 50]
+      },
+      'type[]': {
+          required: true
+      },
+      url: {
+        url: true
       }
     },
 
     fieldStrings: {
-        email: {
-        email: 'Type your email in this field.'
+      email: {
+        required: 'Type your email in this field.'
       },
       gender: {
         required: 'The gender is required.'
