@@ -4,54 +4,54 @@ AUI().ready('aui-form-validator', function(A) {
     boundingBox: "#form",
     fieldContainer: 'p',
     rules: {
-      picture: {
-        acceptFiles: 'jpg, gif, png',
-        required: true
+      name: {
+        required: true,
+        rangeLength: [2,50]
+      },
+      lastName: {
+        required: true,
+        rangeLength: [2,50]
       },
       age: {
         customRule: true,
         digits: true,
         range: [18, 50]
       },
-      email: {
-        email: true,
-        required: true
-      },
-      emailConfirmation: {
-        email: true,
-        equalTo: '#email',
-        required: true
-      },
       gender: {
         required: true
       },
-      lastName: {
+      email: {
         required: true,
-        rangeLength: [2, 50]
+        email: true
       },
-      name: {
+      emailConfirmation: {
         required: true,
-        rangeLength: [2, 50]
+        email: true,
+        equalTo: '#email'
       },
-      'type[]': {
-          required: true
+      picture: {
+        required: true,
+        acceptFiles: 'jpg, gif, png'
       },
       url: {
         url: true
+      },
+      'type[]': {
+        required: true
       }
     },
     fieldStrings: {
-      email: {
-        required: 'Type your email in this field.'
+      name: {
+        required: 'Required field with a custom message.'
       },
       gender: {
         required: 'The gender is required.'
       },
+      email: {
+        required: 'Type your email in this field.'
+      },
       'type[]': {
         required: 'Select the type is required.'
-      },
-      name: {
-        required: 'Required field with a custom message.'
       }
     }
   });
