@@ -6,7 +6,7 @@ AUI().ready('aui-char-counter', function(A) {
     maxLength: 10,
     on: {
       maxLength: function(event) {
-        alert('The max length was reach');
+        alert('The max length limit was reached');
       }
     }
   });
