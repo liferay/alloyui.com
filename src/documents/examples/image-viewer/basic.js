@@ -5,8 +5,7 @@ AUI().ready('aui-image-viewer-base', function(A) {
     caption: 'Liferay Champion Soccer',
     captionFromTitle: true,
     preloadAllImages: true,
-    showInfo: true,
-  })
-  .render();
+    showInfo: true
+  }).render();
 
 });
