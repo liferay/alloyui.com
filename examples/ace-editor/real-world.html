@@ -88,28 +88,8 @@
         
       
         
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
           
-          <li class="active"><a href="http://liferay.github.com/alloyui.com/examples/autocomplete/basic.html" class="iframe-link"><i class="icon-chevron-right"></i> Basic</a></li>
+          <li><a href="http://liferay.github.com/alloyui.com/examples/ace-editor/basic.html" class="iframe-link"><i class="icon-chevron-right"></i> Basic</a></li>
           
         
       
@@ -150,9 +130,29 @@
         
       
         
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
           
-          <li><a href="http://liferay.github.com/alloyui.com/examples/autocomplete/real-world.html" class="iframe-link"><i class="icon-chevron-right"></i> Real World</a></li>
+          <li class="active"><a href="http://liferay.github.com/alloyui.com/examples/ace-editor/real-world.html" class="iframe-link"><i class="icon-chevron-right"></i> Real World</a></li>
           
+        
+      
+        
+      
+        
+      
         
       
         
@@ -189,37 +189,110 @@
   </div>
 
   <div class="span9">
-    <link rel="stylesheet" href="http://liferay.github.com/alloyui.com/autocomplete/css/basic.css" type="text/css" />
+    <link rel="stylesheet" href="http://liferay.github.com/alloyui.com/ace-editor/css/real-world.css" type="text/css" />
 
-<h1>AutoComplete - Basic Example</h1>
-<h4>Start typing the name of a continent (such as America, Europe, or Asia)</h4>
-<div id="myAutoComplete"></div>
+<h1>Ace Editor - Real World Example</h1>
+
+<div id="wrapper">
+    <div class="controls">
+        <label for="mode">Language Mode:</label>
+        <select id="mode">
+            <option>javascript</option>
+            <option>json</option>
+            <option>xml</option>
+            <option>php</option>
+        </select>
+        <label>
+      <input checked="checked" id="updateEditor" type="checkbox" />
+      Update editor value for the selected language
+    </label>
+    </div>
+  <div id="editor"></div>
+</div>
 
 <script id="snippet">
-  AUI().use('aui-autocomplete', function (A) {
+  AUI().ready('aui-ace-editor', function(A) {
 
-  var continents = ['America', 'Europe', 'Asia', 'Africa', 'Oceania', 'Antarctica'];
-
-  var autoComplete = new A.AutoComplete({
-    contentBox: '#myAutoComplete',
-    dataSource: continents
+  var editor = new A.AceEditor({
+      boundingBox: '#editor',
+      mode: 'javascript',
+      value: 'alert("Write something here...");'
   }).render();
 
-});
+  var mode = A.one('#mode');
 
+  if (mode) {
+
+    var updateEditor = A.one('#updateEditor');
+
+    var contents = {
+      javascript: 'alert("Write something here...");',
+      php: '<?php echo "Write something here..."); ?>',
+      xml: '<value attr="something">Write something here...</value>',
+      json: '{"value": "Write something here..."}'
+    };
+
+    var currentMode = 'javascript';
+
+    var updateValue = function() {
+      if (updateEditor.attr('checked')) {
+        editor.set('value', contents[currentMode]);
+      }
+    };
+
+    updateEditor.on('change', updateValue);
+
+    mode.on('change', function(event) {
+      currentMode = this.val();
+      editor.set('mode', currentMode);
+      updateValue();
+    });
+
+  }
+
+});
 </script>
 
-<pre class="highlighted"><code class="javascript">AUI().use(<span class="string">'aui-autocomplete'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(A)</span> {</span>
+<pre class="highlighted"><code class="javascript">AUI().ready(<span class="string">'aui-ace-editor'</span>, <span class="keyword">function</span>(A) {
 
-  <span class="keyword">var</span> continents = [<span class="string">'America'</span>, <span class="string">'Europe'</span>, <span class="string">'Asia'</span>, <span class="string">'Africa'</span>, <span class="string">'Oceania'</span>, <span class="string">'Antarctica'</span>];
-
-  <span class="keyword">var</span> autoComplete = <span class="keyword">new</span> A.AutoComplete({
-    contentBox: <span class="string">'#myAutoComplete'</span>,
-    dataSource: continents
+  <span class="keyword">var</span> editor = <span class="keyword">new</span> A.AceEditor({
+      boundingBox: <span class="string">'#editor'</span>,
+      mode: <span class="string">'javascript'</span>,
+      value: <span class="string">'alert("Write something here...");'</span>
   }).render();
 
-});
-</code></pre>
+  <span class="keyword">var</span> mode = A.one(<span class="string">'#mode'</span>);
+
+  <span class="keyword">if</span> (mode) {
+
+    <span class="keyword">var</span> updateEditor = A.one(<span class="string">'#updateEditor'</span>);
+
+    <span class="keyword">var</span> contents = {
+      javascript: <span class="string">'alert("Write something here...");'</span>,
+      php: <span class="string">'&lt;?php echo "Write something here..."); ?&gt;'</span>,
+      xml: <span class="string">'&lt;value attr="something"&gt;Write something here...&lt;/value&gt;'</span>,
+      json: <span class="string">'{"value": "Write something here..."}'</span>
+    };
+
+    <span class="keyword">var</span> currentMode = <span class="string">'javascript'</span>;
+
+    <span class="keyword">var</span> updateValue = <span class="keyword">function</span>() {
+      <span class="keyword">if</span> (updateEditor.attr(<span class="string">'checked'</span>)) {
+        editor.set(<span class="string">'value'</span>, contents[currentMode]);
+      }
+    };
+
+    updateEditor.on(<span class="string">'change'</span>, updateValue);
+
+    mode.on(<span class="string">'change'</span>, <span class="keyword">function</span>(event) {
+      currentMode = <span class="keyword">this</span>.val();
+      editor.set(<span class="string">'mode'</span>, currentMode);
+      updateValue();
+    });
+
+  }
+
+});</code></pre>
   </div>
 
 </div>
