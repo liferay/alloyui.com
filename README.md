@@ -38,6 +38,8 @@ We use [DocPad](https://github.com/bevry/docpad), a static generator in NodeJS.
 
 2. Install DocPad globally: `sudo npm install -fg docpad@6.11`
 
+**Note**: Having trouble on installing dependencies on Windows? [Check this guide here](https://github.com/liferay/alloyui.com/wiki/How-to-install-dependencies-on-Windows%3F).
+
 ## Getting started
 
 Once you have dependencies installed, you just need to:
