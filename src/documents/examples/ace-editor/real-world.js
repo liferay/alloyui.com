@@ -1,14 +1,15 @@
 AUI().ready('aui-ace-editor', function(A) {
-  var editor = new A.AceEditor(
-    {
+
+  var editor = new A.AceEditor({
       boundingBox: '#editor',
       mode: 'javascript',
       value: 'alert("Write something here...");'
-    }
-  ).render();
+  }).render();
 
   var mode = A.one('#mode');
+
   if (mode) {
+
     var updateEditor = A.one('#updateEditor');
 
     var contents = {
@@ -30,11 +31,10 @@ AUI().ready('aui-ace-editor', function(A) {
 
     mode.on('change', function(event) {
       currentMode = this.val();
-
       editor.set('mode', currentMode);
-
       updateValue();
     });
+
   }
 
 });
