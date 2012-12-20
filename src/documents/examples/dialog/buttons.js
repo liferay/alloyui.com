@@ -13,9 +13,9 @@ AUI().use('aui-dialog', function(A) {
         this.set('bodyContent', 'New body content');
       }
     }
-  ];
+  ],
 
-  var dialog = new A.Dialog({
+  dialog = new A.Dialog({
     bodyContent: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
     title: 'Dialog title',
     buttons: myButtons,
