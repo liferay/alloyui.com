@@ -26,6 +26,8 @@ For now, you can help us in the website by writing tutorials or examples for tho
 
 Or go ahead and [read our main guide](http://liferay.github.com/alloyui.com/contributing).
 
+**Remember:** Before any pull request don't forget to run: `ant jshint`. If you find any error please fix it before send your pull request.
+
 ## How it works?
 
 We use [DocPad](https://github.com/bevry/docpad), a static generator in NodeJS.
