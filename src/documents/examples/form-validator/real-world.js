@@ -1,7 +1,8 @@
 AUI().ready('aui-form-validator', function(A) {
 
-  var validator2 = new A.FormValidator({
-    boundingBox: "#fm2",
+  var validator = new A.FormValidator({
+
+    boundingBox: "#form",
 
     fieldContainer: 'p',
 
@@ -21,7 +22,7 @@ AUI().ready('aui-form-validator', function(A) {
       },
       emailConfirmation: {
         email: true,
-        equalTo: '#email1',
+        equalTo: '#email',
         required: true
       },
       gender: {
