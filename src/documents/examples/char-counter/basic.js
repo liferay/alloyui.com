@@ -1,8 +1,8 @@
 AUI().ready('aui-char-counter', function(A) {
 
-  var cc1 = new A.CharCounter({
-    input: '#input1',
-    counter: '#counter1',
+  var charCounter = new A.CharCounter({
+    input: '#input',
+    counter: '#counter',
     maxLength: 10,
     on: {
       maxLength: function(event) {
