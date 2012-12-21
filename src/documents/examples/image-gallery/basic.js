@@ -26,8 +26,7 @@ AUI().ready('aui-image-viewer-gallery', function(A) {
     // anim: false,
     // random: true,
     delay: 2000
-  })
-  .render();
+  }).render();
 
   // imageGallery1.show();
   // imageGallery1.play();
