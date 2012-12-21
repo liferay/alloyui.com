@@ -1,9 +1,9 @@
 AUI().ready('aui-ace-editor', function(A) {
 
   var editor = new A.AceEditor({
-      boundingBox: '#editor',
-      mode: 'javascript',
-      value: 'alert("Write something here...");'
+    boundingBox: '#editor',
+    mode: 'javascript',
+    value: 'alert("Write something here...");'
   }).render();
 
   var mode = A.one('#mode');
