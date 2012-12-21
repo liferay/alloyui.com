@@ -38,8 +38,6 @@ We use [DocPad](https://github.com/bevry/docpad), a static generator in NodeJS.
 
 2. Install DocPad globally: `sudo npm install -fg docpad@6.11`
 
-**Note**: Having trouble on installing dependencies on Windows? [Check this guide here](https://github.com/liferay/alloyui.com/wiki/How-to-install-dependencies-on-Windows%3F).
-
 ## Getting started
 
 Once you have dependencies installed, you just need to:
@@ -48,7 +46,9 @@ Once you have dependencies installed, you just need to:
 
 2. Then go to the project's folder: `cd alloyui.com`
 
-3. And finally run: `ant run`
+3. Install plugins: `docpad install`
+
+4. And finally run: `docpad run`
 
 Now you can see the website running in `http://localhost:9778/` :D
 
