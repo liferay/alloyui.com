@@ -8,9 +8,8 @@ AUI().use('aui-toggler', function(A) {
     expanded: false,
     header: '.header',
     transition: {
-      duration: 0.2,
+      duration: .2,
       easing: 'cubic-bezier'
     }
   });
-
 });
