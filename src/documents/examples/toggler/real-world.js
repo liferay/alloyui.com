@@ -8,7 +8,7 @@ AUI().use('aui-toggler', function(A) {
     expanded: false,
     header: '.header',
     transition: {
-      duration: .2,
+      duration: 0.2,
       easing: 'cubic-bezier'
     }
   });
