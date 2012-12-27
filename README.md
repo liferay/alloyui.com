@@ -15,18 +15,18 @@ If you are having any problem with the library, please create an issue on [lifer
 
 ## Contribute
 
-So do you want to help us? That's pretty awesome!
+So you want to help us? That's pretty awesome!
 
 We are very happy to accept external contributions in the form of feedback, bug reports or pull requests :)
 
-For now, you can help us in the website by writing tutorials or examples for those components that we didn't add yet. [See the list of components that needs to the added](https://github.com/liferay/alloyui.com/wiki/List-of-Components).
+For now, you can help us with the website by writing tutorials or examples for the components that we haven't added yet. [See the list of components that needs to the added](https://github.com/liferay/alloyui.com/wiki/List-of-Components).
 
-* [How to create a new tutorial?](https://github.com/liferay/alloyui.com/wiki/How-to-create-a-new-tutorial%3F)
-* [How to create a new example?](https://github.com/liferay/alloyui.com/wiki/How-to-create-a-new-example%3F)
+* [How to create a new tutorial](https://github.com/liferay/alloyui.com/wiki/How-to-create-a-new-tutorial)
+* [How to create a new example](https://github.com/liferay/alloyui.com/wiki/How-to-create-a-new-example)
 
 Or go ahead and [read our main guide](http://liferay.github.com/alloyui.com/contributing).
 
-**Remember:** Before any pull request don't forget to run: `ant jshint`. If you find any error please fix it before send your pull request.
+**Remember:** Before any pull request don't forget to run: `ant jshint`. If you find any error please fix it before sending your pull request.
 
 ## How it works?
 
