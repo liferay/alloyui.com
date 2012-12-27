@@ -36,7 +36,7 @@ We use [DocPad](https://github.com/bevry/docpad), a static generator in NodeJS.
 
 1. [Install NodeJS](https://github.com/bevry/community/wiki/Installing-Node), if you don't have it yet.
 
-2. Install DocPad globally: `sudo npm install -fg docpad@6.11`
+2. Install DocPad globally: `sudo npm install -fg docpad@6.20.1`
 
 ## Getting started
 
