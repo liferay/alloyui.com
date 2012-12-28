@@ -1,13 +1,13 @@
-AUI().use('node', function(A) {
+// Create an AUI instance and load the 'aui-node' module
+AUI().use('aui-node', function(A) {
 
-  var node = A.all('.accordion .title');
+  // Select the node(s) using a css selector string
+  var nodes = A.all('.accordion .title');
 
-  node.on('click', function(e) {
+  // Clicking a node will set it as exclusively `active`
+  nodes.on('click', function(event) {
+    nodes.removeClass('active');
 
-    A.all('.accordion .title').removeClass('active');
-    
-    e.target.addClass('active');
-
+    event.target.addClass('active');
   });
-
 });

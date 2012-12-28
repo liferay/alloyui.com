@@ -55,5 +55,4 @@ AUI().ready('aui-form-validator', function(A) {
       }
     }
   });
-
 });
