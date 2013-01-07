@@ -20,6 +20,6 @@ AUI().use('aui-dialog', function(A) {
     title: 'Dialog title',
     buttons: myButtons,
     centered: true
- }).render();
+  }).render();
 
 });
