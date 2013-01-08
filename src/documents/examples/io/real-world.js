@@ -9,7 +9,7 @@ AUI().use('aui-io-request', 'node', function(A) {
 
         // gets the result of this asynchronous request
         var data = this.get('responseData'),
-            states = data.states;
+          states = data.states;
 
         // iterates on all states to create a new <option> on that <select>
         for (i = 0; i < states.length; i++) {
