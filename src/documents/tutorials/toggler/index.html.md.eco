@@ -40,10 +40,10 @@ Create a HTML element with some content to toggle on/off:
 ```
 
 <div class="alert alert-info">
-  <strong>Note:</strong> the `aui-toggler` classes are optional, and tell AUI to place the content in `collapsed` state on load.<br>
+  <strong>Note:</strong> `-collapsed` classes are optional and will place the content in a collapsed state when the toggler's `render` lifecycle stage has completed<br>
 </div>
 
-Now create a new instance of Toggler component, then pass it the `container` where it's going to be attached and `header` and `content` where we placed our header and content html. Finally, let's render it!
+Now create a new instance of the Toggler component then pass it the `container` where it's going to be attached and `header` and `content` where we placed our header and content html. Finally, let's render it!
 
 ``` javascript
 AUI().use('aui-toggler', function(A) {
@@ -63,7 +63,7 @@ AUI().use('aui-toggler', function(A) {
 
 There are some other options that you can pass to your Toggler instance.
 
-For example, if you set `animated` for `true` and pass an object to `transition` which specifies `duration` and `easing`, Toggler will use animated transitions between states.
+For example, if you set configuration property `animated` to `true` and define an object for `transition` which specifies `duration` and `easing`, Toggler will use animated transitions between states.
 
 ``` javascript
 AUI().use('aui-toggler', function(A) {
@@ -98,11 +98,11 @@ You can use the javascript constructor `TogglerDelegate` to assign toggler funct
 AUI().use('aui-toggler', function(A) {
 
   var toggler = new A.TogglerDelegate({
+    animated: true,
+    closeAllOnExpand: true,
     container: '#myToggler',
     content: '.content',
     header: '.header',
-    closeAllOnExpand: true,
-    animated: true,
     transition: {
       duration: .5,
       easing: 'cubic-bezier'
