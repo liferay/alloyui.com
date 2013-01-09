@@ -33,7 +33,7 @@ AUI().use('aui-tree-view', function(A) {
         id: 'root',
         expanded: true,
         cache: true,
-        io: 'assets/content.html'
+        io: 'content.html'
       }];
 
       // Create an array object for temp files child nodes
