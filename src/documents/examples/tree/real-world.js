@@ -5,9 +5,7 @@ AUI().use('aui-tree-view', function(A) {
 
     init: function() {
       var myTreeView = A.one('#myTreeView');
-
       var loadingmask = this.createLoadingMask(myTreeView);
-
       var treeView = this.createTreeMyView();
 
       treeView.on('render', function(event) {
@@ -19,7 +17,6 @@ AUI().use('aui-tree-view', function(A) {
       node.plug(A.LoadingMask);
 
       var loadingmask = node.loadingmask;
-
       loadingmask.show();
 
       return loadingmask;
@@ -56,28 +53,23 @@ AUI().use('aui-tree-view', function(A) {
         });
       };
 
-      A.on(
-        'click',
-        function() {
-          var tempNode = createRootTempNode();
+      A.one('#createNodeROOT').on('click', function() {
+        var tempNode = createRootTempNode();
+        ROOT.appendChild(tempNode);
+      });
 
-          ROOT.appendChild(tempNode);
-        },
-        '#createNodeROOT'
-      );
+      A.one('#insertBeforeROOT').on('click', function() {
+        var tempNode = createRootTempNode();
+        ROOT.insertBefore(tempNode);
+      });
 
-      A.on(
-        'click',
-        function() {
-          var tempNode = createRootTempNode();
+      A.one('#expandAll').on('click', function() {
+        treeView.expandAll();
+      });
 
-          ROOT.insertBefore(tempNode);
-        },
-        '#insertBeforeROOT'
-      );
-
-      A.on('click', function() { treeView.expandAll(); }, '#expandAll');
-      A.on('click', function() { treeView.collapseAll(); }, '#collapseAll');
+      A.one('#collapseAll').on('click', function() {
+        treeView.collapseAll();
+      });
 
       return treeView;
     },
