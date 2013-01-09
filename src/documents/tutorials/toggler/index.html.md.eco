@@ -1,0 +1,115 @@
+---
+layout: single-doc
+title: Toggler
+tags: 'toggler'
+---
+
+# Toggler
+
+The Toggler component allows users to toggle content on and off
+
+---
+
+#### Getting Started
+
+First load the seed file, if you haven't yet.
+
+``` html
+<script src="<%= @cdn %>"></script>
+```
+
+Then initialize AlloyUI and load the Toggler module.
+
+``` javascript
+AUI().use('aui-toggler', function(A) {
+  // code goes here
+});
+```
+
+---
+
+#### Using Toggler
+
+Create a HTML element with some content to toggle on/off:
+
+``` html
+<div id="myToggler">
+  <button class="header aui-toggler-header-collapsed">Read More</button>
+  <p class="content aui-toggler-content-collapsed">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</p>
+</div>
+```
+
+<div class="alert alert-info">
+  <strong>Note:</strong> `-collapsed` classes are optional and will place the content in a collapsed state when the toggler's `render` lifecycle stage has completed<br>
+</div>
+
+Now create a new instance of the Toggler component then pass it the `container` where it's going to be attached and `header` and `content` where we placed our header and content html. Finally, let's render it!
+
+``` javascript
+AUI().use('aui-toggler', function(A) {
+
+  var toggler = new A.Toggler({
+    container: '#myToggler',
+    content: '.content',
+    header: '.header'
+  }).render();
+
+});
+```
+
+---
+
+#### Configuring Toggler
+
+There are some other options that you can pass to your Toggler instance.
+
+For example, if you set configuration property `animated` to `true` and define an object for `transition` which specifies `duration` and `easing`, Toggler will use animated transitions between states.
+
+``` javascript
+AUI().use('aui-toggler', function(A) {
+
+  var toggler = new A.Toggler({
+    container: '#myToggler',
+    content: '.content',
+    header: '.header',
+    animated: true,
+    transition: {
+      duration: .5,
+      easing: 'cubic-bezier'
+    }
+  }).render();
+
+});
+```
+
+You can use the javascript constructor `TogglerDelegate` to assign toggler functionality for all toggler content elements within the container.  You can even set `closeAllOnExpand` for `true` to only allow one content box open at a time.  Don't forget to add multiple content and header boxes to your html container!
+
+``` html
+<div id="myToggler">
+  <button class="header aui-toggler-header-collapsed">Read More</button>
+  <p class="content aui-toggler-content-collapsed">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</p>
+  <button class="header aui-toggler-header-collapsed">Read More</button>
+  <p class="content aui-toggler-content-collapsed">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</p>
+  <button class="header aui-toggler-header-collapsed">Read More</button>
+  <p class="content aui-toggler-content-collapsed">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</p>
+</div>
+```
+``` javascript
+AUI().use('aui-toggler', function(A) {
+
+  var toggler = new A.TogglerDelegate({
+    animated: true,
+    closeAllOnExpand: true,
+    container: '#myToggler',
+    content: '.content',
+    header: '.header',
+    transition: {
+      duration: .5,
+      easing: 'cubic-bezier'
+    }
+  }).render();
+
+});
+```
+
+For more information about configuration, check the <a href="#">API Docs</a>.
