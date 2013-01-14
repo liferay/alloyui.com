@@ -1,0 +1,113 @@
+---
+layout: single-doc
+title: Nested List
+tags: 'nested-list'
+---
+
+# Nested List
+
+The Nested List component gives the user the ability to interact with a list element.
+
+---
+
+#### Getting Started
+
+First load the seed file, if you haven't yet.
+
+``` html
+<script src="<%= @cdn %>"></script>
+```
+
+Then initialize AlloyUI and load the Nested List module.
+
+``` javascript
+AUI().use('aui-nested-list', function(A) {
+  // code goes here
+});
+```
+
+---
+
+#### Using Nested List
+
+Create an HTML list (ordered or unordered):
+
+``` html
+<ol id="demo">
+  <li>Preheat oven to 350&deg;</li>
+  <li>Mix ingredients
+    <ol>
+      <li>Blend butter, sugar, eggs, and vanilla</li>
+      <li>Add flour and baking powder</li>
+    </ol>
+  </li>
+  <li>Shape into 2&quot; spheres and place on cookie sheet</li>
+  <li>Bake
+    <ol>
+      <li>Check every few minutes</li>
+      <li>Should take around 10-12 minutes</li>
+      <li>Remove when golden brown</li>
+    </ol>
+  </li>
+</ol>
+```
+
+Now create an instance of the Nested List component, specify `nodes` for the Nested List to apply to, and add this `dropCondition`:
+
+``` javascript
+AUI().ready('aui-nested-list', function(A) {
+
+  var list = new A.NestedList({
+    nodes: '#demo li',
+    dropCondition: function(event) {
+      return true;
+    },
+    dropOn: 'ol',
+  });
+
+});
+```
+
+---
+
+#### Configuring Nested List
+
+There are quite a few more options you can pass to your Nested List instance to customize it as you'd like.
+
+For example, you can set a `placeholder` that will indicate as you drag your element where it will be dropped (you can style this element using CSS):
+
+``` javascript
+AUI().ready('aui-nested-list', function(A) {
+
+  var placeholder = A.Node.create('<li class="placeholder-test"></li>');
+
+  var list = new A.NestedList({
+    nodes: '#demo li',
+    dropCondition: function(event) {
+      return true;
+    },
+    placeholder: placeholder,
+  });
+
+});
+```
+
+You can also specify a certain type of list that the Nested List instance will limit itself to:
+
+``` javascript
+AUI().ready('aui-nested-list', function(A) {
+
+  var list = new A.NestedList({
+    nodes: '#demo li',
+    dropCondition: function(event) {
+      return true;
+    },
+    dropOn: 'ol',
+  });
+
+});
+```
+
+From there, you can further specify the drop container, add drop conditions, add a helper `div` in addition to the placeholder, and more!
+
+For more information about configuration, check the <a href="#">API Docs</a>.
