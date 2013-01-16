@@ -1,0 +1,112 @@
+---
+layout: single-doc
+title: DatePicker
+tags: 'datepicker'
+---
+
+# Datepicker
+
+The DatePicker utility provides a visual method of selecting dates with a pop-up calender widget.
+
+---
+
+#### Getting Started
+
+First load the seed file, if you haven't yet.
+
+``` html
+<script src="<%= @cdn %>"></script>
+```
+
+Then initialize AlloyUI and load the DatePicker module.
+
+``` javascript
+AUI().use('aui-datepicker', function(A) {
+  // code goes here
+});
+```
+
+---
+
+#### Using DatePicker
+
+First create an HTML element.
+
+``` html
+<div id="datepicker-demo"></div>
+```
+
+Then create a new instance of DatePicker, using your HTML element as `boundingBox`.
+
+An instance of DatePicker with three drop down selectors and calender widget:
+
+``` javascript
+AUI().use('aui-datepicker', function(A) {
+
+  var datepickerSelect = new A.DatePickerSelect({
+    boundingBox: '#datepickerDemo'
+  }).render();
+
+});
+```
+
+A simplified instance of DatePicker using the HTML input element `#trigger`, and a another element as a container:
+
+``` javascript
+AUI().use('aui-datepicker', function(A) {
+
+  var simpleDatepicker = new A.DatePicker({
+    boundingBox: '#datepickerDemo',
+    trigger: '#trigger'
+  }).render();
+
+});
+```
+
+---
+
+#### Configuring DatePicker
+
+The order that DatePicker renders the selectors can be set with `appendOrder`, and the date format for the simple picker can be set with `dateFormat`.
+
+``` javascript
+AUI().use('aui-datepicker', function(A) {
+
+  var datepickerSelect = new A.DatePickerSelect({
+    boundingBox: '#datepickerDemo1',
+    appendOrder: [ 'm', 'd', 'y' ]
+  }).render();
+
+  var simpleDatepicker = new A.DatePicker({
+    boundingBox: '#datepickerDemo2',
+    trigger: '.trigger',
+    calendar: {
+      dateFormat: '%m/%d/%y'
+    }
+  }).render();
+
+});
+```
+
+A DatePicker can also be created from markup by secifying the `srcNode`, `boundingBox`, and nodes for day, month, and year (select elements from markup).
+
+
+``` javascript
+AUI().use('aui-datepicker', function(A) {
+
+  var datepickerSelect = new A.DatePickerSelect({
+    boundingBox: '#datepickerDemo',
+    srcNode: '#srcNode',
+    dayNode: '#dayNode',
+    monthNode: '#monthNode',
+    yearNode: '#yearNode',
+  }).render();
+
+});
+```
+
+<div class="alert alert-info">
+  <strong>Note:</strong> `srcNode` should be located inside of the `boundingBox`, and the day, month, and year nodes inside of `srcNode`
+</div>
+
+For more information about configuration, check the <a href="#">API Docs</a>.
