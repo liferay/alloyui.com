@@ -1,5 +1,7 @@
 # AlloyUI - Website
 
+![AlloyUI Robo Suit](http://f.cl.ly/items/292d3K0l3j221n3m0V0D/Alloy-Robo-Suit.jpg)
+
 This is a working in progress of [AlloyUI's](https://github.com/liferay/alloy-ui/) website. Check the [Status here](https://github.com/liferay/alloyui.com/wiki/Status).
 
 If you are having any problem with the library, please create an issue on [liferay/alloy-ui](https://github.com/liferay/alloy-ui/) repository.
