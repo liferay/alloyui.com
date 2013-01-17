@@ -1,11 +1,8 @@
 AUI().ready('aui-form-validator', function(A) {
 
   var validator = new A.FormValidator({
-
     boundingBox: "#form",
-
     fieldContainer: 'p',
-
     rules: {
       picture: {
         acceptFiles: 'jpg, gif, png',
@@ -43,7 +40,6 @@ AUI().ready('aui-form-validator', function(A) {
         url: true
       }
     },
-
     fieldStrings: {
       email: {
         required: 'Type your email in this field.'
@@ -59,5 +55,4 @@ AUI().ready('aui-form-validator', function(A) {
       }
     }
   });
-
 });

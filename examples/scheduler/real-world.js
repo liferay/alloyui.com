@@ -56,13 +56,11 @@ AUI().use('aui-scheduler', function(A) {
     calendar1,
     calendar2,
     calendar3,
-
     {
       content: 'Large Event 1',
       endDate: new Date(2010, 9, 13, 12),
       startDate: new Date(2010, 9, 13, 9)
     },
-
     {
       content: 'Very Large Event',
       disabled: true,
@@ -71,31 +69,26 @@ AUI().use('aui-scheduler', function(A) {
       reminder: true,
       startDate: new Date(2010, 9, 1, 9)
     },
-
     {
       content: 'Simple JSON event',
       endDate: new Date(2010, 9, 12, 7),
       startDate: new Date(2010, 9, 12, 6)
     },
-
     {
       content: 'Day boundary event',
       endDate: new Date(2010, 9, 13, 0),
       startDate: new Date(2010, 9, 12, 20)
     },
-
     {
       content: 'Overlap event',
       endDate: new Date(2010, 9, 13, 15),
       startDate: new Date(2010, 9, 12, 21)
     },
-
     {
       content: 'Simple JSON event',
       endDate: new Date(2010, 9, 12, 9),
       startDate: new Date(2010, 9, 12, 7)
     },
-
     {
       content: 'Bigger than 24hrs event',
       endDate: new Date(2010, 9, 6, 1),
@@ -130,35 +123,44 @@ AUI().use('aui-scheduler', function(A) {
 
   scheduler.on({
     '*:change': function(event) {
-      console.log(event.type, event);
-    },
 
+      console.log(event.type, event);
+
+    },
     '*:add': function(event) {
-      console.log(event.type, event);
-    },
 
+      console.log(event.type, event);
+
+    },
     '*:remove': function(event) {
-      console.log(event.type, event);
-    },
 
+      console.log(event.type, event);
+
+    },
     'scheduler-event:startDateChange': function(event) {
-      console.log(event.type, event);
-    },
 
+      console.log(event.type, event);
+
+    },
     'scheduler-event:endDateChange': function(event) {
-      console.log(event.type, event);
-    },
 
+      console.log(event.type, event);
+
+    },
     'scheduler-event-recorder:save': function(event) {
-      console.log(event.type, event);
-    },
 
+      console.log(event.type, event);
+
+    },
     'scheduler-event-recorder:delete': function(event) {
-      console.log(event.type, event);
-    },
 
-    'scheduler-event-recorder:edit': function(event) {
       console.log(event.type, event);
+
+    },
+    'scheduler-event-recorder:edit': function(event) {
+
+      console.log(event.type, event);
+      
     }
   });
 });

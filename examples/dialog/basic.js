@@ -4,6 +4,6 @@ AUI().use('aui-dialog', function(A) {
     bodyContent: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
     title: 'Dialog title',
     centered: true
- }).render();
+  }).render();
 
 });
