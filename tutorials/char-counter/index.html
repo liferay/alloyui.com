@@ -66,7 +66,7 @@
       <div class="banner page-banner">
   <div class="container">
     <div class="presentation">
-      <h2>Examples</h2>
+      <h2>Tutorials</h2>
     </div>
   </div>
 </div>
@@ -74,6 +74,7 @@
 <div class="container">
 
   <div class="span3 bs-docs-sidebar">
+
     <p class="related">Related examples</p>
     <ul class="nav nav-list bs-docs-sidenav affix-top">
       
@@ -114,9 +115,7 @@
         
       
         
-          
           <li><a href="http://liferay.github.com/alloyui.com/examples/char-counter/basic.html" class="iframe-link"><i class="icon-chevron-right"></i> Basic</a></li>
-          
         
       
         
@@ -214,9 +213,7 @@
         
       
         
-          
-          <li class="active"><a href="http://liferay.github.com/alloyui.com/examples/char-counter/real-world.html" class="iframe-link"><i class="icon-chevron-right"></i> Real World</a></li>
-          
+          <li><a href="http://liferay.github.com/alloyui.com/examples/char-counter/real-world.html" class="iframe-link"><i class="icon-chevron-right"></i> Real World</a></li>
         
       
         
@@ -254,90 +251,121 @@
         
       
     </ul>
+
+    <p class="related">List of components</p>
+    <ul class="nav nav-list bs-docs-sidenav affix-top">
+      
+        
+      
+        
+          
+            <li><a href="http://liferay.github.com/alloyui.com/tutorials/autocomplete/index.html" class="iframe-link"><i class="icon-chevron-right"></i> AutoComplete</a></li>
+          
+        
+      
+        
+          
+            <li><a href="http://liferay.github.com/alloyui.com/tutorials/carousel/index.html" class="iframe-link"><i class="icon-chevron-right"></i> Carousel</a></li>
+          
+        
+      
+        
+          
+            <li class="active"><a href="http://liferay.github.com/alloyui.com/tutorials/char-counter/index.html" class="iframe-link"><i class="icon-chevron-right"></i> Char Counter</a></li>
+            
+        
+      
+        
+          
+            <li><a href="http://liferay.github.com/alloyui.com/tutorials/dialog/index.html" class="iframe-link"><i class="icon-chevron-right"></i> Dialog</a></li>
+          
+        
+      
+        
+          
+            <li><a href="http://liferay.github.com/alloyui.com/tutorials/io/index.html" class="iframe-link"><i class="icon-chevron-right"></i> I/O</a></li>
+          
+        
+      
+        
+          
+            <li><a href="http://liferay.github.com/alloyui.com/tutorials/portal-layout/index.html" class="iframe-link"><i class="icon-chevron-right"></i> Portal Layout</a></li>
+          
+        
+      
+        
+          
+            <li><a href="http://liferay.github.com/alloyui.com/tutorials/textboxlist/index.html" class="iframe-link"><i class="icon-chevron-right"></i> Textbox List</a></li>
+          
+        
+      
+        
+          
+            <li><a href="http://liferay.github.com/alloyui.com/tutorials/tooltip/index.html" class="iframe-link"><i class="icon-chevron-right"></i> Tooltip</a></li>
+          
+        
+      
+    </ul>
+
   </div>
 
   <div class="span9">
-    <h1>Char Counter - Real World Sample</h1>
+    <h1>Char Counter</h1>
+<p>The Char Counter component provides a method to keep track of the number of characters in a given field.
 
-<p>
-    <input type="text" id="input1"/>
-    <span id="counter1"></span> character(s) remaining
 </p>
+<hr>
+<h4>Getting Started</h4>
+<p>First load the seed file, if you haven&#39;t yet.
 
-<p>
-    <input type="text" id="input2">
-    <span id="counter2"></span> character(s) remaining
-
-    <button id="button2-1">set maxLength to 10</button>
-    <button id="button2-2">set maxLength to 20 </button>
 </p>
+<pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"http://deploy.alloyui.com/build/aui/aui.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></pre>
+<p>Then initialize AlloyUI and load the Char Counter module.
 
-<p>
-    <textarea id="input3"></textarea>
-    <span id="counter3"></span> character(s) remaining
 </p>
+<pre class="highlighted"><code class="javascript">AUI().use(<span class="string">'char-counter'</span>, <span class="keyword">function</span>(A) {
+  <span class="comment">// code goes here</span>
+});</code></pre>
+<hr>
+<h4>Using Char Counter</h4>
+<p>Create an input and an element to be used as the counter.
 
-<script id="snippet">
-  AUI().ready('aui-char-counter', function(A) {
+</p>
+<pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"text"</span> <span class="attribute">id</span>=<span class="value">"input"</span>/&gt;</span>
+<span class="tag">&lt;<span class="title">span</span> <span class="attribute">id</span>=<span class="value">"counter"</span>&gt;</span><span class="tag">&lt;/<span class="title">span</span>&gt;</span> character(s) remaining</code></pre>
+<p>Now let&#39;s create a new instance of Char Counter using these two elements and setting the maximum length to 10.
 
-  var cc1 = new A.CharCounter({
-    input: '#input1',
-    counter: '#counter1',
-    maxLength: 10,
-    on: {
-      maxLength: function(event) {
-        alert('The max length limit was reached');
-      }
-    }
-  });
-
-  var cc2 = new A.CharCounter({
-    input: '#input2',
-    counter: '#counter2',
-    maxLength: 20
-  });
-
-  var cc3 = new A.CharCounter({
-    input: '#input3',
-    counter: '#counter3',
-    maxLength: 255
-  });
-
-  A.on('click', function() { cc2.set('maxLength', 10); }, '#button2-1');
-  A.on('click', function() { cc2.set('maxLength', 20); }, '#button2-2');
-
-});
-</script>
-
+</p>
 <pre class="highlighted"><code class="javascript">AUI().ready(<span class="string">'aui-char-counter'</span>, <span class="keyword">function</span>(A) {
 
-  <span class="keyword">var</span> cc1 = <span class="keyword">new</span> A.CharCounter({
-    input: <span class="string">'#input1'</span>,
-    counter: <span class="string">'#counter1'</span>,
+  <span class="keyword">var</span> characterCounter = <span class="keyword">new</span> A.CharCounter({
+    input: <span class="string">'#input'</span>,
+    counter: <span class="string">'#counter'</span>,
+    maxLength: <span class="number">10</span>
+  });
+
+});</code></pre>
+<hr>
+<h4>Configuring Char Counter</h4>
+<p>When the maximum length is reached, we can create a function, such as an alert informing the user that the maximum length was reached.
+
+</p>
+<pre class="highlighted"><code class="javascript">AUI().ready(<span class="string">'aui-char-counter'</span>, <span class="keyword">function</span>(A) {
+
+  <span class="keyword">var</span> characterCounter = <span class="keyword">new</span> A.CharCounter({
+    input: <span class="string">'#input'</span>,
+    counter: <span class="string">'#counter'</span>,
     maxLength: <span class="number">10</span>,
     on: {
       maxLength: <span class="keyword">function</span>(event) {
-        alert(<span class="string">'The max length limit was reached'</span>);
+        alert(<span class="string">'The max length has been reached'</span>);
       }
     }
   });
 
-  <span class="keyword">var</span> cc2 = <span class="keyword">new</span> A.CharCounter({
-    input: <span class="string">'#input2'</span>,
-    counter: <span class="string">'#counter2'</span>,
-    maxLength: <span class="number">20</span>
-  });
-
-  <span class="keyword">var</span> cc3 = <span class="keyword">new</span> A.CharCounter({
-    input: <span class="string">'#input3'</span>,
-    counter: <span class="string">'#counter3'</span>,
-    maxLength: <span class="number">255</span>
-  });
-
-  A.on(<span class="string">'click'</span>, <span class="keyword">function</span>() { cc2.set(<span class="string">'maxLength'</span>, <span class="number">10</span>); }, <span class="string">'#button2-1'</span>);
-  A.on(<span class="string">'click'</span>, <span class="keyword">function</span>() { cc2.set(<span class="string">'maxLength'</span>, <span class="number">20</span>); }, <span class="string">'#button2-2'</span>);
-
 });</code></pre>
+<p>For more information about configuration, check the <a href="#">API Docs</a>.</p>
+
   </div>
 
 </div>
