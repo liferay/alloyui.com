@@ -1,0 +1,77 @@
+---
+layout: single-doc
+title: Char Counter
+tags: 'char-counter'
+---
+
+# Char Counter
+
+The Char Counter component provides a method to keep track of the number of characters in a given field.
+
+---
+
+#### Getting Started
+
+First load the seed file, if you haven't yet.
+
+``` html
+<script src="<%= @cdn %>"></script>
+```
+
+Then initialize AlloyUI and load the Char Counter module.
+
+``` javascript
+AUI().use('char-counter', function(A) {
+  // code goes here
+});
+```
+
+---
+
+#### Using Char Counter
+
+Create an input and an element to be used as the counter.
+
+``` html
+<input type="text" id="input"/>
+<span id="counter"></span> character(s) remaining
+```
+
+Now let's create a new instance of Char Counter using these two elements and setting the maximum length to 10.
+
+``` javascript
+AUI().ready('aui-char-counter', function(A) {
+
+  var characterCounter = new A.CharCounter({
+    input: '#input',
+    counter: '#counter',
+    maxLength: 10
+  });
+
+});
+```
+
+---
+
+#### Configuring Char Counter
+
+When the maximum length is reached, we can create a function, such as an alert informing the user that the maximum length was reached.
+
+``` javascript
+AUI().ready('aui-char-counter', function(A) {
+
+  var characterCounter = new A.CharCounter({
+    input: '#input',
+    counter: '#counter',
+    maxLength: 10,
+    on: {
+      maxLength: function(event) {
+        alert('The max length has been reached');
+      }
+    }
+  });
+
+});
+```
+
+For more information about configuration, check the <a href="#">API Docs</a>.
