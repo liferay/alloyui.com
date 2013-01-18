@@ -1,8 +1,10 @@
 AUI().ready('aui-ace-editor', function(A) {
 
   var editor = new A.AceEditor({
-    boundingBox: '#editor',
-    value: 'Write something here...'
+    boundingBox: '#myEditor',
+    value: 'Write something here...',
+    width: '700',
+    height: '200'
   }).render();
 
 });
