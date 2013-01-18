@@ -1,0 +1,125 @@
+---
+layout: single-doc
+title: Portal Layout
+tags: 'portal-layout'
+---
+
+# Portal Layout
+
+The Portal Layout component enables a layout with draggable/droppable functionality.
+
+---
+
+#### Getting Started
+
+First load the seed file if you haven't yet.
+
+``` html
+<script src="<%= @cdn %>"></script>
+```
+
+Then initialize AlloyUI and load the Portal Layout module.
+
+``` javascript
+AUI().use('aui-portal-layout', function(A) {
+  // code goes here
+});
+```
+---
+
+#### Using Portal Layout
+
+Create an HTML element with some content nodes:
+
+``` html
+<div id="myPortalLayout">
+  <div class="contentNode">
+    <p>Some content</p>
+  </div>
+  <div class="contentNode">
+    <p>Other content</p>
+  </div>
+  <div class="contentNode">
+    <p>More content</p>
+  </div>
+</div>
+```
+
+Now create a new instance of Portal Layout component by setting `dropNodes` to our HTML element's selector. Also, set `dragNodes` to the content nodes' class so Portal Layout can make the nodes draggable.
+
+``` javascript
+AUI().use('aui-portal-layout', function(A) {
+
+  var portalLayout = new A.PortalLayout({
+    dragNodes: '.contentNode',
+    dropNodes: '#myPortalLayout'
+  });
+
+});
+```
+
+<div class="alert alert-info">
+  <strong>Note:</strong> you could also use `dropContainer`, instead of `dropNodes`, to initialize the HTML container.  DropContainer will initialize the container and all its children as drop targets, whereas DropNodes will only initialize nodes with matching class selector.
+</div>
+
+---
+
+#### Configuring Portal Layout
+
+There are some other optional parameters that you can pass to your Portal Layout instance.
+
+For example, you can add a `proxyNode` which will act as a temporary node during `activeDrag` mode and be replaced by your drag node on drag end.  To give `proxyNode` visibility, make sure to add CSS styles, such as border, which will apply to the proxy node on drag start.
+
+``` javascript
+AUI().use('aui-portal-layout', function(A) {
+
+  var portalLayout = new A.PortalLayout({
+    dragNodes: '.contentNode',
+    dropNodes: '#myPortalLayout',
+    proxyNode: A.Node.create('<div class="proxyNode"></div>')
+  });
+
+});
+```
+
+You can set another HTML container to receive dropped Portal Layout object by setting `dropContainer` to your HTML selector.  Portal Layout can now drag and drop content nodes onto one another and inside the separate DropContainer DIV:
+
+``` html
+<div id="dropContainer"></div>
+```
+
+``` javascript
+AUI().use('aui-portal-layout', function(A) {
+
+  var portalLayout = new A.PortalLayout({
+    dragNodes: '.contentNode',
+    dropNodes: '#myPortalLayout',
+    proxyNode: A.Node.create('<div class="proxyNode"></div>'),
+    dropContainer: '#dropContainer'
+  });
+
+});
+```
+
+You can even define a Placeholder HTML node which will appear in your drop zone before you drop your activeDrag node.  Like we did for proxyNode, pass the `placeholder` property a `Node.create` constructor with your desired HTML placeholder.  Just be sure to add CSS styles to the placeholder class so you can see your placeholder nodes!
+
+
+``` javascript
+AUI().use('aui-portal-layout', function(A) {
+
+  var portalLayout = new A.PortalLayout({
+    dragNodes: '.contentNode',
+    dropNodes: '#myPortalLayout',
+    proxyNode: A.Node.create('<div class="proxyNode"></div>'),
+    dropContainer: '#dropContainer',
+    placeholder: A.Node.create('<div class="placeholder"></div>')
+  });
+
+});
+```
+
+<div class="alert alert-info">
+  <strong>Note:</strong> by default, AlloyUI inserts a placeholder as a blue border with arrows on each end.  The `placeholder` property will override the default AUI placeholder for a custom placeholder.
+</div>
+
+For more information about configuration, check out our <a href="#">API Docs</a>.
