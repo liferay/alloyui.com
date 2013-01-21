@@ -90,41 +90,21 @@
         
       
         
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
           
           <li><a href="http://liferay.github.com/alloyui.com/examples/ace-editor/basic.html" class="iframe-link"><i class="icon-chevron-right"></i> Basic</a></li>
           
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
         
       
         
@@ -253,15 +233,35 @@
       
         
       
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     </ul>
   </div>
 
   <div class="span9">
-    <link rel="stylesheet" href="http://liferay.github.com/alloyui.com/ace-editor/css/real-world.css" type="text/css" />
+    <link rel="stylesheet" href="http://liferay.github.com/alloyui.com/ace-editor/css/real-world.css" />
 
 <h1>Ace Editor - Real World Example</h1>
 
-<div id="wrapper">
+<div id="myWrapper">
     <div class="controls">
         <label for="mode">Language Mode:</label>
         <select id="mode">
@@ -275,16 +275,61 @@
       Update editor value for the selected language
     </label>
     </div>
-  <div id="editor"></div>
+  <div id="myEditor"></div>
 </div>
+
+<pre class="highlighted"><code class="javascript">AUI().ready(<span class="string">'aui-ace-editor'</span>, <span class="keyword">function</span>(A) {
+
+  <span class="keyword">var</span> editor = <span class="keyword">new</span> A.AceEditor({
+    boundingBox: <span class="string">'#myEditor'</span>,
+    mode: <span class="string">'javascript'</span>,
+    value: <span class="string">'alert("Write something here...");'</span>,
+    width: <span class="string">'700'</span>,
+    height: <span class="string">'200'</span>
+  }).render();
+
+  <span class="keyword">var</span> mode = A.one(<span class="string">'#mode'</span>);
+
+  <span class="keyword">if</span> (mode) {
+
+    <span class="keyword">var</span> updateEditor = A.one(<span class="string">'#updateEditor'</span>);
+
+    <span class="keyword">var</span> contents = {
+      javascript: <span class="string">'alert("Write something here...");'</span>,
+      php: <span class="string">'&lt;?php echo "Write something here..."); ?&gt;'</span>,
+      xml: <span class="string">'&lt;value attr="something"&gt;Write something here...&lt;/value&gt;'</span>,
+      json: <span class="string">'{"value": "Write something here..."}'</span>
+    };
+
+    <span class="keyword">var</span> currentMode = <span class="string">'javascript'</span>;
+
+    <span class="keyword">var</span> updateValue = <span class="keyword">function</span>() {
+      <span class="keyword">if</span> (updateEditor.attr(<span class="string">'checked'</span>)) {
+        editor.set(<span class="string">'value'</span>, contents[currentMode]);
+      }
+    };
+
+    updateEditor.on(<span class="string">'change'</span>, updateValue);
+
+    mode.on(<span class="string">'change'</span>, <span class="keyword">function</span>(event) {
+      currentMode = <span class="keyword">this</span>.val();
+      editor.set(<span class="string">'mode'</span>, currentMode);
+      updateValue();
+    });
+
+  }
+
+});</code></pre>
 
 <script id="snippet">
   AUI().ready('aui-ace-editor', function(A) {
 
   var editor = new A.AceEditor({
-    boundingBox: '#editor',
+    boundingBox: '#myEditor',
     mode: 'javascript',
-    value: 'alert("Write something here...");'
+    value: 'alert("Write something here...");',
+    width: '700',
+    height: '200'
   }).render();
 
   var mode = A.one('#mode');
@@ -320,47 +365,6 @@
 
 });
 </script>
-
-<pre class="highlighted"><code class="javascript">AUI().ready(<span class="string">'aui-ace-editor'</span>, <span class="keyword">function</span>(A) {
-
-  <span class="keyword">var</span> editor = <span class="keyword">new</span> A.AceEditor({
-    boundingBox: <span class="string">'#editor'</span>,
-    mode: <span class="string">'javascript'</span>,
-    value: <span class="string">'alert("Write something here...");'</span>
-  }).render();
-
-  <span class="keyword">var</span> mode = A.one(<span class="string">'#mode'</span>);
-
-  <span class="keyword">if</span> (mode) {
-
-    <span class="keyword">var</span> updateEditor = A.one(<span class="string">'#updateEditor'</span>);
-
-    <span class="keyword">var</span> contents = {
-      javascript: <span class="string">'alert("Write something here...");'</span>,
-      php: <span class="string">'&lt;?php echo "Write something here..."); ?&gt;'</span>,
-      xml: <span class="string">'&lt;value attr="something"&gt;Write something here...&lt;/value&gt;'</span>,
-      json: <span class="string">'{"value": "Write something here..."}'</span>
-    };
-
-    <span class="keyword">var</span> currentMode = <span class="string">'javascript'</span>;
-
-    <span class="keyword">var</span> updateValue = <span class="keyword">function</span>() {
-      <span class="keyword">if</span> (updateEditor.attr(<span class="string">'checked'</span>)) {
-        editor.set(<span class="string">'value'</span>, contents[currentMode]);
-      }
-    };
-
-    updateEditor.on(<span class="string">'change'</span>, updateValue);
-
-    mode.on(<span class="string">'change'</span>, <span class="keyword">function</span>(event) {
-      currentMode = <span class="keyword">this</span>.val();
-      editor.set(<span class="string">'mode'</span>, currentMode);
-      updateValue();
-    });
-
-  }
-
-});</code></pre>
   </div>
 
 </div>
