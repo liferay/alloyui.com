@@ -1,0 +1,118 @@
+---
+layout: single-doc
+title: Tree View
+tags: 'treeview'
+---
+
+# Tree View
+
+The Tree View component allows users to view file/folder structure in expandable tree view
+
+---
+
+#### Getting Started
+
+First load the seed file, if you haven't yet.
+
+``` html
+<script src="<%= @cdn %>"></script>
+```
+
+Then initialize AlloyUI and load the Tree View module.
+
+``` javascript
+AUI().use('aui-tree-view', function(A) {
+  // code goes here
+});
+```
+---
+
+#### Using Tree View
+
+Create a HTML element:
+
+``` html
+<div id="myTreeView"></div>
+```
+
+Now create a new instance of Tree View component, then initialize a variable `children` which will store an array of the child files and folders to be supplied to Tree View.  Then use the `new TreeView` constructor, passing our HTML element for `boundingBox` and our children variable for `children`. Finally, let's render it!
+
+``` javascript
+AUI().use('aui-tree-view', function(A) {
+  var children =  [{
+    label: 'ROOT',
+    children: [{
+      label: 'Folder1',
+      children: [{ label: 'File' }]
+    },
+    {
+      label: 'Folder2',
+      children: [{ label: 'File' }]
+    }]
+  }]
+
+  var treeView = new A.TreeView({
+    boundingBox: '#myTreeView',
+    children: children
+  }).render();
+});
+```
+
+<div class="alert alert-info">
+  <strong>Note:</strong> you could also use `contentBox`, not only `boundingBox` to be initialized.<br>
+  Read more about the [differences between them](https://github.com/liferay/alloy-ui/wiki/FAQs).
+</div>
+
+---
+
+#### Configuring Tree View
+
+There are some other options that you can pass to your Tree View instance.
+
+For example, you can use an external file to populate the Tree View `children` using the `io` type.  We'll pass `io` a sample content file called content.html, which contains an array of child objects just like our previous `children` variable.  In your HTML file, be sure to wrap both option key and value in quotes! (IE: `'label': 'File1'`)
+
+``` javascript
+AUI().use('aui-tree-view', function(A) {
+  var children = [{
+    type: 'io',
+    label: 'ROOT',
+    id: 'root',
+    cache: true,
+    io: 'assets/content.html'
+  }]
+
+  var treeView = new A.TreeView({
+    boundingBox: '#myTreeView',
+    children: children
+  }).render();
+});
+```
+
+Also, you can use the `createNode` method to create a new child node for your Tree View.  This method can be used in a separate function, such as an onClick event.  First, we'll select the ROOT node we added earlier in our `children` var.  Then, we'll use createNode to create a new file, and pass it the options `radio` for type and `radioButton` for id.  Lastly, we'll append `radioButton` to ROOT using `appendChild` method.
+
+``` javascript
+AUI().use('aui-tree-view', function(A) {
+  var children = [{
+    type: 'io',
+    label: 'ROOT',
+    id: 'root',
+    cache: true,
+    io: 'assets/content.html'
+  }]
+
+  var treeView = new A.TreeView({
+    boundingBox: '#myTreeView',
+    children: children
+  }).render();
+
+  var ROOT = treeView.getNodeById('root');
+  var radioButton = ROOT.createNode({
+    type: 'radio',
+    id: 'radioButton',
+    label: 'Radio Button'
+  });
+  ROOT.appendChild(radioButton);
+});
+```
+
+For more information about configuration, check the <a href="#">API Docs</a>.
