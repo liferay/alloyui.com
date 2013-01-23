@@ -41,7 +41,7 @@ AUI().use('aui-property-list', function(A) {
     }
   ];
 
-  window.pList = new A.PropertyList({
+  new A.PropertyList({
     data: properties
   }).render('#myPropertyList');
 
