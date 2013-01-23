@@ -1,13 +1,13 @@
 AUI().ready('aui-nested-list', function(A) {
 
-  var placeholder = A.Node.create('<li class="placeholder-test"></li>');
+  var placeholder = A.Node.create('<li class="placeholder"></li>');
 
   var list = new A.NestedList({
-    nodes: '#demo li',
+    nodes: '#myList li',
     dropCondition: function(event) {
       return true;
     },
-    dropOn: 'ol',
+    dropOn: 'myList',
     placeholder: placeholder,
   });
 
