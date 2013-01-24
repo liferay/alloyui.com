@@ -6,7 +6,7 @@ tags: 'template'
 
 # Template
 
-The Template component provides suggestions while users type into the field.
+AlloyUI Templates allow the ability to format text and JavaScript objects in an easy-to-use manner with great performance and efficiency.
 
 ---
 
@@ -40,10 +40,18 @@ Now create a new instance of Template component by setting contentBox to our HTM
 ``` javascript
 AUI().use('aui-template', function(A) {
   var items = [
-    {item: 'Glasses'},
-    {item: 'Spectacles'},
-    {item: 'Monacles'},
-    {item: 'Contacts'}
+    {
+      item: 'Glasses'
+    },
+    {
+      item: 'Spectacles'
+    },
+    {
+      item: 'Monacles'
+    },
+    {
+      item: 'Contacts'
+    }
   ];
 
   var template = new A.Template(
@@ -89,10 +97,22 @@ For example, you can include your HTML in a `<script>` tag with type `aui/templa
 ``` javascript
 AUI().use('aui-template', function(A) {
   var people = [
-    {name: 'CS Lewis', bday: '11/29/1898'},
-    {name: 'JRR Tolkien', bday: '1/3/1892'},
-    {name: 'Jimmy Stewart', bday: '5/20/1908'},
-    {name: 'William Wilberforce', bday: '7/24/1759'}
+    {
+      name: 'CS Lewis',
+      birthday: '11/29/1898'
+    },
+    {
+      name: 'JRR Tolkien',
+      birthday: '1/3/1892'
+    },
+    {
+      name: 'Jimmy Stewart',
+      birthday: '5/20/1908'
+    },
+    {
+      name: 'William Wilberforce',
+      birthday: '7/24/1759'
+    }
   ];
 
   var tplContent = A.one('#myContent');
@@ -101,7 +121,7 @@ AUI().use('aui-template', function(A) {
 });
 ```
 
-You can use Javascript operators and functions within the template HTML using the `[]` "scriptlet" syntax, which allows for any arbitrary JavaScript code.  The AUI Template is passed the object `values` which represents all the object properties passed to the Template.  In this case, `people.dyear` and `people.byear` exist as properties of `people`, so we can call them using the `values` object and operate with them.
+You can use Javascript operators and functions within the template HTML using the `[...]` "scriptlet" syntax, which allows for any arbitrary JavaScript code.  The AUI Template is passed the object `values` which represents all the object properties passed to the Template.  In this case, `alive.from` and `alive.to` exist as properties of `people`, so we can call them using the `values` object and operate with them.
 
 ``` html
 <script id="myContent" type="aui/template">
@@ -111,7 +131,7 @@ You can use Javascript operators and functions within the template HTML using th
       <thead>
       <tpl for=".">
         <tr>
-          <td>{name}</td><td>{bday}</td><td>{[values.dyear - values.byear + ' Years']}</td>
+          <td>{name}</td><td>{bday}</td><td>{[values.alive.to - values.alive.from + ' Years']}</td>
         <tr>
       </tpl>
     </table>
@@ -123,10 +143,37 @@ You can use Javascript operators and functions within the template HTML using th
 ``` javascript
 AUI().use('aui-template', function(A) {
   var people = [
-    {name: 'CS Lewis', bday: '11/29/1898', byear: 1898, dyear: 1963},
-    {name: 'JRR Tolkien', bday: '1/3/1892' byear: 1892, dyear: 1973},
-    {name: 'Jimmy Stewart', bday: '5/20/1908' byear: 1908, dyear: 1997},
-    {name: 'William Wilberforce', bday: '7/24/1759' byear: 1759, dyear: 1833}
+    {
+      name: 'CS Lewis',
+      birthday: '11/29/1898',
+      alive: {
+        from: 1898,
+        to: 1963
+      }
+    },
+    {
+      name: 'JRR Tolkien', birthday: '1/3/1892',
+      alive: {
+        from: 1892,
+        to: 1973
+      }
+    },
+    {
+      name: 'Jimmy Stewart',
+      birthday: '5/20/1908',
+      alive: {
+        from: 1908,
+        to: 1997
+      }
+    },
+    {
+      name: 'William Wilberforce',
+      birthday: '7/24/1759',
+      alive: {
+        from: 1759,
+        dyear: 1833
+      }
+    }
   ];
 
   var tplContent = A.one('#myContent');
@@ -144,7 +191,7 @@ You can see the full power of AUI Template with the ability to loop over individ
   </ul></tpl>
 </script>
 
-<div id="myTemplate"></div>
+<div id='myTemplate'></div>
 ```
 
 ``` javascript
