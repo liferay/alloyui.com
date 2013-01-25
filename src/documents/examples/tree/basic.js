@@ -16,7 +16,7 @@ AUI().use('aui-tree-view', function(A) {
   }];
 
   // Create a TreeView Component
-  var treeView = new A.TreeView({
+  new A.TreeView({
     boundingBox: '#myTreeView',
     children: children
   }).render();
