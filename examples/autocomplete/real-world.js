@@ -54,7 +54,7 @@ AUI().use('aui-autocomplete', function (A) {
     ['WY', 'Wyoming', 'Like No Place on Earth']
   ],
 
-  autoComplete = new A.AutoComplete({
+  new A.AutoComplete({
     contentBox: '#myAutoComplete',
     dataSource: states,
     delimChar: ',',
