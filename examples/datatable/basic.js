@@ -10,7 +10,7 @@ AUI().use('aui-datatable', function(A) {
     { name:"Bob F. Uncle",  address:"9899 Random Road", city:"Los Angeles",   state:"CA" }
   ];
 
-  var table = new A.DataTable.Base({
+  new A.DataTable.Base({
     columnset: columns,
     recordset: data
   }).render('#myDataTable');
