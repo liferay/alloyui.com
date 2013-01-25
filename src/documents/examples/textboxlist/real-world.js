@@ -6,7 +6,7 @@ AUI().ready('aui-textboxlist', function(A) {
     ['ME', 'Maine', 'The Pine Tree State']
   ];
 
-  var textboxlist = new A.TextboxList({
+  new A.TextboxList({
     contentBox: '#demo',
     dataSource: states,
     matchKey: 'name',
