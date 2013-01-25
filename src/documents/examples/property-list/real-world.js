@@ -1,4 +1,5 @@
 AUI().use('aui-property-list', function(A) {
+
   var properties = [
     {
       editor: new A.CheckboxCellEditor({
