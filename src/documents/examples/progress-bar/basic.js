@@ -15,4 +15,5 @@ AUI().ready('aui-progressbar', function(A) {
   A.one('.load').on('click', function() {
     progressBar.set('value', 100);
   });
+
 });

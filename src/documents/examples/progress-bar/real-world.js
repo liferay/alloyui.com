@@ -1,4 +1,5 @@
 AUI().ready('node', 'aui-progressbar', 'async-queue', 'node-load', function(A) {
+
   var content = A.one('.content');
   var progressBar, steptask, step, speed, statusBar;
   var loadBut = A.one('.load'); //load button
@@ -57,4 +58,5 @@ AUI().ready('node', 'aui-progressbar', 'async-queue', 'node-load', function(A) {
 
   //onload
   pbCreate();
+
 });
