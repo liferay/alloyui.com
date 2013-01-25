@@ -1,6 +1,6 @@
 AUI().use('aui-datatable', 'datatable-sort', 'aui-datatype', function(A) {
 
-  window.nameEditor = new A.TextAreaCellEditor({
+  var nameEditor = new A.TextAreaCellEditor({
     validator: {
       rules: {
         name: {
@@ -11,7 +11,7 @@ AUI().use('aui-datatable', 'datatable-sort', 'aui-datatype', function(A) {
     }
   });
 
-  window.fruitEditor = new A.DropDownCellEditor({
+  var fruitEditor = new A.DropDownCellEditor({
     editable: true,
     multiple: true,
     validator: {
@@ -113,7 +113,7 @@ AUI().use('aui-datatable', 'datatable-sort', 'aui-datatype', function(A) {
     }
   ];
 
-  window.dtable = new A.DataTable({
+  var dataTable = new A.DataTable({
     columns: nestedCols,
     data: remoteData,
     editEvent: 'dblclick',
@@ -125,8 +125,8 @@ AUI().use('aui-datatable', 'datatable-sort', 'aui-datatype', function(A) {
         }
       }
     ]
-  }).render("#dt1");
+  }).render("#myDataTable");
 
-  dtable.get('boundingBox').unselectable();
+  dataTable.get('boundingBox').unselectable();
 
 });
