@@ -1,11 +1,11 @@
 AUI().ready('aui-carousel', function(A) {
 
-  var carousel = new A.Carousel({
-    contentBox: '#demo',
+  new A.Carousel({
+    contentBox: '#myCarousel',
     activeIndex: 'rand',
     intervalTime: 2,
-    width: 680,
-    height: 254
+    width: 700,
+    height: 250
   }).render();
 
 });
