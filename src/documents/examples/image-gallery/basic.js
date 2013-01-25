@@ -1,6 +1,6 @@
 AUI().ready('aui-image-viewer-gallery', function(A) {
 
-  var imageGallery1 = new A.ImageGallery({
+  new A.ImageGallery({
     links: '#gallery1 a',
     caption: 'Liferay Champion Soccer',
     // useOriginalImage: true,
