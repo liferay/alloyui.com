@@ -7,7 +7,7 @@ AUI().use('aui-node', function(A) {
   // Clicking a node will set it as exclusively `active`
   nodes.on('click', function(event) {
     nodes.removeClass('active');
-
     event.target.addClass('active');
   });
+
 });
