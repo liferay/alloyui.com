@@ -15,7 +15,7 @@ AUI().use('aui-dialog', function(A) {
     }
   ],
 
-  dialog = new A.Dialog({
+  new A.Dialog({
     bodyContent: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
     title: 'Dialog title',
     buttons: myButtons,
