@@ -14,7 +14,7 @@ AUI().use('aui-scheduler', function(A) {
 
   eventRecorder = new A.SchedulerEventRecorder(),
 
-  scheduler = new A.Scheduler({
+  new A.Scheduler({
     boundingBox: '#scheduler',
     date: new Date(2012, 9, 12),
     eventRecorder: eventRecorder,

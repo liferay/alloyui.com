@@ -160,7 +160,8 @@ AUI().use('aui-scheduler', function(A) {
     'scheduler-event-recorder:edit': function(event) {
 
       console.log(event.type, event);
-      
+
     }
   });
+
 });
