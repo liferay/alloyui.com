@@ -1,6 +1,6 @@
 AUI().ready('aui-char-counter', function(A) {
 
-  var charCounter = new A.CharCounter({
+  new A.CharCounter({
     input: '#myTextarea',
     counter: '#myCounter',
     maxLength: 140,
