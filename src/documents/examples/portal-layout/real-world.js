@@ -1,4 +1,5 @@
 AUI().use('aui-portal-layout', function(A) {
+
   var proxyNode = A.Node.create('<div class="aui-portal-layout-proxy"></div>');
   var DDM = A.DD.DDM;
 
@@ -62,4 +63,5 @@ AUI().use('aui-portal-layout', function(A) {
       livePortlet.drop.set('groups', ['portal-layout']);
     }
   });
+
 });
