@@ -1,6 +1,6 @@
 AUI().use('aui-datepicker', function(A) {
 
-  var datePicker = new A.DatePickerSelect({
+  new A.DatePickerSelect({
     boundingBox: '#datePicker',
     srcNode: '#srcNode',
     trigger: '#trigger',

@@ -1,15 +1,15 @@
 AUI().use('aui-datepicker', function(A) {
 
-  var dynamicDatepicker = new A.DatePickerSelect({
+  new A.DatePickerSelect({
     appendOrder: [ 'm', 'd', 'y' ]
-  }).render('#datePicker');
+  }).render('#myDatePicker');
 
-  var simpleDatepicker = new A.DatePicker({
-    trigger: '#trigger1',
+  new A.DatePicker({
+    trigger: '#myInput',
     calendar: {
       selectedDates: new Date,
       dateFormat: '%m/%d/%Y'
     }
-  }).render('#simpleDatePicker');
+  }).render('#myOtherDatePicker');
 
 });
