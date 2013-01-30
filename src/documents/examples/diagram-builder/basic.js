@@ -9,7 +9,6 @@ AUI().ready('aui-diagram-builder', function(A) {
   ];
 
   var diagramBuilder = new A.DiagramBuilder ({
-
     availableFields: availableFields,
     boundingBox: '#diagram-builder-bb',
     srcNode: '#diagram-builder-sn',
@@ -26,11 +25,11 @@ AUI().ready('aui-diagram-builder', function(A) {
       }
     ],
     render: true
-    });
+  });
 
   diagramBuilder.connectAll([
     {
-    connector: {
+      connector: {
         name: 'TaskConnector'
       },
       source: 'StartNode',

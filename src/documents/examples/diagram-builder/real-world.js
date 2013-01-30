@@ -39,7 +39,6 @@ AUI().ready('aui-diagram-builder', function(A) {
   ];
 
   var diagramBuilder = new A.DiagramBuilder ({
-
     availableFields: availableFields,
     boundingBox: '#diagram-builder-bb',
     srcNode: '#diagram-builder-sn',
