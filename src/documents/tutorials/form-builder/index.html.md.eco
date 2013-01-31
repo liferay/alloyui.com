@@ -1,0 +1,129 @@
+---
+layout: single-doc
+title: Form Builder
+tags: 'form-builder'
+---
+
+# Form Builder
+
+The Form Builder module provides the user with a graphic user interface method for contructing forms.
+
+---
+
+#### Getting Started
+
+First load the seed file, if you haven't yet.
+
+``` html
+<script src="<%= @cdn %>"></script>
+```
+
+Then initialize AlloyUI and load the Form Builder module.
+
+``` javascript
+AUI().use('aui-form-builder', function (A) {
+  // code goes here
+});
+```
+
+---
+
+#### Using Form Builder
+
+Create an HTML element to house your Form Builder.
+
+``` html
+<div id="myFormBuilder"></div>
+```
+
+Then initialize a new instance of Form Builder using your element as the `boundingBox` and render it.
+
+``` javascript
+AUI().use('aui-form-builder', function(A) {
+
+  new A.FormBuilder({
+    boundingBox: '#myFormBuilder'
+  }).render();
+
+});
+
+```
+
+When Form Builder is first initialized, it contains no available fields, such elements must be specified in the Form Builder under `availableFields`. Lets make text fields and checkboxes available.
+
+``` javascript
+AUI().use('aui-form-builder', function(A) {
+
+  new A.FormBuilder({
+    boundingBox: '#myFormBuilder',
+    availableFields: [
+      {
+        iconClass: 'aui-form-builder-field-icon-text',
+        label: 'Text',
+        type: 'text'
+      },
+      {
+        iconClass: 'aui-form-builder-field-icon-checkbox',
+        lebel: 'Checkbox',
+        type: 'checkbox'
+      }
+    ]
+  }).render();
+
+});
+
+```
+<div class="alert alert-info">
+  <strong>Note:</strong> Many other field types are available, please see example for other available types.
+</div>
+
+---
+
+#### Configuring Form Builder
+
+Additional configuration includes setting a field type to unique (making that field type only usable once), setting the width of the element, and specifying which attributes of the element are read only.
+
+``` javascript
+AUI().use('aui-form-builder', function(A) {
+
+  new A.FormBuilder({
+    boundingBox: '#myFormBuilder',
+    availableFields: [
+      {
+        iconClass: 'aui-form-builder-field-icon-text',
+        label: 'Text',
+        type: 'text',
+        unique: true,
+        width: 100,
+        readOnlyAttributes: ['name']
+      }
+    ]
+  }).render();
+
+});
+
+```
+
+Predefined fields can be specified in the Form Builder so that fields are already included in the form on load.
+
+``` javascript
+AUI().use('aui-form-builder', function(A) {
+
+  new A.FormBuilder({
+    boundingBox: '#myFormBuilder',
+    fields: {
+      {
+        label: 'City',
+        predefinedValue: 'Chicago',
+        type: 'text'
+      }
+    }
+  }).render();
+
+});
+
+```
+
+<div class="alert alert-success">
+  For more information about configuration, check out our <a href="http://deploy.alloyui.com/api/">API Docs</a>.
+</div>
