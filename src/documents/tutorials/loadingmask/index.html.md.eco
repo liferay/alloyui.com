@@ -1,0 +1,85 @@
+---
+layout: single-doc
+title: Loading Mask
+tags: 'loading-mask'
+---
+
+# Loading Mask
+
+The Loading Mask provides a mask functionality to cover an element while content is loading.
+
+---
+
+#### Getting Started
+
+First load the seed file, if you haven't yet.
+
+``` html
+<script src="<%= @cdn %>"></script>
+```
+
+Then initialize AlloyUI and load the Loading Mask module.
+
+``` javascript
+AUI().use('aui-loading-mask', function (A) {
+  // code goes here
+});
+```
+
+---
+
+#### Using Loading Mask
+
+Loading Mask must be plugged into some kind of an element, lets plug one into the container of this image.
+
+``` html
+<div id="container">
+  <img src="sample-picture.jpg" />
+</div>
+```
+
+``` javascript
+AUI().use('aui-loading-mask', function(A) {
+
+  var container = A.one('#container');
+
+  container.plug(A.LoadingMask);
+
+  container.loadingmask.show();
+
+});
+```
+
+---
+
+#### Conifguring Loading Mask
+
+The appearence of the Loading Mask can be altered, such as background color, opacity, and loading message.
+
+``` javascript
+AUI().use('aui-loading-mask', function(A) {
+
+  var container = A.one('#container');
+
+  container.plug(A.LoadingMask, {
+    background: 'red',
+    opacity: 0.5,
+    strings: {
+      loading: 'Custom loading message'
+    }
+  });
+
+  container.loadingmask.show();
+
+});
+```
+
+The loading mask can also be set to hide at any time.
+
+``` javascript
+  container.loadingmask.hide();
+```
+
+<div class="alert alert-success">
+  For more information about configuration, check out our <a href="http://deploy.alloyui.com/api/">API Docs</a>.
+</div>
