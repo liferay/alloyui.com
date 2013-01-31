@@ -2,7 +2,7 @@ AUI().use('aui-loading-mask', 'aui-io-request', function(A) {
 
   var demo = A.one('#demo');
 
-  var imageContainer = A.one('#ioContent');
+  var imageContainer = demo.one('#ioContent');
 
   demo.plug(A.LoadingMask, {
     background: '#000',
@@ -28,23 +28,25 @@ AUI().use('aui-loading-mask', 'aui-io-request', function(A) {
       cache: false,
       timeOut: 1000,
       on: {
-        start: function() {
-          showMask();
-        },
+        start: showMask,
         success: function() {
           var data = this.get('responseData');
+
           imageContainer.html(data);
         }
       },
       after: {
         end: function() {
           //setTimeout method used to delay hideMask until image is fully displayed
-          setTimeout ( function() {
-            var image = A.one('.image');
-            if (image) {
-              hideMask();
-            }
-          }, 1500);
+          setTimeout(
+            function() {
+              var image = imageContainer.one('.image');
+              if (image) {
+                hideMask();
+              }
+            },
+            1500
+          );
         }
       }
     }
@@ -63,7 +65,7 @@ AUI().use('aui-loading-mask', 'aui-io-request', function(A) {
 
   request.start();
 
-  A.one('#reload').on('click', function() {
+  A.one('#load').on('click', function() {
     loadImage();
   });
 
