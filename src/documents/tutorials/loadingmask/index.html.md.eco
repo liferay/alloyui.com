@@ -21,7 +21,7 @@ First load the seed file, if you haven't yet.
 Then initialize AlloyUI and load the Loading Mask module.
 
 ``` javascript
-AUI().use('aui-loading-mask', function (A) {
+AUI().use('aui-loading-mask', function(A) {
   // code goes here
 });
 ```
@@ -30,7 +30,7 @@ AUI().use('aui-loading-mask', function (A) {
 
 #### Using Loading Mask
 
-Loading Mask must be plugged into some kind of an element, lets plug one into the container of this image.
+`.plug` one of your element nodes with the `LoadingMask` object. In this example, we plug an image container.
 
 ``` html
 <div id="container">
@@ -50,34 +50,46 @@ AUI().use('aui-loading-mask', function(A) {
 });
 ```
 
+<div class="alert alert-info">
+  <strong>Note:</strong> Once a node has been `.plug`'d with the `A.LoadingMask` function (and an optional config object), it will immediately have the property `loadingmask` available to us. `loadingmask` points to the new Loading Mask component that was just instantiated.
+</div>
+
 ---
 
-#### Conifguring Loading Mask
+#### Configuring Loading Mask
 
-The appearence of the Loading Mask can be altered, such as background color, opacity, and loading message.
+The appearance of the Loading Mask can be altered, such as background color, opacity, and loading message.
 
 ``` javascript
 AUI().use('aui-loading-mask', function(A) {
 
   var container = A.one('#container');
 
-  container.plug(A.LoadingMask, {
-    background: 'red',
-    opacity: 0.5,
-    strings: {
-      loading: 'Custom loading message'
+  container.plug(
+    A.LoadingMask,
+    {
+      background: 'red',
+      opacity: 0.5,
+      strings: {
+        loading: 'Custom loading message'
+      }
     }
-  });
+  );
 
   container.loadingmask.show();
 
 });
 ```
 
-The loading mask can also be set to hide at any time.
+The `loadingmask` can also be set to hide at any time...
 
 ``` javascript
   container.loadingmask.hide();
+```
+
+...or maybe you want to toggle visibility...
+``` javascript
+  container.loadingmask.toggle();
 ```
 
 <div class="alert alert-success">
