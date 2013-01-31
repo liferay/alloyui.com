@@ -1,4 +1,5 @@
 AUI().use('aui-rating', 'node', function(A) {
+
   var titleBox = A.one('#titleBox');
   var instance, title, stars;
 
@@ -13,10 +14,11 @@ AUI().use('aui-rating', 'node', function(A) {
     title = instance.get('title');
     stars = instance.get('value');
     if (!title) {
-      titleBox.set('innerHTML', 'You selected <b>0 stars</b> - no rating!');
+      titleBox.set('innerHTML', 'You selected <strong>0 stars</strong> - no rating!');
     }
     else {
-      titleBox.set('innerHTML', 'You selected <b>' + stars + ' stars</b> - "' + title + '"!');
+      titleBox.set('innerHTML', 'You selected <strong>' + stars + ' stars</strong> - "' + title + '"!');
     }
   });
+
 });
