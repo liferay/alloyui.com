@@ -1,5 +1,7 @@
 AUI().ready('aui-paginator', 'aui-io-request', function(A) {
 
+  var content = A.one('.content');
+
   var paginator = new A.Paginator({
     containers: '.paginator',
     total: 4,
@@ -16,7 +18,8 @@ AUI().ready('aui-paginator', 'aui-io-request', function(A) {
           on: {
             success: function() {
               var data = this.get('responseData');
-              A.one('.content').html(data);
+
+              content.html(data);
             }
           }
         });

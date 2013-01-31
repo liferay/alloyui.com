@@ -1,5 +1,7 @@
 AUI().ready('aui-paginator', function(A) {
 
+  var items = A.all('.item');
+
   var paginator = new A.Paginator({
     containers: '.paginator',
     total: 10,
@@ -14,26 +16,18 @@ AUI().ready('aui-paginator', function(A) {
 
         this.setState(newState);
 
-        if (newState.before) {
-          var lastPage = newState.before.page;
+        var lastPage = newState.before && newState.before.page;
 
+        if (lastPage) {
           A.all('.page' + lastPage).setStyle('display', 'none');
         }
 
-        var items = A.all('.item');
+        var rowsPerPage = newState.rowsPerPage;
 
-        items.set('className', 'item');
+        items.each(function(item, index, collection) {
+          var itemOnPage = Math.floor((index - 1) / rowsPerPage) + 1;
 
-        var i = 0;
-
-        items.each(function(item) {
-          i++;
-
-          var itemOnPage = Math.floor((i-1) / newState.rowsPerPage) + 1;
-
-          var currentClass = "page" + itemOnPage;
-
-          item.addClass(currentClass);
+          item.addClass('page' + itemOnPage);
         });
 
         var currentPageNumber = event.state.page;
