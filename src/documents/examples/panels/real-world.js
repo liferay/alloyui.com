@@ -45,8 +45,6 @@ AUI().ready('aui-panel', function(A) {
     });
   };
 
-  A.one('#createPost').on('click', function() {
-    createPanel();
-  });
+  A.one('#createPost').on('click', createPanel);
 
 });
