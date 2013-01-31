@@ -1,23 +1,12 @@
 AUI().ready('aui-image-cropper', function(A) {
 
-  var imageNode = A.one('#image');
-
-  var cropLinkNode = A.one('#cropLink');
-
   imageCropper = new A.ImageCropper({
-    srcNode: imageNode,
-    // cropHeight: 100,
-    // cropWidth: 100,
-    // minWidth: 50,
-    // minHeight: 50,
-    // movable: true,
-    // preserveRatio: true,
-    // resizeable: true,
+    srcNode: "#image",
     x: 100,
     y: 100
   }).render();
 
-  var statusTPL = '<b class="x">x: {x}</b><b class="y">y: {y}</b><b class="height">height: {height}</b><b class="width">width: {width}</b>';
+  var statusTPL = '<strong class="x">x: {x}</strong><strong class="y">y: {y}</strong><strong class="height">height: {height}</strong><strong class="width">width: {width}</strong>';
 
   var updateImage = function() {
 
@@ -46,7 +35,7 @@ AUI().ready('aui-image-cropper', function(A) {
 
   updateImage();
 
-  cropLinkNode.on('click', function (event) {
+  A.one('#cropLink').on('click', function (event) {
     imageCropper.setAttrs({
       x: 45,
       y: 5,
