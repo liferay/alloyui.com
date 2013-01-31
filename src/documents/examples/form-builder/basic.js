@@ -1,7 +1,7 @@
 AUI().use('aui-form-builder', function(A) {
 
-  window.formBuilder = new A.FormBuilder({
-    boundingBox: '#formBuilder',
+  new A.FormBuilder({
+    boundingBox: '#myFormBuilder',
     availableFields: [
       {
         iconClass: 'aui-form-builder-field-icon-text',
