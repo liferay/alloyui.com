@@ -1,9 +1,7 @@
 AUI().ready('aui-image-cropper', function(A) {
 
-  var imageNode = A.one('#image');
-
-  imageCropper = new A.ImageCropper({
-    srcNode: imageNode,
+  new A.ImageCropper({
+    srcNode: "#myImage",
     cropHeight: 200,
     cropWidth: 200,
     x: 50,
