@@ -78,6 +78,20 @@
     <ul class="nav nav-list bs-docs-sidenav affix-top">
       
         
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
           
           <li><a href="http://liferay.github.com/alloyui.com/examples/image-cropper/basic.html" class="iframe-link"><i class="icon-chevron-right"></i> Basic</a></li>
           
@@ -86,13 +100,25 @@
         
       
         
-      
-        
-      
-        
           
           <li class="active"><a href="http://liferay.github.com/alloyui.com/examples/image-cropper/real-world.html" class="iframe-link"><i class="icon-chevron-right"></i> With Display</a></li>
           
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
         
       
         
@@ -348,22 +374,6 @@
 <button id="cropLink">Crop Image to x: 45, y: 5, width: 390, height: 125</button>
 
 <div class="aui-layout image-cropper">
-    <div class="aui-column aui-w50">
-        <div class="aui-column-content">
-            <img id="image" src="http://liferay.github.com/alloyui.com/image-cropper/img/crop-image.jpg" />
-        </div>
-    </div>
-    <div id="cropped-view" class="aui-column aui-w50">
-        <div class="aui-column-content cropped-output">
-            <div class="cropped-image aui-helper-hidden" id="croppedImage"></div>
-            <div class="status aui-helper-hidden" id="status"></div>
-        </div>
-    </div>
-</div>
-
-<button id="cropLink">Crop Image to x: 45, y: 5, width: 390, height: 125</button>
-
-<div class="aui-layout image-cropper">
   <div class="aui-column aui-w50">
     <div class="aui-column-content">
       <img id="image" src="http://liferay.github.com/alloyui.com/image-cropper/img/crop-image.jpg" />
@@ -394,24 +404,13 @@
 <span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre>
 <pre class="highlighted"><code class="javascript">AUI().ready(<span class="string">'aui-image-cropper'</span>, <span class="keyword">function</span>(A) {
 
-  <span class="keyword">var</span> imageNode = A.one(<span class="string">'#image'</span>);
-
-  <span class="keyword">var</span> cropLinkNode = A.one(<span class="string">'#cropLink'</span>);
-
   imageCropper = <span class="keyword">new</span> A.ImageCropper({
-    srcNode: imageNode,
-    <span class="comment">// cropHeight: 100,</span>
-    <span class="comment">// cropWidth: 100,</span>
-    <span class="comment">// minWidth: 50,</span>
-    <span class="comment">// minHeight: 50,</span>
-    <span class="comment">// movable: true,</span>
-    <span class="comment">// preserveRatio: true,</span>
-    <span class="comment">// resizeable: true,</span>
+    srcNode: <span class="string">"#image"</span>,
     x: <span class="number">100</span>,
     y: <span class="number">100</span>
   }).render();
 
-  <span class="keyword">var</span> statusTPL = <span class="string">'&lt;b class="x"&gt;x: {x}&lt;/b&gt;&lt;b class="y"&gt;y: {y}&lt;/b&gt;&lt;b class="height"&gt;height: {height}&lt;/b&gt;&lt;b class="width"&gt;width: {width}&lt;/b&gt;'</span>;
+  <span class="keyword">var</span> statusTPL = <span class="string">'&lt;strong class="x"&gt;x: {x}&lt;/strong&gt;&lt;strong class="y"&gt;y: {y}&lt;/strong&gt;&lt;strong class="height"&gt;height: {height}&lt;/strong&gt;&lt;strong class="width"&gt;width: {width}&lt;/strong&gt;'</span>;
 
   <span class="keyword">var</span> updateImage = <span class="keyword">function</span>() {
 
@@ -440,7 +439,7 @@
 
   updateImage();
 
-  cropLinkNode.on(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(event)</span> {</span>
+  A.one(<span class="string">'#cropLink'</span>).on(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(event)</span> {</span>
     imageCropper.setAttrs({
       x: <span class="number">45</span>,
       y: <span class="number">5</span>,
@@ -454,24 +453,13 @@
 <script>
   AUI().ready('aui-image-cropper', function(A) {
 
-  var imageNode = A.one('#image');
-
-  var cropLinkNode = A.one('#cropLink');
-
   imageCropper = new A.ImageCropper({
-    srcNode: imageNode,
-    // cropHeight: 100,
-    // cropWidth: 100,
-    // minWidth: 50,
-    // minHeight: 50,
-    // movable: true,
-    // preserveRatio: true,
-    // resizeable: true,
+    srcNode: "#image",
     x: 100,
     y: 100
   }).render();
 
-  var statusTPL = '<b class="x">x: {x}</b><b class="y">y: {y}</b><b class="height">height: {height}</b><b class="width">width: {width}</b>';
+  var statusTPL = '<strong class="x">x: {x}</strong><strong class="y">y: {y}</strong><strong class="height">height: {height}</strong><strong class="width">width: {width}</strong>';
 
   var updateImage = function() {
 
@@ -500,7 +488,7 @@
 
   updateImage();
 
-  cropLinkNode.on('click', function (event) {
+  A.one('#cropLink').on('click', function (event) {
     imageCropper.setAttrs({
       x: 45,
       y: 5,
