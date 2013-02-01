@@ -33,10 +33,10 @@ AUI().use('aui-paginator', function(A) {
 The Paginator can be set in any number of `containers`, right now we'll use just one.
 
 ``` html
-<div class="container"></div>
+<div class="paginator"></div>
 ```
 
-Now let's initialize a new instance of Paginator, setting the options `containers`, and `total`.
+Now let's initialize a new instance of Paginator, setting the options `containers` and `total`.
 
 ``` javascript
 AUI().use('aui-paginator', function(A) {
@@ -49,7 +49,7 @@ AUI().use('aui-paginator', function(A) {
 });
 ```
 
-As is, the paginator will render, but won't do anything! You must specify what you want the paginator to do on `changeRequest`, which fires every time the user clicks on a new page. Here we will set the state of the Paginator on `changeRequest`.
+As is, the paginator will render, but won't do anything! You must specify what you want the paginator to do on the `changeRequest` event, which fires every time the user clicks on a new page. Here we will set the state of the Paginator on `changeRequest`.
 
 ``` javascript
 AUI().use('aui-paginator', function(A) {
@@ -73,7 +73,7 @@ Now as the user clicks on the different pages, the state of the paginator will c
 
 #### Configuring Paginator
 
-There are many configuration options that can be passed into Paginator, such as `maxPageLinks`, which sets the total amount of links displayed at a time, `rowsPerPageOptions`, which can be used to change the amount of pages displayed at once, and `circular`, allowing the user to navigate from the last page to the first when clicking next.
+There are many configuration options that can be passed into Paginator, such as `maxPageLinks`, which sets the total amount of links displayed at a time, `rowsPerPageOptions`, which can be used to change the amount of pages displayed at once, and `circular`, allowing the user to navigate from the last page to the first by clicking next.
 
 ``` javascript
 AUI().use('aui-paginator', function(A) {
@@ -94,16 +94,16 @@ AUI().use('aui-paginator', function(A) {
 });
 ```
 
-So far we have shown how to initialize and configure the Paginator, but it still isn't interacting with any page content! That's up to you, Paginator can be utilized to paginate through content from markup, or generated content, such an IO request.
+So far we have shown how to initialize and configure the Paginator, but it still isn't interacting with any page content! That's up to you: Paginator can be utilized to paginate through content from markup, or generated content, such as an IO request.
 
-These actions can take place within `changeRequest`, utilizing `event.state.page`, `event.state.rowsPerPage`, etc. Please see the examples for how these changes can be executed.
+These actions can take place within `changeRequest`, utilizing `event.state.page`, `event.state.rowsPerPage`, etc. Check out the examples for how these changes can be executed.
 
 Here is a very basic example of how a paginator may be used to change the content of a page.
 
 ``` javascript
 AUI().use('aui-paginator', function(A) {
 
-  //grabbing a node for content
+  //grabbing a node to be used for content
   var content = A.one('.content');
 
   new A.Paginator({
