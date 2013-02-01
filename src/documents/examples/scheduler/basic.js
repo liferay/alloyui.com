@@ -12,10 +12,10 @@ AUI().use('aui-scheduler', function(A) {
   monthView = new A.SchedulerMonthView(),
   weekView = new A.SchedulerWeekView(),
 
-  eventRecorder = new A.SchedulerEventRecorder(),
+  eventRecorder = new A.SchedulerEventRecorder();
 
   new A.Scheduler({
-    boundingBox: '#scheduler',
+    boundingBox: '#myScheduler',
     date: new Date(2012, 9, 12),
     eventRecorder: eventRecorder,
     items: events,
