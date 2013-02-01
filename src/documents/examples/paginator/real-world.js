@@ -2,7 +2,7 @@ AUI().ready('aui-paginator', 'aui-io-request', function(A) {
 
   var content = A.one('.content');
 
-  var paginator = new A.Paginator({
+  new A.Paginator({
     containers: '.paginator',
     total: 4,
     maxPageLinks: 4,
