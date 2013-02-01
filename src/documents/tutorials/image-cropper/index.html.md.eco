@@ -1,0 +1,143 @@
+---
+layout: single-doc
+title: Image Cropper
+tags: 'image-cropper'
+---
+
+# Image Cropper
+
+The Image Cropper component provides a draggable/resizable cropper widget to crop image sizes.
+
+---
+
+#### Getting Started
+
+First load the seed file if you haven't yet.
+
+``` html
+<script src="<%= @cdn %>"></script>
+```
+
+Then initialize AlloyUI and load the Image Cropper module.
+
+``` javascript
+AUI().use('aui-image-cropper', function(A) {
+  // code goes here
+});
+```
+---
+
+#### Using Image Cropper
+
+Create an HTML element with the desired crop image nested inside:
+
+``` html
+<div id="myImageCropper">
+  <img id="myImage" src="mywebsite.com/path/to/image" />
+</div>
+```
+
+Now create a new instance of Image Cropper component by setting `srcNode` to our image element. Finally, let's render it!
+
+``` javascript
+AUI().use('aui-image-cropper', function(A) {
+
+  var imageCropper = new A.ImageCropper({
+    srcNode: "#myImage"
+  }).render();
+
+});
+```
+
+---
+
+#### Configuring Image Cropper
+
+There are some other optional parameters that you can pass to your Image Cropper instance.
+
+For example, you can turn of Cropper resizing by setting `resizable` to `false`.  Also, you can prevent Image Cropper from moving by setting `movable` to `false`.  And if you need to maintain a constant aspect ratio for Image Cropper, set `preserveRatio` to `true`.
+
+``` javascript
+AUI().use('aui-image-cropper', function(A) {
+
+  var imageCropper = new A.ImageCropper({
+    movable: false,
+    preserveRatio: true,
+    resizable: false,
+    srcNode: "#myImage"
+  }).render();
+
+});
+```
+
+Setting `cropWidth` and `cropHeight` to integers will set the pixel width and height for the Image Cropper.  Likewise, passing integers to `minWidth` and `minHeight` will set the minimum pixel width and height for the Image Cropper.
+
+``` javascript
+AUI().use('aui-image-cropper', function(A) {
+
+  var imageCropper = new A.ImageCropper({
+    cropWidth: 100,
+    cropHeight: 100,
+    minWidth: 50,
+    minHeight: 50,
+    srcNode: "#myImage"
+  }).render();
+
+});
+```
+
+Image Cropper's `region` property returns you the current crop region.  To see crop region values update while you adjust Image Cropper, create an HTML element where you can store your region values, for example `#myCropSize`.  Now bind the event handler `after` to `imageCropper` to execute on the `crop` event.  The event handler will set the the HTML of `#myCropSize` with the updated crop region's width and height.
+
+``` javascript
+AUI().use('aui-image-cropper', function(A) {
+
+  var imageCropper = new A.ImageCropper({
+    srcNode: "#myImage"
+  }).render();
+
+  var cropSize = A.one('#myCropSize');
+
+  imageCropper.after('crop', function(event) {
+    var cropRegion = imageCropper.get('region');
+
+    cropSize.html('Width: ' + cropRegion.width + ' Height: ' + cropRegion.height)
+  });
+
+});
+```
+
+If you want to output your cropped image to another node, you can also use Image Cropper `region` to restyle the cropped image.  Using an event handler that is triggered by the `click` event and bound to the `cropImgButton` button, we can use the `setStyles` method to apply the crop region values.  This will update our `croppedImage` node to the current Image Cropper region each time we click `cropImgButton`.  Finally, let's show the cropped image with the `show` method.
+
+<div class="alert alert-info">
+  <strong>Note:</strong> be sure to add the classes `cropped-image` and `aui-helper-hidden` to your `#myCroppedImage` element so that Image Cropper handles the image crop properly.
+</div>
+
+``` javascript
+AUI().use('aui-image-cropper', function(A) {
+
+  var imageCropper = new A.ImageCropper({
+    srcNode: "#myImage"
+  }).render();
+
+  var image = A.one('#myImage');
+  var cropImgButton = A.one('#myCropButton');
+  var croppedImage = A.one('#myCroppedImage');
+
+  cropImgButton.on('click', function(event) {
+    var cropRegion = imageCropper.get('region');
+
+    croppedImage.setStyles({
+      'backgroundPosition': (-cropRegion.x) + 'px ' + (-cropRegion.y) + 'px',
+      height: cropRegion.height,
+      width: cropRegion.width
+    });
+  });
+
+  croppedImage.show();
+
+});
+```
+
+<div class="alert alert-success">
+  For more information about configuration, check out our <a href="http://deploy.alloyui.com/api/">API Docs</a>.
+</div>
