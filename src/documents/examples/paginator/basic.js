@@ -12,7 +12,7 @@ AUI().ready('aui-paginator', function(A) {
     on: {
       changeRequest: function(event) {
         var newState = event.state;
-        var page = newState.page;
+        var currentPage = newState.page;
 
         this.setState(newState);
 
@@ -25,14 +25,14 @@ AUI().ready('aui-paginator', function(A) {
         var rowsPerPage = newState.rowsPerPage;
 
         items.each(function(item, index, collection) {
-          var itemOnPage = Math.floor((index - 1) / rowsPerPage) + 1;
+          item.set('className', 'item');
+
+          var itemOnPage = Math.floor((index) / rowsPerPage) + 1;
 
           item.addClass('page' + itemOnPage);
         });
 
-        var currentPageNumber = event.state.page;
-
-        A.all('.page' + currentPageNumber).setStyle('display', 'block');
+        A.all('.page' + currentPage).setStyle('display', 'block');
       }
     }
   }).render();
