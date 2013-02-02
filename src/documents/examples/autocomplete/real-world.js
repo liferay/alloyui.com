@@ -52,7 +52,7 @@ AUI().use('aui-autocomplete', function (A) {
     ['WV', 'West Virginia', 'Mountain State'],
     ['WI', 'Wisconsin', "America's Dairyland"],
     ['WY', 'Wyoming', 'Like No Place on Earth']
-  ],
+  ];
 
   new A.AutoComplete({
     contentBox: '#myAutoComplete',
