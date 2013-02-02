@@ -1,7 +1,7 @@
 AUI().ready('aui-tooltip', function(A) {
 
-  var tooltip = new A.Tooltip({
-    trigger: '#tooltip',
+  new A.Tooltip({
+    trigger: '#myTooltip',
     bodyContent: 'Lorem ipsum sit amet, consectetur elit.'
   }).render();
 

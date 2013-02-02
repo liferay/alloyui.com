@@ -1,8 +1,8 @@
 AUI().ready('aui-progressbar', function(A) {
 
   var progressBar = new A.ProgressBar({
-    boundingBox: '#progressBar',
-    contentBox: '.pbar',
+    boundingBox: '#myProgressBarContainer',
+    contentBox: '.myProgressBar',
     label: 'Ready to load',
     value: '0',
     on: {

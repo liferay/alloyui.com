@@ -1,6 +1,6 @@
 AUI().use('aui-io-request', function (A) {
 
-  A.io.request('data/content.html', {
+  A.io.request('io/data/content.html', {
 
     on: {
       success: function() {
