@@ -1,0 +1,157 @@
+---
+layout: single-doc
+title: Form Validator
+tags: 'form-validator'
+---
+
+# Form Validator
+
+The Form Validator provides a method of ensuring the validity of form entries.
+
+---
+
+#### Getting Started
+
+First load the seed file, if you haven't yet.
+
+``` html
+<script src="<%= @cdn %>"></script>
+```
+
+Then initialize AlloyUI and load the Form Validator module.
+
+``` javascript
+AUI().use('aui-form-validator', function(A) {
+  // code goes here
+});
+```
+
+---
+
+#### Using Form Validator
+
+In order to validate form entries, a form must first be created in HTML.
+
+```html
+<form id="form" name="form">
+  <fieldset>
+    <p>
+      <label for="name">Name:</label>
+      <input type="text" name="name" />
+    </p>
+  </fieldset>
+</form>
+```
+
+Set `boundingBox` to the form id, pass in the input element name under `rules`, and set `required` to `true`.
+
+```javascript
+AUI().ready('aui-form-validator', function(A) {
+
+  var validator = new A.FormValidator({
+
+    boundingBox: '#form',
+
+    rules: {
+      name: {
+        required: true,
+      }
+    }
+  });
+
+});
+```
+
+Now, if the user attempted to subit the form without filling out the name field, they would receive an alert reading, "This field is required."
+
+---
+
+#### Configuring Form Validator
+
+Further requirements can be specified depending on the input type. For example, if the form input is for an email address, Form Validator can ensure that the text entered is a valid email address by setting `email` to `true`.
+
+```javascript
+AUI().ready('aui-form-validator', function(A) {
+
+  var validator = new A.FormValidator({
+
+    boundingBox: '#form',
+
+    rules: {
+      email: {
+        required: true,
+        email: true
+      }
+    }
+  });
+
+});
+```
+
+The same can be done for various other inputs.
+
+```javascript
+var validator = new A.FormValidator({
+
+  boundingBox: '#form',
+
+  rules: {
+    name: {
+      required: true,
+      rangeLength: [2,50]
+    },
+    url: {
+      required: true,
+      url: true
+    },
+    age: {
+      required: true,
+      digits: true
+    }
+  }
+});
+```
+
+Further configuration includes creating custom alerts that are displayed when invalid content is entered into a field (this replaces the default "This feild is required" message).
+
+```javascript
+var validator = new A.FormValidator({
+
+  boundingBox: '#form',
+
+  rules: {
+    name: {
+      required: true,
+    }
+  },
+
+  fieldStrings: {
+    name: {
+      required: 'We need your name! (Custom message)'
+    }
+  }
+});
+```
+
+Furthermore, the requirements can be customized beyond the default parameters. For example, one input can have the requirement of being equal to the content entered into another field.
+
+```javascript
+var validator = new A.FormValidator({
+
+  boundingBox: '#form',
+
+  rules: {
+    email: {
+      required: true,
+      email: true
+    },
+    emailConfirmation: {
+      required: true,
+      email: true,
+      equalTo: '#email'
+    }
+  }
+});
+```
+
+For more information about configuration, check the <a href="#">API Docs</a>.
