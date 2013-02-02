@@ -20,7 +20,7 @@
   <link rel="shortcut icon" type="image/x-icon" href="http://liferay.github.com/alloyui.com/website/img/favicon.ico">
 
   <!-- CSS: AlloyUI -->
-  <link href="http://deploy.alloyui.com/build/aui-skin-classic/css/aui-skin-classic-all-min.css" rel="stylesheet">
+  <link href="http://cdn.js.liferay.com/aui/1.7.0/aui-skin-classic/css/aui-skin-classic-all-min.css">
 
   <!-- CSS: Bootstrap -->
   <link href="http://liferay.github.com/alloyui.com/website/css/bootstrap.css" rel="stylesheet">
@@ -36,6 +36,7 @@
 
   <!-- JS -->
   <script src="http://cdn.js.liferay.com/aui/1.7.0/aui/aui.js"></script>
+  <script>AUI().applyConfig({ filter: 'min' });</script>
 
 </head>
 <body>
@@ -518,12 +519,6 @@
         
       
         
-          <li><a href="http://liferay.github.com/alloyui.com/examples/node/full">Full Example</a></li>
-        
-      
-        
-          <li><a href="http://liferay.github.com/alloyui.com/examples/node">Basic Example</a></li>
-        
       
         
           <li><a href="http://liferay.github.com/alloyui.com/examples/node/real-world">Real World Example</a></li>
@@ -572,6 +567,12 @@
         
       
         
+          <li><a href="http://liferay.github.com/alloyui.com/examples/node">Basic Example</a></li>
+        
+      
+        
+          <li><a href="http://liferay.github.com/alloyui.com/examples/node/full">Full Example</a></li>
+        
       
         
       
@@ -612,70 +613,44 @@
     
 
     <h1>Node</h1>
-<p>The node component allows interaction with the DOM through a set of utility methods.
-
-</p>
+<p>The node component allows interaction with the DOM through a set of utility methods.</p>
 <hr>
 <h4>What Does Node Do, Exactly?</h4>
-<p>Node supplies a set of methods that assists in DOM manipulation. Simple DOM interaction is possible without the node component, with <code>A.one</code>, <code>A.all</code>, and such commands being supplied in the YUI base code.
-
-</p>
-<p>However, more complicated actions which would be quite difficult with that code alone (e.g., finding ancestors and siblings, changing attributes, or modifying content) are made much simpler with the node component.
-
-</p>
+<p>Node supplies a set of methods that assists in DOM manipulation. Simple DOM interaction is possible without the node component, with <code>A.one</code>, <code>A.all</code>, and such commands being supplied in the YUI base code.</p>
+<p>However, more complicated actions which would be quite difficult with that code alone (e.g., finding ancestors and siblings, changing attributes, or modifying content) are made much simpler with the node component.</p>
 <hr>
 <h4>Getting Started</h4>
-<p>First load the seed file, if you haven&#39;t yet.
-
-</p>
+<p>First load the seed file, if you haven&#39;t yet.</p>
 <pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"http://cdn.js.liferay.com/aui/1.7.0/aui/aui.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></pre>
-<p>Then initialize AlloyUI and load the Node module.
-
-</p>
+<p>Then initialize AlloyUI and load the Node module.</p>
 <pre class="highlighted"><code class="javascript">AUI().use(<span class="string">'aui-node'</span>, <span class="keyword">function</span>(A) {
   <span class="comment">// code goes here</span>
 });</code></pre>
 <hr>
 <h4>Using Node</h4>
-<p>Let&#39;s make a <code>&lt;div&gt;</code> element so we have something to work with:
-
-</p>
+<p>Let&#39;s make a <code>&lt;div&gt;</code> element so we have something to work with:</p>
 <pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">'box'</span>&gt;</span><span class="tag">&lt;<span class="title">div</span>/&gt;</span></code></pre>
-<p>Now we can do all sorts of things with this box, using the utility methods that the node component provides.
-
-</p>
-<p>We can find all of the ancestors of our box, or all the ancestors that are <code>div</code> elements:
-
-</p>
+<p>Now we can do all sorts of things with this box, using the utility methods that the node component provides.</p>
+<p>We can find all of the ancestors of our box, or all the ancestors that are <code>div</code> elements:</p>
 <pre class="highlighted"><code class="javascript">AUI().use(<span class="string">'aui-node'</span>, <span class="keyword">function</span>(A) {
   <span class="keyword">var</span> ancestors = A.one(<span class="string">'.box'</span>).ancestors();
   <span class="comment">// or</span>
   <span class="keyword">var</span> divAncestors = A.one(<span class="string">'.box'</span>).ancestors(<span class="string">'div'</span>);
 });</code></pre>
-<p>We can add content to our box:
-
-</p>
+<p>We can add content to our box:</p>
 <pre class="highlighted"><code class="javascript">AUI().use(<span class="string">'aui-node'</span>, <span class="keyword">function</span>(A) {
   A.one(<span class="string">'.box'</span>).html(<span class="string">'&lt;p&gt;I just love boxes! Do you?&lt;/p&gt;'</span>);
 });</code></pre>
-<p>And then add more content:
-
-</p>
+<p>And then add more content:</p>
 <pre class="highlighted"><code class="javascript">AUI().use(<span class="string">'aui-node'</span>, <span class="keyword">function</span>(A) {
   A.one(<span class="string">'.box p'</span>).placeAfter(<span class="string">'&lt;p&gt;Especially when they are filled to the brim!&lt;/p&gt;'</span>);
 });</code></pre>
-<p>Or, we could empty it of all content:
-
-</p>
+<p>Or, we could empty it of all content:</p>
 <pre class="highlighted"><code class="javascript">AUI().use(<span class="string">'aui-node'</span>, <span class="keyword">function</span>(A) {
   A.one(<span class="string">'.box'</span>).empty();
 });</code></pre>
-<p>Node allows you to interact with the DOM in all sorts of ways that would usually be quite difficult. You can get the margin or padding on a certain element, change an element&#39;s ID, center an element in an ancestor container, get or set an attribute of an element, or many other useful things.
-
-</p>
-<p>For a full list of the utilities that the node component supplies, check out the <a href="https://github.com/liferay/alloy-ui/blob/master/src/aui-node/js/aui-node-base.js">source code</a>! Most methods explain what they do right there in the code for you.
-
-</p>
+<p>Node allows you to interact with the DOM in all sorts of ways that would usually be quite difficult. You can get the margin or padding on a certain element, change an element&#39;s ID, center an element in an ancestor container, get or set an attribute of an element, or many other useful things.</p>
+<p>For a full list of the utilities that the node component supplies, check out the <a href="https://github.com/liferay/alloy-ui/blob/master/src/aui-node/js/aui-node-base.js">source code</a>! Most methods explain what they do right there in the code for you.</p>
 <div class="alert alert-success">
   For more information about configuration, check out our <a href="http://deploy.alloyui.com/api/">API Docs</a>.
 </div>

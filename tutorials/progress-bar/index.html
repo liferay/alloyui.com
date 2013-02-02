@@ -20,7 +20,7 @@
   <link rel="shortcut icon" type="image/x-icon" href="http://liferay.github.com/alloyui.com/website/img/favicon.ico">
 
   <!-- CSS: AlloyUI -->
-  <link href="http://deploy.alloyui.com/build/aui-skin-classic/css/aui-skin-classic-all-min.css" rel="stylesheet">
+  <link href="http://cdn.js.liferay.com/aui/1.7.0/aui-skin-classic/css/aui-skin-classic-all-min.css">
 
   <!-- CSS: Bootstrap -->
   <link href="http://liferay.github.com/alloyui.com/website/css/bootstrap.css" rel="stylesheet">
@@ -36,6 +36,7 @@
 
   <!-- JS -->
   <script src="http://cdn.js.liferay.com/aui/1.7.0/aui/aui.js"></script>
+  <script>AUI().applyConfig({ filter: 'min' });</script>
 
 </head>
 <body>
@@ -530,13 +531,13 @@
         
       
         
-      
-        
           <li><a href="http://liferay.github.com/alloyui.com/examples/progress-bar">Basic Example</a></li>
         
       
         
           <li><a href="http://liferay.github.com/alloyui.com/examples/progress-bar/real-world">Real World Example</a></li>
+        
+      
         
       
         
@@ -613,28 +614,20 @@
     
 
     <h4>Getting Started</h4>
-<p>First load the seed file, if you haven&#39;t yet.
-
-</p>
+<p>First load the seed file, if you haven&#39;t yet.</p>
 <pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"http://cdn.js.liferay.com/aui/1.7.0/aui/aui.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></pre>
-<p>Then initialize AlloyUI and load the Progress Bar module.
-
-</p>
+<p>Then initialize AlloyUI and load the Progress Bar module.</p>
 <pre class="highlighted"><code class="javascript">AUI().use(<span class="string">'aui-progressbar'</span>, <span class="keyword">function</span>(A) {
   <span class="comment">// code goes here</span>
 });</code></pre>
 <hr>
 <h4>Using Progress Bar</h4>
-<p>Create a HTML element:
-
-</p>
+<p>Create a HTML element:</p>
 <pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"myProgressBar"</span>&gt;</span>
   <span class="tag">&lt;<span class="title">button</span> <span class="attribute">class</span>=<span class="value">"load"</span>&gt;</span>Load<span class="tag">&lt;/<span class="title">button</span>&gt;</span>
   <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"bar"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
 <span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre>
-<p>Now create a new instance of Progress Bar component, then tell to <code>boundingBox</code> where it&#39;s going to be attached and <code>contentBox</code> where to render the Progress Bar.  We&#39;ll set the initial <code>value</code> of Progress Bar to <code>0</code>. Next, let&#39;s render it.  Finally, we need to attach the onClick event to our load button, where Progress Bar&#39;s <code>value</code> will be set to <code>100</code>.
-
-</p>
+<p>Now create a new instance of Progress Bar component, then tell to <code>boundingBox</code> where it&#39;s going to be attached and <code>contentBox</code> where to render the Progress Bar.  We&#39;ll set the initial <code>value</code> of Progress Bar to <code>0</code>. Next, let&#39;s render it.  Finally, we need to attach the onClick event to our load button, where Progress Bar&#39;s <code>value</code> will be set to <code>100</code>.</p>
 <pre class="highlighted"><code class="javascript">AUI().use(<span class="string">'aui-progressbar'</span>, <span class="keyword">function</span>(A) {
 
   <span class="keyword">new</span> A.ProgressBar({
@@ -649,12 +642,8 @@
 });</code></pre>
 <hr>
 <h4>Configuring Progress Bar</h4>
-<p>There are some other options that you can pass to your Progress Bar instance.
-
-</p>
-<p>If you need to have Progress Bar load content from another file, you can set a callback function when the <code>complete</code> event fires that loads your content.  Be sure to tell AUI to use the Node-Load component as well.  You can even set a <code>label</code> which is changed when the <code>complete</code> event fires.
-
-</p>
+<p>There are some other options that you can pass to your Progress Bar instance.</p>
+<p>If you need to have Progress Bar load content from another file, you can set a callback function when the <code>complete</code> event fires that loads your content.  Be sure to tell AUI to use the Node-Load component as well.  You can even set a <code>label</code> which is changed when the <code>complete</code> event fires.</p>
 <pre class="highlighted"><code class="javascript">AUI().use(<span class="string">'aui-progressbar'</span>, <span class="string">'node-load'</span>, <span class="keyword">function</span>(A) {
 
   <span class="keyword">new</span> A.ProgressBar({
@@ -680,9 +669,7 @@
 
 <hr>
 <h4>Demo Use Case</h4>
-<p>For demo purposes, if you would like to see what Progress Bar looks like when it loads larger content, you can set an Asynchronous Queue which will step through 100 iterations and set Progress Bar <code>value</code> on each iteration.  We will need to request AUI to load the AsyncQueue component for this exercise.  Then we will declare the variable <code>step</code> and set its value to <code>0</code>.  Next, we will create a new Asynchronous Queue with the <code>AsyncQueue</code> constructor, passing it a <code>fn</code> which iterates the <code>step</code> variable and sets Progress Bar <code>label</code> and <code>value</code>.  We will pass it a <code>timeout</code> of 1 millisecond and <code>iterations</code> of <code>100</code>.  Last, we will amend the load button to run the <code>steptask</code> function when <code>onClick</code> event fires.
-
-</p>
+<p>For demo purposes, if you would like to see what Progress Bar looks like when it loads larger content, you can set an Asynchronous Queue which will step through 100 iterations and set Progress Bar <code>value</code> on each iteration.  We will need to request AUI to load the AsyncQueue component for this exercise.  Then we will declare the variable <code>step</code> and set its value to <code>0</code>.  Next, we will create a new Asynchronous Queue with the <code>AsyncQueue</code> constructor, passing it a <code>fn</code> which iterates the <code>step</code> variable and sets Progress Bar <code>label</code> and <code>value</code>.  We will pass it a <code>timeout</code> of 1 millisecond and <code>iterations</code> of <code>100</code>.  Last, we will amend the load button to run the <code>steptask</code> function when <code>onClick</code> event fires.</p>
 <pre class="highlighted"><code class="javascript">AUI().use(<span class="string">'aui-progressbar'</span>, <span class="string">'node-load'</span>, <span class="string">'async-queue'</span>, <span class="keyword">function</span>(A) {
 
   <span class="keyword">new</span> A.ProgressBar({
