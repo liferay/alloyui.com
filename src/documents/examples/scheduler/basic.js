@@ -11,7 +11,7 @@ AUI().use('aui-scheduler', function(A) {
   var eventRecorder = new A.SchedulerEventRecorder();
   var weekView = new A.SchedulerWeekView();
 
-  var scheduler = new A.Scheduler({
+  new A.Scheduler({
     boundingBox: '#myScheduler',
     date: new Date(2013, 1, 4),
     eventRecorder: eventRecorder,

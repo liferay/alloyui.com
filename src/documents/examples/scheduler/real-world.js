@@ -49,7 +49,7 @@ AUI().use('aui-scheduler', function(A) {
   var monthView = new A.SchedulerMonthView();
   var weekView = new A.SchedulerWeekView();
 
-  var scheduler = new A.Scheduler({
+  new A.Scheduler({
     activeView: weekView,
     boundingBox: '#myScheduler',
     date: new Date(2013, 1, 4),
