@@ -24,6 +24,25 @@ module.exports =
         # -----------------------------
         # Helpers
 
+        # Get the prepared site/document title
+        # Often we would like to specify particular formatting to our page's title
+        # we can apply that formatting here
+        getPreparedTitle: ->
+          # if we have a document title, then we should use that and suffix the site's title onto it
+          if @document.title
+            if @document.category
+              "#{@document.category} - #{@document.title} | #{@site.title}"
+            else
+              "#{@document.title} | #{@site.title}"
+          # if our document does not have it's own title, then we should just use the site's title
+          else
+            @site.title
+
+        # Get the prepared site/document description
+        getPreparedDescription: ->
+          # if we have a document description, then we should use that, otherwise use the site's description
+          @document.description or @site.description
+
         # Get the Absolute URL of a document
         getUrl: (document) ->
             return @site.url + (document.url or document.get?('url'))
