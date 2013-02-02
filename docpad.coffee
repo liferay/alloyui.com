@@ -49,10 +49,10 @@ module.exports =
     collections:
 
       # Get all tutorials sorted by alphabetical order
-      tutorials: -> @getCollection("documents").findAllLive({url:$startsWith:'/tutorials'}, [title:1])
+      tutorials: -> @getCollection("documents").findAll({url:$startsWith:'/tutorials'}, [title:1])
 
       # Get all examples sorted by alphabetical order
-      examples: -> @getCollection("documents").findAllLive({url:$startsWith:'/examples'}, [category:1])
+      examples: -> @getCollection("documents").findAll({url:$startsWith:'/examples'}, [category:1])
 
     # =================================
     # Environments

@@ -13,22 +13,45 @@ layout: default
 <div class="container">
 
   <div class="span3 bs-docs-sidebar">
-    <p class="related">Related examples</p>
+
+    <p class="related">List of components</p>
     <ul class="nav nav-list bs-docs-sidenav affix-top">
       <% for example in @getCollection("examples").toJSON(): %>
-        <% if example.tags == @document.tags: %>
-          <% if example.title == @document.title: %>
-          <li class="active"><a href="<%= @site.url %><%= example.url %>" class="iframe-link"><i class="icon-chevron-right"></i> <%= example.title %></a></li>
-          <% else: %>
-          <li><a href="<%= @site.url %><%= example.url %>" class="iframe-link"><i class="icon-chevron-right"></i> <%= example.title %></a></li>
+        <% if example.category && example.index: %>
+          <% if example.category == @document.category: %>
+            <li class="active"><a href="<%= @site.url %><%= example.url %>" class="iframe-link"><i class="icon-chevron-right"></i> <%= example.category %></a></li>
+            <% else: %>
+            <li><a href="<%= @site.url %><%= example.url %>" class="iframe-link"><i class="icon-chevron-right"></i> <%= example.category %></a></li>
           <% end %>
         <% end %>
       <% end %>
     </ul>
+
   </div>
 
   <div class="span9">
+
+    <h1><%= @document.category %></h1>
+
+    <ul class="nav nav-tabs">
+      <li><a href="/tutorials/<%= @document.slug %>/">Introduction</a></li>
+      <% for example in @getCollection("examples").toJSON(): %>
+        <% if example.tags == @document.tags: %>
+          <% if example.title == @document.title: %>
+            <li class="active"><a href="<%= @site.url %><%= example.url %>"><%= example.title %></a></li>
+            <% else: %>
+            <li><a href="<%= @site.url %><%= example.url %>"><%= example.title %></a></li>
+          <% end %>
+        <% end %>
+      <% end %>
+    </ul>
+
+    <% if @document.description: %>
+      <p><%= @document.description %></p>
+    <% end %>
+
     <%- @content %>
+
   </div>
 
 </div>

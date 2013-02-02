@@ -14,15 +14,6 @@ layout: default
 
   <div class="span3 bs-docs-sidebar">
 
-    <p class="related">Related examples</p>
-    <ul class="nav nav-list bs-docs-sidenav affix-top">
-      <% for example in @getCollection("examples").toJSON(): %>
-        <% if example.tags == @document.tags: %>
-          <li><a href="<%= @site.url %><%= example.url %>" class="iframe-link"><i class="icon-chevron-right"></i> <%= example.title %></a></li>
-        <% end %>
-      <% end %>
-    </ul>
-
     <p class="related">List of components</p>
     <ul class="nav nav-list bs-docs-sidenav affix-top">
       <% for tutorial in @getCollection("tutorials").toJSON(): %>
@@ -39,7 +30,27 @@ layout: default
   </div>
 
   <div class="span9">
+
+    <h1><%= @document.title %></h1>
+
+    <ul class="nav nav-tabs">
+      <li class="active">
+        <a href="#">Introduction</a>
+      </li>
+      <% for example in @getCollection("examples").toJSON(): %>
+        <% if example.tags == @document.tags: %>
+          <li><a href="<%= @site.url %><%= example.url %>"><%= example.title %></a></li>
+        <% end %>
+      <% end %>
+    </ul>
+
+    <% if @document.description: %>
+      <p><%= @document.description %></p>
+      <hr>
+    <% end %>
+
     <%- @content %>
+
   </div>
 
 </div>
