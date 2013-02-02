@@ -12,7 +12,7 @@ AUI().ready('aui-aria', 'aui-dialog', 'aui-overlay-manager', 'dd-constrain', fun
 
     dialog.plug(A.Plugin.IO, {
       autoLoad: false,
-      uri: 'assets/content.html'
+      uri: 'http://liferay.github.com/dialog/content.html'
     });
 
     dialog.io.start();
