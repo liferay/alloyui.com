@@ -7,7 +7,7 @@ AUI().ready('aui-textboxlist', function(A) {
   ];
 
   new A.TextboxList({
-    contentBox: '#demo',
+    contentBox: '#myList',
     dataSource: states,
     matchKey: 'name',
     schema: {
