@@ -6,11 +6,11 @@ module.exports =
 
     templateData:
 
-        version: '1.7.0'
+        version: '2.0.x'
 
-        cdnDomain: 'http://cdn.alloyui.com/1.7.0'
-        cdn: 'http://cdn.alloyui.com/1.7.0/aui/aui-min.js'
-        download: 'https://github.com/liferay/alloy-ui/archive/1.7.0.zip'
+        cdnDomain: 'http://cdn.alloyui.com/2.0.x'
+        cdn: 'http://cdn.alloyui.com/2.0.x/aui/aui-min.js'
+        download: 'https://github.com/liferay/alloy-ui/archive/2.0.x.zip'
 
         # -----------------------------
         # Site Information
@@ -22,8 +22,8 @@ module.exports =
             description: 'Alloy is a UI framework built on top of YUI3 that provides a simple API for building high scalable applications.'
 
             # Production URL
-            url: 'http://alloyui.com/1.7.0'
-            assets: 'http://alloyui.com/1.7.0/website'
+            url: 'http://alloyui.com'
+            assets: 'http://alloyui.com/website'
 
         # -----------------------------
         # Helpers
