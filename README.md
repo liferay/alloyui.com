@@ -38,7 +38,7 @@ We use [DocPad](https://github.com/bevry/docpad), a static generator in NodeJS.
 
 1. [Install NodeJS](https://github.com/bevry/community/wiki/Installing-Node), if you don't have it yet.
 
-2. Install DocPad globally: `sudo npm install -fg docpad@6.20.1`
+2. Install DocPad globally: `sudo npm install -fg docpad@6.21.7`
 
 ## Getting started
 
@@ -105,5 +105,9 @@ List NodeJS modules dependencies.
 
 ## Deploy
 
-Just run `ant deploy` and then go to [liferay.github.com/alloyui.com](http://liferay.github.com/alloyui.com/).
+Just run `ant deploy` and then go to [alloyui.com](http://alloyui.com/).
 
+## History
+
+* v1.7.0 February 03, 2013
+	* New website live in the official domain
