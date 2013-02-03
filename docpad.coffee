@@ -7,7 +7,7 @@ module.exports =
     templateData:
 
         version: 'v1.7.0'
-        cdn: 'http://cdn.alloyui.com/1.7.x/aui-min.js'
+        cdn: 'http://cdn.alloyui.com/1.7.0/aui/aui-min.js'
 
         # -----------------------------
         # Site Information
