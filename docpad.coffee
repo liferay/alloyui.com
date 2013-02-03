@@ -6,8 +6,10 @@ module.exports =
 
     templateData:
 
-        version: 'v1.7.0'
-        cdn: 'http://cdn.alloyui.com/1.7.0'
+        version: '1.7.0'
+
+        cdnDomain: 'http://cdn.alloyui.com/1.7.0'
+        cdn: 'http://cdn.alloyui.com/1.7.0/aui/aui-min.js'
         download: 'https://github.com/liferay/alloy-ui/archive/1.7.0.zip'
 
         # -----------------------------
