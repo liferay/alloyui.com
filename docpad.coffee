@@ -19,8 +19,8 @@ module.exports =
             description: 'Alloy is a UI framework built on top of YUI3 that provides a simple API for building high scalable applications.'
 
             # Production URL
-            url: 'http://liferay.github.com/alloyui.com'
-            assets: 'http://liferay.github.com/alloyui.com/website'
+            url: 'http://alloyui.com/1.7.0'
+            assets: 'http://alloyui.com/1.7.0/website'
 
         # -----------------------------
         # Helpers
