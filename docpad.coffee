@@ -6,7 +6,7 @@ module.exports =
 
     templateData:
 
-        cdn: 'http://cdn.js.liferay.com/aui/1.7.0/aui/aui.js'
+        cdn: 'http://cdn.alloyui.com/1.7.0/aui-min.js'
 
         # -----------------------------
         # Site Information
