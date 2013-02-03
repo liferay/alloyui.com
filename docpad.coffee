@@ -6,7 +6,8 @@ module.exports =
 
     templateData:
 
-        cdn: 'http://cdn.alloyui.com/1.7.0/aui-min.js'
+        version: 'v1.7.0'
+        cdn: 'http://cdn.alloyui.com/1.7.x/aui-min.js'
 
         # -----------------------------
         # Site Information
@@ -68,10 +69,10 @@ module.exports =
     collections:
 
       # Get all tutorials sorted by alphabetical order
-      tutorials: -> @getCollection("documents").findAll({url:$startsWith:'/tutorials'}, [title:1])
+      tutorials: -> @getCollection("documents").findAllLive({url:$startsWith:'/tutorials'}, [title:1])
 
       # Get all examples sorted by alphabetical order
-      examples: -> @getCollection("documents").findAll({url:$startsWith:'/examples'}, [category:1])
+      examples: -> @getCollection("documents").findAllLive({url:$startsWith:'/examples'}, [category:1,title:1])
 
     # =================================
     # Environments
