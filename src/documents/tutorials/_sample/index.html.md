@@ -3,7 +3,8 @@ ignored: true
 layout: single-doc
 title: Sample
 tags: 'sample'
-description: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.
+category: Sample
+description: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur dignissimos!
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
