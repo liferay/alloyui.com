@@ -2,7 +2,7 @@ AUI().use('aui-audio', function(A) {
 
   new A.Audio({
     boundingBox: '#myAudio',
-    url: 'http://alloyui.com/audio/zelda.mp3'
+    url: 'http://alloyui.com/versions/1.7.0/versions/1.7.0/audio/zelda.mp3'
   }).render();
 
 });
