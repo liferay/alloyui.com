@@ -8,6 +8,7 @@ module.exports =
 
         version: 'v1.7.0'
         cdn: 'http://cdn.alloyui.com/1.7.0'
+        download: 'https://github.com/liferay/alloy-ui/archive/1.7.0.zip'
 
         # -----------------------------
         # Site Information
