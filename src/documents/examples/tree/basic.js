@@ -1,22 +1,18 @@
-AUI().use('aui-tree-view', function(A) {
+YUI().use('aui-tree-view', function(Y) {
 
-  // // Create an array object for the tree root and child nodes
+  // Create an array object for the tree root and child nodes
   var children = [{
-    label: 'ROOT',
+    label: 'Root',
+    expanded: true,
     children: [
-      {
-        label: 'Folder1',
-        children: [{ label: 'File' }]
-      },
-      {
-        label: 'Folder2',
-        children: [{ label: 'File' }]
-      }
+      { label: 'File X' },
+      { label: 'File Y' },
+      { label: 'File Z' }
     ]
   }];
 
   // Create a TreeView Component
-  new A.TreeView({
+  new Y.TreeView({
     boundingBox: '#myTreeView',
     children: children
   }).render();
