@@ -1,16 +1,9 @@
-AUI().ready('aui-video', function(A) {
+YUI().ready('aui-video', function(Y) {
 
-  new A.Video({
+  new Y.Video({
     boundingBox: '#myVideo',
-    width: 640,
-    height: 368,
-    url: 'http://videos.liferay.com/webinars/2010-08-11.mp4',
-    ogvUrl: 'http://videos.liferay.com/lifecasts/portal/6.0/106.ogv',
-    // swfUrl: 'http://videos.liferay.com/common/player.swf',
-    poster: 'assets/sample-jpg.jpg',
-    fixedAttributes: {
-      allowfullscreen: 'true'
-    }
+    url: 'http://alloyui.com/video/movie.mp4',
+    ogvUrl: 'http://alloyui.com/video/movie.ogg'
   }).render();
 
 });
