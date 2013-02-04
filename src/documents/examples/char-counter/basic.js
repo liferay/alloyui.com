@@ -1,6 +1,6 @@
-YUI().ready('aui-char-counter', function(Y) {
+AUI().ready('aui-char-counter', function(A) {
 
-  new Y.CharCounter({
+  new A.CharCounter({
     input: '#myInput',
     counter: '#myCounter',
     maxLength: 10

@@ -1,6 +1,6 @@
-YUI().ready('aui-ace-editor', function(Y) {
+AUI().ready('aui-ace-editor', function(A) {
 
-  var editor = new Y.AceEditor({
+  var editor = new A.AceEditor({
     boundingBox: '#myEditor',
     mode: 'javascript',
     value: 'alert("Write something here...");',
@@ -8,11 +8,11 @@ YUI().ready('aui-ace-editor', function(Y) {
     height: '200'
   }).render();
 
-  var mode = Y.one('#mode');
+  var mode = A.one('#mode');
 
   if (mode) {
 
-    var updateEditor = Y.one('#updateEditor');
+    var updateEditor = A.one('#updateEditor');
 
     var contents = {
       javascript: 'alert("Write something here...");',

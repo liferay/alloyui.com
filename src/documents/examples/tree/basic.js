@@ -1,4 +1,4 @@
-YUI().use('aui-tree-view', function(Y) {
+AUI().use('aui-tree-view', function(A) {
 
   // Create an array object for the tree root and child nodes
   var children = [{
@@ -12,7 +12,7 @@ YUI().use('aui-tree-view', function(Y) {
   }];
 
   // Create a TreeView Component
-  new Y.TreeView({
+  new A.TreeView({
     boundingBox: '#myTreeView',
     children: children
   }).render();

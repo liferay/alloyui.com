@@ -1,6 +1,6 @@
-YUI().ready('aui-video', function(Y) {
+AUI().ready('aui-video', function(A) {
 
-  new Y.Video({
+  new A.Video({
     boundingBox: '#myVideo',
     url: 'http://alloyui.com/video/movie.mp4',
     ogvUrl: 'http://alloyui.com/video/movie.ogg'

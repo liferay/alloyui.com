@@ -1,1 +1,1 @@
-YUI().use('aui-viewport');
+AUI().use('aui-viewport');

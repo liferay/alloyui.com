@@ -1,6 +1,6 @@
-YUI().ready('aui-progressbar', function(Y) {
+AUI().ready('aui-progressbar', function(A) {
 
-  new Y.ProgressBar({
+  new A.ProgressBar({
     boundingBox: '#myProgressBar',
     value: 70,
     width: 700

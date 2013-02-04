@@ -1,23 +1,23 @@
-YUI().use('aui-button', function(Y) {
+AUI().use('aui-button', function(A) {
 
-  new Y.Button({
+  new A.Button({
     label: 'Basic',
     srcNode: '#basic',
     icon: 'aui-icon-print',
     iconAlign: 'left'
   }).render();
 
-  new Y.ToggleButton({
+  new A.ToggleButton({
     label: 'Click to toggle',
     srcNode: '#toggle'
   }).render();
 
-  new Y.ButtonGroup({
+  new A.ButtonGroup({
     boundingBox: '#checkgroup',
     type: 'checkbox'
   }).render();
 
-  new Y.ButtonGroup({
+  new A.ButtonGroup({
     boundingBox: '#radiogroup',
     type: 'radio'
   }).render();

@@ -1,8 +1,8 @@
 // Create an AUI instance and load the 'aui-node' module
-YUI().use('aui-node', function(Y) {
+AUI().use('aui-node', function(A) {
 
   // Select the node(s) using a css selector string
-  var node = Y.one('#toggleColor');
+  var node = A.one('#toggleColor');
 
   // Change the background color on a `click` event
   node.on('click', function() {

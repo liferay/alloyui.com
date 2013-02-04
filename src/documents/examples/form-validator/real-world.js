@@ -1,4 +1,4 @@
-YUI().ready('aui-form-validator', function(Y) {
+AUI().ready('aui-form-validator', function(A) {
 
   var rules = {
     name: {
@@ -35,7 +35,7 @@ YUI().ready('aui-form-validator', function(Y) {
     }
   };
 
-  new Y.FormValidator({
+  new A.FormValidator({
     boundingBox: '#myForm',
     showAllMessages: true,
     rules: rules,

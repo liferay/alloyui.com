@@ -1,6 +1,6 @@
-YUI().use('aui-pagination', function(Y) {
+AUI().use('aui-pagination', function(A) {
 
-  new Y.Pagination({
+  new A.Pagination({
     boundingBox: '#jslarge',
     offset: 999,
     total: 5,
@@ -18,12 +18,12 @@ YUI().use('aui-pagination', function(Y) {
     }
   }).render();
 
-  new Y.Pagination({
+  new A.Pagination({
     boundingBox: '#jssmall',
     total: 15
   }).render();
 
-  new Y.Pagination({
+  new A.Pagination({
     boundingBox: '#jsmini',
     total: 15
   }).render();
