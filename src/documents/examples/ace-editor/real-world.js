@@ -1,4 +1,4 @@
-AUI().ready('aui-ace-editor', function(A) {
+YUI().ready('aui-ace-editor', function(A) {
 
   var editor = new A.AceEditor({
     boundingBox: '#myEditor',
