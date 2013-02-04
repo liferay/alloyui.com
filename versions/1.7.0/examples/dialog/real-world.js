@@ -1,4 +1,4 @@
-AUI().ready('aui-aria', 'aui-dialog', 'aui-overlay-manager', 'dd-constrain', function(A) {
+AUI().use('aui-aria', 'aui-dialog', 'aui-overlay-manager', 'dd-constrain', function(A) {
 
   A.one('#createNew').on('click', function() {
 

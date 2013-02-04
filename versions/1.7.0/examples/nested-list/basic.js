@@ -1,4 +1,4 @@
-AUI().ready('aui-nested-list', function(A) {
+AUI().use('aui-nested-list', function(A) {
 
   var placeholder = A.Node.create('<li class="placeholder"></li>');
 

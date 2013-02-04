@@ -1,4 +1,4 @@
-AUI().ready('aui-paginator', 'aui-io-request', function(A) {
+AUI().use('aui-paginator', 'aui-io-request', function(A) {
 
   var content = A.one('.myContent');
 

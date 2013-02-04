@@ -1,4 +1,4 @@
-YUI().ready('aui-progressbar', function(Y) {
+YUI().use('aui-progressbar', function(Y) {
 
   new Y.ProgressBar({
     boundingBox: '#myProgressBar',

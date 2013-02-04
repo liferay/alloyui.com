@@ -1,4 +1,4 @@
-AUI().ready('aui-textboxlist', function(A) {
+AUI().use('aui-textboxlist', function(A) {
 
   var states = [
     ['AK', 'Alaska', 'The Land of the Midnight Sun'],

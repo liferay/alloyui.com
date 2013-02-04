@@ -1,4 +1,4 @@
-AUI().ready('node', 'aui-progressbar', 'async-queue', 'node-load', function(A) {
+AUI().use('node', 'aui-progressbar', 'async-queue', 'node-load', function(A) {
 
   var content = A.one('.content');
   var progressBar, steptask, step, speed, statusBar;

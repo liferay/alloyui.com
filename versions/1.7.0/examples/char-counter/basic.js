@@ -1,4 +1,4 @@
-AUI().ready('aui-char-counter', function(A) {
+AUI().use('aui-char-counter', function(A) {
 
   new A.CharCounter({
     input: '#myInput',

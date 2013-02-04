@@ -1,4 +1,4 @@
-AUI().ready('aui-image-cropper', function(A) {
+AUI().use('aui-image-cropper', function(A) {
 
   new A.ImageCropper({
     srcNode: "#myImage",

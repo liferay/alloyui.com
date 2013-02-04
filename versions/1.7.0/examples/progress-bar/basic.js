@@ -1,4 +1,4 @@
-AUI().ready('aui-progressbar', function(A) {
+AUI().use('aui-progressbar', function(A) {
 
   var progressBar = new A.ProgressBar({
     boundingBox: '#myProgressBarContainer',

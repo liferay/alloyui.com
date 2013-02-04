@@ -1,4 +1,4 @@
-YUI().ready('aui-char-counter', function(Y) {
+YUI().use('aui-char-counter', function(Y) {
 
   new Y.CharCounter({
     input: '#myTextarea',
