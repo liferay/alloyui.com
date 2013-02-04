@@ -1,6 +1,6 @@
-AUI().ready('aui-image-cropper', function(A) {
+YUI().ready('aui-image-cropper', function(Y) {
 
-  new A.ImageCropper({
+  new Y.ImageCropper({
     srcNode: "#myImage",
     cropHeight: 200,
     cropWidth: 200,
