@@ -1,6 +1,6 @@
 YUI().use('aui-io-request', function (Y) {
 
-  Y.io.request('io/data/content.html', {
+  Y.io.request('data/content.html', {
 
     on: {
       success: function() {
