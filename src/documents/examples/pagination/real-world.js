@@ -1,30 +1,22 @@
-YUI().use('aui-pagination', 'aui-io-request', function(Y) {
+YUI().use('aui-pagination', function(Y) {
 
-  var content = Y.one('.myContent');
+  var pages = Y.all('.content div');
 
   new Y.Pagination({
-    containers: '.myPagination',
-    total: 4,
-    maxPageLinks: 4,
-    circular: true,
-    pageLinkContent: function(pageEl, pageNumber) {
-      pageEl.html('Page ' + pageNumber);
-    },
+    boundingBox: '#pagination',
+    contentBox: '#pagination .aui-pagination-content',
+    circular: false,
+    page: 1,
     on: {
       changeRequest: function(event) {
-        var newState = event.state;
+        var instance = this,
+            state = event.state,
+            lastState = event.lastState;
 
-        Y.io.request('data/html-' + newState.page + '.html', {
-          on: {
-            success: function() {
-              var data = this.get('responseData');
-
-              content.html(data);
-            }
-          }
-        });
-
-        this.setState(newState);
+        if (lastState) {
+            pages.item(lastState.page - 1).setStyle('display', 'none');
+        }
+        pages.item(state.page - 1).setStyle('display', 'block');
       }
     }
   }).render();
