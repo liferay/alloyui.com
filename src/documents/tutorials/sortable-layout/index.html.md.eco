@@ -1,8 +1,7 @@
 ---
-ignored: true
 layout: single-doc
-title: Portal Layout
-tags: 'portal-layout'
+title: Sortable Layout
+tags: 'sortable-layout'
 index: true
 description: Enables a layout with draggable/droppable functionality.
 ---
@@ -15,21 +14,21 @@ First load the seed file if you haven't yet.
 <script src="<%= @cdn %>"></script>
 ```
 
-Then initialize AlloyUI and load the Portal Layout module.
+Then initialize AlloyUI and load the Sortable Layout module.
 
 ``` javascript
-AUI().use('aui-portal-layout', function(A) {
+YUI().use('aui-sortable-layout', function(Y) {
   // code goes here
 });
 ```
 ---
 
-#### Using Portal Layout
+#### Using Sortable Layout
 
 Create an HTML element with some content nodes:
 
 ``` html
-<div id="myPortalLayout">
+<div id="mySortableLayout">
   <div class="contentNode">
     <p>Some content</p>
   </div>
@@ -42,14 +41,14 @@ Create an HTML element with some content nodes:
 </div>
 ```
 
-Now create a new instance of Portal Layout component by setting `dropNodes` to our HTML element's selector. Also, set `dragNodes` to the content nodes' class so Portal Layout can make the nodes draggable.
+Now create a new instance of Sortable Layout component by setting `dropNodes` to our HTML element's selector. Also, set `dragNodes` to the content nodes' class so Sortable Layout can make the nodes draggable.
 
 ``` javascript
-AUI().use('aui-portal-layout', function(A) {
+YUI().use('aui-sortable-layout', function(Y) {
 
-  var portalLayout = new A.PortalLayout({
+  new Y.SortableLayout({
     dragNodes: '.contentNode',
-    dropNodes: '#myPortalLayout'
+    dropNodes: '#mySortableLayout'
   });
 
 });
@@ -61,37 +60,37 @@ AUI().use('aui-portal-layout', function(A) {
 
 ---
 
-#### Configuring Portal Layout
+#### Configuring Sortable Layout
 
-There are some other optional parameters that you can pass to your Portal Layout instance.
+There are some other optional parameters that you can pass to your Sortable Layout instance.
 
 For example, you can add a `proxyNode` which will act as a temporary node during `activeDrag` mode and be replaced by your drag node on drag end.  To give `proxyNode` visibility, make sure to add CSS styles, such as border, which will apply to the proxy node on drag start.
 
 ``` javascript
-AUI().use('aui-portal-layout', function(A) {
+YUI().use('aui-sortable-layout', function(Y) {
 
-  new A.PortalLayout({
+  new Y.SortableLayout({
     dragNodes: '.contentNode',
-    dropNodes: '#myPortalLayout',
-    proxyNode: A.Node.create('<div class="proxyNode"></div>')
+    dropNodes: '#mySortableLayout',
+    proxyNode: Y.Node.create('<div class="proxyNode"></div>')
   });
 
 });
 ```
 
-You can set another HTML container to receive dropped Portal Layout object by setting `dropContainer` to your HTML selector.  Portal Layout can now drag and drop content nodes onto one another and inside the separate DropContainer DIV:
+You can set another HTML container to receive dropped Sortable Layout object by setting `dropContainer` to your HTML selector.  Sortable Layout can now drag and drop content nodes onto one another and inside the separate DropContainer DIV:
 
 ``` html
 <div id="dropContainer"></div>
 ```
 
 ``` javascript
-AUI().use('aui-portal-layout', function(A) {
+YUI().use('aui-sortable-layout', function(Y) {
 
-  new A.PortalLayout({
+  new Y.SortableLayout({
     dragNodes: '.contentNode',
-    dropNodes: '#myPortalLayout',
-    proxyNode: A.Node.create('<div class="proxyNode"></div>'),
+    dropNodes: '#mySortableLayout',
+    proxyNode: Y.Node.create('<div class="proxyNode"></div>'),
     dropContainer: '#dropContainer'
   });
 
@@ -102,14 +101,14 @@ You can even define a Placeholder HTML node which will appear in your drop zone 
 
 
 ``` javascript
-AUI().use('aui-portal-layout', function(A) {
+YUI().use('aui-sortable-layout', function(Y) {
 
-  new A.PortalLayout({
+  new Y.SortableLayout({
     dragNodes: '.contentNode',
-    dropNodes: '#myPortalLayout',
-    proxyNode: A.Node.create('<div class="proxyNode"></div>'),
+    dropNodes: '#mySortableLayout',
+    proxyNode: Y.Node.create('<div class="proxyNode"></div>'),
     dropContainer: '#dropContainer',
-    placeholder: A.Node.create('<div class="placeholder"></div>')
+    placeholder: Y.Node.create('<div class="placeholder"></div>')
   });
 
 });
