@@ -1,4 +1,4 @@
-AUI().ready('aui-video', function(A) {
+AUI().use('aui-video', function(A) {
 
   new A.Video({
     boundingBox: '#myVideo',

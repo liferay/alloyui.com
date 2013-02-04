@@ -1,4 +1,4 @@
-AUI().ready('aui-carousel', function(A) {
+AUI().use('aui-carousel', function(A) {
 
   new A.Carousel({
     contentBox: '#myCarousel',

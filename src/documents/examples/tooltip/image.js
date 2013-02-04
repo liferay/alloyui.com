@@ -1,4 +1,4 @@
-AUI().ready('aui-tooltip', function(A) {
+AUI().use('aui-tooltip', function(A) {
 
   new A.Tooltip({
     trigger: '#myTooltip',

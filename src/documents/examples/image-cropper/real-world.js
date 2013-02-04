@@ -1,4 +1,4 @@
-YUI().ready('aui-image-cropper', function(Y) {
+YUI().use('aui-image-cropper', function(Y) {
 
   var imageCropper = new Y.ImageCropper({
     srcNode: "#image",

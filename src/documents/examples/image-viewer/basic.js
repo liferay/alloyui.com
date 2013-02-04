@@ -1,4 +1,4 @@
-AUI().ready('aui-image-viewer-base', function(A) {
+AUI().use('aui-image-viewer-base', function(A) {
 
   new A.ImageViewer({
     links: '#myGallery a',

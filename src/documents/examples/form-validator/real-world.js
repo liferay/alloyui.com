@@ -1,4 +1,4 @@
-YUI().ready('aui-form-validator', function(Y) {
+YUI().use('aui-form-validator', function(Y) {
 
   var rules = {
     name: {

@@ -1,4 +1,4 @@
-AUI().ready('aui-form-validator', function(A) {
+AUI().use('aui-form-validator', function(A) {
 
   var rules = {
     picture: {
