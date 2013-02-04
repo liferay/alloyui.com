@@ -1,6 +1,6 @@
-AUI().ready('aui-form-validator', function(A) {
+YUI().ready('aui-form-validator', function(Y) {
 
-  new A.FormValidator({
+  new Y.FormValidator({
     boundingBox: '#myForm'
   });
 
