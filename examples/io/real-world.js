@@ -1,7 +1,7 @@
 YUI().use('aui-io-request', 'node', function(Y) {
 
   // create a new asynchonous request to grab all states
-  Y.io.request('data/states.json', {
+  Y.io.request('http://alloyui.com/io/data/states.json', {
 
     dataType: 'json',
     on: {
