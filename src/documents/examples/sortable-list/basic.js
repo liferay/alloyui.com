@@ -1,8 +1,8 @@
-AUI().ready('aui-nested-list', function(A) {
+YUI().use('aui-sortable-list', function(Y) {
 
-  var placeholder = A.Node.create('<li class="placeholder"></li>');
+  var placeholder = Y.Node.create('<li class="placeholder"></li>');
 
-  new A.NestedList({
+  new Y.SortableList({
     nodes: '#myList li',
     dropCondition: function(event) {
       return true;
