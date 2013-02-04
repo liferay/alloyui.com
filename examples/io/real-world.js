@@ -28,7 +28,7 @@ YUI().use('aui-io-request', 'node', function(Y) {
     if (cityCode !== '') {
 
       // creates a new asynchronous request to grab the cities corresponding to that state
-      Y.io.request('data/' + cityCode + '.json', {
+      Y.io.request('http://alloyui.com/io/data/' + cityCode + '.json', {
 
         dataType: 'json',
         on: {

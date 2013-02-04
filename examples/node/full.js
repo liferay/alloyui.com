@@ -24,18 +24,6 @@ YUI().use('aui-node', function(Y) {
     boxes.toggle();
   });
 
-  // Center button centers the boxes
-  Y.one('#center').on('click', function() {
-    if (!centered) {
-      holder.center(demo);
-      centered = true;
-    }
-    else {
-      holder.setStyle('position', 'static');
-      centered = false;
-    }
-  });
-
   // Selectable button turns selectability on and off
   Y.one('#select').on('click', function() {
     if (!selectable) {
