@@ -1,19 +1,9 @@
-AUI().ready('aui-progressbar', function(A) {
+YUI().ready('aui-progressbar', function(Y) {
 
-  var progressBar = new A.ProgressBar({
-    boundingBox: '#myProgressBarContainer',
-    contentBox: '.myProgressBar',
-    label: 'Ready to load',
-    value: '0',
-    on: {
-      complete: function(e) {
-        this.set('label', 'Complete!');
-      }
-    }
+  new Y.ProgressBar({
+    boundingBox: '#myProgressBar',
+    value: 70,
+    width: 700
   }).render();
-
-  A.one('.load').on('click', function() {
-    progressBar.set('value', 100);
-  });
 
 });
