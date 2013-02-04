@@ -1,9 +1,9 @@
-AUI().ready('aui-paginator', 'aui-io-request', function(A) {
+YUI().use('aui-pagination', 'aui-io-request', function(Y) {
 
-  var content = A.one('.myContent');
+  var content = Y.one('.myContent');
 
-  new A.Paginator({
-    containers: '.myPaginator',
+  new Y.Pagination({
+    containers: '.myPagination',
     total: 4,
     maxPageLinks: 4,
     circular: true,
@@ -14,7 +14,7 @@ AUI().ready('aui-paginator', 'aui-io-request', function(A) {
       changeRequest: function(event) {
         var newState = event.state;
 
-        A.io.request('data/html-' + newState.page + '.html', {
+        Y.io.request('data/html-' + newState.page + '.html', {
           on: {
             success: function() {
               var data = this.get('responseData');
