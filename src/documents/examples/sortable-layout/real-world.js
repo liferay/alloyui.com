@@ -1,9 +1,9 @@
-YUI().use('aui-sortable-layout', function(Y) {
+AUI().use('aui-sortable-layout', function(A) {
 
-  var proxyNode = Y.Node.create('<div class="aui-sortable-layout-proxy"></div>');
-  var DDM = Y.DD.DDM;
+  var proxyNode = A.Node.create('<div class="aui-sortable-layout-proxy"></div>');
+  var DDM = A.DD.DDM;
 
-  var sortableLayout = new Y.SortableLayout({
+  var sortableLayout = new A.SortableLayout({
     dragNodes: '.portlet',
     dropContainer: '#mySortableLayout',
     proxyNode: proxyNode
@@ -35,7 +35,7 @@ YUI().use('aui-sortable-layout', function(Y) {
 
   //Extend widget to clone itself when dragged
   var color = '';
-  Y.extend(PortletItem, Y.SortableLayout, {
+  A.extend(PortletItem, A.SortableLayout, {
     _getAppendNode: function() {
       var instance = this;
       instance.appendNode = DDM.activeDrag.get('node').clone();
@@ -50,7 +50,7 @@ YUI().use('aui-sortable-layout', function(Y) {
   //Create new node which replaces clone and add drop plugin to new node
   var livePortlet;
   portletList.on('drag:end', function(event) {
-    var newPortlet = Y.Node.create('<div class="portlet ' + color + '">New Portlet</div>');
+    var newPortlet = A.Node.create('<div class="portlet ' + color + '">New Portlet</div>');
     var dropConfig = {
       useShim: false,
       bubbleTargets: this
@@ -58,8 +58,8 @@ YUI().use('aui-sortable-layout', function(Y) {
 
     if (portletList.appendNode && portletList.appendNode.inDoc()) {
       portletList.appendNode.replace(newPortlet);
-      var livePortlet = Y.one('.' + color);
-      livePortlet.plug(Y.Plugin.Drop, dropConfig);
+      var livePortlet = A.one('.' + color);
+      livePortlet.plug(A.Plugin.Drop, dropConfig);
       livePortlet.drop.set('groups', ['portal-layout']);
     }
   });

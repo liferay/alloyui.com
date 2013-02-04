@@ -1,6 +1,6 @@
-YUI().ready('aui-video', function(Y) {
+AUI().ready('aui-video', function(A) {
 
-  new Y.Video({
+  new A.Video({
     boundingBox: '#myVideo',
     url: 'http://videos.liferay.com/webinars/2010-08-11.mp4',
     ogvUrl: 'http://videos.liferay.com/lifecasts/portal/6.0/106.ogv',

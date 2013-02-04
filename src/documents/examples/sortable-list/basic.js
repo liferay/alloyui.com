@@ -1,8 +1,8 @@
-YUI().use('aui-sortable-list', function(Y) {
+AUI().use('aui-sortable-list', function(A) {
 
-  var placeholder = Y.Node.create('<li class="placeholder"></li>');
+  var placeholder = A.Node.create('<li class="placeholder"></li>');
 
-  new Y.SortableList({
+  new A.SortableList({
     nodes: '#myList li',
     dropCondition: function(event) {
       return true;

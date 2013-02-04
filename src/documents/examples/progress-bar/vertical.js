@@ -1,6 +1,6 @@
-YUI().use('aui-progressbar', function(Y) {
+AUI().use('aui-progressbar', function(A) {
 
-  new Y.ProgressBar({
+  new A.ProgressBar({
     boundingBox: '#myProgressBar',
     orientation: 'vertical',
     label: '60%',

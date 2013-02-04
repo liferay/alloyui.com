@@ -1,6 +1,6 @@
-YUI().ready('aui-ace-editor', function(Y) {
+AUI().ready('aui-ace-editor', function(A) {
 
-  new Y.AceEditor({
+  new A.AceEditor({
     boundingBox: '#myEditor',
     value: 'Write something here...',
     width: '700',

@@ -1,8 +1,8 @@
-YUI().use('aui-pagination', function(Y) {
+AUI().use('aui-pagination', function(A) {
 
-  var pages = Y.all('.content div');
+  var pages = A.all('.content div');
 
-  new Y.Pagination({
+  new A.Pagination({
     boundingBox: '#pagination',
     contentBox: '#pagination .aui-pagination-content',
     circular: false,

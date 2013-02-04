@@ -1,6 +1,6 @@
-YUI().use('aui-sortable-layout', function(Y) {
+AUI().use('aui-sortable-layout', function(A) {
 
-  new Y.SortableLayout({
+  new A.SortableLayout({
     dragNodes: '.portlet',
     dropNodes: '#mySortableLayout'
   });

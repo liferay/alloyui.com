@@ -1,6 +1,6 @@
-YUI().use('aui-tree-view', function(Y) {
+AUI().use('aui-tree-view', function(A) {
 
-  new Y.TreeViewDD({
+  new A.TreeViewDD({
     boundingBox: '#myTreeView',
     children: [
       {
