@@ -1,9 +1,9 @@
-AUI().use('aui-rating', 'node', function(A) {
+YUI().use('aui-rating', 'node', function(Y) {
 
-  var titleBox = A.one('#titleBox');
+  var titleBox = Y.one('#titleBox');
   var instance, title, stars;
 
-  var rating = new A.StarRating({
+  var rating = new Y.StarRating({
     boundingBox: '#myRating',
     disabled: false,
     label: "It's OK to be honest:"

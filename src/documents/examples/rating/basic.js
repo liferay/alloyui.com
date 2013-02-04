@@ -1,6 +1,6 @@
-AUI().use('aui-rating', function(A) {
+YUI().use('aui-rating', function(Y) {
 
-  new A.ThumbRating({
+  new Y.ThumbRating({
     boundingBox: '#myRating'
   }).render();
 
