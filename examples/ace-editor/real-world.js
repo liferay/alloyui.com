@@ -12,11 +12,9 @@ YUI().use('aui-ace-editor', function(Y) {
 
   if (mode) {
 
-    var updateEditor = Y.one('#updateEditor');
-
     var contents = {
       javascript: 'alert("Write something here...");',
-      php: '<?php echo "Write something here..."); ?>',
+      php: '<?php echo "Write something here..."; ?>',
       xml: '<value attr="something">Write something here...</value>',
       json: '{"value": "Write something here..."}'
     };
@@ -24,12 +22,10 @@ YUI().use('aui-ace-editor', function(Y) {
     var currentMode = 'javascript';
 
     var updateValue = function() {
-      if (updateEditor.attr('checked')) {
-        editor.set('value', contents[currentMode]);
-      }
+      editor.set('value', contents[currentMode]);
     };
 
-    updateEditor.on('change', updateValue);
+    Y.one('#updateEditor').on('change', updateValue);
 
     mode.on('change', function(event) {
       currentMode = this.val();

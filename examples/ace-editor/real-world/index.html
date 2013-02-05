@@ -330,6 +330,8 @@
         
       
         
+      
+        
           
             <li><a href="http://alloyui.com/examples/audio"><i class="aui-icon-chevron-right"></i> Audio</a></li>
           
@@ -473,8 +475,6 @@
           
         
       
-        
-      
     </ul>
 
   </div>
@@ -490,6 +490,8 @@
           
             <li><a href="http://alloyui.com/examples/ace-editor">Basic Example</a></li>
           
+        
+      
         
       
         
@@ -808,8 +810,6 @@
       
         
       
-        
-      
     </ul>
 
     <link rel="stylesheet" href="http://alloyui.com/ace-editor/css/basic.css" />
@@ -823,10 +823,6 @@
       <option>xml</option>
       <option>php</option>
     </select>
-    <label>
-      <input checked="checked" id="updateEditor" type="checkbox" />
-      Update editor value for the selected language
-    </label>
   </div>
   <div id="myEditor"></div>
 </div>
@@ -840,10 +836,6 @@
       <span class="tag">&lt;<span class="title">option</span>&gt;</span>xml<span class="tag">&lt;/<span class="title">option</span>&gt;</span>
       <span class="tag">&lt;<span class="title">option</span>&gt;</span>php<span class="tag">&lt;/<span class="title">option</span>&gt;</span>
     <span class="tag">&lt;/<span class="title">select</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">label</span>&gt;</span>
-      <span class="tag">&lt;<span class="title">input</span> <span class="attribute">checked</span>=<span class="value">"checked"</span> <span class="attribute">id</span>=<span class="value">"updateEditor"</span> <span class="attribute">type</span>=<span class="value">"checkbox"</span> /&gt;</span>
-      Update editor value for the selected language
-    <span class="tag">&lt;/<span class="title">label</span>&gt;</span>
   <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
   <span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"myEditor"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
 <span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre>
@@ -861,11 +853,9 @@
 
   <span class="keyword">if</span> (mode) {
 
-    <span class="keyword">var</span> updateEditor = Y.one(<span class="string">'#updateEditor'</span>);
-
     <span class="keyword">var</span> contents = {
       javascript: <span class="string">'alert("Write something here...");'</span>,
-      php: <span class="string">'&lt;?php echo "Write something here..."); ?&gt;'</span>,
+      php: <span class="string">'&lt;?php echo "Write something here..."; ?&gt;'</span>,
       xml: <span class="string">'&lt;value attr="something"&gt;Write something here...&lt;/value&gt;'</span>,
       json: <span class="string">'{"value": "Write something here..."}'</span>
     };
@@ -873,12 +863,10 @@
     <span class="keyword">var</span> currentMode = <span class="string">'javascript'</span>;
 
     <span class="keyword">var</span> updateValue = <span class="keyword">function</span>() {
-      <span class="keyword">if</span> (updateEditor.attr(<span class="string">'checked'</span>)) {
-        editor.set(<span class="string">'value'</span>, contents[currentMode]);
-      }
+      editor.set(<span class="string">'value'</span>, contents[currentMode]);
     };
 
-    updateEditor.on(<span class="string">'change'</span>, updateValue);
+    Y.one(<span class="string">'#updateEditor'</span>).on(<span class="string">'change'</span>, updateValue);
 
     mode.on(<span class="string">'change'</span>, <span class="keyword">function</span>(event) {
       currentMode = <span class="keyword">this</span>.val();
@@ -905,11 +893,9 @@
 
   if (mode) {
 
-    var updateEditor = Y.one('#updateEditor');
-
     var contents = {
       javascript: 'alert("Write something here...");',
-      php: '<?php echo "Write something here..."); ?>',
+      php: '<?php echo "Write something here..."; ?>',
       xml: '<value attr="something">Write something here...</value>',
       json: '{"value": "Write something here..."}'
     };
@@ -917,12 +903,10 @@
     var currentMode = 'javascript';
 
     var updateValue = function() {
-      if (updateEditor.attr('checked')) {
-        editor.set('value', contents[currentMode]);
-      }
+      editor.set('value', contents[currentMode]);
     };
 
-    updateEditor.on('change', updateValue);
+    Y.one('#updateEditor').on('change', updateValue);
 
     mode.on('change', function(event) {
       currentMode = this.val();
