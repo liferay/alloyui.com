@@ -25,8 +25,6 @@ YUI().use('aui-ace-editor', function(Y) {
       editor.set('value', contents[currentMode]);
     };
 
-    Y.one('#updateEditor').on('change', updateValue);
-
     mode.on('change', function(event) {
       currentMode = this.val();
       editor.set('mode', currentMode);
