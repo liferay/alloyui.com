@@ -77,6 +77,10 @@ module.exports =
       # Get all examples sorted by alphabetical order
       examples: -> @getCollection("documents").findAllLive({url:$startsWith:'/examples'}, [category:1,title:1])
 
+
+      featuring: (database) ->
+        database.findAllLive({featuringOrder: $exists: true}, [featuringOrder:1])
+
     # =================================
     # Environments
 

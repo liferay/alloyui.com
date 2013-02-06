@@ -11,10 +11,35 @@ layout: default
   </div>
 </div>
 
-<div class="aui-container">
+<div id="page-example">
+  <div class="aui-container">
+
+    <div class="aui-row">
+      <div class="aui-title aui-span5">
+        <h3>featuring!</h3>
+      </div>
+    </div>
+
+    <% for example in @getCollection("featuring").toJSON(): %>
+      <% if example.category && example.index: %>
+        <div class="aui-span4 aui-example">
+          <h2><a href="<%= @site.url %><%= example.url %>"><%= example.category %></a></h2>
+          <a href="<%= @site.url %><%= example.url %>">
+            <img src="<%= @site.assets %>/img/example-<%= example.slug %>.jpg" alt="<%= example.category %>" />
+          </a>
+          <p><%= example.description %></p>
+        </div>
+      <% end %>
+    <% end %>
+
+    <div class="aui-row">
+      <div class="aui-title aui-span5">
+        <h3>more components :)</h3>
+      </div>
+    </div>
 
     <% for example in @getCollection("examples").toJSON(): %>
-      <% if example.category && example.index: %>
+      <% if example.category && example.index && !example.featuringOrder: %>
         <div class="aui-span4 aui-example">
           <h2><a href="<%= @site.url %><%= example.url %>"><%= example.category %></a></h2>
           <a href="<%= @site.url %><%= example.url %>">
@@ -39,4 +64,5 @@ layout: default
       <a class="bt" id="bt-contribute" href="<%= @site.url %>/contributing/">Contribute</a>
     </div>
 
+  </div>
 </div>
