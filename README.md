@@ -2,33 +2,15 @@
 
 ![AlloyUI Robo Suit](http://f.cl.ly/items/292d3K0l3j221n3m0V0D/Alloy-Robo-Suit.jpg)
 
-This is a working in progress of [AlloyUI's](https://github.com/liferay/alloy-ui/) website. Check the [Status here](https://github.com/liferay/alloyui.com/wiki/Status).
-
-If you are having any problem with the library, please create an issue on [liferay/alloy-ui](https://github.com/liferay/alloy-ui/) repository.
+If you want to create an issue about something of [AlloyUI's website](http://alloyui.com) you are in the right place. But if the problem is with AlloyUI's source code, please visit [liferay/alloy-ui](https://github.com/liferay/alloy-ui/) repository.
 
 ## Table of contents
 
-* [Contribute](#contribute)
 * [How it works?](#how-it-works)
 * [Dependencies](#dependencies)
 * [Getting started](#getting-started)
 * [Structure](#structure)
 * [Deploy](#deploy)
-
-## Contribute
-
-So you want to help us? That's pretty awesome!
-
-We are very happy to accept external contributions in the form of feedback, bug reports or pull requests :)
-
-For now, you can help us with the website by writing tutorials or examples for the components that we haven't added yet. [See the list of components that needs to the added](https://github.com/liferay/alloyui.com/wiki/List-of-Components).
-
-* [How to create a new tutorial](https://github.com/liferay/alloyui.com/wiki/How-to-create-a-new-tutorial)
-* [How to create a new example](https://github.com/liferay/alloyui.com/wiki/How-to-create-a-new-example)
-
-Or go ahead and [read our main guide](http://liferay.github.com/alloyui.com/contributing).
-
-**Remember:** Before any pull request don't forget to run: `ant jshint`. If you find any error please fix it before sending your pull request.
 
 ## How it works?
 
