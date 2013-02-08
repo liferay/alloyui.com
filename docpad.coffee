@@ -6,11 +6,11 @@ module.exports =
 
     templateData:
 
-        version: '2.0.0pr1'
+        version: '2.0.0pr2'
 
-        cdnDomain: 'http://cdn.alloyui.com/2.0.0pr1'
-        cdn: 'http://cdn.alloyui.com/2.0.0pr1/aui/aui-min.js'
-        download: 'http://cdn.alloyui.com/downloads/alloy-2.0.0pr1.zip'
+        cdnDomain: 'http://cdn.alloyui.com/2.0.0pr2'
+        cdn: 'http://cdn.alloyui.com/2.0.0pr2/aui/aui-min.js'
+        download: 'http://cdn.alloyui.com/downloads/alloy-2.0.0pr2.zip'
 
         # -----------------------------
         # Site Information
@@ -72,10 +72,10 @@ module.exports =
     collections:
 
       # Get all tutorials sorted by alphabetical order
-      tutorials: -> @getCollection("documents").findAllLive({url:$startsWith:'/tutorials'}, {title:1})
+      tutorials: -> @getCollection("documents").findAllLive({url:$startsWith:'/tutorials'}, [title:1])
 
       # Get all examples sorted by alphabetical order
-      examples: -> @getCollection("documents").findAllLive({url:$startsWith:'/examples'}, {category:1,title:1})
+      examples: -> @getCollection("documents").findAllLive({url:$startsWith:'/examples'}, [category:1,title:1])
 
 
       featuring: (database) ->
