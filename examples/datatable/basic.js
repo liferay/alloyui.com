@@ -1,4 +1,4 @@
-AUI().use('aui-datatable', function(A) {
+YUI().use('aui-datatable', function(Y) {
 
   var columns = ["name", "address", "city", "state"];
 
@@ -10,7 +10,7 @@ AUI().use('aui-datatable', function(A) {
     { name:"Bob F. Uncle",  address:"9899 Random Road", city:"Los Angeles",   state:"CA" }
   ];
 
-  new A.DataTable.Base({
+  new Y.DataTable.Base({
     columnset: columns,
     recordset: data
   }).render('#myDataTable');

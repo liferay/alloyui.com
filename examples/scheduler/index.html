@@ -2,19 +2,19 @@
 <html>
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
 
-  <title>Char Counter - Basic Example | AlloyUI</title>
+  <title>Scheduler - Basic Example | AlloyUI</title>
 
   <meta charset="utf-8">
   <meta name="author" content="Eduardo Lundgren, Nate Cavanaugh">
-  <meta name="description" content="Provides a character counter that limits the amount of text in a field.">
+  <meta name="description" content="Allows user to access scheduler widget with built-in calendar.">
 
   <!-- Facebook Tags -->
   <meta property="fb:app_id" content="176947299114210">
   <meta property="og:type" content="website">
   <meta property="og:url" content="http://alloyui.com">
   <meta property="og:image" content="http://alloyui.com/website/img/facebook-share.jpg">
-  <meta property="og:title" content="Char Counter - Basic Example | AlloyUI">
-  <meta property="og:description" content="Provides a character counter that limits the amount of text in a field.">
+  <meta property="og:title" content="Scheduler - Basic Example | AlloyUI">
+  <meta property="og:description" content="Allows user to access scheduler widget with built-in calendar.">
 
   <!-- Favicon -->
   <link rel="shortcut icon" type="image/x-icon" href="http://alloyui.com/website/img/favicon.ico">
@@ -357,8 +357,8 @@
       
         
           
-            <li class="aui-active"><a href="http://alloyui.com/examples/char-counter"><i class="aui-icon-chevron-right"></i> Char Counter</a></li>
-            
+            <li><a href="http://alloyui.com/examples/char-counter"><i class="aui-icon-chevron-right"></i> Char Counter</a></li>
+          
         
       
         
@@ -433,8 +433,8 @@
       
         
           
-            <li><a href="http://alloyui.com/examples/scheduler"><i class="aui-icon-chevron-right"></i> Scheduler</a></li>
-          
+            <li class="aui-active"><a href="http://alloyui.com/examples/scheduler"><i class="aui-icon-chevron-right"></i> Scheduler</a></li>
+            
         
       
         
@@ -497,10 +497,50 @@
 
   <div class="aui-span9">
 
-    <h1>Char Counter</h1>
+    <h1>Scheduler</h1>
 
     <ul class="aui-nav aui-nav-tabs">
-      <li><a href="http://alloyui.com/tutorials/char-counter/">Introduction</a></li>
+      <li><a href="http://alloyui.com/tutorials/scheduler/">Introduction</a></li>
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
       
         
       
@@ -760,54 +800,14 @@
       
         
           
-            <li class="aui-active"><a href="http://alloyui.com/examples/char-counter">Basic Example</a></li>
+            <li class="aui-active"><a href="http://alloyui.com/examples/scheduler">Basic Example</a></li>
             
         
       
         
           
-            <li><a href="http://alloyui.com/examples/char-counter/real-world">Real World Example</a></li>
+            <li><a href="http://alloyui.com/examples/scheduler/real-world">Real World Example</a></li>
           
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
         
       
         
@@ -836,30 +836,56 @@
       
     </ul>
 
-    <link rel="stylesheet" href="http://alloyui.com/char-counter/css/basic.css" />
+    <link rel="stylesheet" href="http://alloyui.com/scheduler/basic.css" />
 
-<p><input id="myInput" type="text" />
-<span id="myCounter"></span> character(s) remaining</p>
+<div id="myScheduler"></div>
 
-<pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">input</span> <span class="attribute">id</span>=<span class="value">"myInput"</span> <span class="attribute">type</span>=<span class="value">"text"</span> /&gt;</span>
-<span class="tag">&lt;<span class="title">span</span> <span class="attribute">id</span>=<span class="value">"myCounter"</span>&gt;</span><span class="tag">&lt;/<span class="title">span</span>&gt;</span> character(s) remaining</code></pre>
-<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-char-counter'</span>, <span class="keyword">function</span>(Y) {
+<pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"myScheduler"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre>
+<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-scheduler'</span>, <span class="keyword">function</span>(Y) {
 
-  <span class="keyword">new</span> Y.CharCounter({
-    input: <span class="string">'#myInput'</span>,
-    counter: <span class="string">'#myCounter'</span>,
-    maxLength: <span class="number">10</span>
+  <span class="keyword">var</span> events = [
+    {
+      content: <span class="string">"Event1"</span>,
+      endDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">5</span>),
+      startDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">1</span>)
+    }
+  ];
+
+  <span class="keyword">var</span> eventRecorder = <span class="keyword">new</span> Y.SchedulerEventRecorder();
+  <span class="keyword">var</span> weekView = <span class="keyword">new</span> Y.SchedulerWeekView();
+
+  <span class="keyword">new</span> Y.Scheduler({
+    boundingBox: <span class="string">'#myScheduler'</span>,
+    date: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">1</span>, <span class="number">4</span>),
+    eventRecorder: eventRecorder,
+    items: events,
+    render: <span class="literal">true</span>,
+    views: [weekView]
   });
 
 });</code></pre>
 
 <script>
-  YUI().use('aui-char-counter', function(Y) {
+  YUI().use('aui-scheduler', function(Y) {
 
-  new Y.CharCounter({
-    input: '#myInput',
-    counter: '#myCounter',
-    maxLength: 10
+  var events = [
+    {
+      content: "Event1",
+      endDate: new Date(2013, 1, 4, 5),
+      startDate: new Date(2013, 1, 4, 1)
+    }
+  ];
+
+  var eventRecorder = new Y.SchedulerEventRecorder();
+  var weekView = new Y.SchedulerWeekView();
+
+  new Y.Scheduler({
+    boundingBox: '#myScheduler',
+    date: new Date(2013, 1, 4),
+    eventRecorder: eventRecorder,
+    items: events,
+    render: true,
+    views: [weekView]
   });
 
 });

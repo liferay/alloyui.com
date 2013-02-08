@@ -2,19 +2,19 @@
 <html>
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
 
-  <title>Button | AlloyUI</title>
+  <title>Scheduler | AlloyUI</title>
 
   <meta charset="utf-8">
   <meta name="author" content="Eduardo Lundgren, Nate Cavanaugh">
-  <meta name="description" content="Enables the creation of rich buttons different from traditional HTML form buttons.">
+  <meta name="description" content="Allows user to access scheduler widget with built-in calendar.">
 
   <!-- Facebook Tags -->
   <meta property="fb:app_id" content="176947299114210">
   <meta property="og:type" content="website">
   <meta property="og:url" content="http://alloyui.com">
   <meta property="og:image" content="http://alloyui.com/website/img/facebook-share.jpg">
-  <meta property="og:title" content="Button | AlloyUI">
-  <meta property="og:description" content="Enables the creation of rich buttons different from traditional HTML form buttons.">
+  <meta property="og:title" content="Scheduler | AlloyUI">
+  <meta property="og:description" content="Allows user to access scheduler widget with built-in calendar.">
 
   <!-- Favicon -->
   <link rel="shortcut icon" type="image/x-icon" href="http://alloyui.com/website/img/favicon.ico">
@@ -97,8 +97,8 @@
       
         
           
-            <li class="aui-active"><a href="http://alloyui.com/tutorials/button"><i class="aui-icon-chevron-right"></i> Button</a></li>
-            
+            <li><a href="http://alloyui.com/tutorials/button"><i class="aui-icon-chevron-right"></i> Button</a></li>
+          
         
       
         
@@ -163,8 +163,8 @@
       
         
           
-            <li><a href="http://alloyui.com/tutorials/scheduler"><i class="aui-icon-chevron-right"></i> Scheduler</a></li>
-          
+            <li class="aui-active"><a href="http://alloyui.com/tutorials/scheduler"><i class="aui-icon-chevron-right"></i> Scheduler</a></li>
+            
         
       
         
@@ -217,7 +217,7 @@
 
   <div class="aui-span9">
 
-    <h1>Button</h1>
+    <h1>Scheduler</h1>
 
     <ul class="aui-nav aui-nav-tabs">
       <li class="aui-active">
@@ -469,15 +469,7 @@
         
       
         
-          <li><a href="http://alloyui.com/examples/button">Basic Example</a></li>
-        
       
-        
-          <li><a href="http://alloyui.com/examples/button/css3">CSS3 Example</a></li>
-        
-      
-        
-          <li><a href="http://alloyui.com/examples/button/real-world">Real World Example</a></li>
         
       
         
@@ -526,6 +518,12 @@
       
         
       
+        
+          <li><a href="http://alloyui.com/examples/scheduler">Basic Example</a></li>
+        
+      
+        
+          <li><a href="http://alloyui.com/examples/scheduler/real-world">Real World Example</a></li>
         
       
         
@@ -557,52 +555,148 @@
     </ul>
 
     
-      <p>Enables the creation of rich buttons different from traditional HTML form buttons.</p>
+      <p>Allows user to access scheduler widget with built-in calendar.</p>
       <hr>
     
 
     <h4>Getting Started</h4>
 <p>First load the seed file if you haven&#39;t yet.</p>
 <pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"http://cdn.alloyui.com/2.0.0pr2/aui/aui-min.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></pre>
-<p>Then initialize AlloyUI and load the Button module.</p>
-<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-button'</span>, <span class="keyword">function</span>(Y) {
+<p>Then initialize AlloyUI and load the Scheduler module.</p>
+<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-scheduler'</span>, <span class="keyword">function</span>(Y) {
   <span class="comment">// code goes here</span>
 });</code></pre>
 <hr>
-<h4>Using Button</h4>
-<p>The easiest way to use a button is just define a <code>aui-btn</code> class for it. There&#39;s also additional classes that changes the style like <code>aui-btn-primary</code>, <code>aui-btn-info</code> and <code>aui-btn-success</code>.</p>
-<pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">button</span> <span class="attribute">class</span>=<span class="value">"aui-btn aui-btn-primary"</span>&gt;</span>Primary<span class="tag">&lt;/<span class="title">button</span>&gt;</span>
-<span class="tag">&lt;<span class="title">button</span> <span class="attribute">class</span>=<span class="value">"aui-btn aui-btn-info"</span>&gt;</span>Info<span class="tag">&lt;/<span class="title">button</span>&gt;</span>
-<span class="tag">&lt;<span class="title">button</span> <span class="attribute">class</span>=<span class="value">"aui-btn aui-btn-success"</span>&gt;</span>Success<span class="tag">&lt;/<span class="title">button</span>&gt;</span></code></pre>
-<p>The other way is through JavaScript. First, define an HTML tag.</p>
-<pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">button</span> <span class="attribute">id</span>=<span class="value">"myButton"</span>&gt;</span><span class="tag">&lt;/<span class="title">button</span>&gt;</span></code></pre>
-<p>Now create a new instance of Button component by setting <code>srcNode</code> to our HTML element&#39;s selector. Also, we should include a <code>label</code> to populate the button. Finally, let&#39;s render it!</p>
-<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-button'</span>, <span class="keyword">function</span>(Y) {
+<h4>Using Scheduler</h4>
+<p>Create an HTML element with a wrapper div:</p>
+<pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"wrapper"</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"myScheduler"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre>
+<div class="aui-alert aui-alert-info">
+  <strong>Note:</strong> using Scheduler without a &quot;wrapper&quot; <code>div</code> may produce undesirable results due to its styling within AlloyUI.  Try it with or without a wrapper to see how Scheduler works with surrounding elements.
+</div>
 
-  <span class="keyword">new</span> Y.Button({
-    label: <span class="string">'Basic'</span>,
-    srcNode: <span class="string">'#myButton'</span>
-  }).render();
+<p>Now create a new instance of Scheduler component.</p>
+<p>First, let&#39;s create an <code>events</code> variable where we stored our first calendar event, setting its name via <code>content</code> and a start and end date. Then we&#39;ll initialize the calendar view we&#39;re going to use, <code>weekView</code>.</p>
+<p>Finally, we&#39;ll create a new Scheduler with its <code>boundingBox</code> set to our HTML element, its <code>date</code> set to when we scheduled our first event, and pass in <code>events</code> for <code>items</code> and <code>weekView</code> for <code>views</code>, setting <code>render</code> to <code>true</code> so that it renders on load.</p>
+<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-scheduler'</span>, <span class="keyword">function</span>(Y) {
+
+  <span class="keyword">var</span> events = [{
+    content: <span class="string">'Partial Lunar Eclipse'</span>,
+    startDate: <span class="keyword">new</span> Date(<span class="number">2012</span>, <span class="number">4</span>, <span class="number">25</span>, <span class="number">1</span>),
+    endDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">4</span>, <span class="number">25</span>, <span class="number">5</span>)
+  }];
+
+  <span class="keyword">var</span> weekView = <span class="keyword">new</span> Y.SchedulerWeekView();
+
+  <span class="keyword">new</span> Y.Scheduler({
+    boundingBox: <span class="string">'#myScheduler'</span>,
+    date: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">4</span>, <span class="number">25</span>),
+    items: events,
+    render: <span class="literal">true</span>,
+    views: [weekView]
+  });
 
 });</code></pre>
-<hr>
-<h4>Using ButtonGroup</h4>
-<p>You can include a ButtonGroup on your website too. First, define a HTML element that contains your buttons.</p>
-<pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"myCheckgroup"</span>&gt;</span>
-  <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"button"</span> <span class="attribute">value</span>=<span class="value">"2"</span>&gt;</span>
-  <span class="tag">&lt;<span class="title">input</span> <span class="attribute">class</span>=<span class="value">"aui-active"</span> <span class="attribute">type</span>=<span class="value">"reset"</span> <span class="attribute">value</span>=<span class="value">"3"</span>&gt;</span>
-  <span class="tag">&lt;<span class="title">input</span> <span class="attribute">class</span>=<span class="value">"aui-active"</span> <span class="attribute">type</span>=<span class="value">"submit"</span> <span class="attribute">value</span>=<span class="value">"4"</span>&gt;</span>
-  <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"button"</span> <span class="attribute">value</span>=<span class="value">"5"</span>&gt;</span>
-  <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"button"</span> <span class="attribute">value</span>=<span class="value">"6"</span>&gt;</span>
-  <span class="tag">&lt;<span class="title">button</span>&gt;</span>7<span class="tag">&lt;/<span class="title">button</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre>
-<p>Now you have to define a <code>type</code> for this ButtonGroup, can be <code>checkbox</code> or <code>radio</code>. Then set <code>boundingBox</code> to your HTML parent node.</p>
-<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-button'</span>, <span class="keyword">function</span>(Y) {
+<div class="aui-alert aui-alert-info">
+  <strong>Note:</strong> you don&#39;t have to set <code>date</code> inside your new Scheduler instance, but be forewarned, if you don&#39;t supply a date, Scheduler will use the current date as its starting date, sometimes making it hard to find your events!
+</div>
 
-  <span class="keyword">new</span> Y.ButtonGroup({
-    boundingBox: <span class="string">'#myCheckgroup'</span>,
-    type: <span class="string">'checkbox'</span>
-  }).render();
+<hr>
+<h4>Configuring Scheduler</h4>
+<p>There are some other optional parameters that you can pass to your Scheduler instance.</p>
+<p>For example, you can add other views to your <code>views</code> option with the Scheduler View constructors.  This will allow you to view your events in different formats.  You can also set <code>activeView</code> to the view you want Scheduler to start on.</p>
+<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-scheduler'</span>, <span class="keyword">function</span>(Y) {
+
+  <span class="keyword">var</span> events = [{
+    content: <span class="string">'Partial Lunar Eclipse'</span>,
+    startDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">4</span>, <span class="number">25</span>, <span class="number">1</span>),
+    endDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">4</span>, <span class="number">25</span>, <span class="number">5</span>)
+  }];
+
+  <span class="keyword">var</span> agendaView = <span class="keyword">new</span> Y.SchedulerAgendaView();
+  <span class="keyword">var</span> dayView = <span class="keyword">new</span> Y.SchedulerDayView();
+  <span class="keyword">var</span> weekView = <span class="keyword">new</span> Y.SchedulerWeekView();
+  <span class="keyword">var</span> monthView = <span class="keyword">new</span> Y.SchedulerMonthView();
+
+  <span class="keyword">new</span> Y.Scheduler({
+    boundingBox: <span class="string">'#myScheduler'</span>,
+    date: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">4</span>, <span class="number">25</span>),
+    items: events,
+    render: <span class="literal">true</span>,
+    activeView: weekView,
+    views: [dayView, weekView, monthView, agendaView]
+  });
+
+});</code></pre>
+<p>Adding <code>eventRecorder</code> to your options via the <code>NewEventRecorder</code> constructor allows you change the duration of existing events and create new events directly inside Scheduler, all of which are recorded and saved in Scheduler.</p>
+<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-scheduler'</span>, <span class="keyword">function</span>(Y) {
+
+  <span class="keyword">var</span> events = [{
+    content: <span class="string">'Partial Lunar Eclipse'</span>,
+    startDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">4</span>, <span class="number">25</span>, <span class="number">1</span>),
+    endDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">4</span>, <span class="number">25</span>, <span class="number">5</span>)
+  }];
+
+  <span class="keyword">var</span> agendaView = <span class="keyword">new</span> Y.SchedulerAgendaView();
+  <span class="keyword">var</span> dayView = <span class="keyword">new</span> Y.SchedulerDayView();
+  <span class="keyword">var</span> weekView = <span class="keyword">new</span> Y.SchedulerWeekView();
+  <span class="keyword">var</span> monthView = <span class="keyword">new</span> Y.SchedulerMonthView();
+
+  <span class="keyword">var</span> eventRecorder = <span class="keyword">new</span> Y.SchedulerEventRecorder();
+
+  <span class="keyword">new</span> Y.Scheduler({
+    boundingBox: <span class="string">'#myScheduler'</span>,
+    date: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">4</span>, <span class="number">25</span>),
+    eventRecorder: eventRecorder,
+    items: events,
+    render: <span class="literal">true</span>,
+    activeView: weekView,
+    views: [dayView, weekView, monthView, agendaView]
+  });
+
+});</code></pre>
+<p>You can even customize your individual events with a number of options, including <code>color</code>, <code>meeting</code>, <code>reminder</code>, and <code>disabled</code>.  Events can also span multiple days and overlap each other.</p>
+<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-scheduler'</span>, <span class="keyword">function</span>(Y) {
+
+  <span class="keyword">var</span> events = [
+    {
+      content: <span class="string">'Partial Lunar Eclipse'</span>,
+      startDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">4</span>, <span class="number">25</span>, <span class="number">1</span>),
+      endDate: <span class="keyword">new</span> Date(<span class="number">2012</span>, <span class="number">4</span>, <span class="number">25</span>, <span class="number">5</span>)
+    },
+    {
+      content: <span class="string">'Earth Day Lunch'</span>,
+      startDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">22</span>, <span class="number">12</span>, <span class="number">12</span>),
+      endDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">4</span>, <span class="number">22</span>, <span class="number">13</span>),
+      color: <span class="string">"#8d8"</span>,
+      meeting: <span class="literal">true</span>,
+      reminder: <span class="literal">true</span>,
+      disabled: <span class="literal">true</span>
+    },
+    {
+      content: <span class="string">"Weeklong"</span>,
+      endDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">4</span>, <span class="number">21</span>),
+      startDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">4</span>, <span class="number">27</span>)
+    },
+  ];
+
+  <span class="keyword">var</span> agendaView = <span class="keyword">new</span> Y.SchedulerAgendaView();
+  <span class="keyword">var</span> dayView = <span class="keyword">new</span> Y.SchedulerDayView();
+  <span class="keyword">var</span> weekView = <span class="keyword">new</span> Y.SchedulerWeekView();
+  <span class="keyword">var</span> monthView = <span class="keyword">new</span> Y.SchedulerMonthView();
+
+  <span class="keyword">var</span> eventRecorder = <span class="keyword">new</span> Y.SchedulerEventRecorder();
+
+  <span class="keyword">new</span> Y.Scheduler({
+    boundingBox: <span class="string">'#myScheduler'</span>,
+    date: <span class="keyword">new</span> Date(<span class="number">2012</span>, <span class="number">4</span>, <span class="number">25</span>),
+    eventRecorder: eventRecorder,
+    items: events,
+    render: <span class="literal">true</span>,
+    activeView: weekView,
+    views: [dayView, weekView, monthView, agendaView]
+  });
 
 });</code></pre>
 <div class="aui-alert aui-alert-success">

@@ -1,4 +1,4 @@
-AUI().use('aui-datatable', 'datatable-sort', 'aui-datatype', function(A) {
+YUI().use('aui-datatable', 'datatable-sort', 'aui-datatype', function(Y) {
 
   var remoteData = [
     { name:'John A. Smith', address:'1236 Some Street', city:'San Francisco', state:'CA', amount:5, active:'yes', colors:['red'], fruit:['banana','cherry'], last_login:'4/19/2007' },
@@ -15,7 +15,7 @@ AUI().use('aui-datatable', 'datatable-sort', 'aui-datatype', function(A) {
 
   var states = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'];
 
-  var nameEditor = new A.TextAreaCellEditor({
+  var nameEditor = new Y.TextAreaCellEditor({
     validator: {
       rules: {
         name: {
@@ -26,7 +26,7 @@ AUI().use('aui-datatable', 'datatable-sort', 'aui-datatype', function(A) {
     }
   });
 
-  var fruitEditor = new A.DropDownCellEditor({
+  var fruitEditor = new Y.DropDownCellEditor({
     editable: true,
     multiple: true,
     validator: {
@@ -52,24 +52,24 @@ AUI().use('aui-datatable', 'datatable-sort', 'aui-datatype', function(A) {
     },
     {
       key: 'address',
-      editor: new A.TextAreaCellEditor(),
+      editor: new Y.TextAreaCellEditor(),
       sortable: true
     },
     {
       key: 'city',
-      editor: new A.TextAreaCellEditor()
+      editor: new Y.TextAreaCellEditor()
     },
     {
       key: 'state',
-      editor: new A.DropDownCellEditor({
+      editor: new Y.DropDownCellEditor({
         editable: true,
         options: states
       })
     },
     {
       key: 'amount',
-      editor: new A.TextCellEditor({
-        inputFormatter: A.DataType.String.evaluate,
+      editor: new Y.TextCellEditor({
+        inputFormatter: Y.DataType.String.evaluate,
         validator: {
           rules: {
             value: {
@@ -82,7 +82,7 @@ AUI().use('aui-datatable', 'datatable-sort', 'aui-datatype', function(A) {
     },
     {
       key: 'active',
-      editor: new A.RadioCellEditor({
+      editor: new Y.RadioCellEditor({
         editable: true,
         options: {
           yes: 'Yes',
@@ -93,7 +93,7 @@ AUI().use('aui-datatable', 'datatable-sort', 'aui-datatype', function(A) {
     },
     {
       key: 'colors',
-      editor: new A.CheckboxCellEditor({
+      editor: new Y.CheckboxCellEditor({
         editable: true,
         multiple: true,
         options: {
@@ -105,7 +105,7 @@ AUI().use('aui-datatable', 'datatable-sort', 'aui-datatype', function(A) {
     },
     {
       key: 'last_login',
-      editor: new A.DateCellEditor({
+      editor: new Y.DateCellEditor({
         calendar: {
           width:'250px',
           showPrevMonth: false,
@@ -128,13 +128,13 @@ AUI().use('aui-datatable', 'datatable-sort', 'aui-datatype', function(A) {
     }
   ];
 
-  var dataTable = new A.DataTable({
+  var dataTable = new Y.DataTable({
     columns: nestedCols,
     data: remoteData,
     editEvent: 'dblclick',
     plugins: [
       {
-        fn: A.Plugin.DataTableHighlight,
+        fn: Y.Plugin.DataTableHighlight,
         cfg: {
           highlightRange: false
         }
