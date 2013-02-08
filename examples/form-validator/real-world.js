@@ -18,9 +18,6 @@ YUI().use('aui-form-validator', function(Y) {
       equalTo: '#email',
       required: true
     },
-    gender: {
-      required: true
-    },
     url: {
       url: true
     }
