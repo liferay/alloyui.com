@@ -1,8 +1,11 @@
-AUI().use('aui-tooltip', function(A) {
-
-  new A.Tooltip({
-    trigger: '#myTooltip',
-    title: true
-  }).render();
-
-});
+AUI().use(
+  'aui-tooltip',
+  function(A) {
+    new A.Tooltip(
+      {
+        title: true,
+        trigger: '#myTooltip'
+      }
+    ).render();
+  }
+);
