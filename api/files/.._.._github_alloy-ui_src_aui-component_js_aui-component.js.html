@@ -17,7 +17,7 @@
         </div>
         <div class="yui3-u-1-4 version">
             <div class="version-details">
-                <span class="version-lib">AlloyUI 2.0.0pr1</span>
+                <span class="version-lib">AlloyUI 2.0.0pr2</span>
                 <div class="yui-version">
                     <span class="version-lib version-lib-yui">YUI 3.8.1</span>
                 </div>
@@ -111,9 +111,13 @@
             
                 <li><a href="..&#x2F;classes/Base.html">Base</a></li>
             
+                <li><a href="..&#x2F;classes/BaseCellEditor.html">BaseCellEditor</a></li>
+            
                 <li><a href="..&#x2F;classes/BaseCore.html">BaseCore</a></li>
             
                 <li><a href="..&#x2F;classes/BaseObservable.html">BaseObservable</a></li>
+            
+                <li><a href="..&#x2F;classes/BaseOptionsCellEditor.html">BaseOptionsCellEditor</a></li>
             
                 <li><a href="..&#x2F;classes/BottomAxisLayout.html">BottomAxisLayout</a></li>
             
@@ -155,6 +159,8 @@
             
                 <li><a href="..&#x2F;classes/CategoryAxis.html">CategoryAxis</a></li>
             
+                <li><a href="..&#x2F;classes/CellEditorSupport.html">CellEditorSupport</a></li>
+            
                 <li><a href="..&#x2F;classes/CharCounter.html">CharCounter</a></li>
             
                 <li><a href="..&#x2F;classes/Chart.html">Chart</a></li>
@@ -162,6 +168,8 @@
                 <li><a href="..&#x2F;classes/ChartBase.html">ChartBase</a></li>
             
                 <li><a href="..&#x2F;classes/ChartLegend.html">ChartLegend</a></li>
+            
+                <li><a href="..&#x2F;classes/CheckboxCellEditor.html">CheckboxCellEditor</a></li>
             
                 <li><a href="..&#x2F;classes/Circle.html">Circle</a></li>
             
@@ -259,6 +267,8 @@
             
                 <li><a href="..&#x2F;classes/Date.html">Date</a></li>
             
+                <li><a href="..&#x2F;classes/DateCellEditor.html">DateCellEditor</a></li>
+            
                 <li><a href="..&#x2F;classes/DD.DDM.html">DD.DDM</a></li>
             
                 <li><a href="..&#x2F;classes/DD.Delegate.html">DD.Delegate</a></li>
@@ -290,6 +300,8 @@
                 <li><a href="..&#x2F;classes/DOMEventFacade.html">DOMEventFacade</a></li>
             
                 <li><a href="..&#x2F;classes/Drawing.html">Drawing</a></li>
+            
+                <li><a href="..&#x2F;classes/DropDownCellEditor.html">DropDownCellEditor</a></li>
             
                 <li><a href="..&#x2F;classes/Easing.html">Easing</a></li>
             
@@ -515,6 +527,8 @@
             
                 <li><a href="..&#x2F;classes/Queue.html">Queue</a></li>
             
+                <li><a href="..&#x2F;classes/RadioCellEditor.html">RadioCellEditor</a></li>
+            
                 <li><a href="..&#x2F;classes/Rating.html">Rating</a></li>
             
                 <li><a href="..&#x2F;classes/Record.html">Record</a></li>
@@ -672,6 +686,10 @@
                 <li><a href="..&#x2F;classes/Text.AccentFold.html">Text.AccentFold</a></li>
             
                 <li><a href="..&#x2F;classes/Text.WordBreak.html">Text.WordBreak</a></li>
+            
+                <li><a href="..&#x2F;classes/TextAreaCellEditor.html">TextAreaCellEditor</a></li>
+            
+                <li><a href="..&#x2F;classes/TextCellEditor.html">TextCellEditor</a></li>
             
                 <li><a href="..&#x2F;classes/ThumbRating.html">ThumbRating</a></li>
             
@@ -1497,16 +1515,16 @@
 
 var Lang = A.Lang,
 
-    concat = function(arr, arr2) {
-        return (arr || []).concat(arr2 || []);
-    },
+	concat = function(arr, arr2) {
+		return (arr || []).concat(arr2 || []);
+	},
 
-    getClassName = A.getClassName,
+	getClassName = A.getClassName,
 
-    NAME = &#x27;component&#x27;,
+	NAME = &#x27;component&#x27;,
 
-    CSS_HIDE = getClassName(&#x27;hide&#x27;),
-    CONSTRUCTOR_OBJECT = A.config.win.Object.prototype.constructor;
+	CSS_HIDE = getClassName(&#x27;hide&#x27;),
+	CONSTRUCTOR_OBJECT = A.config.win.Object.prototype.constructor;
 
 &#x2F;**
  * A base class for Component, providing:
@@ -1525,15 +1543,15 @@ var Lang = A.Lang,
  * @extends Widget
  *&#x2F;
 var Component = function(config) {
-    var instance = this;
+	var instance = this;
 
-    instance._originalConfig = config;
+	instance._originalConfig = config;
 
-    instance._setRender(config);
+	instance._setRender(config);
 
-    Component.superclass.constructor.apply(this, arguments);
+	Component.superclass.constructor.apply(this, arguments);
 
-    INSTANCES[instance.get(&#x27;id&#x27;)] = instance;
+	INSTANCES[instance.get(&#x27;id&#x27;)] = instance;
 };
 
 var INSTANCES = Component._INSTANCES = {};
@@ -1556,259 +1574,259 @@ Component.NAME = &#x27;component&#x27;;
  * @static
  *&#x2F;
 Component.ATTRS = {
-    &#x2F;**
-    * Boolean indicating if use of the WAI-ARIA Roles and States should be
-    * enabled for the Widget.
-    *
-    * @attribute useARIA
-    * @readOnly
-    * @writeOnce
-    * @default true
-    * @type boolean
-    *&#x2F;
-    useARIA: {
-        writeOnce: true,
-        value: false,
-        validator: Lang.isBoolean
-    },
+	&#x2F;**
+	* Boolean indicating if use of the WAI-ARIA Roles and States should be
+	* enabled for the Widget.
+	*
+	* @attribute useARIA
+	* @readOnly
+	* @writeOnce
+	* @default true
+	* @type boolean
+	*&#x2F;
+	useARIA: {
+		writeOnce: true,
+		value: false,
+		validator: Lang.isBoolean
+	},
 
-    &#x2F;**
-     * CSS class to be automatically added to the &lt;code&gt;boundingBox&lt;&#x2F;code&gt;.
-     *
-     * @attribute cssClass
-     * @default null
-     * @type String
-     *&#x2F;
-    cssClass: {
-        lazyAdd: false,
-        value: null
-    },
+	&#x2F;**
+	 * CSS class to be automatically added to the &lt;code&gt;boundingBox&lt;&#x2F;code&gt;.
+	 *
+	 * @attribute cssClass
+	 * @default null
+	 * @type String
+	 *&#x2F;
+	cssClass: {
+		lazyAdd: false,
+		value: null
+	},
 
-    &#x2F;**
-     * css class added to hide the &lt;code&gt;boundingBox&lt;&#x2F;code&gt; when
+	&#x2F;**
+	 * css class added to hide the &lt;code&gt;boundingBox&lt;&#x2F;code&gt; when
      * &lt;a href=&quot;Component.html#config_visible&quot;&gt;visible&lt;&#x2F;a&gt; is set to
      * &lt;code&gt;false&lt;&#x2F;code&gt;.
-     *
-     * @attribute hideClass
-     * @default &#x27;aui-hide&#x27;
-     * @type String
-     *&#x2F;
-    hideClass: {
-        value: CSS_HIDE
-    },
+	 *
+	 * @attribute hideClass
+	 * @default &#x27;aui-hide&#x27;
+	 * @type String
+	 *&#x2F;
+	hideClass: {
+		value: CSS_HIDE
+	},
 
-    &#x2F;**
-     * If &lt;code&gt;true&lt;&#x2F;code&gt; the render phase will be autimatically invoked
+	&#x2F;**
+	 * If &lt;code&gt;true&lt;&#x2F;code&gt; the render phase will be autimatically invoked
      * preventing the &lt;code&gt;.render()&lt;&#x2F;code&gt; manual call.
-     *
-     * @attribute render
-     * @default false
-     * @type boolean | Node
-     *&#x2F;
-    render: {
-        value: false,
-        writeOnce: true
-    }
+	 *
+	 * @attribute render
+	 * @default false
+	 * @type boolean | Node
+	 *&#x2F;
+	render: {
+		value: false,
+		writeOnce: true
+	}
 };
 
 A.extend(
-    Component,
-    A.Widget,
-    {
-        &#x2F;**
-         * Construction logic executed during Component instantiation. Lifecycle.
-         *
-         * @method initializer
-         * @protected
-         *&#x2F;
-        initializer: function(config) {
-            var instance = this;
+	Component,
+	A.Widget,
+	{
+		&#x2F;**
+		 * Construction logic executed during Component instantiation. Lifecycle.
+		 *
+		 * @method initializer
+		 * @protected
+		 *&#x2F;
+		initializer: function(config) {
+			var instance = this;
 
-            if (config &amp;&amp; config.cssClass) {
-                instance._uiSetCssClass(config.cssClass);
-            }
+			if (config &amp;&amp; config.cssClass) {
+				instance._uiSetCssClass(config.cssClass);
+			}
 
-            instance._setComponentClassNames();
+			instance._setComponentClassNames();
 
-            instance.after(&#x27;cssClassChange&#x27;, instance._afterCssClassChange);
-        },
+			instance.after(&#x27;cssClassChange&#x27;, instance._afterCssClassChange);
+		},
 
-        &#x2F;**
-         * Clone the current Component.
-         *
-         * @method clone
-         * @param {Object} config
-         * @return {Widget} Cloned instance.
-         *&#x2F;
-        clone: function(config) {
-            var instance = this;
+		&#x2F;**
+		 * Clone the current Component.
+		 *
+		 * @method clone
+		 * @param {Object} config
+		 * @return {Widget} Cloned instance.
+		 *&#x2F;
+		clone: function(config) {
+			var instance = this;
 
-            config = config || {};
+			config = config || {};
 
-            config.id = config.id || A.guid();
+			config.id = config.id || A.guid();
 
-            A.mix(config, instance._originalConfig);
+			A.mix(config, instance._originalConfig);
 
-            return new instance.constructor(config);
-        },
+			return new instance.constructor(config);
+		},
 
-        &#x2F;**
-         * Toggle the visibility of the Panel toggling the value of the
-         * &lt;a href=&quot;Widget.html#config_visible&quot;&gt;visible&lt;&#x2F;a&gt; attribute.
-         *
-         * @method toggle
-         * @param visible Force the visibility of the component to this state.
-         *&#x2F;
-        toggle: function(visible) {
-            var instance = this;
+		&#x2F;**
+		 * Toggle the visibility of the Panel toggling the value of the
+	     * &lt;a href=&quot;Widget.html#config_visible&quot;&gt;visible&lt;&#x2F;a&gt; attribute.
+		 *
+		 * @method toggle
+		 * @param visible Force the visibility of the component to this state.
+		 *&#x2F;
+		toggle: function(visible) {
+			var instance = this;
 
-            if (!Lang.isBoolean(visible)) {
-                visible = !instance.get(&#x27;visible&#x27;);
-            }
+			if (!Lang.isBoolean(visible)) {
+				visible = !instance.get(&#x27;visible&#x27;);
+			}
 
-            return instance.set(&#x27;visible&#x27;, visible);
-        },
+			return instance.set(&#x27;visible&#x27;, visible);
+		},
 
-        _uiSetVisible: function(value) {
-            var instance = this;
+		_uiSetVisible: function(value) {
+			var instance = this;
 
-            var superUISetVisible = Component.superclass._uiSetVisible;
+			var superUISetVisible = Component.superclass._uiSetVisible;
 
-            if (superUISetVisible) {
-                superUISetVisible.apply(instance, arguments);
-            }
+			if (superUISetVisible) {
+				superUISetVisible.apply(instance, arguments);
+			}
 
-            var hideClass = instance.get(&#x27;hideClass&#x27;);
+			var hideClass = instance.get(&#x27;hideClass&#x27;);
 
-            if (hideClass !== false) {
-                var boundingBox = instance.get(&#x27;boundingBox&#x27;);
+			if (hideClass !== false) {
+				var boundingBox = instance.get(&#x27;boundingBox&#x27;);
 
-                boundingBox.toggleClass(hideClass || CSS_HIDE, !value);
-            }
-        },
+				boundingBox.toggleClass(hideClass || CSS_HIDE, !value);
+			}
+		},
 
-        &#x2F;**
-         * Fires after the value of the
-         * &lt;a href=&quot;Component.html#config_cssClass&quot;&gt;cssClass&lt;&#x2F;a&gt; attribute change.
-         *
-         * @method _afterCssClassChange
-         * @param {EventFacade} event
-         * @protected
-         *&#x2F;
-        _afterCssClassChange: function(event) {
-            var instance = this;
+		&#x2F;**
+		 * Fires after the value of the
+		 * &lt;a href=&quot;Component.html#config_cssClass&quot;&gt;cssClass&lt;&#x2F;a&gt; attribute change.
+		 *
+		 * @method _afterCssClassChange
+		 * @param {EventFacade} event
+		 * @protected
+		 *&#x2F;
+		_afterCssClassChange: function(event) {
+			var instance = this;
 
-            instance._uiSetCssClass(event.newVal, event.prevVal);
-        },
+			instance._uiSetCssClass(event.newVal, event.prevVal);
+		},
 
-        &#x2F;**
-         * Renders the Component based upon a passed in interaction.
-         *
-         * @method _renderInteraction
-         * @protected
-         *&#x2F;
-        _renderInteraction: function(event, parentNode) {
-            var instance = this;
+		&#x2F;**
+		 * Renders the Component based upon a passed in interaction.
+		 *
+		 * @method _renderInteraction
+		 * @protected
+		 *&#x2F;
+		_renderInteraction: function(event, parentNode) {
+			var instance = this;
 
-            instance.render(parentNode);
+			instance.render(parentNode);
 
-            var renderHandles = instance._renderHandles;
+			var renderHandles = instance._renderHandles;
 
-            for (var i = renderHandles.length - 1; i &gt;= 0; i--) {
-                var handle = renderHandles.pop();
+			for (var i = renderHandles.length - 1; i &gt;= 0; i--) {
+				var handle = renderHandles.pop();
 
-                handle.detach();
-            }
-        },
+				handle.detach();
+			}
+		},
 
-        &#x2F;**
-         * Set the class names on the Component &lt;code&gt;contentBox&lt;&#x2F;code&gt;.
-         *
-         * @method _setComponentClassNames
-         * @protected
-         *&#x2F;
-        _setComponentClassNames: function() {
-            var instance = this;
+		&#x2F;**
+		 * Set the class names on the Component &lt;code&gt;contentBox&lt;&#x2F;code&gt;.
+		 *
+		 * @method _setComponentClassNames
+		 * @protected
+		 *&#x2F;
+		_setComponentClassNames: function() {
+			var instance = this;
 
-            var classes = instance._getClasses();
-            var name;
-            var buffer = [];
+			var classes = instance._getClasses();
+			var name;
+			var buffer = [];
 
-            for (var i = classes.length - 4; i &gt;= 0; i--) {
-                name = String(classes[i].NAME).toLowerCase();
+			for (var i = classes.length - 4; i &gt;= 0; i--) {
+				name = String(classes[i].NAME).toLowerCase();
 
-                buffer.push(getClassName(name, &#x27;content&#x27;));
-            }
+				buffer.push(getClassName(name, &#x27;content&#x27;));
+			}
 
-            instance.get(&#x27;contentBox&#x27;).addClass(buffer.join(&#x27; &#x27;));
-        },
+			instance.get(&#x27;contentBox&#x27;).addClass(buffer.join(&#x27; &#x27;));
+		},
 
-        &#x2F;**
-         * Set the interaction and render behavior based upon an object
-         * (intercepts the default rendering behavior).
-         *
-         * @method _setRender
-         * @protected
-         *&#x2F;
-        _setRender: function(config) {
-            var instance = this;
+		&#x2F;**
+		 * Set the interaction and render behavior based upon an object
+		 * (intercepts the default rendering behavior).
+		 *
+		 * @method _setRender
+		 * @protected
+		 *&#x2F;
+		_setRender: function(config) {
+			var instance = this;
 
-            var render = config &amp;&amp; config.render;
+			var render = config &amp;&amp; config.render;
 
-            if (render &amp;&amp; render.constructor == CONSTRUCTOR_OBJECT) {
-                var eventType = render.eventType || &#x27;mousemove&#x27;;
-                var parentNode = render.parentNode;
-                var selector = render.selector || parentNode;
+			if (render &amp;&amp; render.constructor == CONSTRUCTOR_OBJECT) {
+				var eventType = render.eventType || &#x27;mousemove&#x27;;
+				var parentNode = render.parentNode;
+				var selector = render.selector || parentNode;
 
-                if (selector) {
-                    instance._renderHandles = [];
+				if (selector) {
+					instance._renderHandles = [];
 
-                    var renderHandles = instance._renderHandles;
+					var renderHandles = instance._renderHandles;
 
-                    if (!Lang.isArray(eventType)) {
-                        eventType = [eventType];
-                    }
+					if (!Lang.isArray(eventType)) {
+						eventType = [eventType];
+					}
 
-                    var renderInteraction = A.rbind(instance._renderInteraction, instance, parentNode);
+					var renderInteraction = A.rbind(instance._renderInteraction, instance, parentNode);
 
-                    var interactionNode = A.one(selector);
+					var interactionNode = A.one(selector);
 
-                    for (var i = eventType.length - 1; i &gt;= 0; i--) {
-                        renderHandles[i] = interactionNode.once(eventType[i], renderInteraction);
-                    }
+					for (var i = eventType.length - 1; i &gt;= 0; i--) {
+						renderHandles[i] = interactionNode.once(eventType[i], renderInteraction);
+					}
 
-                    delete config.render;
-                }
-            }
-        },
+					delete config.render;
+				}
+			}
+		},
 
-        &#x2F;**
-         * Applies the CSS classes to the &lt;code&gt;boundingBox&lt;&#x2F;code&gt; and
+		&#x2F;**
+		 * Applies the CSS classes to the &lt;code&gt;boundingBox&lt;&#x2F;code&gt; and
          * &lt;code&gt;contentBox&lt;&#x2F;code&gt;.
-         *
-         * @method _uiSetCssClass
-         * @protected
-         * @param {String} newVal
-         * @param {String} prevVal
-         *&#x2F;
-        _uiSetCssClass: function(newVal, prevVal) {
-            var instance = this;
+		 *
+		 * @method _uiSetCssClass
+		 * @protected
+		 * @param {String} newVal
+		 * @param {String} prevVal
+		 *&#x2F;
+		_uiSetCssClass: function(newVal, prevVal) {
+			var instance = this;
 
-            var prevValContent = prevVal + &#x27;-content&#x27;;
+			var prevValContent = prevVal + &#x27;-content&#x27;;
 
-            var newValContent = newVal + &#x27;-content&#x27;;
+			var newValContent = newVal + &#x27;-content&#x27;;
 
-            var boundingBox = instance.get(&#x27;boundingBox&#x27;);
-            var contentBox = instance.get(&#x27;contentBox&#x27;);
+			var boundingBox = instance.get(&#x27;boundingBox&#x27;);
+			var contentBox = instance.get(&#x27;contentBox&#x27;);
 
-            boundingBox.replaceClass(prevVal, newVal);
-            contentBox.replaceClass(prevValContent, newValContent);
-        }
-    }
+			boundingBox.replaceClass(prevVal, newVal);
+			contentBox.replaceClass(prevValContent, newValContent);
+		}
+	}
 );
 
 Component.getById = function(id) {
-    return INSTANCES[id];
+	return INSTANCES[id];
 };
 
 var COMP_PROTO = Component.prototype;
@@ -1816,74 +1834,74 @@ var COMP_PROTO = Component.prototype;
 var DEFAULT_UI_ATTRS = A.Widget.prototype._UI_ATTRS;
 
 Component._applyCssPrefix = function(component) {
-    if (component &amp;&amp; component.NAME &amp;&amp; !(&#x27;CSS_PREFIX&#x27; in component)) {
-        component.CSS_PREFIX = A.getClassName(String(component.NAME).toLowerCase());
-    }
+	if (component &amp;&amp; component.NAME &amp;&amp; !(&#x27;CSS_PREFIX&#x27; in component)) {
+		component.CSS_PREFIX = A.getClassName(String(component.NAME).toLowerCase());
+	}
 
-    return component;
+	return component;
 };
 
 Component.create = function(config) {
-    config = config || {};
+	config = config || {};
 
-    var extendsClass = config.EXTENDS || A.Component;
+	var extendsClass = config.EXTENDS || A.Component;
 
-    var component = config.constructor;
+	var component = config.constructor;
 
-    if (!A.Object.owns(config, &#x27;constructor&#x27;)){
-        component = function(){
-            component.superclass.constructor.apply(this, arguments);
-        };
-    }
+	if (!A.Object.owns(config, &#x27;constructor&#x27;)){
+		component = function(){
+			component.superclass.constructor.apply(this, arguments);
+		};
+	}
 
-    var configProto = config.prototype;
+	var configProto = config.prototype;
 
-    if (configProto) {
-        if (config.UI_ATTRS || config.BIND_UI_ATTRS || config.SYNC_UI_ATTRS) {
-            var BIND_UI_ATTRS = concat(config.BIND_UI_ATTRS, config.UI_ATTRS);
-            var SYNC_UI_ATTRS = concat(config.SYNC_UI_ATTRS, config.UI_ATTRS);
+	if (configProto) {
+		if (config.UI_ATTRS || config.BIND_UI_ATTRS || config.SYNC_UI_ATTRS) {
+			var BIND_UI_ATTRS = concat(config.BIND_UI_ATTRS, config.UI_ATTRS);
+			var SYNC_UI_ATTRS = concat(config.SYNC_UI_ATTRS, config.UI_ATTRS);
 
-            var extendsProto = extendsClass.prototype;
-            var extendsUIAttrs = (extendsProto &amp;&amp; extendsProto._UI_ATTRS) || DEFAULT_UI_ATTRS;
+			var extendsProto = extendsClass.prototype;
+			var extendsUIAttrs = (extendsProto &amp;&amp; extendsProto._UI_ATTRS) || DEFAULT_UI_ATTRS;
 
-            BIND_UI_ATTRS = concat(extendsUIAttrs.BIND, BIND_UI_ATTRS);
-            SYNC_UI_ATTRS = concat(extendsUIAttrs.SYNC, SYNC_UI_ATTRS);
+			BIND_UI_ATTRS = concat(extendsUIAttrs.BIND, BIND_UI_ATTRS);
+			SYNC_UI_ATTRS = concat(extendsUIAttrs.SYNC, SYNC_UI_ATTRS);
 
-            var configProtoUIAttrs = configProto._UI_ATTRS;
+			var configProtoUIAttrs = configProto._UI_ATTRS;
 
-            if (!configProtoUIAttrs) {
-                configProtoUIAttrs = configProto._UI_ATTRS = {};
-            }
+			if (!configProtoUIAttrs) {
+				configProtoUIAttrs = configProto._UI_ATTRS = {};
+			}
 
-            if (BIND_UI_ATTRS.length) {
-                configProtoUIAttrs.BIND = BIND_UI_ATTRS;
-            }
+			if (BIND_UI_ATTRS.length) {
+				configProtoUIAttrs.BIND = BIND_UI_ATTRS;
+			}
 
-            if (SYNC_UI_ATTRS.length) {
-                configProtoUIAttrs.SYNC = SYNC_UI_ATTRS;
-            }
-        }
-    }
+			if (SYNC_UI_ATTRS.length) {
+				configProtoUIAttrs.SYNC = SYNC_UI_ATTRS;
+			}
+		}
+	}
 
-    var augmentsClasses = config.AUGMENTS;
+	var augmentsClasses = config.AUGMENTS;
 
-    if (augmentsClasses &amp;&amp; !Lang.isArray(augmentsClasses)) {
-        augmentsClasses = [augmentsClasses];
-    }
+	if (augmentsClasses &amp;&amp; !Lang.isArray(augmentsClasses)) {
+		augmentsClasses = [augmentsClasses];
+	}
 
-    A.mix(component, config);
+	A.mix(component, config);
 
-    delete component.prototype;
+	delete component.prototype;
 
-    A.extend(component, extendsClass, configProto);
+	A.extend(component, extendsClass, configProto);
 
-    if (augmentsClasses) {
-        component = A.Base.build(config.NAME, component, augmentsClasses, { dynamic: false });
-    }
+	if (augmentsClasses) {
+		component = A.Base.build(config.NAME, component, augmentsClasses, { dynamic: false });
+	}
 
-    Component._applyCssPrefix(component);
+	Component._applyCssPrefix(component);
 
-    return component;
+	return component;
 };
 
 Component.CSS_PREFIX = getClassName(&#x27;component&#x27;);
@@ -1891,11 +1909,11 @@ Component.CSS_PREFIX = getClassName(&#x27;component&#x27;);
 var Base = A.Base;
 
 Component.build = function() {
-    var component = Base.build.apply(Base, arguments);
+	var component = Base.build.apply(Base, arguments);
 
-    Component._applyCssPrefix(component);
+	Component._applyCssPrefix(component);
 
-    return component;
+	return component;
 };
 
 A.Component = Component;

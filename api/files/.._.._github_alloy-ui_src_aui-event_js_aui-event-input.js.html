@@ -17,7 +17,7 @@
         </div>
         <div class="yui3-u-1-4 version">
             <div class="version-details">
-                <span class="version-lib">AlloyUI 2.0.0pr1</span>
+                <span class="version-lib">AlloyUI 2.0.0pr2</span>
                 <div class="yui-version">
                     <span class="version-lib version-lib-yui">YUI 3.8.1</span>
                 </div>
@@ -111,9 +111,13 @@
             
                 <li><a href="..&#x2F;classes/Base.html">Base</a></li>
             
+                <li><a href="..&#x2F;classes/BaseCellEditor.html">BaseCellEditor</a></li>
+            
                 <li><a href="..&#x2F;classes/BaseCore.html">BaseCore</a></li>
             
                 <li><a href="..&#x2F;classes/BaseObservable.html">BaseObservable</a></li>
+            
+                <li><a href="..&#x2F;classes/BaseOptionsCellEditor.html">BaseOptionsCellEditor</a></li>
             
                 <li><a href="..&#x2F;classes/BottomAxisLayout.html">BottomAxisLayout</a></li>
             
@@ -155,6 +159,8 @@
             
                 <li><a href="..&#x2F;classes/CategoryAxis.html">CategoryAxis</a></li>
             
+                <li><a href="..&#x2F;classes/CellEditorSupport.html">CellEditorSupport</a></li>
+            
                 <li><a href="..&#x2F;classes/CharCounter.html">CharCounter</a></li>
             
                 <li><a href="..&#x2F;classes/Chart.html">Chart</a></li>
@@ -162,6 +168,8 @@
                 <li><a href="..&#x2F;classes/ChartBase.html">ChartBase</a></li>
             
                 <li><a href="..&#x2F;classes/ChartLegend.html">ChartLegend</a></li>
+            
+                <li><a href="..&#x2F;classes/CheckboxCellEditor.html">CheckboxCellEditor</a></li>
             
                 <li><a href="..&#x2F;classes/Circle.html">Circle</a></li>
             
@@ -259,6 +267,8 @@
             
                 <li><a href="..&#x2F;classes/Date.html">Date</a></li>
             
+                <li><a href="..&#x2F;classes/DateCellEditor.html">DateCellEditor</a></li>
+            
                 <li><a href="..&#x2F;classes/DD.DDM.html">DD.DDM</a></li>
             
                 <li><a href="..&#x2F;classes/DD.Delegate.html">DD.Delegate</a></li>
@@ -290,6 +300,8 @@
                 <li><a href="..&#x2F;classes/DOMEventFacade.html">DOMEventFacade</a></li>
             
                 <li><a href="..&#x2F;classes/Drawing.html">Drawing</a></li>
+            
+                <li><a href="..&#x2F;classes/DropDownCellEditor.html">DropDownCellEditor</a></li>
             
                 <li><a href="..&#x2F;classes/Easing.html">Easing</a></li>
             
@@ -515,6 +527,8 @@
             
                 <li><a href="..&#x2F;classes/Queue.html">Queue</a></li>
             
+                <li><a href="..&#x2F;classes/RadioCellEditor.html">RadioCellEditor</a></li>
+            
                 <li><a href="..&#x2F;classes/Rating.html">Rating</a></li>
             
                 <li><a href="..&#x2F;classes/Record.html">Record</a></li>
@@ -672,6 +686,10 @@
                 <li><a href="..&#x2F;classes/Text.AccentFold.html">Text.AccentFold</a></li>
             
                 <li><a href="..&#x2F;classes/Text.WordBreak.html">Text.WordBreak</a></li>
+            
+                <li><a href="..&#x2F;classes/TextAreaCellEditor.html">TextAreaCellEditor</a></li>
+            
+                <li><a href="..&#x2F;classes/TextCellEditor.html">TextCellEditor</a></li>
             
                 <li><a href="..&#x2F;classes/ThumbRating.html">ThumbRating</a></li>
             
@@ -1506,9 +1524,9 @@ var DOM_EVENTS = A.Node.DOM_EVENTS;
 &#x2F;&#x2F; version 531 (3.0.182.2) did not support input events for textareas.
 &#x2F;&#x2F; See http:&#x2F;&#x2F;dev.chromium.org&#x2F;developers&#x2F;webkit-version-table
 if (A.Features.test(&#x27;event&#x27;, &#x27;input&#x27;)) {
-    &#x2F;&#x2F; http:&#x2F;&#x2F;yuilibrary.com&#x2F;projects&#x2F;yui3&#x2F;ticket&#x2F;2533063
-    DOM_EVENTS.input = 1;
-    return;
+	&#x2F;&#x2F; http:&#x2F;&#x2F;yuilibrary.com&#x2F;projects&#x2F;yui3&#x2F;ticket&#x2F;2533063
+	DOM_EVENTS.input = 1;
+	return;
 }
 
 DOM_EVENTS.cut = 1;
@@ -1516,69 +1534,69 @@ DOM_EVENTS.dragend = 1;
 DOM_EVENTS.paste = 1;
 
 var ACTIVE_ELEMENT = &#x27;activeElement&#x27;,
-    OWNER_DOCUMENT = &#x27;ownerDocument&#x27;,
+	OWNER_DOCUMENT = &#x27;ownerDocument&#x27;,
 
-    _HANDLER_DATA_KEY = &#x27;~~aui|input|event~~&#x27;,
-    _INPUT_EVENT_TYPE = [&#x27;keydown&#x27;, &#x27;paste&#x27;, &#x27;drop&#x27;, &#x27;cut&#x27;],
-    _SKIP_FOCUS_CHECK_MAP = {
-        cut: 1,
-        drop: 1,
-        paste: 1
-    };
+	_HANDLER_DATA_KEY = &#x27;~~aui|input|event~~&#x27;,
+	_INPUT_EVENT_TYPE = [&#x27;keydown&#x27;, &#x27;paste&#x27;, &#x27;drop&#x27;, &#x27;cut&#x27;],
+	_SKIP_FOCUS_CHECK_MAP = {
+		cut: 1,
+		drop: 1,
+		paste: 1
+	};
 
 A.Event.define(&#x27;input&#x27;, {
-    on: function (node, subscription, notifier) {
-        var instance = this;
+	on: function (node, subscription, notifier) {
+		var instance = this;
 
-        subscription._handler = node.on(
-            _INPUT_EVENT_TYPE, A.bind(instance._dispatchEvent, instance, notifier));
-    },
+		subscription._handler = node.on(
+			_INPUT_EVENT_TYPE, A.bind(instance._dispatchEvent, instance, notifier));
+	},
 
-    delegate: function (node, subscription, notifier, filter) {
-        var instance = this;
+	delegate: function (node, subscription, notifier, filter) {
+		var instance = this;
 
-        subscription._handles = [];
-        subscription._handler = node.delegate(&#x27;focus&#x27;, function(event) {
-            var element = event.target,
-                handler = element.getData(_HANDLER_DATA_KEY);
+		subscription._handles = [];
+		subscription._handler = node.delegate(&#x27;focus&#x27;, function(event) {
+			var element = event.target,
+				handler = element.getData(_HANDLER_DATA_KEY);
 
-            if (!handler) {
-                handler = element.on(
-                    _INPUT_EVENT_TYPE,
-                    A.bind(instance._dispatchEvent, instance, notifier));
+			if (!handler) {
+				handler = element.on(
+					_INPUT_EVENT_TYPE,
+					A.bind(instance._dispatchEvent, instance, notifier));
 
-                subscription._handles.push(handler);
-                element.setData(_HANDLER_DATA_KEY, handler);
-            }
-        }, filter);
-    },
+				subscription._handles.push(handler);
+				element.setData(_HANDLER_DATA_KEY, handler);
+			}
+		}, filter);
+	},
 
-    detach: function (node, subscription, notifier) {
-        subscription._handler.detach();
-    },
+	detach: function (node, subscription, notifier) {
+		subscription._handler.detach();
+	},
 
-    detachDelegate: function (node, subscription, notifier) {
-        A.Array.each(subscription._handles, function(handle) {
-            var element = A.one(handle.evt.el);
-            if (element) {
-                element.setData(_HANDLER_DATA_KEY, null);
-            }
-            handle.detach();
-        });
-        subscription._handler.detach();
-    },
+	detachDelegate: function (node, subscription, notifier) {
+		A.Array.each(subscription._handles, function(handle) {
+			var element = A.one(handle.evt.el);
+			if (element) {
+				element.setData(_HANDLER_DATA_KEY, null);
+			}
+			handle.detach();
+		});
+		subscription._handler.detach();
+	},
 
-    _dispatchEvent: function(notifier, event) {
-        var instance = this,
-            input = event.target;
+	_dispatchEvent: function(notifier, event) {
+		var instance = this,
+			input = event.target;
 
-        if (&#x2F;&#x2F; Since cut, drop and paste events fires before the element is focused, skip focus checking.
-            _SKIP_FOCUS_CHECK_MAP[event.type] ||
-            (input.get(OWNER_DOCUMENT).get(ACTIVE_ELEMENT) === input)) {
+		if (&#x2F;&#x2F; Since cut, drop and paste events fires before the element is focused, skip focus checking.
+			_SKIP_FOCUS_CHECK_MAP[event.type] ||
+			(input.get(OWNER_DOCUMENT).get(ACTIVE_ELEMENT) === input)) {
 
-            notifier.fire(event);
-        }
-    }
+			notifier.fire(event);
+		}
+	}
 });
     </pre>
 </div>

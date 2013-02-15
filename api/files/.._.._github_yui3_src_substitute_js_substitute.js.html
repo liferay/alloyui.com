@@ -17,7 +17,7 @@
         </div>
         <div class="yui3-u-1-4 version">
             <div class="version-details">
-                <span class="version-lib">AlloyUI 2.0.0pr1</span>
+                <span class="version-lib">AlloyUI 2.0.0pr2</span>
                 <div class="yui-version">
                     <span class="version-lib version-lib-yui">YUI 3.8.1</span>
                 </div>
@@ -111,9 +111,13 @@
             
                 <li><a href="..&#x2F;classes/Base.html">Base</a></li>
             
+                <li><a href="..&#x2F;classes/BaseCellEditor.html">BaseCellEditor</a></li>
+            
                 <li><a href="..&#x2F;classes/BaseCore.html">BaseCore</a></li>
             
                 <li><a href="..&#x2F;classes/BaseObservable.html">BaseObservable</a></li>
+            
+                <li><a href="..&#x2F;classes/BaseOptionsCellEditor.html">BaseOptionsCellEditor</a></li>
             
                 <li><a href="..&#x2F;classes/BottomAxisLayout.html">BottomAxisLayout</a></li>
             
@@ -155,6 +159,8 @@
             
                 <li><a href="..&#x2F;classes/CategoryAxis.html">CategoryAxis</a></li>
             
+                <li><a href="..&#x2F;classes/CellEditorSupport.html">CellEditorSupport</a></li>
+            
                 <li><a href="..&#x2F;classes/CharCounter.html">CharCounter</a></li>
             
                 <li><a href="..&#x2F;classes/Chart.html">Chart</a></li>
@@ -162,6 +168,8 @@
                 <li><a href="..&#x2F;classes/ChartBase.html">ChartBase</a></li>
             
                 <li><a href="..&#x2F;classes/ChartLegend.html">ChartLegend</a></li>
+            
+                <li><a href="..&#x2F;classes/CheckboxCellEditor.html">CheckboxCellEditor</a></li>
             
                 <li><a href="..&#x2F;classes/Circle.html">Circle</a></li>
             
@@ -259,6 +267,8 @@
             
                 <li><a href="..&#x2F;classes/Date.html">Date</a></li>
             
+                <li><a href="..&#x2F;classes/DateCellEditor.html">DateCellEditor</a></li>
+            
                 <li><a href="..&#x2F;classes/DD.DDM.html">DD.DDM</a></li>
             
                 <li><a href="..&#x2F;classes/DD.Delegate.html">DD.Delegate</a></li>
@@ -290,6 +300,8 @@
                 <li><a href="..&#x2F;classes/DOMEventFacade.html">DOMEventFacade</a></li>
             
                 <li><a href="..&#x2F;classes/Drawing.html">Drawing</a></li>
+            
+                <li><a href="..&#x2F;classes/DropDownCellEditor.html">DropDownCellEditor</a></li>
             
                 <li><a href="..&#x2F;classes/Easing.html">Easing</a></li>
             
@@ -515,6 +527,8 @@
             
                 <li><a href="..&#x2F;classes/Queue.html">Queue</a></li>
             
+                <li><a href="..&#x2F;classes/RadioCellEditor.html">RadioCellEditor</a></li>
+            
                 <li><a href="..&#x2F;classes/Rating.html">Rating</a></li>
             
                 <li><a href="..&#x2F;classes/Record.html">Record</a></li>
@@ -672,6 +686,10 @@
                 <li><a href="..&#x2F;classes/Text.AccentFold.html">Text.AccentFold</a></li>
             
                 <li><a href="..&#x2F;classes/Text.WordBreak.html">Text.WordBreak</a></li>
+            
+                <li><a href="..&#x2F;classes/TextAreaCellEditor.html">TextAreaCellEditor</a></li>
+            
+                <li><a href="..&#x2F;classes/TextCellEditor.html">TextCellEditor</a></li>
             
                 <li><a href="..&#x2F;classes/ThumbRating.html">ThumbRating</a></li>
             
@@ -1497,7 +1515,7 @@
  *&#x2F;
 
     var L = Y.Lang, DUMP = &#x27;dump&#x27;, SPACE = &#x27; &#x27;, LBRACE = &#x27;{&#x27;, RBRACE = &#x27;}&#x27;,
-        savedRegExp =  &#x2F;(~-(\d+)-~)&#x2F;g, lBraceRegExp = &#x2F;\{LBRACE\}&#x2F;g, rBraceRegExp = &#x2F;\{RBRACE\}&#x2F;g,
+		savedRegExp =  &#x2F;(~-(\d+)-~)&#x2F;g, lBraceRegExp = &#x2F;\{LBRACE\}&#x2F;g, rBraceRegExp = &#x2F;\{RBRACE\}&#x2F;g,
 
     &#x2F;**
      * The following methods are added to the YUI instance
@@ -1617,30 +1635,30 @@
                         }
                     }
                 }
-            } else if (L.isUndefined(v)) {
+			} else if (L.isUndefined(v)) {
                 &#x2F;&#x2F; This {block} has no replace string. Save it for later.
                 v = &#x27;~-&#x27; + saved.length + &#x27;-~&#x27;;
-                    saved.push(token);
+					saved.push(token);
 
                 &#x2F;&#x2F; break;
             }
 
             s = s.substring(0, i) + v + s.substring(j + 1);
 
-            if (!recurse) {
-                lidx = i - 1;
-            } 
-        }
-        &#x2F;&#x2F; restore saved {block}s and escaped braces
+			if (!recurse) {
+				lidx = i - 1;
+			} 
+		}
+		&#x2F;&#x2F; restore saved {block}s and escaped braces
 
-        return s
-            .replace(savedRegExp, function (str, p1, p2) {
-                return LBRACE + saved[parseInt(p2,10)] + RBRACE;
-            })
-            .replace(lBraceRegExp, LBRACE)
-            .replace(rBraceRegExp, RBRACE)
-        ;
-    };
+		return s
+			.replace(savedRegExp, function (str, p1, p2) {
+				return LBRACE + saved[parseInt(p2,10)] + RBRACE;
+			})
+			.replace(lBraceRegExp, LBRACE)
+			.replace(rBraceRegExp, RBRACE)
+		;
+	};
 
     Y.substitute = substitute;
     L.substitute = substitute;

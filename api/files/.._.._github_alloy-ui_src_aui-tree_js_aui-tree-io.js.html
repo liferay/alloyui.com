@@ -17,7 +17,7 @@
         </div>
         <div class="yui3-u-1-4 version">
             <div class="version-details">
-                <span class="version-lib">AlloyUI 2.0.0pr1</span>
+                <span class="version-lib">AlloyUI 2.0.0pr2</span>
                 <div class="yui-version">
                     <span class="version-lib version-lib-yui">YUI 3.8.1</span>
                 </div>
@@ -111,9 +111,13 @@
             
                 <li><a href="..&#x2F;classes/Base.html">Base</a></li>
             
+                <li><a href="..&#x2F;classes/BaseCellEditor.html">BaseCellEditor</a></li>
+            
                 <li><a href="..&#x2F;classes/BaseCore.html">BaseCore</a></li>
             
                 <li><a href="..&#x2F;classes/BaseObservable.html">BaseObservable</a></li>
+            
+                <li><a href="..&#x2F;classes/BaseOptionsCellEditor.html">BaseOptionsCellEditor</a></li>
             
                 <li><a href="..&#x2F;classes/BottomAxisLayout.html">BottomAxisLayout</a></li>
             
@@ -155,6 +159,8 @@
             
                 <li><a href="..&#x2F;classes/CategoryAxis.html">CategoryAxis</a></li>
             
+                <li><a href="..&#x2F;classes/CellEditorSupport.html">CellEditorSupport</a></li>
+            
                 <li><a href="..&#x2F;classes/CharCounter.html">CharCounter</a></li>
             
                 <li><a href="..&#x2F;classes/Chart.html">Chart</a></li>
@@ -162,6 +168,8 @@
                 <li><a href="..&#x2F;classes/ChartBase.html">ChartBase</a></li>
             
                 <li><a href="..&#x2F;classes/ChartLegend.html">ChartLegend</a></li>
+            
+                <li><a href="..&#x2F;classes/CheckboxCellEditor.html">CheckboxCellEditor</a></li>
             
                 <li><a href="..&#x2F;classes/Circle.html">Circle</a></li>
             
@@ -259,6 +267,8 @@
             
                 <li><a href="..&#x2F;classes/Date.html">Date</a></li>
             
+                <li><a href="..&#x2F;classes/DateCellEditor.html">DateCellEditor</a></li>
+            
                 <li><a href="..&#x2F;classes/DD.DDM.html">DD.DDM</a></li>
             
                 <li><a href="..&#x2F;classes/DD.Delegate.html">DD.Delegate</a></li>
@@ -290,6 +300,8 @@
                 <li><a href="..&#x2F;classes/DOMEventFacade.html">DOMEventFacade</a></li>
             
                 <li><a href="..&#x2F;classes/Drawing.html">Drawing</a></li>
+            
+                <li><a href="..&#x2F;classes/DropDownCellEditor.html">DropDownCellEditor</a></li>
             
                 <li><a href="..&#x2F;classes/Easing.html">Easing</a></li>
             
@@ -515,6 +527,8 @@
             
                 <li><a href="..&#x2F;classes/Queue.html">Queue</a></li>
             
+                <li><a href="..&#x2F;classes/RadioCellEditor.html">RadioCellEditor</a></li>
+            
                 <li><a href="..&#x2F;classes/Rating.html">Rating</a></li>
             
                 <li><a href="..&#x2F;classes/Record.html">Record</a></li>
@@ -672,6 +686,10 @@
                 <li><a href="..&#x2F;classes/Text.AccentFold.html">Text.AccentFold</a></li>
             
                 <li><a href="..&#x2F;classes/Text.WordBreak.html">Text.WordBreak</a></li>
+            
+                <li><a href="..&#x2F;classes/TextAreaCellEditor.html">TextAreaCellEditor</a></li>
+            
+                <li><a href="..&#x2F;classes/TextCellEditor.html">TextCellEditor</a></li>
             
                 <li><a href="..&#x2F;classes/ThumbRating.html">ThumbRating</a></li>
             
@@ -1490,238 +1508,238 @@
 <div class="file">
     <pre class="code prettyprint linenums">
 var Lang = A.Lang,
-    isFunction = Lang.isFunction,
-    isString = Lang.isString,
+	isFunction = Lang.isFunction,
+	isString = Lang.isString,
 
-    EVENT_IO_REQUEST_SUCCESS = &#x27;ioRequestSuccess&#x27;,
+	EVENT_IO_REQUEST_SUCCESS = &#x27;ioRequestSuccess&#x27;,
 
-    CONTENT_BOX = &#x27;contentBox&#x27;,
-    IO = &#x27;io&#x27;,
-    OWNER_TREE = &#x27;ownerTree&#x27;,
-    LOADED = &#x27;loaded&#x27;,
-    LOADING = &#x27;loading&#x27;,
-    NODE = &#x27;node&#x27;,
-    TREE = &#x27;tree&#x27;,
+	CONTENT_BOX = &#x27;contentBox&#x27;,
+	IO = &#x27;io&#x27;,
+	OWNER_TREE = &#x27;ownerTree&#x27;,
+	LOADED = &#x27;loaded&#x27;,
+	LOADING = &#x27;loading&#x27;,
+	NODE = &#x27;node&#x27;,
+	TREE = &#x27;tree&#x27;,
 
-    getCN = A.getClassName,
+	getCN = A.getClassName,
 
-    CSS_TREE_NODE_IO_LOADING = getCN(TREE, NODE, IO, LOADING);
+	CSS_TREE_NODE_IO_LOADING = getCN(TREE, NODE, IO, LOADING);
 
 function TreeViewIO(config) {
-    var instance = this;
+	var instance = this;
 
-    instance.publish(
-        EVENT_IO_REQUEST_SUCCESS,
-        {
-            defaultFn: instance._onIOSuccessDefault
-        }
-    );
+	instance.publish(
+		EVENT_IO_REQUEST_SUCCESS,
+		{
+			defaultFn: instance._onIOSuccessDefault
+		}
+	);
 }
 
 
 TreeViewIO.ATTRS = {
-    &#x2F;**
-     * IO options for the current TreeNode load the children.
-     *
-     * @attribute io
-     * @default Default IO Configuration.
-     * @type Object
-     *&#x2F;
-    io: {
-        lazyAdd: false,
-        value: null,
-        setter: function(v) {
-            return this._setIO(v);
-        }
-    }
+	&#x2F;**
+	 * IO options for the current TreeNode load the children.
+	 *
+	 * @attribute io
+	 * @default Default IO Configuration.
+	 * @type Object
+	 *&#x2F;
+	io: {
+		lazyAdd: false,
+		value: null,
+		setter: function(v) {
+			return this._setIO(v);
+		}
+	}
 };
 
 TreeViewIO.prototype = {
-    initializer: function() {
-        var instance = this;
+	initializer: function() {
+		var instance = this;
 
-        instance.publish(
+		instance.publish(
 
-        );
-    },
+		);
+	},
 
-    &#x2F;**
-     * Initialize the IO transaction setup on the &lt;a
-     * href=&quot;TreeNode.html#config_io&quot;&gt;io&lt;&#x2F;a&gt; attribute.
-     *
-     * @method initIO
-     *&#x2F;
-    initIO: function() {
-        var instance = this;
+	&#x2F;**
+	 * Initialize the IO transaction setup on the &lt;a
+	 * href=&quot;TreeNode.html#config_io&quot;&gt;io&lt;&#x2F;a&gt; attribute.
+	 *
+	 * @method initIO
+	 *&#x2F;
+	initIO: function() {
+		var instance = this;
 
-        var io = instance.get(IO);
+		var io = instance.get(IO);
 
-        if (isFunction(io.cfg.data)) {
-            io.cfg.data = io.cfg.data.call(instance, instance);
-        }
+		if (isFunction(io.cfg.data)) {
+			io.cfg.data = io.cfg.data.call(instance, instance);
+		}
 
-        instance._syncPaginatorIOData(io);
+		instance._syncPaginatorIOData(io);
 
-        if (isFunction(io.loader)) {
-            var loader = A.bind(io.loader, instance);
+		if (isFunction(io.loader)) {
+			var loader = A.bind(io.loader, instance);
 
-            &#x2F;&#x2F; apply loader in the TreeNodeIO scope
-            loader(io.url, io.cfg, instance);
-        }
-        else {
-            A.io.request(io.url, io.cfg);
-        }
-    },
+			&#x2F;&#x2F; apply loader in the TreeNodeIO scope
+			loader(io.url, io.cfg, instance);
+		}
+		else {
+			A.io.request(io.url, io.cfg);
+		}
+	},
 
-    &#x2F;**
-     * IO Start handler.
-     *
-     * @method ioStartHandler
-     *&#x2F;
-    ioStartHandler: function() {
-        var instance = this;
+	&#x2F;**
+	 * IO Start handler.
+	 *
+	 * @method ioStartHandler
+	 *&#x2F;
+	ioStartHandler: function() {
+		var instance = this;
 
-        var contentBox = instance.get(CONTENT_BOX);
+		var contentBox = instance.get(CONTENT_BOX);
 
-        instance.set(LOADING, true);
+		instance.set(LOADING, true);
 
-        contentBox.addClass(CSS_TREE_NODE_IO_LOADING);
-    },
+		contentBox.addClass(CSS_TREE_NODE_IO_LOADING);
+	},
 
-    &#x2F;**
-     * IO Complete handler.
-     *
-     * @method ioCompleteHandler
-     *&#x2F;
-    ioCompleteHandler: function() {
-        var instance = this;
+	&#x2F;**
+	 * IO Complete handler.
+	 *
+	 * @method ioCompleteHandler
+	 *&#x2F;
+	ioCompleteHandler: function() {
+		var instance = this;
 
-        var contentBox = instance.get(CONTENT_BOX);
+		var contentBox = instance.get(CONTENT_BOX);
 
-        instance.set(LOADING, false);
-        instance.set(LOADED, true);
+		instance.set(LOADING, false);
+		instance.set(LOADED, true);
 
-        contentBox.removeClass(CSS_TREE_NODE_IO_LOADING);
-    },
+		contentBox.removeClass(CSS_TREE_NODE_IO_LOADING);
+	},
 
-    &#x2F;**
-     * IO Success handler.
-     *
-     * @method ioSuccessHandler
-     *&#x2F;
-    ioSuccessHandler: function() {
-        var instance = this;
+	&#x2F;**
+	 * IO Success handler.
+	 *
+	 * @method ioSuccessHandler
+	 *&#x2F;
+	ioSuccessHandler: function() {
+		var instance = this;
 
-        var io = instance.get(IO);
+		var io = instance.get(IO);
 
-        var args = Array.prototype.slice.call(arguments);
-        var length = args.length;
+		var args = Array.prototype.slice.call(arguments);
+		var length = args.length;
 
-        &#x2F;&#x2F; if using the first argument as the JSON object
-        var nodes = args[1];
+		&#x2F;&#x2F; if using the first argument as the JSON object
+		var nodes = args[1];
 
-        &#x2F;&#x2F; if using (event, id, o) yui callback syntax
-        if (length &gt;= 3) {
-            var o = args[2];
-            &#x2F;&#x2F; try to convert responseText to JSON
-            try {
-                nodes = A.JSON.parse(o.responseText);
-            }
-            catch(e) {}
-        }
+		&#x2F;&#x2F; if using (event, id, o) yui callback syntax
+		if (length &gt;= 3) {
+			var o = args[2];
+			&#x2F;&#x2F; try to convert responseText to JSON
+			try {
+				nodes = A.JSON.parse(o.responseText);
+			}
+			catch(e) {}
+		}
 
-        var formatter = io.formatter;
+		var formatter = io.formatter;
 
-        if (formatter) {
-            nodes = formatter(nodes);
-        }
+		if (formatter) {
+			nodes = formatter(nodes);
+		}
 
-        instance.createNodes(nodes);
+		instance.createNodes(nodes);
 
-        instance.fire(EVENT_IO_REQUEST_SUCCESS, nodes);
-    },
+		instance.fire(EVENT_IO_REQUEST_SUCCESS, nodes);
+	},
 
-    &#x2F;**
-     * IO Failure handler.
-     *
-     * @method ioFailureHandler
-     *&#x2F;
-    ioFailureHandler: function() {
-        var instance = this;
+	&#x2F;**
+	 * IO Failure handler.
+	 *
+	 * @method ioFailureHandler
+	 *&#x2F;
+	ioFailureHandler: function() {
+		var instance = this;
 
-        instance.fire(&#x27;ioRequestFailure&#x27;);
+		instance.fire(&#x27;ioRequestFailure&#x27;);
 
-        instance.set(LOADING, false);
-        instance.set(LOADED, false);
-    },
+		instance.set(LOADING, false);
+		instance.set(LOADED, false);
+	},
 
-    _onIOSuccessDefault: function(event) {
-        var instance = this;
+	_onIOSuccessDefault: function(event) {
+		var instance = this;
 
-        var ownerTree = instance.get(OWNER_TREE);
+		var ownerTree = instance.get(OWNER_TREE);
 
-        if (ownerTree &amp;&amp; ownerTree.ddDelegate) {
-            ownerTree.ddDelegate.syncTargets();
-        }
-    },
+		if (ownerTree &amp;&amp; ownerTree.ddDelegate) {
+			ownerTree.ddDelegate.syncTargets();
+		}
+	},
 
-    &#x2F;**
-     * Setter for &lt;a href=&quot;TreeNodeIO.html#config_io&quot;&gt;io&lt;&#x2F;a&gt;.
-     *
-     * @method _setIO
-     * @protected
-     * @param {Object} v
-     * @return {Object}
-     *&#x2F;
-    _setIO: function(v) {
-        var instance = this;
+	&#x2F;**
+	 * Setter for &lt;a href=&quot;TreeNodeIO.html#config_io&quot;&gt;io&lt;&#x2F;a&gt;.
+	 *
+	 * @method _setIO
+	 * @protected
+	 * @param {Object} v
+	 * @return {Object}
+	 *&#x2F;
+	_setIO: function(v) {
+		var instance = this;
 
-        if (!v) {
-            return null;
-        }
-        else if (isString(v)) {
-            v = { url: v };
-        }
+		if (!v) {
+			return null;
+		}
+		else if (isString(v)) {
+			v = { url: v };
+		}
 
-        v = v || {};
-        v.cfg = v.cfg || {};
-        v.cfg.on = v.cfg.on || {};
+		v = v || {};
+		v.cfg = v.cfg || {};
+		v.cfg.on = v.cfg.on || {};
 
-        var defCallbacks = {
-            start: A.bind(instance.ioStartHandler, instance),
-            complete: A.bind(instance.ioCompleteHandler, instance),
-            success: A.bind(instance.ioSuccessHandler, instance),
-            failure: A.bind(instance.ioFailureHandler, instance)
-        };
+		var defCallbacks = {
+			start: A.bind(instance.ioStartHandler, instance),
+			complete: A.bind(instance.ioCompleteHandler, instance),
+			success: A.bind(instance.ioSuccessHandler, instance),
+			failure: A.bind(instance.ioFailureHandler, instance)
+		};
 
-        A.each(defCallbacks, function(fn, name) {
-            var userFn = v.cfg.on[name];
+		A.each(defCallbacks, function(fn, name) {
+			var userFn = v.cfg.on[name];
 
-            fn.defaultFn = true;
+			fn.defaultFn = true;
 
-            if (isFunction(userFn)) {
-                &#x2F;&#x2F; wrapping user callback and default callback, invoking both handlers
-                var wrappedFn = A.bind(
-                    function() {
-                        fn.apply(instance, arguments);
-                        userFn.apply(instance, arguments);
-                    },
-                    instance
-                );
+			if (isFunction(userFn)) {
+				&#x2F;&#x2F; wrapping user callback and default callback, invoking both handlers
+				var wrappedFn = A.bind(
+					function() {
+						fn.apply(instance, arguments);
+						userFn.apply(instance, arguments);
+					},
+					instance
+				);
 
-                wrappedFn.wrappedFn = true;
+				wrappedFn.wrappedFn = true;
 
-                v.cfg.on[name] = wrappedFn;
-            }
-            else {
-                &#x2F;&#x2F; get from defCallbacks map
-                v.cfg.on[name] = fn;
-            }
+				v.cfg.on[name] = wrappedFn;
+			}
+			else {
+				&#x2F;&#x2F; get from defCallbacks map
+				v.cfg.on[name] = fn;
+			}
 
-        });
+		});
 
-        return v;
-    }
+		return v;
+	}
 };
 
 A.TreeViewIO = TreeViewIO;

@@ -17,7 +17,7 @@
         </div>
         <div class="yui3-u-1-4 version">
             <div class="version-details">
-                <span class="version-lib">AlloyUI 2.0.0pr1</span>
+                <span class="version-lib">AlloyUI 2.0.0pr2</span>
                 <div class="yui-version">
                     <span class="version-lib version-lib-yui">YUI 3.8.1</span>
                 </div>
@@ -111,9 +111,13 @@
             
                 <li><a href="..&#x2F;classes/Base.html">Base</a></li>
             
+                <li><a href="..&#x2F;classes/BaseCellEditor.html">BaseCellEditor</a></li>
+            
                 <li><a href="..&#x2F;classes/BaseCore.html">BaseCore</a></li>
             
                 <li><a href="..&#x2F;classes/BaseObservable.html">BaseObservable</a></li>
+            
+                <li><a href="..&#x2F;classes/BaseOptionsCellEditor.html">BaseOptionsCellEditor</a></li>
             
                 <li><a href="..&#x2F;classes/BottomAxisLayout.html">BottomAxisLayout</a></li>
             
@@ -155,6 +159,8 @@
             
                 <li><a href="..&#x2F;classes/CategoryAxis.html">CategoryAxis</a></li>
             
+                <li><a href="..&#x2F;classes/CellEditorSupport.html">CellEditorSupport</a></li>
+            
                 <li><a href="..&#x2F;classes/CharCounter.html">CharCounter</a></li>
             
                 <li><a href="..&#x2F;classes/Chart.html">Chart</a></li>
@@ -162,6 +168,8 @@
                 <li><a href="..&#x2F;classes/ChartBase.html">ChartBase</a></li>
             
                 <li><a href="..&#x2F;classes/ChartLegend.html">ChartLegend</a></li>
+            
+                <li><a href="..&#x2F;classes/CheckboxCellEditor.html">CheckboxCellEditor</a></li>
             
                 <li><a href="..&#x2F;classes/Circle.html">Circle</a></li>
             
@@ -259,6 +267,8 @@
             
                 <li><a href="..&#x2F;classes/Date.html">Date</a></li>
             
+                <li><a href="..&#x2F;classes/DateCellEditor.html">DateCellEditor</a></li>
+            
                 <li><a href="..&#x2F;classes/DD.DDM.html">DD.DDM</a></li>
             
                 <li><a href="..&#x2F;classes/DD.Delegate.html">DD.Delegate</a></li>
@@ -290,6 +300,8 @@
                 <li><a href="..&#x2F;classes/DOMEventFacade.html">DOMEventFacade</a></li>
             
                 <li><a href="..&#x2F;classes/Drawing.html">Drawing</a></li>
+            
+                <li><a href="..&#x2F;classes/DropDownCellEditor.html">DropDownCellEditor</a></li>
             
                 <li><a href="..&#x2F;classes/Easing.html">Easing</a></li>
             
@@ -515,6 +527,8 @@
             
                 <li><a href="..&#x2F;classes/Queue.html">Queue</a></li>
             
+                <li><a href="..&#x2F;classes/RadioCellEditor.html">RadioCellEditor</a></li>
+            
                 <li><a href="..&#x2F;classes/Rating.html">Rating</a></li>
             
                 <li><a href="..&#x2F;classes/Record.html">Record</a></li>
@@ -672,6 +686,10 @@
                 <li><a href="..&#x2F;classes/Text.AccentFold.html">Text.AccentFold</a></li>
             
                 <li><a href="..&#x2F;classes/Text.WordBreak.html">Text.WordBreak</a></li>
+            
+                <li><a href="..&#x2F;classes/TextAreaCellEditor.html">TextAreaCellEditor</a></li>
+            
+                <li><a href="..&#x2F;classes/TextCellEditor.html">TextCellEditor</a></li>
             
                 <li><a href="..&#x2F;classes/ThumbRating.html">ThumbRating</a></li>
             
@@ -1490,211 +1508,211 @@
 <div class="file">
     <pre class="code prettyprint linenums">
 var Lang = A.Lang,
-    isObject = Lang.isObject,
-    isValue = Lang.isValue,
+	isObject = Lang.isObject,
+	isValue = Lang.isValue,
 
-    getCN = A.getClassName,
+	getCN = A.getClassName,
 
-    CHILDREN = &#x27;children&#x27;,
-    CONTAINER = &#x27;container&#x27;,
-    END = &#x27;end&#x27;,
-    IO = &#x27;io&#x27;,
-    LIMIT = &#x27;limit&#x27;,
-    MORE_RESULTS_LABEL = &#x27;Load more results&#x27;,
-    NODE = &#x27;node&#x27;,
-    OWNER_TREE = &#x27;ownerTree&#x27;,
-    PAGINATOR = &#x27;paginator&#x27;,
-    START = &#x27;start&#x27;,
-    TREE = &#x27;tree&#x27;,
-    TREE_NODE_IO = &#x27;tree-node-io&#x27;,
+	CHILDREN = &#x27;children&#x27;,
+	CONTAINER = &#x27;container&#x27;,
+	END = &#x27;end&#x27;,
+	IO = &#x27;io&#x27;,
+	LIMIT = &#x27;limit&#x27;,
+	MORE_RESULTS_LABEL = &#x27;Load more results&#x27;,
+	NODE = &#x27;node&#x27;,
+	OWNER_TREE = &#x27;ownerTree&#x27;,
+	PAGINATOR = &#x27;paginator&#x27;,
+	START = &#x27;start&#x27;,
+	TREE = &#x27;tree&#x27;,
+	TREE_NODE_IO = &#x27;tree-node-io&#x27;,
 
-    EV_TREE_NODE_PAGINATOR_CLICK = &#x27;paginatorClick&#x27;,
+	EV_TREE_NODE_PAGINATOR_CLICK = &#x27;paginatorClick&#x27;,
 
-    CSS_TREE_NODE_PAGINATOR = getCN(TREE, NODE, PAGINATOR),
+	CSS_TREE_NODE_PAGINATOR = getCN(TREE, NODE, PAGINATOR),
 
-    TPL_PAGINATOR = &#x27;&lt;a class=&quot;&#x27; + CSS_TREE_NODE_PAGINATOR + &#x27;&quot; href=&quot;javascript:void(0);&quot;&gt;{moreResultsLabel}&lt;&#x2F;a&gt;&#x27;;
+	TPL_PAGINATOR = &#x27;&lt;a class=&quot;&#x27; + CSS_TREE_NODE_PAGINATOR + &#x27;&quot; href=&quot;javascript:void(0);&quot;&gt;{moreResultsLabel}&lt;&#x2F;a&gt;&#x27;;
 
 function TreeViewPaginator(config) {
-    var instance = this;
+	var instance = this;
 
-    A.after(instance._bindPaginatorUI, this, &#x27;bindUI&#x27;);
+	A.after(instance._bindPaginatorUI, this, &#x27;bindUI&#x27;);
 
-    A.after(instance._syncPaginatorUI, this, &#x27;syncUI&#x27;);
+	A.after(instance._syncPaginatorUI, this, &#x27;syncUI&#x27;);
 }
 
 TreeViewPaginator.ATTRS = {
-    paginator: {
-        setter: function(value) {
-            var instance = this;
+	paginator: {
+		setter: function(value) {
+			var instance = this;
 
-            var paginatorNode = A.Node.create(
-                Lang.sub(
-                    TPL_PAGINATOR,
-                    {
-                        moreResultsLabel: value.moreResultsLabel || MORE_RESULTS_LABEL
-                    }
-                )
-            );
+			var paginatorNode = A.Node.create(
+				Lang.sub(
+					TPL_PAGINATOR,
+					{
+						moreResultsLabel: value.moreResultsLabel || MORE_RESULTS_LABEL
+					}
+				)
+			);
 
-            return A.merge(
-                {
-                    alwaysVisible: false,
-                    autoFocus: true,
-                    element: paginatorNode,
-                    endParam: END,
-                    limitParam: LIMIT,
-                    start: 0,
-                    startParam: START
-                },
-                value
-            );
-        },
-        validator: isObject
-    }
+			return A.merge(
+				{
+					alwaysVisible: false,
+					autoFocus: true,
+					element: paginatorNode,
+					endParam: END,
+					limitParam: LIMIT,
+					start: 0,
+					startParam: START
+				},
+				value
+			);
+		},
+		validator: isObject
+	}
 };
 
 
 TreeViewPaginator.prototype = {
-    &#x2F;**
-     * Bind events to the paginator &quot;show more&quot; link.
-     *
-     * @method _bindPaginatorUI
-     * @protected
-     *&#x2F;
-    _bindPaginatorUI: function() {
-        var instance = this;
+	&#x2F;**
+	 * Bind events to the paginator &quot;show more&quot; link.
+	 *
+	 * @method _bindPaginatorUI
+	 * @protected
+	 *&#x2F;
+	_bindPaginatorUI: function() {
+		var instance = this;
 
-        var paginator = instance.get(PAGINATOR);
+		var paginator = instance.get(PAGINATOR);
 
-        if (paginator) {
-            paginator.element.on(&#x27;click&#x27;, A.bind(instance._handlePaginatorClickEvent, instance));
-        }
+		if (paginator) {
+			paginator.element.on(&#x27;click&#x27;, A.bind(instance._handlePaginatorClickEvent, instance));
+		}
 
-        instance._createEvents();
-    },
+		instance._createEvents();
+	},
 
-    &#x2F;**
-     * Create custom events.
-     *
-     * @method _createEvents
-     * @private
-     *&#x2F;
-    _createEvents: function() {
-        var instance = this;
+	&#x2F;**
+	 * Create custom events.
+	 *
+	 * @method _createEvents
+	 * @private
+	 *&#x2F;
+	_createEvents: function() {
+		var instance = this;
 
-        instance.publish(
-            EV_TREE_NODE_PAGINATOR_CLICK,
-            {
-                defaultFn: instance._defPaginatorClickFn,
-                prefix: TREE_NODE_IO
-            }
-        );
-    },
+		instance.publish(
+			EV_TREE_NODE_PAGINATOR_CLICK,
+			{
+				defaultFn: instance._defPaginatorClickFn,
+				prefix: TREE_NODE_IO
+			}
+		);
+	},
 
-    &#x2F;**
-     * Default paginatorClick event handler. Increment the
-     * &lt;code&gt;paginator.start&lt;&#x2F;code&gt; to the next &lt;code&gt;paginator.limit&lt;&#x2F;code&gt;.
-     *
-     * @method _defPaginatorClickFn
-     * @param {EventFacade} event The Event object
-     * @protected
-     *&#x2F;
-    _defPaginatorClickFn: function(event) {
-        var instance = this;
+	&#x2F;**
+	 * Default paginatorClick event handler. Increment the
+	 * &lt;code&gt;paginator.start&lt;&#x2F;code&gt; to the next &lt;code&gt;paginator.limit&lt;&#x2F;code&gt;.
+	 *
+	 * @method _defPaginatorClickFn
+	 * @param {EventFacade} event The Event object
+	 * @protected
+	 *&#x2F;
+	_defPaginatorClickFn: function(event) {
+		var instance = this;
 
-        var paginator = instance.get(PAGINATOR);
+		var paginator = instance.get(PAGINATOR);
 
-        if (isValue(paginator.limit)) {
-            paginator.start += paginator.limit;
-        }
+		if (isValue(paginator.limit)) {
+			paginator.start += paginator.limit;
+		}
 
-        if (instance.get(IO)) {
-            instance.initIO();
-        }
-    },
+		if (instance.get(IO)) {
+			instance.initIO();
+		}
+	},
 
-    &#x2F;**
-     * Fires the paginatorClick event.
-     *
-     * @method _handlePaginatorClickEvent
-     * @param {EventFacade} event paginatorClick event facade
-     * @protected
-     *&#x2F;
-    _handlePaginatorClickEvent: function(event) {
-        var instance = this;
+	&#x2F;**
+	 * Fires the paginatorClick event.
+	 *
+	 * @method _handlePaginatorClickEvent
+	 * @param {EventFacade} event paginatorClick event facade
+	 * @protected
+	 *&#x2F;
+	_handlePaginatorClickEvent: function(event) {
+		var instance = this;
 
-        var output = instance.getEventOutputMap(instance);
+		var output = instance.getEventOutputMap(instance);
 
-        instance.fire(EV_TREE_NODE_PAGINATOR_CLICK, output);
+		instance.fire(EV_TREE_NODE_PAGINATOR_CLICK, output);
 
-        event.halt();
-    },
+		event.halt();
+	},
 
-    &#x2F;**
-     * Adds two extra IO data parameter to the request to handle the
-     * paginator. By default these parameters are &lt;code&gt;limit&lt;&#x2F;code&gt; and
-     * &lt;code&gt;start&lt;&#x2F;code&gt;.
-     *
-     * @method _syncPaginatorIOData
-     * @protected
-     *&#x2F;
-    _syncPaginatorIOData: function(io) {
-        var instance = this;
+	&#x2F;**
+	 * Adds two extra IO data parameter to the request to handle the
+	 * paginator. By default these parameters are &lt;code&gt;limit&lt;&#x2F;code&gt; and
+	 * &lt;code&gt;start&lt;&#x2F;code&gt;.
+	 *
+	 * @method _syncPaginatorIOData
+	 * @protected
+	 *&#x2F;
+	_syncPaginatorIOData: function(io) {
+		var instance = this;
 
-        var paginator = instance.get(PAGINATOR);
+		var paginator = instance.get(PAGINATOR);
 
-        if (paginator &amp;&amp; isValue(paginator.limit)) {
-            var data = io.cfg.data || {};
+		if (paginator &amp;&amp; isValue(paginator.limit)) {
+			var data = io.cfg.data || {};
 
-            data[ paginator.limitParam ] = paginator.limit;
-            data[ paginator.startParam ] = paginator.start;
-            data[ paginator.endParam ] = (paginator.start + paginator.limit);
+			data[ paginator.limitParam ] = paginator.limit;
+			data[ paginator.startParam ] = paginator.start;
+			data[ paginator.endParam ] = (paginator.start + paginator.limit);
 
-            io.cfg.data = data;
-        }
-    },
+			io.cfg.data = data;
+		}
+	},
 
-    &#x2F;**
-     * Sync the paginator link UI.
-     *
-     * @method _syncPaginatorUI
-     * @protected
-     *&#x2F;
-    _syncPaginatorUI: function(newNodes) {
-        var instance = this;
+	&#x2F;**
+	 * Sync the paginator link UI.
+	 *
+	 * @method _syncPaginatorUI
+	 * @protected
+	 *&#x2F;
+	_syncPaginatorUI: function(newNodes) {
+		var instance = this;
 
-        var paginator = instance.get(PAGINATOR);
+		var paginator = instance.get(PAGINATOR);
 
-        if (paginator) {
-            var hasMoreData = true;
+		if (paginator) {
+			var hasMoreData = true;
 
-            if (newNodes) {
-                hasMoreData = (newNodes.length &gt; 0);
-            }
+			if (newNodes) {
+				hasMoreData = (newNodes.length &gt; 0);
+			}
 
-            var childrenLength = instance.getChildrenLength();
-            var start = paginator.start;
-            var total = paginator.total || childrenLength;
+			var childrenLength = instance.getChildrenLength();
+			var start = paginator.start;
+			var total = paginator.total || childrenLength;
 
-            var showPaginator = hasMoreData &amp;&amp; (total &gt; childrenLength);
+			var showPaginator = hasMoreData &amp;&amp; (total &gt; childrenLength);
 
-            if (paginator.alwaysVisible || showPaginator) {
-                instance.get(CONTAINER).append(
-                    paginator.element.show()
-                );
+			if (paginator.alwaysVisible || showPaginator) {
+				instance.get(CONTAINER).append(
+					paginator.element.show()
+				);
 
-                if (paginator.autoFocus) {
-                    try {
-                        paginator.element.focus();
-                    }
-                    catch(e) {}
-                }
-            }
-            else {
-                paginator.element.hide();
-            }
-        }
-    }
+				if (paginator.autoFocus) {
+					try {
+						paginator.element.focus();
+					}
+					catch(e) {}
+				}
+			}
+			else {
+				paginator.element.hide();
+			}
+		}
+	}
 };
 
 A.TreeViewPaginator = TreeViewPaginator;

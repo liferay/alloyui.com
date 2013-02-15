@@ -17,7 +17,7 @@
         </div>
         <div class="yui3-u-1-4 version">
             <div class="version-details">
-                <span class="version-lib">AlloyUI 2.0.0pr1</span>
+                <span class="version-lib">AlloyUI 2.0.0pr2</span>
                 <div class="yui-version">
                     <span class="version-lib version-lib-yui">YUI 3.8.1</span>
                 </div>
@@ -111,9 +111,13 @@
             
                 <li><a href="..&#x2F;classes/Base.html">Base</a></li>
             
+                <li><a href="..&#x2F;classes/BaseCellEditor.html">BaseCellEditor</a></li>
+            
                 <li><a href="..&#x2F;classes/BaseCore.html">BaseCore</a></li>
             
                 <li><a href="..&#x2F;classes/BaseObservable.html">BaseObservable</a></li>
+            
+                <li><a href="..&#x2F;classes/BaseOptionsCellEditor.html">BaseOptionsCellEditor</a></li>
             
                 <li><a href="..&#x2F;classes/BottomAxisLayout.html">BottomAxisLayout</a></li>
             
@@ -155,6 +159,8 @@
             
                 <li><a href="..&#x2F;classes/CategoryAxis.html">CategoryAxis</a></li>
             
+                <li><a href="..&#x2F;classes/CellEditorSupport.html">CellEditorSupport</a></li>
+            
                 <li><a href="..&#x2F;classes/CharCounter.html">CharCounter</a></li>
             
                 <li><a href="..&#x2F;classes/Chart.html">Chart</a></li>
@@ -162,6 +168,8 @@
                 <li><a href="..&#x2F;classes/ChartBase.html">ChartBase</a></li>
             
                 <li><a href="..&#x2F;classes/ChartLegend.html">ChartLegend</a></li>
+            
+                <li><a href="..&#x2F;classes/CheckboxCellEditor.html">CheckboxCellEditor</a></li>
             
                 <li><a href="..&#x2F;classes/Circle.html">Circle</a></li>
             
@@ -259,6 +267,8 @@
             
                 <li><a href="..&#x2F;classes/Date.html">Date</a></li>
             
+                <li><a href="..&#x2F;classes/DateCellEditor.html">DateCellEditor</a></li>
+            
                 <li><a href="..&#x2F;classes/DD.DDM.html">DD.DDM</a></li>
             
                 <li><a href="..&#x2F;classes/DD.Delegate.html">DD.Delegate</a></li>
@@ -290,6 +300,8 @@
                 <li><a href="..&#x2F;classes/DOMEventFacade.html">DOMEventFacade</a></li>
             
                 <li><a href="..&#x2F;classes/Drawing.html">Drawing</a></li>
+            
+                <li><a href="..&#x2F;classes/DropDownCellEditor.html">DropDownCellEditor</a></li>
             
                 <li><a href="..&#x2F;classes/Easing.html">Easing</a></li>
             
@@ -515,6 +527,8 @@
             
                 <li><a href="..&#x2F;classes/Queue.html">Queue</a></li>
             
+                <li><a href="..&#x2F;classes/RadioCellEditor.html">RadioCellEditor</a></li>
+            
                 <li><a href="..&#x2F;classes/Rating.html">Rating</a></li>
             
                 <li><a href="..&#x2F;classes/Record.html">Record</a></li>
@@ -672,6 +686,10 @@
                 <li><a href="..&#x2F;classes/Text.AccentFold.html">Text.AccentFold</a></li>
             
                 <li><a href="..&#x2F;classes/Text.WordBreak.html">Text.WordBreak</a></li>
+            
+                <li><a href="..&#x2F;classes/TextAreaCellEditor.html">TextAreaCellEditor</a></li>
+            
+                <li><a href="..&#x2F;classes/TextCellEditor.html">TextCellEditor</a></li>
             
                 <li><a href="..&#x2F;classes/ThumbRating.html">ThumbRating</a></li>
             
@@ -1500,141 +1518,141 @@ var LANG = Y.Lang;
 
 Y.mix(Y.namespace(&quot;Date&quot;), {
 
-    &#x2F;**
-     * Checks whether a native JavaScript Date contains a valid value.
-     * @for Date
-     * @method isValidDate
-     * @param oDate {Date} Date in the month for which the number of days is desired.
-     * @return {Boolean} True if the date argument contains a valid value.
-     *&#x2F;
-     isValidDate : function (oDate) {
-        if(LANG.isDate(oDate) &amp;&amp; (isFinite(oDate)) &amp;&amp; (oDate != &quot;Invalid Date&quot;) &amp;&amp; !isNaN(oDate) &amp;&amp; (oDate != null)) {
+	&#x2F;**
+	 * Checks whether a native JavaScript Date contains a valid value.
+	 * @for Date
+	 * @method isValidDate
+	 * @param oDate {Date} Date in the month for which the number of days is desired.
+	 * @return {Boolean} True if the date argument contains a valid value.
+	 *&#x2F;
+	 isValidDate : function (oDate) {
+		if(LANG.isDate(oDate) &amp;&amp; (isFinite(oDate)) &amp;&amp; (oDate != &quot;Invalid Date&quot;) &amp;&amp; !isNaN(oDate) &amp;&amp; (oDate != null)) {
             return true;
         }
         else {
             Y.log(&quot;Could not validate data as type Date&quot;, &quot;warn&quot;, &quot;date&quot;);
             return false;
         }
-    },
+	},
 
-    &#x2F;**
-     * Checks whether two dates correspond to the same date and time.
-     * @for Date
-     * @method areEqual
-     * @param aDate {Date} The first date to compare.
-     * @param bDate {Date} The second date to compare.
-     * @return {Boolean} True if the two dates correspond to the same
-     * date and time.
-     *&#x2F;    
-    areEqual : function (aDate, bDate) {
-        return (this.isValidDate(aDate) &amp;&amp; this.isValidDate(bDate) &amp;&amp; (aDate.getTime() == bDate.getTime()));    
-    },
+	&#x2F;**
+	 * Checks whether two dates correspond to the same date and time.
+	 * @for Date
+	 * @method areEqual
+	 * @param aDate {Date} The first date to compare.
+	 * @param bDate {Date} The second date to compare.
+	 * @return {Boolean} True if the two dates correspond to the same
+	 * date and time.
+	 *&#x2F;	
+	areEqual : function (aDate, bDate) {
+		return (this.isValidDate(aDate) &amp;&amp; this.isValidDate(bDate) &amp;&amp; (aDate.getTime() == bDate.getTime()));	
+	},
 
-    &#x2F;**
-     * Checks whether the first date comes later than the second.
-     * @for Date
-     * @method isGreater
-     * @param aDate {Date} The first date to compare.
-     * @param bDate {Date} The second date to compare.
-     * @return {Boolean} True if the first date is later than the second.
-     *&#x2F;    
+	&#x2F;**
+	 * Checks whether the first date comes later than the second.
+	 * @for Date
+	 * @method isGreater
+	 * @param aDate {Date} The first date to compare.
+	 * @param bDate {Date} The second date to compare.
+	 * @return {Boolean} True if the first date is later than the second.
+	 *&#x2F;	
     isGreater : function (aDate, bDate) {
-        return (this.isValidDate(aDate) &amp;&amp; this.isValidDate(bDate) &amp;&amp; (aDate.getTime() &gt; bDate.getTime()));
+    	return (this.isValidDate(aDate) &amp;&amp; this.isValidDate(bDate) &amp;&amp; (aDate.getTime() &gt; bDate.getTime()));
     },
 
-    &#x2F;**
-     * Checks whether the first date comes later than or is the same as
-     * the second.
-     * @for Date
-     * @method isGreaterOrEqual
-     * @param aDate {Date} The first date to compare.
-     * @param bDate {Date} The second date to compare.
-     * @return {Boolean} True if the first date is later than or 
-     * the same as the second.
-     *&#x2F;    
+	&#x2F;**
+	 * Checks whether the first date comes later than or is the same as
+	 * the second.
+	 * @for Date
+	 * @method isGreaterOrEqual
+	 * @param aDate {Date} The first date to compare.
+	 * @param bDate {Date} The second date to compare.
+	 * @return {Boolean} True if the first date is later than or 
+	 * the same as the second.
+	 *&#x2F;	
     isGreaterOrEqual : function (aDate, bDate) {
-        return (this.isValidDate(aDate) &amp;&amp; this.isValidDate(bDate) &amp;&amp; (aDate.getTime() &gt;= bDate.getTime()));
+    	return (this.isValidDate(aDate) &amp;&amp; this.isValidDate(bDate) &amp;&amp; (aDate.getTime() &gt;= bDate.getTime()));
     },
 
 
     &#x2F;**
-     * Checks whether the date is between two other given dates.
-     * @for Date
-     * @method isInRange
-     * @param aDate {Date} The date to check
-     * @param bDate {Date} Lower bound of the range.
-     * @param cDate {Date} Higher bound of the range.
-     * @return {Boolean} True if the date is between the two other given dates.
-     *&#x2F;    
+	 * Checks whether the date is between two other given dates.
+	 * @for Date
+	 * @method isInRange
+	 * @param aDate {Date} The date to check
+	 * @param bDate {Date} Lower bound of the range.
+	 * @param cDate {Date} Higher bound of the range.
+	 * @return {Boolean} True if the date is between the two other given dates.
+	 *&#x2F;	
     isInRange : function (aDate, bDate, cDate) {
-        return (this.isGreaterOrEqual(aDate, bDate) &amp;&amp; this.isGreaterOrEqual(cDate, aDate));
+    	return (this.isGreaterOrEqual(aDate, bDate) &amp;&amp; this.isGreaterOrEqual(cDate, aDate));
     },
 
-    &#x2F;**
-     * Adds a specified number of days to the given date.
-     * @for Date
-     * @method addDays
-     * @param oDate {Date} The date to add days to.
-     * @param numDays {Number} The number of days to add (can be negative)
-     * @return {Date} A new Date with the specified number of days
-     * added to the original date.
-     *&#x2F;    
-    addDays : function (oDate, numDays) {
-        return new Date(oDate.getTime() + 86400000*numDays);
-    },
+	&#x2F;**
+	 * Adds a specified number of days to the given date.
+	 * @for Date
+	 * @method addDays
+	 * @param oDate {Date} The date to add days to.
+	 * @param numDays {Number} The number of days to add (can be negative)
+	 * @return {Date} A new Date with the specified number of days
+	 * added to the original date.
+	 *&#x2F;	
+	addDays : function (oDate, numDays) {
+		return new Date(oDate.getTime() + 86400000*numDays);
+	},
 
 
-    &#x2F;**
-     * Adds a specified number of months to the given date.
-     * @for Date
-     * @method addMonths
-     * @param oDate {Date} The date to add months to.
-     * @param numMonths {Number} The number of months to add (can be negative)
-     * @return {Date} A new Date with the specified number of months
-     * added to the original date.
-     *&#x2F;    
-    addMonths : function (oDate, numMonths) {
-        var newYear = oDate.getFullYear();
-        var newMonth = oDate.getMonth() + numMonths;        
-        
-        newYear  = Math.floor(newYear + newMonth &#x2F; 12);
-        newMonth = (newMonth % 12 + 12) % 12;
-        
-        var newDate = new Date (oDate.getTime());
-        newDate.setFullYear(newYear);
-        newDate.setMonth(newMonth);
-        
-        return newDate;
-    },
+	&#x2F;**
+	 * Adds a specified number of months to the given date.
+	 * @for Date
+	 * @method addMonths
+	 * @param oDate {Date} The date to add months to.
+	 * @param numMonths {Number} The number of months to add (can be negative)
+	 * @return {Date} A new Date with the specified number of months
+	 * added to the original date.
+	 *&#x2F;	
+	addMonths : function (oDate, numMonths) {
+		var newYear = oDate.getFullYear();
+		var newMonth = oDate.getMonth() + numMonths;		
+		
+		newYear  = Math.floor(newYear + newMonth &#x2F; 12);
+		newMonth = (newMonth % 12 + 12) % 12;
+		
+		var newDate = new Date (oDate.getTime());
+		newDate.setFullYear(newYear);
+		newDate.setMonth(newMonth);
+		
+		return newDate;
+	},
 
-    &#x2F;**
-     * Adds a specified number of years to the given date.
-     * @for Date
-     * @method addYears
-     * @param oDate {Date} The date to add years to.
-     * @param numYears {Number} The number of years to add (can be negative)
-     * @return {Date} A new Date with the specified number of years
-     * added to the original date.
-     *&#x2F;    
-    addYears : function (oDate, numYears) {
-        var newYear = oDate.getFullYear() + numYears;
-        var newDate = new Date(oDate.getTime());
-        
-        newDate.setFullYear(newYear);
-        return newDate;
-    },
+	&#x2F;**
+	 * Adds a specified number of years to the given date.
+	 * @for Date
+	 * @method addYears
+	 * @param oDate {Date} The date to add years to.
+	 * @param numYears {Number} The number of years to add (can be negative)
+	 * @return {Date} A new Date with the specified number of years
+	 * added to the original date.
+	 *&#x2F;	
+	addYears : function (oDate, numYears) {
+		var newYear = oDate.getFullYear() + numYears;
+		var newDate = new Date(oDate.getTime());
+		
+		newDate.setFullYear(newYear);
+		return newDate;
+	},
 
-    &#x2F;**
-     * Lists all dates in a given month.
-     * @for Date
-     * @method listOfDatesInMonth
-     * @param oDate {Date} The date corresponding to the month for
-     * which a list of dates is required.
-     * @return {Array} An &#x60;Array&#x60; of &#x60;Date&#x60;s from a given month.
-     *&#x2F;    
+	&#x2F;**
+	 * Lists all dates in a given month.
+	 * @for Date
+	 * @method listOfDatesInMonth
+	 * @param oDate {Date} The date corresponding to the month for
+	 * which a list of dates is required.
+	 * @return {Array} An &#x60;Array&#x60; of &#x60;Date&#x60;s from a given month.
+	 *&#x2F;	
     listOfDatesInMonth : function (oDate) {
        if (!this.isValidDate(oDate)) {
-            return [];
+       	 return [];
        }
 
        var daysInMonth = this.daysInMonth(oDate),
@@ -1643,50 +1661,50 @@ Y.mix(Y.namespace(&quot;Date&quot;), {
            output      = [];
 
        for (var day = 1; day &lt;= daysInMonth; day++) {
-              output.push(new Date(year, month, day, 12, 0, 0));
+       	   output.push(new Date(year, month, day, 12, 0, 0));
        }
 
        return output;
     },
 
-    &#x2F;**
-     * Takes a native JavaScript Date and returns the number of days
-     * in the month that the given date belongs to.
-     * @for Date
-     * @method daysInMonth
-     * @param oDate {Date} Date in the month for which the number 
-     * of days is desired.
-     * @return {Number} A number (either 28, 29, 30 or 31) of days 
-     * in the given month.
-     *&#x2F;
-     daysInMonth : function (oDate) {
-        if (!this.isValidDate(oDate)) {
-            return 0;
-        }
-        
-        var mon = oDate.getMonth();
-        var lengths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+	&#x2F;**
+	 * Takes a native JavaScript Date and returns the number of days
+	 * in the month that the given date belongs to.
+	 * @for Date
+	 * @method daysInMonth
+	 * @param oDate {Date} Date in the month for which the number 
+	 * of days is desired.
+	 * @return {Number} A number (either 28, 29, 30 or 31) of days 
+	 * in the given month.
+	 *&#x2F;
+	 daysInMonth : function (oDate) {
+		if (!this.isValidDate(oDate)) {
+			return 0;
+		}
+		
+		var mon = oDate.getMonth();
+		var lengths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
-        if (mon != 1) {
-            return lengths[mon];
-        }
-        else {
+		if (mon != 1) {
+			return lengths[mon];
+		}
+		else {
 
-            var year = oDate.getFullYear();
-            if (year%400 === 0) {
-                   return 29;
-            }    
-            else if (year%100 === 0) {
-                   return 28;
-            }
-            else if (year%4 === 0) {
-                   return 29;
-            }
-            else {
-                   return 28;
-            }
-       } 
-    }
+			var year = oDate.getFullYear();
+			if (year%400 === 0) {
+			       return 29;
+			}	
+			else if (year%100 === 0) {
+				   return 28;
+			}
+			else if (year%4 === 0) {
+			       return 29;
+			}
+			else {
+			       return 28;
+		    }
+	   } 
+	}
 
 });
 

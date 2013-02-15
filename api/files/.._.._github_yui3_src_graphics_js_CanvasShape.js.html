@@ -17,7 +17,7 @@
         </div>
         <div class="yui3-u-1-4 version">
             <div class="version-details">
-                <span class="version-lib">AlloyUI 2.0.0pr1</span>
+                <span class="version-lib">AlloyUI 2.0.0pr2</span>
                 <div class="yui-version">
                     <span class="version-lib version-lib-yui">YUI 3.8.1</span>
                 </div>
@@ -111,9 +111,13 @@
             
                 <li><a href="..&#x2F;classes/Base.html">Base</a></li>
             
+                <li><a href="..&#x2F;classes/BaseCellEditor.html">BaseCellEditor</a></li>
+            
                 <li><a href="..&#x2F;classes/BaseCore.html">BaseCore</a></li>
             
                 <li><a href="..&#x2F;classes/BaseObservable.html">BaseObservable</a></li>
+            
+                <li><a href="..&#x2F;classes/BaseOptionsCellEditor.html">BaseOptionsCellEditor</a></li>
             
                 <li><a href="..&#x2F;classes/BottomAxisLayout.html">BottomAxisLayout</a></li>
             
@@ -155,6 +159,8 @@
             
                 <li><a href="..&#x2F;classes/CategoryAxis.html">CategoryAxis</a></li>
             
+                <li><a href="..&#x2F;classes/CellEditorSupport.html">CellEditorSupport</a></li>
+            
                 <li><a href="..&#x2F;classes/CharCounter.html">CharCounter</a></li>
             
                 <li><a href="..&#x2F;classes/Chart.html">Chart</a></li>
@@ -162,6 +168,8 @@
                 <li><a href="..&#x2F;classes/ChartBase.html">ChartBase</a></li>
             
                 <li><a href="..&#x2F;classes/ChartLegend.html">ChartLegend</a></li>
+            
+                <li><a href="..&#x2F;classes/CheckboxCellEditor.html">CheckboxCellEditor</a></li>
             
                 <li><a href="..&#x2F;classes/Circle.html">Circle</a></li>
             
@@ -259,6 +267,8 @@
             
                 <li><a href="..&#x2F;classes/Date.html">Date</a></li>
             
+                <li><a href="..&#x2F;classes/DateCellEditor.html">DateCellEditor</a></li>
+            
                 <li><a href="..&#x2F;classes/DD.DDM.html">DD.DDM</a></li>
             
                 <li><a href="..&#x2F;classes/DD.Delegate.html">DD.Delegate</a></li>
@@ -290,6 +300,8 @@
                 <li><a href="..&#x2F;classes/DOMEventFacade.html">DOMEventFacade</a></li>
             
                 <li><a href="..&#x2F;classes/Drawing.html">Drawing</a></li>
+            
+                <li><a href="..&#x2F;classes/DropDownCellEditor.html">DropDownCellEditor</a></li>
             
                 <li><a href="..&#x2F;classes/Easing.html">Easing</a></li>
             
@@ -515,6 +527,8 @@
             
                 <li><a href="..&#x2F;classes/Queue.html">Queue</a></li>
             
+                <li><a href="..&#x2F;classes/RadioCellEditor.html">RadioCellEditor</a></li>
+            
                 <li><a href="..&#x2F;classes/Rating.html">Rating</a></li>
             
                 <li><a href="..&#x2F;classes/Record.html">Record</a></li>
@@ -672,6 +686,10 @@
                 <li><a href="..&#x2F;classes/Text.AccentFold.html">Text.AccentFold</a></li>
             
                 <li><a href="..&#x2F;classes/Text.WordBreak.html">Text.WordBreak</a></li>
+            
+                <li><a href="..&#x2F;classes/TextAreaCellEditor.html">TextAreaCellEditor</a></li>
+            
+                <li><a href="..&#x2F;classes/TextCellEditor.html">TextCellEditor</a></li>
             
                 <li><a href="..&#x2F;classes/ThumbRating.html">ThumbRating</a></li>
             
@@ -1518,25 +1536,25 @@ Y.extend(CanvasShape, Y.GraphicBase, Y.mix({
      * @protected
      *&#x2F;
     init: function()
-    {
-        this.initializer.apply(this, arguments);
-    },
+	{
+		this.initializer.apply(this, arguments);
+	},
 
-    &#x2F;**
-     * Initializes the shape
-     *
-     * @private
-     * @method _initialize
-     *&#x2F;
-    initializer: function(cfg)
-    {
-        var host = this,
+	&#x2F;**
+	 * Initializes the shape
+	 *
+	 * @private
+	 * @method _initialize
+	 *&#x2F;
+	initializer: function(cfg)
+	{
+		var host = this,
             graphic = cfg.graphic,
             data = this.get(&quot;data&quot;);
         host._initProps();
-        host.createNode();
-        host._xcoords = [0];
-        host._ycoords = [0];
+		host.createNode();
+		host._xcoords = [0];
+		host._ycoords = [0];
         if(graphic)
         {
             this._setGraphic(graphic);
@@ -1545,8 +1563,8 @@ Y.extend(CanvasShape, Y.GraphicBase, Y.mix({
         {
             host._parsePathData(data);
         }
-        host._updateHandler();
-    },
+		host._updateHandler();
+	},
 
     &#x2F;**
      * Set the Graphic instance for the shape.
@@ -1575,231 +1593,231 @@ Y.extend(CanvasShape, Y.GraphicBase, Y.mix({
         }
     },
 
-    &#x2F;**
-     * Add a class name to each node.
-     *
-     * @method addClass
-     * @param {String} className the class name to add to the node&#x27;s class attribute
-     *&#x2F;
-    addClass: function(className)
-    {
-        var node = Y.one(this.get(&quot;node&quot;));
-        node.addClass(className);
-    },
+	&#x2F;**
+	 * Add a class name to each node.
+	 *
+	 * @method addClass
+	 * @param {String} className the class name to add to the node&#x27;s class attribute
+	 *&#x2F;
+	addClass: function(className)
+	{
+		var node = Y.one(this.get(&quot;node&quot;));
+		node.addClass(className);
+	},
 
-    &#x2F;**
-     * Removes a class name from each node.
-     *
-     * @method removeClass
-     * @param {String} className the class name to remove from the node&#x27;s class attribute
-     *&#x2F;
-    removeClass: function(className)
-    {
-        var node = Y.one(this.get(&quot;node&quot;));
-        node.removeClass(className);
-    },
+	&#x2F;**
+	 * Removes a class name from each node.
+	 *
+	 * @method removeClass
+	 * @param {String} className the class name to remove from the node&#x27;s class attribute
+	 *&#x2F;
+	removeClass: function(className)
+	{
+		var node = Y.one(this.get(&quot;node&quot;));
+		node.removeClass(className);
+	},
 
-    &#x2F;**
-     * Gets the current position of the node in page coordinates.
-     *
-     * @method getXY
-     * @return Array The XY position of the shape.
-     *&#x2F;
-    getXY: function()
-    {
-        var graphic = this.get(&quot;graphic&quot;),
-            parentXY = graphic.getXY(),
-            x = this.get(&quot;x&quot;),
-            y = this.get(&quot;y&quot;);
-        return [parentXY[0] + x, parentXY[1] + y];
-    },
+	&#x2F;**
+	 * Gets the current position of the node in page coordinates.
+	 *
+	 * @method getXY
+	 * @return Array The XY position of the shape.
+	 *&#x2F;
+	getXY: function()
+	{
+		var graphic = this.get(&quot;graphic&quot;),
+			parentXY = graphic.getXY(),
+			x = this.get(&quot;x&quot;),
+			y = this.get(&quot;y&quot;);
+		return [parentXY[0] + x, parentXY[1] + y];
+	},
 
-    &#x2F;**
-     * Set the position of the shape in page coordinates, regardless of how the node is positioned.
-     *
-     * @method setXY
-     * @param {Array} Contains X &amp; Y values for new position (coordinates are page-based)
-     *&#x2F;
-    setXY: function(xy)
-    {
-        var graphic = this.get(&quot;graphic&quot;),
-            parentXY = graphic.getXY(),
-            x = xy[0] - parentXY[0],
-            y = xy[1] - parentXY[1];
-        this._set(&quot;x&quot;, x);
-        this._set(&quot;y&quot;, y);
-        this._updateNodePosition(x, y);
-    },
+	&#x2F;**
+	 * Set the position of the shape in page coordinates, regardless of how the node is positioned.
+	 *
+	 * @method setXY
+	 * @param {Array} Contains X &amp; Y values for new position (coordinates are page-based)
+	 *&#x2F;
+	setXY: function(xy)
+	{
+		var graphic = this.get(&quot;graphic&quot;),
+			parentXY = graphic.getXY(),
+			x = xy[0] - parentXY[0],
+			y = xy[1] - parentXY[1];
+		this._set(&quot;x&quot;, x);
+		this._set(&quot;y&quot;, y);
+		this._updateNodePosition(x, y);
+	},
 
-    &#x2F;**
-     * Determines whether the node is an ancestor of another HTML element in the DOM hierarchy.
-     *
-     * @method contains
-     * @param {CanvasShape | HTMLElement} needle The possible node or descendent
-     * @return Boolean Whether or not this shape is the needle or its ancestor.
-     *&#x2F;
-    contains: function(needle)
-    {
-        return needle === Y.one(this.node);
-    },
+	&#x2F;**
+	 * Determines whether the node is an ancestor of another HTML element in the DOM hierarchy.
+	 *
+	 * @method contains
+	 * @param {CanvasShape | HTMLElement} needle The possible node or descendent
+	 * @return Boolean Whether or not this shape is the needle or its ancestor.
+	 *&#x2F;
+	contains: function(needle)
+	{
+		return needle === Y.one(this.node);
+	},
 
-    &#x2F;**
-     * Test if the supplied node matches the supplied selector.
-     *
-     * @method test
-     * @param {String} selector The CSS selector to test against.
-     * @return Boolean Wheter or not the shape matches the selector.
-     *&#x2F;
-    test: function(selector)
-    {
-        return Y.one(this.get(&quot;node&quot;)).test(selector);
-        &#x2F;&#x2F;return Y.Selector.test(this.node, selector);
-    },
+	&#x2F;**
+	 * Test if the supplied node matches the supplied selector.
+	 *
+	 * @method test
+	 * @param {String} selector The CSS selector to test against.
+	 * @return Boolean Wheter or not the shape matches the selector.
+	 *&#x2F;
+	test: function(selector)
+	{
+		return Y.one(this.get(&quot;node&quot;)).test(selector);
+		&#x2F;&#x2F;return Y.Selector.test(this.node, selector);
+	},
 
-    &#x2F;**
-     * Compares nodes to determine if they match.
-     * Node instances can be compared to each other and&#x2F;or HTMLElements.
-     * @method compareTo
-     * @param {HTMLElement | Node} refNode The reference node to compare to the node.
-     * @return {Boolean} True if the nodes match, false if they do not.
-     *&#x2F;
-    compareTo: function(refNode) {
-        var node = this.node;
-        return node === refNode;
-    },
+	&#x2F;**
+	 * Compares nodes to determine if they match.
+	 * Node instances can be compared to each other and&#x2F;or HTMLElements.
+	 * @method compareTo
+	 * @param {HTMLElement | Node} refNode The reference node to compare to the node.
+	 * @return {Boolean} True if the nodes match, false if they do not.
+	 *&#x2F;
+	compareTo: function(refNode) {
+		var node = this.node;
+		return node === refNode;
+	},
 
-    &#x2F;**
-     * Value function for fill attribute
-     *
-     * @method _getDefaultFill
-     * @return Object
-     * @private
-     *&#x2F;
-    _getDefaultFill: function() {
-        return {
-            type: &quot;solid&quot;,
-            opacity: 1,
-            cx: 0.5,
-            cy: 0.5,
-            fx: 0.5,
-            fy: 0.5,
-            r: 0.5
-        };
-    },
+	&#x2F;**
+	 * Value function for fill attribute
+	 *
+	 * @method _getDefaultFill
+	 * @return Object
+	 * @private
+	 *&#x2F;
+	_getDefaultFill: function() {
+		return {
+			type: &quot;solid&quot;,
+			opacity: 1,
+			cx: 0.5,
+			cy: 0.5,
+			fx: 0.5,
+			fy: 0.5,
+			r: 0.5
+		};
+	},
 
-    &#x2F;**
-     * Value function for stroke attribute
-     *
-     * @method _getDefaultStroke
-     * @return Object
-     * @private
-     *&#x2F;
-    _getDefaultStroke: function()
-    {
-        return {
-            weight: 1,
-            dashstyle: &quot;none&quot;,
-            color: &quot;#000&quot;,
-            opacity: 1.0
-        };
-    },
+	&#x2F;**
+	 * Value function for stroke attribute
+	 *
+	 * @method _getDefaultStroke
+	 * @return Object
+	 * @private
+	 *&#x2F;
+	_getDefaultStroke: function()
+	{
+		return {
+			weight: 1,
+			dashstyle: &quot;none&quot;,
+			color: &quot;#000&quot;,
+			opacity: 1.0
+		};
+	},
 
-    &#x2F;**
-     * Left edge of the path
-     *
+	&#x2F;**
+	 * Left edge of the path
+	 *
      * @property _left
      * @type Number
-     * @private
-     *&#x2F;
-    _left: 0,
+	 * @private
+	 *&#x2F;
+	_left: 0,
 
-    &#x2F;**
-     * Right edge of the path
-     *
+	&#x2F;**
+	 * Right edge of the path
+	 *
      * @property _right
      * @type Number
-     * @private
-     *&#x2F;
-    _right: 0,
+	 * @private
+	 *&#x2F;
+	_right: 0,
 
-    &#x2F;**
-     * Top edge of the path
-     *
+	&#x2F;**
+	 * Top edge of the path
+	 *
      * @property _top
      * @type Number
-     * @private
-     *&#x2F;
-    _top: 0,
+	 * @private
+	 *&#x2F;
+	_top: 0,
 
-    &#x2F;**
-     * Bottom edge of the path
-     *
+	&#x2F;**
+	 * Bottom edge of the path
+	 *
      * @property _bottom
      * @type Number
-     * @private
-     *&#x2F;
-    _bottom: 0,
+	 * @private
+	 *&#x2F;
+	_bottom: 0,
 
-    &#x2F;**
-     * Creates the dom node for the shape.
-     *
+	&#x2F;**
+	 * Creates the dom node for the shape.
+	 *
      * @method createNode
-     * @return HTMLElement
-     * @private
-     *&#x2F;
-    createNode: function()
-    {
-        var host = this,
+	 * @return HTMLElement
+	 * @private
+	 *&#x2F;
+	createNode: function()
+	{
+		var host = this,
             node = Y.config.doc.createElement(&#x27;canvas&#x27;),
-            id = host.get(&quot;id&quot;),
+			id = host.get(&quot;id&quot;),
             concat = host._camelCaseConcat,
             name = host.name;
-        host._context = node.getContext(&#x27;2d&#x27;);
-        node.setAttribute(&quot;overflow&quot;, &quot;visible&quot;);
+		host._context = node.getContext(&#x27;2d&#x27;);
+		node.setAttribute(&quot;overflow&quot;, &quot;visible&quot;);
         node.style.overflow = &quot;visible&quot;;
         if(!host.get(&quot;visible&quot;))
         {
             node.style.visibility = &quot;hidden&quot;;
         }
-        node.setAttribute(&quot;id&quot;, id);
-        id = &quot;#&quot; + id;
+		node.setAttribute(&quot;id&quot;, id);
+		id = &quot;#&quot; + id;
         host.node = node;
-        host.addClass(_getClassName(SHAPE) + &quot; &quot; + _getClassName(concat(IMPLEMENTATION, SHAPE)) + &quot; &quot; + _getClassName(name) + &quot; &quot; + _getClassName(concat(IMPLEMENTATION, name)));
-    },
+		host.addClass(_getClassName(SHAPE) + &quot; &quot; + _getClassName(concat(IMPLEMENTATION, SHAPE)) + &quot; &quot; + _getClassName(name) + &quot; &quot; + _getClassName(concat(IMPLEMENTATION, name)));
+	},
 
-    &#x2F;**
+	&#x2F;**
      * Overrides default &#x60;on&#x60; method. Checks to see if its a dom interaction event. If so,
      * return an event attached to the &#x60;node&#x60; element. If not, return the normal functionality.
      *
      * @method on
      * @param {String} type event type
      * @param {Object} callback function
-     * @private
-     *&#x2F;
-    on: function(type, fn)
-    {
-        if(Y.Node.DOM_EVENTS[type])
-        {
-            return Y.one(&quot;#&quot; +  this.get(&quot;id&quot;)).on(type, fn);
-        }
-        return Y.on.apply(this, arguments);
-    },
+	 * @private
+	 *&#x2F;
+	on: function(type, fn)
+	{
+		if(Y.Node.DOM_EVENTS[type])
+		{
+			return Y.one(&quot;#&quot; +  this.get(&quot;id&quot;)).on(type, fn);
+		}
+		return Y.on.apply(this, arguments);
+	},
 
-    &#x2F;**
-     * Adds a stroke to the shape node.
-     *
-     * @method _strokeChangeHandler
+	&#x2F;**
+	 * Adds a stroke to the shape node.
+	 *
+	 * @method _strokeChangeHandler
      * @param {Object} stroke Properties of the &#x60;stroke&#x60; attribute.
-     * @private
-     *&#x2F;
-    _setStrokeProps: function(stroke)
-    {
-        var color,
-            weight,
-            opacity,
-            linejoin,
-            linecap,
-            dashstyle;
+	 * @private
+	 *&#x2F;
+	_setStrokeProps: function(stroke)
+	{
+		var color,
+			weight,
+			opacity,
+			linejoin,
+			linecap,
+			dashstyle;
         if(stroke)
         {
             color = stroke.color;
@@ -1846,7 +1864,7 @@ Y.extend(CanvasShape, Y.GraphicBase, Y.mix({
         {
             this._stroke = 0;
         }
-    },
+	},
 
     &#x2F;**
      * Sets the value of an attribute.
@@ -1857,30 +1875,30 @@ Y.extend(CanvasShape, Y.GraphicBase, Y.mix({
      * @param {Any} value The value to set the attribute to. This value is ignored if an object is received as
      * the name param.
      *&#x2F;
-    set: function()
-    {
-        var host = this,
-            val = arguments[0];
-        AttributeLite.prototype.set.apply(host, arguments);
-        if(host.initialized)
-        {
-            host._updateHandler();
-        }
-    },
+	set: function()
+	{
+		var host = this,
+			val = arguments[0];
+		AttributeLite.prototype.set.apply(host, arguments);
+		if(host.initialized)
+		{
+			host._updateHandler();
+		}
+	},
 
-    &#x2F;**
-     * Adds a fill to the shape node.
-     *
-     * @method _setFillProps
+	&#x2F;**
+	 * Adds a fill to the shape node.
+	 *
+	 * @method _setFillProps
      * @param {Object} fill Properties of the &#x60;fill&#x60; attribute.
-     * @private
-     *&#x2F;
-    _setFillProps: function(fill)
-    {
-        var isNumber = IS_NUMBER,
-            color,
-            opacity,
-            type;
+	 * @private
+	 *&#x2F;
+	_setFillProps: function(fill)
+	{
+		var isNumber = IS_NUMBER,
+			color,
+			opacity,
+			type;
         if(fill)
         {
             color = fill.color;
@@ -1910,48 +1928,48 @@ Y.extend(CanvasShape, Y.GraphicBase, Y.mix({
                 this._fillColor = null;
             }
         }
-        else
-        {
+		else
+		{
             this._fillType = null;
-            this._fillColor = null;
-        }
-    },
+			this._fillColor = null;
+		}
+	},
 
-    &#x2F;**
-     * Specifies a 2d translation.
-     *
-     * @method translate
-     * @param {Number} x The value to transate on the x-axis.
-     * @param {Number} y The value to translate on the y-axis.
-     *&#x2F;
-    translate: function(x, y)
-    {
-        this._translateX += x;
-        this._translateY += y;
-        this._addTransform(&quot;translate&quot;, arguments);
-    },
+	&#x2F;**
+	 * Specifies a 2d translation.
+	 *
+	 * @method translate
+	 * @param {Number} x The value to transate on the x-axis.
+	 * @param {Number} y The value to translate on the y-axis.
+	 *&#x2F;
+	translate: function(x, y)
+	{
+		this._translateX += x;
+		this._translateY += y;
+		this._addTransform(&quot;translate&quot;, arguments);
+	},
 
-    &#x2F;**
-     * Translates the shape along the x-axis. When translating x and y coordinates,
-     * use the &#x60;translate&#x60; method.
-     *
-     * @method translateX
-     * @param {Number} x The value to translate.
-     *&#x2F;
-    translateX: function(x)
+	&#x2F;**
+	 * Translates the shape along the x-axis. When translating x and y coordinates,
+	 * use the &#x60;translate&#x60; method.
+	 *
+	 * @method translateX
+	 * @param {Number} x The value to translate.
+	 *&#x2F;
+	translateX: function(x)
     {
         this._translateX += x;
         this._addTransform(&quot;translateX&quot;, arguments);
     },
 
-    &#x2F;**
-     * Performs a translate on the y-coordinate. When translating x and y coordinates,
-     * use the &#x60;translate&#x60; method.
-     *
-     * @method translateY
-     * @param {Number} y The value to translate.
-     *&#x2F;
-    translateY: function(y)
+	&#x2F;**
+	 * Performs a translate on the y-coordinate. When translating x and y coordinates,
+	 * use the &#x60;translate&#x60; method.
+	 *
+	 * @method translateY
+	 * @param {Number} y The value to translate.
+	 *&#x2F;
+	translateY: function(y)
     {
         this._translateY += y;
         this._addTransform(&quot;translateY&quot;, arguments);
@@ -1969,46 +1987,46 @@ Y.extend(CanvasShape, Y.GraphicBase, Y.mix({
         this._addTransform(&quot;skew&quot;, arguments);
     },
 
-    &#x2F;**
-     * Skews the shape around the x-axis.
-     *
-     * @method skewX
-     * @param {Number} x x-coordinate
-     *&#x2F;
+	&#x2F;**
+	 * Skews the shape around the x-axis.
+	 *
+	 * @method skewX
+	 * @param {Number} x x-coordinate
+	 *&#x2F;
     skewX: function(x)
     {
         this._addTransform(&quot;skewX&quot;, arguments);
     },
 
-    &#x2F;**
-     * Skews the shape around the y-axis.
-     *
-     * @method skewY
-     * @param {Number} y y-coordinate
-     *&#x2F;
+	&#x2F;**
+	 * Skews the shape around the y-axis.
+	 *
+	 * @method skewY
+	 * @param {Number} y y-coordinate
+	 *&#x2F;
     skewY: function(y)
     {
         this._addTransform(&quot;skewY&quot;, arguments);
     },
 
-    &#x2F;**
-     * Rotates the shape clockwise around it transformOrigin.
-     *
-     * @method rotate
-     * @param {Number} deg The degree of the rotation.
-     *&#x2F;
+	&#x2F;**
+	 * Rotates the shape clockwise around it transformOrigin.
+	 *
+	 * @method rotate
+	 * @param {Number} deg The degree of the rotation.
+	 *&#x2F;
     rotate: function(deg)
     {
         this._rotation = deg;
         this._addTransform(&quot;rotate&quot;, arguments);
     },
 
-    &#x2F;**
-     * Specifies a 2d scaling operation.
-     *
-     * @method scale
-     * @param {Number} val
-     *&#x2F;
+	&#x2F;**
+	 * Specifies a 2d scaling operation.
+	 *
+	 * @method scale
+	 * @param {Number} val
+	 *&#x2F;
     scale: function(x, y)
     {
         this._addTransform(&quot;scale&quot;, arguments);
@@ -2019,9 +2037,9 @@ Y.extend(CanvasShape, Y.GraphicBase, Y.mix({
      *
      * @property _rotation
      * @type Number
-     * @private
-     *&#x2F;
-    _rotation: 0,
+	 * @private
+	 *&#x2F;
+	_rotation: 0,
 
     &#x2F;**
      * Storage for the transform attribute.
@@ -2038,10 +2056,10 @@ Y.extend(CanvasShape, Y.GraphicBase, Y.mix({
      * @method _addTransform
      * @param {String} type The transform being applied.
      * @param {Array} args The arguments for the transform.
-     * @private
-     *&#x2F;
-    _addTransform: function(type, args)
-    {
+	 * @private
+	 *&#x2F;
+	_addTransform: function(type, args)
+	{
         args = Y.Array(args);
         this._transform = Y_LANG.trim(this._transform + &quot; &quot; + type + &quot;(&quot; + args.join(&quot;, &quot;) + &quot;)&quot;);
         args.unshift(type);
@@ -2050,20 +2068,20 @@ Y.extend(CanvasShape, Y.GraphicBase, Y.mix({
         {
             this._updateTransform();
         }
-    },
+	},
 
-    &#x2F;**
+	&#x2F;**
      * Applies all transforms.
      *
      * @method _updateTransform
-     * @private
-     *&#x2F;
-    _updateTransform: function()
-    {
-        var node = this.node,
-            key,
-            transform,
-            transformOrigin = this.get(&quot;transformOrigin&quot;),
+	 * @private
+	 *&#x2F;
+	_updateTransform: function()
+	{
+		var node = this.node,
+			key,
+			transform,
+			transformOrigin = this.get(&quot;transformOrigin&quot;),
             matrix = this.matrix,
             i,
             len = this._transforms.length;
@@ -2082,127 +2100,127 @@ Y.extend(CanvasShape, Y.GraphicBase, Y.mix({
         }
 
         this._graphic.addToRedrawQueue(this);
-        transformOrigin = (100 * transformOrigin[0]) + &quot;% &quot; + (100 * transformOrigin[1]) + &quot;%&quot;;
+		transformOrigin = (100 * transformOrigin[0]) + &quot;% &quot; + (100 * transformOrigin[1]) + &quot;%&quot;;
         Y_DOM.setStyle(node, &quot;transformOrigin&quot;, transformOrigin);
         if(transform)
-        {
+		{
             Y_DOM.setStyle(node, &quot;transform&quot;, transform);
-        }
+		}
         this._transforms = [];
-    },
+	},
 
-    &#x2F;**
+	&#x2F;**
      * Updates &#x60;Shape&#x60; based on attribute changes.
      *
      * @method _updateHandler
-     * @private
-     *&#x2F;
-    _updateHandler: function()
-    {
-        this._draw();
-        this._updateTransform();
-    },
+	 * @private
+	 *&#x2F;
+	_updateHandler: function()
+	{
+		this._draw();
+		this._updateTransform();
+	},
 
-    &#x2F;**
-     * Updates the shape.
-     *
-     * @method _draw
-     * @private
-     *&#x2F;
-    _draw: function()
-    {
+	&#x2F;**
+	 * Updates the shape.
+	 *
+	 * @method _draw
+	 * @private
+	 *&#x2F;
+	_draw: function()
+	{
         var node = this.node;
         this.clear();
-        this._closePath();
-        node.style.left = this.get(&quot;x&quot;) + &quot;px&quot;;
-        node.style.top = this.get(&quot;y&quot;) + &quot;px&quot;;
-    },
+		this._closePath();
+		node.style.left = this.get(&quot;x&quot;) + &quot;px&quot;;
+		node.style.top = this.get(&quot;y&quot;) + &quot;px&quot;;
+	},
 
-    &#x2F;**
-     * Completes a shape or drawing
-     *
-     * @method _closePath
-     * @private
-     *&#x2F;
-    _closePath: function()
-    {
-        if(!this._methods)
-        {
-            return;
-        }
-        var node = this.get(&quot;node&quot;),
-            w = this._right - this._left,
-            h = this._bottom - this._top,
-            context = this._context,
-            methods = [],
-            cachedMethods = this._methods.concat(),
-            i,
-            j,
-            method,
-            args,
+	&#x2F;**
+	 * Completes a shape or drawing
+	 *
+	 * @method _closePath
+	 * @private
+	 *&#x2F;
+	_closePath: function()
+	{
+		if(!this._methods)
+		{
+			return;
+		}
+		var node = this.get(&quot;node&quot;),
+			w = this._right - this._left,
+			h = this._bottom - this._top,
+			context = this._context,
+			methods = [],
+			cachedMethods = this._methods.concat(),
+			i,
+			j,
+			method,
+			args,
             argsLen,
-            len = 0;
-        this._context.clearRect(0, 0, node.width, node.height);
+			len = 0;
+		this._context.clearRect(0, 0, node.width, node.height);
         if(this._methods)
         {
-            len = cachedMethods.length;
-            if(!len || len &lt; 1)
-            {
-                return;
-            }
-            for(i = 0; i &lt; len; ++i)
-            {
-                methods[i] = cachedMethods[i].concat();
-                args = methods[i];
+			len = cachedMethods.length;
+			if(!len || len &lt; 1)
+			{
+				return;
+			}
+			for(i = 0; i &lt; len; ++i)
+			{
+				methods[i] = cachedMethods[i].concat();
+				args = methods[i];
                 argsLen = (args[0] == &quot;quadraticCurveTo&quot; || args[0] == &quot;bezierCurveTo&quot;) ? args.length : 3;
-                for(j = 1; j &lt; argsLen; ++j)
-                {
-                    if(j % 2 === 0)
-                    {
-                        args[j] = args[j] - this._top;
-                    }
-                    else
-                    {
-                        args[j] = args[j] - this._left;
-                    }
-                }
-            }
+				for(j = 1; j &lt; argsLen; ++j)
+				{
+					if(j % 2 === 0)
+					{
+						args[j] = args[j] - this._top;
+					}
+					else
+					{
+						args[j] = args[j] - this._left;
+					}
+				}
+			}
             node.setAttribute(&quot;width&quot;, Math.min(w, 2000));
             node.setAttribute(&quot;height&quot;, Math.min(2000, h));
             context.beginPath();
-            for(i = 0; i &lt; len; ++i)
-            {
-                args = methods[i].concat();
-                if(args &amp;&amp; args.length &gt; 0)
-                {
-                    method = args.shift();
-                    if(method)
-                    {
+			for(i = 0; i &lt; len; ++i)
+			{
+				args = methods[i].concat();
+				if(args &amp;&amp; args.length &gt; 0)
+				{
+					method = args.shift();
+					if(method)
+					{
                         if(method == &quot;closePath&quot;)
                         {
                             context.closePath();
                             this._strokeAndFill(context);
                         }
-                        else if(method &amp;&amp; method == &quot;lineTo&quot; &amp;&amp; this._dashstyle)
-                        {
-                            args.unshift(this._xcoords[i] - this._left, this._ycoords[i] - this._top);
-                            this._drawDashedLine.apply(this, args);
-                        }
-                        else
-                        {
+						else if(method &amp;&amp; method == &quot;lineTo&quot; &amp;&amp; this._dashstyle)
+						{
+							args.unshift(this._xcoords[i] - this._left, this._ycoords[i] - this._top);
+							this._drawDashedLine.apply(this, args);
+						}
+						else
+						{
                             context[method].apply(context, args);
-                        }
-                    }
-                }
-            }
+						}
+					}
+				}
+			}
 
             this._strokeAndFill(context);
-            this._drawingComplete = true;
-            this._clearAndUpdateCoords();
-            this._updateNodePosition();
-            this._methods = cachedMethods;
-        }
-    },
+			this._drawingComplete = true;
+			this._clearAndUpdateCoords();
+			this._updateNodePosition();
+			this._methods = cachedMethods;
+		}
+	},
 
     &#x2F;**
      * Completes a stroke and&#x2F;or fill operation on the context.
@@ -2247,83 +2265,83 @@ Y.extend(CanvasShape, Y.GraphicBase, Y.mix({
         }
     },
 
-    &#x2F;**
-     * Draws a dashed line between two points.
-     *
-     * @method _drawDashedLine
-     * @param {Number} xStart    The x position of the start of the line
-     * @param {Number} yStart    The y position of the start of the line
-     * @param {Number} xEnd        The x position of the end of the line
-     * @param {Number} yEnd        The y position of the end of the line
-     * @private
-     *&#x2F;
-    _drawDashedLine: function(xStart, yStart, xEnd, yEnd)
-    {
-        var context = this._context,
-            dashsize = this._dashstyle[0],
-            gapsize = this._dashstyle[1],
-            segmentLength = dashsize + gapsize,
-            xDelta = xEnd - xStart,
-            yDelta = yEnd - yStart,
-            delta = Math.sqrt(Math.pow(xDelta, 2) + Math.pow(yDelta, 2)),
-            segmentCount = Math.floor(Math.abs(delta &#x2F; segmentLength)),
-            radians = Math.atan2(yDelta, xDelta),
-            xCurrent = xStart,
-            yCurrent = yStart,
-            i;
-        xDelta = Math.cos(radians) * segmentLength;
-        yDelta = Math.sin(radians) * segmentLength;
+	&#x2F;**
+	 * Draws a dashed line between two points.
+	 *
+	 * @method _drawDashedLine
+	 * @param {Number} xStart	The x position of the start of the line
+	 * @param {Number} yStart	The y position of the start of the line
+	 * @param {Number} xEnd		The x position of the end of the line
+	 * @param {Number} yEnd		The y position of the end of the line
+	 * @private
+	 *&#x2F;
+	_drawDashedLine: function(xStart, yStart, xEnd, yEnd)
+	{
+		var context = this._context,
+			dashsize = this._dashstyle[0],
+			gapsize = this._dashstyle[1],
+			segmentLength = dashsize + gapsize,
+			xDelta = xEnd - xStart,
+			yDelta = yEnd - yStart,
+			delta = Math.sqrt(Math.pow(xDelta, 2) + Math.pow(yDelta, 2)),
+			segmentCount = Math.floor(Math.abs(delta &#x2F; segmentLength)),
+			radians = Math.atan2(yDelta, xDelta),
+			xCurrent = xStart,
+			yCurrent = yStart,
+			i;
+		xDelta = Math.cos(radians) * segmentLength;
+		yDelta = Math.sin(radians) * segmentLength;
 
-        for(i = 0; i &lt; segmentCount; ++i)
-        {
-            context.moveTo(xCurrent, yCurrent);
-            context.lineTo(xCurrent + Math.cos(radians) * dashsize, yCurrent + Math.sin(radians) * dashsize);
-            xCurrent += xDelta;
-            yCurrent += yDelta;
-        }
+		for(i = 0; i &lt; segmentCount; ++i)
+		{
+			context.moveTo(xCurrent, yCurrent);
+			context.lineTo(xCurrent + Math.cos(radians) * dashsize, yCurrent + Math.sin(radians) * dashsize);
+			xCurrent += xDelta;
+			yCurrent += yDelta;
+		}
 
-        context.moveTo(xCurrent, yCurrent);
-        delta = Math.sqrt((xEnd - xCurrent) * (xEnd - xCurrent) + (yEnd - yCurrent) * (yEnd - yCurrent));
+		context.moveTo(xCurrent, yCurrent);
+		delta = Math.sqrt((xEnd - xCurrent) * (xEnd - xCurrent) + (yEnd - yCurrent) * (yEnd - yCurrent));
 
-        if(delta &gt; dashsize)
-        {
-            context.lineTo(xCurrent + Math.cos(radians) * dashsize, yCurrent + Math.sin(radians) * dashsize);
-        }
-        else if(delta &gt; 0)
-        {
-            context.lineTo(xCurrent + Math.cos(radians) * delta, yCurrent + Math.sin(radians) * delta);
-        }
+		if(delta &gt; dashsize)
+		{
+			context.lineTo(xCurrent + Math.cos(radians) * dashsize, yCurrent + Math.sin(radians) * dashsize);
+		}
+		else if(delta &gt; 0)
+		{
+			context.lineTo(xCurrent + Math.cos(radians) * delta, yCurrent + Math.sin(radians) * delta);
+		}
 
-        context.moveTo(xEnd, yEnd);
-    },
+		context.moveTo(xEnd, yEnd);
+	},
 
-    &#x2F;&#x2F;This should move to CanvasDrawing class.
+	&#x2F;&#x2F;This should move to CanvasDrawing class.
     &#x2F;&#x2F;Currently docmented in CanvasDrawing class.
     clear: function() {
-        this._initProps();
+		this._initProps();
         if(this.node)
         {
             this._context.clearRect(0, 0, this.node.width, this.node.height);
         }
         return this;
-    },
+	},
 
-    &#x2F;**
-     * Returns the bounds for a shape.
-     *
+	&#x2F;**
+	 * Returns the bounds for a shape.
+	 *
      * Calculates the a new bounding box from the original corner coordinates (base on size and position) and the transform matrix.
      * The calculated bounding box is used by the graphic instance to calculate its viewBox.
      *
-     * @method getBounds
-     * @return Object
-     *&#x2F;
-    getBounds: function()
-    {
-        var type = this._type,
-            w = this.get(&quot;width&quot;),
-            h = this.get(&quot;height&quot;),
-            x = this.get(&quot;x&quot;),
-            y = this.get(&quot;y&quot;);
+	 * @method getBounds
+	 * @return Object
+	 *&#x2F;
+	getBounds: function()
+	{
+		var type = this._type,
+			w = this.get(&quot;width&quot;),
+			h = this.get(&quot;height&quot;),
+			x = this.get(&quot;x&quot;),
+			y = this.get(&quot;y&quot;);
         if(type == &quot;path&quot;)
         {
             x = x + this._left;
@@ -2332,7 +2350,7 @@ Y.extend(CanvasShape, Y.GraphicBase, Y.mix({
             h = this._bottom - this._top;
         }
         return this._getContentRect(w, h, x, y);
-    },
+	},
 
     &#x2F;**
      * Calculates the bounding box for the shape.
@@ -2485,19 +2503,19 @@ Y.extend(CanvasShape, Y.GraphicBase, Y.mix({
 }, Y.CanvasDrawing.prototype));
 
 CanvasShape.ATTRS =  {
-    &#x2F;**
-     * An array of x, y values which indicates the transformOrigin in which to rotate the shape. Valid values range between 0 and 1 representing a
-     * fraction of the shape&#x27;s corresponding bounding box dimension. The default value is [0.5, 0.5].
-     *
-     * @config transformOrigin
-     * @type Array
-     *&#x2F;
-    transformOrigin: {
-        valueFn: function()
-        {
-            return [0.5, 0.5];
-        }
-    },
+	&#x2F;**
+	 * An array of x, y values which indicates the transformOrigin in which to rotate the shape. Valid values range between 0 and 1 representing a
+	 * fraction of the shape&#x27;s corresponding bounding box dimension. The default value is [0.5, 0.5].
+	 *
+	 * @config transformOrigin
+	 * @type Array
+	 *&#x2F;
+	transformOrigin: {
+		valueFn: function()
+		{
+			return [0.5, 0.5];
+		}
+	},
 
     &#x2F;**
      * &lt;p&gt;A string containing, in order, transform operations applied to the shape instance. The &#x60;transform&#x60; string can contain the following values:
@@ -2526,125 +2544,125 @@ CanvasShape.ATTRS =  {
      * &lt;p&gt;The code below would apply &#x60;translate&#x60; and &#x60;rotate&#x60; to an existing shape.&lt;&#x2F;p&gt;
 
         myRect.set(&quot;transform&quot;, &quot;translate(40, 50) rotate(45)&quot;);
-     * @config transform
+	 * @config transform
      * @type String
-     *&#x2F;
-    transform: {
-        setter: function(val)
-        {
+	 *&#x2F;
+	transform: {
+		setter: function(val)
+		{
             this.matrix.init();
             this._transforms = this.matrix.getTransformArray(val);
             this._transform = val;
             return val;
-        },
+		},
 
         getter: function()
         {
             return this._transform;
         }
-    },
+	},
 
-    &#x2F;**
-     * Dom node for the shape
-     *
-     * @config node
-     * @type HTMLElement
-     * @readOnly
-     *&#x2F;
-    node: {
-        readOnly: true,
+	&#x2F;**
+	 * Dom node for the shape
+	 *
+	 * @config node
+	 * @type HTMLElement
+	 * @readOnly
+	 *&#x2F;
+	node: {
+		readOnly: true,
 
-        getter: function()
-        {
-            return this.node;
-        }
-    },
+		getter: function()
+		{
+			return this.node;
+		}
+	},
 
-    &#x2F;**
-     * Unique id for class instance.
-     *
-     * @config id
-     * @type String
-     *&#x2F;
-    id: {
-        valueFn: function()
-        {
-            return Y.guid();
-        },
+	&#x2F;**
+	 * Unique id for class instance.
+	 *
+	 * @config id
+	 * @type String
+	 *&#x2F;
+	id: {
+		valueFn: function()
+		{
+			return Y.guid();
+		},
 
-        setter: function(val)
-        {
-            var node = this.node;
-            if(node)
-            {
-                node.setAttribute(&quot;id&quot;, val);
-            }
-            return val;
-        }
-    },
+		setter: function(val)
+		{
+			var node = this.node;
+			if(node)
+			{
+				node.setAttribute(&quot;id&quot;, val);
+			}
+			return val;
+		}
+	},
 
-    &#x2F;**
-     * Indicates the width of the shape
-     *
-     * @config width
-     * @type Number
-     *&#x2F;
-    width: {
+	&#x2F;**
+	 * Indicates the width of the shape
+	 *
+	 * @config width
+	 * @type Number
+	 *&#x2F;
+	width: {
         value: 0
     },
 
-    &#x2F;**
-     * Indicates the height of the shape
-     *
-     * @config height
-     * @type Number
-     *&#x2F;
-    height: {
+	&#x2F;**
+	 * Indicates the height of the shape
+	 *
+	 * @config height
+	 * @type Number
+	 *&#x2F;
+	height: {
         value: 0
     },
 
-    &#x2F;**
-     * Indicates the x position of shape.
-     *
-     * @config x
-     * @type Number
-     *&#x2F;
-    x: {
-        value: 0
-    },
+	&#x2F;**
+	 * Indicates the x position of shape.
+	 *
+	 * @config x
+	 * @type Number
+	 *&#x2F;
+	x: {
+		value: 0
+	},
 
-    &#x2F;**
-     * Indicates the y position of shape.
-     *
-     * @config y
-     * @type Number
-     *&#x2F;
-    y: {
-        value: 0
-    },
+	&#x2F;**
+	 * Indicates the y position of shape.
+	 *
+	 * @config y
+	 * @type Number
+	 *&#x2F;
+	y: {
+		value: 0
+	},
 
-    &#x2F;**
-     * Indicates whether the shape is visible.
-     *
-     * @config visible
-     * @type Boolean
-     *&#x2F;
-    visible: {
-        value: true,
+	&#x2F;**
+	 * Indicates whether the shape is visible.
+	 *
+	 * @config visible
+	 * @type Boolean
+	 *&#x2F;
+	visible: {
+		value: true,
 
-        setter: function(val){
-            var node = this.get(&quot;node&quot;),
+		setter: function(val){
+			var node = this.get(&quot;node&quot;),
                 visibility = val ? &quot;visible&quot; : &quot;hidden&quot;;
-            if(node)
+			if(node)
             {
                 node.style.visibility = visibility;
             }
-            return val;
-        }
-    },
+			return val;
+		}
+	},
 
-    &#x2F;**
-     * Contains information about the fill of the shape.
+	&#x2F;**
+	 * Contains information about the fill of the shape.
      *  &lt;dl&gt;
      *      &lt;dt&gt;color&lt;&#x2F;dt&gt;&lt;dd&gt;The color of the fill.&lt;&#x2F;dd&gt;
      *      &lt;dt&gt;opacity&lt;&#x2F;dt&gt;&lt;dd&gt;Number between 0 and 1 that indicates the opacity of the fill. The default value is 1.&lt;&#x2F;dd&gt;
@@ -2688,32 +2706,32 @@ CanvasShape.ATTRS =  {
      *      &lt;&#x2F;dd&gt;
      *  &lt;&#x2F;dl&gt;
      *  &lt;p&gt;These properties are not currently implemented in &#x60;CanvasShape&#x60; or &#x60;VMLShape&#x60;.&lt;&#x2F;p&gt;
-     *
-     * @config fill
-     * @type Object
-     *&#x2F;
-    fill: {
-        valueFn: &quot;_getDefaultFill&quot;,
+	 *
+	 * @config fill
+	 * @type Object
+	 *&#x2F;
+	fill: {
+		valueFn: &quot;_getDefaultFill&quot;,
 
-        setter: function(val)
-        {
-            var fill,
-                tmpl = this.get(&quot;fill&quot;) || this._getDefaultFill();
-            fill = (val) ? Y.merge(tmpl, val) : null;
-            if(fill &amp;&amp; fill.color)
-            {
-                if(fill.color === undefined || fill.color == &quot;none&quot;)
-                {
-                    fill.color = null;
-                }
-            }
-            this._setFillProps(fill);
-            return fill;
-        }
-    },
+		setter: function(val)
+		{
+			var fill,
+				tmpl = this.get(&quot;fill&quot;) || this._getDefaultFill();
+			fill = (val) ? Y.merge(tmpl, val) : null;
+			if(fill &amp;&amp; fill.color)
+			{
+				if(fill.color === undefined || fill.color == &quot;none&quot;)
+				{
+					fill.color = null;
+				}
+			}
+			this._setFillProps(fill);
+			return fill;
+		}
+	},
 
-    &#x2F;**
-     * Contains information about the stroke of the shape.
+	&#x2F;**
+	 * Contains information about the stroke of the shape.
      *  &lt;dl&gt;
      *      &lt;dt&gt;color&lt;&#x2F;dt&gt;&lt;dd&gt;The color of the stroke.&lt;&#x2F;dd&gt;
      *      &lt;dt&gt;weight&lt;&#x2F;dt&gt;&lt;dd&gt;Number that indicates the width of the stroke.&lt;&#x2F;dd&gt;
@@ -2736,16 +2754,16 @@ CanvasShape.ATTRS =  {
      *          &lt;&#x2F;dl&gt;
      *      &lt;&#x2F;dd&gt;
      *  &lt;&#x2F;dl&gt;
-     *
-     * @config stroke
-     * @type Object
-     *&#x2F;
-    stroke: {
-        valueFn: &quot;_getDefaultStroke&quot;,
+	 *
+	 * @config stroke
+	 * @type Object
+	 *&#x2F;
+	stroke: {
+		valueFn: &quot;_getDefaultStroke&quot;,
 
-        setter: function(val)
-        {
-            var tmpl = this.get(&quot;stroke&quot;) || this._getDefaultStroke(),
+		setter: function(val)
+		{
+			var tmpl = this.get(&quot;stroke&quot;) || this._getDefaultStroke(),
                 wt;
             if(val &amp;&amp; val.hasOwnProperty(&quot;weight&quot;))
             {
@@ -2755,26 +2773,26 @@ CanvasShape.ATTRS =  {
                     val.weight = wt;
                 }
             }
-            val = (val) ? Y.merge(tmpl, val) : null;
-            this._setStrokeProps(val);
-            return val;
-        }
-    },
+			val = (val) ? Y.merge(tmpl, val) : null;
+			this._setStrokeProps(val);
+			return val;
+		}
+	},
 
-    &#x2F;&#x2F;Not used. Remove in future.
-    autoSize: {
-        value: false
-    },
+	&#x2F;&#x2F;Not used. Remove in future.
+	autoSize: {
+		value: false
+	},
 
-    &#x2F;&#x2F; Only implemented in SVG
-    &#x2F;&#x2F; Determines whether the instance will receive mouse events.
-    &#x2F;&#x2F;
-    &#x2F;&#x2F; @config pointerEvents
-    &#x2F;&#x2F; @type string
-    &#x2F;&#x2F;
-    pointerEvents: {
-        value: &quot;visiblePainted&quot;
-    },
+	&#x2F;&#x2F; Only implemented in SVG
+	&#x2F;&#x2F; Determines whether the instance will receive mouse events.
+	&#x2F;&#x2F;
+	&#x2F;&#x2F; @config pointerEvents
+	&#x2F;&#x2F; @type string
+	&#x2F;&#x2F;
+	pointerEvents: {
+		value: &quot;visiblePainted&quot;
+	},
 
     &#x2F;**
      * Represents an SVG Path string. This will be parsed and added to shape&#x27;s API to represent the SVG data across all
@@ -2796,19 +2814,19 @@ CanvasShape.ATTRS =  {
         }
     },
 
-    &#x2F;**
-     * Reference to the container Graphic.
-     *
-     * @config graphic
-     * @type Graphic
-     *&#x2F;
-    graphic: {
-        readOnly: true,
+	&#x2F;**
+	 * Reference to the container Graphic.
+	 *
+	 * @config graphic
+	 * @type Graphic
+	 *&#x2F;
+	graphic: {
+		readOnly: true,
 
-        getter: function()
-        {
-            return this._graphic;
-        }
+		getter: function()
+		{
+			return this._graphic;
+		}
     }
 };
 Y.CanvasShape = CanvasShape;
