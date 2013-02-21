@@ -7,10 +7,8 @@ module.exports =
     templateData:
 
         version: '1.7.x'
-
-        cdnDomain: 'http://cdn.alloyui.com/1.7.x'
-        cdn: 'http://cdn.alloyui.com/1.7.x/aui/aui-min.js'
-        download: 'https://github.com/liferay/alloy-ui/archive/1.7.x.zip'
+        cdnDomain: 'http://cdn.alloyui.com/'
+        githubUrl: 'https://github.com/liferay/alloy-ui/'
 
         # -----------------------------
         # Site Information
@@ -22,8 +20,8 @@ module.exports =
             description: 'Alloy is a UI framework built on top of YUI3 that provides a simple API for building high scalable applications.'
 
             # Production URL
-            url: 'http://alloyui.com/1.7.x'
-            assets: 'http://alloyui.com/1.7.x/website'
+            url: 'http://alloyui.com'
+            assets: 'http://alloyui.com/website'
 
         # -----------------------------
         # Helpers
@@ -46,6 +44,18 @@ module.exports =
         getPreparedDescription: ->
           # if we have a document description, then we should use that, otherwise use the site's description
           @document.description or @site.description
+
+        # Get the CDN path for this version
+        getCdnPath: ->
+          "#{@cdnDomain}#{@version}"
+
+        # Get the CDN seed file for this version
+        getCdnSeed: ->
+          "#{@cdnDomain}#{@version}/aui/aui-min.js"
+
+        # Get the download URL for this version
+        getDownloadUrl: ->
+          "#{@cdnDomain}downloads/alloy-#{@version}.zip"
 
         # Get the Absolute URL of a document
         getUrl: (document) ->
@@ -76,6 +86,10 @@ module.exports =
 
       # Get all examples sorted by alphabetical order
       examples: -> @getCollection("documents").findAllLive({url:$startsWith:'/examples'}, [category:1,title:1])
+
+      # Get all examples that contains featuringOrder attribute
+      featuring: (database) ->
+        database.findAllLive({featuringOrder: $exists: true}, [featuringOrder:1])
 
     # =================================
     # Environments
