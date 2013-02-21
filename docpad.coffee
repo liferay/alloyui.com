@@ -6,7 +6,9 @@ module.exports =
 
     templateData:
 
-        version: '1.7.x'
+        siteVersion: '1.7.x'
+        alloyVersion: '1.7.0'
+
         cdnDomain: 'http://cdn.alloyui.com/'
         githubUrl: 'https://github.com/liferay/alloy-ui/'
 
@@ -47,15 +49,15 @@ module.exports =
 
         # Get the CDN path for this version
         getCdnPath: ->
-          "#{@cdnDomain}#{@version}"
+          "#{@cdnDomain}#{@alloyVersion}"
 
         # Get the CDN seed file for this version
         getCdnSeed: ->
-          "#{@cdnDomain}#{@version}/aui/aui-min.js"
+          "#{@cdnDomain}#{@alloyVersion}/aui/aui-min.js"
 
         # Get the download URL for this version
         getDownloadUrl: ->
-          "#{@cdnDomain}downloads/alloy-#{@version}.zip"
+          "#{@cdnDomain}downloads/alloy-#{@alloyVersion}.zip"
 
         # Get the Absolute URL of a document
         getUrl: (document) ->
