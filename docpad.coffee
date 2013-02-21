@@ -7,10 +7,7 @@ module.exports =
     templateData:
 
         version: '2.0.0pr2'
-
-        cdnDomain: 'http://cdn.alloyui.com/2.0.0pr2'
-        cdn: 'http://cdn.alloyui.com/2.0.0pr2/aui/aui-min.js'
-        download: 'http://cdn.alloyui.com/downloads/alloy-2.0.0pr2.zip'
+        cdnRoot: 'http://cdn.alloyui.com/'
 
         # -----------------------------
         # Site Information
@@ -47,6 +44,18 @@ module.exports =
           # if we have a document description, then we should use that, otherwise use the site's description
           @document.description or @site.description
 
+        # Get the CDN domain for this version
+        getCdnDomain: ->
+          "#{@cdnRoot}#{@version}"
+
+        # Get the CDN seed file for this version
+        getCdnSeed: ->
+          "#{@cdnRoot}#{@version}/aui/aui-min.js"
+
+        # Get the download URL for this version
+        getDownloadUrl: ->
+          "#{@cdnRoot}downloads/alloy-#{@version}.zip"
+
         # Get the Absolute URL of a document
         getUrl: (document) ->
             return @site.url + (document.url or document.get?('url'))
@@ -77,7 +86,7 @@ module.exports =
       # Get all examples sorted by alphabetical order
       examples: -> @getCollection("documents").findAllLive({url:$startsWith:'/examples'}, [category:1,title:1])
 
-
+      # Get all examples that contains featuringOrder attribute
       featuring: (database) ->
         database.findAllLive({featuringOrder: $exists: true}, [featuringOrder:1])
 
