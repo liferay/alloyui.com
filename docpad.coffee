@@ -8,6 +8,7 @@ module.exports =
 
         version: '2.0.0pr2'
         cdnRoot: 'http://cdn.alloyui.com/'
+        githubUrl: 'https://github.com/liferay/alloy-ui/tree/2.0.x'
 
         # -----------------------------
         # Site Information
