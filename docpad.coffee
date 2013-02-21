@@ -7,7 +7,7 @@ module.exports =
     templateData:
 
         version: '2.0.0pr2'
-        cdnRoot: 'http://cdn.alloyui.com/'
+        cdnDomain: 'http://cdn.alloyui.com/'
         githubUrl: 'https://github.com/liferay/alloy-ui/tree/2.0.x'
 
         # -----------------------------
@@ -45,17 +45,17 @@ module.exports =
           # if we have a document description, then we should use that, otherwise use the site's description
           @document.description or @site.description
 
-        # Get the CDN domain for this version
-        getCdnDomain: ->
-          "#{@cdnRoot}#{@version}"
+        # Get the CDN path for this version
+        getCdnPath: ->
+          "#{@cdnDomain}#{@version}"
 
         # Get the CDN seed file for this version
         getCdnSeed: ->
-          "#{@cdnRoot}#{@version}/aui/aui-min.js"
+          "#{@cdnDomain}#{@version}/aui/aui-min.js"
 
         # Get the download URL for this version
         getDownloadUrl: ->
-          "#{@cdnRoot}downloads/alloy-#{@version}.zip"
+          "#{@cdnDomain}downloads/alloy-#{@version}.zip"
 
         # Get the Absolute URL of a document
         getUrl: (document) ->
