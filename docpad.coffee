@@ -6,33 +6,42 @@ module.exports =
 
     templateData:
 
-        siteVersion: '1.7.x'
-        alloyVersion: '1.7.0'
+        # -----------------------------
+        # AlloyUI Information
 
-        cdnDomain: 'http://cdn.alloyui.com/'
-        githubUrl: 'https://github.com/liferay/alloy-ui/'
+        alloy:
+
+            # AlloyUI version
+            version: '1.7.0'
+
+            # CDN domain
+            cdnDomain: 'http://cdn.alloyui.com'
 
         # -----------------------------
         # Site Information
 
         site:
 
-            # Basic info
-            title: 'AlloyUI'
-            description: 'Alloy is a UI framework built on top of YUI3 that provides a simple API for building high scalable applications.'
+            # Website version
+            version: '1.7.x'
+            isLastVersion: false
 
             # Production URL
             url: 'http://alloyui.com'
-            assets: 'http://alloyui.com/website'
+
+            # Github branch
+            githubUrl: 'https://github.com/liferay/alloy-ui/'
+
+            # Basic info
+            title: 'AlloyUI'
+            description: 'Alloy is a UI framework built on top of YUI3 that provides a simple API for building high scalable applications.'
 
         # -----------------------------
         # Helpers
 
         # Get the prepared site/document title
-        # Often we would like to specify particular formatting to our page's title
-        # we can apply that formatting here
         getPreparedTitle: ->
-          # if we have a document title, then we should use that and suffix the site's title onto it
+          # if we have a document title, then we should use that and suffix the site's title into it
           if @document.title
             if @document.category
               "#{@document.category} - #{@document.title} | #{@site.title}"
@@ -47,36 +56,47 @@ module.exports =
           # if we have a document description, then we should use that, otherwise use the site's description
           @document.description or @site.description
 
-        # Get the CDN path for this version
+        # Get the CDN path for this Alloy version
         getCdnPath: ->
-          "#{@cdnDomain}#{@alloyVersion}"
+          "#{@alloy.cdnDomain}/#{@alloy.version}"
 
-        # Get the CDN seed file for this version
+        # Get the CDN seed file for this Alloy version
         getCdnSeed: ->
-          "#{@cdnDomain}#{@alloyVersion}/aui/aui-min.js"
+          "#{@alloy.cdnDomain}/#{@alloy.version}/aui/aui-min.js"
 
-        # Get the download URL for this version
+        # Get the download URL for this Alloy version
         getDownloadUrl: ->
-          "#{@cdnDomain}downloads/alloy-#{@alloyVersion}.zip"
+          "#{@alloy.cdnDomain}/downloads/alloy-#{@alloy.version}.zip"
 
-        # Get the Absolute URL of a document
-        getUrl: (document) ->
-            return @site.url + (document.url or document.get?('url'))
+        # Get the Absolute URL of the website
+        getSiteUrl: ->
+          if @site.isLastVersion
+            "#{@site.url}"
+          else
+            "#{@site.url}/versions/#{@site.version}"
+
+
+        # Get the Absolute URL of the assets folder
+        getAssetsUrl: ->
+          if @site.isLastVersion
+            "#{@site.url}/website"
+          else
+            "#{@site.url}/versions/#{@site.version}/website"
 
         # Read File
         readFile: (relativePath) ->
-            fsUtil = require('fs')
-            path = @document.fullDirPath+'/'+relativePath
-            result = fsUtil.readFileSync(path)
-            if result instanceof Error
-                throw result
-            else
-                return result.toString()
+          fsUtil = require('fs')
+          path = @document.fullDirPath+'/'+relativePath
+          result = fsUtil.readFileSync(path)
+          if result instanceof Error
+            throw result
+          else
+            return result.toString()
 
         # Code File
         codeFile: (relativePath,language) ->
-            contents = @readFile(relativePath)
-            return """<pre><code class="#{language}">#{contents}</code></pre>"""
+          contents = @readFile(relativePath)
+          return """<pre><code class="#{language}">#{contents}</code></pre>"""
 
     # =================================
     # Collections
@@ -97,8 +117,15 @@ module.exports =
     # Environments
 
     environments:
-        development:
-            templateData:
-                site:
-                    url: 'http://localhost:9778'
-                    assets: 'http://localhost:9778/website'
+      development:
+
+        templateData:
+
+            site:
+              url: 'http://localhost:9778'
+
+            getSiteUrl: ->
+              "#{@site.url}"
+
+            getAssetsUrl: ->
+              "#{@site.url}/website"
