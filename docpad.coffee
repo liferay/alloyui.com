@@ -68,15 +68,14 @@ module.exports =
         getDownloadUrl: ->
           "#{@alloy.cdnDomain}/downloads/alloy-#{@alloy.version}.zip"
 
-        # Get the Absolute URL of the website
+        # Get the absolute URL of the website
         getSiteUrl: ->
           if @site.isLastVersion
             "#{@site.url}"
           else
             "#{@site.url}/versions/#{@site.version}"
 
-
-        # Get the Absolute URL of the assets folder
+        # Get the absolute URL of the assets folder
         getAssetsUrl: ->
           if @site.isLastVersion
             "#{@site.url}/website"
@@ -121,11 +120,21 @@ module.exports =
 
         templateData:
 
-            site:
-              url: 'http://localhost:9778'
+          # -----------------------------
+          # Site Information
 
-            getSiteUrl: ->
-              "#{@site.url}"
+          site:
 
-            getAssetsUrl: ->
-              "#{@site.url}/website"
+            # Development URL
+            url: 'http://localhost:9778'
+
+          # -----------------------------
+          # Helpers
+
+          # Get the absolute Development URL of the website
+          getSiteUrl: ->
+            "#{@site.url}"
+
+          # Get the absolute Development URL of the assets folder
+          getAssetsUrl: ->
+            "#{@site.url}/website"
