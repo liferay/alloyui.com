@@ -12,7 +12,7 @@ module.exports =
         alloy:
 
             # AlloyUI version
-            version: '2.0.0pr2'
+            version: '2.0.0-pr2'
 
             # CDN domain
             cdnDomain: 'http://cdn.alloyui.com'
@@ -30,7 +30,7 @@ module.exports =
             url: 'http://alloyui.com'
 
             # Github branch
-            githubUrl: 'https://github.com/liferay/alloy-ui/tree/2.0.x'
+            githubUrl: 'https://github.com/liferay/alloy-ui/'
 
             # Basic info
             title: 'AlloyUI'
@@ -68,14 +68,14 @@ module.exports =
         getDownloadUrl: ->
           "#{@alloy.cdnDomain}/downloads/alloy-#{@alloy.version}.zip"
 
-        # Get the Absolute URL of the website
+        # Get the absolute URL of the website
         getSiteUrl: ->
           if @site.isLastVersion
             "#{@site.url}"
           else
             "#{@site.url}/versions/#{@site.version}"
 
-        # Get the Absolute URL of the assets folder
+        # Get the absolute URL of the assets folder
         getAssetsUrl: ->
           if @site.isLastVersion
             "#{@site.url}/website"
@@ -117,6 +117,24 @@ module.exports =
 
     environments:
       development:
+
         templateData:
-            site:
-              url: 'http://localhost:9778'
+
+          # -----------------------------
+          # Site Information
+
+          site:
+
+            # Development URL
+            url: 'http://localhost:9778'
+
+          # -----------------------------
+          # Helpers
+
+          # Get the absolute Development URL of the website
+          getSiteUrl: ->
+            "#{@site.url}"
+
+          # Get the absolute Development URL of the assets folder
+          getAssetsUrl: ->
+            "#{@site.url}/website"
