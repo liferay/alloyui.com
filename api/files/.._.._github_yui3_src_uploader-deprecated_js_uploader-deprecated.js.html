@@ -1517,7 +1517,7 @@
  * @module uploader-deprecated
  * @deprecated
  *&#x2F;
-	
+    
 var Event = Y.Event,
     Node = Y.Node;
 
@@ -1555,29 +1555,29 @@ var SWFURL = Y.Env.cdn + &quot;uploader-deprecated&#x2F;assets&#x2F;uploader.swf
  *        &lt;&#x2F;dl&gt;
  * @deprecated
  *&#x2F;
-				
+                
 function Uploader (config &#x2F;*Object*&#x2F;) {
-	
-	Uploader.superclass.constructor.apply(this, arguments);
+    
+    Uploader.superclass.constructor.apply(this, arguments);
 
-	if (config.hasOwnProperty(&quot;boundingBox&quot;)) {
-		this.set(&quot;boundingBox&quot;, config.boundingBox);
-	};
+    if (config.hasOwnProperty(&quot;boundingBox&quot;)) {
+        this.set(&quot;boundingBox&quot;, config.boundingBox);
+    };
 
-	if (config.hasOwnProperty(&quot;buttonSkin&quot;)) {
-		this.set(&quot;buttonSkin&quot;, config.buttonSkin);
-	};
-	if (config.hasOwnProperty(&quot;transparent&quot;)) {
-		this.set(&quot;transparent&quot;, config.transparent);
-	};
-	if (config.hasOwnProperty(&quot;swfURL&quot;)) {
-		this.set(&quot;swfURL&quot;, config.swfURL);
-	};
+    if (config.hasOwnProperty(&quot;buttonSkin&quot;)) {
+        this.set(&quot;buttonSkin&quot;, config.buttonSkin);
+    };
+    if (config.hasOwnProperty(&quot;transparent&quot;)) {
+        this.set(&quot;transparent&quot;, config.transparent);
+    };
+    if (config.hasOwnProperty(&quot;swfURL&quot;)) {
+        this.set(&quot;swfURL&quot;, config.swfURL);
+    };
 };
 
 
 Y.extend(Uploader, Y.Base, {
-	
+    
    &#x2F;*
     * The reference to the instance of Y.SWF that encapsulates the instance of the Flash player with uploader logic.
     *
@@ -1587,7 +1587,7 @@ Y.extend(Uploader, Y.Base, {
     * @default null
     * @deprecated
     *&#x2F;
-	uploaderswf:null,
+    uploaderswf:null,
 
    &#x2F;*
     * The id of this instance of uploader.
@@ -1597,7 +1597,7 @@ Y.extend(Uploader, Y.Base, {
     * @type {String}
     * @deprecated
     *&#x2F;
-	_id:&quot;&quot;,
+    _id:&quot;&quot;,
 
    &#x2F;*
     * Construction logic executed during Uploader instantiation.
@@ -1606,184 +1606,184 @@ Y.extend(Uploader, Y.Base, {
     * @protected
     * @deprecated
     *&#x2F;
-	initializer : function () {
-		
-	this._id = Y.guid(&quot;uploader&quot;);
+    initializer : function () {
+        
+    this._id = Y.guid(&quot;uploader&quot;);
     var oElement = Node.one(this.get(&quot;boundingBox&quot;));
 
-	var params = {version: &quot;10.0.45&quot;,
-  	          	  fixedAttributes: {allowScriptAccess:&quot;always&quot;, allowNetworking:&quot;all&quot;, scale: &quot;noscale&quot;},
-	              flashVars: {}};
+    var params = {version: &quot;10.0.45&quot;,
+                      fixedAttributes: {allowScriptAccess:&quot;always&quot;, allowNetworking:&quot;all&quot;, scale: &quot;noscale&quot;},
+                  flashVars: {}};
 
-	if (this.get(&quot;buttonSkin&quot;) != &quot;&quot;) {
-		params.flashVars[&quot;buttonSkin&quot;] = this.get(&quot;buttonSkin&quot;);
-	}
-	if (this.get(&quot;transparent&quot;)) {
-		params.fixedAttributes[&quot;wmode&quot;] = &quot;transparent&quot;;
-	}
+    if (this.get(&quot;buttonSkin&quot;) != &quot;&quot;) {
+        params.flashVars[&quot;buttonSkin&quot;] = this.get(&quot;buttonSkin&quot;);
+    }
+    if (this.get(&quot;transparent&quot;)) {
+        params.fixedAttributes[&quot;wmode&quot;] = &quot;transparent&quot;;
+    }
 
     this.uploaderswf = new Y.SWF(oElement, this.get(&quot;swfURL&quot;), params);
 
-	var upswf = this.uploaderswf;
-	var relEvent = Y.bind(this._relayEvent, this);
+    var upswf = this.uploaderswf;
+    var relEvent = Y.bind(this._relayEvent, this);
 
-	&#x2F;*
-	* Announces that the uploader is ready and available for calling methods
-	* and setting properties
-	*
-	* @event uploaderReady
-	* @param event {Event} The event object for the uploaderReady.
+    &#x2F;*
+    * Announces that the uploader is ready and available for calling methods
+    * and setting properties
+    *
+    * @event uploaderReady
+    * @param event {Event} The event object for the uploaderReady.
     * @deprecated
     *&#x2F;
-	upswf.on (&quot;swfReady&quot;, Y.bind(this._initializeUploader, this));
-	
-	&#x2F;*
-	* Fired when the mouse button is clicked on the Uploader&#x27;s &#x27;Browse&#x27; button.
-	*
-	* @event click
-	* @param event {Event} The event object for the click.
+    upswf.on (&quot;swfReady&quot;, Y.bind(this._initializeUploader, this));
+    
+    &#x2F;*
+    * Fired when the mouse button is clicked on the Uploader&#x27;s &#x27;Browse&#x27; button.
+    *
+    * @event click
+    * @param event {Event} The event object for the click.
     * @deprecated
     *&#x2F;
-	upswf.on (&quot;click&quot;, relEvent);
+    upswf.on (&quot;click&quot;, relEvent);
 
-	&#x2F;*
-	* Fires when the user has finished selecting a set of files to be uploaded.
-	*
-	* @event fileselect
-	* @param event {Event} The event object for the fileSelect.
-	*  &lt;dl&gt;
-	*      &lt;dt&gt;fileList&lt;&#x2F;dt&gt;
-	*          &lt;dd&gt;The file list Object with entries in the following format: 
-	               fileList[fileID] = {id: fileID, name: fileName, cDate: fileCDate, mDate: fileMDate, size: fileSize}&lt;&#x2F;dd&gt;
-	*  &lt;&#x2F;dl&gt;
+    &#x2F;*
+    * Fires when the user has finished selecting a set of files to be uploaded.
+    *
+    * @event fileselect
+    * @param event {Event} The event object for the fileSelect.
+    *  &lt;dl&gt;
+    *      &lt;dt&gt;fileList&lt;&#x2F;dt&gt;
+    *          &lt;dd&gt;The file list Object with entries in the following format: 
+                   fileList[fileID] = {id: fileID, name: fileName, cDate: fileCDate, mDate: fileMDate, size: fileSize}&lt;&#x2F;dd&gt;
+    *  &lt;&#x2F;dl&gt;
     * @deprecated
     *&#x2F;
-	upswf.on (&quot;fileselect&quot;, relEvent);
+    upswf.on (&quot;fileselect&quot;, relEvent);
 
-	&#x2F;*
-	* Fired when the mouse button is pressed on the Uploader&#x27;s &#x27;Browse&#x27; button.
-	*
-	* @event mousedown
-	* @param event {Event} The event object for the mousedown.
+    &#x2F;*
+    * Fired when the mouse button is pressed on the Uploader&#x27;s &#x27;Browse&#x27; button.
+    *
+    * @event mousedown
+    * @param event {Event} The event object for the mousedown.
     * @deprecated
     *&#x2F;
-	upswf.on (&quot;mousedown&quot;, relEvent);
+    upswf.on (&quot;mousedown&quot;, relEvent);
 
-	&#x2F;*
-	* Fired when the mouse button is raised on the Uploader&#x27;s &#x27;Browse&#x27; button.
-	*
-	* @event mouseup
-	* @param event {Event} The event object for the mouseup.
+    &#x2F;*
+    * Fired when the mouse button is raised on the Uploader&#x27;s &#x27;Browse&#x27; button.
+    *
+    * @event mouseup
+    * @param event {Event} The event object for the mouseup.
     * @deprecated
     *&#x2F;
-	upswf.on (&quot;mouseup&quot;, relEvent);
+    upswf.on (&quot;mouseup&quot;, relEvent);
 
-	&#x2F;*
-	* Fired when the mouse leaves the Uploader&#x27;s &#x27;Browse&#x27; button.
-	*
-	* @event mouseleave
-	* @param event {Event} The event object for the mouseleave.
+    &#x2F;*
+    * Fired when the mouse leaves the Uploader&#x27;s &#x27;Browse&#x27; button.
+    *
+    * @event mouseleave
+    * @param event {Event} The event object for the mouseleave.
     * @deprecated
     *&#x2F;
-	upswf.on (&quot;mouseleave&quot;, relEvent);
+    upswf.on (&quot;mouseleave&quot;, relEvent);
 
-	&#x2F;*
-	* Fired when the mouse enters the Uploader&#x27;s &#x27;Browse&#x27; button.
-	*
-	* @event mouseenter
-	* @param event {Event} The event object for the mouseenter.
+    &#x2F;*
+    * Fired when the mouse enters the Uploader&#x27;s &#x27;Browse&#x27; button.
+    *
+    * @event mouseenter
+    * @param event {Event} The event object for the mouseenter.
     * @deprecated
     *&#x2F;
-	upswf.on (&quot;mouseenter&quot;, relEvent);
+    upswf.on (&quot;mouseenter&quot;, relEvent);
 
-	&#x2F;*
-	* Announces that the uploader is ready and available for calling methods
-	* and setting properties
-	*
-	* @event uploadcancel
-	* @param event {Event} The event object for the uploaderReady.
-	*  &lt;dl&gt;
-	*      &lt;dt&gt;ddEvent&lt;&#x2F;dt&gt;
-	*          &lt;dd&gt;&lt;code&gt;drag:start&lt;&#x2F;code&gt; event from the thumb&lt;&#x2F;dd&gt;
-	*  &lt;&#x2F;dl&gt;
+    &#x2F;*
+    * Announces that the uploader is ready and available for calling methods
+    * and setting properties
+    *
+    * @event uploadcancel
+    * @param event {Event} The event object for the uploaderReady.
+    *  &lt;dl&gt;
+    *      &lt;dt&gt;ddEvent&lt;&#x2F;dt&gt;
+    *          &lt;dd&gt;&lt;code&gt;drag:start&lt;&#x2F;code&gt; event from the thumb&lt;&#x2F;dd&gt;
+    *  &lt;&#x2F;dl&gt;
     * @deprecated
     *&#x2F;
-	upswf.on (&quot;uploadcancel&quot;, relEvent);
+    upswf.on (&quot;uploadcancel&quot;, relEvent);
 
-	&#x2F;*
-	* Fires when a specific file&#x27;s upload is cancelled.
-	*
-	* @event uploadcomplete
-	* @param event {Event} The event object for the uploadcancel.
-	*  &lt;dl&gt;
-	*      &lt;dt&gt;id&lt;&#x2F;dt&gt;
-	*          &lt;dd&gt;The id of the file whose upload has been cancelled.&lt;&#x2F;dd&gt;
-	*  &lt;&#x2F;dl&gt;
+    &#x2F;*
+    * Fires when a specific file&#x27;s upload is cancelled.
+    *
+    * @event uploadcomplete
+    * @param event {Event} The event object for the uploadcancel.
+    *  &lt;dl&gt;
+    *      &lt;dt&gt;id&lt;&#x2F;dt&gt;
+    *          &lt;dd&gt;The id of the file whose upload has been cancelled.&lt;&#x2F;dd&gt;
+    *  &lt;&#x2F;dl&gt;
     * @deprecated
     *&#x2F;
-	upswf.on (&quot;uploadcomplete&quot;, relEvent);
+    upswf.on (&quot;uploadcomplete&quot;, relEvent);
 
-	&#x2F;*
-	* If the server has sent a response to the file upload, this event is
-	* fired and the response is added to its payload.
-	*
-	* @event uploadcompletedata
-	* @param event {Event} The event object for the uploadcompletedata.
-	*  &lt;dl&gt;
-	*      &lt;dt&gt;id&lt;&#x2F;dt&gt;
-	*          &lt;dd&gt;The id of the file for which the response is being provided.&lt;&#x2F;dd&gt;
-	*      &lt;dt&gt;data&lt;&#x2F;dt&gt;
-	*          &lt;dd&gt;The content of the server response.&lt;&#x2F;dd&gt;
-	*  &lt;&#x2F;dl&gt;
+    &#x2F;*
+    * If the server has sent a response to the file upload, this event is
+    * fired and the response is added to its payload.
+    *
+    * @event uploadcompletedata
+    * @param event {Event} The event object for the uploadcompletedata.
+    *  &lt;dl&gt;
+    *      &lt;dt&gt;id&lt;&#x2F;dt&gt;
+    *          &lt;dd&gt;The id of the file for which the response is being provided.&lt;&#x2F;dd&gt;
+    *      &lt;dt&gt;data&lt;&#x2F;dt&gt;
+    *          &lt;dd&gt;The content of the server response.&lt;&#x2F;dd&gt;
+    *  &lt;&#x2F;dl&gt;
     * @deprecated
     *&#x2F;
-	upswf.on (&quot;uploadcompletedata&quot;, relEvent);
+    upswf.on (&quot;uploadcompletedata&quot;, relEvent);
 
-	&#x2F;*
-	* Provides error information if an error has occurred during the upload.
-	*
-	* @event uploaderror
-	* @param event {Event} The event object for the uploadeerror.
-	*  &lt;dl&gt;
-	*      &lt;dt&gt;id&lt;&#x2F;dt&gt;
-	*          &lt;dd&gt;The id of the file for which the upload error has occurred.&lt;&#x2F;dd&gt;
-	*      &lt;dt&gt;status&lt;&#x2F;dt&gt;
-	*          &lt;dd&gt;Relevant error information.&lt;&#x2F;dd&gt;
-	*  &lt;&#x2F;dl&gt;
+    &#x2F;*
+    * Provides error information if an error has occurred during the upload.
+    *
+    * @event uploaderror
+    * @param event {Event} The event object for the uploadeerror.
+    *  &lt;dl&gt;
+    *      &lt;dt&gt;id&lt;&#x2F;dt&gt;
+    *          &lt;dd&gt;The id of the file for which the upload error has occurred.&lt;&#x2F;dd&gt;
+    *      &lt;dt&gt;status&lt;&#x2F;dt&gt;
+    *          &lt;dd&gt;Relevant error information.&lt;&#x2F;dd&gt;
+    *  &lt;&#x2F;dl&gt;
     * @deprecated
     *&#x2F;
-	upswf.on (&quot;uploaderror&quot;, relEvent);
+    upswf.on (&quot;uploaderror&quot;, relEvent);
 
-	&#x2F;*
-	* Provides progress information on a specific file upload.
-	*
-	* @event uploadprogress
-	* @param event {Event} The event object for the uploadprogress.
-	*  &lt;dl&gt;
-	*      &lt;dt&gt;id&lt;&#x2F;dt&gt;
-	*          &lt;dd&gt;The id of the file for which the progress information is being provided.&lt;&#x2F;dd&gt;
-	*      &lt;dt&gt;bytesLoaded&lt;&#x2F;dt&gt;
-	*          &lt;dd&gt;The number of bytes of the file that has been uploaded.&lt;&#x2F;dd&gt;
-	*      &lt;dt&gt;bytesTotal&lt;&#x2F;dt&gt;
-	*          &lt;dd&gt;The total number of bytes in the file that is being uploaded.&lt;&#x2F;dd&gt;
-	*  &lt;&#x2F;dl&gt;
+    &#x2F;*
+    * Provides progress information on a specific file upload.
+    *
+    * @event uploadprogress
+    * @param event {Event} The event object for the uploadprogress.
+    *  &lt;dl&gt;
+    *      &lt;dt&gt;id&lt;&#x2F;dt&gt;
+    *          &lt;dd&gt;The id of the file for which the progress information is being provided.&lt;&#x2F;dd&gt;
+    *      &lt;dt&gt;bytesLoaded&lt;&#x2F;dt&gt;
+    *          &lt;dd&gt;The number of bytes of the file that has been uploaded.&lt;&#x2F;dd&gt;
+    *      &lt;dt&gt;bytesTotal&lt;&#x2F;dt&gt;
+    *          &lt;dd&gt;The total number of bytes in the file that is being uploaded.&lt;&#x2F;dd&gt;
+    *  &lt;&#x2F;dl&gt;
     * @deprecated
     *&#x2F;
-	upswf.on (&quot;uploadprogress&quot;, relEvent);
+    upswf.on (&quot;uploadprogress&quot;, relEvent);
 
-	&#x2F;*
-	* Announces that the upload has been started for a specific file.
-	*
-	* @event uploadstart
-	* @param event {Event} The event object for the uploadstart.
-	*  &lt;dl&gt;
-	*      &lt;dt&gt;id&lt;&#x2F;dt&gt;
-	*          &lt;dd&gt;The id of the file whose upload has been started.&lt;&#x2F;dd&gt;
-	*  &lt;&#x2F;dl&gt;
+    &#x2F;*
+    * Announces that the upload has been started for a specific file.
+    *
+    * @event uploadstart
+    * @param event {Event} The event object for the uploadstart.
+    *  &lt;dl&gt;
+    *      &lt;dt&gt;id&lt;&#x2F;dt&gt;
+    *          &lt;dd&gt;The id of the file whose upload has been started.&lt;&#x2F;dd&gt;
+    *  &lt;&#x2F;dl&gt;
     * @deprecated
     *&#x2F; 
-	upswf.on (&quot;uploadstart&quot;, relEvent);
-	},
+    upswf.on (&quot;uploadstart&quot;, relEvent);
+    },
 
    &#x2F;*
     * Removes a specific file from the upload queue.
@@ -1794,10 +1794,10 @@ Y.extend(Uploader, Y.Base, {
     * fileList[fileID] = {id: fileID, name: fileName, cDate: fileCDate, mDate: fileMDate, size: fileSize}
     * @deprecated
     *&#x2F;
-	removeFile : function (fileID &#x2F;*String*&#x2F;) {
-		return this.uploaderswf.callSWF(&quot;removeFile&quot;, [fileID]);
-	},
-	
+    removeFile : function (fileID &#x2F;*String*&#x2F;) {
+        return this.uploaderswf.callSWF(&quot;removeFile&quot;, [fileID]);
+    },
+    
    &#x2F;*
     * Clears the upload queue.
     *
@@ -1805,9 +1805,9 @@ Y.extend(Uploader, Y.Base, {
     * @return {Boolean} This method always returns true.
     * @deprecated
     *&#x2F;
-	clearFileList : function () {
-		return this.uploaderswf.callSWF(&quot;clearFileList&quot;, []);
-	},
+    clearFileList : function () {
+        return this.uploaderswf.callSWF(&quot;clearFileList&quot;, []);
+    },
 
    &#x2F;*
     * Starts the upload of a specific file.
@@ -1816,20 +1816,20 @@ Y.extend(Uploader, Y.Base, {
     * @param fileID {String} The ID of the file to be uploaded.
     * @param url {String} The URL to upload the file to.
     * @param method {String} (optional) The HTTP method to use for sending additional variables, either &#x27;GET&#x27; or &#x27;POST&#x27; (&#x27;GET&#x27; by default)
-	* @param postVars {Object} (optional) A set of key-value pairs to send as variables along with the file upload HTTP request.
-	* @param postFileVarName {String} (optional) The name of the POST variable that should contain the uploaded file (&#x27;Filedata&#x27; by default)
+    * @param postVars {Object} (optional) A set of key-value pairs to send as variables along with the file upload HTTP request.
+    * @param postFileVarName {String} (optional) The name of the POST variable that should contain the uploaded file (&#x27;Filedata&#x27; by default)
     * @return {Boolean} This method always returns true.
     * @deprecated
     *&#x2F;
-	upload : function (fileID &#x2F;*String*&#x2F;, url &#x2F;*String*&#x2F;, method &#x2F;*String*&#x2F;, postVars &#x2F;*Object*&#x2F;, postFileVarName &#x2F;*String*&#x2F;) {
-	    if (Y.Lang.isArray(fileID)) {
-			return this.uploaderswf.callSWF(&quot;uploadThese&quot;, [fileID, url, method, postVars, postFileVarName]);
-		}
-		else if (Y.Lang.isString(fileID)) {
-			return this.uploaderswf.callSWF(&quot;upload&quot;, [fileID, url, method, postVars, postFileVarName]);
-			
-		}
-	},
+    upload : function (fileID &#x2F;*String*&#x2F;, url &#x2F;*String*&#x2F;, method &#x2F;*String*&#x2F;, postVars &#x2F;*Object*&#x2F;, postFileVarName &#x2F;*String*&#x2F;) {
+        if (Y.Lang.isArray(fileID)) {
+            return this.uploaderswf.callSWF(&quot;uploadThese&quot;, [fileID, url, method, postVars, postFileVarName]);
+        }
+        else if (Y.Lang.isString(fileID)) {
+            return this.uploaderswf.callSWF(&quot;upload&quot;, [fileID, url, method, postVars, postFileVarName]);
+            
+        }
+    },
 
    &#x2F;*
     * Starts the upload of a set of files, as specified in the first argument. 
@@ -1839,13 +1839,13 @@ Y.extend(Uploader, Y.Base, {
     * @param fileIDs {Array} The array of IDs of the files to be uploaded.
     * @param url {String} The URL to upload the files to.
     * @param method {String} (optional) The HTTP method to use for sending additional variables, either &#x27;GET&#x27; or &#x27;POST&#x27; (&#x27;GET&#x27; by default)
-	* @param postVars {Object} (optional) A set of key-value pairs to send as variables along with the file upload HTTP request.
-	* @param postFileVarName {String} (optional) The name of the POST variable that should contain the uploaded file (&#x27;Filedata&#x27; by default)
+    * @param postVars {Object} (optional) A set of key-value pairs to send as variables along with the file upload HTTP request.
+    * @param postFileVarName {String} (optional) The name of the POST variable that should contain the uploaded file (&#x27;Filedata&#x27; by default)
     * @deprecated
     *&#x2F;
-	uploadThese : function (fileIDs &#x2F;*Array*&#x2F;, url &#x2F;*String*&#x2F;, method &#x2F;*String*&#x2F;, postVars &#x2F;*Object*&#x2F;, postFileVarName &#x2F;*String*&#x2F;) {
-		return this.uploaderswf.callSWF(&quot;uploadThese&quot;, [fileIDs, url, method, postVars, postFileVarName]);
-	},
+    uploadThese : function (fileIDs &#x2F;*Array*&#x2F;, url &#x2F;*String*&#x2F;, method &#x2F;*String*&#x2F;, postVars &#x2F;*Object*&#x2F;, postFileVarName &#x2F;*String*&#x2F;) {
+        return this.uploaderswf.callSWF(&quot;uploadThese&quot;, [fileIDs, url, method, postVars, postFileVarName]);
+    },
 
    &#x2F;*
     * Starts the upload of the files in the upload queue. 
@@ -1854,13 +1854,13 @@ Y.extend(Uploader, Y.Base, {
     * @method uploadAll
     * @param url {String} The URL to upload the files to.
     * @param method {String} (optional) The HTTP method to use for sending additional variables, either &#x27;GET&#x27; or &#x27;POST&#x27; (&#x27;GET&#x27; by default)
-	* @param postVars {Object} (optional) A set of key-value pairs to send as variables along with the file upload HTTP request.
-	* @param postFileVarName {String} (optional) The name of the POST variable that should contain the uploaded file (&#x27;Filedata&#x27; by default).
+    * @param postVars {Object} (optional) A set of key-value pairs to send as variables along with the file upload HTTP request.
+    * @param postFileVarName {String} (optional) The name of the POST variable that should contain the uploaded file (&#x27;Filedata&#x27; by default).
     * @deprecated
-    *&#x2F;	
-	uploadAll : function (url &#x2F;*String*&#x2F;, method &#x2F;*String*&#x2F;, postVars &#x2F;*Object*&#x2F;, postFileVarName &#x2F;*String*&#x2F;) {
-		return this.uploaderswf.callSWF(&quot;uploadAll&quot;, [url, method, postVars,postFileVarName]);
-	},
+    *&#x2F;    
+    uploadAll : function (url &#x2F;*String*&#x2F;, method &#x2F;*String*&#x2F;, postVars &#x2F;*Object*&#x2F;, postFileVarName &#x2F;*String*&#x2F;) {
+        return this.uploaderswf.callSWF(&quot;uploadAll&quot;, [url, method, postVars,postFileVarName]);
+    },
 
    &#x2F;*
     * Cancels the upload of a specific file, if currently in progress.
@@ -1868,54 +1868,54 @@ Y.extend(Uploader, Y.Base, {
     * @method cancel
     * @param fileID {String} (optional) The ID of the file whose upload should be cancelled. If no ID is specified, all uploads are cancelled.
     * @deprecated
-    *&#x2F;	
-	cancel : function (fileID &#x2F;*String*&#x2F;) {
-		return this.uploaderswf.callSWF(&quot;cancel&quot;, [fileID]);
-	},
+    *&#x2F;    
+    cancel : function (fileID &#x2F;*String*&#x2F;) {
+        return this.uploaderswf.callSWF(&quot;cancel&quot;, [fileID]);
+    },
 
-	&#x2F;*
-	 * @private
-	 * Setter for the &#x27;log&#x27; property.
-	 * @method setAllowLogging
-	 * @param value {Boolean} The value for the &#x27;log&#x27; property.
+    &#x2F;*
+     * @private
+     * Setter for the &#x27;log&#x27; property.
+     * @method setAllowLogging
+     * @param value {Boolean} The value for the &#x27;log&#x27; property.
      * @deprecated
-	 *&#x2F;
-	setAllowLogging : function (value &#x2F;*Boolean*&#x2F;) {
-		this.uploaderswf.callSWF(&quot;setAllowLogging&quot;, [value]);
-	},
+     *&#x2F;
+    setAllowLogging : function (value &#x2F;*Boolean*&#x2F;) {
+        this.uploaderswf.callSWF(&quot;setAllowLogging&quot;, [value]);
+    },
 
-	&#x2F;*
-	 * @private
-	 * Setter for the &#x27;multiFiles&#x27; property.
-	 * @method setAllowMultipleFiles
-	 * @param value {Boolean} The value for the &#x27;multiFiles&#x27; property.
+    &#x2F;*
+     * @private
+     * Setter for the &#x27;multiFiles&#x27; property.
+     * @method setAllowMultipleFiles
+     * @param value {Boolean} The value for the &#x27;multiFiles&#x27; property.
      * @deprecated
-	 *&#x2F;
-	setAllowMultipleFiles : function (value &#x2F;*Boolean*&#x2F;) {
-		this.uploaderswf.callSWF(&quot;setAllowMultipleFiles&quot;, [value]);
-	},
+     *&#x2F;
+    setAllowMultipleFiles : function (value &#x2F;*Boolean*&#x2F;) {
+        this.uploaderswf.callSWF(&quot;setAllowMultipleFiles&quot;, [value]);
+    },
 
-	&#x2F;*
-	 * @private
-	 * Setter for the &#x27;simLimit&#x27; property.
-	 * @method setSimUploadLimit
-	 * @param value {Boolean} The value for the &#x27;simLimit&#x27; property.
+    &#x2F;*
+     * @private
+     * Setter for the &#x27;simLimit&#x27; property.
+     * @method setSimUploadLimit
+     * @param value {Boolean} The value for the &#x27;simLimit&#x27; property.
      * @deprecated
-	 *&#x2F;
-	setSimUploadLimit : function (value &#x2F;*int*&#x2F;) {
-		this.uploaderswf.callSWF(&quot;setSimUploadLimit&quot;, [value]);
-	},
+     *&#x2F;
+    setSimUploadLimit : function (value &#x2F;*int*&#x2F;) {
+        this.uploaderswf.callSWF(&quot;setSimUploadLimit&quot;, [value]);
+    },
 
-	&#x2F;*
-	 * @private
-	 * Setter for the &#x27;fileFilters&#x27; property.
-	 * @method setFileFilters
-	 * @param value {Boolean} The value for the &#x27;fileFilters&#x27; property.
+    &#x2F;*
+     * @private
+     * Setter for the &#x27;fileFilters&#x27; property.
+     * @method setFileFilters
+     * @param value {Boolean} The value for the &#x27;fileFilters&#x27; property.
      * @deprecated
-	 *&#x2F;	
-	setFileFilters : function (fileFilters &#x2F;*Array*&#x2F;) {
-		this.uploaderswf.callSWF(&quot;setFileFilters&quot;, [fileFilters]);
-	},
+     *&#x2F;    
+    setFileFilters : function (fileFilters &#x2F;*Array*&#x2F;) {
+        this.uploaderswf.callSWF(&quot;setFileFilters&quot;, [fileFilters]);
+    },
 
    &#x2F;*
     * Enables the uploader user input (mouse clicks on the &#x27;Browse&#x27; button). If the button skin 
@@ -1923,10 +1923,10 @@ Y.extend(Uploader, Y.Base, {
     *
     * @method enable
     * @deprecated
-    *&#x2F;	
-	enable : function () {
-		this.uploaderswf.callSWF(&quot;enable&quot;);
-	},
+    *&#x2F;    
+    enable : function () {
+        this.uploaderswf.callSWF(&quot;enable&quot;);
+    },
 
    &#x2F;*
     * Disables the uploader user input (mouse clicks on the &#x27;Browse&#x27; button). If the button skin 
@@ -1934,44 +1934,44 @@ Y.extend(Uploader, Y.Base, {
     *
     * @method enable
     * @deprecated
-    *&#x2F;	
-	disable : function () {
-		this.uploaderswf.callSWF(&quot;disable&quot;);
-	},
+    *&#x2F;    
+    disable : function () {
+        this.uploaderswf.callSWF(&quot;disable&quot;);
+    },
 
-	&#x2F;*
-	 * @private
-	 * Called when the uploader SWF is initialized
-	 * @method _initializeUploader
-	 * @param event {Object} The event to be propagated from Flash.
+    &#x2F;*
+     * @private
+     * Called when the uploader SWF is initialized
+     * @method _initializeUploader
+     * @param event {Object} The event to be propagated from Flash.
      * @deprecated
-	 *&#x2F;
-	_initializeUploader: function (event) {
-			this.publish(&quot;uploaderReady&quot;, {fireOnce:true});
-	     	this.fire(&quot;uploaderReady&quot;, {});
-	},
+     *&#x2F;
+    _initializeUploader: function (event) {
+            this.publish(&quot;uploaderReady&quot;, {fireOnce:true});
+             this.fire(&quot;uploaderReady&quot;, {});
+    },
 
-	&#x2F;*
-	 * @private
-	 * Called when an event is dispatched from Uploader
-	 * @method _relayEvent
-	 * @param event {Object} The event to be propagated from Flash.
+    &#x2F;*
+     * @private
+     * Called when an event is dispatched from Uploader
+     * @method _relayEvent
+     * @param event {Object} The event to be propagated from Flash.
      * @deprecated
-	 *&#x2F;	
-	_relayEvent: function (event) {
-		    Y.log(&quot;Firing event...&quot;);
-		    Y.log(event.type);
-		    this.fire(event.type, event);
-	},
-	
-	toString: function()
-	{
-		return &quot;Uploader &quot; + this._id;
-	}
+     *&#x2F;    
+    _relayEvent: function (event) {
+            Y.log(&quot;Firing event...&quot;);
+            Y.log(event.type);
+            this.fire(event.type, event);
+    },
+    
+    toString: function()
+    {
+        return &quot;Uploader &quot; + this._id;
+    }
 
 },
 {
-	ATTRS: {
+    ATTRS: {
         &#x2F;*
          * The flag that allows Flash player to 
          * output debug messages to its trace stack 
@@ -1982,10 +1982,10 @@ Y.extend(Uploader, Y.Base, {
          * @default false
          * @deprecated
          *&#x2F;
-		log: {
-			value: false,
-			setter : &quot;setAllowLogging&quot;
-		},
+        log: {
+            value: false,
+            setter : &quot;setAllowLogging&quot;
+        },
 
         &#x2F;*
          * The flag that allows the user to select
@@ -1997,11 +1997,11 @@ Y.extend(Uploader, Y.Base, {
          * @default false
          * @deprecated
          *&#x2F;
-		multiFiles : {
-			value: false,
-			setter : &quot;setAllowMultipleFiles&quot;
-		},
-	
+        multiFiles : {
+            value: false,
+            setter : &quot;setAllowMultipleFiles&quot;
+        },
+    
         &#x2F;*
          * The number of files that can be uploaded
          * simultaneously if the automatic queue management
@@ -2013,10 +2013,10 @@ Y.extend(Uploader, Y.Base, {
          * @default 2
          * @deprecated
          *&#x2F;
-		simLimit : {
-			value: 2,
-			setter : &quot;setSimUploadLimit&quot;
-		},
+        simLimit : {
+            value: 2,
+            setter : &quot;setSimUploadLimit&quot;
+        },
 
         &#x2F;*
          * The array of filters on file extensions for
@@ -2032,11 +2032,11 @@ Y.extend(Uploader, Y.Base, {
          * @default []
          * @deprecated
          *&#x2F;
-		fileFilters : {
-			value: [],
-			setter : &quot;setFileFilters&quot;
-		},
-		
+        fileFilters : {
+            value: [],
+            setter : &quot;setFileFilters&quot;
+        },
+        
         &#x2F;*
          * The Node containing the uploader&#x27;s &#x27;Browse&#x27; button.
          *
@@ -2046,11 +2046,11 @@ Y.extend(Uploader, Y.Base, {
          * @writeOnce
          * @deprecated
          *&#x2F;
-		boundingBox : {
-			value: null,
-			writeOnce: &#x27;initOnly&#x27;
-		},
-		
+        boundingBox : {
+            value: null,
+            writeOnce: &#x27;initOnly&#x27;
+        },
+        
         &#x2F;*
          * The URL of the image sprite for skinning the uploader&#x27;s &#x27;Browse&#x27; button.
          *
@@ -2060,11 +2060,11 @@ Y.extend(Uploader, Y.Base, {
          * @writeOnce
          * @deprecated
          *&#x2F;
-		buttonSkin : {
-			value: null,
-			writeOnce: &#x27;initOnly&#x27;
-		},
-		
+        buttonSkin : {
+            value: null,
+            writeOnce: &#x27;initOnly&#x27;
+        },
+        
         &#x2F;*
          * The flag indicating whether the uploader is rendered 
          * with a transparent background.
@@ -2075,11 +2075,11 @@ Y.extend(Uploader, Y.Base, {
          * @writeOnce
          * @deprecated
          *&#x2F;
-		transparent : {
-			value: true,
-			writeOnce: &#x27;initOnly&#x27;
-		},
-		
+        transparent : {
+            value: true,
+            writeOnce: &#x27;initOnly&#x27;
+        },
+        
         &#x2F;*
          * The URL of the uploader&#x27;s SWF.
          *
@@ -2089,12 +2089,12 @@ Y.extend(Uploader, Y.Base, {
          * @writeOnce
          * @deprecated
          *&#x2F;
-		swfURL : {
-			value : SWFURL,
-			writeOnce: &#x27;initOnly&#x27;
-		}
-		
-	}
+        swfURL : {
+            value : SWFURL,
+            writeOnce: &#x27;initOnly&#x27;
+        }
+        
+    }
 }
 );
 Y.Uploader = Uploader;

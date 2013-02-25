@@ -1515,129 +1515,129 @@
  *&#x2F;
 
 var Lang = A.Lang,
-	isArray = Lang.isArray,
-	isFunction = Lang.isFunction,
-	isObject = Lang.isObject,
-	isString = Lang.isString,
-	isUndefined = Lang.isUndefined,
-	isValue = Lang.isValue,
+    isArray = Lang.isArray,
+    isFunction = Lang.isFunction,
+    isObject = Lang.isObject,
+    isString = Lang.isString,
+    isUndefined = Lang.isUndefined,
+    isValue = Lang.isValue,
 
-	AArray = A.Array,
-	ANode = A.Node,
-	ANodeList = A.NodeList,
+    AArray = A.Array,
+    ANode = A.Node,
+    ANodeList = A.NodeList,
 
-	getClassName = A.getClassName,
-	getRegExp = A.DOM._getRegExp,
+    getClassName = A.getClassName,
+    getRegExp = A.DOM._getRegExp,
 
-	prefix = Lang.String.prefix,
+    prefix = Lang.String.prefix,
 
-	CONFIG = A.config,
-	DOC = CONFIG.doc,
-	WIN = CONFIG.win,
+    CONFIG = A.config,
+    DOC = CONFIG.doc,
+    WIN = CONFIG.win,
 
-	NODE_PROTO = ANode.prototype,
-	NODELIST_PROTO = ANodeList.prototype,
+    NODE_PROTO = ANode.prototype,
+    NODELIST_PROTO = ANodeList.prototype,
 
-	STR_EMPTY = &#x27;&#x27;,
+    STR_EMPTY = &#x27;&#x27;,
 
-	ARRAY_EMPTY_STRINGS = [STR_EMPTY, STR_EMPTY],
+    ARRAY_EMPTY_STRINGS = [STR_EMPTY, STR_EMPTY],
 
-	OFFSET = &#x27;offset&#x27;,
+    OFFSET = &#x27;offset&#x27;,
 
-	CSS_FORCE_OFFSET = getClassName(&#x27;force&#x27;, OFFSET),
-	CSS_HIDE = getClassName(&#x27;hide&#x27;),
-	CSS_UNSELECTABLE = getClassName(&#x27;unselectable&#x27;),
+    CSS_FORCE_OFFSET = getClassName(&#x27;force&#x27;, OFFSET),
+    CSS_HIDE = getClassName(&#x27;hide&#x27;),
+    CSS_UNSELECTABLE = getClassName(&#x27;unselectable&#x27;),
 
-	CHILD_NODES = &#x27;childNodes&#x27;,
-	CREATE_DOCUMENT_FRAGMENT = &#x27;createDocumentFragment&#x27;,
-	INNER = &#x27;inner&#x27;,
-	INNER_HTML = &#x27;innerHTML&#x27;,
-	NEXT_SIBLING = &#x27;nextSibling&#x27;,
-	NONE = &#x27;none&#x27;,
-	OUTER = &#x27;outer&#x27;,
-	PARENT_NODE = &#x27;parentNode&#x27;,
-	REGION = &#x27;region&#x27;,
-	SCRIPT = &#x27;script&#x27;,
+    CHILD_NODES = &#x27;childNodes&#x27;,
+    CREATE_DOCUMENT_FRAGMENT = &#x27;createDocumentFragment&#x27;,
+    INNER = &#x27;inner&#x27;,
+    INNER_HTML = &#x27;innerHTML&#x27;,
+    NEXT_SIBLING = &#x27;nextSibling&#x27;,
+    NONE = &#x27;none&#x27;,
+    OUTER = &#x27;outer&#x27;,
+    PARENT_NODE = &#x27;parentNode&#x27;,
+    REGION = &#x27;region&#x27;,
+    SCRIPT = &#x27;script&#x27;,
 
-	SUPPORT_CLONED_EVENTS = false,
+    SUPPORT_CLONED_EVENTS = false,
 
-	VALUE = &#x27;value&#x27;,
+    VALUE = &#x27;value&#x27;,
 
-	MAP_BORDER = {
-		b: &#x27;borderBottomWidth&#x27;,
-		l: &#x27;borderLeftWidth&#x27;,
-		r: &#x27;borderRightWidth&#x27;,
-		t: &#x27;borderTopWidth&#x27;
-	},
-	MAP_MARGIN = {
-		b: &#x27;marginBottom&#x27;,
-		l: &#x27;marginLeft&#x27;,
-		r: &#x27;marginRight&#x27;,
-		t: &#x27;marginTop&#x27;
-	},
-	MAP_PADDING = {
-		b: &#x27;paddingBottom&#x27;,
-		l: &#x27;paddingLeft&#x27;,
-		r: &#x27;paddingRight&#x27;,
-		t: &#x27;paddingTop&#x27;
-	},
+    MAP_BORDER = {
+        b: &#x27;borderBottomWidth&#x27;,
+        l: &#x27;borderLeftWidth&#x27;,
+        r: &#x27;borderRightWidth&#x27;,
+        t: &#x27;borderTopWidth&#x27;
+    },
+    MAP_MARGIN = {
+        b: &#x27;marginBottom&#x27;,
+        l: &#x27;marginLeft&#x27;,
+        r: &#x27;marginRight&#x27;,
+        t: &#x27;marginTop&#x27;
+    },
+    MAP_PADDING = {
+        b: &#x27;paddingBottom&#x27;,
+        l: &#x27;paddingLeft&#x27;,
+        r: &#x27;paddingRight&#x27;,
+        t: &#x27;paddingTop&#x27;
+    },
 
-	prefixSelector = function(ns, id) {
-		return &#x27;#&#x27; + prefix(ns, id);
-	},
+    prefixSelector = function(ns, id) {
+        return &#x27;#&#x27; + prefix(ns, id);
+    },
 
-	formatSelectorNS = function(ns, selector) {
-		return selector.replace(getRegExp(&#x27;(#|\\[id=(\\\&quot;|\\\&#x27;))(?!&#x27; + ns + &#x27;)&#x27;, &#x27;g&#x27;), &#x27;$1&#x27; + ns);
-	};
+    formatSelectorNS = function(ns, selector) {
+        return selector.replace(getRegExp(&#x27;(#|\\[id=(\\\&quot;|\\\&#x27;))(?!&#x27; + ns + &#x27;)&#x27;, &#x27;g&#x27;), &#x27;$1&#x27; + ns);
+    };
 
-	&#x2F;*
-		Parts of this file are used from jQuery (http:&#x2F;&#x2F;jquery.com)
-		Dual-licensed under MIT&#x2F;GPL
-	*&#x2F;
-	var div = DOC.createElement(&#x27;div&#x27;);
+    &#x2F;*
+        Parts of this file are used from jQuery (http:&#x2F;&#x2F;jquery.com)
+        Dual-licensed under MIT&#x2F;GPL
+    *&#x2F;
+    var div = DOC.createElement(&#x27;div&#x27;);
 
-	div.style.display = &#x27;none&#x27;;
-	div.innerHTML = &#x27;   &lt;table&gt;&lt;&#x2F;table&gt;&amp;nbsp;&#x27;;
+    div.style.display = &#x27;none&#x27;;
+    div.innerHTML = &#x27;   &lt;table&gt;&lt;&#x2F;table&gt;&amp;nbsp;&#x27;;
 
-	if (div.attachEvent &amp;&amp; div.fireEvent) {
-		div.attachEvent(
-			&#x27;onclick&#x27;,
-			function(){
-				SUPPORT_CLONED_EVENTS = true;
+    if (div.attachEvent &amp;&amp; div.fireEvent) {
+        div.attachEvent(
+            &#x27;onclick&#x27;,
+            function(){
+                SUPPORT_CLONED_EVENTS = true;
 
-				div.detachEvent(&#x27;onclick&#x27;, arguments.callee);
-			}
-		);
+                div.detachEvent(&#x27;onclick&#x27;, arguments.callee);
+            }
+        );
 
-		div.cloneNode(true).fireEvent(&#x27;onclick&#x27;);
-	}
+        div.cloneNode(true).fireEvent(&#x27;onclick&#x27;);
+    }
 
-	var SUPPORT_OPTIONAL_TBODY = !div.getElementsByTagName(&#x27;tbody&#x27;).length;
+    var SUPPORT_OPTIONAL_TBODY = !div.getElementsByTagName(&#x27;tbody&#x27;).length;
 
-	var REGEX_LEADING_WHITE_SPACE = &#x2F;^\s+&#x2F;,
-		REGEX_IE8_ACTION = &#x2F;=([^=\x27\x22&gt;\s]+\&#x2F;)&gt;&#x2F;g,
-		REGEX_TAGNAME = &#x2F;&lt;([\w:]+)&#x2F;;
+    var REGEX_LEADING_WHITE_SPACE = &#x2F;^\s+&#x2F;,
+        REGEX_IE8_ACTION = &#x2F;=([^=\x27\x22&gt;\s]+\&#x2F;)&gt;&#x2F;g,
+        REGEX_TAGNAME = &#x2F;&lt;([\w:]+)&#x2F;;
 
-	div = null;
+    div = null;
 
-	ANode.cssId = prefixSelector;
+    ANode.cssId = prefixSelector;
 
-	ANode.formatSelectorNS = formatSelectorNS;
+    ANode.formatSelectorNS = formatSelectorNS;
 
-	var _setUnselectable = function(element, unselectable, noRecurse) {
-		var descendants,
-			value = unselectable ? &#x27;on&#x27; : &#x27;&#x27;;
+    var _setUnselectable = function(element, unselectable, noRecurse) {
+        var descendants,
+            value = unselectable ? &#x27;on&#x27; : &#x27;&#x27;;
 
-		element.setAttribute(&#x27;unselectable&#x27;, value);
+        element.setAttribute(&#x27;unselectable&#x27;, value);
 
-		if (!noRecurse) {
-			descendants = element.getElementsByTagName(&#x27;*&#x27;);
+        if (!noRecurse) {
+            descendants = element.getElementsByTagName(&#x27;*&#x27;);
 
-			for (var i = 0, descendant; descendant = descendants[i]; i++) {
-				descendant.setAttribute(&#x27;unselectable&#x27;, value);
-			}
-		}
-	};
+            for (var i = 0, descendant; descendant = descendants[i]; i++) {
+                descendant.setAttribute(&#x27;unselectable&#x27;, value);
+            }
+        }
+    };
 
 &#x2F;**
  * Augment the &lt;a href=&quot;Node.html&quot;&gt;YUI3 Node&lt;&#x2F;a&gt; with more util methods.
@@ -1650,957 +1650,957 @@ var Lang = A.Lang,
  * @uses Node
  *&#x2F;
 A.mix(NODE_PROTO, {
-	allNS: function(ns, selector) {
-		var instance = this;
-
-		return instance.all(formatSelectorNS(ns, selector));
-	},
-
-	&#x2F;**
-	 * &lt;p&gt;Returns the current ancestors of the node element. If a selector is
-	 * specified, the ancestors are filtered to match the selector.&lt;&#x2F;p&gt;
-	 *
-	 * Example:
-	 *
-	 * &lt;pre&gt;&lt;code&gt;
-	 * A.one(&#x27;#nodeId&#x27;).ancestors(&#x27;div&#x27;);
-	 * &lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
-	 *
-	 * @method ancestors
-	 * @param {String} selector A selector to filter the ancestor elements against.
-	 * @return {NodeList}
-	 *&#x2F;
-	ancestors: function(selector) {
-		var instance = this;
-
-		var ancestors = [];
-		var currentEl = instance.getDOM();
-
-		while (currentEl &amp;&amp; currentEl.nodeType !== 9) {
-			if (currentEl.nodeType === 1) {
-				ancestors.push(currentEl);
-			}
-
-			currentEl = currentEl.parentNode;
-		}
-
-		var nodeList = new A.all(ancestors);
-
-		if (selector) {
-			nodeList = nodeList.filter(selector);
-		}
-
-		return nodeList;
-	},
-
-	&#x2F;**
-	 * &lt;p&gt;Returns the current ancestors of the node element filtered by a className.
-	 * This is an optimized method for finding ancestors by a specific CSS class name.&lt;&#x2F;p&gt;
-	 *
-	 * Example:
-	 *
-	 * &lt;pre&gt;&lt;code&gt;
-	 * A.one(&#x27;#nodeId&#x27;).ancestorsByClassName(&#x27;aui-hide&#x27;);
-	 * &lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
-	 *
-	 * @method ancestors
-	 * @param {String} selector A selector to filter the ancestor elements against.
-	 * @return {NodeList}
-	 *&#x2F;
-	ancestorsByClassName: function(className) {
-		var instance = this;
-
-		var ancestors = [];
-		var cssRE = new RegExp(&#x27;\\b&#x27; + className + &#x27;\\b&#x27;);
-		var currentEl = instance.getDOM();
-
-		while (currentEl &amp;&amp; currentEl.nodeType !== 9) {
-			if (currentEl.nodeType === 1 &amp;&amp; cssRE.test(currentEl.className)) {
-				ancestors.push(currentEl);
-			}
-
-			currentEl = currentEl.parentNode;
-		}
-
-		return A.all(ancestors);
-	},
-
-	&#x2F;**
-	 * &lt;p&gt;Insert the node instance to the end of the &lt;code&gt;selector&lt;&#x2F;code&gt;
-	 * element.&lt;&#x2F;p&gt;
-	 *
-	 * Example:
-	 *
-	 * &lt;pre&gt;&lt;code&gt;var node = A.one(&#x27;#nodeId&#x27;);
-	 * &#x2F;&#x2F; using another Node instance
-	 * var body = A.one(&#x27;body&#x27;);
-	 * node.appendTo(body);
-	 * &#x2F;&#x2F; using a CSS selector
-	 * node.appendTo(&#x27;#container&#x27;);
-	 * &lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
-	 *
-	 * @method appendTo
-	 * @chainable
-	 * @param {Node | String} selector A selector, element, HTML string, Node
-	 * @return {String}
-	 *&#x2F;
-	appendTo: function(selector) {
-		var instance = this;
-
-		A.one(selector).append(instance);
-
-		return instance;
-	},
-
-	&#x2F;**
-	 * &lt;p&gt;Get or Set the value of an attribute for the first element in the
-	 * set of matched elements. If only the &lt;code&gt;name&lt;&#x2F;code&gt; is passed it
-	 * works as a getter.&lt;&#x2F;p&gt;
-	 *
-	 * Example:
-	 *
-	 * &lt;pre&gt;&lt;code&gt;var node = A.one(&#x27;#nodeId&#x27;);
-	 * node.attr(&#x27;title&#x27;, &#x27;Setting a new title attribute&#x27;);
-	 * &#x2F;&#x2F; Alert the value of the title attribute: &#x27;Setting a new title attribute&#x27;
-	 * alert( node.attr(&#x27;title&#x27;) );
-	 * &lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
-	 *
-	 * @method attr
-	 * @param {String} name The name of the attribute
-	 * @param {String} value The value of the attribute to be set. Optional.
-	 * @return {String}
-	 *&#x2F;
-	attr: function(name, value) {
-		var instance = this;
-
-		if (!isUndefined(value)) {
-			var el = instance.getDOM();
-
-			if (name in el) {
-				instance.set(name, value);
-			}
-			else {
-				instance.setAttribute(name, value);
-			}
-
-			return instance;
-		}
-		else {
-			if (isObject(name)) {
-				for (var i in name) {
-					instance.attr(i, name[i]);
-				}
-
-				return instance;
-			}
-
-			var currentValue = instance.get(name);
-
-			if (!Lang.isValue(currentValue)) {
-				currentValue = instance.getAttribute(name);
-			}
-
-			return currentValue;
-		}
-	},
-
-	&#x2F;**
-	 * Normalizes the behavior of cloning a node, which by default should not clone
-	 * the events that are attached to it.
-	 *
-	 * Example:
-	 *
-	 * &lt;pre&gt;&lt;code&gt;var node = A.one(&#x27;#nodeId&#x27;);
-	 * node.clone().appendTo(&#x27;body&#x27;);
-	 * &lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
-	 *
-	 * @method clone
-	 * @return {Node}
-	 *&#x2F;
-	clone: (function() {
-		var clone;
-
-		if (SUPPORT_CLONED_EVENTS) {
-			clone = function() {
-				var el = this.getDOM();
-				var clone;
-
-				if (el.nodeType != 3) {
-					var outerHTML = this.outerHTML();
-
-					outerHTML = outerHTML.replace(REGEX_IE8_ACTION, &#x27;=&quot;$1&quot;&gt;&#x27;).replace(REGEX_LEADING_WHITE_SPACE, STR_EMPTY);
-
-					clone = ANode.create(outerHTML);
-				}
-				else {
-					clone = A.one(el.cloneNode());
-				}
-
-				return clone;
-			};
-		}
-		else {
-			clone = function() {
-				return this.cloneNode(true);
-			};
-		}
-
-		return clone;
-	})(),
-
-	&#x2F;**
-	 * &lt;p&gt;Centralize the current Node instance with the passed
-	 * &lt;code&gt;val&lt;&#x2F;code&gt; Array, Node, String, or Region, if not specified, the body will be
-	 * used.&lt;&#x2F;p&gt;
-	 *
-	 * Example:
-	 *
-	 * &lt;pre&gt;&lt;code&gt;var node = A.one(&#x27;#nodeId&#x27;);
-	 * &#x2F;&#x2F; Center the &lt;code&gt;node&lt;&#x2F;code&gt; with the &lt;code&gt;#container&lt;&#x2F;code&gt;.
-	 * node.center(&#x27;#container&#x27;);
-	 * &lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
-	 *
-	 * @method center
-	 * @chainable
-	 * @param {Array | Node | Region | String} val Array, Node, String, or Region to center with
-	 *&#x2F;
-	center: function(val) {
-		var instance = this,
-			nodeRegion = instance.get(REGION),
-			x,
-			y;
-
-		if (isArray(val)) {
-			x = val[0];
-			y = val[1];
-		}
-		else {
-			var region;
-
-			if (isObject(val) &amp;&amp; !A.instanceOf(val, ANode)) {
-				region = val;
-			}
-			else {
-				region = (A.one(val) || A.getBody()).get(REGION);
-			}
-
-			x = region.left + (region.width &#x2F; 2);
-			y = region.top + (region.height &#x2F; 2);
-		}
-
-		instance.setXY([x - (nodeRegion.width &#x2F; 2), y - (nodeRegion.height &#x2F; 2)]);
-	},
-
-	&#x2F;**
-	 * &lt;p&gt;This method removes not only child (and other descendant) elements,
-	 * but also any text within the set of matched elements. This is because,
-	 * according to the DOM specification, any string of text within an element
-	 * is considered a child node of that element.&lt;&#x2F;p&gt;
-	 *
-	 * Example:
-	 *
-	 * &lt;pre&gt;&lt;code&gt;var node = A.one(&#x27;#nodeId&#x27;);
-	 * node.empty();
-	 * &lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
-	 *
-	 * @method empty
-	 * @chainable
-	 *&#x2F;
-	empty: function() {
-		var instance = this;
-
-		instance.all(&#x27;&gt;*&#x27;).remove().purge();
-
-		var el = ANode.getDOMNode(instance);
-
-		while (el.firstChild) {
-			el.removeChild(el.firstChild);
-		}
-
-		return instance;
-	},
-
-	&#x2F;**
-	 * Retrieves the DOM node bound to a Node instance. See
-	 * &lt;a href=&quot;Node.html#method_getDOMNode&quot;&gt;getDOMNode&lt;&#x2F;a&gt;.
-	 *
-	 * @method getDOM
-	 * @return {HTMLNode} The DOM node bound to the Node instance.
-	 *&#x2F;
-	getDOM: function() {
-		var instance = this;
-
-		return ANode.getDOMNode(instance);
-	},
-
-	&#x2F;**
-	 * Return the combined width of the border for the specified sides.
-	 *
-	 * @method getBorderWidth
-	 * @param {string} sides Can be t, r, b, l or any combination of
-	 * those to represent the top, right, bottom, or left sides.
-	 * @return {number}
-	 *&#x2F;
-	getBorderWidth: function(sides) {
-		var instance = this;
-
-		return instance._getBoxStyleAsNumber(sides, MAP_BORDER);
-	},
-
-	&#x2F;**
-	 * Gets the current center position of the node in page coordinates.
-	 * @method getCenterXY
-	 * @for Node
-	 * @return {Array} The XY position of the node
-	*&#x2F;
-	getCenterXY: function() {
-		var instance = this;
-		var region = instance.get(REGION);
-
-		return [(region.left + region.width&#x2F;2), (region.top + region.height&#x2F;2)];
-	},
-
-	&#x2F;**
-	 * Return the combined size of the margin for the specified sides.
-	 *
-	 * @method getMargin
-	 * @param {string} sides Can be t, r, b, l or any combination of
-	 * those to represent the top, right, bottom, or left sides.
-	 * @return {number}
-	 *&#x2F;
-	getMargin: function(sides) {
-		var instance = this;
-
-		return instance._getBoxStyleAsNumber(sides, MAP_MARGIN);
-	},
-
-	&#x2F;**
-	 * Return the combined width of the border for the specified sides.
-	 *
-	 * @method getPadding
-	 * @param {string} sides Can be t, r, b, l or any combination of
-	 * those to represent the top, right, bottom, or left sides.
-	 * @return {number}
-	 *&#x2F;
-	getPadding: function(sides) {
-		var instance = this;
-
-		return instance._getBoxStyleAsNumber(sides, MAP_PADDING);
-	},
-
-	&#x2F;**
-	 * Set the id of the Node instance if the object does not have one. The
-	 * generated id is based on a guid created by the
-	 * &lt;a href=&quot;YUI.html#method_stamp&quot;&gt;stamp&lt;&#x2F;a&gt; method.
-	 *
-	 * @method guid
-	 * @param {string} prefix optional guid prefix
-	 * @return {String} The current id of the node
-	 *&#x2F;
-	guid: function(prefix) {
-		var instance = this;
-		var currentId = instance.get(&#x27;id&#x27;);
-
-		if (!currentId) {
-			currentId = A.stamp(instance);
-
-			instance.set(&#x27;id&#x27;, currentId);
-		}
-
-		return currentId;
-	},
-
-	&#x2F;**
-	 * Create a hover interaction.
-	 *
-	 * @method hover
-	 * @param {string} overFn
-	 * @param {string} outFn
-	 * @return {Node} The current Node instance
-	 *&#x2F;
-	hover: function(overFn, outFn) {
-		var instance = this;
-
-		var hoverOptions;
-		var defaultHoverOptions = instance._defaultHoverOptions;
-
-		if (isObject(overFn, true)) {
-			hoverOptions = overFn;
-
-			hoverOptions = A.mix(hoverOptions, defaultHoverOptions);
-
-			overFn = hoverOptions.over;
-			outFn = hoverOptions.out;
-		}
-		else {
-			hoverOptions = A.mix(
-				{
-					over: overFn,
-					out: outFn
-				},
-				defaultHoverOptions
-			);
-		}
-
-		instance._hoverOptions = hoverOptions;
-
-		hoverOptions.overTask = A.debounce(instance._hoverOverTaskFn, null, instance);
-		hoverOptions.outTask = A.debounce(instance._hoverOutTaskFn, null, instance);
-
-		return new A.EventHandle(
-			[
-				instance.on(hoverOptions.overEventType, instance._hoverOverHandler, instance),
-				instance.on(hoverOptions.outEventType, instance._hoverOutHandler, instance)
-			]
-		);
-	},
-
-	&#x2F;**
-	 * &lt;p&gt;Get or Set the HTML contents of the node. If the &lt;code&gt;value&lt;&#x2F;code&gt;
-	 * is passed it&#x27;s set the content of the element, otherwise it works as a
-	 * getter for the current content.&lt;&#x2F;p&gt;
-	 *
-	 * Example:
-	 *
-	 * &lt;pre&gt;&lt;code&gt;var node = A.one(&#x27;#nodeId&#x27;);
-	 * node.html(&#x27;Setting new HTML&#x27;);
-	 * &#x2F;&#x2F; Alert the value of the current content
-	 * alert( node.html() );
-	 * &lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
-	 *
-	 * @method html
-	 * @param {string} value A string of html to set as the content of the node instance.
-	 *&#x2F;
-	html: function() {
-		var args = arguments, length = args.length;
-
-		if (length) {
-			this.set(INNER_HTML, args[0]);
-		}
-		else {
-			return this.get(INNER_HTML);
-		}
-
-		return this;
-	},
-
-	oneNS: function(ns, selector) {
-		var instance = this;
-
-		return instance.one(formatSelectorNS(ns, selector));
-	},
-
-	&#x2F;**
-	 * Gets the outerHTML of a node, which islike innerHTML, except that it
-	 * actually contains the HTML of the node itself.
-	 *
-	 * @return {string} The outerHTML of the given element.
-	 *&#x2F;
-	outerHTML: function() {
-		var instance = this;
-		var domEl = instance.getDOM();
-
-		&#x2F;&#x2F; IE, Opera and WebKit all have outerHTML.
-		if (&#x27;outerHTML&#x27; in domEl) {
-			return domEl.outerHTML;
-		}
-
-		var temp = ANode.create(&#x27;&lt;div&gt;&lt;&#x2F;div&gt;&#x27;).append(
-			this.clone()
-		);
-
-		try {
-			return temp.html();
-		}
-		catch(e) {}
-		finally {
-			temp = null;
-		}
-	},
-
-	&#x2F;**
-	 * &lt;p&gt;Inserts a &lt;code&gt;newNode&lt;&#x2F;code&gt; after the node instance (i.e., as the next
-	 * sibling). If the reference node has no parent, then does nothing.&lt;&#x2F;p&gt;
-	 *
-	 * Example:
-	 *
-	 * &lt;pre&gt;&lt;code&gt;var titleNode = A.one(&#x27;#titleNode&#x27;);
-	 * var descriptionNode = A.one(&#x27;#descriptionNode&#x27;);
-	 * &#x2F;&#x2F; the description is usually shown after the title
-	 * titleNode.placeAfter(descriptionNode);
-	 * &lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
-	 *
-	 * @method placeAfter
-	 * @chainable
-	 * @param {Node} newNode Node to insert.
-	 *&#x2F;
-	placeAfter: function(newNode) {
-		var instance = this;
-
-		return instance._place(newNode, instance.get(NEXT_SIBLING));
-	},
-
-	&#x2F;**
-	 * &lt;p&gt;Inserts a &lt;code&gt;newNode&lt;&#x2F;code&gt; before the node instance (i.e., as the previous
-	 * sibling). If the reference node has no parent, then does nothing.&lt;&#x2F;p&gt;
-	 *
-	 * Example:
-	 *
-	 * &lt;pre&gt;&lt;code&gt;var descriptionNode = A.one(&#x27;#descriptionNode&#x27;);
-	 * var titleNode = A.one(&#x27;#titleNode&#x27;);
-	 * &#x2F;&#x2F; the title is usually shown before the description
-	 * descriptionNode.placeBefore(titleNode);
-	 * &lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
-	 *
-	 * @method placeBefore
-	 * @chainable
-	 * @param {Node} newNode Node to insert.
-	 *&#x2F;
-	placeBefore: function(newNode) {
-		var instance = this;
-
-		return instance._place(newNode, instance);
-	},
-
-	&#x2F;**
-	 * &lt;p&gt;Inserts the node instance to the begining of the &lt;code&gt;selector&lt;&#x2F;code&gt;
-	 * node (i.e., insert before the &lt;code&gt;firstChild&lt;&#x2F;code&gt; of the
-	 * &lt;code&gt;selector&lt;&#x2F;code&gt;).&lt;&#x2F;p&gt;
-	 *
-	 * Example:
-	 *
-	 * &lt;pre&gt;&lt;code&gt;var node = A.one(&#x27;#nodeId&#x27;);
-	 * node.prependTo(&#x27;body&#x27;);
-	 * &lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
-	 *
-	 * @method prependTo
-	 * @chainable
-	 * @param {Node | String} selector A selector, element, HTML string, Node
-	 *&#x2F;
-	prependTo: function(selector) {
-		var instance = this;
-
-		A.one(selector).prepend(instance);
-
-		return instance;
-	},
-
-	&#x2F;**
-	 * Add one or more CSS classes to an element and remove the class(es)
-	 * from the siblings of the element.
-	 *
-	 * @method radioClass
-	 * @chainable
-	 * @param {String} cssClass
-	 *&#x2F;
-	radioClass: function(cssClass) {
-		var instance = this;
-
-		var siblings = instance.siblings();
-
-		if (isString(cssClass)) {
-			siblings.removeClass(cssClass);
-
-			instance.addClass(cssClass);
-		}
-		else if (isArray(cssClass)) {
-			var siblingNodes = siblings.getDOM();
-
-			var regex = getRegExp(&#x27;(?:^|\\s+)(?:&#x27; + cssClass.join(&#x27;|&#x27;) + &#x27;)(?=\\s+|$)&#x27;, &#x27;g&#x27;);
-			var node;
-
-			for (var i = siblingNodes.length - 1; i &gt;= 0; i--) {
-				node = siblingNodes[i];
-				node.className = node.className.replace(regex, &#x27;&#x27;);
-			}
-
-			instance.addClass(cssClass.join(&#x27; &#x27;));
-		}
-
-		return instance;
-	},
-
-	&#x2F;**
-	 * Generate an unique identifier and reset the id attribute of the node
-	 * instance using the new value. Invokes the
-	 * &lt;a href=&quot;Node.html#method_guid&quot;&gt;guid&lt;&#x2F;a&gt;.
-	 *
-	 * @method resetId
-	 * @chainable
-	 * @param {String} prefix Optional prefix for the guid.
-	 *&#x2F;
-	resetId: function(prefix) {
-		var instance = this;
-
-		instance.attr(&#x27;id&#x27;, A.guid(prefix));
-
-		return instance;
-	},
-
-	&#x2F;**
-	 * Selects a substring of text inside of the input element.
-	 *
-	 * @method selectText
-	 * @param {Number} start The index to start the selection range from
-	 * @param {Number} end The index to end the selection range at
-	 *&#x2F;
-	selectText: function(start, end) {
-		var instance = this;
-
-		var textField = instance.getDOM();
-		var length = instance.val().length;
-
-		end = isValue(end) ? end : length;
-		start = isValue(start) ? start : 0;
-
-		&#x2F;&#x2F; Some form elements could throw a (NS_ERROR_FAILURE)
-		&#x2F;&#x2F; [nsIDOMNSHTMLInputElement.setSelectionRange] error when invoke the
-		&#x2F;&#x2F; setSelectionRange on firefox. Wrapping in a try&#x2F;catch to prevent the error be thrown
-		try {
-			if (textField.setSelectionRange) {
-				textField.setSelectionRange(start, end);
-			}
-			else if (textField.createTextRange) {
-				var range = textField.createTextRange();
-
-				range.moveStart(&#x27;character&#x27;, start);
-				range.moveEnd(&#x27;character&#x27;, end - length);
-
-				range.select();
-			}
-			else {
-				textField.select();
-			}
-
-			if (textField != DOC.activeElement) {
-				textField.focus();
-			}
-		}
-		catch(e) {}
-
-		return instance;
-	},
-
-	&#x2F;**
-	 * Enables text selection for this element (normalized across browsers).
-	 *
-	 * @method selectable
-	 * @chainable
-	 *&#x2F;
-	selectable: function(noRecurse) {
-		var instance = this;
-
-		instance.removeClass(CSS_UNSELECTABLE);
-
-		if (A.UA.ie || A.UA.opera) {
-			_setUnselectable(instance._node, false, noRecurse);
-		}
-
-		return instance;
-	},
-
-	&#x2F;**
-	 * &lt;p&gt;Stops the specified event(s) from bubbling and optionally prevents the
-	 * default action.&lt;&#x2F;p&gt;
-	 *
-	 * Example:
-	 *
-	 * &lt;pre&gt;&lt;code&gt;var anchor = A.one(&#x27;a#anchorId&#x27;);
-	 * anchor.swallowEvent(&#x27;click&#x27;);
-	 * &lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
-	 *
-	 * @method swallowEvent
-	 * @chainable
-	 * @param {String&#x2F;Array} eventName an event or array of events to stop from bubbling
-	 * @param {Boolean} preventDefault (optional) true to prevent the default action too
-	 *&#x2F;
-	swallowEvent: function(eventName, preventDefault) {
-		var instance = this;
-
-		var fn = function(event) {
-			event.stopPropagation();
-
-			if (preventDefault) {
-				event.preventDefault();
-
-				event.halt();
-			}
-
-			return false;
-		};
-
-		if(isArray(eventName)) {
-			AArray.each(
-				eventName,
-				function(name) {
-					instance.on(name, fn);
-				}
-			);
-
-			return this;
-		}
-		else {
-			instance.on(eventName, fn);
-		}
-
-		return instance;
-	},
-
-	&#x2F;**
-	 * &lt;p&gt;Get or Set the combined text contents of the node instance,
-	 * including it&#x27;s descendants. If the &lt;code&gt;text&lt;&#x2F;code&gt;
-	 * is passed it&#x27;s set the content of the element, otherwise it works as a
-	 * getter for the current content.&lt;&#x2F;p&gt;
-	 *
-	 * Example:
-	 *
-	 * &lt;pre&gt;&lt;code&gt;var node = A.one(&#x27;#nodeId&#x27;);
-	 * node.text(&#x27;Setting new text content&#x27;);
-	 * &#x2F;&#x2F; Alert the value of the current content
-	 * alert( node.text() );
-	 * &lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
-	 *
-	 * @method text
-	 * @param {String} text A string of text to set as the content of the node instance.
-	 *&#x2F;
-	text: function(text) {
-		var instance = this;
-		var el = instance.getDOM();
-
-		if (!isUndefined(text)) {
-			text = A.DOM._getDoc(el).createTextNode(text);
-
-			return instance.empty().append(text);
-		}
-
-		return instance._getText(el.childNodes);
-	},
-
-	&#x2F;**
-	 * &lt;p&gt;Displays or hide the node instance.&lt;&#x2F;p&gt;
-	 *
-	 * &lt;p&gt;&lt;string&gt;NOTE:&lt;&#x2F;string&gt; This method assume that your node were hidden
-	 * because of the &#x27;aui-hide&#x27; css class were being used. This won&#x27;t
-	 * manipulate the inline &lt;code&gt;style.display&lt;&#x2F;code&gt; property.&lt;&#x2F;p&gt;
-	 *
-	 * @method toggle
-	 * @chainable
-	 * @param {Boolean} on Whether to force the toggle. Optional.
-	 * @param {Function} callback A function to run after the visibility change. Optional.
-	 *&#x2F;
-	toggle: function(on, callback) {
-		var instance = this;
-
-		instance._toggleView.apply(instance, arguments);
-
-		return instance;
-	},
-
-	&#x2F;**
-	 * Disables text selection for this element (normalized across browsers).
-	 *
-	 * @method unselectable
-	 * @chainable
-	 *&#x2F;
-	unselectable: function(noRecurse) {
-		var instance = this;
-
-		instance.addClass(CSS_UNSELECTABLE);
-
-		if (A.UA.ie || A.UA.opera) {
-			_setUnselectable(instance._node, true, noRecurse);
-		}
-
-		return instance;
-	},
-
-	&#x2F;**
-	 * &lt;p&gt;Get or Set the value attribute of the node instance. If the
-	 * &lt;code&gt;value&lt;&#x2F;code&gt; is passed it&#x27;s set the value of the element,
-	 * otherwise it works as a getter for the current value.&lt;&#x2F;p&gt;
-	 *
-	 * Example:
-	 *
-	 * &lt;pre&gt;&lt;code&gt;var input = A.one(&#x27;#inputId&#x27;);
-	 * input.val(&#x27;Setting new input value&#x27;);
-	 * &#x2F;&#x2F; Alert the value of the input
-	 * alert( input.val() );
-	 * &lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
-	 *
-	 * @method val
-	 * @param {string} value Value to be set. Optional.
-	 *&#x2F;
-	val: function(value) {
-		var instance = this;
-
-		if (isUndefined(value)) {
-			return instance.get(VALUE);
-		}
-		else {
-			return instance.set(VALUE, value);
-		}
-	},
-
-	&#x2F;**
-	 * Return the combined size of the box style for the specified sides.
-	 *
-	 * @method _getBoxStyleAsNumber
-	 * @param {string} sides Can be t, r, b, l or any combination of
-	 * those to represent the top, right, bottom, or left sides.
-	 * @param {string} map An object mapping mapping the &quot;sides&quot; param to the a CSS value to retrieve
-	 * @return {number}
-	 *&#x2F;
-	_getBoxStyleAsNumber: function(sides, map) {
-		var instance = this;
-
-		var sidesArray = sides.match(&#x2F;\w&#x2F;g);
-		var value = 0;
-		var side;
-		var sideKey;
-
-		for (var i = sidesArray.length - 1; i &gt;= 0; i--) {
-			sideKey = sidesArray[i];
-			side = 0;
-
-			if (sideKey) {
-				side = parseFloat(instance.getComputedStyle(map[sideKey]));
-				side = Math.abs(side);
-
-				value += side || 0;
-			}
-		}
-
-		return value;
-	},
-
-	&#x2F;**
-	 * Extract text content from the passed nodes.
-	 *
-	 * @method _getText
-	 * @private
-	 * @param {Native NodeList} childNodes
-	 *&#x2F;
-	_getText: function(childNodes) {
-		var instance = this;
-
-		var length = childNodes.length;
-		var childNode;
-
-		var str = [];
-
-		for (var i = 0; i &lt; length; i++) {
-			childNode = childNodes[i];
-
-			if (childNode &amp;&amp; childNode.nodeType != 8) {
-				if (childNode.nodeType != 1) {
-					str.push(childNode.nodeValue);
-				}
-
-				if (childNode.childNodes) {
-					str.push(instance._getText(childNode.childNodes));
-				}
-			}
-		}
-
-		return str.join(STR_EMPTY);
-	},
-
-	&#x2F;**
-	 * The event handler for the &quot;out&quot; function that is fired for events attached via the hover method.
-	 *
-	 * @method _hoverOutHandler
-	 * @private
-	 * @param {EventFacade} event
-	 *&#x2F;
-	_hoverOutHandler: function(event) {
-		var instance = this;
-
-		var hoverOptions = instance._hoverOptions;
-
-		hoverOptions.outTask.delay(hoverOptions.outDelay, event);
-	},
-
-	&#x2F;**
-	 * The event handler for the &quot;over&quot; function that is fired for events attached via the hover method.
-	 *
-	 * @method _hoverOverHandler
-	 * @private
-	 * @param {EventFacade} event
-	 *&#x2F;
-	_hoverOverHandler: function(event) {
-		var instance = this;
-
-		var hoverOptions = instance._hoverOptions;
-
-		hoverOptions.overTask.delay(hoverOptions.overDelay, event);
-	},
-
-	&#x2F;**
-	 * Cancels the over task, and fires the users custom &quot;out&quot; function for the hover method
-	 *
-	 * @method _hoverOverHandler
-	 * @private
-	 * @param {EventFacade} event
-	 *&#x2F;
-	_hoverOutTaskFn: function(event) {
-		var instance = this;
-
-		var hoverOptions = instance._hoverOptions;
-
-		hoverOptions.overTask.cancel();
-
-		hoverOptions.out.apply(hoverOptions.context || event.currentTarget, arguments);
-	},
-
-	&#x2F;**
-	 * Cancels the out task, and fires the users custom &quot;over&quot; function for the hover method
-	 *
-	 * @method _hoverOverHandler
-	 * @private
-	 * @param {EventFacade} event
-	 *&#x2F;
-	_hoverOverTaskFn: function(event) {
-		var instance = this;
-
-		var hoverOptions = instance._hoverOptions;
-
-		hoverOptions.outTask.cancel();
-
-		hoverOptions.over.apply(hoverOptions.context || event.currentTarget, arguments);
-	},
-
-	&#x2F;**
-	 * Place a node or html string at a specific location
-	 *
-	 * @method _place
-	 * @private
-	 * @param {Node|String} newNode
-	 * @param {Node} refNode
-	 *&#x2F;
-	_place: function(newNode, refNode) {
-		var instance = this;
-
-		var parent = instance.get(PARENT_NODE);
-
-		if (parent) {
-			if (isString(newNode)) {
-				newNode = ANode.create(newNode);
-			}
-
-			parent.insertBefore(newNode, refNode);
-		}
-
-		return instance;
-	},
-
-	_defaultHoverOptions: {
-		overEventType: &#x27;mouseenter&#x27;,
-		outEventType: &#x27;mouseleave&#x27;,
-		overDelay: 0,
-		outDelay: 0,
-		over: Lang.emptyFn,
-		out: Lang.emptyFn
-	}
+    allNS: function(ns, selector) {
+        var instance = this;
+
+        return instance.all(formatSelectorNS(ns, selector));
+    },
+
+    &#x2F;**
+     * &lt;p&gt;Returns the current ancestors of the node element. If a selector is
+     * specified, the ancestors are filtered to match the selector.&lt;&#x2F;p&gt;
+     *
+     * Example:
+     *
+     * &lt;pre&gt;&lt;code&gt;
+     * A.one(&#x27;#nodeId&#x27;).ancestors(&#x27;div&#x27;);
+     * &lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+     *
+     * @method ancestors
+     * @param {String} selector A selector to filter the ancestor elements against.
+     * @return {NodeList}
+     *&#x2F;
+    ancestors: function(selector) {
+        var instance = this;
+
+        var ancestors = [];
+        var currentEl = instance.getDOM();
+
+        while (currentEl &amp;&amp; currentEl.nodeType !== 9) {
+            if (currentEl.nodeType === 1) {
+                ancestors.push(currentEl);
+            }
+
+            currentEl = currentEl.parentNode;
+        }
+
+        var nodeList = new A.all(ancestors);
+
+        if (selector) {
+            nodeList = nodeList.filter(selector);
+        }
+
+        return nodeList;
+    },
+
+    &#x2F;**
+     * &lt;p&gt;Returns the current ancestors of the node element filtered by a className.
+     * This is an optimized method for finding ancestors by a specific CSS class name.&lt;&#x2F;p&gt;
+     *
+     * Example:
+     *
+     * &lt;pre&gt;&lt;code&gt;
+     * A.one(&#x27;#nodeId&#x27;).ancestorsByClassName(&#x27;aui-hide&#x27;);
+     * &lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+     *
+     * @method ancestors
+     * @param {String} selector A selector to filter the ancestor elements against.
+     * @return {NodeList}
+     *&#x2F;
+    ancestorsByClassName: function(className) {
+        var instance = this;
+
+        var ancestors = [];
+        var cssRE = new RegExp(&#x27;\\b&#x27; + className + &#x27;\\b&#x27;);
+        var currentEl = instance.getDOM();
+
+        while (currentEl &amp;&amp; currentEl.nodeType !== 9) {
+            if (currentEl.nodeType === 1 &amp;&amp; cssRE.test(currentEl.className)) {
+                ancestors.push(currentEl);
+            }
+
+            currentEl = currentEl.parentNode;
+        }
+
+        return A.all(ancestors);
+    },
+
+    &#x2F;**
+     * &lt;p&gt;Insert the node instance to the end of the &lt;code&gt;selector&lt;&#x2F;code&gt;
+     * element.&lt;&#x2F;p&gt;
+     *
+     * Example:
+     *
+     * &lt;pre&gt;&lt;code&gt;var node = A.one(&#x27;#nodeId&#x27;);
+     * &#x2F;&#x2F; using another Node instance
+     * var body = A.one(&#x27;body&#x27;);
+     * node.appendTo(body);
+     * &#x2F;&#x2F; using a CSS selector
+     * node.appendTo(&#x27;#container&#x27;);
+     * &lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+     *
+     * @method appendTo
+     * @chainable
+     * @param {Node | String} selector A selector, element, HTML string, Node
+     * @return {String}
+     *&#x2F;
+    appendTo: function(selector) {
+        var instance = this;
+
+        A.one(selector).append(instance);
+
+        return instance;
+    },
+
+    &#x2F;**
+     * &lt;p&gt;Get or Set the value of an attribute for the first element in the
+     * set of matched elements. If only the &lt;code&gt;name&lt;&#x2F;code&gt; is passed it
+     * works as a getter.&lt;&#x2F;p&gt;
+     *
+     * Example:
+     *
+     * &lt;pre&gt;&lt;code&gt;var node = A.one(&#x27;#nodeId&#x27;);
+     * node.attr(&#x27;title&#x27;, &#x27;Setting a new title attribute&#x27;);
+     * &#x2F;&#x2F; Alert the value of the title attribute: &#x27;Setting a new title attribute&#x27;
+     * alert( node.attr(&#x27;title&#x27;) );
+     * &lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+     *
+     * @method attr
+     * @param {String} name The name of the attribute
+     * @param {String} value The value of the attribute to be set. Optional.
+     * @return {String}
+     *&#x2F;
+    attr: function(name, value) {
+        var instance = this;
+
+        if (!isUndefined(value)) {
+            var el = instance.getDOM();
+
+            if (name in el) {
+                instance.set(name, value);
+            }
+            else {
+                instance.setAttribute(name, value);
+            }
+
+            return instance;
+        }
+        else {
+            if (isObject(name)) {
+                for (var i in name) {
+                    instance.attr(i, name[i]);
+                }
+
+                return instance;
+            }
+
+            var currentValue = instance.get(name);
+
+            if (!Lang.isValue(currentValue)) {
+                currentValue = instance.getAttribute(name);
+            }
+
+            return currentValue;
+        }
+    },
+
+    &#x2F;**
+     * Normalizes the behavior of cloning a node, which by default should not clone
+     * the events that are attached to it.
+     *
+     * Example:
+     *
+     * &lt;pre&gt;&lt;code&gt;var node = A.one(&#x27;#nodeId&#x27;);
+     * node.clone().appendTo(&#x27;body&#x27;);
+     * &lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+     *
+     * @method clone
+     * @return {Node}
+     *&#x2F;
+    clone: (function() {
+        var clone;
+
+        if (SUPPORT_CLONED_EVENTS) {
+            clone = function() {
+                var el = this.getDOM();
+                var clone;
+
+                if (el.nodeType != 3) {
+                    var outerHTML = this.outerHTML();
+
+                    outerHTML = outerHTML.replace(REGEX_IE8_ACTION, &#x27;=&quot;$1&quot;&gt;&#x27;).replace(REGEX_LEADING_WHITE_SPACE, STR_EMPTY);
+
+                    clone = ANode.create(outerHTML);
+                }
+                else {
+                    clone = A.one(el.cloneNode());
+                }
+
+                return clone;
+            };
+        }
+        else {
+            clone = function() {
+                return this.cloneNode(true);
+            };
+        }
+
+        return clone;
+    })(),
+
+    &#x2F;**
+     * &lt;p&gt;Centralize the current Node instance with the passed
+     * &lt;code&gt;val&lt;&#x2F;code&gt; Array, Node, String, or Region, if not specified, the body will be
+     * used.&lt;&#x2F;p&gt;
+     *
+     * Example:
+     *
+     * &lt;pre&gt;&lt;code&gt;var node = A.one(&#x27;#nodeId&#x27;);
+     * &#x2F;&#x2F; Center the &lt;code&gt;node&lt;&#x2F;code&gt; with the &lt;code&gt;#container&lt;&#x2F;code&gt;.
+     * node.center(&#x27;#container&#x27;);
+     * &lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+     *
+     * @method center
+     * @chainable
+     * @param {Array | Node | Region | String} val Array, Node, String, or Region to center with
+     *&#x2F;
+    center: function(val) {
+        var instance = this,
+            nodeRegion = instance.get(REGION),
+            x,
+            y;
+
+        if (isArray(val)) {
+            x = val[0];
+            y = val[1];
+        }
+        else {
+            var region;
+
+            if (isObject(val) &amp;&amp; !A.instanceOf(val, ANode)) {
+                region = val;
+            }
+            else {
+                region = (A.one(val) || A.getBody()).get(REGION);
+            }
+
+            x = region.left + (region.width &#x2F; 2);
+            y = region.top + (region.height &#x2F; 2);
+        }
+
+        instance.setXY([x - (nodeRegion.width &#x2F; 2), y - (nodeRegion.height &#x2F; 2)]);
+    },
+
+    &#x2F;**
+     * &lt;p&gt;This method removes not only child (and other descendant) elements,
+     * but also any text within the set of matched elements. This is because,
+     * according to the DOM specification, any string of text within an element
+     * is considered a child node of that element.&lt;&#x2F;p&gt;
+     *
+     * Example:
+     *
+     * &lt;pre&gt;&lt;code&gt;var node = A.one(&#x27;#nodeId&#x27;);
+     * node.empty();
+     * &lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+     *
+     * @method empty
+     * @chainable
+     *&#x2F;
+    empty: function() {
+        var instance = this;
+
+        instance.all(&#x27;&gt;*&#x27;).remove().purge();
+
+        var el = ANode.getDOMNode(instance);
+
+        while (el.firstChild) {
+            el.removeChild(el.firstChild);
+        }
+
+        return instance;
+    },
+
+    &#x2F;**
+     * Retrieves the DOM node bound to a Node instance. See
+     * &lt;a href=&quot;Node.html#method_getDOMNode&quot;&gt;getDOMNode&lt;&#x2F;a&gt;.
+     *
+     * @method getDOM
+     * @return {HTMLNode} The DOM node bound to the Node instance.
+     *&#x2F;
+    getDOM: function() {
+        var instance = this;
+
+        return ANode.getDOMNode(instance);
+    },
+
+    &#x2F;**
+     * Return the combined width of the border for the specified sides.
+     *
+     * @method getBorderWidth
+     * @param {string} sides Can be t, r, b, l or any combination of
+     * those to represent the top, right, bottom, or left sides.
+     * @return {number}
+     *&#x2F;
+    getBorderWidth: function(sides) {
+        var instance = this;
+
+        return instance._getBoxStyleAsNumber(sides, MAP_BORDER);
+    },
+
+    &#x2F;**
+     * Gets the current center position of the node in page coordinates.
+     * @method getCenterXY
+     * @for Node
+     * @return {Array} The XY position of the node
+    *&#x2F;
+    getCenterXY: function() {
+        var instance = this;
+        var region = instance.get(REGION);
+
+        return [(region.left + region.width&#x2F;2), (region.top + region.height&#x2F;2)];
+    },
+
+    &#x2F;**
+     * Return the combined size of the margin for the specified sides.
+     *
+     * @method getMargin
+     * @param {string} sides Can be t, r, b, l or any combination of
+     * those to represent the top, right, bottom, or left sides.
+     * @return {number}
+     *&#x2F;
+    getMargin: function(sides) {
+        var instance = this;
+
+        return instance._getBoxStyleAsNumber(sides, MAP_MARGIN);
+    },
+
+    &#x2F;**
+     * Return the combined width of the border for the specified sides.
+     *
+     * @method getPadding
+     * @param {string} sides Can be t, r, b, l or any combination of
+     * those to represent the top, right, bottom, or left sides.
+     * @return {number}
+     *&#x2F;
+    getPadding: function(sides) {
+        var instance = this;
+
+        return instance._getBoxStyleAsNumber(sides, MAP_PADDING);
+    },
+
+    &#x2F;**
+     * Set the id of the Node instance if the object does not have one. The
+     * generated id is based on a guid created by the
+     * &lt;a href=&quot;YUI.html#method_stamp&quot;&gt;stamp&lt;&#x2F;a&gt; method.
+     *
+     * @method guid
+     * @param {string} prefix optional guid prefix
+     * @return {String} The current id of the node
+     *&#x2F;
+    guid: function(prefix) {
+        var instance = this;
+        var currentId = instance.get(&#x27;id&#x27;);
+
+        if (!currentId) {
+            currentId = A.stamp(instance);
+
+            instance.set(&#x27;id&#x27;, currentId);
+        }
+
+        return currentId;
+    },
+
+    &#x2F;**
+     * Create a hover interaction.
+     *
+     * @method hover
+     * @param {string} overFn
+     * @param {string} outFn
+     * @return {Node} The current Node instance
+     *&#x2F;
+    hover: function(overFn, outFn) {
+        var instance = this;
+
+        var hoverOptions;
+        var defaultHoverOptions = instance._defaultHoverOptions;
+
+        if (isObject(overFn, true)) {
+            hoverOptions = overFn;
+
+            hoverOptions = A.mix(hoverOptions, defaultHoverOptions);
+
+            overFn = hoverOptions.over;
+            outFn = hoverOptions.out;
+        }
+        else {
+            hoverOptions = A.mix(
+                {
+                    over: overFn,
+                    out: outFn
+                },
+                defaultHoverOptions
+            );
+        }
+
+        instance._hoverOptions = hoverOptions;
+
+        hoverOptions.overTask = A.debounce(instance._hoverOverTaskFn, null, instance);
+        hoverOptions.outTask = A.debounce(instance._hoverOutTaskFn, null, instance);
+
+        return new A.EventHandle(
+            [
+                instance.on(hoverOptions.overEventType, instance._hoverOverHandler, instance),
+                instance.on(hoverOptions.outEventType, instance._hoverOutHandler, instance)
+            ]
+        );
+    },
+
+    &#x2F;**
+     * &lt;p&gt;Get or Set the HTML contents of the node. If the &lt;code&gt;value&lt;&#x2F;code&gt;
+     * is passed it&#x27;s set the content of the element, otherwise it works as a
+     * getter for the current content.&lt;&#x2F;p&gt;
+     *
+     * Example:
+     *
+     * &lt;pre&gt;&lt;code&gt;var node = A.one(&#x27;#nodeId&#x27;);
+     * node.html(&#x27;Setting new HTML&#x27;);
+     * &#x2F;&#x2F; Alert the value of the current content
+     * alert( node.html() );
+     * &lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+     *
+     * @method html
+     * @param {string} value A string of html to set as the content of the node instance.
+     *&#x2F;
+    html: function() {
+        var args = arguments, length = args.length;
+
+        if (length) {
+            this.set(INNER_HTML, args[0]);
+        }
+        else {
+            return this.get(INNER_HTML);
+        }
+
+        return this;
+    },
+
+    oneNS: function(ns, selector) {
+        var instance = this;
+
+        return instance.one(formatSelectorNS(ns, selector));
+    },
+
+    &#x2F;**
+     * Gets the outerHTML of a node, which islike innerHTML, except that it
+     * actually contains the HTML of the node itself.
+     *
+     * @return {string} The outerHTML of the given element.
+     *&#x2F;
+    outerHTML: function() {
+        var instance = this;
+        var domEl = instance.getDOM();
+
+        &#x2F;&#x2F; IE, Opera and WebKit all have outerHTML.
+        if (&#x27;outerHTML&#x27; in domEl) {
+            return domEl.outerHTML;
+        }
+
+        var temp = ANode.create(&#x27;&lt;div&gt;&lt;&#x2F;div&gt;&#x27;).append(
+            this.clone()
+        );
+
+        try {
+            return temp.html();
+        }
+        catch(e) {}
+        finally {
+            temp = null;
+        }
+    },
+
+    &#x2F;**
+     * &lt;p&gt;Inserts a &lt;code&gt;newNode&lt;&#x2F;code&gt; after the node instance (i.e., as the next
+     * sibling). If the reference node has no parent, then does nothing.&lt;&#x2F;p&gt;
+     *
+     * Example:
+     *
+     * &lt;pre&gt;&lt;code&gt;var titleNode = A.one(&#x27;#titleNode&#x27;);
+     * var descriptionNode = A.one(&#x27;#descriptionNode&#x27;);
+     * &#x2F;&#x2F; the description is usually shown after the title
+     * titleNode.placeAfter(descriptionNode);
+     * &lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+     *
+     * @method placeAfter
+     * @chainable
+     * @param {Node} newNode Node to insert.
+     *&#x2F;
+    placeAfter: function(newNode) {
+        var instance = this;
+
+        return instance._place(newNode, instance.get(NEXT_SIBLING));
+    },
+
+    &#x2F;**
+     * &lt;p&gt;Inserts a &lt;code&gt;newNode&lt;&#x2F;code&gt; before the node instance (i.e., as the previous
+     * sibling). If the reference node has no parent, then does nothing.&lt;&#x2F;p&gt;
+     *
+     * Example:
+     *
+     * &lt;pre&gt;&lt;code&gt;var descriptionNode = A.one(&#x27;#descriptionNode&#x27;);
+     * var titleNode = A.one(&#x27;#titleNode&#x27;);
+     * &#x2F;&#x2F; the title is usually shown before the description
+     * descriptionNode.placeBefore(titleNode);
+     * &lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+     *
+     * @method placeBefore
+     * @chainable
+     * @param {Node} newNode Node to insert.
+     *&#x2F;
+    placeBefore: function(newNode) {
+        var instance = this;
+
+        return instance._place(newNode, instance);
+    },
+
+    &#x2F;**
+     * &lt;p&gt;Inserts the node instance to the begining of the &lt;code&gt;selector&lt;&#x2F;code&gt;
+     * node (i.e., insert before the &lt;code&gt;firstChild&lt;&#x2F;code&gt; of the
+     * &lt;code&gt;selector&lt;&#x2F;code&gt;).&lt;&#x2F;p&gt;
+     *
+     * Example:
+     *
+     * &lt;pre&gt;&lt;code&gt;var node = A.one(&#x27;#nodeId&#x27;);
+     * node.prependTo(&#x27;body&#x27;);
+     * &lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+     *
+     * @method prependTo
+     * @chainable
+     * @param {Node | String} selector A selector, element, HTML string, Node
+     *&#x2F;
+    prependTo: function(selector) {
+        var instance = this;
+
+        A.one(selector).prepend(instance);
+
+        return instance;
+    },
+
+    &#x2F;**
+     * Add one or more CSS classes to an element and remove the class(es)
+     * from the siblings of the element.
+     *
+     * @method radioClass
+     * @chainable
+     * @param {String} cssClass
+     *&#x2F;
+    radioClass: function(cssClass) {
+        var instance = this;
+
+        var siblings = instance.siblings();
+
+        if (isString(cssClass)) {
+            siblings.removeClass(cssClass);
+
+            instance.addClass(cssClass);
+        }
+        else if (isArray(cssClass)) {
+            var siblingNodes = siblings.getDOM();
+
+            var regex = getRegExp(&#x27;(?:^|\\s+)(?:&#x27; + cssClass.join(&#x27;|&#x27;) + &#x27;)(?=\\s+|$)&#x27;, &#x27;g&#x27;);
+            var node;
+
+            for (var i = siblingNodes.length - 1; i &gt;= 0; i--) {
+                node = siblingNodes[i];
+                node.className = node.className.replace(regex, &#x27;&#x27;);
+            }
+
+            instance.addClass(cssClass.join(&#x27; &#x27;));
+        }
+
+        return instance;
+    },
+
+    &#x2F;**
+     * Generate an unique identifier and reset the id attribute of the node
+     * instance using the new value. Invokes the
+     * &lt;a href=&quot;Node.html#method_guid&quot;&gt;guid&lt;&#x2F;a&gt;.
+     *
+     * @method resetId
+     * @chainable
+     * @param {String} prefix Optional prefix for the guid.
+     *&#x2F;
+    resetId: function(prefix) {
+        var instance = this;
+
+        instance.attr(&#x27;id&#x27;, A.guid(prefix));
+
+        return instance;
+    },
+
+    &#x2F;**
+     * Selects a substring of text inside of the input element.
+     *
+     * @method selectText
+     * @param {Number} start The index to start the selection range from
+     * @param {Number} end The index to end the selection range at
+     *&#x2F;
+    selectText: function(start, end) {
+        var instance = this;
+
+        var textField = instance.getDOM();
+        var length = instance.val().length;
+
+        end = isValue(end) ? end : length;
+        start = isValue(start) ? start : 0;
+
+        &#x2F;&#x2F; Some form elements could throw a (NS_ERROR_FAILURE)
+        &#x2F;&#x2F; [nsIDOMNSHTMLInputElement.setSelectionRange] error when invoke the
+        &#x2F;&#x2F; setSelectionRange on firefox. Wrapping in a try&#x2F;catch to prevent the error be thrown
+        try {
+            if (textField.setSelectionRange) {
+                textField.setSelectionRange(start, end);
+            }
+            else if (textField.createTextRange) {
+                var range = textField.createTextRange();
+
+                range.moveStart(&#x27;character&#x27;, start);
+                range.moveEnd(&#x27;character&#x27;, end - length);
+
+                range.select();
+            }
+            else {
+                textField.select();
+            }
+
+            if (textField != DOC.activeElement) {
+                textField.focus();
+            }
+        }
+        catch(e) {}
+
+        return instance;
+    },
+
+    &#x2F;**
+     * Enables text selection for this element (normalized across browsers).
+     *
+     * @method selectable
+     * @chainable
+     *&#x2F;
+    selectable: function(noRecurse) {
+        var instance = this;
+
+        instance.removeClass(CSS_UNSELECTABLE);
+
+        if (A.UA.ie || A.UA.opera) {
+            _setUnselectable(instance._node, false, noRecurse);
+        }
+
+        return instance;
+    },
+
+    &#x2F;**
+     * &lt;p&gt;Stops the specified event(s) from bubbling and optionally prevents the
+     * default action.&lt;&#x2F;p&gt;
+     *
+     * Example:
+     *
+     * &lt;pre&gt;&lt;code&gt;var anchor = A.one(&#x27;a#anchorId&#x27;);
+     * anchor.swallowEvent(&#x27;click&#x27;);
+     * &lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+     *
+     * @method swallowEvent
+     * @chainable
+     * @param {String&#x2F;Array} eventName an event or array of events to stop from bubbling
+     * @param {Boolean} preventDefault (optional) true to prevent the default action too
+     *&#x2F;
+    swallowEvent: function(eventName, preventDefault) {
+        var instance = this;
+
+        var fn = function(event) {
+            event.stopPropagation();
+
+            if (preventDefault) {
+                event.preventDefault();
+
+                event.halt();
+            }
+
+            return false;
+        };
+
+        if(isArray(eventName)) {
+            AArray.each(
+                eventName,
+                function(name) {
+                    instance.on(name, fn);
+                }
+            );
+
+            return this;
+        }
+        else {
+            instance.on(eventName, fn);
+        }
+
+        return instance;
+    },
+
+    &#x2F;**
+     * &lt;p&gt;Get or Set the combined text contents of the node instance,
+     * including it&#x27;s descendants. If the &lt;code&gt;text&lt;&#x2F;code&gt;
+     * is passed it&#x27;s set the content of the element, otherwise it works as a
+     * getter for the current content.&lt;&#x2F;p&gt;
+     *
+     * Example:
+     *
+     * &lt;pre&gt;&lt;code&gt;var node = A.one(&#x27;#nodeId&#x27;);
+     * node.text(&#x27;Setting new text content&#x27;);
+     * &#x2F;&#x2F; Alert the value of the current content
+     * alert( node.text() );
+     * &lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+     *
+     * @method text
+     * @param {String} text A string of text to set as the content of the node instance.
+     *&#x2F;
+    text: function(text) {
+        var instance = this;
+        var el = instance.getDOM();
+
+        if (!isUndefined(text)) {
+            text = A.DOM._getDoc(el).createTextNode(text);
+
+            return instance.empty().append(text);
+        }
+
+        return instance._getText(el.childNodes);
+    },
+
+    &#x2F;**
+     * &lt;p&gt;Displays or hide the node instance.&lt;&#x2F;p&gt;
+     *
+     * &lt;p&gt;&lt;string&gt;NOTE:&lt;&#x2F;string&gt; This method assume that your node were hidden
+     * because of the &#x27;aui-hide&#x27; css class were being used. This won&#x27;t
+     * manipulate the inline &lt;code&gt;style.display&lt;&#x2F;code&gt; property.&lt;&#x2F;p&gt;
+     *
+     * @method toggle
+     * @chainable
+     * @param {Boolean} on Whether to force the toggle. Optional.
+     * @param {Function} callback A function to run after the visibility change. Optional.
+     *&#x2F;
+    toggle: function(on, callback) {
+        var instance = this;
+
+        instance._toggleView.apply(instance, arguments);
+
+        return instance;
+    },
+
+    &#x2F;**
+     * Disables text selection for this element (normalized across browsers).
+     *
+     * @method unselectable
+     * @chainable
+     *&#x2F;
+    unselectable: function(noRecurse) {
+        var instance = this;
+
+        instance.addClass(CSS_UNSELECTABLE);
+
+        if (A.UA.ie || A.UA.opera) {
+            _setUnselectable(instance._node, true, noRecurse);
+        }
+
+        return instance;
+    },
+
+    &#x2F;**
+     * &lt;p&gt;Get or Set the value attribute of the node instance. If the
+     * &lt;code&gt;value&lt;&#x2F;code&gt; is passed it&#x27;s set the value of the element,
+     * otherwise it works as a getter for the current value.&lt;&#x2F;p&gt;
+     *
+     * Example:
+     *
+     * &lt;pre&gt;&lt;code&gt;var input = A.one(&#x27;#inputId&#x27;);
+     * input.val(&#x27;Setting new input value&#x27;);
+     * &#x2F;&#x2F; Alert the value of the input
+     * alert( input.val() );
+     * &lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+     *
+     * @method val
+     * @param {string} value Value to be set. Optional.
+     *&#x2F;
+    val: function(value) {
+        var instance = this;
+
+        if (isUndefined(value)) {
+            return instance.get(VALUE);
+        }
+        else {
+            return instance.set(VALUE, value);
+        }
+    },
+
+    &#x2F;**
+     * Return the combined size of the box style for the specified sides.
+     *
+     * @method _getBoxStyleAsNumber
+     * @param {string} sides Can be t, r, b, l or any combination of
+     * those to represent the top, right, bottom, or left sides.
+     * @param {string} map An object mapping mapping the &quot;sides&quot; param to the a CSS value to retrieve
+     * @return {number}
+     *&#x2F;
+    _getBoxStyleAsNumber: function(sides, map) {
+        var instance = this;
+
+        var sidesArray = sides.match(&#x2F;\w&#x2F;g);
+        var value = 0;
+        var side;
+        var sideKey;
+
+        for (var i = sidesArray.length - 1; i &gt;= 0; i--) {
+            sideKey = sidesArray[i];
+            side = 0;
+
+            if (sideKey) {
+                side = parseFloat(instance.getComputedStyle(map[sideKey]));
+                side = Math.abs(side);
+
+                value += side || 0;
+            }
+        }
+
+        return value;
+    },
+
+    &#x2F;**
+     * Extract text content from the passed nodes.
+     *
+     * @method _getText
+     * @private
+     * @param {Native NodeList} childNodes
+     *&#x2F;
+    _getText: function(childNodes) {
+        var instance = this;
+
+        var length = childNodes.length;
+        var childNode;
+
+        var str = [];
+
+        for (var i = 0; i &lt; length; i++) {
+            childNode = childNodes[i];
+
+            if (childNode &amp;&amp; childNode.nodeType != 8) {
+                if (childNode.nodeType != 1) {
+                    str.push(childNode.nodeValue);
+                }
+
+                if (childNode.childNodes) {
+                    str.push(instance._getText(childNode.childNodes));
+                }
+            }
+        }
+
+        return str.join(STR_EMPTY);
+    },
+
+    &#x2F;**
+     * The event handler for the &quot;out&quot; function that is fired for events attached via the hover method.
+     *
+     * @method _hoverOutHandler
+     * @private
+     * @param {EventFacade} event
+     *&#x2F;
+    _hoverOutHandler: function(event) {
+        var instance = this;
+
+        var hoverOptions = instance._hoverOptions;
+
+        hoverOptions.outTask.delay(hoverOptions.outDelay, event);
+    },
+
+    &#x2F;**
+     * The event handler for the &quot;over&quot; function that is fired for events attached via the hover method.
+     *
+     * @method _hoverOverHandler
+     * @private
+     * @param {EventFacade} event
+     *&#x2F;
+    _hoverOverHandler: function(event) {
+        var instance = this;
+
+        var hoverOptions = instance._hoverOptions;
+
+        hoverOptions.overTask.delay(hoverOptions.overDelay, event);
+    },
+
+    &#x2F;**
+     * Cancels the over task, and fires the users custom &quot;out&quot; function for the hover method
+     *
+     * @method _hoverOverHandler
+     * @private
+     * @param {EventFacade} event
+     *&#x2F;
+    _hoverOutTaskFn: function(event) {
+        var instance = this;
+
+        var hoverOptions = instance._hoverOptions;
+
+        hoverOptions.overTask.cancel();
+
+        hoverOptions.out.apply(hoverOptions.context || event.currentTarget, arguments);
+    },
+
+    &#x2F;**
+     * Cancels the out task, and fires the users custom &quot;over&quot; function for the hover method
+     *
+     * @method _hoverOverHandler
+     * @private
+     * @param {EventFacade} event
+     *&#x2F;
+    _hoverOverTaskFn: function(event) {
+        var instance = this;
+
+        var hoverOptions = instance._hoverOptions;
+
+        hoverOptions.outTask.cancel();
+
+        hoverOptions.over.apply(hoverOptions.context || event.currentTarget, arguments);
+    },
+
+    &#x2F;**
+     * Place a node or html string at a specific location
+     *
+     * @method _place
+     * @private
+     * @param {Node|String} newNode
+     * @param {Node} refNode
+     *&#x2F;
+    _place: function(newNode, refNode) {
+        var instance = this;
+
+        var parent = instance.get(PARENT_NODE);
+
+        if (parent) {
+            if (isString(newNode)) {
+                newNode = ANode.create(newNode);
+            }
+
+            parent.insertBefore(newNode, refNode);
+        }
+
+        return instance;
+    },
+
+    _defaultHoverOptions: {
+        overEventType: &#x27;mouseenter&#x27;,
+        outEventType: &#x27;mouseleave&#x27;,
+        overDelay: 0,
+        outDelay: 0,
+        over: Lang.emptyFn,
+        out: Lang.emptyFn
+    }
 }, true);
 
 NODE_PROTO.__show = NODE_PROTO._show;
@@ -2608,9 +2608,9 @@ NODE_PROTO.__hide = NODE_PROTO._hide;
 NODE_PROTO.__isHidden = NODE_PROTO._isHidden;
 
 NODE_PROTO._isHidden = function() {
-	var instance = this;
+    var instance = this;
 
-	return NODE_PROTO.__isHidden.call(instance) || instance.hasClass(instance._hideClass || CSS_HIDE);
+    return NODE_PROTO.__isHidden.call(instance) || instance.hasClass(instance._hideClass || CSS_HIDE);
 };
 &#x2F;**
  * &lt;p&gt;Hide the node adding a css class on it. If &lt;code&gt;cssClass&lt;&#x2F;code&gt; is not
@@ -2626,11 +2626,11 @@ NODE_PROTO._isHidden = function() {
  * @param {string} cssClass Class name to hide the element. Optional.
  *&#x2F;
 NODE_PROTO._hide = function() {
-	var instance = this;
+    var instance = this;
 
-	instance.addClass(instance._hideClass || CSS_HIDE);
+    instance.addClass(instance._hideClass || CSS_HIDE);
 
-	return instance;
+    return instance;
 };
 
 &#x2F;**
@@ -2648,11 +2648,11 @@ NODE_PROTO._hide = function() {
  * @param {string} cssClass Class name to hide the element. Optional.
  *&#x2F;
 NODE_PROTO._show = function() {
-	var instance = this;
+    var instance = this;
 
-	instance.removeClass(instance._hideClass || CSS_HIDE);
+    instance.removeClass(instance._hideClass || CSS_HIDE);
 
-	return instance;
+    return instance;
 };
 
 &#x2F;**
@@ -2746,114 +2746,114 @@ NODE_PROTO._show = function() {
  *&#x2F;
 
 A.each(
-	[&#x27;Height&#x27;, &#x27;Width&#x27;],
-	function(item, index, collection) {
-		var sides = index ? &#x27;lr&#x27; : &#x27;tb&#x27;;
+    [&#x27;Height&#x27;, &#x27;Width&#x27;],
+    function(item, index, collection) {
+        var sides = index ? &#x27;lr&#x27; : &#x27;tb&#x27;;
 
-		var dimensionType = item.toLowerCase();
+        var dimensionType = item.toLowerCase();
 
-		NODE_PROTO[dimensionType] = function(size) {
-			var instance = this;
+        NODE_PROTO[dimensionType] = function(size) {
+            var instance = this;
 
-			var returnValue = instance;
+            var returnValue = instance;
 
-			if (isUndefined(size)) {
-				var node = instance._node;
-				var dimension;
+            if (isUndefined(size)) {
+                var node = instance._node;
+                var dimension;
 
-				if (node) {
-					if ((!node.tagName &amp;&amp; node.nodeType === 9) || node.alert) {
-						dimension = instance.get(REGION)[dimensionType];
-					}
-					else {
-						dimension = instance.get(OFFSET + item);
+                if (node) {
+                    if ((!node.tagName &amp;&amp; node.nodeType === 9) || node.alert) {
+                        dimension = instance.get(REGION)[dimensionType];
+                    }
+                    else {
+                        dimension = instance.get(OFFSET + item);
 
-						var previous = {};
-						var styleObj = node.style;
+                        var previous = {};
+                        var styleObj = node.style;
 
-						if (!dimension) {
-							instance.addClass(CSS_FORCE_OFFSET);
+                        if (!dimension) {
+                            instance.addClass(CSS_FORCE_OFFSET);
 
-							dimension = instance.get(OFFSET + item);
+                            dimension = instance.get(OFFSET + item);
 
-							instance.removeClass(CSS_FORCE_OFFSET);
-						}
+                            instance.removeClass(CSS_FORCE_OFFSET);
+                        }
 
-						if (dimension) {
-							dimension -= (instance.getPadding(sides) + instance.getBorderWidth(sides));
-						}
-					}
-				}
+                        if (dimension) {
+                            dimension -= (instance.getPadding(sides) + instance.getBorderWidth(sides));
+                        }
+                    }
+                }
 
-				returnValue = dimension;
-			}
-			else {
-				instance.setStyle(dimensionType, size);
-			}
+                returnValue = dimension;
+            }
+            else {
+                instance.setStyle(dimensionType, size);
+            }
 
-			return returnValue;
-		};
+            return returnValue;
+        };
 
-		NODE_PROTO[INNER + item] = function() {
-			var instance = this;
+        NODE_PROTO[INNER + item] = function() {
+            var instance = this;
 
-			return instance[dimensionType]() + instance.getPadding(sides);
-		};
+            return instance[dimensionType]() + instance.getPadding(sides);
+        };
 
-		NODE_PROTO[OUTER + item] = function(margin) {
-			var instance = this;
+        NODE_PROTO[OUTER + item] = function(margin) {
+            var instance = this;
 
-			var innerSize = instance[INNER + item]();
-			var borderSize = instance.getBorderWidth(sides);
+            var innerSize = instance[INNER + item]();
+            var borderSize = instance.getBorderWidth(sides);
 
-			var size = innerSize + borderSize;
+            var size = innerSize + borderSize;
 
-			if (margin) {
-				size += instance.getMargin(sides);
-			}
+            if (margin) {
+                size += instance.getMargin(sides);
+            }
 
-			return size;
-		};
-	}
+            return size;
+        };
+    }
 );
 
 if (!SUPPORT_OPTIONAL_TBODY) {
-	A.DOM._ADD_HTML = A.DOM.addHTML;
+    A.DOM._ADD_HTML = A.DOM.addHTML;
 
-	A.DOM.addHTML = function(node, content, where) {
-		var nodeName = (node.nodeName &amp;&amp; node.nodeName.toLowerCase()) || STR_EMPTY;
+    A.DOM.addHTML = function(node, content, where) {
+        var nodeName = (node.nodeName &amp;&amp; node.nodeName.toLowerCase()) || STR_EMPTY;
 
-		var tagName = STR_EMPTY;
+        var tagName = STR_EMPTY;
 
-		if (!isUndefined(content)) {
-			if (isString(content)) {
-				tagName = (REGEX_TAGNAME.exec(content) || ARRAY_EMPTY_STRINGS)[1];
-			}
-			else if (content.nodeType &amp;&amp; content.nodeType == 11 &amp;&amp; content.childNodes.length) { &#x2F;&#x2F; a doc frag
-				tagName = content.childNodes[0].nodeName;
-			}
-			else if (content.nodeName) { &#x2F;&#x2F; a node
-				tagName = content.nodeName;
-			}
+        if (!isUndefined(content)) {
+            if (isString(content)) {
+                tagName = (REGEX_TAGNAME.exec(content) || ARRAY_EMPTY_STRINGS)[1];
+            }
+            else if (content.nodeType &amp;&amp; content.nodeType == 11 &amp;&amp; content.childNodes.length) { &#x2F;&#x2F; a doc frag
+                tagName = content.childNodes[0].nodeName;
+            }
+            else if (content.nodeName) { &#x2F;&#x2F; a node
+                tagName = content.nodeName;
+            }
 
-			tagName = tagName &amp;&amp; tagName.toLowerCase();
-		}
+            tagName = tagName &amp;&amp; tagName.toLowerCase();
+        }
 
-		if (nodeName == &#x27;table&#x27; &amp;&amp; tagName == &#x27;tr&#x27;) {
-			node = node.getElementsByTagName(&#x27;tbody&#x27;)[0] || node.appendChild(node.ownerDocument.createElement(&#x27;tbody&#x27;));
+        if (nodeName == &#x27;table&#x27; &amp;&amp; tagName == &#x27;tr&#x27;) {
+            node = node.getElementsByTagName(&#x27;tbody&#x27;)[0] || node.appendChild(node.ownerDocument.createElement(&#x27;tbody&#x27;));
 
-			var whereNodeName = ((where &amp;&amp; where.nodeName) || STR_EMPTY).toLowerCase();
+            var whereNodeName = ((where &amp;&amp; where.nodeName) || STR_EMPTY).toLowerCase();
 
-			&#x2F;&#x2F; Assuming if the &quot;where&quot; is a tbody node,
-			&#x2F;&#x2F; we&#x27;re trying to prepend to a table. Attempt to
-			&#x2F;&#x2F; grab the first child of the tbody.
-			if (whereNodeName == &#x27;tbody&#x27; &amp;&amp; where.childNodes.length &gt; 0) {
-				where = where.firstChild;
-			}
-		}
+            &#x2F;&#x2F; Assuming if the &quot;where&quot; is a tbody node,
+            &#x2F;&#x2F; we&#x27;re trying to prepend to a table. Attempt to
+            &#x2F;&#x2F; grab the first child of the tbody.
+            if (whereNodeName == &#x27;tbody&#x27; &amp;&amp; where.childNodes.length &gt; 0) {
+                where = where.firstChild;
+            }
+        }
 
-		return A.DOM._ADD_HTML(node, content, where);
-	};
+        return A.DOM._ADD_HTML(node, content, where);
+    };
 }
 
 &#x2F;**
@@ -2867,269 +2867,269 @@ if (!SUPPORT_OPTIONAL_TBODY) {
  * @uses A.Node
  *&#x2F;
  ANodeList.importMethod(
-	NODE_PROTO,
-	[
-		&#x27;after&#x27;,
+    NODE_PROTO,
+    [
+        &#x27;after&#x27;,
 
-		&#x27;appendTo&#x27;,
+        &#x27;appendTo&#x27;,
 
-		&#x27;attr&#x27;,
+        &#x27;attr&#x27;,
 
-		&#x27;before&#x27;,
+        &#x27;before&#x27;,
 
-		&#x27;empty&#x27;,
+        &#x27;empty&#x27;,
 
-		&#x27;getX&#x27;,
+        &#x27;getX&#x27;,
 
-		&#x27;getXY&#x27;,
+        &#x27;getXY&#x27;,
 
-		&#x27;getY&#x27;,
+        &#x27;getY&#x27;,
 
-		&#x27;hover&#x27;,
+        &#x27;hover&#x27;,
 
-		&#x27;html&#x27;,
+        &#x27;html&#x27;,
 
-		&#x27;innerHeight&#x27;,
+        &#x27;innerHeight&#x27;,
 
-		&#x27;innerWidth&#x27;,
+        &#x27;innerWidth&#x27;,
 
-		&#x27;outerHeight&#x27;,
+        &#x27;outerHeight&#x27;,
 
-		&#x27;outerHTML&#x27;,
+        &#x27;outerHTML&#x27;,
 
-		&#x27;outerWidth&#x27;,
+        &#x27;outerWidth&#x27;,
 
-		&#x27;prepend&#x27;,
+        &#x27;prepend&#x27;,
 
-		&#x27;prependTo&#x27;,
+        &#x27;prependTo&#x27;,
 
-		&#x27;purge&#x27;,
+        &#x27;purge&#x27;,
 
-		&#x27;selectText&#x27;,
+        &#x27;selectText&#x27;,
 
-		&#x27;selectable&#x27;,
+        &#x27;selectable&#x27;,
 
-		&#x27;setX&#x27;,
+        &#x27;setX&#x27;,
 
-		&#x27;setXY&#x27;,
+        &#x27;setXY&#x27;,
 
-		&#x27;setY&#x27;,
+        &#x27;setY&#x27;,
 
-		&#x27;text&#x27;,
+        &#x27;text&#x27;,
 
-		&#x27;toggle&#x27;,
+        &#x27;toggle&#x27;,
 
-		&#x27;unselectable&#x27;,
+        &#x27;unselectable&#x27;,
 
-		&#x27;val&#x27;
-	]
+        &#x27;val&#x27;
+    ]
 );
 
 A.mix(
-	NODELIST_PROTO,
-	{
-		&#x2F;**
-		 * See &lt;a href=&quot;Node.html#method_all&quot;&gt;Node all&lt;&#x2F;a&gt;.
-		 *
-		 * @method all
-		 *&#x2F;
-		all: function(selector) {
-			var instance = this;
+    NODELIST_PROTO,
+    {
+        &#x2F;**
+         * See &lt;a href=&quot;Node.html#method_all&quot;&gt;Node all&lt;&#x2F;a&gt;.
+         *
+         * @method all
+         *&#x2F;
+        all: function(selector) {
+            var instance = this;
 
-			var newNodeList = [];
-			var nodes = instance._nodes;
-			var length = nodes.length;
+            var newNodeList = [];
+            var nodes = instance._nodes;
+            var length = nodes.length;
 
-			var subList;
+            var subList;
 
-			for (var i = 0; i &lt; length; i++) {
-				subList = A.Selector.query(selector, nodes[i]);
+            for (var i = 0; i &lt; length; i++) {
+                subList = A.Selector.query(selector, nodes[i]);
 
-				if (subList &amp;&amp; subList.length) {
-					newNodeList.push.apply(newNodeList, subList);
-				}
-			}
+                if (subList &amp;&amp; subList.length) {
+                    newNodeList.push.apply(newNodeList, subList);
+                }
+            }
 
-			newNodeList = AArray.unique(newNodeList);
+            newNodeList = AArray.unique(newNodeList);
 
-			return A.all(newNodeList);
-		},
+            return A.all(newNodeList);
+        },
 
-		allNS: function(ns, selector) {
-			var instance = this;
+        allNS: function(ns, selector) {
+            var instance = this;
 
-			return instance.all(formatSelectorNS(ns, selector));
-		},
+            return instance.all(formatSelectorNS(ns, selector));
+        },
 
-		&#x2F;**
-		 * Returns the first element in the node list collection.
-		 *
-		 * @method first
-		 * @return {Node}
-		 *&#x2F;
-		first: function() {
-			var instance = this;
+        &#x2F;**
+         * Returns the first element in the node list collection.
+         *
+         * @method first
+         * @return {Node}
+         *&#x2F;
+        first: function() {
+            var instance = this;
 
-			return instance.item(0);
-		},
+            return instance.item(0);
+        },
 
-		&#x2F;**
-		 * See &lt;a href=&quot;Node.html#method_getDOM&quot;&gt;Node getDOM&lt;&#x2F;a&gt;.
-		 *
-		 * @method getDOM
-		 *&#x2F;
-		getDOM: function() {
-			var instance = this;
+        &#x2F;**
+         * See &lt;a href=&quot;Node.html#method_getDOM&quot;&gt;Node getDOM&lt;&#x2F;a&gt;.
+         *
+         * @method getDOM
+         *&#x2F;
+        getDOM: function() {
+            var instance = this;
 
-			return ANodeList.getDOMNodes(this);
-		},
+            return ANodeList.getDOMNodes(this);
+        },
 
-		&#x2F;**
-		 * Returns the last element in the node list collection.
-		 *
-		 * @method last
-		 * @return {Node}
-		 *&#x2F;
-		last: function() {
-			var instance = this;
+        &#x2F;**
+         * Returns the last element in the node list collection.
+         *
+         * @method last
+         * @return {Node}
+         *&#x2F;
+        last: function() {
+            var instance = this;
 
-			return instance.item(instance._nodes.length - 1);
-		},
+            return instance.item(instance._nodes.length - 1);
+        },
 
-		&#x2F;**
-		 * See &lt;a href=&quot;Node.html#method_one&quot;&gt;Node one&lt;&#x2F;a&gt;.
-		 *
-		 * @method one
-		 *&#x2F;
-		one: function(selector) {
-			var instance = this;
+        &#x2F;**
+         * See &lt;a href=&quot;Node.html#method_one&quot;&gt;Node one&lt;&#x2F;a&gt;.
+         *
+         * @method one
+         *&#x2F;
+        one: function(selector) {
+            var instance = this;
 
-			var newNode = null;
+            var newNode = null;
 
-			var nodes = instance._nodes;
-			var length = nodes.length;
+            var nodes = instance._nodes;
+            var length = nodes.length;
 
-			for (var i = 0; i &lt; length; i++) {
-				newNode = A.Selector.query(selector, nodes[i], true);
+            for (var i = 0; i &lt; length; i++) {
+                newNode = A.Selector.query(selector, nodes[i], true);
 
-				if (newNode) {
-					newNode = A.one(newNode);
+                if (newNode) {
+                    newNode = A.one(newNode);
 
-					break;
-				}
-			}
+                    break;
+                }
+            }
 
-			return newNode;
-		},
+            return newNode;
+        },
 
-		oneNS: function(ns, selector) {
-			var instance = this;
+        oneNS: function(ns, selector) {
+            var instance = this;
 
-			return instance.one(formatSelectorNS(ns, selector));
-		}
-	}
+            return instance.one(formatSelectorNS(ns, selector));
+        }
+    }
 );
 
 NODELIST_PROTO.__filter = NODELIST_PROTO.filter;
 
 NODELIST_PROTO.filter = function(value, context) {
-	var instance = this;
+    var instance = this;
 
-	var newNodeList;
+    var newNodeList;
 
-	if (isFunction(value)) {
-		var nodes = [];
+    if (isFunction(value)) {
+        var nodes = [];
 
-		instance.each(
-			function(item, index, collection) {
-				if (value.call(context || item, item, index, collection)) {
-					nodes.push(item._node);
-				}
-			}
-		);
+        instance.each(
+            function(item, index, collection) {
+                if (value.call(context || item, item, index, collection)) {
+                    nodes.push(item._node);
+                }
+            }
+        );
 
-		newNodeList = A.all(nodes);
-	}
-	else {
-		newNodeList = NODELIST_PROTO.__filter.call(instance, value);
-	}
+        newNodeList = A.all(nodes);
+    }
+    else {
+        newNodeList = NODELIST_PROTO.__filter.call(instance, value);
+    }
 
-	return newNodeList;
+    return newNodeList;
 };
 
 A.mix(
-	ANodeList,
-	{
-		create: function(html) {
-			var docFrag = A.getDoc().invoke(CREATE_DOCUMENT_FRAGMENT);
+    ANodeList,
+    {
+        create: function(html) {
+            var docFrag = A.getDoc().invoke(CREATE_DOCUMENT_FRAGMENT);
 
-			return docFrag.append(html).get(CHILD_NODES);
-		}
-	}
+            return docFrag.append(html).get(CHILD_NODES);
+        }
+    }
 );
 
 A.mix(
-	A,
-	{
-		&#x2F;**
-		 * Get the body node. Shortcut to &lt;code&gt;A.one(&#x27;body&#x27;)&lt;&#x2F;code&gt;.
-		 *
-		 * @method getBody
-		 *&#x2F;
-		getBody: function() {
-			var instance = this;
+    A,
+    {
+        &#x2F;**
+         * Get the body node. Shortcut to &lt;code&gt;A.one(&#x27;body&#x27;)&lt;&#x2F;code&gt;.
+         *
+         * @method getBody
+         *&#x2F;
+        getBody: function() {
+            var instance = this;
 
-			if (!instance._bodyNode) {
-				instance._bodyNode = A.one(DOC.body);
-			}
+            if (!instance._bodyNode) {
+                instance._bodyNode = A.one(DOC.body);
+            }
 
-			return instance._bodyNode;
-		},
+            return instance._bodyNode;
+        },
 
-		&#x2F;**
-		 * Get the document node. Shortcut to &lt;code&gt;A.one(document)&lt;&#x2F;code&gt;.
-		 *
-		 * @method getDoc
-		 *&#x2F;
-		getDoc: function() {
-			var instance = this;
+        &#x2F;**
+         * Get the document node. Shortcut to &lt;code&gt;A.one(document)&lt;&#x2F;code&gt;.
+         *
+         * @method getDoc
+         *&#x2F;
+        getDoc: function() {
+            var instance = this;
 
-			if (!instance._documentNode) {
-				instance._documentNode = A.one(DOC);
-			}
+            if (!instance._documentNode) {
+                instance._documentNode = A.one(DOC);
+            }
 
-			return instance._documentNode;
-		},
+            return instance._documentNode;
+        },
 
-		&#x2F;**
-		 * Get the window node. Shortcut to &lt;code&gt;A.one(window)&lt;&#x2F;code&gt;.
-		 *
-		 * @method getWin
-		 *&#x2F;
-		getWin: function() {
-			var instance = this;
+        &#x2F;**
+         * Get the window node. Shortcut to &lt;code&gt;A.one(window)&lt;&#x2F;code&gt;.
+         *
+         * @method getWin
+         *&#x2F;
+        getWin: function() {
+            var instance = this;
 
-			if (!instance._windowNode) {
-				instance._windowNode = A.one(WIN);
-			}
+            if (!instance._windowNode) {
+                instance._windowNode = A.one(WIN);
+            }
 
-			return instance._windowNode;
-		}
-	}
+            return instance._windowNode;
+        }
+    }
 );
 
 A.queryNS = function(ns, selector, methodName) {
-	return A[methodName || &#x27;one&#x27;](formatSelectorNS(ns, selector));
+    return A[methodName || &#x27;one&#x27;](formatSelectorNS(ns, selector));
 };
 
 A.oneNS = A.queryNS;
 
 A.allNS = function(ns, selector) {
-	return A.queryNS(ns, selector, &#x27;all&#x27;);
+    return A.queryNS(ns, selector, &#x27;all&#x27;);
 };
 
 A.byIdNS = function(ns, id) {
-	return A.one(prefixSelector(ns, id));
+    return A.one(prefixSelector(ns, id));
 };
 
 &#x2F;&#x2F; Patch for http:&#x2F;&#x2F;yuilibrary.com&#x2F;projects&#x2F;yui3&#x2F;ticket&#x2F;2531537
@@ -3137,15 +3137,15 @@ A.byIdNS = function(ns, id) {
 var addMethod = ANodeList.addMethod;
 
 AArray.each(
-	[&#x27;hide&#x27;, &#x27;show&#x27;],
-	function(item, index, collection) {
-		addMethod(
-			item,
-			function() {
-				return this[item].apply(this, arguments);
-			}
-		);
-	}
+    [&#x27;hide&#x27;, &#x27;show&#x27;],
+    function(item, index, collection) {
+        addMethod(
+            item,
+            function() {
+                return this[item].apply(this, arguments);
+            }
+        );
+    }
 );
     </pre>
 </div>

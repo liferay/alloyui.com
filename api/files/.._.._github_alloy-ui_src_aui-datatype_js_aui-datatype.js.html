@@ -1514,32 +1514,32 @@
  *&#x2F;
 
 var L = A.Lang,
-	FALSE = &#x27;false&#x27;,
-	TRUE = &#x27;true&#x27;,
+    FALSE = &#x27;false&#x27;,
+    TRUE = &#x27;true&#x27;,
 
-	NUM_SIXTY = 60,
-	NUM_THOUSAND = 1000,
-	NUM_TWENTY_FOUR = 24,
+    NUM_SIXTY = 60,
+    NUM_THOUSAND = 1000,
+    NUM_TWENTY_FOUR = 24,
 
-	&#x2F;**
-	 * DataType.Boolean provides a set of utility to parse &lt;code&gt;falsey&lt;&#x2F;code&gt;
+    &#x2F;**
+     * DataType.Boolean provides a set of utility to parse &lt;code&gt;falsey&lt;&#x2F;code&gt;
      * value to &lt;code&gt;false&lt;&#x2F;code&gt; and &lt;code&gt;non-falsey&lt;&#x2F;code&gt; to
      * &lt;code&gt;true&lt;&#x2F;code&gt;.
-	 *
-	 * @class DataType.Boolean
-	 * @static
-	 *&#x2F;
-	DB = A.namespace(&#x27;DataType.Boolean&#x27;),
+     *
+     * @class DataType.Boolean
+     * @static
+     *&#x2F;
+    DB = A.namespace(&#x27;DataType.Boolean&#x27;),
 
-	&#x2F;**
-	 * DataType.String provides a set of utility to provides a simple function
+    &#x2F;**
+     * DataType.String provides a set of utility to provides a simple function
      * that evaluates a string to a primitive value (if possible). Supports
      * &lt;code&gt;true&lt;&#x2F;code&gt; and &lt;code&gt;false&lt;&#x2F;code&gt; also.
-	 *
-	 * @class DataType.String
-	 * @static
-	 *&#x2F;
-	DS = A.namespace(&#x27;DataType.String&#x27;);
+     *
+     * @class DataType.String
+     * @static
+     *&#x2F;
+    DS = A.namespace(&#x27;DataType.String&#x27;);
 
 &#x2F;**
  * Parses any &lt;code&gt;falsey&lt;&#x2F;code&gt; value to &lt;code&gt;false&lt;&#x2F;code&gt; and
@@ -1551,9 +1551,9 @@ var L = A.Lang,
  * @return {boolean} Parsed value
  *&#x2F;
 DB.parse = function(data) {
-	data = A.Lang.trim(data);
+    data = A.Lang.trim(data);
 
-	return (data == FALSE) ? false : !!data;
+    return (data == FALSE) ? false : !!data;
 };
 
 &#x2F;**
@@ -1567,25 +1567,25 @@ DB.parse = function(data) {
  * @return {boolean | null | number | String | undefined} Parsed value
  *&#x2F;
 DS.evaluate = function(data) {
-	var trimmedData = A.Lang.trim(data);
+    var trimmedData = A.Lang.trim(data);
 
-	&#x2F;&#x2F; booleans
-	if (trimmedData == TRUE || trimmedData == FALSE) {
-		return DB.parse(data);
-	}
+    &#x2F;&#x2F; booleans
+    if (trimmedData == TRUE || trimmedData == FALSE) {
+        return DB.parse(data);
+    }
 
-	&#x2F;&#x2F; Handle positive &amp; negative numbers (integer or float)
-	&#x2F;&#x2F; Handle hexadecimal numbers: 0xFF -&gt; 255
-	&#x2F;&#x2F; Handle exponential notation: 1e5 -&gt; 100000
-	if (trimmedData &amp;&amp; L.isString(trimmedData)) {
-		var number = +trimmedData;
+    &#x2F;&#x2F; Handle positive &amp; negative numbers (integer or float)
+    &#x2F;&#x2F; Handle hexadecimal numbers: 0xFF -&gt; 255
+    &#x2F;&#x2F; Handle exponential notation: 1e5 -&gt; 100000
+    if (trimmedData &amp;&amp; L.isString(trimmedData)) {
+        var number = +trimmedData;
 
-		if (!isNaN(number)) {
-			return number;
-		}
-	}
+        if (!isNaN(number)) {
+            return number;
+        }
+    }
 
-	return data;
+    return data;
 };
 
 &#x2F;**
@@ -1595,865 +1595,865 @@ DS.evaluate = function(data) {
 * @class A.DataType.DateMath
 *&#x2F;
 var L = A.Lang,
-	S = A.Lang.String,
+    S = A.Lang.String,
 
-	isDate = L.isDate,
-	isValue = L.isValue,
+    isDate = L.isDate,
+    isValue = L.isValue,
 
-	COLON = &#x27;:&#x27;,
-	AM = &#x27;am&#x27;,
-	PM = &#x27;pm&#x27;;
+    COLON = &#x27;:&#x27;,
+    AM = &#x27;am&#x27;,
+    PM = &#x27;pm&#x27;;
 
 A.namespace(&#x27;DataType.DateMath&#x27;);
 
 A.mix(A.DataType.DateMath, {
-	&#x2F;**
-	* Constant field representing Day
-	* @property DAY
-	* @static
-	* @final
-	* @type String
-	*&#x2F;
-	DAY : &#x27;D&#x27;,
+    &#x2F;**
+    * Constant field representing Day
+    * @property DAY
+    * @static
+    * @final
+    * @type String
+    *&#x2F;
+    DAY : &#x27;D&#x27;,
 
-	&#x2F;**
-	* Constant field representing Week
-	* @property WEEK
-	* @static
-	* @final
-	* @type String
-	*&#x2F;
-	WEEK : &#x27;W&#x27;,
+    &#x2F;**
+    * Constant field representing Week
+    * @property WEEK
+    * @static
+    * @final
+    * @type String
+    *&#x2F;
+    WEEK : &#x27;W&#x27;,
 
-	&#x2F;**
-	* Constant field representing Year
-	* @property YEAR
-	* @static
-	* @final
-	* @type String
-	*&#x2F;
-	YEAR : &#x27;Y&#x27;,
+    &#x2F;**
+    * Constant field representing Year
+    * @property YEAR
+    * @static
+    * @final
+    * @type String
+    *&#x2F;
+    YEAR : &#x27;Y&#x27;,
 
-	&#x2F;**
-	* Constant field representing Month
-	* @property MONTH
-	* @static
-	* @final
-	* @type String
-	*&#x2F;
-	MONTH : &#x27;M&#x27;,
+    &#x2F;**
+    * Constant field representing Month
+    * @property MONTH
+    * @static
+    * @final
+    * @type String
+    *&#x2F;
+    MONTH : &#x27;M&#x27;,
 
-	&#x2F;**
-	* Constant field representing Minutes
-	* @property MINUTES
-	* @static
-	* @final
-	* @type String
-	*&#x2F;
-	MINUTES : &#x27;MINUTES&#x27;,
+    &#x2F;**
+    * Constant field representing Minutes
+    * @property MINUTES
+    * @static
+    * @final
+    * @type String
+    *&#x2F;
+    MINUTES : &#x27;MINUTES&#x27;,
 
-	&#x2F;**
-	* Constant field representing Hour
-	* @property HOUR
-	* @static
-	* @final
-	* @type String
-	*&#x2F;
-	HOUR : &#x27;HOUR&#x27;,
+    &#x2F;**
+    * Constant field representing Hour
+    * @property HOUR
+    * @static
+    * @final
+    * @type String
+    *&#x2F;
+    HOUR : &#x27;HOUR&#x27;,
 
-	&#x2F;**
-	* Constant field representing Seconds
-	* @property SECONDS
-	* @static
-	* @final
-	* @type String
-	*&#x2F;
-	SECONDS : &#x27;SECONDS&#x27;,
+    &#x2F;**
+    * Constant field representing Seconds
+    * @property SECONDS
+    * @static
+    * @final
+    * @type String
+    *&#x2F;
+    SECONDS : &#x27;SECONDS&#x27;,
 
-	&#x2F;**
-	* Constant field representing the number of maximum days in a month
-	* @property MAX_MONTH_LENGTH
-	* @static
-	* @final
-	* @type Number
-	*&#x2F;
-	MAX_MONTH_LENGTH: 31,
+    &#x2F;**
+    * Constant field representing the number of maximum days in a month
+    * @property MAX_MONTH_LENGTH
+    * @static
+    * @final
+    * @type Number
+    *&#x2F;
+    MAX_MONTH_LENGTH: 31,
 
-	&#x2F;**
-	* Constant field representing the number of maximum days in a week
-	* @property WEEK_LENGTH
-	* @static
-	* @final
-	* @type Number
-	*&#x2F;
-	WEEK_LENGTH: 7,
+    &#x2F;**
+    * Constant field representing the number of maximum days in a week
+    * @property WEEK_LENGTH
+    * @static
+    * @final
+    * @type Number
+    *&#x2F;
+    WEEK_LENGTH: 7,
 
-	&#x2F;**
-	* Constant field representing one day, in milliseconds
-	* @property ONE_DAY_MS
-	* @static
-	* @final
-	* @type Number
-	*&#x2F;
-	ONE_DAY_MS : NUM_THOUSAND * NUM_SIXTY * NUM_SIXTY * NUM_TWENTY_FOUR,
+    &#x2F;**
+    * Constant field representing one day, in milliseconds
+    * @property ONE_DAY_MS
+    * @static
+    * @final
+    * @type Number
+    *&#x2F;
+    ONE_DAY_MS : NUM_THOUSAND * NUM_SIXTY * NUM_SIXTY * NUM_TWENTY_FOUR,
 
-	&#x2F;**
-	* Constant field representing one hour, in milliseconds
-	* @property ONE_HOUR_MS
-	* @static
-	* @final
-	* @type Number
-	*&#x2F;
-	ONE_HOUR_MS : NUM_THOUSAND * NUM_SIXTY * NUM_SIXTY,
+    &#x2F;**
+    * Constant field representing one hour, in milliseconds
+    * @property ONE_HOUR_MS
+    * @static
+    * @final
+    * @type Number
+    *&#x2F;
+    ONE_HOUR_MS : NUM_THOUSAND * NUM_SIXTY * NUM_SIXTY,
 
-	&#x2F;**
-	* Constant field representing one minute, in milliseconds
-	* @property ONE_MINUTE_MS
-	* @static
-	* @final
-	* @type Number
-	*&#x2F;
-	ONE_MINUTE_MS : NUM_THOUSAND * NUM_SIXTY,
+    &#x2F;**
+    * Constant field representing one minute, in milliseconds
+    * @property ONE_MINUTE_MS
+    * @static
+    * @final
+    * @type Number
+    *&#x2F;
+    ONE_MINUTE_MS : NUM_THOUSAND * NUM_SIXTY,
 
-	&#x2F;**
-	* Constant field representing one second, in milliseconds
-	* @property ONE_SECOND_MS
-	* @static
-	* @final
-	* @type Number
-	*&#x2F;
-	ONE_SECOND_MS : NUM_THOUSAND,
+    &#x2F;**
+    * Constant field representing one second, in milliseconds
+    * @property ONE_SECOND_MS
+    * @static
+    * @final
+    * @type Number
+    *&#x2F;
+    ONE_SECOND_MS : NUM_THOUSAND,
 
-	&#x2F;**
-	 * Constant field representing the date in first week of January
-	 * which identifies the first week of the year.
-	 * &lt;p&gt;
-	 * In the U.S, Jan 1st is normally used based on a Sunday start of week.
-	 * ISO 8601, used widely throughout Europe, uses Jan 4th, based on a Monday start of week.
-	 * &lt;&#x2F;p&gt;
-	 * @property WEEK_ONE_JAN_DATE
-	 * @static
-	 * @type Number
-	 *&#x2F;
-	WEEK_ONE_JAN_DATE : 1,
+    &#x2F;**
+     * Constant field representing the date in first week of January
+     * which identifies the first week of the year.
+     * &lt;p&gt;
+     * In the U.S, Jan 1st is normally used based on a Sunday start of week.
+     * ISO 8601, used widely throughout Europe, uses Jan 4th, based on a Monday start of week.
+     * &lt;&#x2F;p&gt;
+     * @property WEEK_ONE_JAN_DATE
+     * @static
+     * @type Number
+     *&#x2F;
+    WEEK_ONE_JAN_DATE : 1,
 
-	&#x2F;**
-	* Adds the specified amount of time to the this instance.
-	* @method add
-	* @param {Date} date	The JavaScript Date object to perform addition on
-	* @param {String} field	The field constant to be used for performing addition.
-	* @param {Number} amount	The number of units (measured in the field constant) to add to the date.
-	* @return {Date} The resulting Date object
-	*&#x2F;
-	add: function(date, field, amount) {
-		var d = new Date(date.getTime());
-		switch (field) {
-			case this.MONTH:
-				var newMonth = date.getMonth() + amount;
-				var years = 0;
+    &#x2F;**
+    * Adds the specified amount of time to the this instance.
+    * @method add
+    * @param {Date} date    The JavaScript Date object to perform addition on
+    * @param {String} field    The field constant to be used for performing addition.
+    * @param {Number} amount    The number of units (measured in the field constant) to add to the date.
+    * @return {Date} The resulting Date object
+    *&#x2F;
+    add: function(date, field, amount) {
+        var d = new Date(date.getTime());
+        switch (field) {
+            case this.MONTH:
+                var newMonth = date.getMonth() + amount;
+                var years = 0;
 
-				if (newMonth &lt; 0) {
-					while (newMonth &lt; 0) {
-						newMonth += 12;
-						years -= 1;
-					}
-				} else if (newMonth &gt; 11) {
-					while (newMonth &gt; 11) {
-						newMonth -= 12;
-						years += 1;
-					}
-				}
+                if (newMonth &lt; 0) {
+                    while (newMonth &lt; 0) {
+                        newMonth += 12;
+                        years -= 1;
+                    }
+                } else if (newMonth &gt; 11) {
+                    while (newMonth &gt; 11) {
+                        newMonth -= 12;
+                        years += 1;
+                    }
+                }
 
-				d.setMonth(newMonth);
-				d.setFullYear(date.getFullYear() + years);
-				break;
-			case this.DAY:
-				this._addDays(d, amount);
-				&#x2F;&#x2F; d.setDate(date.getDate() + amount);
-				break;
-			case this.YEAR:
-				d.setFullYear(date.getFullYear() + amount);
-				break;
-			case this.WEEK:
-				this._addDays(d, (amount * 7));
-				&#x2F;&#x2F; d.setDate(date.getDate() + (amount * 7));
-				break;
-			case this.HOUR:
-				var hours = d.getHours();
+                d.setMonth(newMonth);
+                d.setFullYear(date.getFullYear() + years);
+                break;
+            case this.DAY:
+                this._addDays(d, amount);
+                &#x2F;&#x2F; d.setDate(date.getDate() + amount);
+                break;
+            case this.YEAR:
+                d.setFullYear(date.getFullYear() + amount);
+                break;
+            case this.WEEK:
+                this._addDays(d, (amount * 7));
+                &#x2F;&#x2F; d.setDate(date.getDate() + (amount * 7));
+                break;
+            case this.HOUR:
+                var hours = d.getHours();
 
-				d.setHours(hours + amount);
-				break;
-			case this.MINUTES:
-				var minutes = d.getMinutes();
+                d.setHours(hours + amount);
+                break;
+            case this.MINUTES:
+                var minutes = d.getMinutes();
 
-				d.setMinutes(minutes + amount);
-				break;
-			case this.SECONDS:
-				var seconds = d.getSeconds();
+                d.setMinutes(minutes + amount);
+                break;
+            case this.SECONDS:
+                var seconds = d.getSeconds();
 
-				d.setSeconds(seconds + amount);
-				break;
-		}
-		return d;
-	},
+                d.setSeconds(seconds + amount);
+                break;
+        }
+        return d;
+    },
 
-	&#x2F;**
-	 * Private helper method to account for bug in Safari 2 (webkit &lt; 420)
-	 * when Date.setDate(n) is called with n less than -128 or greater than 127.
-	 * &lt;p&gt;
-	 * Fix approach and original findings are available here:
-	 * http:&#x2F;&#x2F;brianary.blogspot.com&#x2F;2006&#x2F;03&#x2F;safari-date-bug.html
-	 * &lt;&#x2F;p&gt;
-	 * @method _addDays
-	 * @param {Date} d JavaScript date object
-	 * @param {Number} nDays The number of days to add to the date object (can be negative)
-	 * @private
-	 *&#x2F;
-	_addDays: function(d, nDays) {
-		if (A.UA.webkit &amp;&amp; A.UA.webkit &lt; 420) {
-			if (nDays &lt; 0) {
-				&#x2F;&#x2F; Ensure we don&#x27;t go below -128 (getDate() is always 1 to 31, so we won&#x27;t go above 127)
-				for(var min = -128; nDays &lt; min; nDays -= min) {
-					d.setDate(d.getDate() + min);
-				}
-			} else {
-				&#x2F;&#x2F; Ensure we don&#x27;t go above 96 + 31 = 127
-				for(var max = 96; nDays &gt; max; nDays -= max) {
-					d.setDate(d.getDate() + max);
-				}
-			}
-			&#x2F;&#x2F; nDays should be remainder between -128 and 96
-		}
-		d.setDate(d.getDate() + nDays);
-	},
+    &#x2F;**
+     * Private helper method to account for bug in Safari 2 (webkit &lt; 420)
+     * when Date.setDate(n) is called with n less than -128 or greater than 127.
+     * &lt;p&gt;
+     * Fix approach and original findings are available here:
+     * http:&#x2F;&#x2F;brianary.blogspot.com&#x2F;2006&#x2F;03&#x2F;safari-date-bug.html
+     * &lt;&#x2F;p&gt;
+     * @method _addDays
+     * @param {Date} d JavaScript date object
+     * @param {Number} nDays The number of days to add to the date object (can be negative)
+     * @private
+     *&#x2F;
+    _addDays: function(d, nDays) {
+        if (A.UA.webkit &amp;&amp; A.UA.webkit &lt; 420) {
+            if (nDays &lt; 0) {
+                &#x2F;&#x2F; Ensure we don&#x27;t go below -128 (getDate() is always 1 to 31, so we won&#x27;t go above 127)
+                for(var min = -128; nDays &lt; min; nDays -= min) {
+                    d.setDate(d.getDate() + min);
+                }
+            } else {
+                &#x2F;&#x2F; Ensure we don&#x27;t go above 96 + 31 = 127
+                for(var max = 96; nDays &gt; max; nDays -= max) {
+                    d.setDate(d.getDate() + max);
+                }
+            }
+            &#x2F;&#x2F; nDays should be remainder between -128 and 96
+        }
+        d.setDate(d.getDate() + nDays);
+    },
 
-	&#x2F;**
-	* Compare dates.
-	* @method compare
-	* @param {Date} d1	The JavaScript Date object to compare
-	* @param {Date} d2	The JavaScript Date object to compare
-	* @return {boolean}
-	*&#x2F;
-	compare: function(d1, d2) {
-		return ( d1 &amp;&amp; d2 &amp;&amp; (d1.getTime() == d2.getTime()) );
-	},
+    &#x2F;**
+    * Compare dates.
+    * @method compare
+    * @param {Date} d1    The JavaScript Date object to compare
+    * @param {Date} d2    The JavaScript Date object to compare
+    * @return {boolean}
+    *&#x2F;
+    compare: function(d1, d2) {
+        return ( d1 &amp;&amp; d2 &amp;&amp; (d1.getTime() == d2.getTime()) );
+    },
 
-	copyHours: function(d1, d2) {
-		var instance = this;
+    copyHours: function(d1, d2) {
+        var instance = this;
 
-		d1.setHours(d2.getHours());
-		d1.setMinutes(d2.getMinutes());
-		d1.setSeconds(d2.getSeconds());
-		d1.setMilliseconds(d2.getMilliseconds());
-	},
+        d1.setHours(d2.getHours());
+        d1.setMinutes(d2.getMinutes());
+        d1.setSeconds(d2.getSeconds());
+        d1.setMilliseconds(d2.getMilliseconds());
+    },
 
-	&#x2F;**
-	* Subtracts the specified amount of time from the this instance.
-	* @method subtract
-	* @param {Date} date	The JavaScript Date object to perform subtraction on
-	* @param {Number} field	The this field constant to be used for performing subtraction.
-	* @param {Number} amount	The number of units (measured in the field constant) to subtract from the date.
-	* @return {Date} The resulting Date object
-	*&#x2F;
-	subtract: function(date, field, amount) {
-		return this.add(date, field, (amount*-1));
-	},
+    &#x2F;**
+    * Subtracts the specified amount of time from the this instance.
+    * @method subtract
+    * @param {Date} date    The JavaScript Date object to perform subtraction on
+    * @param {Number} field    The this field constant to be used for performing subtraction.
+    * @param {Number} amount    The number of units (measured in the field constant) to subtract from the date.
+    * @return {Date} The resulting Date object
+    *&#x2F;
+    subtract: function(date, field, amount) {
+        return this.add(date, field, (amount*-1));
+    },
 
-	&#x2F;**
-	* Determines whether a given date is before another date on the calendar.
-	* @method before
-	* @param {Date} date		The Date object to compare with the compare argument
-	* @param {Date} compareTo	The Date object to use for the comparison
-	* @return {Boolean} true if the date occurs before the compared date; false if not.
-	*&#x2F;
-	before: function(date, compareTo) {
-		var ms = compareTo.getTime();
-		if (date.getTime() &lt; ms) {
-			return true;
-		} else {
-			return false;
-		}
-	},
+    &#x2F;**
+    * Determines whether a given date is before another date on the calendar.
+    * @method before
+    * @param {Date} date        The Date object to compare with the compare argument
+    * @param {Date} compareTo    The Date object to use for the comparison
+    * @return {Boolean} true if the date occurs before the compared date; false if not.
+    *&#x2F;
+    before: function(date, compareTo) {
+        var ms = compareTo.getTime();
+        if (date.getTime() &lt; ms) {
+            return true;
+        } else {
+            return false;
+        }
+    },
 
-	&#x2F;**
-	* Determines whether a given date is after another date on the calendar.
-	* @method after
-	* @param {Date} date		The Date object to compare with the compare argument
-	* @param {Date} compareTo	The Date object to use for the comparison
-	* @return {Boolean} true if the date occurs after the compared date; false if not.
-	*&#x2F;
-	after: function(date, compareTo) {
-		var ms = compareTo.getTime();
-		if (date.getTime() &gt; ms) {
-			return true;
-		} else {
-			return false;
-		}
-	},
+    &#x2F;**
+    * Determines whether a given date is after another date on the calendar.
+    * @method after
+    * @param {Date} date        The Date object to compare with the compare argument
+    * @param {Date} compareTo    The Date object to use for the comparison
+    * @return {Boolean} true if the date occurs after the compared date; false if not.
+    *&#x2F;
+    after: function(date, compareTo) {
+        var ms = compareTo.getTime();
+        if (date.getTime() &gt; ms) {
+            return true;
+        } else {
+            return false;
+        }
+    },
 
-	&#x2F;**
-	* Determines whether a given date is between two other dates on the calendar.
-	* @method between
-	* @param {Date} date		The date to check for
-	* @param {Date} dateBegin	The start of the range
-	* @param {Date} dateEnd		The end of the range
-	* @return {Boolean} true if the date occurs between the compared dates; false if not.
-	*&#x2F;
-	between: function(date, dateBegin, dateEnd) {
-		if (this.after(date, dateBegin) &amp;&amp; this.before(date, dateEnd)) {
-			return true;
-		} else {
-			return false;
-		}
-	},
+    &#x2F;**
+    * Determines whether a given date is between two other dates on the calendar.
+    * @method between
+    * @param {Date} date        The date to check for
+    * @param {Date} dateBegin    The start of the range
+    * @param {Date} dateEnd        The end of the range
+    * @return {Boolean} true if the date occurs between the compared dates; false if not.
+    *&#x2F;
+    between: function(date, dateBegin, dateEnd) {
+        if (this.after(date, dateBegin) &amp;&amp; this.before(date, dateEnd)) {
+            return true;
+        } else {
+            return false;
+        }
+    },
 
-	&#x2F;**
-	* Retrieves a JavaScript Date object representing January 1 of any given year.
-	* @method getJan1
-	* @param {Number} calendarYear		The calendar year for which to retrieve January 1
-	* @return {Date}	January 1 of the calendar year specified.
-	*&#x2F;
-	getJan1: function(calendarYear) {
-		return this.getDate(calendarYear,0,1);
-	},
+    &#x2F;**
+    * Retrieves a JavaScript Date object representing January 1 of any given year.
+    * @method getJan1
+    * @param {Number} calendarYear        The calendar year for which to retrieve January 1
+    * @return {Date}    January 1 of the calendar year specified.
+    *&#x2F;
+    getJan1: function(calendarYear) {
+        return this.getDate(calendarYear,0,1);
+    },
 
-	&#x2F;**
-	* Calculates the number of days the specified date is from January 1 of the specified calendar year.
-	* Passing January 1 to this function would return an offset value of zero.
-	* @method getDayOffset
-	* @param {Date}	date	The JavaScript date for which to find the offset
-	* @param {Number} calendarYear	The calendar year to use for determining the offset
-	* @return {Number}	The number of days since January 1 of the given year
-	*&#x2F;
-	getDayOffsetYear: function(date, calendarYear) {
-		var beginYear = this.getJan1(calendarYear); &#x2F;&#x2F; Find the start of the year. This will be in week 1.
+    &#x2F;**
+    * Calculates the number of days the specified date is from January 1 of the specified calendar year.
+    * Passing January 1 to this function would return an offset value of zero.
+    * @method getDayOffset
+    * @param {Date}    date    The JavaScript date for which to find the offset
+    * @param {Number} calendarYear    The calendar year to use for determining the offset
+    * @return {Number}    The number of days since January 1 of the given year
+    *&#x2F;
+    getDayOffsetYear: function(date, calendarYear) {
+        var beginYear = this.getJan1(calendarYear); &#x2F;&#x2F; Find the start of the year. This will be in week 1.
 
-		&#x2F;&#x2F; Find the number of days the passed in date is away from the calendar year start
-		return this.getDayOffset(date, beginYear, calendarYear);
-	},
+        &#x2F;&#x2F; Find the number of days the passed in date is away from the calendar year start
+        return this.getDayOffset(date, beginYear, calendarYear);
+    },
 
-	&#x2F;**
-	* Calculates the number of days between the specified dates.
-	* @method getDayOffset
-	* @param {Date}	d1 Date 1
-	* @param {Date}	d2 Date 2
-	* @return {Number}	The number of days
-	*&#x2F;
-	getDayOffset: function(d1, d2) {
-		return this._absFloor(this.getOffset(d1, d2, this.ONE_DAY_MS));
-	},
+    &#x2F;**
+    * Calculates the number of days between the specified dates.
+    * @method getDayOffset
+    * @param {Date}    d1 Date 1
+    * @param {Date}    d2 Date 2
+    * @return {Number}    The number of days
+    *&#x2F;
+    getDayOffset: function(d1, d2) {
+        return this._absFloor(this.getOffset(d1, d2, this.ONE_DAY_MS));
+    },
 
-	&#x2F;**
-	* Calculates the number of hours between the specified dates.
-	* @method getHoursOffset
-	* @param {Date}	d1 Date 1
-	* @param {Date}	d2 Date 2
-	* @return {Number}	The number of hours
-	*&#x2F;
-	getHoursOffset: function(d1, d2) {
-		return this._absFloor(this.getOffset(d1, d2, this.ONE_HOUR_MS));
-	},
+    &#x2F;**
+    * Calculates the number of hours between the specified dates.
+    * @method getHoursOffset
+    * @param {Date}    d1 Date 1
+    * @param {Date}    d2 Date 2
+    * @return {Number}    The number of hours
+    *&#x2F;
+    getHoursOffset: function(d1, d2) {
+        return this._absFloor(this.getOffset(d1, d2, this.ONE_HOUR_MS));
+    },
 
-	&#x2F;**
-	* Calculates the number of minutes between the specified dates.
-	* @method getMinutesOffset
-	* @param {Date}	d1 Date 1
-	* @param {Date}	d2 Date 2
-	* @return {Number}	The number of minutes
-	*&#x2F;
-	getMinutesOffset: function(d1, d2) {
-		return this._absFloor(this.getOffset(d1, d2, this.ONE_MINUTE_MS));
-	},
+    &#x2F;**
+    * Calculates the number of minutes between the specified dates.
+    * @method getMinutesOffset
+    * @param {Date}    d1 Date 1
+    * @param {Date}    d2 Date 2
+    * @return {Number}    The number of minutes
+    *&#x2F;
+    getMinutesOffset: function(d1, d2) {
+        return this._absFloor(this.getOffset(d1, d2, this.ONE_MINUTE_MS));
+    },
 
-	&#x2F;**
-	* Calculates the number of seconds between the specified dates.
-	* @method getSecondsOffset
-	* @param {Date}	d1 Date 1
-	* @param {Date}	d2 Date 2
-	* @return {Number}	The number of seconds
-	*&#x2F;
-	getSecondsOffset: function(d1, d2) {
-		return this._absFloor(this.getOffset(d1, d2, this.ONE_SECOND_MS));
-	},
+    &#x2F;**
+    * Calculates the number of seconds between the specified dates.
+    * @method getSecondsOffset
+    * @param {Date}    d1 Date 1
+    * @param {Date}    d2 Date 2
+    * @return {Number}    The number of seconds
+    *&#x2F;
+    getSecondsOffset: function(d1, d2) {
+        return this._absFloor(this.getOffset(d1, d2, this.ONE_SECOND_MS));
+    },
 
-	getOffset: function(d1, d2, constantAmount) {
-		var offset = (d1.getTime()-d2.getTime()) &#x2F; (constantAmount || 0);
+    getOffset: function(d1, d2, constantAmount) {
+        var offset = (d1.getTime()-d2.getTime()) &#x2F; (constantAmount || 0);
 
-		return offset;
-	},
+        return offset;
+    },
 
     _absFloor: function(n) {
-		var abs = Math.floor(Math.abs(n));
+        var abs = Math.floor(Math.abs(n));
 
-		if (n &lt; 0) {
-			abs *= -1;
-		}
+        if (n &lt; 0) {
+            abs *= -1;
+        }
 
         return abs;
     },
 
-	&#x2F;**
-	* Calculates the week number for the given date. Can currently support standard
-	* U.S. week numbers, based on Jan 1st defining the 1st week of the year, and
-	* ISO8601 week numbers, based on Jan 4th defining the 1st week of the year.
-	*
-	* @method getWeekNumber
-	* @param {Date}	date The JavaScript date for which to find the week number
-	* @param {Number} firstDayOfWeek The index of the first day of the week (0 = Sun, 1 = Mon ... 6 = Sat).
-	* Defaults to 0
-	* @param {Number} janDate The date in the first week of January which defines week one for the year
-	* Defaults to the value of YAHOO.widget.DateMath.WEEK_ONE_JAN_DATE, which is 1 (Jan 1st).
-	* For the U.S, this is normally Jan 1st. ISO8601 uses Jan 4th to define the first week of the year.
-	*
-	* @return {Number} The number of the week containing the given date.
-	*&#x2F;
-	getWeekNumber: function(date, firstDayOfWeek, janDate) {
+    &#x2F;**
+    * Calculates the week number for the given date. Can currently support standard
+    * U.S. week numbers, based on Jan 1st defining the 1st week of the year, and
+    * ISO8601 week numbers, based on Jan 4th defining the 1st week of the year.
+    *
+    * @method getWeekNumber
+    * @param {Date}    date The JavaScript date for which to find the week number
+    * @param {Number} firstDayOfWeek The index of the first day of the week (0 = Sun, 1 = Mon ... 6 = Sat).
+    * Defaults to 0
+    * @param {Number} janDate The date in the first week of January which defines week one for the year
+    * Defaults to the value of YAHOO.widget.DateMath.WEEK_ONE_JAN_DATE, which is 1 (Jan 1st).
+    * For the U.S, this is normally Jan 1st. ISO8601 uses Jan 4th to define the first week of the year.
+    *
+    * @return {Number} The number of the week containing the given date.
+    *&#x2F;
+    getWeekNumber: function(date, firstDayOfWeek, janDate) {
 
-		&#x2F;&#x2F; Setup Defaults
-		firstDayOfWeek = firstDayOfWeek || 0;
-		janDate = janDate || this.WEEK_ONE_JAN_DATE;
+        &#x2F;&#x2F; Setup Defaults
+        firstDayOfWeek = firstDayOfWeek || 0;
+        janDate = janDate || this.WEEK_ONE_JAN_DATE;
 
-		var targetDate = this.clearTime(date),
-			startOfWeek,
-			endOfWeek;
+        var targetDate = this.clearTime(date),
+            startOfWeek,
+            endOfWeek;
 
-		if (targetDate.getDay() === firstDayOfWeek) {
-			startOfWeek = targetDate;
-		} else {
-			startOfWeek = this.getFirstDayOfWeek(targetDate, firstDayOfWeek);
-		}
+        if (targetDate.getDay() === firstDayOfWeek) {
+            startOfWeek = targetDate;
+        } else {
+            startOfWeek = this.getFirstDayOfWeek(targetDate, firstDayOfWeek);
+        }
 
-		var startYear = startOfWeek.getFullYear(),
-			startTime = startOfWeek.getTime();
+        var startYear = startOfWeek.getFullYear(),
+            startTime = startOfWeek.getTime();
 
-		&#x2F;&#x2F; DST shouldn&#x27;t be a problem here, math is quicker than setDate();
-		endOfWeek = new Date(startOfWeek.getTime() + 6*this.ONE_DAY_MS);
+        &#x2F;&#x2F; DST shouldn&#x27;t be a problem here, math is quicker than setDate();
+        endOfWeek = new Date(startOfWeek.getTime() + 6*this.ONE_DAY_MS);
 
-		var weekNum;
-		if (startYear !== endOfWeek.getFullYear() &amp;&amp; endOfWeek.getDate() &gt;= janDate) {
-			&#x2F;&#x2F; If years don&#x27;t match, endOfWeek is in Jan. and if the
-			&#x2F;&#x2F; week has WEEK_ONE_JAN_DATE in it, it&#x27;s week one by definition.
-			weekNum = 1;
-		} else {
-			&#x2F;&#x2F; Get the 1st day of the 1st week, and
-			&#x2F;&#x2F; find how many days away we are from it.
-			var weekOne = this.clearTime(this.getDate(startYear, 0, janDate)),
-				weekOneDayOne = this.getFirstDayOfWeek(weekOne, firstDayOfWeek);
+        var weekNum;
+        if (startYear !== endOfWeek.getFullYear() &amp;&amp; endOfWeek.getDate() &gt;= janDate) {
+            &#x2F;&#x2F; If years don&#x27;t match, endOfWeek is in Jan. and if the
+            &#x2F;&#x2F; week has WEEK_ONE_JAN_DATE in it, it&#x27;s week one by definition.
+            weekNum = 1;
+        } else {
+            &#x2F;&#x2F; Get the 1st day of the 1st week, and
+            &#x2F;&#x2F; find how many days away we are from it.
+            var weekOne = this.clearTime(this.getDate(startYear, 0, janDate)),
+                weekOneDayOne = this.getFirstDayOfWeek(weekOne, firstDayOfWeek);
 
-			&#x2F;&#x2F; Round days to smoothen out 1 hr DST diff
-			var daysDiff  = Math.round((targetDate.getTime() - weekOneDayOne.getTime())&#x2F;this.ONE_DAY_MS);
+            &#x2F;&#x2F; Round days to smoothen out 1 hr DST diff
+            var daysDiff  = Math.round((targetDate.getTime() - weekOneDayOne.getTime())&#x2F;this.ONE_DAY_MS);
 
-			&#x2F;&#x2F; Calc. Full Weeks
-			var rem = daysDiff % 7;
-			var weeksDiff = (daysDiff - rem)&#x2F;7;
-			weekNum = weeksDiff + 1;
-		}
-		return weekNum;
-	},
-
-	&#x2F;**
-	 * Get the first day of the week, for the give date.
-	 * @param {Date} dt The date in the week for which the first day is required.
-	 * @param {Number} startOfWeek The index for the first day of the week, 0 = Sun, 1 = Mon ... 6 = Sat (defaults to 0)
-	 * @return {Date} The first day of the week
-	 *&#x2F;
-	getFirstDayOfWeek: function (dt, startOfWeek) {
-		startOfWeek = startOfWeek || 0;
-		var dayOfWeekIndex = dt.getDay(),
-			dayOfWeek = (dayOfWeekIndex - startOfWeek + 7) % 7;
-
-		return this.subtract(dt, this.DAY, dayOfWeek);
-	},
-
-	&#x2F;**
-	 * Chechs if the passed date is a week day.
-	 *
-	 * @method isWeekDay
-	 * @param {Date} date Date
-	 * @return boolean
-	 *&#x2F;
-	isWeekDay: function(date) {
-		var day = date.getDay();
-
-		return (day &gt; 0) &amp;&amp; (day &lt; 6);
-	},
-
-	&#x2F;**
-	 * Chechs if the passed date is a Tuesday or Thursday.
-	 *
-	 * @method isTueOrThu
-	 * @param {Date} date Date
-	 * @return boolean
-	 *&#x2F;
-	isTueOrThu: function(date) {
-		return this.isWeekDay(date) &amp;&amp; (date.getDay() % 2 === 0);
-	},
-
-	&#x2F;**
-	 * Chechs if the passed date is a Monday, Wednesday or Friday.
-	 *
-	 * @method isMonWedOrFri
-	 * @param {Date} date Date
-	 * @return boolean
-	 *&#x2F;
-	isMonWedOrFri: function(date) {
-		return this.isWeekDay(date) &amp;&amp; !this.isTueOrThu(date);
-	},
-
-	&#x2F;**
-	 * Chechs if the {date2} is the next day.
-	 *
-	 * @method isNextDay
-	 * @param {Date} date1 Date
-	 * @param {Date} date2 Date
-	 * @return boolean
-	 *&#x2F;
-	isNextDay: function(date1, date2) {
-		return this.getDayOffset(this.safeClearTime(date2), this.safeClearTime(date1)) === 1;
-	},
-
-	&#x2F;**
-	 * Chechs if the {date2} is the next day at 00:00:00.
-	 *
-	 * @method isNextDayBoundary
-	 * @param {Date} date1 Date
-	 * @param {Date} date2 Date
-	 * @return boolean
-	 *&#x2F;
-	isDayBoundary: function(date1, date2) {
-		return this.isNextDay(date1, date2) &amp;&amp; (date2.getHours() === 0) &amp;&amp; (date2.getMinutes() === 0) &amp;&amp; (date2.getSeconds() === 0);
-	},
-
-	&#x2F;**
-	 * Chechs if the passed date is between two days.
-	 *
-	 * @method isDayOverlap
-	 * @param {Date} date1 Date
-	 * @param {Date} date2 Date
-	 * @return boolean
-	 *&#x2F;
-	isDayOverlap : function(date1, date2) {
-		return ((date1.getFullYear() !== date2.getFullYear()) || (date1.getMonth() !== date2.getMonth()) || (date1.getDate() !== date2.getDate()));;
-	},
-
-	&#x2F;**
-	 * Chechs if the passed date is today.
-	 *
-	 * @method isToday
-	 * @param {Date} date Date
-	 * @return boolean
-	 *&#x2F;
-	isToday: function(date) {
-		return !this.isDayOverlap(date, new Date());
-	},
-
-	&#x2F;**
-	 * Chechs if the passed dates are in the same month.
-	 *
-	 * @method isSameMonth
-	 * @param {Date} d1 Date
-	 * @param {Date} d2 Date
-	 * @return boolean
-	 *&#x2F;
-	isSameMonth : function(d1, d2) {
-		return ((d1.getFullYear() === d2.getFullYear()) &amp;&amp; (d1.getMonth() === d2.getMonth()));
-	},
-
-	&#x2F;**
-	* Determines if a given week overlaps two different years.
-	* @method isYearOverlapWeek
-	* @param {Date}	weekBeginDate	The JavaScript Date representing the first day of the week.
-	* @return {Boolean}	true if the date overlaps two different years.
-	*&#x2F;
-	isYearOverlapWeek : function(weekBeginDate) {
-		var overlaps = false;
-		var nextWeek = this.add(weekBeginDate, this.DAY, 6);
-		if (nextWeek.getFullYear() != weekBeginDate.getFullYear()) {
-			overlaps = true;
-		}
-		return overlaps;
-	},
-
-	&#x2F;**
-	* Determines if a given week overlaps two different months.
-	* @method isMonthOverlapWeek
-	* @param {Date}	weekBeginDate	The JavaScript Date representing the first day of the week.
-	* @return {Boolean}	true if the date overlaps two different months.
-	*&#x2F;
-	isMonthOverlapWeek : function(weekBeginDate) {
-		var overlaps = false;
-		var nextWeek = this.add(weekBeginDate, this.DAY, 6);
-		if (nextWeek.getMonth() != weekBeginDate.getMonth()) {
-			overlaps = true;
-		}
-		return overlaps;
-	},
-
-	&#x2F;**
-	* Gets the first day of a month containing a given date.
-	* @method findMonthStart
-	* @param {Date}	date	The JavaScript Date used to calculate the month start
-	* @return {Date}		The JavaScript Date representing the first day of the month
-	*&#x2F;
-	findMonthStart : function(date) {
-		var start = this.getDate(date.getFullYear(), date.getMonth(), 1);
-		return start;
-	},
-
-	&#x2F;**
-	* Gets the last day of a month containing a given date.
-	* @method findMonthEnd
-	* @param {Date}	date	The JavaScript Date used to calculate the month end
-	* @return {Date}		The JavaScript Date representing the last day of the month
-	*&#x2F;
-	findMonthEnd : function(date) {
-		var start = this.findMonthStart(date);
-		var nextMonth = this.add(start, this.MONTH, 1);
-		var end = this.subtract(nextMonth, this.DAY, 1);
-		end.setHours(23,59,59,999);
-		return end;
-	},
-
-	&#x2F;**
-	* Clears the time fields from a given date, effectively setting the time to 12 noon.
-	* @method clearTime
-	* @param {Date}	date	The JavaScript Date for which the time fields will be cleared
-	* @return {Date}		The JavaScript Date cleared of all time fields
-	*&#x2F;
-	clearTime : function(date) {
-		date.setHours(12,0,0,0);
-		return date;
-	},
-
-	&#x2F;**
-	* Clears the time fields from a given date, effectively setting the time to
-	* 12 noon. This is &quot;safe&quot; because clones the date before clear, not affecting
-	* the passed reference.
-	* @method safeClearTime
-	* @param {Date}	date	The JavaScript Date for which the time fields will be cleared
-	* @return {Date}		The JavaScript Date cleared of all time fields
-	*&#x2F;
-	safeClearTime : function(date) {
-		return this.clearTime(this.clone(date));
-	},
-
-	&#x2F;**
-	* Set the time fields from a given date to the last possible hour.
-	* @method toLastHour
-	* @param {Date}	date	The JavaScript Date for which the time fields will be set to the last possible hour
-	* @return {Date}		The JavaScript Date set to the last possible hour
-	*&#x2F;
-	toLastHour: function(date) {
-		date.setHours(23,59,59,999);
-		return date;
-	},
-
-	&#x2F;**
-	* Set the time fields from a given date to midnight.
-	* @method toMidnight
-	* @param {Date}	date	The JavaScript Date for which the time fields will be set to midnight
-	* @return {Date}		The JavaScript Date set to midnight
-	*&#x2F;
-	toMidnight: function(date) {
-		date.setHours(0,0,0,0);
-		return date;
-	},
-
-	&#x2F;**
-	* Clone the passed date object.
-	* @method clone
-	* @param {Date}	date	The JavaScript Date to clone
-	* @return {Date}		The JavaScript Date cloned
-	*&#x2F;
-	clone : function(date) {
-		return new Date(date.getTime());
-	},
-
-	&#x2F;**
-	 * Returns a new JavaScript Date object, representing the given year, month and date. Time fields (hr, min, sec, ms) on the new Date object
-	 * are set to 0. The method allows Date instances to be created with the a year less than 100. &quot;new Date(year, month, date)&quot; implementations
-	 * set the year to 19xx if a year (xx) which is less than 100 is provided.
-	 * &lt;p&gt;
-	 * &lt;em&gt;NOTE:&lt;&#x2F;em&gt;Validation on argument values is not performed. It is the caller&#x27;s responsibility to ensure
-	 * arguments are valid as per the ECMAScript-262 Date object specification for the new Date(year, month[, date]) constructor.
-	 * &lt;&#x2F;p&gt;
-	 * @method getDate
-	 * @param {Number} y Year.
-	 * @param {Number} m Month index from 0 (Jan) to 11 (Dec).
-	 * @param {Number} d (optional) Date from 1 to 31. If not provided, defaults to 1.
-	 * @return {Date} The JavaScript date object with year, month, date set as provided.
-	 *&#x2F;
-	getDate : function(y, m, d) {
-		var dt = null;
-		if (!isValue(d)) {
-			d = 1;
-		}
-		if (y &gt;= 100) {
-			dt = new Date(y, m, d);
-		} else {
-			dt = new Date();
-			dt.setFullYear(y);
-			dt.setMonth(m);
-			dt.setDate(d);
-			dt.setHours(0,0,0,0);
-		}
-		return dt;
-	},
-
-	getDaysInMonth: function(year, month) {
-		return this.findMonthEnd(this.getDate(year, month)).getDate();
+            &#x2F;&#x2F; Calc. Full Weeks
+            var rem = daysDiff % 7;
+            var weeksDiff = (daysDiff - rem)&#x2F;7;
+            weekNum = weeksDiff + 1;
+        }
+        return weekNum;
     },
 
-	toUsTimeString: function(date, padHours, omitMinutes, hideAmPm) {
-		date = isDate(date) ? date : new Date(0, 0, 0, date);
+    &#x2F;**
+     * Get the first day of the week, for the give date.
+     * @param {Date} dt The date in the week for which the first day is required.
+     * @param {Number} startOfWeek The index for the first day of the week, 0 = Sun, 1 = Mon ... 6 = Sat (defaults to 0)
+     * @return {Date} The first day of the week
+     *&#x2F;
+    getFirstDayOfWeek: function (dt, startOfWeek) {
+        startOfWeek = startOfWeek || 0;
+        var dayOfWeekIndex = dt.getDay(),
+            dayOfWeek = (dayOfWeekIndex - startOfWeek + 7) % 7;
 
-		var hours = date.getHours();
-		var minutes = date.getMinutes();
-		var isPM = false;
+        return this.subtract(dt, this.DAY, dayOfWeek);
+    },
 
-		if (hours &gt;= 12) {
-			isPM = true;
+    &#x2F;**
+     * Chechs if the passed date is a week day.
+     *
+     * @method isWeekDay
+     * @param {Date} date Date
+     * @return boolean
+     *&#x2F;
+    isWeekDay: function(date) {
+        var day = date.getDay();
 
-			if (hours &gt; 12) {
-				hours -= 12;
-			}
-		}
-		else if (hours === 0) {
-			hours = 12;
-		}
+        return (day &gt; 0) &amp;&amp; (day &lt; 6);
+    },
 
-		var time = padHours ? S.padNumber(hours, 2) : String(hours);
+    &#x2F;**
+     * Chechs if the passed date is a Tuesday or Thursday.
+     *
+     * @method isTueOrThu
+     * @param {Date} date Date
+     * @return boolean
+     *&#x2F;
+    isTueOrThu: function(date) {
+        return this.isWeekDay(date) &amp;&amp; (date.getDay() % 2 === 0);
+    },
 
-		if (!omitMinutes) {
-			time += COLON;
-			time += S.padNumber(minutes, 2);
-		}
+    &#x2F;**
+     * Chechs if the passed date is a Monday, Wednesday or Friday.
+     *
+     * @method isMonWedOrFri
+     * @param {Date} date Date
+     * @return boolean
+     *&#x2F;
+    isMonWedOrFri: function(date) {
+        return this.isWeekDay(date) &amp;&amp; !this.isTueOrThu(date);
+    },
 
-		if (!hideAmPm) {
-			time += (isPM ? PM : AM);
-		}
+    &#x2F;**
+     * Chechs if the {date2} is the next day.
+     *
+     * @method isNextDay
+     * @param {Date} date1 Date
+     * @param {Date} date2 Date
+     * @return boolean
+     *&#x2F;
+    isNextDay: function(date1, date2) {
+        return this.getDayOffset(this.safeClearTime(date2), this.safeClearTime(date1)) === 1;
+    },
 
-		return time;
-	},
+    &#x2F;**
+     * Chechs if the {date2} is the next day at 00:00:00.
+     *
+     * @method isNextDayBoundary
+     * @param {Date} date1 Date
+     * @param {Date} date2 Date
+     * @return boolean
+     *&#x2F;
+    isDayBoundary: function(date1, date2) {
+        return this.isNextDay(date1, date2) &amp;&amp; (date2.getHours() === 0) &amp;&amp; (date2.getMinutes() === 0) &amp;&amp; (date2.getSeconds() === 0);
+    },
 
-	toIsoTimeString: function(date, showSeconds) {
-		date = isDate(date) ? date : new Date(0, 0, 0, date);
+    &#x2F;**
+     * Chechs if the passed date is between two days.
+     *
+     * @method isDayOverlap
+     * @param {Date} date1 Date
+     * @param {Date} date2 Date
+     * @return boolean
+     *&#x2F;
+    isDayOverlap : function(date1, date2) {
+        return ((date1.getFullYear() !== date2.getFullYear()) || (date1.getMonth() !== date2.getMonth()) || (date1.getDate() !== date2.getDate()));;
+    },
 
-		var hours = date.getHours();
-		var minutes = date.getMinutes();
-		var time = S.padNumber(hours, 2) + COLON + S.padNumber(minutes, 2);
+    &#x2F;**
+     * Chechs if the passed date is today.
+     *
+     * @method isToday
+     * @param {Date} date Date
+     * @return boolean
+     *&#x2F;
+    isToday: function(date) {
+        return !this.isDayOverlap(date, new Date());
+    },
 
-		if (showSeconds) {
-			var seconds = date.getSeconds();
+    &#x2F;**
+     * Chechs if the passed dates are in the same month.
+     *
+     * @method isSameMonth
+     * @param {Date} d1 Date
+     * @param {Date} d2 Date
+     * @return boolean
+     *&#x2F;
+    isSameMonth : function(d1, d2) {
+        return ((d1.getFullYear() === d2.getFullYear()) &amp;&amp; (d1.getMonth() === d2.getMonth()));
+    },
 
-			time += COLON;
-			time += S.padNumber(seconds, 2);
-		}
+    &#x2F;**
+    * Determines if a given week overlaps two different years.
+    * @method isYearOverlapWeek
+    * @param {Date}    weekBeginDate    The JavaScript Date representing the first day of the week.
+    * @return {Boolean}    true if the date overlaps two different years.
+    *&#x2F;
+    isYearOverlapWeek : function(weekBeginDate) {
+        var overlaps = false;
+        var nextWeek = this.add(weekBeginDate, this.DAY, 6);
+        if (nextWeek.getFullYear() != weekBeginDate.getFullYear()) {
+            overlaps = true;
+        }
+        return overlaps;
+    },
 
-		return time;
-	}
+    &#x2F;**
+    * Determines if a given week overlaps two different months.
+    * @method isMonthOverlapWeek
+    * @param {Date}    weekBeginDate    The JavaScript Date representing the first day of the week.
+    * @return {Boolean}    true if the date overlaps two different months.
+    *&#x2F;
+    isMonthOverlapWeek : function(weekBeginDate) {
+        var overlaps = false;
+        var nextWeek = this.add(weekBeginDate, this.DAY, 6);
+        if (nextWeek.getMonth() != weekBeginDate.getMonth()) {
+            overlaps = true;
+        }
+        return overlaps;
+    },
+
+    &#x2F;**
+    * Gets the first day of a month containing a given date.
+    * @method findMonthStart
+    * @param {Date}    date    The JavaScript Date used to calculate the month start
+    * @return {Date}        The JavaScript Date representing the first day of the month
+    *&#x2F;
+    findMonthStart : function(date) {
+        var start = this.getDate(date.getFullYear(), date.getMonth(), 1);
+        return start;
+    },
+
+    &#x2F;**
+    * Gets the last day of a month containing a given date.
+    * @method findMonthEnd
+    * @param {Date}    date    The JavaScript Date used to calculate the month end
+    * @return {Date}        The JavaScript Date representing the last day of the month
+    *&#x2F;
+    findMonthEnd : function(date) {
+        var start = this.findMonthStart(date);
+        var nextMonth = this.add(start, this.MONTH, 1);
+        var end = this.subtract(nextMonth, this.DAY, 1);
+        end.setHours(23,59,59,999);
+        return end;
+    },
+
+    &#x2F;**
+    * Clears the time fields from a given date, effectively setting the time to 12 noon.
+    * @method clearTime
+    * @param {Date}    date    The JavaScript Date for which the time fields will be cleared
+    * @return {Date}        The JavaScript Date cleared of all time fields
+    *&#x2F;
+    clearTime : function(date) {
+        date.setHours(12,0,0,0);
+        return date;
+    },
+
+    &#x2F;**
+    * Clears the time fields from a given date, effectively setting the time to
+    * 12 noon. This is &quot;safe&quot; because clones the date before clear, not affecting
+    * the passed reference.
+    * @method safeClearTime
+    * @param {Date}    date    The JavaScript Date for which the time fields will be cleared
+    * @return {Date}        The JavaScript Date cleared of all time fields
+    *&#x2F;
+    safeClearTime : function(date) {
+        return this.clearTime(this.clone(date));
+    },
+
+    &#x2F;**
+    * Set the time fields from a given date to the last possible hour.
+    * @method toLastHour
+    * @param {Date}    date    The JavaScript Date for which the time fields will be set to the last possible hour
+    * @return {Date}        The JavaScript Date set to the last possible hour
+    *&#x2F;
+    toLastHour: function(date) {
+        date.setHours(23,59,59,999);
+        return date;
+    },
+
+    &#x2F;**
+    * Set the time fields from a given date to midnight.
+    * @method toMidnight
+    * @param {Date}    date    The JavaScript Date for which the time fields will be set to midnight
+    * @return {Date}        The JavaScript Date set to midnight
+    *&#x2F;
+    toMidnight: function(date) {
+        date.setHours(0,0,0,0);
+        return date;
+    },
+
+    &#x2F;**
+    * Clone the passed date object.
+    * @method clone
+    * @param {Date}    date    The JavaScript Date to clone
+    * @return {Date}        The JavaScript Date cloned
+    *&#x2F;
+    clone : function(date) {
+        return new Date(date.getTime());
+    },
+
+    &#x2F;**
+     * Returns a new JavaScript Date object, representing the given year, month and date. Time fields (hr, min, sec, ms) on the new Date object
+     * are set to 0. The method allows Date instances to be created with the a year less than 100. &quot;new Date(year, month, date)&quot; implementations
+     * set the year to 19xx if a year (xx) which is less than 100 is provided.
+     * &lt;p&gt;
+     * &lt;em&gt;NOTE:&lt;&#x2F;em&gt;Validation on argument values is not performed. It is the caller&#x27;s responsibility to ensure
+     * arguments are valid as per the ECMAScript-262 Date object specification for the new Date(year, month[, date]) constructor.
+     * &lt;&#x2F;p&gt;
+     * @method getDate
+     * @param {Number} y Year.
+     * @param {Number} m Month index from 0 (Jan) to 11 (Dec).
+     * @param {Number} d (optional) Date from 1 to 31. If not provided, defaults to 1.
+     * @return {Date} The JavaScript date object with year, month, date set as provided.
+     *&#x2F;
+    getDate : function(y, m, d) {
+        var dt = null;
+        if (!isValue(d)) {
+            d = 1;
+        }
+        if (y &gt;= 100) {
+            dt = new Date(y, m, d);
+        } else {
+            dt = new Date();
+            dt.setFullYear(y);
+            dt.setMonth(m);
+            dt.setDate(d);
+            dt.setHours(0,0,0,0);
+        }
+        return dt;
+    },
+
+    getDaysInMonth: function(year, month) {
+        return this.findMonthEnd(this.getDate(year, month)).getDate();
+    },
+
+    toUsTimeString: function(date, padHours, omitMinutes, hideAmPm) {
+        date = isDate(date) ? date : new Date(0, 0, 0, date);
+
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var isPM = false;
+
+        if (hours &gt;= 12) {
+            isPM = true;
+
+            if (hours &gt; 12) {
+                hours -= 12;
+            }
+        }
+        else if (hours === 0) {
+            hours = 12;
+        }
+
+        var time = padHours ? S.padNumber(hours, 2) : String(hours);
+
+        if (!omitMinutes) {
+            time += COLON;
+            time += S.padNumber(minutes, 2);
+        }
+
+        if (!hideAmPm) {
+            time += (isPM ? PM : AM);
+        }
+
+        return time;
+    },
+
+    toIsoTimeString: function(date, showSeconds) {
+        date = isDate(date) ? date : new Date(0, 0, 0, date);
+
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var time = S.padNumber(hours, 2) + COLON + S.padNumber(minutes, 2);
+
+        if (showSeconds) {
+            var seconds = date.getSeconds();
+
+            time += COLON;
+            time += S.padNumber(seconds, 2);
+        }
+
+        return time;
+    }
 });
 
 (function(Y) {
-	&#x2F;&#x2F; See http:&#x2F;&#x2F;yuilibrary.com&#x2F;projects&#x2F;yui3&#x2F;ticket&#x2F;2532862
+    &#x2F;&#x2F; See http:&#x2F;&#x2F;yuilibrary.com&#x2F;projects&#x2F;yui3&#x2F;ticket&#x2F;2532862
 
-	&#x2F;**
-	 * @module datatype
-	*&#x2F;
+    &#x2F;**
+     * @module datatype
+    *&#x2F;
 
-	&#x2F;**
-	 * The Date.Locale class is a container for all localised date strings
-	 * used by Y.DataType.Date. It is used internally, but may be extended
-	 * to provide new date localisations.
-	 *
-	 * To create your own Locale, follow these steps:
-	 * &lt;ol&gt;
-	 *  &lt;li&gt;Find an existing locale that matches closely with your needs&lt;&#x2F;li&gt;
-	 *  &lt;li&gt;Use this as your base class.  Use Y.DataType.Date.Locale[&quot;en&quot;] if nothing
-	 *   matches.&lt;&#x2F;li&gt;
-	 *  &lt;li&gt;Create your own class as an extension of the base class using
-	 *   Y.merge, and add your own localisations where needed.&lt;&#x2F;li&gt;
-	 * &lt;&#x2F;ol&gt;
-	 * See the Y.DataType.Date.Locale[&quot;en-US&quot;] and Y.DataType.Date.Locale[&quot;en-GB&quot;]
-	 * classes which extend Y.DataType.Date.Locale[&quot;en&quot;].
-	 *
-	 * For example, to implement locales for French french and Canadian french,
-	 * we would do the following:
-	 * &lt;ol&gt;
-	 *  &lt;li&gt;For French french, we have no existing similar locale, so use
-	 *   Y.DataType.Date.Locale[&quot;en&quot;] as the base, and extend it:
-	 *   &lt;pre&gt;
-	 *      Y.DataType.Date.Locale[&quot;fr&quot;] = Y.merge(Y.DataType.Date.Locale[&quot;en&quot;], {
-	 *          a: [&quot;dim&quot;, &quot;lun&quot;, &quot;mar&quot;, &quot;mer&quot;, &quot;jeu&quot;, &quot;ven&quot;, &quot;sam&quot;],
-	 *          A: [&quot;dimanche&quot;, &quot;lundi&quot;, &quot;mardi&quot;, &quot;mercredi&quot;, &quot;jeudi&quot;, &quot;vendredi&quot;, &quot;samedi&quot;],
-	 *          b: [&quot;jan&quot;, &quot;f&amp;eacute;v&quot;, &quot;mar&quot;, &quot;avr&quot;, &quot;mai&quot;, &quot;jun&quot;, &quot;jui&quot;, &quot;ao&amp;ucirc;&quot;, &quot;sep&quot;, &quot;oct&quot;, &quot;nov&quot;, &quot;d&amp;eacute;c&quot;],
-	 *          B: [&quot;janvier&quot;, &quot;f&amp;eacute;vrier&quot;, &quot;mars&quot;, &quot;avril&quot;, &quot;mai&quot;, &quot;juin&quot;, &quot;juillet&quot;, &quot;ao&amp;ucirc;t&quot;, &quot;septembre&quot;, &quot;octobre&quot;, &quot;novembre&quot;, &quot;d&amp;eacute;cembre&quot;],
-	 *          c: &quot;%a %d %b %Y %T %Z&quot;,
-	 *          p: [&quot;&quot;, &quot;&quot;],
-	 *          P: [&quot;&quot;, &quot;&quot;],
-	 *          x: &quot;%d.%m.%Y&quot;,
-	 *          X: &quot;%T&quot;
-	 *      });
-	 *   &lt;&#x2F;pre&gt;
-	 *  &lt;&#x2F;li&gt;
-	 *  &lt;li&gt;For Canadian french, we start with French french and change the meaning of \%x:
-	 *   &lt;pre&gt;
-	 *      Y.DataType.Date.Locale[&quot;fr-CA&quot;] = Y.merge(Y.DataType.Date.Locale[&quot;fr&quot;], {
-	 *          x: &quot;%Y-%m-%d&quot;
-	 *      });
-	 *   &lt;&#x2F;pre&gt;
-	 *  &lt;&#x2F;li&gt;
-	 * &lt;&#x2F;ol&gt;
-	 *
-	 * With that, you can use your new locales:
-	 * &lt;pre&gt;
-	 *    var d = new Date(&quot;2008&#x2F;04&#x2F;22&quot;);
-	 *    Y.DataType.Date.format(d, { format: &quot;%A, %d %B == %x&quot;, locale: &quot;fr&quot; });
-	 * &lt;&#x2F;pre&gt;
-	 * will return:
-	 * &lt;pre&gt;
-	 *    mardi, 22 avril == 22.04.2008
-	 * &lt;&#x2F;pre&gt;
-	 * And
-	 * &lt;pre&gt;
-	 *    Y.DataType.Date.format(d, {format: &quot;%A, %d %B == %x&quot;, locale: &quot;fr-CA&quot; });
-	 * &lt;&#x2F;pre&gt;
-	 * Will return:
-	 * &lt;pre&gt;
-	 *   mardi, 22 avril == 2008-04-22
-	 * &lt;&#x2F;pre&gt;
-	 * @requires oop
-	 * @class DataType.Date.Locale
-	 * @static
-	 * @deprecated - use Y.config.lang to request one of many built-in languages instead.
-	 *&#x2F;
-	var YDateEn = {
-		a: [&quot;Sun&quot;, &quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;],
-		A: [&quot;Sunday&quot;, &quot;Monday&quot;, &quot;Tuesday&quot;, &quot;Wednesday&quot;, &quot;Thursday&quot;, &quot;Friday&quot;, &quot;Saturday&quot;],
-		b: [&quot;Jan&quot;, &quot;Feb&quot;, &quot;Mar&quot;, &quot;Apr&quot;, &quot;May&quot;, &quot;Jun&quot;, &quot;Jul&quot;, &quot;Aug&quot;, &quot;Sep&quot;, &quot;Oct&quot;, &quot;Nov&quot;, &quot;Dec&quot;],
-		B: [&quot;January&quot;, &quot;February&quot;, &quot;March&quot;, &quot;April&quot;, &quot;May&quot;, &quot;June&quot;, &quot;July&quot;, &quot;August&quot;, &quot;September&quot;, &quot;October&quot;, &quot;November&quot;, &quot;December&quot;],
-		c: &quot;%a %d %b %Y %T %Z&quot;,
-		p: [&quot;AM&quot;, &quot;PM&quot;],
-		P: [&quot;am&quot;, &quot;pm&quot;],
-		r: &quot;%I:%M:%S %p&quot;,
-		x: &quot;%d&#x2F;%m&#x2F;%y&quot;,
-		X: &quot;%T&quot;
-	};
+    &#x2F;**
+     * The Date.Locale class is a container for all localised date strings
+     * used by Y.DataType.Date. It is used internally, but may be extended
+     * to provide new date localisations.
+     *
+     * To create your own Locale, follow these steps:
+     * &lt;ol&gt;
+     *  &lt;li&gt;Find an existing locale that matches closely with your needs&lt;&#x2F;li&gt;
+     *  &lt;li&gt;Use this as your base class.  Use Y.DataType.Date.Locale[&quot;en&quot;] if nothing
+     *   matches.&lt;&#x2F;li&gt;
+     *  &lt;li&gt;Create your own class as an extension of the base class using
+     *   Y.merge, and add your own localisations where needed.&lt;&#x2F;li&gt;
+     * &lt;&#x2F;ol&gt;
+     * See the Y.DataType.Date.Locale[&quot;en-US&quot;] and Y.DataType.Date.Locale[&quot;en-GB&quot;]
+     * classes which extend Y.DataType.Date.Locale[&quot;en&quot;].
+     *
+     * For example, to implement locales for French french and Canadian french,
+     * we would do the following:
+     * &lt;ol&gt;
+     *  &lt;li&gt;For French french, we have no existing similar locale, so use
+     *   Y.DataType.Date.Locale[&quot;en&quot;] as the base, and extend it:
+     *   &lt;pre&gt;
+     *      Y.DataType.Date.Locale[&quot;fr&quot;] = Y.merge(Y.DataType.Date.Locale[&quot;en&quot;], {
+     *          a: [&quot;dim&quot;, &quot;lun&quot;, &quot;mar&quot;, &quot;mer&quot;, &quot;jeu&quot;, &quot;ven&quot;, &quot;sam&quot;],
+     *          A: [&quot;dimanche&quot;, &quot;lundi&quot;, &quot;mardi&quot;, &quot;mercredi&quot;, &quot;jeudi&quot;, &quot;vendredi&quot;, &quot;samedi&quot;],
+     *          b: [&quot;jan&quot;, &quot;f&amp;eacute;v&quot;, &quot;mar&quot;, &quot;avr&quot;, &quot;mai&quot;, &quot;jun&quot;, &quot;jui&quot;, &quot;ao&amp;ucirc;&quot;, &quot;sep&quot;, &quot;oct&quot;, &quot;nov&quot;, &quot;d&amp;eacute;c&quot;],
+     *          B: [&quot;janvier&quot;, &quot;f&amp;eacute;vrier&quot;, &quot;mars&quot;, &quot;avril&quot;, &quot;mai&quot;, &quot;juin&quot;, &quot;juillet&quot;, &quot;ao&amp;ucirc;t&quot;, &quot;septembre&quot;, &quot;octobre&quot;, &quot;novembre&quot;, &quot;d&amp;eacute;cembre&quot;],
+     *          c: &quot;%a %d %b %Y %T %Z&quot;,
+     *          p: [&quot;&quot;, &quot;&quot;],
+     *          P: [&quot;&quot;, &quot;&quot;],
+     *          x: &quot;%d.%m.%Y&quot;,
+     *          X: &quot;%T&quot;
+     *      });
+     *   &lt;&#x2F;pre&gt;
+     *  &lt;&#x2F;li&gt;
+     *  &lt;li&gt;For Canadian french, we start with French french and change the meaning of \%x:
+     *   &lt;pre&gt;
+     *      Y.DataType.Date.Locale[&quot;fr-CA&quot;] = Y.merge(Y.DataType.Date.Locale[&quot;fr&quot;], {
+     *          x: &quot;%Y-%m-%d&quot;
+     *      });
+     *   &lt;&#x2F;pre&gt;
+     *  &lt;&#x2F;li&gt;
+     * &lt;&#x2F;ol&gt;
+     *
+     * With that, you can use your new locales:
+     * &lt;pre&gt;
+     *    var d = new Date(&quot;2008&#x2F;04&#x2F;22&quot;);
+     *    Y.DataType.Date.format(d, { format: &quot;%A, %d %B == %x&quot;, locale: &quot;fr&quot; });
+     * &lt;&#x2F;pre&gt;
+     * will return:
+     * &lt;pre&gt;
+     *    mardi, 22 avril == 22.04.2008
+     * &lt;&#x2F;pre&gt;
+     * And
+     * &lt;pre&gt;
+     *    Y.DataType.Date.format(d, {format: &quot;%A, %d %B == %x&quot;, locale: &quot;fr-CA&quot; });
+     * &lt;&#x2F;pre&gt;
+     * Will return:
+     * &lt;pre&gt;
+     *   mardi, 22 avril == 2008-04-22
+     * &lt;&#x2F;pre&gt;
+     * @requires oop
+     * @class DataType.Date.Locale
+     * @static
+     * @deprecated - use Y.config.lang to request one of many built-in languages instead.
+     *&#x2F;
+    var YDateEn = {
+        a: [&quot;Sun&quot;, &quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;],
+        A: [&quot;Sunday&quot;, &quot;Monday&quot;, &quot;Tuesday&quot;, &quot;Wednesday&quot;, &quot;Thursday&quot;, &quot;Friday&quot;, &quot;Saturday&quot;],
+        b: [&quot;Jan&quot;, &quot;Feb&quot;, &quot;Mar&quot;, &quot;Apr&quot;, &quot;May&quot;, &quot;Jun&quot;, &quot;Jul&quot;, &quot;Aug&quot;, &quot;Sep&quot;, &quot;Oct&quot;, &quot;Nov&quot;, &quot;Dec&quot;],
+        B: [&quot;January&quot;, &quot;February&quot;, &quot;March&quot;, &quot;April&quot;, &quot;May&quot;, &quot;June&quot;, &quot;July&quot;, &quot;August&quot;, &quot;September&quot;, &quot;October&quot;, &quot;November&quot;, &quot;December&quot;],
+        c: &quot;%a %d %b %Y %T %Z&quot;,
+        p: [&quot;AM&quot;, &quot;PM&quot;],
+        P: [&quot;am&quot;, &quot;pm&quot;],
+        r: &quot;%I:%M:%S %p&quot;,
+        x: &quot;%d&#x2F;%m&#x2F;%y&quot;,
+        X: &quot;%T&quot;
+    };
 
-	Y.namespace(&quot;DataType.Date.Locale&quot;);
+    Y.namespace(&quot;DataType.Date.Locale&quot;);
 
-	Y.DataType.Date.Locale[&quot;en&quot;] = YDateEn;
+    Y.DataType.Date.Locale[&quot;en&quot;] = YDateEn;
 
-	Y.DataType.Date.Locale[&quot;en-US&quot;] = Y.merge(YDateEn, {
-		c: &quot;%a %d %b %Y %I:%M:%S %p %Z&quot;,
-		x: &quot;%m&#x2F;%d&#x2F;%Y&quot;,
-		X: &quot;%I:%M:%S %p&quot;
-	});
+    Y.DataType.Date.Locale[&quot;en-US&quot;] = Y.merge(YDateEn, {
+        c: &quot;%a %d %b %Y %I:%M:%S %p %Z&quot;,
+        x: &quot;%m&#x2F;%d&#x2F;%Y&quot;,
+        X: &quot;%I:%M:%S %p&quot;
+    });
 
-	Y.DataType.Date.Locale[&quot;en-GB&quot;] = Y.merge(YDateEn, {
-		r: &quot;%l:%M:%S %P %Z&quot;
-	});
-	Y.DataType.Date.Locale[&quot;en-AU&quot;] = Y.merge(YDateEn);
+    Y.DataType.Date.Locale[&quot;en-GB&quot;] = Y.merge(YDateEn, {
+        r: &quot;%l:%M:%S %P %Z&quot;
+    });
+    Y.DataType.Date.Locale[&quot;en-AU&quot;] = Y.merge(YDateEn);
 }(A));
 
     </pre>

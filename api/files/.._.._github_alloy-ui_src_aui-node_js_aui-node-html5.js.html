@@ -1516,84 +1516,84 @@
  *&#x2F;
 
 if (A.UA.ie) {
-	&#x2F;**
-	 * &lt;p&gt;An object that encapsulates util methods for HTML5 shiving.&lt;&#x2F;p&gt;
-	 * &lt;h2&gt;What is a &quot;shiv&quot;?&lt;&#x2F;h1&gt;
-	 * &lt;p&gt;To the world, a shiv is a slang term for a sharp object used as a
+    &#x2F;**
+     * &lt;p&gt;An object that encapsulates util methods for HTML5 shiving.&lt;&#x2F;p&gt;
+     * &lt;h2&gt;What is a &quot;shiv&quot;?&lt;&#x2F;h1&gt;
+     * &lt;p&gt;To the world, a shiv is a slang term for a sharp object used as a
      * knife-like weapon. To Internet Explorer, a shiv is a script that, when
      * executed, forces the browser to recognize HTML5 elements.&lt;&#x2F;p&gt;
-	 *
-	 * @class A.HTML5
-	 *&#x2F;
-	var HTML5 = A.namespace(&#x27;HTML5&#x27;),
-		DOM_create = A.DOM._create;
+     *
+     * @class A.HTML5
+     *&#x2F;
+    var HTML5 = A.namespace(&#x27;HTML5&#x27;),
+        DOM_create = A.DOM._create;
 
-	if (!HTML5._fragHTML5Shived) {
-		&#x2F;**
-		 * A global DocumentFragment already HTML5 shived, for performance
+    if (!HTML5._fragHTML5Shived) {
+        &#x2F;**
+         * A global DocumentFragment already HTML5 shived, for performance
          * reasons. (i.e., all nodes and its HTML5 children appended to this
          * fragment iherits the styles on IE).
-		 *
-		 * @property A.HTML._fragHTML5Shived
-		 * @type DocumentFragment (shived)
-		 * @protected
-		 *&#x2F;
-		HTML5._fragHTML5Shived = YUI.AUI.html5shiv(
-			A.config.doc.createDocumentFragment()
-		);
-	}
+         *
+         * @property A.HTML._fragHTML5Shived
+         * @type DocumentFragment (shived)
+         * @protected
+         *&#x2F;
+        HTML5._fragHTML5Shived = YUI.AUI.html5shiv(
+            A.config.doc.createDocumentFragment()
+        );
+    }
 
-	A.mix(
-		HTML5,
-		{
-			&#x2F;**
-			 * Receives a &lt;code&gt;frag&lt;&#x2F;code&gt; and a HTML content. This method
+    A.mix(
+        HTML5,
+        {
+            &#x2F;**
+             * Receives a &lt;code&gt;frag&lt;&#x2F;code&gt; and a HTML content. This method
              * shivs the HTML5 nodes appended to a Node or fragment which is not
              * on the document yet.
-			 *
-			 * @method IECreateFix
-			 * @param {Node | DocumentFragment} frag Fragment to be fixed.
-			 * @param {String} content HTML to be set (using innerHTML) on the &lt;code&gt;frag&lt;&#x2F;code&gt;.
-			 * @return {Node | DocumentFragment}
-			 *&#x2F;
-			IECreateFix: function(frag, content) {
-				var shivedFrag = HTML5._fragHTML5Shived;
+             *
+             * @method IECreateFix
+             * @param {Node | DocumentFragment} frag Fragment to be fixed.
+             * @param {String} content HTML to be set (using innerHTML) on the &lt;code&gt;frag&lt;&#x2F;code&gt;.
+             * @return {Node | DocumentFragment}
+             *&#x2F;
+            IECreateFix: function(frag, content) {
+                var shivedFrag = HTML5._fragHTML5Shived;
 
-				shivedFrag.appendChild(frag);
+                shivedFrag.appendChild(frag);
 
-				frag.innerHTML = content;
+                frag.innerHTML = content;
 
-				shivedFrag.removeChild(frag);
+                shivedFrag.removeChild(frag);
 
-				return frag;
-			},
+                return frag;
+            },
 
-			&#x2F;**
-			 * AOP listener to the A.DOM._create method. This method
+            &#x2F;**
+             * AOP listener to the A.DOM._create method. This method
              * intercepts all the calls to the A.DOM._create and append the
              * generated fragment to &lt;a
              * href=&quot;A.HTML5.html#property_A.HTML._fragHTML5Shived&quot;&gt;A.HTML._fragHTML5Shived&lt;&#x2F;a&gt;,
              * this fixes the IE bug for painting the HTML5 nodes on the HTML
              * fragment.
-			 *
-			 * @method _doBeforeCreate
-			 * @param {String} html HTML content
-			 * @param {String} doc
-			 * @param {String} tag
-			 * @protected
-			 * @return {DocumentFragment}
-			 *&#x2F;
-			_doBeforeCreate: function(html, doc, tag) {
-				var createdFrag = DOM_create.apply(this, arguments);
+             *
+             * @method _doBeforeCreate
+             * @param {String} html HTML content
+             * @param {String} doc
+             * @param {String} tag
+             * @protected
+             * @return {DocumentFragment}
+             *&#x2F;
+            _doBeforeCreate: function(html, doc, tag) {
+                var createdFrag = DOM_create.apply(this, arguments);
 
-				var shivedFrag = HTML5.IECreateFix(createdFrag, html);
+                var shivedFrag = HTML5.IECreateFix(createdFrag, html);
 
-				return new A.Do.Halt(null, shivedFrag);
-			}
-		}
-	);
+                return new A.Do.Halt(null, shivedFrag);
+            }
+        }
+    );
 
-	A.Do.before(HTML5._doBeforeCreate, A.DOM, &#x27;_create&#x27;, A.DOM);
+    A.Do.before(HTML5._doBeforeCreate, A.DOM, &#x27;_create&#x27;, A.DOM);
 }
     </pre>
 </div>

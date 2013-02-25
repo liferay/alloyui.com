@@ -1516,56 +1516,56 @@
  *&#x2F;
 
 var L = A.Lang,
-	isBoolean = L.isBoolean,
-	isFunction = L.isFunction,
-	isString = L.isString,
+    isBoolean = L.isBoolean,
+    isFunction = L.isFunction,
+    isString = L.isString,
 
-	defaults = YUI.namespace(&#x27;defaults.io&#x27;),
+    defaults = YUI.namespace(&#x27;defaults.io&#x27;),
 
-	getDefault = function(attr) {
-		return function() {
-			return defaults[attr];
-		};
-	},
+    getDefault = function(attr) {
+        return function() {
+            return defaults[attr];
+        };
+    },
 
-	ACTIVE = &#x27;active&#x27;,
-	ARGUMENTS = &#x27;arguments&#x27;,
-	AUTO_LOAD = &#x27;autoLoad&#x27;,
-	CACHE = &#x27;cache&#x27;,
-	CFG = &#x27;cfg&#x27;,
-	COMPLETE = &#x27;complete&#x27;,
-	CONTENT_TYPE = &#x27;content-type&#x27;,
-	CONTEXT = &#x27;context&#x27;,
-	DATA = &#x27;data&#x27;,
-	DATA_TYPE = &#x27;dataType&#x27;,
-	EMPTY_STRING = &#x27;&#x27;,
-	END = &#x27;end&#x27;,
-	FAILURE = &#x27;failure&#x27;,
-	FORM = &#x27;form&#x27;,
-	GET = &#x27;get&#x27;,
-	HEADERS = &#x27;headers&#x27;,
-	IO_REQUEST = &#x27;IORequest&#x27;,
-	JSON = &#x27;json&#x27;,
-	METHOD = &#x27;method&#x27;,
-	RESPONSE_DATA = &#x27;responseData&#x27;,
-	START = &#x27;start&#x27;,
-	SUCCESS = &#x27;success&#x27;,
-	SYNC = &#x27;sync&#x27;,
-	TIMEOUT = &#x27;timeout&#x27;,
-	TRANSACTION = &#x27;transaction&#x27;,
-	URI = &#x27;uri&#x27;,
-	XDR = &#x27;xdr&#x27;,
-	XML = &#x27;xml&#x27;,
+    ACTIVE = &#x27;active&#x27;,
+    ARGUMENTS = &#x27;arguments&#x27;,
+    AUTO_LOAD = &#x27;autoLoad&#x27;,
+    CACHE = &#x27;cache&#x27;,
+    CFG = &#x27;cfg&#x27;,
+    COMPLETE = &#x27;complete&#x27;,
+    CONTENT_TYPE = &#x27;content-type&#x27;,
+    CONTEXT = &#x27;context&#x27;,
+    DATA = &#x27;data&#x27;,
+    DATA_TYPE = &#x27;dataType&#x27;,
+    EMPTY_STRING = &#x27;&#x27;,
+    END = &#x27;end&#x27;,
+    FAILURE = &#x27;failure&#x27;,
+    FORM = &#x27;form&#x27;,
+    GET = &#x27;get&#x27;,
+    HEADERS = &#x27;headers&#x27;,
+    IO_REQUEST = &#x27;IORequest&#x27;,
+    JSON = &#x27;json&#x27;,
+    METHOD = &#x27;method&#x27;,
+    RESPONSE_DATA = &#x27;responseData&#x27;,
+    START = &#x27;start&#x27;,
+    SUCCESS = &#x27;success&#x27;,
+    SYNC = &#x27;sync&#x27;,
+    TIMEOUT = &#x27;timeout&#x27;,
+    TRANSACTION = &#x27;transaction&#x27;,
+    URI = &#x27;uri&#x27;,
+    XDR = &#x27;xdr&#x27;,
+    XML = &#x27;xml&#x27;,
 
-	PARSE_ERROR = &#x27;Parser error: IO dataType is not correctly parsing&#x27;,
+    PARSE_ERROR = &#x27;Parser error: IO dataType is not correctly parsing&#x27;,
 
-	ACCEPTS = {
-		all: &#x27;*&#x2F;*&#x27;,
-		html: &#x27;text&#x2F;html&#x27;,
-		json: &#x27;application&#x2F;json, text&#x2F;javascript&#x27;,
-		text: &#x27;text&#x2F;plain&#x27;,
-		xml: &#x27;application&#x2F;xml, text&#x2F;xml&#x27;
-	};
+    ACCEPTS = {
+        all: &#x27;*&#x2F;*&#x27;,
+        html: &#x27;text&#x2F;html&#x27;,
+        json: &#x27;application&#x2F;json, text&#x2F;javascript&#x27;,
+        text: &#x27;text&#x2F;plain&#x27;,
+        xml: &#x27;application&#x2F;xml, text&#x2F;xml&#x27;
+    };
 
 &#x2F;**
  * A base class for IORequest, providing:
@@ -1589,555 +1589,555 @@ var L = A.Lang,
  * @uses io
  *&#x2F;
 var IORequest = A.Component.create(
-	{
-		&#x2F;**
-		 * Static property provides a string to identify the class.
-		 *
-		 * @property IORequest.NAME
-		 * @type String
-		 * @static
-		 *&#x2F;
-		NAME: IO_REQUEST,
-
-		&#x2F;**
-		 * Static property used to define the default attribute
-		 * configuration for the IORequest.
-		 *
-		 * @property IORequest.ATTRS
-		 * @type Object
-		 * @static
-		 *&#x2F;
-		ATTRS: {
-			&#x2F;**
-			 * If &lt;code&gt;true&lt;&#x2F;code&gt; invoke the
-	         * &lt;a href=&quot;IORequest.html#method_start&quot;&gt;start&lt;&#x2F;a&gt; method automatically,
-	         * initializing the IO transaction.
-			 *
-			 * @attribute autoLoad
-			 * @default true
-			 * @type boolean
-			 *&#x2F;
-			autoLoad: {
-				value: true,
-				validator: isBoolean
-			},
-
-			&#x2F;**
-			 * If &lt;code&gt;false&lt;&#x2F;code&gt; the current timestamp will be appended to the
-	         * url, avoiding the url to be cached.
-			 *
-			 * @attribute cache
-			 * @default true
-			 * @type boolean
-			 *&#x2F;
-			cache: {
-				value: true,
-				validator: isBoolean
-			},
-
-			&#x2F;**
-			 * The type of the request (i.e., could be xml, json, javascript, text).
-			 *
-			 * @attribute dataType
-			 * @default null
-			 * @type String
-			 *&#x2F;
-			dataType: {
-				setter: function(v) {
-					return (v || EMPTY_STRING).toLowerCase();
-				},
-				value: null,
-				validator: isString
-			},
-
-			&#x2F;**
-			 * This is a normalized attribute for the response data. It&#x27;s useful
-	         * to retrieve the correct type for the
-	         * &lt;a href=&quot;IORequest.html#config_dataType&quot;&gt;dataType&lt;&#x2F;a&gt; (i.e., in json
-	         * requests the &lt;code&gt;responseData&lt;&#x2F;code&gt;) is a JSONObject.
-			 *
-			 * @attribute responseData
-			 * @default null
-			 * @type String | JSONObject | XMLDocument
-			 *&#x2F;
-			responseData: {
-				setter: function(v) {
-					return this._setResponseData(v);
-				},
-				value: null
-			},
-
-			&#x2F;**
-			 * URI to be requested using AJAX.
-			 *
-			 * @attribute uri
-			 * @default null
-			 * @type String
-			 *&#x2F;
-			uri: {
-				setter: function(v) {
-					return this._parseURL(v);
-				},
-				value: null,
-				validator: isString
-			},
-
-			&#x2F;&#x2F; User readOnly variables
-
-			&#x2F;**
-			 * Whether the transaction is active or not.
-			 *
-			 * @attribute active
-			 * @default false
-			 * @type boolean
-			 *&#x2F;
-			active: {
-				value: false,
-				validator: isBoolean
-			},
-
-			&#x2F;**
-			 * Object containing all the
-	         * &lt;a href=&quot;io.html#configattributes&quot;&gt;IO Configuration Attributes&lt;&#x2F;a&gt;.
-	         * This Object is passed to the &lt;code&gt;A.io&lt;&#x2F;code&gt; internally.
-			 *
-			 * @attribute cfg
-			 * @default Object containing all the
-	         * &lt;a href=&quot;io.html#configattributes&quot;&gt;IO Configuration Attributes&lt;&#x2F;a&gt;.
-	         * @readOnly
-			 * @type String
-			 *&#x2F;
-			cfg: {
-				getter: function() {
-					var instance = this;
-
-					&#x2F;&#x2F; keep the current cfg object always synchronized with the mapped public attributes
-					&#x2F;&#x2F; when the user call .start() it always retrieve the last set values for each mapped attr
-					return {
-						arguments: instance.get(ARGUMENTS),
-						context: instance.get(CONTEXT),
-						data: instance.getFormattedData(),
-						form: instance.get(FORM),
-						headers: instance.get(HEADERS),
-						method: instance.get(METHOD),
-						on: {
-							complete: A.bind(instance.fire, instance, COMPLETE),
-							end: A.bind(instance._end, instance),
-							failure: A.bind(instance.fire, instance, FAILURE),
-							start: A.bind(instance.fire, instance, START),
-							success: A.bind(instance._success, instance)
-						},
-						sync: instance.get(SYNC),
-						timeout: instance.get(TIMEOUT),
-						xdr: instance.get(XDR)
-					};
-				},
-				readOnly: true
-			},
-
-			&#x2F;**
-			 * Stores the IO Object of the current transaction.
-			 *
-			 * @attribute transaction
-			 * @default null
-			 * @type Object
-			 *&#x2F;
-			transaction: {
-				value: null
-			},
-
-			&#x2F;&#x2F; Configuration Object mapping
-			&#x2F;&#x2F; To take advantages of the Attribute listeners of A.Base
-			&#x2F;&#x2F; See: http:&#x2F;&#x2F;developer.yahoo.com&#x2F;yui&#x2F;3&#x2F;io&#x2F;
-
-			&#x2F;**
-			 * See &lt;a href=&quot;http:&#x2F;&#x2F;developer.yahoo.com&#x2F;yui&#x2F;3&#x2F;io&#x2F;#configuration&quot;&gt;IO
-	        * Configuration&lt;&#x2F;a&gt;.
-			 *
-			 * @attribute arguments
-			 * @default Value mapped on YUI.AUI.defaults.io.
-			 * @type Object
-			 *&#x2F;
-			arguments: {
-				valueFn: getDefault(ARGUMENTS)
-			},
-
-			&#x2F;**
-			 * See &lt;a href=&quot;http:&#x2F;&#x2F;developer.yahoo.com&#x2F;yui&#x2F;3&#x2F;io&#x2F;#configuration&quot;&gt;IO
-	        * Configuration&lt;&#x2F;a&gt;.
-			 *
-			 * @attribute context
-			 * @default Value mapped on YUI.AUI.defaults.io.
-			 * @type Object
-			 *&#x2F;
-			context: {
-				valueFn: getDefault(CONTEXT)
-			},
-
-			&#x2F;**
-			 * See &lt;a href=&quot;http:&#x2F;&#x2F;developer.yahoo.com&#x2F;yui&#x2F;3&#x2F;io&#x2F;#configuration&quot;&gt;IO
-	        * Configuration&lt;&#x2F;a&gt;.
-			 *
-			 * @attribute data
-			 * @default Value mapped on YUI.AUI.defaults.io.
-			 * @type Object
-			 *&#x2F;
-			data: {
-				valueFn: getDefault(DATA)
-			},
-
-			&#x2F;**
-			 * See &lt;a href=&quot;http:&#x2F;&#x2F;developer.yahoo.com&#x2F;yui&#x2F;3&#x2F;io&#x2F;#configuration&quot;&gt;IO
-	        * Configuration&lt;&#x2F;a&gt;.
-			 *
-			 * @attribute form
-			 * @default Value mapped on YUI.AUI.defaults.io.
-			 * @type Object
-			 *&#x2F;
-			form: {
-				valueFn: getDefault(FORM)
-			},
-
-			&#x2F;**
-			 * Set the correct ACCEPT header based on the dataType.
-			 *
-			 * @attribute headers
-			 * @default Object
-			 * @type Object
-			 *&#x2F;
-			headers: {
-				getter: function(value) {
-					var header = [];
-					var instance = this;
-					var dataType = instance.get(DATA_TYPE);
-
-					if (dataType) {
-						header.push(
-							ACCEPTS[dataType]
-						);
-					}
-
-					&#x2F;&#x2F; always add *.* to the accept header
-					header.push(
-						ACCEPTS.all
-					);
-
-					return A.merge(
-						value,
-						{
-							Accept: header.join(&#x27;, &#x27;)
-						}
-					);
-				},
-				valueFn: getDefault(HEADERS)
-			},
-
-			&#x2F;**
-			 * See &lt;a href=&quot;http:&#x2F;&#x2F;developer.yahoo.com&#x2F;yui&#x2F;3&#x2F;io&#x2F;#configuration&quot;&gt;IO
-	        * Configuration&lt;&#x2F;a&gt;.
-			 *
-			 * @attribute method
-			 * @default Value mapped on YUI.AUI.defaults.io.
-			 * @type String
-			 *&#x2F;
-			method: {
-				valueFn: getDefault(METHOD)
-			},
-
-			&#x2F;**
-			 * A selector to be used to query against the response of the
-			 * request. Only works if the response is XML or HTML.
-			 *
-			 * @attribute selector
-			 * @type string
-			 *&#x2F;
-			selector: {
-				value: null
-			},
-
-			&#x2F;**
-			 * See &lt;a href=&quot;http:&#x2F;&#x2F;developer.yahoo.com&#x2F;yui&#x2F;3&#x2F;io&#x2F;#configuration&quot;&gt;IO
-	        * Configuration&lt;&#x2F;a&gt;.
-			 *
-			 * @attribute sync
-			 * @default Value mapped on YUI.AUI.defaults.io.
-			 * @type boolean
-			 *&#x2F;
-			sync: {
-				valueFn: getDefault(SYNC)
-			},
-
-			&#x2F;**
-			 * See &lt;a href=&quot;http:&#x2F;&#x2F;developer.yahoo.com&#x2F;yui&#x2F;3&#x2F;io&#x2F;#configuration&quot;&gt;IO
-	        * Configuration&lt;&#x2F;a&gt;.
-			 *
-			 * @attribute timeout
-			 * @default Value mapped on YUI.AUI.defaults.io.
-			 * @type Number
-			 *&#x2F;
-			timeout: {
-				valueFn: getDefault(TIMEOUT)
-			},
-
-			&#x2F;**
-			 * See &lt;a href=&quot;http:&#x2F;&#x2F;developer.yahoo.com&#x2F;yui&#x2F;3&#x2F;io&#x2F;#configuration&quot;&gt;IO
-	         * Configuration&lt;&#x2F;a&gt;.
-			 *
-			 * @attribute xdr
-			 * @default Value mapped on YUI.AUI.defaults.io.
-			 * @type Object
-			 *&#x2F;
-			xdr: {
-				valueFn: getDefault(XDR)
-			}
-		},
-
-		EXTENDS: A.Plugin.Base,
-
-		prototype: {
-			&#x2F;**
-			 * Construction logic executed during IORequest instantiation. Lifecycle.
-			 *
-			 * @method initializer
-			 * @protected
-			 *&#x2F;
-			init: function(config) {
-				var instance = this;
-
-				IORequest.superclass.init.apply(this, arguments);
-
-				instance._autoStart();
-			},
-
-			&#x2F;**
-			 * Descructor lifecycle implementation for the IORequest class.
-			 * Purges events attached to the node (and all child nodes).
-			 *
-			 * @method destructor
-			 * @protected
-			 *&#x2F;
-			destructor: function() {
-				var instance = this;
-
-				instance.stop();
-
-				instance.set(TRANSACTION, null);
-			},
-
-			&#x2F;**
-			 * Applies the &lt;code&gt;YUI.AUI.defaults.io.dataFormatter&lt;&#x2F;code&gt; if defined and return the formatted data.
-			 *
-			 * @method getFormattedData
-			 * @protected
-			 * @return {String}
-			 *&#x2F;
-			getFormattedData: function() {
-				var instance = this;
-				var value = instance.get(DATA);
-				var dataFormatter = defaults.dataFormatter;
-
-				if (isFunction(dataFormatter)) {
-					value = dataFormatter.call(instance, value);
-				}
-
-				return value;
-			},
-
-			&#x2F;**
-			 * Starts the IO transaction. Used to refresh the content also.
-			 *
-			 * @method start
-			 *&#x2F;
-			start: function() {
-				var instance = this;
-
-				instance.destructor();
-
-				instance.set(ACTIVE, true);
-
-				var ioObj = instance._yuiIOObj;
-
-				if (!ioObj) {
-					ioObj = new A.IO();
-
-					instance._yuiIOObj = ioObj;
-				}
-
-				var transaction = ioObj.send(
-					instance.get(URI),
-					instance.get(CFG)
-				);
-
-				instance.set(TRANSACTION, transaction);
-			},
-
-			&#x2F;**
-			 * Stops the IO transaction.
-			 *
-			 * @method stop
-			 *&#x2F;
-			stop: function() {
-				var instance = this;
-				var transaction = instance.get(TRANSACTION);
-
-				if (transaction) {
-					transaction.abort();
-				}
-			},
-
-			&#x2F;**
-			 * Invoke the &lt;code&gt;start&lt;&#x2F;code&gt; method (autoLoad attribute).
-			 *
-			 * @method _autoStart
-			 * @protected
-			 *&#x2F;
-			_autoStart: function() {
-				var instance = this;
-
-				if (instance.get(AUTO_LOAD)) {
-					instance.start();
-				}
-			},
-
-			&#x2F;**
-			 * Parse the &lt;a href=&quot;IORequest.html#config_uri&quot;&gt;uri&lt;&#x2F;a&gt; to add a
-		     * timestamp if &lt;a href=&quot;IORequest.html#config_cache&quot;&gt;cache&lt;&#x2F;a&gt; is
-		     * &lt;code&gt;true&lt;&#x2F;code&gt;. Also applies the
-		     * &lt;code&gt;YUI.AUI.defaults.io.uriFormatter&lt;&#x2F;code&gt;.
-			 *
-			 * @method _parseURL
-			 * @param {String} url
-			 * @protected
-			 * @return {String}
-			 *&#x2F;
-			_parseURL: function(url) {
-				var instance = this;
-				var cache = instance.get(CACHE);
-				var method = instance.get(METHOD);
-
-				&#x2F;&#x2F; reusing logic to add a timestamp on the url from jQuery 1.3.2
-				if ( (cache === false) &amp;&amp; (method == GET) ) {
-					var ts = +new Date;
-					&#x2F;&#x2F; try replacing _= if it is there
-					var ret = url.replace(&#x2F;(\?|&amp;)_=.*?(&amp;|$)&#x2F;, &#x27;$1_=&#x27; + ts + &#x27;$2&#x27;);
-					&#x2F;&#x2F; if nothing was replaced, add timestamp to the end
-					url = ret + ((ret == url) ? (url.match(&#x2F;\?&#x2F;) ? &#x27;&amp;&#x27; : &#x27;?&#x27;) + &#x27;_=&#x27; + ts : &#x27;&#x27;);
-				}
-
-				&#x2F;&#x2F; formatting the URL with the default uriFormatter after the cache timestamp was added
-				var uriFormatter = defaults.uriFormatter;
-
-				if (isFunction(uriFormatter)) {
-					url = uriFormatter.apply(instance, [url]);
-				}
-
-				return url;
-			},
-
-			&#x2F;**
-			 * Internal end callback for the IO transaction.
-			 *
-			 * @method _end
-			 * @param {Number} id ID of the IO transaction.
-			 * @param {Object} args Custom arguments, passed to the event handler. See &lt;a href=&quot;http:&#x2F;&#x2F;developer.yahoo.com&#x2F;yui&#x2F;3&#x2F;io&#x2F;#configuration&quot;&gt;IO
-			 * @protected
-			 *&#x2F;
-			_end: function(id, args) {
-				var instance = this;
-
-				instance.set(ACTIVE, false);
-				instance.set(TRANSACTION, null);
-
-				instance.fire(END, id, args);
-			},
-
-			&#x2F;**
-			 * Internal success callback for the IO transaction.
-			 *
-			 * @method _success
-			 * @param {Number} id ID of the IO transaction.
-			 * @param {Object} obj IO transaction Object.
-			 * @param {Object} args Custom arguments, passed to the event handler. See &lt;a href=&quot;http:&#x2F;&#x2F;developer.yahoo.com&#x2F;yui&#x2F;3&#x2F;io&#x2F;#configuration&quot;&gt;IO
-			 * @protected
-			 *&#x2F;
-			_success: function(id, obj, args) {
-				var instance = this;
-
-				&#x2F;&#x2F; update the responseData attribute with the new data from xhr
-				instance.set(RESPONSE_DATA, obj);
-
-				instance.fire(SUCCESS, id, obj, args);
-			},
-
-			&#x2F;**
-			 * Setter for &lt;a href=&quot;IORequest.html#config_responseData&quot;&gt;responseData&lt;&#x2F;a&gt;.
-			 *
-			 * @method _setResponseData
-			 * @protected
-			 * @param {Object} xhr XHR Object.
-			 * @return {Object}
-			 *&#x2F;
-			_setResponseData: function(xhr) {
-				var data = null;
-				var instance = this;
-
-				if (xhr) {
-					var dataType = instance.get(DATA_TYPE);
-					var contentType = xhr.getResponseHeader(CONTENT_TYPE) || &#x27;&#x27;;
-
-					&#x2F;&#x2F; if the dataType or the content-type is XML...
-					if ((dataType == XML) ||
-						(!dataType &amp;&amp; contentType.indexOf(XML) &gt;= 0)) {
-
-						&#x2F;&#x2F; use responseXML
-						data = xhr.responseXML;
-
-						&#x2F;&#x2F; check if the XML was parsed correctly
-						if (data.documentElement.tagName == &#x27;parsererror&#x27;) {
-							throw PARSE_ERROR;
-						}
-					}
-					else {
-						&#x2F;&#x2F; otherwise use the responseText
-						data = xhr.responseText;
-					}
-
-					&#x2F;&#x2F; empty string is not a valid JSON, convert it to null
-					if (data === EMPTY_STRING) {
-						data = null;
-					}
-
-					&#x2F;&#x2F; trying to parse to JSON if dataType is a valid json
-					if (dataType == JSON) {
-						try {
-							data = A.JSON.parse(data);
-						}
-						catch(e) {
-							&#x2F;&#x2F; throw PARSE_ERROR;
-						}
-					}
-					else {
-						var selector = instance.get(&#x27;selector&#x27;);
-
-						if (data &amp;&amp; selector) {
-							var tempRoot;
-
-							if (data.documentElement) {
-								tempRoot = A.one(data);
-							}
-							else {
-								tempRoot = A.Node.create(data);
-							}
-
-							data = tempRoot.all(selector);
-						}
-					}
-				}
-
-				return data;
-			}
-		}
-	}
+    {
+        &#x2F;**
+         * Static property provides a string to identify the class.
+         *
+         * @property IORequest.NAME
+         * @type String
+         * @static
+         *&#x2F;
+        NAME: IO_REQUEST,
+
+        &#x2F;**
+         * Static property used to define the default attribute
+         * configuration for the IORequest.
+         *
+         * @property IORequest.ATTRS
+         * @type Object
+         * @static
+         *&#x2F;
+        ATTRS: {
+            &#x2F;**
+             * If &lt;code&gt;true&lt;&#x2F;code&gt; invoke the
+             * &lt;a href=&quot;IORequest.html#method_start&quot;&gt;start&lt;&#x2F;a&gt; method automatically,
+             * initializing the IO transaction.
+             *
+             * @attribute autoLoad
+             * @default true
+             * @type boolean
+             *&#x2F;
+            autoLoad: {
+                value: true,
+                validator: isBoolean
+            },
+
+            &#x2F;**
+             * If &lt;code&gt;false&lt;&#x2F;code&gt; the current timestamp will be appended to the
+             * url, avoiding the url to be cached.
+             *
+             * @attribute cache
+             * @default true
+             * @type boolean
+             *&#x2F;
+            cache: {
+                value: true,
+                validator: isBoolean
+            },
+
+            &#x2F;**
+             * The type of the request (i.e., could be xml, json, javascript, text).
+             *
+             * @attribute dataType
+             * @default null
+             * @type String
+             *&#x2F;
+            dataType: {
+                setter: function(v) {
+                    return (v || EMPTY_STRING).toLowerCase();
+                },
+                value: null,
+                validator: isString
+            },
+
+            &#x2F;**
+             * This is a normalized attribute for the response data. It&#x27;s useful
+             * to retrieve the correct type for the
+             * &lt;a href=&quot;IORequest.html#config_dataType&quot;&gt;dataType&lt;&#x2F;a&gt; (i.e., in json
+             * requests the &lt;code&gt;responseData&lt;&#x2F;code&gt;) is a JSONObject.
+             *
+             * @attribute responseData
+             * @default null
+             * @type String | JSONObject | XMLDocument
+             *&#x2F;
+            responseData: {
+                setter: function(v) {
+                    return this._setResponseData(v);
+                },
+                value: null
+            },
+
+            &#x2F;**
+             * URI to be requested using AJAX.
+             *
+             * @attribute uri
+             * @default null
+             * @type String
+             *&#x2F;
+            uri: {
+                setter: function(v) {
+                    return this._parseURL(v);
+                },
+                value: null,
+                validator: isString
+            },
+
+            &#x2F;&#x2F; User readOnly variables
+
+            &#x2F;**
+             * Whether the transaction is active or not.
+             *
+             * @attribute active
+             * @default false
+             * @type boolean
+             *&#x2F;
+            active: {
+                value: false,
+                validator: isBoolean
+            },
+
+            &#x2F;**
+             * Object containing all the
+             * &lt;a href=&quot;io.html#configattributes&quot;&gt;IO Configuration Attributes&lt;&#x2F;a&gt;.
+             * This Object is passed to the &lt;code&gt;A.io&lt;&#x2F;code&gt; internally.
+             *
+             * @attribute cfg
+             * @default Object containing all the
+             * &lt;a href=&quot;io.html#configattributes&quot;&gt;IO Configuration Attributes&lt;&#x2F;a&gt;.
+             * @readOnly
+             * @type String
+             *&#x2F;
+            cfg: {
+                getter: function() {
+                    var instance = this;
+
+                    &#x2F;&#x2F; keep the current cfg object always synchronized with the mapped public attributes
+                    &#x2F;&#x2F; when the user call .start() it always retrieve the last set values for each mapped attr
+                    return {
+                        arguments: instance.get(ARGUMENTS),
+                        context: instance.get(CONTEXT),
+                        data: instance.getFormattedData(),
+                        form: instance.get(FORM),
+                        headers: instance.get(HEADERS),
+                        method: instance.get(METHOD),
+                        on: {
+                            complete: A.bind(instance.fire, instance, COMPLETE),
+                            end: A.bind(instance._end, instance),
+                            failure: A.bind(instance.fire, instance, FAILURE),
+                            start: A.bind(instance.fire, instance, START),
+                            success: A.bind(instance._success, instance)
+                        },
+                        sync: instance.get(SYNC),
+                        timeout: instance.get(TIMEOUT),
+                        xdr: instance.get(XDR)
+                    };
+                },
+                readOnly: true
+            },
+
+            &#x2F;**
+             * Stores the IO Object of the current transaction.
+             *
+             * @attribute transaction
+             * @default null
+             * @type Object
+             *&#x2F;
+            transaction: {
+                value: null
+            },
+
+            &#x2F;&#x2F; Configuration Object mapping
+            &#x2F;&#x2F; To take advantages of the Attribute listeners of A.Base
+            &#x2F;&#x2F; See: http:&#x2F;&#x2F;developer.yahoo.com&#x2F;yui&#x2F;3&#x2F;io&#x2F;
+
+            &#x2F;**
+             * See &lt;a href=&quot;http:&#x2F;&#x2F;developer.yahoo.com&#x2F;yui&#x2F;3&#x2F;io&#x2F;#configuration&quot;&gt;IO
+            * Configuration&lt;&#x2F;a&gt;.
+             *
+             * @attribute arguments
+             * @default Value mapped on YUI.AUI.defaults.io.
+             * @type Object
+             *&#x2F;
+            arguments: {
+                valueFn: getDefault(ARGUMENTS)
+            },
+
+            &#x2F;**
+             * See &lt;a href=&quot;http:&#x2F;&#x2F;developer.yahoo.com&#x2F;yui&#x2F;3&#x2F;io&#x2F;#configuration&quot;&gt;IO
+            * Configuration&lt;&#x2F;a&gt;.
+             *
+             * @attribute context
+             * @default Value mapped on YUI.AUI.defaults.io.
+             * @type Object
+             *&#x2F;
+            context: {
+                valueFn: getDefault(CONTEXT)
+            },
+
+            &#x2F;**
+             * See &lt;a href=&quot;http:&#x2F;&#x2F;developer.yahoo.com&#x2F;yui&#x2F;3&#x2F;io&#x2F;#configuration&quot;&gt;IO
+            * Configuration&lt;&#x2F;a&gt;.
+             *
+             * @attribute data
+             * @default Value mapped on YUI.AUI.defaults.io.
+             * @type Object
+             *&#x2F;
+            data: {
+                valueFn: getDefault(DATA)
+            },
+
+            &#x2F;**
+             * See &lt;a href=&quot;http:&#x2F;&#x2F;developer.yahoo.com&#x2F;yui&#x2F;3&#x2F;io&#x2F;#configuration&quot;&gt;IO
+            * Configuration&lt;&#x2F;a&gt;.
+             *
+             * @attribute form
+             * @default Value mapped on YUI.AUI.defaults.io.
+             * @type Object
+             *&#x2F;
+            form: {
+                valueFn: getDefault(FORM)
+            },
+
+            &#x2F;**
+             * Set the correct ACCEPT header based on the dataType.
+             *
+             * @attribute headers
+             * @default Object
+             * @type Object
+             *&#x2F;
+            headers: {
+                getter: function(value) {
+                    var header = [];
+                    var instance = this;
+                    var dataType = instance.get(DATA_TYPE);
+
+                    if (dataType) {
+                        header.push(
+                            ACCEPTS[dataType]
+                        );
+                    }
+
+                    &#x2F;&#x2F; always add *.* to the accept header
+                    header.push(
+                        ACCEPTS.all
+                    );
+
+                    return A.merge(
+                        value,
+                        {
+                            Accept: header.join(&#x27;, &#x27;)
+                        }
+                    );
+                },
+                valueFn: getDefault(HEADERS)
+            },
+
+            &#x2F;**
+             * See &lt;a href=&quot;http:&#x2F;&#x2F;developer.yahoo.com&#x2F;yui&#x2F;3&#x2F;io&#x2F;#configuration&quot;&gt;IO
+            * Configuration&lt;&#x2F;a&gt;.
+             *
+             * @attribute method
+             * @default Value mapped on YUI.AUI.defaults.io.
+             * @type String
+             *&#x2F;
+            method: {
+                valueFn: getDefault(METHOD)
+            },
+
+            &#x2F;**
+             * A selector to be used to query against the response of the
+             * request. Only works if the response is XML or HTML.
+             *
+             * @attribute selector
+             * @type string
+             *&#x2F;
+            selector: {
+                value: null
+            },
+
+            &#x2F;**
+             * See &lt;a href=&quot;http:&#x2F;&#x2F;developer.yahoo.com&#x2F;yui&#x2F;3&#x2F;io&#x2F;#configuration&quot;&gt;IO
+            * Configuration&lt;&#x2F;a&gt;.
+             *
+             * @attribute sync
+             * @default Value mapped on YUI.AUI.defaults.io.
+             * @type boolean
+             *&#x2F;
+            sync: {
+                valueFn: getDefault(SYNC)
+            },
+
+            &#x2F;**
+             * See &lt;a href=&quot;http:&#x2F;&#x2F;developer.yahoo.com&#x2F;yui&#x2F;3&#x2F;io&#x2F;#configuration&quot;&gt;IO
+            * Configuration&lt;&#x2F;a&gt;.
+             *
+             * @attribute timeout
+             * @default Value mapped on YUI.AUI.defaults.io.
+             * @type Number
+             *&#x2F;
+            timeout: {
+                valueFn: getDefault(TIMEOUT)
+            },
+
+            &#x2F;**
+             * See &lt;a href=&quot;http:&#x2F;&#x2F;developer.yahoo.com&#x2F;yui&#x2F;3&#x2F;io&#x2F;#configuration&quot;&gt;IO
+             * Configuration&lt;&#x2F;a&gt;.
+             *
+             * @attribute xdr
+             * @default Value mapped on YUI.AUI.defaults.io.
+             * @type Object
+             *&#x2F;
+            xdr: {
+                valueFn: getDefault(XDR)
+            }
+        },
+
+        EXTENDS: A.Plugin.Base,
+
+        prototype: {
+            &#x2F;**
+             * Construction logic executed during IORequest instantiation. Lifecycle.
+             *
+             * @method initializer
+             * @protected
+             *&#x2F;
+            init: function(config) {
+                var instance = this;
+
+                IORequest.superclass.init.apply(this, arguments);
+
+                instance._autoStart();
+            },
+
+            &#x2F;**
+             * Descructor lifecycle implementation for the IORequest class.
+             * Purges events attached to the node (and all child nodes).
+             *
+             * @method destructor
+             * @protected
+             *&#x2F;
+            destructor: function() {
+                var instance = this;
+
+                instance.stop();
+
+                instance.set(TRANSACTION, null);
+            },
+
+            &#x2F;**
+             * Applies the &lt;code&gt;YUI.AUI.defaults.io.dataFormatter&lt;&#x2F;code&gt; if defined and return the formatted data.
+             *
+             * @method getFormattedData
+             * @protected
+             * @return {String}
+             *&#x2F;
+            getFormattedData: function() {
+                var instance = this;
+                var value = instance.get(DATA);
+                var dataFormatter = defaults.dataFormatter;
+
+                if (isFunction(dataFormatter)) {
+                    value = dataFormatter.call(instance, value);
+                }
+
+                return value;
+            },
+
+            &#x2F;**
+             * Starts the IO transaction. Used to refresh the content also.
+             *
+             * @method start
+             *&#x2F;
+            start: function() {
+                var instance = this;
+
+                instance.destructor();
+
+                instance.set(ACTIVE, true);
+
+                var ioObj = instance._yuiIOObj;
+
+                if (!ioObj) {
+                    ioObj = new A.IO();
+
+                    instance._yuiIOObj = ioObj;
+                }
+
+                var transaction = ioObj.send(
+                    instance.get(URI),
+                    instance.get(CFG)
+                );
+
+                instance.set(TRANSACTION, transaction);
+            },
+
+            &#x2F;**
+             * Stops the IO transaction.
+             *
+             * @method stop
+             *&#x2F;
+            stop: function() {
+                var instance = this;
+                var transaction = instance.get(TRANSACTION);
+
+                if (transaction) {
+                    transaction.abort();
+                }
+            },
+
+            &#x2F;**
+             * Invoke the &lt;code&gt;start&lt;&#x2F;code&gt; method (autoLoad attribute).
+             *
+             * @method _autoStart
+             * @protected
+             *&#x2F;
+            _autoStart: function() {
+                var instance = this;
+
+                if (instance.get(AUTO_LOAD)) {
+                    instance.start();
+                }
+            },
+
+            &#x2F;**
+             * Parse the &lt;a href=&quot;IORequest.html#config_uri&quot;&gt;uri&lt;&#x2F;a&gt; to add a
+             * timestamp if &lt;a href=&quot;IORequest.html#config_cache&quot;&gt;cache&lt;&#x2F;a&gt; is
+             * &lt;code&gt;true&lt;&#x2F;code&gt;. Also applies the
+             * &lt;code&gt;YUI.AUI.defaults.io.uriFormatter&lt;&#x2F;code&gt;.
+             *
+             * @method _parseURL
+             * @param {String} url
+             * @protected
+             * @return {String}
+             *&#x2F;
+            _parseURL: function(url) {
+                var instance = this;
+                var cache = instance.get(CACHE);
+                var method = instance.get(METHOD);
+
+                &#x2F;&#x2F; reusing logic to add a timestamp on the url from jQuery 1.3.2
+                if ( (cache === false) &amp;&amp; (method == GET) ) {
+                    var ts = +new Date;
+                    &#x2F;&#x2F; try replacing _= if it is there
+                    var ret = url.replace(&#x2F;(\?|&amp;)_=.*?(&amp;|$)&#x2F;, &#x27;$1_=&#x27; + ts + &#x27;$2&#x27;);
+                    &#x2F;&#x2F; if nothing was replaced, add timestamp to the end
+                    url = ret + ((ret == url) ? (url.match(&#x2F;\?&#x2F;) ? &#x27;&amp;&#x27; : &#x27;?&#x27;) + &#x27;_=&#x27; + ts : &#x27;&#x27;);
+                }
+
+                &#x2F;&#x2F; formatting the URL with the default uriFormatter after the cache timestamp was added
+                var uriFormatter = defaults.uriFormatter;
+
+                if (isFunction(uriFormatter)) {
+                    url = uriFormatter.apply(instance, [url]);
+                }
+
+                return url;
+            },
+
+            &#x2F;**
+             * Internal end callback for the IO transaction.
+             *
+             * @method _end
+             * @param {Number} id ID of the IO transaction.
+             * @param {Object} args Custom arguments, passed to the event handler. See &lt;a href=&quot;http:&#x2F;&#x2F;developer.yahoo.com&#x2F;yui&#x2F;3&#x2F;io&#x2F;#configuration&quot;&gt;IO
+             * @protected
+             *&#x2F;
+            _end: function(id, args) {
+                var instance = this;
+
+                instance.set(ACTIVE, false);
+                instance.set(TRANSACTION, null);
+
+                instance.fire(END, id, args);
+            },
+
+            &#x2F;**
+             * Internal success callback for the IO transaction.
+             *
+             * @method _success
+             * @param {Number} id ID of the IO transaction.
+             * @param {Object} obj IO transaction Object.
+             * @param {Object} args Custom arguments, passed to the event handler. See &lt;a href=&quot;http:&#x2F;&#x2F;developer.yahoo.com&#x2F;yui&#x2F;3&#x2F;io&#x2F;#configuration&quot;&gt;IO
+             * @protected
+             *&#x2F;
+            _success: function(id, obj, args) {
+                var instance = this;
+
+                &#x2F;&#x2F; update the responseData attribute with the new data from xhr
+                instance.set(RESPONSE_DATA, obj);
+
+                instance.fire(SUCCESS, id, obj, args);
+            },
+
+            &#x2F;**
+             * Setter for &lt;a href=&quot;IORequest.html#config_responseData&quot;&gt;responseData&lt;&#x2F;a&gt;.
+             *
+             * @method _setResponseData
+             * @protected
+             * @param {Object} xhr XHR Object.
+             * @return {Object}
+             *&#x2F;
+            _setResponseData: function(xhr) {
+                var data = null;
+                var instance = this;
+
+                if (xhr) {
+                    var dataType = instance.get(DATA_TYPE);
+                    var contentType = xhr.getResponseHeader(CONTENT_TYPE) || &#x27;&#x27;;
+
+                    &#x2F;&#x2F; if the dataType or the content-type is XML...
+                    if ((dataType == XML) ||
+                        (!dataType &amp;&amp; contentType.indexOf(XML) &gt;= 0)) {
+
+                        &#x2F;&#x2F; use responseXML
+                        data = xhr.responseXML;
+
+                        &#x2F;&#x2F; check if the XML was parsed correctly
+                        if (data.documentElement.tagName == &#x27;parsererror&#x27;) {
+                            throw PARSE_ERROR;
+                        }
+                    }
+                    else {
+                        &#x2F;&#x2F; otherwise use the responseText
+                        data = xhr.responseText;
+                    }
+
+                    &#x2F;&#x2F; empty string is not a valid JSON, convert it to null
+                    if (data === EMPTY_STRING) {
+                        data = null;
+                    }
+
+                    &#x2F;&#x2F; trying to parse to JSON if dataType is a valid json
+                    if (dataType == JSON) {
+                        try {
+                            data = A.JSON.parse(data);
+                        }
+                        catch(e) {
+                            &#x2F;&#x2F; throw PARSE_ERROR;
+                        }
+                    }
+                    else {
+                        var selector = instance.get(&#x27;selector&#x27;);
+
+                        if (data &amp;&amp; selector) {
+                            var tempRoot;
+
+                            if (data.documentElement) {
+                                tempRoot = A.one(data);
+                            }
+                            else {
+                                tempRoot = A.Node.create(data);
+                            }
+
+                            data = tempRoot.all(selector);
+                        }
+                    }
+                }
+
+                return data;
+            }
+        }
+    }
 );
 
 A.IORequest = IORequest;
@@ -2159,11 +2159,11 @@ A.IORequest = IORequest;
  * @return {IORequest}
  *&#x2F;
 A.io.request = function(uri, config) {
-	return new A.IORequest(
-		A.merge(config, {
-			uri: uri
-		})
-	);
+    return new A.IORequest(
+        A.merge(config, {
+            uri: uri
+        })
+    );
 };
     </pre>
 </div>

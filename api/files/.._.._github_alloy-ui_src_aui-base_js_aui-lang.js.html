@@ -1508,470 +1508,470 @@
 <div class="file">
     <pre class="code prettyprint linenums">
 (function() {
-	var Lang = A.Lang,
-		AArray = A.Array,
-		AObject = A.Object,
-
-		isArray = Lang.isArray,
-		isNumber = Lang.isNumber,
-		isString = Lang.isString,
-		isUndefined = Lang.isUndefined,
-
-		owns = AObject.owns;
-
-	A.fn = function(fn, context, args) {
-		var wrappedFn,
-			dynamicLookup;
-
-		&#x2F;&#x2F; Explicitly set function arguments
-		if (!isNumber(fn)) {
-			var xargs = arguments;
-
-			if (xargs.length &gt; 2) {
-				xargs = AArray(xargs, 2, true);
-			}
-
-			dynamicLookup = (isString(fn) &amp;&amp; context);
-
-			wrappedFn = function() {
-				var method = (!dynamicLookup) ? fn : context[fn];
-
-				return method.apply(context || fn, xargs);
-			};
-		}
-		else {
-			&#x2F;&#x2F; Set function arity
-			var argLength = fn;
-
-			fn = context;
-			context = args;
-			dynamicLookup = (isString(fn) &amp;&amp; context);
-
-			wrappedFn = function() {
-				var method = (!dynamicLookup) ? fn : context[fn],
-					returnValue;
-
-				context = context || method;
-
-				if (argLength &gt; 0) {
-					returnValue = method.apply(context, AArray(arguments, 0, true).slice(0, argLength));
-				}
-				else {
-					returnValue = method.call(context);
-				}
-
-				return returnValue;
-			};
-		}
-
-		return wrappedFn;
-	};
-
-	&#x2F;**
-	 * A.Lang
-	 *&#x2F;
-	A.mix(Lang, {
-		constrain: function(num, min, max) {
-			return Math.min(Math.max(num, min), max);
-		},
-
-		emptyFn: function() {},
-
-		emptyFnFalse: function() {
-			return false;
-		},
-
-		emptyFnTrue: function() {
-			return true;
-		},
-
-		isGuid: function(id) {
-			return String(id).indexOf(A.Env._guidp) === 0;
-		},
-
-		toFloat: function(value, defaultValue) {
-			return parseFloat(value) || defaultValue || 0;
-		},
-
-		toInt: function(value, radix, defaultValue) {
-			return parseInt(value, radix || 10) || defaultValue || 0;
-		}
-	});
-
-	&#x2F;**
-	 * A.Array
-	 *&#x2F;
-	A.mix(AArray, {
-		remove: function(a, from, to) {
-			var rest = a.slice((to || from) + 1 || a.length);
-			a.length = (from &lt; 0) ? (a.length + from) : from;
-
-			return a.push.apply(a, rest);
-		},
-
-		removeItem: function(a, item) {
-			var index = AArray.indexOf(a, item);
-
-			if (index &gt; -1) {
-				return AArray.remove(a, index);
-			}
-
-			return a;
-		}
-	});
-
-	&#x2F;**
-	 * A.Labg.String
-	 *&#x2F;
-	var LString = A.namespace(&#x27;Lang.String&#x27;),
-
-		DOC = A.config.doc,
-		INNER_HTML = &#x27;innerHTML&#x27;,
-		NORMALIZE = &#x27;normalize&#x27;,
-		REGEX_DASH = &#x2F;-([a-z])&#x2F;gi,
-		REGEX_ESCAPE_REGEX = &#x2F;([.*+?^$(){}|[\]\&#x2F;\\])&#x2F;g,
-		REGEX_NL2BR = &#x2F;\r?\n&#x2F;g,
-		REGEX_STRIP_SCRIPTS = &#x2F;(?:&lt;script.*?&gt;)((\n|\r|.)*?)(?:&lt;\&#x2F;script&gt;)&#x2F;gi,
-		REGEX_STRIP_TAGS = &#x2F;&lt;\&#x2F;?[^&gt;]+&gt;&#x2F;gi,
-		REGEX_UNCAMELIZE = &#x2F;([a-zA-Z][a-zA-Z])([A-Z])([a-z])&#x2F;g,
-		REGEX_UNCAMELIZE_REPLACE_SEPARATOR = &#x2F;([a-zA-Z][a-zA-Z])([A-Z])([a-z])&#x2F;g,
-
-		STR_BLANK = &#x27;&#x27;,
-		STR_AMP = &#x27;&amp;&#x27;,
-		STR_CHEVRON_LEFT = &#x27;&lt;&#x27;,
-		STR_ELLIPSIS = &#x27;...&#x27;,
-		STR_END = &#x27;end&#x27;,
-		STR_HASH = &#x27;#&#x27;,
-		STR_MIDDLE = &#x27;middle&#x27;,
-		STR_START = &#x27;start&#x27;,
-		STR_ZERO = &#x27;0&#x27;,
-
-		STR_G = &#x27;g&#x27;,
-		STR_S = &#x27;s&#x27;,
-
-		htmlUnescapedValues = [],
-
-		MAP_HTML_CHARS_ESCAPED = {
-			&#x27;&amp;&#x27;: &#x27;&amp;amp;&#x27;,
-			&#x27;&lt;&#x27;: &#x27;&amp;lt;&#x27;,
-			&#x27;&gt;&#x27;: &#x27;&amp;gt;&#x27;,
-			&#x27;&quot;&#x27;: &#x27;&amp;#034;&#x27;,
-			&#x27;\&#x27;&#x27;: &#x27;&amp;#039;&#x27;,
-			&#x27;&#x2F;&#x27;: &#x27;&amp;#047;&#x27;,
-			&#x27;&#x60;&#x27;: &#x27;&amp;#096;&#x27;
-		},
-		htmlChar,
-		MAP_HTML_CHARS_UNESCAPED = {};
-
-	for (htmlChar in MAP_HTML_CHARS_ESCAPED) {
-		if (MAP_HTML_CHARS_ESCAPED.hasOwnProperty(htmlChar)) {
-			var escapedValue = MAP_HTML_CHARS_ESCAPED[htmlChar];
-
-			MAP_HTML_CHARS_UNESCAPED[escapedValue] = htmlChar;
-
-			htmlUnescapedValues.push(htmlChar);
-		}
-	}
-
-	var REGEX_HTML_ESCAPE = new RegExp(&#x27;[&#x27; + htmlUnescapedValues.join(STR_BLANK) + &#x27;]&#x27;, &#x27;g&#x27;),
-		REGEX_HTML_UNESCAPE = &#x2F;&amp;([^;]+);&#x2F;g;
-
-	A.mix(LString, {
-		camelize: A.cached(
-			function(str, separator) {
-				var regex = REGEX_DASH;
-
-				str = String(str);
-
-				if (separator) {
-					regex = new RegExp(separator + &#x27;([a-z])&#x27;, &#x27;gi&#x27;);
-				}
-
-				return str.replace(regex, LString._camelize);
-			}
-		),
-
-		capitalize: A.cached(
-			function(str) {
-				if (str) {
-					str = String(str);
-
-					str = str.charAt(0).toUpperCase() + str.substr(1).toLowerCase();
-				}
-
-				return str;
-			}
-		),
-
-		contains: function(str, searchString) {
-			return str.indexOf(searchString) !== -1;
-		},
-
-		defaultValue: function(str, defaultValue) {
-			if (isUndefined(str) || str === STR_BLANK) {
-				if (isUndefined(defaultValue)) {
-					defaultValue = STR_BLANK;
-				}
-
-				str = defaultValue;
-			}
-
-			return str;
-		},
-
-		endsWith: function(str, suffix) {
-			var length = (str.length - suffix.length);
-
-			return ((length &gt;= 0) &amp;&amp; (str.indexOf(suffix, length) === length));
-		},
-
-		escapeHTML: function(str) {
-			return str.replace(REGEX_HTML_ESCAPE, LString._escapeHTML);
-		},
-
-		&#x2F;&#x2F; Courtesy of: http:&#x2F;&#x2F;simonwillison.net&#x2F;2006&#x2F;Jan&#x2F;20&#x2F;escape&#x2F;
-		escapeRegEx: function(str) {
-			return str.replace(REGEX_ESCAPE_REGEX, &#x27;\\$1&#x27;);
-		},
-
-		nl2br: function(str) {
-			var instance = this;
+    var Lang = A.Lang,
+        AArray = A.Array,
+        AObject = A.Object,
+
+        isArray = Lang.isArray,
+        isNumber = Lang.isNumber,
+        isString = Lang.isString,
+        isUndefined = Lang.isUndefined,
+
+        owns = AObject.owns;
+
+    A.fn = function(fn, context, args) {
+        var wrappedFn,
+            dynamicLookup;
+
+        &#x2F;&#x2F; Explicitly set function arguments
+        if (!isNumber(fn)) {
+            var xargs = arguments;
+
+            if (xargs.length &gt; 2) {
+                xargs = AArray(xargs, 2, true);
+            }
+
+            dynamicLookup = (isString(fn) &amp;&amp; context);
+
+            wrappedFn = function() {
+                var method = (!dynamicLookup) ? fn : context[fn];
+
+                return method.apply(context || fn, xargs);
+            };
+        }
+        else {
+            &#x2F;&#x2F; Set function arity
+            var argLength = fn;
+
+            fn = context;
+            context = args;
+            dynamicLookup = (isString(fn) &amp;&amp; context);
+
+            wrappedFn = function() {
+                var method = (!dynamicLookup) ? fn : context[fn],
+                    returnValue;
+
+                context = context || method;
+
+                if (argLength &gt; 0) {
+                    returnValue = method.apply(context, AArray(arguments, 0, true).slice(0, argLength));
+                }
+                else {
+                    returnValue = method.call(context);
+                }
+
+                return returnValue;
+            };
+        }
+
+        return wrappedFn;
+    };
+
+    &#x2F;**
+     * A.Lang
+     *&#x2F;
+    A.mix(Lang, {
+        constrain: function(num, min, max) {
+            return Math.min(Math.max(num, min), max);
+        },
+
+        emptyFn: function() {},
+
+        emptyFnFalse: function() {
+            return false;
+        },
+
+        emptyFnTrue: function() {
+            return true;
+        },
+
+        isGuid: function(id) {
+            return String(id).indexOf(A.Env._guidp) === 0;
+        },
+
+        toFloat: function(value, defaultValue) {
+            return parseFloat(value) || defaultValue || 0;
+        },
+
+        toInt: function(value, radix, defaultValue) {
+            return parseInt(value, radix || 10) || defaultValue || 0;
+        }
+    });
+
+    &#x2F;**
+     * A.Array
+     *&#x2F;
+    A.mix(AArray, {
+        remove: function(a, from, to) {
+            var rest = a.slice((to || from) + 1 || a.length);
+            a.length = (from &lt; 0) ? (a.length + from) : from;
+
+            return a.push.apply(a, rest);
+        },
+
+        removeItem: function(a, item) {
+            var index = AArray.indexOf(a, item);
+
+            if (index &gt; -1) {
+                return AArray.remove(a, index);
+            }
+
+            return a;
+        }
+    });
+
+    &#x2F;**
+     * A.Labg.String
+     *&#x2F;
+    var LString = A.namespace(&#x27;Lang.String&#x27;),
+
+        DOC = A.config.doc,
+        INNER_HTML = &#x27;innerHTML&#x27;,
+        NORMALIZE = &#x27;normalize&#x27;,
+        REGEX_DASH = &#x2F;-([a-z])&#x2F;gi,
+        REGEX_ESCAPE_REGEX = &#x2F;([.*+?^$(){}|[\]\&#x2F;\\])&#x2F;g,
+        REGEX_NL2BR = &#x2F;\r?\n&#x2F;g,
+        REGEX_STRIP_SCRIPTS = &#x2F;(?:&lt;script.*?&gt;)((\n|\r|.)*?)(?:&lt;\&#x2F;script&gt;)&#x2F;gi,
+        REGEX_STRIP_TAGS = &#x2F;&lt;\&#x2F;?[^&gt;]+&gt;&#x2F;gi,
+        REGEX_UNCAMELIZE = &#x2F;([a-zA-Z][a-zA-Z])([A-Z])([a-z])&#x2F;g,
+        REGEX_UNCAMELIZE_REPLACE_SEPARATOR = &#x2F;([a-zA-Z][a-zA-Z])([A-Z])([a-z])&#x2F;g,
+
+        STR_BLANK = &#x27;&#x27;,
+        STR_AMP = &#x27;&amp;&#x27;,
+        STR_CHEVRON_LEFT = &#x27;&lt;&#x27;,
+        STR_ELLIPSIS = &#x27;...&#x27;,
+        STR_END = &#x27;end&#x27;,
+        STR_HASH = &#x27;#&#x27;,
+        STR_MIDDLE = &#x27;middle&#x27;,
+        STR_START = &#x27;start&#x27;,
+        STR_ZERO = &#x27;0&#x27;,
+
+        STR_G = &#x27;g&#x27;,
+        STR_S = &#x27;s&#x27;,
+
+        htmlUnescapedValues = [],
+
+        MAP_HTML_CHARS_ESCAPED = {
+            &#x27;&amp;&#x27;: &#x27;&amp;amp;&#x27;,
+            &#x27;&lt;&#x27;: &#x27;&amp;lt;&#x27;,
+            &#x27;&gt;&#x27;: &#x27;&amp;gt;&#x27;,
+            &#x27;&quot;&#x27;: &#x27;&amp;#034;&#x27;,
+            &#x27;\&#x27;&#x27;: &#x27;&amp;#039;&#x27;,
+            &#x27;&#x2F;&#x27;: &#x27;&amp;#047;&#x27;,
+            &#x27;&#x60;&#x27;: &#x27;&amp;#096;&#x27;
+        },
+        htmlChar,
+        MAP_HTML_CHARS_UNESCAPED = {};
+
+    for (htmlChar in MAP_HTML_CHARS_ESCAPED) {
+        if (MAP_HTML_CHARS_ESCAPED.hasOwnProperty(htmlChar)) {
+            var escapedValue = MAP_HTML_CHARS_ESCAPED[htmlChar];
+
+            MAP_HTML_CHARS_UNESCAPED[escapedValue] = htmlChar;
+
+            htmlUnescapedValues.push(htmlChar);
+        }
+    }
+
+    var REGEX_HTML_ESCAPE = new RegExp(&#x27;[&#x27; + htmlUnescapedValues.join(STR_BLANK) + &#x27;]&#x27;, &#x27;g&#x27;),
+        REGEX_HTML_UNESCAPE = &#x2F;&amp;([^;]+);&#x2F;g;
+
+    A.mix(LString, {
+        camelize: A.cached(
+            function(str, separator) {
+                var regex = REGEX_DASH;
+
+                str = String(str);
+
+                if (separator) {
+                    regex = new RegExp(separator + &#x27;([a-z])&#x27;, &#x27;gi&#x27;);
+                }
+
+                return str.replace(regex, LString._camelize);
+            }
+        ),
+
+        capitalize: A.cached(
+            function(str) {
+                if (str) {
+                    str = String(str);
+
+                    str = str.charAt(0).toUpperCase() + str.substr(1).toLowerCase();
+                }
+
+                return str;
+            }
+        ),
+
+        contains: function(str, searchString) {
+            return str.indexOf(searchString) !== -1;
+        },
+
+        defaultValue: function(str, defaultValue) {
+            if (isUndefined(str) || str === STR_BLANK) {
+                if (isUndefined(defaultValue)) {
+                    defaultValue = STR_BLANK;
+                }
+
+                str = defaultValue;
+            }
+
+            return str;
+        },
+
+        endsWith: function(str, suffix) {
+            var length = (str.length - suffix.length);
+
+            return ((length &gt;= 0) &amp;&amp; (str.indexOf(suffix, length) === length));
+        },
+
+        escapeHTML: function(str) {
+            return str.replace(REGEX_HTML_ESCAPE, LString._escapeHTML);
+        },
+
+        &#x2F;&#x2F; Courtesy of: http:&#x2F;&#x2F;simonwillison.net&#x2F;2006&#x2F;Jan&#x2F;20&#x2F;escape&#x2F;
+        escapeRegEx: function(str) {
+            return str.replace(REGEX_ESCAPE_REGEX, &#x27;\\$1&#x27;);
+        },
+
+        nl2br: function(str) {
+            var instance = this;
 
-			return String(str).replace(REGEX_NL2BR, &#x27;&lt;br &#x2F;&gt;&#x27;);
-		},
+            return String(str).replace(REGEX_NL2BR, &#x27;&lt;br &#x2F;&gt;&#x27;);
+        },
 
-		padNumber: function(num, length, precision) {
-			var str = precision ? Number(num).toFixed(precision) : String(num);
-			var index = str.indexOf(&#x27;.&#x27;);
+        padNumber: function(num, length, precision) {
+            var str = precision ? Number(num).toFixed(precision) : String(num);
+            var index = str.indexOf(&#x27;.&#x27;);
 
-			if (index === -1) {
-				index = str.length;
-			}
+            if (index === -1) {
+                index = str.length;
+            }
 
-			return LString.repeat(STR_ZERO, Math.max(0, length - index)) + str;
-		},
+            return LString.repeat(STR_ZERO, Math.max(0, length - index)) + str;
+        },
 
-		pluralize: function(count, singularVersion, pluralVersion) {
-			var suffix;
+        pluralize: function(count, singularVersion, pluralVersion) {
+            var suffix;
 
-			if (count === 1) {
-				suffix = singularVersion;
-			}
-			else {
-				suffix = pluralVersion || singularVersion + STR_S;
-			}
+            if (count === 1) {
+                suffix = singularVersion;
+            }
+            else {
+                suffix = pluralVersion || singularVersion + STR_S;
+            }
 
-			return count + &#x27; &#x27; + suffix;
-		},
+            return count + &#x27; &#x27; + suffix;
+        },
 
-		prefix: function(prefix, str) {
-			str = String(str);
+        prefix: function(prefix, str) {
+            str = String(str);
 
-			if (str.indexOf(prefix) !== 0) {
-				str = prefix + str;
-			}
+            if (str.indexOf(prefix) !== 0) {
+                str = prefix + str;
+            }
 
-			return str;
-		},
+            return str;
+        },
 
-		remove: function(str, substitute, all) {
-			var re = new RegExp(LString.escapeRegEx(substitute), all ? STR_G : STR_BLANK);
+        remove: function(str, substitute, all) {
+            var re = new RegExp(LString.escapeRegEx(substitute), all ? STR_G : STR_BLANK);
 
-			return str.replace(re, STR_BLANK);
-		},
+            return str.replace(re, STR_BLANK);
+        },
 
-		removeAll: function(str, substitute) {
-			return LString.remove(str, substitute, true);
-		},
+        removeAll: function(str, substitute) {
+            return LString.remove(str, substitute, true);
+        },
 
-		repeat: function(str, length) {
-			return new Array(length + 1).join(str);
-		},
-
-		round: function(value, precision) {
-			value = Number(value);
-
-			if (isNumber(precision)) {
-				precision = Math.pow(10, precision);
-				value = Math.round(value * precision) &#x2F; precision;
-			}
-
-			return value;
-		},
-
-		startsWith: function(str, prefix) {
-			return (str.lastIndexOf(prefix, 0) === 0);
-		},
-
-		stripScripts: function(str) {
-			if (str) {
-				str = String(str).replace(REGEX_STRIP_SCRIPTS, STR_BLANK);
-			}
-
-			return str;
-		},
-
-		stripTags: function(str) {
-			var instance = this;
-
-			if (str) {
-				str = String(str).replace(REGEX_STRIP_TAGS, STR_BLANK);
-			}
-
-			return str;
-		},
+        repeat: function(str, length) {
+            return new Array(length + 1).join(str);
+        },
+
+        round: function(value, precision) {
+            value = Number(value);
+
+            if (isNumber(precision)) {
+                precision = Math.pow(10, precision);
+                value = Math.round(value * precision) &#x2F; precision;
+            }
+
+            return value;
+        },
+
+        startsWith: function(str, prefix) {
+            return (str.lastIndexOf(prefix, 0) === 0);
+        },
+
+        stripScripts: function(str) {
+            if (str) {
+                str = String(str).replace(REGEX_STRIP_SCRIPTS, STR_BLANK);
+            }
+
+            return str;
+        },
+
+        stripTags: function(str) {
+            var instance = this;
+
+            if (str) {
+                str = String(str).replace(REGEX_STRIP_TAGS, STR_BLANK);
+            }
+
+            return str;
+        },
 
-		substr: function(str, start, length) {
-			return String(str).substr(start, length);
-		},
+        substr: function(str, start, length) {
+            return String(str).substr(start, length);
+        },
 
-		uncamelize: A.cached(
-			function(str, separator) {
-				separator = separator || &#x27; &#x27;;
+        uncamelize: A.cached(
+            function(str, separator) {
+                separator = separator || &#x27; &#x27;;
 
-				str = String(str);
+                str = String(str);
 
-				str = str.replace(REGEX_UNCAMELIZE, &#x27;$1&#x27; + separator + &#x27;$2$3&#x27;);
-				str = str.replace(REGEX_UNCAMELIZE_REPLACE_SEPARATOR, &#x27;$1&#x27; + separator + &#x27;$2&#x27;);
+                str = str.replace(REGEX_UNCAMELIZE, &#x27;$1&#x27; + separator + &#x27;$2$3&#x27;);
+                str = str.replace(REGEX_UNCAMELIZE_REPLACE_SEPARATOR, &#x27;$1&#x27; + separator + &#x27;$2&#x27;);
 
-				return str;
-			}
-		),
+                return str;
+            }
+        ),
 
-		toLowerCase: function(str) {
-			return String(str).toLowerCase();
-		},
+        toLowerCase: function(str) {
+            return String(str).toLowerCase();
+        },
 
-		toUpperCase: function(str) {
-			return String(str).toUpperCase();
-		},
+        toUpperCase: function(str) {
+            return String(str).toUpperCase();
+        },
 
-		trim: Lang.trim,
+        trim: Lang.trim,
 
-		truncate: function(str, length, where) {
-			str = String(str);
+        truncate: function(str, length, where) {
+            str = String(str);
 
-			var strLength = str.length;
+            var strLength = str.length;
 
-			if (str &amp;&amp; strLength &gt; length) {
-				where = where || STR_END;
+            if (str &amp;&amp; strLength &gt; length) {
+                where = where || STR_END;
 
-				if (where === STR_END) {
-					str = str.substr(0, length - STR_ELLIPSIS.length) + STR_ELLIPSIS;
-				}
-				else if (where === STR_MIDDLE) {
-					var middlePoint = Math.floor(length &#x2F; 2);
-
-					str = str.substr(0, middlePoint) + STR_ELLIPSIS + str.substr(strLength - middlePoint);
-				}
-				else if (where === STR_START) {
-					str = STR_ELLIPSIS + str.substr(strLength - length);
-				}
-			}
-
-			return str;
-		},
-
-		undef: function(str) {
-			if (isUndefined(str)) {
-				str = STR_BLANK;
-			}
-
-			return str;
-		},
-
-		&#x2F;&#x2F; inspired from Google unescape entities
-		unescapeEntities: function(str) {
-			if (LString.contains(str, STR_AMP)) {
-				if (DOC &amp;&amp; !LString.contains(str, STR_CHEVRON_LEFT)) {
-					str = LString._unescapeEntitiesUsingDom(str);
-				}
-				else {
-					str = LString.unescapeHTML(str);
-				}
-			}
-
-			return str;
-		},
-
-		unescapeHTML: function(str) {
-			return str.replace(REGEX_HTML_UNESCAPE, LString._unescapeHTML);
-		},
-
-		_camelize: function(match0, match1) {
-			return match1.toUpperCase();
-		},
-
-		_escapeHTML: function(match) {
-			return MAP_HTML_CHARS_ESCAPED[match];
-		},
-
-		_unescapeHTML: function(match) {
-			var value = MAP_HTML_CHARS_UNESCAPED[match];
-
-			if (!value &amp;&amp; value.charAt(0) === STR_HASH) {
-				var charCode = Number(STR_ZERO + value.substr(1));
-
-				if (!isNaN(charCode)) {
-					value = String.fromCharCode(charCode);
-				}
-			}
-
-			return value;
-		},
-
-		_unescapeEntitiesUsingDom: function(str) {
-			var el = DOC.createElement(&#x27;a&#x27;);
-
-			el[INNER_HTML] = str;
-
-			if (el[NORMALIZE]) {
-				el[NORMALIZE]();
-			}
-
-			str = el.firstChild.nodeValue;
-
-			el[INNER_HTML] = STR_BLANK;
-
-			return str;
-		}
-	});
-
-	&#x2F;**
-	 * A.Object
-	 *&#x2F;
-
-	&#x2F;**
-	 * Maps an object to an array, using the return value of fn as the values
-	 * for the new array.
-	 *&#x2F;
-	AObject.map = function(obj, fn, context) {
-		var map = [],
-			i;
-
-		for (i in obj) {
-			if (owns(obj, i)) {
-				map[map.length] = fn.call(context, obj[i], i, obj);
-			}
-		}
-
-		return map;
-	};
-
-	&#x2F;**
-	 * Maps an array or object to a resulting array, using the return value of
-	 * fn as the values for the new array. Like A.each, this function can accept
-	 * an object or an array.
-	 *&#x2F;
-	A.map = function(obj, fn, context) {
-		var module = AObject;
-
-		if (isArray(obj)) {
-			module = AArray;
-		}
-
-		return module.map.apply(this, arguments);
-	};
+                if (where === STR_END) {
+                    str = str.substr(0, length - STR_ELLIPSIS.length) + STR_ELLIPSIS;
+                }
+                else if (where === STR_MIDDLE) {
+                    var middlePoint = Math.floor(length &#x2F; 2);
+
+                    str = str.substr(0, middlePoint) + STR_ELLIPSIS + str.substr(strLength - middlePoint);
+                }
+                else if (where === STR_START) {
+                    str = STR_ELLIPSIS + str.substr(strLength - length);
+                }
+            }
+
+            return str;
+        },
+
+        undef: function(str) {
+            if (isUndefined(str)) {
+                str = STR_BLANK;
+            }
+
+            return str;
+        },
+
+        &#x2F;&#x2F; inspired from Google unescape entities
+        unescapeEntities: function(str) {
+            if (LString.contains(str, STR_AMP)) {
+                if (DOC &amp;&amp; !LString.contains(str, STR_CHEVRON_LEFT)) {
+                    str = LString._unescapeEntitiesUsingDom(str);
+                }
+                else {
+                    str = LString.unescapeHTML(str);
+                }
+            }
+
+            return str;
+        },
+
+        unescapeHTML: function(str) {
+            return str.replace(REGEX_HTML_UNESCAPE, LString._unescapeHTML);
+        },
+
+        _camelize: function(match0, match1) {
+            return match1.toUpperCase();
+        },
+
+        _escapeHTML: function(match) {
+            return MAP_HTML_CHARS_ESCAPED[match];
+        },
+
+        _unescapeHTML: function(match) {
+            var value = MAP_HTML_CHARS_UNESCAPED[match];
+
+            if (!value &amp;&amp; value.charAt(0) === STR_HASH) {
+                var charCode = Number(STR_ZERO + value.substr(1));
+
+                if (!isNaN(charCode)) {
+                    value = String.fromCharCode(charCode);
+                }
+            }
+
+            return value;
+        },
+
+        _unescapeEntitiesUsingDom: function(str) {
+            var el = DOC.createElement(&#x27;a&#x27;);
+
+            el[INNER_HTML] = str;
+
+            if (el[NORMALIZE]) {
+                el[NORMALIZE]();
+            }
+
+            str = el.firstChild.nodeValue;
+
+            el[INNER_HTML] = STR_BLANK;
+
+            return str;
+        }
+    });
+
+    &#x2F;**
+     * A.Object
+     *&#x2F;
+
+    &#x2F;**
+     * Maps an object to an array, using the return value of fn as the values
+     * for the new array.
+     *&#x2F;
+    AObject.map = function(obj, fn, context) {
+        var map = [],
+            i;
+
+        for (i in obj) {
+            if (owns(obj, i)) {
+                map[map.length] = fn.call(context, obj[i], i, obj);
+            }
+        }
+
+        return map;
+    };
+
+    &#x2F;**
+     * Maps an array or object to a resulting array, using the return value of
+     * fn as the values for the new array. Like A.each, this function can accept
+     * an object or an array.
+     *&#x2F;
+    A.map = function(obj, fn, context) {
+        var module = AObject;
+
+        if (isArray(obj)) {
+            module = AArray;
+        }
+
+        return module.map.apply(this, arguments);
+    };
 }());
     </pre>
 </div>

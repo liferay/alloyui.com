@@ -1550,254 +1550,254 @@
 &#x2F;**
  * Pad a number with leading spaces, zeroes or something else
  * @method xPad
- * @param x {Number}	The number to be padded
+ * @param x {Number}    The number to be padded
  * @param pad {String}  The character to pad the number with
- * @param r {Number}	(optional) The base of the pad, eg, 10 implies to two digits, 100 implies to 3 digits.
+ * @param r {Number}    (optional) The base of the pad, eg, 10 implies to two digits, 100 implies to 3 digits.
  * @private
  *&#x2F;
 var xPad=function (x, pad, r)
 {
-	if(typeof r === &quot;undefined&quot;)
-	{
-		r=10;
-	}
-	pad = pad + &quot;&quot;; 
-	for( ; parseInt(x, 10)&lt;r &amp;&amp; r&gt;1; r&#x2F;=10) {
-		x = pad + x;
-	}
-	return x.toString();
+    if(typeof r === &quot;undefined&quot;)
+    {
+        r=10;
+    }
+    pad = pad + &quot;&quot;; 
+    for( ; parseInt(x, 10)&lt;r &amp;&amp; r&gt;1; r&#x2F;=10) {
+        x = pad + x;
+    }
+    return x.toString();
 };
 
 var Dt = {
-	formats: {
-		a: function (d, l) { return l.a[d.getDay()]; },
-		A: function (d, l) { return l.A[d.getDay()]; },
-		b: function (d, l) { return l.b[d.getMonth()]; },
-		B: function (d, l) { return l.B[d.getMonth()]; },
-		C: function (d) { return xPad(parseInt(d.getFullYear()&#x2F;100, 10), 0); },
-		d: [&quot;getDate&quot;, &quot;0&quot;],
-		e: [&quot;getDate&quot;, &quot; &quot;],
-		g: function (d) { return xPad(parseInt(Dt.formats.G(d)%100, 10), 0); },
-		G: function (d) {
-				var y = d.getFullYear();
-				var V = parseInt(Dt.formats.V(d), 10);
-				var W = parseInt(Dt.formats.W(d), 10);
-	
-				if(W &gt; V) {
-					y++;
-				} else if(W===0 &amp;&amp; V&gt;=52) {
-					y--;
-				}
-	
-				return y;
-			},
-		H: [&quot;getHours&quot;, &quot;0&quot;],
-		I: function (d) { var I=d.getHours()%12; return xPad(I===0?12:I, 0); },
-		j: function (d) {
-				var gmd_1 = new Date(&quot;&quot; + d.getFullYear() + &quot;&#x2F;1&#x2F;1 GMT&quot;);
-				var gmdate = new Date(&quot;&quot; + d.getFullYear() + &quot;&#x2F;&quot; + (d.getMonth()+1) + &quot;&#x2F;&quot; + d.getDate() + &quot; GMT&quot;);
-				var ms = gmdate - gmd_1;
-				var doy = parseInt(ms&#x2F;60000&#x2F;60&#x2F;24, 10)+1;
-				return xPad(doy, 0, 100);
-			},
-		k: [&quot;getHours&quot;, &quot; &quot;],
-		l: function (d) { var I=d.getHours()%12; return xPad(I===0?12:I, &quot; &quot;); },
-		m: function (d) { return xPad(d.getMonth()+1, 0); },
-		M: [&quot;getMinutes&quot;, &quot;0&quot;],
-		p: function (d, l) { return l.p[d.getHours() &gt;= 12 ? 1 : 0 ]; },
-		P: function (d, l) { return l.P[d.getHours() &gt;= 12 ? 1 : 0 ]; },
-		s: function (d, l) { return parseInt(d.getTime()&#x2F;1000, 10); },
-		S: [&quot;getSeconds&quot;, &quot;0&quot;],
-		u: function (d) { var dow = d.getDay(); return dow===0?7:dow; },
-		U: function (d) {
-				var doy = parseInt(Dt.formats.j(d), 10);
-				var rdow = 6-d.getDay();
-				var woy = parseInt((doy+rdow)&#x2F;7, 10);
-				return xPad(woy, 0);
-			},
-		V: function (d) {
-				var woy = parseInt(Dt.formats.W(d), 10);
-				var dow1_1 = (new Date(&quot;&quot; + d.getFullYear() + &quot;&#x2F;1&#x2F;1&quot;)).getDay();
-				&#x2F;&#x2F; First week is 01 and not 00 as in the case of %U and %W,
-				&#x2F;&#x2F; so we add 1 to the final result except if day 1 of the year
-				&#x2F;&#x2F; is a Monday (then %W returns 01).
-				&#x2F;&#x2F; We also need to subtract 1 if the day 1 of the year is 
-				&#x2F;&#x2F; Friday-Sunday, so the resulting equation becomes:
-				var idow = woy + (dow1_1 &gt; 4 || dow1_1 &lt;= 1 ? 0 : 1);
-				if(idow === 53 &amp;&amp; (new Date(&quot;&quot; + d.getFullYear() + &quot;&#x2F;12&#x2F;31&quot;)).getDay() &lt; 4)
-				{
-					idow = 1;
-				}
-				else if(idow === 0)
-				{
-					idow = Dt.formats.V(new Date(&quot;&quot; + (d.getFullYear()-1) + &quot;&#x2F;12&#x2F;31&quot;));
-				}
-	
-				return xPad(idow, 0);
-			},
-		w: &quot;getDay&quot;,
-		W: function (d) {
-				var doy = parseInt(Dt.formats.j(d), 10);
-				var rdow = 7-Dt.formats.u(d);
-				var woy = parseInt((doy+rdow)&#x2F;7, 10);
-				return xPad(woy, 0, 10);
-			},
-		y: function (d) { return xPad(d.getFullYear()%100, 0); },
-		Y: &quot;getFullYear&quot;,
-		z: function (d) {
-				var o = d.getTimezoneOffset();
-				var H = xPad(parseInt(Math.abs(o&#x2F;60), 10), 0);
-				var M = xPad(Math.abs(o%60), 0);
-				return (o&gt;0?&quot;-&quot;:&quot;+&quot;) + H + M;
-			},
-		Z: function (d) {
-			var tz = d.toString().replace(&#x2F;^.*:\d\d( GMT[+-]\d+)? \(?([A-Za-z ]+)\)?\d*$&#x2F;, &quot;$2&quot;).replace(&#x2F;[a-z ]&#x2F;g, &quot;&quot;);
-			if(tz.length &gt; 4) {
-				tz = Dt.formats.z(d);
-			}
-			return tz;
-		},
-		&quot;%&quot;: function (d) { return &quot;%&quot;; }
-	},
+    formats: {
+        a: function (d, l) { return l.a[d.getDay()]; },
+        A: function (d, l) { return l.A[d.getDay()]; },
+        b: function (d, l) { return l.b[d.getMonth()]; },
+        B: function (d, l) { return l.B[d.getMonth()]; },
+        C: function (d) { return xPad(parseInt(d.getFullYear()&#x2F;100, 10), 0); },
+        d: [&quot;getDate&quot;, &quot;0&quot;],
+        e: [&quot;getDate&quot;, &quot; &quot;],
+        g: function (d) { return xPad(parseInt(Dt.formats.G(d)%100, 10), 0); },
+        G: function (d) {
+                var y = d.getFullYear();
+                var V = parseInt(Dt.formats.V(d), 10);
+                var W = parseInt(Dt.formats.W(d), 10);
+    
+                if(W &gt; V) {
+                    y++;
+                } else if(W===0 &amp;&amp; V&gt;=52) {
+                    y--;
+                }
+    
+                return y;
+            },
+        H: [&quot;getHours&quot;, &quot;0&quot;],
+        I: function (d) { var I=d.getHours()%12; return xPad(I===0?12:I, 0); },
+        j: function (d) {
+                var gmd_1 = new Date(&quot;&quot; + d.getFullYear() + &quot;&#x2F;1&#x2F;1 GMT&quot;);
+                var gmdate = new Date(&quot;&quot; + d.getFullYear() + &quot;&#x2F;&quot; + (d.getMonth()+1) + &quot;&#x2F;&quot; + d.getDate() + &quot; GMT&quot;);
+                var ms = gmdate - gmd_1;
+                var doy = parseInt(ms&#x2F;60000&#x2F;60&#x2F;24, 10)+1;
+                return xPad(doy, 0, 100);
+            },
+        k: [&quot;getHours&quot;, &quot; &quot;],
+        l: function (d) { var I=d.getHours()%12; return xPad(I===0?12:I, &quot; &quot;); },
+        m: function (d) { return xPad(d.getMonth()+1, 0); },
+        M: [&quot;getMinutes&quot;, &quot;0&quot;],
+        p: function (d, l) { return l.p[d.getHours() &gt;= 12 ? 1 : 0 ]; },
+        P: function (d, l) { return l.P[d.getHours() &gt;= 12 ? 1 : 0 ]; },
+        s: function (d, l) { return parseInt(d.getTime()&#x2F;1000, 10); },
+        S: [&quot;getSeconds&quot;, &quot;0&quot;],
+        u: function (d) { var dow = d.getDay(); return dow===0?7:dow; },
+        U: function (d) {
+                var doy = parseInt(Dt.formats.j(d), 10);
+                var rdow = 6-d.getDay();
+                var woy = parseInt((doy+rdow)&#x2F;7, 10);
+                return xPad(woy, 0);
+            },
+        V: function (d) {
+                var woy = parseInt(Dt.formats.W(d), 10);
+                var dow1_1 = (new Date(&quot;&quot; + d.getFullYear() + &quot;&#x2F;1&#x2F;1&quot;)).getDay();
+                &#x2F;&#x2F; First week is 01 and not 00 as in the case of %U and %W,
+                &#x2F;&#x2F; so we add 1 to the final result except if day 1 of the year
+                &#x2F;&#x2F; is a Monday (then %W returns 01).
+                &#x2F;&#x2F; We also need to subtract 1 if the day 1 of the year is 
+                &#x2F;&#x2F; Friday-Sunday, so the resulting equation becomes:
+                var idow = woy + (dow1_1 &gt; 4 || dow1_1 &lt;= 1 ? 0 : 1);
+                if(idow === 53 &amp;&amp; (new Date(&quot;&quot; + d.getFullYear() + &quot;&#x2F;12&#x2F;31&quot;)).getDay() &lt; 4)
+                {
+                    idow = 1;
+                }
+                else if(idow === 0)
+                {
+                    idow = Dt.formats.V(new Date(&quot;&quot; + (d.getFullYear()-1) + &quot;&#x2F;12&#x2F;31&quot;));
+                }
+    
+                return xPad(idow, 0);
+            },
+        w: &quot;getDay&quot;,
+        W: function (d) {
+                var doy = parseInt(Dt.formats.j(d), 10);
+                var rdow = 7-Dt.formats.u(d);
+                var woy = parseInt((doy+rdow)&#x2F;7, 10);
+                return xPad(woy, 0, 10);
+            },
+        y: function (d) { return xPad(d.getFullYear()%100, 0); },
+        Y: &quot;getFullYear&quot;,
+        z: function (d) {
+                var o = d.getTimezoneOffset();
+                var H = xPad(parseInt(Math.abs(o&#x2F;60), 10), 0);
+                var M = xPad(Math.abs(o%60), 0);
+                return (o&gt;0?&quot;-&quot;:&quot;+&quot;) + H + M;
+            },
+        Z: function (d) {
+            var tz = d.toString().replace(&#x2F;^.*:\d\d( GMT[+-]\d+)? \(?([A-Za-z ]+)\)?\d*$&#x2F;, &quot;$2&quot;).replace(&#x2F;[a-z ]&#x2F;g, &quot;&quot;);
+            if(tz.length &gt; 4) {
+                tz = Dt.formats.z(d);
+            }
+            return tz;
+        },
+        &quot;%&quot;: function (d) { return &quot;%&quot;; }
+    },
 
-	aggregates: {
-		c: &quot;locale&quot;,
-		D: &quot;%m&#x2F;%d&#x2F;%y&quot;,
-		F: &quot;%Y-%m-%d&quot;,
-		h: &quot;%b&quot;,
-		n: &quot;\n&quot;,
-		r: &quot;%I:%M:%S %p&quot;,
-		R: &quot;%H:%M&quot;,
-		t: &quot;\t&quot;,
-		T: &quot;%H:%M:%S&quot;,
-		x: &quot;locale&quot;,
-		X: &quot;locale&quot;
-		&#x2F;&#x2F;&quot;+&quot;: &quot;%a %b %e %T %Z %Y&quot;
-	},
+    aggregates: {
+        c: &quot;locale&quot;,
+        D: &quot;%m&#x2F;%d&#x2F;%y&quot;,
+        F: &quot;%Y-%m-%d&quot;,
+        h: &quot;%b&quot;,
+        n: &quot;\n&quot;,
+        r: &quot;%I:%M:%S %p&quot;,
+        R: &quot;%H:%M&quot;,
+        t: &quot;\t&quot;,
+        T: &quot;%H:%M:%S&quot;,
+        x: &quot;locale&quot;,
+        X: &quot;locale&quot;
+        &#x2F;&#x2F;&quot;+&quot;: &quot;%a %b %e %T %Z %Y&quot;
+    },
 
-	 &#x2F;**
-	 * Takes a native JavaScript Date and formats it as a string for display to user.
-	 *
-	 * @for Date
-	 * @method format
-	 * @param oDate {Date} Date.
-	 * @param oConfig {Object} (Optional) Object literal of configuration values:
-	 *  &lt;dl&gt;
-	 *   &lt;dt&gt;format {HTML} (Optional)&lt;&#x2F;dt&gt;
-	 *   &lt;dd&gt;
-	 *   &lt;p&gt;
-	 *   Any strftime string is supported, such as &quot;%I:%M:%S %p&quot;. strftime has several format specifiers defined by the Open group at 
-	 *   &lt;a href=&quot;http:&#x2F;&#x2F;www.opengroup.org&#x2F;onlinepubs&#x2F;007908799&#x2F;xsh&#x2F;strftime.html&quot;&gt;http:&#x2F;&#x2F;www.opengroup.org&#x2F;onlinepubs&#x2F;007908799&#x2F;xsh&#x2F;strftime.html&lt;&#x2F;a&gt;
-	 *   PHP added a few of its own, defined at &lt;a href=&quot;http:&#x2F;&#x2F;www.php.net&#x2F;strftime&quot;&gt;http:&#x2F;&#x2F;www.php.net&#x2F;strftime&lt;&#x2F;a&gt;
-	 *   &lt;&#x2F;p&gt;
-	 *   &lt;p&gt;
-	 *   This javascript implementation supports all the PHP specifiers and a few more.  The full list is below.
-	 *   &lt;&#x2F;p&gt;
-	 *   &lt;p&gt;
-	 *   If not specified, it defaults to the ISO 8601 standard date format: %Y-%m-%d.
-	 *   &lt;&#x2F;p&gt;
-	 *   &lt;dl&gt;
-	 *	&lt;dt&gt;%a&lt;&#x2F;dt&gt; &lt;dd&gt;abbreviated weekday name according to the current locale&lt;&#x2F;dd&gt;
-	 *	&lt;dt&gt;%A&lt;&#x2F;dt&gt; &lt;dd&gt;full weekday name according to the current locale&lt;&#x2F;dd&gt;
-	 *	&lt;dt&gt;%b&lt;&#x2F;dt&gt; &lt;dd&gt;abbreviated month name according to the current locale&lt;&#x2F;dd&gt;
-	 *	&lt;dt&gt;%B&lt;&#x2F;dt&gt; &lt;dd&gt;full month name according to the current locale&lt;&#x2F;dd&gt;
-	 *	&lt;dt&gt;%c&lt;&#x2F;dt&gt; &lt;dd&gt;preferred date and time representation for the current locale&lt;&#x2F;dd&gt;
-	 *	&lt;dt&gt;%C&lt;&#x2F;dt&gt; &lt;dd&gt;century number (the year divided by 100 and truncated to an integer, range 00 to 99)&lt;&#x2F;dd&gt;
-	 *	&lt;dt&gt;%d&lt;&#x2F;dt&gt; &lt;dd&gt;day of the month as a decimal number (range 01 to 31)&lt;&#x2F;dd&gt;
-	 *	&lt;dt&gt;%D&lt;&#x2F;dt&gt; &lt;dd&gt;same as %m&#x2F;%d&#x2F;%y&lt;&#x2F;dd&gt;
-	 *	&lt;dt&gt;%e&lt;&#x2F;dt&gt; &lt;dd&gt;day of the month as a decimal number, a single digit is preceded by a space (range &quot; 1&quot; to &quot;31&quot;)&lt;&#x2F;dd&gt;
-	 *	&lt;dt&gt;%F&lt;&#x2F;dt&gt; &lt;dd&gt;same as %Y-%m-%d (ISO 8601 date format)&lt;&#x2F;dd&gt;
-	 *	&lt;dt&gt;%g&lt;&#x2F;dt&gt; &lt;dd&gt;like %G, but without the century&lt;&#x2F;dd&gt;
-	 *	&lt;dt&gt;%G&lt;&#x2F;dt&gt; &lt;dd&gt;The 4-digit year corresponding to the ISO week number&lt;&#x2F;dd&gt;
-	 *	&lt;dt&gt;%h&lt;&#x2F;dt&gt; &lt;dd&gt;same as %b&lt;&#x2F;dd&gt;
-	 *	&lt;dt&gt;%H&lt;&#x2F;dt&gt; &lt;dd&gt;hour as a decimal number using a 24-hour clock (range 00 to 23)&lt;&#x2F;dd&gt;
-	 *	&lt;dt&gt;%I&lt;&#x2F;dt&gt; &lt;dd&gt;hour as a decimal number using a 12-hour clock (range 01 to 12)&lt;&#x2F;dd&gt;
-	 *	&lt;dt&gt;%j&lt;&#x2F;dt&gt; &lt;dd&gt;day of the year as a decimal number (range 001 to 366)&lt;&#x2F;dd&gt;
-	 *	&lt;dt&gt;%k&lt;&#x2F;dt&gt; &lt;dd&gt;hour as a decimal number using a 24-hour clock (range 0 to 23); single digits are preceded by a blank. (See also %H.)&lt;&#x2F;dd&gt;
-	 *	&lt;dt&gt;%l&lt;&#x2F;dt&gt; &lt;dd&gt;hour as a decimal number using a 12-hour clock (range 1 to 12); single digits are preceded by a blank. (See also %I.) &lt;&#x2F;dd&gt;
-	 *	&lt;dt&gt;%m&lt;&#x2F;dt&gt; &lt;dd&gt;month as a decimal number (range 01 to 12)&lt;&#x2F;dd&gt;
-	 *	&lt;dt&gt;%M&lt;&#x2F;dt&gt; &lt;dd&gt;minute as a decimal number&lt;&#x2F;dd&gt;
-	 *	&lt;dt&gt;%n&lt;&#x2F;dt&gt; &lt;dd&gt;newline character&lt;&#x2F;dd&gt;
-	 *	&lt;dt&gt;%p&lt;&#x2F;dt&gt; &lt;dd&gt;either &quot;AM&quot; or &quot;PM&quot; according to the given time value, or the corresponding strings for the current locale&lt;&#x2F;dd&gt;
-	 *	&lt;dt&gt;%P&lt;&#x2F;dt&gt; &lt;dd&gt;like %p, but lower case&lt;&#x2F;dd&gt;
-	 *	&lt;dt&gt;%r&lt;&#x2F;dt&gt; &lt;dd&gt;time in a.m. and p.m. notation equal to %I:%M:%S %p&lt;&#x2F;dd&gt;
-	 *	&lt;dt&gt;%R&lt;&#x2F;dt&gt; &lt;dd&gt;time in 24 hour notation equal to %H:%M&lt;&#x2F;dd&gt;
-	 *	&lt;dt&gt;%s&lt;&#x2F;dt&gt; &lt;dd&gt;number of seconds since the Epoch, ie, since 1970-01-01 00:00:00 UTC&lt;&#x2F;dd&gt;
-	 *	&lt;dt&gt;%S&lt;&#x2F;dt&gt; &lt;dd&gt;second as a decimal number&lt;&#x2F;dd&gt;
-	 *	&lt;dt&gt;%t&lt;&#x2F;dt&gt; &lt;dd&gt;tab character&lt;&#x2F;dd&gt;
-	 *	&lt;dt&gt;%T&lt;&#x2F;dt&gt; &lt;dd&gt;current time, equal to %H:%M:%S&lt;&#x2F;dd&gt;
-	 *	&lt;dt&gt;%u&lt;&#x2F;dt&gt; &lt;dd&gt;weekday as a decimal number [1,7], with 1 representing Monday&lt;&#x2F;dd&gt;
-	 *	&lt;dt&gt;%U&lt;&#x2F;dt&gt; &lt;dd&gt;week number of the current year as a decimal number, starting with the
-	 *			first Sunday as the first day of the first week&lt;&#x2F;dd&gt;
-	 *	&lt;dt&gt;%V&lt;&#x2F;dt&gt; &lt;dd&gt;The ISO 8601:1988 week number of the current year as a decimal number,
-	 *			range 01 to 53, where week 1 is the first week that has at least 4 days
-	 *			in the current year, and with Monday as the first day of the week.&lt;&#x2F;dd&gt;
-	 *	&lt;dt&gt;%w&lt;&#x2F;dt&gt; &lt;dd&gt;day of the week as a decimal, Sunday being 0&lt;&#x2F;dd&gt;
-	 *	&lt;dt&gt;%W&lt;&#x2F;dt&gt; &lt;dd&gt;week number of the current year as a decimal number, starting with the
-	 *			first Monday as the first day of the first week&lt;&#x2F;dd&gt;
-	 *	&lt;dt&gt;%x&lt;&#x2F;dt&gt; &lt;dd&gt;preferred date representation for the current locale without the time&lt;&#x2F;dd&gt;
-	 *	&lt;dt&gt;%X&lt;&#x2F;dt&gt; &lt;dd&gt;preferred time representation for the current locale without the date&lt;&#x2F;dd&gt;
-	 *	&lt;dt&gt;%y&lt;&#x2F;dt&gt; &lt;dd&gt;year as a decimal number without a century (range 00 to 99)&lt;&#x2F;dd&gt;
-	 *	&lt;dt&gt;%Y&lt;&#x2F;dt&gt; &lt;dd&gt;year as a decimal number including the century&lt;&#x2F;dd&gt;
-	 *	&lt;dt&gt;%z&lt;&#x2F;dt&gt; &lt;dd&gt;numerical time zone representation&lt;&#x2F;dd&gt;
-	 *	&lt;dt&gt;%Z&lt;&#x2F;dt&gt; &lt;dd&gt;time zone name or abbreviation&lt;&#x2F;dd&gt;
-	 *	&lt;dt&gt;%%&lt;&#x2F;dt&gt; &lt;dd&gt;a literal &quot;%&quot; character&lt;&#x2F;dd&gt;
-	 *   &lt;&#x2F;dl&gt;
-	 *  &lt;&#x2F;dd&gt;
-	 * &lt;&#x2F;dl&gt;
-	 * @return {HTML} Formatted date for display.
-	 *&#x2F;
-	format : function (oDate, oConfig) {
-		oConfig = oConfig || {};
-		
-		if(!Y.Lang.isDate(oDate)) {
-			Y.log(&quot;format called without a date&quot;, &quot;WARN&quot;, &quot;date&quot;);
-			return Y.Lang.isValue(oDate) ? oDate : &quot;&quot;;
-		}
+     &#x2F;**
+     * Takes a native JavaScript Date and formats it as a string for display to user.
+     *
+     * @for Date
+     * @method format
+     * @param oDate {Date} Date.
+     * @param oConfig {Object} (Optional) Object literal of configuration values:
+     *  &lt;dl&gt;
+     *   &lt;dt&gt;format {HTML} (Optional)&lt;&#x2F;dt&gt;
+     *   &lt;dd&gt;
+     *   &lt;p&gt;
+     *   Any strftime string is supported, such as &quot;%I:%M:%S %p&quot;. strftime has several format specifiers defined by the Open group at 
+     *   &lt;a href=&quot;http:&#x2F;&#x2F;www.opengroup.org&#x2F;onlinepubs&#x2F;007908799&#x2F;xsh&#x2F;strftime.html&quot;&gt;http:&#x2F;&#x2F;www.opengroup.org&#x2F;onlinepubs&#x2F;007908799&#x2F;xsh&#x2F;strftime.html&lt;&#x2F;a&gt;
+     *   PHP added a few of its own, defined at &lt;a href=&quot;http:&#x2F;&#x2F;www.php.net&#x2F;strftime&quot;&gt;http:&#x2F;&#x2F;www.php.net&#x2F;strftime&lt;&#x2F;a&gt;
+     *   &lt;&#x2F;p&gt;
+     *   &lt;p&gt;
+     *   This javascript implementation supports all the PHP specifiers and a few more.  The full list is below.
+     *   &lt;&#x2F;p&gt;
+     *   &lt;p&gt;
+     *   If not specified, it defaults to the ISO 8601 standard date format: %Y-%m-%d.
+     *   &lt;&#x2F;p&gt;
+     *   &lt;dl&gt;
+     *    &lt;dt&gt;%a&lt;&#x2F;dt&gt; &lt;dd&gt;abbreviated weekday name according to the current locale&lt;&#x2F;dd&gt;
+     *    &lt;dt&gt;%A&lt;&#x2F;dt&gt; &lt;dd&gt;full weekday name according to the current locale&lt;&#x2F;dd&gt;
+     *    &lt;dt&gt;%b&lt;&#x2F;dt&gt; &lt;dd&gt;abbreviated month name according to the current locale&lt;&#x2F;dd&gt;
+     *    &lt;dt&gt;%B&lt;&#x2F;dt&gt; &lt;dd&gt;full month name according to the current locale&lt;&#x2F;dd&gt;
+     *    &lt;dt&gt;%c&lt;&#x2F;dt&gt; &lt;dd&gt;preferred date and time representation for the current locale&lt;&#x2F;dd&gt;
+     *    &lt;dt&gt;%C&lt;&#x2F;dt&gt; &lt;dd&gt;century number (the year divided by 100 and truncated to an integer, range 00 to 99)&lt;&#x2F;dd&gt;
+     *    &lt;dt&gt;%d&lt;&#x2F;dt&gt; &lt;dd&gt;day of the month as a decimal number (range 01 to 31)&lt;&#x2F;dd&gt;
+     *    &lt;dt&gt;%D&lt;&#x2F;dt&gt; &lt;dd&gt;same as %m&#x2F;%d&#x2F;%y&lt;&#x2F;dd&gt;
+     *    &lt;dt&gt;%e&lt;&#x2F;dt&gt; &lt;dd&gt;day of the month as a decimal number, a single digit is preceded by a space (range &quot; 1&quot; to &quot;31&quot;)&lt;&#x2F;dd&gt;
+     *    &lt;dt&gt;%F&lt;&#x2F;dt&gt; &lt;dd&gt;same as %Y-%m-%d (ISO 8601 date format)&lt;&#x2F;dd&gt;
+     *    &lt;dt&gt;%g&lt;&#x2F;dt&gt; &lt;dd&gt;like %G, but without the century&lt;&#x2F;dd&gt;
+     *    &lt;dt&gt;%G&lt;&#x2F;dt&gt; &lt;dd&gt;The 4-digit year corresponding to the ISO week number&lt;&#x2F;dd&gt;
+     *    &lt;dt&gt;%h&lt;&#x2F;dt&gt; &lt;dd&gt;same as %b&lt;&#x2F;dd&gt;
+     *    &lt;dt&gt;%H&lt;&#x2F;dt&gt; &lt;dd&gt;hour as a decimal number using a 24-hour clock (range 00 to 23)&lt;&#x2F;dd&gt;
+     *    &lt;dt&gt;%I&lt;&#x2F;dt&gt; &lt;dd&gt;hour as a decimal number using a 12-hour clock (range 01 to 12)&lt;&#x2F;dd&gt;
+     *    &lt;dt&gt;%j&lt;&#x2F;dt&gt; &lt;dd&gt;day of the year as a decimal number (range 001 to 366)&lt;&#x2F;dd&gt;
+     *    &lt;dt&gt;%k&lt;&#x2F;dt&gt; &lt;dd&gt;hour as a decimal number using a 24-hour clock (range 0 to 23); single digits are preceded by a blank. (See also %H.)&lt;&#x2F;dd&gt;
+     *    &lt;dt&gt;%l&lt;&#x2F;dt&gt; &lt;dd&gt;hour as a decimal number using a 12-hour clock (range 1 to 12); single digits are preceded by a blank. (See also %I.) &lt;&#x2F;dd&gt;
+     *    &lt;dt&gt;%m&lt;&#x2F;dt&gt; &lt;dd&gt;month as a decimal number (range 01 to 12)&lt;&#x2F;dd&gt;
+     *    &lt;dt&gt;%M&lt;&#x2F;dt&gt; &lt;dd&gt;minute as a decimal number&lt;&#x2F;dd&gt;
+     *    &lt;dt&gt;%n&lt;&#x2F;dt&gt; &lt;dd&gt;newline character&lt;&#x2F;dd&gt;
+     *    &lt;dt&gt;%p&lt;&#x2F;dt&gt; &lt;dd&gt;either &quot;AM&quot; or &quot;PM&quot; according to the given time value, or the corresponding strings for the current locale&lt;&#x2F;dd&gt;
+     *    &lt;dt&gt;%P&lt;&#x2F;dt&gt; &lt;dd&gt;like %p, but lower case&lt;&#x2F;dd&gt;
+     *    &lt;dt&gt;%r&lt;&#x2F;dt&gt; &lt;dd&gt;time in a.m. and p.m. notation equal to %I:%M:%S %p&lt;&#x2F;dd&gt;
+     *    &lt;dt&gt;%R&lt;&#x2F;dt&gt; &lt;dd&gt;time in 24 hour notation equal to %H:%M&lt;&#x2F;dd&gt;
+     *    &lt;dt&gt;%s&lt;&#x2F;dt&gt; &lt;dd&gt;number of seconds since the Epoch, ie, since 1970-01-01 00:00:00 UTC&lt;&#x2F;dd&gt;
+     *    &lt;dt&gt;%S&lt;&#x2F;dt&gt; &lt;dd&gt;second as a decimal number&lt;&#x2F;dd&gt;
+     *    &lt;dt&gt;%t&lt;&#x2F;dt&gt; &lt;dd&gt;tab character&lt;&#x2F;dd&gt;
+     *    &lt;dt&gt;%T&lt;&#x2F;dt&gt; &lt;dd&gt;current time, equal to %H:%M:%S&lt;&#x2F;dd&gt;
+     *    &lt;dt&gt;%u&lt;&#x2F;dt&gt; &lt;dd&gt;weekday as a decimal number [1,7], with 1 representing Monday&lt;&#x2F;dd&gt;
+     *    &lt;dt&gt;%U&lt;&#x2F;dt&gt; &lt;dd&gt;week number of the current year as a decimal number, starting with the
+     *            first Sunday as the first day of the first week&lt;&#x2F;dd&gt;
+     *    &lt;dt&gt;%V&lt;&#x2F;dt&gt; &lt;dd&gt;The ISO 8601:1988 week number of the current year as a decimal number,
+     *            range 01 to 53, where week 1 is the first week that has at least 4 days
+     *            in the current year, and with Monday as the first day of the week.&lt;&#x2F;dd&gt;
+     *    &lt;dt&gt;%w&lt;&#x2F;dt&gt; &lt;dd&gt;day of the week as a decimal, Sunday being 0&lt;&#x2F;dd&gt;
+     *    &lt;dt&gt;%W&lt;&#x2F;dt&gt; &lt;dd&gt;week number of the current year as a decimal number, starting with the
+     *            first Monday as the first day of the first week&lt;&#x2F;dd&gt;
+     *    &lt;dt&gt;%x&lt;&#x2F;dt&gt; &lt;dd&gt;preferred date representation for the current locale without the time&lt;&#x2F;dd&gt;
+     *    &lt;dt&gt;%X&lt;&#x2F;dt&gt; &lt;dd&gt;preferred time representation for the current locale without the date&lt;&#x2F;dd&gt;
+     *    &lt;dt&gt;%y&lt;&#x2F;dt&gt; &lt;dd&gt;year as a decimal number without a century (range 00 to 99)&lt;&#x2F;dd&gt;
+     *    &lt;dt&gt;%Y&lt;&#x2F;dt&gt; &lt;dd&gt;year as a decimal number including the century&lt;&#x2F;dd&gt;
+     *    &lt;dt&gt;%z&lt;&#x2F;dt&gt; &lt;dd&gt;numerical time zone representation&lt;&#x2F;dd&gt;
+     *    &lt;dt&gt;%Z&lt;&#x2F;dt&gt; &lt;dd&gt;time zone name or abbreviation&lt;&#x2F;dd&gt;
+     *    &lt;dt&gt;%%&lt;&#x2F;dt&gt; &lt;dd&gt;a literal &quot;%&quot; character&lt;&#x2F;dd&gt;
+     *   &lt;&#x2F;dl&gt;
+     *  &lt;&#x2F;dd&gt;
+     * &lt;&#x2F;dl&gt;
+     * @return {HTML} Formatted date for display.
+     *&#x2F;
+    format : function (oDate, oConfig) {
+        oConfig = oConfig || {};
+        
+        if(!Y.Lang.isDate(oDate)) {
+            Y.log(&quot;format called without a date&quot;, &quot;WARN&quot;, &quot;date&quot;);
+            return Y.Lang.isValue(oDate) ? oDate : &quot;&quot;;
+        }
 
-		var format, resources, compatMode, sLocale, LOCALE;
+        var format, resources, compatMode, sLocale, LOCALE;
 
         format = oConfig.format || &quot;%Y-%m-%d&quot;;
 
         resources = Y.Intl.get(&#x27;datatype-date-format&#x27;);
 
-		var replace_aggs = function (m0, m1) {
-			if (compatMode &amp;&amp; m1 === &quot;r&quot;) {
-			    return resources[m1];
-			}
-			var f = Dt.aggregates[m1];
-			return (f === &quot;locale&quot; ? resources[m1] : f);
-		};
+        var replace_aggs = function (m0, m1) {
+            if (compatMode &amp;&amp; m1 === &quot;r&quot;) {
+                return resources[m1];
+            }
+            var f = Dt.aggregates[m1];
+            return (f === &quot;locale&quot; ? resources[m1] : f);
+        };
 
-		var replace_formats = function (m0, m1) {
-			var f = Dt.formats[m1];
-			switch(Y.Lang.type(f)) {
-				case &quot;string&quot;:					&#x2F;&#x2F; string =&gt; built in date function
-					return oDate[f]();
-				case &quot;function&quot;:				&#x2F;&#x2F; function =&gt; our own function
-					return f.call(oDate, oDate, resources);
-				case &quot;array&quot;:					&#x2F;&#x2F; built in function with padding
-					if(Y.Lang.type(f[0]) === &quot;string&quot;) {
-						return xPad(oDate[f[0]](), f[1]);
-					} &#x2F;&#x2F; no break; (fall through to default:)
-				default:
-					Y.log(&quot;unrecognised replacement type, please file a bug (format: &quot; + oConfig.format + &quot;)&quot;, &quot;WARN&quot;, &quot;date&quot;);
-					return m1;
-			}
-		};
+        var replace_formats = function (m0, m1) {
+            var f = Dt.formats[m1];
+            switch(Y.Lang.type(f)) {
+                case &quot;string&quot;:                    &#x2F;&#x2F; string =&gt; built in date function
+                    return oDate[f]();
+                case &quot;function&quot;:                &#x2F;&#x2F; function =&gt; our own function
+                    return f.call(oDate, oDate, resources);
+                case &quot;array&quot;:                    &#x2F;&#x2F; built in function with padding
+                    if(Y.Lang.type(f[0]) === &quot;string&quot;) {
+                        return xPad(oDate[f[0]](), f[1]);
+                    } &#x2F;&#x2F; no break; (fall through to default:)
+                default:
+                    Y.log(&quot;unrecognised replacement type, please file a bug (format: &quot; + oConfig.format + &quot;)&quot;, &quot;WARN&quot;, &quot;date&quot;);
+                    return m1;
+            }
+        };
 
-		&#x2F;&#x2F; First replace aggregates (run in a loop because an agg may be made up of other aggs)
-		while(format.match(&#x2F;%[cDFhnrRtTxX]&#x2F;)) {
-			format = format.replace(&#x2F;%([cDFhnrRtTxX])&#x2F;g, replace_aggs);
-		}
+        &#x2F;&#x2F; First replace aggregates (run in a loop because an agg may be made up of other aggs)
+        while(format.match(&#x2F;%[cDFhnrRtTxX]&#x2F;)) {
+            format = format.replace(&#x2F;%([cDFhnrRtTxX])&#x2F;g, replace_aggs);
+        }
 
-		&#x2F;&#x2F; Now replace formats (do not run in a loop otherwise %%a will be replace with the value of %a)
-		var str = format.replace(&#x2F;%([aAbBCdegGHIjklmMpPsSuUVwWyYzZ%])&#x2F;g, replace_formats);
+        &#x2F;&#x2F; Now replace formats (do not run in a loop otherwise %%a will be replace with the value of %a)
+        var str = format.replace(&#x2F;%([aAbBCdegGHIjklmMpPsSuUVwWyYzZ%])&#x2F;g, replace_formats);
 
-		replace_aggs = replace_formats = undefined;
+        replace_aggs = replace_formats = undefined;
 
-		return str;
-	}
+        return str;
+    }
 };
 
 Y.mix(Y.namespace(&quot;Date&quot;), Dt);

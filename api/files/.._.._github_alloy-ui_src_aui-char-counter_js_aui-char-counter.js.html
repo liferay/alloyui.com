@@ -1514,14 +1514,14 @@
  *&#x2F;
 
 var L = A.Lang,
-	isNumber = L.isNumber,
+    isNumber = L.isNumber,
 
-	CHAR_COUNTER = &#x27;char-counter&#x27;,
-	COUNTER = &#x27;counter&#x27;,
-	INPUT = &#x27;input&#x27;,
-	MAX_LENGTH = &#x27;maxLength&#x27;,
-	SCROLL_LEFT = &#x27;scrollLeft&#x27;,
-	SCROLL_TOP = &#x27;scrollTop&#x27;;
+    CHAR_COUNTER = &#x27;char-counter&#x27;,
+    COUNTER = &#x27;counter&#x27;,
+    INPUT = &#x27;input&#x27;,
+    MAX_LENGTH = &#x27;maxLength&#x27;,
+    SCROLL_LEFT = &#x27;scrollLeft&#x27;,
+    SCROLL_TOP = &#x27;scrollTop&#x27;;
 
 &#x2F;**
  * &lt;p&gt;&lt;img src=&quot;assets&#x2F;images&#x2F;aui-char-counter&#x2F;main.png&quot;&#x2F;&gt;&lt;&#x2F;p&gt;
@@ -1551,217 +1551,217 @@ var L = A.Lang,
  * @extends Base
  *&#x2F;
 var CharCounter = A.Component.create(
-	{
-		&#x2F;**
-		 * Static property provides a string to identify the class.
-		 *
-		 * @property CharCounter.NAME
-		 * @type String
-		 * @static
-		 *&#x2F;
-		NAME: CHAR_COUNTER,
+    {
+        &#x2F;**
+         * Static property provides a string to identify the class.
+         *
+         * @property CharCounter.NAME
+         * @type String
+         * @static
+         *&#x2F;
+        NAME: CHAR_COUNTER,
 
-		&#x2F;**
-		 * Static property used to define the default attribute
-		 * configuration for the CharCounter.
-		 *
-		 * @property CharCounter.ATTRS
-		 * @type Object
-		 * @static
-		 *&#x2F;
-		ATTRS: {
-			&#x2F;**
-			 * Node or Selector to display the information of the counter.
-			 *
-			 * @attribute counter
-			 * @default null
-			 * @type {Node | String}
-			 *&#x2F;
-			counter: {
-				setter: A.one
-			},
+        &#x2F;**
+         * Static property used to define the default attribute
+         * configuration for the CharCounter.
+         *
+         * @property CharCounter.ATTRS
+         * @type Object
+         * @static
+         *&#x2F;
+        ATTRS: {
+            &#x2F;**
+             * Node or Selector to display the information of the counter.
+             *
+             * @attribute counter
+             * @default null
+             * @type {Node | String}
+             *&#x2F;
+            counter: {
+                setter: A.one
+            },
 
-			&#x2F;**
-			 * Max number of characters the &lt;a
-	         * href=&quot;CharCounter.html#config_input&quot;&gt;input&lt;&#x2F;a&gt; can have.
-			 *
-			 * @attribute maxLength
-			 * @default Infinity
-			 * @type Number
-			 *&#x2F;
-			maxLength: {
-				lazyAdd: false,
-				setter: function(v) {
-					return this._setMaxLength(v);
-				},
-				value: Infinity,
-				validator: isNumber
-			},
+            &#x2F;**
+             * Max number of characters the &lt;a
+             * href=&quot;CharCounter.html#config_input&quot;&gt;input&lt;&#x2F;a&gt; can have.
+             *
+             * @attribute maxLength
+             * @default Infinity
+             * @type Number
+             *&#x2F;
+            maxLength: {
+                lazyAdd: false,
+                setter: function(v) {
+                    return this._setMaxLength(v);
+                },
+                value: Infinity,
+                validator: isNumber
+            },
 
-			&#x2F;**
-			 * Node or Selector for the input field. Required.
-			 *
-			 * @attribute input
-			 * @default null
-			 * @type {Node | String}
-			 *&#x2F;
-			input: {
-				setter: A.one
-			}
-		},
+            &#x2F;**
+             * Node or Selector for the input field. Required.
+             *
+             * @attribute input
+             * @default null
+             * @type {Node | String}
+             *&#x2F;
+            input: {
+                setter: A.one
+            }
+        },
 
-		EXTENDS: A.Base,
+        EXTENDS: A.Base,
 
-		prototype: {
-			&#x2F;**
-			 * Event handler for the input &lt;a
-		     * href=&quot;module_aui-event.html&quot;&gt;aui-event&lt;&#x2F;a&gt; event.
-			 *
-			 * @property handler
-			 * @type EventHandle
-			 * @protected
-			 *&#x2F;
-			handler: null,
+        prototype: {
+            &#x2F;**
+             * Event handler for the input &lt;a
+             * href=&quot;module_aui-event.html&quot;&gt;aui-event&lt;&#x2F;a&gt; event.
+             *
+             * @property handler
+             * @type EventHandle
+             * @protected
+             *&#x2F;
+            handler: null,
 
-			&#x2F;**
-			 * Construction logic executed during CharCounter instantiation. Lifecycle.
-			 *
-			 * @method initializer
-			 * @protected
-			 *&#x2F;
-			initializer: function() {
-				var instance = this;
+            &#x2F;**
+             * Construction logic executed during CharCounter instantiation. Lifecycle.
+             *
+             * @method initializer
+             * @protected
+             *&#x2F;
+            initializer: function() {
+                var instance = this;
 
-				instance.bindUI();
+                instance.bindUI();
 
-				instance.checkLength();
-			},
+                instance.checkLength();
+            },
 
-			&#x2F;**
-			 * Bind the events on the CharCounter UI. Lifecycle.
-			 *
-			 * @method bindUI
-			 * @protected
-			 *&#x2F;
-			bindUI: function() {
-				var instance = this;
-				var input = instance.get(INPUT);
+            &#x2F;**
+             * Bind the events on the CharCounter UI. Lifecycle.
+             *
+             * @method bindUI
+             * @protected
+             *&#x2F;
+            bindUI: function() {
+                var instance = this;
+                var input = instance.get(INPUT);
 
-				instance.publish(&#x27;maxLength&#x27;);
+                instance.publish(&#x27;maxLength&#x27;);
 
-				instance.after(&#x27;maxLengthChange&#x27;, instance.checkLength);
+                instance.after(&#x27;maxLengthChange&#x27;, instance.checkLength);
 
-				if (input) {
-					&#x2F;&#x2F; use cross browser input-handler event
-					instance.handler = input.on(INPUT, A.bind(instance._onInputChange, instance));
-				}
-			},
+                if (input) {
+                    &#x2F;&#x2F; use cross browser input-handler event
+                    instance.handler = input.on(INPUT, A.bind(instance._onInputChange, instance));
+                }
+            },
 
-			&#x2F;**
-			 * Sync the CharCounter UI. Lifecycle.
-			 *
-			 * @method syncUI
-			 * @protected
-			 *&#x2F;
-			syncUI: function() {
-				var instance = this;
-				var counter = instance.get(COUNTER);
+            &#x2F;**
+             * Sync the CharCounter UI. Lifecycle.
+             *
+             * @method syncUI
+             * @protected
+             *&#x2F;
+            syncUI: function() {
+                var instance = this;
+                var counter = instance.get(COUNTER);
 
-				if (counter) {
-					var value = instance.get(INPUT).val();
+                if (counter) {
+                    var value = instance.get(INPUT).val();
 
-					counter.html(
-						instance.get(MAX_LENGTH) - value.length
-					);
-				}
-			},
+                    counter.html(
+                        instance.get(MAX_LENGTH) - value.length
+                    );
+                }
+            },
 
-			&#x2F;**
-			 * Descructor lifecycle implementation for the CharCounter class.
-			 * Purges events attached to the node (and all child nodes).
-			 *
-			 * @method destroy
-			 * @protected
-			 *&#x2F;
-			destroy: function() {
-				var instance = this;
+            &#x2F;**
+             * Descructor lifecycle implementation for the CharCounter class.
+             * Purges events attached to the node (and all child nodes).
+             *
+             * @method destroy
+             * @protected
+             *&#x2F;
+            destroy: function() {
+                var instance = this;
 
-				if (instance.handler) {
-					instance.handler.detach();
-				}
-			},
+                if (instance.handler) {
+                    instance.handler.detach();
+                }
+            },
 
-			&#x2F;**
-			 * Check the current value of the &lt;a
-		     * href=&quot;CharCounter.html#config_input&quot;&gt;input&lt;&#x2F;a&gt;, truncate the data if
-		     * needed, and re-sync the UI. Fired from &lt;a
-		     *  href=&quot;CharCounter.html#method__onInputChange&quot;&gt;_onInputChange&lt;&#x2F;a&gt;.
-			 *
-			 * @method checkLength
-			 *&#x2F;
-			checkLength: function() {
-				var instance = this;
-				var input = instance.get(INPUT);
-				var maxLength = instance.get(MAX_LENGTH);
+            &#x2F;**
+             * Check the current value of the &lt;a
+             * href=&quot;CharCounter.html#config_input&quot;&gt;input&lt;&#x2F;a&gt;, truncate the data if
+             * needed, and re-sync the UI. Fired from &lt;a
+             *  href=&quot;CharCounter.html#method__onInputChange&quot;&gt;_onInputChange&lt;&#x2F;a&gt;.
+             *
+             * @method checkLength
+             *&#x2F;
+            checkLength: function() {
+                var instance = this;
+                var input = instance.get(INPUT);
+                var maxLength = instance.get(MAX_LENGTH);
 
-				if (!input) {
-					return false; &#x2F;&#x2F; NOTE: return
-				}
+                if (!input) {
+                    return false; &#x2F;&#x2F; NOTE: return
+                }
 
-				var value = input.val();
-				var scrollTop = input.get(SCROLL_TOP);
-				var scrollLeft = input.get(SCROLL_LEFT);
+                var value = input.val();
+                var scrollTop = input.get(SCROLL_TOP);
+                var scrollLeft = input.get(SCROLL_LEFT);
 
-				if (value.length &gt; maxLength) {
-					input.val(
-						value.substring(0, maxLength)
-					);
-				}
+                if (value.length &gt; maxLength) {
+                    input.val(
+                        value.substring(0, maxLength)
+                    );
+                }
 
-				if (value.length == maxLength) {
-					instance.fire(&#x27;maxLength&#x27;);
-				}
+                if (value.length == maxLength) {
+                    instance.fire(&#x27;maxLength&#x27;);
+                }
 
-				input.set(SCROLL_TOP, scrollTop);
-				input.set(SCROLL_LEFT, scrollLeft);
+                input.set(SCROLL_TOP, scrollTop);
+                input.set(SCROLL_LEFT, scrollLeft);
 
-				instance.syncUI();
-			},
+                instance.syncUI();
+            },
 
-			&#x2F;**
-			 * Fired on input value change.
-			 *
-			 * @method _onInputChange
-			 * @param {EventFacade} event
-			 * @protected
-			 *&#x2F;
-			_onInputChange: function(event) {
-				var instance = this;
+            &#x2F;**
+             * Fired on input value change.
+             *
+             * @method _onInputChange
+             * @param {EventFacade} event
+             * @protected
+             *&#x2F;
+            _onInputChange: function(event) {
+                var instance = this;
 
-				instance.checkLength();
-			},
+                instance.checkLength();
+            },
 
-			&#x2F;**
-			 * Setter for &lt;a href=&quot;CharCounter.html#config_maxLength&quot;&gt;maxLength&lt;&#x2F;a&gt;.
-			 *
-			 * @method _setMaxLength
-			 * @param {Number} v Value of the new &lt;a
-		     * href=&quot;CharCounter.html#config_maxLenght&quot;&gt;maxLenght&lt;&#x2F;a&gt;.
-			 * @protected
-			 * @return {Number}
-			 *&#x2F;
-			_setMaxLength: function(v) {
-				var instance = this;
-				var input = instance.get(INPUT);
+            &#x2F;**
+             * Setter for &lt;a href=&quot;CharCounter.html#config_maxLength&quot;&gt;maxLength&lt;&#x2F;a&gt;.
+             *
+             * @method _setMaxLength
+             * @param {Number} v Value of the new &lt;a
+             * href=&quot;CharCounter.html#config_maxLenght&quot;&gt;maxLenght&lt;&#x2F;a&gt;.
+             * @protected
+             * @return {Number}
+             *&#x2F;
+            _setMaxLength: function(v) {
+                var instance = this;
+                var input = instance.get(INPUT);
 
-				if (input &amp;&amp; (v &lt; Infinity)) {
-					input.set(MAX_LENGTH, v);
-				}
+                if (input &amp;&amp; (v &lt; Infinity)) {
+                    input.set(MAX_LENGTH, v);
+                }
 
-				return v;
-			}
-		}
-	}
+                return v;
+            }
+        }
+    }
 );
 
 A.CharCounter = CharCounter;

@@ -1515,63 +1515,63 @@
  *&#x2F;
 
 
-	&#x2F;**
-	 * A group for images. A group can have one time limit and a series of triggers. Thus the images belonging to this group must share these constraints.
-	 * @class ImgLoadGroup
-	 * @extends Base
-	 * @constructor
-	 *&#x2F;
-	Y.ImgLoadGroup = function() {
-		&#x2F;&#x2F; call init first, because it sets up local vars for storing attribute-related info
-		this._init();
-		Y.ImgLoadGroup.superclass.constructor.apply(this, arguments);
-	};
+    &#x2F;**
+     * A group for images. A group can have one time limit and a series of triggers. Thus the images belonging to this group must share these constraints.
+     * @class ImgLoadGroup
+     * @extends Base
+     * @constructor
+     *&#x2F;
+    Y.ImgLoadGroup = function() {
+        &#x2F;&#x2F; call init first, because it sets up local vars for storing attribute-related info
+        this._init();
+        Y.ImgLoadGroup.superclass.constructor.apply(this, arguments);
+    };
 
-	Y.ImgLoadGroup.NAME = &#x27;imgLoadGroup&#x27;;
+    Y.ImgLoadGroup.NAME = &#x27;imgLoadGroup&#x27;;
 
-	Y.ImgLoadGroup.ATTRS = {
-		
-		&#x2F;**
-		 * Name for the group. Only used to identify the group in logging statements.
-		 * @attribute name
-		 * @type String
-		 *&#x2F;
-		name: {
-			value: &#x27;&#x27;
-		},
+    Y.ImgLoadGroup.ATTRS = {
+        
+        &#x2F;**
+         * Name for the group. Only used to identify the group in logging statements.
+         * @attribute name
+         * @type String
+         *&#x2F;
+        name: {
+            value: &#x27;&#x27;
+        },
 
-		&#x2F;**
-		 * Time limit, in seconds, after which images are fetched regardless of trigger events.
-		 * @attribute timeLimit
-		 * @type Number
-		 *&#x2F;
-		timeLimit: {
-			value: null
-		},
+        &#x2F;**
+         * Time limit, in seconds, after which images are fetched regardless of trigger events.
+         * @attribute timeLimit
+         * @type Number
+         *&#x2F;
+        timeLimit: {
+            value: null
+        },
 
-		&#x2F;**
-		 * Distance below the fold for which images are loaded. Images are not loaded until they are at most this distance away from (or above) the fold.
-		 * This check is performed at page load (domready) and after any window scroll or window resize event (until all images are loaded).
-		 * @attribute foldDistance
-		 * @type Number
-		 *&#x2F;
-		foldDistance: {
-			validator: Y.Lang.isNumber,
-			setter: function(val) { this._setFoldTriggers(); return val; },
-			lazyAdd: false
-		},
+        &#x2F;**
+         * Distance below the fold for which images are loaded. Images are not loaded until they are at most this distance away from (or above) the fold.
+         * This check is performed at page load (domready) and after any window scroll or window resize event (until all images are loaded).
+         * @attribute foldDistance
+         * @type Number
+         *&#x2F;
+        foldDistance: {
+            validator: Y.Lang.isNumber,
+            setter: function(val) { this._setFoldTriggers(); return val; },
+            lazyAdd: false
+        },
 
-		&#x2F;**
-		 * Class name that will identify images belonging to the group. This class name will be removed from each element in order to fetch images.
-		 * This class should have, in its CSS style definition, &quot;&lt;code&gt;background:none !important;&lt;&#x2F;code&gt;&quot;.
-		 * @attribute className
-		 * @type String
-		 *&#x2F;
-		className: {
-			value: null,
-			setter: function(name) { this._className = name; return name; },
-			lazyAdd: false
-		}, 
+        &#x2F;**
+         * Class name that will identify images belonging to the group. This class name will be removed from each element in order to fetch images.
+         * This class should have, in its CSS style definition, &quot;&lt;code&gt;background:none !important;&lt;&#x2F;code&gt;&quot;.
+         * @attribute className
+         * @type String
+         *&#x2F;
+        className: {
+            value: null,
+            setter: function(name) { this._className = name; return name; },
+            lazyAdd: false
+        }, 
         
         &#x2F;**
          * Determines how to act when className is used as the way to delay load images. The &quot;default&quot; action is to just
@@ -1584,295 +1584,295 @@
             value: &quot;default&quot;
         }
 
-	};
+    };
 
-	var groupProto = {
+    var groupProto = {
 
-		&#x2F;**
-		 * Initialize all private members needed for the group.
-		 * @method _init
-		 * @private
-		 *&#x2F;
-		_init: function() {
+        &#x2F;**
+         * Initialize all private members needed for the group.
+         * @method _init
+         * @private
+         *&#x2F;
+        _init: function() {
 
-			&#x2F;**
-			 * Collection of triggers for this group.
-			 * Keeps track of each trigger&#x27;s event handle, as returned from &lt;code&gt;Y.on&lt;&#x2F;code&gt;.
-			 * @property _triggers
-			 * @private
-			 * @type Array
-			 *&#x2F;
-			this._triggers = [];
+            &#x2F;**
+             * Collection of triggers for this group.
+             * Keeps track of each trigger&#x27;s event handle, as returned from &lt;code&gt;Y.on&lt;&#x2F;code&gt;.
+             * @property _triggers
+             * @private
+             * @type Array
+             *&#x2F;
+            this._triggers = [];
 
-			&#x2F;**
-			 * Collection of images (&lt;code&gt;Y.ImgLoadImgObj&lt;&#x2F;code&gt; objects) registered with this group, keyed by DOM id.
-			 * @property _imgObjs
-			 * @private
-			 * @type Object
-			 *&#x2F;
-			this._imgObjs = {};
+            &#x2F;**
+             * Collection of images (&lt;code&gt;Y.ImgLoadImgObj&lt;&#x2F;code&gt; objects) registered with this group, keyed by DOM id.
+             * @property _imgObjs
+             * @private
+             * @type Object
+             *&#x2F;
+            this._imgObjs = {};
 
-			&#x2F;**
-			 * Timeout object to keep a handle on the time limit.
-			 * @property _timeout
-			 * @private
-			 * @type Object
-			 *&#x2F;
-			this._timeout = null;
+            &#x2F;**
+             * Timeout object to keep a handle on the time limit.
+             * @property _timeout
+             * @private
+             * @type Object
+             *&#x2F;
+            this._timeout = null;
 
-			&#x2F;**
-			 * DOM elements having the class name that is associated with this group.
-			 * Elements are stored during the &lt;code&gt;_foldCheck&lt;&#x2F;code&gt; function and reused later during any subsequent &lt;code&gt;_foldCheck&lt;&#x2F;code&gt; calls - gives a slight performance improvement when the page fold is repeatedly checked.
-			 * @property _classImageEls
-			 * @private
-			 * @type Array
-			 *&#x2F;
-			this._classImageEls = null;
+            &#x2F;**
+             * DOM elements having the class name that is associated with this group.
+             * Elements are stored during the &lt;code&gt;_foldCheck&lt;&#x2F;code&gt; function and reused later during any subsequent &lt;code&gt;_foldCheck&lt;&#x2F;code&gt; calls - gives a slight performance improvement when the page fold is repeatedly checked.
+             * @property _classImageEls
+             * @private
+             * @type Array
+             *&#x2F;
+            this._classImageEls = null;
 
-			&#x2F;**
-			 * Keep the CSS class name in a member variable for ease and speed.
-			 * @property _className
-			 * @private
-			 * @type String
-			 *&#x2F;
-			this._className = null;
+            &#x2F;**
+             * Keep the CSS class name in a member variable for ease and speed.
+             * @property _className
+             * @private
+             * @type String
+             *&#x2F;
+            this._className = null;
 
-			&#x2F;**
-			 * Boolean tracking whether the window scroll and window resize triggers have been set if this is a fold group.
-			 * @property _areFoldTriggersSet
-			 * @private
-			 * @type Boolean
-			 *&#x2F;
-			this._areFoldTriggersSet = false;
+            &#x2F;**
+             * Boolean tracking whether the window scroll and window resize triggers have been set if this is a fold group.
+             * @property _areFoldTriggersSet
+             * @private
+             * @type Boolean
+             *&#x2F;
+            this._areFoldTriggersSet = false;
 
-			&#x2F;**
-			 * The maximum pixel height of the document that has been made visible.
-			 * During fold checks, if the user scrolls up then there&#x27;s no need to check for newly exposed images.
-			 * @property _maxKnownHLimit
-			 * @private
-			 * @type Int
-			 *&#x2F;
-			this._maxKnownHLimit = 0;
+            &#x2F;**
+             * The maximum pixel height of the document that has been made visible.
+             * During fold checks, if the user scrolls up then there&#x27;s no need to check for newly exposed images.
+             * @property _maxKnownHLimit
+             * @private
+             * @type Int
+             *&#x2F;
+            this._maxKnownHLimit = 0;
 
-			&#x2F;&#x2F; add a listener to domready that will start the time limit
-			Y.on(&#x27;domready&#x27;, this._onloadTasks, this);
-		},
+            &#x2F;&#x2F; add a listener to domready that will start the time limit
+            Y.on(&#x27;domready&#x27;, this._onloadTasks, this);
+        },
 
-		&#x2F;**
-		 * Adds a trigger to the group. Arguments are passed to &lt;code&gt;Y.on&lt;&#x2F;code&gt;.
-		 * @method addTrigger
-		 * @chainable
-		 * @param {Object} obj  The DOM object to attach the trigger event to
-		 * @param {String} type  The event type
-		 *&#x2F;
-		addTrigger: function(obj, type) {
-			if (! obj || ! type) {
-				return this;
-			}
+        &#x2F;**
+         * Adds a trigger to the group. Arguments are passed to &lt;code&gt;Y.on&lt;&#x2F;code&gt;.
+         * @method addTrigger
+         * @chainable
+         * @param {Object} obj  The DOM object to attach the trigger event to
+         * @param {String} type  The event type
+         *&#x2F;
+        addTrigger: function(obj, type) {
+            if (! obj || ! type) {
+                return this;
+            }
 
-			Y.log(&#x27;adding trigger to group: &#x27; + this.get(&#x27;name&#x27;), &#x27;info&#x27;, &#x27;imageloader&#x27;);
+            Y.log(&#x27;adding trigger to group: &#x27; + this.get(&#x27;name&#x27;), &#x27;info&#x27;, &#x27;imageloader&#x27;);
 
-			&#x2F;* Need to wrap the fetch function. Event Util can&#x27;t distinguish prototyped functions of different instantiations.
-			 *   Leads to this scenario: groupA and groupZ both have window-scroll triggers. groupZ also has a 2-sec timeout (groupA has no timeout).
-			 *   groupZ&#x27;s timeout fires; we remove the triggers. The detach call finds the first window-scroll event with Y.ILG.p.fetch, which is groupA&#x27;s. 
-			 *   groupA&#x27;s trigger is removed and never fires, leaving images unfetched.
-			 *&#x2F;
-			var wrappedFetch = function() {
-				this.fetch();
-			};
-			this._triggers.push( Y.on(type, wrappedFetch, obj, this) );
+            &#x2F;* Need to wrap the fetch function. Event Util can&#x27;t distinguish prototyped functions of different instantiations.
+             *   Leads to this scenario: groupA and groupZ both have window-scroll triggers. groupZ also has a 2-sec timeout (groupA has no timeout).
+             *   groupZ&#x27;s timeout fires; we remove the triggers. The detach call finds the first window-scroll event with Y.ILG.p.fetch, which is groupA&#x27;s. 
+             *   groupA&#x27;s trigger is removed and never fires, leaving images unfetched.
+             *&#x2F;
+            var wrappedFetch = function() {
+                this.fetch();
+            };
+            this._triggers.push( Y.on(type, wrappedFetch, obj, this) );
 
-			return this;
-		},
+            return this;
+        },
 
-		&#x2F;**
-		 * Adds a custom event trigger to the group.
-		 * @method addCustomTrigger
-		 * @chainable
-		 * @param {String} name  The name of the event
-		 * @param {Object} obj  The object on which to attach the event. &lt;code&gt;obj&lt;&#x2F;code&gt; is optional - by default the event is attached to the &lt;code&gt;Y&lt;&#x2F;code&gt; instance
-		 *&#x2F;
-		addCustomTrigger: function(name, obj) {
-			if (! name) {
-				return this;
-			}
+        &#x2F;**
+         * Adds a custom event trigger to the group.
+         * @method addCustomTrigger
+         * @chainable
+         * @param {String} name  The name of the event
+         * @param {Object} obj  The object on which to attach the event. &lt;code&gt;obj&lt;&#x2F;code&gt; is optional - by default the event is attached to the &lt;code&gt;Y&lt;&#x2F;code&gt; instance
+         *&#x2F;
+        addCustomTrigger: function(name, obj) {
+            if (! name) {
+                return this;
+            }
 
-			Y.log(&#x27;adding custom trigger to group: &#x27; + this.get(&#x27;name&#x27;), &#x27;info&#x27;, &#x27;imageloader&#x27;);
+            Y.log(&#x27;adding custom trigger to group: &#x27; + this.get(&#x27;name&#x27;), &#x27;info&#x27;, &#x27;imageloader&#x27;);
 
-			&#x2F;&#x2F; see comment in addTrigger()
-			var wrappedFetch = function() {
-				this.fetch();
-			};
-			if (Y.Lang.isUndefined(obj)) {
-				this._triggers.push( Y.on(name, wrappedFetch, this) );
-			}
-			else {
-				this._triggers.push( obj.on(name, wrappedFetch, this) );
-			}
+            &#x2F;&#x2F; see comment in addTrigger()
+            var wrappedFetch = function() {
+                this.fetch();
+            };
+            if (Y.Lang.isUndefined(obj)) {
+                this._triggers.push( Y.on(name, wrappedFetch, this) );
+            }
+            else {
+                this._triggers.push( obj.on(name, wrappedFetch, this) );
+            }
 
-			return this;
-		},
+            return this;
+        },
 
-		&#x2F;**
-		 * Sets the window scroll and window resize triggers for any group that is fold-conditional (i.e., has a fold distance set).
-		 * @method _setFoldTriggers
-		 * @private
-		 *&#x2F;
-		_setFoldTriggers: function() {
-			if (this._areFoldTriggersSet) {
-				return;
-			}
+        &#x2F;**
+         * Sets the window scroll and window resize triggers for any group that is fold-conditional (i.e., has a fold distance set).
+         * @method _setFoldTriggers
+         * @private
+         *&#x2F;
+        _setFoldTriggers: function() {
+            if (this._areFoldTriggersSet) {
+                return;
+            }
 
-			Y.log(&#x27;setting window scroll and resize events for group: &#x27; + this.get(&#x27;name&#x27;), &#x27;info&#x27;, &#x27;imageloader&#x27;);
+            Y.log(&#x27;setting window scroll and resize events for group: &#x27; + this.get(&#x27;name&#x27;), &#x27;info&#x27;, &#x27;imageloader&#x27;);
 
-			var wrappedFoldCheck = function() {
-				this._foldCheck();
-			};
-			this._triggers.push( Y.on(&#x27;scroll&#x27;, wrappedFoldCheck, window, this) );
-			this._triggers.push( Y.on(&#x27;resize&#x27;, wrappedFoldCheck, window, this) );
-			this._areFoldTriggersSet = true;
-		},
+            var wrappedFoldCheck = function() {
+                this._foldCheck();
+            };
+            this._triggers.push( Y.on(&#x27;scroll&#x27;, wrappedFoldCheck, window, this) );
+            this._triggers.push( Y.on(&#x27;resize&#x27;, wrappedFoldCheck, window, this) );
+            this._areFoldTriggersSet = true;
+        },
 
-		&#x2F;**
-		 * Performs necessary setup at domready time.
-		 * Initiates time limit for group; executes the fold check for the images.
-		 * @method _onloadTasks
-		 * @private
-		 *&#x2F;
-		_onloadTasks: function() {
-			var timeLim = this.get(&#x27;timeLimit&#x27;);
-			if (timeLim &amp;&amp; timeLim &gt; 0) {
-				Y.log(&#x27;setting time limit of &#x27; + timeLim + &#x27; seconds for group: &#x27; + this.get(&#x27;name&#x27;), &#x27;info&#x27;, &#x27;imageloader&#x27;);
-				this._timeout = setTimeout(this._getFetchTimeout(), timeLim * 1000);
-			}
+        &#x2F;**
+         * Performs necessary setup at domready time.
+         * Initiates time limit for group; executes the fold check for the images.
+         * @method _onloadTasks
+         * @private
+         *&#x2F;
+        _onloadTasks: function() {
+            var timeLim = this.get(&#x27;timeLimit&#x27;);
+            if (timeLim &amp;&amp; timeLim &gt; 0) {
+                Y.log(&#x27;setting time limit of &#x27; + timeLim + &#x27; seconds for group: &#x27; + this.get(&#x27;name&#x27;), &#x27;info&#x27;, &#x27;imageloader&#x27;);
+                this._timeout = setTimeout(this._getFetchTimeout(), timeLim * 1000);
+            }
 
-			if (! Y.Lang.isUndefined(this.get(&#x27;foldDistance&#x27;))) {
-				this._foldCheck();
-			}
-		},
+            if (! Y.Lang.isUndefined(this.get(&#x27;foldDistance&#x27;))) {
+                this._foldCheck();
+            }
+        },
 
-		&#x2F;**
-		 * Returns the group&#x27;s &lt;code&gt;fetch&lt;&#x2F;code&gt; method, with the proper closure, for use with &lt;code&gt;setTimeout&lt;&#x2F;code&gt;.
-		 * @method _getFetchTimeout
-		 * @return {Function}  group&#x27;s &lt;code&gt;fetch&lt;&#x2F;code&gt; method
-		 * @private
-		 *&#x2F;
-		_getFetchTimeout: function() {
-			var self = this;
-			return function() { self.fetch(); };
-		},
+        &#x2F;**
+         * Returns the group&#x27;s &lt;code&gt;fetch&lt;&#x2F;code&gt; method, with the proper closure, for use with &lt;code&gt;setTimeout&lt;&#x2F;code&gt;.
+         * @method _getFetchTimeout
+         * @return {Function}  group&#x27;s &lt;code&gt;fetch&lt;&#x2F;code&gt; method
+         * @private
+         *&#x2F;
+        _getFetchTimeout: function() {
+            var self = this;
+            return function() { self.fetch(); };
+        },
 
-		&#x2F;**
-		 * Registers an image with the group.
-		 * Arguments are passed through to a &lt;code&gt;Y.ImgLoadImgObj&lt;&#x2F;code&gt; constructor; see that class&#x27; attribute documentation for detailed information. &quot;&lt;code&gt;domId&lt;&#x2F;code&gt;&quot; is a required attribute.
-		 * @method registerImage
-		 * @param {Object} *  A configuration object literal with attribute name&#x2F;value pairs  (passed through to a &lt;code&gt;Y.ImgLoadImgObj&lt;&#x2F;code&gt; constructor)
-		 * @return {Object}  &lt;code&gt;Y.ImgLoadImgObj&lt;&#x2F;code&gt; that was registered
-		 *&#x2F;
-		registerImage: function() {
-			var domId = arguments[0].domId;
-			if (! domId) {
-				return null;
-			}
+        &#x2F;**
+         * Registers an image with the group.
+         * Arguments are passed through to a &lt;code&gt;Y.ImgLoadImgObj&lt;&#x2F;code&gt; constructor; see that class&#x27; attribute documentation for detailed information. &quot;&lt;code&gt;domId&lt;&#x2F;code&gt;&quot; is a required attribute.
+         * @method registerImage
+         * @param {Object} *  A configuration object literal with attribute name&#x2F;value pairs  (passed through to a &lt;code&gt;Y.ImgLoadImgObj&lt;&#x2F;code&gt; constructor)
+         * @return {Object}  &lt;code&gt;Y.ImgLoadImgObj&lt;&#x2F;code&gt; that was registered
+         *&#x2F;
+        registerImage: function() {
+            var domId = arguments[0].domId;
+            if (! domId) {
+                return null;
+            }
 
-			Y.log(&#x27;adding image with id: &#x27; + domId + &#x27; to group: &#x27; + this.get(&#x27;name&#x27;), &#x27;info&#x27;, &#x27;imageloader&#x27;);
+            Y.log(&#x27;adding image with id: &#x27; + domId + &#x27; to group: &#x27; + this.get(&#x27;name&#x27;), &#x27;info&#x27;, &#x27;imageloader&#x27;);
 
-			this._imgObjs[domId] = new Y.ImgLoadImgObj(arguments[0]);
-			return this._imgObjs[domId];
-		},
+            this._imgObjs[domId] = new Y.ImgLoadImgObj(arguments[0]);
+            return this._imgObjs[domId];
+        },
 
-		&#x2F;**
-		 * Displays the images in the group.
-		 * This method is called when a trigger fires or the time limit expires; it shouldn&#x27;t be called externally, but is not private in the rare event that it needs to be called immediately.
-		 * @method fetch
-		 *&#x2F;
-		fetch: function() {
-			Y.log(&#x27;Fetching images in group: &quot;&#x27; + this.get(&#x27;name&#x27;) + &#x27;&quot;.&#x27;, &#x27;info&#x27;, &#x27;imageloader&#x27;);
+        &#x2F;**
+         * Displays the images in the group.
+         * This method is called when a trigger fires or the time limit expires; it shouldn&#x27;t be called externally, but is not private in the rare event that it needs to be called immediately.
+         * @method fetch
+         *&#x2F;
+        fetch: function() {
+            Y.log(&#x27;Fetching images in group: &quot;&#x27; + this.get(&#x27;name&#x27;) + &#x27;&quot;.&#x27;, &#x27;info&#x27;, &#x27;imageloader&#x27;);
 
-			&#x2F;&#x2F; done with the triggers
-			this._clearTriggers();
+            &#x2F;&#x2F; done with the triggers
+            this._clearTriggers();
 
-			&#x2F;&#x2F; fetch whatever we need to by className
-			this._fetchByClass();
+            &#x2F;&#x2F; fetch whatever we need to by className
+            this._fetchByClass();
 
-			&#x2F;&#x2F; fetch registered images
-			for (var id in this._imgObjs) {
-				if (this._imgObjs.hasOwnProperty(id)) {
-					this._imgObjs[id].fetch();
-				}
-			}
-		},
+            &#x2F;&#x2F; fetch registered images
+            for (var id in this._imgObjs) {
+                if (this._imgObjs.hasOwnProperty(id)) {
+                    this._imgObjs[id].fetch();
+                }
+            }
+        },
 
-		&#x2F;**
-		 * Clears the timeout and all triggers associated with the group.
-		 * @method _clearTriggers
-		 * @private
-		 *&#x2F;
-		_clearTriggers: function() {
-			clearTimeout(this._timeout);
-			&#x2F;&#x2F; detach all listeners
-			for (var i=0, len = this._triggers.length; i &lt; len; i++) {
-				this._triggers[i].detach();
-			}
-		},
+        &#x2F;**
+         * Clears the timeout and all triggers associated with the group.
+         * @method _clearTriggers
+         * @private
+         *&#x2F;
+        _clearTriggers: function() {
+            clearTimeout(this._timeout);
+            &#x2F;&#x2F; detach all listeners
+            for (var i=0, len = this._triggers.length; i &lt; len; i++) {
+                this._triggers[i].detach();
+            }
+        },
 
-		&#x2F;**
-		 * Checks the position of each image in the group. If any part of the image is within the specified distance (&lt;code&gt;foldDistance&lt;&#x2F;code&gt;) of the client viewport, the image is fetched immediately.
-		 * @method _foldCheck
-		 * @private
-		 *&#x2F;
-		_foldCheck: function() {
-			Y.log(&#x27;Checking for images above the fold in group: &quot;&#x27; + this.get(&#x27;name&#x27;) + &#x27;&quot;&#x27;, &#x27;info&#x27;, &#x27;imageloader&#x27;);
+        &#x2F;**
+         * Checks the position of each image in the group. If any part of the image is within the specified distance (&lt;code&gt;foldDistance&lt;&#x2F;code&gt;) of the client viewport, the image is fetched immediately.
+         * @method _foldCheck
+         * @private
+         *&#x2F;
+        _foldCheck: function() {
+            Y.log(&#x27;Checking for images above the fold in group: &quot;&#x27; + this.get(&#x27;name&#x27;) + &#x27;&quot;&#x27;, &#x27;info&#x27;, &#x27;imageloader&#x27;);
 
-			var allFetched = true,
-			    viewReg = Y.DOM.viewportRegion(),
-			    hLimit = viewReg.bottom + this.get(&#x27;foldDistance&#x27;),
-					id, imgFetched, els, i, len;
+            var allFetched = true,
+                viewReg = Y.DOM.viewportRegion(),
+                hLimit = viewReg.bottom + this.get(&#x27;foldDistance&#x27;),
+                    id, imgFetched, els, i, len;
 
-			&#x2F;&#x2F; unless we&#x27;ve uncovered new frontiers, there&#x27;s no need to continue
-			if (hLimit &lt;= this._maxKnownHLimit) {
-				return;
-			}
-			this._maxKnownHLimit = hLimit;
+            &#x2F;&#x2F; unless we&#x27;ve uncovered new frontiers, there&#x27;s no need to continue
+            if (hLimit &lt;= this._maxKnownHLimit) {
+                return;
+            }
+            this._maxKnownHLimit = hLimit;
 
-			for (id in this._imgObjs) {
-				if (this._imgObjs.hasOwnProperty(id)) {
-					imgFetched = this._imgObjs[id].fetch(hLimit);
-					allFetched = allFetched &amp;&amp; imgFetched;
-				}
-			}
+            for (id in this._imgObjs) {
+                if (this._imgObjs.hasOwnProperty(id)) {
+                    imgFetched = this._imgObjs[id].fetch(hLimit);
+                    allFetched = allFetched &amp;&amp; imgFetched;
+                }
+            }
 
-			&#x2F;&#x2F; and by class
-			if (this._className) {
-				if (this._classImageEls === null) {
-					&#x2F;&#x2F; get all the relevant elements and store them
-					this._classImageEls = [];
-					els = Y.all(&#x27;.&#x27; + this._className);
-					els.each( function(node) { this._classImageEls.push( { el: node, y: node.getY(), fetched: false } ); }, this);
-				}
-				els = this._classImageEls;
-				for (i=0, len = els.length; i &lt; len; i++) {
-					if (els[i].fetched) {
-						continue;
-					}
-					if (els[i].y &amp;&amp; els[i].y &lt;= hLimit) {
-						&#x2F;&#x2F;els[i].el.removeClass(this._className);
-						this._updateNodeClassName(els[i].el);
+            &#x2F;&#x2F; and by class
+            if (this._className) {
+                if (this._classImageEls === null) {
+                    &#x2F;&#x2F; get all the relevant elements and store them
+                    this._classImageEls = [];
+                    els = Y.all(&#x27;.&#x27; + this._className);
+                    els.each( function(node) { this._classImageEls.push( { el: node, y: node.getY(), fetched: false } ); }, this);
+                }
+                els = this._classImageEls;
+                for (i=0, len = els.length; i &lt; len; i++) {
+                    if (els[i].fetched) {
+                        continue;
+                    }
+                    if (els[i].y &amp;&amp; els[i].y &lt;= hLimit) {
+                        &#x2F;&#x2F;els[i].el.removeClass(this._className);
+                        this._updateNodeClassName(els[i].el);
                         els[i].fetched = true;
-						Y.log(&#x27;Image with id &quot;&#x27; + els[i].el.get(&#x27;id&#x27;) + &#x27;&quot; is within distance of the fold. Fetching image. (Image registered by class name with the group - may not have an id.)&#x27;, &#x27;info&#x27;, &#x27;imageloader&#x27;);
-					}
-					else {
-						allFetched = false;
-					}
-				}
-			}
-			
-			&#x2F;&#x2F; if allFetched, remove listeners
-			if (allFetched) {
-				Y.log(&#x27;All images fetched; removing listeners for group: &quot;&#x27; + this.get(&#x27;name&#x27;) + &#x27;&quot;&#x27;, &#x27;info&#x27;, &#x27;imageloader&#x27;);
-				this._clearTriggers();
-			}
-		},
+                        Y.log(&#x27;Image with id &quot;&#x27; + els[i].el.get(&#x27;id&#x27;) + &#x27;&quot; is within distance of the fold. Fetching image. (Image registered by class name with the group - may not have an id.)&#x27;, &#x27;info&#x27;, &#x27;imageloader&#x27;);
+                    }
+                    else {
+                        allFetched = false;
+                    }
+                }
+            }
+            
+            &#x2F;&#x2F; if allFetched, remove listeners
+            if (allFetched) {
+                Y.log(&#x27;All images fetched; removing listeners for group: &quot;&#x27; + this.get(&#x27;name&#x27;) + &#x27;&quot;&#x27;, &#x27;info&#x27;, &#x27;imageloader&#x27;);
+                this._clearTriggers();
+            }
+        },
         
         &#x2F;**
          * Updates a given node, removing the ImageLoader class name. If the
@@ -1900,271 +1900,271 @@
             node.removeClass(this._className);        
         },
 
-		&#x2F;**
-		 * Finds all elements in the DOM with the class name specified in the group. Removes the class from the element in order to let the style definitions trigger the image fetching.
-		 * @method _fetchByClass
-		 * @private
-		 *&#x2F;
-		_fetchByClass: function() {
-			if (! this._className) {
-				return;
-			}
+        &#x2F;**
+         * Finds all elements in the DOM with the class name specified in the group. Removes the class from the element in order to let the style definitions trigger the image fetching.
+         * @method _fetchByClass
+         * @private
+         *&#x2F;
+        _fetchByClass: function() {
+            if (! this._className) {
+                return;
+            }
 
-			Y.log(&#x27;Fetching all images with class &quot;&#x27; + this._className + &#x27;&quot; in group &quot;&#x27; + this.get(&#x27;name&#x27;) + &#x27;&quot;.&#x27;, &#x27;info&#x27;, &#x27;imageloader&#x27;);
+            Y.log(&#x27;Fetching all images with class &quot;&#x27; + this._className + &#x27;&quot; in group &quot;&#x27; + this.get(&#x27;name&#x27;) + &#x27;&quot;.&#x27;, &#x27;info&#x27;, &#x27;imageloader&#x27;);
 
-			Y.all(&#x27;.&#x27; + this._className).each(Y.bind(this._updateNodeClassName, this));
-		}
+            Y.all(&#x27;.&#x27; + this._className).each(Y.bind(this._updateNodeClassName, this));
+        }
 
-	};
-
-
-	Y.extend(Y.ImgLoadGroup, Y.Base, groupProto);
+    };
 
 
-	&#x2F;&#x2F;------------------------------------------------
+    Y.extend(Y.ImgLoadGroup, Y.Base, groupProto);
 
 
-	&#x2F;**
-	 * Image objects to be registered with the groups
-	 * @class ImgLoadImgObj
-	 * @extends Base
-	 * @constructor
-	 *&#x2F;
-	Y.ImgLoadImgObj = function() {
-		Y.ImgLoadImgObj.superclass.constructor.apply(this, arguments);
-		this._init();
-	};
-		
-	Y.ImgLoadImgObj.NAME = &#x27;imgLoadImgObj&#x27;;
-
-	Y.ImgLoadImgObj.ATTRS = {
-		&#x2F;**
-		 * HTML DOM id of the image element.
-		 * @attribute domId
-		 * @type String
-		 *&#x2F;
-		domId: {
-			value: null,
-			writeOnce: true
-		},
-
-		&#x2F;**
-		 * Background URL for the image.
-		 * For an image whose URL is specified by &quot;&lt;code&gt;background-image&lt;&#x2F;code&gt;&quot; in the element&#x27;s style.
-		 * @attribute bgUrl
-		 * @type String
-		 *&#x2F;
-		bgUrl: {
-			value: null
-		},
-
-		&#x2F;**
-		 * Source URL for the image.
-		 * For an image whose URL is specified by a &quot;&lt;code&gt;src&lt;&#x2F;code&gt;&quot; attribute in the DOM element.
-		 * @attribute srcUrl
-		 * @type String
-		 *&#x2F;
-		srcUrl: {
-			value: null
-		},
-
-		&#x2F;**
-		 * Pixel width of the image. Will be set as a &lt;code&gt;width&lt;&#x2F;code&gt; attribute on the DOM element after the image is fetched.
-		 * Defaults to the natural width of the image (no &lt;code&gt;width&lt;&#x2F;code&gt; attribute will be set).
-		 * Usually only used with src images.
-		 * @attribute width
-		 * @type Int
-		 *&#x2F;
-		width: {
-			value: null
-		},
-
-		&#x2F;**
-		 * Pixel height of the image. Will be set as a &lt;code&gt;height&lt;&#x2F;code&gt; attribute on the DOM element after the image is fetched.
-		 * Defaults to the natural height of the image (no &lt;code&gt;height&lt;&#x2F;code&gt; attribute will be set).
-		 * Usually only used with src images.
-		 * @attribute height
-		 * @type Int
-		 *&#x2F;
-		height: {
-			value: null
-		},
-
-		&#x2F;**
-		 * Whether the image&#x27;s &lt;code&gt;style.visibility&lt;&#x2F;code&gt; should be set to &lt;code&gt;visible&lt;&#x2F;code&gt; after the image is fetched.
-		 * Used when setting images as &lt;code&gt;visibility:hidden&lt;&#x2F;code&gt; prior to image fetching.
-		 * @attribute setVisible
-		 * @type Boolean
-		 *&#x2F;
-		setVisible: {
-			value: false
-		},
-
-		&#x2F;**
-		 * Whether the image is a PNG.
-		 * PNG images get special treatment in that the URL is specified through AlphaImageLoader for IE, versions 6 and earlier.
-		 * Only used with background images.
-		 * @attribute isPng
-		 * @type Boolean
-		 *&#x2F;
-		isPng: {
-			value: false
-		},
-
-		&#x2F;**
-		 * AlphaImageLoader &lt;code&gt;sizingMethod&lt;&#x2F;code&gt; property to be set for the image.
-		 * Only set if &lt;code&gt;isPng&lt;&#x2F;code&gt; value for this image is set to &lt;code&gt;true&lt;&#x2F;code&gt;.
-		 * Defaults to &lt;code&gt;scale&lt;&#x2F;code&gt;.
-		 * @attribute sizingMethod
-		 * @type String
-		 *&#x2F;
-		sizingMethod: {
-			value: &#x27;scale&#x27;
-		},
-
-		&#x2F;**
-		 * AlphaImageLoader &lt;code&gt;enabled&lt;&#x2F;code&gt; property to be set for the image.
-		 * Only set if &lt;code&gt;isPng&lt;&#x2F;code&gt; value for this image is set to &lt;code&gt;true&lt;&#x2F;code&gt;.
-		 * Defaults to &lt;code&gt;true&lt;&#x2F;code&gt;.
-		 * @attribute enabled
-		 * @type String
-		 *&#x2F;
-		enabled: {
-			value: &#x27;true&#x27;
-		}
-
-	};
-
-	var imgProto = {
-
-		&#x2F;**
-		 * Initialize all private members needed for the group.
-		 * @method _init
-		 * @private
-		 *&#x2F;
-		_init: function() {
-
-			&#x2F;**
-			 * Whether this image has already been fetched.
-			 * In the case of fold-conditional groups, images won&#x27;t be fetched twice.
-			 * @property _fetched
-			 * @private
-			 * @type Boolean
-			 *&#x2F;
-			this._fetched = false;
-
-			&#x2F;**
-			 * The Node object returned from &lt;code&gt;Y.one&lt;&#x2F;code&gt;, to avoid repeat calls to access the DOM.
-			 * @property _imgEl
-			 * @private
-			 * @type Object
-			 *&#x2F;
-			this._imgEl = null;
-
-			&#x2F;**
-			 * The vertical position returned from &lt;code&gt;getY&lt;&#x2F;code&gt;, to avoid repeat calls to access the DOM.
-			 * The Y position is checked only for images registered with fold-conditional groups. The position is checked first at page load (domready)
-			 *   and this caching enhancement assumes that the image&#x27;s vertical position won&#x27;t change after that first check.
-			 * @property _yPos
-			 * @private
-			 * @type Int
-			 *&#x2F;
-			this._yPos = null;
-		},
-
-		&#x2F;**
-		 * Displays the image; puts the URL into the DOM.
-		 * This method shouldn&#x27;t be called externally, but is not private in the rare event that it needs to be called immediately.
-		 * @method fetch
-		 * @param {Int} withinY  The pixel distance from the top of the page, for which if the image lies within, it will be fetched. Undefined indicates that no check should be made, and the image should always be fetched
-		 * @return {Boolean}  Whether the image has been fetched (either during this execution or previously)
-		 *&#x2F;
-		fetch: function(withinY) {
-			if (this._fetched) {
-				return true;
-			}
-
-			var el = this._getImgEl(),
-			    yPos;
-			if (! el) {
-				return false;
-			}
-
-			if (withinY) {
-				&#x2F;&#x2F; need a distance check
-				yPos = this._getYPos();
-				if (! yPos || yPos &gt; withinY) {
-					return false;
-				}
-				Y.log(&#x27;Image with id &quot;&#x27; + this.get(&#x27;domId&#x27;) + &#x27;&quot; is within distance of the fold. Fetching image.&#x27;, &#x27;info&#x27;, &#x27;imageloader&#x27;);
-			}
-
-			Y.log(&#x27;Fetching image with id &quot;&#x27; + this.get(&#x27;domId&#x27;) + &#x27;&quot;.&#x27;, &#x27;info&#x27;, &#x27;imageloader&#x27;);
-
-			&#x2F;&#x2F; apply url
-			if (this.get(&#x27;bgUrl&#x27;) !== null) {
-				&#x2F;&#x2F; bg url
-				if (this.get(&#x27;isPng&#x27;) &amp;&amp; Y.UA.ie &amp;&amp; Y.UA.ie &lt;= 6) {
-					&#x2F;&#x2F; png for which to apply AlphaImageLoader
-					el.setStyle(&#x27;filter&#x27;, &#x27;progid:DXImageTransform.Microsoft.AlphaImageLoader(src=&quot;&#x27; + this.get(&#x27;bgUrl&#x27;) + &#x27;&quot;, sizingMethod=&quot;&#x27; + this.get(&#x27;sizingMethod&#x27;) + &#x27;&quot;, enabled=&quot;&#x27; + this.get(&#x27;enabled&#x27;) + &#x27;&quot;)&#x27;);
-				}
-				else {
-					&#x2F;&#x2F; regular bg image
-					el.setStyle(&#x27;backgroundImage&#x27;, &quot;url(&#x27;&quot; + this.get(&#x27;bgUrl&#x27;) + &quot;&#x27;)&quot;);
-				}
-			}
-			else if (this.get(&#x27;srcUrl&#x27;) !== null) {
-				&#x2F;&#x2F; regular src image
-				el.setAttribute(&#x27;src&#x27;, this.get(&#x27;srcUrl&#x27;));
-			}
-
-			&#x2F;&#x2F; apply attributes
-			if (this.get(&#x27;setVisible&#x27;)) {
-				el.setStyle(&#x27;visibility&#x27;, &#x27;visible&#x27;);
-			}
-			if (this.get(&#x27;width&#x27;)) {
-				el.setAttribute(&#x27;width&#x27;, this.get(&#x27;width&#x27;));
-			}
-			if (this.get(&#x27;height&#x27;)) {
-				el.setAttribute(&#x27;height&#x27;, this.get(&#x27;height&#x27;));
-			}
-
-			this._fetched = true;
-
-			return true;
-		},
-
-		&#x2F;**
-		 * Gets the object (as a &lt;code&gt;Y.Node&lt;&#x2F;code&gt;) of the DOM element indicated by &quot;&lt;code&gt;domId&lt;&#x2F;code&gt;&quot;.
-		 * @method _getImgEl
-		 * @returns {Object} DOM element of the image as a &lt;code&gt;Y.Node&lt;&#x2F;code&gt; object
-		 * @private
-		 *&#x2F;
-		_getImgEl: function() {
-			if (this._imgEl === null) {
-				this._imgEl = Y.one(&#x27;#&#x27; + this.get(&#x27;domId&#x27;));
-			}
-			return this._imgEl;
-		},
-
-		&#x2F;**
-		 * Gets the Y position of the node in page coordinates.
-		 * Expects that the page-coordinate position of the image won&#x27;t change.
-		 * @method _getYPos
-		 * @returns {Object} The Y position of the image
-		 * @private
-		 *&#x2F;
-		_getYPos: function() {
-			if (this._yPos === null) {
-				this._yPos = this._getImgEl().getY();
-			}
-			return this._yPos;
-		}
-
-	};
+    &#x2F;&#x2F;------------------------------------------------
 
 
-	Y.extend(Y.ImgLoadImgObj, Y.Base, imgProto);
+    &#x2F;**
+     * Image objects to be registered with the groups
+     * @class ImgLoadImgObj
+     * @extends Base
+     * @constructor
+     *&#x2F;
+    Y.ImgLoadImgObj = function() {
+        Y.ImgLoadImgObj.superclass.constructor.apply(this, arguments);
+        this._init();
+    };
+        
+    Y.ImgLoadImgObj.NAME = &#x27;imgLoadImgObj&#x27;;
+
+    Y.ImgLoadImgObj.ATTRS = {
+        &#x2F;**
+         * HTML DOM id of the image element.
+         * @attribute domId
+         * @type String
+         *&#x2F;
+        domId: {
+            value: null,
+            writeOnce: true
+        },
+
+        &#x2F;**
+         * Background URL for the image.
+         * For an image whose URL is specified by &quot;&lt;code&gt;background-image&lt;&#x2F;code&gt;&quot; in the element&#x27;s style.
+         * @attribute bgUrl
+         * @type String
+         *&#x2F;
+        bgUrl: {
+            value: null
+        },
+
+        &#x2F;**
+         * Source URL for the image.
+         * For an image whose URL is specified by a &quot;&lt;code&gt;src&lt;&#x2F;code&gt;&quot; attribute in the DOM element.
+         * @attribute srcUrl
+         * @type String
+         *&#x2F;
+        srcUrl: {
+            value: null
+        },
+
+        &#x2F;**
+         * Pixel width of the image. Will be set as a &lt;code&gt;width&lt;&#x2F;code&gt; attribute on the DOM element after the image is fetched.
+         * Defaults to the natural width of the image (no &lt;code&gt;width&lt;&#x2F;code&gt; attribute will be set).
+         * Usually only used with src images.
+         * @attribute width
+         * @type Int
+         *&#x2F;
+        width: {
+            value: null
+        },
+
+        &#x2F;**
+         * Pixel height of the image. Will be set as a &lt;code&gt;height&lt;&#x2F;code&gt; attribute on the DOM element after the image is fetched.
+         * Defaults to the natural height of the image (no &lt;code&gt;height&lt;&#x2F;code&gt; attribute will be set).
+         * Usually only used with src images.
+         * @attribute height
+         * @type Int
+         *&#x2F;
+        height: {
+            value: null
+        },
+
+        &#x2F;**
+         * Whether the image&#x27;s &lt;code&gt;style.visibility&lt;&#x2F;code&gt; should be set to &lt;code&gt;visible&lt;&#x2F;code&gt; after the image is fetched.
+         * Used when setting images as &lt;code&gt;visibility:hidden&lt;&#x2F;code&gt; prior to image fetching.
+         * @attribute setVisible
+         * @type Boolean
+         *&#x2F;
+        setVisible: {
+            value: false
+        },
+
+        &#x2F;**
+         * Whether the image is a PNG.
+         * PNG images get special treatment in that the URL is specified through AlphaImageLoader for IE, versions 6 and earlier.
+         * Only used with background images.
+         * @attribute isPng
+         * @type Boolean
+         *&#x2F;
+        isPng: {
+            value: false
+        },
+
+        &#x2F;**
+         * AlphaImageLoader &lt;code&gt;sizingMethod&lt;&#x2F;code&gt; property to be set for the image.
+         * Only set if &lt;code&gt;isPng&lt;&#x2F;code&gt; value for this image is set to &lt;code&gt;true&lt;&#x2F;code&gt;.
+         * Defaults to &lt;code&gt;scale&lt;&#x2F;code&gt;.
+         * @attribute sizingMethod
+         * @type String
+         *&#x2F;
+        sizingMethod: {
+            value: &#x27;scale&#x27;
+        },
+
+        &#x2F;**
+         * AlphaImageLoader &lt;code&gt;enabled&lt;&#x2F;code&gt; property to be set for the image.
+         * Only set if &lt;code&gt;isPng&lt;&#x2F;code&gt; value for this image is set to &lt;code&gt;true&lt;&#x2F;code&gt;.
+         * Defaults to &lt;code&gt;true&lt;&#x2F;code&gt;.
+         * @attribute enabled
+         * @type String
+         *&#x2F;
+        enabled: {
+            value: &#x27;true&#x27;
+        }
+
+    };
+
+    var imgProto = {
+
+        &#x2F;**
+         * Initialize all private members needed for the group.
+         * @method _init
+         * @private
+         *&#x2F;
+        _init: function() {
+
+            &#x2F;**
+             * Whether this image has already been fetched.
+             * In the case of fold-conditional groups, images won&#x27;t be fetched twice.
+             * @property _fetched
+             * @private
+             * @type Boolean
+             *&#x2F;
+            this._fetched = false;
+
+            &#x2F;**
+             * The Node object returned from &lt;code&gt;Y.one&lt;&#x2F;code&gt;, to avoid repeat calls to access the DOM.
+             * @property _imgEl
+             * @private
+             * @type Object
+             *&#x2F;
+            this._imgEl = null;
+
+            &#x2F;**
+             * The vertical position returned from &lt;code&gt;getY&lt;&#x2F;code&gt;, to avoid repeat calls to access the DOM.
+             * The Y position is checked only for images registered with fold-conditional groups. The position is checked first at page load (domready)
+             *   and this caching enhancement assumes that the image&#x27;s vertical position won&#x27;t change after that first check.
+             * @property _yPos
+             * @private
+             * @type Int
+             *&#x2F;
+            this._yPos = null;
+        },
+
+        &#x2F;**
+         * Displays the image; puts the URL into the DOM.
+         * This method shouldn&#x27;t be called externally, but is not private in the rare event that it needs to be called immediately.
+         * @method fetch
+         * @param {Int} withinY  The pixel distance from the top of the page, for which if the image lies within, it will be fetched. Undefined indicates that no check should be made, and the image should always be fetched
+         * @return {Boolean}  Whether the image has been fetched (either during this execution or previously)
+         *&#x2F;
+        fetch: function(withinY) {
+            if (this._fetched) {
+                return true;
+            }
+
+            var el = this._getImgEl(),
+                yPos;
+            if (! el) {
+                return false;
+            }
+
+            if (withinY) {
+                &#x2F;&#x2F; need a distance check
+                yPos = this._getYPos();
+                if (! yPos || yPos &gt; withinY) {
+                    return false;
+                }
+                Y.log(&#x27;Image with id &quot;&#x27; + this.get(&#x27;domId&#x27;) + &#x27;&quot; is within distance of the fold. Fetching image.&#x27;, &#x27;info&#x27;, &#x27;imageloader&#x27;);
+            }
+
+            Y.log(&#x27;Fetching image with id &quot;&#x27; + this.get(&#x27;domId&#x27;) + &#x27;&quot;.&#x27;, &#x27;info&#x27;, &#x27;imageloader&#x27;);
+
+            &#x2F;&#x2F; apply url
+            if (this.get(&#x27;bgUrl&#x27;) !== null) {
+                &#x2F;&#x2F; bg url
+                if (this.get(&#x27;isPng&#x27;) &amp;&amp; Y.UA.ie &amp;&amp; Y.UA.ie &lt;= 6) {
+                    &#x2F;&#x2F; png for which to apply AlphaImageLoader
+                    el.setStyle(&#x27;filter&#x27;, &#x27;progid:DXImageTransform.Microsoft.AlphaImageLoader(src=&quot;&#x27; + this.get(&#x27;bgUrl&#x27;) + &#x27;&quot;, sizingMethod=&quot;&#x27; + this.get(&#x27;sizingMethod&#x27;) + &#x27;&quot;, enabled=&quot;&#x27; + this.get(&#x27;enabled&#x27;) + &#x27;&quot;)&#x27;);
+                }
+                else {
+                    &#x2F;&#x2F; regular bg image
+                    el.setStyle(&#x27;backgroundImage&#x27;, &quot;url(&#x27;&quot; + this.get(&#x27;bgUrl&#x27;) + &quot;&#x27;)&quot;);
+                }
+            }
+            else if (this.get(&#x27;srcUrl&#x27;) !== null) {
+                &#x2F;&#x2F; regular src image
+                el.setAttribute(&#x27;src&#x27;, this.get(&#x27;srcUrl&#x27;));
+            }
+
+            &#x2F;&#x2F; apply attributes
+            if (this.get(&#x27;setVisible&#x27;)) {
+                el.setStyle(&#x27;visibility&#x27;, &#x27;visible&#x27;);
+            }
+            if (this.get(&#x27;width&#x27;)) {
+                el.setAttribute(&#x27;width&#x27;, this.get(&#x27;width&#x27;));
+            }
+            if (this.get(&#x27;height&#x27;)) {
+                el.setAttribute(&#x27;height&#x27;, this.get(&#x27;height&#x27;));
+            }
+
+            this._fetched = true;
+
+            return true;
+        },
+
+        &#x2F;**
+         * Gets the object (as a &lt;code&gt;Y.Node&lt;&#x2F;code&gt;) of the DOM element indicated by &quot;&lt;code&gt;domId&lt;&#x2F;code&gt;&quot;.
+         * @method _getImgEl
+         * @returns {Object} DOM element of the image as a &lt;code&gt;Y.Node&lt;&#x2F;code&gt; object
+         * @private
+         *&#x2F;
+        _getImgEl: function() {
+            if (this._imgEl === null) {
+                this._imgEl = Y.one(&#x27;#&#x27; + this.get(&#x27;domId&#x27;));
+            }
+            return this._imgEl;
+        },
+
+        &#x2F;**
+         * Gets the Y position of the node in page coordinates.
+         * Expects that the page-coordinate position of the image won&#x27;t change.
+         * @method _getYPos
+         * @returns {Object} The Y position of the image
+         * @private
+         *&#x2F;
+        _getYPos: function() {
+            if (this._yPos === null) {
+                this._yPos = this._getImgEl().getY();
+            }
+            return this._yPos;
+        }
+
+    };
+
+
+    Y.extend(Y.ImgLoadImgObj, Y.Base, imgProto);
 
 
 

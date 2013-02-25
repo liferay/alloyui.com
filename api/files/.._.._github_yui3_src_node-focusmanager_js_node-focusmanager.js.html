@@ -1538,279 +1538,279 @@
 * @module node-focusmanager
 *&#x2F;
 
-	&#x2F;&#x2F;	Frequently used strings
+    &#x2F;&#x2F;    Frequently used strings
 
 var ACTIVE_DESCENDANT = &quot;activeDescendant&quot;,
-	ID = &quot;id&quot;,
-	DISABLED = &quot;disabled&quot;,
-	TAB_INDEX = &quot;tabIndex&quot;,
-	FOCUSED = &quot;focused&quot;,
-	FOCUS_CLASS = &quot;focusClass&quot;,
-	CIRCULAR = &quot;circular&quot;,
-	UI = &quot;UI&quot;,
-	KEY = &quot;key&quot;,
-	ACTIVE_DESCENDANT_CHANGE = ACTIVE_DESCENDANT + &quot;Change&quot;,
-	HOST = &quot;host&quot;,
+    ID = &quot;id&quot;,
+    DISABLED = &quot;disabled&quot;,
+    TAB_INDEX = &quot;tabIndex&quot;,
+    FOCUSED = &quot;focused&quot;,
+    FOCUS_CLASS = &quot;focusClass&quot;,
+    CIRCULAR = &quot;circular&quot;,
+    UI = &quot;UI&quot;,
+    KEY = &quot;key&quot;,
+    ACTIVE_DESCENDANT_CHANGE = ACTIVE_DESCENDANT + &quot;Change&quot;,
+    HOST = &quot;host&quot;,
 
-	&#x2F;&#x2F;	Collection of keys that, when pressed, cause the browser viewport
-	&#x2F;&#x2F;	to scroll.
-	scrollKeys = {
-		37: true,
-		38: true,
-		39: true,
-		40: true
-	},
+    &#x2F;&#x2F;    Collection of keys that, when pressed, cause the browser viewport
+    &#x2F;&#x2F;    to scroll.
+    scrollKeys = {
+        37: true,
+        38: true,
+        39: true,
+        40: true
+    },
 
-	clickableElements = {
-		&quot;a&quot;: true,
-		&quot;button&quot;: true,
-		&quot;input&quot;: true,
-		&quot;object&quot;: true
-	},
+    clickableElements = {
+        &quot;a&quot;: true,
+        &quot;button&quot;: true,
+        &quot;input&quot;: true,
+        &quot;object&quot;: true
+    },
 
-	&#x2F;&#x2F;	Library shortcuts
+    &#x2F;&#x2F;    Library shortcuts
 
-	Lang = Y.Lang,
- 	UA = Y.UA,
+    Lang = Y.Lang,
+     UA = Y.UA,
 
-	&#x2F;**
-	* The NodeFocusManager class is a plugin for a Node instance.  The class is used
-	* via the &lt;a href=&quot;Node.html#method_plug&quot;&gt;&lt;code&gt;plug&lt;&#x2F;code&gt;&lt;&#x2F;a&gt; method of Node
-	* and should not be instantiated directly.
-	* @namespace plugin
-	* @class NodeFocusManager
-	*&#x2F;
-	NodeFocusManager = function () {
+    &#x2F;**
+    * The NodeFocusManager class is a plugin for a Node instance.  The class is used
+    * via the &lt;a href=&quot;Node.html#method_plug&quot;&gt;&lt;code&gt;plug&lt;&#x2F;code&gt;&lt;&#x2F;a&gt; method of Node
+    * and should not be instantiated directly.
+    * @namespace plugin
+    * @class NodeFocusManager
+    *&#x2F;
+    NodeFocusManager = function () {
 
-		NodeFocusManager.superclass.constructor.apply(this, arguments);
+        NodeFocusManager.superclass.constructor.apply(this, arguments);
 
-	};
+    };
 
 
 NodeFocusManager.ATTRS = {
 
-	&#x2F;**
-	* Boolean indicating that one of the descendants is focused.
-	*
-	* @attribute focused
-	* @readOnly
-	* @default false
-	* @type boolean
-	*&#x2F;
-	focused: {
+    &#x2F;**
+    * Boolean indicating that one of the descendants is focused.
+    *
+    * @attribute focused
+    * @readOnly
+    * @default false
+    * @type boolean
+    *&#x2F;
+    focused: {
 
-		value: false,
-		readOnly: true
+        value: false,
+        readOnly: true
 
-	},
-
-
-	&#x2F;**
-	* String representing the CSS selector used to define the descendant Nodes
-	* whose focus should be managed.
-	*
-	* @attribute descendants
-	* @type Y.NodeList
-	*&#x2F;
-	descendants: {
-
-		getter: function (value) {
-
-			return this.get(HOST).all(value);
-
-		}
-
-	},
+    },
 
 
-	&#x2F;**
-	* &lt;p&gt;Node, or index of the Node, representing the descendant that is either
-	* focused or is focusable (&lt;code&gt;tabIndex&lt;&#x2F;code&gt; attribute is set to 0).
-	* The value cannot represent a disabled descendant Node.  Use a value of -1
-	* to remove all descendant Nodes from the default tab flow.
-	* If no value is specified, the active descendant will be inferred using
-	* the following criteria:&lt;&#x2F;p&gt;
-	* &lt;ol&gt;
-	* &lt;li&gt;Examining the &lt;code&gt;tabIndex&lt;&#x2F;code&gt; attribute of each descendant and
-	* using the first descendant whose &lt;code&gt;tabIndex&lt;&#x2F;code&gt; attribute is set
-	* to 0&lt;&#x2F;li&gt;
-	* &lt;li&gt;If no default can be inferred then the value is set to either 0 or
-	* the index of the first enabled descendant.&lt;&#x2F;li&gt;
-	* &lt;&#x2F;ol&gt;
-	*
-	* @attribute activeDescendant
-	* @type Number
-	*&#x2F;
-	activeDescendant: {
+    &#x2F;**
+    * String representing the CSS selector used to define the descendant Nodes
+    * whose focus should be managed.
+    *
+    * @attribute descendants
+    * @type Y.NodeList
+    *&#x2F;
+    descendants: {
 
-		setter: function (value) {
+        getter: function (value) {
 
-			var isNumber = Lang.isNumber,
-				INVALID_VALUE = Y.Attribute.INVALID_VALUE,
-				descendantsMap = this._descendantsMap,
-				descendants = this._descendants,
-				nodeIndex,
-				returnValue,
-				oNode;
+            return this.get(HOST).all(value);
+
+        }
+
+    },
 
 
-			if (isNumber(value)) {
-				nodeIndex = value;
-				returnValue = nodeIndex;
-			}
-			else if ((value instanceof Y.Node) &amp;&amp; descendantsMap) {
+    &#x2F;**
+    * &lt;p&gt;Node, or index of the Node, representing the descendant that is either
+    * focused or is focusable (&lt;code&gt;tabIndex&lt;&#x2F;code&gt; attribute is set to 0).
+    * The value cannot represent a disabled descendant Node.  Use a value of -1
+    * to remove all descendant Nodes from the default tab flow.
+    * If no value is specified, the active descendant will be inferred using
+    * the following criteria:&lt;&#x2F;p&gt;
+    * &lt;ol&gt;
+    * &lt;li&gt;Examining the &lt;code&gt;tabIndex&lt;&#x2F;code&gt; attribute of each descendant and
+    * using the first descendant whose &lt;code&gt;tabIndex&lt;&#x2F;code&gt; attribute is set
+    * to 0&lt;&#x2F;li&gt;
+    * &lt;li&gt;If no default can be inferred then the value is set to either 0 or
+    * the index of the first enabled descendant.&lt;&#x2F;li&gt;
+    * &lt;&#x2F;ol&gt;
+    *
+    * @attribute activeDescendant
+    * @type Number
+    *&#x2F;
+    activeDescendant: {
 
-				nodeIndex = descendantsMap[value.get(ID)];
+        setter: function (value) {
 
-				if (isNumber(nodeIndex)) {
-					returnValue = nodeIndex;
-				}
-				else {
-
-					&#x2F;&#x2F;	The user passed a reference to a Node that wasn&#x27;t one
-					&#x2F;&#x2F;	of the descendants.
-					returnValue = INVALID_VALUE;
-
-				}
-
-			}
-			else {
-				returnValue = INVALID_VALUE;
-			}
-
-
-			if (descendants) {
-
-				oNode = descendants.item(nodeIndex);
-
-				if (oNode &amp;&amp; oNode.get(&quot;disabled&quot;)) {
-
-					&#x2F;&#x2F;	Setting the &quot;activeDescendant&quot; attribute to the index
-					&#x2F;&#x2F;	of a disabled descendant is invalid.
-					returnValue = INVALID_VALUE;
-
-				}
-
-			}
-
-			return returnValue;
-
-		}
-
-	},
+            var isNumber = Lang.isNumber,
+                INVALID_VALUE = Y.Attribute.INVALID_VALUE,
+                descendantsMap = this._descendantsMap,
+                descendants = this._descendants,
+                nodeIndex,
+                returnValue,
+                oNode;
 
 
-	&#x2F;**
-	* Object literal representing the keys to be used to navigate between the
-	* next&#x2F;previous descendant.  The format for the attribute&#x27;s value is
-	* &lt;code&gt;{ next: &quot;down:40&quot;, previous: &quot;down:38&quot; }&lt;&#x2F;code&gt;.  The value for the
-	* &quot;next&quot; and &quot;previous&quot; properties are used to attach
-	* &lt;a href=&quot;event&#x2F;#keylistener&quot;&gt;&lt;code&gt;key&lt;&#x2F;code&gt;&lt;&#x2F;a&gt; event listeners. See
-	* the &lt;a href=&quot;event&#x2F;#keylistener&quot;&gt;Using the key Event&lt;&#x2F;a&gt; section of
-	* the Event documentation for more information on &quot;key&quot; event listeners.
-	*
-	* @attribute keys
-	* @type Object
-	*&#x2F;
-	keys: {
+            if (isNumber(value)) {
+                nodeIndex = value;
+                returnValue = nodeIndex;
+            }
+            else if ((value instanceof Y.Node) &amp;&amp; descendantsMap) {
 
-		value: {
+                nodeIndex = descendantsMap[value.get(ID)];
 
-			next: null,
-			previous: null
+                if (isNumber(nodeIndex)) {
+                    returnValue = nodeIndex;
+                }
+                else {
 
-		}
+                    &#x2F;&#x2F;    The user passed a reference to a Node that wasn&#x27;t one
+                    &#x2F;&#x2F;    of the descendants.
+                    returnValue = INVALID_VALUE;
 
+                }
 
-	},
-
-
-	&#x2F;**
-	* String representing the name of class applied to the focused active
-	* descendant Node.  Can also be an object literal used to define both the
-	* class name, and the Node to which the class should be applied.  If using
-	* an object literal, the format is:
-	* &lt;code&gt;{ className: &quot;focus&quot;, fn: myFunction }&lt;&#x2F;code&gt;.  The function
-	* referenced by the &lt;code&gt;fn&lt;&#x2F;code&gt; property in the object literal will be
-	* passed a reference to the currently focused active descendant Node.
-	*
-	* @attribute focusClass
-	* @type String|Object
-	*&#x2F;
-	focusClass: { },
+            }
+            else {
+                returnValue = INVALID_VALUE;
+            }
 
 
-	&#x2F;**
-	* Boolean indicating if focus should be set to the first&#x2F;last descendant
-	* when the end or beginning of the descendants has been reached.
-	*
-	* @attribute circular
-	* @type Boolean
-	* @default true
-	*&#x2F;
-	circular: {
-		value: true
-	}
+            if (descendants) {
+
+                oNode = descendants.item(nodeIndex);
+
+                if (oNode &amp;&amp; oNode.get(&quot;disabled&quot;)) {
+
+                    &#x2F;&#x2F;    Setting the &quot;activeDescendant&quot; attribute to the index
+                    &#x2F;&#x2F;    of a disabled descendant is invalid.
+                    returnValue = INVALID_VALUE;
+
+                }
+
+            }
+
+            return returnValue;
+
+        }
+
+    },
+
+
+    &#x2F;**
+    * Object literal representing the keys to be used to navigate between the
+    * next&#x2F;previous descendant.  The format for the attribute&#x27;s value is
+    * &lt;code&gt;{ next: &quot;down:40&quot;, previous: &quot;down:38&quot; }&lt;&#x2F;code&gt;.  The value for the
+    * &quot;next&quot; and &quot;previous&quot; properties are used to attach
+    * &lt;a href=&quot;event&#x2F;#keylistener&quot;&gt;&lt;code&gt;key&lt;&#x2F;code&gt;&lt;&#x2F;a&gt; event listeners. See
+    * the &lt;a href=&quot;event&#x2F;#keylistener&quot;&gt;Using the key Event&lt;&#x2F;a&gt; section of
+    * the Event documentation for more information on &quot;key&quot; event listeners.
+    *
+    * @attribute keys
+    * @type Object
+    *&#x2F;
+    keys: {
+
+        value: {
+
+            next: null,
+            previous: null
+
+        }
+
+
+    },
+
+
+    &#x2F;**
+    * String representing the name of class applied to the focused active
+    * descendant Node.  Can also be an object literal used to define both the
+    * class name, and the Node to which the class should be applied.  If using
+    * an object literal, the format is:
+    * &lt;code&gt;{ className: &quot;focus&quot;, fn: myFunction }&lt;&#x2F;code&gt;.  The function
+    * referenced by the &lt;code&gt;fn&lt;&#x2F;code&gt; property in the object literal will be
+    * passed a reference to the currently focused active descendant Node.
+    *
+    * @attribute focusClass
+    * @type String|Object
+    *&#x2F;
+    focusClass: { },
+
+
+    &#x2F;**
+    * Boolean indicating if focus should be set to the first&#x2F;last descendant
+    * when the end or beginning of the descendants has been reached.
+    *
+    * @attribute circular
+    * @type Boolean
+    * @default true
+    *&#x2F;
+    circular: {
+        value: true
+    }
 
 };
 
 Y.extend(NodeFocusManager, Y.Plugin.Base, {
 
-	&#x2F;&#x2F;	Protected properties
+    &#x2F;&#x2F;    Protected properties
 
-	&#x2F;&#x2F;	Boolean indicating if the NodeFocusManager is active.
-	_stopped: true,
+    &#x2F;&#x2F;    Boolean indicating if the NodeFocusManager is active.
+    _stopped: true,
 
-	&#x2F;&#x2F;	NodeList representing the descendants selected via the
-	&#x2F;&#x2F;	&quot;descendants&quot; attribute.
-	_descendants: null,
+    &#x2F;&#x2F;    NodeList representing the descendants selected via the
+    &#x2F;&#x2F;    &quot;descendants&quot; attribute.
+    _descendants: null,
 
-	&#x2F;&#x2F;	Object literal mapping the IDs of each descendant to its index in the
-	&#x2F;&#x2F;	&quot;_descendants&quot; NodeList.
-	_descendantsMap: null,
+    &#x2F;&#x2F;    Object literal mapping the IDs of each descendant to its index in the
+    &#x2F;&#x2F;    &quot;_descendants&quot; NodeList.
+    _descendantsMap: null,
 
-	&#x2F;&#x2F;	Reference to the Node instance to which the focused class (defined
-	&#x2F;&#x2F;	by the &quot;focusClass&quot; attribute) is currently applied.
-	_focusedNode: null,
+    &#x2F;&#x2F;    Reference to the Node instance to which the focused class (defined
+    &#x2F;&#x2F;    by the &quot;focusClass&quot; attribute) is currently applied.
+    _focusedNode: null,
 
-	&#x2F;&#x2F;	Number representing the index of the last descendant Node.
-	_lastNodeIndex: 0,
+    &#x2F;&#x2F;    Number representing the index of the last descendant Node.
+    _lastNodeIndex: 0,
 
-	&#x2F;&#x2F;	Array of handles for event handlers used for a NodeFocusManager instance.
-	_eventHandlers: null,
-
-
-
-	&#x2F;&#x2F;	Protected methods
-
-	&#x2F;**
-	* @method _initDescendants
-	* @description Sets the &lt;code&gt;tabIndex&lt;&#x2F;code&gt; attribute of all of the
-	* descendants to -1, except the active descendant, whose
-	* &lt;code&gt;tabIndex&lt;&#x2F;code&gt; attribute is set to 0.
-	* @protected
-	*&#x2F;
-	_initDescendants: function () {
-
-		var descendants = this.get(&quot;descendants&quot;),
-			descendantsMap = {},
-			nFirstEnabled = -1,
-			nDescendants,
-			nActiveDescendant = this.get(ACTIVE_DESCENDANT),
-			oNode,
-			sID,
-			i = 0;
+    &#x2F;&#x2F;    Array of handles for event handlers used for a NodeFocusManager instance.
+    _eventHandlers: null,
 
 
 
-		if (Lang.isUndefined(nActiveDescendant)) {
-			nActiveDescendant = -1;
-		}
+    &#x2F;&#x2F;    Protected methods
+
+    &#x2F;**
+    * @method _initDescendants
+    * @description Sets the &lt;code&gt;tabIndex&lt;&#x2F;code&gt; attribute of all of the
+    * descendants to -1, except the active descendant, whose
+    * &lt;code&gt;tabIndex&lt;&#x2F;code&gt; attribute is set to 0.
+    * @protected
+    *&#x2F;
+    _initDescendants: function () {
+
+        var descendants = this.get(&quot;descendants&quot;),
+            descendantsMap = {},
+            nFirstEnabled = -1,
+            nDescendants,
+            nActiveDescendant = this.get(ACTIVE_DESCENDANT),
+            oNode,
+            sID,
+            i = 0;
 
 
-		if (descendants) {
 
-			nDescendants = descendants.size();
+        if (Lang.isUndefined(nActiveDescendant)) {
+            nActiveDescendant = -1;
+        }
+
+
+        if (descendants) {
+
+            nDescendants = descendants.size();
 
 
             for (i = 0; i &lt; nDescendants; i++) {
@@ -1822,16 +1822,16 @@ Y.extend(NodeFocusManager, Y.Plugin.Base, {
                 }
 
 
-                &#x2F;&#x2F;	If the user didn&#x27;t specify a value for the
-                &#x2F;&#x2F;	&quot;activeDescendant&quot; attribute try to infer it from
-                &#x2F;&#x2F;	the markup.
+                &#x2F;&#x2F;    If the user didn&#x27;t specify a value for the
+                &#x2F;&#x2F;    &quot;activeDescendant&quot; attribute try to infer it from
+                &#x2F;&#x2F;    the markup.
 
-                &#x2F;&#x2F;	Need to pass &quot;2&quot; when using &quot;getAttribute&quot; for IE to get
-                &#x2F;&#x2F;	the attribute value as it is set in the markup.
-                &#x2F;&#x2F;	Need to use &quot;parseInt&quot; because IE always returns the
-                &#x2F;&#x2F;	value as a number, whereas all other browsers return
-                &#x2F;&#x2F;	the attribute as a string when accessed
-                &#x2F;&#x2F;	via &quot;getAttribute&quot;.
+                &#x2F;&#x2F;    Need to pass &quot;2&quot; when using &quot;getAttribute&quot; for IE to get
+                &#x2F;&#x2F;    the attribute value as it is set in the markup.
+                &#x2F;&#x2F;    Need to use &quot;parseInt&quot; because IE always returns the
+                &#x2F;&#x2F;    value as a number, whereas all other browsers return
+                &#x2F;&#x2F;    the attribute as a string when accessed
+                &#x2F;&#x2F;    via &quot;getAttribute&quot;.
 
                 if (nActiveDescendant &lt; 0 &amp;&amp;
                         parseInt(oNode.getAttribute(TAB_INDEX, 2), 10) === 0) {
@@ -1856,9 +1856,9 @@ Y.extend(NodeFocusManager, Y.Plugin.Base, {
             }
 
 
-            &#x2F;&#x2F;	If the user didn&#x27;t specify a value for the
-            &#x2F;&#x2F;	&quot;activeDescendant&quot; attribute and no default value could be
-            &#x2F;&#x2F;	determined from the markup, then default to 0.
+            &#x2F;&#x2F;    If the user didn&#x27;t specify a value for the
+            &#x2F;&#x2F;    &quot;activeDescendant&quot; attribute and no default value could be
+            &#x2F;&#x2F;    determined from the markup, then default to 0.
 
             if (nActiveDescendant &lt; 0) {
                 nActiveDescendant = 0;
@@ -1867,8 +1867,8 @@ Y.extend(NodeFocusManager, Y.Plugin.Base, {
 
             oNode = descendants.item(nActiveDescendant);
 
-            &#x2F;&#x2F;	Check to make sure the active descendant isn&#x27;t disabled,
-            &#x2F;&#x2F;	and fall back to the first enabled descendant if it is.
+            &#x2F;&#x2F;    Check to make sure the active descendant isn&#x27;t disabled,
+            &#x2F;&#x2F;    and fall back to the first enabled descendant if it is.
 
             if (!oNode || oNode.get(DISABLED)) {
                 oNode = descendants.item(nFirstEnabled);
@@ -1881,461 +1881,461 @@ Y.extend(NodeFocusManager, Y.Plugin.Base, {
 
             this.set(ACTIVE_DESCENDANT, nActiveDescendant);
 
-            &#x2F;&#x2F;	Need to set the &quot;tabIndex&quot; attribute here, since the
-            &#x2F;&#x2F;	&quot;activeDescendantChange&quot; event handler used to manage
-            &#x2F;&#x2F;	the setting of the &quot;tabIndex&quot; attribute isn&#x27;t wired up yet.
+            &#x2F;&#x2F;    Need to set the &quot;tabIndex&quot; attribute here, since the
+            &#x2F;&#x2F;    &quot;activeDescendantChange&quot; event handler used to manage
+            &#x2F;&#x2F;    the setting of the &quot;tabIndex&quot; attribute isn&#x27;t wired up yet.
 
             if (oNode) {
                 oNode.set(TAB_INDEX, 0);
             }
 
-		}
+        }
 
-	},
+    },
 
 
-	&#x2F;**
-	* @method _isDescendant
-	* @description Determines if the specified Node instance is a descendant
-	* managed by the Focus Manager.
-	* @param node {Node} Node instance to be checked.
-	* @return {Boolean} Boolean indicating if the specified Node instance is a
-	* descendant managed by the Focus Manager.
-	* @protected
-	*&#x2F;
-	_isDescendant: function (node) {
+    &#x2F;**
+    * @method _isDescendant
+    * @description Determines if the specified Node instance is a descendant
+    * managed by the Focus Manager.
+    * @param node {Node} Node instance to be checked.
+    * @return {Boolean} Boolean indicating if the specified Node instance is a
+    * descendant managed by the Focus Manager.
+    * @protected
+    *&#x2F;
+    _isDescendant: function (node) {
 
-		return (node.get(ID) in this._descendantsMap);
+        return (node.get(ID) in this._descendantsMap);
 
-	},
+    },
 
 
-	&#x2F;**
-	* @method _removeFocusClass
-	* @description Removes the class name representing focus (as specified by
-	* the &quot;focusClass&quot; attribute) from the Node instance to which it is
-	* currently applied.
-	* @protected
-	*&#x2F;
-	_removeFocusClass: function () {
+    &#x2F;**
+    * @method _removeFocusClass
+    * @description Removes the class name representing focus (as specified by
+    * the &quot;focusClass&quot; attribute) from the Node instance to which it is
+    * currently applied.
+    * @protected
+    *&#x2F;
+    _removeFocusClass: function () {
 
-		var oFocusedNode = this._focusedNode,
-			focusClass = this.get(FOCUS_CLASS),
-			sClassName;
+        var oFocusedNode = this._focusedNode,
+            focusClass = this.get(FOCUS_CLASS),
+            sClassName;
 
-		if (focusClass) {
-			sClassName = Lang.isString(focusClass) ?
-				focusClass : focusClass.className;
-		}
+        if (focusClass) {
+            sClassName = Lang.isString(focusClass) ?
+                focusClass : focusClass.className;
+        }
 
-		if (oFocusedNode &amp;&amp; sClassName) {
-			oFocusedNode.removeClass(sClassName);
-		}
+        if (oFocusedNode &amp;&amp; sClassName) {
+            oFocusedNode.removeClass(sClassName);
+        }
 
-	},
+    },
 
 
-	&#x2F;**
-	* @method _detachKeyHandler
-	* @description Detaches the &quot;key&quot; event handlers used to support the &quot;keys&quot;
-	* attribute.
-	* @protected
-	*&#x2F;
-	_detachKeyHandler: function () {
+    &#x2F;**
+    * @method _detachKeyHandler
+    * @description Detaches the &quot;key&quot; event handlers used to support the &quot;keys&quot;
+    * attribute.
+    * @protected
+    *&#x2F;
+    _detachKeyHandler: function () {
 
-		var prevKeyHandler = this._prevKeyHandler,
-			nextKeyHandler = this._nextKeyHandler;
+        var prevKeyHandler = this._prevKeyHandler,
+            nextKeyHandler = this._nextKeyHandler;
 
-		if (prevKeyHandler) {
-			prevKeyHandler.detach();
-		}
+        if (prevKeyHandler) {
+            prevKeyHandler.detach();
+        }
 
-		if (nextKeyHandler) {
-			nextKeyHandler.detach();
-		}
+        if (nextKeyHandler) {
+            nextKeyHandler.detach();
+        }
 
-	},
+    },
 
 
-	&#x2F;**
-	* @method _preventScroll
-	* @description Prevents the viewport from scolling when the user presses
-	* the up, down, left, or right key.
-	* @protected
-	*&#x2F;
-	_preventScroll: function (event) {
+    &#x2F;**
+    * @method _preventScroll
+    * @description Prevents the viewport from scolling when the user presses
+    * the up, down, left, or right key.
+    * @protected
+    *&#x2F;
+    _preventScroll: function (event) {
 
-		if (scrollKeys[event.keyCode] &amp;&amp; this._isDescendant(event.target)) {
-			event.preventDefault();
-		}
+        if (scrollKeys[event.keyCode] &amp;&amp; this._isDescendant(event.target)) {
+            event.preventDefault();
+        }
 
-	},
+    },
 
 
-	&#x2F;**
-	* @method _fireClick
-	* @description Fires the click event if the enter key is pressed while
-	* focused on an HTML element that is not natively clickable.
-	* @protected
-	*&#x2F;
-	_fireClick: function (event) {
+    &#x2F;**
+    * @method _fireClick
+    * @description Fires the click event if the enter key is pressed while
+    * focused on an HTML element that is not natively clickable.
+    * @protected
+    *&#x2F;
+    _fireClick: function (event) {
 
-		var oTarget = event.target,
-			sNodeName = oTarget.get(&quot;nodeName&quot;).toLowerCase();
+        var oTarget = event.target,
+            sNodeName = oTarget.get(&quot;nodeName&quot;).toLowerCase();
 
-		if (event.keyCode === 13 &amp;&amp; (!clickableElements[sNodeName] ||
-				(sNodeName === &quot;a&quot; &amp;&amp; !oTarget.getAttribute(&quot;href&quot;)))) {
+        if (event.keyCode === 13 &amp;&amp; (!clickableElements[sNodeName] ||
+                (sNodeName === &quot;a&quot; &amp;&amp; !oTarget.getAttribute(&quot;href&quot;)))) {
 
-			Y.log((&quot;Firing click event for node:&quot; + oTarget.get(&quot;id&quot;)), &quot;info&quot;, &quot;nodeFocusManager&quot;);
+            Y.log((&quot;Firing click event for node:&quot; + oTarget.get(&quot;id&quot;)), &quot;info&quot;, &quot;nodeFocusManager&quot;);
 
-			oTarget.simulate(&quot;click&quot;);
+            oTarget.simulate(&quot;click&quot;);
 
-		}
+        }
 
-	},
+    },
 
 
-	&#x2F;**
-	* @method _attachKeyHandler
-	* @description Attaches the &quot;key&quot; event handlers used to support the &quot;keys&quot;
-	* attribute.
-	* @protected
-	*&#x2F;
-	_attachKeyHandler: function () {
+    &#x2F;**
+    * @method _attachKeyHandler
+    * @description Attaches the &quot;key&quot; event handlers used to support the &quot;keys&quot;
+    * attribute.
+    * @protected
+    *&#x2F;
+    _attachKeyHandler: function () {
 
-		this._detachKeyHandler();
+        this._detachKeyHandler();
 
-		var sNextKey = this.get(&quot;keys.next&quot;),
-			sPrevKey = this.get(&quot;keys.previous&quot;),
-			oNode = this.get(HOST),
-			aHandlers = this._eventHandlers;
+        var sNextKey = this.get(&quot;keys.next&quot;),
+            sPrevKey = this.get(&quot;keys.previous&quot;),
+            oNode = this.get(HOST),
+            aHandlers = this._eventHandlers;
 
-		if (sPrevKey) {
- 			this._prevKeyHandler =
-				Y.on(KEY, Y.bind(this._focusPrevious, this), oNode, sPrevKey);
-		}
+        if (sPrevKey) {
+             this._prevKeyHandler =
+                Y.on(KEY, Y.bind(this._focusPrevious, this), oNode, sPrevKey);
+        }
 
-		if (sNextKey) {
- 			this._nextKeyHandler =
-				Y.on(KEY, Y.bind(this._focusNext, this), oNode, sNextKey);
-		}
+        if (sNextKey) {
+             this._nextKeyHandler =
+                Y.on(KEY, Y.bind(this._focusNext, this), oNode, sNextKey);
+        }
 
 
-		&#x2F;&#x2F;	In Opera it is necessary to call the &quot;preventDefault&quot; method in
-		&#x2F;&#x2F;	response to the user pressing the arrow keys in order to prevent
-		&#x2F;&#x2F;	the viewport from scrolling when the user is moving focus among
-		&#x2F;&#x2F;	the focusable descendants.
+        &#x2F;&#x2F;    In Opera it is necessary to call the &quot;preventDefault&quot; method in
+        &#x2F;&#x2F;    response to the user pressing the arrow keys in order to prevent
+        &#x2F;&#x2F;    the viewport from scrolling when the user is moving focus among
+        &#x2F;&#x2F;    the focusable descendants.
 
-		if (UA.opera) {
-			aHandlers.push(oNode.on(&quot;keypress&quot;, this._preventScroll, this));
-		}
+        if (UA.opera) {
+            aHandlers.push(oNode.on(&quot;keypress&quot;, this._preventScroll, this));
+        }
 
 
-		&#x2F;&#x2F;	For all browsers except Opera: HTML elements that are not natively
-		&#x2F;&#x2F;	focusable but made focusable via the tabIndex attribute don&#x27;t
-		&#x2F;&#x2F;	fire a click event when the user presses the enter key.  It is
-		&#x2F;&#x2F;	possible to work around this problem by simplying dispatching a
-		&#x2F;&#x2F;	click event in response to the user pressing the enter key.
+        &#x2F;&#x2F;    For all browsers except Opera: HTML elements that are not natively
+        &#x2F;&#x2F;    focusable but made focusable via the tabIndex attribute don&#x27;t
+        &#x2F;&#x2F;    fire a click event when the user presses the enter key.  It is
+        &#x2F;&#x2F;    possible to work around this problem by simplying dispatching a
+        &#x2F;&#x2F;    click event in response to the user pressing the enter key.
 
-		if (!UA.opera) {
-			aHandlers.push(oNode.on(&quot;keypress&quot;, this._fireClick, this));
-		}
+        if (!UA.opera) {
+            aHandlers.push(oNode.on(&quot;keypress&quot;, this._fireClick, this));
+        }
 
-	},
+    },
 
 
-	&#x2F;**
-	* @method _detachEventHandlers
-	* @description Detaches all event handlers used by the Focus Manager.
-	* @protected
-	*&#x2F;
-	_detachEventHandlers: function () {
+    &#x2F;**
+    * @method _detachEventHandlers
+    * @description Detaches all event handlers used by the Focus Manager.
+    * @protected
+    *&#x2F;
+    _detachEventHandlers: function () {
 
-		this._detachKeyHandler();
+        this._detachKeyHandler();
 
-		var aHandlers = this._eventHandlers;
+        var aHandlers = this._eventHandlers;
 
-		if (aHandlers) {
+        if (aHandlers) {
 
-			Y.Array.each(aHandlers, function (handle) {
-				handle.detach();
-			});
+            Y.Array.each(aHandlers, function (handle) {
+                handle.detach();
+            });
 
-			this._eventHandlers = null;
+            this._eventHandlers = null;
 
-		}
+        }
 
-	},
+    },
 
 
-	&#x2F;**
-	* @method _detachEventHandlers
-	* @description Attaches all event handlers used by the Focus Manager.
-	* @protected
-	*&#x2F;
-	_attachEventHandlers: function () {
+    &#x2F;**
+    * @method _detachEventHandlers
+    * @description Attaches all event handlers used by the Focus Manager.
+    * @protected
+    *&#x2F;
+    _attachEventHandlers: function () {
 
-		var descendants = this._descendants,
-			aHandlers,
-			oDocument,
-			handle;
+        var descendants = this._descendants,
+            aHandlers,
+            oDocument,
+            handle;
 
-		if (descendants &amp;&amp; descendants.size()) {
+        if (descendants &amp;&amp; descendants.size()) {
 
-			aHandlers = this._eventHandlers || [];
-			oDocument = this.get(HOST).get(&quot;ownerDocument&quot;);
+            aHandlers = this._eventHandlers || [];
+            oDocument = this.get(HOST).get(&quot;ownerDocument&quot;);
 
 
-			if (aHandlers.length === 0) {
+            if (aHandlers.length === 0) {
 
-		        Y.log(&quot;Attaching base set of event handlers.&quot;, &quot;info&quot;, &quot;nodeFocusManager&quot;);
+                Y.log(&quot;Attaching base set of event handlers.&quot;, &quot;info&quot;, &quot;nodeFocusManager&quot;);
 
-				aHandlers.push(oDocument.on(&quot;focus&quot;, this._onDocFocus, this));
+                aHandlers.push(oDocument.on(&quot;focus&quot;, this._onDocFocus, this));
 
-				aHandlers.push(oDocument.on(&quot;mousedown&quot;,
-					this._onDocMouseDown, this));
+                aHandlers.push(oDocument.on(&quot;mousedown&quot;,
+                    this._onDocMouseDown, this));
 
-				aHandlers.push(
-						this.after(&quot;keysChange&quot;, this._attachKeyHandler));
+                aHandlers.push(
+                        this.after(&quot;keysChange&quot;, this._attachKeyHandler));
 
-				aHandlers.push(
-						this.after(&quot;descendantsChange&quot;, this._initDescendants));
+                aHandlers.push(
+                        this.after(&quot;descendantsChange&quot;, this._initDescendants));
 
-				aHandlers.push(
-						this.after(ACTIVE_DESCENDANT_CHANGE,
-								this._afterActiveDescendantChange));
+                aHandlers.push(
+                        this.after(ACTIVE_DESCENDANT_CHANGE,
+                                this._afterActiveDescendantChange));
 
 
-				&#x2F;&#x2F;	For performance: defer attaching all key-related event
-				&#x2F;&#x2F;	handlers until the first time one of the specified
-				&#x2F;&#x2F;	descendants receives focus.
+                &#x2F;&#x2F;    For performance: defer attaching all key-related event
+                &#x2F;&#x2F;    handlers until the first time one of the specified
+                &#x2F;&#x2F;    descendants receives focus.
 
-				handle = this.after(&quot;focusedChange&quot;, Y.bind(function (event) {
+                handle = this.after(&quot;focusedChange&quot;, Y.bind(function (event) {
 
-					if (event.newVal) {
+                    if (event.newVal) {
 
-				        Y.log(&quot;Attaching key event handlers.&quot;, &quot;info&quot;, &quot;nodeFocusManager&quot;);
+                        Y.log(&quot;Attaching key event handlers.&quot;, &quot;info&quot;, &quot;nodeFocusManager&quot;);
 
-						this._attachKeyHandler();
+                        this._attachKeyHandler();
 
-						&#x2F;&#x2F;	Detach this &quot;focusedChange&quot; handler so that the
-						&#x2F;&#x2F;	key-related handlers only get attached once.
+                        &#x2F;&#x2F;    Detach this &quot;focusedChange&quot; handler so that the
+                        &#x2F;&#x2F;    key-related handlers only get attached once.
 
-						handle.detach();
+                        handle.detach();
 
-					}
+                    }
 
-				}, this));
+                }, this));
 
-				aHandlers.push(handle);
+                aHandlers.push(handle);
 
-			}
+            }
 
 
-			this._eventHandlers = aHandlers;
+            this._eventHandlers = aHandlers;
 
-		}
+        }
 
-	},
+    },
 
 
-	&#x2F;&#x2F;	Protected event handlers
+    &#x2F;&#x2F;    Protected event handlers
 
-	&#x2F;**
-	* @method _onDocMouseDown
-	* @description &quot;mousedown&quot; event handler for the owner document of the
-	* Focus Manager&#x27;s Node.
-	* @protected
-	* @param event {Object} Object representing the DOM event.
-	*&#x2F;
-	_onDocMouseDown: function (event) {
+    &#x2F;**
+    * @method _onDocMouseDown
+    * @description &quot;mousedown&quot; event handler for the owner document of the
+    * Focus Manager&#x27;s Node.
+    * @protected
+    * @param event {Object} Object representing the DOM event.
+    *&#x2F;
+    _onDocMouseDown: function (event) {
 
-		var oHost = this.get(HOST),
-			oTarget = event.target,
-			bChildNode = oHost.contains(oTarget),
-			node,
+        var oHost = this.get(HOST),
+            oTarget = event.target,
+            bChildNode = oHost.contains(oTarget),
+            node,
 
-			getFocusable = function (node) {
+            getFocusable = function (node) {
 
-				var returnVal = false;
+                var returnVal = false;
 
-				if (!node.compareTo(oHost)) {
+                if (!node.compareTo(oHost)) {
 
-					returnVal = this._isDescendant(node) ? node :
-									getFocusable.call(this, node.get(&quot;parentNode&quot;));
+                    returnVal = this._isDescendant(node) ? node :
+                                    getFocusable.call(this, node.get(&quot;parentNode&quot;));
 
-				}
+                }
 
-				return returnVal;
+                return returnVal;
 
-			};
+            };
 
 
-		if (bChildNode) {
+        if (bChildNode) {
 
-			&#x2F;&#x2F;	Check to make sure that the target isn&#x27;t a child node of one
-			&#x2F;&#x2F;	of the focusable descendants.
+            &#x2F;&#x2F;    Check to make sure that the target isn&#x27;t a child node of one
+            &#x2F;&#x2F;    of the focusable descendants.
 
-			node = getFocusable.call(this, oTarget);
+            node = getFocusable.call(this, oTarget);
 
-			if (node) {
-				oTarget = node;
-			}
-			else if (!node &amp;&amp; this.get(FOCUSED)) {
+            if (node) {
+                oTarget = node;
+            }
+            else if (!node &amp;&amp; this.get(FOCUSED)) {
 
-				&#x2F;&#x2F;	The target was a non-focusable descendant of the root
-				&#x2F;&#x2F;	node, so the &quot;focused&quot; attribute should be set to false.
+                &#x2F;&#x2F;    The target was a non-focusable descendant of the root
+                &#x2F;&#x2F;    node, so the &quot;focused&quot; attribute should be set to false.
 
-	 			this._set(FOCUSED, false);
-	 			this._onDocFocus(event);
+                 this._set(FOCUSED, false);
+                 this._onDocFocus(event);
 
-			}
+            }
 
-		}
+        }
 
 
-		if (bChildNode &amp;&amp; this._isDescendant(oTarget)) {
+        if (bChildNode &amp;&amp; this._isDescendant(oTarget)) {
 
-			&#x2F;&#x2F;	Fix general problem in Webkit: mousing down on a button or an
-			&#x2F;&#x2F;	anchor element doesn&#x27;t focus it.
+            &#x2F;&#x2F;    Fix general problem in Webkit: mousing down on a button or an
+            &#x2F;&#x2F;    anchor element doesn&#x27;t focus it.
 
-			&#x2F;&#x2F;	For all browsers: makes sure that the descendant that
-			&#x2F;&#x2F;	was the target of the mousedown event is now considered the
-			&#x2F;&#x2F;	active descendant.
+            &#x2F;&#x2F;    For all browsers: makes sure that the descendant that
+            &#x2F;&#x2F;    was the target of the mousedown event is now considered the
+            &#x2F;&#x2F;    active descendant.
 
-			this.focus(oTarget);
-		}
-		else if (UA.webkit &amp;&amp; this.get(FOCUSED) &amp;&amp;
-			(!bChildNode || (bChildNode &amp;&amp; !this._isDescendant(oTarget)))) {
+            this.focus(oTarget);
+        }
+        else if (UA.webkit &amp;&amp; this.get(FOCUSED) &amp;&amp;
+            (!bChildNode || (bChildNode &amp;&amp; !this._isDescendant(oTarget)))) {
 
-			&#x2F;&#x2F;	Fix for Webkit:
+            &#x2F;&#x2F;    Fix for Webkit:
 
-			&#x2F;&#x2F;	Document doesn&#x27;t receive focus in Webkit when the user mouses
-			&#x2F;&#x2F;	down on it, so the &quot;focused&quot; attribute won&#x27;t get set to the
-			&#x2F;&#x2F;	correct value.
+            &#x2F;&#x2F;    Document doesn&#x27;t receive focus in Webkit when the user mouses
+            &#x2F;&#x2F;    down on it, so the &quot;focused&quot; attribute won&#x27;t get set to the
+            &#x2F;&#x2F;    correct value.
 
-			&#x2F;&#x2F;	The goal is to force a blur if the user moused down on
-			&#x2F;&#x2F;	either: 1) A descendant node, but not one that managed by
-			&#x2F;&#x2F;	the FocusManager, or 2) an element outside of the
-			&#x2F;&#x2F;	FocusManager
+            &#x2F;&#x2F;    The goal is to force a blur if the user moused down on
+            &#x2F;&#x2F;    either: 1) A descendant node, but not one that managed by
+            &#x2F;&#x2F;    the FocusManager, or 2) an element outside of the
+            &#x2F;&#x2F;    FocusManager
 
- 			this._set(FOCUSED, false);
- 			this._onDocFocus(event);
+             this._set(FOCUSED, false);
+             this._onDocFocus(event);
 
-		}
+        }
 
-	},
+    },
 
 
-	&#x2F;**
-	* @method _onDocFocus
-	* @description &quot;focus&quot; event handler for the owner document of the
-	* Focus Manager&#x27;s Node.
-	* @protected
-	* @param event {Object} Object representing the DOM event.
-	*&#x2F;
-	_onDocFocus: function (event) {
+    &#x2F;**
+    * @method _onDocFocus
+    * @description &quot;focus&quot; event handler for the owner document of the
+    * Focus Manager&#x27;s Node.
+    * @protected
+    * @param event {Object} Object representing the DOM event.
+    *&#x2F;
+    _onDocFocus: function (event) {
 
-		var oTarget = this._focusTarget || event.target,
-			bFocused = this.get(FOCUSED),
-			focusClass = this.get(FOCUS_CLASS),
-			oFocusedNode = this._focusedNode,
-			bInCollection;
+        var oTarget = this._focusTarget || event.target,
+            bFocused = this.get(FOCUSED),
+            focusClass = this.get(FOCUS_CLASS),
+            oFocusedNode = this._focusedNode,
+            bInCollection;
 
-		if (this._focusTarget) {
-			this._focusTarget = null;
-		}
+        if (this._focusTarget) {
+            this._focusTarget = null;
+        }
 
 
-		if (this.get(HOST).contains(oTarget)) {
+        if (this.get(HOST).contains(oTarget)) {
 
-			&#x2F;&#x2F;	The target is a descendant of the root Node.
+            &#x2F;&#x2F;    The target is a descendant of the root Node.
 
-			bInCollection = this._isDescendant(oTarget);
+            bInCollection = this._isDescendant(oTarget);
 
-			if (!bFocused &amp;&amp; bInCollection) {
+            if (!bFocused &amp;&amp; bInCollection) {
 
-				&#x2F;&#x2F;	The user has focused a focusable descendant.
+                &#x2F;&#x2F;    The user has focused a focusable descendant.
 
-				bFocused = true;
+                bFocused = true;
 
-			}
-			else if (bFocused &amp;&amp; !bInCollection) {
+            }
+            else if (bFocused &amp;&amp; !bInCollection) {
 
-				&#x2F;&#x2F;	The user has focused a child of the root Node that is
-				&#x2F;&#x2F;	not one of the descendants managed by this Focus Manager
-				&#x2F;&#x2F;	so clear the currently focused descendant.
+                &#x2F;&#x2F;    The user has focused a child of the root Node that is
+                &#x2F;&#x2F;    not one of the descendants managed by this Focus Manager
+                &#x2F;&#x2F;    so clear the currently focused descendant.
 
-				bFocused = false;
+                bFocused = false;
 
-			}
+            }
 
-		}
-		else {
+        }
+        else {
 
-			&#x2F;&#x2F; The target is some other node in the document.
+            &#x2F;&#x2F; The target is some other node in the document.
 
-			bFocused = false;
+            bFocused = false;
 
-		}
+        }
 
 
-		if (focusClass) {
+        if (focusClass) {
 
-			if (oFocusedNode &amp;&amp; (!oFocusedNode.compareTo(oTarget) || !bFocused)) {
-				this._removeFocusClass();
-			}
+            if (oFocusedNode &amp;&amp; (!oFocusedNode.compareTo(oTarget) || !bFocused)) {
+                this._removeFocusClass();
+            }
 
-			if (bInCollection &amp;&amp; bFocused) {
+            if (bInCollection &amp;&amp; bFocused) {
 
-				if (focusClass.fn) {
-					oTarget = focusClass.fn(oTarget);
-					oTarget.addClass(focusClass.className);
-				}
-				else {
-					oTarget.addClass(focusClass);
-				}
+                if (focusClass.fn) {
+                    oTarget = focusClass.fn(oTarget);
+                    oTarget.addClass(focusClass.className);
+                }
+                else {
+                    oTarget.addClass(focusClass);
+                }
 
-				this._focusedNode = oTarget;
+                this._focusedNode = oTarget;
 
-			}
+            }
 
-		}
+        }
 
 
-		this._set(FOCUSED, bFocused);
+        this._set(FOCUSED, bFocused);
 
-	},
+    },
 
 
-	&#x2F;**
-	* @method _focusNext
-	* @description Keydown event handler that moves focus to the next
-	* enabled descendant.
-	* @protected
-	* @param event {Object} Object representing the DOM event.
-	* @param activeDescendant {Number} Number representing the index of the
-	* next descendant to be focused
-	*&#x2F;
-	_focusNext: function (event, activeDescendant) {
+    &#x2F;**
+    * @method _focusNext
+    * @description Keydown event handler that moves focus to the next
+    * enabled descendant.
+    * @protected
+    * @param event {Object} Object representing the DOM event.
+    * @param activeDescendant {Number} Number representing the index of the
+    * next descendant to be focused
+    *&#x2F;
+    _focusNext: function (event, activeDescendant) {
 
-		var nActiveDescendant = activeDescendant || this.get(ACTIVE_DESCENDANT),
-			oNode;
+        var nActiveDescendant = activeDescendant || this.get(ACTIVE_DESCENDANT),
+            oNode;
 
 
-		if (this._isDescendant(event.target) &amp;&amp;
-			(nActiveDescendant &lt;= this._lastNodeIndex)) {
+        if (this._isDescendant(event.target) &amp;&amp;
+            (nActiveDescendant &lt;= this._lastNodeIndex)) {
 
-			nActiveDescendant = nActiveDescendant + 1;
+            nActiveDescendant = nActiveDescendant + 1;
 
-			if (nActiveDescendant === (this._lastNodeIndex + 1) &amp;&amp;
-				this.get(CIRCULAR)) {
+            if (nActiveDescendant === (this._lastNodeIndex + 1) &amp;&amp;
+                this.get(CIRCULAR)) {
 
-				nActiveDescendant = 0;
+                nActiveDescendant = 0;
 
-			}
+            }
 
-			oNode = this._descendants.item(nActiveDescendant);
+            oNode = this._descendants.item(nActiveDescendant);
 
             if (oNode) {
 
@@ -2348,34 +2348,34 @@ Y.extend(NodeFocusManager, Y.Plugin.Base, {
 
             }
 
-		}
+        }
 
-		this._preventScroll(event);
+        this._preventScroll(event);
 
-	},
+    },
 
 
-	&#x2F;**
-	* @method _focusPrevious
-	* @description Keydown event handler that moves focus to the previous
-	* enabled descendant.
-	* @protected
-	* @param event {Object} Object representing the DOM event.
-	* @param activeDescendant {Number} Number representing the index of the
-	* next descendant to be focused.
-	*&#x2F;
-	_focusPrevious: function (event, activeDescendant) {
+    &#x2F;**
+    * @method _focusPrevious
+    * @description Keydown event handler that moves focus to the previous
+    * enabled descendant.
+    * @protected
+    * @param event {Object} Object representing the DOM event.
+    * @param activeDescendant {Number} Number representing the index of the
+    * next descendant to be focused.
+    *&#x2F;
+    _focusPrevious: function (event, activeDescendant) {
 
-		var nActiveDescendant = activeDescendant || this.get(ACTIVE_DESCENDANT),
-			oNode;
+        var nActiveDescendant = activeDescendant || this.get(ACTIVE_DESCENDANT),
+            oNode;
 
-		if (this._isDescendant(event.target) &amp;&amp; nActiveDescendant &gt;= 0) {
+        if (this._isDescendant(event.target) &amp;&amp; nActiveDescendant &gt;= 0) {
 
-			nActiveDescendant = nActiveDescendant - 1;
+            nActiveDescendant = nActiveDescendant - 1;
 
-			if (nActiveDescendant === -1 &amp;&amp; this.get(CIRCULAR)) {
-				nActiveDescendant = this._lastNodeIndex;
-			}
+            if (nActiveDescendant === -1 &amp;&amp; this.get(CIRCULAR)) {
+                nActiveDescendant = this._lastNodeIndex;
+            }
 
             oNode = this._descendants.item(nActiveDescendant);
 
@@ -2390,178 +2390,178 @@ Y.extend(NodeFocusManager, Y.Plugin.Base, {
 
             }
 
-		}
+        }
 
-		this._preventScroll(event);
+        this._preventScroll(event);
 
-	},
-
-
-	&#x2F;**
-	* @method _afterActiveDescendantChange
-	* @description afterChange event handler for the
-	* &quot;activeDescendant&quot; attribute.
-	* @protected
-	* @param event {Object} Object representing the change event.
-	*&#x2F;
-	_afterActiveDescendantChange: function (event) {
-
-		var oNode = this._descendants.item(event.prevVal);
-
-		if (oNode) {
-			oNode.set(TAB_INDEX, -1);
-		}
-
-		oNode = this._descendants.item(event.newVal);
-
-		if (oNode) {
-			oNode.set(TAB_INDEX, 0);
-		}
-
-	},
+    },
 
 
+    &#x2F;**
+    * @method _afterActiveDescendantChange
+    * @description afterChange event handler for the
+    * &quot;activeDescendant&quot; attribute.
+    * @protected
+    * @param event {Object} Object representing the change event.
+    *&#x2F;
+    _afterActiveDescendantChange: function (event) {
 
-	&#x2F;&#x2F;	Public methods
+        var oNode = this._descendants.item(event.prevVal);
+
+        if (oNode) {
+            oNode.set(TAB_INDEX, -1);
+        }
+
+        oNode = this._descendants.item(event.newVal);
+
+        if (oNode) {
+            oNode.set(TAB_INDEX, 0);
+        }
+
+    },
+
+
+
+    &#x2F;&#x2F;    Public methods
 
     initializer: function (config) {
 
-		this.start();
+        this.start();
 
     },
 
-	destructor: function () {
+    destructor: function () {
 
-		this.stop();
-		this.get(HOST).focusManager = null;
+        this.stop();
+        this.get(HOST).focusManager = null;
 
     },
 
 
-	&#x2F;**
-	* @method focus
-	* @description Focuses the active descendant and sets the
-	* &lt;code&gt;focused&lt;&#x2F;code&gt; attribute to true.
-	* @param index {Number} Optional. Number representing the index of the
-	* descendant to be set as the active descendant.
-	* @param index {Node} Optional. Node instance representing the
-	* descendant to be set as the active descendant.
-	*&#x2F;
-	focus: function (index) {
+    &#x2F;**
+    * @method focus
+    * @description Focuses the active descendant and sets the
+    * &lt;code&gt;focused&lt;&#x2F;code&gt; attribute to true.
+    * @param index {Number} Optional. Number representing the index of the
+    * descendant to be set as the active descendant.
+    * @param index {Node} Optional. Node instance representing the
+    * descendant to be set as the active descendant.
+    *&#x2F;
+    focus: function (index) {
 
-		if (Lang.isUndefined(index)) {
-			index = this.get(ACTIVE_DESCENDANT);
-		}
+        if (Lang.isUndefined(index)) {
+            index = this.get(ACTIVE_DESCENDANT);
+        }
 
-		this.set(ACTIVE_DESCENDANT, index, { src: UI });
+        this.set(ACTIVE_DESCENDANT, index, { src: UI });
 
-		var oNode = this._descendants.item(this.get(ACTIVE_DESCENDANT));
+        var oNode = this._descendants.item(this.get(ACTIVE_DESCENDANT));
 
-		if (oNode) {
+        if (oNode) {
 
-			oNode.focus();
+            oNode.focus();
 
-			&#x2F;&#x2F;	In Opera focusing a &lt;BUTTON&gt; element programmatically
-			&#x2F;&#x2F;	will result in the document-level focus event handler
-			&#x2F;&#x2F;	&quot;_onDocFocus&quot; being called, resulting in the handler
-			&#x2F;&#x2F;	incorrectly setting the &quot;focused&quot; Attribute to false.  To fix
-			&#x2F;&#x2F;	this, set a flag (&quot;_focusTarget&quot;) that the &quot;_onDocFocus&quot; method
-			&#x2F;&#x2F;	can look for to properly handle this edge case.
+            &#x2F;&#x2F;    In Opera focusing a &lt;BUTTON&gt; element programmatically
+            &#x2F;&#x2F;    will result in the document-level focus event handler
+            &#x2F;&#x2F;    &quot;_onDocFocus&quot; being called, resulting in the handler
+            &#x2F;&#x2F;    incorrectly setting the &quot;focused&quot; Attribute to false.  To fix
+            &#x2F;&#x2F;    this, set a flag (&quot;_focusTarget&quot;) that the &quot;_onDocFocus&quot; method
+            &#x2F;&#x2F;    can look for to properly handle this edge case.
 
-			if (UA.opera &amp;&amp; oNode.get(&quot;nodeName&quot;).toLowerCase() === &quot;button&quot;) {
-				this._focusTarget = oNode;
-			}
+            if (UA.opera &amp;&amp; oNode.get(&quot;nodeName&quot;).toLowerCase() === &quot;button&quot;) {
+                this._focusTarget = oNode;
+            }
 
-		}
+        }
 
-	},
-
-
-	&#x2F;**
-	* @method blur
-	* @description Blurs the current active descendant and sets the
-	* &lt;code&gt;focused&lt;&#x2F;code&gt; attribute to false.
-	*&#x2F;
-	blur: function () {
-
-		var oNode;
-
-		if (this.get(FOCUSED)) {
-
-			oNode = this._descendants.item(this.get(ACTIVE_DESCENDANT));
-
-			if (oNode) {
-
-				oNode.blur();
-
-				&#x2F;&#x2F;	For Opera and Webkit:  Blurring an element in either browser
-				&#x2F;&#x2F;	doesn&#x27;t result in another element (such as the document)
-				&#x2F;&#x2F;	being focused.  Therefore, the &quot;_onDocFocus&quot; method
-				&#x2F;&#x2F;	responsible for managing the application and removal of the
-				&#x2F;&#x2F;	focus indicator class name is never called.
-
-				this._removeFocusClass();
-
-			}
-
-			this._set(FOCUSED, false, { src: UI });
-		}
-
-	},
+    },
 
 
-	&#x2F;**
-	* @method start
-	* @description Enables the Focus Manager.
-	*&#x2F;
-	start: function () {
+    &#x2F;**
+    * @method blur
+    * @description Blurs the current active descendant and sets the
+    * &lt;code&gt;focused&lt;&#x2F;code&gt; attribute to false.
+    *&#x2F;
+    blur: function () {
 
-		if (this._stopped) {
+        var oNode;
 
-			this._initDescendants();
-			this._attachEventHandlers();
+        if (this.get(FOCUSED)) {
 
-			this._stopped = false;
+            oNode = this._descendants.item(this.get(ACTIVE_DESCENDANT));
 
-		}
+            if (oNode) {
 
-	},
+                oNode.blur();
 
+                &#x2F;&#x2F;    For Opera and Webkit:  Blurring an element in either browser
+                &#x2F;&#x2F;    doesn&#x27;t result in another element (such as the document)
+                &#x2F;&#x2F;    being focused.  Therefore, the &quot;_onDocFocus&quot; method
+                &#x2F;&#x2F;    responsible for managing the application and removal of the
+                &#x2F;&#x2F;    focus indicator class name is never called.
 
-	&#x2F;**
-	* @method stop
-	* @description Disables the Focus Manager by detaching all event handlers.
-	*&#x2F;
-	stop: function () {
+                this._removeFocusClass();
 
-		if (!this._stopped) {
+            }
 
-			this._detachEventHandlers();
+            this._set(FOCUSED, false, { src: UI });
+        }
 
-			this._descendants = null;
-			this._focusedNode = null;
-			this._lastNodeIndex = 0;
-			this._stopped = true;
-
-		}
-
-	},
+    },
 
 
-	&#x2F;**
-	* @method refresh
-	* @description Refreshes the Focus Manager&#x27;s descendants by re-executing the
-	* CSS selector query specified by the &lt;code&gt;descendants&lt;&#x2F;code&gt; attribute.
-	*&#x2F;
-	refresh: function () {
+    &#x2F;**
+    * @method start
+    * @description Enables the Focus Manager.
+    *&#x2F;
+    start: function () {
 
-		this._initDescendants();
+        if (this._stopped) {
 
-		if (!this._eventHandlers) {
-			this._attachEventHandlers();
-		}
+            this._initDescendants();
+            this._attachEventHandlers();
 
-	}
+            this._stopped = false;
+
+        }
+
+    },
+
+
+    &#x2F;**
+    * @method stop
+    * @description Disables the Focus Manager by detaching all event handlers.
+    *&#x2F;
+    stop: function () {
+
+        if (!this._stopped) {
+
+            this._detachEventHandlers();
+
+            this._descendants = null;
+            this._focusedNode = null;
+            this._lastNodeIndex = 0;
+            this._stopped = true;
+
+        }
+
+    },
+
+
+    &#x2F;**
+    * @method refresh
+    * @description Refreshes the Focus Manager&#x27;s descendants by re-executing the
+    * CSS selector query specified by the &lt;code&gt;descendants&lt;&#x2F;code&gt; attribute.
+    *&#x2F;
+    refresh: function () {
+
+        this._initDescendants();
+
+        if (!this._eventHandlers) {
+            this._attachEventHandlers();
+        }
+
+    }
 
 });
 

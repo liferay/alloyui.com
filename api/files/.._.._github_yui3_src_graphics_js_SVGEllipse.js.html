@@ -1519,95 +1519,95 @@
  *&#x2F;
 SVGEllipse = function(cfg)
 {
-	SVGEllipse.superclass.constructor.apply(this, arguments);
+    SVGEllipse.superclass.constructor.apply(this, arguments);
 };
 
 SVGEllipse.NAME = &quot;ellipse&quot;;
 
 Y.extend(SVGEllipse, SVGShape, {
-	&#x2F;**
-	 * Indicates the type of shape
-	 *
-	 * @property _type
-	 * @type String
+    &#x2F;**
+     * Indicates the type of shape
+     *
+     * @property _type
+     * @type String
      * @private
-	 *&#x2F;
-	_type: &quot;ellipse&quot;,
+     *&#x2F;
+    _type: &quot;ellipse&quot;,
 
-	&#x2F;**
-	 * Updates the shape.
-	 *
-	 * @method _draw
-	 * @private
-	 *&#x2F;
-	_draw: function()
-	{
-		var node = this.node,
-			w = this.get(&quot;width&quot;),
-			h = this.get(&quot;height&quot;),
-			x = this.get(&quot;x&quot;),
-			y = this.get(&quot;y&quot;),
-			xRadius = w * 0.5,
-			yRadius = h * 0.5,
-			cx = x + xRadius,
-			cy = y + yRadius;
-		node.setAttribute(&quot;rx&quot;, xRadius);
-		node.setAttribute(&quot;ry&quot;, yRadius);
-		node.setAttribute(&quot;cx&quot;, cx);
-		node.setAttribute(&quot;cy&quot;, cy);
-		this._fillChangeHandler();
-		this._strokeChangeHandler();
-		this._updateTransform();
-	}
+    &#x2F;**
+     * Updates the shape.
+     *
+     * @method _draw
+     * @private
+     *&#x2F;
+    _draw: function()
+    {
+        var node = this.node,
+            w = this.get(&quot;width&quot;),
+            h = this.get(&quot;height&quot;),
+            x = this.get(&quot;x&quot;),
+            y = this.get(&quot;y&quot;),
+            xRadius = w * 0.5,
+            yRadius = h * 0.5,
+            cx = x + xRadius,
+            cy = y + yRadius;
+        node.setAttribute(&quot;rx&quot;, xRadius);
+        node.setAttribute(&quot;ry&quot;, yRadius);
+        node.setAttribute(&quot;cx&quot;, cx);
+        node.setAttribute(&quot;cy&quot;, cy);
+        this._fillChangeHandler();
+        this._strokeChangeHandler();
+        this._updateTransform();
+    }
 });
 
 SVGEllipse.ATTRS = Y.merge(SVGShape.ATTRS, {
-	&#x2F;**
-	 * Horizontal radius for the ellipse.
-	 *
-	 * @config xRadius
-	 * @type Number
-	 *&#x2F;
-	xRadius: {
-		setter: function(val)
-		{
-			this.set(&quot;width&quot;, val * 2);
-		},
+    &#x2F;**
+     * Horizontal radius for the ellipse.
+     *
+     * @config xRadius
+     * @type Number
+     *&#x2F;
+    xRadius: {
+        setter: function(val)
+        {
+            this.set(&quot;width&quot;, val * 2);
+        },
 
-		getter: function()
-		{
-			var val = this.get(&quot;width&quot;);
-			if(val)
-			{
-				val *= 0.5;
-			}
-			return val;
-		}
-	},
+        getter: function()
+        {
+            var val = this.get(&quot;width&quot;);
+            if(val)
+            {
+                val *= 0.5;
+            }
+            return val;
+        }
+    },
 
-	&#x2F;**
-	 * Vertical radius for the ellipse.
-	 *
-	 * @config yRadius
-	 * @type Number
-	 * @readOnly
-	 *&#x2F;
-	yRadius: {
-		setter: function(val)
-		{
-			this.set(&quot;height&quot;, val * 2);
-		},
+    &#x2F;**
+     * Vertical radius for the ellipse.
+     *
+     * @config yRadius
+     * @type Number
+     * @readOnly
+     *&#x2F;
+    yRadius: {
+        setter: function(val)
+        {
+            this.set(&quot;height&quot;, val * 2);
+        },
 
-		getter: function()
-		{
-			var val = this.get(&quot;height&quot;);
-			if(val)
-			{
-				val *= 0.5;
-			}
-			return val;
-		}
-	}
+        getter: function()
+        {
+            var val = this.get(&quot;height&quot;);
+            if(val)
+            {
+                val *= 0.5;
+            }
+            return val;
+        }
+    }
 });
 Y.SVGEllipse = SVGEllipse;
 
