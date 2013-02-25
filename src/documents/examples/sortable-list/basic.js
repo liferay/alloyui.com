@@ -1,14 +1,17 @@
-YUI().use('aui-sortable-list', function(Y) {
+YUI().use(
+  'aui-sortable-list',
+  function(Y) {
+    var placeholder = Y.Node.create('<li class="placeholder"></li>');
 
-  var placeholder = Y.Node.create('<li class="placeholder"></li>');
-
-  new Y.SortableList({
-    nodes: '#myList li',
-    dropCondition: function(event) {
-      return true;
-    },
-    dropOn: 'myList',
-    placeholder: placeholder,
-  });
-
-});
+    new Y.SortableList(
+      {
+        dropCondition: function(event) {
+          return true;
+        },
+        dropOn: 'myList',
+        nodes: '#myList li',
+        placeholder: placeholder
+      }
+    );
+  }
+);
