@@ -6,33 +6,42 @@ module.exports =
 
     templateData:
 
-        version: '1.5.x'
+        # -----------------------------
+        # AlloyUI Information
 
-        cdnDomain: 'http://cdn.alloyui.com/1.5.x'
-        cdn: 'http://cdn.alloyui.com/1.5.x/aui/aui-min.js'
-        download: 'https://github.com/liferay/alloy-ui/archive/1.5.x.zip'
+        alloy:
+
+            # AlloyUI version
+            version: '1.5.1'
+
+            # CDN domain
+            cdnDomain: 'http://cdn.alloyui.com'
 
         # -----------------------------
         # Site Information
 
         site:
 
+            # Website version
+            version: '1.5.x'
+            isLastVersion: false
+
+            # Production URL
+            url: 'http://alloyui.com'
+
+            # Github branch
+            githubUrl: 'https://github.com/liferay/alloy-ui/'
+
             # Basic info
             title: 'AlloyUI'
             description: 'Alloy is a UI framework built on top of YUI3 that provides a simple API for building high scalable applications.'
-
-            # Production URL
-            url: 'http://alloyui.com/1.5.x'
-            assets: 'http://alloyui.com/1.5.x/website'
 
         # -----------------------------
         # Helpers
 
         # Get the prepared site/document title
-        # Often we would like to specify particular formatting to our page's title
-        # we can apply that formatting here
         getPreparedTitle: ->
-          # if we have a document title, then we should use that and suffix the site's title onto it
+          # if we have a document title, then we should use that and suffix the site's title into it
           if @document.title
             if @document.category
               "#{@document.category} - #{@document.title} | #{@site.title}"
@@ -47,24 +56,46 @@ module.exports =
           # if we have a document description, then we should use that, otherwise use the site's description
           @document.description or @site.description
 
-        # Get the Absolute URL of a document
-        getUrl: (document) ->
-            return @site.url + (document.url or document.get?('url'))
+        # Get the CDN path for this Alloy version
+        getCdnPath: ->
+          "#{@alloy.cdnDomain}/#{@alloy.version}"
+
+        # Get the CDN seed file for this Alloy version
+        getCdnSeed: ->
+          "#{@alloy.cdnDomain}/#{@alloy.version}/aui/aui-min.js"
+
+        # Get the download URL for this Alloy version
+        getDownloadUrl: ->
+          "#{@alloy.cdnDomain}/downloads/alloy-#{@alloy.version}.zip"
+
+        # Get the absolute URL of the website
+        getSiteUrl: ->
+          if @site.isLastVersion
+            "#{@site.url}"
+          else
+            "#{@site.url}/versions/#{@site.version}"
+
+        # Get the absolute URL of the assets folder
+        getAssetsUrl: ->
+          if @site.isLastVersion
+            "#{@site.url}/website"
+          else
+            "#{@site.url}/versions/#{@site.version}/website"
 
         # Read File
         readFile: (relativePath) ->
-            fsUtil = require('fs')
-            path = @document.fullDirPath+'/'+relativePath
-            result = fsUtil.readFileSync(path)
-            if result instanceof Error
-                throw result
-            else
-                return result.toString()
+          fsUtil = require('fs')
+          path = @document.fullDirPath+'/'+relativePath
+          result = fsUtil.readFileSync(path)
+          if result instanceof Error
+            throw result
+          else
+            return result.toString()
 
         # Code File
         codeFile: (relativePath,language) ->
-            contents = @readFile(relativePath)
-            return """<pre><code class="#{language}">#{contents}</code></pre>"""
+          contents = @readFile(relativePath)
+          return """<pre><code class="#{language}">#{contents}</code></pre>"""
 
     # =================================
     # Collections
@@ -77,12 +108,33 @@ module.exports =
       # Get all examples sorted by alphabetical order
       examples: -> @getCollection("documents").findAllLive({url:$startsWith:'/examples'}, [category:1,title:1])
 
+      # Get all examples that contains featuringOrder attribute
+      featuring: (database) ->
+        database.findAllLive({featuringOrder: $exists: true}, [featuringOrder:1])
+
     # =================================
     # Environments
 
     environments:
-        development:
-            templateData:
-                site:
-                    url: 'http://localhost:9778'
-                    assets: 'http://localhost:9778/website'
+      development:
+
+        templateData:
+
+          # -----------------------------
+          # Site Information
+
+          site:
+
+            # Development URL
+            url: 'http://localhost:9778'
+
+          # -----------------------------
+          # Helpers
+
+          # Get the absolute Development URL of the website
+          getSiteUrl: ->
+            "#{@site.url}"
+
+          # Get the absolute Development URL of the assets folder
+          getAssetsUrl: ->
+            "#{@site.url}/website"
