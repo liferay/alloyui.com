@@ -92,13 +92,11 @@
     <ul class="aui-nav aui-nav-list aui-bs-docs-sidenav aui-affix-top">
       
         
+      
+        
           
             <li><a href="http://alloyui.com/examples/ace-editor"><i class="aui-icon-chevron-right"></i> Ace Editor</a></li>
           
-        
-      
-        
-      
         
       
         
@@ -499,6 +497,8 @@
           
         
       
+        
+      
     </ul>
 
   </div>
@@ -509,8 +509,6 @@
 
     <ul class="aui-nav aui-nav-tabs">
       <li><a href="http://alloyui.com/tutorials/progress-bar/">Introduction</a></li>
-      
-        
       
         
       
@@ -846,53 +844,61 @@
       
         
       
+        
+      
     </ul>
 
     <div id="myProgressBar" class="aui-progress-warning"></div>
 
 <pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"myProgressBar"</span> <span class="attribute">class</span>=<span class="value">"aui-progress-warning"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre>
-<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-progressbar'</span>, <span class="keyword">function</span>(Y) {
-
-  <span class="keyword">new</span> Y.ProgressBar({
-    boundingBox: <span class="string">'#myProgressBar'</span>,
-    label: <span class="string">'40%'</span>,
-    min: <span class="number">0</span>,
-    max: <span class="number">100</span>,
-    on: {
-      complete: <span class="keyword">function</span>(e) {
-        <span class="keyword">this</span>.set(<span class="string">'label'</span>, <span class="string">'Complete!'</span>);
-      },
-      valueChange: <span class="keyword">function</span>(e) {
-        <span class="keyword">this</span>.set(<span class="string">'label'</span>, e.newVal + <span class="string">'%'</span>);
+<pre class="highlighted"><code class="javascript">YUI().use(
+  <span class="string">'aui-progressbar'</span>,
+  <span class="keyword">function</span>(Y) {
+    <span class="keyword">new</span> Y.ProgressBar(
+      {
+        boundingBox: <span class="string">'#myProgressBar'</span>,
+        label: <span class="string">'40%'</span>,
+        max: <span class="number">100</span>,
+        min: <span class="number">0</span>,
+        on: {
+          complete: <span class="keyword">function</span>(e) {
+            <span class="keyword">this</span>.set(<span class="string">'label'</span>, <span class="string">'Complete!'</span>);
+          },
+          valueChange: <span class="keyword">function</span>(e) {
+            <span class="keyword">this</span>.set(<span class="string">'label'</span>, e.newVal + <span class="string">'%'</span>);
+          }
+        },
+        value: <span class="number">40</span>,
+        width: <span class="number">700</span>
       }
-    },
-    value: <span class="number">40</span>,
-    width: <span class="number">700</span>
-  }).render();
-
-});</code></pre>
+    ).render();
+  }
+);</code></pre>
 
 <script>
-  YUI().use('aui-progressbar', function(Y) {
-
-  new Y.ProgressBar({
-    boundingBox: '#myProgressBar',
-    label: '40%',
-    min: 0,
-    max: 100,
-    on: {
-      complete: function(e) {
-        this.set('label', 'Complete!');
-      },
-      valueChange: function(e) {
-        this.set('label', e.newVal + '%');
+  YUI().use(
+  'aui-progressbar',
+  function(Y) {
+    new Y.ProgressBar(
+      {
+        boundingBox: '#myProgressBar',
+        label: '40%',
+        max: 100,
+        min: 0,
+        on: {
+          complete: function(e) {
+            this.set('label', 'Complete!');
+          },
+          valueChange: function(e) {
+            this.set('label', e.newVal + '%');
+          }
+        },
+        value: 40,
+        width: 700
       }
-    },
-    value: 40,
-    width: 700
-  }).render();
-
-});
+    ).render();
+  }
+);
 </script>
 
   </div>

@@ -92,13 +92,11 @@
     <ul class="aui-nav aui-nav-list aui-bs-docs-sidenav aui-affix-top">
       
         
+      
+        
           
             <li><a href="http://alloyui.com/examples/ace-editor"><i class="aui-icon-chevron-right"></i> Ace Editor</a></li>
           
-        
-      
-        
-      
         
       
         
@@ -499,6 +497,8 @@
           
         
       
+        
+      
     </ul>
 
   </div>
@@ -509,8 +509,6 @@
 
     <ul class="aui-nav aui-nav-tabs">
       <li><a href="http://alloyui.com/tutorials/image-cropper/">Introduction</a></li>
-      
-        
       
         
       
@@ -842,6 +840,8 @@
       
         
       
+        
+      
     </ul>
 
     <link rel="stylesheet" href="http://alloyui.com/image-cropper/css/real-world.css" />
@@ -877,102 +877,122 @@
     <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
   <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
 <span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre>
-<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-image-cropper'</span>, <span class="keyword">function</span>(Y) {
-
-  <span class="keyword">var</span> imageCropper = <span class="keyword">new</span> Y.ImageCropper({
-    srcNode: <span class="string">"#image"</span>,
-    x: <span class="number">100</span>,
-    y: <span class="number">100</span>
-  }).render();
-
-  <span class="keyword">var</span> statusTPL = <span class="string">'&lt;strong class="x"&gt;x: {x}&lt;/strong&gt;&lt;strong class="y"&gt;y: {y}&lt;/strong&gt;&lt;strong class="height"&gt;height: {height}&lt;/strong&gt;&lt;strong class="width"&gt;width: {width}&lt;/strong&gt;'</span>;
-
-  <span class="keyword">var</span> updateImage = <span class="keyword">function</span>() {
-
-    <span class="keyword">var</span> cropRegion = imageCropper.get(<span class="string">'region'</span>);
-
-    croppedImage.setStyles(
+<pre class="highlighted"><code class="javascript">YUI().use(
+  <span class="string">'aui-image-cropper'</span>,
+  <span class="keyword">function</span>(Y) {
+    <span class="keyword">var</span> imageCropper = <span class="keyword">new</span> Y.ImageCropper(
       {
-        <span class="string">'backgroundPosition'</span>: (-cropRegion.x) + <span class="string">'px '</span> + (-cropRegion.y) + <span class="string">'px'</span>,
-        height: cropRegion.height,
-        width: cropRegion.width
+        srcNode: <span class="string">'#image'</span>,
+        x: <span class="number">100</span>,
+        y: <span class="number">100</span>
+      }
+    ).render();
+
+    <span class="keyword">var</span> statusTPL = <span class="string">'&lt;strong class="x"&gt;x: {x}&lt;/strong&gt;&lt;strong class="y"&gt;y: {y}&lt;/strong&gt;&lt;strong class="height"&gt;height: {height}&lt;/strong&gt;&lt;strong class="width"&gt;width: {width}&lt;/strong&gt;'</span>;
+
+    <span class="keyword">var</span> updateImage = <span class="keyword">function</span>() {
+      <span class="keyword">var</span> cropRegion = imageCropper.get(<span class="string">'region'</span>);
+
+      croppedImage.setStyles(
+        {
+          <span class="string">'backgroundPosition'</span>: (-cropRegion.x) + <span class="string">'px '</span> + (-cropRegion.y) + <span class="string">'px'</span>,
+          height: cropRegion.height,
+          width: cropRegion.width
+        }
+      );
+
+      croppedImage.html(Y.Lang.sub(statusTPL, cropRegion));
+    };
+
+    imageCropper.after(
+      <span class="string">'crop'</span>,
+      <span class="keyword">function</span>(event) {
+        updateImage();
       }
     );
 
-    croppedImage.html(Y.Lang.sub(statusTPL, cropRegion));
-  };
+    <span class="keyword">var</span> croppedImage = Y.one(<span class="string">'#croppedImage'</span>);
 
-  imageCropper.after(<span class="string">'crop'</span>, <span class="keyword">function</span>(event) {
+    <span class="keyword">var</span> croppedStatus = Y.one(<span class="string">'#croppedStatus'</span>);
+
+    croppedImage.show();
+
     updateImage();
-  });
 
-  <span class="keyword">var</span> croppedImage = Y.one(<span class="string">'#croppedImage'</span>);
-
-  <span class="keyword">var</span> croppedStatus = Y.one(<span class="string">'#croppedStatus'</span>);
-
-  croppedImage.show();
-
-  updateImage();
-
-  Y.one(<span class="string">'#cropLink'</span>).on(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(event)</span> {</span>
-    imageCropper.setAttrs({
-      x: <span class="number">45</span>,
-      y: <span class="number">5</span>,
-      cropWidth: <span class="number">390</span>,
-      cropHeight: <span class="number">125</span>
-    });
-  });
-
-});</code></pre>
+    Y.one(<span class="string">'#cropLink'</span>).on(
+      <span class="string">'click'</span>,
+      <span class="function"><span class="keyword">function</span> <span class="params">(event)</span> {</span>
+        imageCropper.setAttrs(
+          {
+            cropHeight: <span class="number">125</span>,
+            cropWidth: <span class="number">390</span>,
+            x: <span class="number">45</span>,
+            y: <span class="number">5</span>
+          }
+        );
+      }
+    );
+  }
+);</code></pre>
 
 <script>
-  YUI().use('aui-image-cropper', function(Y) {
-
-  var imageCropper = new Y.ImageCropper({
-    srcNode: "#image",
-    x: 100,
-    y: 100
-  }).render();
-
-  var statusTPL = '<strong class="x">x: {x}</strong><strong class="y">y: {y}</strong><strong class="height">height: {height}</strong><strong class="width">width: {width}</strong>';
-
-  var updateImage = function() {
-
-    var cropRegion = imageCropper.get('region');
-
-    croppedImage.setStyles(
+  YUI().use(
+  'aui-image-cropper',
+  function(Y) {
+    var imageCropper = new Y.ImageCropper(
       {
-        'backgroundPosition': (-cropRegion.x) + 'px ' + (-cropRegion.y) + 'px',
-        height: cropRegion.height,
-        width: cropRegion.width
+        srcNode: '#image',
+        x: 100,
+        y: 100
+      }
+    ).render();
+
+    var statusTPL = '<strong class="x">x: {x}</strong><strong class="y">y: {y}</strong><strong class="height">height: {height}</strong><strong class="width">width: {width}</strong>';
+
+    var updateImage = function() {
+      var cropRegion = imageCropper.get('region');
+
+      croppedImage.setStyles(
+        {
+          'backgroundPosition': (-cropRegion.x) + 'px ' + (-cropRegion.y) + 'px',
+          height: cropRegion.height,
+          width: cropRegion.width
+        }
+      );
+
+      croppedImage.html(Y.Lang.sub(statusTPL, cropRegion));
+    };
+
+    imageCropper.after(
+      'crop',
+      function(event) {
+        updateImage();
       }
     );
 
-    croppedImage.html(Y.Lang.sub(statusTPL, cropRegion));
-  };
+    var croppedImage = Y.one('#croppedImage');
 
-  imageCropper.after('crop', function(event) {
+    var croppedStatus = Y.one('#croppedStatus');
+
+    croppedImage.show();
+
     updateImage();
-  });
 
-  var croppedImage = Y.one('#croppedImage');
-
-  var croppedStatus = Y.one('#croppedStatus');
-
-  croppedImage.show();
-
-  updateImage();
-
-  Y.one('#cropLink').on('click', function (event) {
-    imageCropper.setAttrs({
-      x: 45,
-      y: 5,
-      cropWidth: 390,
-      cropHeight: 125
-    });
-  });
-
-});
+    Y.one('#cropLink').on(
+      'click',
+      function (event) {
+        imageCropper.setAttrs(
+          {
+            cropHeight: 125,
+            cropWidth: 390,
+            x: 45,
+            y: 5
+          }
+        );
+      }
+    );
+  }
+);
 </script>
 
   </div>

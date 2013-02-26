@@ -92,8 +92,6 @@
     <ul class="aui-nav aui-nav-list aui-bs-docs-sidenav aui-affix-top">
       
         
-      
-        
           
             <li><a href="http://alloyui.com/examples/ace-editor"><i class="aui-icon-chevron-right"></i> Ace Editor</a></li>
           
@@ -499,6 +497,8 @@
           
         
       
+        
+      
     </ul>
 
   </div>
@@ -509,8 +509,6 @@
 
     <ul class="aui-nav aui-nav-tabs">
       <li><a href="http://alloyui.com/tutorials/scheduler/">Introduction</a></li>
-      
-        
       
         
       
@@ -842,6 +840,8 @@
       
         
       
+        
+      
     </ul>
 
     <link rel="stylesheet" href="http://alloyui.com/scheduler/basic.css" />
@@ -849,54 +849,60 @@
 <div id="myScheduler"></div>
 
 <pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"myScheduler"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre>
-<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-scheduler'</span>, <span class="keyword">function</span>(Y) {
+<pre class="highlighted"><code class="javascript">YUI().use(
+  <span class="string">'aui-scheduler'</span>,
+  <span class="keyword">function</span>(Y) {
+    <span class="keyword">var</span> events = [
+      {
+        content: <span class="string">'Event1'</span>,
+        endDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">5</span>),
+        startDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">1</span>)
+      }
+    ];
 
-  <span class="keyword">var</span> events = [
-    {
-      content: <span class="string">"Event1"</span>,
-      endDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">5</span>),
-      startDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">1</span>)
-    }
-  ];
+    <span class="keyword">var</span> eventRecorder = <span class="keyword">new</span> Y.SchedulerEventRecorder();
+    <span class="keyword">var</span> weekView = <span class="keyword">new</span> Y.SchedulerWeekView();
 
-  <span class="keyword">var</span> eventRecorder = <span class="keyword">new</span> Y.SchedulerEventRecorder();
-  <span class="keyword">var</span> weekView = <span class="keyword">new</span> Y.SchedulerWeekView();
-
-  <span class="keyword">new</span> Y.Scheduler({
-    boundingBox: <span class="string">'#myScheduler'</span>,
-    date: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">1</span>, <span class="number">4</span>),
-    eventRecorder: eventRecorder,
-    items: events,
-    render: <span class="literal">true</span>,
-    views: [weekView]
-  });
-
-});</code></pre>
+    <span class="keyword">new</span> Y.Scheduler(
+      {
+        boundingBox: <span class="string">'#myScheduler'</span>,
+        date: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">1</span>, <span class="number">4</span>),
+        eventRecorder: eventRecorder,
+        items: events,
+        render: <span class="literal">true</span>,
+        views: [weekView]
+      }
+    );
+  }
+);</code></pre>
 
 <script>
-  YUI().use('aui-scheduler', function(Y) {
+  YUI().use(
+  'aui-scheduler',
+  function(Y) {
+    var events = [
+      {
+        content: 'Event1',
+        endDate: new Date(2013, 1, 4, 5),
+        startDate: new Date(2013, 1, 4, 1)
+      }
+    ];
 
-  var events = [
-    {
-      content: "Event1",
-      endDate: new Date(2013, 1, 4, 5),
-      startDate: new Date(2013, 1, 4, 1)
-    }
-  ];
+    var eventRecorder = new Y.SchedulerEventRecorder();
+    var weekView = new Y.SchedulerWeekView();
 
-  var eventRecorder = new Y.SchedulerEventRecorder();
-  var weekView = new Y.SchedulerWeekView();
-
-  new Y.Scheduler({
-    boundingBox: '#myScheduler',
-    date: new Date(2013, 1, 4),
-    eventRecorder: eventRecorder,
-    items: events,
-    render: true,
-    views: [weekView]
-  });
-
-});
+    new Y.Scheduler(
+      {
+        boundingBox: '#myScheduler',
+        date: new Date(2013, 1, 4),
+        eventRecorder: eventRecorder,
+        items: events,
+        render: true,
+        views: [weekView]
+      }
+    );
+  }
+);
 </script>
 
   </div>

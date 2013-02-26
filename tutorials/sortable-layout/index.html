@@ -571,9 +571,12 @@
 <p>First load the seed file if you haven&#39;t yet.</p>
 <pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"http://cdn.alloyui.com/2.0.0pr2/aui/aui-min.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></pre>
 <p>Then initialize AlloyUI and load the Sortable Layout module.</p>
-<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-sortable-layout'</span>, <span class="keyword">function</span>(Y) {
-  <span class="comment">// code goes here</span>
-});</code></pre>
+<pre class="highlighted"><code class="javascript">YUI().use(
+  <span class="string">'aui-sortable-layout'</span>,
+  <span class="keyword">function</span>(Y) {
+    <span class="comment">// code goes here</span>
+  }
+);</code></pre>
 <hr>
 <h4>Using Sortable Layout</h4>
 <p>Create an HTML element with some content nodes:</p>
@@ -589,14 +592,17 @@
   <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
 <span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre>
 <p>Now create a new instance of Sortable Layout component by setting <code>dropNodes</code> to our HTML element&#39;s selector. Also, set <code>dragNodes</code> to the content nodes&#39; class so Sortable Layout can make the nodes draggable.</p>
-<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-sortable-layout'</span>, <span class="keyword">function</span>(Y) {
-
-  <span class="keyword">new</span> Y.SortableLayout({
-    dragNodes: <span class="string">'.contentNode'</span>,
-    dropNodes: <span class="string">'#mySortableLayout'</span>
-  });
-
-});</code></pre>
+<pre class="highlighted"><code class="javascript">YUI().use(
+  <span class="string">'aui-sortable-layout'</span>,
+  <span class="keyword">function</span>(Y) {
+    <span class="keyword">new</span> Y.SortableLayout(
+      {
+        dragNodes: <span class="string">'.contentNode'</span>,
+        dropNodes: <span class="string">'#mySortableLayout'</span>
+      }
+    );
+  }
+);</code></pre>
 <div class="aui-alert aui-alert-info">
   <strong>Note:</strong> you could also use <code>dropContainer</code>, instead of <code>dropNodes</code>, to initialize the HTML container.  DropContainer will initialize the container and all its children as drop targets, whereas DropNodes will only initialize nodes with matching class selector.
 </div>
@@ -605,39 +611,48 @@
 <h4>Configuring Sortable Layout</h4>
 <p>There are some other optional parameters that you can pass to your Sortable Layout instance.</p>
 <p>For example, you can add a <code>proxyNode</code> which will act as a temporary node during <code>activeDrag</code> mode and be replaced by your drag node on drag end.  To give <code>proxyNode</code> visibility, make sure to add CSS styles, such as border, which will apply to the proxy node on drag start.</p>
-<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-sortable-layout'</span>, <span class="keyword">function</span>(Y) {
-
-  <span class="keyword">new</span> Y.SortableLayout({
-    dragNodes: <span class="string">'.contentNode'</span>,
-    dropNodes: <span class="string">'#mySortableLayout'</span>,
-    proxyNode: Y.Node.create(<span class="string">'&lt;div class="proxyNode"&gt;&lt;/div&gt;'</span>)
-  });
-
-});</code></pre>
+<pre class="highlighted"><code class="javascript">YUI().use(
+  <span class="string">'aui-sortable-layout'</span>,
+  <span class="keyword">function</span>(Y) {
+    <span class="keyword">new</span> Y.SortableLayout(
+      {
+        dragNodes: <span class="string">'.contentNode'</span>,
+        dropNodes: <span class="string">'#mySortableLayout'</span>,
+        proxyNode: Y.Node.create(<span class="string">'&lt;div class="proxyNode"&gt;&lt;/div&gt;'</span>)
+      }
+    );
+  }
+);</code></pre>
 <p>You can set another HTML container to receive dropped Sortable Layout object by setting <code>dropContainer</code> to your HTML selector.  Sortable Layout can now drag and drop content nodes onto one another and inside the separate DropContainer DIV:</p>
 <pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"dropContainer"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre>
-<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-sortable-layout'</span>, <span class="keyword">function</span>(Y) {
-
-  <span class="keyword">new</span> Y.SortableLayout({
-    dragNodes: <span class="string">'.contentNode'</span>,
-    dropNodes: <span class="string">'#mySortableLayout'</span>,
-    proxyNode: Y.Node.create(<span class="string">'&lt;div class="proxyNode"&gt;&lt;/div&gt;'</span>),
-    dropContainer: <span class="string">'#dropContainer'</span>
-  });
-
-});</code></pre>
+<pre class="highlighted"><code class="javascript">YUI().use(
+  <span class="string">'aui-sortable-layout'</span>,
+  <span class="keyword">function</span>(Y) {
+    <span class="keyword">new</span> Y.SortableLayout(
+      {
+        dragNodes: <span class="string">'.contentNode'</span>,
+        dropContainer: <span class="string">'#dropContainer'</span>,
+        dropNodes: <span class="string">'#mySortableLayout'</span>,
+        proxyNode: Y.Node.create(<span class="string">'&lt;div class="proxyNode"&gt;&lt;/div&gt;'</span>)
+      }
+    );
+  }
+);</code></pre>
 <p>You can even define a Placeholder HTML node which will appear in your drop zone before you drop your activeDrag node.  Like we did for proxyNode, pass the <code>placeholder</code> property a <code>Node.create</code> constructor with your desired HTML placeholder.  Just be sure to add CSS styles to the placeholder class so you can see your placeholder nodes!</p>
-<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-sortable-layout'</span>, <span class="keyword">function</span>(Y) {
-
-  <span class="keyword">new</span> Y.SortableLayout({
-    dragNodes: <span class="string">'.contentNode'</span>,
-    dropNodes: <span class="string">'#mySortableLayout'</span>,
-    proxyNode: Y.Node.create(<span class="string">'&lt;div class="proxyNode"&gt;&lt;/div&gt;'</span>),
-    dropContainer: <span class="string">'#dropContainer'</span>,
-    placeholder: Y.Node.create(<span class="string">'&lt;div class="placeholder"&gt;&lt;/div&gt;'</span>)
-  });
-
-});</code></pre>
+<pre class="highlighted"><code class="javascript">YUI().use(
+  <span class="string">'aui-sortable-layout'</span>,
+  <span class="keyword">function</span>(Y) {
+    <span class="keyword">new</span> Y.SortableLayout(
+      {
+        dragNodes: <span class="string">'.contentNode'</span>,
+        dropContainer: <span class="string">'#dropContainer'</span>,
+        dropNodes: <span class="string">'#mySortableLayout'</span>,
+        placeholder: Y.Node.create(<span class="string">'&lt;div class="placeholder"&gt;&lt;/div&gt;'</span>),
+        proxyNode: Y.Node.create(<span class="string">'&lt;div class="proxyNode"&gt;&lt;/div&gt;'</span>)
+      }
+    );
+  }
+);</code></pre>
 <div class="aui-alert aui-alert-info">
   <strong>Note:</strong> by default, AlloyUI inserts a placeholder as a blue border with arrows on each end.  The <code>placeholder</code> property will override the default AUI placeholder for a custom placeholder.
 </div>

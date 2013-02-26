@@ -571,95 +571,113 @@
 <p>First load the seed file, if you haven&#39;t yet.</p>
 <pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"http://cdn.alloyui.com/2.0.0pr2/aui/aui-min.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></pre>
 <p>Then initialize AlloyUI and load the Pagination module.</p>
-<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-pagination'</span>, <span class="keyword">function</span>(Y) {
-  <span class="comment">// code goes here</span>
-});</code></pre>
+<pre class="highlighted"><code class="javascript">YUI().use(
+  <span class="string">'aui-pagination'</span>,
+  <span class="keyword">function</span>(Y) {
+    <span class="comment">// code goes here</span>
+  }
+);</code></pre>
 <hr>
 <h4>Using Pagination</h4>
 <p>Multiple Paginations can be rendered using the same HTML markup. We&#39;ll create one.</p>
 <pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"myPagination"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre>
 <p>Now let&#39;s initialize a new instance of Pagination, using the <code>containers</code> and <code>total</code> options.</p>
-<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-pagination'</span>, <span class="keyword">function</span>(Y) {
-
-  <span class="keyword">new</span> Y.Pagination({
-    containers: <span class="string">'.myPagination'</span>,
-    total: <span class="number">10</span>
-  }).render();
-
-});</code></pre>
-<p>In order for the Pagination to function, you must specify what you want the pagination to do on the <code>changeRequest</code> event.  This &#39;changeRequest&#39; event fires when a user clicks on a page link. Here we will select the page link using the Pagination&#39;s <code>changeRequest</code> event.</p>
-<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-pagination'</span>, <span class="keyword">function</span>(Y) {
-
-  <span class="keyword">new</span> Y.Pagination({
-    containers: <span class="string">'.myPagination'</span>,
-    on: {
-      changeRequest: <span class="keyword">function</span>(event) {
-        <span class="keyword">this</span>.setState(event.state);
+<pre class="highlighted"><code class="javascript">YUI().use(
+  <span class="string">'aui-pagination'</span>,
+  <span class="keyword">function</span>(Y) {
+    <span class="keyword">new</span> Y.Pagination(
+      {
+        containers: <span class="string">'.myPagination'</span>,
+        total: <span class="number">10</span>
       }
-    },
-    total: <span class="number">10</span>
-  }).render();
-
-});</code></pre>
+    ).render();
+  }
+);</code></pre>
+<p>In order for the Pagination to function, you must specify what you want the pagination to do on the <code>changeRequest</code> event.  This &#39;changeRequest&#39; event fires when a user clicks on a page link. Here we will select the page link using the Pagination&#39;s <code>changeRequest</code> event.</p>
+<pre class="highlighted"><code class="javascript">YUI().use(
+  <span class="string">'aui-pagination'</span>,
+  <span class="keyword">function</span>(Y) {
+    <span class="keyword">new</span> Y.Pagination(
+      {
+        containers: <span class="string">'.myPagination'</span>,
+        on: {
+          changeRequest: <span class="keyword">function</span>(event) {
+            <span class="keyword">this</span>.setState(event.state);
+          }
+        },
+        total: <span class="number">10</span>
+      }
+    ).render();
+  }
+);</code></pre>
 <hr>
 <h4>Configuring Pagination</h4>
 <p>There are many configuration options that can be passed into the Pagination, such as <code>maxPageLinks</code>, which sets the total amount of links displayed at a time, <code>rowsPerPageOptions</code>, which can be used to change the amount of pages displayed at once, and <code>circular</code>, which allows continuous page navigation.</p>
-<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-pagination'</span>, <span class="keyword">function</span>(Y) {
-
-  <span class="keyword">new</span> Y.Pagination({
-    circular: <span class="literal">true</span>,
-    containers: <span class="string">'.myPagination'</span>,
-    maxPageLinks: <span class="number">5</span>,
-    on: {
-      changeRequest: <span class="keyword">function</span>(event) {
-        <span class="keyword">this</span>.setState(event.state);
+<pre class="highlighted"><code class="javascript">YUI().use(
+  <span class="string">'aui-pagination'</span>,
+  <span class="keyword">function</span>(Y) {
+    <span class="keyword">new</span> Y.Pagination(
+      {
+        circular: <span class="literal">true</span>,
+        containers: <span class="string">'.myPagination'</span>,
+        maxPageLinks: <span class="number">5</span>,
+        on: {
+          changeRequest: <span class="keyword">function</span>(event) {
+            <span class="keyword">this</span>.setState(event.state);
+          }
+        },
+        rowsPerPageOptions: [<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>],
+        total: <span class="number">10</span>
       }
-    },
-    rowsPerPageOptions: [<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>],
-    total: <span class="number">10</span>
-  }).render();
-
-});</code></pre>
+    ).render();
+  }
+);</code></pre>
 <p>You can also change what is displayed in the various links of the Pagination.</p>
-<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-pagination'</span>, <span class="keyword">function</span>(Y) {
-
-  <span class="keyword">new</span> Y.Pagination({
-    containers: <span class="string">'.myPagination'</span>,
-    firstPageLinkLabel: <span class="string">'First Page'</span>,
-    nextPageLinkLabel: <span class="string">'&gt;&gt;'</span>,
-    on: {
-      changeRequest: <span class="keyword">function</span>(event) {
-        <span class="keyword">this</span>.setState(event.state);
+<pre class="highlighted"><code class="javascript">YUI().use(
+  <span class="string">'aui-pagination'</span>,
+  <span class="keyword">function</span>(Y) {
+    <span class="keyword">new</span> Y.Pagination(
+      {
+        containers: <span class="string">'.myPagination'</span>,
+        firstPageLinkLabel: <span class="string">'First Page'</span>,
+        nextPageLinkLabel: <span class="string">'&gt;&gt;'</span>,
+        on: {
+          changeRequest: <span class="keyword">function</span>(event) {
+            <span class="keyword">this</span>.setState(event.state);
+          }
+        },
+        total: <span class="number">10</span>
       }
-    },
-    total: <span class="number">10</span>
-  }).render();
-
-});</code></pre>
+    ).render();
+  }
+);</code></pre>
 <p>So far we have shown how to initialize and configure the Pagination, but it still isn&#39;t interacting with any page content! Pagination can be utilized to paginate through content from markup or dynamic content.</p>
 <p>These actions can take place within <code>changeRequest</code>, utilizing <code>event.state.page</code>, <code>event.state.rowsPerPage</code>, etc. Check out the examples for how these changes can be executed.</p>
 <p>Here is a very basic example of how a pagination may be used to change the content of a page.</p>
-<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-pagination'</span>, <span class="keyword">function</span>(Y) {
+<pre class="highlighted"><code class="javascript">YUI().use(
+  <span class="string">'aui-pagination'</span>,
+  <span class="keyword">function</span>(Y) {
+    <span class="comment">//grabbing a node to be used for content</span>
+    <span class="keyword">var</span> content = Y.one(<span class="string">'.content'</span>);
 
-  <span class="comment">//grabbing a node to be used for content</span>
-  <span class="keyword">var</span> content = Y.one(<span class="string">'.content'</span>);
+    <span class="keyword">new</span> Y.Pagination(
+      {
+        containers: <span class="string">'.myPagination'</span>,
+        on: {
+          changeRequest: <span class="keyword">function</span>(event) {
+            <span class="keyword">var</span> newState = event.state;
 
-  <span class="keyword">new</span> Y.Pagination({
-    containers: <span class="string">'.myPagination'</span>,
-    on: {
-      changeRequest: <span class="keyword">function</span>(event) {
-        <span class="keyword">var</span> newState = event.state;
+            <span class="keyword">this</span>.setState(newState);
 
-        <span class="keyword">this</span>.setState(newState);
-
-        <span class="comment">//setting the content of the node to the current page number</span>
-        content.html(event.state.page);
+            <span class="comment">//setting the content of the node to the current page number</span>
+            content.html(event.state.page);
+          }
+        },
+        total: <span class="number">4</span>
       }
-    },
-    total: <span class="number">4</span>
-  }).render();
-
-});</code></pre>
+    ).render();
+  }
+);</code></pre>
 <div class="aui-alert aui-alert-success">
   For more information about configuration, check out our <a href="http://alloyui.com/api/">API Docs</a>.
 </div>

@@ -569,9 +569,12 @@
 <p>First load the seed file, if you haven&#39;t yet.</p>
 <pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"http://cdn.alloyui.com/2.0.0pr2/aui/aui-min.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></pre>
 <p>Then initialize AlloyUI and load the Sortable List module.</p>
-<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-sortable-list'</span>, <span class="keyword">function</span>(Y) {
-  <span class="comment">// code goes here</span>
-});</code></pre>
+<pre class="highlighted"><code class="javascript">YUI().use(
+  <span class="string">'aui-sortable-list'</span>,
+  <span class="keyword">function</span>(Y) {
+    <span class="comment">// code goes here</span>
+  }
+);</code></pre>
 <hr>
 <h4>Using Sortable List</h4>
 <p>Create an HTML list (ordered or unordered):</p>
@@ -593,46 +596,55 @@
   <span class="tag">&lt;/<span class="title">li</span>&gt;</span>
 <span class="tag">&lt;/<span class="title">ol</span>&gt;</span></code></pre>
 <p>Now create an instance of the Sortable List component, specify <code>nodes</code> for the Sortable List to apply to, and add this <code>dropCondition</code>:</p>
-<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-sortable-list'</span>, <span class="keyword">function</span>(Y) {
-
-  <span class="keyword">new</span> Y.SortableList({
-    nodes: <span class="string">'#myList li'</span>,
-    dropCondition: <span class="keyword">function</span>(event) {
-      <span class="keyword">return</span> <span class="literal">true</span>;
-    },
-    dropOn: <span class="string">'myList'</span>,
-  });
-
-});</code></pre>
+<pre class="highlighted"><code class="javascript">YUI().use(
+  <span class="string">'aui-sortable-list'</span>,
+  <span class="keyword">function</span>(Y) {
+    <span class="keyword">new</span> Y.SortableList(
+      {
+        dropCondition: <span class="keyword">function</span>(event) {
+          <span class="keyword">return</span> <span class="literal">true</span>;
+        },
+        dropOn: <span class="string">'myList'</span>,
+        nodes: <span class="string">'#myList li'</span>
+      }
+    );
+  }
+);</code></pre>
 <hr>
 <h4>Configuring Sortable List</h4>
 <p>There are quite a few more options you can pass to your Sortable List instance to customize it as you&#39;d like.</p>
 <p>For example, you can set a <code>placeholder</code> that will indicate as you drag your element where it will be dropped (you can style this element using CSS):</p>
-<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-sortable-list'</span>, <span class="keyword">function</span>(Y) {
+<pre class="highlighted"><code class="javascript">YUI().use(
+  <span class="string">'aui-sortable-list'</span>,
+  <span class="keyword">function</span>(Y) {
+    <span class="keyword">var</span> placeholder = Y.Node.create(<span class="string">'&lt;li class="placeholder"&gt;&lt;/li&gt;'</span>);
 
-  <span class="keyword">var</span> placeholder = Y.Node.create(<span class="string">'&lt;li class="placeholder"&gt;&lt;/li&gt;'</span>);
-
-  <span class="keyword">new</span> Y.SortableList({
-    nodes: <span class="string">'#myList li'</span>,
-    dropCondition: <span class="keyword">function</span>(event) {
-      <span class="keyword">return</span> <span class="literal">true</span>;
-    },
-    placeholder: placeholder,
-  });
-
-});</code></pre>
+    <span class="keyword">new</span> Y.SortableList(
+      {
+        dropCondition: <span class="keyword">function</span>(event) {
+          <span class="keyword">return</span> <span class="literal">true</span>;
+        },
+        nodes: <span class="string">'#myList li'</span>,
+        placeholder: placeholder
+      }
+    );
+  }
+);</code></pre>
 <p>You can also specify a certain type of list that the Sortable List instance will limit itself to:</p>
-<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-sortable-list'</span>, <span class="keyword">function</span>(Y) {
-
-  <span class="keyword">new</span> Y.SortableList({
-    nodes: <span class="string">'#myList li'</span>,
-    dropCondition: <span class="keyword">function</span>(event) {
-      <span class="keyword">return</span> <span class="literal">true</span>;
-    },
-    dropOn: <span class="string">'myList'</span>,
-  });
-
-});</code></pre>
+<pre class="highlighted"><code class="javascript">YUI().use(
+  <span class="string">'aui-sortable-list'</span>,
+  <span class="keyword">function</span>(Y) {
+    <span class="keyword">new</span> Y.SortableList(
+      {
+        dropCondition: <span class="keyword">function</span>(event) {
+          <span class="keyword">return</span> <span class="literal">true</span>;
+        },
+        dropOn: <span class="string">'myList'</span>,
+        nodes: <span class="string">'#myList li'</span>
+      }
+    );
+  }
+);</code></pre>
 <p>From there, you can further specify the drop container, add drop conditions, add a helper <code>div</code> in addition to the placeholder, and more!</p>
 <div class="aui-alert aui-alert-success">
   For more information about configuration, check out our <a href="http://alloyui.com/api/">API Docs</a>.

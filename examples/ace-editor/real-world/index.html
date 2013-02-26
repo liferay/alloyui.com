@@ -92,13 +92,11 @@
     <ul class="aui-nav aui-nav-list aui-bs-docs-sidenav aui-affix-top">
       
         
+      
+        
           
             <li class="aui-active"><a href="http://alloyui.com/examples/ace-editor"><i class="aui-icon-chevron-right"></i> Ace Editor</a></li>
             
-        
-      
-        
-      
         
       
         
@@ -499,6 +497,8 @@
           
         
       
+        
+      
     </ul>
 
   </div>
@@ -511,13 +511,11 @@
       <li><a href="http://alloyui.com/tutorials/ace-editor/">Introduction</a></li>
       
         
+      
+        
           
             <li><a href="http://alloyui.com/examples/ace-editor">Basic Example</a></li>
           
-        
-      
-        
-      
         
       
         
@@ -842,6 +840,8 @@
       
         
       
+        
+      
     </ul>
 
     <link rel="stylesheet" href="http://alloyui.com/ace-editor/css/basic.css" />
@@ -871,80 +871,88 @@
   <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
   <span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"myEditor"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
 <span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre>
-<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-ace-editor'</span>, <span class="keyword">function</span>(Y) {
+<pre class="highlighted"><code class="javascript">YUI().use(
+  <span class="string">'aui-ace-editor'</span>,
+  <span class="keyword">function</span>(Y) {
+    <span class="keyword">var</span> editor = <span class="keyword">new</span> Y.AceEditor(
+      {
+        boundingBox: <span class="string">'#myEditor'</span>,
+        height: <span class="string">'200'</span>,
+        mode: <span class="string">'javascript'</span>,
+        value: <span class="string">'alert("Write something here...");'</span>,
+        width: <span class="string">'700'</span>
+      }
+    ).render();
 
-  <span class="keyword">var</span> editor = <span class="keyword">new</span> Y.AceEditor({
-    boundingBox: <span class="string">'#myEditor'</span>,
-    mode: <span class="string">'javascript'</span>,
-    value: <span class="string">'alert("Write something here...");'</span>,
-    width: <span class="string">'700'</span>,
-    height: <span class="string">'200'</span>
-  }).render();
+    <span class="keyword">var</span> mode = Y.one(<span class="string">'#mode'</span>);
 
-  <span class="keyword">var</span> mode = Y.one(<span class="string">'#mode'</span>);
+    <span class="keyword">if</span> (mode) {
+      <span class="keyword">var</span> contents = {
+        javascript: <span class="string">'alert("Write something here...");'</span>,
+        json: <span class="string">'{"value": "Write something here..."}'</span>,
+        php: <span class="string">'&lt;?php echo "Write something here..."; ?&gt;'</span>,
+        xml: <span class="string">'&lt;value attr="something"&gt;Write something here...&lt;/value&gt;'</span>
+      };
 
-  <span class="keyword">if</span> (mode) {
+      <span class="keyword">var</span> currentMode = <span class="string">'javascript'</span>;
 
-    <span class="keyword">var</span> contents = {
-      javascript: <span class="string">'alert("Write something here...");'</span>,
-      php: <span class="string">'&lt;?php echo "Write something here..."; ?&gt;'</span>,
-      xml: <span class="string">'&lt;value attr="something"&gt;Write something here...&lt;/value&gt;'</span>,
-      json: <span class="string">'{"value": "Write something here..."}'</span>
-    };
+      <span class="keyword">var</span> updateValue = <span class="keyword">function</span>() {
+        editor.set(<span class="string">'value'</span>, contents[currentMode]);
+      };
 
-    <span class="keyword">var</span> currentMode = <span class="string">'javascript'</span>;
-
-    <span class="keyword">var</span> updateValue = <span class="keyword">function</span>() {
-      editor.set(<span class="string">'value'</span>, contents[currentMode]);
-    };
-
-    mode.on(<span class="string">'change'</span>, <span class="keyword">function</span>(event) {
-      currentMode = <span class="keyword">this</span>.val();
-      editor.set(<span class="string">'mode'</span>, currentMode);
-      updateValue();
-    });
-
+      mode.on(
+        <span class="string">'change'</span>,
+        <span class="keyword">function</span>(event) {
+          currentMode = <span class="keyword">this</span>.val();
+          editor.set(<span class="string">'mode'</span>, currentMode);
+          updateValue();
+        }
+      );
+    }
   }
-
-});</code></pre>
+);</code></pre>
 
 <script>
-  YUI().use('aui-ace-editor', function(Y) {
+  YUI().use(
+  'aui-ace-editor',
+  function(Y) {
+    var editor = new Y.AceEditor(
+      {
+        boundingBox: '#myEditor',
+        height: '200',
+        mode: 'javascript',
+        value: 'alert("Write something here...");',
+        width: '700'
+      }
+    ).render();
 
-  var editor = new Y.AceEditor({
-    boundingBox: '#myEditor',
-    mode: 'javascript',
-    value: 'alert("Write something here...");',
-    width: '700',
-    height: '200'
-  }).render();
+    var mode = Y.one('#mode');
 
-  var mode = Y.one('#mode');
+    if (mode) {
+      var contents = {
+        javascript: 'alert("Write something here...");',
+        json: '{"value": "Write something here..."}',
+        php: '<?php echo "Write something here..."; ?>',
+        xml: '<value attr="something">Write something here...</value>'
+      };
 
-  if (mode) {
+      var currentMode = 'javascript';
 
-    var contents = {
-      javascript: 'alert("Write something here...");',
-      php: '<?php echo "Write something here..."; ?>',
-      xml: '<value attr="something">Write something here...</value>',
-      json: '{"value": "Write something here..."}'
-    };
+      var updateValue = function() {
+        editor.set('value', contents[currentMode]);
+      };
 
-    var currentMode = 'javascript';
-
-    var updateValue = function() {
-      editor.set('value', contents[currentMode]);
-    };
-
-    mode.on('change', function(event) {
-      currentMode = this.val();
-      editor.set('mode', currentMode);
-      updateValue();
-    });
-
+      mode.on(
+        'change',
+        function(event) {
+          currentMode = this.val();
+          editor.set('mode', currentMode);
+          updateValue();
+        }
+      );
+    }
   }
-
-});
+);
 </script>
 
   </div>

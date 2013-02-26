@@ -92,8 +92,6 @@
     <ul class="aui-nav aui-nav-list aui-bs-docs-sidenav aui-affix-top">
       
         
-      
-        
           
             <li><a href="http://alloyui.com/examples/ace-editor"><i class="aui-icon-chevron-right"></i> Ace Editor</a></li>
           
@@ -499,6 +497,8 @@
           
         
       
+        
+      
     </ul>
 
   </div>
@@ -509,8 +509,6 @@
 
     <ul class="aui-nav aui-nav-tabs">
       <li><a href="http://alloyui.com/tutorials/scheduler/">Introduction</a></li>
-      
-        
       
         
       
@@ -842,6 +840,8 @@
       
         
       
+        
+      
     </ul>
 
     <link rel="stylesheet" href="http://alloyui.com/scheduler/basic.css" />
@@ -849,132 +849,138 @@
 <div id="myScheduler"></div>
 
 <pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"myScheduler"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre>
-<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-scheduler'</span>, <span class="keyword">function</span>(Y) {
+<pre class="highlighted"><code class="javascript">YUI().use(
+  <span class="string">'aui-scheduler'</span>,
+  <span class="keyword">function</span>(Y) {
+    <span class="keyword">var</span> events = [
+      {
+        content: <span class="string">'AllDay'</span>,
+        endDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">23</span>, <span class="number">59</span>),
+        startDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">0</span>)
+      },
+      {
+        color: <span class="string">'#8D8'</span>,
+        content: <span class="string">'Colorful'</span>,
+        endDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">1</span>, <span class="number">6</span>, <span class="number">6</span>),
+        startDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">1</span>, <span class="number">6</span>, <span class="number">2</span>)
+      },
+      {
+        content: <span class="string">'MultipleDays'</span>,
+        endDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">1</span>, <span class="number">8</span>),
+        startDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">1</span>, <span class="number">4</span>)
+      },
+      {
+        content: <span class="string">'Disabled'</span>,
+        disabled: <span class="literal">true</span>,
+        endDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">1</span>, <span class="number">8</span>, <span class="number">5</span>),
+        startDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">1</span>, <span class="number">8</span>, <span class="number">1</span>)
+      },
+      {
+        content: <span class="string">'Meeting'</span>,
+        endDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">1</span>, <span class="number">7</span>, <span class="number">7</span>),
+        meeting: <span class="literal">true</span>,
+        startDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">1</span>, <span class="number">7</span>, <span class="number">3</span>)
+      },
+      {
+        color: <span class="string">'#88D'</span>,
+        content: <span class="string">'Overlap'</span>,
+        endDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">4</span>),
+        startDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">1</span>)
+      },
+      {
+        content: <span class="string">'Reminder'</span>,
+        endDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">4</span>),
+        reminder: <span class="literal">true</span>,
+        startDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">0</span>)
+      }
+    ];
 
-  <span class="keyword">var</span> events = [
-    {
-      content: <span class="string">"AllDay"</span>,
-      endDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">23</span>, <span class="number">59</span>),
-      startDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">0</span>)
-    },
-    {
-      color: <span class="string">'#8D8'</span>,
-      content: <span class="string">"Colorful"</span>,
-      endDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">1</span>, <span class="number">6</span>, <span class="number">6</span>),
-      startDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">1</span>, <span class="number">6</span>, <span class="number">2</span>)
-    },
-    {
-      content: <span class="string">"MultipleDays"</span>,
-      endDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">1</span>, <span class="number">8</span>),
-      startDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">1</span>, <span class="number">4</span>)
-    },
-    {
-      content: <span class="string">"Disabled"</span>,
-      disabled: <span class="literal">true</span>,
-      endDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">1</span>, <span class="number">8</span>, <span class="number">5</span>),
-      startDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">1</span>, <span class="number">8</span>, <span class="number">1</span>)
-    },
-    {
-      content: <span class="string">"Meeting"</span>,
-      endDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">1</span>, <span class="number">7</span>, <span class="number">7</span>),
-      meeting: <span class="literal">true</span>,
-      startDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">1</span>, <span class="number">7</span>, <span class="number">3</span>)
-    },
-    {
-      color: <span class="string">'#88D'</span>,
-      content: <span class="string">"Overlap"</span>,
-      endDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">4</span>),
-      startDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">1</span>)
-    },
-    {
-      content: <span class="string">"Reminder"</span>,
-      endDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">4</span>),
-      reminder: <span class="literal">true</span>,
-      startDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">0</span>)
-    }
-  ];
+    <span class="keyword">var</span> agendaView = <span class="keyword">new</span> Y.SchedulerAgendaView();
+    <span class="keyword">var</span> dayView = <span class="keyword">new</span> Y.SchedulerDayView();
+    <span class="keyword">var</span> eventRecorder = <span class="keyword">new</span> Y.SchedulerEventRecorder();
+    <span class="keyword">var</span> monthView = <span class="keyword">new</span> Y.SchedulerMonthView();
+    <span class="keyword">var</span> weekView = <span class="keyword">new</span> Y.SchedulerWeekView();
 
-  <span class="keyword">var</span> agendaView = <span class="keyword">new</span> Y.SchedulerAgendaView();
-  <span class="keyword">var</span> dayView = <span class="keyword">new</span> Y.SchedulerDayView();
-  <span class="keyword">var</span> eventRecorder = <span class="keyword">new</span> Y.SchedulerEventRecorder();
-  <span class="keyword">var</span> monthView = <span class="keyword">new</span> Y.SchedulerMonthView();
-  <span class="keyword">var</span> weekView = <span class="keyword">new</span> Y.SchedulerWeekView();
-
-  <span class="keyword">new</span> Y.Scheduler({
-    activeView: weekView,
-    boundingBox: <span class="string">'#myScheduler'</span>,
-    date: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">1</span>, <span class="number">4</span>),
-    eventRecorder: eventRecorder,
-    items: events,
-    render: <span class="literal">true</span>,
-    views: [dayView, weekView, monthView, agendaView]
-  });
-
-});</code></pre>
+    <span class="keyword">new</span> Y.Scheduler(
+      {
+        activeView: weekView,
+        boundingBox: <span class="string">'#myScheduler'</span>,
+        date: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">1</span>, <span class="number">4</span>),
+        eventRecorder: eventRecorder,
+        items: events,
+        render: <span class="literal">true</span>,
+        views: [dayView, weekView, monthView, agendaView]
+      }
+    );
+  }
+);</code></pre>
 
 <script>
-  YUI().use('aui-scheduler', function(Y) {
+  YUI().use(
+  'aui-scheduler',
+  function(Y) {
+    var events = [
+      {
+        content: 'AllDay',
+        endDate: new Date(2013, 1, 5, 23, 59),
+        startDate: new Date(2013, 1, 5, 0)
+      },
+      {
+        color: '#8D8',
+        content: 'Colorful',
+        endDate: new Date(2013, 1, 6, 6),
+        startDate: new Date(2013, 1, 6, 2)
+      },
+      {
+        content: 'MultipleDays',
+        endDate: new Date(2013, 1, 8),
+        startDate: new Date(2013, 1, 4)
+      },
+      {
+        content: 'Disabled',
+        disabled: true,
+        endDate: new Date(2013, 1, 8, 5),
+        startDate: new Date(2013, 1, 8, 1)
+      },
+      {
+        content: 'Meeting',
+        endDate: new Date(2013, 1, 7, 7),
+        meeting: true,
+        startDate: new Date(2013, 1, 7, 3)
+      },
+      {
+        color: '#88D',
+        content: 'Overlap',
+        endDate: new Date(2013, 1, 5, 4),
+        startDate: new Date(2013, 1, 5, 1)
+      },
+      {
+        content: 'Reminder',
+        endDate: new Date(2013, 1, 4, 4),
+        reminder: true,
+        startDate: new Date(2013, 1, 4, 0)
+      }
+    ];
 
-  var events = [
-    {
-      content: "AllDay",
-      endDate: new Date(2013, 1, 5, 23, 59),
-      startDate: new Date(2013, 1, 5, 0)
-    },
-    {
-      color: '#8D8',
-      content: "Colorful",
-      endDate: new Date(2013, 1, 6, 6),
-      startDate: new Date(2013, 1, 6, 2)
-    },
-    {
-      content: "MultipleDays",
-      endDate: new Date(2013, 1, 8),
-      startDate: new Date(2013, 1, 4)
-    },
-    {
-      content: "Disabled",
-      disabled: true,
-      endDate: new Date(2013, 1, 8, 5),
-      startDate: new Date(2013, 1, 8, 1)
-    },
-    {
-      content: "Meeting",
-      endDate: new Date(2013, 1, 7, 7),
-      meeting: true,
-      startDate: new Date(2013, 1, 7, 3)
-    },
-    {
-      color: '#88D',
-      content: "Overlap",
-      endDate: new Date(2013, 1, 5, 4),
-      startDate: new Date(2013, 1, 5, 1)
-    },
-    {
-      content: "Reminder",
-      endDate: new Date(2013, 1, 4, 4),
-      reminder: true,
-      startDate: new Date(2013, 1, 4, 0)
-    }
-  ];
+    var agendaView = new Y.SchedulerAgendaView();
+    var dayView = new Y.SchedulerDayView();
+    var eventRecorder = new Y.SchedulerEventRecorder();
+    var monthView = new Y.SchedulerMonthView();
+    var weekView = new Y.SchedulerWeekView();
 
-  var agendaView = new Y.SchedulerAgendaView();
-  var dayView = new Y.SchedulerDayView();
-  var eventRecorder = new Y.SchedulerEventRecorder();
-  var monthView = new Y.SchedulerMonthView();
-  var weekView = new Y.SchedulerWeekView();
-
-  new Y.Scheduler({
-    activeView: weekView,
-    boundingBox: '#myScheduler',
-    date: new Date(2013, 1, 4),
-    eventRecorder: eventRecorder,
-    items: events,
-    render: true,
-    views: [dayView, weekView, monthView, agendaView]
-  });
-
-});
+    new Y.Scheduler(
+      {
+        activeView: weekView,
+        boundingBox: '#myScheduler',
+        date: new Date(2013, 1, 4),
+        eventRecorder: eventRecorder,
+        items: events,
+        render: true,
+        views: [dayView, weekView, monthView, agendaView]
+      }
+    );
+  }
+);
 </script>
 
   </div>

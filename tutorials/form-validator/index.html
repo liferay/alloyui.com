@@ -571,9 +571,12 @@
 <p>First load the seed file, if you haven&#39;t yet.</p>
 <pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"http://cdn.alloyui.com/2.0.0pr2/aui/aui-min.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></pre>
 <p>Then initialize AlloyUI and load the Form Validator module.</p>
-<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-form-validator'</span>, <span class="keyword">function</span>(Y) {
-  <span class="comment">// code goes here</span>
-});</code></pre>
+<pre class="highlighted"><code class="javascript">YUI().use(
+  <span class="string">'aui-form-validator'</span>,
+  <span class="keyword">function</span>(Y) {
+    <span class="comment">// code goes here</span>
+  }
+);</code></pre>
 <hr>
 <h4>Using Form Validator</h4>
 <p>In order to validate form entries, a form must first be created in HTML.</p>
@@ -586,94 +589,109 @@
   <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
 <span class="tag">&lt;/<span class="title">form</span>&gt;</span></code></pre>
 <p>Set <code>boundingBox</code> to the form id, pass in the input element name under <code>rules</code>, and set <code>required</code> to <code>true</code>.</p>
-<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-form-validator'</span>, <span class="keyword">function</span>(Y) {
-
-  <span class="keyword">new</span> Y.FormValidator({
-    boundingBox: <span class="string">'#myForm'</span>,
-    rules: {
-      name: {
-        required: <span class="literal">true</span>,
+<pre class="highlighted"><code class="javascript">YUI().use(
+  <span class="string">'aui-form-validator'</span>,
+  <span class="keyword">function</span>(Y) {
+    <span class="keyword">new</span> Y.FormValidator(
+      {
+        boundingBox: <span class="string">'#myForm'</span>,
+        rules: {
+          name: {
+            required: <span class="literal">true</span>
+          }
+        }
       }
-    }
-  });
-
-});</code></pre>
+    );
+  }
+);</code></pre>
 <p>Now, if the user attempted to subit the form without filling out the name field, they would receive an alert reading, &quot;This field is required.&quot;</p>
 <hr>
 <h4>Configuring Form Validator</h4>
 <p>Further requirements can be specified depending on the input type. For example, if the form input is for an email address, Form Validator can ensure that the text entered is a valid email address by setting <code>email</code> to <code>true</code>.</p>
-<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-form-validator'</span>, <span class="keyword">function</span>(Y) {
-
-  <span class="keyword">new</span> Y.FormValidator({
-    boundingBox: <span class="string">'#myForm'</span>,
-    rules: {
-      email: {
-        required: <span class="literal">true</span>,
-        email: <span class="literal">true</span>
+<pre class="highlighted"><code class="javascript">YUI().use(
+  <span class="string">'aui-form-validator'</span>,
+  <span class="keyword">function</span>(Y) {
+    <span class="keyword">new</span> Y.FormValidator(
+      {
+        boundingBox: <span class="string">'#myForm'</span>,
+        rules: {
+          email: {
+            email: <span class="literal">true</span>,
+            required: <span class="literal">true</span>
+          }
+        }
       }
-    }
-  });
-
-});</code></pre>
+    );
+  }
+);</code></pre>
 <p>The same can be done for various other inputs.</p>
-<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-form-validator'</span>, <span class="keyword">function</span>(Y) {
-
-  <span class="keyword">new</span> Y.FormValidator({
-    boundingBox: <span class="string">'#myForm'</span>,
-    rules: {
-      name: {
-        required: <span class="literal">true</span>,
-        rangeLength: [<span class="number">2</span>,<span class="number">50</span>]
-      },
-      url: {
-        required: <span class="literal">true</span>,
-        url: <span class="literal">true</span>
-      },
-      age: {
-        required: <span class="literal">true</span>,
-        digits: <span class="literal">true</span>
+<pre class="highlighted"><code class="javascript">YUI().use(
+  <span class="string">'aui-form-validator'</span>,
+  <span class="keyword">function</span>(Y) {
+    <span class="keyword">new</span> Y.FormValidator(
+      {
+        boundingBox: <span class="string">'#myForm'</span>,
+        rules: {
+          age: {
+            digits: <span class="literal">true</span>,
+            required: <span class="literal">true</span>
+          },
+          name: {
+            rangeLength: [<span class="number">2</span>,<span class="number">50</span>],
+            required: <span class="literal">true</span>
+          },
+          url: {
+            required: <span class="literal">true</span>,
+            url: <span class="literal">true</span>
+          }
+        }
       }
-    }
-  });
-
-});</code></pre>
+    );
+  }
+);</code></pre>
 <p>Further configuration includes creating custom alerts that are displayed when invalid content is entered into a field (this replaces the default &quot;This feild is required&quot; message).</p>
-<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-form-validator'</span>, <span class="keyword">function</span>(Y) {
-
-  <span class="keyword">new</span> Y.FormValidator({
-    boundingBox: <span class="string">'#myForm'</span>,
-    rules: {
-      name: {
-        required: <span class="literal">true</span>,
+<pre class="highlighted"><code class="javascript">YUI().use(
+  <span class="string">'aui-form-validator'</span>,
+  <span class="keyword">function</span>(Y) {
+    <span class="keyword">new</span> Y.FormValidator(
+      {
+        boundingBox: <span class="string">'#myForm'</span>,
+        fieldStrings: {
+          name: {
+            required: <span class="string">'We need your name! (Custom message)'</span>
+          }
+        },
+        rules: {
+          name: {
+            required: <span class="literal">true</span>
+          }
+        }
       }
-    },
-    fieldStrings: {
-      name: {
-        required: <span class="string">'We need your name! (Custom message)'</span>
-      }
-    }
-  });
-
-});</code></pre>
+    );
+  }
+);</code></pre>
 <p>Furthermore, the requirements can be customized beyond the default parameters. For example, one input can have the requirement of being equal to the content entered into another field.</p>
-<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-form-validator'</span>, <span class="keyword">function</span>(Y) {
-
-  <span class="keyword">new</span> Y.FormValidator({
-    boundingBox: <span class="string">'#myForm'</span>,
-    rules: {
-      email: {
-        required: <span class="literal">true</span>,
-        email: <span class="literal">true</span>
-      },
-      emailConfirmation: {
-        required: <span class="literal">true</span>,
-        email: <span class="literal">true</span>,
-        equalTo: <span class="string">'#email'</span>
+<pre class="highlighted"><code class="javascript">YUI().use(
+  <span class="string">'aui-form-validator'</span>,
+  <span class="keyword">function</span>(Y) {
+    <span class="keyword">new</span> Y.FormValidator(
+      {
+        boundingBox: <span class="string">'#myForm'</span>,
+        rules: {
+          email: {
+            email: <span class="literal">true</span>,
+            required: <span class="literal">true</span>
+          },
+          emailConfirmation: {
+            email: <span class="literal">true</span>,
+            equalTo: <span class="string">'#email'</span>,
+            required: <span class="literal">true</span>
+          }
+        }
       }
-    }
-  });
-
-});</code></pre>
+    );
+  }
+);</code></pre>
 <div class="aui-alert aui-alert-success">
   For more information about configuration, check out our <a href="http://alloyui.com/api/">API Docs</a>.
 </div>

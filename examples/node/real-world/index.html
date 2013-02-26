@@ -338,8 +338,6 @@
         
       
         
-      
-        
           
             <li><a href="http://alloyui.com/examples/audio"><i class="aui-icon-chevron-right"></i> Audio</a></li>
           
@@ -499,6 +497,8 @@
           
         
       
+        
+      
     </ul>
 
   </div>
@@ -509,8 +509,6 @@
 
     <ul class="aui-nav aui-nav-tabs">
       <li><a href="http://alloyui.com/tutorials/node/">Introduction</a></li>
-      
-        
       
         
       
@@ -846,6 +844,8 @@
       
         
       
+        
+      
     </ul>
 
     <link rel="stylesheet" href="http://alloyui.com/node/css/real-world.css" type="text/css" />
@@ -900,65 +900,79 @@
 
 <span class="tag">&lt;/<span class="title">form</span>&gt;</span></code></pre>
 <pre class="highlighted"><code class="javascript"><span class="comment">// Create an AUI instance and load the 'aui-node' module</span>
-YUI().use(<span class="string">'aui-node'</span>, <span class="keyword">function</span>(Y) {
+YUI().use(
+  <span class="string">'aui-node'</span>,
+  <span class="keyword">function</span>(Y) {
+    <span class="keyword">var</span> lastJobNumber = <span class="number">1</span>;
+    <span class="keyword">var</span> newJobNumber = <span class="number">2</span>;
+    <span class="keyword">var</span> job = <span class="string">'&lt;div class="job added"&gt;&lt;/div&gt;'</span>;
+    <span class="keyword">var</span> jobContent = <span class="string">'&lt;h5&gt;Previous job: &lt;/h5&gt;&lt;label for="position2"&gt;Position: &lt;/label&gt;&lt;input type="text" id="position2"&gt;&lt;br&gt;&lt;label for="employer2"&gt;Employer: &lt;/label&gt;&lt;input type="text" id="employer2"&gt;&lt;br&gt;&lt;label for="dateRange"&gt;Dates of Employment: &lt;/label&gt;&lt;input type="text" id="dateRange"&gt;&lt;br&gt;'</span>;
 
-  <span class="keyword">var</span> lastJobNumber = <span class="number">1</span>;
-  <span class="keyword">var</span> newJobNumber = <span class="number">2</span>;
-  <span class="keyword">var</span> job = <span class="string">'&lt;div class="job added"&gt;&lt;/div&gt;'</span>;
-  <span class="keyword">var</span> jobContent = <span class="string">'&lt;h5&gt;Previous job: &lt;/h5&gt;&lt;label for="position2"&gt;Position: &lt;/label&gt;&lt;input type="text" id="position2"&gt;&lt;br&gt;&lt;label for="employer2"&gt;Employer: &lt;/label&gt;&lt;input type="text" id="employer2"&gt;&lt;br&gt;&lt;label for="dateRange"&gt;Dates of Employment: &lt;/label&gt;&lt;input type="text" id="dateRange"&gt;&lt;br&gt;'</span>;
+    Y.one(<span class="string">'#addJob'</span>).on(
+      <span class="string">'click'</span>,
+      <span class="keyword">function</span>() {
+        <span class="comment">// Create a new Job node and give it an appropriate ID</span>
+        <span class="keyword">var</span> newJob = Y.Node.create(job);
+        newJob.attr(<span class="string">'id'</span>, <span class="string">'job'</span> + newJobNumber);
 
-  Y.one(<span class="string">'#addJob'</span>).on(<span class="string">'click'</span>, <span class="keyword">function</span>() {
-    <span class="comment">// Create a new Job node and give it an appropriate ID</span>
-    <span class="keyword">var</span> newJob = Y.Node.create(job);
-    newJob.attr(<span class="string">'id'</span>, <span class="string">'job'</span> + newJobNumber);
+        <span class="comment">// Place the node in its spot in the DOM and populate it</span>
+        <span class="keyword">var</span> lastJob = <span class="string">'#job'</span> + lastJobNumber;
+        Y.one(lastJob).placeAfter(newJob);
+        newJob.html(jobContent);
 
-    <span class="comment">// Place the node in its spot in the DOM and populate it</span>
-    <span class="keyword">var</span> lastJob = <span class="string">"#job"</span> + lastJobNumber;
-    Y.one(lastJob).placeAfter(newJob);
-    newJob.html(jobContent);
+        <span class="comment">// Increment the values in case another job is added</span>
+        lastJobNumber++;
+        newJobNumber++;
+      }
+    );
 
-    <span class="comment">// Increment the values in case another job is added</span>
-    lastJobNumber++;
-    newJobNumber++;
-  });
-
-  Y.one(<span class="string">'#reset'</span>).on(<span class="string">'click'</span>, <span class="keyword">function</span>() {
-    <span class="comment">// Reset the original number of fields when "Reset" is pressed</span>
-    Y.all(<span class="string">'#jobForm .added'</span>).remove(<span class="literal">true</span>);
-  })
-
-});</code></pre>
+    Y.one(<span class="string">'#reset'</span>).on(
+      <span class="string">'click'</span>,
+      <span class="keyword">function</span>() {
+        <span class="comment">// Reset the original number of fields when "Reset" is pressed</span>
+        Y.all(<span class="string">'#jobForm .added'</span>).remove(<span class="literal">true</span>);
+      }
+    );
+  }
+);</code></pre>
 
 <script>
   // Create an AUI instance and load the 'aui-node' module
-YUI().use('aui-node', function(Y) {
+YUI().use(
+  'aui-node',
+  function(Y) {
+    var lastJobNumber = 1;
+    var newJobNumber = 2;
+    var job = '<div class="job added"></div>';
+    var jobContent = '<h5>Previous job: </h5><label for="position2">Position: </label><input type="text" id="position2"><br><label for="employer2">Employer: </label><input type="text" id="employer2"><br><label for="dateRange">Dates of Employment: </label><input type="text" id="dateRange"><br>';
 
-  var lastJobNumber = 1;
-  var newJobNumber = 2;
-  var job = '<div class="job added"></div>';
-  var jobContent = '<h5>Previous job: </h5><label for="position2">Position: </label><input type="text" id="position2"><br><label for="employer2">Employer: </label><input type="text" id="employer2"><br><label for="dateRange">Dates of Employment: </label><input type="text" id="dateRange"><br>';
+    Y.one('#addJob').on(
+      'click',
+      function() {
+        // Create a new Job node and give it an appropriate ID
+        var newJob = Y.Node.create(job);
+        newJob.attr('id', 'job' + newJobNumber);
 
-  Y.one('#addJob').on('click', function() {
-    // Create a new Job node and give it an appropriate ID
-    var newJob = Y.Node.create(job);
-    newJob.attr('id', 'job' + newJobNumber);
+        // Place the node in its spot in the DOM and populate it
+        var lastJob = '#job' + lastJobNumber;
+        Y.one(lastJob).placeAfter(newJob);
+        newJob.html(jobContent);
 
-    // Place the node in its spot in the DOM and populate it
-    var lastJob = "#job" + lastJobNumber;
-    Y.one(lastJob).placeAfter(newJob);
-    newJob.html(jobContent);
+        // Increment the values in case another job is added
+        lastJobNumber++;
+        newJobNumber++;
+      }
+    );
 
-    // Increment the values in case another job is added
-    lastJobNumber++;
-    newJobNumber++;
-  });
-
-  Y.one('#reset').on('click', function() {
-    // Reset the original number of fields when "Reset" is pressed
-    Y.all('#jobForm .added').remove(true);
-  })
-
-});
+    Y.one('#reset').on(
+      'click',
+      function() {
+        // Reset the original number of fields when "Reset" is pressed
+        Y.all('#jobForm .added').remove(true);
+      }
+    );
+  }
+);
 </script>
 
   </div>

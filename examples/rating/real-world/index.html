@@ -338,8 +338,6 @@
         
       
         
-      
-        
           
             <li><a href="http://alloyui.com/examples/audio"><i class="aui-icon-chevron-right"></i> Audio</a></li>
           
@@ -499,6 +497,8 @@
           
         
       
+        
+      
     </ul>
 
   </div>
@@ -509,8 +509,6 @@
 
     <ul class="aui-nav aui-nav-tabs">
       <li><a href="http://alloyui.com/tutorials/rating/">Introduction</a></li>
-      
-        
       
         
       
@@ -842,6 +840,8 @@
       
         
       
+        
+      
     </ul>
 
     <link rel="stylesheet" href="http://alloyui.com/rating/css/real-world.css" />
@@ -871,56 +871,72 @@
 <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
 
 <span class="tag">&lt;<span class="title">p</span> <span class="attribute">id</span>=<span class="value">"titleBox"</span>&gt;</span><span class="tag">&lt;/<span class="title">p</span>&gt;</span></code></pre>
-<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-rating'</span>, <span class="string">'node'</span>, <span class="keyword">function</span>(Y) {
+<pre class="highlighted"><code class="javascript">YUI().use(
+  <span class="string">'aui-rating'</span>,
+  <span class="string">'node'</span>,
+  <span class="keyword">function</span>(Y) {
+    <span class="keyword">var</span> titleBox = Y.one(<span class="string">'#titleBox'</span>);
+    <span class="keyword">var</span> instance, title, stars;
 
-  <span class="keyword">var</span> titleBox = Y.one(<span class="string">'#titleBox'</span>);
-  <span class="keyword">var</span> instance, title, stars;
+    <span class="keyword">var</span> rating = <span class="keyword">new</span> Y.StarRating(
+      {
+        boundingBox: <span class="string">'#myRating'</span>,
+        disabled: <span class="literal">false</span>,
+        label: <span class="string">"It's OK to be honest:"</span>
+      }
+    ).render();
 
-  <span class="keyword">var</span> rating = <span class="keyword">new</span> Y.StarRating({
-    boundingBox: <span class="string">'#myRating'</span>,
-    disabled: <span class="literal">false</span>,
-    label: <span class="string">"It's OK to be honest:"</span>
-  }).render();
+    rating.on(
+      <span class="string">'click'</span>,
+      <span class="keyword">function</span>(event) {
+        instance = event.target;
+        title = instance.get(<span class="string">'title'</span>);
+        stars = instance.get(<span class="string">'value'</span>);
 
-  rating.on(<span class="string">'click'</span>, <span class="keyword">function</span>(event) {
-    instance = event.target;
-    title = instance.get(<span class="string">'title'</span>);
-    stars = instance.get(<span class="string">'value'</span>);
-    <span class="keyword">if</span> (!title) {
-      titleBox.set(<span class="string">'innerHTML'</span>, <span class="string">'You selected &lt;strong&gt;0 stars&lt;/strong&gt; - no rating!'</span>);
-    }
-    <span class="keyword">else</span> {
-      titleBox.set(<span class="string">'innerHTML'</span>, <span class="string">'You selected &lt;strong&gt;'</span> + stars + <span class="string">' stars&lt;/strong&gt; - "'</span> + title + <span class="string">'"!'</span>);
-    }
-  });
-
-});</code></pre>
+        <span class="keyword">if</span> (!title) {
+          titleBox.set(<span class="string">'innerHTML'</span>, <span class="string">'You selected &lt;strong&gt;0 stars&lt;/strong&gt; - no rating!'</span>);
+        }
+        <span class="keyword">else</span> {
+          titleBox.set(<span class="string">'innerHTML'</span>, <span class="string">'You selected &lt;strong&gt;'</span> + stars + <span class="string">' stars&lt;/strong&gt; - "'</span> + title + <span class="string">'"!'</span>);
+        }
+      }
+    );
+  }
+);</code></pre>
 
 <script>
-  YUI().use('aui-rating', 'node', function(Y) {
+  YUI().use(
+  'aui-rating',
+  'node',
+  function(Y) {
+    var titleBox = Y.one('#titleBox');
+    var instance, title, stars;
 
-  var titleBox = Y.one('#titleBox');
-  var instance, title, stars;
+    var rating = new Y.StarRating(
+      {
+        boundingBox: '#myRating',
+        disabled: false,
+        label: "It's OK to be honest:"
+      }
+    ).render();
 
-  var rating = new Y.StarRating({
-    boundingBox: '#myRating',
-    disabled: false,
-    label: "It's OK to be honest:"
-  }).render();
+    rating.on(
+      'click',
+      function(event) {
+        instance = event.target;
+        title = instance.get('title');
+        stars = instance.get('value');
 
-  rating.on('click', function(event) {
-    instance = event.target;
-    title = instance.get('title');
-    stars = instance.get('value');
-    if (!title) {
-      titleBox.set('innerHTML', 'You selected <strong>0 stars</strong> - no rating!');
-    }
-    else {
-      titleBox.set('innerHTML', 'You selected <strong>' + stars + ' stars</strong> - "' + title + '"!');
-    }
-  });
-
-});
+        if (!title) {
+          titleBox.set('innerHTML', 'You selected <strong>0 stars</strong> - no rating!');
+        }
+        else {
+          titleBox.set('innerHTML', 'You selected <strong>' + stars + ' stars</strong> - "' + title + '"!');
+        }
+      }
+    );
+  }
+);
 </script>
 
   </div>

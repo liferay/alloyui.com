@@ -94,169 +94,169 @@
         
       
         
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
           
             <li><a href="http://alloyui.com/examples/ace-editor"><i class="aui-icon-chevron-right"></i> Ace Editor</a></li>
           
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
         
       
         
@@ -895,56 +895,64 @@
     <span class="tag">&lt;<span class="title">li</span>&gt;</span><span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#"</span>&gt;</span>Next<span class="tag">&lt;/<span class="title">a</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span>
   <span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
 <span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre>
-<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-pagination'</span>, <span class="keyword">function</span>(Y) {
+<pre class="highlighted"><code class="javascript">YUI().use(
+  <span class="string">'aui-pagination'</span>,
+  <span class="keyword">function</span>(Y) {
+    <span class="keyword">var</span> pages = Y.all(<span class="string">'.content div'</span>);
 
-  <span class="keyword">var</span> pages = Y.all(<span class="string">'.content div'</span>);
+    <span class="keyword">new</span> Y.Pagination(
+      {
+        boundingBox: <span class="string">'#pagination'</span>,
+        circular: <span class="literal">false</span>,
+        contentBox: <span class="string">'#pagination .aui-pagination-content'</span>,
+        on: {
+          changeRequest: <span class="keyword">function</span>(event) {
+            <span class="keyword">var</span> instance = <span class="keyword">this</span>,
+                state = event.state,
+                lastState = event.lastState;
 
-  <span class="keyword">new</span> Y.Pagination({
-    boundingBox: <span class="string">'#pagination'</span>,
-    contentBox: <span class="string">'#pagination .aui-pagination-content'</span>,
-    circular: <span class="literal">false</span>,
-    page: <span class="number">1</span>,
-    on: {
-      changeRequest: <span class="keyword">function</span>(event) {
-        <span class="keyword">var</span> instance = <span class="keyword">this</span>,
-            state = event.state,
-            lastState = event.lastState;
+            <span class="keyword">if</span> (lastState) {
+                pages.item(lastState.page - <span class="number">1</span>).setStyle(<span class="string">'display'</span>, <span class="string">'none'</span>);
+            }
 
-        <span class="keyword">if</span> (lastState) {
-            pages.item(lastState.page - <span class="number">1</span>).setStyle(<span class="string">'display'</span>, <span class="string">'none'</span>);
-        }
-        pages.item(state.page - <span class="number">1</span>).setStyle(<span class="string">'display'</span>, <span class="string">'block'</span>);
+            pages.item(state.page - <span class="number">1</span>).setStyle(<span class="string">'display'</span>, <span class="string">'block'</span>);
+          }
+        },
+        page: <span class="number">1</span>
       }
-    }
-  }).render();
-
-});</code></pre>
+    ).render();
+  }
+);</code></pre>
 
 <script>
-  YUI().use('aui-pagination', function(Y) {
+  YUI().use(
+  'aui-pagination',
+  function(Y) {
+    var pages = Y.all('.content div');
 
-  var pages = Y.all('.content div');
+    new Y.Pagination(
+      {
+        boundingBox: '#pagination',
+        circular: false,
+        contentBox: '#pagination .aui-pagination-content',
+        on: {
+          changeRequest: function(event) {
+            var instance = this,
+                state = event.state,
+                lastState = event.lastState;
 
-  new Y.Pagination({
-    boundingBox: '#pagination',
-    contentBox: '#pagination .aui-pagination-content',
-    circular: false,
-    page: 1,
-    on: {
-      changeRequest: function(event) {
-        var instance = this,
-            state = event.state,
-            lastState = event.lastState;
+            if (lastState) {
+                pages.item(lastState.page - 1).setStyle('display', 'none');
+            }
 
-        if (lastState) {
-            pages.item(lastState.page - 1).setStyle('display', 'none');
-        }
-        pages.item(state.page - 1).setStyle('display', 'block');
+            pages.item(state.page - 1).setStyle('display', 'block');
+          }
+        },
+        page: 1
       }
-    }
-  }).render();
-
-});
+    ).render();
+  }
+);
 </script>
 
   </div>

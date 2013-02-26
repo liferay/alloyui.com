@@ -571,9 +571,12 @@
 <p>First load the seed file, if you haven&#39;t yet.</p>
 <pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"http://cdn.alloyui.com/2.0.0pr2/aui/aui-min.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></pre>
 <p>Then initialize AlloyUI and load the Toggler module.</p>
-<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-toggler'</span>, <span class="keyword">function</span>(Y) {
-  <span class="comment">// code goes here</span>
-});</code></pre>
+<pre class="highlighted"><code class="javascript">YUI().use(
+  <span class="string">'aui-toggler'</span>,
+  <span class="keyword">function</span>(Y) {
+    <span class="comment">// code goes here</span>
+  }
+);</code></pre>
 <hr>
 <h4>Using Toggler</h4>
 <p>Create a HTML element with some content to toggle on/off:</p>
@@ -586,33 +589,39 @@
 </div>
 
 <p>Now create a new instance of Toggler component, then pass it the <code>container</code> where it&#39;s going to be attached and <code>header</code> and <code>content</code> where we placed our header and content html. Finally, let&#39;s render it!</p>
-<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-toggler'</span>, <span class="keyword">function</span>(Y) {
-
-  <span class="keyword">new</span> Y.Toggler({
-    container: <span class="string">'#myToggler'</span>,
-    content: <span class="string">'.content'</span>,
-    header: <span class="string">'.header'</span>
-  }).render();
-
-});</code></pre>
+<pre class="highlighted"><code class="javascript">YUI().use(
+  <span class="string">'aui-toggler'</span>,
+  <span class="keyword">function</span>(Y) {
+    <span class="keyword">new</span> Y.Toggler(
+      {
+        container: <span class="string">'#myToggler'</span>,
+        content: <span class="string">'.content'</span>,
+        header: <span class="string">'.header'</span>
+      }
+    ).render();
+  }
+);</code></pre>
 <hr>
 <h4>Configuring Toggler</h4>
 <p>There are some other options that you can pass to your Toggler instance.</p>
 <p>For example, if you set <code>animated</code> for <code>true</code> and pass an object to <code>transition</code> which specifies <code>duration</code> and <code>easing</code>, Toggler will use animated transitions between states.</p>
-<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-toggler'</span>, <span class="keyword">function</span>(Y) {
-
-  <span class="keyword">new</span> Y.Toggler({
-    container: <span class="string">'#myToggler'</span>,
-    content: <span class="string">'.content'</span>,
-    header: <span class="string">'.header'</span>,
-    animated: <span class="literal">true</span>,
-    transition: {
-      duration: <span class="number">.5</span>,
-      easing: <span class="string">'cubic-bezier'</span>
-    }
-  }).render();
-
-});</code></pre>
+<pre class="highlighted"><code class="javascript">YUI().use(
+  <span class="string">'aui-toggler'</span>,
+  <span class="keyword">function</span>(Y) {
+    <span class="keyword">new</span> Y.Toggler(
+      {
+        animated: <span class="literal">true</span>,
+        container: <span class="string">'#myToggler'</span>,
+        content: <span class="string">'.content'</span>,
+        header: <span class="string">'.header'</span>,
+        transition: {
+          duration: <span class="number">.5</span>,
+          easing: <span class="string">'cubic-bezier'</span>
+        }
+      }
+    ).render();
+  }
+);</code></pre>
 <p>You can use the javascript constructor <code>TogglerDelegate</code> to assign toggler functionality for all toggler content elements within the container.  You can even set <code>closeAllOnExpand</code> for <code>true</code> to only allow one content box open at a time.  Don&#39;t forget to add multiple content and header boxes to your html container!</p>
 <pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"myToggler"</span>&gt;</span>
   <span class="tag">&lt;<span class="title">button</span> <span class="attribute">class</span>=<span class="value">"header aui-toggler-header-collapsed"</span>&gt;</span>Read More<span class="tag">&lt;/<span class="title">button</span>&gt;</span>
@@ -622,21 +631,24 @@
   <span class="tag">&lt;<span class="title">button</span> <span class="attribute">class</span>=<span class="value">"header aui-toggler-header-collapsed"</span>&gt;</span>Read More<span class="tag">&lt;/<span class="title">button</span>&gt;</span>
   <span class="tag">&lt;<span class="title">p</span> <span class="attribute">class</span>=<span class="value">"content aui-toggler-content-collapsed"</span>&gt;</span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
 <span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre>
-<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-toggler'</span>, <span class="keyword">function</span>(Y) {
-
-  <span class="keyword">new</span> Y.TogglerDelegate({
-    container: <span class="string">'#myToggler'</span>,
-    content: <span class="string">'.content'</span>,
-    header: <span class="string">'.header'</span>,
-    closeAllOnExpand: <span class="literal">true</span>,
-    animated: <span class="literal">true</span>,
-    transition: {
-      duration: <span class="number">.5</span>,
-      easing: <span class="string">'cubic-bezier'</span>
-    }
-  }).render();
-
-});</code></pre>
+<pre class="highlighted"><code class="javascript">YUI().use(
+  <span class="string">'aui-toggler'</span>,
+  <span class="keyword">function</span>(Y) {
+    <span class="keyword">new</span> Y.TogglerDelegate(
+      {
+        animated: <span class="literal">true</span>,
+        closeAllOnExpand: <span class="literal">true</span>,
+        container: <span class="string">'#myToggler'</span>,
+        content: <span class="string">'.content'</span>,
+        header: <span class="string">'.header'</span>,
+        transition: {
+          duration: <span class="number">.5</span>,
+          easing: <span class="string">'cubic-bezier'</span>
+        }
+      }
+    ).render();
+  }
+);</code></pre>
 <div class="aui-alert aui-alert-success">
   For more information about configuration, check out our <a href="http://alloyui.com/api/">API Docs</a>.
 </div>

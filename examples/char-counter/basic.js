@@ -1,9 +1,12 @@
-YUI().use('aui-char-counter', function(Y) {
-
-  new Y.CharCounter({
-    input: '#myInput',
-    counter: '#myCounter',
-    maxLength: 10
-  });
-
-});
+YUI().use(
+  'aui-char-counter',
+  function(Y) {
+    new Y.CharCounter(
+      {
+        counter: '#myCounter',
+        input: '#myInput',
+        maxLength: 10
+      }
+    );
+  }
+);

@@ -1,42 +1,48 @@
-YUI().use('aui-form-validator', function(Y) {
+YUI().use(
+  'aui-form-validator',
+  function(Y) {
+    var rules = {
+      email: {
+        email: true,
+        required: true
+      },
+      emailConfirmation: {
+        email: true,
+        equalTo: '#email',
+        required: true
+      },
+      gender: {
+        required: true
+      },
+      name: {
+        rangeLength: [2, 50],
+        required: true
+      },
+      picture: {
+        acceptFiles: 'jpg, gif, png',
+        required: true
+      },
+      url: {
+        url: true
+      }
+    };
 
-  var rules = {
-    name: {
-      required: true,
-      rangeLength: [2, 50]
-    },
-    picture: {
-      acceptFiles: 'jpg, gif, png',
-      required: true
-    },
-    email: {
-      email: true,
-      required: true
-    },
-    emailConfirmation: {
-      email: true,
-      equalTo: '#email',
-      required: true
-    },
-    url: {
-      url: true
-    }
-  };
+    var fieldStrings = {
+      email: {
+        required: 'Type your email in this field.'
+      },
+      name: {
+        required: 'Please provide your name.'
+      }
+    };
 
-  var fieldStrings = {
-    name: {
-      required: 'Please provide your name.'
-    },
-    email: {
-      required: 'Type your email in this field.'
-    }
-  };
-
-  new Y.FormValidator({
-    boundingBox: '#myForm',
-    showAllMessages: true,
-    rules: rules,
-    fieldStrings: fieldStrings
-  });
-
-});
+    new Y.FormValidator(
+      {
+        boundingBox: '#myForm',
+        fieldStrings: fieldStrings,
+        rules: rules,
+        showAllMessages: true
+      }
+    );
+  }
+);

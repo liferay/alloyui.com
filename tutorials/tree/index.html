@@ -571,32 +571,46 @@
 <p>First load the seed file, if you haven&#39;t yet.</p>
 <pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"http://cdn.alloyui.com/2.0.0pr2/aui/aui-min.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></pre>
 <p>Then initialize AlloyUI and load the Tree View module.</p>
-<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-tree-view'</span>, <span class="keyword">function</span>(Y) {
-  <span class="comment">// code goes here</span>
-});</code></pre>
+<pre class="highlighted"><code class="javascript">YUI().use(
+  <span class="string">'aui-tree-view'</span>,
+  <span class="keyword">function</span>(Y) {
+    <span class="comment">// code goes here</span>
+  }
+);</code></pre>
 <hr>
 <h4>Using Tree View</h4>
 <p>Create a HTML element:</p>
 <pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"myTreeView"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre>
 <p>Now create a new instance of Tree View component, then initialize a variable <code>children</code> which will store an array of the child files and folders to be supplied to Tree View.  Then use the <code>new TreeView</code> constructor, passing our HTML element for <code>boundingBox</code> and our children variable for <code>children</code>. Finally, let&#39;s render it!</p>
-<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-tree-view'</span>, <span class="keyword">function</span>(Y) {
+<pre class="highlighted"><code class="javascript">YUI().use(
+  <span class="string">'aui-tree-view'</span>,
+  <span class="keyword">function</span>(Y) {
+    <span class="keyword">var</span> children = [
+      {
+        children: [
+          {
+            label: <span class="string">'File X'</span>
+          },
+          {
+            label: <span class="string">'File Y'</span>
+          },
+          {
+            label: <span class="string">'File Z'</span>
+          }
+        ],
+        expanded: <span class="literal">true</span>,
+        label: <span class="string">'Root'</span>
+      }
+    ];
 
-  <span class="keyword">var</span> children = [{
-    label: <span class="string">'Root'</span>,
-    expanded: <span class="literal">true</span>,
-    children: [
-      { label: <span class="string">'File X'</span> },
-      { label: <span class="string">'File Y'</span> },
-      { label: <span class="string">'File Z'</span> }
-    ]
-  }];
-
-  <span class="keyword">new</span> Y.TreeView({
-    boundingBox: <span class="string">'#myTreeView'</span>,
-    children: children
-  }).render();
-
-});</code></pre>
+    <span class="keyword">new</span> Y.TreeView(
+      {
+        boundingBox: <span class="string">'#myTreeView'</span>,
+        children: children
+      }
+    ).render();
+  }
+);</code></pre>
 <div class="aui-alert aui-alert-info">
   <strong>Note:</strong> you could also use <code>contentBox</code>, not only <code>boundingBox</code> to be initialized.<br>
   Read more about the <a href="https://github.com/liferay/alloy-ui/wiki/FAQs">differences between them</a>.
@@ -606,48 +620,61 @@
 <h4>Configuring Tree View</h4>
 <p>There are some other options that you can pass to your Tree View instance.</p>
 <p>For example, you can use an external file to populate the Tree View <code>children</code> using the <code>io</code> type.  We&#39;ll pass <code>io</code> a sample content file called content.html, which contains an array of child objects just like our previous <code>children</code> variable.  In your HTML file, be sure to wrap both option key and value in quotes! (IE: <code>&#39;label&#39;: &#39;File1&#39;</code>)</p>
-<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-tree-view'</span>, <span class="keyword">function</span>(Y) {
+<pre class="highlighted"><code class="javascript">YUI().use(
+  <span class="string">'aui-tree-view'</span>,
+  <span class="keyword">function</span>(Y) {
+    <span class="keyword">var</span> children = [
+      {
+        cache: <span class="literal">true</span>,
+        id: <span class="string">'root'</span>,
+        io: <span class="string">'assets/content.html'</span>,
+        label: <span class="string">'ROOT'</span>,
+        type: <span class="string">'io'</span>
+      }
+    ];
 
-  <span class="keyword">var</span> children = [{
-    type: <span class="string">'io'</span>,
-    label: <span class="string">'ROOT'</span>,
-    id: <span class="string">'root'</span>,
-    cache: <span class="literal">true</span>,
-    io: <span class="string">'assets/content.html'</span>
-  }];
-
-  <span class="keyword">new</span> Y.TreeView({
-    boundingBox: <span class="string">'#myTreeView'</span>,
-    children: children
-  }).render();
-
-});</code></pre>
+    <span class="keyword">new</span> Y.TreeView(
+      {
+        boundingBox: <span class="string">'#myTreeView'</span>,
+        children: children
+      }
+    ).render();
+  }
+);</code></pre>
 <p>Also, you can use the <code>createNode</code> method to create a new child node for your Tree View.  This method can be used in a separate function, such as an onClick event.  First, we&#39;ll select the ROOT node we added earlier in our <code>children</code> var.  Then, we&#39;ll use createNode to create a new file, and pass it the options <code>radio</code> for type and <code>radioButton</code> for id.  Lastly, we&#39;ll append <code>radioButton</code> to ROOT using <code>appendChild</code> method.</p>
-<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-tree-view'</span>, <span class="keyword">function</span>(Y) {
+<pre class="highlighted"><code class="javascript">YUI().use(
+  <span class="string">'aui-tree-view'</span>,
+  <span class="keyword">function</span>(Y) {
+    <span class="keyword">var</span> children = [
+      {
+        cache: <span class="literal">true</span>,
+        id: <span class="string">'root'</span>,
+        io: <span class="string">'assets/content.html'</span>,
+        label: <span class="string">'ROOT'</span>,
+        type: <span class="string">'io'</span>
+      }
+    ];
 
-  <span class="keyword">var</span> children = [{
-    type: <span class="string">'io'</span>,
-    label: <span class="string">'ROOT'</span>,
-    id: <span class="string">'root'</span>,
-    cache: <span class="literal">true</span>,
-    io: <span class="string">'assets/content.html'</span>
-  }];
+    <span class="keyword">var</span> treeView = <span class="keyword">new</span> Y.TreeView(
+      {
+        boundingBox: <span class="string">'#myTreeView'</span>,
+        children: children
+      }
+    ).render();
 
-  <span class="keyword">var</span> treeView = <span class="keyword">new</span> Y.TreeView({
-    boundingBox: <span class="string">'#myTreeView'</span>,
-    children: children
-  }).render();
+    <span class="keyword">var</span> ROOT = treeView.getNodeById(<span class="string">'root'</span>);
 
-  <span class="keyword">var</span> ROOT = treeView.getNodeById(<span class="string">'root'</span>);
-  <span class="keyword">var</span> radioButton = ROOT.createNode({
-    type: <span class="string">'radio'</span>,
-    id: <span class="string">'radioButton'</span>,
-    label: <span class="string">'Radio Button'</span>
-  });
+    <span class="keyword">var</span> radioButton = ROOT.createNode(
+      {
+        id: <span class="string">'radioButton'</span>,
+        label: <span class="string">'Radio Button'</span>,
+        type: <span class="string">'radio'</span>
+      }
+    );
 
-  ROOT.appendChild(radioButton);
-
-});</code></pre>
+    ROOT.appendChild(radioButton);
+  }
+);</code></pre>
 <div class="aui-alert aui-alert-success">
   For more information about configuration, check out our <a href="http://alloyui.com/api/">API Docs</a>.
 </div>

@@ -571,21 +571,27 @@
 <p>First load the seed file if you haven&#39;t yet.</p>
 <pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"http://cdn.alloyui.com/2.0.0pr2/aui/aui-min.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></pre>
 <p>Then initialize AlloyUI and load the Rating module.</p>
-<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-rating'</span>, <span class="keyword">function</span>(Y) {
-  <span class="comment">// code goes here</span>
-});</code></pre>
+<pre class="highlighted"><code class="javascript">YUI().use(
+  <span class="string">'aui-rating'</span>,
+  <span class="keyword">function</span>(Y) {
+    <span class="comment">// code goes here</span>
+  }
+);</code></pre>
 <hr>
 <h4>Using Rating</h4>
 <p>Create an HTML element:</p>
 <pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"myRating"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre>
 <p>Now create a new instance of Rating component by setting boundingBox to our HTML element&#39;s selector. We will leave all other options empty for a stock Rating configuration. Finally, let&#39;s render it!</p>
-<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-rating'</span>, <span class="keyword">function</span>(Y) {
-
-  <span class="keyword">new</span> Y.StarRating({
-    boundingBox: <span class="string">'#myRating'</span>
-  }).render();
-
-});</code></pre>
+<pre class="highlighted"><code class="javascript">YUI().use(
+  <span class="string">'aui-rating'</span>,
+  <span class="keyword">function</span>(Y) {
+    <span class="keyword">new</span> Y.StarRating(
+      {
+        boundingBox: <span class="string">'#myRating'</span>
+      }
+    ).render();
+  }
+);</code></pre>
 <div class="aui-alert aui-alert-info">
   <strong>Note:</strong> you can also use the constructor new ThumbRating, which is a Rating component that initially contains 2 options: thumbs up or thumbs down.  Give it a try!
 </div>
@@ -594,25 +600,31 @@
 <h4>Configuring Rating</h4>
 <p>There are some other optional parameters that you can pass to your Rating instance.</p>
 <p>For example, you can pass the <code>size</code> option a whole number for how many choices you want Rating to have:</p>
-<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-rating'</span>, <span class="keyword">function</span>(Y) {
-
-  <span class="keyword">new</span> Y.StarRating({
-    boundingBox: <span class="string">'#myRating'</span>,
-    size: <span class="number">8</span>
-  }).render();
-
-});</code></pre>
+<pre class="highlighted"><code class="javascript">YUI().use(
+  <span class="string">'aui-rating'</span>,
+  <span class="keyword">function</span>(Y) {
+    <span class="keyword">new</span> Y.StarRating(
+      {
+        boundingBox: <span class="string">'#myRating'</span>,
+        size: <span class="number">8</span>
+      }
+    ).render();
+  }
+);</code></pre>
 <p>Setting <code>showTitle</code> to <code>true</code> displays the string you have set for <code>title</code> as a tooltip when user hovers over Rating.</p>
-<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-rating'</span>, <span class="keyword">function</span>(Y) {
-
-  <span class="keyword">new</span> Y.StarRating({
-    boundingBox: <span class="string">'#myRating'</span>,
-    title: <span class="string">"A new way to Rate!"</span>,
-    showTitle: <span class="literal">true</span>,
-    size: <span class="number">8</span>
-  }).render();
-
-});</code></pre>
+<pre class="highlighted"><code class="javascript">YUI().use(
+  <span class="string">'aui-rating'</span>,
+  <span class="keyword">function</span>(Y) {
+    <span class="keyword">new</span> Y.StarRating(
+      {
+        boundingBox: <span class="string">'#myRating'</span>,
+        showTitle: <span class="literal">true</span>,
+        size: <span class="number">8</span>,
+        title: <span class="string">"A new way to Rate!"</span>
+      }
+    ).render();
+  }
+);</code></pre>
 <h4>Rendering from HTML</h4>
 <p>You can also define Rating choices from HTML <code>radio</code> inputs, enabling control over individual <code>title</code> for each input!  Further, you can set event handlers using <code>on</code> or <code>after</code> options to run code on Rating events.  Each rating event is passed in object <code>this</code> for the rating choice with includes data such as <code>title</code> and <code>value</code>.  Add a <code>div</code> below rating and we will print a message containing event data.</p>
 <pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"myRating"</span>&gt;</span>
@@ -626,21 +638,26 @@
 <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
 
 <span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"print"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre>
-<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-rating'</span>, <span class="keyword">function</span>(Y) {
+<pre class="highlighted"><code class="javascript">YUI().use(
+  <span class="string">'aui-rating'</span>,
+  <span class="keyword">function</span>(Y) {
+    <span class="keyword">new</span> Y.StarRating(
+      {
+        after: {
+          itemSelect: <span class="keyword">function</span>(event) {
+            <span class="keyword">var</span> title = <span class="keyword">this</span>.get(<span class="string">'title'</span>);
 
-  <span class="keyword">new</span> Y.StarRating({
-    boundingBox: <span class="string">'#myRating'</span>,
-    showTitle: <span class="literal">true</span>,
-    after:
-      itemSelect: <span class="keyword">function</span>(event) {
-        <span class="keyword">var</span> title = <span class="keyword">this</span>.get(<span class="string">'title'</span>);
-        <span class="keyword">var</span> stars = <span class="keyword">this</span>.get(<span class="string">'value'</span>) + <span class="number">1</span>;
-        stars += <span class="string">' Stars'</span>;
-        A.one(<span class="string">'#print'</span>).set(<span class="string">'innerHTML'</span>, <span class="string">'You selected '</span> + title + <span class="string">' - '</span> + stars);
-      }
-  }).render();
+            <span class="keyword">var</span> stars = <span class="keyword">this</span>.get(<span class="string">'value'</span>) + <span class="number">1</span>;
+            stars += <span class="string">' Stars'</span>;
 
-});</code></pre>
+            A.one(<span class="string">'#print'</span>).set(<span class="string">'innerHTML'</span>, <span class="string">'You selected '</span> + title + <span class="string">' - '</span> + stars);
+          }
+        },
+        boundingBox: <span class="string">'#myRating'</span>,
+        showTitle: <span class="literal">true</span>
+    }).render();
+  }
+);</code></pre>
 <div class="aui-alert aui-alert-success">
   For more information about configuration, check out our <a href="http://alloyui.com/api/">API Docs</a>.
 </div>

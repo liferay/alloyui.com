@@ -92,171 +92,171 @@
     <ul class="aui-nav aui-nav-list aui-bs-docs-sidenav aui-affix-top">
       
         
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
           
             <li><a href="http://alloyui.com/examples/ace-editor"><i class="aui-icon-chevron-right"></i> Ace Editor</a></li>
           
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
         
       
         
@@ -927,92 +927,104 @@
   <span class="tag">&lt;<span class="title">input</span> <span class="attribute">class</span>=<span class="value">"aui-btn aui-btn-primary"</span> <span class="attribute">type</span>=<span class="value">"reset"</span> <span class="attribute">value</span>=<span class="value">"Reset"</span>&gt;</span>
 
 <span class="tag">&lt;/<span class="title">form</span>&gt;</span></code></pre>
-<pre class="highlighted"><code class="javascript">YUI().use(<span class="string">'aui-form-validator'</span>, <span class="keyword">function</span>(Y) {
+<pre class="highlighted"><code class="javascript">YUI().use(
+  <span class="string">'aui-form-validator'</span>,
+  <span class="keyword">function</span>(Y) {
+    <span class="keyword">var</span> rules = {
+      email: {
+        email: <span class="literal">true</span>,
+        required: <span class="literal">true</span>
+      },
+      emailConfirmation: {
+        email: <span class="literal">true</span>,
+        equalTo: <span class="string">'#email'</span>,
+        required: <span class="literal">true</span>
+      },
+      gender: {
+        required: <span class="literal">true</span>
+      },
+      name: {
+        rangeLength: [<span class="number">2</span>, <span class="number">50</span>],
+        required: <span class="literal">true</span>
+      },
+      picture: {
+        acceptFiles: <span class="string">'jpg, gif, png'</span>,
+        required: <span class="literal">true</span>
+      },
+      url: {
+        url: <span class="literal">true</span>
+      }
+    };
 
-  <span class="keyword">var</span> rules = {
-    name: {
-      required: <span class="literal">true</span>,
-      rangeLength: [<span class="number">2</span>, <span class="number">50</span>]
-    },
-    picture: {
-      acceptFiles: <span class="string">'jpg, gif, png'</span>,
-      required: <span class="literal">true</span>
-    },
-    email: {
-      email: <span class="literal">true</span>,
-      required: <span class="literal">true</span>
-    },
-    emailConfirmation: {
-      email: <span class="literal">true</span>,
-      equalTo: <span class="string">'#email'</span>,
-      required: <span class="literal">true</span>
-    },
-    url: {
-      url: <span class="literal">true</span>
-    }
-  };
+    <span class="keyword">var</span> fieldStrings = {
+      email: {
+        required: <span class="string">'Type your email in this field.'</span>
+      },
+      name: {
+        required: <span class="string">'Please provide your name.'</span>
+      }
+    };
 
-  <span class="keyword">var</span> fieldStrings = {
-    name: {
-      required: <span class="string">'Please provide your name.'</span>
-    },
-    email: {
-      required: <span class="string">'Type your email in this field.'</span>
-    }
-  };
-
-  <span class="keyword">new</span> Y.FormValidator({
-    boundingBox: <span class="string">'#myForm'</span>,
-    showAllMessages: <span class="literal">true</span>,
-    rules: rules,
-    fieldStrings: fieldStrings
-  });
-
-});</code></pre>
+    <span class="keyword">new</span> Y.FormValidator(
+      {
+        boundingBox: <span class="string">'#myForm'</span>,
+        fieldStrings: fieldStrings,
+        rules: rules,
+        showAllMessages: <span class="literal">true</span>
+      }
+    );
+  }
+);</code></pre>
 
 <script>
-  YUI().use('aui-form-validator', function(Y) {
+  YUI().use(
+  'aui-form-validator',
+  function(Y) {
+    var rules = {
+      email: {
+        email: true,
+        required: true
+      },
+      emailConfirmation: {
+        email: true,
+        equalTo: '#email',
+        required: true
+      },
+      gender: {
+        required: true
+      },
+      name: {
+        rangeLength: [2, 50],
+        required: true
+      },
+      picture: {
+        acceptFiles: 'jpg, gif, png',
+        required: true
+      },
+      url: {
+        url: true
+      }
+    };
 
-  var rules = {
-    name: {
-      required: true,
-      rangeLength: [2, 50]
-    },
-    picture: {
-      acceptFiles: 'jpg, gif, png',
-      required: true
-    },
-    email: {
-      email: true,
-      required: true
-    },
-    emailConfirmation: {
-      email: true,
-      equalTo: '#email',
-      required: true
-    },
-    url: {
-      url: true
-    }
-  };
+    var fieldStrings = {
+      email: {
+        required: 'Type your email in this field.'
+      },
+      name: {
+        required: 'Please provide your name.'
+      }
+    };
 
-  var fieldStrings = {
-    name: {
-      required: 'Please provide your name.'
-    },
-    email: {
-      required: 'Type your email in this field.'
-    }
-  };
-
-  new Y.FormValidator({
-    boundingBox: '#myForm',
-    showAllMessages: true,
-    rules: rules,
-    fieldStrings: fieldStrings
-  });
-
-});
+    new Y.FormValidator(
+      {
+        boundingBox: '#myForm',
+        fieldStrings: fieldStrings,
+        rules: rules,
+        showAllMessages: true
+      }
+    );
+  }
+);
 </script>
 
   </div>
