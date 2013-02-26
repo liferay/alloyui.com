@@ -18,9 +18,12 @@ First load the seed file if you haven't yet.
 Then initialize AlloyUI and load the Property List module.
 
 ``` javascript
-AUI().use('aui-property-list', function(A) {
-  // code goes here
-});
+AUI().use(
+  'aui-property-list',
+  function(A) {
+    // code goes here
+  }
+);
 ```
 ---
 
@@ -39,23 +42,27 @@ Create an HTML element:
 Next, populate an array with some objects containing `name` and `value` pairs, so that Property List has data to display. We'll pass in our `properties` array to Property List `data` option.  Finally, let's render it, passing our HTML element to the `.render()` method.
 
 ``` javascript
-AUI().use('aui-property-list', function(A) {
-  var properties = [
-    {
-      name: 'Programmer',
-      value: 'Linus Torvalds'
-    },
-    {
-      name: 'Software',
-      value: 'Linux, Git'
-    }
-  ];
+AUI().use(
+  'aui-property-list',
+  function(A) {
+    var properties = [
+      {
+        name: 'Programmer',
+        value: 'Linus Torvalds'
+      },
+      {
+        name: 'Software',
+        value: 'Linux, Git'
+      }
+    ];
 
-  new A.PropertyList({
-    data: properties
-  }).render('#myPropertyList');
-
-});
+    new A.PropertyList(
+      {
+        data: properties
+      }
+    ).render('#myPropertyList');
+  }
+);
 ```
 
 ---
@@ -67,78 +74,93 @@ There are some other optional constructor types that you can pass to your Proper
 For example, you can set an object's `editor` option containing a `new CheckboxCellEditor` constructor.  This option creates a checkbox input inside the object which can be toggled on/off within Property List.  In our example, we are using standard boolean naming conventions, but `Checkbox` can be assigned any name and value.
 
 ``` javascript
-AUI().use('aui-property-list', function(A) {
-  var properties = [
-    {
-      editor: new A.CheckboxCellEditor({
-        editable: true,
-        options: [ 'True' ]
-      }),
-      name: 'Boolean',
-      value: 'True'
-    }
-  ];
+AUI().use(
+  'aui-property-list',
+  function(A) {
+    var properties = [
+      {
+        editor: new A.CheckboxCellEditor(
+          {
+            editable: true,
+            options: [ 'True' ]
+          }
+        ),
+        name: 'Boolean',
+        value: 'True'
+      }
+    ];
 
-  new A.PropertyList({
-    data: properties
-  }).render('#myPropertyList');
-
-});
+    new A.PropertyList(
+      {
+        data: properties
+      }
+    ).render('#myPropertyList');
+  }
+);
 ```
 
 Other `editor` constructor types include `DateCellEditor`, which contains a calendar widget, `RadioCellEditor` for radio buttons, `DropDownCellEditor` for drop-down lists, and `TextAreaCellEditor` for HTML `textarea` element.  Pass the editor `editable` option for `true` to allow changing options.  You may also set `readOnly` to `true` for each object, disabling the ability to change property values.
 
 ``` javascript
-AUI().use('aui-property-list', function(A) {
+AUI().use(
+  'aui-property-list',
+  function(A) {
+    var properties = [
+      {
+        editor: new A.CheckboxCellEditor(
+          {
+            editable: true,
+            options: [ 'True' ]
+          }
+        ),
+        name: 'Boolean',
+        value: 'True'
+      },
+      {
+        editor: new A.DateCellEditor(),
+        name: 'Date',
+        value: new Date().toDateString()
+      },
+      {
+        editor: new A.RadioCellEditor(
+          {
+            editable: true,
+            options: [ 'Yes', 'No' ]
+          }
+        ),
+        name: 'Radio',
+        readOnly: true,
+        value: 'Yes'
+      },
+      {
+        editor: new A.DropDownCellEditor(
+          {
+            editable: true,
+            options: {
+              apple: 'Apple',
+              banana: 'Banana',
+              cherry: 'Cherry',
+              kiwi: 'Kiwi'
+            }
+          }
+        ),
+        name: 'Select',
+        value: 'Apple'
+      },
+      {
+        editor: new A.TextAreaCellEditor(),
+        name: 'Text-box',
+        value: 'Write some text, then save!'
+      }
+    ];
 
-  var properties = [
-    {
-      editor: new A.CheckboxCellEditor({
-        editable: true,
-        options: [ 'True' ]
-      }),
-      name: 'Boolean',
-      value: 'True'
-    },
-    {
-      editor: new A.DateCellEditor(),
-      name: 'Date',
-      value: new Date().toDateString()
-    },
-    {
-      editor: new A.RadioCellEditor({
-        editable: true,
-        options: [ 'Yes', 'No' ]
-      }),
-      name: 'Radio',
-      value: 'Yes',
-      readOnly: true
-    },
-    {
-      editor: new A.DropDownCellEditor({
-        editable: true,
-        options: {
-          apple: 'Apple',
-          cherry: 'Cherry',
-          banana: 'Banana',
-          kiwi: 'Kiwi'
-        }
-      }),
-      name: 'Select',
-      value: 'Apple'
-    },
-    {
-      editor: new A.TextAreaCellEditor(),
-      name: 'Text-box',
-      value: 'Write some text, then save!'
-    }
-  ];
-
-  new A.PropertyList({
-    data: properties
-  }).render('#myPropertyList');
-
-});
+    new A.PropertyList(
+      {
+        data: properties
+      }
+    ).render('#myPropertyList');
+  }
+);
 ```
 
 <div class="aui-alert aui-alert-success">
