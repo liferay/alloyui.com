@@ -1,32 +1,39 @@
-AUI().ready('aui-paginator', 'aui-io-request', function(A) {
+AUI().ready(
+  'aui-paginator',
+  'aui-io-request',
+  function(A) {
+    var content = A.one('.myContent');
 
-  var content = A.one('.myContent');
+    new A.Paginator(
+      {
+        circular: true,
+        containers: '.myPaginator',
+        maxPageLinks: 4,
+        on: {
+          changeRequest: function(event) {
+            var newState = event.state;
 
-  new A.Paginator({
-    containers: '.myPaginator',
-    total: 4,
-    maxPageLinks: 4,
-    circular: true,
-    pageLinkContent: function(pageEl, pageNumber) {
-      pageEl.html('Page ' + pageNumber);
-    },
-    on: {
-      changeRequest: function(event) {
-        var newState = event.state;
+            A.io.request(
+              'data/html-' + newState.page + '.html',
+              {
+                on: {
+                  success: function() {
+                    var data = this.get('responseData');
 
-        A.io.request('data/html-' + newState.page + '.html', {
-          on: {
-            success: function() {
-              var data = this.get('responseData');
+                    content.html(data);
+                  }
+                }
+              }
+            );
 
-              content.html(data);
-            }
+            this.setState(newState);
           }
-        });
-
-        this.setState(newState);
+        },
+        pageLinkContent: function(pageEl, pageNumber) {
+          pageEl.html('Page ' + pageNumber);
+        },
+        total: 4
       }
-    }
-  }).render();
-
-});
+    ).render();
+  }
+);
