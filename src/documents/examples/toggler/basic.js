@@ -1,10 +1,13 @@
-AUI().use('aui-toggler', function(A) {
-
-  new A.Toggler({
-    container: "#myToggler",
-    content: ".content",
-    header: ".header",
-    expanded: false
-  });
-
-});
+AUI().use(
+  'aui-toggler',
+  function(A) {
+    new A.Toggler(
+      {
+        container: '#myToggler',
+        content: '.content',
+        expanded: false,
+        header: '.header'
+      }
+    );
+  }
+);
