@@ -1,81 +1,106 @@
-AUI().use('aui-tree-view', function(A) {
+AUI().use(
+  'aui-tree-view',
+  function(A) {
+    // Define our real world example
+    var RealWorldExample = {
+      init: function() {
+        var myTreeView = A.one('#myTreeView');
+        var loadingmask = this.createLoadingMask(myTreeView);
+        var treeView = this.createTreeMyView();
 
-  // Define our real world example
-  var RealWorldExample = {
+        treeView.on(
+          'render',
+          function(event) {
+            loadingmask.hide();
+          }
+        );
+      },
 
-    init: function() {
-      var myTreeView = A.one('#myTreeView');
-      var loadingmask = this.createLoadingMask(myTreeView);
-      var treeView = this.createTreeMyView();
+      createLoadingMask: function(node) {
+        node.plug(A.LoadingMask);
 
-      treeView.on('render', function(event) {
-        loadingmask.hide();
-      });
-    },
+        var loadingmask = node.loadingmask;
+        loadingmask.show();
 
-    createLoadingMask: function(node) {
-      node.plug(A.LoadingMask);
+        return loadingmask;
+      },
 
-      var loadingmask = node.loadingmask;
-      loadingmask.show();
+      createTreeMyView: function() {
+        // Create an array object for the root node
+        var root = [
+          {
+            cache: true,
+            expanded: true,
+            id: 'root',
+            io: 'content.html',
+            label: 'ROOT',
+            type: 'io'
+          }
+        ];
 
-      return loadingmask;
-    },
-    createTreeMyView: function() {
+        // Create an array object for temp files child nodes
+        var tempFile = [
+          {
+            label: 'Temp file'
+          }
+        ];
 
-      // Create an array object for the root node
-      var root = [{
-        type: 'io',
-        label: 'ROOT',
-        id: 'root',
-        expanded: true,
-        cache: true,
-        io: 'content.html'
-      }];
+        // Create a TreeView Component with Drag & Drop support
+        var treeView = new A.TreeViewDD(
+          {
+            boundingBox: '#myTreeView',
+            children: root,
+            height: '380'
+          }
+        ).render();
 
-      // Create an array object for temp files child nodes
-      var tempFile = [{ label: 'Temp file' }];
+        // Attach button event listeners
+        var ROOT = treeView.getNodeById('root');
 
-      // Create a TreeView Component with Drag & Drop support
-      var treeView = new A.TreeViewDD({
-        height: '380',
-        boundingBox: '#myTreeView',
-        children: root
-      }).render();
+        var createRootTempNode = function() {
+          return ROOT.createNode(
+            {
+              children: tempFile,
+              label: 'Temp folder'
+            }
+          );
+        };
 
-      // Attach button event listeners
-      var ROOT = treeView.getNodeById('root');
+        A.one('#createNodeROOT').on(
+          'click',
+          function() {
+            var tempNode = createRootTempNode();
+            ROOT.appendChild(tempNode);
+          }
+        );
 
-      var createRootTempNode = function() {
-        return ROOT.createNode({
-          label: 'Temp folder',
-          children: tempFile
-        });
-      };
+        A.one('#insertBeforeROOT').on(
+          'click',
+          function() {
+            var tempNode = createRootTempNode();
+            ROOT.insertBefore(tempNode);
+          }
+        );
 
-      A.one('#createNodeROOT').on('click', function() {
-        var tempNode = createRootTempNode();
-        ROOT.appendChild(tempNode);
-      });
+        A.one('#expandAll').on(
+          'click',
+          function() {
+            treeView.expandAll();
+          }
+        );
 
-      A.one('#insertBeforeROOT').on('click', function() {
-        var tempNode = createRootTempNode();
-        ROOT.insertBefore(tempNode);
-      });
+        A.one('#collapseAll').on(
+          'click',
+          function() {
+            treeView.collapseAll();
+          }
+        );
 
-      A.one('#expandAll').on('click', function() {
-        treeView.expandAll();
-      });
+        return treeView;
+      },
+    };
 
-      A.one('#collapseAll').on('click', function() {
-        treeView.collapseAll();
-      });
-
-      return treeView;
-    },
-  };
-
-  // Run our real world example
-  RealWorldExample.init();
-
-});
+    // Run our real world example
+    RealWorldExample.init();
+  }
+);
