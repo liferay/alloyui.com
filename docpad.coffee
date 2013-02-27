@@ -106,7 +106,7 @@ module.exports =
       tutorials: -> @getCollection("documents").findAllLive({url:$startsWith:'/tutorials'}, [title:1])
 
       # Get all examples sorted by alphabetical order
-      examples: -> @getCollection("documents").findAllLive({url:$startsWith:'/examples'}, [category:1,title:1])
+      examples: -> @getCollection("documents").findAllLive({url:$startsWith:'/examples'}, {category:1,title:1})
 
       # Get all examples that contains featuringOrder attribute
       featuring: (database) ->
