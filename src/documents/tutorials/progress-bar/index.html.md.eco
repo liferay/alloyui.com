@@ -17,9 +17,12 @@ First load the seed file, if you haven't yet.
 Then initialize AlloyUI and load the Progress Bar module.
 
 ``` javascript
-AUI().use('aui-progressbar', function(A) {
-  // code goes here
-});
+AUI().use(
+  'aui-progressbar',
+  function(A) {
+    // code goes here
+  }
+);
 ```
 ---
 
@@ -37,18 +40,25 @@ Create a HTML element:
 Now create a new instance of Progress Bar component, then tell to `boundingBox` where it's going to be attached and `contentBox` where to render the Progress Bar.  We'll set the initial `value` of Progress Bar to `0`. Next, let's render it.  Finally, we need to attach the onClick event to our load button, where Progress Bar's `value` will be set to `100`.
 
 ``` javascript
-AUI().use('aui-progressbar', function(A) {
+AUI().use(
+  'aui-progressbar',
+  function(A) {
+    new A.ProgressBar(
+      {
+        boundingBox: '#myProgressBar',
+        contentBox: '.bar',
+        value: '0'
+      }
+    ).render();
 
-  new A.ProgressBar({
-    boundingBox: '#myProgressBar',
-    contentBox: '.bar',
-    value: '0'
-  }).render();
-
-  A.one('.load').on('click', function() {
-    progressBar.set('value', 100);
-  });
-});
+    A.one('.load').on(
+      'click',
+      function() {
+        progressBar.set('value', 100);
+      }
+    );
+  }
+);
 ```
 
 ---
@@ -60,25 +70,33 @@ There are some other options that you can pass to your Progress Bar instance.
 If you need to have Progress Bar load content from another file, you can set a callback function when the `complete` event fires that loads your content.  Be sure to tell AUI to use the Node-Load component as well.  You can even set a `label` which is changed when the `complete` event fires.
 
 ``` javascript
-AUI().use('aui-progressbar', 'node-load', function(A) {
-
-  new A.ProgressBar({
-    boundingBox: '#myProgressBar',
-    contentBox: '.bar',
-    value: '0',
-    label: 'Ready to load!',
-    on: {
-      complete: function(event) {
-        this.set('label', 'Complete!');
-        content.load('assets/content.html');
+AUI().use(
+  'aui-progressbar',
+  'node-load',
+  function(A) {
+    new A.ProgressBar(
+      {
+        boundingBox: '#myProgressBar',
+        contentBox: '.bar',
+        value: '0',
+        label: 'Ready to load!',
+        on: {
+          complete: function(event) {
+            this.set('label', 'Complete!');
+            content.load('assets/content.html');
+          }
+        }
       }
-    }
-  }).render();
+    ).render();
 
-  A.one('.load').on('click', function() {
-    progressBar.set('value', 100);
-  });
-});
+    A.one('.load').on(
+      'click',
+      function() {
+        progressBar.set('value', 100);
+      }
+    );
+  }
+);
 ```
 
 <div class="alert alert-success">
@@ -92,37 +110,48 @@ AUI().use('aui-progressbar', 'node-load', function(A) {
 For demo purposes, if you would like to see what Progress Bar looks like when it loads larger content, you can set an Asynchronous Queue which will step through 100 iterations and set Progress Bar `value` on each iteration.  We will need to request AUI to load the AsyncQueue component for this exercise.  Then we will declare the variable `step` and set its value to `0`.  Next, we will create a new Asynchronous Queue with the `AsyncQueue` constructor, passing it a `fn` which iterates the `step` variable and sets Progress Bar `label` and `value`.  We will pass it a `timeout` of 1 millisecond and `iterations` of `100`.  Last, we will amend the load button to run the `steptask` function when `onClick` event fires.
 
 ``` javascript
-AUI().use('aui-progressbar', 'node-load', 'async-queue', function(A) {
-
-  new A.ProgressBar({
-    boundingBox: '#myProgressBar',
-    contentBox: '.bar',
-    value: '0',
-    label: 'Ready to load!',
-    on: {
-      complete: function(event) {
-        this.set('label', 'Complete!');
-        content.load('assets/content.html');
+AUI().use(
+  'aui-progressbar',
+  'node-load',
+  'async-queue',
+  function(A) {
+    new A.ProgressBar(
+      {
+        boundingBox: '#myProgressBar',
+        contentBox: '.bar',
+        label: 'Ready to load!',
+        on: {
+          complete: function(event) {
+            this.set('label', 'Complete!');
+            content.load('assets/content.html');
+          }
+        },
+        value: '0'
       }
-    }
-  }).render();
+    ).render();
 
-  var step = 0;
-  var steptask = new A.AsyncQueue({
-    fn: function() {
-      ++step;
+    var step = 0;
+    var steptask = new A.AsyncQueue(
+      {
+        fn: function() {
+          ++step;
 
-      progressBar.set('label', 'Loading... ' + step + '%');
-      progressBar.set('value', step);
-    },
-    timeout: 1,
-    iterations: 100
-  });
+          progressBar.set('label', 'Loading... ' + step + '%');
+          progressBar.set('value', step);
+        },
+        iterations: 100,
+        timeout: 1
+      }
+    );
 
-  A.one('.load').on('click', function() {
-    steptask.run();
-  });
-});
+    A.one('.load').on(
+      'click',
+      function() {
+        steptask.run();
+      }
+    );
+  }
+);
 ```
 
 Now when you click load, you will see Progress Bar give the appearance of load time as our `steptask` function iterates through its values.  While Progress Bar is not actually waiting for content to load here, this can give you an idea of what loading will look like in real world usage.
