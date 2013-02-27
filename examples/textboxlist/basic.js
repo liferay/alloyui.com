@@ -1,4 +1,4 @@
-AUI().use(
+AUI().ready(
   'aui-textboxlist',
   function(A) {
     var continents = ['America', 'Europe', 'Asia', 'Africa', 'Oceania', 'Antarctica'];

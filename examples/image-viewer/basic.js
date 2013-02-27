@@ -1,4 +1,4 @@
-AUI().use(
+AUI().ready(
   'aui-image-viewer-base',
   function(A) {
     new A.ImageViewer(

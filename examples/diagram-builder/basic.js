@@ -1,4 +1,4 @@
-AUI().use(
+AUI().ready(
   'aui-diagram-builder',
   function(A) {
     var availableFields = [

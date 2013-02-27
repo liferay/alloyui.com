@@ -1,4 +1,4 @@
-AUI().use(
+AUI().ready(
   'aui-aria',
   'aui-dialog',
   'aui-overlay-manager',

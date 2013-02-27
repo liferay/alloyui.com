@@ -1,11 +1,11 @@
-YUI().use(
+AUI().use(
   'aui-toggler',
-  function(Y) {
-    new Y.TogglerDelegate(
+  function(A) {
+    new A.TogglerDelegate(
       {
         animated: true,
         closeAllOnExpand: true,
-        container: '#myToggler',
+        container: '#togglerDelegate1',
         content: '.content',
         expanded: false,
         header: '.header',

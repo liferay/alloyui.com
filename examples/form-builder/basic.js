@@ -65,7 +65,7 @@ AUI().use(
               }
             ],
             predefinedValue: 'chicago',
-            type: 'select'
+            type: 'select',
           },
           {
             label: 'Colors',
@@ -83,7 +83,7 @@ AUI().use(
                 value: 'blue'
               }
             ],
-            type: 'radio'
+            type: 'radio',
           }
         ]
       }

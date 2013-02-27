@@ -1,14 +1,12 @@
-YUI().use('node', 'transition', 'aui-carousel', function (Y) {
+AUI().use('node', 'transition', 'aui-tooltip', function (A) {
 
-  Y.one('.aui-btn').on('click', function() {
+  A.one('.btn').on('click', function() {
     this.transition({ width: '400px' });
   });
 
-  new Y.Carousel({
-    contentBox: '#myCarousel',
-    intervalTime: 2,
-    width: 700,
-    height: 250
+  var tooltip = new A.Tooltip({
+    trigger: '#tooltip',
+    bodyContent: '<iframe width="500" height="280" src="http://www.youtube.com/embed/KzorZ1CO6Vs" frameborder="0" allowfullscreen></iframe>'
   }).render();
 
 });

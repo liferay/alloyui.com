@@ -1,7 +1,7 @@
-YUI().use(
+AUI().ready(
   'aui-image-cropper',
-  function(Y) {
-    var imageCropper = new Y.ImageCropper(
+  function(A) {
+    imageCropper = new A.ImageCropper(
       {
         srcNode: '#image',
         x: 100,
@@ -22,7 +22,7 @@ YUI().use(
         }
       );
 
-      croppedImage.html(Y.Lang.sub(statusTPL, cropRegion));
+      croppedImage.html(A.Lang.sub(statusTPL, cropRegion));
     };
 
     imageCropper.after(
@@ -32,15 +32,15 @@ YUI().use(
       }
     );
 
-    var croppedImage = Y.one('#croppedImage');
+    var croppedImage = A.one('#croppedImage');
 
-    var croppedStatus = Y.one('#croppedStatus');
+    var croppedStatus = A.one('#croppedStatus');
 
     croppedImage.show();
 
     updateImage();
 
-    Y.one('#cropLink').on(
+    A.one('#cropLink').on(
       'click',
       function (event) {
         imageCropper.setAttrs(
