@@ -1,7 +1,7 @@
-AUI().ready(
+YUI().use(
   'aui-char-counter',
-  function(A) {
-    new A.CharCounter(
+  function(Y) {
+    new Y.CharCounter(
       {
         counter: '#myCounter',
         input: '#myTextarea',

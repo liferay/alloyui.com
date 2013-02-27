@@ -1,12 +1,7 @@
-AUI().ready(
+YUI().use(
   'aui-form-validator',
-  function(A) {
+  function(Y) {
     var rules = {
-      age: {
-        customRule: true,
-        digits: true,
-        range: [18, 50]
-      },
       email: {
         email: true,
         required: true
@@ -19,19 +14,12 @@ AUI().ready(
       gender: {
         required: true
       },
-      lastName: {
-        rangeLength: [2, 50],
-        required: true
-      },
       name: {
         rangeLength: [2, 50],
         required: true
       },
       picture: {
         acceptFiles: 'jpg, gif, png',
-        required: true
-      },
-      'type[]': {
         required: true
       },
       url: {
@@ -43,23 +31,17 @@ AUI().ready(
       email: {
         required: 'Type your email in this field.'
       },
-      gender: {
-        required: 'The gender is required.'
-      },
       name: {
-        required: 'Required field with a custom message.'
-      },
-      'type[]': {
-        required: 'Select the type is required.'
+        required: 'Please provide your name.'
       }
     };
 
-    new A.FormValidator(
+    new Y.FormValidator(
       {
         boundingBox: '#myForm',
-        fieldContainer: 'p',
         fieldStrings: fieldStrings,
-        rules: rules
+        rules: rules,
+        showAllMessages: true
       }
     );
   }

@@ -1,6 +1,6 @@
-AUI().use(
+YUI().use(
   'aui-scheduler',
-  function(A) {
+  function(Y) {
     var events = [
       {
         content: 'Event1',
@@ -9,10 +9,10 @@ AUI().use(
       }
     ];
 
-    var eventRecorder = new A.SchedulerEventRecorder();
-    var weekView = new A.SchedulerWeekView();
+    var eventRecorder = new Y.SchedulerEventRecorder();
+    var weekView = new Y.SchedulerWeekView();
 
-    new A.Scheduler(
+    new Y.Scheduler(
       {
         boundingBox: '#myScheduler',
         date: new Date(2013, 1, 4),

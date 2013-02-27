@@ -1,7 +1,7 @@
 AUI().use(
   'aui-autocomplete',
   function (A) {
-    var continents = ['America', 'Europe', 'Asia', 'Africa', 'Oceania', 'Antarctica'];
+    var continents = ['Africa', 'America', 'Antarctica', 'Asia', 'Europe', 'Oceania'];
 
     new A.AutoComplete(
       {

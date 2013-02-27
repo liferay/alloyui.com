@@ -1,6 +1,7 @@
-AUI().ready(
+AUI().use(
   'aui-diagram-builder',
   function(A) {
+
     var availableFields = [
       {
         iconClass: 'aui-diagram-node-start-icon',

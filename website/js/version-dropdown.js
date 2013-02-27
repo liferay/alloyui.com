@@ -5,13 +5,13 @@ YUI().use('node', 'node-focusmanager', function (Y) {
       versionDropdown = Y.one('#version-dropdown');
 
   version.on('click', function(e) {
-    versionDropdown.toggleClass('show');
+    versionDropdown.toggleClass('aui-show');
     e.preventDefault();
     e.stopPropagation();
   });
 
   doc.on('click', function() {
-    versionDropdown.removeClass('show');
+    versionDropdown.removeClass('aui-show');
   });
 
 });

@@ -1,7 +1,7 @@
-AUI().ready(
+YUI().use(
   'aui-ace-editor',
-  function(A) {
-    var editor = new A.AceEditor(
+  function(Y) {
+    var editor = new Y.AceEditor(
       {
         boundingBox: '#myEditor',
         height: '200',
@@ -11,33 +11,21 @@ AUI().ready(
       }
     ).render();
 
-    var mode = A.one('#mode');
+    var mode = Y.one('#mode');
 
     if (mode) {
-      var updateEditor = A.one('#updateEditor');
-
       var contents = {
         javascript: 'alert("Write something here...");',
-        php: '<?php echo "Write something here..."); ?>',
-        xml: '<value attr="something">Write something here...</value>',
-        json: '{"value": "Write something here..."}'
+        json: '{"value": "Write something here..."}',
+        php: '<?php echo "Write something here..."; ?>',
+        xml: '<value attr="something">Write something here...</value>'
       };
 
       var currentMode = 'javascript';
 
       var updateValue = function() {
-        if (updateEditor.attr('checked')) {
-          editor.set(
-            'value',
-            contents[currentMode]
-          );
-        }
+        editor.set('value', contents[currentMode]);
       };
-
-      updateEditor.on(
-        'change',
-        updateValue
-      );
 
       mode.on(
         'change',

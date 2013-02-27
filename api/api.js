@@ -5,7 +5,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "A.HTML5",
         "A.Node",
         "A.NodeList",
-        "A.Plugin.IO",
         "A.io",
         "AUI~event~input",
         "Anim",
@@ -25,6 +24,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "AttributeEvents",
         "AttributeExtras",
         "AttributeLite",
+        "AttributeObservable",
         "AutoComplete",
         "AutoCompleteBase",
         "AutoCompleteFilters",
@@ -36,13 +36,12 @@ YUI.add("yuidoc-meta", function(Y) {
         "Base",
         "BaseCellEditor",
         "BaseCore",
+        "BaseObservable",
         "BaseOptionsCellEditor",
         "BottomAxisLayout",
         "Button",
         "ButtonCore",
         "ButtonGroup",
-        "ButtonItem",
-        "ButtonPlugin",
         "Cache",
         "CacheOffline",
         "Calendar",
@@ -69,7 +68,10 @@ YUI.add("yuidoc-meta", function(Y) {
         "CircleGroup",
         "ClassNameManager",
         "ClickableRail",
-        "ColorPicker",
+        "Color",
+        "Color.HSL",
+        "Color.HSV",
+        "Color.Harmony",
         "ColumnSeries",
         "ComboSeries",
         "ComboSplineSeries",
@@ -117,13 +119,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "DataType.String",
         "Date",
         "DateCellEditor",
-        "DatePickerSelect",
-        "DatepickerManager",
-        "DelayedTask",
         "Dial",
-        "Dialog",
-        "DialogManager",
-        "DialogMask",
         "Do",
         "Do.AlterArgs",
         "Do.AlterReturn",
@@ -134,7 +130,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "Drawing",
         "DropDownCellEditor",
         "Easing",
-        "Editable",
         "EditorBase",
         "EditorSelection",
         "Ellipse",
@@ -169,9 +164,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "HorizontalLegendLayout",
         "IO",
         "IORequest",
-        "ImageGallery",
-        "ImageViewer",
-        "ImageViewerMask",
         "ImgLoadGroup",
         "ImgLoadImgObj",
         "Intl",
@@ -182,33 +174,22 @@ YUI.add("yuidoc-meta", function(Y) {
         "LeftAxisLayout",
         "LineSeries",
         "Lines",
-        "LiveSearch",
         "Loader",
-        "LoadingMask",
         "MarkerSeries",
         "Matrix",
         "MatrixUtil",
         "Model",
         "ModelList",
         "ModelSync.REST",
-        "NestedList",
         "Node",
         "NodeList",
         "Number",
         "NumericAxis",
         "Object",
         "Overlay",
-        "OverlayBase",
-        "OverlayContext",
-        "OverlayContextManager",
-        "OverlayContextPanel",
-        "OverlayContextPanelManager",
-        "OverlayManager",
-        "OverlayMask",
-        "Paginator",
+        "Pagination",
         "Panel",
         "Parallel",
-        "ParseContent",
         "Path",
         "PieChart",
         "PieSeries",
@@ -219,6 +200,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Plugin.Align",
         "Plugin.AutoComplete",
         "Plugin.Base",
+        "Plugin.Button",
         "Plugin.Cache",
         "Plugin.CalendarNavigator",
         "Plugin.ConsoleFilters",
@@ -253,7 +235,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "Plugin.SortScroll",
         "Plugin.WidgetAnim",
         "Pollable",
-        "PortalLayout",
         "Profiler",
         "ProgressBar",
         "QueryString",
@@ -288,6 +269,8 @@ YUI.add("yuidoc-meta", function(Y) {
         "SliderBase",
         "SliderValueRange",
         "Sortable",
+        "SortableLayout",
+        "SortableList",
         "SplineSeries",
         "StackedAreaSeries",
         "StackedAreaSplineSeries",
@@ -308,6 +291,8 @@ YUI.add("yuidoc-meta", function(Y) {
         "SyntheticEvent.Notifier",
         "Tab",
         "TabView",
+        "Template",
+        "Template.Micro",
         "Test.ArrayAssert",
         "Test.Assert",
         "Test.AssertionError",
@@ -336,12 +321,9 @@ YUI.add("yuidoc-meta", function(Y) {
         "Text.WordBreak",
         "TextAreaCellEditor",
         "TextCellEditor",
-        "Textboxlist",
         "ThumbRating",
         "TimeAxis",
         "ToggleButton",
-        "Toolbar",
-        "Tooltip",
         "TopAxisLayout",
         "Transition",
         "TreeData",
@@ -417,53 +399,24 @@ YUI.add("yuidoc-meta", function(Y) {
         "attribute-base",
         "attribute-complex",
         "attribute-core",
-        "attribute-events",
         "attribute-extras",
-        "aui-autocomplete",
-        "aui-button-item",
-        "aui-calendar",
-        "aui-calendar-base",
-        "aui-calendar-datepicker-select",
+        "attribute-observable",
         "aui-carousel",
         "aui-char-counter",
-        "aui-color-picker",
         "aui-component",
         "aui-datatype",
-        "aui-delayed-task",
-        "aui-dialog",
-        "aui-editable",
         "aui-event",
         "aui-event-input",
-        "aui-image-viewer",
-        "aui-image-viewer-base",
-        "aui-image-viewer-gallery",
         "aui-io",
-        "aui-io-plugin",
         "aui-io-request",
-        "aui-live-search",
-        "aui-loading-mask",
-        "aui-media-viewer-plugin",
-        "aui-nested-list",
         "aui-node",
         "aui-node-base",
         "aui-node-html5",
-        "aui-overlay",
-        "aui-overlay-base",
-        "aui-overlay-context",
-        "aui-overlay-context-panel",
-        "aui-overlay-manager",
-        "aui-overlay-mask",
-        "aui-paginator",
-        "aui-panel",
-        "aui-parse-content",
-        "aui-portal-layout",
+        "aui-pagination",
         "aui-progressbar",
         "aui-rating",
-        "aui-resize",
-        "aui-text",
-        "aui-textboxlist",
-        "aui-toolbar",
-        "aui-tooltip",
+        "aui-sortable-layout",
+        "aui-sortable-list",
         "aui-tree",
         "aui-tree-data",
         "aui-tree-node",
@@ -482,6 +435,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "base-base",
         "base-build",
         "base-core",
+        "base-observable",
         "base-pluginhost",
         "button",
         "button-core",
@@ -500,6 +454,11 @@ YUI.add("yuidoc-meta", function(Y) {
         "classnamemanager",
         "clickable-rail",
         "collection",
+        "color",
+        "color-base",
+        "color-harmony",
+        "color-hsl",
+        "color-hsv",
         "console",
         "console-filters",
         "cookie",
@@ -639,6 +598,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "lazy-model-list",
         "loader",
         "loader-base",
+        "loader-yui3",
         "matrix",
         "model",
         "model-list",
@@ -677,7 +637,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "querystring-parse-simple",
         "querystring-stringify",
         "querystring-stringify-simple",
-        "querystring-stringify-simple",
         "queue-promote",
         "range-slider",
         "recordset",
@@ -712,6 +671,9 @@ YUI.add("yuidoc-meta", function(Y) {
         "swf",
         "swfdetect",
         "tabview",
+        "template",
+        "template-base",
+        "template-micro",
         "test",
         "test-console",
         "text",
@@ -780,7 +742,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "anim-curve",
             "name": "anim-curve",
-            "description": "Adds support for the <code>curve</code> property for the <code>to</code> \nattribute.  A curve is zero or more control points and an end point."
+            "description": "Adds support for the <code>curve</code> property for the <code>to</code>\nattribute.  A curve is zero or more control points and an end point."
         },
         {
             "displayName": "anim-easing",
@@ -810,7 +772,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "anim-xy",
             "name": "anim-xy",
-            "description": "Adds support for the <code>xy</code> property in <code>from</code> and \n<code>to</code> attributes."
+            "description": "Adds support for the <code>xy</code> property in <code>from</code> and\n<code>to</code> attributes."
         },
         {
             "displayName": "app",
@@ -874,7 +836,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "attribute",
             "name": "attribute",
-            "description": "The attribute module provides an augmentable Attribute implementation, which \nadds configurable attributes and attribute change events to the class being \naugmented. It also provides a State class, which is used internally by Attribute,\nbut can also be used independently to provide a name/property/value data structure to\nstore state."
+            "description": "The attribute module provides an augmentable Attribute implementation, which\nadds configurable attributes and attribute change events to the class being\naugmented. It also provides a State class, which is used internally by Attribute,\nbut can also be used independently to provide a name/property/value data structure to\nstore state."
         },
         {
             "displayName": "attribute-base",
@@ -889,41 +851,17 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "attribute-core",
             "name": "attribute-core",
-            "description": "The attribute-core submodule provides the lightest level of attribute handling support \nwithout Attribute change events, or lesser used methods such as reset(), modifyAttrs(),\nand removeAttr()."
-        },
-        {
-            "displayName": "attribute-events",
-            "name": "attribute-events",
-            "description": "The attribute-events submodule provides augmentable attribute change event support \nfor AttributeCore based implementations."
+            "description": "The attribute-core submodule provides the lightest level of attribute handling support\nwithout Attribute change events, or lesser used methods such as reset(), modifyAttrs(),\nand removeAttr()."
         },
         {
             "displayName": "attribute-extras",
             "name": "attribute-extras",
-            "description": "The attribute-extras submodule provides less commonly used attribute methods, and can \nbe augmented/mixed into an implemention which used attribute-core."
+            "description": "The attribute-extras submodule provides less commonly used attribute methods, and can\nbe augmented/mixed into an implemention which used attribute-core."
         },
         {
-            "displayName": "aui-autocomplete",
-            "name": "aui-autocomplete",
-            "description": "The AutoComplete Utility"
-        },
-        {
-            "displayName": "aui-button-item",
-            "name": "aui-button-item",
-            "description": "The ButtonItem Utility"
-        },
-        {
-            "displayName": "aui-calendar",
-            "name": "aui-calendar"
-        },
-        {
-            "displayName": "aui-calendar-base",
-            "name": "aui-calendar-base",
-            "description": "The Calendar component is a UI control that enables users to choose one or\nmore dates from a graphical calendar presented in a single month or multi\nmonth interface. Calendars are generated entirely via script and can be\nnavigated without any page refreshes."
-        },
-        {
-            "displayName": "aui-calendar-datepicker-select",
-            "name": "aui-calendar-datepicker-select",
-            "description": "The DatePickerSelect Utility"
+            "displayName": "attribute-observable",
+            "name": "attribute-observable",
+            "description": "The `attribute-observable` submodule provides augmentable attribute change event support\nfor AttributeCore based implementations."
         },
         {
             "displayName": "aui-carousel",
@@ -936,11 +874,6 @@ YUI.add("yuidoc-meta", function(Y) {
             "description": "The CharCounter Utility"
         },
         {
-            "displayName": "aui-color-picker",
-            "name": "aui-color-picker",
-            "description": "The ColorPicker Utility - Full documentation coming soon."
-        },
-        {
             "displayName": "aui-component",
             "name": "aui-component",
             "description": "The Component Utility"
@@ -949,21 +882,6 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "aui-datatype",
             "name": "aui-datatype",
             "description": "The Datatype Utility"
-        },
-        {
-            "displayName": "aui-delayed-task",
-            "name": "aui-delayed-task",
-            "description": "The DelayedTask Utility - Executes the supplied function in the context of\nthe supplied object 'when' milliseconds later"
-        },
-        {
-            "displayName": "aui-dialog",
-            "name": "aui-dialog",
-            "description": "The Dialog Utility - The Dialog component is an extension of Panel that is\nmeant to emulate the behavior of an dialog window using a floating,\ndraggable HTML element."
-        },
-        {
-            "displayName": "aui-editable",
-            "name": "aui-editable",
-            "description": "The Editable Utility"
         },
         {
             "displayName": "aui-event",
@@ -975,52 +893,13 @@ YUI.add("yuidoc-meta", function(Y) {
             "description": "An object that encapsulates text changed events for textareas and input\nelement of type text and password. This event only occurs when the element\nis focused."
         },
         {
-            "displayName": "aui-image-viewer",
-            "name": "aui-image-viewer"
-        },
-        {
-            "displayName": "aui-image-viewer-base",
-            "name": "aui-image-viewer-base",
-            "description": "The ImageViewer Utility"
-        },
-        {
-            "displayName": "aui-image-viewer-gallery",
-            "name": "aui-image-viewer-gallery",
-            "description": "The ImageGallery Utility"
-        },
-        {
             "displayName": "aui-io",
             "name": "aui-io"
-        },
-        {
-            "displayName": "aui-io-plugin",
-            "name": "aui-io-plugin",
-            "description": "The IOPlugin Utility - When plugged to a Node or Widget loads the content\nof a URI and set as its content, parsing the <code>script</code> tags if\npresent on the code."
         },
         {
             "displayName": "aui-io-request",
             "name": "aui-io-request",
             "description": "The IORequest Utility - Provides response data normalization for XML, JSON,\nJavaScript and cache option."
-        },
-        {
-            "displayName": "aui-live-search",
-            "name": "aui-live-search",
-            "description": "The LiveSearch Utility allow real-time filtering for DOM elements based on\na input query."
-        },
-        {
-            "displayName": "aui-loading-mask",
-            "name": "aui-loading-mask",
-            "description": "The LoadingMask Utility"
-        },
-        {
-            "displayName": "aui-media-viewer-plugin",
-            "name": "aui-media-viewer-plugin",
-            "description": "The ImageViewer Media Plugin"
-        },
-        {
-            "displayName": "aui-nested-list",
-            "name": "aui-nested-list",
-            "description": "The NestedList Utility - Full documentation coming soon."
         },
         {
             "displayName": "aui-node",
@@ -1037,53 +916,9 @@ YUI.add("yuidoc-meta", function(Y) {
             "description": "aui-node-html5 provides support for HTML shiv natively on the Alloy dom\nmethods. The HTML5 shiv just affects IE."
         },
         {
-            "displayName": "aui-overlay",
-            "name": "aui-overlay"
-        },
-        {
-            "displayName": "aui-overlay-base",
-            "name": "aui-overlay-base",
-            "description": "Provides a basic Overlay widget, with Standard Module content support. The Overlay widget\nprovides Page XY positioning support, alignment and centering support along with basic\nstackable support (z-index and shimming)."
-        },
-        {
-            "displayName": "aui-overlay-context",
-            "name": "aui-overlay-context",
-            "description": "The OverlayContext Utility"
-        },
-        {
-            "displayName": "aui-overlay-context-panel",
-            "name": "aui-overlay-context-panel",
-            "description": "The OverlayContextPanel Utility"
-        },
-        {
-            "displayName": "aui-overlay-manager",
-            "name": "aui-overlay-manager",
-            "description": "The OverlayManager Utility"
-        },
-        {
-            "displayName": "aui-overlay-mask",
-            "name": "aui-overlay-mask",
-            "description": "The OverlayMask Utility"
-        },
-        {
-            "displayName": "aui-paginator",
-            "name": "aui-paginator",
-            "description": "The Paginator Utility - The Paginator widget provides a set of controls to navigate through paged data."
-        },
-        {
-            "displayName": "aui-panel",
-            "name": "aui-panel",
-            "description": "The Panel Utility - Panel is a container that has specific functionality\nand structural components that make it the good for building block for\napplication-oriented user interfaces. Panel also provides built-in\nexpandable and collapsible behavior, along with a variety of prebuilt tool\nbuttons that can be wired up to provide other customized behavior. Panels\ncan be easily dropped into any Container or layout."
-        },
-        {
-            "displayName": "aui-parse-content",
-            "name": "aui-parse-content",
-            "description": "The ParseContent Utility - Parse the content of a Node so that all of the\njavascript contained in that Node will be executed according to the order\nthat it appears."
-        },
-        {
-            "displayName": "aui-portal-layout",
-            "name": "aui-portal-layout",
-            "description": "The PortalLayout Utility - Full documentation coming soon."
+            "displayName": "aui-pagination",
+            "name": "aui-pagination",
+            "description": "The Pagination Utility - The Pagination widget provides a set of controls to navigate through paged data."
         },
         {
             "displayName": "aui-progressbar",
@@ -1096,29 +931,14 @@ YUI.add("yuidoc-meta", function(Y) {
             "description": "The Rating Utility - The Star Rating creates a non-obstrusive star rating\ncontrol, could be based on a set of radio input boxes."
         },
         {
-            "displayName": "aui-resize",
-            "name": "aui-resize",
-            "description": "The Resize Utility allows you to make an HTML element resizable."
+            "displayName": "aui-sortable-layout",
+            "name": "aui-sortable-layout",
+            "description": "The SortableLayout Utility - Full documentation coming soon."
         },
         {
-            "displayName": "aui-text",
-            "name": "aui-text",
-            "description": "Utility for testing strings against unicode patterns."
-        },
-        {
-            "displayName": "aui-textboxlist",
-            "name": "aui-textboxlist",
-            "description": "The Textboxlist Utility - Full documentation coming soon."
-        },
-        {
-            "displayName": "aui-toolbar",
-            "name": "aui-toolbar",
-            "description": "The Toolbar Utility"
-        },
-        {
-            "displayName": "aui-tooltip",
-            "name": "aui-tooltip",
-            "description": "The Tooltip Utility - A standard tooltip implementation for providing additional information when hovering over a target element."
+            "displayName": "aui-sortable-list",
+            "name": "aui-sortable-list",
+            "description": "The SortableList Utility - Full documentation coming soon."
         },
         {
             "displayName": "aui-tree",
@@ -1192,27 +1012,32 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "base",
             "name": "base",
-            "description": "The base module provides the Base class, which objects requiring attribute and custom event support can extend. \nThe module also provides two ways to reuse code - It augments Base with the Plugin.Host interface which provides \nplugin support and also provides the BaseCore.build method which provides a way to build custom classes using extensions."
+            "description": "The base module provides the Base class, which objects requiring attribute and custom event support can extend.\nThe module also provides two ways to reuse code - It augments Base with the Plugin.Host interface which provides\nplugin support and also provides the BaseCore.build method which provides a way to build custom classes using extensions."
         },
         {
             "displayName": "base-base",
             "name": "base-base",
-            "description": "The base-base submodule provides the Base class without the Plugin support, provided by Plugin.Host, \nand without the extension support provided by BaseCore.build."
+            "description": "The base-base submodule provides the Base class without the Plugin support, provided by Plugin.Host,\nand without the extension support provided by BaseCore.build."
         },
         {
             "displayName": "base-build",
             "name": "base-build",
-            "description": "The base-build submodule provides Base.build functionality, which\ncan be used to create custom classes, by aggregating extensions onto \na main class."
+            "description": "The base-build submodule provides Base.build functionality, which\ncan be used to create custom classes, by aggregating extensions onto\na main class."
         },
         {
             "displayName": "base-core",
             "name": "base-core",
-            "description": "<p>The base-core module provides the BaseCore class, the lightest version of Base, \nwhich provides Base's basic lifecycle management and ATTRS construction support, \nbut doesn't fire init/destroy or attribute change events.</p> \n\n<p>It mixes in AttributeCore, which is the lightest version of Attribute</p>"
+            "description": "<p>The base-core module provides the BaseCore class, the lightest version of Base,\nwhich provides Base's basic lifecycle management and ATTRS construction support,\nbut doesn't fire init/destroy or attribute change events.</p>\n\n<p>It mixes in AttributeCore, which is the lightest version of Attribute</p>"
+        },
+        {
+            "displayName": "base-observable",
+            "name": "base-observable",
+            "description": "The `base-observable` submodule adds observability to Base's lifecycle and\nattributes, and also make it an `EventTarget`."
         },
         {
             "displayName": "base-pluginhost",
             "name": "base-pluginhost",
-            "description": "The base-pluginhost submodule adds Plugin support to Base, by augmenting Base with \nPlugin.Host and setting up static (class level) Base.plug and Base.unplug methods."
+            "description": "The base-pluginhost submodule adds Plugin support to Base, by augmenting Base with\nPlugin.Host and setting up static (class level) Base.plug and Base.unplug methods."
         },
         {
             "displayName": "button",
@@ -1297,6 +1122,30 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "collection",
             "name": "collection"
+        },
+        {
+            "displayName": "color",
+            "name": "color"
+        },
+        {
+            "displayName": "color-base",
+            "name": "color-base",
+            "description": "Color provides static methods for color conversion.\n\n    Y.Color.toRGB('f00'); // rgb(255, 0, 0)\n\n    Y.Color.toHex('rgb(255, 255, 0)'); // #ffff00"
+        },
+        {
+            "displayName": "color-harmony",
+            "name": "color-harmony",
+            "description": "Color Harmony provides methods useful for color combination discovery."
+        },
+        {
+            "displayName": "color-hsl",
+            "name": "color-hsl",
+            "description": "Color provides static methods for color conversion to hsl values.\n\n    Y.Color.toHSL('f00'); // hsl(0, 100%, 50%)\n\n    Y.Color.toHSLA('rgb(255, 255, 0'); // hsla(60, 100%, 50%, 1)"
+        },
+        {
+            "displayName": "color-hsv",
+            "name": "color-hsv",
+            "description": "Color provides static methods for color conversion hsv values.\n\n    Y.Color.toHSV('f00'); // hsv(0, 100%, 100%)\n\n    Y.Color.toHSVA('rgb(255, 255, 0'); // hsva(60, 100%, 100%, 1)"
         },
         {
             "displayName": "console",
@@ -1845,7 +1694,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "graphics",
             "name": "graphics",
-            "description": "<p>The `Graphics` module provides a JavaScript API for creating shapes in a variety of formats across \n a <a href=\"http://developer.yahoo.com/yui/articles/gbs\">browser test baseline</a>. \n Based on device and browser capabilities, `Graphics` leverages <a href=\"http://www.w3.org/TR/SVG/\">SVG</a>, \n <a href=\"http://www.w3.org/TR/html5/the-canvas-element.html\">Canvas</a> and <a href=\"http://www.w3.org/TR/NOTE-VML\">VML</a> \n to render its graphical elements.</p>\n\n <p>The `Graphics` module features a <a href=\"../classes/Graphic.html\">`Graphic`</a> class that allows you to easily create and manage shapes. \n Currently, a <a href=\"../classes/Graphic.html\">`Graphic`</a> instance can be used to create predifined shapes and free-form polygons with fill \n and stroke properties.</p>  \n\n <p>The `Graphics` module normalizes an API through the use of alias and implementation classes that share\n interfaces. Each alias class points to an appropriate implementation class dependent on the browser's \n capabilities. There should rarely, if ever, be a need to interact directly with an implementation class.</p>\n\n <p>Below is a list of available classes. \n     <ul>\n         <li><a href=\"../classes/Graphic.html\">`Graphic`</a>\n         <li><a href=\"../classes/Shape.html\">`Shape`</a>\n         <li><a href=\"../classes/Circle.html\">`Circle`</a>\n         <li><a href=\"../classes/Ellipse.html\">`Ellipse`</a>\n         <li><a href=\"../classes/Rect.html\">`Rect`</a>\n         <li><a href=\"../classes/Path.html\">`Path`</a>\n     </ul>\n You can also extend the `Shape` class to create your own custom shape classes.</p>"
+            "description": "<p>The `Graphics` module provides a JavaScript API for creating shapes in a variety of formats across\n a <a href=\"http://developer.yahoo.com/yui/articles/gbs\">browser test baseline</a>.\n Based on device and browser capabilities, `Graphics` leverages <a href=\"http://www.w3.org/TR/SVG/\">SVG</a>,\n <a href=\"http://www.w3.org/TR/html5/the-canvas-element.html\">Canvas</a> and <a href=\"http://www.w3.org/TR/NOTE-VML\">VML</a>\n to render its graphical elements.</p>\n<p>The `Graphics` module features a <a href=\"../classes/Graphic.html\">`Graphic`</a> class that allows you to easily create and manage shapes.\n Currently, a <a href=\"../classes/Graphic.html\">`Graphic`</a> instance can be used to create predifined shapes and free-form polygons with fill\n and stroke properties.</p>\n<p>The `Graphics` module normalizes an API through the use of alias and implementation classes that share\n interfaces. Each alias class points to an appropriate implementation class dependent on the browser's\n capabilities. There should rarely, if ever, be a need to interact directly with an implementation class.</p>\n<p>Below is a list of available classes.\n     <ul>\n         <li><a href=\"../classes/Graphic.html\">`Graphic`</a>\n         <li><a href=\"../classes/Shape.html\">`Shape`</a>\n         <li><a href=\"../classes/Circle.html\">`Circle`</a>\n         <li><a href=\"../classes/Ellipse.html\">`Ellipse`</a>\n         <li><a href=\"../classes/Rect.html\">`Rect`</a>\n         <li><a href=\"../classes/Path.html\">`Path`</a>\n     </ul>\n You can also extend the `Shape` class to create your own custom shape classes.</p>"
         },
         {
             "displayName": "handlebars",
@@ -1985,6 +1834,11 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "loader-base",
             "name": "loader-base",
             "description": "Loader dynamically loads script and css files.  It includes the dependency\ninformation for the version of the library in use, and will automatically pull in\ndependencies for the modules requested. It can also load the\nfiles from the Yahoo! CDN, and it can utilize the combo service provided on\nthis network to reduce the number of http connections required to download\nYUI files."
+        },
+        {
+            "displayName": "loader-yui3",
+            "name": "loader-yui3",
+            "description": "YUI 3 module metadata"
         },
         {
             "displayName": "matrix",
@@ -2241,7 +2095,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "scrollview",
             "name": "scrollview",
-            "description": "<p>\nThe scrollview module does not add any new classes. It simply plugs the ScrollViewScrollbars plugin into the \nbase ScrollView class implementation provided by the scrollview-base module, so that all scrollview instances \nhave scrollbars enabled.\n</p>\n\n<ul>\n    <li><a href=\"../classes/ScrollView.html\">ScrollView API documentation</a></li>\n    <li><a href=\"scrollview-base.html\">scrollview-base Module documentation</a></li>\n</ul>"
+            "description": "<p>\nThe scrollview module does not add any new classes. It simply plugs the ScrollViewScrollbars plugin into the\n base ScrollView class implementation provided by the scrollview-base module, so that all scrollview instances\n have scrollbars enabled.\n</p>\n\n<ul>\n    <li><a href=\"../classes/ScrollView.html\">ScrollView API documentation</a></li>\n    <li><a href=\"scrollview-base.html\">scrollview-base Module documentation</a></li>\n</ul>"
         },
         {
             "displayName": "scrollview-base",
@@ -2344,6 +2198,21 @@ YUI.add("yuidoc-meta", function(Y) {
             "description": "The TabView module"
         },
         {
+            "displayName": "template",
+            "name": "template",
+            "description": "Virtual rollup of the `template-base` and `template-micro` modules."
+        },
+        {
+            "displayName": "template-base",
+            "name": "template-base",
+            "description": "Provides a generic API for using template engines such as Handlebars and\n`Y.Template.Micro`."
+        },
+        {
+            "displayName": "template-micro",
+            "name": "template-micro",
+            "description": "Adds the `Y.Template.Micro` template engine, which provides fast, simple\nstring-based micro-templating similar to ERB or Underscore templates."
+        },
+        {
             "displayName": "test",
             "name": "test",
             "description": "YUI Test Framework"
@@ -2381,7 +2250,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "uploader",
             "name": "uploader",
-            "description": "Provides UI for selecting multiple files and functionality for \nuploading multiple files to the server with support for either\nhtml5 or Flash transport mechanisms, automatic queue management,\nupload progress monitoring, and error events."
+            "description": "Provides UI for selecting multiple files and functionality for\nuploading multiple files to the server with support for either\nhtml5 or Flash transport mechanisms, automatic queue management,\nupload progress monitoring, and error events."
         },
         {
             "displayName": "uploader-deprecated",
@@ -2521,12 +2390,12 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "yui",
             "name": "yui",
-            "description": "The YUI module contains the components required for building the YUI seed\nfile.  This includes the script loading mechanism, a simple queue, and\nthe core utilities for the library."
+            "description": "The YUI module contains the components required for building the YUI seed file.\nThis includes the script loading mechanism, a simple queue, and the core\nutilities for the library."
         },
         {
             "displayName": "yui-base",
             "name": "yui-base",
-            "description": "The YUI module contains the components required for building the YUI seed\nfile.  This includes the script loading mechanism, a simple queue, and\nthe core utilities for the library."
+            "description": "The YUI module contains the components required for building the YUI seed file.\nThis includes the script loading mechanism, a simple queue, and the core\nutilities for the library."
         },
         {
             "displayName": "yui-later",
