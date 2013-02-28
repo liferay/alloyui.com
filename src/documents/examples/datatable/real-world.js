@@ -1,166 +1,97 @@
 AUI().use(
   'aui-datatable',
-  'datatable-sort',
-  'aui-datatype',
   function(A) {
+    var columns = ["name", "address", "city", "state"];
 
-    var remoteData = [
-      {name:'John A. Smith', address:'1236 Some Street', city:'San Francisco', state:'CA', amount:5, active:'yes', colors:['red'], fruit:['banana','cherry'], last_login:'4/19/2007'},
-      {name:'Bob C. Uncle', address:'9996 Random Road', city:'Los Angeles', state:'CA', amount:0, active:'maybe', colors:['green'], fruit:['cherry'], last_login:['4/10/2007']},
-      {name:'John D. Smith', address:'1623 Some Street', city:'San Francisco', state:'CA', amount:5, active:'yes', colors:['red'], fruit:['cherry'], last_login:'4/19/2007'},
-      {name:'Joan E. Jones', address:'3217 Another Ave', city:'New York', state:'NY', amount:3, active:'no', colors:['red','blue'], fruit:['apple','cherry'], last_login:'2/15/2006'},
-      {name:'Bob F. Uncle', address:'9899 Random Road', city:'Los Angeles', state:'CA', amount:0, active:'maybe', colors:['green'], fruit:['banana'], last_login:'1/23/2004'},
-      {name:'John G. Smith', address:'1723 Some Street', city:'San Francisco', state:'CA', amount:5, active:'yes', colors:['red'], fruit:['apple'], last_login:'4/19/2007'},
-      {name:'Joan H. Jones', address:'3241 Another Ave', city:'New York', state:'NY', amount:3, active:'no', colors:['red','blue'], fruit:['kiwi'], last_login:'2/15/2006'},
-      {name:'Bob I. Uncle', address:'9909 Random Road', city:'Los Angeles', state:'CA', amount:0, active:'maybe', colors:['green'], fruit:['apple','banana'], last_login:'1/23/2004'},
-      {name:'John J. Smith', address:'1623 Some Street', city:'San Francisco', state:'CA', amount:5, active:'yes', colors:['red'], fruit:['apple','cherry'], last_login:'4/19/2007'},
-      {name:'Joan K. Jones', address:'3721 Another Ave', city:'New York', state:'NY', amount:3, active:'no', colors:['red','blue'], fruit:['banana'], last_login:'2/15/2006'}
+    var cols = [
+      {label: 'Name', key: 'name', editor: false, sortable: true},
+      {label: 'Value', key: 'value', sortable: true}
     ];
 
-    var states = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'];
-
-    var nameEditor = new A.TextAreaCellEditor(
+    var data = [
       {
-        validator: {
-          rules: {
-            name: {
-              required: true,
-              email: true
-            }
+        editor: new A.CheckboxCellEditor({
+          options: ['Boolean value']
+        }),
+        name: 'Boolean',
+        value: 'Boolean value'
+      },
+      {
+        editor: new A.DateCellEditor(),
+        name: 'Date',
+        value: '10/10/2011'
+      },
+      {
+        editor: new A.TextCellEditor(),
+        name: 'Decimal',
+        value: 'Decimal'
+      },
+      {
+        editor: new A.TextCellEditor(),
+        name: 'Integer',
+        value: 'Integer'
+      },
+      {
+        editor: new A.TextCellEditor(),
+        name: 'Number',
+        value: '123'
+      },
+      {
+        editor: new A.RadioCellEditor({
+          options: ['Yes', 'No']
+        }),
+        name: 'Radio',
+        value: 'Yes'
+      },
+      {
+        editor: new A.DropDownCellEditor({
+          options: {
+            apple: 'Apple',
+            banana: 'Banana',
+            cherry: 'Cherry',
+            kiwi: 'Kiwi'
           }
-        }
-      }
-    );
-
-    var fruitEditor = new A.DropDownCellEditor(
+        }),
+        name: 'Select',
+        value: 'Apple'
+      },
       {
-        editable: true,
-        multiple: true,
-        options: {
-          apple: 'Apple',
-          banana: 'Banana',
-          cherry: 'Cherry',
-          kiwi: 'Kiwi'
-        },
-        validator: {
-          rules: {
-            value: {
-              required: true
-            }
+        editor: new A.DropDownCellEditor({
+          multiple: true,
+          options: {
+            apple: 'Apple',
+            banana: 'Banana',
+            cherry: 'Cherry',
+            kiwi: 'Kiwi'
           }
-        }
-      }
-    );
-
-    var nestedCols = [
+        }),
+        name: 'Select multiple',
+        value: 'apple'
+      },
       {
-        editor: nameEditor,
-        key: 'name',
-        sortable: true
+        editor: new A.TextCellEditor(),
+        name: 'Text',
+        value: 'Text value'
       },
       {
         editor: new A.TextAreaCellEditor(),
-        key: 'address',
-        sortable: true
-      },
-      {
-        editor: new A.TextAreaCellEditor(),
-        key: 'city'
-      },
-      {
-        editor: new A.DropDownCellEditor(
-          {
-            editable: true,
-            options: states
-          }
-        ),
-        key: 'state'
-      },
-      {
-        editor: new A.TextCellEditor(
-          {
-            inputFormatter: A.DataType.String.evaluate,
-            validator: {
-              rules: {
-                value: {
-                  number: true,
-                  required: true
-                }
-              }
-            }
-          }
-        ),
-        key: 'amount'
-      },
-      {
-        editor: new A.RadioCellEditor(
-          {
-            editable: true,
-            options: {
-              yes: 'Yes',
-              no: 'No',
-              maybe: 'Maybe'
-            }
-          }
-        ),
-        key: 'active'
-      },
-      {
-        editor: new A.CheckboxCellEditor(
-          {
-            editable: true,
-            multiple: true,
-            options: {
-              red: 'Red',
-              green: 'Green',
-              blue: 'Blue'
-            }
-          }
-        ),
-        key: 'colors'
-      },
-      {
-        editor: new A.DateCellEditor(
-          {
-            calendar: {
-              dateFormat: '%m/%d/%Y',
-              selectionMode: 'multiple',
-              showNextMonth: false,
-              showPrevMonth: false,
-              width:'250px'
-            },
-            validator: {
-              rules: {
-                value: {
-                  required: true
-                }
-              }
-            }
-          }
-        ),
-        key: 'last_login'
-      },
-      {
-        editor: fruitEditor,
-        key: 'fruit'
+        name: 'Text-box',
+        value: 'Text-box value'
       }
     ];
 
-    var dataTable = new A.DataTable(
+    var dataTable = new A.DataTable.Base(
       {
-        columns: nestedCols,
-        data: remoteData,
-        editEvent: 'dblclick',
-        plugins: [
-          {
-            fn: A.Plugin.DataTableHighlight,
-            cfg: {
-              highlightRange: false
-            }
-          }
-        ]
+        columnset: cols,
+        editEvent: 'mousedown',
+        recordset: data
       }
-    ).render('#myDataTable');
+    ).plug(
+      A.Plugin.DataTableSelection,
+      {
+        selectRow: true,
+      }
+    ).plug(A.Plugin.DataTableSort).render('#myDataTable');
 
     dataTable.get('boundingBox').unselectable();
   }
