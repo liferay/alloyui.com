@@ -21,7 +21,7 @@ AUI().ready(
           A.Plugin.IO,
           {
             autoLoad: false,
-            uri: 'http://liferay.github.com/dialog/content.html'
+            uri: 'data/content.html'
           }
         );
 

@@ -3,7 +3,10 @@ AUI().use(
   function(A) {
     new A.DatePickerSelect(
       {
-        appendOrder: ['m', 'd', 'y']
+        appendOrder: ['m', 'd', 'y'],
+        calendar: {
+          dates: ['10/10/2013']
+        }
       }
     ).render('#myDatePicker');
 
@@ -11,7 +14,7 @@ AUI().use(
       {
         calendar: {
           dateFormat: '%m/%d/%Y',
-          selectedDates: new Date
+          dates: ['10/10/2013']
         },
         trigger: '#myInput'
       }

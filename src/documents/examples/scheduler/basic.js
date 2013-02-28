@@ -15,9 +15,9 @@ AUI().use(
     new A.Scheduler(
       {
         boundingBox: '#myScheduler',
-        date: new Date(2013, 1, 4),
+        currentDate: new Date(2013, 1, 4),
         eventRecorder: eventRecorder,
-        items: events,
+        events: events,
         render: true,
         views: [weekView]
       }

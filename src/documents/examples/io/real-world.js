@@ -46,7 +46,7 @@ AUI().use(
                     options += '<option value="' + cities[i].name + '">' + cities[i].name + '</option>';
                   }
 
-                  A.one('#city').setHTML(options);
+                  A.one('#city').html(options);
                 }
               }
             }

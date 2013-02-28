@@ -51,7 +51,7 @@ AUI().use(
 
     new A.PropertyList(
       {
-        data: properties
+        recordset: properties
       }
     ).render('#myPropertyList');
   }
