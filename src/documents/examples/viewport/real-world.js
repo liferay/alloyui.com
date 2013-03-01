@@ -1,3 +1,0 @@
-AUI().use(
-  'aui-viewport'
-);
