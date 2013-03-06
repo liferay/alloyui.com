@@ -34,7 +34,7 @@ module.exports =
 
             # Basic info
             title: 'AlloyUI'
-            description: 'Alloy is a UI framework built on top of YUI3 that provides a simple API for building high scalable applications.'
+            description: 'AlloyUI is a framework built on top of YUI3 that provides a simple API for building high scalable applications.'
 
         # -----------------------------
         # Helpers
