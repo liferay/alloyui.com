@@ -37,7 +37,7 @@ YUI().use(
               {label: 'Kiwi', type: 'task', leaf: true},
               {label: 'Orange', type: 'task', leaf: true},
               {label: 'Pomegranate', type: 'task', leaf: true}
-            ]
+            ],
             expanded: true,
             label: 'Task',
             type: 'task'
