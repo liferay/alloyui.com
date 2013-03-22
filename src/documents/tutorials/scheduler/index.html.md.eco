@@ -17,12 +17,9 @@ First load the seed file if you haven't yet.
 Then initialize AlloyUI and load the Scheduler module.
 
 ``` javascript
-YUI().use(
-  'aui-scheduler',
-  function(Y) {
-    // code goes here
-  }
-);
+YUI().use('aui-scheduler', function (Y) {
+  // code goes here
+});
 ```
 ---
 
@@ -46,30 +43,23 @@ First, let's create an `events` variable where we stored our first calendar even
 Finally, we'll create a new Scheduler with its `boundingBox` set to our HTML element, its `date` set to when we scheduled our first event, and pass in `events` for `items` and `weekView` for `views`, setting `render` to `true` so that it renders on load.
 
 ``` javascript
-YUI().use(
-  'aui-scheduler',
-  function(Y) {
-    var events = [
-      {
-        content: 'Partial Lunar Eclipse',
-        endDate: new Date(2013, 4, 25, 5),
-        startDate: new Date(2012, 4, 25, 1)
-      }
-    ];
+YUI().use('aui-scheduler', function (Y) {
+  var events = [{
+    content: 'Partial Lunar Eclipse',
+    endDate: new Date(2013, 4, 25, 5),
+    startDate: new Date(2012, 4, 25, 1)
+  }];
 
-    var weekView = new Y.SchedulerWeekView();
+  var weekView = new Y.SchedulerWeekView();
 
-    new Y.Scheduler(
-      {
-        boundingBox: '#myScheduler',
-        date: new Date(2013, 4, 25),
-        items: events,
-        render: true,
-        views: [weekView]
-      }
-    );
-  }
-);
+  new Y.Scheduler({
+    boundingBox: '#myScheduler',
+    date: new Date(2013, 4, 25),
+    items: events,
+    render: true,
+    views: [weekView]
+  });
+});
 ```
 
 <div class="aui-alert aui-alert-info">
@@ -85,121 +75,96 @@ There are some other optional parameters that you can pass to your Scheduler ins
 For example, you can add other views to your `views` option with the Scheduler View constructors.  This will allow you to view your events in different formats.  You can also set `activeView` to the view you want Scheduler to start on.
 
 ``` javascript
-YUI().use(
-  'aui-scheduler',
-  function(Y) {
-    var events = [
-      {
-        content: 'Partial Lunar Eclipse',
-        endDate: new Date(2013, 4, 25, 5),
-        startDate: new Date(2013, 4, 25, 1)
-      }
-    ];
+YUI().use('aui-scheduler', function (Y) {
+  var events = [{
+    content: 'Partial Lunar Eclipse',
+    endDate: new Date(2013, 4, 25, 5),
+    startDate: new Date(2013, 4, 25, 1)
+  }];
 
-    var agendaView = new Y.SchedulerAgendaView();
-    var dayView = new Y.SchedulerDayView();
-    var weekView = new Y.SchedulerWeekView();
-    var monthView = new Y.SchedulerMonthView();
+  var agendaView = new Y.SchedulerAgendaView();
+  var dayView = new Y.SchedulerDayView();
+  var weekView = new Y.SchedulerWeekView();
+  var monthView = new Y.SchedulerMonthView();
 
-    new Y.Scheduler(
-      {
-        activeView: weekView,
-        boundingBox: '#myScheduler',
-        date: new Date(2013, 4, 25),
-        items: events,
-        render: true,
-        views: [dayView, weekView, monthView, agendaView]
-      }
-    );
-  }
-);
+  new Y.Scheduler({
+    activeView: weekView,
+    boundingBox: '#myScheduler',
+    date: new Date(2013, 4, 25),
+    items: events,
+    render: true,
+    views: [dayView, weekView, monthView, agendaView]
+  });
+});
 ```
 
 Adding `eventRecorder` to your options via the `NewEventRecorder` constructor allows you change the duration of existing events and create new events directly inside Scheduler, all of which are recorded and saved in Scheduler.
 
 ``` javascript
-YUI().use(
-  'aui-scheduler',
-  function(Y) {
-    var events = [
-      {
-        content: 'Partial Lunar Eclipse',
-        endDate: new Date(2013, 4, 25, 5),
-        startDate: new Date(2013, 4, 25, 1)
-      }
-    ];
+YUI().use('aui-scheduler', function (Y) {
+  var events = [{
+    content: 'Partial Lunar Eclipse',
+    endDate: new Date(2013, 4, 25, 5),
+    startDate: new Date(2013, 4, 25, 1)
+  }];
 
-    var agendaView = new Y.SchedulerAgendaView();
-    var dayView = new Y.SchedulerDayView();
-    var weekView = new Y.SchedulerWeekView();
-    var monthView = new Y.SchedulerMonthView();
+  var agendaView = new Y.SchedulerAgendaView();
+  var dayView = new Y.SchedulerDayView();
+  var weekView = new Y.SchedulerWeekView();
+  var monthView = new Y.SchedulerMonthView();
+  var eventRecorder = new Y.SchedulerEventRecorder();
 
-    var eventRecorder = new Y.SchedulerEventRecorder();
-
-    new Y.Scheduler(
-      {
-        activeView: weekView,
-        boundingBox: '#myScheduler',
-        date: new Date(2013, 4, 25),
-        eventRecorder: eventRecorder,
-        items: events,
-        render: true,
-        views: [dayView, weekView, monthView, agendaView]
-      }
-    );
-  }
-);
+  new Y.Scheduler({
+    activeView: weekView,
+    boundingBox: '#myScheduler',
+    date: new Date(2013, 4, 25),
+    eventRecorder: eventRecorder,
+    items: events,
+    render: true,
+    views: [dayView, weekView, monthView, agendaView]
+  });
+});
 ```
 
 You can even customize your individual events with a number of options, including `color`, `meeting`, `reminder`, and `disabled`.  Events can also span multiple days and overlap each other.
 
 
 ``` javascript
-YUI().use(
-  'aui-scheduler',
-  function(Y) {
-    var events = [
-      {
-        content: 'Partial Lunar Eclipse',
-        endDate: new Date(2012, 4, 25, 5),
-        startDate: new Date(2013, 4, 25, 1)
-      },
-      {
-        color: "#8d8",
-        content: 'Earth Day Lunch',
-        disabled: true,
-        endDate: new Date(2013, 4, 22, 13),
-        meeting: true,
-        reminder: true,
-        startDate: new Date(2013, 22, 12, 12)
-      },
-      {
-        content: "Weeklong",
-        endDate: new Date(2013, 4, 21),
-        startDate: new Date(2013, 4, 27)
-      },
-    ];
+YUI().use('aui-scheduler', function (Y) {
+  var events = [{
+    content: 'Partial Lunar Eclipse',
+    endDate: new Date(2012, 4, 25, 5),
+    startDate: new Date(2013, 4, 25, 1)
+  }, {
+    color: '#8D8',
+    content: 'Earth Day Lunch',
+    disabled: true,
+    endDate: new Date(2013, 4, 22, 13),
+    meeting: true,
+    reminder: true,
+    startDate: new Date(2013, 22, 12, 12)
+  }, {
+    content: 'Weeklong',
+    endDate: new Date(2013, 4, 21),
+    startDate: new Date(2013, 4, 27)
+  }];
 
-    var agendaView = new Y.SchedulerAgendaView();
-    var dayView = new Y.SchedulerDayView();
-    var weekView = new Y.SchedulerWeekView();
-    var monthView = new Y.SchedulerMonthView();
+  var agendaView = new Y.SchedulerAgendaView();
+  var dayView = new Y.SchedulerDayView();
+  var weekView = new Y.SchedulerWeekView();
+  var monthView = new Y.SchedulerMonthView();
+  var eventRecorder = new Y.SchedulerEventRecorder();
 
-    var eventRecorder = new Y.SchedulerEventRecorder();
-
-    new Y.Scheduler(
-      {
-        activeView: weekView,
-        boundingBox: '#myScheduler',
-        date: new Date(2012, 4, 25),
-        eventRecorder: eventRecorder,
-        items: events,
-        render: true,
-        views: [dayView, weekView, monthView, agendaView]
-      }
-    );
-  }
-);
+  new Y.Scheduler({
+    activeView: weekView,
+    boundingBox: '#myScheduler',
+    date: new Date(2012, 4, 25),
+    eventRecorder: eventRecorder,
+    items: events,
+    render: true,
+    views: [dayView, weekView, monthView, agendaView]
+  });
+});
 ```
 
 <div class="aui-alert aui-alert-success">
