@@ -1,32 +1,24 @@
-YUI().use(
-  'aui-rating',
-  'node',
-  function(Y) {
-    var titleBox = Y.one('#titleBox');
-    var instance, title, stars;
+YUI().use('aui-rating', 'node', function (Y) {
+  var titleBox = Y.one('#titleBox');
 
-    var rating = new Y.StarRating(
-      {
-        boundingBox: '#myRating',
-        disabled: false,
-        label: "It's OK to be honest:"
-      }
-    ).render();
+  var instance, title, stars;
 
-    rating.on(
-      'click',
-      function(event) {
-        instance = event.target;
-        title = instance.get('title');
-        stars = instance.get('value');
+  var rating = new Y.StarRating({
+    boundingBox: '#myRating',
+    disabled: false,
+    label: "It's OK to be honest:"
+  }).render();
 
-        if (!title) {
-          titleBox.set('innerHTML', 'You selected <strong>0 stars</strong> - no rating!');
-        }
-        else {
-          titleBox.set('innerHTML', 'You selected <strong>' + stars + ' stars</strong> - "' + title + '"!');
-        }
-      }
-    );
-  }
-);
+  rating.on('click', function (event) {
+    instance = event.target;
+
+    title = instance.get('title');
+    stars = instance.get('value');
+
+    if (!title) {
+      titleBox.set('innerHTML', 'You selected <strong>0 stars</strong> - no rating!');
+    } else {
+      titleBox.set('innerHTML', 'You selected <strong>' + stars + ' stars</strong> - "' + title + '"!');
+    }
+  });
+});

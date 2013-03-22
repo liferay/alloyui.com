@@ -1,10 +1,5 @@
-YUI().use(
-  'aui-form-validator',
-  function(Y) {
-    new Y.FormValidator(
-      {
-        boundingBox: '#myForm'
-      }
-    );
-  }
-);
+YUI().use('aui-form-validator', function (Y) {
+  new Y.FormValidator({
+    boundingBox: '#myForm'
+  });
+});
