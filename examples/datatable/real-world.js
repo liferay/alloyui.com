@@ -101,7 +101,7 @@ YUI().use(
               maybe: 'Maybe'
             }
           }
-        )
+        ),
         key: 'active'
       },
       {
