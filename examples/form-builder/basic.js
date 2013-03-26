@@ -1,7 +1,7 @@
-AUI().use(
+YUI().use(
   'aui-form-builder',
-  function(A) {
-    new A.FormBuilder(
+  function(Y) {
+    new Y.FormBuilder(
       {
         availableFields: [
           {

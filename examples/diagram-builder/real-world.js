@@ -1,6 +1,6 @@
-AUI().use(
+YUI().use(
   'aui-diagram-builder',
-  function(A) {
+  function(Y) {
 
     var availableFields = [
       {
@@ -40,7 +40,7 @@ AUI().use(
       }
     ];
 
-    var diagramBuilder = new A.DiagramBuilder (
+    var diagramBuilder = new Y.DiagramBuilder (
       {
         availableFields: availableFields,
         boundingBox: '#diagram-builder-bb',
