@@ -1,10 +1,10 @@
-AUI().use('aui-image-viewer-base', function(A) {
-
-  new A.ImageViewer({
-    links: '#myGallery a',
-    caption: 'Liferay Champion Soccer',
-    captionFromTitle: true,
-    preloadAllImages: true
-  }).render();
-
-});
+YUI().use(
+  'aui-image-viewer-base',
+  function(Y) {
+    new Y.ImageViewer(
+      {
+        links: '#myGallery a'
+      }
+    ).render();
+  }
+);

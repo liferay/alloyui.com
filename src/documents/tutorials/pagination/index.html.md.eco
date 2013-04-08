@@ -11,15 +11,18 @@ description: Provides a set of controls to navigate through paged data.
 First load the seed file, if you haven't yet.
 
 ``` html
-<script src="<%= @cdn %>"></script>
+<script src="<%= @getCdnSeed() %>"></script>
 ```
 
 Then initialize AlloyUI and load the Pagination module.
 
 ``` javascript
-YUI().use('aui-pagination', function(Y) {
-  // code goes here
-});
+YUI().use(
+  'aui-pagination',
+  function(Y) {
+    // code goes here
+  }
+);
 ```
 
 ---
@@ -35,32 +38,38 @@ Multiple Paginations can be rendered using the same HTML markup. We'll create on
 Now let's initialize a new instance of Pagination, using the `containers` and `total` options.
 
 ``` javascript
-YUI().use('aui-pagination', function(Y) {
-
-  new Y.Pagination({
-    containers: '.myPagination',
-    total: 10
-  }).render();
-
-});
+YUI().use(
+  'aui-pagination',
+  function(Y) {
+    new Y.Pagination(
+      {
+        containers: '.myPagination',
+        total: 10
+      }
+    ).render();
+  }
+);
 ```
 
 In order for the Pagination to function, you must specify what you want the pagination to do on the `changeRequest` event.  This 'changeRequest' event fires when a user clicks on a page link. Here we will select the page link using the Pagination's `changeRequest` event.
 
 ``` javascript
-YUI().use('aui-pagination', function(Y) {
-
-  new Y.Pagination({
-    containers: '.myPagination',
-    on: {
-      changeRequest: function(event) {
-        this.setState(event.state);
+YUI().use(
+  'aui-pagination',
+  function(Y) {
+    new Y.Pagination(
+      {
+        containers: '.myPagination',
+        on: {
+          changeRequest: function(event) {
+            this.setState(event.state);
+          }
+        },
+        total: 10
       }
-    },
-    total: 10
-  }).render();
-
-});
+    ).render();
+  }
+);
 ```
 
 ---
@@ -70,42 +79,48 @@ YUI().use('aui-pagination', function(Y) {
 There are many configuration options that can be passed into the Pagination, such as `maxPageLinks`, which sets the total amount of links displayed at a time, `rowsPerPageOptions`, which can be used to change the amount of pages displayed at once, and `circular`, which allows continuous page navigation.
 
 ``` javascript
-YUI().use('aui-pagination', function(Y) {
-
-  new Y.Pagination({
-    circular: true,
-    containers: '.myPagination',
-    maxPageLinks: 5,
-    on: {
-      changeRequest: function(event) {
-        this.setState(event.state);
+YUI().use(
+  'aui-pagination',
+  function(Y) {
+    new Y.Pagination(
+      {
+        circular: true,
+        containers: '.myPagination',
+        maxPageLinks: 5,
+        on: {
+          changeRequest: function(event) {
+            this.setState(event.state);
+          }
+        },
+        rowsPerPageOptions: [1, 3, 5, 7],
+        total: 10
       }
-    },
-    rowsPerPageOptions: [1, 3, 5, 7],
-    total: 10
-  }).render();
-
-});
+    ).render();
+  }
+);
 ```
 
 You can also change what is displayed in the various links of the Pagination.
 
 ``` javascript
-YUI().use('aui-pagination', function(Y) {
-
-  new Y.Pagination({
-    containers: '.myPagination',
-    firstPageLinkLabel: 'First Page',
-    nextPageLinkLabel: '>>',
-    on: {
-      changeRequest: function(event) {
-        this.setState(event.state);
+YUI().use(
+  'aui-pagination',
+  function(Y) {
+    new Y.Pagination(
+      {
+        containers: '.myPagination',
+        firstPageLinkLabel: 'First Page',
+        nextPageLinkLabel: '>>',
+        on: {
+          changeRequest: function(event) {
+            this.setState(event.state);
+          }
+        },
+        total: 10
       }
-    },
-    total: 10
-  }).render();
-
-});
+    ).render();
+  }
+);
 ```
 
 So far we have shown how to initialize and configure the Pagination, but it still isn't interacting with any page content! Pagination can be utilized to paginate through content from markup or dynamic content.
@@ -115,29 +130,32 @@ These actions can take place within `changeRequest`, utilizing `event.state.page
 Here is a very basic example of how a pagination may be used to change the content of a page.
 
 ``` javascript
-YUI().use('aui-pagination', function(Y) {
+YUI().use(
+  'aui-pagination',
+  function(Y) {
+    //grabbing a node to be used for content
+    var content = Y.one('.content');
 
-  //grabbing a node to be used for content
-  var content = Y.one('.content');
+    new Y.Pagination(
+      {
+        containers: '.myPagination',
+        on: {
+          changeRequest: function(event) {
+            var newState = event.state;
 
-  new Y.Pagination({
-    containers: '.myPagination',
-    on: {
-      changeRequest: function(event) {
-        var newState = event.state;
+            this.setState(newState);
 
-        this.setState(newState);
-
-        //setting the content of the node to the current page number
-        content.html(event.state.page);
+            //setting the content of the node to the current page number
+            content.html(event.state.page);
+          }
+        },
+        total: 4
       }
-    },
-    total: 4
-  }).render();
-
-});
+    ).render();
+  }
+);
 ```
 
 <div class="aui-alert aui-alert-success">
-  For more information about configuration, check out our <a href="<%= @site.url %>/api/">API Docs</a>.
+  For more information about configuration, check out our <a href="<%= @getSiteUrl() %>/api/">API Docs</a>.
 </div>

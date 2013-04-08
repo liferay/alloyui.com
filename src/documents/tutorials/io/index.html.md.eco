@@ -11,15 +11,18 @@ description: Allows you to make asynchronous HTTP (Ajax) requests.
 First load the seed file, if you haven't yet.
 
 ``` html
-<script src="<%= @cdn %>"></script>
+<script src="<%= @getCdnSeed() %>"></script>
 ```
 
 Then initialize AlloyUI and load the I/O module.
 
 ``` javascript
-YUI().use('aui-io-request', function (Y) {
-  // code goes here
-});
+YUI().use(
+  'aui-io-request',
+  function (Y) {
+    // code goes here
+  }
+);
 ```
 
 ---
@@ -29,17 +32,21 @@ YUI().use('aui-io-request', function (Y) {
 Make an asynchronous request and get the response data.
 
 ``` javascript
-YUI().use('aui-io-request', function (Y) {
-
-  Y.io.request('example.json', {
-    on: {
-      success: function() {
-        var data = this.get('responseData');
+YUI().use(
+  'aui-io-request',
+  function (Y) {
+    Y.io.request(
+      'example.json',
+      {
+        on: {
+          success: function() {
+            var data = this.get('responseData');
+          }
+        }
       }
-    }
-  });
-
-});
+    );
+  }
+);
 ```
 
 ---
@@ -51,37 +58,45 @@ There are some other options that you can pass to your I/O method.
 For example, you can specify the type of the request (e.g., xml, json, javascript, text).
 
 ``` javascript
-YUI().use('aui-io-request', function (Y) {
-
-  Y.io.request('example.xml', {
-    dataType: 'xml',
-    on: {
-      success: function() {
-        var data = this.get('responseData');
+YUI().use(
+  'aui-io-request',
+  function (Y) {
+    Y.io.request(
+      'example.xml',
+      {
+        dataType: 'xml',
+        on: {
+          success: function() {
+            var data = this.get('responseData');
+          }
+        }
       }
-    }
-  });
-
-});
+    );
+  }
+);
 ```
 
 Also, you can set `cache` to `false` so the current timestamp will be appended to the url, preventing the url from being cached.
 
 ``` javascript
-YUI().use('aui-io-request', function (Y) {
-
-  Y.io.request('example.xml', {
-    cache: 'false',
-    on: {
-      success: function() {
-        var data = this.get('responseData');
+YUI().use(
+  'aui-io-request',
+  function (Y) {
+    Y.io.request(
+      'example.xml',
+      {
+        cache: 'false',
+        on: {
+          success: function() {
+            var data = this.get('responseData');
+          }
+        }
       }
-    }
-  });
-
-});
+    );
+  }
+);
 ```
 
 <div class="aui-alert aui-alert-success">
-  For more information about configuration, check out our <a href="<%= @site.url %>/api/">API Docs</a>.
+  For more information about configuration, check out our <a href="<%= @getSiteUrl() %>/api/">API Docs</a>.
 </div>

@@ -1,0 +1,147 @@
+---
+layout: single-doc
+title: Tabview
+tags: 'tabview'
+index: true
+description: 'Allows user to swap content between different sections.'
+---
+
+#### Getting Started
+
+First load the seed file if you haven't yet.
+
+``` html
+<script src="<%= @getCdnSeed() %>"></script>
+```
+
+Then initialize AlloyUI and load the Tabview module.
+
+``` javascript
+YUI().use(
+  'aui-tabview',
+  function(Y) {
+    // code goes here
+  }
+);
+```
+---
+
+#### Using Tabview (from markup)
+
+There are two ways to create a Tabview, from markup or script. Here's how to do it from markup.
+
+``` html
+<div id="myTab">
+
+  <ul class="aui-nav aui-nav-tabs">
+    <li><a href="#tab-1">Tab #1</a></li>
+    <li class="aui-active"><a href="#tab-2">Tab #2</a></li>
+    <li><a href="#tab-3">Tab #3</a></li>
+  </ul>
+
+  <div class="aui-tab-content">
+    <div id="tab-1" class="aui-tab-pane">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus dicta aspernatur beatae fuga neque cupiditate laudantium itaque pariatur deleniti tenetur modi voluptatem animi sunt eligendi nisi corporis expedita quaerat facilis.</p>
+    </div>
+    <div id="tab-2">
+      <p>Doloremque beatae rem voluptate nulla perspiciatis atque laudantium nihil impedit molestiae fuga veritatis quibusdam nam maiores aliquid. Deserunt dolorum quas temporibus enim ex nihil nemo perspiciatis. Nisi deserunt rem id pariatur in nostrum?</p>
+    </div>
+    <div id="tab-3" class="aui-tab-pane">
+      <p>Aliquid ipsum asperiores alias temporibus autem impedit soluta ut id iure explicabo veritatis consectetur debitis eaque recusandae odit quas nobis maxime saepe. Incidunt amet obcaecati. Ducimus soluta unde repellat laboriosam fuga modi rem itaque!</p>
+    </div>
+  </div>
+
+</div>
+```
+
+Create a new instance of Tabview referecing the `srcNode`, and render it!
+
+``` javascript
+YUI().use(
+  'aui-tabview',
+  function(Y) {
+    new Y.TabView(
+      {
+        srcNode: '#myTab'
+      }
+    ).render();
+  }
+);
+```
+
+#### Using Tabview (from script)
+
+Or you can just create a container:
+
+``` html
+<div id="myTab"></div>
+```
+
+And then create a new instance of TabView using `children` parameter to populate it.
+
+``` javascript
+YUI().use(
+  'aui-tabview',
+  function(Y) {
+    new Y.TabView(
+      {
+        children: [
+          {
+              label: 'Tab #1',
+              content: '<br><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus dicta aspernatur beatae fuga neque cupiditate laudantium itaque pariatur deleniti tenetur modi voluptatem animi sunt eligendi nisi corporis expedita quaerat facilis.</p>'
+          },
+          {
+              label: 'Tab #2',
+              content: '<br><p>Doloremque beatae rem voluptate nulla perspiciatis atque laudantium nihil impedit molestiae fuga veritatis quibusdam nam maiores aliquid. Deserunt dolorum quas temporibus enim ex nihil nemo perspiciatis. Nisi deserunt rem id pariatur in nostrum?</p>'
+          },
+          {
+              label: 'Tab #3',
+              content: '<br><p>Aliquid ipsum asperiores alias temporibus autem impedit soluta ut id iure explicabo veritatis consectetur debitis eaque recusandae odit quas nobis maxime saepe. Incidunt amet obcaecati. Ducimus soluta unde repellat laboriosam fuga modi rem itaque!</p>'
+          }
+       ],
+       srcNode: '#myTab'
+      }
+    ).render();
+  }
+);
+```
+
+---
+
+#### Configuring Tabview
+
+Parameters can be passed into your instance of Tabview, for example you can set a pill format.
+
+``` javascript
+YUI().use(
+  'aui-tabview',
+  function(Y) {
+    new Y.TabView(
+      {
+       srcNode: '#myTab',
+       type: 'pills'
+      }
+    ).render();
+  }
+);
+```
+
+Further configuration includes setting a stacked TabView format.
+
+``` javascript
+YUI().use(
+  'aui-tabview',
+  function(Y) {
+    new Y.TabView(
+      {
+       srcNode: '#myTab',
+       stacked: true
+      }
+    ).render();
+  }
+);
+```
+
+<div class="aui-alert aui-alert-success">
+  For more information about configuration, check out our <a href="<%= @getSiteUrl() %>/api/">API Docs</a>.
+</div>

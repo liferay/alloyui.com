@@ -1,40 +1,46 @@
-AUI().use('aui-diagram-builder', function(A) {
+YUI().use(
+  'aui-diagram-builder',
+  function(Y) {
 
-  var availableFields = [
-    {
-      type: 'task',
-      label: 'Task',
-      iconClass: 'aui-diagram-node-task-icon'
-    }
-  ];
-
-  var diagramBuilder = new A.DiagramBuilder ({
-    availableFields: availableFields,
-    boundingBox: '#diagram-builder-bb',
-    srcNode: '#diagram-builder-sn',
-    fields: [
+    var availableFields = [
       {
-        name: 'StartNode',
-        type: 'start',
-        xy: [10, 10]
-      },
-      {
-        name: 'EndNode',
-        type: 'end',
-        xy: [300, 400]
+        iconClass: 'aui-diagram-node-task-icon',
+        label: 'Task',
+        type: 'task'
       }
-    ],
-    render: true
-  });
+    ];
 
-  diagramBuilder.connectAll([
-    {
-      connector: {
-        name: 'TaskConnector'
-      },
-      source: 'StartNode',
-      target: 'EndNode'
-    }
-  ]);
+    var diagramBuilder = new Y.DiagramBuilder (
+      {
+        availableFields: availableFields,
+        boundingBox: '#diagram-builder-bb',
+        fields: [
+          {
+            name: 'StartNode',
+            type: 'start',
+            xy: [10, 10]
+          },
+          {
+            name: 'EndNode',
+            type: 'end',
+            xy: [300, 400]
+          }
+        ],
+        render: true,
+        srcNode: '#diagram-builder-sn'
+      }
+    );
 
-});
+    diagramBuilder.connectAll(
+      [
+        {
+          connector: {
+            name: 'TaskConnector'
+          },
+          source: 'StartNode',
+          target: 'EndNode'
+        }
+      ]
+    );
+  }
+);

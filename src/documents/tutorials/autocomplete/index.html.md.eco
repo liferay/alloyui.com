@@ -12,15 +12,18 @@ description: Provides suggestions while users type into the field.
 First load the seed file if you haven't yet.
 
 ``` html
-<script src="<%= @cdn %>"></script>
+<script src="<%= @getCdnSeed() %>"></script>
 ```
 
 Then initialize AlloyUI and load the AutoComplete module.
 
 ``` javascript
-AUI().use('aui-autocomplete', function(A) {
-  // code goes here
-});
+AUI().use(
+  'aui-autocomplete',
+  function(A) {
+    // code goes here
+  }
+);
 ```
 ---
 
@@ -35,14 +38,17 @@ Create an HTML element:
 Now create a new instance of AutoComplete component by setting contentBox to our HTML element's selector. Also, we should populate some suggestions by adding a simple JavaScript array to dataSource. Finally, let's render it!
 
 ``` javascript
-AUI().use('aui-autocomplete', function(A) {
-
-  new A.AutoComplete({
-    contentBox: '#myAutoComplete',
-    dataSource: ['America', 'Europe', 'Asia']
-  }).render();
-
-});
+AUI().use(
+  'aui-autocomplete',
+  function(A) {
+    new A.AutoComplete(
+      {
+        contentBox: '#myAutoComplete',
+        dataSource: ['America', 'Europe', 'Asia']
+      }
+    ).render();
+  }
+);
 ```
 
 <div class="aui-alert aui-alert-info">
@@ -59,56 +65,82 @@ There are some other optional parameters that you can pass to your AutoComplete 
 For example, you can add support for multiple options by defining a `delimChar` - character to indicate the beginning or ending of a new value.
 
 ``` javascript
-AUI().use('aui-autocomplete', function(A) {
-
-  new A.AutoComplete({
-    contentBox: '#myAutoComplete',
-    dataSource: ['America', 'Europe', 'Asia'],
-    delimChar: ','
-  }).render();
-
-});
+AUI().use(
+  'aui-autocomplete',
+  function(A) {
+    new A.AutoComplete(
+      {
+        contentBox: '#myAutoComplete',
+        dataSource: ['America', 'Europe', 'Asia'],
+        delimChar: ','
+      }
+    ).render();
+  }
+);
 ```
 
 Setting `typeAhead` to `true` will cause the input field to be automatically updated with the first result as the user types, selecting the portion of the text the user has not typed yet.
 
 ``` javascript
-AUI().use('aui-autocomplete', function(A) {
-
-  new A.AutoComplete({
-    contentBox: '#myAutoComplete',
-    dataSource: ['America', 'Europe', 'Asia'],
-    delimChar: ',',
-    typeAhead: true,
-  }).render();
-
-});
+AUI().use(
+  'aui-autocomplete',
+  function(A) {
+    new A.AutoComplete(
+      {
+        contentBox: '#myAutoComplete',
+        dataSource: ['America', 'Europe', 'Asia'],
+        delimChar: ',',
+        typeAhead: true
+      }
+    ).render();
+  }
+);
 ```
 
 You can even define a more specific `schema` by adding the `matchKey` option to match results against a key or numeric index on the schema. In this example, we want to find a match when searching for names of states. The results that appear are defined by the schema as `key`, `name` and `description`.
 
 
 ``` javascript
-AUI().use('aui-autocomplete', function(A) {
+AUI().use(
+  'aui-autocomplete',
+  function(A) {
 
-  var states = [
-    ['AL', 'Alabama', 'The Heart of Dixie'],
-    ['MA', 'Massachusetts', 'The Spirit of America'],
-    ['WY', 'Wyoming', 'Like No Place on Earth']
-  ];
+    var states = [
+      [
+        'AL',
+        'Alabama',
+        'The Heart of Dixie'
+      ],
+      [
+        'MA',
+        'Massachusetts',
+        'The Spirit of America'
+      ],
+      [
+        'WY',
+        'Wyoming',
+        'Like No Place on Earth'
+      ]
+    ];
 
-  new A.AutoComplete({
-    contentBox: '#myAutoComplete'
-    dataSource: states,
-    matchKey: 'name',
-    schema: {
-      resultFields: ['key', 'name', 'description']
-    }
-  }).render();
-
-});
+    new A.AutoComplete(
+      {
+        contentBox: '#myAutoComplete',
+        dataSource: states,
+        matchKey: 'name',
+        schema: {
+          resultFields: [
+            'key',
+            'name',
+            'description'
+          ]
+        }
+      }
+    ).render();
+  }
+);
 ```
 
 <div class="aui-alert aui-alert-success">
-  For more information about configuration, check out our <a href="<%= @site.url %>/api/">API Docs</a>.
+  For more information about configuration, check out our <a href="<%= @getSiteUrl() %>/api/">API Docs</a>.
 </div>

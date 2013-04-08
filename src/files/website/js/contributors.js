@@ -1,4 +1,4 @@
-YUI().use('jsonp', 'node',function (A) {
+YUI().use('jsonp', 'node',function (Y) {
 
   var githubAPI = 'https://api.github.com/repos/liferay/alloy-ui/contributors?callback={callback}',
       template  = '<a href="http://github.com/{login}" title="@{login}">' +
@@ -10,13 +10,13 @@ YUI().use('jsonp', 'node',function (A) {
     var contributorsHTML = '';
 
     for (var i = 0; i < response.data.length; i++) {
-      contributorsHTML += A.Lang.sub(template, response.data[i]);
+      contributorsHTML += Y.Lang.sub(template, response.data[i]);
     }
 
-    A.one("#contributors").setHTML(contributorsHTML);
+    Y.one("#contributors").setHTML(contributorsHTML);
 
   }
 
-  A.jsonp(githubAPI, handleJSONP);
+  Y.jsonp(githubAPI, handleJSONP);
 
 });

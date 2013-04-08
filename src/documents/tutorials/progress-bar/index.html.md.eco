@@ -11,15 +11,18 @@ description: Allows users to view loading progress in real time.
 First load the seed file, if you haven't yet.
 
 ``` html
-<script src="<%= @cdn %>"></script>
+<script src="<%= @getCdnSeed() %>"></script>
 ```
 
 Then initialize AlloyUI and load the Progress Bar module.
 
 ``` javascript
-YUI().use('aui-progressbar', function(Y) {
-  // code goes here
-});
+YUI().use(
+  'aui-progressbar',
+  function(Y) {
+    // code goes here
+  }
+);
 ```
 ---
 
@@ -34,15 +37,18 @@ Create a HTML element:
 Now create a new instance of Progress Bar component, then tell to `boundingBox` where it's going to be attached.  We'll set the initial `value` of Progress Bar to `70`. Next, let's render it.
 
 ``` javascript
-YUI().use('aui-progressbar', function(Y) {
-
-  new Y.ProgressBar({
-    boundingBox: '#myProgressBar',
-    value: 70,
-    width: 700
-  }).render();
-
-});
+YUI().use(
+  'aui-progressbar',
+  function(Y) {
+    new Y.ProgressBar(
+      {
+        boundingBox: '#myProgressBar',
+        value: 70,
+        width: 700
+      }
+    ).render();
+  }
+);
 ```
 
 ---
@@ -54,40 +60,46 @@ There are some other options that you can pass to your Progress Bar instance.
 You can set a `label` which is changed when the `complete` event fires.
 
 ``` javascript
-YUI().use('aui-progressbar', function(Y) {
-
-  new Y.ProgressBar({
-    boundingBox: '#myProgressBar',
-    label: '40%',
-    on: {
-      complete: function(e) {
-        this.set('label', 'Complete!');
+YUI().use(
+  'aui-progressbar',
+  function(Y) {
+    new Y.ProgressBar(
+      {
+        boundingBox: '#myProgressBar',
+        label: '40%',
+        on: {
+          complete: function(e) {
+            this.set('label', 'Complete!');
+          }
+        },
+        value: 40,
+        width: 700
       }
-    },
-    value: 40,
-    width: 700
-  }).render();
-
-});
+    ).render();
+  }
+);
 ```
 
 Also you can define a vertical Progress Bar, to do that just set `orientation` to `vertical`.
 
 ``` javascript
-YUI().use('aui-progressbar', function(Y) {
-
-  new Y.ProgressBar({
-    boundingBox: '#myProgressBar',
-    orientation: 'vertical',
-    label: '60%',
-    value: 60,
-    width: 30,
-    height: 200
-  }).render();
-
-});
+YUI().use(
+  'aui-progressbar',
+  function(Y) {
+    new Y.ProgressBar(
+      {
+        boundingBox: '#myProgressBar',
+        height: 200,
+        label: '60%',
+        orientation: 'vertical',
+        value: 60,
+        width: 30
+      }
+    ).render();
+  }
+);
 ```
 
 <div class="aui-alert aui-alert-success">
-  For more information about configuration, check out our <a href="<%= @site.url %>/api/">API Docs</a>.
+  For more information about configuration, check out our <a href="<%= @getSiteUrl() %>/api/">API Docs</a>.
 </div>

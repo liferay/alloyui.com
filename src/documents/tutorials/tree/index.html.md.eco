@@ -11,15 +11,18 @@ description: Allows users to view file/folder structure in expandable tree view.
 First load the seed file, if you haven't yet.
 
 ``` html
-<script src="<%= @cdn %>"></script>
+<script src="<%= @getCdnSeed() %>"></script>
 ```
 
 Then initialize AlloyUI and load the Tree View module.
 
 ``` javascript
-YUI().use('aui-tree-view', function(Y) {
-  // code goes here
-});
+YUI().use(
+  'aui-tree-view',
+  function(Y) {
+    // code goes here
+  }
+);
 ```
 ---
 
@@ -34,24 +37,35 @@ Create a HTML element:
 Now create a new instance of Tree View component, then initialize a variable `children` which will store an array of the child files and folders to be supplied to Tree View.  Then use the `new TreeView` constructor, passing our HTML element for `boundingBox` and our children variable for `children`. Finally, let's render it!
 
 ``` javascript
-YUI().use('aui-tree-view', function(Y) {
+YUI().use(
+  'aui-tree-view',
+  function(Y) {
+    var children = [
+      {
+        children: [
+          {
+            label: 'File X'
+          },
+          {
+            label: 'File Y'
+          },
+          {
+            label: 'File Z'
+          }
+        ],
+        expanded: true,
+        label: 'Root'
+      }
+    ];
 
-  var children = [{
-    label: 'Root',
-    expanded: true,
-    children: [
-      { label: 'File X' },
-      { label: 'File Y' },
-      { label: 'File Z' }
-    ]
-  }];
-
-  new Y.TreeView({
-    boundingBox: '#myTreeView',
-    children: children
-  }).render();
-
-});
+    new Y.TreeView(
+      {
+        boundingBox: '#myTreeView',
+        children: children
+      }
+    ).render();
+  }
+);
 ```
 
 <div class="aui-alert aui-alert-info">
@@ -68,54 +82,67 @@ There are some other options that you can pass to your Tree View instance.
 For example, you can use an external file to populate the Tree View `children` using the `io` type.  We'll pass `io` a sample content file called content.html, which contains an array of child objects just like our previous `children` variable.  In your HTML file, be sure to wrap both option key and value in quotes! (IE: `'label': 'File1'`)
 
 ``` javascript
-YUI().use('aui-tree-view', function(Y) {
+YUI().use(
+  'aui-tree-view',
+  function(Y) {
+    var children = [
+      {
+        cache: true,
+        id: 'root',
+        io: 'assets/content.html',
+        label: 'ROOT',
+        type: 'io'
+      }
+    ];
 
-  var children = [{
-    type: 'io',
-    label: 'ROOT',
-    id: 'root',
-    cache: true,
-    io: 'assets/content.html'
-  }];
-
-  new Y.TreeView({
-    boundingBox: '#myTreeView',
-    children: children
-  }).render();
-
-});
+    new Y.TreeView(
+      {
+        boundingBox: '#myTreeView',
+        children: children
+      }
+    ).render();
+  }
+);
 ```
 
 Also, you can use the `createNode` method to create a new child node for your Tree View.  This method can be used in a separate function, such as an onClick event.  First, we'll select the ROOT node we added earlier in our `children` var.  Then, we'll use createNode to create a new file, and pass it the options `radio` for type and `radioButton` for id.  Lastly, we'll append `radioButton` to ROOT using `appendChild` method.
 
 ``` javascript
-YUI().use('aui-tree-view', function(Y) {
+YUI().use(
+  'aui-tree-view',
+  function(Y) {
+    var children = [
+      {
+        cache: true,
+        id: 'root',
+        io: 'assets/content.html',
+        label: 'ROOT',
+        type: 'io'
+      }
+    ];
 
-  var children = [{
-    type: 'io',
-    label: 'ROOT',
-    id: 'root',
-    cache: true,
-    io: 'assets/content.html'
-  }];
+    var treeView = new Y.TreeView(
+      {
+        boundingBox: '#myTreeView',
+        children: children
+      }
+    ).render();
 
-  var treeView = new Y.TreeView({
-    boundingBox: '#myTreeView',
-    children: children
-  }).render();
+    var ROOT = treeView.getNodeById('root');
 
-  var ROOT = treeView.getNodeById('root');
-  var radioButton = ROOT.createNode({
-    type: 'radio',
-    id: 'radioButton',
-    label: 'Radio Button'
-  });
+    var radioButton = ROOT.createNode(
+      {
+        id: 'radioButton',
+        label: 'Radio Button',
+        type: 'radio'
+      }
+    );
 
-  ROOT.appendChild(radioButton);
-
-});
+    ROOT.appendChild(radioButton);
+  }
+);
 ```
 
 <div class="aui-alert aui-alert-success">
-  For more information about configuration, check out our <a href="<%= @site.url %>/api/">API Docs</a>.
+  For more information about configuration, check out our <a href="<%= @getSiteUrl() %>/api/">API Docs</a>.
 </div>

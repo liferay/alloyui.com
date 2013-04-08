@@ -1,5 +1,4 @@
 ---
-ignored: true
 layout: single-doc
 title: Image Viewer
 tags: 'image-viewer'
@@ -12,15 +11,18 @@ description: Allows users to view and navigate through a collection of images.
 First load the seed file if you haven't yet.
 
 ``` html
-<script src="<%= @cdn %>"></script>
+<script src="<%= @getCdnSeed() %>"></script>
 ```
 
 Then initialize AlloyUI and load the Image Viewer module.
 
 ``` javascript
-AUI().use('aui-image-viewer', function(A) {
-  // code goes here
-});
+YUI().use(
+  'aui-image-viewer',
+  function(Y) {
+    // code goes here
+  }
+);
 ```
 ---
 
@@ -44,37 +46,60 @@ Image Viewer uses images that are linked in the HTML:
 </div>
 ```
 
-Creat a new instance of Image Viewer referecing the linked images in the HTML, and render it!
+Create a new instance of Image Viewer referecing the linked images in the HTML, and render it!
 
 ``` javascript
-AUI().use('aui-image-viewer', function(A) {
+YUI().use(
+  'aui-image-viewer',
+  function(Y) {
+    new Y.ImageViewer(
+      {
+        links: '#gallery a'
+      }
+    ).render();
+  }
+);
+```
 
-  new A.ImageViewer({
-    links: '#gallery a'
-  }).render();
+#### Using Image Gallery
 
-});
+You can also use a very similar module called Image Gallery to navigate and possibly cycling through a collection of images. Just need to link those images in the HTML, and render it!
+
+``` javascript
+YUI().use(
+  'aui-image-viewer-gallery',
+  function(Y) {
+    new Y.ImageGallery(
+      {
+        links: '#myGallery a'
+      }
+    ).render();
+  }
+);
 ```
 
 ---
 
 #### Configuring Image Viewer
 
-Parameters can be passed into your instance of Image Viewer to change attibutes such as image captions, image positioning, and when images within the viewer are loaded.
+Parameters can be passed into your instance of Image Viewer to change attributes such as image captions, image positioning, and when images within the viewer are loaded.
 
 ``` javascript
-AUI().use('aui-image-viewer', function(A) {
-
-  new A.ImageViewer({
-    links: '#gallery a',
-    //captionFromTitle uses the DOM title attibute as image caption
-    captionFromTitle: true,
-    preloadAllImages: true,
-    //preloadNeighborImages: true,
-    centered: false
-  }).render();
-
-});
+YUI().use(
+  'aui-image-viewer',
+  function(Y) {
+    new Y.ImageViewer(
+      {
+        //captionFromTitle uses the DOM title attibute as image caption
+        captionFromTitle: true,
+        centered: false
+        links: '#gallery a',
+        preloadAllImages: true
+        //or preloadNeighborImages: true
+      }
+    ).render();
+  }
+);
 ```
 
 Further configuration includes declaring what elements are to be used to house the caption, navigation arrows, close button, and even the loader, which houses the image being displayed.
@@ -84,20 +109,23 @@ Further configuration includes declaring what elements are to be used to house t
 </div>
 
 ``` javascript
-AUI().use('aui-image-viewer', function(A) {
-
-  new A.ImageViewer({
-    links: '#gallery a',
-    loader: '#loader',
-    arrowLeftEl: '#arrowLeft',
-    arrowRightEl: '#arrowRight',
-    captionEl: '#caption',
-    closeEl: '#close'
-  }).render();
-
-});
+YUI().use(
+  'aui-image-viewer',
+  function(Y) {
+    new Y.ImageViewer(
+      {
+        arrowLeftEl: '#arrowLeft',
+        arrowRightEl: '#arrowRight',
+        captionEl: '#caption',
+        closeEl: '#close',
+        links: '#gallery a',
+        loader: '#loader'
+      }
+    ).render();
+  }
+);
 ```
 
 <div class="aui-alert aui-alert-success">
-  For more information about configuration, check out our <a href="<%= @site.url %>/api/">API Docs</a>.
+  For more information about configuration, check out our <a href="<%= @getSiteUrl() %>/api/">API Docs</a>.
 </div>

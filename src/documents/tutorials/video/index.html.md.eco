@@ -11,15 +11,18 @@ description: Creates an interactive HTML5 video player with fallback Flash video
 First load the seed file if you haven't yet.
 
 ``` html
-<script src="<%= @cdn %>"></script>
+<script src="<%= @getCdnSeed() %>"></script>
 ```
 
 Then initialize AlloyUI and load the Video module.
 
 ``` javascript
-YUI().use('aui-video', function(Y) {
-  // code goes here
-});
+YUI().use(
+  'aui-video',
+  function(Y) {
+    // code goes here
+  }
+);
 ```
 ---
 
@@ -34,14 +37,17 @@ Create an HTML element:
 Now create a new instance of the Video component by setting `contentBox` to our HTML element's selector. Then, we'll pass the `url` parameter our video file's url. Finally, let's render it!
 
 ``` javascript
-YUI().use('aui-video', function(Y) {
-
-  new Y.Video({
-    contentBox: '#myVideo',
-    url: 'http://alloyui.com/video/movie.mp4'
-  }).render();
-
-});
+YUI().use(
+  'aui-video',
+  function(Y) {
+    new Y.Video(
+      {
+        contentBox: '#myVideo',
+        url: 'http://alloyui.com/video/movie.mp4'
+      }
+    ).render();
+  }
+);
 ```
 
 <div class="aui-alert aui-alert-info">
@@ -58,45 +64,54 @@ There are some other optional parameters that you can pass to your Video instanc
 For example, you can specify the Video's `width` and `height` by passing integer values.  These values will become inline width and height pixel values.
 
 ``` javascript
-YUI().use('aui-video', function(Y) {
-
-  new Y.Video({
-    contentBox: '#myVideo',
-    url: 'http://alloyui.com/video/movie.mp4',
-    width: 640,
-    height: 360
-  }).render();
-
-});
+YUI().use(
+  'aui-video',
+  function(Y) {
+    new Y.Video(
+      {
+        contentBox: '#myVideo',
+        height: 360,
+        url: 'http://alloyui.com/video/movie.mp4',
+        width: 640
+      }
+    ).render();
+  }
+);
 ```
 
 If you want to load a poster image in the Video player before the user begins playing the video, pass the image url using the `poster` parameter.
 
 ``` javascript
-YUI().use('aui-video', function(Y) {
-
-  new Y.Video({
-    contentBox: '#myVideo',
-    url: 'http://alloyui.com/video/movie.mp4',
-    poster: 'assets/myPosterImg.jpg',
-    width: 640,
-    height: 360
-  }).render();
-
-});
+YUI().use(
+  'aui-video',
+  function(Y) {
+    new Y.Video(
+      {
+        contentBox: '#myVideo',
+        height: 360,
+        poster: 'assets/myPosterImg.jpg',
+        url: 'http://alloyui.com/video/movie.mp4',
+        width: 640
+      }
+    ).render();
+  }
+);
 ```
 
 Video component supports Ogg Theora and Ogg Vorbis formatted media files as well.  If you want to use one of the supported Ogg formats, pass the Ogg file url using the `oggUrl` parameter.
 
 ``` javascript
-YUI().use('aui-video', function(Y) {
-
-  new Y.Video({
-    contentBox: '#myVideo',
-    ogvUrl: 'http://alloyui.com/video/movie.ogg'
-  }).render();
-
-});
+YUI().use(
+  'aui-video',
+  function(Y) {
+    new Y.Video(
+      {
+        contentBox: '#myVideo',
+        ogvUrl: 'http://alloyui.com/video/movie.ogg'
+      }
+    ).render();
+  }
+);
 ```
 
 <div class="aui-alert aui-alert-info">
@@ -106,17 +121,20 @@ YUI().use('aui-video', function(Y) {
 You can even play non-supported formats in other browsers with the fallback Flash video player.  For example, you can play .mp4 files in Firefox by using the `swfUrl` parameter to play the Flash video.
 
 ``` javascript
-YUI().use('aui-video', function(Y) {
-
-  new Y.Video({
-    contentBox: '#myVideo',
-    url: 'http://videos.liferay.com/webinars/2010-08-11.mp4',
-    swfUrl: 'http://videos.liferay.com/common/player.swf'
-  }).render();
-
-});
+YUI().use(
+  'aui-video',
+  function(Y) {
+    new Y.Video(
+      {
+        contentBox: '#myVideo',
+        swfUrl: 'http://videos.liferay.com/common/player.swf',
+        url: 'http://videos.liferay.com/webinars/2010-08-11.mp4'
+      }
+    ).render();
+  }
+);
 ```
 
 <div class="aui-alert aui-alert-success">
-  For more information about configuration, check out our <a href="<%= @site.url %>/api/">API Docs</a>.
+  For more information about configuration, check out our <a href="<%= @getSiteUrl() %>/api/">API Docs</a>.
 </div>

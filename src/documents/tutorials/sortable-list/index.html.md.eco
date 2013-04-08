@@ -11,15 +11,18 @@ description: Gives the user the ability to interact with a list element.
 First load the seed file, if you haven't yet.
 
 ``` html
-<script src="<%= @cdn %>"></script>
+<script src="<%= @getCdnSeed() %>"></script>
 ```
 
 Then initialize AlloyUI and load the Sortable List module.
 
 ``` javascript
-YUI().use('aui-sortable-list', function(Y) {
-  // code goes here
-});
+YUI().use(
+  'aui-sortable-list',
+  function(Y) {
+    // code goes here
+  }
+);
 ```
 
 ---
@@ -51,17 +54,20 @@ Create an HTML list (ordered or unordered):
 Now create an instance of the Sortable List component, specify `nodes` for the Sortable List to apply to, and add this `dropCondition`:
 
 ``` javascript
-YUI().use('aui-sortable-list', function(Y) {
-
-  new Y.SortableList({
-    nodes: '#myList li',
-    dropCondition: function(event) {
-      return true;
-    },
-    dropOn: 'myList',
-  });
-
-});
+YUI().use(
+  'aui-sortable-list',
+  function(Y) {
+    new Y.SortableList(
+      {
+        dropCondition: function(event) {
+          return true;
+        },
+        dropOn: 'myList',
+        nodes: '#myList li'
+      }
+    );
+  }
+);
 ```
 
 ---
@@ -73,39 +79,45 @@ There are quite a few more options you can pass to your Sortable List instance t
 For example, you can set a `placeholder` that will indicate as you drag your element where it will be dropped (you can style this element using CSS):
 
 ``` javascript
-YUI().use('aui-sortable-list', function(Y) {
+YUI().use(
+  'aui-sortable-list',
+  function(Y) {
+    var placeholder = Y.Node.create('<li class="placeholder"></li>');
 
-  var placeholder = Y.Node.create('<li class="placeholder"></li>');
-
-  new Y.SortableList({
-    nodes: '#myList li',
-    dropCondition: function(event) {
-      return true;
-    },
-    placeholder: placeholder,
-  });
-
-});
+    new Y.SortableList(
+      {
+        dropCondition: function(event) {
+          return true;
+        },
+        nodes: '#myList li',
+        placeholder: placeholder
+      }
+    );
+  }
+);
 ```
 
 You can also specify a certain type of list that the Sortable List instance will limit itself to:
 
 ``` javascript
-YUI().use('aui-sortable-list', function(Y) {
-
-  new Y.SortableList({
-    nodes: '#myList li',
-    dropCondition: function(event) {
-      return true;
-    },
-    dropOn: 'myList',
-  });
-
-});
+YUI().use(
+  'aui-sortable-list',
+  function(Y) {
+    new Y.SortableList(
+      {
+        dropCondition: function(event) {
+          return true;
+        },
+        dropOn: 'myList',
+        nodes: '#myList li'
+      }
+    );
+  }
+);
 ```
 
 From there, you can further specify the drop container, add drop conditions, add a helper `div` in addition to the placeholder, and more!
 
 <div class="aui-alert aui-alert-success">
-  For more information about configuration, check out our <a href="<%= @site.url %>/api/">API Docs</a>.
+  For more information about configuration, check out our <a href="<%= @getSiteUrl() %>/api/">API Docs</a>.
 </div>
