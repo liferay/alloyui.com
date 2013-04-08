@@ -77,6 +77,6 @@ List NodeJS modules dependencies.
 
 ## Deploy
 
-Just run `yogi alloy --site-deploy` and then go to [alloyui.com](http://alloyui.com/).
+Go to the branch you want to deploy and run `yogi alloy --site-deploy`, now you can see your changes live at [alloyui.com](http://alloyui.com/).
 
-> **Note:** this will only work for master branch. We're currently working to improve this Yogi Alloy task to support deploy for different website versions.
+> **Note:** Make sure you've commited everything before running this command.
