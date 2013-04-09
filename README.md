@@ -21,9 +21,9 @@ We use [Docpad](https://github.com/bevry/docpad), a static generator in NodeJS.
 
 1. Install [NodeJS](https://github.com/bevry/community/wiki/Installing-Node), if you don't have it yet.
 
-2. Install [Docpad](https://github.com/bevry/docpad) globally: `sudo npm install -fg docpad`
+2. Install [Docpad](https://github.com/bevry/docpad) globally: `[sudo] npm install -fg docpad`
 
-3. Install [Yogi Alloy](https://github.com/liferay/yogi-alloy) globally: `sudo npm -g install yogi yogi-alloy`
+3. Install [Yogi Alloy](https://github.com/liferay/yogi-alloy) globally: `[sudo] npm -g install yogi yogi-alloy`
 
 ## Getting started
 
