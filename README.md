@@ -11,6 +11,7 @@ If you want to report an issue about [AlloyUI's website](http://alloyui.com) you
 * [Getting started](#getting-started)
 * [Structure](#structure)
 * [Deploy](#deploy)
+* [Bonus](#bonus)
 
 ## How it works?
 
@@ -80,3 +81,7 @@ List NodeJS modules dependencies.
 Go to the branch you want to deploy and run `yogi alloy --site-deploy`, now you can see your changes live at [alloyui.com](http://alloyui.com/).
 
 > **Note:** Make sure you've commited everything before running this command.
+
+## Bonus
+
+We use a template engine called [Eco (.eco)](https://github.com/sstephenson/eco), so you should definitely install a syntax highlight for it on your code editor.
