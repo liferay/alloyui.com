@@ -1,7 +1,7 @@
-AUI().use(
+YUI().use(
   'aui-toggler',
-  function(A) {
-    new A.Toggler(
+  function(Y) {
+    new Y.Toggler(
       {
         container: '#myToggler',
         content: '.content',

@@ -1,7 +1,7 @@
-AUI().ready(
+YUI().use(
   'aui-carousel',
-  function(A) {
-    new A.Carousel(
+  function(Y) {
+    new Y.Carousel(
       {
         activeIndex: 'rand',
         contentBox: '#myCarousel',

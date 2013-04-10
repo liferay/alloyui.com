@@ -1,6 +1,7 @@
 AUI().use(
   'aui-autocomplete',
   function (A) {
+
     var states = [
       ['AL', 'Alabama', 'The Heart of Dixie'],
       ['AK', 'Alaska', 'The Land of the Midnight Sun'],

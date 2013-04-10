@@ -1,7 +1,7 @@
-AUI().use(
+YUI().use(
   'aui-form-builder',
-  function(A) {
-    new A.FormBuilder(
+  function(Y) {
+    new Y.FormBuilder(
       {
         availableFields: [
           {
@@ -65,7 +65,7 @@ AUI().use(
               }
             ],
             predefinedValue: 'chicago',
-            type: 'select',
+            type: 'select'
           },
           {
             label: 'Colors',
@@ -83,7 +83,7 @@ AUI().use(
                 value: 'blue'
               }
             ],
-            type: 'radio',
+            type: 'radio'
           }
         ]
       }

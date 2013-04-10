@@ -1,3 +1,3 @@
-AUI().use(
+YUI().use(
   'aui-viewport'
 );

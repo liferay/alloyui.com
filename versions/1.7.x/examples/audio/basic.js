@@ -1,7 +1,7 @@
-AUI().use(
+YUI().use(
   'aui-audio',
-  function(A) {
-    new A.Audio(
+  function(Y) {
+    new Y.Audio(
       {
         boundingBox: '#myAudio',
         url: 'http://alloyui.com/audio/zelda.mp3'

@@ -1,6 +1,7 @@
-AUI().ready(
+YUI().use(
   'aui-diagram-builder',
-  function(A) {
+  function(Y) {
+
     var availableFields = [
       {
         iconClass: 'aui-diagram-node-start-icon',
@@ -39,7 +40,7 @@ AUI().ready(
       }
     ];
 
-    var diagramBuilder = new A.DiagramBuilder (
+    var diagramBuilder = new Y.DiagramBuilder (
       {
         availableFields: availableFields,
         boundingBox: '#diagram-builder-bb',

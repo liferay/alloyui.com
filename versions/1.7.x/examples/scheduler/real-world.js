@@ -1,6 +1,6 @@
-AUI().use(
+YUI().use(
   'aui-scheduler',
-  function(A) {
+  function(Y) {
     var events = [
       {
         content: 'AllDay',
@@ -44,13 +44,13 @@ AUI().use(
       }
     ];
 
-    var agendaView = new A.SchedulerAgendaView();
-    var dayView = new A.SchedulerDayView();
-    var eventRecorder = new A.SchedulerEventRecorder();
-    var monthView = new A.SchedulerMonthView();
-    var weekView = new A.SchedulerWeekView();
+    var agendaView = new Y.SchedulerAgendaView();
+    var dayView = new Y.SchedulerDayView();
+    var eventRecorder = new Y.SchedulerEventRecorder();
+    var monthView = new Y.SchedulerMonthView();
+    var weekView = new Y.SchedulerWeekView();
 
-    new A.Scheduler(
+    new Y.Scheduler(
       {
         activeView: weekView,
         boundingBox: '#myScheduler',

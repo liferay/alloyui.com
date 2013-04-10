@@ -1,54 +1,41 @@
 // Create an AUI instance and load the 'aui-node' module
-AUI().use(
+YUI().use(
   'aui-node',
-  function(A) {
+  function(Y) {
     var text = 'The quick brown fox jumps over the lazy dog.';
     var centered = false;
     var selectable = true;
-    var demo = A.one('#demo');
-    var holder = A.one('#contentHolder');
+    var demo = Y.one('#demo');
+    var holder = Y.one('#contentHolder');
 
     // Create and Append button makes a new box
-    A.one('#populate').on(
+    Y.one('#populate').on(
       'click',
       function() {
-        A.Node.create('<div class="mini"><p>'+text+'</p></div>').appendTo(holder);
+        Y.Node.create('<div class="mini"><p>'+text+'</p></div>').appendTo(holder);
       }
     );
 
     // Empty button clears all boxes
-    A.one('#empty').on(
-      'click', function() {
+    Y.one('#empty').on(
+      'click',
+      function() {
         holder.empty();
         holder.setStyle('position', 'static');
       }
     );
 
     // Toggle button hides and displays boxes
-    A.one('#toggle').on(
-      'click', function() {
-        var boxes = A.all('.mini');
+    Y.one('#toggle').on(
+      'click',
+      function() {
+        var boxes = Y.all('.mini');
         boxes.toggle();
       }
     );
 
-    // Center button centers the boxes
-    A.one('#center').on(
-      'click',
-      function() {
-        if (!centered) {
-          holder.center(demo);
-          centered = true;
-        }
-        else {
-          holder.setStyle('position', 'static');
-          centered = false;
-        }
-      }
-    );
-
     // Selectable button turns selectability on and off
-    A.one('#select').on(
+    Y.one('#select').on(
       'click',
       function() {
         if (!selectable) {

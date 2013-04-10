@@ -1,38 +1,37 @@
-AUI().use(
+YUI().use(
   'aui-datatable',
   'datatable-sort',
   'aui-datatype',
-  function(A) {
-
+  function(Y) {
     var remoteData = [
-      {name:'John A. Smith', address:'1236 Some Street', city:'San Francisco', state:'CA', amount:5, active:'yes', colors:['red'], fruit:['banana','cherry'], last_login:'4/19/2007'},
-      {name:'Bob C. Uncle', address:'9996 Random Road', city:'Los Angeles', state:'CA', amount:0, active:'maybe', colors:['green'], fruit:['cherry'], last_login:['4/10/2007']},
-      {name:'John D. Smith', address:'1623 Some Street', city:'San Francisco', state:'CA', amount:5, active:'yes', colors:['red'], fruit:['cherry'], last_login:'4/19/2007'},
-      {name:'Joan E. Jones', address:'3217 Another Ave', city:'New York', state:'NY', amount:3, active:'no', colors:['red','blue'], fruit:['apple','cherry'], last_login:'2/15/2006'},
-      {name:'Bob F. Uncle', address:'9899 Random Road', city:'Los Angeles', state:'CA', amount:0, active:'maybe', colors:['green'], fruit:['banana'], last_login:'1/23/2004'},
-      {name:'John G. Smith', address:'1723 Some Street', city:'San Francisco', state:'CA', amount:5, active:'yes', colors:['red'], fruit:['apple'], last_login:'4/19/2007'},
-      {name:'Joan H. Jones', address:'3241 Another Ave', city:'New York', state:'NY', amount:3, active:'no', colors:['red','blue'], fruit:['kiwi'], last_login:'2/15/2006'},
-      {name:'Bob I. Uncle', address:'9909 Random Road', city:'Los Angeles', state:'CA', amount:0, active:'maybe', colors:['green'], fruit:['apple','banana'], last_login:'1/23/2004'},
-      {name:'John J. Smith', address:'1623 Some Street', city:'San Francisco', state:'CA', amount:5, active:'yes', colors:['red'], fruit:['apple','cherry'], last_login:'4/19/2007'},
-      {name:'Joan K. Jones', address:'3721 Another Ave', city:'New York', state:'NY', amount:3, active:'no', colors:['red','blue'], fruit:['banana'], last_login:'2/15/2006'}
+      {name:'John A. Smith', address:'1236 Some Street', city:'San Francisco', state:'CA', amount:5, active:'yes', colors:['red'], fruit:['banana','cherry'], last_login:'4/19/2007' },
+      {name:'Bob C. Uncle', address:'9996 Random Road', city:'Los Angeles', state:'CA', amount:0, active:'maybe', colors:['green'], fruit:['cherry'], last_login:['4/10/2007'] },
+      {name:'John D. Smith', address:'1623 Some Street', city:'San Francisco', state:'CA', amount:5, active:'yes', colors:['red'], fruit:['cherry'], last_login:'4/19/2007' },
+      {name:'Joan E. Jones', address:'3217 Another Ave', city:'New York', state:'NY', amount:3, active:'no', colors:['red','blue'], fruit:['apple','cherry'], last_login:'2/15/2006' },
+      {name:'Bob F. Uncle', address:'9899 Random Road', city:'Los Angeles', state:'CA', amount:0, active:'maybe', colors:['green'], fruit:['banana'], last_login:'1/23/2004' },
+      {name:'John G. Smith', address:'1723 Some Street', city:'San Francisco', state:'CA', amount:5, active:'yes', colors:['red'], fruit:['apple'], last_login:'4/19/2007' },
+      {name:'Joan H. Jones', address:'3241 Another Ave', city:'New York', state:'NY', amount:3, active:'no', colors:['red','blue'], fruit:['kiwi'], last_login:'2/15/2006' },
+      {name:'Bob I. Uncle', address:'9909 Random Road', city:'Los Angeles', state:'CA', amount:0, active:'maybe', colors:['green'], fruit:['apple','banana'], last_login:'1/23/2004' },
+      {name:'John J. Smith', address:'1623 Some Street', city:'San Francisco', state:'CA', amount:5, active:'yes', colors:['red'], fruit:['apple','cherry'], last_login:'4/19/2007' },
+      {name:'Joan K. Jones', address:'3721 Another Ave', city:'New York', state:'NY', amount:3, active:'no', colors:['red','blue'], fruit:['banana'], last_login:'2/15/2006' }
     ];
 
     var states = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'];
 
-    var nameEditor = new A.TextAreaCellEditor(
+    var nameEditor = new Y.TextAreaCellEditor(
       {
         validator: {
           rules: {
             name: {
-              required: true,
-              email: true
+              email: true,
+              required: true
             }
           }
         }
       }
     );
 
-    var fruitEditor = new A.DropDownCellEditor(
+    var fruitEditor = new Y.DropDownCellEditor(
       {
         editable: true,
         multiple: true,
@@ -59,16 +58,16 @@ AUI().use(
         sortable: true
       },
       {
-        editor: new A.TextAreaCellEditor(),
+        editor: new Y.TextAreaCellEditor(),
         key: 'address',
         sortable: true
       },
       {
-        editor: new A.TextAreaCellEditor(),
+        editor: new Y.TextAreaCellEditor(),
         key: 'city'
       },
       {
-        editor: new A.DropDownCellEditor(
+        editor: new Y.DropDownCellEditor(
           {
             editable: true,
             options: states
@@ -77,9 +76,9 @@ AUI().use(
         key: 'state'
       },
       {
-        editor: new A.TextCellEditor(
+        editor: new Y.TextCellEditor(
           {
-            inputFormatter: A.DataType.String.evaluate,
+            inputFormatter: Y.DataType.String.evaluate,
             validator: {
               rules: {
                 value: {
@@ -93,7 +92,7 @@ AUI().use(
         key: 'amount'
       },
       {
-        editor: new A.RadioCellEditor(
+        editor: new Y.RadioCellEditor(
           {
             editable: true,
             options: {
@@ -106,7 +105,7 @@ AUI().use(
         key: 'active'
       },
       {
-        editor: new A.CheckboxCellEditor(
+        editor: new Y.CheckboxCellEditor(
           {
             editable: true,
             multiple: true,
@@ -120,7 +119,7 @@ AUI().use(
         key: 'colors'
       },
       {
-        editor: new A.DateCellEditor(
+        editor: new Y.DateCellEditor(
           {
             calendar: {
               dateFormat: '%m/%d/%Y',
@@ -146,17 +145,17 @@ AUI().use(
       }
     ];
 
-    var dataTable = new A.DataTable(
+    var dataTable = new Y.DataTable(
       {
         columns: nestedCols,
         data: remoteData,
         editEvent: 'dblclick',
         plugins: [
           {
-            fn: A.Plugin.DataTableHighlight,
             cfg: {
               highlightRange: false
-            }
+            },
+            fn: Y.Plugin.DataTableHighlight
           }
         ]
       }
