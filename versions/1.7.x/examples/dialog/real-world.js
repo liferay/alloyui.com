@@ -1,4 +1,4 @@
-AUI().use(
+AUI().ready(
   'aui-aria',
   'aui-dialog',
   'aui-overlay-manager',
@@ -21,7 +21,7 @@ AUI().use(
           A.Plugin.IO,
           {
             autoLoad: false,
-            uri: 'http://liferay.github.com/dialog/content.html'
+            uri: 'data/content.html'
           }
         );
 

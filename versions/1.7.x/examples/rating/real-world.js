@@ -1,11 +1,11 @@
-YUI().use(
+AUI().use(
   'aui-rating',
   'node',
-  function(Y) {
-    var titleBox = Y.one('#titleBox');
+  function(A) {
+    var titleBox = A.one('#titleBox');
     var instance, title, stars;
 
-    var rating = new Y.StarRating(
+    var rating = new A.StarRating(
       {
         boundingBox: '#myRating',
         disabled: false,
@@ -19,7 +19,6 @@ YUI().use(
         instance = event.target;
         title = instance.get('title');
         stars = instance.get('value');
-
         if (!title) {
           titleBox.set('innerHTML', 'You selected <strong>0 stars</strong> - no rating!');
         }

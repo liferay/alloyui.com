@@ -1,4 +1,4 @@
-AUI().use(
+AUI().ready(
   'aui-tooltip',
   function(A) {
     new A.Tooltip(

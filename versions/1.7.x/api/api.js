@@ -5,6 +5,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "A.HTML5",
         "A.Node",
         "A.NodeList",
+        "A.Plugin.IO",
         "A.io",
         "AUI~event~input",
         "Anim",
@@ -40,6 +41,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Button",
         "ButtonCore",
         "ButtonGroup",
+        "ButtonItem",
         "ButtonPlugin",
         "Cache",
         "CacheOffline",
@@ -67,6 +69,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "CircleGroup",
         "ClassNameManager",
         "ClickableRail",
+        "ColorPicker",
         "ColumnSeries",
         "ComboSeries",
         "ComboSplineSeries",
@@ -114,7 +117,13 @@ YUI.add("yuidoc-meta", function(Y) {
         "DataType.String",
         "Date",
         "DateCellEditor",
+        "DatePickerSelect",
+        "DatepickerManager",
+        "DelayedTask",
         "Dial",
+        "Dialog",
+        "DialogManager",
+        "DialogMask",
         "Do",
         "Do.AlterArgs",
         "Do.AlterReturn",
@@ -125,6 +134,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Drawing",
         "DropDownCellEditor",
         "Easing",
+        "Editable",
         "EditorBase",
         "EditorSelection",
         "Ellipse",
@@ -161,6 +171,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "IORequest",
         "ImageGallery",
         "ImageViewer",
+        "ImageViewerMask",
         "ImgLoadGroup",
         "ImgLoadImgObj",
         "Intl",
@@ -171,22 +182,33 @@ YUI.add("yuidoc-meta", function(Y) {
         "LeftAxisLayout",
         "LineSeries",
         "Lines",
+        "LiveSearch",
         "Loader",
+        "LoadingMask",
         "MarkerSeries",
         "Matrix",
         "MatrixUtil",
         "Model",
         "ModelList",
         "ModelSync.REST",
+        "NestedList",
         "Node",
         "NodeList",
         "Number",
         "NumericAxis",
         "Object",
         "Overlay",
-        "Pagination",
+        "OverlayBase",
+        "OverlayContext",
+        "OverlayContextManager",
+        "OverlayContextPanel",
+        "OverlayContextPanelManager",
+        "OverlayManager",
+        "OverlayMask",
+        "Paginator",
         "Panel",
         "Parallel",
+        "ParseContent",
         "Path",
         "PieChart",
         "PieSeries",
@@ -231,6 +253,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Plugin.SortScroll",
         "Plugin.WidgetAnim",
         "Pollable",
+        "PortalLayout",
         "Profiler",
         "ProgressBar",
         "QueryString",
@@ -265,8 +288,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "SliderBase",
         "SliderValueRange",
         "Sortable",
-        "SortableLayout",
-        "SortableList",
         "SplineSeries",
         "StackedAreaSeries",
         "StackedAreaSplineSeries",
@@ -315,9 +336,12 @@ YUI.add("yuidoc-meta", function(Y) {
         "Text.WordBreak",
         "TextAreaCellEditor",
         "TextCellEditor",
+        "Textboxlist",
         "ThumbRating",
         "TimeAxis",
         "ToggleButton",
+        "Toolbar",
+        "Tooltip",
         "TopAxisLayout",
         "Transition",
         "TreeData",
@@ -395,26 +419,51 @@ YUI.add("yuidoc-meta", function(Y) {
         "attribute-core",
         "attribute-events",
         "attribute-extras",
+        "aui-autocomplete",
+        "aui-button-item",
+        "aui-calendar",
+        "aui-calendar-base",
+        "aui-calendar-datepicker-select",
         "aui-carousel",
         "aui-char-counter",
+        "aui-color-picker",
         "aui-component",
         "aui-datatype",
+        "aui-delayed-task",
+        "aui-dialog",
+        "aui-editable",
         "aui-event",
         "aui-event-input",
         "aui-image-viewer",
         "aui-image-viewer-base",
         "aui-image-viewer-gallery",
         "aui-io",
+        "aui-io-plugin",
         "aui-io-request",
+        "aui-live-search",
+        "aui-loading-mask",
         "aui-media-viewer-plugin",
+        "aui-nested-list",
         "aui-node",
         "aui-node-base",
         "aui-node-html5",
-        "aui-pagination",
+        "aui-overlay",
+        "aui-overlay-base",
+        "aui-overlay-context",
+        "aui-overlay-context-panel",
+        "aui-overlay-manager",
+        "aui-overlay-mask",
+        "aui-paginator",
+        "aui-panel",
+        "aui-parse-content",
+        "aui-portal-layout",
         "aui-progressbar",
         "aui-rating",
-        "aui-sortable-layout",
-        "aui-sortable-list",
+        "aui-resize",
+        "aui-text",
+        "aui-textboxlist",
+        "aui-toolbar",
+        "aui-tooltip",
         "aui-tree",
         "aui-tree-data",
         "aui-tree-node",
@@ -590,7 +639,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "lazy-model-list",
         "loader",
         "loader-base",
-        "loader-yui3",
         "matrix",
         "model",
         "model-list",
@@ -854,6 +902,30 @@ YUI.add("yuidoc-meta", function(Y) {
             "description": "The attribute-extras submodule provides less commonly used attribute methods, and can \nbe augmented/mixed into an implemention which used attribute-core."
         },
         {
+            "displayName": "aui-autocomplete",
+            "name": "aui-autocomplete",
+            "description": "The AutoComplete Utility"
+        },
+        {
+            "displayName": "aui-button-item",
+            "name": "aui-button-item",
+            "description": "The ButtonItem Utility"
+        },
+        {
+            "displayName": "aui-calendar",
+            "name": "aui-calendar"
+        },
+        {
+            "displayName": "aui-calendar-base",
+            "name": "aui-calendar-base",
+            "description": "The Calendar component is a UI control that enables users to choose one or\nmore dates from a graphical calendar presented in a single month or multi\nmonth interface. Calendars are generated entirely via script and can be\nnavigated without any page refreshes."
+        },
+        {
+            "displayName": "aui-calendar-datepicker-select",
+            "name": "aui-calendar-datepicker-select",
+            "description": "The DatePickerSelect Utility"
+        },
+        {
             "displayName": "aui-carousel",
             "name": "aui-carousel",
             "description": "The Carousel Component"
@@ -864,6 +936,11 @@ YUI.add("yuidoc-meta", function(Y) {
             "description": "The CharCounter Utility"
         },
         {
+            "displayName": "aui-color-picker",
+            "name": "aui-color-picker",
+            "description": "The ColorPicker Utility - Full documentation coming soon."
+        },
+        {
             "displayName": "aui-component",
             "name": "aui-component",
             "description": "The Component Utility"
@@ -872,6 +949,21 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "aui-datatype",
             "name": "aui-datatype",
             "description": "The Datatype Utility"
+        },
+        {
+            "displayName": "aui-delayed-task",
+            "name": "aui-delayed-task",
+            "description": "The DelayedTask Utility - Executes the supplied function in the context of\nthe supplied object 'when' milliseconds later"
+        },
+        {
+            "displayName": "aui-dialog",
+            "name": "aui-dialog",
+            "description": "The Dialog Utility - The Dialog component is an extension of Panel that is\nmeant to emulate the behavior of an dialog window using a floating,\ndraggable HTML element."
+        },
+        {
+            "displayName": "aui-editable",
+            "name": "aui-editable",
+            "description": "The Editable Utility"
         },
         {
             "displayName": "aui-event",
@@ -901,14 +993,34 @@ YUI.add("yuidoc-meta", function(Y) {
             "name": "aui-io"
         },
         {
+            "displayName": "aui-io-plugin",
+            "name": "aui-io-plugin",
+            "description": "The IOPlugin Utility - When plugged to a Node or Widget loads the content\nof a URI and set as its content, parsing the <code>script</code> tags if\npresent on the code."
+        },
+        {
             "displayName": "aui-io-request",
             "name": "aui-io-request",
             "description": "The IORequest Utility - Provides response data normalization for XML, JSON,\nJavaScript and cache option."
         },
         {
+            "displayName": "aui-live-search",
+            "name": "aui-live-search",
+            "description": "The LiveSearch Utility allow real-time filtering for DOM elements based on\na input query."
+        },
+        {
+            "displayName": "aui-loading-mask",
+            "name": "aui-loading-mask",
+            "description": "The LoadingMask Utility"
+        },
+        {
             "displayName": "aui-media-viewer-plugin",
             "name": "aui-media-viewer-plugin",
             "description": "The ImageViewer Media Plugin"
+        },
+        {
+            "displayName": "aui-nested-list",
+            "name": "aui-nested-list",
+            "description": "The NestedList Utility - Full documentation coming soon."
         },
         {
             "displayName": "aui-node",
@@ -925,9 +1037,53 @@ YUI.add("yuidoc-meta", function(Y) {
             "description": "aui-node-html5 provides support for HTML shiv natively on the Alloy dom\nmethods. The HTML5 shiv just affects IE."
         },
         {
-            "displayName": "aui-pagination",
-            "name": "aui-pagination",
-            "description": "The Pagination Utility - The Pagination widget provides a set of controls to navigate through paged data."
+            "displayName": "aui-overlay",
+            "name": "aui-overlay"
+        },
+        {
+            "displayName": "aui-overlay-base",
+            "name": "aui-overlay-base",
+            "description": "Provides a basic Overlay widget, with Standard Module content support. The Overlay widget\nprovides Page XY positioning support, alignment and centering support along with basic\nstackable support (z-index and shimming)."
+        },
+        {
+            "displayName": "aui-overlay-context",
+            "name": "aui-overlay-context",
+            "description": "The OverlayContext Utility"
+        },
+        {
+            "displayName": "aui-overlay-context-panel",
+            "name": "aui-overlay-context-panel",
+            "description": "The OverlayContextPanel Utility"
+        },
+        {
+            "displayName": "aui-overlay-manager",
+            "name": "aui-overlay-manager",
+            "description": "The OverlayManager Utility"
+        },
+        {
+            "displayName": "aui-overlay-mask",
+            "name": "aui-overlay-mask",
+            "description": "The OverlayMask Utility"
+        },
+        {
+            "displayName": "aui-paginator",
+            "name": "aui-paginator",
+            "description": "The Paginator Utility - The Paginator widget provides a set of controls to navigate through paged data."
+        },
+        {
+            "displayName": "aui-panel",
+            "name": "aui-panel",
+            "description": "The Panel Utility - Panel is a container that has specific functionality\nand structural components that make it the good for building block for\napplication-oriented user interfaces. Panel also provides built-in\nexpandable and collapsible behavior, along with a variety of prebuilt tool\nbuttons that can be wired up to provide other customized behavior. Panels\ncan be easily dropped into any Container or layout."
+        },
+        {
+            "displayName": "aui-parse-content",
+            "name": "aui-parse-content",
+            "description": "The ParseContent Utility - Parse the content of a Node so that all of the\njavascript contained in that Node will be executed according to the order\nthat it appears."
+        },
+        {
+            "displayName": "aui-portal-layout",
+            "name": "aui-portal-layout",
+            "description": "The PortalLayout Utility - Full documentation coming soon."
         },
         {
             "displayName": "aui-progressbar",
@@ -940,14 +1096,29 @@ YUI.add("yuidoc-meta", function(Y) {
             "description": "The Rating Utility - The Star Rating creates a non-obstrusive star rating\ncontrol, could be based on a set of radio input boxes."
         },
         {
-            "displayName": "aui-sortable-layout",
-            "name": "aui-sortable-layout",
-            "description": "The SortableLayout Utility - Full documentation coming soon."
+            "displayName": "aui-resize",
+            "name": "aui-resize",
+            "description": "The Resize Utility allows you to make an HTML element resizable."
         },
         {
-            "displayName": "aui-sortable-list",
-            "name": "aui-sortable-list",
-            "description": "The SortableList Utility - Full documentation coming soon."
+            "displayName": "aui-text",
+            "name": "aui-text",
+            "description": "Utility for testing strings against unicode patterns."
+        },
+        {
+            "displayName": "aui-textboxlist",
+            "name": "aui-textboxlist",
+            "description": "The Textboxlist Utility - Full documentation coming soon."
+        },
+        {
+            "displayName": "aui-toolbar",
+            "name": "aui-toolbar",
+            "description": "The Toolbar Utility"
+        },
+        {
+            "displayName": "aui-tooltip",
+            "name": "aui-tooltip",
+            "description": "The Tooltip Utility - A standard tooltip implementation for providing additional information when hovering over a target element."
         },
         {
             "displayName": "aui-tree",
@@ -1814,11 +1985,6 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "loader-base",
             "name": "loader-base",
             "description": "Loader dynamically loads script and css files.  It includes the dependency\ninformation for the version of the library in use, and will automatically pull in\ndependencies for the modules requested. It can also load the\nfiles from the Yahoo! CDN, and it can utilize the combo service provided on\nthis network to reduce the number of http connections required to download\nYUI files."
-        },
-        {
-            "displayName": "loader-yui3",
-            "name": "loader-yui3",
-            "description": "YUI 3 module metadata"
         },
         {
             "displayName": "matrix",

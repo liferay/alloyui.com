@@ -1,7 +1,7 @@
-YUI().use(
+AUI().ready(
   'aui-ace-editor',
-  function(Y) {
-    new Y.AceEditor(
+  function(A) {
+    new A.AceEditor(
       {
         boundingBox: '#myEditor',
         height: '200',

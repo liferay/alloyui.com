@@ -1,8 +1,8 @@
-YUI().use(
+AUI().use(
   'aui-io-request',
-  function (Y) {
-    Y.io.request(
-      'http://alloyui.com/io/data/content.html',
+  function (A) {
+    A.io.request(
+      'data/content.html',
       {
         on: {
           success: function() {

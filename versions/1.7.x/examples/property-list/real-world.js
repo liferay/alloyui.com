@@ -6,7 +6,7 @@ AUI().use(
         editor: new A.CheckboxCellEditor(
           {
             editable: true,
-            options: [ 'True' ]
+            options: ['True']
           }
         ),
         name: 'Boolean',
@@ -21,7 +21,7 @@ AUI().use(
         editor: new A.RadioCellEditor(
           {
             editable: true,
-            options: [ 'Yes', 'No' ]
+            options: ['Yes', 'No']
           }
         ),
         name: 'Radio',
@@ -51,7 +51,7 @@ AUI().use(
 
     new A.PropertyList(
       {
-        data: properties
+        recordset: properties
       }
     ).render('#myPropertyList');
   }
