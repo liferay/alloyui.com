@@ -4,11 +4,11 @@ YUI().use(
     var columns = ['name', 'address', 'city', 'state'];
 
     var data = [
-      {name:'John A. Smith', address:'1236 Some Street', city:'San Francisco', state:'CA'},
-      {name:'Joan B. Jones', address:'3271 Another Ave', city:'New York', state:'NY'},
-      {name:'Bob C. Uncle', address:'9996 Random Road', city:'Los Angeles', state:'CA'},
-      {name:'John D. Smith', address:'1623 Some Street', city:'San Francisco', state:'CA'},
-      {name:'Bob F. Uncle', address:'9899 Random Road', city:'Los Angeles', state:'CA'}
+      {address: '1236 Some Street', city: 'San Francisco', name: 'John A. Smith', state: 'CA'},
+      {address: '3271 Another Ave', city: 'New York', name: 'Joan B. Jones', state: 'NY'},
+      {address: '9996 Random Road', city: 'Los Angeles', name: 'Bob C. Uncle', state: 'CA'},
+      {address: '1623 Some Street', city: 'San Francisco', name: 'John D. Smith', state: 'CA'},
+      {address: '9899 Random Road', city: 'Los Angeles', name: 'Bob F. Uncle', state: 'CA'}
     ];
 
     new Y.DataTable.Base(
