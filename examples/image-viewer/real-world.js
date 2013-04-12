@@ -3,17 +3,17 @@ YUI().use(
   function(Y) {
     new Y.ImageViewer(
       {
-        links: '#myGallery a',
         anim: true,
         caption: 'Liferay Champion Soccer',
         captionFromTitle: true,
-        lockScroll: true,
-        preloadAllImages: true,
-        showInfo: true,
         imageAnim: {
          duration: 1,
-         easing: 'easeIn',
-        }
+         easing: 'easeIn'
+        },
+        links: '#myGallery a',
+        lockScroll: true,
+        preloadAllImages: true,
+        showInfo: true
       }
     ).render();
   }

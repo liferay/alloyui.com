@@ -993,8 +993,15 @@ YUI().use(
   <span class="keyword">function</span>(Y) {
     <span class="keyword">var</span> lastJobNumber = <span class="number">1</span>;
     <span class="keyword">var</span> newJobNumber = <span class="number">2</span>;
-    <span class="keyword">var</span> job = <span class="string">'&lt;div class="job added"&gt;&lt;/div&gt;'</span>;
-    <span class="keyword">var</span> jobContent = <span class="string">'&lt;h5&gt;Previous job: &lt;/h5&gt;&lt;label for="position2"&gt;Position: &lt;/label&gt;&lt;input type="text" id="position2"&gt;&lt;br&gt;&lt;label for="employer2"&gt;Employer: &lt;/label&gt;&lt;input type="text" id="employer2"&gt;&lt;br&gt;&lt;label for="dateRange"&gt;Dates of Employment: &lt;/label&gt;&lt;input type="text" id="dateRange"&gt;&lt;br&gt;'</span>;
+    <span class="keyword">var</span> job = <span class="string">'&lt;div class="job added"&gt;'</span> +
+      <span class="string">'&lt;h5&gt;Previous job: &lt;/h5&gt;'</span> +
+      <span class="string">'&lt;label for="position2"&gt;Position: &lt;/label&gt;'</span> +
+      <span class="string">'&lt;input type="text" id="position2"&gt;&lt;br&gt;'</span> +
+      <span class="string">'&lt;label for="employer2"&gt;Employer: &lt;/label&gt;'</span> +
+      <span class="string">'&lt;input type="text" id="employer2"&gt;&lt;br&gt;'</span> +
+      <span class="string">'&lt;label for="dateRange"&gt;Dates of Employment: &lt;/label&gt;'</span> +
+      <span class="string">'&lt;input type="text" id="dateRange"&gt;&lt;br&gt;'</span> +
+    <span class="string">'&lt;/div&gt;'</span>;
 
     Y.one(<span class="string">'#addJob'</span>).on(
       <span class="string">'click'</span>,
@@ -1006,7 +1013,6 @@ YUI().use(
         <span class="comment">// Place the node in its spot in the DOM and populate it</span>
         <span class="keyword">var</span> lastJob = <span class="string">'#job'</span> + lastJobNumber;
         Y.one(lastJob).placeAfter(newJob);
-        newJob.html(jobContent);
 
         <span class="comment">// Increment the values in case another job is added</span>
         lastJobNumber++;
@@ -1019,6 +1025,9 @@ YUI().use(
       <span class="keyword">function</span>() {
         <span class="comment">// Reset the original number of fields when "Reset" is pressed</span>
         Y.all(<span class="string">'#jobForm .added'</span>).remove(<span class="literal">true</span>);
+
+        lastJobNumber = <span class="number">1</span>;
+        newJobNumber = <span class="number">2</span>;
       }
     );
   }
@@ -1031,8 +1040,15 @@ YUI().use(
   function(Y) {
     var lastJobNumber = 1;
     var newJobNumber = 2;
-    var job = '<div class="job added"></div>';
-    var jobContent = '<h5>Previous job: </h5><label for="position2">Position: </label><input type="text" id="position2"><br><label for="employer2">Employer: </label><input type="text" id="employer2"><br><label for="dateRange">Dates of Employment: </label><input type="text" id="dateRange"><br>';
+    var job = '<div class="job added">' +
+      '<h5>Previous job: </h5>' +
+      '<label for="position2">Position: </label>' +
+      '<input type="text" id="position2"><br>' +
+      '<label for="employer2">Employer: </label>' +
+      '<input type="text" id="employer2"><br>' +
+      '<label for="dateRange">Dates of Employment: </label>' +
+      '<input type="text" id="dateRange"><br>' +
+    '</div>';
 
     Y.one('#addJob').on(
       'click',
@@ -1044,7 +1060,6 @@ YUI().use(
         // Place the node in its spot in the DOM and populate it
         var lastJob = '#job' + lastJobNumber;
         Y.one(lastJob).placeAfter(newJob);
-        newJob.html(jobContent);
 
         // Increment the values in case another job is added
         lastJobNumber++;
@@ -1057,6 +1072,9 @@ YUI().use(
       function() {
         // Reset the original number of fields when "Reset" is pressed
         Y.all('#jobForm .added').remove(true);
+
+        lastJobNumber = 1;
+        newJobNumber = 2;
       }
     );
   }

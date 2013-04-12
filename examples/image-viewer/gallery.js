@@ -3,12 +3,12 @@ YUI().use(
   function(Y) {
     new Y.ImageGallery(
       {
-        links: '#myGallery a',
         caption: 'Liferay Champion Soccer',
+        delay: 2000,
+        links: '#myGallery a',
         pagination: {
           total: 5
-        },
-        delay: 2000
+        }
       }
     ).render();
   }

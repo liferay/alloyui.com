@@ -7,36 +7,36 @@ YUI().use(
         children: [
           {
             children: [
-              {label: 'Watermelon', type: 'check', leaf: true},
-              {label: 'Apricot', type: 'check', leaf: true},
-              {label: 'Pineapple', type: 'check', leaf: true},
-              {label: 'Kiwi', type: 'check', leaf: true},
-              {label: 'Orange', type: 'check', leaf: true},
-              {label: 'Pomegranate', type: 'check', leaf: true}
+              {label: 'Watermelon', leaf: true, type: 'check'},
+              {label: 'Apricot', leaf: true, type: 'check'},
+              {label: 'Pineapple', leaf: true, type: 'check'},
+              {label: 'Kiwi', leaf: true, type: 'check'},
+              {label: 'Orange', leaf: true, type: 'check'},
+              {label: 'Pomegranate', leaf: true, type: 'check'}
             ],
             expanded: true,
             label: 'Checkboxes'
           },
           {
             children: [
-              {label: 'Watermelon', type: 'radio', leaf: true},
-              {label: 'Apricot', type: 'radio', leaf: true},
-              {label: 'Pineapple', type: 'radio', leaf: true},
-              {label: 'Kiwi', type: 'radio', leaf: true},
-              {label: 'Orange', type: 'radio', leaf: true},
-              {label: 'Pomegranate', type: 'radio', leaf: true}
+              {label: 'Watermelon', leaf: true, type: 'radio'},
+              {label: 'Apricot', leaf: true, type: 'radio'},
+              {label: 'Pineapple', leaf: true, type: 'radio'},
+              {label: 'Kiwi', leaf: true, type: 'radio'},
+              {label: 'Orange', leaf: true, type: 'radio'},
+              {label: 'Pomegranate', leaf: true, type: 'radio'}
             ],
             expanded: true,
             label: 'Radio'
           },
           {
             children: [
-              {label: 'Watermelon', type: 'task', leaf: true},
-              {label: 'Apricot', type: 'task', leaf: true},
-              {label: 'Pineapple', type: 'task', leaf: true},
-              {label: 'Kiwi', type: 'task', leaf: true},
-              {label: 'Orange', type: 'task', leaf: true},
-              {label: 'Pomegranate', type: 'task', leaf: true}
+              {label: 'Watermelon', leaf: true, type: 'task'},
+              {label: 'Apricot', leaf: true, type: 'task'},
+              {label: 'Pineapple', leaf: true,  type: 'task'},
+              {label: 'Kiwi', leaf: true, type: 'task'},
+              {label: 'Orange', leaf: true, type: 'task'},
+              {label: 'Pomegranate', leaf: true,  type: 'task'}
             ],
             expanded: true,
             label: 'Task',
