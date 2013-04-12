@@ -4,8 +4,15 @@ YUI().use(
   function(Y) {
     var lastJobNumber = 1;
     var newJobNumber = 2;
-    var job = '<div class="job added"></div>';
-    var jobContent = '<h5>Previous job: </h5><label for="position2">Position: </label><input type="text" id="position2"><br><label for="employer2">Employer: </label><input type="text" id="employer2"><br><label for="dateRange">Dates of Employment: </label><input type="text" id="dateRange"><br>';
+    var job = '<div class="job added">' +
+      '<h5>Previous job: </h5>' +
+      '<label for="position2">Position: </label>' +
+      '<input type="text" id="position2"><br>' +
+      '<label for="employer2">Employer: </label>' +
+      '<input type="text" id="employer2"><br>' +
+      '<label for="dateRange">Dates of Employment: </label>' +
+      '<input type="text" id="dateRange"><br>' +
+    '</div>';
 
     Y.one('#addJob').on(
       'click',
@@ -17,7 +24,6 @@ YUI().use(
         // Place the node in its spot in the DOM and populate it
         var lastJob = '#job' + lastJobNumber;
         Y.one(lastJob).placeAfter(newJob);
-        newJob.html(jobContent);
 
         // Increment the values in case another job is added
         lastJobNumber++;
@@ -30,6 +36,9 @@ YUI().use(
       function() {
         // Reset the original number of fields when "Reset" is pressed
         Y.all('#jobForm .added').remove(true);
+
+        lastJobNumber = 1;
+        newJobNumber = 2;
       }
     );
   }

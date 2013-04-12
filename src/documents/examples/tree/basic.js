@@ -5,9 +5,15 @@ YUI().use(
     var children = [
       {
         children: [
-          {label: 'File X'},
-          {label: 'File Y'},
-          {label: 'File Z'}
+          {
+            label: 'File X'
+          },
+          {
+            label: 'File Y'
+          },
+          {
+            label: 'File Z'
+          }
         ],
         expanded: true,
         label: 'Root'
