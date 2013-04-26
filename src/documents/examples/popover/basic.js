@@ -6,8 +6,8 @@ YUI().use(
     var popover = new A.Popover(
       {
         align: {
-            node: trigger,
-            points:[A.WidgetPositionAlign.BC, A.WidgetPositionAlign.TC]
+          node: trigger,
+          points:[A.WidgetPositionAlign.BC, A.WidgetPositionAlign.TC]
         },
         bodyContent: 'Body Content',
         headerContent: 'Header content',
