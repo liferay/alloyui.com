@@ -1,4 +1,4 @@
-# AlloyUI.com
+# AlloyUI.com [![Build Status](https://secure.travis-ci.org/liferay/alloyui.com.png?branch=master)](https://travis-ci.org/liferay/alloyui.com)
 
 ![AlloyUI Robo Suit](http://f.cl.ly/items/1c1z23343G2e2I3X3a3P/Screen-Shot-2013-04-08-at-9.37.36-AM.png)
 
