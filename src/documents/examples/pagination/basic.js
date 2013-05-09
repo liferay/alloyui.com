@@ -15,8 +15,8 @@ YUI().use(
         offset: 999,
         page: 1,
         strings: {
-          prev: '&laquo;',
-          next: '&raquo;'
+          next: '&raquo;',
+          prev: '&laquo;'
         },
         total: 5
       }

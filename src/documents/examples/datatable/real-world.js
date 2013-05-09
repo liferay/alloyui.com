@@ -1,19 +1,19 @@
 YUI().use(
   'aui-datatable',
-  'datatable-sort',
   'aui-datatype',
+  'datatable-sort',
   function(Y) {
     var remoteData = [
-      {name:'John A. Smith', address:'1236 Some Street', city:'San Francisco', state:'CA', amount:5, active:'yes', colors:['red'], fruit:['banana','cherry'], last_login:'4/19/2007' },
-      {name:'Bob C. Uncle', address:'9996 Random Road', city:'Los Angeles', state:'CA', amount:0, active:'maybe', colors:['green'], fruit:['cherry'], last_login:['4/10/2007'] },
-      {name:'John D. Smith', address:'1623 Some Street', city:'San Francisco', state:'CA', amount:5, active:'yes', colors:['red'], fruit:['cherry'], last_login:'4/19/2007' },
-      {name:'Joan E. Jones', address:'3217 Another Ave', city:'New York', state:'NY', amount:3, active:'no', colors:['red','blue'], fruit:['apple','cherry'], last_login:'2/15/2006' },
-      {name:'Bob F. Uncle', address:'9899 Random Road', city:'Los Angeles', state:'CA', amount:0, active:'maybe', colors:['green'], fruit:['banana'], last_login:'1/23/2004' },
-      {name:'John G. Smith', address:'1723 Some Street', city:'San Francisco', state:'CA', amount:5, active:'yes', colors:['red'], fruit:['apple'], last_login:'4/19/2007' },
-      {name:'Joan H. Jones', address:'3241 Another Ave', city:'New York', state:'NY', amount:3, active:'no', colors:['red','blue'], fruit:['kiwi'], last_login:'2/15/2006' },
-      {name:'Bob I. Uncle', address:'9909 Random Road', city:'Los Angeles', state:'CA', amount:0, active:'maybe', colors:['green'], fruit:['apple','banana'], last_login:'1/23/2004' },
-      {name:'John J. Smith', address:'1623 Some Street', city:'San Francisco', state:'CA', amount:5, active:'yes', colors:['red'], fruit:['apple','cherry'], last_login:'4/19/2007' },
-      {name:'Joan K. Jones', address:'3721 Another Ave', city:'New York', state:'NY', amount:3, active:'no', colors:['red','blue'], fruit:['banana'], last_login:'2/15/2006' }
+      {active: 'yes', address: '1236 Some Street', amount: 5, city: 'San Francisco', colors:['red'], fruit:['banana','cherry'], last_login: '4/19/2007', name: 'John A. Smith', state: 'CA'},
+      {active: 'maybe', address: '9996 Random Road', amount: 0, city: 'Los Angeles', colors:['green'], fruit:['cherry'], last_login:['4/10/2007'], name: 'Bob C. Uncle', state: 'CA'},
+      {active: 'yes', address: '1623 Some Street', amount: 5, city: 'San Francisco', colors:['red'], fruit:['cherry'], last_login: '4/19/2007', name: 'John D. Smith', state: 'CA'},
+      {active: 'no', address: '3217 Another Ave', amount: 3, city: 'New York', colors:['red','blue'], fruit:['apple','cherry'], last_login: '2/15/2006', name: 'Joan E. Jones', state: 'NY'},
+      {active: 'maybe', address: '9899 Random Road', amount: 0, city: 'Los Angeles', colors:['green'], fruit:['banana'], last_login: '1/23/2004', name: 'Bob F. Uncle', state: 'CA'},
+      {active: 'yes', address: '1723 Some Street', amount: 5, city: 'San Francisco', colors:['red'], fruit:['apple'], last_login: '4/19/2007', name: 'John G. Smith', state: 'CA'},
+      {active: 'no', address: '3241 Another Ave', amount: 3, city: 'New York', colors:['red','blue'], fruit:['kiwi'], last_login: '2/15/2006', name: 'Joan H. Jones', state: 'NY'},
+      {active: 'maybe', address: '9909 Random Road', amount: 0, city: 'Los Angeles', colors:['green'], fruit:['apple','banana'], last_login: '1/23/2004', name: 'Bob I. Uncle', state: 'CA'},
+      {active: 'yes', address: '1623 Some Street', amount: 5, city: 'San Francisco', colors:['red'], fruit:['apple','cherry'], last_login: '4/19/2007', name: 'John J. Smith', state: 'CA'},
+      {active: 'no', address: '3721 Another Ave', amount: 3, city: 'New York', colors:['red','blue'], fruit:['banana'], last_login: '2/15/2006', name: 'Joan K. Jones', state: 'NY'}
     ];
 
     var states = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'];
@@ -126,7 +126,7 @@ YUI().use(
               selectionMode: 'multiple',
               showNextMonth: false,
               showPrevMonth: false,
-              width:'250px'
+              width: '250px'
             },
             validator: {
               rules: {

@@ -1,4 +1,4 @@
-# AlloyUI.com
+# AlloyUI.com [![Build Status](https://secure.travis-ci.org/liferay/alloyui.com.png?branch=master)](https://travis-ci.org/liferay/alloyui.com)
 
 ![AlloyUI Robo Suit](http://f.cl.ly/items/1c1z23343G2e2I3X3a3P/Screen-Shot-2013-04-08-at-9.37.36-AM.png)
 
@@ -11,6 +11,7 @@ If you want to report an issue about [AlloyUI's website](http://alloyui.com) you
 * [Getting started](#getting-started)
 * [Structure](#structure)
 * [Deploy](#deploy)
+* [Bonus](#bonus)
 
 ## How it works?
 
@@ -20,9 +21,9 @@ We use [Docpad](https://github.com/bevry/docpad), a static generator in NodeJS.
 
 1. Install [NodeJS](https://github.com/bevry/community/wiki/Installing-Node), if you don't have it yet.
 
-2. Install [Docpad](https://github.com/bevry/docpad) globally: `sudo npm install -fg docpad`
+2. Install [Docpad](https://github.com/bevry/docpad) globally: `[sudo] npm install -fg docpad`
 
-3. Install [Yogi Alloy](https://github.com/liferay/yogi-alloy) globally: `sudo npm -g install yogi yogi-alloy`
+3. Install [Yogi Alloy](https://github.com/liferay/yogi-alloy) globally: `[sudo] npm -g install yogi yogi-alloy`
 
 ## Getting started
 
@@ -77,6 +78,10 @@ List NodeJS modules dependencies.
 
 ## Deploy
 
-Just run `yogi alloy --site-deploy` and then go to [alloyui.com](http://alloyui.com/).
+Go to the branch you want to deploy and run `yogi alloy --site-deploy`, now you can see your changes live at [alloyui.com](http://alloyui.com/).
 
-> **Note:** this will only work for master branch. We're currently working to improve this Yogi Alloy task to support deploy for different website versions.
+> **Note:** Make sure to commit everything before running this command.
+
+## Bonus
+
+We use a template engine called [Eco (.eco)](https://github.com/sstephenson/eco), so you should definitely install a syntax highlight for it on your code editor.
