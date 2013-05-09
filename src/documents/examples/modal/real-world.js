@@ -3,10 +3,10 @@ YUI().use(
   function(Y) {
     var modal = new Y.Modal(
       {
-        bodyContent: 'Modal body',
+        bodyContent: 'How many pages do you want to print?',
         centered: true,
         destroyOnHide: false,
-        headerContent: '<h3>Modal header</h3>',
+        headerContent: '<h3>Print</h3>',
         height: 200,
         modal: true,
         render: '#modal',
@@ -17,7 +17,11 @@ YUI().use(
           body: [
             {
               icon: 'aui-icon-file',
-              label: 'Body Toolbar'
+              label: 'Single Page'
+            },
+            {
+              icon: 'aui-icon-book',
+              label: 'All Pages'
             }
           ]
         },
@@ -40,7 +44,7 @@ YUI().use(
           label: 'Okay',
           on: {
             click: function() {
-              alert('This tool bar was added after modal was rendered!');
+              alert('Just an example, there will be no printing here.');
             }
           }
         }
