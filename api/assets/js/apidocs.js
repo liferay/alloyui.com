@@ -6,7 +6,7 @@ function (Y) {
 var win          = Y.config.win,
     localStorage = win.localStorage,
 
-    bdNode = Y.one('#bd'),
+    docsMainNode = Y.one('#docs-main'),
 
     pjax,
     defaultRoute,
@@ -23,7 +23,7 @@ if (!Y.getLocation().protocol.match(/^https?\:/)) {
 // on the loaded content.
 defaultRoute = Y.Pjax.defaultRoute.concat(function (req, res, next) {
     prettyPrint();
-    bdNode.removeClass('loading');
+    docsMainNode.removeClass('loading');
 
     next();
 });
@@ -325,7 +325,7 @@ pjax.onNavigate = function (e) {
     // Only scroll to the top of the page when the URL doesn't have a hash.
     this.set('scrollToTop', !e.url.match(/#.+$/));
 
-    bdNode.addClass('loading');
+    docsMainNode.addClass('loading');
 };
 
 pjax.onOptionClick = function () {
