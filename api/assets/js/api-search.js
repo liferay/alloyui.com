@@ -1,16 +1,16 @@
-AUI.add('api-search', function (A) {
+YUI.add('api-search', function (Y) {
 
-var Lang   = A.Lang,
-    Node   = A.Node,
-    AArray = A.Array;
+var Lang   = Y.Lang,
+    Node   = Y.Node,
+    YArray = Y.Array;
 
-A.APISearch = A.Base.create('apiSearch', A.Base, [A.AutoCompleteBase], {
+Y.APISearch = Y.Base.create('apiSearch', Y.Base, [Y.AutoCompleteBase], {
     // -- Public Properties ----------------------------------------------------
     RESULT_TEMPLATE:
         '<li class="result {resultType}">' +
             '<a href="{url}">' +
                 '<h3 class="title">{name}</h3>' +
-                '<span class="type">{resultType}</span>' + 
+                '<span class="type">{resultType}</span>' +
                 '<div class="description">{description}</div>' +
                 '<span class="className">{class}</span>' +
             '</a>' +
@@ -25,26 +25,26 @@ A.APISearch = A.Base.create('apiSearch', A.Base, [A.AutoCompleteBase], {
     // -- Protected Methods ----------------------------------------------------
     _apiResultFilter: function (query, results) {
         // Filter components out of the results.
-        return AArray.filter(results, function (result) {
+        return YArray.filter(results, function (result) {
             return result.raw.resultType === 'component' ? false : result;
         });
     },
 
     _apiResultFormatter: function (query, results) {
-        return AArray.map(results, function (result) {
-            var raw  = A.merge(result.raw), // create a copy
+        return YArray.map(results, function (result) {
+            var raw  = Y.merge(result.raw), // create a copy
                 desc = raw.description || '';
 
             // Convert description to text and truncate it if necessary.
             desc = Node.create('<div>' + desc + '</div>').get('text');
 
             if (desc.length > 65) {
-                desc = A.Escape.html(desc.substr(0, 65)) + ' &hellip;';
+                desc = Y.Escape.html(desc.substr(0, 65)) + ' &hellip;';
             } else {
-                desc = A.Escape.html(desc);
+                desc = Y.Escape.html(desc);
             }
 
-            raw['class'] || (raw['class'] = '');
+            raw['class'] = raw['class'] || (raw['class'] = '');
             raw.description = desc;
 
             // Use the highlighted result name.
