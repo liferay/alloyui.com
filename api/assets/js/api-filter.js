@@ -1,14 +1,13 @@
-YUI.add('api-filter', function (Y) {
+AUI.add('api-filter', function (A) {
 
-Y.APIFilter = Y.Base.create('apiFilter', Y.Base, [Y.AutoCompleteBase], {
+A.APIFilter = A.Base.create('apiFilter', A.Base, [A.AutoCompleteBase], {
     // -- Initializer ----------------------------------------------------------
     initializer: function () {
         this._bindUIACBase();
         this._syncUIACBase();
     },
     getDisplayName: function(name) {
-
-        Y.each(Y.YUIDoc.meta.allModules, function(i) {
+        A.each(A.YUIDoc.meta.allModules, function(i) {
             if (i.name === name && i.displayName) {
                 name = i.displayName;
             }
@@ -33,9 +32,36 @@ Y.APIFilter = Y.Base.create('apiFilter', Y.Base, [Y.AutoCompleteBase], {
             valueFn: function() {
                 var self = this;
                 return function(q) {
-                    var data = Y.YUIDoc.meta[self.get('queryType')],
-                        out = [];
-                    Y.each(data, function(v) {
+                    var queryType = self.get('queryType');
+
+                    var meta = A.YUIDoc.meta;
+
+                    if (!meta.everything) {
+                        var everything = [].concat(meta.modules, meta.classes);
+
+                        meta.DOC_DATA = {
+                            classes: A.Array.hash(meta.classes),
+                            modules: A.Array.hash(meta.modules)
+                        };
+
+                        everything.sort(function(x,y){
+                            var a = String(x).toUpperCase();
+                            var b = String(y).toUpperCase();
+                            if (a > b) {
+                                return 1;
+                            }
+                            if (a < b) {
+                                return -1;
+                            }
+                            return 0;
+                        });
+
+                        meta.everything = everything;
+                    }
+
+                    var data = A.YUIDoc.meta[queryType];
+                    var out = [];
+                    A.each(data, function(v) {
                         if (v.toLowerCase().indexOf(q.toLowerCase()) > -1) {
                             out.push(v);
                         }

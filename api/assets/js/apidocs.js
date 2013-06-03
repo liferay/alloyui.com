@@ -1,72 +1,129 @@
-YUI().use(
+AUI().use(
     'yuidoc-meta',
-    'api-list', 'history-hash', 'node-screen', 'node-style', 'pjax',
+    'api-list', 'controller', 'history-hash', 'node-event-delegate',
+    'node-load', 'node-screen', 'node-style',
 function (Y) {
 
-var win          = Y.config.win,
+// Autodetecting the URL we are serving from
+var parts = location.href.split('/'),
+    url = [],
+    baseNum = parts.length;
+
+Y.each(parts, function(v, k) {
+    switch (v) {
+        case 'classes':
+        case 'modules':
+        case 'files':
+            baseNum = k;
+            url.push('');
+            break;
+        default:
+            if (k < baseNum) {
+                url.push(v); 
+            }
+            break
+    }
+});
+
+url = url.join('/');
+
+
+var win = Y.config.win,
+
+    bd           = Y.one('#bd'),
+    controller   = new Y.Controller({ root: url }),
+    contentNode  = Y.one('#docs-main'),
     localStorage = win.localStorage,
-
-    docsMainNode = Y.one('#docs-main'),
-
-    pjax,
-    defaultRoute,
 
     classTabView,
     selectedTab;
 
-// Kill pjax functionality unless serving over HTTP.
-if (!Y.getLocation().protocol.match(/^https?\:/)) {
-    Y.Router.html5 = false;
-}
+    Y.APIList.rootPath = url;
 
-// Create the default route with middleware which enables syntax highlighting
-// on the loaded content.
-defaultRoute = Y.Pjax.defaultRoute.concat(function (req, res, next) {
-    prettyPrint();
-    docsMainNode.removeClass('loading');
+// Note: In the following routes, an ?xhr query string is appended to each URL
+// requested via XHR. This has no functional purpose, but works around a bug in
+// both WebKit and Gecko browsers that causes XHR requests (and their headers)
+// to override normal requests in the cache when the URLs are the same, even if
+// the request headers differ.
 
-    next();
+// -- / ------------------------------------------------------------------------
+controller.route('/(index.html)?', function (req) {
+    if (req.path === controller._lastPath) {
+        return;
+    }
+
+    controller._lastPath = req.path;
+
+    bd.addClass('loading');
+    contentNode.load(this.root + '/?xhr', null, this.afterLoad);
 });
 
-pjax = new Y.Pjax({
-    container      : '#docs-main',
-    contentSelector: '#docs-main > .content',
-    linkSelector   : '#bd a',
-    titleSelector  : '#xhr-title',
+// -- /classes/* ---------------------------------------------------------------
+controller.route('/classes/:class.html', function (req, next) {
+    if (req.path === controller._lastPath) {
+        controller.updateTabState();
+        return;
+    }
 
-    navigateOnHash: true,
-    root          : '/',
-    routes        : [
-        // -- / ----------------------------------------------------------------
-        {
-            path     : '/(index.html)?',
-            callbacks: defaultRoute
-        },
+    bd.addClass('loading');
+    controller._lastPath = req.path;
 
-        // -- /classes/* -------------------------------------------------------
-        {
-            path     : '/classes/:class.html*',
-            callbacks: [defaultRoute, 'handleClasses']
-        },
-
-        // -- /files/* ---------------------------------------------------------
-        {
-            path     : '/files/*file',
-            callbacks: [defaultRoute, 'handleFiles']
-        },
-
-        // -- /modules/* -------------------------------------------------------
-        {
-            path     : '/modules/:module.html*',
-            callbacks: defaultRoute
+    contentNode.load(this.root + '/classes/' + req.params['class'] + '.html?xhr',
+        null,
+        function () {
+            controller.afterLoad();
+            controller.initClassTabView();
         }
-    ]
+    );
+});
+
+// -- /files/* -----------------------------------------------------------------
+controller.route('/files/*file', function (req, next) {
+    if (req.path === controller._lastPath) {
+        return;
+    }
+
+    controller._lastPath = req.path;
+
+    bd.addClass('loading');
+    contentNode.load(this.root + '/files/' + req.params.file + '?xhr', null,
+        function () {
+            controller.afterLoad();
+            controller.initLineNumbers();
+        });
+});
+
+// -- /modules/* ---------------------------------------------------------------
+controller.route('/modules/:module.html', function (req, next) {
+    if (req.path === controller._lastPath) {
+        return;
+    }
+
+    controller._lastPath = req.path;
+
+    bd.addClass('loading');
+    contentNode.load(this.root + '/modules/' + req.params.module + '.html?xhr',
+            null, this.afterLoad);
 });
 
 // -- Utility Functions --------------------------------------------------------
+controller.afterLoad =  function () {
+    var xhrCrumbsNode = Y.one('#xhr-crumbs'),
+        xhrTitleNode  = Y.one('#xhr-title');
 
-pjax.checkVisibility = function (tab) {
-    tab = tab || (tab = selectedTab);
+    // Update the page title.
+    if (xhrTitleNode) {
+        Y.config.doc.title = xhrTitleNode.get('text');
+    }
+
+    // Enable syntax highlighting on the loaded content.
+    prettyPrint();
+
+    bd.removeClass('loading');
+};
+
+controller.checkVisibility = function (tab) {
+    tab || (tab = selectedTab);
 
     if (!tab) { return; }
 
@@ -124,7 +181,7 @@ pjax.checkVisibility = function (tab) {
     });
 };
 
-pjax.initClassTabView = function () {
+controller.initClassTabView = function () {
     if (!Y.all('#classdocs .api-class-tab').size()) {
         return;
     }
@@ -138,21 +195,21 @@ pjax.initClassTabView = function () {
         srcNode: '#classdocs',
 
         on: {
-            selectionChange: pjax.onTabSelectionChange
+            selectionChange: controller.onTabSelectionChange
         }
     });
 
-    pjax.updateTabState();
+    controller.updateTabState();
     classTabView.render();
 };
 
-pjax.initLineNumbers = function () {
-    var hash      = win.location.hash.substring(1),
-        container = pjax.get('container'),
-        hasLines, node;
+controller.initLineNumbers = function () {
+    var hash = win.location.hash.substring(1),
+        hasLines,
+        node;
 
     // Add ids for each line number in the file source view.
-    container.all('.linenums>li').each(function (lineNode, index) {
+    contentNode.all('.linenums>li').each(function (lineNode, index) {
         lineNode.set('id', 'l' + (index + 1));
         lineNode.addClass('file-line');
         hasLines = true;
@@ -160,55 +217,15 @@ pjax.initLineNumbers = function () {
 
     // Scroll to the desired line.
     if (hasLines && /^l\d+$/.test(hash)) {
-        if ((node = container.getById(hash))) {
+        if ((node = contentNode.one('#' + hash))) {
             win.scroll(0, node.getY());
         }
     }
 };
 
-pjax.initRoot = function () {
-    var terminators = /^(?:classes|files|modules)$/,
-        parts       = pjax._getPathRoot().split('/'),
-        root        = [],
-        i, len, part;
-
-    for (i = 0, len = parts.length; i < len; i += 1) {
-        part = parts[i];
-
-        if (part.match(terminators)) {
-            // Makes sure the path will end with a "/".
-            root.push('');
-            break;
-        }
-
-        root.push(part);
-    }
-
-    pjax.set('root', root.join('/'));
-};
-
-pjax.updateTabState = function (src) {
+controller.updateTabState = function (src) {
     var hash = win.location.hash.substring(1),
         defaultTab, node, tab, tabPanel;
-
-    function scrollToNode() {
-        if (node.hasClass('protected')) {
-            Y.one('#api-show-protected').set('checked', true);
-            pjax.updateVisibility();
-        }
-
-        if (node.hasClass('private')) {
-            Y.one('#api-show-private').set('checked', true);
-            pjax.updateVisibility();
-        }
-
-        setTimeout(function () {
-            // For some reason, unless we re-get the node instance here,
-            // getY() always returns 0.
-            var node = Y.one('#classdocs').getById(hash);
-            win.scrollTo(0, node.getY() - 70);
-        }, 1);
-    }
 
     if (!classTabView) {
         return;
@@ -218,20 +235,20 @@ pjax.updateTabState = function (src) {
         defaultTab = 'index';
     } else {
         if (localStorage) {
-            defaultTab = localStorage.getItem('tab_' + pjax.getPath()) ||
+            defaultTab = localStorage.getItem('tab_' + controller.getPath()) ||
                 'index';
         } else {
             defaultTab = 'index';
         }
     }
 
-    if (hash && (node = Y.one('#classdocs').getById(hash))) {
+    if (hash && (node = Y.one('#classdocs #' + hash))) {
         if ((tabPanel = node.ancestor('.api-class-tabpanel', true))) {
             if ((tab = Y.one('#classdocs .api-class-tab.' + tabPanel.get('id')))) {
                 if (classTabView.get('rendered')) {
                     Y.Widget.getByNode(tab).set('selected', 1);
                 } else {
-                    tab.addClass('tab-selected');
+                    tab.addClass('yui3-tab-selected');
                 }
             }
         }
@@ -247,92 +264,84 @@ pjax.updateTabState = function (src) {
     } else {
         tab = Y.one('#classdocs .api-class-tab.' + defaultTab);
 
-        // When the `defaultTab` node isn't found, `localStorage` is stale.
-        if (!tab && defaultTab !== 'index') {
-            tab = Y.one('#classdocs .api-class-tab.index');
-        }
-
         if (classTabView.get('rendered')) {
             Y.Widget.getByNode(tab).set('selected', 1);
         } else {
-            tab.addClass('tab-selected');
+            tab.addClass('yui3-tab-selected')
         }
     }
+
+    function scrollToNode() {
+        if (node.hasClass('protected')) {
+            Y.one('#api-show-protected').set('checked', true);
+            controller.updateVisibility();
+        }
+
+        if (node.hasClass('private')) {
+            Y.one('#api-show-private').set('checked', true);
+            controller.updateVisibility();
+        }
+
+        setTimeout(function () {
+            // For some reason, unless we re-get the node instance here,
+            // getY() always returns 0.
+            var node = Y.one('#classdocs #' + hash);
+            win.scrollTo(0, node.getY() - 70);
+        }, 1);
+    }
 };
 
-pjax.updateVisibility = function () {
-    var container = pjax.get('container');
-
-    container.toggleClass('hide-inherited',
+controller.updateVisibility = function () {
+    contentNode.toggleClass('hide-inherited',
             !Y.one('#api-show-inherited').get('checked'));
 
-    container.toggleClass('show-deprecated',
-            Y.one('#api-show-deprecated').get('checked'));
-
-    container.toggleClass('show-protected',
+    contentNode.toggleClass('show-protected',
             Y.one('#api-show-protected').get('checked'));
 
-    container.toggleClass('show-private',
+    contentNode.toggleClass('show-private',
             Y.one('#api-show-private').get('checked'));
 
-    pjax.checkVisibility();
-};
-
-// -- Route Handlers -----------------------------------------------------------
-
-pjax.handleClasses = function (req, res, next) {
-    var status = res.ioResponse.status;
-
-    // Handles success and local filesystem XHRs.
-    if (!status || (status >= 200 && status < 300)) {
-        pjax.initClassTabView();
-    }
-
-    next();
-};
-
-pjax.handleFiles = function (req, res, next) {
-    var status = res.ioResponse.status;
-
-    // Handles success and local filesystem XHRs.
-    if (!status || (status >= 200 && status < 300)) {
-        pjax.initLineNumbers();
-    }
-
-    next();
+    controller.checkVisibility();
 };
 
 // -- Event Handlers -----------------------------------------------------------
+controller.onLinkClick = function (e) {
+    // Allow the native behavior on middle/right-click, or when Ctrl or Command
+    // are pressed.
+    if (e.button !== 1 || e.ctrlKey || e.metaKey) { return; }
 
-pjax.onNavigate = function (e) {
-    var hash         = e.hash,
-        originTarget = e.originEvent && e.originEvent.target,
-        tab;
+    // Opera currently has bugs when using both HTML5 history and hashchange
+    // events. It gets the legacy fallback behavior until we can properly debug
+    // it.
+    if (Y.UA.opera) { return; }
 
-    if (hash) {
-        tab = originTarget && originTarget.ancestor('.nav-tabs', true);
+    var path       = controller.removeRoot(e.currentTarget.get('href')),
+        pathNoHash = path.replace(/#.*$/, '');
 
-        if (hash === win.location.hash) {
-            pjax.updateTabState('hashchange');
-        } else if (!tab) {
-            win.location.hash = hash;
-        }
-
-        e.preventDefault();
+    if (pathNoHash === controller.getPath()) {
+        // Nothing to do.
         return;
     }
 
-    // Only scroll to the top of the page when the URL doesn't have a hash.
-    this.set('scrollToTop', !e.url.match(/#.+$/));
+    if (controller.hasRoute(pathNoHash)) {
+        e.preventDefault();
 
-    docsMainNode.addClass('loading');
+        controller.save(path);
+
+        // Scroll to the top of the page. The timeout ensures that the scroll
+        // happens after navigation begins, so that the current scroll position
+        // will be restored if the user clicks the back button.
+        setTimeout(function () {
+            Y.config.win.scroll(0, 0);
+        }, 1);
+    }
 };
 
-pjax.onOptionClick = function () {
-    pjax.updateVisibility();
+controller.onOptionClick = function (e) {
+    controller.updateVisibility();
 };
 
-pjax.onTabSelectionChange = function (e) {
+controller.onTabSelectionChange = function (e) {
     var tab   = e.newVal,
         tabId = tab.get('contentBox').getAttribute('href').substring(1);
 
@@ -343,28 +352,30 @@ pjax.onTabSelectionChange = function (e) {
     // be selected if the user navigates away and then returns using the back
     // or forward buttons.
     if (e.prevVal && localStorage) {
-        localStorage.setItem('tab_' + pjax.getPath(), tabId);
+        localStorage.setItem('tab_' + controller.getPath(), tabId);
     }
 
-    pjax.checkVisibility(tab);
+    controller.checkVisibility(tab);
 };
 
 // -- Init ---------------------------------------------------------------------
+controller.upgrade();
 
-pjax.on('navigate', pjax.onNavigate);
+controller.initClassTabView();
+controller.initLineNumbers();
+controller.updateVisibility();
 
-pjax.initRoot();
-pjax.upgrade();
-pjax.initClassTabView();
-pjax.initLineNumbers();
-pjax.updateVisibility();
+Y.one('#api-options').delegate('click', controller.onOptionClick, 'input');
 
-Y.APIList.rootPath = pjax.get('root');
+// Only intercept link clicks in HTML5 browsers. Supporting both in-page hash
+// navigation and hash-based routing would just be too much of a pain, so legacy
+// browsers will have to endure full page refreshes.
+if (controller.html5) {
+    Y.one('#bd').delegate('click', controller.onLinkClick, 'a');
+}
 
-Y.one('#api-options').delegate('click', pjax.onOptionClick, 'input');
-
-Y.on('hashchange', function () {
-    pjax.updateTabState('hashchange');
-}, win);
+Y.on('hashchange', function (e) {
+    controller.updateTabState('hashchange');
+}, Y.config.win);
 
 });
