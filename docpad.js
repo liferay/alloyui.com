@@ -126,7 +126,7 @@ module.exports = {
    */
 
   collections: {
-    // Get all tutorials sorted by alphabetical order
+    // Get all tutorials sorted by type & alphabetical order
     tutorials: function() {
       return this.getCollection("documents").findAllLive({
         url: {
@@ -134,12 +134,14 @@ module.exports = {
         }
       }, [
         {
+          type: 1,
+          order: 1,
           title: 1
         }
       ]);
     },
 
-    // Get all examples sorted by alphabetical order
+    // Get all examples sorted by category & alphabetical order
     examples: function() {
       return this.getCollection("documents").findAllLive({
         url: {
