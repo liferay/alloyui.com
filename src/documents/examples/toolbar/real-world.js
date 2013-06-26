@@ -7,10 +7,10 @@ YUI().use(
         children: [
           [
             {
-              icon: 'aui-icon-camera'
+              icon: 'icon-camera'
             },
             {
-              icon: 'aui-icon-print'
+              icon: 'icon-print'
             }
           ],
           [
@@ -28,28 +28,28 @@ YUI().use(
           [
             'checkbox',
             {
-              icon: 'aui-icon-bold'
+              icon: 'icon-bold'
             },
             {
-              icon: 'aui-icon-italic'
+              icon: 'icon-italic'
             },
             {
-              icon: 'aui-icon-font'
+              icon: 'icon-font'
             }
           ],
           [
             'radio',
             {
-              icon: 'aui-icon-align-left'
+              icon: 'icon-align-left'
             },
             {
-              icon: 'aui-icon-align-center'
+              icon: 'icon-align-center'
             },
             {
-              icon: 'aui-icon-align-right'
+              icon: 'icon-align-right'
             },
             {
-              icon: 'aui-icon-align-justify'
+              icon: 'icon-align-justify'
             }
           ]
         ]

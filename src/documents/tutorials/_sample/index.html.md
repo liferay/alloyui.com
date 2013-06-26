@@ -5,6 +5,7 @@ title: Sample
 tags: 'sample'
 category: Sample
 description: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur dignissimos!
+api: http://alloyui.com/api/
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
