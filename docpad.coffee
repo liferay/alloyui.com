@@ -30,7 +30,7 @@ module.exports =
             url: 'http://alloyui.com'
 
             # Github branch
-            githubUrl: 'https://github.com/liferay/alloy-ui/'
+            githubUrl: 'https://github.com/liferay/alloy-ui/tree/1.5.x'
 
             # Basic info
             title: 'AlloyUI'
