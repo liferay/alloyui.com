@@ -13,7 +13,7 @@ module.exports = {
 
     alloy: {
       // AlloyUI version
-      version: '1.5.1',
+      version: '1.0.3',
 
       // CDN domain
       cdnDomain: 'http://cdn.alloyui.com'
@@ -25,14 +25,14 @@ module.exports = {
 
     site: {
       // Website version
-      version: '1.5.x',
+      version: '1.0.x',
       isLastVersion: false,
 
       // Production URL
       url: 'http://alloyui.com',
 
       // Github branch
-      githubUrl: 'https://github.com/liferay/alloy-ui/tree/1.5.x',
+      githubUrl: 'https://github.com/liferay/alloy-ui/tree/1.0.x',
 
       // Basic info
       title: 'AlloyUI',
