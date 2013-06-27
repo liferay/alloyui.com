@@ -1,0 +1,809 @@
+<!doctype html>
+<html>
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+
+  <title>Image Cropper - Image Cropper | AlloyUI</title>
+
+  <meta charset="utf-8">
+  <meta name="author" content="Eduardo Lundgren, Nate Cavanaugh">
+  <meta name="description" content="Provides a draggable/resizable cropper widget to crop image sizes.">
+
+  <!-- Facebook Tags -->
+  <meta property="fb:app_id" content="176947299114210">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="AlloyUI">
+  <meta property="og:image" content="http://alloyui.com/website/img/facebook-share.jpg">
+  <meta property="og:title" content="Image Cropper - Image Cropper | AlloyUI">
+  <meta property="og:description" content="Provides a draggable/resizable cropper widget to crop image sizes.">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="http://alloyui.com/website/img/favicon.ico">
+
+  <!-- CSS: AlloyUI -->
+  <link href="http://cdn.alloyui.com/1.5.1/aui-skin-classic/css/aui-skin-classic-all-min.css" rel="stylesheet">
+
+  <!-- CSS: Bootstrap -->
+  <link href="http://alloyui.com/website/css/bootstrap.css" rel="stylesheet">
+
+  <!-- CSS: My own -->
+  <link href="http://alloyui.com/website/css/main.css" rel="stylesheet">
+
+  <!-- Fonts -->
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,700" rel="stylesheet">
+
+  <!-- JS -->
+  <script src="http://cdn.alloyui.com/1.5.1/aui/aui-min.js"></script>
+  <script>
+  AUI().applyConfig({
+    filter: 'min',
+    comboBase: 'http://cdn.alloyui.com/combo/combo.php?',
+    combine: true,
+    root: '../1.5.1/'
+  });
+  </script>
+
+</head>
+<body>
+
+  <div id="wrap">
+
+    <a class="github-ribbon" href="https://github.com/liferay/alloy-ui/tree/1.5.x">
+      <img src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
+    </a>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="http://alloyui.com">
+            <img src="http://alloyui.com/website/img/logo.png" alt="AlloyUI Logo" width="149" height="34">
+          </a>
+          <a href="#" id="version">
+            v1.5.x
+            <span class="caret"></span>
+          </a>
+          <ul id="version-dropdown" class="dropdown-menu">
+            <li><a href="/">v2.0.x</a></li>
+          </ul>
+          <div class="pull-right">
+            <ul class="nav">
+              <li><a href="http://alloyui.com/examples/">Examples</a></li>
+              <li><a href="http://alloyui.com/tutorials/">Tutorials</a></li>
+              <li><a href="http://alloyui.com/api/">API Docs</a></li>
+              <li><a href="http://alloyui.com/rosetta-stone/">Rosetta Stone</a></li>
+              <li><a href="http://alloyui.com/contributing/">Contributing</a></li>
+              <li><a href="http://alloyui.com/about/">About</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="content">
+      <div class="banner page-banner">
+  <div class="container">
+    <div class="presentation">
+      <h2>Tutorials</h2>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="span3 bs-docs-sidebar">
+
+    <p class="related">List of components</p>
+    <ul class="nav nav-list bs-docs-sidenav affix-top">
+      
+        
+          
+            <li><a href="http://alloyui.com/tutorials/ace-editor" class="iframe-link"><i class="icon-chevron-right"></i> Ace Editor</a></li>
+          
+        
+      
+        
+          
+            <li><a href="http://alloyui.com/tutorials/audio" class="iframe-link"><i class="icon-chevron-right"></i> Audio</a></li>
+          
+        
+      
+        
+          
+            <li><a href="http://alloyui.com/tutorials/autocomplete" class="iframe-link"><i class="icon-chevron-right"></i> AutoComplete</a></li>
+          
+        
+      
+        
+          
+            <li><a href="http://alloyui.com/tutorials/button-item" class="iframe-link"><i class="icon-chevron-right"></i> Button Item</a></li>
+          
+        
+      
+        
+          
+            <li><a href="http://alloyui.com/tutorials/carousel" class="iframe-link"><i class="icon-chevron-right"></i> Carousel</a></li>
+          
+        
+      
+        
+          
+            <li><a href="http://alloyui.com/tutorials/char-counter" class="iframe-link"><i class="icon-chevron-right"></i> Char Counter</a></li>
+          
+        
+      
+        
+          
+            <li><a href="http://alloyui.com/tutorials/datatable" class="iframe-link"><i class="icon-chevron-right"></i> Data Table</a></li>
+          
+        
+      
+        
+          
+            <li><a href="http://alloyui.com/tutorials/datepicker" class="iframe-link"><i class="icon-chevron-right"></i> DatePicker</a></li>
+          
+        
+      
+        
+          
+            <li><a href="http://alloyui.com/tutorials/diagram-builder" class="iframe-link"><i class="icon-chevron-right"></i> Diagram Builder</a></li>
+          
+        
+      
+        
+          
+            <li><a href="http://alloyui.com/tutorials/dialog" class="iframe-link"><i class="icon-chevron-right"></i> Dialog</a></li>
+          
+        
+      
+        
+          
+            <li><a href="http://alloyui.com/tutorials/form-builder" class="iframe-link"><i class="icon-chevron-right"></i> Form Builder</a></li>
+          
+        
+      
+        
+          
+            <li><a href="http://alloyui.com/tutorials/form-validator" class="iframe-link"><i class="icon-chevron-right"></i> Form Validator</a></li>
+          
+        
+      
+        
+          
+            <li><a href="http://alloyui.com/tutorials/io" class="iframe-link"><i class="icon-chevron-right"></i> I/O</a></li>
+          
+        
+      
+        
+          
+            <li class="active"><a href="http://alloyui.com/tutorials/image-cropper" class="iframe-link"><i class="icon-chevron-right"></i> Image Cropper</a></li>
+            
+        
+      
+        
+          
+            <li><a href="http://alloyui.com/tutorials/image-viewer" class="iframe-link"><i class="icon-chevron-right"></i> Image Viewer</a></li>
+          
+        
+      
+        
+          
+            <li><a href="http://alloyui.com/tutorials/nested-list" class="iframe-link"><i class="icon-chevron-right"></i> Nested List</a></li>
+          
+        
+      
+        
+          
+            <li><a href="http://alloyui.com/tutorials/node" class="iframe-link"><i class="icon-chevron-right"></i> Node</a></li>
+          
+        
+      
+        
+          
+            <li><a href="http://alloyui.com/tutorials/paginator" class="iframe-link"><i class="icon-chevron-right"></i> Paginator</a></li>
+          
+        
+      
+        
+          
+            <li><a href="http://alloyui.com/tutorials/portal-layout" class="iframe-link"><i class="icon-chevron-right"></i> Portal Layout</a></li>
+          
+        
+      
+        
+          
+            <li><a href="http://alloyui.com/tutorials/progress-bar" class="iframe-link"><i class="icon-chevron-right"></i> Progress Bar</a></li>
+          
+        
+      
+        
+          
+            <li><a href="http://alloyui.com/tutorials/property-list" class="iframe-link"><i class="icon-chevron-right"></i> Property List</a></li>
+          
+        
+      
+        
+          
+            <li><a href="http://alloyui.com/tutorials/rating" class="iframe-link"><i class="icon-chevron-right"></i> Rating</a></li>
+          
+        
+      
+        
+          
+            <li><a href="http://alloyui.com/tutorials/scheduler" class="iframe-link"><i class="icon-chevron-right"></i> Scheduler</a></li>
+          
+        
+      
+        
+          
+            <li><a href="http://alloyui.com/tutorials/textboxlist" class="iframe-link"><i class="icon-chevron-right"></i> Textbox List</a></li>
+          
+        
+      
+        
+          
+            <li><a href="http://alloyui.com/tutorials/toggler" class="iframe-link"><i class="icon-chevron-right"></i> Toggler</a></li>
+          
+        
+      
+        
+          
+            <li><a href="http://alloyui.com/tutorials/tooltip" class="iframe-link"><i class="icon-chevron-right"></i> Tooltip</a></li>
+          
+        
+      
+        
+          
+            <li><a href="http://alloyui.com/tutorials/tree" class="iframe-link"><i class="icon-chevron-right"></i> Tree View</a></li>
+          
+        
+      
+        
+      
+        
+          
+            <li><a href="http://alloyui.com/tutorials/video" class="iframe-link"><i class="icon-chevron-right"></i> Video</a></li>
+          
+        
+      
+        
+          
+            <li><a href="http://alloyui.com/tutorials/viewport" class="iframe-link"><i class="icon-chevron-right"></i> Viewport</a></li>
+          
+        
+      
+    </ul>
+
+  </div>
+
+  <div class="span9">
+
+    <h1>Image Cropper</h1>
+
+    <ul class="nav nav-tabs">
+      <li class="active">
+        <a href="#">Introduction</a>
+      </li>
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <li><a href="http://alloyui.com/examples/image-cropper">Basic Example</a></li>
+        
+      
+        
+          <li><a href="http://alloyui.com/examples/image-cropper/real-world">Real World Example</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </ul>
+
+    
+      <p>Provides a draggable/resizable cropper widget to crop image sizes.</p>
+      <hr>
+    
+
+    <h4>Getting Started</h4>
+<p>First load the seed file if you haven&#39;t yet.</p>
+<pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"http://cdn.alloyui.com/1.5.1/aui/aui-min.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></pre>
+<p>Then initialize AlloyUI and load the Image Cropper module.</p>
+<pre class="highlighted"><code class="javascript">AUI().use(
+  <span class="string">'aui-image-cropper'</span>,
+  <span class="keyword">function</span>(A) {
+    <span class="comment">// code goes here</span>
+  }
+);</code></pre>
+<hr>
+<h4>Using Image Cropper</h4>
+<p>Create an HTML element with the desired crop image nested inside:</p>
+<pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"myImageCropper"</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">img</span> <span class="attribute">id</span>=<span class="value">"myImage"</span> <span class="attribute">src</span>=<span class="value">"http://alloyui.com/image-cropper/img/crop-image.jpg"</span> /&gt;</span>
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre>
+<p>Now create a new instance of Image Cropper component by setting <code>srcNode</code> to our image element. Finally, let&#39;s render it!</p>
+<pre class="highlighted"><code class="javascript">AUI().use(
+  <span class="string">'aui-image-cropper'</span>,
+  <span class="keyword">function</span>(A) {
+    <span class="keyword">new</span> A.ImageCropper(
+      {
+        srcNode: <span class="string">"#myImage"</span>
+      }
+    ).render();
+  }
+);</code></pre>
+<hr>
+<h4>Configuring Image Cropper</h4>
+<p>There are some other optional parameters that you can pass to your Image Cropper instance.</p>
+<p>For example, you can turn of Cropper resizing by setting <code>resizable</code> to <code>false</code>.  Also, you can prevent Image Cropper from moving by setting <code>movable</code> to <code>false</code>.  And if you need to maintain a constant aspect ratio for Image Cropper, set <code>preserveRatio</code> to <code>true</code>.</p>
+<pre class="highlighted"><code class="javascript">AUI().use(
+  <span class="string">'aui-image-cropper'</span>,
+  <span class="keyword">function</span>(A) {
+    <span class="keyword">new</span> A.ImageCropper(
+      {
+        movable: <span class="literal">false</span>,
+        preserveRatio: <span class="literal">true</span>,
+        resizable: <span class="literal">false</span>,
+        srcNode: <span class="string">'#myImage'</span>
+      }
+    ).render();
+  }
+);</code></pre>
+<p>Setting <code>cropWidth</code> and <code>cropHeight</code> to integers will set the pixel width and height for the Image Cropper.  Likewise, passing integers to <code>minWidth</code> and <code>minHeight</code> will set the minimum pixel width and height for the Image Cropper.</p>
+<pre class="highlighted"><code class="javascript">AUI().use(
+  <span class="string">'aui-image-cropper'</span>,
+  <span class="keyword">function</span>(A) {
+    <span class="keyword">new</span> A.ImageCropper(
+      {
+        cropHeight: <span class="number">100</span>,
+        cropWidth: <span class="number">100</span>,
+        minHeight: <span class="number">50</span>,
+        minWidth: <span class="number">50</span>,
+        srcNode: <span class="string">'#myImage'</span>
+      }
+    ).render();
+  }
+);</code></pre>
+<p>Image Cropper&#39;s <code>region</code> property returns you the current crop region.  To see crop region values update while you adjust Image Cropper, create an HTML element where you can store your region values, for example <code>#myCropSize</code>.  Now bind the event handler <code>after</code> to <code>imageCropper</code> to execute on the <code>crop</code> event.  The event handler will set the the HTML of <code>#myCropSize</code> with the updated crop region&#39;s width and height.</p>
+<pre class="highlighted"><code class="javascript">AUI().use(
+  <span class="string">'aui-image-cropper'</span>,
+  <span class="keyword">function</span>(A) {
+    <span class="keyword">var</span> imageCropper = <span class="keyword">new</span> A.ImageCropper(
+      {
+        srcNode: <span class="string">'#myImage'</span>
+      }
+    ).render();
+
+    <span class="keyword">var</span> cropSize = A.one(<span class="string">'#myCropSize'</span>);
+
+    imageCropper.after(
+      <span class="string">'crop'</span>,
+      <span class="keyword">function</span>(event) {
+        <span class="keyword">var</span> cropRegion = imageCropper.get(<span class="string">'region'</span>);
+        cropSize.html(<span class="string">'Width: '</span> + cropRegion.width + <span class="string">' Height: '</span> + cropRegion.height);
+      }
+    );
+  }
+);</code></pre>
+<p>If you want to output your cropped image to another node, you can also use Image Cropper <code>region</code> to restyle the cropped image.  Using an event handler that is triggered by the <code>click</code> event and bound to the <code>cropImgButton</code> button, we can use the <code>setStyles</code> method to apply the crop region values.  This will update our <code>croppedImage</code> node to the current Image Cropper region each time we click <code>cropImgButton</code>.  Finally, let&#39;s show the cropped image with the <code>show</code> method.</p>
+<div class="alert alert-info">
+  <strong>Note:</strong> be sure to add the classes <code>cropped-image</code> and <code>aui-helper-hidden</code> to your <code>#myCroppedImage</code> element so that Image Cropper handles the image crop properly.
+</div>
+
+<pre class="highlighted"><code class="javascript">AUI().use(
+  <span class="string">'aui-image-cropper'</span>,
+  <span class="keyword">function</span>(A) {
+    <span class="keyword">var</span> imageCropper = <span class="keyword">new</span> A.ImageCropper(
+      {
+        srcNode: <span class="string">"#myImage"</span>
+      }
+    ).render();
+
+    <span class="keyword">var</span> image = A.one(<span class="string">'#myImage'</span>);
+    <span class="keyword">var</span> cropImgButton = A.one(<span class="string">'#myCropButton'</span>);
+    <span class="keyword">var</span> croppedImage = A.one(<span class="string">'#myCroppedImage'</span>);
+
+    cropImgButton.on(
+      <span class="string">'click'</span>,
+      <span class="keyword">function</span>(event) {
+        <span class="keyword">var</span> cropRegion = imageCropper.get(<span class="string">'region'</span>);
+        croppedImage.setStyles(
+          {
+            <span class="string">'backgroundPosition'</span>: (-cropRegion.x) + <span class="string">'px '</span> + (-cropRegion.y) + <span class="string">'px'</span>,
+            height: cropRegion.height,
+            width: cropRegion.width
+          }
+        );
+      }
+    );
+
+    croppedImage.show();
+  }
+);</code></pre>
+<div class="alert alert-success">
+  For more information about configuration, check out our <a href="http://alloyui.com/api/">API Docs</a>.
+</div>
+
+  </div>
+
+</div>
+    </div>
+
+    <div id="push"></div>
+
+  </div>
+
+  <div class="footer navbar">
+    <div class="container">
+      <p class="pull-left">
+        <a href="http://liferay.com/">
+          <img src="http://alloyui.com/website/img/liferay-logo.png" alt="Liferay Logo" id="liferay-logo">
+        </a>
+      </p>
+      <p class="copyright pull-right"><a href="https://github.com/liferay/alloy-ui/blob/master/LICENSE.txt">BSD</a> License.</p>
+    </div>
+  </div>
+
+  <script src="http://alloyui.com/website/js/version-dropdown.js"></script>
+
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-37033501-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+  </script>
+
+</body>
+</html>
