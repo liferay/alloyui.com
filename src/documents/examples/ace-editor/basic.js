@@ -1,4 +1,4 @@
-AUI().ready(
+AUI().use(
   'aui-ace-editor',
   function(A) {
     new A.AceEditor(

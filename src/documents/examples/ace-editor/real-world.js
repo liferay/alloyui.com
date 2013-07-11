@@ -1,4 +1,4 @@
-AUI().ready(
+AUI().use(
   'aui-ace-editor',
   function(A) {
     var editor = new A.AceEditor(
@@ -27,17 +27,11 @@ AUI().ready(
 
       var updateValue = function() {
         if (updateEditor.attr('checked')) {
-          editor.set(
-            'value',
-            contents[currentMode]
-          );
+          editor.set('value', contents[currentMode]);
         }
       };
 
-      updateEditor.on(
-        'change',
-        updateValue
-      );
+      updateEditor.on('change', updateValue);
 
       mode.on(
         'change',
