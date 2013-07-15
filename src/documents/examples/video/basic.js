@@ -4,15 +4,8 @@ AUI().use(
     new A.Video(
       {
         boundingBox: '#myVideo',
-        fixedAttributes: {
-          allowfullscreen: 'true'
-        },
-        height: 368,
-        ogvUrl: 'http://videos.liferay.com/lifecasts/portal/6.0/106.ogv',
-        poster: 'http://alloyui.com/video/poster.png',
-        swfUrl: 'http://videos.liferay.com/common/player.swf',
-        url: 'http://videos.liferay.com/webinars/2010-08-11.mp4',
-        width: 640
+        ogvUrl: 'http://alloyui.com/video/movie.ogg',
+        url: 'http://alloyui.com/video/movie.mp4'
       }
     ).render();
   }
