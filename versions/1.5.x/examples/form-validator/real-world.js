@@ -1,4 +1,4 @@
-AUI().ready(
+AUI().use(
   'aui-form-validator',
   function(A) {
     var rules = {

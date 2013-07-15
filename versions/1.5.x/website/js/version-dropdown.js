@@ -1,8 +1,8 @@
-YUI().use('node', 'node-focusmanager', function (Y) {
+AUI().use('node', 'node-focusmanager', function (A) {
 
-  var doc = Y.one(document),
-      version = Y.one('#version'),
-      versionDropdown = Y.one('#version-dropdown');
+  var doc = A.one(document),
+      version = A.one('#version'),
+      versionDropdown = A.one('#version-dropdown');
 
   version.on('click', function(e) {
     versionDropdown.toggleClass('show');

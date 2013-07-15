@@ -10,9 +10,11 @@ AUI().use(
 
     var data = [
       {
-        editor: new A.CheckboxCellEditor({
-          options: ['Boolean value']
-        }),
+        editor: new A.CheckboxCellEditor(
+          {
+            options: ['Boolean value']
+          }
+        ),
         name: 'Boolean',
         value: 'Boolean value'
       },
@@ -37,34 +39,40 @@ AUI().use(
         value: '123'
       },
       {
-        editor: new A.RadioCellEditor({
-          options: ['Yes', 'No']
-        }),
+        editor: new A.RadioCellEditor(
+          {
+            options: ['Yes', 'No']
+          }
+        ),
         name: 'Radio',
         value: 'Yes'
       },
       {
-        editor: new A.DropDownCellEditor({
-          options: {
-            apple: 'Apple',
-            banana: 'Banana',
-            cherry: 'Cherry',
-            kiwi: 'Kiwi'
+        editor: new A.DropDownCellEditor(
+          {
+            options: {
+              apple: 'Apple',
+              banana: 'Banana',
+              cherry: 'Cherry',
+              kiwi: 'Kiwi'
+            }
           }
-        }),
+        ),
         name: 'Select',
         value: 'Apple'
       },
       {
-        editor: new A.DropDownCellEditor({
-          multiple: true,
-          options: {
-            apple: 'Apple',
-            banana: 'Banana',
-            cherry: 'Cherry',
-            kiwi: 'Kiwi'
+        editor: new A.DropDownCellEditor(
+          {
+            multiple: true,
+            options: {
+              apple: 'Apple',
+              banana: 'Banana',
+              cherry: 'Cherry',
+              kiwi: 'Kiwi'
+            }
           }
-        }),
+        ),
         name: 'Select multiple',
         value: 'apple'
       },
@@ -89,7 +97,7 @@ AUI().use(
     ).plug(
       A.Plugin.DataTableSelection,
       {
-        selectRow: true,
+        selectRow: true
       }
     ).plug(A.Plugin.DataTableSort).render('#myDataTable');
 
