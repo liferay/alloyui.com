@@ -1,4 +1,4 @@
-AUI().use('jsonp', 'node',function (A) {
+AUI().use('jsonp', 'aui-node', function (A) {
 
   var githubAPI = 'https://api.github.com/repos/liferay/alloy-ui/contributors?callback={callback}',
       template  = '<a href="http://github.com/{login}" title="@{login}">' +
@@ -13,7 +13,7 @@ AUI().use('jsonp', 'node',function (A) {
       contributorsHTML += A.Lang.sub(template, response.data[i]);
     }
 
-    A.one("#contributors").setHTML(contributorsHTML);
+    A.one("#contributors").html(contributorsHTML);
 
   }
 
