@@ -1,4 +1,4 @@
-AUI().ready(
+AUI().use(
   'aui-progressbar',
   function(A) {
     var progressBar = new A.ProgressBar(

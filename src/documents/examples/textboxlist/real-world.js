@@ -1,4 +1,4 @@
-AUI().ready(
+AUI().use(
   'aui-textboxlist',
   function(A) {
     var states = [

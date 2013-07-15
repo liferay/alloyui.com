@@ -1,4 +1,4 @@
-AUI().ready(
+AUI().use(
   'node',
   'aui-progressbar',
   'async-queue',

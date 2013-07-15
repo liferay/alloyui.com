@@ -1,4 +1,4 @@
-AUI().ready(
+AUI().use(
   'aui-paginator',
   function(A) {
     var items = A.all('.item');

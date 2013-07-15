@@ -1,4 +1,4 @@
-AUI().ready(
+AUI().use(
   'aui-image-cropper',
   function(A) {
     new A.ImageCropper(

@@ -1,4 +1,4 @@
-AUI().ready(
+AUI().use(
   'aui-char-counter',
   function(A) {
     new A.CharCounter(

@@ -1,4 +1,4 @@
-AUI().ready(
+AUI().use(
   'aui-paginator',
   'aui-io-request',
   function(A) {
