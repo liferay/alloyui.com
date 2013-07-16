@@ -4,37 +4,37 @@ YUI().use(
 
     var availableFields = [
       {
-        iconClass: 'aui-diagram-node-start-icon',
+        iconClass: 'diagram-node-start-icon',
         label: 'Start',
         type: 'start'
       },
       {
-        iconClass: 'aui-diagram-node-task-icon',
+        iconClass: 'diagram-node-task-icon',
         label: 'Task',
         type: 'task'
       },
       {
-        iconClass: 'aui-diagram-node-state-icon',
+        iconClass: 'diagram-node-state-icon',
         label: 'State',
         type: 'state'
       },
       {
-        iconClass: 'aui-diagram-node-join-icon',
+        iconClass: 'diagram-node-join-icon',
         label: 'Join',
         type: 'join'
       },
       {
-        iconClass: 'aui-diagram-node-fork-icon',
+        iconClass: 'diagram-node-fork-icon',
         label: 'Fork',
         type: 'fork'
       },
       {
-        iconClass: 'aui-diagram-node-condition-icon',
+        iconClass: 'diagram-node-condition-icon',
         label: 'Condition',
         type: 'condition'
       },
       {
-        iconClass: 'aui-diagram-node-end-icon',
+        iconClass: 'diagram-node-end-icon',
         label: 'End',
         type: 'end'
       }

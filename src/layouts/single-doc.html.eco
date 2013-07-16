@@ -2,39 +2,39 @@
 layout: default
 ---
 
-<div class="aui-banner aui-page-banner">
-  <div class="aui-container">
-    <div class="aui-presentation">
+<div class="banner page-banner">
+  <div class="container">
+    <div class="presentation">
       <h2>Tutorials</h2>
     </div>
   </div>
 </div>
 
-<div class="aui-container">
+<div class="container">
 
-  <div class="aui-span3 aui-bs-docs-sidebar">
+  <div class="span3 bs-docs-sidebar">
 
-    <p class="aui-related">General</p>
-    <ul class="aui-nav aui-nav-list aui-bs-docs-sidenav aui-affix-top">
+    <p class="related">General</p>
+    <ul class="nav nav-list bs-docs-sidenav affix-top">
       <% for tutorial in @getCollection("tutorials").toJSON(): %>
         <% if tutorial.type == "general": %>
           <% if tutorial.title == @document.title: %>
-            <li class="aui-active"><a href="<%= @getSiteUrl() %><%= tutorial.url %>"><i class="aui-icon-chevron-right"></i> <%= tutorial.title %></a></li>
+            <li class="active"><a href="<%= @getSiteUrl() %><%= tutorial.url %>"><i class="icon-chevron-right"></i> <%= tutorial.title %></a></li>
             <% else: %>
-            <li><a href="<%= @getSiteUrl() %><%= tutorial.url %>"><i class="aui-icon-chevron-right"></i> <%= tutorial.title %></a></li>
+            <li><a href="<%= @getSiteUrl() %><%= tutorial.url %>"><i class="icon-chevron-right"></i> <%= tutorial.title %></a></li>
           <% end %>
         <% end %>
       <% end %>
     </ul>
 
-    <p class="aui-related">List of modules</p>
-    <ul class="aui-nav aui-nav-list aui-bs-docs-sidenav aui-affix-top">
+    <p class="related">List of modules</p>
+    <ul class="nav nav-list bs-docs-sidenav affix-top">
       <% for tutorial in @getCollection("tutorials").toJSON(): %>
         <% if tutorial.type == "module": %>
           <% if tutorial.title == @document.title: %>
-            <li class="aui-active"><a href="<%= @getSiteUrl() %><%= tutorial.url %>"><i class="aui-icon-chevron-right"></i> <%= tutorial.title %></a></li>
+            <li class="active"><a href="<%= @getSiteUrl() %><%= tutorial.url %>"><i class="icon-chevron-right"></i> <%= tutorial.title %></a></li>
             <% else: %>
-            <li><a href="<%= @getSiteUrl() %><%= tutorial.url %>"><i class="aui-icon-chevron-right"></i> <%= tutorial.title %></a></li>
+            <li><a href="<%= @getSiteUrl() %><%= tutorial.url %>"><i class="icon-chevron-right"></i> <%= tutorial.title %></a></li>
           <% end %>
         <% end %>
       <% end %>
@@ -42,13 +42,13 @@ layout: default
 
   </div>
 
-  <div class="aui-span9">
+  <div class="span9">
 
     <h1><%= @document.title %></h1>
 
     <% if @document.type == "module": %>
-      <ul class="aui-nav aui-nav-tabs">
-        <li class="aui-active">
+      <ul class="nav nav-tabs">
+        <li class="active">
           <a href="#">Introduction</a>
         </li>
         <% for example in @getCollection("examples").toJSON(): %>
@@ -65,6 +65,12 @@ layout: default
     <% end %>
 
     <%- @content %>
+
+    <% if @document.type == "module": %>
+    <div class="alert alert-success">
+        For more information about configuration, check out our <a href="<%= @document.api %>" target="_blank">API Docs</a>.
+    </div>
+    <% end %>
 
     <div id="disqus_thread"></div>
     <script type="text/javascript">

@@ -3,7 +3,7 @@ YUI().use(
   function(Y) {
     new Y.Button(
       {
-        icon: 'aui-icon-print',
+        icon: 'icon-print',
         iconAlign: 'left',
         label: 'Basic',
         srcNode: '#myButton'
