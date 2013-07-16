@@ -1,6 +1,6 @@
 YUI().use('node', 'transition', 'aui-carousel', function (Y) {
 
-  Y.one('.aui-btn').on('click', function() {
+  Y.one('.btn').on('click', function() {
     this.transition({ width: '400px' });
   });
 

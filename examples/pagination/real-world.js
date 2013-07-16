@@ -7,7 +7,7 @@ YUI().use(
       {
         boundingBox: '#pagination',
         circular: false,
-        contentBox: '#pagination .aui-pagination-content',
+        contentBox: '#pagination .pagination-content',
         on: {
           changeRequest: function(event) {
             var instance = this,
