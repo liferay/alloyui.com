@@ -2,7 +2,7 @@ YUI().use(
   'aui-popover',
   'widget-anim',
   function(A) {
-    var triggerAnim = A.one('#triggerAnim');
+    var triggerAnim = A.one('#myPopoverAnim');
 
     var popoverAnim = new A.Popover(
       {
@@ -21,28 +21,6 @@ YUI().use(
       'click',
       function() {
         popoverAnim.set('visible', !popoverAnim.get('visible'));
-      }
-    );
-
-    var triggerFoot = A.one('#triggerFoot');
-
-    var popoverFoot = new A.Popover(
-      {
-        align: {
-          node: triggerFoot,
-          points:[A.WidgetPositionAlign.LC, A.WidgetPositionAlign.RC]
-        },
-        bodyContent: 'Body Content',
-        footerContent: 'Footer content',
-        headerContent: 'Header content',
-        position: 'right'
-      }
-    ).render();
-
-    triggerFoot.on(
-      'click',
-      function() {
-        popoverFoot.set('visible', !popoverFoot.get('visible'));
       }
     );
   }
