@@ -1,13 +1,13 @@
 YUI().use(
   'aui-popover',
-  function(A) {
-    var trigger = A.one('#trigger');
+  function(Y) {
+    var trigger = Y.one('#myPopover');
 
-    var popover = new A.Popover(
+    var popover = new Y.Popover(
       {
         align: {
           node: trigger,
-          points:[A.WidgetPositionAlign.BC, A.WidgetPositionAlign.TC]
+          points:[Y.WidgetPositionAlign.BC, Y.WidgetPositionAlign.TC]
         },
         bodyContent: 'Body Content',
         headerContent: 'Header content',
