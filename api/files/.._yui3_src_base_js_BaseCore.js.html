@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>2.0.0pr5</b>
+                        API Docs for Version: <b>2.0.0pr6</b>
                     </p>
                 </li>
             </div>
@@ -2104,23 +2104,64 @@
      * configured through the static &lt;a href=&quot;#property_BaseCore.ATTRS&quot;&gt;ATTRS&lt;/a&gt;
      * property for each class in the hierarchy will be initialized by BaseCore.
      *
-     * &lt;p&gt;
-     * **NOTE:** Prior to version 3.11.0, ATTRS would get added a class at a time. That is,
-     * BaseCore would loop through each class in the hierarchy, and add the class&#x27; ATTRS, and
-     * then call it&#x27;s initializer, and move on to the subclass&#x27; ATTRS and initializer. As of
-     * 3.11.0, ATTRS from all classes in the hierarchy are added in one &#x60;addAttrs&#x60; call before
-     * any initializers are called. This fixes subtle edge-case issues with subclass ATTRS overriding
-     * superclass &#x60;setter&#x60;, &#x60;getter&#x60; or &#x60;valueFn&#x60; definitions and being unable to get/set attributes
-     * defined by the subclass. This order of operation change may impact &#x60;setter&#x60;, &#x60;getter&#x60; or &#x60;valueFn&#x60;
-     * code which expects a superclass&#x27; initializer to have run. This is expected to be rare, but to support
-     * it, Base supports a &#x60;_preAddAttrs()&#x60;, method hook (same signature as &#x60;addAttrs&#x60;). Components can
-     * implement this method on their prototype for edge cases which do require finer control over
-     * the order in which attributes are added (see widget-htmlparser).
-     * &lt;/p&gt;
-     *
      * Classes which require attribute support, but don&#x27;t intend to use/expose attribute
      * change events can extend BaseCore instead of Base for optimal kweight and
      * runtime performance.
+     *
+     * **3.11.0 BACK COMPAT NOTE FOR COMPONENT DEVELOPERS**
+     *
+     * Prior to version 3.11.0, ATTRS would get added a class at a time. That is:
+     *
+     * &lt;pre&gt;
+     *    for each (class in the hierarchy) {
+     *       Call the class Extension constructors.
+     *
+     *       Add the class ATTRS.
+     *
+     *       Call the class initializer
+     *       Call the class Extension initializers.
+     *    }
+     * &lt;/pre&gt;
+     *
+     * As of 3.11.0, ATTRS from all classes in the hierarchy are added in one &#x60;addAttrs&#x60; call
+     * before **any** initializers are called. That is, the flow becomes:
+     *
+     * &lt;pre&gt;
+     *    for each (class in the hierarchy) {
+     *       Call the class Extension constructors.
+     *    }
+     *
+     *    Add ATTRS for all classes
+     *
+     *    for each (class in the hierarchy) {
+     *       Call the class initializer.
+     *       Call the class Extension initializers.
+     *    }
+     * &lt;/pre&gt;
+     *
+     * Adding all ATTRS at once fixes subtle edge-case issues with subclass ATTRS overriding
+     * superclass &#x60;setter&#x60;, &#x60;getter&#x60; or &#x60;valueFn&#x60; definitions and being unable to get/set attributes
+     * defined by the subclass. It also leaves us with a cleaner order of operation flow moving
+     * forward.
+     *
+     * However, it may require component developers to upgrade their components, for the following
+     * scenarios:
+     *
+     * 1. It impacts components which may have &#x60;setter&#x60;, &#x60;getter&#x60; or &#x60;valueFn&#x60; code which
+     * expects a superclass&#x27; initializer to have run.
+     *
+     * This is expected to be rare, but to support it, Base now supports a &#x60;_preAddAttrs()&#x60;, method
+     * hook (same signature as &#x60;addAttrs&#x60;). Components can implement this method on their prototype
+     * for edge cases which do require finer control over the order in which attributes are added
+     * (see widget-htmlparser for example).
+     *
+     * 2. Extension developers may need to move code from Extension constructors to &#x60;initializer&#x60;s
+     *
+     * Older extensions, which were written before &#x60;initializer&#x60; support was added, had a lot of
+     * initialization code in their constructors. For example, code which acccessed superclass
+     * attributes. With the new flow this code would not be able to see attributes. The recommendation
+     * is to move this initialization code to an &#x60;initializer&#x60; on the Extension, which was the
+     * recommendation for anything created after &#x60;initializer&#x60; support for Extensions was added.
      *
      * @class BaseCore
      * @constructor
@@ -2780,11 +2821,11 @@
                 this._preAddAttrs(instanceAttrs, userVals, lazy);
             }
 
-            this.addAttrs(instanceAttrs, userVals, lazy);
-
             if (this._allowAdHocAttrs) {
                 this.addAttrs(this._filterAdHocAttrs(attrCfgs, userVals), userVals, lazy);
             }
+
+            this.addAttrs(instanceAttrs, userVals, lazy);
 
             // Initializers
             for (i = 0, l = initializers.length; i &lt; l; i++) {

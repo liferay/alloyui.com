@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>2.0.0pr5</b>
+                        API Docs for Version: <b>2.0.0pr6</b>
                     </p>
                 </li>
             </div>
@@ -3109,8 +3109,8 @@ Y.CalendarBase = Y.extend( CalendarBase, Y.Widget, {
      */
     _initCalendarPane : function (baseDate, pane_id) {
         // Get a list of short weekdays from the internationalization package, or else use default English ones.
-        var weekdays = this.get(&#x27;strings.very_short_weekdays&#x27;) || [&quot;Su&quot;, &quot;Mo&quot;, &quot;Tu&quot;, &quot;We&quot;, &quot;Th&quot;, &quot;Fr&quot;, &quot;Sa&quot;],
-            fullweekdays = this.get(&#x27;strings.weekdays&#x27;) || [&quot;Sunday&quot;, &quot;Monday&quot;, &quot;Tuesday&quot;, &quot;Wednesday&quot;, &quot;Thursday&quot;, &quot;Friday&quot;, &quot;Saturday&quot;],
+        var shortWeekDays = this.get(&#x27;strings.very_short_weekdays&#x27;) || [&quot;Su&quot;, &quot;Mo&quot;, &quot;Tu&quot;, &quot;We&quot;, &quot;Th&quot;, &quot;Fr&quot;, &quot;Sa&quot;],
+            weekDays = Y.Intl.get(&#x27;datatype-date-format&#x27;).A,
             // Get the first day of the week from the internationalization package, or else use Sunday as default.
             firstday = this.get(&#x27;strings.first_weekday&#x27;) || 0,
             // Compute the cutoff column of the masked calendar table, based on the start date and the first day of week.
@@ -3138,8 +3138,8 @@ Y.CalendarBase = Y.extend( CalendarBase, Y.Widget, {
         for (day = firstday; day &lt;= firstday + 6; day++) {
             partials.weekday_row +=
                 substitute(CalendarBase.WEEKDAY_TEMPLATE, {
-                    weekdayname: weekdays[day%7],
-                    full_weekdayname: fullweekdays[day%7]
+                    short_weekdayname: shortWeekDays[day%7],
+                    weekdayname: weekDays[day%7]
                 });
         }
 
@@ -3562,7 +3562,7 @@ Y.CalendarBase = Y.extend( CalendarBase, Y.Widget, {
         * @protected
         * @static
         */
-    WEEKDAY_TEMPLATE: &#x27;&lt;th class=&quot;{calendar_weekday_class}&quot; role=&quot;columnheader&quot; aria-label=&quot;{full_weekdayname}&quot;&gt;{weekdayname}&lt;/th&gt;&#x27;,
+    WEEKDAY_TEMPLATE: &#x27;&lt;th class=&quot;{calendar_weekday_class}&quot; role=&quot;columnheader&quot; aria-label=&quot;{weekdayname}&quot;&gt;{short_weekdayname}&lt;/th&gt;&#x27;,
 
      /**
         * A template for a single cell with a calendar day.

@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>2.0.0pr5</b>
+                        API Docs for Version: <b>2.0.0pr6</b>
                     </p>
                 </li>
             </div>
@@ -2137,7 +2137,7 @@ hasEnumBug = O._hasEnumBug = !{valueOf: 0}.propertyIsEnumerable(&#x27;valueOf&#x
 
 /**
  * &#x60;true&#x60; if this browser incorrectly considers the &#x60;prototype&#x60; property of
- * functions to be enumerable. Currently known to affect Opera 11.50.
+ * functions to be enumerable. Currently known to affect Opera 11.50 and Android 2.3.x.
  *
  * @property _hasProtoEnumBug
  * @type Boolean
@@ -2181,7 +2181,9 @@ O.hasKey = owns;
  * as the order in which they were defined.
  *
  * This method is an alias for the native ES5 &#x60;Object.keys()&#x60; method if
- * available.
+ * available and non-buggy. The Opera 11.50 and Android 2.3.x versions of 
+ * &#x60;Object.keys()&#x60; have an inconsistency as they consider &#x60;prototype&#x60; to be 
+ * enumerable, so a non-native shim is used to rectify the difference.
  *
  * @example
  *
@@ -2193,7 +2195,7 @@ O.hasKey = owns;
  * @return {String[]} Array of keys.
  * @static
  */
-O.keys = Lang._isNative(Object.keys) ? Object.keys : function (obj) {
+O.keys = Lang._isNative(Object.keys) &amp;&amp; !hasProtoEnumBug ? Object.keys : function (obj) {
     if (!Lang.isObject(obj)) {
         throw new TypeError(&#x27;Object.keys called on a non-object&#x27;);
     }

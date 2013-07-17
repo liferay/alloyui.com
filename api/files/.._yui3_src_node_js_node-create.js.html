@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>2.0.0pr5</b>
+                        API Docs for Version: <b>2.0.0pr6</b>
                     </p>
                 </li>
             </div>
@@ -2218,8 +2218,17 @@ Y.mix(Y_Node.prototype, {
      * @deprecated Use getHTML
      * @return {String} The current content
      */
-    getContent: function(content) {
-        return this.get(&#x27;innerHTML&#x27;);
+    getContent: function() {
+        var node = this;
+
+        if (node._node.nodeType === 11) { // 11 === Node.DOCUMENT_FRAGMENT_NODE
+            // &quot;this&quot;, when it is a document fragment, must be cloned because
+            // the nodes contained in the fragment actually disappear once
+            // the fragment is appended anywhere
+            node = node.create(&quot;&lt;div/&gt;&quot;).append(node.cloneNode(true));
+        }
+
+        return node.get(&quot;innerHTML&quot;);
     }
 });
 

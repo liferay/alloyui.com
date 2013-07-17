@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>2.0.0pr5</b>
+                        API Docs for Version: <b>2.0.0pr6</b>
                     </p>
                 </li>
             </div>
@@ -2291,8 +2291,11 @@ var Selector = {
     },
 
     _nativeQuery: function(selector, root, one) {
-        if (Y.UA.webkit &amp;&amp; selector.indexOf(&#x27;:checked&#x27;) &gt; -1 &amp;&amp;
-                (Y.Selector.pseudos &amp;&amp; Y.Selector.pseudos.checked)) { // webkit (chrome, safari) fails to pick up &quot;selected&quot;  with &quot;checked&quot;
+        if (
+            (Y.UA.webkit || Y.UA.opera) &amp;&amp;          // webkit (chrome, safari) and Opera
+            selector.indexOf(&#x27;:checked&#x27;) &gt; -1 &amp;&amp;    // fail to pick up &quot;selected&quot;  with &quot;:checked&quot;
+            (Y.Selector.pseudos &amp;&amp; Y.Selector.pseudos.checked)
+        ) {
             return Y.Selector.query(selector, root, one, true); // redo with skipNative true to try brute query
         }
         try {

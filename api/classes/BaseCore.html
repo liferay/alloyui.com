@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>2.0.0pr5</b>
+                        API Docs for Version: <b>2.0.0pr6</b>
                     </p>
                 </li>
             </div>
@@ -2092,23 +2092,68 @@ the hierarchy as part of object construction and destruction. Additionally, attr
 configured through the static <a href="#property_BaseCore.ATTRS">ATTRS</a>
 property for each class in the hierarchy will be initialized by BaseCore.</p>
 
-<p>
-**NOTE:** Prior to version 3.11.0, ATTRS would get added a class at a time. That is,
-BaseCore would loop through each class in the hierarchy, and add the class' ATTRS, and
-then call it's initializer, and move on to the subclass' ATTRS and initializer. As of
-3.11.0, ATTRS from all classes in the hierarchy are added in one <code>addAttrs</code> call before
-any initializers are called. This fixes subtle edge-case issues with subclass ATTRS overriding
-superclass <code>setter</code>, <code>getter</code> or <code>valueFn</code> definitions and being unable to get/set attributes
-defined by the subclass. This order of operation change may impact <code>setter</code>, <code>getter</code> or <code>valueFn</code>
-code which expects a superclass' initializer to have run. This is expected to be rare, but to support
-it, Base supports a <code>_preAddAttrs()</code>, method hook (same signature as <code>addAttrs</code>). Components can
-implement this method on their prototype for edge cases which do require finer control over
-the order in which attributes are added (see widget-htmlparser).
-</p>
-
 <p>Classes which require attribute support, but don't intend to use/expose attribute
 change events can extend BaseCore instead of Base for optimal kweight and
 runtime performance.</p>
+
+<p><strong>3.11.0 BACK COMPAT NOTE FOR COMPONENT DEVELOPERS</strong></p>
+
+<p>Prior to version 3.11.0, ATTRS would get added a class at a time. That is:</p>
+
+<pre>
+   for each (class in the hierarchy) {
+      Call the class Extension constructors.
+
+      Add the class ATTRS.
+
+      Call the class initializer
+      Call the class Extension initializers.
+   }
+</pre>
+
+<p>As of 3.11.0, ATTRS from all classes in the hierarchy are added in one <code>addAttrs</code> call
+before <strong>any</strong> initializers are called. That is, the flow becomes:</p>
+
+<pre>
+   for each (class in the hierarchy) {
+      Call the class Extension constructors.
+   }
+
+   Add ATTRS for all classes
+
+   for each (class in the hierarchy) {
+      Call the class initializer.
+      Call the class Extension initializers.
+   }
+</pre>
+
+<p>Adding all ATTRS at once fixes subtle edge-case issues with subclass ATTRS overriding
+superclass <code>setter</code>, <code>getter</code> or <code>valueFn</code> definitions and being unable to get/set attributes
+defined by the subclass. It also leaves us with a cleaner order of operation flow moving
+forward.</p>
+
+<p>However, it may require component developers to upgrade their components, for the following
+scenarios:</p>
+
+<ol>
+<li>It impacts components which may have <code>setter</code>, <code>getter</code> or <code>valueFn</code> code which
+expects a superclass' initializer to have run.</li>
+</ol>
+
+<p>This is expected to be rare, but to support it, Base now supports a <code>_preAddAttrs()</code>, method
+hook (same signature as <code>addAttrs</code>). Components can implement this method on their prototype
+for edge cases which do require finer control over the order in which attributes are added
+(see widget-htmlparser for example).</p>
+
+<ol>
+<li>Extension developers may need to move code from Extension constructors to <code>initializer</code>s</li>
+</ol>
+
+<p>Older extensions, which were written before <code>initializer</code> support was added, had a lot of
+initialization code in their constructors. For example, code which acccessed superclass
+attributes. With the new flow this code would not be able to see attributes. The recommendation
+is to move this initialization code to an <code>initializer</code> on the Extension, which was the
+recommendation for anything created after <code>initializer</code> support for Extensions was added.</p>
 </div>
 
 
@@ -3037,7 +3082,7 @@ encountered out of order when calling addAttrs().</p>
             
         
         
-        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l577"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:577</code></a>
+        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l618"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:618</code></a>
         
         </p>
 
@@ -3135,7 +3180,7 @@ attribute configuration has cloneDefaultValue set to shallow or deep).</p>
             
         
         
-        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l540"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:540</code></a>
+        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l581"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:581</code></a>
         
         </p>
 
@@ -3192,7 +3237,7 @@ this class for iteration performance reasons.</p>
             
         
         
-        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l323"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:323</code></a>
+        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l364"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:364</code></a>
         
         </p>
 
@@ -3248,7 +3293,7 @@ this class for iteration performance reasons.</p>
             
         
         
-        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l295"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:295</code></a>
+        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l336"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:336</code></a>
         
         </p>
 
@@ -3314,7 +3359,7 @@ this class for iteration performance reasons.</p>
             
         
         
-        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l551"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:551</code></a>
+        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l592"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:592</code></a>
         
         </p>
 
@@ -3394,7 +3439,7 @@ Since it's on a critical path, we don't want to re-do the check.</p>
             
         
         
-        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l741"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:741</code></a>
+        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l782"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:782</code></a>
         
         </p>
 
@@ -3471,7 +3516,7 @@ the destructor method on the prototype of each class in the hierarchy.</p>
             
         
         
-        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l429"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:429</code></a>
+        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l470"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:470</code></a>
         
         </p>
 
@@ -3693,7 +3738,7 @@ allowing Attribute hosts to over-ride either method.</p>
             
         
         
-        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l353"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:353</code></a>
+        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l394"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:394</code></a>
         
         </p>
 
@@ -4021,7 +4066,7 @@ returned. If set to true, all attributes modified from their initial values are 
             
         
         
-        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l337"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:337</code></a>
+        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l378"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:378</code></a>
         
         </p>
 
@@ -4106,7 +4151,7 @@ cached value.
             
         
         
-        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l370"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:370</code></a>
+        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l411"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:411</code></a>
         
         </p>
 
@@ -4460,7 +4505,7 @@ constructor.</p>
             
         
         
-        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l268"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:268</code></a>
+        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l309"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:309</code></a>
         
         </p>
 
@@ -4657,7 +4702,7 @@ either through the constructor.ATTRS property, or explicitly passed in.</p>
             
         
         
-        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l233"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:233</code></a>
+        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l274"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:274</code></a>
         
         </p>
 
@@ -4746,7 +4791,7 @@ either through the constructor.ATTRS property, or explicitly passed in.</p>
             
         
         
-        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l661"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:661</code></a>
+        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l702"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:702</code></a>
         
         </p>
 
@@ -4828,7 +4873,7 @@ invoking the initializer method on the prototype of each class in the hierarchy.
             
         
         
-        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l459"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:459</code></a>
+        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l500"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:500</code></a>
         
         </p>
 
@@ -6463,7 +6508,7 @@ See <a href="#method_addAttr">addAttr</a>.</p>
             
         
         
-        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l311"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:311</code></a>
+        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l352"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:352</code></a>
         
         </p>
 
@@ -6752,7 +6797,7 @@ returned. If set to true, all attributes modified from their initial values are 
             
         
         
-        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l278"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:278</code></a>
+        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l319"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:319</code></a>
         
         </p>
 
@@ -6861,7 +6906,7 @@ and invokes initializers for the class hierarchy.</p>
             
         
         
-        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l186"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:186</code></a>
+        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l227"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:227</code></a>
         
         </p>
 
@@ -7243,7 +7288,7 @@ to set the value of a property within the object (e.g. <code>set("x.y.z", 5)</co
             
         
         
-        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l774"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:774</code></a>
+        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l815"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:815</code></a>
         
         </p>
 
@@ -7312,7 +7357,7 @@ and the instance guid, if set.</p>
             
         
         
-        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l114"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:114</code></a>
+        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l155"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:155</code></a>
         
         </p>
 
@@ -7367,7 +7412,7 @@ not handled by the MyClass.<em>NON</em>ATTRS_CFG</p>
             
         
         
-        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l88"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:88</code></a>
+        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l129"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:129</code></a>
         
         </p>
 
@@ -7416,7 +7461,7 @@ not handled by the MyClass.<em>NON</em>ATTRS_CFG</p>
             
         
         
-        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l99"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:99</code></a>
+        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l140"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:140</code></a>
         
         </p>
 
@@ -7467,7 +7512,7 @@ non-attribute configuration properties don't get added as ad-hoc attributes.</p>
             
         
         
-        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l141"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:141</code></a>
+        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l182"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:182</code></a>
         
         </p>
 
@@ -7521,7 +7566,7 @@ cloned, to protect the default value.</p>
             
         
         
-        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l128"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:128</code></a>
+        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l169"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:169</code></a>
         
         </p>
 
@@ -7571,7 +7616,7 @@ convention (e.g. MyClass.NAME = "myClass";).</p>
             
         
         
-        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l256"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:256</code></a>
+        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l297"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:297</code></a>
         
         </p>
 
@@ -7634,7 +7679,7 @@ convention (e.g. MyClass.NAME = "myClass";).</p>
             
         
         
-        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l171"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:171</code></a>
+        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l212"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:212</code></a>
         
         </p>
 
@@ -7690,7 +7735,7 @@ has been through the destroy lifecycle phase.</p>
             
         
         
-        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l157"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:157</code></a>
+        <a href="../files/.._yui3_src_base_js_BaseCore.js.html#l198"><code>..&#x2F;yui3&#x2F;src&#x2F;base&#x2F;js&#x2F;BaseCore.js:198</code></a>
         
         </p>
 

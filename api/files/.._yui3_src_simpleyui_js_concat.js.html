@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>2.0.0pr5</b>
+                        API Docs for Version: <b>2.0.0pr6</b>
                     </p>
                 </li>
             </div>
@@ -4194,9 +4194,15 @@ TYPES = {
     &#x27;[object Error]&#x27;   : &#x27;error&#x27;
 },
 
-SUBREGEX        = /\{\s*([^|}]+?)\s*(?:\|([^}]*))?\s*\}/g,
-TRIMREGEX       = /^\s+|\s+$/g,
-NATIVE_FN_REGEX = /\{\s*\[(?:native code|function)\]\s*\}/i;
+SUBREGEX         = /\{\s*([^|}]+?)\s*(?:\|([^}]*))?\s*\}/g,
+
+WHITESPACE       = &quot;\x09\x0A\x0B\x0C\x0D\x20\xA0\u1680\u180E\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200A\u2028\u2029\u202F\u205F\u3000\uFEFF&quot;,
+WHITESPACE_CLASS = &quot;[\x09-\x0D\x20\xA0\u1680\u180E\u2000-\u200A\u2028\u2029\u202F\u205F\u3000\uFEFF]+&quot;,
+TRIM_LEFT_REGEX  = new RegExp(&quot;^&quot; + WHITESPACE_CLASS),
+TRIM_RIGHT_REGEX = new RegExp(WHITESPACE_CLASS + &quot;$&quot;),
+TRIMREGEX        = new RegExp(TRIM_LEFT_REGEX.source + &quot;|&quot; + TRIM_RIGHT_REGEX.source, &quot;g&quot;),
+
+NATIVE_FN_REGEX  = /\{\s*\[(?:native code|function)\]\s*\}/i;
 
 // -- Protected Methods --------------------------------------------------------
 
@@ -4420,7 +4426,7 @@ L.sub = function(s, o) {
  * @param s {string} the string to trim.
  * @return {string} the trimmed string.
  */
-L.trim = STRING_PROTO.trim ? function(s) {
+L.trim = L._isNative(STRING_PROTO.trim) &amp;&amp; !WHITESPACE.trim() ? function(s) {
     return s &amp;&amp; s.trim ? s.trim() : s;
 } : function (s) {
     try {
@@ -4437,10 +4443,10 @@ L.trim = STRING_PROTO.trim ? function(s) {
  * @param s {string} the string to trim.
  * @return {string} the trimmed string.
  */
-L.trimLeft = STRING_PROTO.trimLeft ? function (s) {
+L.trimLeft = L._isNative(STRING_PROTO.trimLeft) &amp;&amp; !WHITESPACE.trimLeft() ? function (s) {
     return s.trimLeft();
 } : function (s) {
-    return s.replace(/^\s+/, &#x27;&#x27;);
+    return s.replace(TRIM_LEFT_REGEX, &#x27;&#x27;);
 };
 
 /**
@@ -4450,10 +4456,10 @@ L.trimLeft = STRING_PROTO.trimLeft ? function (s) {
  * @param s {string} the string to trim.
  * @return {string} the trimmed string.
  */
-L.trimRight = STRING_PROTO.trimRight ? function (s) {
+L.trimRight = L._isNative(STRING_PROTO.trimRight) &amp;&amp; !WHITESPACE.trimRight() ? function (s) {
     return s.trimRight();
 } : function (s) {
-    return s.replace(/\s+$/, &#x27;&#x27;);
+    return s.replace(TRIM_RIGHT_REGEX, &#x27;&#x27;);
 };
 
 /**
@@ -4555,16 +4561,34 @@ Dedupes an array of strings, returning an array that&#x27;s guaranteed to contai
 only one copy of a given string.
 
 This method differs from &#x60;Array.unique()&#x60; in that it&#x27;s optimized for use only
-with strings, whereas &#x60;unique&#x60; may be used with other types (but is slower).
-Using &#x60;dedupe()&#x60; with non-string values may result in unexpected behavior.
+with arrays consisting entirely of strings or entirely of numbers, whereas
+&#x60;unique&#x60; may be used with other value types (but is slower).
+
+Using &#x60;dedupe()&#x60; with values other than strings or numbers, or with arrays
+containing a mix of strings and numbers, may result in unexpected behavior.
 
 @method dedupe
-@param {String[]} array Array of strings to dedupe.
-@return {Array} Deduped copy of _array_.
+@param {String[]|Number[]} array Array of strings or numbers to dedupe.
+@return {Array} Copy of _array_ containing no duplicate values.
 @static
 @since 3.4.0
 **/
-YArray.dedupe = function (array) {
+YArray.dedupe = Lang._isNative(Object.create) ? function (array) {
+    var hash    = Object.create(null),
+        results = [],
+        i, item, len;
+
+    for (i = 0, len = array.length; i &lt; len; ++i) {
+        item = array[i];
+
+        if (!hash[item]) {
+            hash[item] = 1;
+            results.push(item);
+        }
+    }
+
+    return results;
+} : function (array) {
     var hash    = {},
         results = [],
         i, item, len;
@@ -5206,7 +5230,7 @@ hasEnumBug = O._hasEnumBug = !{valueOf: 0}.propertyIsEnumerable(&#x27;valueOf&#x
 
 /**
  * &#x60;true&#x60; if this browser incorrectly considers the &#x60;prototype&#x60; property of
- * functions to be enumerable. Currently known to affect Opera 11.50.
+ * functions to be enumerable. Currently known to affect Opera 11.50 and Android 2.3.x.
  *
  * @property _hasProtoEnumBug
  * @type Boolean
@@ -5250,7 +5274,9 @@ O.hasKey = owns;
  * as the order in which they were defined.
  *
  * This method is an alias for the native ES5 &#x60;Object.keys()&#x60; method if
- * available.
+ * available and non-buggy. The Opera 11.50 and Android 2.3.x versions of 
+ * &#x60;Object.keys()&#x60; have an inconsistency as they consider &#x60;prototype&#x60; to be 
+ * enumerable, so a non-native shim is used to rectify the difference.
  *
  * @example
  *
@@ -5262,7 +5288,7 @@ O.hasKey = owns;
  * @return {String[]} Array of keys.
  * @static
  */
-O.keys = Lang._isNative(Object.keys) ? Object.keys : function (obj) {
+O.keys = Lang._isNative(Object.keys) &amp;&amp; !hasProtoEnumBug ? Object.keys : function (obj) {
     if (!Lang.isObject(obj)) {
         throw new TypeError(&#x27;Object.keys called on a non-object&#x27;);
     }
@@ -5869,17 +5895,25 @@ YUI.Env.parseUA = function(subUA) {
                 }
             }
 
-            m = ua.match(/(Chrome|CrMo|CriOS)\/([^\s]*)/);
-            if (m &amp;&amp; m[1] &amp;&amp; m[2]) {
-                o.chrome = numberify(m[2]); // Chrome
-                o.safari = 0; //Reset safari back to 0
-                if (m[1] === &#x27;CrMo&#x27;) {
-                    o.mobile = &#x27;chrome&#x27;;
-                }
+            m = ua.match(/OPR\/(\d+\.\d+)/);
+
+            if (m &amp;&amp; m[1]) {
+                // Opera 15+ with Blink (pretends to be both Chrome and Safari)
+                o.opera = numberify(m[1]);
             } else {
-                m = ua.match(/AdobeAIR\/([^\s]*)/);
-                if (m) {
-                    o.air = m[0]; // Adobe AIR 1.0 or better
+                m = ua.match(/(Chrome|CrMo|CriOS)\/([^\s]*)/);
+
+                if (m &amp;&amp; m[1] &amp;&amp; m[2]) {
+                    o.chrome = numberify(m[2]); // Chrome
+                    o.safari = 0; //Reset safari back to 0
+                    if (m[1] === &#x27;CrMo&#x27;) {
+                        o.mobile = &#x27;chrome&#x27;;
+                    }
+                } else {
+                    m = ua.match(/AdobeAIR\/([^\s]*)/);
+                    if (m) {
+                        o.air = m[0]; // Adobe AIR 1.0 or better
+                    }
                 }
             }
         }
@@ -5909,11 +5943,13 @@ YUI.Env.parseUA = function(subUA) {
                     o.mobile = m[0]; // ex: Opera Mini/2.0.4509/1316
                 }
             } else { // not opera or webkit
-                m = ua.match(/MSIE\s([^;]*)/);
-                if (m &amp;&amp; m[1]) {
-                    o.ie = numberify(m[1]);
+                m = ua.match(/MSIE ([^;]*)|Trident.*; rv ([0-9.]+)/);
+
+                if (m &amp;&amp; (m[1] || m[2])) {
+                    o.ie = numberify(m[1] || m[2]);
                 } else { // not opera, webkit, or ie
                     m = ua.match(/Gecko\/([^\s]*)/);
+
                     if (m) {
                         o.gecko = 1; // Gecko detected, look for revision
                         m = ua.match(/rv:([^\s\)]*)/);
@@ -11849,8 +11885,11 @@ var Selector = {
     },
 
     _nativeQuery: function(selector, root, one) {
-        if (Y.UA.webkit &amp;&amp; selector.indexOf(&#x27;:checked&#x27;) &gt; -1 &amp;&amp;
-                (Y.Selector.pseudos &amp;&amp; Y.Selector.pseudos.checked)) { // webkit (chrome, safari) fails to pick up &quot;selected&quot;  with &quot;checked&quot;
+        if (
+            (Y.UA.webkit || Y.UA.opera) &amp;&amp;          // webkit (chrome, safari) and Opera
+            selector.indexOf(&#x27;:checked&#x27;) &gt; -1 &amp;&amp;    // fail to pick up &quot;selected&quot;  with &quot;:checked&quot;
+            (Y.Selector.pseudos &amp;&amp; Y.Selector.pseudos.checked)
+        ) {
             return Y.Selector.query(selector, root, one, true); // redo with skipNative true to try brute query
         }
         try {
@@ -13470,7 +13509,7 @@ var L = Y.Lang,
      */
     _getType = function(type, pre) {
 
-        if (!pre || type.indexOf(PREFIX_DELIMITER) &gt; -1) {
+        if (!pre || (typeof type !== &quot;string&quot;) || type.indexOf(PREFIX_DELIMITER) &gt; -1) {
             return type;
         }
 
@@ -14125,17 +14164,17 @@ Y.log(&#x27;EventTarget unsubscribeAll() is deprecated, use detachAll()&#x27;, &
      * from the context specified when the event was created, and with the
      * following parameters.
      *
-     * If the custom event object hasn&#x27;t been created, then the event hasn&#x27;t
-     * been published and it has no subscribers.  For performance sake, we
-     * immediate exit in this case.  This means the event won&#x27;t bubble, so
-     * if the intention is that a bubble target be notified, the event must
-     * be published on this object first.
-     *
      * The first argument is the event type, and any additional arguments are
      * passed to the listeners as parameters.  If the first of these is an
      * object literal, and the event is configured to emit an event facade,
      * that object is mixed into the event facade and the facade is provided
      * in place of the original object.
+     *
+     * If the custom event object hasn&#x27;t been created, then the event hasn&#x27;t
+     * been published and it has no subscribers.  For performance sake, we
+     * immediate exit in this case.  This means the event won&#x27;t bubble, so
+     * if the intention is that a bubble target be notified, the event must
+     * be published on this object first.
      *
      * @method fire
      * @param type {String|Object} The type of the event, or an object that contains
@@ -14145,7 +14184,8 @@ Y.log(&#x27;EventTarget unsubscribeAll() is deprecated, use detachAll()&#x27;, &
      * configured to emit an event facade, the event facade will replace that
      * parameter after the properties the object literal contains are copied to
      * the event facade.
-     * @return {EventTarget} the event host
+     * @return {Boolean} True if the whole lifecycle of the event went through,
+     * false if at any point the event propagation was halted.
      */
     fire: function(type) {
 
@@ -16999,8 +17039,17 @@ Y.mix(Y_Node.prototype, {
      * @deprecated Use getHTML
      * @return {String} The current content
      */
-    getContent: function(content) {
-        return this.get(&#x27;innerHTML&#x27;);
+    getContent: function() {
+        var node = this;
+
+        if (node._node.nodeType === 11) { // 11 === Node.DOCUMENT_FRAGMENT_NODE
+            // &quot;this&quot;, when it is a document fragment, must be cloned because
+            // the nodes contained in the fragment actually disappear once
+            // the fragment is appended anywhere
+            node = node.create(&quot;&lt;div/&gt;&quot;).append(node.cloneNode(true));
+        }
+
+        return node.get(&quot;innerHTML&quot;);
     }
 });
 
@@ -22619,13 +22668,15 @@ var PARENT_NODE = &#x27;parentNode&#x27;,
         _bruteQuery: function(selector, root, firstOnly) {
             var ret = [],
                 nodes = [],
+                visited,
                 tokens = Selector._tokenize(selector),
                 token = tokens[tokens.length - 1],
                 rootDoc = Y.DOM._getDoc(root),
                 child,
                 id,
                 className,
-                tagName;
+                tagName,
+                isUniversal;
 
             if (token) {
                 // prefilter nodes
@@ -22646,16 +22697,30 @@ var PARENT_NODE = &#x27;parentNode&#x27;,
                     }
 
                 } else { // brute getElementsByTagName()
+                    visited = [];
                     child = root.firstChild;
+                    isUniversal = tagName === &quot;*&quot;;
                     while (child) {
-                        // only collect HTMLElements
-                        // match tag to supplement missing getElementsByTagName
-                        if (child.tagName &amp;&amp; (tagName === &#x27;*&#x27; || child.tagName === tagName)) {
-                            nodes.push(child);
+                        while (child) {
+                            // IE 6-7 considers comment nodes as element nodes, and gives them the tagName &quot;!&quot;.
+                            // We can filter them out by checking if its tagName is &gt; &quot;@&quot;. 
+                            // This also avoids a superflous nodeType === 1 check.
+                            if (child.tagName &gt; &quot;@&quot; &amp;&amp; (isUniversal || child.tagName === tagName)) {
+                                nodes.push(child);
+                            }
+
+                            // We may need to traverse back up the tree to find more unvisited subtrees.
+                            visited.push(child);
+                            child = child.firstChild;
                         }
-                        child = child.nextSibling || child.firstChild;
+
+                        // Find the most recently visited node who has a next sibling.
+                        while (visited.length &gt; 0 &amp;&amp; !child) {
+                            child = visited.pop().nextSibling;
+                        }
                     }
                 }
+
                 if (nodes.length) {
                     ret = Selector._filterNodes(nodes, tokens, firstOnly);
                 }
@@ -22998,7 +23063,6 @@ Y.Selector.getters.src = Y.Selector.getters.rel = Y.Selector.getters.href;
 if (Y.Selector.useNative &amp;&amp; Y.config.doc.querySelector) {
     Y.Selector.shorthand[&#x27;\\.(-?[_a-z]+[-\\w]*)&#x27;] = &#x27;[class~=$1]&#x27;;
 }
-
 
 
 }, &#x27;@VERSION@&#x27;, {&quot;requires&quot;: [&quot;selector-native&quot;]});

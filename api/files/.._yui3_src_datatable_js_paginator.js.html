@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>2.0.0pr5</b>
+                        API Docs for Version: <b>2.0.0pr6</b>
                     </p>
                 </li>
             </div>
@@ -2129,9 +2129,6 @@ View = Y.Base.create(&#x27;dt-pg-view&#x27;, Y.View, [], {
             paginator: getClassName(NAME)
         });
 
-        var container = this.get(&#x27;container&#x27;),
-            events = this._eventHandles;
-
         this._initStrings();
         this._initClassNames();
 
@@ -2252,7 +2249,7 @@ View = Y.Base.create(&#x27;dt-pg-view&#x27;, Y.View, [], {
                 option = {
                     value: option,
                     label: option
-                }
+                };
             }
             option.selected = (option.value === rowsPerPage) ? &#x27; selected&#x27; : &#x27;&#x27;;
         }
@@ -2370,8 +2367,9 @@ View = Y.Base.create(&#x27;dt-pg-view&#x27;, Y.View, [], {
      @SINCE@
      */
     _controlChange: function (e, selector) {
+        var control = e.target,
+            val;
 
-        var control = e.target;
         // register change events from the perPage select
         if (
             control.hasClass(CLASS_DISABLED) ||
@@ -2380,7 +2378,7 @@ View = Y.Base.create(&#x27;dt-pg-view&#x27;, Y.View, [], {
             return;
         }
 
-        var val = e.target.get(&#x27;value&#x27;);
+        val = e.target.get(&#x27;value&#x27;);
         this.fire(EVENT_UI, { type: &#x27;perPage&#x27;, val: parseInt(val, 10) });
     },
 
@@ -2393,7 +2391,9 @@ View = Y.Base.create(&#x27;dt-pg-view&#x27;, Y.View, [], {
      @SINCE@
      */
     _controlSubmit: function (e, selector) {
-        var control = e.target;
+        var control = e.target,
+            input;
+
         if (
             control.hasClass(CLASS_DISABLED) ||
             ( selector &amp;&amp; !(control.test(selector)) )
@@ -2404,7 +2404,7 @@ View = Y.Base.create(&#x27;dt-pg-view&#x27;, Y.View, [], {
         // the only form we have is the go to page form
         e.preventDefault();
 
-        var input = e.target.one(&#x27;input&#x27;);
+        input = e.target.one(&#x27;input&#x27;);
         this.fire(EVENT_UI, { type: &#x27;page&#x27;, val: input.get(&#x27;value&#x27;) });
     },
 
@@ -2604,8 +2604,6 @@ Y.mix(Controller.prototype, {
      @since @SINCE@
      */
     initializer: function () {
-        var model = this.get(&#x27;paginatorModel&#x27;)
-
         // allow DT to use paged data
         this._augmentData();
 
@@ -2908,9 +2906,11 @@ Y.mix(Controller.prototype, {
                 // We want to check to see if we have a number or a string
                 // of a number. If we do not, we want the value to be -1 to
                 // indicate &quot;all rows&quot;
+                /*jshint eqeqeq:false */
                 if (parseInt(value, 10) != value) {
                     value = -1;
                 }
+                /*jshint eqeqeq:true */
                 val[i] = { label: label, value: value };
             }
         }

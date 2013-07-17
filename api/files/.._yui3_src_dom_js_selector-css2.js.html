@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>2.0.0pr5</b>
+                        API Docs for Version: <b>2.0.0pr6</b>
                     </p>
                 </li>
             </div>
@@ -2112,13 +2112,15 @@ var PARENT_NODE = &#x27;parentNode&#x27;,
         _bruteQuery: function(selector, root, firstOnly) {
             var ret = [],
                 nodes = [],
+                visited,
                 tokens = Selector._tokenize(selector),
                 token = tokens[tokens.length - 1],
                 rootDoc = Y.DOM._getDoc(root),
                 child,
                 id,
                 className,
-                tagName;
+                tagName,
+                isUniversal;
 
             if (token) {
                 // prefilter nodes
@@ -2139,16 +2141,30 @@ var PARENT_NODE = &#x27;parentNode&#x27;,
                     }
 
                 } else { // brute getElementsByTagName()
+                    visited = [];
                     child = root.firstChild;
+                    isUniversal = tagName === &quot;*&quot;;
                     while (child) {
-                        // only collect HTMLElements
-                        // match tag to supplement missing getElementsByTagName
-                        if (child.tagName &amp;&amp; (tagName === &#x27;*&#x27; || child.tagName === tagName)) {
-                            nodes.push(child);
+                        while (child) {
+                            // IE 6-7 considers comment nodes as element nodes, and gives them the tagName &quot;!&quot;.
+                            // We can filter them out by checking if its tagName is &gt; &quot;@&quot;. 
+                            // This also avoids a superflous nodeType === 1 check.
+                            if (child.tagName &gt; &quot;@&quot; &amp;&amp; (isUniversal || child.tagName === tagName)) {
+                                nodes.push(child);
+                            }
+
+                            // We may need to traverse back up the tree to find more unvisited subtrees.
+                            visited.push(child);
+                            child = child.firstChild;
                         }
-                        child = child.nextSibling || child.firstChild;
+
+                        // Find the most recently visited node who has a next sibling.
+                        while (visited.length &gt; 0 &amp;&amp; !child) {
+                            child = visited.pop().nextSibling;
+                        }
                     }
                 }
+
                 if (nodes.length) {
                     ret = Selector._filterNodes(nodes, tokens, firstOnly);
                 }
@@ -2491,7 +2507,6 @@ Y.Selector.getters.src = Y.Selector.getters.rel = Y.Selector.getters.href;
 if (Y.Selector.useNative &amp;&amp; Y.config.doc.querySelector) {
     Y.Selector.shorthand[&#x27;\\.(-?[_a-z]+[-\\w]*)&#x27;] = &#x27;[class~=$1]&#x27;;
 }
-
 
     </pre>
 </div>
