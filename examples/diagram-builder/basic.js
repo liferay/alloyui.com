@@ -4,7 +4,7 @@ YUI().use(
 
     var availableFields = [
       {
-        iconClass: 'diagram-node-task-icon',
+        iconClass: 'aui-diagram-node-task-icon',
         label: 'Task',
         type: 'task'
       }

@@ -16,11 +16,11 @@ YUI().use(
         toolbars: {
           body: [
             {
-              icon: 'icon-file',
+              icon: 'aui-icon-file',
               label: 'Single Page'
             },
             {
-              icon: 'icon-book',
+              icon: 'aui-icon-book',
               label: 'All Pages'
             }
           ]

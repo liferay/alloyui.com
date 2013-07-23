@@ -5,7 +5,7 @@ YUI().use(
       {
         availableFields: [
           {
-            iconClass: 'form-builder-field-icon-text',
+            iconClass: 'aui-form-builder-field-icon-text',
             id: 'uniqueTextField',
             label: 'Text',
             readOnlyAttributes: ['name'],
@@ -15,37 +15,37 @@ YUI().use(
           },
           {
             hiddenAttributes: ['tip'],
-            iconClass: 'form-builder-field-icon-textarea',
+            iconClass: 'aui-form-builder-field-icon-textarea',
             label: 'Textarea',
             type: 'textarea'
           },
           {
-            iconClass: 'form-builder-field-icon-checkbox',
+            iconClass: 'aui-form-builder-field-icon-checkbox',
             label: 'Checkbox',
             type: 'checkbox'
           },
           {
-            iconClass: 'form-builder-field-icon-button',
+            iconClass: 'aui-form-builder-field-icon-button',
             label: 'Button',
             type: 'button'
           },
           {
-            iconClass: 'form-builder-field-icon-select',
+            iconClass: 'aui-form-builder-field-icon-select',
             label: 'Select',
             type: 'select'
           },
           {
-            iconClass: 'form-builder-field-icon-radio',
+            iconClass: 'aui-form-builder-field-icon-radio',
             label: 'Radio Buttons',
             type: 'radio'
           },
           {
-            iconClass: 'form-builder-field-icon-fileupload',
+            iconClass: 'aui-form-builder-field-icon-fileupload',
             label: 'File Upload',
             type: 'fileupload'
           },
           {
-            iconClass: 'form-builder-field-icon-fieldset',
+            iconClass: 'aui-form-builder-field-icon-fieldset',
             label: 'Fieldset',
             type: 'fieldset'
           }
