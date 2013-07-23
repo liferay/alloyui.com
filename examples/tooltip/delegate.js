@@ -6,6 +6,6 @@ YUI().use(
         trigger: '#myTooltipDelegate li',
         position: 'right'
       }
-    ).render();
+    )
   }
 );
