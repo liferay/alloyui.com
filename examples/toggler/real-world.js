@@ -11,7 +11,7 @@ YUI().use(
         header: '.header',
         transition: {
           duration: 0.2,
-          easing: 'cubic-bezier'
+          easing: 'cubic-bezier(0, 0.1, 0, 1)'
         }
       }
     );

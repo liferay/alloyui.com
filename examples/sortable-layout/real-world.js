@@ -1,7 +1,7 @@
 YUI().use(
   'aui-sortable-layout',
   function(Y) {
-    var proxyNode = Y.Node.create('<div class="aui-sortable-layout-proxy"></div>');
+    var proxyNode = Y.Node.create('<div class="sortable-layout-proxy"></div>');
     var DDM = Y.DD.DDM;
 
     var sortableLayout = new Y.SortableLayout(
