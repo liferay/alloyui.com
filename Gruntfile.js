@@ -34,7 +34,6 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask('build',  ['default']);
-    grunt.registerTask('deploy', ['default']);
     grunt.registerTask('push',   ['default']);
     grunt.registerTask('watch',  ['default']);
 
