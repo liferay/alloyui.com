@@ -30,7 +30,7 @@ module.exports = function(grunt) {
         async.series([
             function(mainCallback) {
                 grunt.log.ok('Setting Grunt config');
-                exports._setGruntConfig(mainCallback);
+                exports._setGruntConfig(mainCallback, grunt);
             },
             function(mainCallback) {
                 grunt.log.ok('Getting current branch');
@@ -72,17 +72,31 @@ module.exports = function(grunt) {
 };
 
 exports._setGruntConfig = function(mainCallback, grunt) {
-    if (typeof grunt.option('branch') === 'string') {
-        grunt.config('push.branch', grunt.option('branch'));
-    }
+    var options = grunt.option.flags();
 
-    if (typeof grunt.option('folder') === 'string') {
-        grunt.config('push.folder', grunt.option('folder'));
-    }
+    options.forEach(function(option) {
+        var key;
+        var value;
+        var valueIndex;
 
-    if (typeof grunt.option('remote') === 'string') {
-        grunt.config('push.remote', grunt.option('remote'));
-    }
+        // -- Normalize option
+        option = option.replace(/^--(no-)?/, '');
+
+        valueIndex = option.lastIndexOf('=');
+
+        // -- String parameter
+        if (valueIndex !== -1) {
+            key   = option.substring(0, valueIndex);
+            value = option.substring(valueIndex + 1);
+        }
+        // -- Boolean parameter
+        else {
+            key   = option;
+            value = grunt.option(key);
+        }
+
+        grunt.config([TASK.name, key], value);
+    });
 
     mainCallback();
 };
@@ -94,7 +108,7 @@ exports._gitCurrentBranch = function(mainCallback) {
         .exec('git', ['symbolic-ref', 'HEAD'])
         .then(function() {
             var data = this.lastOutput.stdout;
-            currentBranch = data.substring(data.lastIndexOf('/') + 1);
+            currentBranch = data.substring(data.lastIndexOf('/') + 1).trim();
             mainCallback();
         });
 };
@@ -117,7 +131,7 @@ exports._moveFolder = function(mainCallback, folder) {
         var origin = path.join(folderPath, fileName);
         var destination = '';
 
-        if (currentBranch == 'master') {
+        if (currentBranch === 'master') {
             destination = path.join(root, fileName);
         } else {
             destination = path.join(root, 'versions', currentBranch, fileName);
