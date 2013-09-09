@@ -20,24 +20,7 @@ module.exports = function(grunt) {
         watch: {}
     });
 
+    grunt.loadTasks('grunt');
+
     grunt.registerTask('deploy', ['build', 'push']);
-
-    // -- Install --------------------------------------------------------------
-    grunt.registerTask('default', 'Install local dependencies', function() {
-        var done = this.async();
-
-        var cmd = spawn('npm', ['install'], {
-            stdio: 'inherit'
-        });
-
-        cmd.on('close', done);
-    });
-
-    grunt.registerTask('build',  ['default']);
-    grunt.registerTask('push',   ['default']);
-    grunt.registerTask('watch',  ['default']);
-
-    if (grunt.file.exists('node_modules')) {
-        grunt.loadTasks('grunt');
-    }
 };
