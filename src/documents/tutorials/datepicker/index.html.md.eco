@@ -1,0 +1,113 @@
+---
+layout: single-doc
+title: Datepicker
+type: module
+category: Tutorial
+tags: 'datepicker'
+description: Create a dynamic datepicker that allows users to select the date with a calendar.
+api: http://alloyui.com/api/modules/aui-datepicker.html
+---
+
+#### Getting Started
+
+First load the seed and CSS files, if you haven't yet.
+
+```html
+<script src="<%= @getCdnSeed() %>"></script>
+<link href="<%= @getBootstrapCSS() %>" rel="stylesheet"></link>
+```
+
+Then initialize AlloyUI and load the Datepicker module.
+
+``` javascript
+YUI().use(
+  'aui-datepicker',
+  function(Y) {
+    // code goes here
+  }
+);
+```
+
+---
+
+#### Using Datepicker
+
+Create an element to trigger a Datepicker:
+
+``` html
+<button class="btn">Select the date</button>
+```
+
+Now create a new instance of Datepicker component and define your `trigger`.
+
+``` javascript
+YUI().use(
+  'aui-datepicker',
+  function(Y) {
+    new Y.DatePicker(
+      {
+        trigger: 'button'
+      }
+    );
+  }
+);
+```
+
+---
+
+#### Configuring Datepicker
+
+There are some other options that you can pass to your Datepicker instance.
+
+For example, you can set a specific `mask` for the date using a pattern
+called [strftime](http://www.opengroup.org/onlinepubs/007908799/xsh/strftime.html).
+If you are familiar to PHP you probably played with it.
+
+``` javascript
+YUI().use(
+  'aui-datepicker',
+  function(Y) {
+    new Y.DatePicker(
+      {
+        trigger: 'button',
+        mask: '%m/%d/%y'
+      }
+    );
+  }
+);
+```
+
+Besides that, you can define which date format you prefer. Let's say you are
+from Japan, go ahead and define `lang` attribute on `YUI()`.
+
+``` javascript
+YUI({ lang: 'ja' }).use(
+  'aui-datepicker',
+  function(Y) {
+    new Y.DatePicker(
+      {
+        trigger: 'button'
+      }
+    );
+  }
+);
+```
+
+Also, you can increase the number of calendars by defining `panes` and `selectionMode` attributes.
+
+``` javascript
+YUI().use(
+  'aui-datepicker',
+  function(Y) {
+    new Y.DatePicker(
+      {
+        trigger: 'button',
+        calendar: {
+          selectionMode: 'multiple'
+        },
+        panes: 2
+      }
+    );
+  }
+);
+```
