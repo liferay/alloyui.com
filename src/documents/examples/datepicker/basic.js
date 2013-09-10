@@ -11,7 +11,7 @@ YUI().use(
           selectionChange: function(event) {
             console.log(event.newSelection)
           }
-        },
+        }
       }
     );
   }
