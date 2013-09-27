@@ -1,7 +1,7 @@
 YUI().use(
   'aui-video',
   function(Y) {
-    new Y.Video(
+    var video = new Y.Video(
       {
         boundingBox: '#myVideo',
         fixedAttributes: {
@@ -15,5 +15,36 @@ YUI().use(
         width: 640
       }
     ).render();
+
+    Y.one('#play-btn').on(
+      'click',
+      function(e) {
+        e.preventDefault();
+
+        video.play();
+      }
+    );
+
+    Y.one('#pause-btn').on(
+      'click',
+      function(e) {
+        e.preventDefault();
+
+        video.pause();
+      }
+    );
+
+    Y.one('#change-video-btn').on(
+      'click',
+      function(e) {
+        e.preventDefault();
+
+        video.pause();
+        video.set('ogvUrl', 'http://alloyui.com/video/movie.ogv');
+        video.set('url', 'http://alloyui.com/video/movie.mp4');
+        video.load();
+        video.play();
+      }
+    );
   }
 );
