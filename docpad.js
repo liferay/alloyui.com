@@ -84,7 +84,7 @@ module.exports = {
 
     // Get the download URL for this Alloy version
     getDownloadUrl: function() {
-      return "" + this.alloy.cdnDomain + "/downloads/alloy-" + this.alloy.version + ".zip";
+      return "https://github.com/liferay/alloy-ui/releases/download/" + this.alloy.version + "/alloy-" + this.alloy.version + ".zip";
     },
 
     // Get the absolute URL of the website
