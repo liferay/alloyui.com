@@ -16,6 +16,7 @@
 <ul class="toc">
   <li><a href="#start">Getting Started</a></li>
   <li><a href="#common">Common Idioms</a></li>
+  <li><a href="#events">Events</a></li>
   <li><a href="#selectors">Selectors</a></li>
   <li><a href="#effects">Animations &amp; Effects</a></li>
   <li>
@@ -28,6 +29,7 @@
   </li>
   <li><a href="#ajax">Ajax</a></li>
   <li><a href="#css">CSS</a></li>
+  <li><a href="#langUtil">Language Utiilities</a></li>
   <li><a href="#credits">Credits</a></li>
   <li class="screenonly"><a href="#contrib">How to Contribute</a></li>
 </ul>
@@ -37,9 +39,9 @@
 <table>
   <thead>
     <tr>
-      <th class="jq">jQuery 1.4.2</th>
-      <th class="yui">YUI 3.3.0</th>
-      <th class="aui">AUI 1.0.1</th>
+      <th class="jq">jQuery 1.10.2</th>
+      <th class="yui">YUI 3.10.3</th>
+      <th class="aui">AUI 2.0.1</th>
       <th class="notes">Notes</th>
     </tr>
   </thead>
@@ -47,19 +49,66 @@
   <tbody>
     <tr>
       <td class="code">
-        <pre class="code jq">$<i>.foo.bar()</i></pre>
+<pre class="code jq">
+&lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"&gt;&lt;/script&gt;
+&lt;script src="https://somedomain.com/path/to/plugin.js"&gt;&lt;/script&gt;
+&lt;script src="https://somedomain.com/path/to/anotherplugin.js"&gt;&lt;/script&gt;
+
+&lt;script&gt;
+  $(document).ready(function() {
+    // Do stuff with the $ object here
+    $<i>.foo.bar()</i>
+  });
+&lt;/script&gt;
+</pre>
+        <p><strong>Loading Method</strong>: Statically loaded (by default).</p>
+        <p><strong>Scope</strong>: The <code>jQuery</code>/<code>$</code> objects are global.</p>
+        <p><strong>Plugins</strong>: To go beyond base library functionality, jQuery has the concept of "plugins" which are loaded in via additional <code>&lt;script&gt;</code> tags, or a dynamic loader.  All examples on this page use core library methods (no plugins).<p>
       </td>
       <td class="code">
-<pre class="code yui">YUI().use('<i>node</i>', '<i>module2</i>', '<i>module3</i>', function (Y) {
-  Y<i>.foo.bar()</i>
-});</pre>
-      </td>
-	  <td class="code">
-<pre class="code yui">AUI().use('<i>node</i>', '<i>module2</i>', '<i>module3</i>', function (A) {
-  A<i>.foo.bar()</i>
-});</pre>
-      </td>
+<pre class="code yui">
+&lt;script src="http://yui.yahooapis.com/3.10.3/build/yui/yui-min.js"&gt;&lt;/script&gt;
 
+
+
+&lt;script&gt;
+  YUI().use('<i>module1</i>', '<i>module2</i>', '<i>module3</i>', function (Y) {
+    // Do stuff with the Y object here
+    Y<i>.foo.bar()</i>
+  });
+&lt;/script&gt;
+</pre>
+
+<p><strong>Loading Method</strong>: Dynamically loaded (by default).</p>
+
+<p><strong>Scope</strong>: The <code>YUI</code> loader object is global, and the <code>Y</code> object is local to each "sandbox" (your callback function). However, the return value of <code>YUI().use()</code> is a <code>Y</code> object, which you can assign to a global variable [e.g. <code class="nowrap">var Y = YUI().use(&hellip;);</code>].</p>
+
+<p><strong>Modules</strong>: Functionality in the YUI library is provided by "modules", which are split between <a href="http://yuilibrary.com/yui/docs/guides/">core</a> (officially supported) and <a href="http://yuilibrary.com/gallery/show">gallery</a> (user contributed). Simply adding <code>YUI().use(function(Y){});</code> doesn't get you much, so you will need to specify which modules you wish to use and the loader will fetch them for you.  The following core modules should provide you all the functionality for the examples in this document: </p>
+<pre>
+  YUI().use('node', 'io', 'event', 'animation', function (Y) {
+    // example code here
+  });
+</pre>
+
+<p>If any additional modules are needed, they'll be specified in the "notes" section to the example.</p>
+      </td>
+      <td class="code">
+<pre class="code aui">
+&lt;script src="http://cdn.alloyui.com/2.0.0pr7/aui/aui-min.js"&gt;&lt;/script&gt;
+&lt;link href="http://cdn.alloyui.com/2.0.0pr7/aui-css/css/bootstrap.min.css" rel="stylesheet"&gt;&lt;/link&gt;
+
+&lt;script&gt;
+  YUI().use(
+    '<i>module1</i>',
+    '<i>module2</i>',
+    '<i>module3</i>',
+    function (Y) {
+      Y<i>.foo.bar()</i>
+    }
+  );
+&lt;/script&gt;
+</pre>
+      </td>
       <td class="notes">
         <p>The <code>jQuery</code> and <code>$</code> objects are globals and the jQuery library itself is statically loaded, so they are available immediately.</p>
 
@@ -77,10 +126,6 @@
           <code class="nowrap">var Y = YUI().use(&hellip;);</code>] and debug
           with it in a JavaScript console.
         </p>
-        <p>The return value of <code>AUI().use()</code> is also an A object, which
-        you can assign to a global variable [e.g.
-        <code class="nowrap">var A = AUI().use(&hellip;);</code>] and debug
-        with it in a JavaScript console.</p>
       </td>
     </tr>
   </tbody>
@@ -91,9 +136,9 @@
 <table>
   <thead>
     <tr>
-      <th class="jq">jQuery 1.4.2</th>
-      <th class="yui">YUI 3.3.0</th>
-      <th class="aui">AUI 1.0.1</th>
+      <th class="jq">jQuery 1.10.2</th>
+      <th class="yui">YUI 3.10.3</th>
+      <th class="aui">AUI 2.0.1</th>
       <th class="notes">Notes</th>
     </tr>
   </thead>
@@ -107,10 +152,10 @@
         <pre class="code yui">Y.one('div.foo')</pre>
       </td>
       <td class="code">
-        <pre class="code aui">A.one('div.foo')</pre>
+        <pre class="code aui">Y.one('div.foo')</pre>
       </td>
       <td class="notes">
-        <p>jQuery, YUI3, &amp; AUI use similar selector syntax, but jQuery has added extensions, mainly convenience pseudo-classes, to the Sizzle CSS3-compliant selector engine. YUI3 &amp; AUI comes with three different selector engines; see the section on <a href="#selectors">Selectors</a>.
+        <p>jQuery, YUI, and AUI use similar selector syntax, but jQuery has added extensions, mainly convenience pseudo-classes, to the Sizzle CSS3-compliant selector engine. YUI &amp; AUI comes with three different selector engines; see the section on <a href="#selectors">Selectors</a>.
       </td>
     </tr>
 
@@ -132,16 +177,16 @@ if (foo) {
       </td>
       <td class="code">
 <pre class="code aui">
-var foo = A.one('div.foo');
+var foo = Y.one('div.foo');
 
 if (foo) {
-   foo.<i>some_method()</i>;
+  foo.<i>some_method()</i>;
 }
 </pre>
       </td>
       <td class="notes">
         <p>Return the first element which matches the selector. <code>:first</code> is a jQuery extension.</p>
-        <p>If no elements match, <code>Y.one()</code> &amp; <code>A.one()</code> returns <code>null</code> and you should check for it. jQuery selector methods always return a list object with 0 or more elements.<p>
+        <p>If no elements match, <code>Y.one()</code> returns <code>null</code> and you should check for it. jQuery selector methods always return a list object with 0 or more elements.<p>
       </td>
     </tr>
 
@@ -153,7 +198,7 @@ if (foo) {
         <pre class="code yui">Y.all('div.foo')</pre>
       </td>
       <td class="code">
-        <pre class="code aui">A.all('div.foo')</pre>
+        <pre class="code aui">Y.all('div.foo')</pre>
       </td>
       <td class="notes">
         <p>Select all div elements with a class of foo.<p>
@@ -184,12 +229,12 @@ if (foo.size()) {
 var foo = Y.all('div.foo');
 
 if (foo.size()) {
-   <i>// do something</i>
+  <i>// do something</i>
 }
 </pre>
       </td>
       <td class="notes">
-        <p>If no elements match the selector, <code>Y.all()</code> &amp; <code>A.all()</code>returns an empty <code>NodeList</code> object. jQuery will return an empty list <code>[]</code> that is loaded with special jQ methods. Both are <a href="http://javascript.crockford.com/style2.html">truthy</a> even if they contain no elements, so use <code>NodeList.size()</code> and <code>[].length</code> to check for emptiness.<p>
+        <p>If no elements match the selector, <code>Y.all()</code> returns an empty <code>NodeList</code> object. jQuery will return an empty list <code>[]</code> that is loaded with special jQ methods. Both are <a href="http://javascript.crockford.com/style2.html">truthy</a> even if they contain no elements, so use <code>NodeList.size()</code> and <code>[].length</code> to check for emptiness.<p>
       </td>
     </tr>
 
@@ -223,7 +268,7 @@ if (foo.size()) {
         <pre class="code yui">Y.Node.create('&lt;div/&gt;')</pre>
       </td>
       <td class="code">
-        <pre class="code aui">A.Node.create('&lt;div/&gt;')</pre>
+        <pre class="code aui">Y.Node.create('&lt;div/&gt;')</pre>
       </td>
       <td class="notes"><p>Create a new DOM element. Does not add it to the document tree.<p></td>
     </tr>
@@ -238,24 +283,28 @@ if (foo.size()) {
       </td>
       <td class="code">
 <pre class="code yui">
-.setContent('<i>foo</i>')
+.setHTML('<i>foo</i>')
 .set('text', '<i>foo</i>')
 .set('value', '<i>foo</i>')
 </pre>
       </td>
       <td class="code">
 <pre class="code aui">
-.html('<i>foo</i>')
-.text('<i>foo</i>')
-.val('<i>foo</i>')
+.setHTML('<i>foo</i>')
+.set('text', '<i>foo</i>')
+.set('value', '<i>foo</i>')
 </pre>
       </td>
       <td class="notes">
-        <p><code>.set()</code> is a generic method in YUI for modifying element object properties. Use <code>.setAttr()</code> to modify element attributes.<p>
+        <p><code>.set()</code> is a generic method in YUI for modifying element object properties. Use <code>.setAttribute()</code> to modify element attributes.<p>
 
-        <p><code>.setContent(<i>html</i>)</code> is a convenience wrapper around <code>.set('innerHTML', <i>html</i>)</code><p>
+        <p><code>.setHTML(<i>html</i>)</code> is a convenience wrapper around <code>.set('innerHTML', <i>html</i>)</code><p>
 
-        <p><code>.val(<i>inputValue</i>)</code> is a generic method of AUI for obtaining the value of an input element.<p>
+        <p><code>.val(<i>inputValue</i>)</code> is a generic method of AUI for setting the value attribute of a node instance.</p>
+
+        <p>AUI's <code>setHTML</code> replaces the node's innerHTML.</p>
+
+        <p>jQuery and AUI overload getters and setters in the same methods. If a value is passed, these work as setters.</p>
       </td>
     </tr>
 
@@ -269,20 +318,22 @@ if (foo.size()) {
       </td>
       <td class="code">
 <pre class="code yui">
-.get('innerHTML')
+.getHTML()
 .get('text')
 .get('value')
 </pre>
       </td>
       <td class="code">
 <pre class="code aui">
-.html()
-.text()
-.val()
+.getHTML()
+.get('text')
+.get('value')
 </pre>
       </td>
       <td class="notes">
-        <p>jQuery tends to overload getters and setters in the same method.</p>
+        <p>AUI's <code>getHTML</code> returns the node's innerHTML content.</p>
+
+        <p>jQuery and AUI overload getters and setters in the same method. If no value is passed, these work as getters.</p>
       </td>
     </tr>
 
@@ -295,8 +346,8 @@ if (foo.size()) {
       </td>
       <td class="code">
 <pre class="code yui">
-.getAttr('<i>foo</i>')
-.setAttr('<i>foo</i>', '<i>bar</i>')
+.getAttribute('<i>foo</i>')
+.setAttribute('<i>foo</i>', '<i>bar</i>')
 </pre>
       </td>
       <td class="code">
@@ -306,76 +357,32 @@ if (foo.size()) {
 </pre>
       </td>
       <td class="notes">
-        <p>Generic HTML attribute getters and setters.</p>
+        <p>Generic HTML attribute getters and setters. If only the name is passed, it works as a getter.</p>
+
+        <p><code>.attr('foo')</code> gets the value of <code>foo</code> attribute.</p>
+
+        <p><code>.attr('foo', 'bar')</code> sets the value of <code>foo</code> attribute to <code>bar</code>.</p>
       </td>
     </tr>
 
     <tr>
       <td class="code">
 <pre class="code jq">
-.click(<i>fn</i>)
-.focus(<i>fn</i>)
-.blur(<i>fn</i>)
-.mouseout(<i>fn</i>)
-.mouseover(<i>fn</i>)
-
-<i>// jQuery 1.4.2 and later allows you to
-// register events when creating the element
-</i>$('&lt;p/&gt;',{
-  text      :<i>'foo'</i>,
-  className : <i>'bar'</i>,
-  click     : <i>fn</i>,
-  focus     : <i>fn</i>,
-  blur      : <i>fn</i>
-})
+$.trim('<i> foo </i>')
 </pre>
       </td>
       <td class="code">
 <pre class="code yui">
-.on('click', <i>fn</i>)
-.on('focus', <i>fn</i>)
-.on('blur', <i>fn</i>)
-.on('mouseout', <i>fn</i>)
-.on('mouseover', <i>fn</i>)
-
-<i>// Alternatively, YUI allows you to attach multiple
-// subscribers with a single call.</i>
-.on({
-  click    : <i>fn</i>,
-  focus    : <i>fn</i>,
-  blur     : <i>fn</i>,
-  mouseout : <i>fn</i>,
-  mouseover: <i>fn</i>
-})
-
-<i>// Or attach a single subscriber to multiple events.</i>
-.on(['click', 'focus', 'blur', 'mouseout', 'mouseover'], <i>fn</i>)
+Y.Lang.trim('<i> foo </i>')
 </pre>
       </td>
       <td class="code">
 <pre class="code aui">
-.on('click', <i>fn</i>)
-.on('focus', <i>fn</i>)
-.on('blur', <i>fn</i>)
-.on('mouseout', <i>fn</i>)
-.on('mouseover', <i>fn</i>)
-
-<i>// Alternatively, AUI allows you to attach multiple
-// subscribers with a single call.</i>
-.on({
-  click    : <i>fn</i>,
-  focus    : <i>fn</i>,
-  blur     : <i>fn</i>,
-  mouseout : <i>fn</i>,
-  mouseover: <i>fn</i>
-})
-
-<i>// Or attach a single subscriber to multiple events.</i>
-.on(['click', 'focus', 'blur', 'mouseout', 'mouseover'], <i>fn</i>)
+Y.Lang.trim('<i> foo </i>')
 </pre>
       </td>
       <td class="notes">
-        <p><code>.on()</code> is not chainable by default, but multiple subscribers can be attached in one call using the syntax shown here.</p>
+        <p>Strips leading and trailing whitespace.</p>
       </td>
     </tr>
 
@@ -423,21 +430,65 @@ $('&lt;p&gt;foo&lt;p&gt;')
       <td class="code">
 <pre class="code yui">
 <i>parent</i> = Y.Node.create('&lt;div/&gt;');
-Y.Node.create(&#x27;&lt;p&gt;foo&lt;/p&gt;&#x27;)
+Y.Node.create('&lt;p&gt;foo&lt;/p&gt;')
   .appendTo(<i>parent</i>)
-  .on(&#x27;click&#x27;, <i>fn</i>);
+  .on('click', <i>fn</i>);
 </pre>
       </td>
       <td class="code">
 <pre class="code aui">
-<i>parent</i> = A.Node.create('&lt;div/&gt;');
-A.Node.create(&#x27;&lt;p&gt;foo&lt;/p&gt;&#x27;)
+<i>parent</i> = Y.Node.create('&lt;div/&gt;');
+Y.Node.create('&lt;p&gt;foo&lt;/p&gt;')
   .appendTo(<i>parent</i>)
-  .on(&#x27;click&#x27;, <i>fn</i>);
+  .on('click', <i>fn</i>);
 </pre>
       </td>
       <td class="notes">
-        Creates a new <code>div</code> element, then appends a <code>p</code> element with a <code>click</code> event subscription. Note that YUI's <code>on()</code> method is not chainable, so it returns an event handle, not the <code>p</code> node.
+        Creates a new <code>div</code> element, then appends a <code>p</code> element with a <code>click</code> event subscription. Note that YUI and AUI's <code>on()</code> method is not chainable, so it returns an event handle, not the <code>p</code> node.
+      </td>
+    </tr>
+
+    <tr>
+      <td class="code">
+<pre class="code jq">
+<i>// Removes #foo from its parent and
+// detaches events and jQuery data.</i>
+$('#foo').remove()
+
+<i>// Removes #foo from #container.</i>
+$('#container').remove('#foo')
+</pre>
+      </td>
+      <td class="code">
+<pre class="code yui">
+<i>// Removes #foo from its parent, but doesn't
+// detach events or YUI plugins.</i>
+Y.one('#foo').remove()
+
+<i>// Removes #foo and detaches events and plugins.</i>
+Y.one('#foo').remove(<i>true</i>)
+
+<i>// Removes #foo from #container.</i>
+Y.one('#container').removeChild(Y.one('#foo'))
+</pre>
+      </td>
+      <td class="code">
+<pre class="code aui">
+<i>// Removes #foo from its parent, but doesn't
+// detach events or YUI plugins.</i>
+Y.one('#foo').remove()
+
+<i>// Removes #foo and detaches events and plugins.</i>
+Y.one('#foo').remove(<i>true</i>)
+
+<i>// Removes #foo from #container.</i>
+Y.one('#container').removeChild(Y.one('#foo'))
+</pre>
+      </td>
+      <td class="notes">
+        <p>
+          jQuery's <code>.remove()</code> purges events and jQuery data from the removed node. For the equivalent behavior in YUI &amp; AUI, use <code>.remove(<i>true</i>)</code>.
+        </p>
       </td>
     </tr>
 
@@ -446,23 +497,19 @@ A.Node.create(&#x27;&lt;p&gt;foo&lt;/p&gt;&#x27;)
         <pre class="code jq">.empty()</pre>
       </td>
       <td class="code">
-        <pre class="code yui">.empty(<i>true</i>)</pre>
+        <pre class="code yui">.empty()</pre>
       </td>
       <td class="code">
         <pre class="code aui">.empty()</pre>
       </td>
       <td class="notes">
         <p>
-          jQuery's <code>.empty()</code> also deregisters any events associated with the elements being destroyed. Passing <code>true</code> to <code>.empty()</code> enables the same behavior in YUI.
+          Removes and destroys all of the nodes within the given node and also deregisters any events associated with the elements being destroyed.
         <p>
 
         <p>
           <code>.empty()</code> was added to YUI in 3.3.0.
         </p>
-
-        <p>
-          AUI removes the child (and other des)
-        </p>
       </td>
     </tr>
 
@@ -477,25 +524,170 @@ A.Node.create(&#x27;&lt;p&gt;foo&lt;/p&gt;&#x27;)
 <pre class="code yui">
 .siblings()
 .siblings(<i>selector</i>)
-.siblings(<i>function</i>)
+.siblings(<i>fn</i>)
 </pre>
       </td>
       <td class="code">
-        <pre class="code aui">
+<pre class="code aui">
 .siblings()
 .siblings(<i>selector</i>)
-.siblings(<i>function</i>)
-        </pre>
+.siblings(<i>fn</i>)
+</pre>
+      </td>
+      <td class="notes">
+        <p>In addition to an optional selector string, YUI also supports passing
+          a function to filter the returned siblings.<p>
+
+        <p>AUI supports passing a selector for the ancestors to be filtered on. If the reference node has no parent, then it does nothing.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="code">
+<pre class="code jq">
+.next()
+.next(<i>selector</i>)
+</pre>
+      </td>
+      <td class="code">
+<pre class="code yui">
+.next()
+.next(<i>selector</i>)
+.next(<i>fn</i>)
+</pre>
+      </td>
+      <td class="code">
+<pre class="code aui">
+.next()
+.next(<i>selector</i>)
+.next(<i>fn</i>)
+</pre>
       </td>
       <td class="notes">
         <p>
-          In addition to an optional selector string, YUI3 also supports passing
-          a function to filter the returned siblings.
+          Same considerations as <code>.siblings()</code>.
         <p>
-        <p>
-          AUI supports passing a selector for the ancestors to be filtered on.  If the reference node has no parent, then it does nothing.
-        </p>
       </td>
+    </tr>
+
+    <tr>
+      <td class="code">
+<pre class="code jq">
+.prev()
+.prev(<i>selector</i>)
+</pre>
+      </td>
+      <td class="code">
+<pre class="code yui">
+.previous()
+.previous(<i>selector</i>)
+.previous(<i>fn</i>)
+</pre>
+      </td>
+      <td class="code">
+<pre class="code aui">
+.previous()
+.previous(<i>selector</i>)
+.previous(<i>fn</i>)
+</pre>
+      </td>
+      <td class="notes">
+        <p>
+          Same considerations as <code>.siblings()</code>.
+        <p>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="code">
+<pre class="code jq">
+.parent()
+</pre>
+      </td>
+      <td class="code">
+<pre class="code yui">
+.get('parentNode')
+</pre>
+      </td>
+      <td class="code">
+<pre class="code aui">
+.ancestor(<i>selector</i>)
+.ancestor(<i>fn</i>)
+</pre>
+      </td>
+      <td class="notes"><p>Returns the parent node of the given node.</p></td>
+    </tr>
+
+    <tr>
+      <td class="code">
+<pre class="code jq">
+.children()
+</pre>
+      </td>
+      <td class="code">
+<pre class="code yui">
+.get('children')
+</pre>
+      </td>
+      <td class="code">
+<pre class="code aui">
+<i>// Finds the first child </i>
+.one(<i>selector</i>)
+
+<i>// Finds all children that matches </i>
+.all(<i>selector</i>)
+</pre>
+      </td>
+      <td class="notes"><p>Returns all the element children of the given node.</p></td>
+    </tr>
+
+    <tr>
+      <td class="code">
+<pre class="code jq">
+// Finds the first ancestor
+.closest(<i>selector</i>)
+
+// Finds all the ancestors
+.parents(<i>selector</i>)
+</pre>
+      </td>
+      <td class="code">
+<pre class="code yui">
+.ancestor(<i>selector</i>)
+.ancestor(<i>fn</i>)
+</pre>
+      </td>
+      <td class="code">
+<pre class="code aui">
+// Finds the first ancestor
+.ancestor(<i>selector</i>)
+.ancestor(<i>fn</i>)
+
+// Finds all the ancestors
+.ancestors(<i>selector</i>)
+.ancestors(<i>fn</i>)
+</pre>
+      </td>
+      <td class="notes"><p>Returns the first ancestor that matches the given selector. In addition, YUI &amp; AUI support using a function instead of a selector to find an ancestor.</p></td>
+    </tr>
+
+    <tr>
+      <td class="code">
+<pre class="code jq">
+$.contains(<i>node</i>, <i>descendant</i>)
+</pre>
+      </td>
+      <td class="code">
+<pre class="code yui">
+.contains(<i>descendant</i>)
+</pre>
+      </td>
+      <td class="code">
+<pre class="code aui">
+.contains(<i>descendant</i>)
+</pre>
+      </td>
+      <td class="notes"><p>Check to see if a node contains a certain descendant.</p></td>
     </tr>
 
     <tr>
@@ -509,69 +701,301 @@ A.Node.create(&#x27;&lt;p&gt;foo&lt;/p&gt;&#x27;)
 <pre class="code yui">
 .show()
 .hide()
-
-<i>// If the transition module is loaded,
-// a fade transition will be used when
-// true is passed.</i>
-.show(<i>true</i>)
-.hide(<i>true</i>)
 </pre>
       </td>
       <td class="code">
 <pre class="code aui">
-.show();
-.hide();
-
-<i>// If the transition module is loaded,
-// a fade transition will be used when
-// true is passed.</i>
-.show(<i>true</i>)
-.hide(<i>true</i>)
+.show()
+.hide()
 </pre>
       </td>
-      <td class="notes">
-        <p>In YUI, <code>.show()</code> and <code>.hide()</code> can be customized to use transitions supported by the <code>transition</code> module. These methods were added to YUI in 3.3.0.<p>
-        <p>AUI assume that your node was display/hidden based on the css class 'aui-helper-hidden' used. This won't manipulate the inline <code>style.display</code> property.</p>
-      </td>
+      <td class="notes">Make DOM nodes appear/disappear</td>
     </tr>
-	<tr>
-	   <td class="code">
-<pre class="code jq">
-.before('<i>foo</i>')
-.before('<i>function</i>')
 
-.after('<i>foo</i>')
-.after('<i>function</i>')
+    <tr>
+      <td class="code">
+<pre class="code jq">
+.fadeIn()
+.fadeOut()
 </pre>
       </td>
       <td class="code">
 <pre class="code yui">
-.insertBefore('<i>foo</i>')
-.insertAfter('<i>foo</i>')
+.show(<i>true</i>)
+.hide(<i>true</i>)
 </pre>
       </td>
       <td class="code">
 <pre class="code aui">
-.placeBefore('<i>foo</i>')
-.placeAfter('<i>foo</i>')
+.show(<i>true</i>)
+.hide(<i>true</i>)
 </pre>
       </td>
       <td class="notes">
-        <p>Add element before/after parent node as the next sibling.<p>
-        <p>If the reference node has no parent in AUI, it does nothing.</p>
+        <p>In YUI and AUI, <code>.show()</code> and <code>.hide()</code> can be customized to use transitions supported by the <code>transition</code> module. These methods were added to YUI in 3.3.0.<p>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="code">
+<pre class="code jq">
+$.parseJSON( '{"name":"Douglas"}' )
+</pre>
+      </td>
+      <td class="code">
+<pre class="code yui">
+Y.JSON.parse( '{"name":"Douglas"}' )
+</pre>
+      </td>
+      <td class="code">
+<pre class="code aui">
+Y.JSON.parse( '{"name":"Douglas"}' )
+</pre>
+      </td>
+      <td class="notes"><p>Converts a JSON string into an object. Requires the <code>json-parse</code> module.</p></td>
+    </tr>
+
+    <tr>
+      <td class="code">
+<pre class="code jq"></pre>
+      </td>
+      <td class="code">
+<pre class="code yui">
+Y.JSON.stringify({name: "Douglas"})
+</pre>
+      </td>
+      <td class="code">
+<pre class="code aui">
+Y.JSON.stringify({name: "Douglas"})
+</pre>
+      </td>
+      <td class="notes"><p>Converts an object to a JSON string. Requires the <code>json-stringify</code> module. No jQuery equivalent.</p></td></p></td>
+    </tr>
+
+    <tr>
+      <td class="code">
+<pre class="code jq">$.proxy(<i>fn</i>, <i>context</i>)
+</pre>
+      </td>
+      <td class="code">
+<pre class="code yui">
+Y.bind(<i>fn</i>, <i>context</i>)
+</pre>
+      </td>
+      <td class="code">
+<pre class="code aui">
+Y.bind(<i>fn</i>, <i>context</i>)
+</pre>
+      </td>
+      <td class="notes"><p>Creates a new function that will call the supplied function in a particular context.</p></td>
+    </tr>
+
+    <tr>
+      <td class="code">
+<pre class="code jq">
+.data(<i>key</i>)
+.data(<i>key</i>, <i>value</i>)
+</pre>
+      </td>
+      <td class="code">
+<pre class="code yui">
+.getData(<i>key</i>)
+.setData(<i>key</i>, <i>value</i>)
+</pre>
+      </td>
+      <td class="code">
+<pre class="code aui">
+.getData(<i>key</i>)
+.setData(<i>key</i>, <i>value</i>)
+</pre>
+      </td>
+      <td class="notes"><p>Stores data associated with a DOM element without modifying the DOM.</p></td>
+    </tr>
+
+    <tr>
+      <td class="code">
+<pre class="code jq">
+.removeData()
+.removeData(<i>key</i>)
+</pre>
+      </td>
+      <td class="code">
+<pre class="code yui">
+.clearData()
+.clearData(<i>key</i>)
+</pre>
+      </td>
+      <td class="code">
+<pre class="code aui">
+.clearData()
+.clearData(<i>key</i>)
+</pre>
+      </td>
+      <td class="notes"><p>Removes the associated data.</p></td>
+    </tr>
+
+  </tbody>
+</table>
+
+<h2 id="events">Events</h2>
+<table>
+  <thead>
+    <tr>
+      <th class="jq">jQuery 1.10.2</th>
+      <th class="yui">YUI 3.10.3</th>
+      <th class="aui">AUI 2.0.1</th>
+      <th class="notes">Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="code">
+<pre class="code jq">
+$('#foo').click(<i>fn</i>)
+$('#foo').focus(<i>fn</i>)
+$('#foo').blur(<i>fn</i>)
+$('#foo').mouseout(<i>fn</i>).mouseover(<i>fn</i>)
+
+<i>// jQuery 1.4.2 and later allows you to
+// register events when creating the element
+</i>$('&lt;p/&gt;',{
+  text      :<i>'foo'</i>,
+  className : <i>'bar'</i>,
+  click     : <i>fn</i>,
+  focus     : <i>fn</i>,
+  blur      : <i>fn</i>
+})
+
+<i>//Alternatively, you can use the bind() method</i>
+$('#foo').bind('click', <i>fn</i>);
+</pre>
+      </td>
+      <td class="code">
+<pre class="code yui">
+Y.one('#foo').on('click', <i>fn</i>)
+Y.one('#foo').on('focus', <i>fn</i>)
+Y.one('#foo').on('blur', <i>fn</i>)
+Y.one('#foo').on('mouseout', <i>fn</i>)
+Y.one('#foo').on('mouseover', <i>fn</i>)
+
+<i>// Alternatively, YUI allows you to attach multiple
+// subscribers with a single call.</i>
+Y.one('#foo').on({
+  click    : <i>fn</i>,
+  focus    : <i>fn</i>,
+  blur     : <i>fn</i>,
+  mouseout : <i>fn</i>,
+  mouseover: <i>fn</i>
+})
+
+<i>// Or attach a single subscriber to multiple events.</i>
+Y.one("#foo").on(['click', 'focus', 'blur'], <i>fn</i>)
+</pre>
+      </td>
+      <td class="code">
+<pre class="code aui">
+Y.one('#foo').on('click', <i>fn</i>)
+Y.one('#foo').on('focus', <i>fn</i>)
+Y.one('#foo').on('blur', <i>fn</i>)
+Y.one('#foo').on('mouseout', <i>fn</i>)
+Y.one('#foo').on('mouseover', <i>fn</i>)
+
+<i>// Alternatively, YUI allows you to attach multiple
+// subscribers with a single call.</i>
+Y.one('#foo').on({
+  click    : <i>fn</i>,
+  focus    : <i>fn</i>,
+  blur     : <i>fn</i>,
+  mouseout : <i>fn</i>,
+  mouseover: <i>fn</i>
+})
+
+<i>// Or attach a single subscriber to multiple events.</i>
+Y.one("#foo").on(['click', 'focus', 'blur'], <i>fn</i>)
+</pre>
+      </td>
+      <td class="notes">
+        <p><code>.on()</code> is not chainable by default, but multiple subscribers can be attached in one call using the syntax shown here.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="code">
+<pre class="code jq">
+$('#container').delegate('#target', 'click', <i>fn</i>);
+</pre>
+      </td>
+      <td class="code">
+<pre class="code yui">
+Y.one('#container').delegate('click', <i>fn</i>, '#target');
+</pre>
+      </td>
+      <td class="code">
+<pre class="code aui">
+Y.one('#container').delegate('click', <i>fn</i>, '#target');
+</pre>
+      </td>
+      <td class="notes">
+        <p>Event listener will bind to #container and only fire the callback <i>fn</i> when a event's target is #target (or any other selector)</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="code">
+<pre class="code jq">
+$(document).on('click', '#target', <i>fn</i>);
+</pre>
+      </td>
+      <td class="code">
+<pre class="code yui">
+Y.one(Y.config.doc).delegate('click', <i>fn</i>, '#target');
+</pre>
+      </td>
+      <td class="code">
+<pre class="code aui">
+Y.one(Y.config.doc).delegate('click', <i>fn</i>, '#target');
+</pre>
+      </td>
+      <td class="notes">
+        <p>jQuery's delegate() is generally preferred over on() because of performance as well as chaining limitations (<a href="http://www.alfajango.com/blog/the-difference-between-jquerys-bind-live-and-delegate/">source</a>).</p>
+        <p><code>.live()</code> was deprecated in jQuery 1.7, and removed in jQuery 1.9 in favour of <code>.on()</code></p>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="code">
+<pre class="code jq">
+$('#foo').trigger('click');
+</pre>
+      </td>
+      <td class="code">
+<pre class="code yui">
+Y.one('#foo').simulate('click');
+</pre>
+      </td>
+      <td class="code">
+<pre class="code aui">
+Y.one('#foo').simulate('click');
+</pre>
+      </td>
+      <td class="notes">
+        <p>Simulates a <em>click</em> event. You'll need the <code>node-event-simulate</code> module.</p>
       </td>
     </tr>
   </tbody>
 </table>
+
+
+
 
 <h2 id="selectors">Selectors</h2>
 
 <table>
   <thead>
     <tr>
-      <th class="jq">jQuery 1.4.2</th>
-      <th class="yui">YUI 3.3.0</th>
-      <th class="aui">AUI 1.0.1</th>
+      <th class="jq">jQuery 1.10.2</th>
+      <th class="yui">YUI 3.10.3</th>
+      <th class="aui">AUI 2.0.1</th>
       <th class="notes">Notes</th>
     </tr>
   </thead>
@@ -580,59 +1004,57 @@ A.Node.create(&#x27;&lt;p&gt;foo&lt;/p&gt;&#x27;)
     <tr>
       <td class="code"><pre class="code jq">$('*')</pre></td>
       <td class="code"><pre class="code yui">Y.all('*')</pre></td>
-      <td class="code"><pre class="code aui">A.all('*')</pre></td>
-      <td class="notes"><p>Select all nodes. Note that the default selector engine for YUI3 is CSS 2.1. For all examples in this section, use the <code>selector-css3</code> module for YUI.</p></td>
+      <td class="code"><pre class="code aui">Y.all('*')</pre></td>
+      <td class="notes"><p>Select all nodes. Note that the default selector engine for YUI is CSS 2.1. For all examples in this section, use the <code>selector-css3</code> module for YUI.</p></td>
     </tr>
     <tr>
       <td class="code"><pre class="code jq">$(':animated')</pre></td>
       <td class="code"><pre class="code yui"></pre></td>
       <td class="code"><pre class="code aui"></pre></td>
-      <td class="notes"><p>Psuedoclass to select all elements currently being animated. No YUI3 equivalent. </p></td>
+      <td class="notes"><p>Psuedoclass to select all elements currently being animated. No YUI equivalent. </p></td>
     </tr>
     <tr>
       <td class="code"><pre class="code jq">$(':button')</pre></td>
       <td class="code"><pre class="code yui">Y.all('input[type=button], button')</pre></td>
-      <td class="code"><pre class="code aui">A.all(':button')</pre></td>
-      <td class="notes">
-        <p>Extension. In both jQuery and YUI3 you can run multiple selectors separated by commas.</p>
-      </td>
+      <td class="code"><pre class="code aui">Y.all('input[type=button], button')</pre></td>
+      <td class="notes"><p>Extension. In jQuery, YUI and AUI you can run multiple selectors separated by commas.</p></td>
     </tr>
     <tr>
       <td class="code"><pre class="code jq">$(':checkbox')</pre></td>
       <td class="code"><pre class="code yui">Y.all('input[type=checkbox]')</pre></td>
-      <td class="code"><pre class="code aui">A.all(':checkbox')</pre></td>
+      <td class="code"><pre class="code aui">Y.all('input[type=checkbox]')</pre></td>
       <td class="notes"><p>Extension.</p></td>
     </tr>
     <tr>
       <td class="code"><pre class="code jq">$(':checked')</pre></td>
       <td class="code"><pre class="code yui">Y.all(':checked')</pre></td>
-      <td class="code"><pre class="code aui">A.all(':checked')</pre></td>
+      <td class="code"><pre class="code aui">Y.all(':checked')</pre></td>
       <td class="notes"><p>CSS3</p></td>
     </tr>
     <tr>
       <td class="code"><pre class="code jq">$('parent > child')</pre></td>
       <td class="code"><pre class="code yui">Y.all('parent > child')</pre></td>
-      <td class="code"><pre class="code aui">A.all('parent > child')</pre></td>
+      <td class="code"><pre class="code aui">Y.all('parent > child')</pre></td>
       <td class="notes"><p>Immediate child selector (child must be one level below parent)</p></td>
     </tr>
     <tr>
       <td class="code"><pre class="code jq">$('parent child')</pre></td>
       <td class="code"><pre class="code yui">Y.all('parent child')</pre></td>
-      <td class="code"><pre class="code aui">A.all('parent child')</pre></td>
+      <td class="code"><pre class="code aui">Y.all('parent child')</pre></td>
       <td class="notes"><p>Descendent selector (child can be at any level below parent)</p></td>
     </tr>
     <tr>
       <td class="code"><pre class="code jq">$('div.class')</pre></td>
       <td class="code"><pre class="code yui">Y.all('div.class')</pre></td>
-      <td class="code"><pre class="code aui">A.all('div.class')</pre></td>
+      <td class="code"><pre class="code aui">Y.all('div.class')</pre></td>
       <td class="notes"><p>Class selector</p></td>
     </tr>
 
     <tr>
       <td class="code"><pre class="code jq">$(":contains('<i>foo</i>')")</pre></td>
       <td class="code"><pre class="code yui">Y.all(':contains(<i>foo</i>)')</pre></td>
-      <td class="code"><pre class="code aui">A.all(':contains(<i>foo</i>)')</pre></td>
-      <td class="notes"><p>Extension to select all elements whose text matches 'foo'. jQuery can take quotes or not. YUI3 requires no quotes. The text matching is plain string comparison, not glob or regexp. Be careful with this one as it will return all matching ancestors, eg <code>[html, body, div]</code>.</p></td>
+      <td class="code"><pre class="code aui">Y.all(':contains(<i>foo</i>)')</pre></td>
+      <td class="notes"><p>Extension to select all elements whose text matches 'foo'. jQuery can take quotes or not. YUI requires no quotes. The text matching is plain string comparison, not glob or regexp. Be careful with this one as it will return all matching ancestors, eg <code>[html, body, div]</code>.</p></td>
     </tr>
 
     <tr>
@@ -649,36 +1071,31 @@ Y.all(':enabled')
       </td>
       <td class="code">
 <pre class="code aui">
-A.all(':disabled')
-A.all(':enabled')
+Y.all(':disabled')
+Y.all(':enabled')
 </pre>
       </td>
-      <td class="notes"><p>CSS3. <code>'input[disabled]'</code> and <code>'input:not([disabled])'</code> also work in all libraries.</p></td>
+      <td class="notes"><p>CSS3. <code>'input[disabled]'</code> and <code>'input:not([disabled])'</code> also work in both libraries.</p></td>
     </tr>
 
     <tr>
       <td class="code"><pre class="code jq">$(':empty')</pre></td>
       <td class="code"><pre class="code yui">Y.all(':empty')</pre></td>
-      <td class="code"><pre class="code aui">A.all(':empty')</pre></td>
+      <td class="code"><pre class="code aui">Y.all(':empty')</pre></td>
       <td class="notes"><p>CSS3. Selects all elements that have no child nodes (excluding text nodes).</p></td>
     </tr>
 
     <tr>
       <td class="code"><pre class="code jq">$(':parent')</pre></td>
       <td class="code"><pre class="code yui">Y.all(':not(:empty)')</pre></td>
-      <td class="code">
-<pre class="code aui">
-A.all(':parent')
-A.all(':not(:empty)')
-</pre>
-      </td>
+      <td class="code"><pre class="code aui">Y.all(':not(:empty)')</pre></td>
       <td class="notes"><p>Inverse of <code>:empty</code>. Will find all elements that are a parent of at least one element. jQuery's version is an extension. YUI's is CSS3.</p></td>
     </tr>
 
     <tr>
       <td class="code"><pre class="code jq">$('div:eq(<i>n</i>)')</pre></td>
       <td class="code"><pre class="code yui">Y.all('div').item(<i>n</i>)</pre></td>
-      <td class="code"><pre class="code aui">A.all('div').item(<i>n</i>)</pre></td>
+      <td class="code"><pre class="code aui">Y.all('div').item(<i>n</i>)</pre></td>
       <td class="notes"><p>Extension. Selects <i>nth</i> element. YUI's <code>item()</code> will return <code>null</code> if there is no <code>nth</code> element. jQuery's selector will return an empty list <code>[]</code> on a match failure.</p></td>
     </tr>
 
@@ -697,32 +1114,31 @@ Y.all('div').odd()
       </td>
       <td class="code">
 <pre class="code aui">
-A.all('div').even()
-A.all('div').odd()
+Y.all('div').even()
+Y.all('div').odd()
 </pre>
       </td>
-      <td class="notes"><p>Extension. Selects all even or odd elements. Note that elements are 0-indexed and the 0th element is considered even. See also YUI3's <code>NodeList.modulus(n, offset)</code>.</p></td>
+      <td class="notes"><p>Extension. Selects all even or odd elements. Note that elements are 0-indexed and the 0th element is considered even. See also YUI's <code>NodeList.modulus(n, offset)</code>.</p></td>
     </tr>
 
     <tr>
       <td class="code"><pre class="code jq">$(':file')</pre></td>
       <td class="code"><pre class="code yui">Y.all('input[type=file]')</pre></td>
-      <td class="code"><pre class="code aui">A.all(':file')</pre>
-      </td>
-      <td class="notes"><p>Extension. Find input elements whose <code>type=file</code>.</p></td>
+      <td class="code"><pre class="code aui">Y.all('input[type=file]')</pre></td>
+      <td class="notes"><p>Extension. Find input elements whose type=file.</p></td>
     </tr>
 
     <tr>
       <td class="code"><pre class="code jq">$('div:first-child')</pre></td>
       <td class="code"><pre class="code yui">Y.all('div:first-child')</pre></td>
-      <td class="code"><pre class="code aui">A.all('div:first-child')</pre></td>
+      <td class="code"><pre class="code aui">Y.all('div:first-child')</pre></td>
       <td class="notes"><p>CSS3. Selects the first child element of divs.</p></td>
     </tr>
 
     <tr>
       <td class="code"><pre class="code jq">$('div:first)</pre></td>
       <td class="code"><pre class="code yui">Y.one('div')</pre></td>
-      <td class="code"><pre class="code aui">A.one('div')</pre></td>
+      <td class="code"><pre class="code aui">Y.one('div')</pre></td>
       <td class="notes"><p>The <code>.one()</code> method returns <code>null</code> if there is no match, and a single Node object if there is.</p></td>
     </tr>
 
@@ -731,7 +1147,7 @@ A.all('div').odd()
 <pre class="code jq">
 $('div:gt(<i>n</i>)');
 $('div:lt(<i>n</i>)');
-<i>// or</i>
+<i>// Or</i>
 $('div').slice(<i>n + 1</i>);
 $('div').slice(0,<i>n</i>);
 </pre>
@@ -744,8 +1160,8 @@ Y.all('div').slice(0, <i>n</i>);
       </td>
       <td class="code">
 <pre class="code aui">
-A.all('div').slice(<i>n + 1</i>);
-A.all('div').slice(0, <i>n</i>);
+Y.all('div').slice(<i>n + 1</i>);
+Y.all('div').slice(0, <i>n</i>);
 </pre>
       </td>
       <td class="notes"><p>Extension. <code>:gt</code> (greater than) selects all elements from index <code>n+1</code> onwards. <code>:lt</code> (less than) selects all nodes from 0 up to <code>n-1</code>.
@@ -770,13 +1186,13 @@ nodes = Y.all(nodes);
 <pre class="code aui">
 var nodes = [];
 
-A.all('div').each(function (node) {
+Y.all('div').each(function (node) {
   if (node.one('p')) {
     nodes.push(node);
   }
 });
 
-nodes = A.all(nodes);
+nodes = Y.all(nodes);
 </pre>
       </td>
       <td class="notes"><p>Extension. Selects elements which contain at least one element that matches the specified selector. In this example, all <code>div</code> tags which have a <code>p</code> tag descendent will be selected.</p></td>
@@ -785,7 +1201,7 @@ nodes = A.all(nodes);
     <tr>
       <td class="code"><pre class="code jq">$(':header')</pre></td>
       <td class="code"><pre class="code yui">Y.all('h1,h2,h3,h4,h5,h6')</pre></td>
-      <td class="code"><pre class="code aui">A.all(':header')</pre></td>
+      <td class="code"><pre class="code aui">Y.all('h1,h2,h3,h4,h5,h6')</pre></td>
       <td class="notes"><p>Extension. Selects all heading elements. Rarely used.</p></td>
     </tr>
 
@@ -795,53 +1211,59 @@ nodes = A.all(nodes);
 <pre class="code yui">
 var hidden = [];
 Y.all('div').each(function(node) {
-  if ((node.get('offsetWidth') === 0 &amp;&amp;
-    node.get('offsetHeight') === 0) ||
-    node.get('display') === 'none') {
-    hidden.push(node);
-  }
+    if ((node.get('offsetWidth') === 0 &amp;&amp;
+        node.get('offsetHeight') === 0) ||
+        node.get('display') === 'none') {
+        hidden.push(node);
+    }
 });
 hidden = Y.all(hidden);
 </pre>
       </td>
       <td class="code">
 <pre class="code aui">
-A.all(':hidden')
+var hidden = [];
+Y.all('div').each(function(node) {
+    if ((node.get('offsetWidth') === 0 &amp;&amp;
+        node.get('offsetHeight') === 0) ||
+        node.get('display') === 'none') {
+        hidden.push(node);
+    }
+});
+hidden = Y.all(hidden);
 </pre>
       </td>
       <td class="notes">
         <p>Extension. In jQuery > 1.3.2 <code>:hidden</code> selects all elements (or descendents of elements) which <a href="http://docs.jquery.com/Release:jQuery_1.3.2#:visible.2F:hidden_Overhauled">take up no visual space</a>. Elements with <code>display:none</code> or whose <code>offsetWidth/offsetHeight</code> equal 0 are considered hidden. Elements with <code>visibility:hidden</code> are not considered hidden.</p>
-        <p>The YUI3 equivalent would essentially be a port of the jQuery code that implements <code>:hidden</code>. This might be a good candidate for a patch to YUI3.</p>
+        <p>The YUI equivalent would essentially be a port of the jQuery code that implements <code>:hidden</code>. This might be a good candidate for a patch to YUI.</p>
       </td>
     </tr>
 
     <tr>
       <td class="code"><pre class="code jq">$('#id')</pre></td>
       <td class="code"><pre class="code yui">Y.all('#id')</pre></td>
-      <td class="code"><pre class="code aui">A.all('#id')</pre></td>
+      <td class="code"><pre class="code aui">Y.all('#id')</pre></td>
       <td class="notes"><p>CSS3. Identity selector.</p></td>
     </tr>
 
     <tr>
       <td class="code"><pre class="code jq">$('input:image')</pre></td>
       <td class="code"><pre class="code yui">Y.all('input[type=image]')</pre></td>
-      <td class="code"><pre class="code aui">A.all(':image')</pre>
-      </td>
+      <td class="code"><pre class="code aui">Y.all('input[type=image]')</pre></td>
       <td class="notes"><p>Extension. Selects all inputs of type image.</p></td>
     </tr>
 
     <tr>
       <td class="code"><pre class="code jq">$(':input')</pre></td>
       <td class="code"><pre class="code yui">Y.all('input,textarea,select,button')</pre></td>
-      <td class="code"><pre class="code aui">A.all(':input')</pre>
-      </td>
+      <td class="code"><pre class="code aui">Y.all('input,textarea,select,button')</pre></td>
       <td class="notes"><p>Extension. Selects all user-editable form elements.</p></td>
     </tr>
 
     <tr>
       <td class="code"><pre class="code jq">$(':last-child')</pre></td>
       <td class="code"><pre class="code yui">Y.all(':last-child')</pre></td>
-      <td class="code"><pre class="code aui">A.all(':last-child')</pre></td>
+      <td class="code"><pre class="code aui">Y.all(':last-child')</pre></td>
       <td class="notes"><p>CSS3.</p></td>
     </tr>
 
@@ -851,20 +1273,22 @@ A.all(':hidden')
       <td class="code">
 <pre class="code yui">
 var list = Y.all('div'),
-  last;
+    len  = list.size(),
+    last;
 
-if (list.size()) {
-  last = list.item(list.size() - 1);
+if (len) {
+  last = list.item(len - 1);
 }
 </pre>
       </td>
       <td class="code">
 <pre class="code aui">
-var list = A.all('div'),
-  last;
+var list = Y.all('div'),
+    len  = list.size(),
+    last;
 
-if (list.size()) {
-  last = list.item(list.size() - 1);
+if (len) {
+  last = list.item(len - 1);
 }
 </pre>
       </td>
@@ -874,75 +1298,69 @@ if (list.size()) {
     <tr>
       <td class="code"><pre class="code jq">$('input[type=checkbox][checked]')</pre></td>
       <td class="code"><pre class="code yui">Y.all('input[type=checkbox][checked]')</pre></td>
-      <td class="code"><pre class="code aui">A.all(':checkbox:checked')</pre></td>
+      <td class="code"><pre class="code aui">Y.all('input[type=checkbox][checked]')</pre></td>
       <td class="notes"><p>CSS3, multiple attribute selector</p></td>
     </tr>
 
     <tr>
       <td class="code"><pre class="code jq">$(':not(<i>div</i>)')</pre></td>
       <td class="code"><pre class="code yui">Y.all(':not(<i>div</i>)')</pre></td>
-      <td class="code"><pre class="code aui">A.all(':not(<i>div</i>)')</pre></td>
+      <td class="code"><pre class="code aui">Y.all(':not(<i>div</i>)')</pre></td>
       <td class="notes"><p>CSS3. Negation selector.</p></td>
     </tr>
 
     <tr>
       <td class="code"><pre class="code jq">$(':password')</pre></td>
       <td class="code"><pre class="code yui">Y.all('input[type=password]')</pre></td>
-      <td class="code"><pre class="code aui">A.all(':password')</pre>
-      </td>
+      <td class="code"><pre class="code aui">Y.all('input[type=password]')</pre></td>
       <td class="notes"><p>Extension.</p></td>
     </tr>
 
     <tr>
       <td class="code"><pre class="code jq">$(':radio')</pre></td>
       <td class="code"><pre class="code yui">Y.all('input[type=radio]')</pre></td>
-      <td class="code"><pre class="code aui">A.all(':radio')</pre>
-      </td>
+      <td class="code"><pre class="code aui">Y.all('input[type=radio]')</pre></td>
       <td class="notes"><p>Extension.</p></td>
     </tr>
 
     <tr>
       <td class="code"><pre class="code jq">$(':reset')</pre></td>
       <td class="code"><pre class="code yui">Y.all('input[type=reset]')</pre></td>
-      <td class="code"><pre class="code aui">A.all(':reset')</pre>
-      </td>
+      <td class="code"><pre class="code aui">Y.all('input[type=reset]')</pre></td>
       <td class="notes"><p>Extension.</p></td>
     </tr>
 
     <tr>
       <td class="code"><pre class="code jq">$(':selected')</pre></td>
       <td class="code"><pre class="code yui">Y.all('option[selected]')</pre></td>
-      <td class="code"><pre class="code aui">A.all(':selected')</pre>
-      </td>
+      <td class="code"><pre class="code aui">Y.all('option[selected]')</pre></td>
       <td class="notes"><p>Extension.</p></td>
     </tr>
 
     <tr>
       <td class="code"><pre class="code jq">$(':submit')</pre></td>
       <td class="code"><pre class="code yui">Y.all('input[type=submit]')</pre></td>
-      <td class="code"><pre class="code aui">A.all(':submit')</pre>
-      </td>
+      <td class="code"><pre class="code aui">Y.all('input[type=submit]')</pre></td>
       <td class="notes"><p>Extension.</p></td>
     </tr>
 
     <tr>
       <td class="code"><pre class="code jq">$(':text')</pre></td>
       <td class="code"><pre class="code yui">Y.all('input[type=text]')</pre></td>
-      <td class="code"><pre class="code aui">A.all(':text')</pre>
-      </td>
+      <td class="code"><pre class="code aui">Y.all('input[type=text]')</pre></td>
       <td class="notes"><p>Extension. Does not select <code>textarea</code> elements.</p></td>
     </tr>
   </tbody>
 </table>
-
+s
 <h2 id="effects">Effects</h2>
 
 <table>
   <thead>
     <tr>
-      <th class="jq">jQuery 1.4.2</th>
-      <th class="yui">YUI 3.3.0</th>
-      <th class="aui">AUI 1.0.1</th>
+      <th class="jq">jQuery 1.10.2</th>
+      <th class="yui">YUI 3.10.3</th>
+      <th class="aui">AUI 2.0.1</th>
       <th class="notes">Notes</th>
     </tr>
   </thead>
@@ -970,49 +1388,68 @@ var a = new Y.Anim(
   {
     node: '<i>#foo</i>',
     to: {
-      width:   <i>100</i>,
-      height:  <i>100</i>,
-      opacity: <i>0.5</i>
+        width:   <i>100</i>,
+        height:  <i>100</i>,
+        opacity: <i>0.5</i>
     },
     duration: <i>0.6</i>,
-    easing:   Y.Easing.bounceOut
+    easing: Y.Easing.bounceOut
   }
 );
 a.run();
+
+<i>// Or use transition</i>
+
+Y.one('<i>#foo</i>').transition(
+  {
+    width:   <i>100</i>,
+    height:  <i>100</i>,
+    opacity: <i>0.5</i>
+    duration: <i>0.6</i>,
+    easing: 'ease-out'
+  }
+);
 </pre>
       </td>
       <td class="code">
 <pre class="code aui">
-var a = new A.Anim(
+var a = new Y.Anim(
   {
     node: '<i>#foo</i>',
     to: {
-      width:   <i>100</i>,
-      height:  <i>100</i>,
-      opacity: <i>0.5</i>
+        width:   <i>100</i>,
+        height:  <i>100</i>,
+        opacity: <i>0.5</i>
     },
     duration: <i>0.6</i>,
-    easing:   A.Easing.bounceOut
+    easing: Y.Easing.bounceOut
   }
 );
 a.run();
 
-//or
+<i>// Or use transition</i>
 
-A=AUI().use('transition');
-A.one('#foo').transition({
-  width: 100,
-  height: 100,
-  opacity: 0.5,
-  duration: 0.6
-})
+YUI().use(
+  'transition',
+  function(Y) {
+    Y.one('#foo').on('click', function(event) {
+      event.currentTarget.transition(
+        {
+          duration: 1,
+          height: 0,
+          opacity: 0,
+          width: 0
+        }
+      );
+    })
+  }
+);
 </pre>
       </td>
       <td class="notes">
         <p>The basic syntax and capabilities of both animation libraries are very similar. jQuery has convenience methods for effects like <code>.fadeIn()</code>, <code>.slideUp()</code>, etc. jQuery core has two easing functions: 'linear' and 'swing', but jQuery UI comes with <a href="http://jqueryui.com/demos/effect/">many more effects</a> as plugins.</p>
-        <p>YUI3 has several <a href="http://developer.yahoo.com/yui/3/api/Easing.html">easing algorithms</a> built-in, and offers additional tools such as <a href="http://developer.yahoo.com/yui/3/examples/anim/curve.html">animations over Bezier curves</a>. Make sure to load the <code>'anim'</code> module in your call to <code>YUI().use()</code>.</p>
-
-        <p>AUI's <code>transition</code> method requires the <code>'transition'</code> module. </p>
+        <p>YUI has several <a href="http://yuilibrary.com/yui/docs/api/classes/Easing.html">easing algorithms</a> built-in, and offers additional tools such as <a href="http://yuilibrary.com/yui/docs/anim/curve.html">animations over Bezier curves</a>. Requires the <code>anim</code> module.</p>
+        <p>You can also use the <code>transition</code> module for simple transitions.</p>
       </td>
     </tr>
 
@@ -1021,7 +1458,7 @@ A.one('#foo').transition({
 <pre class="code jq">
 $('#.foo').fadeOut();
 
-<i>// or</i>
+<i>// Or</i>
 
 $('#.foo').hide(600);
 </pre></td>
@@ -1032,15 +1469,16 @@ Y.one('#foo').hide(<i>true</i>)
       </td>
       <td class="code">
 <pre class="code aui">
-A.one('#foo').hide(<i>true</i>)
+Y.one('#foo').hide(<i>true</i>)
 
 <i>// or</i>
 
-A=AUI().use('transition');
-A.one('#foo').transition({
-  opacity: 0,
-  duration: 0.6
-})
+Y.one('<i>#foo</i>').transition(
+  {
+    opacity: 0,
+    duration: 0.6
+  }
+);
 </pre>
       </td>
       <td class="notes">
@@ -1049,7 +1487,7 @@ A.one('#foo').transition({
         <p>
           jQuery effects tend to default to 200 or 600ms while YUI's show/hide transitions default to 500ms. YUI durations are in fractions of seconds; jQuery durations are set in milliseconds.</p>
 
-        <p>AUI's <code>transition</code> method requires the <code>'transition'</code> module to be loaded. </p>
+        <p>The <code>transition</code> method requires the <code>'transition'</code> module to be loaded.</p>
       </td>
     </tr>
   </tbody>
@@ -1060,9 +1498,9 @@ A.one('#foo').transition({
 <table>
   <thead>
     <tr>
-      <th class="jq">jQuery 1.4.2</th>
-      <th class="yui">YUI 3.3.0</th>
-      <th class="aui">AUI 1.0.1</th>
+      <th class="jq">jQuery 1.10.2</th>
+      <th class="yui">YUI 3.10.3</th>
+      <th class="aui">AUI 2.0.1</th>
       <th class="notes">Notes</th>
     </tr>
   </thead>
@@ -1071,21 +1509,21 @@ A.one('#foo').transition({
     <tr>
       <td class="code"><pre class="code jq">$('<i>.foo</i>').<i>array_method</i>(<i>args</i>)</pre></td>
       <td class="code"><pre class="code yui">Y.all('<i>.foo</i>').<i>array_method</i>(<i>args</i>)</pre></td>
-      <td class="code"><pre class="code aui">A.all('<i>.foo</i>').<i>array_method</i>(<i>args</i>)</pre></td>
+      <td class="code"><pre class="code aui">Y.all('<i>.foo</i>').<i>array_method</i>(<i>args</i>)</pre></td>
       <td class="notes"><p>Any Array operation that you can perform on a jQuery list can be translated to YUI in this form. YUI NodeList objects are not native Arrays, but do provide wrapper functions for the most common array methods as of 3.3.0.</p></td>
     </tr>
 
     <tr>
       <td class="code"><pre class="code jq">$('div').slice(<i>x</i>, <i>y</i>)</pre></td>
       <td class="code"><pre class="code yui">Y.all('div').slice(<i>x</i>, <i>y</i>)</pre></td>
-      <td class="code"><pre class="code aui">A.all('div').slice(<i>x</i>, <i>y</i>)</pre></td>
+      <td class="code"><pre class="code aui">Y.all('div').slice(<i>x</i>, <i>y</i>)</pre></td>
       <td class="notes"><p>Return the <i>xth</i> to the <i>yth</i> div elements.</p></td>
     </tr>
 
     <tr>
       <td class="code"><pre class="code jq">$('div').add('p')</pre></td>
-      <td class="code"><pre class="code yui">Y.all('div').concat(Y.all('p'));</pre></td>
-      <td class="code"><pre class="code aui"></pre></td>
+      <td class="code"><pre class="code yui">Y.all('div').concat(Y.all('p'))</pre></td>
+      <td class="code"><pre class="code aui">Y.all('div').concat(Y.all('p'))</pre></td>
       <td class="notes">
         <p>
         Add nodes that match the specified selector.
@@ -1098,7 +1536,7 @@ A.one('#foo').transition({
 <pre class="code jq">
 $('<i>.foo</i>').each(
   function() {
-    this.<i>some_method();</i>
+    $(this).<i>some_method();</i>
   }
 );
 </pre>
@@ -1114,7 +1552,7 @@ Y.all('<i>.foo</i>').each(
       </td>
       <td class="code">
 <pre class="code aui">
-A.all('<i>.foo</i>').each(
+Y.all('<i>.foo</i>').each(
   function() {
     this.<i>some_method();</i>
   }
@@ -1127,59 +1565,33 @@ A.all('<i>.foo</i>').each(
     <tr>
       <td class="code"><pre class="code jq">$('<i>.foo</i>').filter('<i>.bar</i>')</pre></td>
       <td class="code"><pre class="code yui">Y.all('<i>.foo</i>').filter('<i>.bar</i>')</pre></td>
-      <td class="code"><pre class="code aui">A.all('<i>.foo</i>').filter('<i>.bar</i>')</pre></td>
+      <td class="code"><pre class="code aui">Y.all('<i>.foo</i>').filter('<i>.bar</i>')</pre></td>
       <td class="notes"><p>The <code>.filter()</code> method in both libraries both take CSS selectors as filter criteria. jQuery's <code>.filter()</code> can also take a function.</p></td>
     </tr>
 
     <tr>
       <td class="code">
 <pre class="code jq">
-var fn = function(idx) {
+$('<i>.foo</i>').filter(function (idx) {
   return this.<i>property</i> === '<i>value</i>';
-};
-$('<i>.foo</i>').filter(fn);
+});
 </pre>
       </td>
       <td class="code">
 <pre class="code yui">
-var filtered = [];
-Y.all('<i>.foo</i>').each(
-  function(node) {
-    if (node.get('<i>property</i>') === '<i>value</i>') {
-      filtered.push(node);
-    }
-  }
-);
-filtered = Y.all(filtered);
+Y.all('<i>.foo</i>').filter(function (node) {
+  return node.get('<i>property</i>') === '<i>value</i>';
+});
 </pre>
       </td>
       <td class="code">
 <pre class="code aui">
-var filtered = [];
-A.all('<i>.foo</i>').each(
-  function(node) {
-    if (node.get('<i>property</i>') === '<i>value</i>') {
-      filtered.push(node);
-    }
-  }
-);
-filtered = A.all(filtered);
-
-<i>// or</i>
-
-A=AUI().use('array-extras');
-var n = A.all('<i>foo</i>');
-
-var filtered = A.Array.filter(n.getDOM(), function(item, index, collection){
-  return item.get('<i>property</i>') == '<i>value</i>');
+$('<i>.foo</i>').filter(function (idx) {
+  return this.<i>property</i> === '<i>value</i>';
 });
-A.all(filtered);
 </pre>
       </td>
-      <td class="notes">
-        <p>Classic functional programming filter function. Given a list of elements, run the function on each and return a list of those which evaluated true. <code>NodeList.filter(fn)</code> is coming to a future point release of YUI3.</p>
-        <p>AUI <code>filtered</code> method requires the AUI <code>'array-extras'</code> module</p>
-      </td>
+      <td class="notes"><p>Classic functional programming filter function. Given a list of elements, run the function on each and return a list of those which evaluated true.</p></td>
     </tr>
 
     <tr>
@@ -1187,19 +1599,17 @@ A.all(filtered);
 <pre class="code jq">
 $('<i>.foo</i>').map(
   function(idx, el) {
-    some_function(el);
+    return some_function(el);
   }
-).get();
+)
 </pre>
 </td>
       <td class="code">
 <pre class="code yui">
 var mapped = [];
 Y.all('<i>.foo</i>').each(
-  function(node) {
-    mapped.push(
-      some_function(node)
-    );
+  function (node) {
+    mapped.push(some_function(node));
   }
 );
 mapped = Y.all(mapped);
@@ -1208,29 +1618,16 @@ mapped = Y.all(mapped);
       <td class="code">
 <pre class="code aui">
 var mapped = [];
-A.all('<i>.foo</i>').each(
-  function(node) {
-    mapped.push(
-      some_function(node)
-    );
+Y.all('<i>.foo</i>').each(
+  function (node) {
+    mapped.push(some_function(node));
   }
 );
-mapped = A.all(mapped);
-
-<i>// or</i>
-
-A=AUI().use('array-extras');
-var n = A.all('<i>foo</i>');
-
-var map = A.Array.map(n.getDOM(), function(item, index, collection){
-  return some_function(<i>item</i>);
-});
-A.all(map);
+mapped = Y.all(mapped);
 </pre>
       </td>
       <td class="notes">
-        <p>jQuery's <code>.map()</code> returns a jQuery-wrapped array of the return values of calls to the given function. <code>get()</code> returns a true array. <code>NodeList.map(fn)</code> is coming to a future point release of YUI3.</p>
-        <p>AUI <code>map</code> method requires the AUI <code>'array-extras'</code> module</p>
+        <p>jQuery's <code>.map()</code> returns a jQuery-wrapped array of the return values of calls to the given function.</p>
       </td>
     </tr>
   </tbody>
@@ -1241,9 +1638,9 @@ A.all(map);
 <table>
   <thead>
     <tr>
-      <th class="jq">jQuery 1.4.2</th>
-      <th class="yui">YUI 3.3.0</th>
-      <th class="aui">AUI 1.0.1</th>
+      <th class="jq">jQuery 1.10.2</th>
+      <th class="yui">YUI 3.10.3</th>
+      <th class="aui">AUI 2.0.1</th>
       <th class="notes">Notes</th>
     </tr>
   </thead>
@@ -1262,23 +1659,24 @@ $.ajax({
       <td class="code">
 <pre class="code yui">
 Y.io(<i>url</i>, {
-  data: <i>data</i>,
-  on:   {success: <i>successFn</i>}
+    data: <i>data</i>,
+    on:   {success: <i>successFn</i>}
 });
 </pre>
       </td>
       <td class="code">
 <pre class="code aui">
-A.io.request(<i>url</i>, {
-  method: <i>method</i>,
-  dataType: <i>data</i>,
-  on: {success: <i>successFn</i>}
+Y.io(
+    <i>url</i>,
+    {
+      data: <i>data</i>,
+      on:   {success: <i>successFn</i>
+    }
 });
 </pre>
       </td>
       <td class="notes">
-        <p><a href="http://developer.yahoo.com/yui/3/io/">YUI.io</a> &amp; AUI have extra options for failure mode callbacks, headers, cross-frame i/o, etc. <a href="http://api.jquery.com/jQuery.ajax/">jQuery.ajax()</a> has some interesting options for async, context, and filtering. Make sure to load the YUI <code>'io'</code> module.</p>
-        <p>AUI <code>'aui-io'</code> module.</p>
+        <p><a href="http://yuilibrary.com/yui/docs/io/">YUI.io</a> &amp; AUI have extra options for failure mode callbacks, headers, cross-frame i/o, etc. <a href="http://api.jquery.com/jQuery.ajax/">jQuery.ajax()</a> has some interesting options for async, context, and filtering. Make sure to load the YUI <code>io</code> module.</p>
       </td>
     </tr>
 
@@ -1287,54 +1685,106 @@ A.io.request(<i>url</i>, {
       <td class="code">
 <pre class="code yui">
 Y.io(<i>url</i>, {
-  data: <i>data</i>,
-  on:   {success: <i>successFn</i>},
-  xdr:  {use: 'flash'}
+    data: <i>data</i>,
+    on:   {success: <i>successFn</i>},
+    xdr:  {use: 'flash'}
 });
 </pre>
       </td>
       <td class="code">
 <pre class="code aui">
-A.io.request(<i>url</i>, {
-  method: <i>method</i>,
-  data: <i>data</i>,
-  on:   {success: <i>successFn</i>},
-  xdr:  {use: 'flash'}
-})
+Y.io(
+    <i>url</i>,
+    {
+      data: <i>data</i>,
+      on:   {success: <i>successFn</i>},
+      xdr:  {use: 'flash'
+    }
+});
 </pre>
       </td>
       <td class="notes">
         <p>Cross-domain requests via a Flash helper. No jQuery equivalent.</p>
-        <p>AUI <code>'aui-io'</code> module.</p>
       </td>
     </tr>
 
     <tr>
-      <td class="code"><pre class="code jq">$('<i>#message</i>').load('<i>url</i>');</pre></td>
+      <td class="code"><pre class="code jq">$('<i>#message</i>').load('<i>/ajax/test.html</i>');</pre></td>
       <td class="code">
 <pre class="code yui">
-Y.one('<i>#message</i>').load('<i>url</i>');
-Y.one('<i>#message</i>').load('<i>url</i>', '<i>#foo</i>');
+Y.one('<i>#message</i>').load('<i>/ajax/test.html</i>');
+Y.one('<i>#message</i>').load('<i>/ajax/test.html</i>', '<i>#foo</i>');
 </pre>
       </td>
       <td class="code">
 <pre class="code aui">
-A.one('<i>#message</i>').load('<i>url</i>');
-A.one('<i>#message</i>').load('<i>url</i>', '<i>#foo</i>');
-
-<i>// or</i>
-A.one('#message').plug(A.Plugin.IO, {
-  uri: '<i>url</i>',
-  method: '<i>method</i>'
-});
+Y.one('<i>#message</i>').load('<i>/ajax/test.html</i>');
+Y.one('<i>#message</i>').load('<i>/ajax/test.html</i>', '<i>#foo</i>');
 </pre>
       </td>
       <td class="notes">
         <p>Load the content of a given URL and replace the contents of <code>#message</code> with it.</p>
 
-        <p>In YUI, the <code>node-load</code> module provides this functionality. YUI also optionally supports extracting only a portion of the loaded content if a selector string is passed as the second argument (assuming the content is HTML).</p>
+        <p>In YUI, the <code>node-load</code> module provides this functionality. YUI also optionally supports extracting only a portion of the loaded content if a selector string is passed as the second argument (assuming the content is HTML).
+      </td>
+    </tr>
 
-        <p>AUI <code>'aui-io'</code> module.</p>
+    <tr>
+      <td class="code">
+<pre class="code jq">
+$.getJSON(<i>url</i>, <i>successFn</i>);
+</pre>
+</td>
+      <td class="code">
+<pre class="code yui">
+Y.io(<i>url</i>, {
+    on:   {success: <i>successFn</i>}
+});
+</pre>
+      </td>
+      <td class="code">
+<pre class="code aui">
+Y.io(
+    <i>url</i>,
+    {
+      on:   {success: <i>successFn</i>
+    }
+});
+</pre>
+      </td>
+      <td class="notes">
+        <p>A remote request for a JSON file. Same-origin policy is enforced.</p>
+        <p>There is no convenience method for this in YUI.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="code">
+<pre class="code jq">
+$.getJSON(
+  "/some/jsonpURL.json?callback=?",
+  <i>successFn</i>
+);
+</pre>
+</td>
+      <td class="code">
+<pre class="code yui">
+Y.jsonp(
+  "/some/jsonpURL.json?callback={callback}",
+  <i>successFn</i>
+);
+</pre>
+      </td>
+      <td class="code">
+<pre class="code aui">
+Y.jsonp(
+  "/some/jsonpURL.json?callback={callback}",
+  <i>successFn</i>
+);
+</pre>
+      </td>
+      <td class="notes">
+        <p>JSONP requests. Same-origin policy is not enforced.  Requires the <code>jsonp</code> module.</p>
       </td>
     </tr>
   </tbody>
@@ -1345,9 +1795,9 @@ A.one('#message').plug(A.Plugin.IO, {
 <table>
   <thead>
     <tr>
-      <th class="jq">jQuery 1.4.2</th>
-      <th class="yui">YUI 3.3.0</th>
-      <th class="aui">AUI 1.0.1</th>
+      <th class="jq">jQuery 1.10.2</th>
+      <th class="yui">YUI 3.10.3</th>
+      <th class="aui">AUI 2.0.1</th>
       <th class="notes">Notes</th>
     </tr>
   </thead>
@@ -1399,26 +1849,26 @@ A.one('#message').plug(A.Plugin.IO, {
       <td class="code">
 <pre class="code jq">
 .css({
-  height:  100,
-  width:   100,
-  display: 'block'
+    height:  100,
+    width:   100,
+    display: 'block'
 })
 </pre>
       </td>
       <td class="code">
 <pre class="code yui">
 .setStyles({
-  height:  100,
-  width:   100,
-  display: 'block'
+    height:  100,
+    width:   100,
+    display: 'block'
 })</pre>
       </td>
       <td class="code">
 <pre class="code aui">
 .setStyles({
-  height:  100,
-  width:   100,
-  display: 'block'
+    height:  100,
+    width:   100,
+    display: 'block'
 })</pre>
       </td>
       <td class="notes"><p>Set multiple CSS properties with a dictionary.</p></td>
@@ -1436,11 +1886,20 @@ A.one('#message').plug(A.Plugin.IO, {
 .width()
 </pre>
       </td>
-      <td class="code"><pre class="code yui">???</pre></td>
-      <td class="code"><pre class="code aui">get('offsetWidth') - getPadding('lr') - getBorderWidth('lr')</pre></td>
+      <td class="code">
+<pre class="code yui">
+.getComputedStyle('height')
+.getComputedStyle('width')
+</pre></td>
+<td class="code">
+<pre class="code aui">
+get('offsetWidth') - getPadding('lr') - getBorderWidth('lr')
+</pre>
+      </td>
       <td class="notes">
         <p>Computed height / width. Excludes padding and borders.</p>
-        <p>AUI <i>getBorderWidth</i> has values of t(top), l(left), r(right), b(bottom)</p>
+
+        <p>AUI <code>getBorderWidth</code> has values of t(top), l(left), r(right), b(bottom).</P>
       </td>
     </tr>
 
@@ -1451,12 +1910,17 @@ A.one('#message').plug(A.Plugin.IO, {
 .innerWidth()
 </pre>
       </td>
-      <td class="code"><pre class="code yui">???</pre></td>
-      <td class="code"><pre class="code aui">get('offsetWidth') - getBorderWidth('lr')</pre></td>
-      <td class="notes">
-        <p>Includes padding but not border</p>
-        <p>AUI <i>getBorderWidth</i> has values of t(top), l(left), r(right), b(bottom)</p>
+      <td class="code">
+<pre class="code yui">
+.get('clientHeight')
+.get('clientWidth')
+</pre></td>
+<td class="code">
+<pre class="code aui">
+get('offsetWidth') - getBorderWidth('lr')
+</pre>
       </td>
+      <td class="notes"><p>Includes padding but not border</p></td>
     </tr>
 
     <tr>
@@ -1484,8 +1948,8 @@ A.one('#message').plug(A.Plugin.IO, {
     <tr>
       <td class="code">
 <pre class="code jq">
-.position()
-<i>// {left: 123, top: 456}</i>
+.offset()
+<i>// {left: 123, top: 456, width: 789, height: 1011}</i>
 </pre>
       </td>
       <td class="code">
@@ -1501,9 +1965,184 @@ A.one('#message').plug(A.Plugin.IO, {
 </pre>
       </td>
       <td class="notes">
-        <p>Get the computed x,y coordinates.</p>
+        <p>Get the computed x,y coordinates relative to the document. jQuery also returns the size of the node</p>
+      </td>
+    </tr>
 
-        <p>In jQuery, the coordinates are relative to the nearest ancestor element that is relatively or absolutely positioned. In YUI, they're relative to the document.</p>
+    <tr>
+      <td class="code">
+<pre class="code jq">
+.offset(<i>{ left: 123, top: 456 }</i>)
+</pre>
+      </td>
+      <td class="code">
+<pre class="code yui">
+.setXY(123, 456)
+</pre>
+      </td>
+      <td class="code">
+<pre class="code aui">
+.setXY(123, 456)
+
+// Center a node on the page
+.center()
+</pre>
+      </td>
+      <td class="notes">
+        <p>Set the x,y coordinates relative to the document.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="langUtil">Language Utilities</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th class="jq">jQuery 1.4.3</th>
+      <th class="yui">YUI 3.10.3</th>
+      <th class="aui">AUI 2.0.1</th>
+      <th class="notes">Notes</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td class="code">
+<pre class="code jq">
+$.each([1, 2, 3], <i>fn(index, value)</i>)
+$.each({ key: value }, <i>fn(key, value)</i>)
+</pre></td>
+      <td class="code">
+<pre class="code yui">
+Y.Array.each([1, 2, 3], <i>fn(value, index)</i>)
+Y.Object.each({ key: value }, <i>fn(value, key)</i>)
+</pre></td>
+<td class="code">
+<pre class="code aui">
+Y.Array.each([1, 2, 3], <i>fn(value, index)</i>)
+Y.Object.each({ key: value }, <i>fn(value, key)</i>)
+</pre></td>
+      <td class="notes">
+        <p>
+          Iterate through an array or object. YUI is compatible with the Array <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/forEach">forEach</a> method so the first parameter the callback receives when iterating through an array is the value. In jQuery, the first parameter is the index of the value in the array.
+        </p>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="code"><pre class="code jq">$.inArray(<i>value</i>, <i>array</i>)</pre></td>
+      <td class="code"><pre class="code yui">Y.Array.indexOf(<i>array</i>, <i>value</i>)</pre></td>
+      <td class="code"><pre class="code aui">Y.Array.indexOf(<i>array</i>, <i>value</i>)</pre></td>
+      <td class="notes">
+        <p>
+          Returns the index of the searched value in the specified array.
+        </p>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="code"><pre class="code jq">$.type(<i>obj</i>)</pre></td>
+      <td class="code"><pre class="code yui">Y.Lang.type(<i>obj</i>)</pre></td>
+      <td class="code"><pre class="code aui">Y.Lang.type(<i>obj</i>)</pre></td>
+      <td class="notes">
+        <p>
+          Returns a string representing the type of the specified object. YUI, AUI and jQuery results are compatible (see <a href="http://api.jquery.com/jQuery.type/">jQuery's</a>).
+        </p>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="code"><pre class="code jq">$.isPlainObject(<i>obj</i>)</pre></td>
+      <td class="code">
+<pre class="code yui">
+Y.Lang.isObject(<i>obj</i>)
+Y.Lang.isObject(<i>obj</i>, <i>true</i>)
+</pre></td>
+<td class="code">
+<pre class="code aui">
+Y.Lang.isObject(<i>obj</i>)
+Y.Lang.isObject(<i>obj</i>, <i>true</i>)
+</pre>
+      </td>
+      <td class="notes">
+        <p>
+          In YUI and AUI, <code>Y.Lang.isObject</code> returns true for arrays and functions. Passing true as a second parameter makes it return false if the input is a function.
+        </p>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="code">
+<pre class="code jq">
+$.isArray(<i>obj</i>)
+$.isFunction(<i>obj</i>)
+</pre>
+      </td>
+      <td class="code">
+<pre class="code yui">
+Y.Lang.isArray(<i>obj</i>)
+Y.Lang.isFunction(<i>obj</i>)
+Y.Lang.isString(<i>obj</i>)
+Y.Lang.isBoolean(<i>obj</i>)
+Y.Lang.isDate(<i>obj</i>)
+Y.Lang.isNumber(<i>obj</i>)
+Y.Lang.isNull(<i>obj</i>)
+Y.Lang.isUndefined(<i>obj</i>)
+Y.Lang.isValue(<i>obj</i>)
+</pre>
+      </td>
+      <td class="code">
+<pre class="code aui">
+Y.Lang.isArray(<i>obj</i>)
+Y.Lang.isFunction(<i>obj</i>)
+Y.Lang.isString(<i>obj</i>)
+Y.Lang.isBoolean(<i>obj</i>)
+Y.Lang.isDate(<i>obj</i>)
+Y.Lang.isNumber(<i>obj</i>)
+Y.Lang.isNull(<i>obj</i>)
+Y.Lang.isUndefined(<i>obj</i>)
+Y.Lang.isValue(<i>obj</i>)
+</pre>
+      </td>
+      <td class="notes">
+        <p>
+          YUI and AUI also have some extra type checking functions. In particular, <code>Y.Lang.isValue()</code> returns false if the object is null, undefined or not a number, and true in any other case.
+        </p>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="code"><pre class="code jq">$.isEmptyObject(<i>obj</i>)</pre></td>
+      <td class="code"><pre class="code yui">Y.Object.isEmpty(<i>obj</i>)</pre></td>
+      <td class="code"><pre class="code aui">Y.Object.isEmpty(<i>obj</i>)</pre></td>
+      <td class="notes">
+        <p>
+          Check if the given object doesn't have any properties.
+        </p>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="code"><pre class="code jq">$.makeArray(<i>obj</i>)</pre></td>
+      <td class="code"><pre class="code yui">Y.Array(<i>obj</i>)</pre></td>
+      <td class="code"><pre class="code aui">Y.Array(<i>obj</i>)</pre></td>
+      <td class="notes">
+        <p>
+          Make an array-like object, for instance the return value of <code>document.getElementsByTagName</code>, into a true array.
+        </p>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="code"><pre class="code jq">$.now()</pre></td>
+      <td class="code"><pre class="code yui">Y.Lang.now()</pre></td>
+      <td class="code"><pre class="code aui">Y.Lang.now()</pre></td>
+      <td class="notes">
+        <p>
+          Return the current time in milliseconds.
+        </p>
       </td>
     </tr>
   </tbody>
@@ -1516,9 +2155,9 @@ A.one('#message').plug(A.Plugin.IO, {
 <table>
   <thead>
     <tr>
-      <th class="jq">jQuery 1.4.2</th>
-      <th class="yui">YUI 3.3.0</th>
-      <th class="yui">AUI 1.0.1</th>
+      <th class="jq">jQuery 1.10.2</th>
+      <th class="yui">YUI 3.10.3</th>
+      <th class="aui">AUI 2.0.1</th>
       <th class="notes">Notes</th>
     </tr>
   </thead>
@@ -1527,7 +2166,7 @@ A.one('#message').plug(A.Plugin.IO, {
     <tr>
       <td class="code"><pre class="code jq">$('')</pre></td>
       <td class="code"><pre class="code yui">Y.all('')</pre></td>
-      <td class="code"><pre class="code aui">A.all('')</pre></td>
+      <td class="code"><pre class="code aui">Y.all('')</pre></td>
       <td class="notes">
         <p>
         </p>
@@ -1537,7 +2176,7 @@ A.one('#message').plug(A.Plugin.IO, {
     <tr>
       <td class="code"><pre class="code jq">$('')</pre></td>
       <td class="code"><pre class="code yui">Y.all('')</pre></td>
-      <td class="code"><pre class="code aui">A.all('')</pre></td>
+      <td class="code"><pre class="code aui">Y.all('')</pre></td>
       <td class="notes">
         <p>
         </p>
@@ -1550,9 +2189,9 @@ A.one('#message').plug(A.Plugin.IO, {
 <h2 id="credits">Credits</h2>
 
 <p>
-  The jQuery - YUI3 Rosetta Stone was originally created by
+  The jQuery - YUI 3 Rosetta Stone was originally created by
   <a href="http://carlos.bueno.org/">Carlos Bueno</a>. It's now maintained by
-  the <a href="http://yuilibrary.com/">YUI team</a> and
+  <a href="http://wonko.com/">Ryan Grove</a> and
   <a href="http://paulirish.com/">Paul Irish</a>.
 </p>
 
