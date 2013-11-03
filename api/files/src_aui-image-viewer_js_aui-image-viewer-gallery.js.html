@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>2.0.0pr6</b>
+                        API Docs for Version: <b>2.0.0</b>
                     </p>
                 </li>
             </div>
@@ -83,6 +83,8 @@
             
                 <li><a href="../classes/A.ButtonGroup.html">A.ButtonGroup</a></li>
             
+                <li><a href="../classes/A.ButtonSearchCancel.html">A.ButtonSearchCancel</a></li>
+            
                 <li><a href="../classes/A.Carousel.html">A.Carousel</a></li>
             
                 <li><a href="../classes/A.CellEditorSupport.html">A.CellEditorSupport</a></li>
@@ -107,7 +109,23 @@
             
                 <li><a href="../classes/A.DataType.DateMath.html">A.DataType.DateMath</a></li>
             
+                <li><a href="../classes/A.Date.html">A.Date</a></li>
+            
                 <li><a href="../classes/A.DateCellEditor.html">A.DateCellEditor</a></li>
+            
+                <li><a href="../classes/A.DateParser.html">A.DateParser</a></li>
+            
+                <li><a href="../classes/A.DatePicker.html">A.DatePicker</a></li>
+            
+                <li><a href="../classes/A.DatePickerBase.html">A.DatePickerBase</a></li>
+            
+                <li><a href="../classes/A.DatePickerDelegate.html">A.DatePickerDelegate</a></li>
+            
+                <li><a href="../classes/A.DatePickerNative.html">A.DatePickerNative</a></li>
+            
+                <li><a href="../classes/A.DatePickerNativeBase.html">A.DatePickerNativeBase</a></li>
+            
+                <li><a href="../classes/A.DatePickerPopover.html">A.DatePickerPopover</a></li>
             
                 <li><a href="../classes/A.DiagramBuilder.html">A.DiagramBuilder</a></li>
             
@@ -260,6 +278,10 @@
                 <li><a href="../classes/A.TextCellEditor.html">A.TextCellEditor</a></li>
             
                 <li><a href="../classes/A.ThumbRating.html">A.ThumbRating</a></li>
+            
+                <li><a href="../classes/A.TimePicker.html">A.TimePicker</a></li>
+            
+                <li><a href="../classes/A.TimePickerBase.html">A.TimePickerBase</a></li>
             
                 <li><a href="../classes/A.ToggleButton.html">A.ToggleButton</a></li>
             
@@ -1057,6 +1079,8 @@
 
             <ul id="api-modules" class="apis modules tab-pane">
             
+                <li><a href="../modules/ace-autocomplete-plugin.html">ace-autocomplete-plugin</a></li>
+            
                 <li><a href="../modules/align-plugin.html">align-plugin</a></li>
             
                 <li><a href="../modules/anim.html">anim</a></li>
@@ -1143,7 +1167,7 @@
             
                 <li><a href="../modules/aui-collection.html">aui-collection</a></li>
             
-                <li><a href="../modules/aui-color-pallete.html">aui-color-pallete</a></li>
+                <li><a href="../modules/aui-color-palette.html">aui-color-palette</a></li>
             
                 <li><a href="../modules/aui-color-picker.html">aui-color-picker</a></li>
             
@@ -1164,6 +1188,16 @@
                 <li><a href="../modules/aui-datatable-selection.html">aui-datatable-selection</a></li>
             
                 <li><a href="../modules/aui-datatype.html">aui-datatype</a></li>
+            
+                <li><a href="../modules/aui-datatype-date-parse.html">aui-datatype-date-parse</a></li>
+            
+                <li><a href="../modules/aui-datepicker.html">aui-datepicker</a></li>
+            
+                <li><a href="../modules/aui-datepicker-delegate.html">aui-datepicker-delegate</a></li>
+            
+                <li><a href="../modules/aui-datepicker-native.html">aui-datepicker-native</a></li>
+            
+                <li><a href="../modules/aui-datepicker-popover.html">aui-datepicker-popover</a></li>
             
                 <li><a href="../modules/aui-diagram-builder.html">aui-diagram-builder</a></li>
             
@@ -1245,7 +1279,7 @@
             
                 <li><a href="../modules/aui-pagination.html">aui-pagination</a></li>
             
-                <li><a href="../modules/aui-pallete.html">aui-pallete</a></li>
+                <li><a href="../modules/aui-palette.html">aui-palette</a></li>
             
                 <li><a href="../modules/aui-parse-content.html">aui-parse-content</a></li>
             
@@ -1296,6 +1330,8 @@
                 <li><a href="../modules/aui-tabview.html">aui-tabview</a></li>
             
                 <li><a href="../modules/aui-text.html">aui-text</a></li>
+            
+                <li><a href="../modules/aui-timepicker.html">aui-timepicker</a></li>
             
                 <li><a href="../modules/aui-timer.html">aui-timer</a></li>
             
@@ -2060,72 +2096,73 @@
  */
 
 var L = A.Lang,
-	isBoolean = L.isBoolean,
-	isNumber = L.isNumber,
-	isObject = L.isObject,
-	isString = L.isString,
+    isBoolean = L.isBoolean,
+    isNumber = L.isNumber,
+    isObject = L.isObject,
+    isString = L.isString,
 
-	AUTO_PLAY = &#x27;autoPlay&#x27;,
-	BODY = &#x27;body&#x27;,
-	CONTENT = &#x27;content&#x27;,
-	CURRENT_INDEX = &#x27;currentIndex&#x27;,
-	DELAY = &#x27;delay&#x27;,
-	DOT = &#x27;.&#x27;,
-	ENTRY = &#x27;entry&#x27;,
-	HANDLER = &#x27;handler&#x27;,
-	HIDDEN = &#x27;hidden&#x27;,
-	HREF = &#x27;href&#x27;,
-	ICON = &#x27;icon&#x27;,
-	IMAGE_GALLERY = &#x27;image-gallery&#x27;,
-	IMG = &#x27;img&#x27;,
-	LEFT = &#x27;left&#x27;,
-	LINKS = &#x27;links&#x27;,
-	OFFSET = &#x27;offset&#x27;,
-	OFFSET_WIDTH = &#x27;offsetWidth&#x27;,
-	PAGE = &#x27;page&#x27;,
-	PAGINATION = &#x27;pagination&#x27;,
-	PAGINATION_EL = &#x27;paginationEl&#x27;,
-	PAGINATION_INSTANCE = &#x27;paginationInstance&#x27;,
-	PAUSE = &#x27;pause&#x27;,
-	PAUSED = &#x27;paused&#x27;,
-	PAUSED_LABEL = &#x27;pausedLabel&#x27;,
-	PLAY = &#x27;play&#x27;,
-	PLAYER = &#x27;player&#x27;,
-	PLAYING = &#x27;playing&#x27;,
-	PLAYING_LABEL = &#x27;playingLabel&#x27;,
-	PX = &#x27;px&#x27;,
-	REPEAT = &#x27;repeat&#x27;,
-	SHOW_PLAYER = &#x27;showPlayer&#x27;,
-	SPACE = &#x27; &#x27;,
-	SRC = &#x27;src&#x27;,
-	THUMB = &#x27;thumb&#x27;,
-	TOOLBAR = &#x27;toolbar&#x27;,
-	TOTAL = &#x27;total&#x27;,
-	USE_ORIGINAL_IMAGE = &#x27;useOriginalImage&#x27;,
-	VIEWPORT_REGION = &#x27;viewportRegion&#x27;,
-	VISIBLE = &#x27;visible&#x27;,
-	WELL = &#x27;well&#x27;,
+    AUTO_PLAY = &#x27;autoPlay&#x27;,
+    BODY = &#x27;body&#x27;,
+    CONTENT = &#x27;content&#x27;,
+    CURRENT_INDEX = &#x27;currentIndex&#x27;,
+    DELAY = &#x27;delay&#x27;,
+    DOT = &#x27;.&#x27;,
+    ENTRY = &#x27;entry&#x27;,
+    HANDLER = &#x27;handler&#x27;,
+    HIDDEN = &#x27;hidden&#x27;,
+    HREF = &#x27;href&#x27;,
+    ICON = &#x27;icon&#x27;,
+    IMAGE_GALLERY = &#x27;image-gallery&#x27;,
+    IMG = &#x27;img&#x27;,
+    LEFT = &#x27;left&#x27;,
+    LINKS = &#x27;links&#x27;,
+    OFFSET = &#x27;offset&#x27;,
+    OFFSET_WIDTH = &#x27;offsetWidth&#x27;,
+    PAGE = &#x27;page&#x27;,
+    PAGINATION = &#x27;pagination&#x27;,
+    PAGINATION_EL = &#x27;paginationEl&#x27;,
+    PAGINATION_INSTANCE = &#x27;paginationInstance&#x27;,
+    PAUSE = &#x27;pause&#x27;,
+    PAUSED = &#x27;paused&#x27;,
+    PAUSED_LABEL = &#x27;pausedLabel&#x27;,
+    PLAY = &#x27;play&#x27;,
+    PLAYER = &#x27;player&#x27;,
+    PLAYING = &#x27;playing&#x27;,
+    PLAYING_LABEL = &#x27;playingLabel&#x27;,
+    PX = &#x27;px&#x27;,
+    REPEAT = &#x27;repeat&#x27;,
+    SHOW_PLAYER = &#x27;showPlayer&#x27;,
+    SPACE = &#x27; &#x27;,
+    SRC = &#x27;src&#x27;,
+    THUMB = &#x27;thumb&#x27;,
+    TOOLBAR = &#x27;toolbar&#x27;,
+    TOTAL = &#x27;total&#x27;,
+    USE_ORIGINAL_IMAGE = &#x27;useOriginalImage&#x27;,
+    VIEWPORT_REGION = &#x27;viewportRegion&#x27;,
+    VISIBLE = &#x27;visible&#x27;,
+    WELL = &#x27;well&#x27;,
 
-	concat = function() {
-		return Array.prototype.slice.call(arguments).join(SPACE);
-	},
+    concat = function() {
+        return Array.prototype.slice.call(arguments).join(SPACE);
+    },
 
-	getCN = A.getClassName,
+    getCN = A.getClassName,
 
-	CSS_ICON_PAUSE = getCN(ICON, PAUSE),
-	CSS_ICON_PLAY = getCN(ICON, PLAY),
-	CSS_IMAGE_GALLERY_PAGINATION = getCN(IMAGE_GALLERY, PAGINATION),
-	CSS_IMAGE_GALLERY_PAGINATION_THUMB = getCN(IMAGE_GALLERY, PAGINATION, THUMB),
-	CSS_IMAGE_GALLERY_PLAYER = getCN(IMAGE_GALLERY, PLAYER),
-	CSS_IMAGE_GALLERY_PLAYER_CONTENT = getCN(IMAGE_GALLERY, PLAYER, CONTENT),
-	CSS_WELL = getCN(WELL),
+    CSS_ICON_PAUSE = getCN(ICON, PAUSE),
+    CSS_ICON_PLAY = getCN(ICON, PLAY),
+    CSS_IMAGE_GALLERY_PAGINATION = getCN(IMAGE_GALLERY, PAGINATION),
+    CSS_IMAGE_GALLERY_PAGINATION_THUMB = getCN(IMAGE_GALLERY, PAGINATION, THUMB),
+    CSS_IMAGE_GALLERY_PLAYER = getCN(IMAGE_GALLERY, PLAYER),
+    CSS_IMAGE_GALLERY_PLAYER_CONTENT = getCN(IMAGE_GALLERY, PLAYER, CONTENT),
+    CSS_WELL = getCN(WELL),
 
-	TEMPLATE_PLAYING_LABEL = &#x27;(playing)&#x27;,
+    TEMPLATE_PLAYING_LABEL = &#x27;(playing)&#x27;,
 
-	TPL_PAGINATION_CONTAINER = &#x27;&lt;div class=&quot;&#x27; + CSS_IMAGE_GALLERY_PAGINATION + &#x27;&quot;&gt;&lt;/div&gt;&#x27;,
-	TPL_PAGINATION_THUMB = &#x27;&lt;li&gt;&lt;a class=&quot;&#x27; + concat(CSS_IMAGE_GALLERY_PAGINATION_THUMB, CSS_WELL) +&#x27;&quot;&gt;&lt;img src=&quot;{src}&quot; /&gt;&lt;/a&gt;&lt;/li&gt;&#x27;,
-	TPL_PLAYER_CONTAINER = &#x27;&lt;div class=&quot;&#x27; + CSS_IMAGE_GALLERY_PLAYER + &#x27;&quot;&gt;&lt;/div&gt;&#x27;,
-	TPL_PLAYER_CONTENT = &#x27;&lt;span class=&quot;&#x27; + CSS_IMAGE_GALLERY_PLAYER_CONTENT + &#x27;&quot;&gt;&lt;/span&gt;&#x27;;
+    TPL_PAGINATION_CONTAINER = &#x27;&lt;div class=&quot;&#x27; + CSS_IMAGE_GALLERY_PAGINATION + &#x27;&quot;&gt;&lt;/div&gt;&#x27;,
+    TPL_PAGINATION_THUMB = &#x27;&lt;li&gt;&lt;a class=&quot;&#x27; + concat(CSS_IMAGE_GALLERY_PAGINATION_THUMB, CSS_WELL) +
+        &#x27;&quot;&gt;&lt;img src=&quot;{src}&quot; /&gt;&lt;/a&gt;&lt;/li&gt;&#x27;,
+    TPL_PLAYER_CONTAINER = &#x27;&lt;div class=&quot;&#x27; + CSS_IMAGE_GALLERY_PLAYER + &#x27;&quot;&gt;&lt;/div&gt;&#x27;,
+    TPL_PLAYER_CONTENT = &#x27;&lt;span class=&quot;&#x27; + CSS_IMAGE_GALLERY_PLAYER_CONTENT + &#x27;&quot;&gt;&lt;/span&gt;&#x27;;
 
 /**
  *
@@ -2145,718 +2182,714 @@ var L = A.Lang,
  * @param config {Object} Object literal specifying widget configuration properties.
  * @constructor
  */
-var ImageGallery = A.Component.create(
-	{
-		/**
-		 * Static property provides a string to identify the class.
-		 *
-		 * @property ImageGallery.NAME
-		 * @type String
-		 * @static
-		 */
-		NAME: IMAGE_GALLERY,
-
-		/**
-		 * Static property used to define the default attribute
-		 * configuration for the ImageGallery.
-		 *
-		 * @property ImageGallery.ATTRS
-		 * @type Object
-		 * @static
-		 */
-		ATTRS: {
-
-			/**
-			 * If &lt;code&gt;true&lt;/code&gt; the slide show will be played when the
-			 * ImageGallery is displayed.
-			 *
-			 * @attribute autoPlay
-			 * @default false
-			 * @type Boolean
-			 */
-			autoPlay: {
-				value: false,
-				validator: isBoolean
-			},
-
-			/**
-			 * Delay in milliseconds to change to the next image.
-			 *
-			 * @attribute delay
-			 * @default 7000
-			 * @type Number
-			 */
-			delay: {
-				value: 7000,
-				validator: isNumber
-			},
-
-			/**
-			 * &lt;a href=&quot;Pagination.html&quot;&gt;Pagination&lt;/a&gt; configuration Object. The
-			 * &lt;code&gt;Pagination&lt;/code&gt; handles the thumbnails control.
-			 *
-			 * @attribute pagination
-			 * @default &lt;a href=&quot;Pagination.html&quot;&gt;Pagination&lt;/a&gt; configuration Object.
-			 * @type Object
-			 */
-			pagination: {
-				value: {},
-				setter: function(value) {
-					var instance = this;
-
-					return A.merge(
-						{
-							formatter: A.bind(instance._thumbnailFormatter, instance),
-							after: {
-								changeRequest: function(event) {
-									// fire changeRequest from ImageGallery passing the &quot;state&quot; object from Pagination
-									instance.fire(
-										&#x27;changeRequest&#x27;,
-										{
-											lastState: event.lastState,
-											state: event.state
-										}
-									);
-								}
-							},
-							render: instance.get(PAGINATION_EL),
-							showNavigation: false
-						},
-						value
-					);
-				},
-				validator: isObject
-			},
-
-			/**
-			 * Element which contains the &lt;a href=&quot;Pagination.html&quot;&gt;Pagination&lt;/a&gt;
-			 * with the thumbnails.
-			 *
-			 * @attribute paginationEl
-			 * @default Generated HTML div.
-			 * @readOnly
-			 * @type Node
-			 */
-			paginationEl: {
-				readyOnly: true,
-				valueFn: function() {
-					return A.Node.create(TPL_PAGINATION_CONTAINER);
-				}
-			},
-
-			/**
-			 * Stores the &lt;a href=&quot;Pagination.html&quot;&gt;Pagination&lt;/a&gt; instance.
-			 *
-			 * @attribute paginationInstance
-			 * @default null
-			 * @type Pagination
-			 */
-			paginationInstance: {
-				value: null
-			},
-
-			/**
-			 * If &lt;code&gt;true&lt;/code&gt; the slide show is paused.
-			 *
-			 * @attribute paused
-			 * @default false
-			 * @type Boolean
-			 */
-			paused: {
-				value: false,
-				validator: isBoolean
-			},
-
-			/**
-			 * Label to display when the slide show is paused.
-			 *
-			 * @attribute pausedLabel
-			 * @default &#x27;&#x27;
-			 * @type String
-			 */
-			pausedLabel: {
-				value: &#x27;&#x27;,
-				validator: isString
-			},
-
-			/**
-			 * If &lt;code&gt;true&lt;/code&gt; the slide show is playing.
-			 *
-			 * @attribute playing
-			 * @default false
-			 * @type Boolean
-			 */
-			playing: {
-				value: false,
-				validator: isBoolean
-			},
-
-			/**
-			 * Label to display when the slide show is playing.
-			 *
-			 * @attribute playingLabel
-			 * @default &#x27;(Playing)&#x27;
-			 * @type String
-			 */
-			playingLabel: {
-				value: TEMPLATE_PLAYING_LABEL,
-				validator: isString
-			},
-
-			/**
-			 * Restart the navigation when reach the last element.
-			 *
-			 * @attribute repeat
-			 * @default true
-			 * @type Boolean
-			 */
-			repeat: {
-				value: true,
-				validator: isBoolean
-			},
-
-			/**
-			 * Show the player controls (i.e., pause and show buttons).
-			 *
-			 * @attribute showPlayer
-			 * @default true
-			 * @type Boolean
-			 */
-			showPlayer: {
-				value: true,
-				validator: isBoolean
-			},
-
-			/**
-			 * &lt;a href=&quot;Toolbar.html&quot;&gt;Toolbar&lt;/a&gt; with a play, and pause buttons.
-			 *
-			 * @attribute toolbar
-			 * @default Generated Toolbar with a play, and pause buttons.
-			 * @type Toolbar constructor.
-			 */
-			toolbar: {
-				value: {},
-				setter: &#x27;_setToolbar&#x27;,
-				validator: isObject
-			},
-
-			/**
-			 * If &lt;code&gt;true&lt;/code&gt; will use the original image as thumbnails.
-			 *
-			 * @attribute useOriginalImage
-			 * @default false
-			 * @type Boolean
-			 */
-			useOriginalImage: {
-				value: false,
-				validator: isBoolean
-			}
-		},
-
-		/**
-		 * Static property used to define which component it extends.
-		 *
-		 * @property ImageGallery.EXTENDS
-		 * @type Object
-		 * @static
-		 */
-		EXTENDS: A.ImageViewer,
-
-		prototype: {
-
-			/**
-			 * Toolbar instance reference.
-			 *
-			 * @property toolbar
-			 * @type Toolbar
-			 * @protected
-			 */
-			toolbar: null,
-
-			/**
-			 * Stores the &lt;code&gt;A.later&lt;/code&gt; reference.
-			 *
-			 * @property _timer
-			 * @type Number
-			 * @protected
-			 */
-			_timer: null,
-
-			/**
-			 * Create the DOM structure for the ImageGallery. Lifecycle.
-			 *
-			 * @method renderUI
-			 * @protected
-			 */
-			renderUI: function() {
-				var instance = this;
-
-				ImageGallery.superclass.renderUI.apply(this, arguments);
-
-				instance._renderPagination();
-
-				if (instance.get(SHOW_PLAYER)) {
-					instance._renderPlayer();
-				}
-			},
-
-			/**
-			 * Bind the events on the ImageGallery UI. Lifecycle.
-			 *
-			 * @method bindUI
-			 * @protected
-			 */
-			bindUI: function() {
-				var instance = this;
-
-				ImageGallery.superclass.bindUI.apply(this, arguments);
-
-				instance.on(&#x27;playingChange&#x27;, instance._onPlayingChange);
-				instance.on(&#x27;pausedChange&#x27;, instance._onPausedChange);
-				instance.on(&#x27;currentIndexChange&#x27;, instance._onCurrentIndexChange);
-
-				instance.publish(&#x27;changeRequest&#x27;, { defaultFn: this._changeRequest });
-			},
-
-			/**
-			 * Destructor lifecycle implementation for the ImageGallery class.
-			 * Purges events attached to the node (and all child nodes).
-			 *
-			 * @method destroy
-			 * @protected
-			 */
-			destroy: function() {
-				var instance = this;
-
-				ImageGallery.superclass.destroy.apply(this, arguments);
-
-				instance.get(PAGINATION_INSTANCE).destroy();
-				instance.toolbar.destroy();
-			},
-
-			/**
-			 * Hide the &lt;a href=&quot;Pagination.html&quot;&gt;Pagination&lt;/a&gt;
-			 * with the thumbnails list.
-			 *
-			 * @method hidePagination
-			 */
-			hidePagination: function() {
-				var instance = this;
-
-				instance.get(PAGINATION_EL).hide();
-			},
-
-			/**
-			 * Pause the slide show.
-			 *
-			 * @method pause
-			 */
-			pause: function() {
-				var instance = this;
-
-				instance.set(PAUSED, true);
-				instance.set(PLAYING, false);
-
-				instance._syncInfoUI();
-			},
-
-			/**
-			 * Play the slide show.
-			 *
-			 * @method play
-			 */
-			play: function() {
-				var instance = this;
-
-				instance.set(PAUSED, false);
-				instance.set(PLAYING, true);
-
-				instance._syncInfoUI();
-			},
-
-			/**
-			 * &lt;p&gt;Show the ImageGallery.&lt;/p&gt;
-			 *
-			 * &lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt;Overloads the &lt;a
-			 * href=&quot;ImageViewer.html&quot;&gt;ImageViewer&lt;/a&gt; show method to not loadImage, the
-			 * changeRequest now is responsible to do that if we invoke the superclass
-			 * show method its loading the image, and the changeRequest loads again,
-			 * avoiding double request.&lt;/p&gt;
-			 *
-			 * @method show
-			 */
-			show: function() {
-				var instance = this;
-				var currentLink = instance.getCurrentLink();
-
-				if (currentLink) {
-					A.ImageViewer.superclass.show.apply(this, arguments);
-
-					// changeRequest on paginationInstance with the new page set
-					var paginationInstance = instance.get(PAGINATION_INSTANCE);
-
-					paginationInstance._dispatchRequest(
-						{
-							page: instance.get(CURRENT_INDEX) + 1
-						}
-					);
-				}
-			},
-
-			/**
-			 * Show the &lt;a href=&quot;Pagination.html&quot;&gt;Pagination&lt;/a&gt;
-			 * with the thumbnails list.
-			 *
-			 * @method showPagination
-			 */
-			showPagination: function() {
-				var instance = this;
-
-				instance.get(PAGINATION_EL).show();
-			},
-
-			/**
-			 * Cancel the timer between slides.
-			 *
-			 * @method _cancelTimer
-			 * @protected
-			 */
-			_cancelTimer: function() {
-				var instance = this;
-
-				if (instance._timer) {
-					instance._timer.cancel();
-				}
-			},
-
-			/**
-			 * Render the &lt;a href=&quot;Pagination.html&quot;&gt;Pagination&lt;/a&gt; with the thumbnails.
-			 *
-			 * @method _renderPagination
-			 * @protected
-			 */
-			_renderPagination: function() {
-				var instance = this;
-				var paginationEl = instance.get(PAGINATION_EL);
-
-				A.one(BODY).append(
-					paginationEl.hide()
-				);
-
-				var paginationInstance = new A.Pagination(
-					instance.get(PAGINATION)
-				)
-				.render();
-
-				instance.set(PAGINATION_INSTANCE, paginationInstance);
-			},
-
-			/**
-			 * Render the player controls.
-			 *
-			 * @method _renderPlayer
-			 * @protected
-			 */
-			_renderPlayer: function() {
-				var instance = this;
-				var paginationEl = instance.get(PAGINATION_EL);
-				var playerContent = A.Node.create(TPL_PLAYER_CONTENT);
-
-				paginationEl.append(
-					A.Node.create(TPL_PLAYER_CONTAINER).append(playerContent)
-				);
-
-				instance.toolbar = new A.Toolbar(
-					instance.get(TOOLBAR)
-				)
-				.render(playerContent);
-			},
-
-			/**
-			 * Set the Toolbar instance.
-			 *
-			 * @method _setToolbar
-			 * @param value
-			 * @protected
-			 */
-			_setToolbar: function(value) {
-				var instance = this;
-
-				if (instance.get(SHOW_PLAYER)) {
-					value = A.merge(
-						{
-							children: [
-								[
-									{
-										icon: CSS_ICON_PLAY,
-										on: {
-											click: A.bind(instance.play, instance)
-										}
-									},
-									{
-										icon: CSS_ICON_PAUSE,
-										on: {
-											click: A.bind(instance.pause, instance)
-										}
-									}
-								]
-							]
-						},
-						value
-					);
-				}
-
-				return value;
-			},
-
-			/**
-			 * Start the timer between slides.
-			 *
-			 * @method _startTimer
-			 * @protected
-			 */
-			_startTimer: function() {
-				var instance = this;
-				var delay = instance.get(DELAY);
-
-				instance._cancelTimer();
-
-				instance._timer = A.later(delay, instance, instance._syncSlideShow);
-			},
-
-			/**
-			 * Sync the controls UI.
-			 *
-			 * @method _syncControlsUI
-			 * @protected
-			 */
-			_syncControlsUI: function() {
-				var instance = this;
-
-				ImageGallery.superclass._syncControlsUI.apply(this, arguments);
-
-				if (instance.get(VISIBLE)) {
-					instance.showPagination();
-				}
-				else {
-					instance.hidePagination();
-
-					instance._cancelTimer();
-				}
-			},
-
-			/**
-			 * Sync the slide show UI.
-			 *
-			 * @method _syncSlideShow
-			 * @protected
-			 */
-			_syncSlideShow: function() {
-				var instance = this;
-
-				if (!instance.hasNext()) {
-					if (instance.get(REPEAT)) {
-						instance.set(CURRENT_INDEX, -1);
-					}
-					else {
-						instance._cancelTimer();
-					}
-				}
-
-				instance.next();
-			},
-
-			/**
-			 * Change the UI when click on a thumbnail.
-			 *
-			 * @method _changeRequest
-			 * @param {EventFacade} event
-			 * @protected
-			 */
-			_changeRequest: function(event) {
-				var instance = this;
-				var newState = event.state;
-				var lastState = event.lastState;
-				var page = newState.page;
-
-				// only update the paginator UI when the Widget is visible
-				if (!instance.get(VISIBLE)) {
-					return false; // NOTE: return
-				}
-
-				// check if the lastState page number is different from the newState page number.
-				if (!lastState || (lastState &amp;&amp; lastState.page != page)) {
-					instance.set(CURRENT_INDEX, page - 1);
-
-					instance._processChangeRequest();
-				}
-
-				var linksCount = instance.get(LINKS).size(),
-					paginationInstance = instance.get(PAGINATION_INSTANCE),
-					total = paginationInstance.get(TOTAL);
-
-				if (linksCount &gt; total) {
-					var offset = parseInt(page / total, 10) * total + 1;
-
-					if (page % total === 0) {
-						offset -= total;
-					}
-
-					page = page % total || total;
-
-					paginationInstance.set(OFFSET,  offset);
-
-					paginationInstance.setState({
-						page: page
-					});
-				}
-			},
-
-			/**
-			 * Process the change request.
-			 * Load image and restart the timer, if needed.
-			 *
-			 * @method _processChangeRequest
-			 * @protected
-			 */
-			_processChangeRequest: function() {
-				var instance = this;
-
-				// loading current index image
-				instance.loadImage(
-					instance.getCurrentLink().attr(HREF)
-				);
-
-				// restart the timer if the user change the image, respecting the paused state
-				var paused = instance.get(PAUSED);
-				var playing = instance.get(PLAYING);
-
-				if (playing &amp;&amp; !paused) {
-					instance._startTimer();
-				}
-			},
-
-			/**
-			 * See &lt;a href=&quot;Pagination.html#method__formatter&quot;&gt;_formatter&lt;/a&gt;.
-			 *
-			 * @method _thumbnailFormatter
-			 * @param {Number} pageNumber
-			 * @protected
-			 */
-			_thumbnailFormatter: function(pageNumber) {
-				var instance = this,
-					paginationInstance = instance.get(PAGINATION_INSTANCE),
-					linksCount = instance.get(LINKS).size(),
-					index = pageNumber - 1;
-
-				if (pageNumber &gt; linksCount) {
-					return &#x27;&#x27;;
-				}
-
-				var link = instance.getLink(index),
-					thumbSrc = null;
-
-				if (instance.get(USE_ORIGINAL_IMAGE)) {
-					thumbSrc = link.attr(HREF);
-				}
-				else {
-					// try to find a inner thumbnail image to show on the pagination
-					var innerImage = link.one(IMG);
-
-					if (innerImage) {
-						thumbSrc = innerImage.attr(SRC);
-					}
-				}
-
-				return L.sub(TPL_PAGINATION_THUMB, {
-					src: thumbSrc
-				});
-			},
-
-			/**
-			 * Get the &lt;a href=&quot;ImageViewer.html#config_info&quot;&gt;info&lt;/a&gt; template.
-			 *
-			 * @method _getInfoTemplate
-			 * @param {String} v template
-			 * @protected
-			 * @return {String} Parsed string.
-			 */
-			_getInfoTemplate: function(v) {
-				var label;
-				var instance = this;
-				var paused = instance.get(PAUSED);
-				var playing = instance.get(PLAYING);
-
-				if (playing) {
-					label = instance.get(PLAYING_LABEL);
-				}
-				else if (paused) {
-					label = instance.get(PAUSED_LABEL);
-				}
-
-				return concat(
-					ImageGallery.superclass._getInfoTemplate.apply(this, arguments),
-					label
-				);
-			},
-
-			/**
-			 * Fire after the value of the
-			 * &lt;a href=&quot;ImageViewer.html#config_visible&quot;&gt;visible&lt;/a&gt; attribute change.
-			 *
-			 * @method _afterVisibleChange
-			 * @param {EventFacade} event
-			 * @protected
-			 */
-			_afterVisibleChange: function(event) {
-				var instance = this;
-
-				// invoke A.ImageViewer _afterVisibleChange method
-				ImageGallery.superclass._afterVisibleChange.apply(this, arguments);
-
-				if (event.newVal) {
-					if (instance.get(AUTO_PLAY)) {
-						instance.play();
-					}
-				}
-			},
-
-			/**
-			 * Fire before the value of the
-			 * &lt;a href=&quot;ImageGallery.html#config_paused&quot;&gt;paused&lt;/a&gt; attribute change.
-			 *
-			 * @method _onPausedChange
-			 * @param {EventFacade} event
-			 * @protected
-			 */
-			_onPausedChange: function(event) {
-				var instance = this;
-
-				if (event.newVal) {
-					instance._cancelTimer();
-				}
-			},
-
-			/**
-			 * Fire before the value of the
-			 * &lt;a href=&quot;ImageGallery.html#config_playing&quot;&gt;playing&lt;/a&gt; attribute change.
-			 *
-			 * @method _onPlayingChange
-			 * @param {EventFacade} event
-			 * @protected
-			 */
-			_onPlayingChange: function(event) {
-				var instance = this;
-
-				if (event.newVal) {
-					instance._startTimer();
-				}
-			}
-		}
-	}
-);
+var ImageGallery = A.Component.create({
+    /**
+     * Static property provides a string to identify the class.
+     *
+     * @property ImageGallery.NAME
+     * @type String
+     * @static
+     */
+    NAME: IMAGE_GALLERY,
+
+    /**
+     * Static property used to define the default attribute
+     * configuration for the ImageGallery.
+     *
+     * @property ImageGallery.ATTRS
+     * @type Object
+     * @static
+     */
+    ATTRS: {
+
+        /**
+         * If &lt;code&gt;true&lt;/code&gt; the slide show will be played when the
+         * ImageGallery is displayed.
+         *
+         * @attribute autoPlay
+         * @default false
+         * @type Boolean
+         */
+        autoPlay: {
+            value: false,
+            validator: isBoolean
+        },
+
+        /**
+         * Delay in milliseconds to change to the next image.
+         *
+         * @attribute delay
+         * @default 7000
+         * @type Number
+         */
+        delay: {
+            value: 7000,
+            validator: isNumber
+        },
+
+        /**
+         * &lt;a href=&quot;Pagination.html&quot;&gt;Pagination&lt;/a&gt; configuration Object. The
+         * &lt;code&gt;Pagination&lt;/code&gt; handles the thumbnails control.
+         *
+         * @attribute pagination
+         * @default &lt;a href=&quot;Pagination.html&quot;&gt;Pagination&lt;/a&gt; configuration Object.
+         * @type Object
+         */
+        pagination: {
+            value: {},
+            setter: function(value) {
+                var instance = this;
+
+                return A.merge({
+                        formatter: A.bind(instance._thumbnailFormatter, instance),
+                        after: {
+                            changeRequest: function(event) {
+                                // fire changeRequest from ImageGallery passing the &quot;state&quot; object from Pagination
+                                instance.fire(
+                                    &#x27;changeRequest&#x27;, {
+                                        lastState: event.lastState,
+                                        state: event.state
+                                    }
+                                );
+                            }
+                        },
+                        render: instance.get(PAGINATION_EL),
+                        showNavigation: false
+                    },
+                    value
+                );
+            },
+            validator: isObject
+        },
+
+        /**
+         * Element which contains the &lt;a href=&quot;Pagination.html&quot;&gt;Pagination&lt;/a&gt;
+         * with the thumbnails.
+         *
+         * @attribute paginationEl
+         * @default Generated HTML div.
+         * @readOnly
+         * @type Node
+         */
+        paginationEl: {
+            readyOnly: true,
+            valueFn: function() {
+                return A.Node.create(TPL_PAGINATION_CONTAINER);
+            }
+        },
+
+        /**
+         * Stores the &lt;a href=&quot;Pagination.html&quot;&gt;Pagination&lt;/a&gt; instance.
+         *
+         * @attribute paginationInstance
+         * @default null
+         * @type Pagination
+         */
+        paginationInstance: {
+            value: null
+        },
+
+        /**
+         * If &lt;code&gt;true&lt;/code&gt; the slide show is paused.
+         *
+         * @attribute paused
+         * @default false
+         * @type Boolean
+         */
+        paused: {
+            value: false,
+            validator: isBoolean
+        },
+
+        /**
+         * Label to display when the slide show is paused.
+         *
+         * @attribute pausedLabel
+         * @default &#x27;&#x27;
+         * @type String
+         */
+        pausedLabel: {
+            value: &#x27;&#x27;,
+            validator: isString
+        },
+
+        /**
+         * If &lt;code&gt;true&lt;/code&gt; the slide show is playing.
+         *
+         * @attribute playing
+         * @default false
+         * @type Boolean
+         */
+        playing: {
+            value: false,
+            validator: isBoolean
+        },
+
+        /**
+         * Label to display when the slide show is playing.
+         *
+         * @attribute playingLabel
+         * @default &#x27;(Playing)&#x27;
+         * @type String
+         */
+        playingLabel: {
+            value: TEMPLATE_PLAYING_LABEL,
+            validator: isString
+        },
+
+        /**
+         * Restart the navigation when reach the last element.
+         *
+         * @attribute repeat
+         * @default true
+         * @type Boolean
+         */
+        repeat: {
+            value: true,
+            validator: isBoolean
+        },
+
+        /**
+         * Show the player controls (i.e., pause and show buttons).
+         *
+         * @attribute showPlayer
+         * @default true
+         * @type Boolean
+         */
+        showPlayer: {
+            value: true,
+            validator: isBoolean
+        },
+
+        /**
+         * &lt;a href=&quot;Toolbar.html&quot;&gt;Toolbar&lt;/a&gt; with a play, and pause buttons.
+         *
+         * @attribute toolbar
+         * @default Generated Toolbar with a play, and pause buttons.
+         * @type Toolbar constructor.
+         */
+        toolbar: {
+            value: {},
+            setter: &#x27;_setToolbar&#x27;,
+            validator: isObject
+        },
+
+        /**
+         * If &lt;code&gt;true&lt;/code&gt; will use the original image as thumbnails.
+         *
+         * @attribute useOriginalImage
+         * @default false
+         * @type Boolean
+         */
+        useOriginalImage: {
+            value: false,
+            validator: isBoolean
+        }
+    },
+
+    /**
+     * Static property used to define which component it extends.
+     *
+     * @property ImageGallery.EXTENDS
+     * @type Object
+     * @static
+     */
+    EXTENDS: A.ImageViewer,
+
+    prototype: {
+
+        /**
+         * Toolbar instance reference.
+         *
+         * @property toolbar
+         * @type Toolbar
+         * @protected
+         */
+        toolbar: null,
+
+        /**
+         * Stores the &lt;code&gt;A.later&lt;/code&gt; reference.
+         *
+         * @property _timer
+         * @type Number
+         * @protected
+         */
+        _timer: null,
+
+        /**
+         * Create the DOM structure for the ImageGallery. Lifecycle.
+         *
+         * @method renderUI
+         * @protected
+         */
+        renderUI: function() {
+            var instance = this;
+
+            ImageGallery.superclass.renderUI.apply(this, arguments);
+
+            instance._renderPagination();
+
+            if (instance.get(SHOW_PLAYER)) {
+                instance._renderPlayer();
+            }
+        },
+
+        /**
+         * Bind the events on the ImageGallery UI. Lifecycle.
+         *
+         * @method bindUI
+         * @protected
+         */
+        bindUI: function() {
+            var instance = this;
+
+            ImageGallery.superclass.bindUI.apply(this, arguments);
+
+            instance.on(&#x27;playingChange&#x27;, instance._onPlayingChange);
+            instance.on(&#x27;pausedChange&#x27;, instance._onPausedChange);
+            instance.on(&#x27;currentIndexChange&#x27;, instance._onCurrentIndexChange);
+
+            instance.publish(&#x27;changeRequest&#x27;, {
+                defaultFn: this._changeRequest
+            });
+        },
+
+        /**
+         * Destructor lifecycle implementation for the ImageGallery class.
+         * Purges events attached to the node (and all child nodes).
+         *
+         * @method destroy
+         * @protected
+         */
+        destroy: function() {
+            var instance = this;
+
+            ImageGallery.superclass.destroy.apply(this, arguments);
+
+            instance.get(PAGINATION_INSTANCE).destroy();
+            instance.toolbar.destroy();
+        },
+
+        /**
+         * Hide the &lt;a href=&quot;Pagination.html&quot;&gt;Pagination&lt;/a&gt;
+         * with the thumbnails list.
+         *
+         * @method hidePagination
+         */
+        hidePagination: function() {
+            var instance = this;
+
+            instance.get(PAGINATION_EL).hide();
+        },
+
+        /**
+         * Pause the slide show.
+         *
+         * @method pause
+         */
+        pause: function() {
+            var instance = this;
+
+            instance.set(PAUSED, true);
+            instance.set(PLAYING, false);
+
+            instance._syncInfoUI();
+        },
+
+        /**
+         * Play the slide show.
+         *
+         * @method play
+         */
+        play: function() {
+            var instance = this;
+
+            instance.set(PAUSED, false);
+            instance.set(PLAYING, true);
+
+            instance._syncInfoUI();
+        },
+
+        /**
+         * &lt;p&gt;Show the ImageGallery.&lt;/p&gt;
+         *
+         * &lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt;Overloads the &lt;a
+         * href=&quot;ImageViewer.html&quot;&gt;ImageViewer&lt;/a&gt; show method to not loadImage, the
+         * changeRequest now is responsible to do that if we invoke the superclass
+         * show method its loading the image, and the changeRequest loads again,
+         * avoiding double request.&lt;/p&gt;
+         *
+         * @method show
+         */
+        show: function() {
+            var instance = this;
+            var currentLink = instance.getCurrentLink();
+
+            if (currentLink) {
+                A.ImageViewer.superclass.show.apply(this, arguments);
+
+                // changeRequest on paginationInstance with the new page set
+                var paginationInstance = instance.get(PAGINATION_INSTANCE);
+
+                paginationInstance._dispatchRequest({
+                    page: instance.get(CURRENT_INDEX) + 1
+                });
+            }
+        },
+
+        /**
+         * Show the &lt;a href=&quot;Pagination.html&quot;&gt;Pagination&lt;/a&gt;
+         * with the thumbnails list.
+         *
+         * @method showPagination
+         */
+        showPagination: function() {
+            var instance = this;
+
+            instance.get(PAGINATION_EL).show();
+        },
+
+        /**
+         * Cancel the timer between slides.
+         *
+         * @method _cancelTimer
+         * @protected
+         */
+        _cancelTimer: function() {
+            var instance = this;
+
+            if (instance._timer) {
+                instance._timer.cancel();
+            }
+        },
+
+        /**
+         * Render the &lt;a href=&quot;Pagination.html&quot;&gt;Pagination&lt;/a&gt; with the thumbnails.
+         *
+         * @method _renderPagination
+         * @protected
+         */
+        _renderPagination: function() {
+            var instance = this;
+            var paginationEl = instance.get(PAGINATION_EL);
+
+            A.one(BODY).append(
+                paginationEl.hide()
+            );
+
+            var paginationInstance = new A.Pagination(
+                instance.get(PAGINATION)
+            )
+                .render();
+
+            instance.set(PAGINATION_INSTANCE, paginationInstance);
+        },
+
+        /**
+         * Render the player controls.
+         *
+         * @method _renderPlayer
+         * @protected
+         */
+        _renderPlayer: function() {
+            var instance = this;
+            var paginationEl = instance.get(PAGINATION_EL);
+            var playerContent = A.Node.create(TPL_PLAYER_CONTENT);
+
+            paginationEl.append(
+                A.Node.create(TPL_PLAYER_CONTAINER).append(playerContent)
+            );
+
+            instance.toolbar = new A.Toolbar(
+                instance.get(TOOLBAR)
+            )
+                .render(playerContent);
+        },
+
+        /**
+         * Set the Toolbar instance.
+         *
+         * @method _setToolbar
+         * @param value
+         * @protected
+         */
+        _setToolbar: function(value) {
+            var instance = this;
+
+            if (instance.get(SHOW_PLAYER)) {
+                value = A.merge({
+                        children: [
+        [
+                                {
+                                    icon: CSS_ICON_PLAY,
+                                    on: {
+                                        click: A.bind(instance.play, instance)
+                                    }
+         },
+                                {
+                                    icon: CSS_ICON_PAUSE,
+                                    on: {
+                                        click: A.bind(instance.pause, instance)
+                                    }
+         }
+        ]
+       ]
+                    },
+                    value
+                );
+            }
+
+            return value;
+        },
+
+        /**
+         * Start the timer between slides.
+         *
+         * @method _startTimer
+         * @protected
+         */
+        _startTimer: function() {
+            var instance = this;
+            var delay = instance.get(DELAY);
+
+            instance._cancelTimer();
+
+            instance._timer = A.later(delay, instance, instance._syncSlideShow);
+        },
+
+        /**
+         * Sync the controls UI.
+         *
+         * @method _syncControlsUI
+         * @protected
+         */
+        _syncControlsUI: function() {
+            var instance = this;
+
+            ImageGallery.superclass._syncControlsUI.apply(this, arguments);
+
+            if (instance.get(VISIBLE)) {
+                instance.showPagination();
+            }
+            else {
+                instance.hidePagination();
+
+                instance._cancelTimer();
+            }
+        },
+
+        /**
+         * Sync the slide show UI.
+         *
+         * @method _syncSlideShow
+         * @protected
+         */
+        _syncSlideShow: function() {
+            var instance = this;
+
+            if (!instance.hasNext()) {
+                if (instance.get(REPEAT)) {
+                    instance.set(CURRENT_INDEX, -1);
+                }
+                else {
+                    instance._cancelTimer();
+                }
+            }
+
+            instance.next();
+        },
+
+        /**
+         * Change the UI when click on a thumbnail.
+         *
+         * @method _changeRequest
+         * @param {EventFacade} event
+         * @protected
+         */
+        _changeRequest: function(event) {
+            var instance = this;
+            var newState = event.state;
+            var lastState = event.lastState;
+            var page = newState.page;
+
+            // only update the paginator UI when the Widget is visible
+            if (!instance.get(VISIBLE)) {
+                return false; // NOTE: return
+            }
+
+            // check if the lastState page number is different from the newState page number.
+            if (!lastState || (lastState &amp;&amp; lastState.page != page)) {
+                instance.set(CURRENT_INDEX, page - 1);
+
+                instance._processChangeRequest();
+            }
+
+            var linksCount = instance.get(LINKS).size(),
+                paginationInstance = instance.get(PAGINATION_INSTANCE),
+                total = paginationInstance.get(TOTAL);
+
+            if (linksCount &gt; total) {
+                var offset = parseInt(page / total, 10) * total + 1;
+
+                if (page % total === 0) {
+                    offset -= total;
+                }
+
+                page = page % total || total;
+
+                paginationInstance.set(OFFSET, offset);
+
+                paginationInstance.setState({
+                    page: page
+                });
+            }
+        },
+
+        /**
+         * Process the change request.
+         * Load image and restart the timer, if needed.
+         *
+         * @method _processChangeRequest
+         * @protected
+         */
+        _processChangeRequest: function() {
+            var instance = this;
+
+            // loading current index image
+            instance.loadImage(
+                instance.getCurrentLink().attr(HREF)
+            );
+
+            // restart the timer if the user change the image, respecting the paused state
+            var paused = instance.get(PAUSED);
+            var playing = instance.get(PLAYING);
+
+            if (playing &amp;&amp; !paused) {
+                instance._startTimer();
+            }
+        },
+
+        /**
+         * See &lt;a href=&quot;Pagination.html#method__formatter&quot;&gt;_formatter&lt;/a&gt;.
+         *
+         * @method _thumbnailFormatter
+         * @param {Number} pageNumber
+         * @protected
+         */
+        _thumbnailFormatter: function(pageNumber) {
+            var instance = this,
+                paginationInstance = instance.get(PAGINATION_INSTANCE),
+                linksCount = instance.get(LINKS).size(),
+                index = pageNumber - 1;
+
+            if (pageNumber &gt; linksCount) {
+                return &#x27;&#x27;;
+            }
+
+            var link = instance.getLink(index),
+                thumbSrc = null;
+
+            if (instance.get(USE_ORIGINAL_IMAGE)) {
+                thumbSrc = link.attr(HREF);
+            }
+            else {
+                // try to find a inner thumbnail image to show on the pagination
+                var innerImage = link.one(IMG);
+
+                if (innerImage) {
+                    thumbSrc = innerImage.attr(SRC);
+                }
+            }
+
+            return L.sub(TPL_PAGINATION_THUMB, {
+                src: thumbSrc
+            });
+        },
+
+        /**
+         * Get the &lt;a href=&quot;ImageViewer.html#config_info&quot;&gt;info&lt;/a&gt; template.
+         *
+         * @method _getInfoTemplate
+         * @param {String} v template
+         * @protected
+         * @return {String} Parsed string.
+         */
+        _getInfoTemplate: function(v) {
+            var label;
+            var instance = this;
+            var paused = instance.get(PAUSED);
+            var playing = instance.get(PLAYING);
+
+            if (playing) {
+                label = instance.get(PLAYING_LABEL);
+            }
+            else if (paused) {
+                label = instance.get(PAUSED_LABEL);
+            }
+
+            return concat(
+                ImageGallery.superclass._getInfoTemplate.apply(this, arguments),
+                label
+            );
+        },
+
+        /**
+         * Fire after the value of the
+         * &lt;a href=&quot;ImageViewer.html#config_visible&quot;&gt;visible&lt;/a&gt; attribute change.
+         *
+         * @method _afterVisibleChange
+         * @param {EventFacade} event
+         * @protected
+         */
+        _afterVisibleChange: function(event) {
+            var instance = this;
+
+            // invoke A.ImageViewer _afterVisibleChange method
+            ImageGallery.superclass._afterVisibleChange.apply(this, arguments);
+
+            if (event.newVal) {
+                if (instance.get(AUTO_PLAY)) {
+                    instance.play();
+                }
+            }
+        },
+
+        /**
+         * Fire before the value of the
+         * &lt;a href=&quot;ImageGallery.html#config_paused&quot;&gt;paused&lt;/a&gt; attribute change.
+         *
+         * @method _onPausedChange
+         * @param {EventFacade} event
+         * @protected
+         */
+        _onPausedChange: function(event) {
+            var instance = this;
+
+            if (event.newVal) {
+                instance._cancelTimer();
+            }
+        },
+
+        /**
+         * Fire before the value of the
+         * &lt;a href=&quot;ImageGallery.html#config_playing&quot;&gt;playing&lt;/a&gt; attribute change.
+         *
+         * @method _onPlayingChange
+         * @param {EventFacade} event
+         * @protected
+         */
+        _onPlayingChange: function(event) {
+            var instance = this;
+
+            if (event.newVal) {
+                instance._startTimer();
+            }
+        }
+    }
+});
 
 A.ImageGallery = ImageGallery;
+
     </pre>
 </div>
 

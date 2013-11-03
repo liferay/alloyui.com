@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>2.0.0pr6</b>
+                        API Docs for Version: <b>2.0.0</b>
                     </p>
                 </li>
             </div>
@@ -83,6 +83,8 @@
             
                 <li><a href="../classes/A.ButtonGroup.html">A.ButtonGroup</a></li>
             
+                <li><a href="../classes/A.ButtonSearchCancel.html">A.ButtonSearchCancel</a></li>
+            
                 <li><a href="../classes/A.Carousel.html">A.Carousel</a></li>
             
                 <li><a href="../classes/A.CellEditorSupport.html">A.CellEditorSupport</a></li>
@@ -107,7 +109,23 @@
             
                 <li><a href="../classes/A.DataType.DateMath.html">A.DataType.DateMath</a></li>
             
+                <li><a href="../classes/A.Date.html">A.Date</a></li>
+            
                 <li><a href="../classes/A.DateCellEditor.html">A.DateCellEditor</a></li>
+            
+                <li><a href="../classes/A.DateParser.html">A.DateParser</a></li>
+            
+                <li><a href="../classes/A.DatePicker.html">A.DatePicker</a></li>
+            
+                <li><a href="../classes/A.DatePickerBase.html">A.DatePickerBase</a></li>
+            
+                <li><a href="../classes/A.DatePickerDelegate.html">A.DatePickerDelegate</a></li>
+            
+                <li><a href="../classes/A.DatePickerNative.html">A.DatePickerNative</a></li>
+            
+                <li><a href="../classes/A.DatePickerNativeBase.html">A.DatePickerNativeBase</a></li>
+            
+                <li><a href="../classes/A.DatePickerPopover.html">A.DatePickerPopover</a></li>
             
                 <li><a href="../classes/A.DiagramBuilder.html">A.DiagramBuilder</a></li>
             
@@ -260,6 +278,10 @@
                 <li><a href="../classes/A.TextCellEditor.html">A.TextCellEditor</a></li>
             
                 <li><a href="../classes/A.ThumbRating.html">A.ThumbRating</a></li>
+            
+                <li><a href="../classes/A.TimePicker.html">A.TimePicker</a></li>
+            
+                <li><a href="../classes/A.TimePickerBase.html">A.TimePickerBase</a></li>
             
                 <li><a href="../classes/A.ToggleButton.html">A.ToggleButton</a></li>
             
@@ -1057,6 +1079,8 @@
 
             <ul id="api-modules" class="apis modules tab-pane">
             
+                <li><a href="../modules/ace-autocomplete-plugin.html">ace-autocomplete-plugin</a></li>
+            
                 <li><a href="../modules/align-plugin.html">align-plugin</a></li>
             
                 <li><a href="../modules/anim.html">anim</a></li>
@@ -1143,7 +1167,7 @@
             
                 <li><a href="../modules/aui-collection.html">aui-collection</a></li>
             
-                <li><a href="../modules/aui-color-pallete.html">aui-color-pallete</a></li>
+                <li><a href="../modules/aui-color-palette.html">aui-color-palette</a></li>
             
                 <li><a href="../modules/aui-color-picker.html">aui-color-picker</a></li>
             
@@ -1164,6 +1188,16 @@
                 <li><a href="../modules/aui-datatable-selection.html">aui-datatable-selection</a></li>
             
                 <li><a href="../modules/aui-datatype.html">aui-datatype</a></li>
+            
+                <li><a href="../modules/aui-datatype-date-parse.html">aui-datatype-date-parse</a></li>
+            
+                <li><a href="../modules/aui-datepicker.html">aui-datepicker</a></li>
+            
+                <li><a href="../modules/aui-datepicker-delegate.html">aui-datepicker-delegate</a></li>
+            
+                <li><a href="../modules/aui-datepicker-native.html">aui-datepicker-native</a></li>
+            
+                <li><a href="../modules/aui-datepicker-popover.html">aui-datepicker-popover</a></li>
             
                 <li><a href="../modules/aui-diagram-builder.html">aui-diagram-builder</a></li>
             
@@ -1245,7 +1279,7 @@
             
                 <li><a href="../modules/aui-pagination.html">aui-pagination</a></li>
             
-                <li><a href="../modules/aui-pallete.html">aui-pallete</a></li>
+                <li><a href="../modules/aui-palette.html">aui-palette</a></li>
             
                 <li><a href="../modules/aui-parse-content.html">aui-parse-content</a></li>
             
@@ -1296,6 +1330,8 @@
                 <li><a href="../modules/aui-tabview.html">aui-tabview</a></li>
             
                 <li><a href="../modules/aui-text.html">aui-text</a></li>
+            
+                <li><a href="../modules/aui-timepicker.html">aui-timepicker</a></li>
             
                 <li><a href="../modules/aui-timer.html">aui-timer</a></li>
             
@@ -2059,222 +2095,223 @@
  */
 
 var Lang = A.Lang,
-	isString = Lang.isString,
+    isString = Lang.isString,
 
-	SELECTOR = A.Selector,
+    SELECTOR = A.Selector,
 
-	getClassName = A.getClassName,
+    getClassName = A.getClassName,
 
-	CSS_HIDE = A.getClassName(&#x27;hide&#x27;),
-	REGEX_HIDDEN_CLASSNAMES = new RegExp(CSS_HIDE);
+    CSS_HIDE = A.getClassName(&#x27;hide&#x27;),
+    REGEX_HIDDEN_CLASSNAMES = new RegExp(CSS_HIDE);
 
-	SELECTOR._isNodeHidden = function(node) {
-		var width = node.offsetWidth;
-		var height = node.offsetHeight;
-		var ignore = node.nodeName.toLowerCase() == &#x27;tr&#x27;;
-		var className = node.className;
-		var nodeStyle = node.style;
+SELECTOR._isNodeHidden = function(node) {
+    var width = node.offsetWidth;
+    var height = node.offsetHeight;
+    var ignore = node.nodeName.toLowerCase() == &#x27;tr&#x27;;
+    var className = node.className;
+    var nodeStyle = node.style;
 
-		var hidden = false;
+    var hidden = false;
 
-		if (!ignore) {
-			if (width == 0 &amp;&amp; height == 0) {
-				hidden = true;
-			}
-			else if (width &gt; 0 &amp;&amp; height &gt; 0) {
-				hidden = false;
-			}
-		}
+    if (!ignore) {
+        if (width == 0 &amp;&amp; height == 0) {
+            hidden = true;
+        }
+        else if (width &gt; 0 &amp;&amp; height &gt; 0) {
+            hidden = false;
+        }
+    }
 
-		hidden = hidden || (nodeStyle.display == &#x27;none&#x27; || nodeStyle.visibility == &#x27;hidden&#x27;) || REGEX_HIDDEN_CLASSNAMES.test(className);
+    hidden = hidden || (nodeStyle.display == &#x27;none&#x27; || nodeStyle.visibility == &#x27;hidden&#x27;) || REGEX_HIDDEN_CLASSNAMES.test(
+        className);
 
-		return hidden;
-	};
+    return hidden;
+};
 
-	var testNodeType = function(type) {
-		return function(node) {
-			return node.type == type;
-		};
-	};
+var testNodeType = function(type) {
+    return function(node) {
+        return node.type == type;
+    };
+};
 
-	/**
-	 * Augment the &lt;a href=&quot;Selector.html&quot;&gt;YUI3 Selector&lt;/a&gt; with more util methods.
-	 *
-	 * @class A.Selector
-	 * @uses Selector
-	 * @constructor
-	 */
-	A.mix(
-		SELECTOR.pseudos,
-		{
-			/**
-			 * TODO. Wanna help? Please send a Pull Request.
-			 *
-			 * @method button
-			 * @param node
-			 */
-			button: function(node) {
-				return node.type === &#x27;button&#x27; || node.nodeName.toLowerCase() === &#x27;button&#x27;;
-			},
+/**
+ * Augment the &lt;a href=&quot;Selector.html&quot;&gt;YUI3 Selector&lt;/a&gt; with more util methods.
+ *
+ * @class A.Selector
+ * @uses Selector
+ * @constructor
+ */
+A.mix(
+    SELECTOR.pseudos, {
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method button
+         * @param node
+         */
+        button: function(node) {
+            return node.type === &#x27;button&#x27; || node.nodeName.toLowerCase() === &#x27;button&#x27;;
+        },
 
-			/**
-			 * TODO. Wanna help? Please send a Pull Request.
-			 *
-			 * @method checkbox
-			 */
-			checkbox: testNodeType(&#x27;checkbox&#x27;),
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method checkbox
+         */
+        checkbox: testNodeType(&#x27;checkbox&#x27;),
 
-			/**
-			 * TODO. Wanna help? Please send a Pull Request.
-			 *
-			 * @method checked
-			 * @param node
-			 */
-			checked: function(node) {
-				return node.checked === true;
-			},
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method checked
+         * @param node
+         */
+        checked: function(node) {
+            return node.checked === true;
+        },
 
-			/**
-			 * TODO. Wanna help? Please send a Pull Request.
-			 *
-			 * @method disabled
-			 * @param node
-			 */
-			disabled: function(node) {
-				return node.disabled === true;
-			},
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method disabled
+         * @param node
+         */
+        disabled: function(node) {
+            return node.disabled === true;
+        },
 
-			/**
-			 * TODO. Wanna help? Please send a Pull Request.
-			 *
-			 * @method empty
-			 * @param node
-			 */
-			empty: function(node) {
-				return !node.firstChild;
-			},
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method empty
+         * @param node
+         */
+        empty: function(node) {
+            return !node.firstChild;
+        },
 
-			/**
-			 * TODO. Wanna help? Please send a Pull Request.
-			 *
-			 * @method enabled
-			 * @param node
-			 */
-			enabled: function(node) {
-				return node.disabled === false &amp;&amp; node.type !== &#x27;hidden&#x27;;
-			},
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method enabled
+         * @param node
+         */
+        enabled: function(node) {
+            return node.disabled === false &amp;&amp; node.type !== &#x27;hidden&#x27;;
+        },
 
-			/**
-			 * TODO. Wanna help? Please send a Pull Request.
-			 *
-			 * @method file
-			 */
-			file: testNodeType(&#x27;file&#x27;),
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method file
+         */
+        file: testNodeType(&#x27;file&#x27;),
 
-			/**
-			 * TODO. Wanna help? Please send a Pull Request.
-			 *
-			 * @method header
-			 * @param node
-			 */
-			header: function(node) {
-				return /h\d/i.test(node.nodeName);
-			},
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method header
+         * @param node
+         */
+        header: function(node) {
+            return /h\d/i.test(node.nodeName);
+        },
 
-			/**
-			 * TODO. Wanna help? Please send a Pull Request.
-			 *
-			 * @method hidden
-			 * @param node
-			 */
-			hidden: function(node) {
-				return SELECTOR._isNodeHidden(node);
-			},
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method hidden
+         * @param node
+         */
+        hidden: function(node) {
+            return SELECTOR._isNodeHidden(node);
+        },
 
-			/**
-			 * TODO. Wanna help? Please send a Pull Request.
-			 *
-			 * @method image
-			 */
-			image: testNodeType(&#x27;image&#x27;),
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method image
+         */
+        image: testNodeType(&#x27;image&#x27;),
 
-			/**
-			 * TODO. Wanna help? Please send a Pull Request.
-			 *
-			 * @method input
-			 * @param node
-			 */
-			input: function(node) {
-				return /input|select|textarea|button/i.test(node.nodeName);
-			},
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method input
+         * @param node
+         */
+        input: function(node) {
+            return /input|select|textarea|button/i.test(node.nodeName);
+        },
 
-			/**
-			 * TODO. Wanna help? Please send a Pull Request.
-			 *
-			 * @method parent
-			 * @param node
-			 */
-			parent: function(node) {
-				return !!node.firstChild;
-			},
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method parent
+         * @param node
+         */
+        parent: function(node) {
+            return !!node.firstChild;
+        },
 
-			/**
-			 * TODO. Wanna help? Please send a Pull Request.
-			 *
-			 * @method password
-			 */
-			password: testNodeType(&#x27;password&#x27;),
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method password
+         */
+        password: testNodeType(&#x27;password&#x27;),
 
-			/**
-			 * TODO. Wanna help? Please send a Pull Request.
-			 *
-			 * @method radio
-			 */
-			radio: testNodeType(&#x27;radio&#x27;),
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method radio
+         */
+        radio: testNodeType(&#x27;radio&#x27;),
 
-			/**
-			 * TODO. Wanna help? Please send a Pull Request.
-			 *
-			 * @method reset
-			 */
-			reset: testNodeType(&#x27;reset&#x27;),
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method reset
+         */
+        reset: testNodeType(&#x27;reset&#x27;),
 
-			/**
-			 * TODO. Wanna help? Please send a Pull Request.
-			 *
-			 * @method selected
-			 * @param node
-			 */
-			selected: function(node) {
-				node.parentNode.selectedIndex;
-				return node.selected === true;
-			},
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method selected
+         * @param node
+         */
+        selected: function(node) {
+            node.parentNode.selectedIndex;
+            return node.selected === true;
+        },
 
-			/**
-			 * TODO. Wanna help? Please send a Pull Request.
-			 *
-			 * @method submit
-			 */
-			submit: testNodeType(&#x27;submit&#x27;),
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method submit
+         */
+        submit: testNodeType(&#x27;submit&#x27;),
 
-			/**
-			 * TODO. Wanna help? Please send a Pull Request.
-			 *
-			 * @method text
-			 */
-			text: testNodeType(&#x27;text&#x27;),
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method text
+         */
+        text: testNodeType(&#x27;text&#x27;),
 
-			/**
-			 * TODO. Wanna help? Please send a Pull Request.
-			 *
-			 * @method visible
-			 * @param node
-			 */
-			visible: function(node) {
-				return !SELECTOR._isNodeHidden(node);
-			}
-		}
-	);
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method visible
+         * @param node
+         */
+        visible: function(node) {
+            return !SELECTOR._isNodeHidden(node);
+        }
+    }
+);
+
     </pre>
 </div>
 

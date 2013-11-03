@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>2.0.0pr6</b>
+                        API Docs for Version: <b>2.0.0</b>
                     </p>
                 </li>
             </div>
@@ -83,6 +83,8 @@
             
                 <li><a href="../classes/A.ButtonGroup.html">A.ButtonGroup</a></li>
             
+                <li><a href="../classes/A.ButtonSearchCancel.html">A.ButtonSearchCancel</a></li>
+            
                 <li><a href="../classes/A.Carousel.html">A.Carousel</a></li>
             
                 <li><a href="../classes/A.CellEditorSupport.html">A.CellEditorSupport</a></li>
@@ -107,7 +109,23 @@
             
                 <li><a href="../classes/A.DataType.DateMath.html">A.DataType.DateMath</a></li>
             
+                <li><a href="../classes/A.Date.html">A.Date</a></li>
+            
                 <li><a href="../classes/A.DateCellEditor.html">A.DateCellEditor</a></li>
+            
+                <li><a href="../classes/A.DateParser.html">A.DateParser</a></li>
+            
+                <li><a href="../classes/A.DatePicker.html">A.DatePicker</a></li>
+            
+                <li><a href="../classes/A.DatePickerBase.html">A.DatePickerBase</a></li>
+            
+                <li><a href="../classes/A.DatePickerDelegate.html">A.DatePickerDelegate</a></li>
+            
+                <li><a href="../classes/A.DatePickerNative.html">A.DatePickerNative</a></li>
+            
+                <li><a href="../classes/A.DatePickerNativeBase.html">A.DatePickerNativeBase</a></li>
+            
+                <li><a href="../classes/A.DatePickerPopover.html">A.DatePickerPopover</a></li>
             
                 <li><a href="../classes/A.DiagramBuilder.html">A.DiagramBuilder</a></li>
             
@@ -260,6 +278,10 @@
                 <li><a href="../classes/A.TextCellEditor.html">A.TextCellEditor</a></li>
             
                 <li><a href="../classes/A.ThumbRating.html">A.ThumbRating</a></li>
+            
+                <li><a href="../classes/A.TimePicker.html">A.TimePicker</a></li>
+            
+                <li><a href="../classes/A.TimePickerBase.html">A.TimePickerBase</a></li>
             
                 <li><a href="../classes/A.ToggleButton.html">A.ToggleButton</a></li>
             
@@ -1057,6 +1079,8 @@
 
             <ul id="api-modules" class="apis modules tab-pane">
             
+                <li><a href="../modules/ace-autocomplete-plugin.html">ace-autocomplete-plugin</a></li>
+            
                 <li><a href="../modules/align-plugin.html">align-plugin</a></li>
             
                 <li><a href="../modules/anim.html">anim</a></li>
@@ -1143,7 +1167,7 @@
             
                 <li><a href="../modules/aui-collection.html">aui-collection</a></li>
             
-                <li><a href="../modules/aui-color-pallete.html">aui-color-pallete</a></li>
+                <li><a href="../modules/aui-color-palette.html">aui-color-palette</a></li>
             
                 <li><a href="../modules/aui-color-picker.html">aui-color-picker</a></li>
             
@@ -1164,6 +1188,16 @@
                 <li><a href="../modules/aui-datatable-selection.html">aui-datatable-selection</a></li>
             
                 <li><a href="../modules/aui-datatype.html">aui-datatype</a></li>
+            
+                <li><a href="../modules/aui-datatype-date-parse.html">aui-datatype-date-parse</a></li>
+            
+                <li><a href="../modules/aui-datepicker.html">aui-datepicker</a></li>
+            
+                <li><a href="../modules/aui-datepicker-delegate.html">aui-datepicker-delegate</a></li>
+            
+                <li><a href="../modules/aui-datepicker-native.html">aui-datepicker-native</a></li>
+            
+                <li><a href="../modules/aui-datepicker-popover.html">aui-datepicker-popover</a></li>
             
                 <li><a href="../modules/aui-diagram-builder.html">aui-diagram-builder</a></li>
             
@@ -1245,7 +1279,7 @@
             
                 <li><a href="../modules/aui-pagination.html">aui-pagination</a></li>
             
-                <li><a href="../modules/aui-pallete.html">aui-pallete</a></li>
+                <li><a href="../modules/aui-palette.html">aui-palette</a></li>
             
                 <li><a href="../modules/aui-parse-content.html">aui-parse-content</a></li>
             
@@ -1296,6 +1330,8 @@
                 <li><a href="../modules/aui-tabview.html">aui-tabview</a></li>
             
                 <li><a href="../modules/aui-text.html">aui-text</a></li>
+            
+                <li><a href="../modules/aui-timepicker.html">aui-timepicker</a></li>
             
                 <li><a href="../modules/aui-timer.html">aui-timer</a></li>
             
@@ -2103,7 +2139,7 @@ var Lang = A.Lang,
     SHOW_LIST_KEY = &#x27;showListKey&#x27;,
     SORTERS = &#x27;sorters&#x27;,
 
-Base = function(){};
+    Base = function() {};
 
 /**
  * A base class for AutoCompleteBase.
@@ -2139,11 +2175,12 @@ Base.prototype = {
     },
 
     /**
-     * TODO. Wanna help? Please send a Pull Request.
+     * Inserts the provided suggestion as a string to the editor. The added text can overwrite the match or to be inserted depending on the &lt;code&gt;fillMode&lt;/code&gt; attribute.
      *
      * @method _addSuggestion
-     * @param content
+     * @param {String} content
      * @protected
+     * @return {Do.Halt} Instance of Do.Halt to stop function execution
      */
     _addSuggestion: function(content) {
         var instance = this,
@@ -2191,7 +2228,7 @@ Base.prototype = {
     },
 
     /**
-     * TODO. Wanna help? Please send a Pull Request.
+     * Binds editor events.
      *
      * @method _bindUIACBase
      * @protected
@@ -2201,8 +2238,7 @@ Base.prototype = {
             editor;
 
         instance.publish(
-            CURSOR_CHANGE,
-            {
+            CURSOR_CHANGE, {
                 defaultFn: instance._defaultCursorChangeFn
             }
         );
@@ -2213,22 +2249,19 @@ Base.prototype = {
 
         editor.on(CHANGE, instance._onChangeFn);
 
-        editor.commands.addCommand(
-            {
-                name: SHOW_AUTO_COMPLETE,
-                bindKey: A.merge(
-                    instance.get(SHOW_LIST_KEY),
-                    {
-                        sender: &#x27;editor|cli&#x27;
-                    }
-                ),
-                exec: function(env, args, request) {
-                    var cursorPosition = editor.getCursorPosition();
-
-                    instance._processAutoComplete(cursorPosition.row, cursorPosition.column);
+        editor.commands.addCommand({
+            name: SHOW_AUTO_COMPLETE,
+            bindKey: A.merge(
+                instance.get(SHOW_LIST_KEY), {
+                    sender: &#x27;editor|cli&#x27;
                 }
+            ),
+            exec: function(env, args, request) {
+                var cursorPosition = editor.getCursorPosition();
+
+                instance._processAutoComplete(cursorPosition.row, cursorPosition.column);
             }
-        );
+        });
 
         instance._onEditorChangeCursorFn = A.bind(&#x27;_onEditorChangeCursor&#x27;, instance);
 
@@ -2238,10 +2271,10 @@ Base.prototype = {
     },
 
     /**
-     * TODO. Wanna help? Please send a Pull Request.
+     * Checks if the cursor is out of the row/column on the latest match. If so, fires an &lt;code&gt;cursorOut&lt;/code&gt; event.
      *
      * @method _defaultCursorChangeFn
-     * @param event
+     * @param {CustomEvent} event The fired event
      * @protected
      */
     _defaultCursorChangeFn: function(event) {
@@ -2267,7 +2300,7 @@ Base.prototype = {
     },
 
     /**
-     * TODO. Wanna help? Please send a Pull Request.
+     * Removes the listeners to editor commands.
      *
      * @method _destroyUIACBase
      * @protected
@@ -2288,10 +2321,11 @@ Base.prototype = {
     },
 
     /**
-     * TODO. Wanna help? Please send a Pull Request.
+     * Returns the editor instance.
      *
      * @method _getEditor
      * @protected
+     * @return {Object} Editor instance
      */
     _getEditor: function() {
         var instance = this;
@@ -2300,12 +2334,13 @@ Base.prototype = {
     },
 
     /**
-     * TODO. Wanna help? Please send a Pull Request.
+     * Filters and sorts the found suggestions using the existing chain of &lt;code&gt;filters&lt;/code&gt; and &lt;code&gt;sorters&lt;/code&gt;.
      *
      * @method _filterResults
-     * @param content
-     * @param results
+     * @param {String} content
+     * @param {Array} results
      * @protected
+     * @return {Array} The filtered results
      */
     _filterResults: function(content, results) {
         var instance = this,
@@ -2338,11 +2373,12 @@ Base.prototype = {
     },
 
     /**
-     * TODO. Wanna help? Please send a Pull Request.
+     * Checks for new line or tab character and adds a suggestion to the editor if so.
      *
      * @method _handleEnter
-     * @param text
+     * @param {String} text
      * @protected
+     * @return {Do.Halt} If text is new line or tab character, returns an instance of Do.Halt to stop function execution
      */
     _handleEnter: function(text) {
         var instance = this,
@@ -2356,10 +2392,10 @@ Base.prototype = {
     },
 
     /**
-     * TODO. Wanna help? Please send a Pull Request.
+     * Handles editor change event. If editor is not locked and data action is insert or remove text, process auto complete.
      *
      * @method _onEditorChange
-     * @param event
+     * @param {CustomEvent} event The fired event
      * @protected
      */
     _onEditorChange: function(event) {
@@ -2371,9 +2407,9 @@ Base.prototype = {
             endRow,
             startRow;
 
-            data = event.data;
+        data = event.data;
 
-            dataAction = data.action;
+        dataAction = data.action;
 
         if (!instance._lockEditor &amp;&amp; (dataAction === INSERT_TEXT || dataAction === REMOVE_TEXT)) {
             dataRange = data.range;
@@ -2387,8 +2423,7 @@ Base.prototype = {
             }
 
             instance.fire(
-                dataAction,
-                {
+                dataAction, {
                     column: column,
                     dataRange: dataRange,
                     endRow: endRow,
@@ -2399,10 +2434,10 @@ Base.prototype = {
     },
 
     /**
-     * TODO. Wanna help? Please send a Pull Request.
+     * Fires cursor change event providing the current position as event payload.
      *
      * @method _onEditorChangeCursor
-     * @param event
+     * @param {CustomEvent} event The fired event
      * @protected
      */
     _onEditorChangeCursor: function(event) {
@@ -2412,7 +2447,7 @@ Base.prototype = {
     },
 
     /**
-     * TODO. Wanna help? Please send a Pull Request.
+     * Fires an &lt;code&gt;resultsError&lt;/code&gt; event containing the error.
      *
      * @method _onResultsError
      * @param error
@@ -2425,10 +2460,10 @@ Base.prototype = {
     },
 
     /**
-     * TODO. Wanna help? Please send a Pull Request.
+     * Updates &lt;code&gt;results&lt;/code&gt; attribute with the provided results.
      *
      * @method _onResultsSuccess
-     * @param results
+     * @param {Array} results
      * @protected
      */
     _onResultsSuccess: function(results) {
@@ -2438,7 +2473,16 @@ Base.prototype = {
     },
 
     /**
-     * TODO. Wanna help? Please send a Pull Request.
+     * Overwrites the following editor commands:
+     * onTextInput,
+     * golinedown
+     * golineup
+     * gotoend
+     * gotolineend
+     * gotolinestart
+     * gotopagedown
+     * gotopageup
+     * gotostart
      *
      * @method _overwriteCommands
      * @protected
@@ -2466,22 +2510,23 @@ Base.prototype = {
     },
 
     /**
-     * TODO. Wanna help? Please send a Pull Request.
+     * Checks for phrase match.
      *
      * @method _phraseMatch
-     * @param content
-     * @param results
-     * @param caseSensitive
+     * @param {String} content The content to be checked for phrase match
+     * @param {Array} results The results to be filtered
+     * @param {Boolean} caseSensitive Should the check be case sensitive or not
      * @protected
+     * @return {Array} The filtered results
      */
-    _phraseMatch: function (content, results, caseSensitive) {
+    _phraseMatch: function(content, results, caseSensitive) {
         if (!content) {
             return results;
         }
 
         return AArray.filter(
             results,
-            function (item) {
+            function(item) {
                 var result = true;
 
                 if (item === content) {
@@ -2505,11 +2550,18 @@ Base.prototype = {
     },
 
     /**
-     * TODO. Wanna help? Please send a Pull Request.
+     * Invokes the loaded content processor and checks for match. If found, provides the match together with information about
+     * current row and column and invokes processor&#x27;s &lt;code&gt;getResults&lt;/code&gt; function in order to retrieve results.
+     * At the end, fires and &lt;code&gt;match&lt;/code&gt; event with the following properties:
+     * column - the current column
+     * coords - the page coordinates of the match
+     * line - the current line
+     * match - the current match
+     * row - the current row
      *
      * @method _processAutoComplete
-     * @param row
-     * @param column
+     * @param {Number} row The row on which match happened
+     * @param {Number} column The column on which match happened
      * @protected
      */
     _processAutoComplete: function(row, column) {
@@ -2549,8 +2601,7 @@ Base.prototype = {
         }
 
         instance.fire(
-            MATCH,
-            {
+            MATCH, {
                 column: column,
                 coords: coords,
                 line: line,
@@ -2561,7 +2612,7 @@ Base.prototype = {
     },
 
     /**
-     * TODO. Wanna help? Please send a Pull Request.
+     * Detaches the previously attached editor commands.
      *
      * @method _removeAutoCompleteCommands
      * @protected
@@ -2575,15 +2626,16 @@ Base.prototype = {
     },
 
     /**
-     * TODO. Wanna help? Please send a Pull Request.
+     * Sorts the results in ascending order, taking in consideration the length of the content.
      *
      * @method _sortAscLength
-     * @param content
-     * @param results
-     * @param caseSensitive
+     * @param {String} content The text content
+     * @param {Array} results The results to be filtered
+     * @param {Boolean} caseSensitive Should we filter these results alphabetically
      * @protected
+     * @return {Array} The sorted results
      */
-    _sortAscLength: function (content, results, caseSensitive) {
+    _sortAscLength: function(content, results, caseSensitive) {
         return results.sort(
             function(item1, item2) {
                 var index1,
@@ -2621,11 +2673,12 @@ Base.prototype = {
     },
 
     /**
-     * TODO. Wanna help? Please send a Pull Request.
+     * Validates the value of &lt;code&gt;fillMode&lt;/code&gt; attribute.
      *
      * @method _validateFillMode
      * @param value
      * @protected
+     * @return {Boolean} True if mode is &#x27;overwrite&#x27; - value &#x27;0&#x27; or &#x27;insert&#x27; - value &#x27;1&#x27;
      */
     _validateFillMode: function(value) {
         return (value === Base.FILL_MODE_OVERWRITE || value === Base.FILL_MODE_INSERT);
@@ -2633,7 +2686,7 @@ Base.prototype = {
 };
 
 /**
- * TODO. Wanna help? Please send a Pull Request.
+ * Exposes a constant for insert fill mode. See &lt;code&gt;fillMode&lt;/code&gt; for more information.
  *
  * @property Base.FILL_MODE_INSERT
  * @static
@@ -2641,7 +2694,7 @@ Base.prototype = {
 Base.FILL_MODE_INSERT = FILL_MODE_INSERT;
 
 /**
- * TODO. Wanna help? Please send a Pull Request.
+ * Exposes a constant for overwrite fill mode. See &lt;code&gt;fillMode&lt;/code&gt; for more information.
  *
  * @property Base.FILL_MODE_OVERWRITE
  * @static
@@ -2649,7 +2702,7 @@ Base.FILL_MODE_INSERT = FILL_MODE_INSERT;
 Base.FILL_MODE_OVERWRITE = FILL_MODE_OVERWRITE;
 
 /**
- * Static property provides a string to identify the class.
+ * Static property which provides a string to identify the class.
  *
  * @property AutoCompleteBase.NAME
  * @type String
@@ -2658,7 +2711,7 @@ Base.FILL_MODE_OVERWRITE = FILL_MODE_OVERWRITE;
 Base.NAME = _NAME;
 
 /**
- * Static property provides a string to identify the namespace.
+ * Static property which provides a string to identify the namespace.
  *
  * @property AutoCompleteBase.NS
  * @type String
@@ -2668,7 +2721,7 @@ Base.NS = _NAME;
 
 /**
  * Static property used to define the default attribute
- * configuration for the AutoCompleteBase.
+ * configuration for AutoCompleteBase.
  *
  * @property AutoCompleteBase.ATTRS
  * @type Object
@@ -2677,9 +2730,14 @@ Base.NS = _NAME;
 Base.ATTRS = {
 
     /**
-     * TODO. Wanna help? Please send a Pull Request.
+     * The mode in which the AutoComplete should operate. Can be one of these:
+     * INSERT - value &#x27;0&#x27; or OVERWRITE - value &#x27;1&#x27;
+     * In case of INSERT mode, when Editor adds a suggestion, it will be added next to the matched expression.
+     * In case of OVERWRITE mode, the suggestion will overwrite the matched expression.
      *
      * @attribute fillMode
+     * @default 1 - OVERWRITE mode
+     * @type Number
      */
     fillMode: {
         validator: &#x27;_validateFillMode&#x27;,
@@ -2687,9 +2745,11 @@ Base.ATTRS = {
     },
 
     /**
-     * TODO. Wanna help? Please send a Pull Request.
+     * Provides an array of filter functions which will filter the results. By default there is one function which provides phrase match filtering.
      *
      * @attribute filters
+     * @default Array with one function which provides phrase match filtering
+     * @type Array
      */
     filters: {
         valueFn: function() {
@@ -2697,12 +2757,12 @@ Base.ATTRS = {
 
             return [
                 instance._phraseMatch
-            ];
+                ];
         }
     },
 
     /**
-     * TODO. Wanna help? Please send a Pull Request.
+     * The default processor which will be used to process matches.
      *
      * @attribute processor
      * @type Object | Function
@@ -2714,9 +2774,10 @@ Base.ATTRS = {
     },
 
     /**
-     * TODO. Wanna help? Please send a Pull Request.
+     * The keyboard combination which should be used to show the list with found results.
      *
      * @attribute showListKey
+     * @default &#x27;Alt-Space&#x27; for Mac, &#x27;Ctrl-Space&#x27; for PC
      * @type Object
      */
     showListKey: {
@@ -2728,9 +2789,11 @@ Base.ATTRS = {
     },
 
     /**
-     * TODO. Wanna help? Please send a Pull Request.
+     * Provides an array of sorter functions which will sort the results. By default there is one function which sorts the results in ascending order.
      *
      * @attribute sorters
+     * @default Array with one function which sorts results in ascending order
+     * @type Array
      */
     sorters: {
         valueFn: function() {
@@ -2738,7 +2801,7 @@ Base.ATTRS = {
 
             return [
                 instance._sortAscLength
-            ];
+                ];
         }
     }
 };

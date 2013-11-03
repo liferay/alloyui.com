@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>2.0.0pr6</b>
+                        API Docs for Version: <b>2.0.0</b>
                     </p>
                 </li>
             </div>
@@ -83,6 +83,8 @@
             
                 <li><a href="../classes/A.ButtonGroup.html">A.ButtonGroup</a></li>
             
+                <li><a href="../classes/A.ButtonSearchCancel.html">A.ButtonSearchCancel</a></li>
+            
                 <li><a href="../classes/A.Carousel.html">A.Carousel</a></li>
             
                 <li><a href="../classes/A.CellEditorSupport.html">A.CellEditorSupport</a></li>
@@ -107,7 +109,23 @@
             
                 <li><a href="../classes/A.DataType.DateMath.html">A.DataType.DateMath</a></li>
             
+                <li><a href="../classes/A.Date.html">A.Date</a></li>
+            
                 <li><a href="../classes/A.DateCellEditor.html">A.DateCellEditor</a></li>
+            
+                <li><a href="../classes/A.DateParser.html">A.DateParser</a></li>
+            
+                <li><a href="../classes/A.DatePicker.html">A.DatePicker</a></li>
+            
+                <li><a href="../classes/A.DatePickerBase.html">A.DatePickerBase</a></li>
+            
+                <li><a href="../classes/A.DatePickerDelegate.html">A.DatePickerDelegate</a></li>
+            
+                <li><a href="../classes/A.DatePickerNative.html">A.DatePickerNative</a></li>
+            
+                <li><a href="../classes/A.DatePickerNativeBase.html">A.DatePickerNativeBase</a></li>
+            
+                <li><a href="../classes/A.DatePickerPopover.html">A.DatePickerPopover</a></li>
             
                 <li><a href="../classes/A.DiagramBuilder.html">A.DiagramBuilder</a></li>
             
@@ -260,6 +278,10 @@
                 <li><a href="../classes/A.TextCellEditor.html">A.TextCellEditor</a></li>
             
                 <li><a href="../classes/A.ThumbRating.html">A.ThumbRating</a></li>
+            
+                <li><a href="../classes/A.TimePicker.html">A.TimePicker</a></li>
+            
+                <li><a href="../classes/A.TimePickerBase.html">A.TimePickerBase</a></li>
             
                 <li><a href="../classes/A.ToggleButton.html">A.ToggleButton</a></li>
             
@@ -1057,6 +1079,8 @@
 
             <ul id="api-modules" class="apis modules tab-pane">
             
+                <li><a href="../modules/ace-autocomplete-plugin.html">ace-autocomplete-plugin</a></li>
+            
                 <li><a href="../modules/align-plugin.html">align-plugin</a></li>
             
                 <li><a href="../modules/anim.html">anim</a></li>
@@ -1143,7 +1167,7 @@
             
                 <li><a href="../modules/aui-collection.html">aui-collection</a></li>
             
-                <li><a href="../modules/aui-color-pallete.html">aui-color-pallete</a></li>
+                <li><a href="../modules/aui-color-palette.html">aui-color-palette</a></li>
             
                 <li><a href="../modules/aui-color-picker.html">aui-color-picker</a></li>
             
@@ -1164,6 +1188,16 @@
                 <li><a href="../modules/aui-datatable-selection.html">aui-datatable-selection</a></li>
             
                 <li><a href="../modules/aui-datatype.html">aui-datatype</a></li>
+            
+                <li><a href="../modules/aui-datatype-date-parse.html">aui-datatype-date-parse</a></li>
+            
+                <li><a href="../modules/aui-datepicker.html">aui-datepicker</a></li>
+            
+                <li><a href="../modules/aui-datepicker-delegate.html">aui-datepicker-delegate</a></li>
+            
+                <li><a href="../modules/aui-datepicker-native.html">aui-datepicker-native</a></li>
+            
+                <li><a href="../modules/aui-datepicker-popover.html">aui-datepicker-popover</a></li>
             
                 <li><a href="../modules/aui-diagram-builder.html">aui-diagram-builder</a></li>
             
@@ -1245,7 +1279,7 @@
             
                 <li><a href="../modules/aui-pagination.html">aui-pagination</a></li>
             
-                <li><a href="../modules/aui-pallete.html">aui-pallete</a></li>
+                <li><a href="../modules/aui-palette.html">aui-palette</a></li>
             
                 <li><a href="../modules/aui-parse-content.html">aui-parse-content</a></li>
             
@@ -1296,6 +1330,8 @@
                 <li><a href="../modules/aui-tabview.html">aui-tabview</a></li>
             
                 <li><a href="../modules/aui-text.html">aui-text</a></li>
+            
+                <li><a href="../modules/aui-timepicker.html">aui-timepicker</a></li>
             
                 <li><a href="../modules/aui-timer.html">aui-timer</a></li>
             
@@ -2110,490 +2146,487 @@ var L = A.Lang,
  * @param config {Object} Object literal specifying widget configuration properties.
  * @constructor
  */
-var SortableList = A.Component.create(
-    {
+var SortableList = A.Component.create({
+    /**
+     * Static property provides a string to identify the class.
+     *
+     * @property SortableList.NAME
+     * @type String
+     * @static
+     */
+    NAME: SORTABLE_LIST,
+
+    /**
+     * Static property used to define the default attribute
+     * configuration for the SortableList.
+     *
+     * @property SortableList.ATTRS
+     * @type Object
+     * @static
+     */
+    ATTRS: {
+
         /**
-         * Static property provides a string to identify the class.
+         * TODO. Wanna help? Please send a Pull Request.
          *
-         * @property SortableList.NAME
+         * @attribute dd
+         * @default null
+         */
+        dd: {
+            value: null
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @attribute dropCondition
+         * @type Function
+         */
+        dropCondition: {
+            value: function() {
+                return true;
+            },
+            setter: function(v) {
+                return A.bind(v, this);
+            },
+            validator: isFunction
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @attribute dropContainer
+         * @type Function
+         */
+        dropContainer: {
+            value: function(event) {
+                var instance = this;
+                var drop = event.drop;
+                var dropNode = drop.get(NODE);
+                var dropOn = instance.get(DROP_ON);
+
+                return dropNode.one(dropOn);
+            },
+            validator: isFunction
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @attribute dropOn
          * @type String
-         * @static
          */
-        NAME: SORTABLE_LIST,
+        dropOn: {
+            validator: isString
+        },
 
         /**
-         * Static property used to define the default attribute
-         * configuration for the SortableList.
+         * TODO. Wanna help? Please send a Pull Request.
          *
-         * @property SortableList.ATTRS
-         * @type Object
-         * @static
+         * @attribute helper
+         * @default null
          */
-        ATTRS: {
+        helper: {
+            value: null
+        },
 
-            /**
-             * TODO. Wanna help? Please send a Pull Request.
-             *
-             * @attribute dd
-             * @default null
-             */
-            dd: {
-                value: null
-            },
-
-            /**
-             * TODO. Wanna help? Please send a Pull Request.
-             *
-             * @attribute dropCondition
-             * @type Function
-             */
-            dropCondition: {
-                value: function() {
-                    return true;
-                },
-                setter: function(v) {
-                    return A.bind(v, this);
-                },
-                validator: isFunction
-            },
-
-            /**
-             * TODO. Wanna help? Please send a Pull Request.
-             *
-             * @attribute dropContainer
-             * @type Function
-             */
-            dropContainer: {
-                value: function(event) {
-                    var instance = this;
-                    var drop = event.drop;
-                    var dropNode = drop.get(NODE);
-                    var dropOn = instance.get(DROP_ON);
-
-                    return dropNode.one(dropOn);
-                },
-                validator: isFunction
-            },
-
-            /**
-             * TODO. Wanna help? Please send a Pull Request.
-             *
-             * @attribute dropOn
-             * @type String
-             */
-            dropOn: {
-                validator: isString
-            },
-
-            /**
-             * TODO. Wanna help? Please send a Pull Request.
-             *
-             * @attribute helper
-             * @default null
-             */
-            helper: {
-                value: null
-            },
-
-            /**
-             * TODO. Wanna help? Please send a Pull Request.
-             *
-             * @attribute nodes
-             */
-            nodes: {
-                setter: function(v) {
-                    return this._setNodes(v);
-                }
-            },
-
-            /**
-             * TODO. Wanna help? Please send a Pull Request.
-             *
-             * @attribute placeholder
-             * @default null
-             */
-            placeholder: {
-                value: null
-            },
-
-            /**
-             * TODO. Wanna help? Please send a Pull Request.
-             *
-             * @attribute proxy
-             * @default null
-             */
-            proxy: {
-                value: null,
-                setter: function(val) {
-                    return A.merge(
-                        {
-                            moveOnEnd: false,
-                            positionProxy: false
-                        },
-                        val || {}
-                    );
-                }
-            },
-
-            /**
-             * TODO. Wanna help? Please send a Pull Request.
-             *
-             * @attribute sortCondition
-             * @type Function
-             */
-            sortCondition: {
-                value: function() {
-                    return true;
-                },
-                setter: function(v) {
-                    return A.bind(v, this);
-                },
-                validator: isFunction
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @attribute nodes
+         */
+        nodes: {
+            setter: function(v) {
+                return this._setNodes(v);
             }
         },
 
         /**
-         * Static property used to define which component it extends.
+         * TODO. Wanna help? Please send a Pull Request.
          *
-         * @property SortableList.EXTENDS
-         * @type Object
-         * @static
+         * @attribute placeholder
+         * @default null
          */
-        EXTENDS: A.Base,
+        placeholder: {
+            value: null
+        },
 
-        prototype: {
-
-            /**
-             * Construction logic executed during SortableList instantiation. Lifecycle.
-             *
-             * @method initializer
-             * @protected
-             */
-            initializer: function() {
-                var instance = this;
-                var nodes = instance.get(NODES);
-
-                // drag &amp; drop listeners
-                instance.on(&#x27;drag:align&#x27;, instance._onDragAlign);
-                instance.on(&#x27;drag:end&#x27;, instance._onDragEnd);
-                instance.on(&#x27;drag:exit&#x27;, instance._onDragExit);
-                instance.on(&#x27;drag:mouseDown&#x27;, instance._onDragMouseDown);
-                instance.on(&#x27;drag:over&#x27;, instance._onDragOver);
-                instance.on(&#x27;drag:start&#x27;, instance._onDragStart);
-
-                instance._createHelper();
-
-                if (nodes) {
-                    instance.addAll(nodes);
-                }
-            },
-
-            /**
-             * TODO. Wanna help? Please send a Pull Request.
-             *
-             * @method add
-             * @param node
-             */
-            add: function(node) {
-                var instance = this;
-
-                instance._createDrag(node);
-            },
-
-            /**
-             * TODO. Wanna help? Please send a Pull Request.
-             *
-             * @method addAll
-             * @param nodes
-             */
-            addAll: function(nodes) {
-                var instance = this;
-
-                nodes.each(function(node) {
-                    instance.add(node);
-                });
-            },
-
-            /**
-             * TODO. Wanna help? Please send a Pull Request.
-             *
-             * @method _createDrag
-             * @param node
-             * @protected
-             */
-            _createDrag: function(node) {
-                var instance = this;
-                var helper = instance.get(HELPER);
-
-                if (!DDM.getDrag(node)) {
-                    var dragOptions = {
-                        bubbleTargets: instance,
-                        node: node,
-                        target: true
-                    };
-
-                    var proxyOptions = instance.get(PROXY);
-
-                    if (helper) {
-                        proxyOptions.borderStyle = null;
-                    }
-
-                    // creating delayed drag instance
-                    new A.DD.Drag(
-                        A.mix(dragOptions, instance.get(DD))
-                    )
-                    .plug(A.Plugin.DDProxy, proxyOptions);
-                }
-            },
-
-            /**
-             * TODO. Wanna help? Please send a Pull Request.
-             *
-             * @method _createHelper
-             * @protected
-             */
-            _createHelper: function() {
-                var instance = this;
-                var helper = instance.get(HELPER);
-
-                if (helper) {
-                    // append helper to the body
-                    A.one(BODY).append( helper.hide() );
-
-                    instance.set(HELPER, helper);
-                }
-            },
-
-            /**
-             * TODO. Wanna help? Please send a Pull Request.
-             *
-             * @method _updatePlaceholder
-             * @param event
-             * @param cancelAppend
-             * @protected
-             */
-            _updatePlaceholder: function(event, cancelAppend) {
-                var instance = this;
-                var drag = event.target;
-                var drop = event.drop;
-                var dragNode = drag.get(NODE);
-                var dropNode = drop.get(NODE);
-                var dropContainer = instance.get(DROP_CONTAINER);
-                var container;
-
-                if (dropContainer) {
-                    container = dropContainer.apply(instance, arguments);
-                }
-
-                var floating = false;
-                var xDirection = instance.XDirection;
-                var yDirection = instance.YDirection;
-
-                if (dropNode.getStyle(FLOAT) !== NONE) {
-                    floating = true;
-                }
-
-                var placeholder = instance.get(PLACEHOLDER);
-
-                if (!placeholder) {
-                    // if no placeholder use the dragNode instead
-                    placeholder = dragNode;
-                }
-
-                if (!placeholder.contains(dropNode)) {
-                    // check for the user dropCondition
-                    var dropCondition = instance.get(DROP_CONDITION);
-
-                    // if there is a container waiting for nodes to be appended it&#x27;s priority
-                    if (container &amp;&amp; !cancelAppend &amp;&amp; dropCondition(event)) {
-                        // this checking avoid the parent bubbling drag:over
-                        if (!container.contains(placeholder) &amp;&amp;
-                            !placeholder.contains(container)) {
-                                // append placeholder on the found container
-                                container.append(placeholder);
-                        }
-                    }
-                    // otherwise, check if it&#x27;s floating and the xDirection
-                    // or if it&#x27;s not floating and the yDirection
-                    else {
-                        if ((floating &amp;&amp; (xDirection === LEFT)) || (!floating &amp;&amp; (yDirection === UP))) {
-                            // LEFT or UP directions means to place the placeholder before
-                            dropNode.placeBefore(placeholder);
-                        }
-                        else {
-                            // RIGHT or DOWN directions means to place the placeholder after
-                            dropNode.placeAfter(placeholder);
-                        }
-                    }
-                }
-            },
-
-            /**
-             * TODO. Wanna help? Please send a Pull Request.
-             *
-             * @method _onDragAlign
-             * @param event
-             * @protected
-             */
-            _onDragAlign: function(event) {
-                var instance = this;
-                var lastX = instance.lastX;
-                var lastY = instance.lastY;
-                var xy = event.target.lastXY;
-
-                var x = xy[0];
-                var y = xy[1];
-
-                // if the y change
-                if (y !== lastY) {
-                    // set the drag vertical direction
-                    instance.YDirection = (y &lt; lastY) ? UP : DOWN;
-                }
-
-                // if the x change
-                if (x !== lastX) {
-                    // set the drag horizontal direction
-                    instance.XDirection = (x &lt; lastX) ? LEFT : RIGHT;
-                }
-
-                instance.lastX = x;
-                instance.lastY = y;
-            },
-
-            /**
-             * TODO. Wanna help? Please send a Pull Request.
-             *
-             * @method _onDragEnd
-             * @param event
-             * @protected
-             */
-            _onDragEnd: function(event) {
-                var instance = this;
-                var drag = event.target;
-                var dragNode = drag.get(NODE);
-                var placeholder = instance.get(PLACEHOLDER);
-
-                if (placeholder) {
-                    dragNode.show();
-                    placeholder.hide();
-
-                    if (!dragNode.contains(placeholder)) {
-                        // position dragNode after the placeholder
-                        placeholder.placeAfter(dragNode);
-                    }
-                }
-            },
-
-            /**
-             * TODO. Wanna help? Please send a Pull Request.
-             *
-             * @method _onDragExit
-             * @param event
-             * @protected
-             */
-            _onDragExit: function(event) {
-                var instance = this;
-                var sortCondition = instance.get(SORT_CONDITION);
-
-                if (sortCondition(event)) {
-                    instance._updatePlaceholder(event, true);
-                }
-            },
-
-            /**
-             * TODO. Wanna help? Please send a Pull Request.
-             *
-             * @method _onDragMouseDown
-             * @param event
-             * @protected
-             */
-            _onDragMouseDown: function(event) {
-                var instance = this;
-                var drag = event.target;
-                var helper = instance.get(HELPER);
-
-                if (helper) {
-                    // update the DRAG_NODE with the new helper
-                    drag.set(DRAG_NODE, helper);
-                }
-            },
-
-            /**
-             * TODO. Wanna help? Please send a Pull Request.
-             *
-             * @method _onDragStart
-             * @param event
-             * @protected
-             */
-            _onDragStart: function(event) {
-                var instance = this;
-                var drag = event.target;
-                var node = drag.get(NODE);
-                var helper = instance.get(HELPER);
-                var placeholder = instance.get(PLACEHOLDER);
-
-                if (placeholder) {
-                    // update placeholder height
-                    placeholder.setStyle(
-                        HEIGHT,
-                        node.get(OFFSET_HEIGHT) + PX
-                    );
-
-                    node.hide();
-                    placeholder.show();
-                    // position placeholder after the node
-                    node.placeAfter(placeholder);
-
-                    if (helper) {
-                        // show helper, we need display block here, yui dd hide it with display none
-                        helper.setStyles({
-                            display: BLOCK,
-                            visibility: VISIBLE
-                        }).show();
-                    }
-                }
-            },
-
-            /**
-             * TODO. Wanna help? Please send a Pull Request.
-             *
-             * @method _onDragOver
-             * @param event
-             * @protected
-             */
-            _onDragOver: function(event) {
-                var instance = this;
-                var sortCondition = instance.get(SORT_CONDITION);
-
-                if (sortCondition(event)) {
-                    instance._updatePlaceholder(event);
-                }
-            },
-
-            /**
-             * TODO. Wanna help? Please send a Pull Request.
-             *
-             * @method _setNodes
-             * @param v
-             * @protected
-             */
-            _setNodes: function(v) {
-                var instance = this;
-
-                if (isNodeList(v)) {
-                    return v;
-                }
-                else if (isString(v)) {
-                    return A.all(v);
-                }
-
-                return new A.NodeList([v]);
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @attribute proxy
+         * @default null
+         */
+        proxy: {
+            value: null,
+            setter: function(val) {
+                return A.merge({
+                        moveOnEnd: false,
+                        positionProxy: false
+                    },
+                    val || {}
+                );
             }
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @attribute sortCondition
+         * @type Function
+         */
+        sortCondition: {
+            value: function() {
+                return true;
+            },
+            setter: function(v) {
+                return A.bind(v, this);
+            },
+            validator: isFunction
+        }
+    },
+
+    /**
+     * Static property used to define which component it extends.
+     *
+     * @property SortableList.EXTENDS
+     * @type Object
+     * @static
+     */
+    EXTENDS: A.Base,
+
+    prototype: {
+
+        /**
+         * Construction logic executed during SortableList instantiation. Lifecycle.
+         *
+         * @method initializer
+         * @protected
+         */
+        initializer: function() {
+            var instance = this;
+            var nodes = instance.get(NODES);
+
+            // drag &amp; drop listeners
+            instance.on(&#x27;drag:align&#x27;, instance._onDragAlign);
+            instance.on(&#x27;drag:end&#x27;, instance._onDragEnd);
+            instance.on(&#x27;drag:exit&#x27;, instance._onDragExit);
+            instance.on(&#x27;drag:mouseDown&#x27;, instance._onDragMouseDown);
+            instance.on(&#x27;drag:over&#x27;, instance._onDragOver);
+            instance.on(&#x27;drag:start&#x27;, instance._onDragStart);
+
+            instance._createHelper();
+
+            if (nodes) {
+                instance.addAll(nodes);
+            }
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method add
+         * @param node
+         */
+        add: function(node) {
+            var instance = this;
+
+            instance._createDrag(node);
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method addAll
+         * @param nodes
+         */
+        addAll: function(nodes) {
+            var instance = this;
+
+            nodes.each(function(node) {
+                instance.add(node);
+            });
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method _createDrag
+         * @param node
+         * @protected
+         */
+        _createDrag: function(node) {
+            var instance = this;
+            var helper = instance.get(HELPER);
+
+            if (!DDM.getDrag(node)) {
+                var dragOptions = {
+                    bubbleTargets: instance,
+                    node: node,
+                    target: true
+                };
+
+                var proxyOptions = instance.get(PROXY);
+
+                if (helper) {
+                    proxyOptions.borderStyle = null;
+                }
+
+                // creating delayed drag instance
+                new A.DD.Drag(
+                    A.mix(dragOptions, instance.get(DD))
+                )
+                    .plug(A.Plugin.DDProxy, proxyOptions);
+            }
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method _createHelper
+         * @protected
+         */
+        _createHelper: function() {
+            var instance = this;
+            var helper = instance.get(HELPER);
+
+            if (helper) {
+                // append helper to the body
+                A.one(BODY).append(helper.hide());
+
+                instance.set(HELPER, helper);
+            }
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method _updatePlaceholder
+         * @param event
+         * @param cancelAppend
+         * @protected
+         */
+        _updatePlaceholder: function(event, cancelAppend) {
+            var instance = this;
+            var drag = event.target;
+            var drop = event.drop;
+            var dragNode = drag.get(NODE);
+            var dropNode = drop.get(NODE);
+            var dropContainer = instance.get(DROP_CONTAINER);
+            var container;
+
+            if (dropContainer) {
+                container = dropContainer.apply(instance, arguments);
+            }
+
+            var floating = false;
+            var xDirection = instance.XDirection;
+            var yDirection = instance.YDirection;
+
+            if (dropNode.getStyle(FLOAT) !== NONE) {
+                floating = true;
+            }
+
+            var placeholder = instance.get(PLACEHOLDER);
+
+            if (!placeholder) {
+                // if no placeholder use the dragNode instead
+                placeholder = dragNode;
+            }
+
+            if (!placeholder.contains(dropNode)) {
+                // check for the user dropCondition
+                var dropCondition = instance.get(DROP_CONDITION);
+
+                // if there is a container waiting for nodes to be appended it&#x27;s priority
+                if (container &amp;&amp; !cancelAppend &amp;&amp; dropCondition(event)) {
+                    // this checking avoid the parent bubbling drag:over
+                    if (!container.contains(placeholder) &amp;&amp; !placeholder.contains(container)) {
+                        // append placeholder on the found container
+                        container.append(placeholder);
+                    }
+                }
+                // otherwise, check if it&#x27;s floating and the xDirection
+                // or if it&#x27;s not floating and the yDirection
+                else {
+                    if ((floating &amp;&amp; (xDirection === LEFT)) || (!floating &amp;&amp; (yDirection === UP))) {
+                        // LEFT or UP directions means to place the placeholder before
+                        dropNode.placeBefore(placeholder);
+                    }
+                    else {
+                        // RIGHT or DOWN directions means to place the placeholder after
+                        dropNode.placeAfter(placeholder);
+                    }
+                }
+            }
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method _onDragAlign
+         * @param event
+         * @protected
+         */
+        _onDragAlign: function(event) {
+            var instance = this;
+            var lastX = instance.lastX;
+            var lastY = instance.lastY;
+            var xy = event.target.lastXY;
+
+            var x = xy[0];
+            var y = xy[1];
+
+            // if the y change
+            if (y !== lastY) {
+                // set the drag vertical direction
+                instance.YDirection = (y &lt; lastY) ? UP : DOWN;
+            }
+
+            // if the x change
+            if (x !== lastX) {
+                // set the drag horizontal direction
+                instance.XDirection = (x &lt; lastX) ? LEFT : RIGHT;
+            }
+
+            instance.lastX = x;
+            instance.lastY = y;
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method _onDragEnd
+         * @param event
+         * @protected
+         */
+        _onDragEnd: function(event) {
+            var instance = this;
+            var drag = event.target;
+            var dragNode = drag.get(NODE);
+            var placeholder = instance.get(PLACEHOLDER);
+
+            if (placeholder) {
+                dragNode.show();
+                placeholder.hide();
+
+                if (!dragNode.contains(placeholder)) {
+                    // position dragNode after the placeholder
+                    placeholder.placeAfter(dragNode);
+                }
+            }
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method _onDragExit
+         * @param event
+         * @protected
+         */
+        _onDragExit: function(event) {
+            var instance = this;
+            var sortCondition = instance.get(SORT_CONDITION);
+
+            if (sortCondition(event)) {
+                instance._updatePlaceholder(event, true);
+            }
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method _onDragMouseDown
+         * @param event
+         * @protected
+         */
+        _onDragMouseDown: function(event) {
+            var instance = this;
+            var drag = event.target;
+            var helper = instance.get(HELPER);
+
+            if (helper) {
+                // update the DRAG_NODE with the new helper
+                drag.set(DRAG_NODE, helper);
+            }
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method _onDragStart
+         * @param event
+         * @protected
+         */
+        _onDragStart: function(event) {
+            var instance = this;
+            var drag = event.target;
+            var node = drag.get(NODE);
+            var helper = instance.get(HELPER);
+            var placeholder = instance.get(PLACEHOLDER);
+
+            if (placeholder) {
+                // update placeholder height
+                placeholder.setStyle(
+                    HEIGHT,
+                    node.get(OFFSET_HEIGHT) + PX
+                );
+
+                node.hide();
+                placeholder.show();
+                // position placeholder after the node
+                node.placeAfter(placeholder);
+
+                if (helper) {
+                    // show helper, we need display block here, yui dd hide it with display none
+                    helper.setStyles({
+                        display: BLOCK,
+                        visibility: VISIBLE
+                    }).show();
+                }
+            }
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method _onDragOver
+         * @param event
+         * @protected
+         */
+        _onDragOver: function(event) {
+            var instance = this;
+            var sortCondition = instance.get(SORT_CONDITION);
+
+            if (sortCondition(event)) {
+                instance._updatePlaceholder(event);
+            }
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method _setNodes
+         * @param v
+         * @protected
+         */
+        _setNodes: function(v) {
+            var instance = this;
+
+            if (isNodeList(v)) {
+                return v;
+            }
+            else if (isString(v)) {
+                return A.all(v);
+            }
+
+            return new A.NodeList([v]);
         }
     }
-);
+});
 
 A.SortableList = SortableList;
+
     </pre>
 </div>
 

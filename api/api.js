@@ -14,6 +14,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "A.Button",
         "A.ButtonCore",
         "A.ButtonGroup",
+        "A.ButtonSearchCancel",
         "A.Carousel",
         "A.CellEditorSupport",
         "A.CharCounter",
@@ -26,7 +27,15 @@ YUI.add("yuidoc-meta", function(Y) {
         "A.DataTableHighlight",
         "A.DataTableSelection",
         "A.DataType.DateMath",
+        "A.Date",
         "A.DateCellEditor",
+        "A.DateParser",
+        "A.DatePicker",
+        "A.DatePickerBase",
+        "A.DatePickerDelegate",
+        "A.DatePickerNative",
+        "A.DatePickerNativeBase",
+        "A.DatePickerPopover",
         "A.DiagramBuilder",
         "A.DiagramBuilderBase",
         "A.DiagramNode",
@@ -102,6 +111,8 @@ YUI.add("yuidoc-meta", function(Y) {
         "A.TextAreaCellEditor",
         "A.TextCellEditor",
         "A.ThumbRating",
+        "A.TimePicker",
+        "A.TimePickerBase",
         "A.ToggleButton",
         "A.Toggler",
         "A.TogglerDelegate",
@@ -501,6 +512,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "soon"
     ],
     "modules": [
+        "ace-autocomplete-plugin",
         "align-plugin",
         "anim",
         "anim-base",
@@ -544,7 +556,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "aui-carousel",
         "aui-char-counter",
         "aui-collection",
-        "aui-color-pallete",
+        "aui-color-palette",
         "aui-color-picker",
         "aui-color-picker-base",
         "aui-color-picker-popover",
@@ -555,6 +567,11 @@ YUI.add("yuidoc-meta", function(Y) {
         "aui-datatable-property-list",
         "aui-datatable-selection",
         "aui-datatype",
+        "aui-datatype-date-parse",
+        "aui-datepicker",
+        "aui-datepicker-delegate",
+        "aui-datepicker-native",
+        "aui-datepicker-popover",
         "aui-diagram-builder",
         "aui-diagram-builder-base",
         "aui-diagram-builder-connector",
@@ -595,7 +612,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "aui-node-html5",
         "aui-node-html5-print",
         "aui-pagination",
-        "aui-pallete",
+        "aui-palette",
         "aui-parse-content",
         "aui-popover",
         "aui-progressbar",
@@ -621,6 +638,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "aui-sortable-list",
         "aui-tabview",
         "aui-text",
+        "aui-timepicker",
         "aui-timer",
         "aui-toggler",
         "aui-toolbar",
@@ -984,6 +1002,11 @@ YUI.add("yuidoc-meta", function(Y) {
     ],
     "allModules": [
         {
+            "displayName": "ace-autocomplete-plugin",
+            "name": "ace-autocomplete-plugin",
+            "description": "Binds an AutoCompleteList instance to a Node instance."
+        },
+        {
             "displayName": "align-plugin",
             "name": "align-plugin",
             "description": "Provides advanced positioning support for Node via a Plugin\nfor centering and alignment."
@@ -1135,22 +1158,22 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "aui-ace-autocomplete-freemarker",
             "name": "aui-ace-autocomplete-freemarker",
-            "description": "The ACE Editor Component"
+            "description": "The ACE Editor Freemarker Plugin"
         },
         {
             "displayName": "aui-ace-autocomplete-list",
             "name": "aui-ace-autocomplete-list",
-            "description": "The ACE Editor Component"
+            "description": "The ACE Editor AutoCompleteList Overlay"
         },
         {
             "displayName": "aui-ace-autocomplete-templateprocessor",
             "name": "aui-ace-autocomplete-templateprocessor",
-            "description": "The ACE Editor Component"
+            "description": "The ACE Editor TemplateProcessor base"
         },
         {
             "displayName": "aui-ace-autocomplete-velocity",
             "name": "aui-ace-autocomplete-velocity",
-            "description": "The ACE Editor Component"
+            "description": "The ACE Editor Velocity Plugin"
         },
         {
             "displayName": "aui-ace-editor",
@@ -1197,8 +1220,8 @@ YUI.add("yuidoc-meta", function(Y) {
             "name": "aui-collection"
         },
         {
-            "displayName": "aui-color-pallete",
-            "name": "aui-color-pallete",
+            "displayName": "aui-color-palette",
+            "name": "aui-color-palette",
             "description": "The Color Picker Component"
         },
         {
@@ -1248,6 +1271,31 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "aui-datatype",
             "name": "aui-datatype",
             "description": "The Datatype Utility"
+        },
+        {
+            "displayName": "aui-datatype-date-parse",
+            "name": "aui-datatype-date-parse",
+            "description": "DateParser is for parsing date in a locale-sensitive manner."
+        },
+        {
+            "displayName": "aui-datepicker",
+            "name": "aui-datepicker",
+            "description": "The DatePicker Component"
+        },
+        {
+            "displayName": "aui-datepicker-delegate",
+            "name": "aui-datepicker-delegate",
+            "description": "The DatePicker Component"
+        },
+        {
+            "displayName": "aui-datepicker-native",
+            "name": "aui-datepicker-native",
+            "description": "The DatePicker Component"
+        },
+        {
+            "displayName": "aui-datepicker-popover",
+            "name": "aui-datepicker-popover",
+            "description": "The DatePicker Component"
         },
         {
             "displayName": "aui-diagram-builder",
@@ -1444,9 +1492,9 @@ YUI.add("yuidoc-meta", function(Y) {
             "description": "The Pagination widget provides a set of controls to navigate through paged data."
         },
         {
-            "displayName": "aui-pallete",
-            "name": "aui-pallete",
-            "description": "The Pallete Utility"
+            "displayName": "aui-palette",
+            "name": "aui-palette",
+            "description": "The Palette Utility"
         },
         {
             "displayName": "aui-parse-content",
@@ -1570,6 +1618,11 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "aui-text",
             "name": "aui-text",
             "description": "Utility for testing strings against unicode patterns."
+        },
+        {
+            "displayName": "aui-timepicker",
+            "name": "aui-timepicker",
+            "description": "The TimePicker Component"
         },
         {
             "displayName": "aui-timer",

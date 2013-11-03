@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>2.0.0pr6</b>
+                        API Docs for Version: <b>2.0.0</b>
                     </p>
                 </li>
             </div>
@@ -83,6 +83,8 @@
             
                 <li><a href="../classes/A.ButtonGroup.html">A.ButtonGroup</a></li>
             
+                <li><a href="../classes/A.ButtonSearchCancel.html">A.ButtonSearchCancel</a></li>
+            
                 <li><a href="../classes/A.Carousel.html">A.Carousel</a></li>
             
                 <li><a href="../classes/A.CellEditorSupport.html">A.CellEditorSupport</a></li>
@@ -107,7 +109,23 @@
             
                 <li><a href="../classes/A.DataType.DateMath.html">A.DataType.DateMath</a></li>
             
+                <li><a href="../classes/A.Date.html">A.Date</a></li>
+            
                 <li><a href="../classes/A.DateCellEditor.html">A.DateCellEditor</a></li>
+            
+                <li><a href="../classes/A.DateParser.html">A.DateParser</a></li>
+            
+                <li><a href="../classes/A.DatePicker.html">A.DatePicker</a></li>
+            
+                <li><a href="../classes/A.DatePickerBase.html">A.DatePickerBase</a></li>
+            
+                <li><a href="../classes/A.DatePickerDelegate.html">A.DatePickerDelegate</a></li>
+            
+                <li><a href="../classes/A.DatePickerNative.html">A.DatePickerNative</a></li>
+            
+                <li><a href="../classes/A.DatePickerNativeBase.html">A.DatePickerNativeBase</a></li>
+            
+                <li><a href="../classes/A.DatePickerPopover.html">A.DatePickerPopover</a></li>
             
                 <li><a href="../classes/A.DiagramBuilder.html">A.DiagramBuilder</a></li>
             
@@ -260,6 +278,10 @@
                 <li><a href="../classes/A.TextCellEditor.html">A.TextCellEditor</a></li>
             
                 <li><a href="../classes/A.ThumbRating.html">A.ThumbRating</a></li>
+            
+                <li><a href="../classes/A.TimePicker.html">A.TimePicker</a></li>
+            
+                <li><a href="../classes/A.TimePickerBase.html">A.TimePickerBase</a></li>
             
                 <li><a href="../classes/A.ToggleButton.html">A.ToggleButton</a></li>
             
@@ -1057,6 +1079,8 @@
 
             <ul id="api-modules" class="apis modules tab-pane">
             
+                <li><a href="../modules/ace-autocomplete-plugin.html">ace-autocomplete-plugin</a></li>
+            
                 <li><a href="../modules/align-plugin.html">align-plugin</a></li>
             
                 <li><a href="../modules/anim.html">anim</a></li>
@@ -1143,7 +1167,7 @@
             
                 <li><a href="../modules/aui-collection.html">aui-collection</a></li>
             
-                <li><a href="../modules/aui-color-pallete.html">aui-color-pallete</a></li>
+                <li><a href="../modules/aui-color-palette.html">aui-color-palette</a></li>
             
                 <li><a href="../modules/aui-color-picker.html">aui-color-picker</a></li>
             
@@ -1164,6 +1188,16 @@
                 <li><a href="../modules/aui-datatable-selection.html">aui-datatable-selection</a></li>
             
                 <li><a href="../modules/aui-datatype.html">aui-datatype</a></li>
+            
+                <li><a href="../modules/aui-datatype-date-parse.html">aui-datatype-date-parse</a></li>
+            
+                <li><a href="../modules/aui-datepicker.html">aui-datepicker</a></li>
+            
+                <li><a href="../modules/aui-datepicker-delegate.html">aui-datepicker-delegate</a></li>
+            
+                <li><a href="../modules/aui-datepicker-native.html">aui-datepicker-native</a></li>
+            
+                <li><a href="../modules/aui-datepicker-popover.html">aui-datepicker-popover</a></li>
             
                 <li><a href="../modules/aui-diagram-builder.html">aui-diagram-builder</a></li>
             
@@ -1245,7 +1279,7 @@
             
                 <li><a href="../modules/aui-pagination.html">aui-pagination</a></li>
             
-                <li><a href="../modules/aui-pallete.html">aui-pallete</a></li>
+                <li><a href="../modules/aui-palette.html">aui-palette</a></li>
             
                 <li><a href="../modules/aui-parse-content.html">aui-parse-content</a></li>
             
@@ -1296,6 +1330,8 @@
                 <li><a href="../modules/aui-tabview.html">aui-tabview</a></li>
             
                 <li><a href="../modules/aui-text.html">aui-text</a></li>
+            
+                <li><a href="../modules/aui-timepicker.html">aui-timepicker</a></li>
             
                 <li><a href="../modules/aui-timer.html">aui-timer</a></li>
             
@@ -2059,39 +2095,39 @@
  */
 
 var Lang = A.Lang,
-	UA = A.UA,
-	getClassName = A.getClassName,
+    UA = A.UA,
+    getClassName = A.getClassName,
 
-	_NAME = &#x27;video&#x27;,
+    _NAME = &#x27;video&#x27;,
 
-	CSS_VIDEO = getClassName(_NAME),
-	CSS_VIDEO_NODE = getClassName(_NAME, &#x27;node&#x27;),
+    CSS_VIDEO = getClassName(_NAME),
+    CSS_VIDEO_NODE = getClassName(_NAME, &#x27;node&#x27;),
 
-	DEFAULT_PLAYER_PATH = A.config.base + &#x27;aui-video/assets/player.swf?t=&#x27; + Lang.now(),
+    DEFAULT_PLAYER_PATH = A.config.base + &#x27;aui-video/assets/player.swf?t=&#x27; + Lang.now(),
 
-	DOC = A.config.doc,
+    DOC = A.config.doc,
 
-	_EMPTY = &#x27;&#x27;,
+    _EMPTY = &#x27;&#x27;,
 
-	CONTENT_BOX = &#x27;contentBox&#x27;,
-	FIXED_ATTRIBUTES = &#x27;fixedAttributes&#x27;,
-	FLASH_VARS = &#x27;flashVars&#x27;,
-	HEIGHT = &#x27;height&#x27;,
-	MOVIE = &#x27;movie&#x27;,
-	NODE_NAME = &#x27;nodeName&#x27;,
-	OGV_URL = &#x27;ogvUrl&#x27;,
-	POSTER = &#x27;poster&#x27;,
-	SOURCE = &#x27;source&#x27;,
-	SRC = &#x27;src&#x27;,
-	SWF_URL = &#x27;swfUrl&#x27;,
-	TYPE = &#x27;type&#x27;,
-	URL = &#x27;url&#x27;,
-	VIDEO = &#x27;video&#x27;,
-	VIDEO_READY = &#x27;videoReady&#x27;,
-	WIDTH = &#x27;width&#x27;,
+    CONTENT_BOX = &#x27;contentBox&#x27;,
+    FIXED_ATTRIBUTES = &#x27;fixedAttributes&#x27;,
+    FLASH_VARS = &#x27;flashVars&#x27;,
+    HEIGHT = &#x27;height&#x27;,
+    MOVIE = &#x27;movie&#x27;,
+    NODE_NAME = &#x27;nodeName&#x27;,
+    OGV_URL = &#x27;ogvUrl&#x27;,
+    POSTER = &#x27;poster&#x27;,
+    SOURCE = &#x27;source&#x27;,
+    SRC = &#x27;src&#x27;,
+    SWF_URL = &#x27;swfUrl&#x27;,
+    TYPE = &#x27;type&#x27;,
+    URL = &#x27;url&#x27;,
+    VIDEO = &#x27;video&#x27;,
+    VIDEO_READY = &#x27;videoReady&#x27;,
+    WIDTH = &#x27;width&#x27;,
 
-	TPL_VIDEO = &#x27;&lt;video id=&quot;{id}&quot; controls=&quot;controls&quot; class=&quot;&#x27; + CSS_VIDEO_NODE + &#x27;&quot; {height} {width}&gt;&lt;/video&gt;&#x27;,
-	TPL_VIDEO_FALLBACK = &#x27;&lt;div class=&quot;&#x27; + CSS_VIDEO_NODE + &#x27;&quot;&gt;&lt;/div&gt;&#x27;;
+    TPL_VIDEO = &#x27;&lt;video id=&quot;{id}&quot; controls=&quot;controls&quot; class=&quot;&#x27; + CSS_VIDEO_NODE + &#x27;&quot; {height} {width}&gt;&lt;/video&gt;&#x27;,
+    TPL_VIDEO_FALLBACK = &#x27;&lt;div class=&quot;&#x27; + CSS_VIDEO_NODE + &#x27;&quot;&gt;&lt;/div&gt;&#x27;;
 
 /**
  * A base class for Video.
@@ -2103,455 +2139,488 @@ var Lang = A.Lang,
  * @param config {Object} Object literal specifying widget configuration properties.
  * @constructor
  */
-var Video = A.Component.create(
-	{
-		/**
-		 * Static property provides a string to identify the class.
-		 *
-		 * @property Video.NAME
-		 * @type String
-		 * @static
-		 */
-		NAME: _NAME,
-
-		/**
-		 * Static property used to define the default attribute
-		 * configuration for the Video.
-		 *
-		 * @property Video.ATTRS
-		 * @type Object
-		 * @static
-		 */
-		ATTRS: {
-
-			/**
-			 * URL used by Video to play.
-			 *
-			 * @attribute url
-			 * @default &#x27;&#x27;
-			 * @type String
-			 */
-			url: {
-				value: &#x27;&#x27;
-			},
-
-			/**
-			 * URL (on .ogv format) used by Video to play.
-			 *
-			 * @attribute ogvUrl
-			 * @default &#x27;&#x27;
-			 * @type String
-			 */
-			ogvUrl: {
-				value: &#x27;&#x27;
-			},
-
-			/**
-			 * URL (on .swf format) used by Video to create
-			 * a fallback player with Flash.
-			 *
-			 * @attribute swfUrl
-			 * @default aui-video/assets/player.swf
-			 * @type String
-			 */
-			swfUrl: {
-				value: DEFAULT_PLAYER_PATH
-			},
-
-			/**
-			 * Image displayed before playback starts.
-			 *
-			 * @attribute poster
-			 * @default &#x27;&#x27;
-			 * @type String
-			 */
-			poster: {
-				value: &#x27;&#x27;
-			},
-
-			/**
-			 * An additional list of attributes.
-			 *
-			 * @attribute fixedAttributes
-			 * @default {}
-			 * @type Object
-			 */
-			fixedAttributes: {
-				value: {}
-			},
-
-			/**
-			 * Variables used by Flash player.
-			 *
-			 * @attribute flashVars
-			 * @default {}
-			 * @type Object
-			 */
-			flashVars: {
-				value: {}
-			},
-
-			/**
-			 * If &lt;code&gt;true&lt;/code&gt; the render phase will be automatically invoked
-			 * preventing the &lt;code&gt;.render()&lt;/code&gt; manual call.
-			 *
-			 * @attribute render
-			 * @default true
-			 * @type Boolean
-			 */
-			render: {
-				value: true
-			}
-		},
-
-		/**
-		 * Static property used to define the attributes
-		 * for the bindUI lifecycle phase.
-		 *
-		 * @property Video.BIND_UI_ATTRS
-		 * @type Array
-		 * @static
-		 */
-		BIND_UI_ATTRS: [&#x27;url&#x27;, &#x27;poster&#x27;, &#x27;ogvUrl&#x27;, &#x27;swfUrl&#x27;, &#x27;fixedAttributes&#x27;, &#x27;flashVars&#x27;],
-
-		/**
-		 * Static property used to define the attributes
-		 * for the syncUI lifecycle phase.
-		 *
-		 * @property Video.SYNC_UI_ATTRS
-		 * @type Array
-		 * @static
-		 */
-		SYNC_UI_ATTRS: [&#x27;url&#x27;, &#x27;poster&#x27;, &#x27;ogvUrl&#x27;],
-
-		prototype: {
-
-			/**
-			 * Render the Video component instance. Lifecycle.
-			 *
-			 * @method renderUI
-			 * @protected
-			 */
-			renderUI: function () {
-				var instance = this;
-
-				instance._renderVideoTask = A.debounce(instance._renderVideo, 1, instance);
-				instance._renderSwfTask = A.debounce(instance._renderSwf, 1, instance);
-
-				instance._renderVideo(!instance.get(OGV_URL));
-			},
-
-			/**
-			 * Bind the events on the Video UI. Lifecycle.
-			 *
-			 * @method bindUI
-			 * @protected
-			 */
-			bindUI: function () {
-				var instance = this;
-
-				instance.publish(
-					VIDEO_READY,
-					{
-						fireOnce: true
-					}
-				);
-			},
-
-			/**
-			 * Create &lt;code&gt;source&lt;/code&gt; element
-			 * using passed type attribute.
-			 *
-			 * @method _createSource
-			 * @param type
-			 * @protected
-			 */
-			_createSource: function(type) {
-				var instance = this;
-
-				var sourceNode = new A.Node(DOC.createElement(SOURCE));
-
-				sourceNode.attr(TYPE, type);
-
-				return sourceNode;
-			},
-
-			/**
-			 * Render SWF in DOM.
-			 *
-			 * @method _renderSwf
-			 * @protected
-			 */
-			_renderSwf: function () {
-				var instance = this;
-
-				var swfUrl = instance.get(SWF_URL);
-
-				if (swfUrl) {
-					var videoUrl = instance.get(URL);
-					var posterUrl = instance.get(POSTER);
-					var flashVars = instance.get(FLASH_VARS);
-
-					A.mix(
-						flashVars,
-						{
-							controls: true,
-							src: videoUrl,
-							poster: posterUrl
-						}
-					);
-
-					var flashVarString = A.QueryString.stringify(flashVars);
-
-					if (instance._swfId) {
-						instance._video.removeChild(A.one(&#x27;#&#x27; + instance._swfId));
-					}
-					else {
-						instance._swfId = A.guid();
-					}
-
-					var tplObj = &#x27;&lt;object id=&quot;&#x27; + instance._swfId + &#x27;&quot; &#x27;;
-
-					if (UA.ie) {
-						tplObj += &#x27;classid=&quot;clsid:d27cdb6e-ae6d-11cf-96b8-444553540000&quot; &#x27;;
-					}
-					else {
-						tplObj += &#x27;type=&quot;application/x-shockwave-flash&quot; data=&quot;&#x27; + swfUrl + &#x27;&quot; &#x27;;
-					}
-
-					tplObj += &#x27;height=&quot;100%&quot; width=&quot;100%&quot;&gt;&#x27;;
-
-					if (UA.ie) {
-						tplObj += &#x27;&lt;param name=&quot;movie&quot; value=&quot;&#x27; + swfUrl + &#x27;&quot;/&gt;&#x27;;
-					}
-
-					var fixedAttributes = instance.get(FIXED_ATTRIBUTES);
-
-					for (var i in fixedAttributes) {
-						tplObj += &#x27;&lt;param name=&quot;&#x27; + i + &#x27;&quot; value=&quot;&#x27; + fixedAttributes[i] + &#x27;&quot; /&gt;&#x27;;
-					}
-
-					if (flashVarString) {
-						tplObj += &#x27;&lt;param name=&quot;flashVars&quot; value=&quot;&#x27; + flashVarString + &#x27;&quot; /&gt;&#x27;;
-					}
-
-					if (posterUrl != &#x27;&#x27;) {
-						tplObj += &#x27;&lt;img src=&quot;&#x27; + posterUrl + &#x27;&quot; alt=&quot;&quot; /&gt;&#x27;;
-					}
-
-					tplObj += &#x27;&lt;/object&gt;&#x27;;
-
-					instance._video.append(tplObj);
-				}
-			},
-
-			/**
-			 * Render Video in DOM.
-			 *
-			 * @method _renderVideo
-			 * @param fallback
-			 * @protected
-			 */
-			_renderVideo: function(fallback) {
-				var instance = this,
-					attrHeight,
-					attrWidth,
-					height,
-					tpl,
-					tplObj,
-					video,
-					width;
-
-				tpl = TPL_VIDEO;
-
-				if (UA.gecko &amp;&amp; fallback) {
-					tpl = TPL_VIDEO_FALLBACK;
-				}
-				else {
-					attrHeight = _EMPTY;
-					attrWidth = _EMPTY;
-
-					height = instance.get(HEIGHT);
-
-					width = instance.get(WIDTH);
-
-					if (height) {
-						attrHeight = &#x27;height=&quot;&#x27; + height + &#x27;&quot;&#x27;;
-					}
-
-					if (width) {
-						attrWidth = &#x27;width=&quot;&#x27; + width + &#x27;&quot;&#x27;;
-					}
-				}
-
-				tplObj = Lang.sub(
-					tpl,
-					{
-						height: attrHeight,
-						id: A.guid(),
-						width: attrWidth
-					}
-				);
-
-				video = A.Node.create(tplObj);
-
-				instance.get(CONTENT_BOX).append(video);
-
-				instance._video = video;
-			},
-
-			/**
-			 * Set the &lt;code&gt;fixedAttributes&lt;/code&gt; on the UI.
-			 *
-			 * @method _uiSetFixedAttributes
-			 * @param val
-			 * @protected
-			 */
-			_uiSetFixedAttributes: function (val) {
-				var instance = this;
-
-				instance._renderSwfTask();
-			},
-
-			/**
-			 * Set the &lt;code&gt;flashVars&lt;/code&gt; on the UI.
-			 *
-			 * @method _uiSetFlashVars
-			 * @param val
-			 * @protected
-			 */
-			_uiSetFlashVars: function (val) {
-				var instance = this;
-
-				instance._renderSwfTask();
-			},
-
-			/**
-			 * Set the &lt;code&gt;ogvUrl&lt;/code&gt; on the UI.
-			 *
-			 * @method _uiSetOgvUrl
-			 * @param val
-			 * @protected
-			 */
-			_uiSetOgvUrl: function (val) {
-				var instance = this;
-
-				if (UA.gecko || UA.opera) {
-					var video = instance._video;
-
-					var usingVideo = instance._usingVideo();
-
-					if ((!val &amp;&amp; usingVideo) || (val &amp;&amp; !usingVideo)) {
-						video.remove(true);
-
-						instance._renderVideoTask(!val);
-					}
-
-					if (!val) {
-						instance._renderSwfTask();
-					}
-					else {
-						var sourceOgv = instance._sourceOgv;
-
-						if (!sourceOgv) {
-							sourceOgv = instance._createSource(&#x27;video/ogg; codecs=&quot;theora, vorbis&quot;&#x27;);
-
-							video.append(sourceOgv);
-
-							instance._sourceOgv = sourceOgv;
-						}
-
-						sourceOgv.attr(SRC, val);
-					}
-				}
-			},
-
-			/**
-			 * Set the &lt;code&gt;poster&lt;/code&gt; on the UI.
-			 *
-			 * @method _uiSetPoster
-			 * @param val
-			 * @protected
-			 */
-			_uiSetPoster: function (val) {
-				var instance = this;
-
-				var video = instance._video;
-
-				if (instance._usingVideo()) {
-					video.setAttribute(POSTER, val);
-				}
-
-				instance._renderSwfTask();
-			},
-
-			/**
-			 * Set the &lt;code&gt;swfUrl&lt;/code&gt; on the UI.
-			 *
-			 * @method _uiSetSwfUrl
-			 * @param val
-			 * @protected
-			 */
-			_uiSetSwfUrl: function (val) {
-				var instance = this;
-
-				instance._renderSwfTask();
-			},
-
-			/**
-			 * Set the &lt;code&gt;url&lt;/code&gt; on the UI.
-			 *
-			 * @method _uiSetUrl
-			 * @param val
-			 * @protected
-			 */
-			_uiSetUrl: function (val) {
-				var instance = this;
-
-				var ogvUrl = instance.get(OGV_URL);
-				var video = instance._video;
-
-				var sourceMp4 = instance._sourceMp4;
-
-				if (UA.gecko &amp;&amp; !instance._usingVideo()) {
-					if (sourceMp4 != null) {
-						sourceMp4.remove(true);
-
-						instance._sourceMp4 = null;
-					}
-				}
-				else
-				{
-					if (video || !ogvUrl) {
-						if (!sourceMp4) {
-							sourceMp4 = instance._createSource(&#x27;video/mp4;&#x27;);
-
-							video.append(sourceMp4);
-
-							instance._sourceMp4 = sourceMp4;
-						}
-
-						sourceMp4.attr(SRC, val);
-					}
-				}
-
-				instance._renderSwfTask();
-			},
-
-			/**
-			 * Check if it&#x27;s a &lt;code&gt;video&lt;/code&gt; node.
-			 *
-			 * @method _usingVideo
-			 * @protected
-			 */
-			_usingVideo: function() {
-				var instance = this;
-
-				return (instance._video.get(NODE_NAME).toLowerCase() === VIDEO);
-			}
-		}
-	}
-);
+var Video = A.Component.create({
+    /**
+     * Static property provides a string to identify the class.
+     *
+     * @property Video.NAME
+     * @type String
+     * @static
+     */
+    NAME: _NAME,
+
+    /**
+     * Static property used to define the default attribute
+     * configuration for the Video.
+     *
+     * @property Video.ATTRS
+     * @type Object
+     * @static
+     */
+    ATTRS: {
+
+        /**
+         * URL used by Video to play.
+         *
+         * @attribute url
+         * @default &#x27;&#x27;
+         * @type String
+         */
+        url: {
+            value: &#x27;&#x27;
+        },
+
+        /**
+         * URL (on .ogv format) used by Video to play.
+         *
+         * @attribute ogvUrl
+         * @default &#x27;&#x27;
+         * @type String
+         */
+        ogvUrl: {
+            value: &#x27;&#x27;
+        },
+
+        /**
+         * URL (on .swf format) used by Video to create
+         * a fallback player with Flash.
+         *
+         * @attribute swfUrl
+         * @default aui-video/assets/player.swf
+         * @type String
+         */
+        swfUrl: {
+            value: DEFAULT_PLAYER_PATH
+        },
+
+        /**
+         * Image displayed before playback starts.
+         *
+         * @attribute poster
+         * @default &#x27;&#x27;
+         * @type String
+         */
+        poster: {
+            value: &#x27;&#x27;
+        },
+
+        /**
+         * An additional list of attributes.
+         *
+         * @attribute fixedAttributes
+         * @default {}
+         * @type Object
+         */
+        fixedAttributes: {
+            value: {}
+        },
+
+        /**
+         * Variables used by Flash player.
+         *
+         * @attribute flashVars
+         * @default {}
+         * @type Object
+         */
+        flashVars: {
+            value: {}
+        },
+
+        /**
+         * If &lt;code&gt;true&lt;/code&gt; the render phase will be automatically invoked
+         * preventing the &lt;code&gt;.render()&lt;/code&gt; manual call.
+         *
+         * @attribute render
+         * @default true
+         * @type Boolean
+         */
+        render: {
+            value: true
+        }
+    },
+
+    /**
+     * Static property used to define the attributes
+     * for the bindUI lifecycle phase.
+     *
+     * @property Video.BIND_UI_ATTRS
+     * @type Array
+     * @static
+     */
+    BIND_UI_ATTRS: [&#x27;url&#x27;, &#x27;poster&#x27;, &#x27;ogvUrl&#x27;, &#x27;swfUrl&#x27;, &#x27;fixedAttributes&#x27;, &#x27;flashVars&#x27;],
+
+    /**
+     * Static property used to define the attributes
+     * for the syncUI lifecycle phase.
+     *
+     * @property Video.SYNC_UI_ATTRS
+     * @type Array
+     * @static
+     */
+    SYNC_UI_ATTRS: [&#x27;url&#x27;, &#x27;poster&#x27;, &#x27;ogvUrl&#x27;],
+
+    prototype: {
+
+        /**
+         * Render the Video component instance. Lifecycle.
+         *
+         * @method renderUI
+         * @protected
+         */
+        renderUI: function() {
+            var instance = this;
+
+            instance._renderVideoTask = A.debounce(instance._renderVideo, 1, instance);
+            instance._renderSwfTask = A.debounce(instance._renderSwf, 1, instance);
+
+            instance._renderVideo(!instance.get(OGV_URL));
+        },
+
+        /**
+         * Bind the events on the Video UI. Lifecycle.
+         *
+         * @method bindUI
+         * @protected
+         */
+        bindUI: function() {
+            var instance = this;
+
+            instance.publish(
+                VIDEO_READY, {
+                    fireOnce: true
+                }
+            );
+        },
+
+        /**
+         * Load video track.
+         *
+         * @method load
+         */
+        load: function() {
+            var instance = this;
+
+            if (instance._video.hasMethod(&#x27;load&#x27;)) {
+                instance._video.invoke(&#x27;load&#x27;);
+            }
+        },
+
+        /**
+         * Pause video track.
+         *
+         * @method pause
+         */
+        pause: function() {
+            var instance = this;
+
+            if (instance._video.hasMethod(&#x27;pause&#x27;)) {
+                instance._video.invoke(&#x27;pause&#x27;);
+            }
+        },
+
+        /**
+         * Play video track.
+         *
+         * @method play
+         */
+        play: function() {
+            var instance = this;
+
+            if (instance._video.hasMethod(&#x27;play&#x27;)) {
+                instance._video.invoke(&#x27;play&#x27;);
+            }
+        },
+
+        /**
+         * Create &lt;code&gt;source&lt;/code&gt; element
+         * using passed type attribute.
+         *
+         * @method _createSource
+         * @param type
+         * @protected
+         */
+        _createSource: function(type) {
+            var instance = this;
+
+            var sourceNode = new A.Node(DOC.createElement(SOURCE));
+
+            sourceNode.attr(TYPE, type);
+
+            return sourceNode;
+        },
+
+        /**
+         * Render SWF in DOM.
+         *
+         * @method _renderSwf
+         * @protected
+         */
+        _renderSwf: function() {
+            var instance = this;
+
+            var swfUrl = instance.get(SWF_URL);
+
+            if (swfUrl) {
+                var videoUrl = instance.get(URL);
+                var posterUrl = instance.get(POSTER);
+                var flashVars = instance.get(FLASH_VARS);
+
+                A.mix(
+                    flashVars, {
+                        controls: true,
+                        src: videoUrl,
+                        poster: posterUrl
+                    }
+                );
+
+                var flashVarString = A.QueryString.stringify(flashVars);
+
+                if (instance._swfId) {
+                    instance._video.removeChild(A.one(&#x27;#&#x27; + instance._swfId));
+                }
+                else {
+                    instance._swfId = A.guid();
+                }
+
+                var tplObj = &#x27;&lt;object id=&quot;&#x27; + instance._swfId + &#x27;&quot; &#x27;;
+
+                if (UA.ie) {
+                    tplObj += &#x27;classid=&quot;clsid:d27cdb6e-ae6d-11cf-96b8-444553540000&quot; &#x27;;
+                }
+                else {
+                    tplObj += &#x27;type=&quot;application/x-shockwave-flash&quot; data=&quot;&#x27; + swfUrl + &#x27;&quot; &#x27;;
+                }
+
+                tplObj += &#x27;height=&quot;100%&quot; width=&quot;100%&quot;&gt;&#x27;;
+
+                if (UA.ie) {
+                    tplObj += &#x27;&lt;param name=&quot;movie&quot; value=&quot;&#x27; + swfUrl + &#x27;&quot;/&gt;&#x27;;
+                }
+
+                var fixedAttributes = instance.get(FIXED_ATTRIBUTES);
+
+                for (var i in fixedAttributes) {
+                    tplObj += &#x27;&lt;param name=&quot;&#x27; + i + &#x27;&quot; value=&quot;&#x27; + fixedAttributes[i] + &#x27;&quot; /&gt;&#x27;;
+                }
+
+                if (flashVarString) {
+                    tplObj += &#x27;&lt;param name=&quot;flashVars&quot; value=&quot;&#x27; + flashVarString + &#x27;&quot; /&gt;&#x27;;
+                }
+
+                if (posterUrl != &#x27;&#x27;) {
+                    tplObj += &#x27;&lt;img src=&quot;&#x27; + posterUrl + &#x27;&quot; alt=&quot;&quot; /&gt;&#x27;;
+                }
+
+                tplObj += &#x27;&lt;/object&gt;&#x27;;
+
+                instance._video.append(tplObj);
+            }
+        },
+
+        /**
+         * Render Video in DOM.
+         *
+         * @method _renderVideo
+         * @param fallback
+         * @protected
+         */
+        _renderVideo: function(fallback) {
+            var instance = this,
+                attrHeight,
+                attrWidth,
+                height,
+                tpl,
+                tplObj,
+                video,
+                width;
+
+            tpl = TPL_VIDEO;
+
+            if (UA.gecko &amp;&amp; fallback) {
+                tpl = TPL_VIDEO_FALLBACK;
+            }
+            else {
+                attrHeight = _EMPTY;
+                attrWidth = _EMPTY;
+
+                height = instance.get(HEIGHT);
+
+                width = instance.get(WIDTH);
+
+                if (height) {
+                    attrHeight = &#x27;height=&quot;&#x27; + height + &#x27;&quot;&#x27;;
+                }
+
+                if (width) {
+                    attrWidth = &#x27;width=&quot;&#x27; + width + &#x27;&quot;&#x27;;
+                }
+            }
+
+            tplObj = Lang.sub(
+                tpl, {
+                    height: attrHeight,
+                    id: A.guid(),
+                    width: attrWidth
+                }
+            );
+
+            video = A.Node.create(tplObj);
+
+            instance.get(CONTENT_BOX).append(video);
+
+            instance._video = video;
+        },
+
+        /**
+         * Set the &lt;code&gt;fixedAttributes&lt;/code&gt; on the UI.
+         *
+         * @method _uiSetFixedAttributes
+         * @param val
+         * @protected
+         */
+        _uiSetFixedAttributes: function(val) {
+            var instance = this;
+
+            instance._renderSwfTask();
+        },
+
+        /**
+         * Set the &lt;code&gt;flashVars&lt;/code&gt; on the UI.
+         *
+         * @method _uiSetFlashVars
+         * @param val
+         * @protected
+         */
+        _uiSetFlashVars: function(val) {
+            var instance = this;
+
+            instance._renderSwfTask();
+        },
+
+        /**
+         * Set the &lt;code&gt;ogvUrl&lt;/code&gt; on the UI.
+         *
+         * @method _uiSetOgvUrl
+         * @param val
+         * @protected
+         */
+        _uiSetOgvUrl: function(val) {
+            var instance = this;
+
+            if (UA.gecko || UA.opera) {
+                var video = instance._video;
+
+                var usingVideo = instance._usingVideo();
+
+                if ((!val &amp;&amp; usingVideo) || (val &amp;&amp; !usingVideo)) {
+                    video.remove(true);
+
+                    instance._renderVideoTask(!val);
+                }
+
+                if (!val) {
+                    instance._renderSwfTask();
+                }
+                else {
+                    var sourceOgv = instance._sourceOgv;
+
+                    if (!sourceOgv) {
+                        sourceOgv = instance._createSource(&#x27;video/ogg; codecs=&quot;theora, vorbis&quot;&#x27;);
+
+                        video.append(sourceOgv);
+
+                        instance._sourceOgv = sourceOgv;
+                    }
+
+                    sourceOgv.attr(SRC, val);
+                }
+            }
+        },
+
+        /**
+         * Set the &lt;code&gt;poster&lt;/code&gt; on the UI.
+         *
+         * @method _uiSetPoster
+         * @param val
+         * @protected
+         */
+        _uiSetPoster: function(val) {
+            var instance = this;
+
+            var video = instance._video;
+
+            if (instance._usingVideo()) {
+                video.setAttribute(POSTER, val);
+            }
+
+            instance._renderSwfTask();
+        },
+
+        /**
+         * Set the &lt;code&gt;swfUrl&lt;/code&gt; on the UI.
+         *
+         * @method _uiSetSwfUrl
+         * @param val
+         * @protected
+         */
+        _uiSetSwfUrl: function(val) {
+            var instance = this;
+
+            instance._renderSwfTask();
+        },
+
+        /**
+         * Set the &lt;code&gt;url&lt;/code&gt; on the UI.
+         *
+         * @method _uiSetUrl
+         * @param val
+         * @protected
+         */
+        _uiSetUrl: function(val) {
+            var instance = this;
+
+            var ogvUrl = instance.get(OGV_URL);
+            var video = instance._video;
+
+            var sourceMp4 = instance._sourceMp4;
+
+            if (UA.gecko &amp;&amp; !instance._usingVideo()) {
+                if (sourceMp4 != null) {
+                    sourceMp4.remove(true);
+
+                    instance._sourceMp4 = null;
+                }
+            }
+            else {
+                if (video || !ogvUrl) {
+                    if (!sourceMp4) {
+                        sourceMp4 = instance._createSource(&#x27;video/mp4;&#x27;);
+
+                        video.append(sourceMp4);
+
+                        instance._sourceMp4 = sourceMp4;
+                    }
+
+                    sourceMp4.attr(SRC, val);
+                }
+            }
+
+            instance._renderSwfTask();
+        },
+
+        /**
+         * Check if it&#x27;s a &lt;code&gt;video&lt;/code&gt; node.
+         *
+         * @method _usingVideo
+         * @protected
+         */
+        _usingVideo: function() {
+            var instance = this;
+
+            return (instance._video.get(NODE_NAME).toLowerCase() === VIDEO);
+        }
+    }
+});
 
 A.Video = Video;
 

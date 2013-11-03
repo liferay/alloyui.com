@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>2.0.0pr6</b>
+                        API Docs for Version: <b>2.0.0</b>
                     </p>
                 </li>
             </div>
@@ -83,6 +83,8 @@
             
                 <li><a href="../classes/A.ButtonGroup.html">A.ButtonGroup</a></li>
             
+                <li><a href="../classes/A.ButtonSearchCancel.html">A.ButtonSearchCancel</a></li>
+            
                 <li><a href="../classes/A.Carousel.html">A.Carousel</a></li>
             
                 <li><a href="../classes/A.CellEditorSupport.html">A.CellEditorSupport</a></li>
@@ -107,7 +109,23 @@
             
                 <li><a href="../classes/A.DataType.DateMath.html">A.DataType.DateMath</a></li>
             
+                <li><a href="../classes/A.Date.html">A.Date</a></li>
+            
                 <li><a href="../classes/A.DateCellEditor.html">A.DateCellEditor</a></li>
+            
+                <li><a href="../classes/A.DateParser.html">A.DateParser</a></li>
+            
+                <li><a href="../classes/A.DatePicker.html">A.DatePicker</a></li>
+            
+                <li><a href="../classes/A.DatePickerBase.html">A.DatePickerBase</a></li>
+            
+                <li><a href="../classes/A.DatePickerDelegate.html">A.DatePickerDelegate</a></li>
+            
+                <li><a href="../classes/A.DatePickerNative.html">A.DatePickerNative</a></li>
+            
+                <li><a href="../classes/A.DatePickerNativeBase.html">A.DatePickerNativeBase</a></li>
+            
+                <li><a href="../classes/A.DatePickerPopover.html">A.DatePickerPopover</a></li>
             
                 <li><a href="../classes/A.DiagramBuilder.html">A.DiagramBuilder</a></li>
             
@@ -260,6 +278,10 @@
                 <li><a href="../classes/A.TextCellEditor.html">A.TextCellEditor</a></li>
             
                 <li><a href="../classes/A.ThumbRating.html">A.ThumbRating</a></li>
+            
+                <li><a href="../classes/A.TimePicker.html">A.TimePicker</a></li>
+            
+                <li><a href="../classes/A.TimePickerBase.html">A.TimePickerBase</a></li>
             
                 <li><a href="../classes/A.ToggleButton.html">A.ToggleButton</a></li>
             
@@ -1057,6 +1079,8 @@
 
             <ul id="api-modules" class="apis modules tab-pane">
             
+                <li><a href="../modules/ace-autocomplete-plugin.html">ace-autocomplete-plugin</a></li>
+            
                 <li><a href="../modules/align-plugin.html">align-plugin</a></li>
             
                 <li><a href="../modules/anim.html">anim</a></li>
@@ -1143,7 +1167,7 @@
             
                 <li><a href="../modules/aui-collection.html">aui-collection</a></li>
             
-                <li><a href="../modules/aui-color-pallete.html">aui-color-pallete</a></li>
+                <li><a href="../modules/aui-color-palette.html">aui-color-palette</a></li>
             
                 <li><a href="../modules/aui-color-picker.html">aui-color-picker</a></li>
             
@@ -1164,6 +1188,16 @@
                 <li><a href="../modules/aui-datatable-selection.html">aui-datatable-selection</a></li>
             
                 <li><a href="../modules/aui-datatype.html">aui-datatype</a></li>
+            
+                <li><a href="../modules/aui-datatype-date-parse.html">aui-datatype-date-parse</a></li>
+            
+                <li><a href="../modules/aui-datepicker.html">aui-datepicker</a></li>
+            
+                <li><a href="../modules/aui-datepicker-delegate.html">aui-datepicker-delegate</a></li>
+            
+                <li><a href="../modules/aui-datepicker-native.html">aui-datepicker-native</a></li>
+            
+                <li><a href="../modules/aui-datepicker-popover.html">aui-datepicker-popover</a></li>
             
                 <li><a href="../modules/aui-diagram-builder.html">aui-diagram-builder</a></li>
             
@@ -1245,7 +1279,7 @@
             
                 <li><a href="../modules/aui-pagination.html">aui-pagination</a></li>
             
-                <li><a href="../modules/aui-pallete.html">aui-pallete</a></li>
+                <li><a href="../modules/aui-palette.html">aui-palette</a></li>
             
                 <li><a href="../modules/aui-parse-content.html">aui-parse-content</a></li>
             
@@ -1296,6 +1330,8 @@
                 <li><a href="../modules/aui-tabview.html">aui-tabview</a></li>
             
                 <li><a href="../modules/aui-text.html">aui-text</a></li>
+            
+                <li><a href="../modules/aui-timepicker.html">aui-timepicker</a></li>
             
                 <li><a href="../modules/aui-timer.html">aui-timer</a></li>
             
@@ -2061,38 +2097,39 @@
 
 var L = A.Lang,
 
-	toInitialCap = A.cached(
-		function(str) {
-			return str.substring(0, 1).toUpperCase() + str.substring(1);
-		}
-	),
+    toInitialCap = A.cached(
+        function(str) {
+            return str.substring(0, 1).toUpperCase() + str.substring(1);
+        }
+    ),
 
-	BTN = &#x27;btn&#x27;,
-	BUTTON = &#x27;button&#x27;,
-	BUTTON_TYPE = &#x27;buttonType&#x27;,
-	FORM_BUILDER_BUTTON_FIELD = &#x27;form-builder-button-field&#x27;,
-	FORM_BUILDER_FIELD = &#x27;form-builder-field&#x27;,
-	ID = &#x27;id&#x27;,
-	LABEL = &#x27;label&#x27;,
-	NAME = &#x27;name&#x27;,
-	NODE = &#x27;node&#x27;,
-	PREDEFINED_VALUE = &#x27;predefinedValue&#x27;,
-	RESET = &#x27;reset&#x27;,
-	SPACE = &#x27; &#x27;,
-	SUBMIT = &#x27;submit&#x27;,
-	TEMPLATE = &#x27;template&#x27;,
-	TEMPLATE_NODE = &#x27;templateNode&#x27;,
-	TYPE = &#x27;type&#x27;,
+    BTN = &#x27;btn&#x27;,
+    BUTTON = &#x27;button&#x27;,
+    BUTTON_TYPE = &#x27;buttonType&#x27;,
+    FORM_BUILDER_BUTTON_FIELD = &#x27;form-builder-button-field&#x27;,
+    FORM_BUILDER_FIELD = &#x27;form-builder-field&#x27;,
+    ID = &#x27;id&#x27;,
+    LABEL = &#x27;label&#x27;,
+    NAME = &#x27;name&#x27;,
+    NODE = &#x27;node&#x27;,
+    PREDEFINED_VALUE = &#x27;predefinedValue&#x27;,
+    RESET = &#x27;reset&#x27;,
+    SPACE = &#x27; &#x27;,
+    SUBMIT = &#x27;submit&#x27;,
+    TEMPLATE = &#x27;template&#x27;,
+    TEMPLATE_NODE = &#x27;templateNode&#x27;,
+    TYPE = &#x27;type&#x27;,
 
-	getCN = A.getClassName,
+    getCN = A.getClassName,
 
-	CSS_BTN = getCN(BTN),
-	CSS_FORM_BUILDER_FIELD = getCN(FORM_BUILDER_FIELD),
-	CSS_FORM_BUILDER_FIELD_NODE = getCN(FORM_BUILDER_FIELD, NODE),
+    CSS_BTN = getCN(BTN),
+    CSS_FORM_BUILDER_FIELD = getCN(FORM_BUILDER_FIELD),
+    CSS_FORM_BUILDER_FIELD_NODE = getCN(FORM_BUILDER_FIELD, NODE),
 
-	TPL_BUTTON = &#x27;&lt;button id=&quot;{id}&quot; class=&quot;&#x27; + [CSS_FORM_BUILDER_FIELD_NODE, CSS_BTN].join(SPACE) + &#x27;&quot; type=&quot;{type}&quot;&gt;{value}&lt;/button&gt;&#x27;,
+    TPL_BUTTON = &#x27;&lt;button id=&quot;{id}&quot; class=&quot;&#x27; + [CSS_FORM_BUILDER_FIELD_NODE, CSS_BTN].join(SPACE) +
+        &#x27;&quot; type=&quot;{type}&quot;&gt;{value}&lt;/button&gt;&#x27;,
 
-	BUTTON_TYPES = [SUBMIT, RESET, BUTTON];
+    BUTTON_TYPES = [SUBMIT, RESET, BUTTON];
 
 /**
  * A base class for FormBuilderButtonField.
@@ -2104,196 +2141,194 @@ var L = A.Lang,
  */
 var FormBuilderButtonField = A.Component.create({
 
-	/**
-	 * Static property provides a string to identify the class.
-	 *
-	 * @property FormBuilderButtonField.NAME
-	 * @type String
-	 * @static
-	 */
-	NAME: FORM_BUILDER_BUTTON_FIELD,
+    /**
+     * Static property provides a string to identify the class.
+     *
+     * @property FormBuilderButtonField.NAME
+     * @type String
+     * @static
+     */
+    NAME: FORM_BUILDER_BUTTON_FIELD,
 
-	/**
-	 * Static property used to define the default attribute
-	 * configuration for the FormBuilderButtonField.
-	 *
-	 * @property FormBuilderButtonField.ATTRS
-	 * @type Object
-	 * @static
-	 */
-	ATTRS: {
+    /**
+     * Static property used to define the default attribute
+     * configuration for the FormBuilderButtonField.
+     *
+     * @property FormBuilderButtonField.ATTRS
+     * @type Object
+     * @static
+     */
+    ATTRS: {
 
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @attribute acceptChildren
-		 * @default false
-		 * @type Boolean
-		 * @readOnly
-		 */
-		acceptChildren: {
-			readOnly: true,
-			value: false
-		},
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @attribute acceptChildren
+         * @default false
+         * @type Boolean
+         * @readOnly
+         */
+        acceptChildren: {
+            readOnly: true,
+            value: false
+        },
 
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @attribute buttonType
-		 * @default &#x27;submit&#x27;
-		 */
-		buttonType: {
-			validator: function(val) {
-				return A.Array(BUTTON_TYPES).indexOf(val.toLowerCase()) &gt; -1;
-			},
-			value: SUBMIT
-		},
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @attribute buttonType
+         * @default &#x27;submit&#x27;
+         */
+        buttonType: {
+            validator: function(val) {
+                return A.Array(BUTTON_TYPES).indexOf(val.toLowerCase()) &gt; -1;
+            },
+            value: SUBMIT
+        },
 
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @attribute predefinedValue
-		 */
-		predefinedValue: {
-			value: toInitialCap(SUBMIT)
-		},
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @attribute predefinedValue
+         */
+        predefinedValue: {
+            value: toInitialCap(SUBMIT)
+        },
 
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @attribute showLabel
-		 * @default false
-		 * @type Boolean
-		 */
-		showLabel: {
-			value: false
-		},
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @attribute showLabel
+         * @default false
+         * @type Boolean
+         */
+        showLabel: {
+            value: false
+        },
 
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @attribute template
-		 */
-		template: {
-			valueFn: function() {
-				return TPL_BUTTON;
-			}
-		}
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @attribute template
+         */
+        template: {
+            valueFn: function() {
+                return TPL_BUTTON;
+            }
+        }
 
-	},
+    },
 
-	/**
-	 * Static property used to define the UI attributes.
-	 *
-	 * @property FormBuilderButtonField.UI_ATTRS
-	 * @type Array
-	 * @static
-	 */
-	UI_ATTRS: A.FormBuilderField.UI_ATTRS.concat([BUTTON_TYPE]),
+    /**
+     * Static property used to define the UI attributes.
+     *
+     * @property FormBuilderButtonField.UI_ATTRS
+     * @type Array
+     * @static
+     */
+    UI_ATTRS: A.FormBuilderField.UI_ATTRS.concat([BUTTON_TYPE]),
 
-	/**
-	 * TODO. Wanna help? Please send a Pull Request.
-	 *
-	 * @property FormBuilderButtonField.CSS_PREFIX
-	 * @type String
-	 * @static
-	 */
-	CSS_PREFIX: CSS_FORM_BUILDER_FIELD,
+    /**
+     * TODO. Wanna help? Please send a Pull Request.
+     *
+     * @property FormBuilderButtonField.CSS_PREFIX
+     * @type String
+     * @static
+     */
+    CSS_PREFIX: CSS_FORM_BUILDER_FIELD,
 
-	/**
-	 * Static property used to define which component it extends.
-	 *
-	 * @property FormBuilderButtonField.EXTENDS
-	 * @type Object
-	 * @static
-	 */
-	EXTENDS: A.FormBuilderField,
+    /**
+     * Static property used to define which component it extends.
+     *
+     * @property FormBuilderButtonField.EXTENDS
+     * @type Object
+     * @static
+     */
+    EXTENDS: A.FormBuilderField,
 
-	prototype: {
+    prototype: {
 
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method getHTML
-		 */
-		getHTML: function() {
-			var instance = this;
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method getHTML
+         */
+        getHTML: function() {
+            var instance = this;
 
-			return L.sub(
-				instance.get(TEMPLATE),
-				{
-					id: instance.get(ID),
-					label: instance.get(LABEL),
-					name: instance.get(NAME),
-					type: instance.get(BUTTON_TYPE),
-					value: instance.get(PREDEFINED_VALUE)
-				}
-			);
-		},
+            return L.sub(
+                instance.get(TEMPLATE), {
+                    id: instance.get(ID),
+                    label: instance.get(LABEL),
+                    name: instance.get(NAME),
+                    type: instance.get(BUTTON_TYPE),
+                    value: instance.get(PREDEFINED_VALUE)
+                }
+            );
+        },
 
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method getPropertyModel
-		 */
-		getPropertyModel: function() {
-			var instance = this,
-				strings = instance.getStrings();
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method getPropertyModel
+         */
+        getPropertyModel: function() {
+            var instance = this,
+                strings = instance.getStrings();
 
-			var model = A.FormBuilderButtonField.superclass.getPropertyModel.apply(instance, arguments);
+            var model = A.FormBuilderButtonField.superclass.getPropertyModel.apply(instance, arguments);
 
-			model.push(
-				{
-					attributeName: BUTTON_TYPE,
-					editor: new A.RadioCellEditor({
-						options: {
-							&#x27;button&#x27;: strings[BUTTON],
-							&#x27;reset&#x27;: strings[RESET],
-							&#x27;submit&#x27;: strings[SUBMIT]
-						}
-					}),
-					name: strings[BUTTON_TYPE]
-				}
-			);
+            model.push({
+                attributeName: BUTTON_TYPE,
+                editor: new A.RadioCellEditor({
+                    options: {
+                        &#x27;button&#x27;: strings[BUTTON],
+                        &#x27;reset&#x27;: strings[RESET],
+                        &#x27;submit&#x27;: strings[SUBMIT]
+                    }
+                }),
+                name: strings[BUTTON_TYPE]
+            });
 
-			return model;
-		},
+            return model;
+        },
 
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method _uiSetButtonType
-		 * @param val
-		 * @protected
-		 */
-		_uiSetButtonType: function(val) {
-			var instance = this,
-				templateNode = instance.get(TEMPLATE_NODE);
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method _uiSetButtonType
+         * @param val
+         * @protected
+         */
+        _uiSetButtonType: function(val) {
+            var instance = this,
+                templateNode = instance.get(TEMPLATE_NODE);
 
-			templateNode.setAttribute(TYPE, val);
-		},
+            templateNode.setAttribute(TYPE, val);
+        },
 
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method _uiSetPredefinedValue
-		 * @param val
-		 * @protected
-		 */
-		_uiSetPredefinedValue: function(val) {
-			var instance = this,
-				templateNode = instance.get(TEMPLATE_NODE);
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method _uiSetPredefinedValue
+         * @param val
+         * @protected
+         */
+        _uiSetPredefinedValue: function(val) {
+            var instance = this,
+                templateNode = instance.get(TEMPLATE_NODE);
 
-			templateNode.setContent(val);
-		}
+            templateNode.setContent(val);
+        }
 
-	}
+    }
 
 });
 
 A.FormBuilderButtonField = FormBuilderButtonField;
 
 A.FormBuilder.types.button = A.FormBuilderButtonField;
+
     </pre>
 </div>
 

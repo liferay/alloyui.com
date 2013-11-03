@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>2.0.0pr6</b>
+                        API Docs for Version: <b>2.0.0</b>
                     </p>
                 </li>
             </div>
@@ -83,6 +83,8 @@
             
                 <li><a href="../classes/A.ButtonGroup.html">A.ButtonGroup</a></li>
             
+                <li><a href="../classes/A.ButtonSearchCancel.html">A.ButtonSearchCancel</a></li>
+            
                 <li><a href="../classes/A.Carousel.html">A.Carousel</a></li>
             
                 <li><a href="../classes/A.CellEditorSupport.html">A.CellEditorSupport</a></li>
@@ -107,7 +109,23 @@
             
                 <li><a href="../classes/A.DataType.DateMath.html">A.DataType.DateMath</a></li>
             
+                <li><a href="../classes/A.Date.html">A.Date</a></li>
+            
                 <li><a href="../classes/A.DateCellEditor.html">A.DateCellEditor</a></li>
+            
+                <li><a href="../classes/A.DateParser.html">A.DateParser</a></li>
+            
+                <li><a href="../classes/A.DatePicker.html">A.DatePicker</a></li>
+            
+                <li><a href="../classes/A.DatePickerBase.html">A.DatePickerBase</a></li>
+            
+                <li><a href="../classes/A.DatePickerDelegate.html">A.DatePickerDelegate</a></li>
+            
+                <li><a href="../classes/A.DatePickerNative.html">A.DatePickerNative</a></li>
+            
+                <li><a href="../classes/A.DatePickerNativeBase.html">A.DatePickerNativeBase</a></li>
+            
+                <li><a href="../classes/A.DatePickerPopover.html">A.DatePickerPopover</a></li>
             
                 <li><a href="../classes/A.DiagramBuilder.html">A.DiagramBuilder</a></li>
             
@@ -260,6 +278,10 @@
                 <li><a href="../classes/A.TextCellEditor.html">A.TextCellEditor</a></li>
             
                 <li><a href="../classes/A.ThumbRating.html">A.ThumbRating</a></li>
+            
+                <li><a href="../classes/A.TimePicker.html">A.TimePicker</a></li>
+            
+                <li><a href="../classes/A.TimePickerBase.html">A.TimePickerBase</a></li>
             
                 <li><a href="../classes/A.ToggleButton.html">A.ToggleButton</a></li>
             
@@ -1057,6 +1079,8 @@
 
             <ul id="api-modules" class="apis modules tab-pane">
             
+                <li><a href="../modules/ace-autocomplete-plugin.html">ace-autocomplete-plugin</a></li>
+            
                 <li><a href="../modules/align-plugin.html">align-plugin</a></li>
             
                 <li><a href="../modules/anim.html">anim</a></li>
@@ -1143,7 +1167,7 @@
             
                 <li><a href="../modules/aui-collection.html">aui-collection</a></li>
             
-                <li><a href="../modules/aui-color-pallete.html">aui-color-pallete</a></li>
+                <li><a href="../modules/aui-color-palette.html">aui-color-palette</a></li>
             
                 <li><a href="../modules/aui-color-picker.html">aui-color-picker</a></li>
             
@@ -1164,6 +1188,16 @@
                 <li><a href="../modules/aui-datatable-selection.html">aui-datatable-selection</a></li>
             
                 <li><a href="../modules/aui-datatype.html">aui-datatype</a></li>
+            
+                <li><a href="../modules/aui-datatype-date-parse.html">aui-datatype-date-parse</a></li>
+            
+                <li><a href="../modules/aui-datepicker.html">aui-datepicker</a></li>
+            
+                <li><a href="../modules/aui-datepicker-delegate.html">aui-datepicker-delegate</a></li>
+            
+                <li><a href="../modules/aui-datepicker-native.html">aui-datepicker-native</a></li>
+            
+                <li><a href="../modules/aui-datepicker-popover.html">aui-datepicker-popover</a></li>
             
                 <li><a href="../modules/aui-diagram-builder.html">aui-diagram-builder</a></li>
             
@@ -1245,7 +1279,7 @@
             
                 <li><a href="../modules/aui-pagination.html">aui-pagination</a></li>
             
-                <li><a href="../modules/aui-pallete.html">aui-pallete</a></li>
+                <li><a href="../modules/aui-palette.html">aui-palette</a></li>
             
                 <li><a href="../modules/aui-parse-content.html">aui-parse-content</a></li>
             
@@ -1296,6 +1330,8 @@
                 <li><a href="../modules/aui-tabview.html">aui-tabview</a></li>
             
                 <li><a href="../modules/aui-text.html">aui-text</a></li>
+            
+                <li><a href="../modules/aui-timepicker.html">aui-timepicker</a></li>
             
                 <li><a href="../modules/aui-timer.html">aui-timer</a></li>
             
@@ -2060,11 +2096,11 @@
  */
 
 var AObject = A.Object,
-	Node = A.Node,
-	Selector = A.Selector,
+    Node = A.Node,
+    Selector = A.Selector,
 
-	EVENT_BEFOREACTIVATE = &#x27;beforeactivate&#x27;,
-	EVENT_CHANGE = &#x27;change&#x27;;
+    EVENT_BEFOREACTIVATE = &#x27;beforeactivate&#x27;,
+    EVENT_CHANGE = &#x27;change&#x27;;
 
 /**
  * TODO. Wanna help? Please send a Pull Request.
@@ -2072,213 +2108,213 @@ var AObject = A.Object,
  * @event change
  */
 A.Event.define(
-	EVENT_CHANGE,
-	{
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method delegate
-		 * @param node
-		 * @param subscription
-		 * @param notifier
-		 * @param filter
-		 */
-		delegate: function (node, subscription, notifier, filter) {
-			var instance = this;
+    EVENT_CHANGE, {
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method delegate
+         * @param node
+         * @param subscription
+         * @param notifier
+         * @param filter
+         */
+        delegate: function(node, subscription, notifier, filter) {
+            var instance = this;
 
-			instance._attachEvents(node, subscription, notifier, filter);
-		},
+            instance._attachEvents(node, subscription, notifier, filter);
+        },
 
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method detach
-		 * @param node
-		 * @param subscription
-		 * @param notifier
-		 */
-		detach: function (node, subscription, notifier) {
-			var instance = this;
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method detach
+         * @param node
+         * @param subscription
+         * @param notifier
+         */
+        detach: function(node, subscription, notifier) {
+            var instance = this;
 
-			instance._detachEvents(node, subscription, notifier);
-		},
+            instance._detachEvents(node, subscription, notifier);
+        },
 
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method detachDelegate
-		 * @param node
-		 * @param subscription
-		 * @param notifier
-		 */
-		detachDelegate: function (node, subscription, notifier) {
-			var instance = this;
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method detachDelegate
+         * @param node
+         * @param subscription
+         * @param notifier
+         */
+        detachDelegate: function(node, subscription, notifier) {
+            var instance = this;
 
-			instance._detachEvents(node, subscription, notifier);
-		},
+            instance._detachEvents(node, subscription, notifier);
+        },
 
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method on
-		 * @param node
-		 * @param subscription
-		 * @param notifier
-		 */
-		on: function (node, subscription, notifier) {
-			var instance = this;
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method on
+         * @param node
+         * @param subscription
+         * @param notifier
+         */
+        on: function(node, subscription, notifier) {
+            var instance = this;
 
-			instance._attachEvent(node, subscription, notifier);
-		},
+            instance._attachEvent(node, subscription, notifier);
+        },
 
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method _attachEvent
-		 * @param node
-		 * @param subscription
-		 * @param notifier
-		 * @param delegateNode
-		 * @param filter
-		 * @protected
-		 */
-		_attachEvent: function(node, subscription, notifier, delegateNode, filter) {
-			var instance = this;
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method _attachEvent
+         * @param node
+         * @param subscription
+         * @param notifier
+         * @param delegateNode
+         * @param filter
+         * @protected
+         */
+        _attachEvent: function(node, subscription, notifier, delegateNode, filter) {
+            var instance = this;
 
-			var type = instance._getEventName(node);
+            var type = instance._getEventName(node);
 
-			var handles = instance._prepareHandles(subscription, node);
+            var handles = instance._prepareHandles(subscription, node);
 
-			if (!AObject.owns(handles, type)) {
-				var fireFn = notifier.fire;
+            if (!AObject.owns(handles, type)) {
+                var fireFn = notifier.fire;
 
-				if (delegateNode) {
-					fireFn = function(event) {
-						var delegateEl = delegateNode.getDOM();
+                if (delegateNode) {
+                    fireFn = function(event) {
+                        var delegateEl = delegateNode.getDOM();
 
-						var result = true;
+                        var result = true;
 
-						var tmpEl = node.getDOM();
+                        var tmpEl = node.getDOM();
 
-						var tmpEvent = A.clone(event);
+                        var tmpEvent = A.clone(event);
 
-						do {
-							if (tmpEl &amp;&amp; Selector.test(tmpEl, filter)) {
-								tmpEvent.currentTarget = A.one(tmpEl);
-								tmpEvent.container = delegateNode;
+                        do {
+                            if (tmpEl &amp;&amp; Selector.test(tmpEl, filter)) {
+                                tmpEvent.currentTarget = A.one(tmpEl);
+                                tmpEvent.container = delegateNode;
 
-								result = notifier.fire(tmpEvent);
-							}
+                                result = notifier.fire(tmpEvent);
+                            }
 
-							tmpEl = tmpEl.parentNode;
-						}
-						while(result !== false &amp;&amp; !tmpEvent.stopped &amp;&amp; tmpEl &amp;&amp; tmpEl !== delegateEl);
+                            tmpEl = tmpEl.parentNode;
+                        }
+                        while (result !== false &amp;&amp; !tmpEvent.stopped &amp;&amp; tmpEl &amp;&amp; tmpEl !== delegateEl);
 
-						return ((result !== false) &amp;&amp; (tmpEvent.stopped !== 2));
-					};
-				}
+                        return ((result !== false) &amp;&amp; (tmpEvent.stopped !== 2));
+                    };
+                }
 
-				handles[type] = A.Event._attach([type, fireFn, node, notifier]);
-			}
-		},
+                handles[type] = A.Event._attach([type, fireFn, node, notifier]);
+            }
+        },
 
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method _attachEvents
-		 * @param node
-		 * @param subscription
-		 * @param notifier
-		 * @param filter
-		 * @protected
-		 */
-		_attachEvents: function(node, subscription, notifier, filter) {
-			var instance = this;
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method _attachEvents
+         * @param node
+         * @param subscription
+         * @param notifier
+         * @param filter
+         * @protected
+         */
+        _attachEvents: function(node, subscription, notifier, filter) {
+            var instance = this;
 
-			var handles = instance._prepareHandles(subscription, node);
+            var handles = instance._prepareHandles(subscription, node);
 
-			handles[EVENT_BEFOREACTIVATE] = node.delegate(
-				EVENT_BEFOREACTIVATE,
-				function(event) {
-					var activeElement = event.target;
+            handles[EVENT_BEFOREACTIVATE] = node.delegate(
+                EVENT_BEFOREACTIVATE,
+                function(event) {
+                    var activeElement = event.target;
 
-					instance._attachEvent(activeElement, subscription, notifier, node, filter);
-				},
-				filter
-			);
-		},
+                    instance._attachEvent(activeElement, subscription, notifier, node, filter);
+                },
+                filter
+            );
+        },
 
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method _detachEvents
-		 * @param node
-		 * @param subscription
-		 * @param notifier
-		 * @protected
-		 */
-		_detachEvents: function(node, subscription, notifier) {
-			A.each(
-				subscription._handles,
-				function(events, node, handles) {
-					A.each(
-						events,
-						function(handle, event, events) {
-							handle.detach();
-						}
-					);
-				}
-			);
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method _detachEvents
+         * @param node
+         * @param subscription
+         * @param notifier
+         * @protected
+         */
+        _detachEvents: function(node, subscription, notifier) {
+            A.each(
+                subscription._handles,
+                function(events, node, handles) {
+                    A.each(
+                        events,
+                        function(handle, event, events) {
+                            handle.detach();
+                        }
+                    );
+                }
+            );
 
-			delete subscription._handles;
-		},
+            delete subscription._handles;
+        },
 
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method _getEventName
-		 * @protected
-		 */
-		_getEventName: A.cached(
-			function(activeElement) {
-				var eventName = EVENT_CHANGE;
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method _getEventName
+         * @protected
+         */
+        _getEventName: A.cached(
+            function(activeElement) {
+                var eventName = EVENT_CHANGE;
 
-				var tagName = activeElement.attr(&#x27;tagName&#x27;).toLowerCase();
+                var tagName = activeElement.attr(&#x27;tagName&#x27;).toLowerCase();
 
-				var type = activeElement.attr(&#x27;type&#x27;).toLowerCase();
+                var type = activeElement.attr(&#x27;type&#x27;).toLowerCase();
 
-				if (tagName == &#x27;input&#x27; &amp;&amp; (type == &#x27;checkbox&#x27; || type == &#x27;radio&#x27;)) {
-					eventName = &#x27;click&#x27;;
-				}
+                if (tagName == &#x27;input&#x27; &amp;&amp; (type == &#x27;checkbox&#x27; || type == &#x27;radio&#x27;)) {
+                    eventName = &#x27;click&#x27;;
+                }
 
-				return eventName;
-			}
-		),
+                return eventName;
+            }
+        ),
 
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method _prepareHandles
-		 * @param subscription
-		 * @param node
-		 * @protected
-		 */
-		_prepareHandles: function(subscription, node) {
-			if (!AObject.owns(subscription, &#x27;_handles&#x27;)) {
-				subscription._handles = {};
-			}
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method _prepareHandles
+         * @param subscription
+         * @param node
+         * @protected
+         */
+        _prepareHandles: function(subscription, node) {
+            if (!AObject.owns(subscription, &#x27;_handles&#x27;)) {
+                subscription._handles = {};
+            }
 
-			var handles = subscription._handles;
+            var handles = subscription._handles;
 
-			if (!AObject.owns(handles, node)) {
-				handles[node] = {};
-			}
+            if (!AObject.owns(handles, node)) {
+                handles[node] = {};
+            }
 
-			return handles[node];
-		}
-	},
-	true
+            return handles[node];
+        }
+    },
+    true
 );
+
     </pre>
 </div>
 

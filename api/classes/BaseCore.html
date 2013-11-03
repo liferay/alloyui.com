@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>2.0.0pr6</b>
+                        API Docs for Version: <b>2.0.0</b>
                     </p>
                 </li>
             </div>
@@ -83,6 +83,8 @@
             
                 <li><a href="../classes/A.ButtonGroup.html">A.ButtonGroup</a></li>
             
+                <li><a href="../classes/A.ButtonSearchCancel.html">A.ButtonSearchCancel</a></li>
+            
                 <li><a href="../classes/A.Carousel.html">A.Carousel</a></li>
             
                 <li><a href="../classes/A.CellEditorSupport.html">A.CellEditorSupport</a></li>
@@ -107,7 +109,23 @@
             
                 <li><a href="../classes/A.DataType.DateMath.html">A.DataType.DateMath</a></li>
             
+                <li><a href="../classes/A.Date.html">A.Date</a></li>
+            
                 <li><a href="../classes/A.DateCellEditor.html">A.DateCellEditor</a></li>
+            
+                <li><a href="../classes/A.DateParser.html">A.DateParser</a></li>
+            
+                <li><a href="../classes/A.DatePicker.html">A.DatePicker</a></li>
+            
+                <li><a href="../classes/A.DatePickerBase.html">A.DatePickerBase</a></li>
+            
+                <li><a href="../classes/A.DatePickerDelegate.html">A.DatePickerDelegate</a></li>
+            
+                <li><a href="../classes/A.DatePickerNative.html">A.DatePickerNative</a></li>
+            
+                <li><a href="../classes/A.DatePickerNativeBase.html">A.DatePickerNativeBase</a></li>
+            
+                <li><a href="../classes/A.DatePickerPopover.html">A.DatePickerPopover</a></li>
             
                 <li><a href="../classes/A.DiagramBuilder.html">A.DiagramBuilder</a></li>
             
@@ -260,6 +278,10 @@
                 <li><a href="../classes/A.TextCellEditor.html">A.TextCellEditor</a></li>
             
                 <li><a href="../classes/A.ThumbRating.html">A.ThumbRating</a></li>
+            
+                <li><a href="../classes/A.TimePicker.html">A.TimePicker</a></li>
+            
+                <li><a href="../classes/A.TimePickerBase.html">A.TimePickerBase</a></li>
             
                 <li><a href="../classes/A.ToggleButton.html">A.ToggleButton</a></li>
             
@@ -1057,6 +1079,8 @@
 
             <ul id="api-modules" class="apis modules tab-pane">
             
+                <li><a href="../modules/ace-autocomplete-plugin.html">ace-autocomplete-plugin</a></li>
+            
                 <li><a href="../modules/align-plugin.html">align-plugin</a></li>
             
                 <li><a href="../modules/anim.html">anim</a></li>
@@ -1143,7 +1167,7 @@
             
                 <li><a href="../modules/aui-collection.html">aui-collection</a></li>
             
-                <li><a href="../modules/aui-color-pallete.html">aui-color-pallete</a></li>
+                <li><a href="../modules/aui-color-palette.html">aui-color-palette</a></li>
             
                 <li><a href="../modules/aui-color-picker.html">aui-color-picker</a></li>
             
@@ -1164,6 +1188,16 @@
                 <li><a href="../modules/aui-datatable-selection.html">aui-datatable-selection</a></li>
             
                 <li><a href="../modules/aui-datatype.html">aui-datatype</a></li>
+            
+                <li><a href="../modules/aui-datatype-date-parse.html">aui-datatype-date-parse</a></li>
+            
+                <li><a href="../modules/aui-datepicker.html">aui-datepicker</a></li>
+            
+                <li><a href="../modules/aui-datepicker-delegate.html">aui-datepicker-delegate</a></li>
+            
+                <li><a href="../modules/aui-datepicker-native.html">aui-datepicker-native</a></li>
+            
+                <li><a href="../modules/aui-datepicker-popover.html">aui-datepicker-popover</a></li>
             
                 <li><a href="../modules/aui-diagram-builder.html">aui-diagram-builder</a></li>
             
@@ -1245,7 +1279,7 @@
             
                 <li><a href="../modules/aui-pagination.html">aui-pagination</a></li>
             
-                <li><a href="../modules/aui-pallete.html">aui-pallete</a></li>
+                <li><a href="../modules/aui-palette.html">aui-palette</a></li>
             
                 <li><a href="../modules/aui-parse-content.html">aui-parse-content</a></li>
             
@@ -1296,6 +1330,8 @@
                 <li><a href="../modules/aui-tabview.html">aui-tabview</a></li>
             
                 <li><a href="../modules/aui-text.html">aui-text</a></li>
+            
+                <li><a href="../modules/aui-timepicker.html">aui-timepicker</a></li>
             
                 <li><a href="../modules/aui-timer.html">aui-timer</a></li>
             
@@ -2083,23 +2119,18 @@
 
 
 <div class="well well-small intro">
-    <p>The BaseCore class, is the lightest version of Base, and provides Base's
-basic lifecycle management and ATTRS construction support, but doesn't
+    <p>The BaseCore class, is the lightest version of Base, and provides Base&#39;s
+basic lifecycle management and ATTRS construction support, but doesn&#39;t
 fire init/destroy or attribute change events.</p>
-
 <p>BaseCore also handles the chaining of initializer and destructor methods across
 the hierarchy as part of object construction and destruction. Additionally, attributes
 configured through the static <a href="#property_BaseCore.ATTRS">ATTRS</a>
 property for each class in the hierarchy will be initialized by BaseCore.</p>
-
-<p>Classes which require attribute support, but don't intend to use/expose attribute
+<p>Classes which require attribute support, but don&#39;t intend to use/expose attribute
 change events can extend BaseCore instead of Base for optimal kweight and
 runtime performance.</p>
-
 <p><strong>3.11.0 BACK COMPAT NOTE FOR COMPONENT DEVELOPERS</strong></p>
-
 <p>Prior to version 3.11.0, ATTRS would get added a class at a time. That is:</p>
-
 <pre>
    for each (class in the hierarchy) {
       Call the class Extension constructors.
@@ -2113,7 +2144,6 @@ runtime performance.</p>
 
 <p>As of 3.11.0, ATTRS from all classes in the hierarchy are added in one <code>addAttrs</code> call
 before <strong>any</strong> initializers are called. That is, the flow becomes:</p>
-
 <pre>
    for each (class in the hierarchy) {
       Call the class Extension constructors.
@@ -2131,29 +2161,25 @@ before <strong>any</strong> initializers are called. That is, the flow becomes:<
 superclass <code>setter</code>, <code>getter</code> or <code>valueFn</code> definitions and being unable to get/set attributes
 defined by the subclass. It also leaves us with a cleaner order of operation flow moving
 forward.</p>
-
 <p>However, it may require component developers to upgrade their components, for the following
 scenarios:</p>
-
 <ol>
 <li>It impacts components which may have <code>setter</code>, <code>getter</code> or <code>valueFn</code> code which
-expects a superclass' initializer to have run.</li>
+expects a superclass&#39; initializer to have run.</li>
 </ol>
-
 <p>This is expected to be rare, but to support it, Base now supports a <code>_preAddAttrs()</code>, method
 hook (same signature as <code>addAttrs</code>). Components can implement this method on their prototype
 for edge cases which do require finer control over the order in which attributes are added
 (see widget-htmlparser for example).</p>
-
 <ol>
 <li>Extension developers may need to move code from Extension constructors to <code>initializer</code>s</li>
 </ol>
-
 <p>Older extensions, which were written before <code>initializer</code> support was added, had a lot of
 initialization code in their constructors. For example, code which acccessed superclass
 attributes. With the new flow this code would not be able to see attributes. The recommendation
 is to move this initialization code to an <code>initializer</code> on the Extension, which was the
 recommendation for anything created after <code>initializer</code> support for Extensions was added.</p>
+
 </div>
 
 
@@ -2233,6 +2259,7 @@ recommendation for anything created after <code>initializer</code> support for E
                         <p>Object with configuration property name/value pairs.
 The object can be used to provide initial values for the objects published
 attributes.</p>
+
                     </div>
 
                     
@@ -2731,11 +2758,11 @@ attributes.</p>
 
     <div class="description">
         <p>Implementation behind the public addAttrs method.</p>
-
 <p>This method is invoked directly by get if it encounters a scenario
-in which an attribute's valueFn attempts to obtain the
+in which an attribute&#39;s valueFn attempts to obtain the
 value an attribute in the same group of attributes, which has not yet
 been added (on demand initialization).</p>
+
     </div>
 
     
@@ -2754,6 +2781,7 @@ been added (on demand initialization).</p>
 
                     <div class="param-description">
                         <p>An object with attribute name/configuration pairs.</p>
+
                     </div>
 
                     
@@ -2770,6 +2798,7 @@ been added (on demand initialization).</p>
                     <div class="param-description">
                         <p>An object with attribute name/value pairs, defining the initial values to apply.
 Values defined in the cfgs argument will be over-written by values in this argument unless defined as read only.</p>
+
                     </div>
 
                     
@@ -2787,6 +2816,7 @@ Values defined in the cfgs argument will be over-written by values in this argum
                         <p>Whether or not to delay the intialization of these attributes until the first call to get/set.
 Individual attributes can over-ride this behavior by defining a lazyAdd configuration property in their configuration.
 See <a href="#method_addAttr">addAttr</a>.</p>
+
                     </div>
 
                     
@@ -2861,6 +2891,7 @@ See <a href="#method_addAttr">addAttr</a>.</p>
 
     <div class="description">
         <p>Finishes initializing an attribute which has been lazily added.</p>
+
     </div>
 
     
@@ -2879,6 +2910,7 @@ See <a href="#method_addAttr">addAttr</a>.</p>
 
                     <div class="param-description">
                         <p>The name of the attribute</p>
+
                     </div>
 
                     
@@ -2896,6 +2928,7 @@ See <a href="#method_addAttr">addAttr</a>.</p>
                     <div class="param-description">
                         <p>Optional config hash for the attribute. This is added for performance
 along the critical path, where the calling method has already obtained lazy config from state.</p>
+
                     </div>
 
                     
@@ -2969,23 +3002,21 @@ along the critical path, where the calling method has already obtained lazy conf
     </div>
 
     <div class="description">
-        <p>Utility method used by get/set to add attributes
-encountered out of order when calling addAttrs().</p>
-
-<p>For example, if:</p>
-
+        <p><p>Utility method used by get/set to add attributes
+encountered out of order when calling addAttrs().</p></p>
+<p><p>For example, if:</p></p>
 <pre class="code prettyprint"><code>this.addAttrs({
      foo: {
          setter: function() {
             // make sure this bar is available when foo is added
-            this.get("bar");
+            this.get(&quot;bar&quot;);
          }
      },
      bar: {
          value: ...
      }
-});
-</code></pre>
+});</code></pre>
+
     </div>
 
     
@@ -3004,6 +3035,7 @@ encountered out of order when calling addAttrs().</p>
 
                     <div class="param-description">
                         <p>attribute name</p>
+
                     </div>
 
                     
@@ -3019,6 +3051,7 @@ encountered out of order when calling addAttrs().</p>
 
                     <div class="param-description">
                         <p>attribute configuration</p>
+
                     </div>
 
                     
@@ -3095,10 +3128,10 @@ encountered out of order when calling addAttrs().</p>
     <div class="description">
         <p>A helper method, used by _initHierarchyData to aggregate
 attribute configuration across the instances class hierarchy.</p>
-
 <p>The method will protect the attribute configuration value to protect the statically defined
 default value in ATTRS if required (if the value is an object literal, array or the
 attribute configuration has cloneDefaultValue set to shallow or deep).</p>
+
     </div>
 
     
@@ -3118,6 +3151,7 @@ attribute configuration has cloneDefaultValue set to shallow or deep).</p>
                     <div class="param-description">
                         <p>An array of ATTRS definitions across classes in the hierarchy
 (subclass first, Base last)</p>
+
                     </div>
 
                     
@@ -3136,7 +3170,8 @@ attribute configuration has cloneDefaultValue set to shallow or deep).</p>
                     
                         <span class="type">Object</span>:
                     
-                    The aggregate set of ATTRS definitions for the instance
+                    <p>The aggregate set of ATTRS definitions for the instance</p>
+
                 
             </div>
         </div>
@@ -3193,6 +3228,7 @@ attribute configuration has cloneDefaultValue set to shallow or deep).</p>
     <div class="description">
         <p>Utility method to define the attribute hash used to filter/whitelist property mixes for
 this class for iteration performance reasons.</p>
+
     </div>
 
     
@@ -3249,6 +3285,7 @@ this class for iteration performance reasons.</p>
 
     <div class="description">
         <p>Internal destroy implementation for BaseCore</p>
+
     </div>
 
     
@@ -3305,6 +3342,7 @@ this class for iteration performance reasons.</p>
 
     <div class="description">
         <p>Internal initialization implementation for BaseCore</p>
+
     </div>
 
     
@@ -3371,7 +3409,8 @@ this class for iteration performance reasons.</p>
 
     <div class="description">
         <p>This method assumes that the value has already been checked to be an object.
-Since it's on a critical path, we don't want to re-do the check.</p>
+Since it&#39;s on a critical path, we don&#39;t want to re-do the check.</p>
+
     </div>
 
     
@@ -3452,6 +3491,7 @@ Since it's on a critical path, we don't want to re-do the check.</p>
     <div class="description">
         <p>Destroys the class hierarchy for this instance by invoking
 the destructor method on the prototype of each class in the hierarchy.</p>
+
     </div>
 
     
@@ -3548,6 +3588,7 @@ the destructor method on the prototype of each class in the hierarchy.</p>
                         <p>The set of all attribute configurations for this instance.
 Attributes will be removed from this set, if they belong to the filtered class, so
 that by the time all classes are processed, allCfgs will be empty.</p>
+
                     </div>
 
                     
@@ -3563,6 +3604,7 @@ that by the time all classes are processed, allCfgs will be empty.</p>
 
                     <div class="param-description">
                         <p>The config object passed in by the user, from which adhoc attrs are to be filtered.</p>
+
                     </div>
 
                     
@@ -3581,8 +3623,9 @@ that by the time all classes are processed, allCfgs will be empty.</p>
                     
                         <span class="type">Object</span>:
                     
-                    The set of adhoc attributes passed in, in the form
-of an object with attribute name/configuration pairs.
+                    <p>The set of adhoc attributes passed in, in the form
+of an object with attribute name/configuration pairs.</p>
+
                 
             </div>
         </div>
@@ -3652,8 +3695,8 @@ of an object with attribute name/configuration pairs.
     <div class="description">
         <p>Provides the common implementation for the public get method,
 allowing Attribute hosts to over-ride either method.</p>
-
 <p>See <a href="#method_get">get</a> for argument details.</p>
+
     </div>
 
     
@@ -3672,6 +3715,7 @@ allowing Attribute hosts to over-ride either method.</p>
 
                     <div class="param-description">
                         <p>The name of the attribute.</p>
+
                     </div>
 
                     
@@ -3690,7 +3734,8 @@ allowing Attribute hosts to over-ride either method.</p>
                     
                         <span class="type">Any</span>:
                     
-                    The value of the attribute.
+                    <p>The value of the attribute.</p>
+
                 
             </div>
         </div>
@@ -3751,6 +3796,7 @@ allowing Attribute hosts to over-ride either method.</p>
     <div class="description">
         <p>Returns an aggregated set of attribute configurations, by traversing
 the class hierarchy.</p>
+
     </div>
 
     
@@ -3764,9 +3810,10 @@ the class hierarchy.</p>
                     
                         <span class="type">Object</span>:
                     
-                    The hash of attribute configurations, aggregated across classes in the hierarchy
+                    <p>The hash of attribute configurations, aggregated across classes in the hierarchy
 This value is cached the first time the method, or _getClasses, is invoked. Subsequent invocations return
-the cached value.
+the cached value.</p>
+
                 
             </div>
         </div>
@@ -3848,6 +3895,7 @@ the cached value.
 either the default configuration provided, or the
 over-ridden value if it exists in the set of initValues
 provided and the attribute is not read-only.</p>
+
     </div>
 
     
@@ -3866,6 +3914,7 @@ provided and the attribute is not read-only.</p>
 
                     <div class="param-description">
                         <p>The name of the attribute</p>
+
                     </div>
 
                     
@@ -3881,6 +3930,7 @@ provided and the attribute is not read-only.</p>
 
                     <div class="param-description">
                         <p>The attribute configuration object</p>
+
                     </div>
 
                     
@@ -3896,6 +3946,7 @@ provided and the attribute is not read-only.</p>
 
                     <div class="param-description">
                         <p>The object with simple and complex attribute name/value pairs returned from _normAttrVals</p>
+
                     </div>
 
                     
@@ -3914,7 +3965,8 @@ provided and the attribute is not read-only.</p>
                     
                         <span class="type">Any</span>:
                     
-                    The initial value of the attribute.
+                    <p>The initial value of the attribute.</p>
+
                 
             </div>
         </div>
@@ -3981,6 +4033,7 @@ provided and the attribute is not read-only.</p>
 
     <div class="description">
         <p>Implementation behind the public getAttrs method, to get multiple attribute values.</p>
+
     </div>
 
     
@@ -4000,6 +4053,7 @@ provided and the attribute is not read-only.</p>
                     <div class="param-description">
                         <p>Optional. An array of attribute names. If omitted, all attribute values are
 returned. If set to true, all attributes modified from their initial values are returned.</p>
+
                     </div>
 
                     
@@ -4018,7 +4072,8 @@ returned. If set to true, all attributes modified from their initial values are 
                     
                         <span class="type">Object</span>:
                     
-                    An object with attribute name/value pairs.
+                    <p>An object with attribute name/value pairs.</p>
+
                 
             </div>
         </div>
@@ -4078,6 +4133,7 @@ returned. If set to true, all attributes modified from their initial values are 
 
     <div class="description">
         <p>Returns the class hierarchy for this object, with BaseCore being the last class in the array.</p>
+
     </div>
 
     
@@ -4091,9 +4147,10 @@ returned. If set to true, all attributes modified from their initial values are 
                     
                         <span class="type">Function</span>:
                     
-                    An array of classes (constructor functions), making up the class hierarchy for this object.
+                    <p>An array of classes (constructor functions), making up the class hierarchy for this object.
 This value is cached the first time the method, or _getAttrCfgs, is invoked. Subsequent invocations return the
-cached value.
+cached value.</p>
+
                 
             </div>
         </div>
@@ -4164,6 +4221,7 @@ cached value.
     <div class="description">
         <p>A helper method used to isolate the attrs config for this instance to pass to <code>addAttrs</code>,
 from the static cached ATTRS for the class.</p>
+
     </div>
 
     
@@ -4184,6 +4242,7 @@ from the static cached ATTRS for the class.</p>
                         <p>The set of all attribute configurations for this instance.
 Attributes will be removed from this set, if they belong to the filtered class, so
 that by the time all classes are processed, allCfgs will be empty.</p>
+
                     </div>
 
                     
@@ -4202,8 +4261,9 @@ that by the time all classes are processed, allCfgs will be empty.</p>
                     
                         <span class="type">Object</span>:
                     
-                    The set of attributes to be added for this instance, suitable
-for passing through to <code>addAttrs</code>.
+                    <p>The set of attributes to be added for this instance, suitable
+for passing through to <code>addAttrs</code>.</p>
+
                 
             </div>
         </div>
@@ -4277,6 +4337,7 @@ for passing through to <code>addAttrs</code>.
     <div class="description">
         <p>Gets the stored value for the attribute, from either the
 internal state object, or the state proxy if it exits</p>
+
     </div>
 
     
@@ -4295,6 +4356,7 @@ internal state object, or the state proxy if it exits</p>
 
                     <div class="param-description">
                         <p>The name of the attribute</p>
+
                     </div>
 
                     
@@ -4312,6 +4374,7 @@ internal state object, or the state proxy if it exits</p>
                     <div class="param-description">
                         <p>Optional config hash for the attribute. This is added for performance along the critical path,
 where the calling method has already obtained the config from state.</p>
+
                     </div>
 
                     
@@ -4330,7 +4393,8 @@ where the calling method has already obtained the config from state.</p>
                     
                         <span class="type">Any</span>:
                     
-                    The stored value of the attribute
+                    <p>The stored value of the attribute</p>
+
                 
             </div>
         </div>
@@ -4406,6 +4470,7 @@ where the calling method has already obtained the config from state.</p>
     <div class="description">
         <p>Constructor logic for attributes. Initializes the host state, and sets up the inital attributes passed to the
 constructor.</p>
+
     </div>
 
     
@@ -4425,6 +4490,7 @@ constructor.</p>
                     <div class="param-description">
                         <p>The attributes to add during construction (passed through to <a href="#method_addAttrs">addAttrs</a>).
        These can also be defined on the constructor being augmented with Attribute by defining the ATTRS property on the constructor.</p>
+
                     </div>
 
                     
@@ -4441,6 +4507,7 @@ constructor.</p>
                     <div class="param-description">
                         <p>The initial attribute values to apply (passed through to <a href="#method_addAttrs">addAttrs</a>).
        These are not merged/cloned. The caller is responsible for isolating user provided values if required.</p>
+
                     </div>
 
                     
@@ -4456,6 +4523,7 @@ constructor.</p>
 
                     <div class="param-description">
                         <p>Whether or not to add attributes lazily (passed through to <a href="#method_addAttrs">addAttrs</a>).</p>
+
                     </div>
 
                     
@@ -4517,6 +4585,7 @@ constructor.</p>
 
     <div class="description">
         <p>Initializes AttributeCore</p>
+
     </div>
 
     
@@ -4593,6 +4662,7 @@ constructor.</p>
     <div class="description">
         <p>Utility method to set up initial attributes defined during construction,
 either through the constructor.ATTRS property, or explicitly passed in.</p>
+
     </div>
 
     
@@ -4612,6 +4682,7 @@ either through the constructor.ATTRS property, or explicitly passed in.</p>
                     <div class="param-description">
                         <p>The attributes to add during construction (passed through to <a href="#method_addAttrs">addAttrs</a>).
        These can also be defined on the constructor being augmented with Attribute by defining the ATTRS property on the constructor.</p>
+
                     </div>
 
                     
@@ -4628,6 +4699,7 @@ either through the constructor.ATTRS property, or explicitly passed in.</p>
                     <div class="param-description">
                         <p>The initial attribute values to apply (passed through to <a href="#method_addAttrs">addAttrs</a>).
        These are not merged/cloned. The caller is responsible for isolating user provided values if required.</p>
+
                     </div>
 
                     
@@ -4643,6 +4715,7 @@ either through the constructor.ATTRS property, or explicitly passed in.</p>
 
                     <div class="param-description">
                         <p>Whether or not to add attributes lazily (passed through to <a href="#method_addAttrs">addAttrs</a>).</p>
+
                     </div>
 
                     
@@ -4714,6 +4787,7 @@ either through the constructor.ATTRS property, or explicitly passed in.</p>
 
     <div class="description">
         <p>Internal construction logic for BaseCore.</p>
+
     </div>
 
     
@@ -4732,6 +4806,7 @@ either through the constructor.ATTRS property, or explicitly passed in.</p>
 
                     <div class="param-description">
                         <p>The constructor configuration object</p>
+
                     </div>
 
                     
@@ -4803,9 +4878,10 @@ either through the constructor.ATTRS property, or explicitly passed in.</p>
 
     <div class="description">
         <p>Initializes the class hierarchy for the instance, which includes
-initializing attributes for each class defined in the class's
+initializing attributes for each class defined in the class&#39;s
 static <a href="#property_BaseCore.ATTRS">ATTRS</a> property and
 invoking the initializer method on the prototype of each class in the hierarchy.</p>
+
     </div>
 
     
@@ -4824,6 +4900,7 @@ invoking the initializer method on the prototype of each class in the hierarchy.
 
                     <div class="param-description">
                         <p>Object with configuration property name/value pairs</p>
+
                     </div>
 
                     
@@ -4887,6 +4964,7 @@ invoking the initializer method on the prototype of each class in the hierarchy.
         <p>A helper method used by _getClasses and _getAttrCfgs, which determines both
 the array of classes and aggregate set of attribute configurations
 across the class hierarchy for the instance.</p>
+
     </div>
 
     
@@ -4955,6 +5033,7 @@ across the class hierarchy for the instance.</p>
     <div class="description">
         <p>Checks whether or not the attribute is one which has been
 added lazily and still requires initialization.</p>
+
     </div>
 
     
@@ -4973,6 +5052,7 @@ added lazily and still requires initialization.</p>
 
                     <div class="param-description">
                         <p>The name of the attribute</p>
+
                     </div>
 
                     
@@ -4991,7 +5071,8 @@ added lazily and still requires initialization.</p>
                     
                         <span class="type">Boolean</span>:
                     
-                    true if it's a lazily added attribute, false otherwise.
+                    <p>true if it&#39;s a lazily added attribute, false otherwise.</p>
+
                 
             </div>
         </div>
@@ -5059,6 +5140,7 @@ added lazily and still requires initialization.</p>
     <div class="description">
         <p>Utility method to normalize attribute values. The base implementation
 simply merges the hash to protect the original.</p>
+
     </div>
 
     
@@ -5077,6 +5159,7 @@ simply merges the hash to protect the original.</p>
 
                     <div class="param-description">
                         <p>An object with attribute name/value pairs</p>
+
                     </div>
 
                     
@@ -5095,9 +5178,10 @@ simply merges the hash to protect the original.</p>
                     
                         <span class="type">Object</span>:
                     
-                    An object literal with 2 properties - "simple" and "complex",
+                    <p>An object literal with 2 properties - &quot;simple&quot; and &quot;complex&quot;,
 containing simple and complex attribute values respectively keyed
-by the top level attribute name, or null, if valueHash is falsey.
+by the top level attribute name, or null, if valueHash is falsey.</p>
+
                 
             </div>
         </div>
@@ -5172,6 +5256,7 @@ by the top level attribute name, or null, if valueHash is falsey.
         <p>Utility method to protect an attribute configuration
 hash, by merging the entire object and the individual
 attr config objects.</p>
+
     </div>
 
     
@@ -5190,6 +5275,7 @@ attr config objects.</p>
 
                     <div class="param-description">
                         <p>A hash of attribute to configuration object pairs.</p>
+
                     </div>
 
                     
@@ -5208,7 +5294,8 @@ attr config objects.</p>
                     
                         <span class="type">Object</span>:
                     
-                    A protected version of the attrs argument.
+                    <p>A protected version of the attrs argument.</p>
+
                 
             </div>
         </div>
@@ -5289,6 +5376,7 @@ attr config objects.</p>
 
     <div class="description">
         <p>Allows setting of readOnly/writeOnce attributes. See <a href="#method_set">set</a> for argument details.</p>
+
     </div>
 
     
@@ -5307,6 +5395,7 @@ attr config objects.</p>
 
                     <div class="param-description">
                         <p>The name of the attribute.</p>
+
                     </div>
 
                     
@@ -5322,6 +5411,7 @@ attr config objects.</p>
 
                     <div class="param-description">
                         <p>The value to set the attribute to.</p>
+
                     </div>
 
                     
@@ -5338,6 +5428,7 @@ attr config objects.</p>
 
                     <div class="param-description">
                         <p>Optional data providing the circumstances for the change.</p>
+
                     </div>
 
                     
@@ -5356,7 +5447,8 @@ attr config objects.</p>
                     
                         <span class="type">Object</span>:
                     
-                    A reference to the host object.
+                    <p>A reference to the host object.</p>
+
                 
             </div>
         </div>
@@ -5443,8 +5535,8 @@ attr config objects.</p>
 
     <div class="description">
         <p>Provides the common implementation for the public set and protected _set methods.</p>
-
 <p>See <a href="#method_set">set</a> for argument details.</p>
+
     </div>
 
     
@@ -5463,6 +5555,7 @@ attr config objects.</p>
 
                     <div class="param-description">
                         <p>The name of the attribute.</p>
+
                     </div>
 
                     
@@ -5478,6 +5571,7 @@ attr config objects.</p>
 
                     <div class="param-description">
                         <p>The value to set the attribute to.</p>
+
                     </div>
 
                     
@@ -5494,6 +5588,7 @@ attr config objects.</p>
 
                     <div class="param-description">
                         <p>Optional data providing the circumstances for the change.</p>
+
                     </div>
 
                     
@@ -5510,6 +5605,7 @@ attr config objects.</p>
                     <div class="param-description">
                         <p>If true, allows the caller to set values for
 readOnly or writeOnce attributes which have already been set.</p>
+
                     </div>
 
                     
@@ -5528,7 +5624,8 @@ readOnly or writeOnce attributes which have already been set.</p>
                     
                         <span class="type">Object</span>:
                     
-                    A reference to the host object.
+                    <p>A reference to the host object.</p>
+
                 
             </div>
         </div>
@@ -5603,6 +5700,7 @@ readOnly or writeOnce attributes which have already been set.</p>
 
     <div class="description">
         <p>Implementation behind the public setAttrs method, to set multiple attribute values.</p>
+
     </div>
 
     
@@ -5621,6 +5719,7 @@ readOnly or writeOnce attributes which have already been set.</p>
 
                     <div class="param-description">
                         <p>An object with attributes name/value pairs.</p>
+
                     </div>
 
                     
@@ -5637,6 +5736,7 @@ readOnly or writeOnce attributes which have already been set.</p>
 
                     <div class="param-description">
                         <p>Optional data providing the circumstances for the change</p>
+
                     </div>
 
                     
@@ -5655,7 +5755,8 @@ readOnly or writeOnce attributes which have already been set.</p>
                     
                         <span class="type">Object</span>:
                     
-                    A reference to the host object.
+                    <p>A reference to the host object.</p>
+
                 
             </div>
         </div>
@@ -5753,6 +5854,7 @@ readOnly or writeOnce attributes which have already been set.</p>
     <div class="description">
         <p>Updates the stored value of the attribute in the privately held State object,
 if validation and setter passes.</p>
+
     </div>
 
     
@@ -5771,6 +5873,7 @@ if validation and setter passes.</p>
 
                     <div class="param-description">
                         <p>The attribute name.</p>
+
                     </div>
 
                     
@@ -5785,7 +5888,8 @@ if validation and setter passes.</p>
                     
 
                     <div class="param-description">
-                        <p>The sub-attribute name, if setting a sub-attribute property ("x.y.z").</p>
+                        <p>The sub-attribute name, if setting a sub-attribute property (&quot;x.y.z&quot;).</p>
+
                     </div>
 
                     
@@ -5801,6 +5905,7 @@ if validation and setter passes.</p>
 
                     <div class="param-description">
                         <p>The currently stored value of the attribute.</p>
+
                     </div>
 
                     
@@ -5816,6 +5921,7 @@ if validation and setter passes.</p>
 
                     <div class="param-description">
                         <p>The value which is going to be stored.</p>
+
                     </div>
 
                     
@@ -5832,6 +5938,7 @@ if validation and setter passes.</p>
 
                     <div class="param-description">
                         <p>Optional data providing the circumstances for the change.</p>
+
                     </div>
 
                     
@@ -5849,6 +5956,7 @@ if validation and setter passes.</p>
                     <div class="param-description">
                         <p>Optional config hash for the attribute. This is added for performance along the critical path,
 where the calling method has already obtained the config from state.</p>
+
                     </div>
 
                     
@@ -5867,7 +5975,8 @@ where the calling method has already obtained the config from state.</p>
                     
                         <span class="type">Booolean</span>:
                     
-                    true if the new attribute value was stored, false if not.
+                    <p>true if the new attribute value was stored, false if not.</p>
+
                 
             </div>
         </div>
@@ -5937,6 +6046,7 @@ where the calling method has already obtained the config from state.</p>
     <div class="description">
         <p>Sets the stored value for the attribute, in either the
 internal state object, or the state proxy if it exits</p>
+
     </div>
 
     
@@ -5955,6 +6065,7 @@ internal state object, or the state proxy if it exits</p>
 
                     <div class="param-description">
                         <p>The name of the attribute</p>
+
                     </div>
 
                     
@@ -5970,6 +6081,7 @@ internal state object, or the state proxy if it exits</p>
 
                     <div class="param-description">
                         <p>The value of the attribute</p>
+
                     </div>
 
                     
@@ -6056,7 +6168,6 @@ internal state object, or the state proxy if it exits</p>
         <p>
 Adds an attribute with the provided configuration to the host object.
 </p>
-
 <p>
 The config argument object supports the following properties:
 </p>
@@ -6069,7 +6180,7 @@ The config argument object supports the following properties:
    <dd>
    <p>A function, which will return the initial value to set on the attribute. This is useful
    for cases where the attribute configuration is defined statically, but needs to
-   reference the host instance ("this") to obtain an initial value. If both the value and valueFn properties are defined,
+   reference the host instance (&quot;this&quot;) to obtain an initial value. If both the value and valueFn properties are defined,
    the value returned by the valueFn has precedence over the value property, unless it returns undefined, in which
    case the value property is used.</p>
 
@@ -6082,10 +6193,10 @@ The config argument object supports the following properties:
 
    <dt>writeOnce &#60;boolean&#62; or &#60;string&#62;</dt>
    <dd>
-       Whether or not the attribute is "write once". Attributes having writeOnce set to true,
+       Whether or not the attribute is &quot;write once&quot;. Attributes having writeOnce set to true,
        can only have their values set once, be it through the default configuration,
        constructor configuration arguments, or by invoking set.
-       <p>The writeOnce attribute can also be set to the string "initOnly",
+       <p>The writeOnce attribute can also be set to the string &quot;initOnly&quot;,
         in which case the attribute can only be set during initialization
        (when used with Base, this means it can only be set during construction)</p>
    </dd>
@@ -6130,7 +6241,7 @@ The config argument object supports the following properties:
 </dl>
 
 <p>The setter, getter and validator are invoked with the value and name passed in as the first and second arguments, and with
-the context ("this") set to the host object.</p>
+the context (&quot;this&quot;) set to the host object.</p>
 
 <p>Configuration properties outside of the list mentioned above are considered private properties used internally by attribute,
 and are not intended for public use.</p>
@@ -6152,6 +6263,7 @@ and are not intended for public use.</p>
 
                     <div class="param-description">
                         <p>The name of the attribute.</p>
+
                     </div>
 
                     
@@ -6167,7 +6279,6 @@ and are not intended for public use.</p>
 
                     <div class="param-description">
                         <p>An object with attribute configuration property/value pairs, specifying the configuration for the attribute.</p>
-
 <p>
 <strong>NOTE:</strong> The configuration object is modified when adding an attribute, so if you need
 to protect the original values, you will need to merge the object.
@@ -6187,6 +6298,7 @@ to protect the original values, you will need to merge the object.
 
                     <div class="param-description">
                         <p>(optional) Whether or not to add this attribute lazily (on the first call to get/set).</p>
+
                     </div>
 
                     
@@ -6205,7 +6317,8 @@ to protect the original values, you will need to merge the object.
                     
                         <span class="type">Object</span>:
                     
-                    A reference to the host object.
+                    <p>A reference to the host object.</p>
+
                 
             </div>
         </div>
@@ -6284,7 +6397,6 @@ to protect the original values, you will need to merge the object.
 
     <div class="description">
         <p>Configures a group of attributes, and sets initial values.</p>
-
 <p>
 <strong>NOTE:</strong> This method does not isolate the configuration object by merging/cloning.
 The caller is responsible for merging/cloning the configuration object if required.
@@ -6307,6 +6419,7 @@ The caller is responsible for merging/cloning the configuration object if requir
 
                     <div class="param-description">
                         <p>An object with attribute name/configuration pairs.</p>
+
                     </div>
 
                     
@@ -6323,6 +6436,7 @@ The caller is responsible for merging/cloning the configuration object if requir
                     <div class="param-description">
                         <p>An object with attribute name/value pairs, defining the initial values to apply.
 Values defined in the cfgs argument will be over-written by values in this argument unless defined as read only.</p>
+
                     </div>
 
                     
@@ -6340,6 +6454,7 @@ Values defined in the cfgs argument will be over-written by values in this argum
                         <p>Whether or not to delay the intialization of these attributes until the first call to get/set.
 Individual attributes can over-ride this behavior by defining a lazyAdd configuration property in their configuration.
 See <a href="#method_addAttr">addAttr</a>.</p>
+
                     </div>
 
                     
@@ -6358,7 +6473,8 @@ See <a href="#method_addAttr">addAttr</a>.</p>
                     
                         <span class="type">Object</span>:
                     
-                    A reference to the host object.
+                    <p>A reference to the host object.</p>
+
                 
             </div>
         </div>
@@ -6423,6 +6539,7 @@ See <a href="#method_addAttr">addAttr</a>.</p>
 
     <div class="description">
         <p>Checks if the given attribute has been added to the host</p>
+
     </div>
 
     
@@ -6441,6 +6558,7 @@ See <a href="#method_addAttr">addAttr</a>.</p>
 
                     <div class="param-description">
                         <p>The name of the attribute to check.</p>
+
                     </div>
 
                     
@@ -6459,8 +6577,9 @@ See <a href="#method_addAttr">addAttr</a>.</p>
                     
                         <span class="type">Boolean</span>:
                     
-                    true if an attribute with the given name has been added, false if it hasn't.
-        This method will return true for lazily added attributes.
+                    <p>true if an attribute with the given name has been added, false if it hasn&#39;t.
+        This method will return true for lazily added attributes.</p>
+
                 
             </div>
         </div>
@@ -6520,6 +6639,7 @@ See <a href="#method_addAttr">addAttr</a>.</p>
 
     <div class="description">
         <p>Destroy lifecycle method. Invokes destructors for the class hierarchy.</p>
+
     </div>
 
     
@@ -6533,7 +6653,8 @@ See <a href="#method_addAttr">addAttr</a>.</p>
                     
                         <span class="type"><a href="../classes/BaseCore.html" class="crosslink">BaseCore</a></span>:
                     
-                    A reference to this object
+                    <p>A reference to this object</p>
+
                 
             </div>
         </div>
@@ -6598,8 +6719,9 @@ See <a href="#method_addAttr">addAttr</a>.</p>
 
     <div class="description">
         <p>Returns the current value of the attribute. If the attribute
-has been configured with a 'getter' function, this method will delegate
-to the 'getter' to obtain the value of the attribute.</p>
+has been configured with a &#39;getter&#39; function, this method will delegate
+to the &#39;getter&#39; to obtain the value of the attribute.</p>
+
     </div>
 
     
@@ -6618,7 +6740,8 @@ to the 'getter' to obtain the value of the attribute.</p>
 
                     <div class="param-description">
                         <p>The name of the attribute. If the value of the attribute is an Object,
-dot notation can be used to obtain the value of a property of the object (e.g. <code>get("x.y.z")</code>)</p>
+dot notation can be used to obtain the value of a property of the object (e.g. <code>get(&quot;x.y.z&quot;)</code>)</p>
+
                     </div>
 
                     
@@ -6637,7 +6760,8 @@ dot notation can be used to obtain the value of a property of the object (e.g. <
                     
                         <span class="type">Any</span>:
                     
-                    The value of the attribute
+                    <p>The value of the attribute</p>
+
                 
             </div>
         </div>
@@ -6702,6 +6826,7 @@ dot notation can be used to obtain the value of a property of the object (e.g. <
 
     <div class="description">
         <p>Gets multiple attribute values.</p>
+
     </div>
 
     
@@ -6721,6 +6846,7 @@ dot notation can be used to obtain the value of a property of the object (e.g. <
                     <div class="param-description">
                         <p>Optional. An array of attribute names. If omitted, all attribute values are
 returned. If set to true, all attributes modified from their initial values are returned.</p>
+
                     </div>
 
                     
@@ -6739,7 +6865,8 @@ returned. If set to true, all attributes modified from their initial values are 
                     
                         <span class="type">Object</span>:
                     
-                    An object with attribute name/value pairs.
+                    <p>An object with attribute name/value pairs.</p>
+
                 
             </div>
         </div>
@@ -6810,6 +6937,7 @@ returned. If set to true, all attributes modified from their initial values are 
     <div class="description">
         <p>Init lifecycle method, invoked during construction. Sets up attributes
 and invokes initializers for the class hierarchy.</p>
+
     </div>
 
     
@@ -6828,6 +6956,7 @@ and invokes initializers for the class hierarchy.</p>
 
                     <div class="param-description">
                         <p>Object with configuration property name/value pairs</p>
+
                     </div>
 
                     
@@ -6846,7 +6975,8 @@ and invokes initializers for the class hierarchy.</p>
                     
                         <span class="type"><a href="../classes/BaseCore.html" class="crosslink">BaseCore</a></span>:
                     
-                    A reference to this object
+                    <p>A reference to this object</p>
+
                 
             </div>
         </div>
@@ -6919,14 +7049,14 @@ and invokes initializers for the class hierarchy.</p>
     </div>
 
     <div class="description">
-        <p>Provides a way to safely modify a <code>Y.BaseCore</code> subclass' static <code>ATTRS</code>
+        <p>Provides a way to safely modify a <code>Y.BaseCore</code> subclass&#39; static <code>ATTRS</code>
 after the class has been defined or created.</p>
-
 <p>BaseCore-based classes cache information about the class hierarchy in order
 to efficiently create instances. This cache includes includes the aggregated
 <code>ATTRS</code> configs. If the static <code>ATTRS</code> configs need to be modified after the
 class has been defined or create, then use this method which will make sure
 to clear any cached data before making any modifications.</p>
+
     </div>
 
     
@@ -6948,6 +7078,7 @@ to clear any cached data before making any modifications.</p>
                         <p>The constructor function whose <code>ATTRS</code> should be
     modified. If a <code>ctor</code> function is not specified, then <code>this</code> is assumed
     to be the constructor which hosts the <code>ATTRS</code>.</p>
+
                     </div>
 
                     
@@ -6964,6 +7095,7 @@ to clear any cached data before making any modifications.</p>
                     <div class="param-description">
                         <p>The collection of <code>ATTRS</code> configs to mix with the
     existing attribute configurations.</p>
+
                     </div>
 
                     
@@ -7048,6 +7180,7 @@ to clear any cached data before making any modifications.</p>
 
     <div class="description">
         <p>Sets the value of an attribute.</p>
+
     </div>
 
     
@@ -7067,7 +7200,8 @@ to clear any cached data before making any modifications.</p>
                     <div class="param-description">
                         <p>The name of the attribute. If the
 current value of the attribute is an Object, dot notation can be used
-to set the value of a property within the object (e.g. <code>set("x.y.z", 5)</code>).</p>
+to set the value of a property within the object (e.g. <code>set(&quot;x.y.z&quot;, 5)</code>).</p>
+
                     </div>
 
                     
@@ -7083,6 +7217,7 @@ to set the value of a property within the object (e.g. <code>set("x.y.z", 5)</co
 
                     <div class="param-description">
                         <p>The value to set the attribute to.</p>
+
                     </div>
 
                     
@@ -7099,6 +7234,7 @@ to set the value of a property within the object (e.g. <code>set("x.y.z", 5)</co
 
                     <div class="param-description">
                         <p>Optional data providing the circumstances for the change.</p>
+
                     </div>
 
                     
@@ -7117,7 +7253,8 @@ to set the value of a property within the object (e.g. <code>set("x.y.z", 5)</co
                     
                         <span class="type">Object</span>:
                     
-                    A reference to the host object.
+                    <p>A reference to the host object.</p>
+
                 
             </div>
         </div>
@@ -7190,6 +7327,7 @@ to set the value of a property within the object (e.g. <code>set("x.y.z", 5)</co
 
     <div class="description">
         <p>Sets multiple attribute values.</p>
+
     </div>
 
     
@@ -7208,6 +7346,7 @@ to set the value of a property within the object (e.g. <code>set("x.y.z", 5)</co
 
                     <div class="param-description">
                         <p>An object with attributes name/value pairs.</p>
+
                     </div>
 
                     
@@ -7224,6 +7363,7 @@ to set the value of a property within the object (e.g. <code>set("x.y.z", 5)</co
 
                     <div class="param-description">
                         <p>Optional data providing the circumstances for the change.</p>
+
                     </div>
 
                     
@@ -7242,7 +7382,8 @@ to set the value of a property within the object (e.g. <code>set("x.y.z", 5)</co
                     
                         <span class="type">Object</span>:
                     
-                    A reference to the host object.
+                    <p>A reference to the host object.</p>
+
                 
             </div>
         </div>
@@ -7301,6 +7442,7 @@ to set the value of a property within the object (e.g. <code>set("x.y.z", 5)</co
     <div class="description">
         <p>Default toString implementation. Provides the constructor NAME
 and the instance guid, if set.</p>
+
     </div>
 
     
@@ -7314,7 +7456,8 @@ and the instance guid, if set.</p>
                     
                         <span class="type">String</span>:
                     
-                    String representation for this object
+                    <p>String representation for this object</p>
+
                 
             </div>
         </div>
@@ -7370,9 +7513,9 @@ and the instance guid, if set.</p>
         <p>This property controls whether or not instances of this class should
 allow users to add ad-hoc attributes through the constructor configuration
 hash.</p>
-
 <p>AdHoc attributes are attributes which are not defined by the class, and are
-not handled by the MyClass.<em>NON</em>ATTRS_CFG</p>
+not handled by the MyClass._NON_ATTRS_CFG</p>
+
     </div>
 
     
@@ -7424,6 +7567,7 @@ not handled by the MyClass.<em>NON</em>ATTRS_CFG</p>
     <div class="description">
         <p>The list of properties which can be configured for each attribute
 (e.g. setter, getter, writeOnce, readOnly etc.)</p>
+
     </div>
 
     
@@ -7472,11 +7616,11 @@ not handled by the MyClass.<em>NON</em>ATTRS_CFG</p>
 
     <div class="description">
         <p>The array of non-attribute configuration properties supported by this class.</p>
-
-<p>For example <code>BaseCore</code> defines a "plugins" configuration property which
+<p>For example <code>BaseCore</code> defines a &quot;plugins&quot; configuration property which
 should not be set up as an attribute. This property is primarily required so
 that when <a href="#property__allowAdHocAttrs"><code>_allowAdHocAttrs</code></a> is enabled by a class,
-non-attribute configuration properties don't get added as ad-hoc attributes.</p>
+non-attribute configuration properties don&#39;t get added as ad-hoc attributes.</p>
+
     </div>
 
     
@@ -7524,13 +7668,13 @@ non-attribute configuration properties don't get added as ad-hoc attributes.</p>
     <div class="description">
         <p>The default set of attributes which will be available for instances of this class, and
 their configuration. In addition to the configuration properties listed by
-AttributeCore's <a href="AttributeCore.html#method_addAttr">addAttr</a> method,
-the attribute can also be configured with a "cloneDefaultValue" property, which
+AttributeCore&#39;s <a href="AttributeCore.html#method_addAttr">addAttr</a> method,
+the attribute can also be configured with a &quot;cloneDefaultValue&quot; property, which
 defines how the statically defined value field should be protected
-("shallow", "deep" and false are supported values).</p>
-
-<p>By default if the value is an object literal or an array it will be "shallow"
+(&quot;shallow&quot;, &quot;deep&quot; and false are supported values).</p>
+<p>By default if the value is an object literal or an array it will be &quot;shallow&quot;
 cloned, to protect the default value.</p>
+
     </div>
 
     
@@ -7577,10 +7721,10 @@ cloned, to protect the default value.</p>
 
     <div class="description">
         <p>The string to be used to identify instances of this class.</p>
-
 <p>Classes extending BaseCore, should define their own
 static NAME property, which should be camelCase by
-convention (e.g. MyClass.NAME = "myClass";).</p>
+convention (e.g. MyClass.NAME = &quot;myClass&quot;;).</p>
+
     </div>
 
     
@@ -7629,6 +7773,7 @@ convention (e.g. MyClass.NAME = "myClass";).</p>
 
     <div class="description">
         <p>The string used to identify the class of this object.</p>
+
     </div>
 
     
@@ -7691,6 +7836,7 @@ convention (e.g. MyClass.NAME = "myClass";).</p>
     <div class="description">
         <p>Flag indicating whether or not this object
 has been through the destroy lifecycle phase.</p>
+
     </div>
 
     
@@ -7747,6 +7893,7 @@ has been through the destroy lifecycle phase.</p>
     <div class="description">
         <p>Flag indicating whether or not this object
 has been through the init lifecycle phase.</p>
+
     </div>
 
     

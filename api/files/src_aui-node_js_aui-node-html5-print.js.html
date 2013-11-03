@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>2.0.0pr6</b>
+                        API Docs for Version: <b>2.0.0</b>
                     </p>
                 </li>
             </div>
@@ -83,6 +83,8 @@
             
                 <li><a href="../classes/A.ButtonGroup.html">A.ButtonGroup</a></li>
             
+                <li><a href="../classes/A.ButtonSearchCancel.html">A.ButtonSearchCancel</a></li>
+            
                 <li><a href="../classes/A.Carousel.html">A.Carousel</a></li>
             
                 <li><a href="../classes/A.CellEditorSupport.html">A.CellEditorSupport</a></li>
@@ -107,7 +109,23 @@
             
                 <li><a href="../classes/A.DataType.DateMath.html">A.DataType.DateMath</a></li>
             
+                <li><a href="../classes/A.Date.html">A.Date</a></li>
+            
                 <li><a href="../classes/A.DateCellEditor.html">A.DateCellEditor</a></li>
+            
+                <li><a href="../classes/A.DateParser.html">A.DateParser</a></li>
+            
+                <li><a href="../classes/A.DatePicker.html">A.DatePicker</a></li>
+            
+                <li><a href="../classes/A.DatePickerBase.html">A.DatePickerBase</a></li>
+            
+                <li><a href="../classes/A.DatePickerDelegate.html">A.DatePickerDelegate</a></li>
+            
+                <li><a href="../classes/A.DatePickerNative.html">A.DatePickerNative</a></li>
+            
+                <li><a href="../classes/A.DatePickerNativeBase.html">A.DatePickerNativeBase</a></li>
+            
+                <li><a href="../classes/A.DatePickerPopover.html">A.DatePickerPopover</a></li>
             
                 <li><a href="../classes/A.DiagramBuilder.html">A.DiagramBuilder</a></li>
             
@@ -260,6 +278,10 @@
                 <li><a href="../classes/A.TextCellEditor.html">A.TextCellEditor</a></li>
             
                 <li><a href="../classes/A.ThumbRating.html">A.ThumbRating</a></li>
+            
+                <li><a href="../classes/A.TimePicker.html">A.TimePicker</a></li>
+            
+                <li><a href="../classes/A.TimePickerBase.html">A.TimePickerBase</a></li>
             
                 <li><a href="../classes/A.ToggleButton.html">A.ToggleButton</a></li>
             
@@ -1057,6 +1079,8 @@
 
             <ul id="api-modules" class="apis modules tab-pane">
             
+                <li><a href="../modules/ace-autocomplete-plugin.html">ace-autocomplete-plugin</a></li>
+            
                 <li><a href="../modules/align-plugin.html">align-plugin</a></li>
             
                 <li><a href="../modules/anim.html">anim</a></li>
@@ -1143,7 +1167,7 @@
             
                 <li><a href="../modules/aui-collection.html">aui-collection</a></li>
             
-                <li><a href="../modules/aui-color-pallete.html">aui-color-pallete</a></li>
+                <li><a href="../modules/aui-color-palette.html">aui-color-palette</a></li>
             
                 <li><a href="../modules/aui-color-picker.html">aui-color-picker</a></li>
             
@@ -1164,6 +1188,16 @@
                 <li><a href="../modules/aui-datatable-selection.html">aui-datatable-selection</a></li>
             
                 <li><a href="../modules/aui-datatype.html">aui-datatype</a></li>
+            
+                <li><a href="../modules/aui-datatype-date-parse.html">aui-datatype-date-parse</a></li>
+            
+                <li><a href="../modules/aui-datepicker.html">aui-datepicker</a></li>
+            
+                <li><a href="../modules/aui-datepicker-delegate.html">aui-datepicker-delegate</a></li>
+            
+                <li><a href="../modules/aui-datepicker-native.html">aui-datepicker-native</a></li>
+            
+                <li><a href="../modules/aui-datepicker-popover.html">aui-datepicker-popover</a></li>
             
                 <li><a href="../modules/aui-diagram-builder.html">aui-diagram-builder</a></li>
             
@@ -1245,7 +1279,7 @@
             
                 <li><a href="../modules/aui-pagination.html">aui-pagination</a></li>
             
-                <li><a href="../modules/aui-pallete.html">aui-pallete</a></li>
+                <li><a href="../modules/aui-palette.html">aui-palette</a></li>
             
                 <li><a href="../modules/aui-parse-content.html">aui-parse-content</a></li>
             
@@ -1296,6 +1330,8 @@
                 <li><a href="../modules/aui-tabview.html">aui-tabview</a></li>
             
                 <li><a href="../modules/aui-text.html">aui-text</a></li>
+            
+                <li><a href="../modules/aui-timepicker.html">aui-timepicker</a></li>
             
                 <li><a href="../modules/aui-timer.html">aui-timer</a></li>
             
@@ -2060,532 +2096,535 @@
  */
 
 var CONFIG = A.config,
-	DOC = CONFIG.doc,
-	WIN = CONFIG.win,
-	UA = A.UA,
-	IE = UA.ie,
+    DOC = CONFIG.doc,
+    WIN = CONFIG.win,
+    UA = A.UA,
+    IE = UA.ie,
 
-	isShivDisabled = function() {
-		return WIN.AUI_HTML5_IE === false;
-	};
+    isShivDisabled = function() {
+        return WIN.AUI_HTML5_IE === false;
+    };
 
 if (!IE || IE &gt;= 9 || isShivDisabled()) {
-	return;
+    return;
 }
 
 var BUFFER_CSS_TEXT = [],
 
-	CSS_PRINTFIX = &#x27;printfix&#x27;,
-	CSS_PRINTFIX_PREFIX = &#x27;printfix-&#x27;,
+    CSS_PRINTFIX = &#x27;printfix&#x27;,
+    CSS_PRINTFIX_PREFIX = &#x27;printfix-&#x27;,
 
-	LOCATION = WIN.location,
+    LOCATION = WIN.location,
 
-	DOMAIN = LOCATION.protocol + &#x27;//&#x27; + LOCATION.host,
+    DOMAIN = LOCATION.protocol + &#x27;//&#x27; + LOCATION.host,
 
-	HTML = DOC.documentElement,
+    HTML = DOC.documentElement,
 
-	HTML5_ELEMENTS = A.HTML5_ELEMENTS,
-	HTML5_ELEMENTS_LENGTH = HTML5_ELEMENTS.length,
-	HTML5_ELEMENTS_LIST = HTML5_ELEMENTS.join(&#x27;|&#x27;),
+    HTML5_ELEMENTS = A.HTML5_ELEMENTS,
+    HTML5_ELEMENTS_LENGTH = HTML5_ELEMENTS.length,
+    HTML5_ELEMENTS_LIST = HTML5_ELEMENTS.join(&#x27;|&#x27;),
 
-	REGEX_CLONE_NODE_CLEANUP = new RegExp(&#x27;&lt;(/?):(&#x27; + HTML5_ELEMENTS_LIST + &#x27;)&#x27;, &#x27;gi&#x27;),
-	REGEX_ELEMENTS = new RegExp(&#x27;(&#x27; + HTML5_ELEMENTS_LIST + &#x27;)&#x27;, &#x27;gi&#x27;),
-	REGEX_ELEMENTS_FAST = new RegExp(&#x27;\\b(&#x27; + HTML5_ELEMENTS_LIST + &#x27;)\\b&#x27;, &#x27;i&#x27;),
+    REGEX_CLONE_NODE_CLEANUP = new RegExp(&#x27;&lt;(/?):(&#x27; + HTML5_ELEMENTS_LIST + &#x27;)&#x27;, &#x27;gi&#x27;),
+    REGEX_ELEMENTS = new RegExp(&#x27;(&#x27; + HTML5_ELEMENTS_LIST + &#x27;)&#x27;, &#x27;gi&#x27;),
+    REGEX_ELEMENTS_FAST = new RegExp(&#x27;\\b(&#x27; + HTML5_ELEMENTS_LIST + &#x27;)\\b&#x27;, &#x27;i&#x27;),
 
-	REGEX_PRINT_MEDIA = /print|all/,
+    REGEX_PRINT_MEDIA = /print|all/,
 
-	REGEX_RULE = new RegExp(&#x27;(^|[^\\n{}]*?\\s)(&#x27; + HTML5_ELEMENTS_LIST + &#x27;).*?{([^}]*)}&#x27;, &#x27;gim&#x27;),
-	REGEX_TAG = new RegExp(&#x27;&lt;(\/*)(&#x27; + HTML5_ELEMENTS_LIST + &#x27;)&#x27;, &#x27;gi&#x27;),
+    REGEX_RULE = new RegExp(&#x27;(^|[^\\n{}]*?\\s)(&#x27; + HTML5_ELEMENTS_LIST + &#x27;).*?{([^}]*)}&#x27;, &#x27;gim&#x27;),
+    REGEX_TAG = new RegExp(&#x27;&lt;(\/*)(&#x27; + HTML5_ELEMENTS_LIST + &#x27;)&#x27;, &#x27;gi&#x27;),
 
-	SELECTOR_REPLACE_RULE = &#x27;.&#x27; + CSS_PRINTFIX_PREFIX + &#x27;$1&#x27;,
+    SELECTOR_REPLACE_RULE = &#x27;.&#x27; + CSS_PRINTFIX_PREFIX + &#x27;$1&#x27;,
 
-	STR_ALL = &#x27;all&#x27;,
-	STR_BLANK = &#x27; &#x27;,
-	STR_EMPTY = &#x27;&#x27;,
+    STR_ALL = &#x27;all&#x27;,
+    STR_BLANK = &#x27; &#x27;,
+    STR_EMPTY = &#x27;&#x27;,
 
-	STR_BRACKET_OPEN = &#x27;{&#x27;,
-	STR_BRACKET_CLOSE = &#x27;}&#x27;,
+    STR_BRACKET_OPEN = &#x27;{&#x27;,
+    STR_BRACKET_CLOSE = &#x27;}&#x27;,
 
-	STR_CHECKBOX = &#x27;checkbox&#x27;,
-	STR_CHECKED = &#x27;checked&#x27;,
-	STR_HTTPS = &#x27;https&#x27;,
-	STR_INPUT = &#x27;INPUT&#x27;,
-	STR_OPTION = &#x27;OPTION&#x27;,
-	STR_RADIO = &#x27;radio&#x27;,
-	STR_SELECTED = &#x27;selected&#x27;,
-	STR_STAR = &#x27;*&#x27;,
-	STR_URL = &#x27;url(&#x27;,
-	STR_URL_DOMAIN = STR_URL + DOMAIN,
+    STR_CHECKBOX = &#x27;checkbox&#x27;,
+    STR_CHECKED = &#x27;checked&#x27;,
+    STR_HTTPS = &#x27;https&#x27;,
+    STR_INPUT = &#x27;INPUT&#x27;,
+    STR_OPTION = &#x27;OPTION&#x27;,
+    STR_RADIO = &#x27;radio&#x27;,
+    STR_SELECTED = &#x27;selected&#x27;,
+    STR_STAR = &#x27;*&#x27;,
+    STR_URL = &#x27;url(&#x27;,
+    STR_URL_DOMAIN = STR_URL + DOMAIN,
 
-	TAG_REPLACE_ORIGINAL = &#x27;&lt;$1$2&#x27;,
-	TAG_REPLACE_FONT = &#x27;&lt;$1font&#x27;;
+    TAG_REPLACE_ORIGINAL = &#x27;&lt;$1$2&#x27;,
+    TAG_REPLACE_FONT = &#x27;&lt;$1font&#x27;;
 
 var html5shiv = A.html5shiv,
-	// Yes, IE does this wackiness; converting an object
-	// to a string should never result in undefined, but
-	// IE&#x27;s styleSheet object sometimes becomes inaccessible
-	// after trying to print the second time
-	isStylesheetDefined = function(obj) {
-		return obj &amp;&amp; (obj + STR_EMPTY !== undefined);
-	},
+    // Yes, IE does this wackiness; converting an object
+    // to a string should never result in undefined, but
+    // IE&#x27;s styleSheet object sometimes becomes inaccessible
+    // after trying to print the second time
+    isStylesheetDefined = function(obj) {
+        return obj &amp;&amp; (obj + STR_EMPTY !== undefined);
+    },
 
-	toggleNode = function(node, origNode, prop) {
-		var state = origNode[prop];
+    toggleNode = function(node, origNode, prop) {
+        var state = origNode[prop];
 
-		if (state) {
-			node.setAttribute(prop, state);
-		}
-		else {
-			node.removeAttribute(prop);
-		}
-	};
+        if (state) {
+            node.setAttribute(prop, state);
+        }
+        else {
+            node.removeAttribute(prop);
+        }
+    };
 
-	html5shiv(DOC);
+html5shiv(DOC);
 
 var PrintFix = function() {
-	var afterPrint = function() {
-		if (isShivDisabled()) {
-			destroy();
-		}
-		else {
-			PrintFix.onAfterPrint();
-		}
-	};
+    var afterPrint = function() {
+        if (isShivDisabled()) {
+            destroy();
+        }
+        else {
+            PrintFix.onAfterPrint();
+        }
+    };
 
-	var beforePrint = function() {
-		if (isShivDisabled()) {
-			destroy();
-		}
-		else {
-			PrintFix.onBeforePrint();
-		}
-	};
+    var beforePrint = function() {
+        if (isShivDisabled()) {
+            destroy();
+        }
+        else {
+            PrintFix.onBeforePrint();
+        }
+    };
 
-	var destroy = function() {
-		WIN.detachEvent(&#x27;onafterprint&#x27;, afterPrint);
-		WIN.detachEvent(&#x27;onbeforeprint&#x27;, beforePrint);
-	};
+    var destroy = function() {
+        WIN.detachEvent(&#x27;onafterprint&#x27;, afterPrint);
+        WIN.detachEvent(&#x27;onbeforeprint&#x27;, beforePrint);
+    };
 
-	var init = function() {
-		WIN.attachEvent(&#x27;onafterprint&#x27;, afterPrint);
-		WIN.attachEvent(&#x27;onbeforeprint&#x27;, beforePrint);
-	};
+    var init = function() {
+        WIN.attachEvent(&#x27;onafterprint&#x27;, afterPrint);
+        WIN.attachEvent(&#x27;onbeforeprint&#x27;, beforePrint);
+    };
 
-	init();
+    init();
 
-	PrintFix.destroy = destroy;
-	PrintFix.init = init;
+    PrintFix.destroy = destroy;
+    PrintFix.init = init;
 };
 
 A.mix(
-	PrintFix,
-	{
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method onAfterPrint
-		 */
-		onAfterPrint: function() {
-			var instance = this;
+    PrintFix, {
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method onAfterPrint
+         */
+        onAfterPrint: function() {
+            var instance = this;
 
-			instance.restoreHTML();
+            instance.restoreHTML();
 
-			var styleSheet = instance._getStyleSheet();
+            var styleSheet = instance._getStyleSheet();
 
-			styleSheet.styleSheet.cssText = STR_EMPTY;
-		},
+            styleSheet.styleSheet.cssText = STR_EMPTY;
+        },
 
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method onBeforePrint
-		 */
-		onBeforePrint: function() {
-			var instance = this;
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method onBeforePrint
+         */
+        onBeforePrint: function() {
+            var instance = this;
 
-			var styleSheet = instance._getStyleSheet();
-			var cssRules = instance._getAllCSSText();
+            var styleSheet = instance._getStyleSheet();
+            var cssRules = instance._getAllCSSText();
 
-			styleSheet.styleSheet.cssText = instance.parseCSS(cssRules);
+            styleSheet.styleSheet.cssText = instance.parseCSS(cssRules);
 
-			instance.writeHTML();
-		},
+            instance.writeHTML();
+        },
 
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method parseCSS
-		 * @param cssText
-		 */
-		parseCSS: function(cssText) {
-			var instance = this;
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method parseCSS
+         * @param cssText
+         */
+        parseCSS: function(cssText) {
+            var instance = this;
 
-			var css = STR_EMPTY;
-			var rules = cssText.match(REGEX_RULE);
+            var css = STR_EMPTY;
+            var rules = cssText.match(REGEX_RULE);
 
-			if (rules) {
-				css = rules.join(&#x27;\n&#x27;).replace(REGEX_ELEMENTS, SELECTOR_REPLACE_RULE);
-			}
+            if (rules) {
+                css = rules.join(&#x27;\n&#x27;).replace(REGEX_ELEMENTS, SELECTOR_REPLACE_RULE);
+            }
 
-			return css;
-		},
+            return css;
+        },
 
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method restoreHTML
-		 */
-		restoreHTML: function() {
-			var instance = this;
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method restoreHTML
+         */
+        restoreHTML: function() {
+            var instance = this;
 
-			var bodyClone = instance._getBodyClone();
-			var bodyEl = instance._getBodyEl();
+            var bodyClone = instance._getBodyClone();
+            var bodyEl = instance._getBodyEl();
 
-			bodyClone.innerHTML = STR_EMPTY;
+            bodyClone.innerHTML = STR_EMPTY;
 
-			HTML.removeChild(bodyClone);
-			HTML.appendChild(bodyEl);
-		},
+            HTML.removeChild(bodyClone);
+            HTML.appendChild(bodyEl);
+        },
 
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method writeHTML
-		 */
-		writeHTML: function() {
-			var instance = this;
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method writeHTML
+         */
+        writeHTML: function() {
+            var instance = this;
 
-			var i = -1;
-			var j;
+            var i = -1;
+            var j;
 
-			var bodyEl = instance._getBodyEl();
+            var bodyEl = instance._getBodyEl();
 
-			var html5Element;
+            var html5Element;
 
-			var cssClass;
+            var cssClass;
 
-			var nodeList;
-			var nodeListLength;
-			var node;
-			var buffer = [];
+            var nodeList;
+            var nodeListLength;
+            var node;
+            var buffer = [];
 
-			while (++i &lt; HTML5_ELEMENTS_LENGTH) {
-				html5Element = HTML5_ELEMENTS[i];
+            while (++i &lt; HTML5_ELEMENTS_LENGTH) {
+                html5Element = HTML5_ELEMENTS[i];
 
-				nodeList = DOC.getElementsByTagName(html5Element);
-				nodeListLength = nodeList.length;
+                nodeList = DOC.getElementsByTagName(html5Element);
+                nodeListLength = nodeList.length;
 
-				j = -1;
+                j = -1;
 
-				while (++j &lt; nodeListLength) {
-					node = nodeList[j];
+                while (++j &lt; nodeListLength) {
+                    node = nodeList[j];
 
-					cssClass = node.className;
+                    cssClass = node.className;
 
-					if (cssClass.indexOf(CSS_PRINTFIX_PREFIX) == -1) {
-						buffer[0] = CSS_PRINTFIX_PREFIX + html5Element;
-						buffer[1] = cssClass;
+                    if (cssClass.indexOf(CSS_PRINTFIX_PREFIX) == -1) {
+                        buffer[0] = CSS_PRINTFIX_PREFIX + html5Element;
+                        buffer[1] = cssClass;
 
-						node.className = buffer.join(STR_BLANK);
-					}
-				}
-			}
+                        node.className = buffer.join(STR_BLANK);
+                    }
+                }
+            }
 
-			var docFrag = instance._getDocFrag();
-			var bodyClone = instance._getBodyClone();
+            var docFrag = instance._getDocFrag();
+            var bodyClone = instance._getBodyClone();
 
-			docFrag.appendChild(bodyEl);
-			HTML.appendChild(bodyClone);
+            docFrag.appendChild(bodyEl);
+            HTML.appendChild(bodyClone);
 
-			bodyClone.className = bodyEl.className;
-			bodyClone.id = bodyEl.id;
+            bodyClone.className = bodyEl.className;
+            bodyClone.id = bodyEl.id;
 
-			var originalNodes = bodyEl.getElementsByTagName(STR_STAR);
-			var length = originalNodes.length;
+            var originalNodes = bodyEl.getElementsByTagName(STR_STAR);
+            var length = originalNodes.length;
 
-			// IE will throw a mixed content warning when using https
-			// and calling clone node if the body contains elements with
-			// an inline background-image style that is relative to the domain.
-			if (UA.secure) {
-				var bodyElStyle = bodyEl.style;
+            // IE will throw a mixed content warning when using https
+            // and calling clone node if the body contains elements with
+            // an inline background-image style that is relative to the domain.
+            if (UA.secure) {
+                var bodyElStyle = bodyEl.style;
 
-				var elStyle;
-				var backgroundImage;
+                var elStyle;
+                var backgroundImage;
 
-				bodyElStyle.display = &#x27;none&#x27;;
+                bodyElStyle.display = &#x27;none&#x27;;
 
-				for (i = 0; i &lt; length; i++) {
-					elStyle = originalNodes[i].style;
+                for (i = 0; i &lt; length; i++) {
+                    elStyle = originalNodes[i].style;
 
-					backgroundImage = elStyle.backgroundImage;
+                    backgroundImage = elStyle.backgroundImage;
 
-					if (backgroundImage &amp;&amp;
-						backgroundImage.indexOf(STR_URL) &gt; -1 &amp;&amp;
-						backgroundImage.indexOf(STR_HTTPS) == -1) {
+                    if (backgroundImage &amp;&amp;
+                        backgroundImage.indexOf(STR_URL) &gt; -1 &amp;&amp;
+                        backgroundImage.indexOf(STR_HTTPS) == -1) {
 
-						elStyle.backgroundImage = backgroundImage.replace(STR_URL, STR_URL_DOMAIN);
-					}
-				}
+                        elStyle.backgroundImage = backgroundImage.replace(STR_URL, STR_URL_DOMAIN);
+                    }
+                }
 
-				bodyElStyle.display = STR_EMPTY;
-			}
+                bodyElStyle.display = STR_EMPTY;
+            }
 
-			var bodyElClone = bodyEl.cloneNode(true);
+            var bodyElClone = bodyEl.cloneNode(true);
 
-			var newNodes = bodyElClone.getElementsByTagName(STR_STAR);
+            var newNodes = bodyElClone.getElementsByTagName(STR_STAR);
 
-			if (length == newNodes.length) {
-				while (length--) {
-					var newNode = newNodes[length];
-					var newNodeName = newNode.nodeName;
+            if (length == newNodes.length) {
+                while (length--) {
+                    var newNode = newNodes[length];
+                    var newNodeName = newNode.nodeName;
 
-					if (newNodeName == STR_INPUT || newNodeName == STR_OPTION) {
-						var originalNode = originalNodes[length];
-						var originalNodeName = originalNode.nodeName;
+                    if (newNodeName == STR_INPUT || newNodeName == STR_OPTION) {
+                        var originalNode = originalNodes[length];
+                        var originalNodeName = originalNode.nodeName;
+
+                        if (originalNodeName == newNodeName) {
+                            var prop = null;
+
+                            if (newNodeName == STR_OPTION) {
+                                prop = STR_SELECTED;
+                            }
+                            else if (newNodeName == STR_INPUT &amp;&amp; (newNode.type == STR_CHECKBOX || newNode.type ==
+                                STR_RADIO)) {
+                                prop = STR_CHECKED;
+                            }
 
-						if (originalNodeName == newNodeName) {
-							var prop = null;
+                            if (prop !== null) {
+                                toggleNode(newNode, originalNode, prop);
+                            }
+                        }
+                    }
+                }
+            }
 
-							if (newNodeName == STR_OPTION) {
-								prop = STR_SELECTED;
-							}
-							else if (newNodeName == STR_INPUT &amp;&amp; (newNode.type == STR_CHECKBOX || newNode.type == STR_RADIO)) {
-								prop = STR_CHECKED;
-							}
+            var bodyHTML = bodyElClone.innerHTML;
 
-							if (prop !== null) {
-								toggleNode(newNode, originalNode, prop);
-							}
-						}
-					}
-				}
-			}
+            bodyHTML = bodyHTML.replace(REGEX_CLONE_NODE_CLEANUP, TAG_REPLACE_ORIGINAL).replace(REGEX_TAG,
+                TAG_REPLACE_FONT);
 
-			var bodyHTML = bodyElClone.innerHTML;
+            bodyClone.innerHTML = bodyHTML;
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method _getAllCSSText
+         * @protected
+         */
+        _getAllCSSText: function() {
+            var instance = this;
+
+            var buffer = [];
+            var styleSheets = instance._getAllStyleSheets(DOC.styleSheets, STR_ALL);
+            var rule;
+            var cssText;
+
+            for (var i = 0; styleSheet = styleSheets[i]; i++) {
+                var rules = styleSheet.rules;
+
+                if (rules &amp;&amp; rules.length) {
+                    for (var j = 0, ruleLength = rules.length; j &lt; ruleLength; j++) {
+                        rule = rules[j];
+
+                        if (!rule.href) {
+                            cssText = instance._getCSSTextFromRule(rule);
+
+                            buffer.push(cssText);
+                        }
+                    }
+                }
+            }
+
+            return buffer.join(STR_BLANK);
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method _getCSSTextFromRule
+         * @param rule
+         * @protected
+         */
+        _getCSSTextFromRule: function(rule) {
+            var instance = this;
+
+            var cssText = STR_EMPTY;
+
+            var ruleStyle = rule.style;
+            var ruleCSSText;
+            var ruleSelectorText;
+
+            if (ruleStyle &amp;&amp; (ruleCSSText = ruleStyle.cssText) &amp;&amp; (ruleSelectorText = rule.selectorText) &amp;&amp;
+                REGEX_ELEMENTS_FAST.test(ruleSelectorText)) {
+                BUFFER_CSS_TEXT.length = 0;
+
+                BUFFER_CSS_TEXT.push(ruleSelectorText, STR_BRACKET_OPEN, ruleCSSText, STR_BRACKET_CLOSE);
+
+                cssText = BUFFER_CSS_TEXT.join(STR_BLANK);
+            }
+
+            return cssText;
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method _getAllStyleSheets
+         * @param styleSheet
+         * @param mediaType
+         * @param level
+         * @param buffer
+         * @protected
+         */
+        _getAllStyleSheets: function(styleSheet, mediaType, level, buffer) {
+            var instance = this;
+
+            level = level || 1;
+
+            buffer = buffer || [];
+
+            var i;
+
+            if (isStylesheetDefined(styleSheet)) {
+                var imports = styleSheet.imports;
+
+                mediaType = styleSheet.mediaType || mediaType;
+
+                if (REGEX_PRINT_MEDIA.test(mediaType)) {
+                    var length;
+
+                    // IE can crash when trying to access imports more than 3 levels deep
+                    if (level &lt;= 3 &amp;&amp; isStylesheetDefined(imports) &amp;&amp; imports.length) {
+                        for (i = 0, length = imports.length; i &lt; length; i++) {
+                            instance._getAllStyleSheets(imports[i], mediaType, level + 1, buffer);
+                        }
+                    }
+                    else if (styleSheet.length) {
+                        for (i = 0, length = styleSheet.length; i &lt; length; i++) {
+                            instance._getAllStyleSheets(styleSheet[i], mediaType, level, buffer);
+                        }
+                    }
+                    else {
+                        var rules = styleSheet.rules;
+                        var ruleStyleSheet;
+
+                        if (rules &amp;&amp; rules.length) {
+                            for (i = 0, length = rules.length; i &lt; length; i++) {
+                                ruleStyleSheet = rules[i].styleSheet;
+
+                                if (ruleStyleSheet) {
+                                    instance._getAllStyleSheets(ruleStyleSheet, mediaType, level, buffer);
+                                }
+                            }
+                        }
+                    }
 
-			bodyHTML = bodyHTML.replace(REGEX_CLONE_NODE_CLEANUP, TAG_REPLACE_ORIGINAL).replace(REGEX_TAG, TAG_REPLACE_FONT);
-
-			bodyClone.innerHTML = bodyHTML;
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method _getAllCSSText
-		 * @protected
-		 */
-		_getAllCSSText: function() {
-			var instance = this;
-
-			var buffer = [];
-			var styleSheets = instance._getAllStyleSheets(DOC.styleSheets, STR_ALL);
-			var rule;
-			var cssText;
-
-			for (var i = 0; styleSheet = styleSheets[i]; i++) {
-				var rules = styleSheet.rules;
-
-				if (rules &amp;&amp; rules.length) {
-					for (var j = 0, ruleLength = rules.length; j &lt; ruleLength; j++) {
-						rule = rules[j];
-
-						if (!rule.href) {
-							cssText = instance._getCSSTextFromRule(rule);
-
-							buffer.push(cssText);
-						}
-					}
-				}
-			}
-
-			return buffer.join(STR_BLANK);
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method _getCSSTextFromRule
-		 * @param rule
-		 * @protected
-		 */
-		_getCSSTextFromRule: function(rule) {
-			var instance = this;
-
-			var cssText = STR_EMPTY;
-
-			var ruleStyle = rule.style;
-			var ruleCSSText;
-			var ruleSelectorText;
-
-			if (ruleStyle &amp;&amp; (ruleCSSText = ruleStyle.cssText) &amp;&amp; (ruleSelectorText = rule.selectorText) &amp;&amp; REGEX_ELEMENTS_FAST.test(ruleSelectorText)) {
-				BUFFER_CSS_TEXT.length = 0;
-
-				BUFFER_CSS_TEXT.push(ruleSelectorText, STR_BRACKET_OPEN, ruleCSSText, STR_BRACKET_CLOSE);
-
-				cssText = BUFFER_CSS_TEXT.join(STR_BLANK);
-			}
-
-			return cssText;
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method _getAllStyleSheets
-		 * @param styleSheet
-		 * @param mediaType
-		 * @param level
-		 * @param buffer
-		 * @protected
-		 */
-		_getAllStyleSheets: function(styleSheet, mediaType, level, buffer) {
-			var instance = this;
-
-			level = level || 1;
-
-			buffer = buffer || [];
-
-			var i;
-
-			if (isStylesheetDefined(styleSheet)) {
-				var imports = styleSheet.imports;
-
-				mediaType = styleSheet.mediaType || mediaType;
-
-				if (REGEX_PRINT_MEDIA.test(mediaType)) {
-					var length;
-
-					// IE can crash when trying to access imports more than 3 levels deep
-					if (level &lt;= 3 &amp;&amp; isStylesheetDefined(imports) &amp;&amp; imports.length) {
-						for (i = 0, length = imports.length; i &lt; length; i++) {
-							instance._getAllStyleSheets(imports[i], mediaType, level + 1, buffer);
-						}
-					}
-					else if (styleSheet.length) {
-						for (i = 0, length = styleSheet.length; i &lt; length; i++) {
-							instance._getAllStyleSheets(styleSheet[i], mediaType, level, buffer);
-						}
-					}
-					else {
-						var rules = styleSheet.rules;
-						var ruleStyleSheet;
-
-						if (rules &amp;&amp; rules.length) {
-							for (i = 0, length = rules.length; i &lt; length; i++) {
-								ruleStyleSheet = rules[i].styleSheet;
-
-								if (ruleStyleSheet) {
-									instance._getAllStyleSheets(ruleStyleSheet, mediaType, level, buffer);
-								}
-							}
-						}
-					}
-
-					if (!styleSheet.disabled &amp;&amp; styleSheet.rules) {
-						buffer.push(styleSheet);
-					}
-				}
-			}
-
-			mediaType = STR_ALL;
-
-			return buffer;
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method _getBodyEl
-		 * @protected
-		 */
-		_getBodyEl: function() {
-			var instance = this;
-
-			var bodyEl = instance._bodyEl;
-
-			if (!bodyEl) {
-				bodyEl = DOC.body;
-
-				instance._bodyEl = bodyEl;
-			}
-
-			return bodyEl;
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method _getBodyClone
-		 * @protected
-		 */
-		_getBodyClone: function() {
-			var instance = this;
-
-			var bodyClone = instance._bodyClone;
-
-			if (!bodyClone) {
-				bodyClone = DOC.createElement(&#x27;body&#x27;);
-
-				instance._bodyClone = bodyClone;
-			}
-
-			return bodyClone;
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method _getDocFrag
-		 * @protected
-		 */
-		_getDocFrag: function() {
-			var instance = this;
-
-			var docFrag = instance._docFrag;
-
-			if (!docFrag) {
-				docFrag = DOC.createDocumentFragment();
-
-				html5shiv(docFrag);
-
-				instance._docFrag = docFrag;
-			}
-
-			return docFrag;
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method _getStyleSheet
-		 * @protected
-		 */
-		_getStyleSheet: function() {
-			var instance = this;
-
-			var styleSheet = instance._styleSheet;
-
-			if (!styleSheet) {
-				styleSheet = DOC.createElement(&#x27;style&#x27;);
-
-				var head = DOC.documentElement.firstChild;
-
-				head.insertBefore(styleSheet, head.firstChild);
-
-				styleSheet.media = &#x27;print&#x27;;
-				styleSheet.className = CSS_PRINTFIX;
-
-				instance._styleSheet = styleSheet;
-			}
-
-			return styleSheet;
-		}
-	}
+                    if (!styleSheet.disabled &amp;&amp; styleSheet.rules) {
+                        buffer.push(styleSheet);
+                    }
+                }
+            }
+
+            mediaType = STR_ALL;
+
+            return buffer;
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method _getBodyEl
+         * @protected
+         */
+        _getBodyEl: function() {
+            var instance = this;
+
+            var bodyEl = instance._bodyEl;
+
+            if (!bodyEl) {
+                bodyEl = DOC.body;
+
+                instance._bodyEl = bodyEl;
+            }
+
+            return bodyEl;
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method _getBodyClone
+         * @protected
+         */
+        _getBodyClone: function() {
+            var instance = this;
+
+            var bodyClone = instance._bodyClone;
+
+            if (!bodyClone) {
+                bodyClone = DOC.createElement(&#x27;body&#x27;);
+
+                instance._bodyClone = bodyClone;
+            }
+
+            return bodyClone;
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method _getDocFrag
+         * @protected
+         */
+        _getDocFrag: function() {
+            var instance = this;
+
+            var docFrag = instance._docFrag;
+
+            if (!docFrag) {
+                docFrag = DOC.createDocumentFragment();
+
+                html5shiv(docFrag);
+
+                instance._docFrag = docFrag;
+            }
+
+            return docFrag;
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method _getStyleSheet
+         * @protected
+         */
+        _getStyleSheet: function() {
+            var instance = this;
+
+            var styleSheet = instance._styleSheet;
+
+            if (!styleSheet) {
+                styleSheet = DOC.createElement(&#x27;style&#x27;);
+
+                var head = DOC.documentElement.firstChild;
+
+                head.insertBefore(styleSheet, head.firstChild);
+
+                styleSheet.media = &#x27;print&#x27;;
+                styleSheet.className = CSS_PRINTFIX;
+
+                instance._styleSheet = styleSheet;
+            }
+
+            return styleSheet;
+        }
+    }
 );
 
 A.namespace(&#x27;HTML5&#x27;).PrintFix = PrintFix;
 
 PrintFix();
+
     </pre>
 </div>
 

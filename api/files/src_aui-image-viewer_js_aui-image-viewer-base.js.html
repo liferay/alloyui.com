@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>2.0.0pr6</b>
+                        API Docs for Version: <b>2.0.0</b>
                     </p>
                 </li>
             </div>
@@ -83,6 +83,8 @@
             
                 <li><a href="../classes/A.ButtonGroup.html">A.ButtonGroup</a></li>
             
+                <li><a href="../classes/A.ButtonSearchCancel.html">A.ButtonSearchCancel</a></li>
+            
                 <li><a href="../classes/A.Carousel.html">A.Carousel</a></li>
             
                 <li><a href="../classes/A.CellEditorSupport.html">A.CellEditorSupport</a></li>
@@ -107,7 +109,23 @@
             
                 <li><a href="../classes/A.DataType.DateMath.html">A.DataType.DateMath</a></li>
             
+                <li><a href="../classes/A.Date.html">A.Date</a></li>
+            
                 <li><a href="../classes/A.DateCellEditor.html">A.DateCellEditor</a></li>
+            
+                <li><a href="../classes/A.DateParser.html">A.DateParser</a></li>
+            
+                <li><a href="../classes/A.DatePicker.html">A.DatePicker</a></li>
+            
+                <li><a href="../classes/A.DatePickerBase.html">A.DatePickerBase</a></li>
+            
+                <li><a href="../classes/A.DatePickerDelegate.html">A.DatePickerDelegate</a></li>
+            
+                <li><a href="../classes/A.DatePickerNative.html">A.DatePickerNative</a></li>
+            
+                <li><a href="../classes/A.DatePickerNativeBase.html">A.DatePickerNativeBase</a></li>
+            
+                <li><a href="../classes/A.DatePickerPopover.html">A.DatePickerPopover</a></li>
             
                 <li><a href="../classes/A.DiagramBuilder.html">A.DiagramBuilder</a></li>
             
@@ -260,6 +278,10 @@
                 <li><a href="../classes/A.TextCellEditor.html">A.TextCellEditor</a></li>
             
                 <li><a href="../classes/A.ThumbRating.html">A.ThumbRating</a></li>
+            
+                <li><a href="../classes/A.TimePicker.html">A.TimePicker</a></li>
+            
+                <li><a href="../classes/A.TimePickerBase.html">A.TimePickerBase</a></li>
             
                 <li><a href="../classes/A.ToggleButton.html">A.ToggleButton</a></li>
             
@@ -1057,6 +1079,8 @@
 
             <ul id="api-modules" class="apis modules tab-pane">
             
+                <li><a href="../modules/ace-autocomplete-plugin.html">ace-autocomplete-plugin</a></li>
+            
                 <li><a href="../modules/align-plugin.html">align-plugin</a></li>
             
                 <li><a href="../modules/anim.html">anim</a></li>
@@ -1143,7 +1167,7 @@
             
                 <li><a href="../modules/aui-collection.html">aui-collection</a></li>
             
-                <li><a href="../modules/aui-color-pallete.html">aui-color-pallete</a></li>
+                <li><a href="../modules/aui-color-palette.html">aui-color-palette</a></li>
             
                 <li><a href="../modules/aui-color-picker.html">aui-color-picker</a></li>
             
@@ -1164,6 +1188,16 @@
                 <li><a href="../modules/aui-datatable-selection.html">aui-datatable-selection</a></li>
             
                 <li><a href="../modules/aui-datatype.html">aui-datatype</a></li>
+            
+                <li><a href="../modules/aui-datatype-date-parse.html">aui-datatype-date-parse</a></li>
+            
+                <li><a href="../modules/aui-datepicker.html">aui-datepicker</a></li>
+            
+                <li><a href="../modules/aui-datepicker-delegate.html">aui-datepicker-delegate</a></li>
+            
+                <li><a href="../modules/aui-datepicker-native.html">aui-datepicker-native</a></li>
+            
+                <li><a href="../modules/aui-datepicker-popover.html">aui-datepicker-popover</a></li>
             
                 <li><a href="../modules/aui-diagram-builder.html">aui-diagram-builder</a></li>
             
@@ -1245,7 +1279,7 @@
             
                 <li><a href="../modules/aui-pagination.html">aui-pagination</a></li>
             
-                <li><a href="../modules/aui-pallete.html">aui-pallete</a></li>
+                <li><a href="../modules/aui-palette.html">aui-palette</a></li>
             
                 <li><a href="../modules/aui-parse-content.html">aui-parse-content</a></li>
             
@@ -1296,6 +1330,8 @@
                 <li><a href="../modules/aui-tabview.html">aui-tabview</a></li>
             
                 <li><a href="../modules/aui-text.html">aui-text</a></li>
+            
+                <li><a href="../modules/aui-timepicker.html">aui-timepicker</a></li>
             
                 <li><a href="../modules/aui-timer.html">aui-timer</a></li>
             
@@ -2060,129 +2096,131 @@
  */
 
 var L = A.Lang,
-	isBoolean = L.isBoolean,
-	isNumber = L.isNumber,
-	isObject = L.isObject,
-	isString = L.isString,
+    isBoolean = L.isBoolean,
+    isNumber = L.isNumber,
+    isObject = L.isObject,
+    isString = L.isString,
 
-	NodeFx = A.Plugin.NodeFX,
+    NodeFx = A.Plugin.NodeFX,
 
-	DOC = A.config.doc,
+    DOC = A.config.doc,
 
-	ANIM = &#x27;anim&#x27;,
-	AUTO = &#x27;auto&#x27;,
-	BD = &#x27;bd&#x27;,
-	BLANK = &#x27;blank&#x27;,
-	BODY = &#x27;body&#x27;,
-	BOUNDING_BOX = &#x27;boundingBox&#x27;,
-	CAPTION = &#x27;caption&#x27;,
-	CAPTION_EL = &#x27;captionEl&#x27;,
-	CAPTION_FROM_TITLE = &#x27;captionFromTitle&#x27;,
-	CAROUSEL = &#x27;carousel&#x27;,
-	CENTERED = &#x27;centered&#x27;,
-	CLOSE = &#x27;close&#x27;,
-	CLOSE_EL = &#x27;closeEl&#x27;,
-	CONTROL = &#x27;control&#x27;,
-	CONTROL_LEFT_EL = &#x27;controlLeftEl&#x27;,
-	CONTROL_RIGHT_EL = &#x27;controlRightEl&#x27;,
-	CREATE_DOCUMENT_FRAGMENT = &#x27;createDocumentFragment&#x27;,
-	CURRENT_INDEX = &#x27;currentIndex&#x27;,
-	EASE_BOTH_STRONG = &#x27;easeBothStrong&#x27;,
-	FOOTER = &#x27;footer&#x27;,
-	HELPER = &#x27;helper&#x27;,
-	HIDDEN = &#x27;hidden&#x27;,
-	HIDE = &#x27;hide&#x27;,
-	HREF = &#x27;href&#x27;,
-	ICON = &#x27;icon&#x27;,
-	IMAGE = &#x27;image&#x27;,
-	IMAGE_ANIM = &#x27;imageAnim&#x27;,
-	IMAGE_VIEWER = &#x27;image-viewer&#x27;,
-	INFO = &#x27;info&#x27;,
-	INFO_EL = &#x27;infoEl&#x27;,
-	INFO_TEMPLATE = &#x27;infoTemplate&#x27;,
-	LEFT = &#x27;left&#x27;,
-	LINK = &#x27;link&#x27;,
-	LINKS = &#x27;links&#x27;,
-	LOADER = &#x27;loader&#x27;,
-	LOADING = &#x27;loading&#x27;,
-	LOADING_EL = &#x27;loadingEl&#x27;,
-	LOCK = &#x27;lock&#x27;,
-	MAX_HEIGHT = &#x27;maxHeight&#x27;,
-	MAX_WIDTH = &#x27;maxWidth&#x27;,
-	MODAL = &#x27;modal&#x27;,
-	OFFSET_HEIGHT = &#x27;offsetHeight&#x27;,
-	OFFSET_WIDTH = &#x27;offsetWidth&#x27;,
-	OPACITY = &#x27;opacity&#x27;,
-	OVERLAY = &#x27;overlay&#x27;,
-	PRELOAD_ALL_IMAGES = &#x27;preloadAllImages&#x27;,
-	PRELOAD_NEIGHBOR_IMAGES = &#x27;preloadNeighborImages&#x27;,
-	PX = &#x27;px&#x27;,
-	REGION = &#x27;region&#x27;,
-	RIGHT = &#x27;right&#x27;,
-	SCROLL = &#x27;scroll&#x27;,
-	SHOW = &#x27;show&#x27;,
-	SHOW_CLOSE = &#x27;showClose&#x27;,
-	SHOW_CONTROLS = &#x27;showControls&#x27;,
-	SPACE = &#x27; &#x27;,
-	SRC = &#x27;src&#x27;,
-	TIME = &#x27;time&#x27;,
-	TITLE = &#x27;title&#x27;,
-	TOP = &#x27;top&#x27;,
-	TOTAL_LINKS = &#x27;totalLinks&#x27;,
-	VIEWPORT_REGION = &#x27;viewportRegion&#x27;,
-	VISIBLE = &#x27;visible&#x27;,
-	WELL = &#x27;well&#x27;,
-	OWNER_DOCUMENT = &#x27;ownerDocument&#x27;,
+    ANIM = &#x27;anim&#x27;,
+    AUTO = &#x27;auto&#x27;,
+    BD = &#x27;bd&#x27;,
+    BLANK = &#x27;blank&#x27;,
+    BODY = &#x27;body&#x27;,
+    BOUNDING_BOX = &#x27;boundingBox&#x27;,
+    CAPTION = &#x27;caption&#x27;,
+    CAPTION_EL = &#x27;captionEl&#x27;,
+    CAPTION_FROM_TITLE = &#x27;captionFromTitle&#x27;,
+    CAROUSEL = &#x27;carousel&#x27;,
+    CENTERED = &#x27;centered&#x27;,
+    CLOSE = &#x27;close&#x27;,
+    CLOSE_EL = &#x27;closeEl&#x27;,
+    CONTROL = &#x27;control&#x27;,
+    CONTROL_LEFT_EL = &#x27;controlLeftEl&#x27;,
+    CONTROL_RIGHT_EL = &#x27;controlRightEl&#x27;,
+    CREATE_DOCUMENT_FRAGMENT = &#x27;createDocumentFragment&#x27;,
+    CURRENT_INDEX = &#x27;currentIndex&#x27;,
+    EASE_BOTH_STRONG = &#x27;easeBothStrong&#x27;,
+    FOOTER = &#x27;footer&#x27;,
+    HELPER = &#x27;helper&#x27;,
+    HIDDEN = &#x27;hidden&#x27;,
+    HIDE = &#x27;hide&#x27;,
+    HREF = &#x27;href&#x27;,
+    ICON = &#x27;icon&#x27;,
+    IMAGE = &#x27;image&#x27;,
+    IMAGE_ANIM = &#x27;imageAnim&#x27;,
+    IMAGE_VIEWER = &#x27;image-viewer&#x27;,
+    INFO = &#x27;info&#x27;,
+    INFO_EL = &#x27;infoEl&#x27;,
+    INFO_TEMPLATE = &#x27;infoTemplate&#x27;,
+    LEFT = &#x27;left&#x27;,
+    LINK = &#x27;link&#x27;,
+    LINKS = &#x27;links&#x27;,
+    LOADER = &#x27;loader&#x27;,
+    LOADING = &#x27;loading&#x27;,
+    LOADING_EL = &#x27;loadingEl&#x27;,
+    LOCK = &#x27;lock&#x27;,
+    MAX_HEIGHT = &#x27;maxHeight&#x27;,
+    MAX_WIDTH = &#x27;maxWidth&#x27;,
+    MODAL = &#x27;modal&#x27;,
+    OFFSET_HEIGHT = &#x27;offsetHeight&#x27;,
+    OFFSET_WIDTH = &#x27;offsetWidth&#x27;,
+    OPACITY = &#x27;opacity&#x27;,
+    OVERLAY = &#x27;overlay&#x27;,
+    PRELOAD_ALL_IMAGES = &#x27;preloadAllImages&#x27;,
+    PRELOAD_NEIGHBOR_IMAGES = &#x27;preloadNeighborImages&#x27;,
+    PX = &#x27;px&#x27;,
+    REGION = &#x27;region&#x27;,
+    RIGHT = &#x27;right&#x27;,
+    SCROLL = &#x27;scroll&#x27;,
+    SHOW = &#x27;show&#x27;,
+    SHOW_CLOSE = &#x27;showClose&#x27;,
+    SHOW_CONTROLS = &#x27;showControls&#x27;,
+    SPACE = &#x27; &#x27;,
+    SRC = &#x27;src&#x27;,
+    TIME = &#x27;time&#x27;,
+    TITLE = &#x27;title&#x27;,
+    TOP = &#x27;top&#x27;,
+    TOTAL_LINKS = &#x27;totalLinks&#x27;,
+    VIEWPORT_REGION = &#x27;viewportRegion&#x27;,
+    VISIBLE = &#x27;visible&#x27;,
+    WELL = &#x27;well&#x27;,
+    OWNER_DOCUMENT = &#x27;ownerDocument&#x27;,
 
-	isNodeList = function(v) {
-		return (v instanceof A.NodeList);
-	},
+    isNodeList = function(v) {
+        return (v instanceof A.NodeList);
+    },
 
-	concat = function() {
-		return Array.prototype.slice.call(arguments).join(SPACE);
-	},
+    concat = function() {
+        return Array.prototype.slice.call(arguments).join(SPACE);
+    },
 
-	getCN = A.getClassName,
+    getCN = A.getClassName,
 
-	CSS_CAROUSEL_CONTROL = getCN(CAROUSEL, CONTROL),
-	CSS_CLOSE = getCN(CLOSE),
-	CSS_HELPER_SCROLL_LOCK = getCN(HELPER, SCROLL, LOCK),
-	CSS_HIDE = getCN(HIDE),
-	CSS_ICON_TIME = getCN(ICON, TIME),
-	CSS_IMAGE_VIEWER_BD = getCN(IMAGE_VIEWER, BD),
-	CSS_IMAGE_VIEWER_CAPTION = getCN(IMAGE_VIEWER, CAPTION),
-	CSS_IMAGE_VIEWER_CLOSE = getCN(IMAGE_VIEWER, CLOSE),
-	CSS_IMAGE_VIEWER_CONTROL = getCN(IMAGE_VIEWER, CONTROL),
-	CSS_IMAGE_VIEWER_IMAGE = getCN(IMAGE_VIEWER, IMAGE),
-	CSS_IMAGE_VIEWER_INFO = getCN(IMAGE_VIEWER, INFO),
-	CSS_IMAGE_VIEWER_LINK = getCN(IMAGE_VIEWER, LINK),
-	CSS_IMAGE_VIEWER_LOADER = getCN(IMAGE_VIEWER, LOADER),
-	CSS_IMAGE_VIEWER_LOADING = getCN(IMAGE_VIEWER, LOADING),
-	CSS_LEFT = getCN(LEFT),
-	CSS_RIGHT = getCN(RIGHT),
-	CSS_WELL = getCN(WELL),
+    CSS_CAROUSEL_CONTROL = getCN(CAROUSEL, CONTROL),
+    CSS_CLOSE = getCN(CLOSE),
+    CSS_HELPER_SCROLL_LOCK = getCN(HELPER, SCROLL, LOCK),
+    CSS_HIDE = getCN(HIDE),
+    CSS_ICON_TIME = getCN(ICON, TIME),
+    CSS_IMAGE_VIEWER_BD = getCN(IMAGE_VIEWER, BD),
+    CSS_IMAGE_VIEWER_CAPTION = getCN(IMAGE_VIEWER, CAPTION),
+    CSS_IMAGE_VIEWER_CLOSE = getCN(IMAGE_VIEWER, CLOSE),
+    CSS_IMAGE_VIEWER_CONTROL = getCN(IMAGE_VIEWER, CONTROL),
+    CSS_IMAGE_VIEWER_IMAGE = getCN(IMAGE_VIEWER, IMAGE),
+    CSS_IMAGE_VIEWER_INFO = getCN(IMAGE_VIEWER, INFO),
+    CSS_IMAGE_VIEWER_LINK = getCN(IMAGE_VIEWER, LINK),
+    CSS_IMAGE_VIEWER_LOADER = getCN(IMAGE_VIEWER, LOADER),
+    CSS_IMAGE_VIEWER_LOADING = getCN(IMAGE_VIEWER, LOADING),
+    CSS_LEFT = getCN(LEFT),
+    CSS_RIGHT = getCN(RIGHT),
+    CSS_WELL = getCN(WELL),
 
-	KEY_ESC = &#x27;ESC&#x27;,
-	KEY_LEFT = &#x27;LEFT&#x27;,
-	KEY_RIGHT = &#x27;RIGHT&#x27;,
+    KEY_ESC = &#x27;ESC&#x27;,
+    KEY_LEFT = &#x27;LEFT&#x27;,
+    KEY_RIGHT = &#x27;RIGHT&#x27;,
 
-	MAP_RESET_DIMENSIONS = {
-		height: AUTO,
-		width: AUTO
-	},
+    MAP_RESET_DIMENSIONS = {
+        height: AUTO,
+        width: AUTO
+    },
 
-	NODE_BLANK_TEXT = DOC.createTextNode(&#x27;&#x27;),
+    NODE_BLANK_TEXT = DOC.createTextNode(&#x27;&#x27;),
 
-	INFO_LABEL_TEMPLATE = &#x27;Image {current} of {total}&#x27;,
+    INFO_LABEL_TEMPLATE = &#x27;Image {current} of {total}&#x27;,
 
-	TPL_CAPTION = &#x27;&lt;h4 class=&quot;&#x27; + CSS_IMAGE_VIEWER_CAPTION + &#x27;&quot;&gt;&lt;/h4&gt;&#x27;,
-	TPL_CLOSE = &#x27;&lt;button class=&quot;&#x27;+ concat(CSS_IMAGE_VIEWER_CLOSE, CSS_CLOSE) +&#x27;&quot; type=&quot;button&quot;&gt;×&lt;/button&gt;&#x27;,
-	TPL_CONTROL_LEFT = &#x27;&lt;a href=&quot;#&quot; class=&quot;&#x27;+ concat(CSS_IMAGE_VIEWER_CONTROL, CSS_CAROUSEL_CONTROL, CSS_LEFT) +&#x27;&quot;&gt;&amp;lsaquo;&lt;/a&gt;&#x27;,
-	TPL_CONTROL_RIGHT = &#x27;&lt;a href=&quot;#&quot; class=&quot;&#x27;+ concat(CSS_IMAGE_VIEWER_CONTROL, CSS_CAROUSEL_CONTROL, CSS_RIGHT) +&#x27;&quot;&gt;&amp;rsaquo;&lt;/a&gt;&#x27;,
-	TPL_IMAGE = &#x27;&lt;img class=&quot;&#x27; + CSS_IMAGE_VIEWER_IMAGE + &#x27;&quot; /&gt;&#x27;,
-	TPL_INFO = &#x27;&lt;h5 class=&quot;&#x27; + CSS_IMAGE_VIEWER_INFO + &#x27;&quot;&gt;&lt;/h5&gt;&#x27;,
-	TPL_LOADER = &#x27;&lt;div class=&quot;&#x27; + CSS_IMAGE_VIEWER_LOADER + &#x27;&quot;&gt;&lt;/div&gt;&#x27;,
-	TPL_LOADING = &#x27;&lt;div class=&quot;&#x27; + CSS_ICON_TIME + &#x27;&quot;&gt;&lt;/div&gt;&#x27;;
+    TPL_CAPTION = &#x27;&lt;h4 class=&quot;&#x27; + CSS_IMAGE_VIEWER_CAPTION + &#x27;&quot;&gt;&lt;/h4&gt;&#x27;,
+    TPL_CLOSE = &#x27;&lt;button class=&quot;&#x27; + concat(CSS_IMAGE_VIEWER_CLOSE, CSS_CLOSE) + &#x27;&quot; type=&quot;button&quot;&gt;×&lt;/button&gt;&#x27;,
+    TPL_CONTROL_LEFT = &#x27;&lt;a href=&quot;#&quot; class=&quot;&#x27; + concat(CSS_IMAGE_VIEWER_CONTROL, CSS_CAROUSEL_CONTROL, CSS_LEFT) +
+        &#x27;&quot;&gt;&amp;lsaquo;&lt;/a&gt;&#x27;,
+    TPL_CONTROL_RIGHT = &#x27;&lt;a href=&quot;#&quot; class=&quot;&#x27; + concat(CSS_IMAGE_VIEWER_CONTROL, CSS_CAROUSEL_CONTROL, CSS_RIGHT) +
+        &#x27;&quot;&gt;&amp;rsaquo;&lt;/a&gt;&#x27;,
+    TPL_IMAGE = &#x27;&lt;img class=&quot;&#x27; + CSS_IMAGE_VIEWER_IMAGE + &#x27;&quot; /&gt;&#x27;,
+    TPL_INFO = &#x27;&lt;h5 class=&quot;&#x27; + CSS_IMAGE_VIEWER_INFO + &#x27;&quot;&gt;&lt;/h5&gt;&#x27;,
+    TPL_LOADER = &#x27;&lt;div class=&quot;&#x27; + CSS_IMAGE_VIEWER_LOADER + &#x27;&quot;&gt;&lt;/div&gt;&#x27;,
+    TPL_LOADING = &#x27;&lt;div class=&quot;&#x27; + CSS_ICON_TIME + &#x27;&quot;&gt;&lt;/div&gt;&#x27;;
 
 /**
  * A base class for ImageViewer, providing:
@@ -2202,9 +2240,8 @@ var L = A.Lang,
  * @constructor
  */
 var ImageViewer = A.Base.create(
-	&#x27;aui-image-viewer&#x27;,
-	A.Widget,
-	[
+    &#x27;aui-image-viewer&#x27;,
+    A.Widget, [
         A.WidgetCssClass,
         A.WidgetStdMod,
         A.WidgetToggle,
@@ -2213,1240 +2250,1245 @@ var ImageViewer = A.Base.create(
         A.WidgetPositionAlign,
         A.WidgetPositionConstrain,
         A.WidgetModality
-    ],
-	{
-		/**
-		 * Handler for the key events.
-		 *
-		 * @property _keyHandler
-		 * @type EventHandler
-		 * @protected
-		 */
-		_keyHandler: null,
-
-		/**
-		 * Create the DOM structure for the ImageViewer. Lifecycle.
-		 *
-		 * @method renderUI
-		 * @protected
-		 */
-		renderUI: function() {
-			var instance = this;
-
-			instance._renderControls();
-			instance._renderFooter();
-
-			instance.get(LINKS).addClass(CSS_IMAGE_VIEWER_LINK);
-		},
-
-		/**
-		 * Bind the events on the ImageViewer UI. Lifecycle.
-		 *
-		 * @method bindUI
-		 * @protected
-		 */
-		bindUI: function() {
-			var instance = this;
-			var links = instance.get(LINKS);
-			var controlLeftEl = instance.get(CONTROL_LEFT_EL);
-			var controlRightEl = instance.get(CONTROL_RIGHT_EL);
-			var closeEl = instance.get(CLOSE_EL);
-
-			closeEl.on(&#x27;click&#x27;, A.bind(instance._onClickCloseEl, instance));
-			controlLeftEl.on(&#x27;click&#x27;, A.bind(instance._onClickLeftControl, instance));
-			controlRightEl.on(&#x27;click&#x27;, A.bind(instance._onClickRightControl, instance));
-			links.on(&#x27;click&#x27;, A.bind(instance._onClickLinks, instance));
-
-			instance._keyHandler = A.bind(instance._onKeyInteraction, instance);
-
-			// NOTE: using keydown to avoid keyCode bug on IE
-			A.getDoc().on(&#x27;keydown&#x27;, instance._keyHandler);
-
-			instance.after(&#x27;render&#x27;, instance._afterRender);
-			instance.after(&#x27;loadingChange&#x27;, instance._afterLoadingChange);
-			instance.after(&#x27;visibleChange&#x27;, instance._afterVisibleChange);
-		},
-
-		/**
-		 * Destructor lifecycle implementation for the ImageViewer class.
-		 * Purges events attached to the node (and all child nodes).
-		 *
-		 * @method destructor
-		 * @protected
-		 */
-		destructor: function() {
-			var instance = this;
-
-			var links = instance.get(LINKS);
-
-			instance.close();
-
-			links.detach(&#x27;click&#x27;);
-			links.removeClass(CSS_IMAGE_VIEWER_LINK);
-
-			// detach key global listener from the document
-			A.getDoc().detach(&#x27;keydown&#x27;, instance._keyHandler);
-
-			instance.get(CONTROL_LEFT_EL).remove(true);
-			instance.get(CONTROL_RIGHT_EL).remove(true);
-			instance.get(CLOSE_EL).remove(true);
-			instance.get(LOADER).remove(true);
-		},
-
-		/**
-		 * Close the ImageViewer.
-		 *
-		 * @method close
-		 */
-		close: function() {
-			var instance = this;
-
-			instance.hide();
-		},
-
-		/**
-		 * Get the Node reference to the &lt;code&gt;currentIndex&lt;/code&gt; element from
-		 * the &lt;a href=&quot;ImageViewer.html#config_links&quot;&gt;links&lt;/a&gt;.
-		 *
-		 * @method getLink
-		 * @param {Number} currentIndex
-		 * @return {Node}
-		 */
-		getLink: function(currentIndex) {
-			var instance = this;
+    ], {
+        /**
+         * Handler for the key events.
+         *
+         * @property _keyHandler
+         * @type EventHandler
+         * @protected
+         */
+        _keyHandler: null,
+
+        /**
+         * Create the DOM structure for the ImageViewer. Lifecycle.
+         *
+         * @method renderUI
+         * @protected
+         */
+        renderUI: function() {
+            var instance = this;
+
+            instance._renderControls();
+            instance._renderFooter();
+
+            instance.get(LINKS).addClass(CSS_IMAGE_VIEWER_LINK);
+        },
+
+        /**
+         * Bind the events on the ImageViewer UI. Lifecycle.
+         *
+         * @method bindUI
+         * @protected
+         */
+        bindUI: function() {
+            var instance = this;
+            var links = instance.get(LINKS);
+            var controlLeftEl = instance.get(CONTROL_LEFT_EL);
+            var controlRightEl = instance.get(CONTROL_RIGHT_EL);
+            var closeEl = instance.get(CLOSE_EL);
+
+            closeEl.on(&#x27;click&#x27;, A.bind(instance._onClickCloseEl, instance));
+            controlLeftEl.on(&#x27;click&#x27;, A.bind(instance._onClickLeftControl, instance));
+            controlRightEl.on(&#x27;click&#x27;, A.bind(instance._onClickRightControl, instance));
+            links.on(&#x27;click&#x27;, A.bind(instance._onClickLinks, instance));
+
+            instance._keyHandler = A.bind(instance._onKeyInteraction, instance);
+
+            // NOTE: using keydown to avoid keyCode bug on IE
+            A.getDoc().on(&#x27;keydown&#x27;, instance._keyHandler);
+
+            instance.after(&#x27;render&#x27;, instance._afterRender);
+            instance.after(&#x27;loadingChange&#x27;, instance._afterLoadingChange);
+            instance.after(&#x27;visibleChange&#x27;, instance._afterVisibleChange);
+        },
+
+        /**
+         * Destructor lifecycle implementation for the ImageViewer class.
+         * Purges events attached to the node (and all child nodes).
+         *
+         * @method destructor
+         * @protected
+         */
+        destructor: function() {
+            var instance = this;
+
+            var links = instance.get(LINKS);
+
+            instance.close();
+
+            links.detach(&#x27;click&#x27;);
+            links.removeClass(CSS_IMAGE_VIEWER_LINK);
+
+            // detach key global listener from the document
+            A.getDoc().detach(&#x27;keydown&#x27;, instance._keyHandler);
+
+            instance.get(CONTROL_LEFT_EL).remove(true);
+            instance.get(CONTROL_RIGHT_EL).remove(true);
+            instance.get(CLOSE_EL).remove(true);
+            instance.get(LOADER).remove(true);
+        },
+
+        /**
+         * Close the ImageViewer.
+         *
+         * @method close
+         */
+        close: function() {
+            var instance = this;
+
+            instance.hide();
+        },
+
+        /**
+         * Get the Node reference to the &lt;code&gt;currentIndex&lt;/code&gt; element from
+         * the &lt;a href=&quot;ImageViewer.html#config_links&quot;&gt;links&lt;/a&gt;.
+         *
+         * @method getLink
+         * @param {Number} currentIndex
+         * @return {Node}
+         */
+        getLink: function(currentIndex) {
+            var instance = this;
+
+            return instance.get(LINKS).item(currentIndex);
+        },
 
-			return instance.get(LINKS).item(currentIndex);
-		},
-
-		/**
-		 * Get the current loaded node link reference.
-		 *
-		 * @method getCurrentLink
-		 * @return {Node}
-		 */
-		getCurrentLink: function() {
-			var instance = this;
-
-			return instance.getLink(
-				instance.get(CURRENT_INDEX)
-			);
-		},
-
-		/**
-		 * Load an image &lt;code&gt;src&lt;/code&gt; on the ImageViewer.
-		 *
-		 * @method loadImage
-		 * @param {String} src Image src.
-		 */
-		loadImage: function(src) {
-			var instance = this;
-
-			var loader = instance.get(LOADER);
-
-			instance.set(LOADING, true);
-
-			var activeImagePool = instance._activeImagePool;
-
-			if (!activeImagePool) {
-				activeImagePool = [];
-
-				// creating the placeholder image
-				var placeholder = instance.get(IMAGE);
-
-				var image0 = placeholder.clone();
-				var image1 = placeholder.clone();
-
-				// bind the onLoad handler to the image, this handler should append the loaded image
-				var onload = A.bind(instance._onLoadImage, instance);
-
-				image0.on(&#x27;load&#x27;, onload);
-				image1.on(&#x27;load&#x27;, onload);
-
-				activeImagePool.push(image0, image1);
-
-				instance._activeImagePool = activeImagePool;
-			}
-
-			var image = activeImagePool[0];
-
-			image.removeAttribute(&#x27;height&#x27;);
-			image.removeAttribute(&#x27;width&#x27;);
-
-			image.setStyles(MAP_RESET_DIMENSIONS);
-
-			// append the placeholder image to the loader div
-			loader.append(image);
-
-			// re-sort the pool
-			activeImagePool.push(activeImagePool.shift(image));
-
-			// set the src of the image to be loaded on the placeholder image.
-			// dataURI allows cached images to refire load event in webkit, and bypass
-			// the MimeType error (c/o Paul Irish &amp; Doug Jones)
-			if (A.UA.webkit) {
-				image.attr(SRC, &#x27;data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==&#x27;);
-			}
-
-			image.attr(SRC, src);
-
-			instance.fire(&#x27;request&#x27;, { image: image });
-		},
-
-		/**
-		 * Check if there is a node reference for the &lt;code&gt;currentIndex&lt;/code&gt;.
-		 *
-		 * @method hasLink
-		 * @param {Number} currentIndex
-		 * @return {Boolean}
-		 */
-		hasLink: function(currentIndex) {
-			var instance = this;
-
-			return instance.getLink(currentIndex);
-		},
-
-		/**
-		 * Check if there is a next element to navigate.
-		 *
-		 * @method hasNext
-		 * @return {Boolean}
-		 */
-		hasNext: function() {
-			var instance = this;
-
-			return instance.hasLink(
-				instance.get(CURRENT_INDEX) + 1
-			);
-		},
-
-		/**
-		 * Check if there is a previous element to navigate.
-		 *
-		 * @method hasPrev
-		 * @return {Boolean}
-		 */
-		hasPrev: function() {
-			var instance = this;
-
-			return instance.hasLink(
-				instance.get(CURRENT_INDEX) - 1
-			);
-		},
-
-		/**
-		 * Hide all UI controls (i.e., arrows, close icon etc).
-		 *
-		 * @method hideControls
-		 */
-		hideControls: function() {
-			var instance = this;
-
-			instance.get(CONTROL_LEFT_EL).hide();
-			instance.get(CONTROL_RIGHT_EL).hide();
-			instance.get(CLOSE_EL).hide();
-		},
-
-		/**
-		 * Load the next image.
-		 *
-		 * @method next
-		 */
-		next: function() {
-			var instance = this;
-
-			if (instance.hasNext()) {
-				instance.set(
-					CURRENT_INDEX,
-					instance.get(CURRENT_INDEX) + 1
-				);
-
-				instance.show();
-			}
-		},
-
-		/**
-		 * Preload all images.
-		 *
-		 * @method preloadAllImages
-		 */
-		preloadAllImages: function() {
-			var instance = this;
-
-			instance.get(LINKS).each(function(link, index) {
-				instance.preloadImage(index);
-			});
-		},
-
-		/**
-		 * Preload an image based on its &lt;code&gt;index&lt;/code&gt;.
-		 *
-		 * @method preloadImage
-		 * @param {Number} currentIndex
-		 */
-		preloadImage: function(currentIndex) {
-			var instance = this;
-			var link = instance.getLink(currentIndex);
-
-			if (link) {
-				var src = link.attr(HREF);
-
-				instance._createPreloadImage(src);
-			}
-		},
-
-		/**
-		 * Load the previous image.
-		 *
-		 * @method next
-		 */
-		prev: function() {
-			var instance = this;
-
-			if (instance.hasPrev()) {
-				instance.set(
-					CURRENT_INDEX,
-					instance.get(CURRENT_INDEX) - 1
-				);
-
-				instance.show();
-			}
-		},
-
-		/**
-		 * Show the loading icon.
-		 *
-		 * @method showLoading
-		 */
-		showLoading: function() {
-			var instance = this;
-			var loadingEl = instance.get(LOADING_EL);
-
-			instance.setStdModContent(BODY, loadingEl);
-
-			loadingEl.center(instance.bodyNode);
-		},
-
-		/**
-		 * Show the ImageViewer UI.
-		 *
-		 * @method show
-		 */
-		show: function() {
-			var instance = this;
-			var currentLink = instance.getCurrentLink();
-
-			if (currentLink) {
-				ImageViewer.superclass.show.apply(this, arguments);
-
-				instance.loadImage(
-					currentLink.attr(HREF)
-				);
-			}
-		},
-
-		/**
-		 * Removes the references to the preload images to free up memory.
-		 *
-		 * @method _clearPreloadImageFn
-		 * @protected
-		 */
-		_clearPreloadImageFn: function() {
-			var instance = this;
-
-			var preloadImagePool = instance._preloadImagePool;
-			var image;
-
-			for (var i in preloadImagePool) {
-				image = preloadImagePool[i];
-
-				if (image &amp;&amp; image.complete) {
-					preloadImagePool[i] = null;
-				}
-			}
-		},
-
-		/**
-		 * Creates the preload image instance, and add&#x27;s it
-		 * to the internal pool.
-		 *
-		 * @method _createPreloadImage
-		 * @param src
-		 * @protected
-		 */
-		_createPreloadImage: function(src) {
-			var instance = this;
-
-			var preloadImagePool = instance._preloadImagePool;
-
-			if (!preloadImagePool) {
-				preloadImagePool = instance._preloadImagePool = {};
-
-				instance._clearPreloadImageTask = A.debounce(instance._clearPreloadImageFn, 50, instance);
-			}
-
-			if (!(src in preloadImagePool)) {
-				var image = new Image();
-
-				image.onload = instance._clearPreloadImageTask;
-				image.src = src;
-
-				preloadImagePool[src] = image;
-			}
-		},
-
-		/**
-		 * Render the controls UI.
-		 *
-		 * @method _renderControls
-		 * @protected
-		 */
-		_renderControls: function() {
-			var instance = this;
-			var body = A.one(BODY);
-
-			body.append(
-				instance.get(CONTROL_LEFT_EL).hide()
-			);
-
-			body.append(
-				instance.get(CONTROL_RIGHT_EL).hide()
-			);
-
-			body.append(
-				instance.get(CLOSE_EL).hide()
-			);
-		},
-
-		/**
-		 * Render the footer UI.
-		 *
-		 * @method _renderFooter
-		 * @protected
-		 */
-		_renderFooter: function() {
-			var instance = this;
-
-			var boundingBox = instance.get(BOUNDING_BOX);
-
-			var docFrag = boundingBox.get(OWNER_DOCUMENT).invoke(CREATE_DOCUMENT_FRAGMENT);
-
-			docFrag.append(
-				instance.get(CAPTION_EL)
-			);
-			docFrag.append(
-				instance.get(INFO_EL)
-			);
-
-			instance.setStdModContent(
-				FOOTER,
-				docFrag
-			);
-		},
-
-		/**
-		 * Sync the caption UI.
-		 *
-		 * @method _syncCaptionUI
-		 * @protected
-		 */
-		_syncCaptionUI: function() {
-			var instance = this;
-			var caption = instance.get(CAPTION);
-			var captionEl = instance.get(CAPTION_EL);
-			var captionFromTitle = instance.get(CAPTION_FROM_TITLE);
-
-			if (captionFromTitle) {
-				var currentLink = instance.getCurrentLink();
-
-				if (currentLink) {
-					var title = currentLink.attr(TITLE);
-
-					if (title) {
-						caption = currentLink.attr(TITLE);
-					}
-				}
-			}
-
-			captionEl.html(caption);
-		},
-
-		/**
-		 * Sync the controls UI.
-		 *
-		 * @method _syncControlsUI
-		 * @protected
-		 */
-		_syncControlsUI: function() {
-			var instance = this;
-			var boundingBox = instance.get(BOUNDING_BOX);
-			var controlLeftEl = instance.get(CONTROL_LEFT_EL);
-			var controlRightEl = instance.get(CONTROL_RIGHT_EL);
-			var closeEl = instance.get(CLOSE_EL);
-
-			if (instance.get(VISIBLE)) {
-				if (instance.get(SHOW_CONTROLS)) {
-					// get the viewportRegion to centralize the controls on the middle of the window viewport
-					var viewportRegion = boundingBox.get(VIEWPORT_REGION);
-					var heightRegion = Math.floor(viewportRegion.height/2) + viewportRegion.top;
-
-					// show or hide controls based on the hasPrev/hasNext information
-					controlLeftEl[ instance.hasPrev() ? SHOW : HIDE ]();
-					controlRightEl[ instance.hasNext() ? SHOW : HIDE ]();
-
-					closeEl.show();
-				}
-			}
-			else {
-				// if the overlay is not visible hide all controls
-				instance.hideControls();
-			}
-		},
-
-		/**
-		 * Sync the ImageViewer UI.
-		 *
-		 * @method _syncImageViewerUI
-		 * @protected
-		 */
-		_syncImageViewerUI: function() {
-			var instance = this;
-
-			instance._syncControlsUI();
-			instance._syncCaptionUI();
-			instance._syncInfoUI();
-		},
-
-		/**
-		 * Sync the info UI.
-		 *
-		 * @method _syncInfoUI
-		 * @protected
-		 */
-		_syncInfoUI: function() {
-			var instance = this;
-			var infoEl = instance.get(INFO_EL);
-
-			infoEl.html(
-				instance.get(INFO_TEMPLATE)
-			);
-		},
-
-		/**
-		 * Calculate the resize ratio for the loaded image.
-		 *
-		 * @method _getRatio
-		 * @param {Number} width Image width
-		 * @param {Number} height Image height
-		 * @protected
-		 * @return {Number}
-		 */
-		_getRatio: function(width, height) {
-			var instance = this;
-
-			var ratio = 1;
-			var maxHeight = instance.get(MAX_HEIGHT);
-			var maxWidth = instance.get(MAX_WIDTH);
-
-			if ((height &gt; maxHeight) || (width &gt; maxWidth)) {
-				var hRatio = (height / maxHeight);
-				var wRatio = (width / maxWidth);
-
-				ratio = Math.max(hRatio, wRatio);
-			}
-
-			return ratio;
-		},
-
-		/**
-		 * Get the &lt;a href=&quot;ImageViewer.html#config_info&quot;&gt;info&lt;/a&gt; template.
-		 *
-		 * @method _getInfoTemplate
-		 * @param {String} v template
-		 * @protected
-		 * @return {String} Parsed string.
-		 */
-		_getInfoTemplate: function(v) {
-			var instance = this;
-			var total = instance.get(TOTAL_LINKS);
-			var current = instance.get(CURRENT_INDEX) + 1;
-
-			return L.sub(v, {
-				current: current,
-				total: total
-			});
-		},
-
-		/**
-		 * Display the image once it&#x27;s been loaded.
-		 *
-		 * @method _displayLoadedImage
-		 * @param {Node} image The loaded image
-		 * @protected
-		 */
-		_displayLoadedImage: function(image) {
-			var instance = this;
-
-			instance._uiSetImageSize(image);
-
-			instance.setStdModContent(BODY, image);
-
-			instance.set(LOADING, false);
-
-			instance._syncImageViewerUI();
-
-			// invoke WidgetPosition _setAlignCenter to force center alignment
-			instance._setAlignCenter(true);
-
-			instance.fire(&#x27;load&#x27;, { image: image });
-
-			if (instance.get(PRELOAD_NEIGHBOR_IMAGES)) {
-				// preload neighbor images
-				var currentIndex = instance.get(CURRENT_INDEX);
-
-				instance.preloadImage(currentIndex + 1);
-				instance.preloadImage(currentIndex - 1);
-			}
-		},
-
-		/**
-		 * Fires after the ImageViewer render phase.
-		 *
-		 * @method _afterRender
-		 * @protected
-		 */
-		_afterRender: function() {
-			var instance = this;
-			var bodyNode = instance.bodyNode;
-			var boundingBox = instance.get(BOUNDING_BOX);
-
-			bodyNode.addClass(CSS_IMAGE_VIEWER_BD);
-			boundingBox.addClass(CSS_WELL);
-
-			if (instance.get(PRELOAD_ALL_IMAGES)) {
-				instance.preloadAllImages();
-			}
-		},
-
-		/**
-		 * Fires after the value of the
-		 * &lt;a href=&quot;ImageViewer.html#config_loading&quot;&gt;loading&lt;/a&gt; attribute change.
-		 *
-		 * @method _afterLoadingChange
-		 * @param {EventFacade} event
-		 * @protected
-		 */
-		_afterLoadingChange: function(event) {
-			var instance = this;
-			var boundingBox = instance.get(BOUNDING_BOX);
-
-			if (event.newVal) {
-				boundingBox.addClass(CSS_IMAGE_VIEWER_LOADING);
-
-				instance.showLoading();
-			}
-			else{
-				boundingBox.removeClass(CSS_IMAGE_VIEWER_LOADING);
-			}
-		},
-
-		/**
-		 * Fires after the value of the
-		 * &lt;a href=&quot;ImageViewer.html#config_visible&quot;&gt;visible&lt;/a&gt; attribute change.
-		 *
-		 * @method _afterVisibleChange
-		 * @param {EventFacade} event
-		 * @protected
-		 */
-		_afterVisibleChange: function(event) {
-			var instance = this;
-
-			instance._syncControlsUI();
-		},
-
-		/**
-		 * Fires the click event on the close icon.
-		 *
-		 * @method _onClickCloseEl
-		 * @param {EventFacade} event click event facade
-		 * @protected
-		 */
-		_onClickCloseEl: function(event) {
-			var instance = this;
-
-			instance.close();
-
-			event.halt();
-		},
-
-		/**
-		 * Fires the click event on the left control icon.
-		 *
-		 * @method _onClickLeftControl
-		 * @param {EventFacade} event click event facade
-		 * @protected
-		 */
-		_onClickLeftControl: function(event) {
-			var instance = this;
-
-			instance.prev();
-
-			event.halt();
-		},
-
-		/**
-		 * Fires the click event on the right control icon.
-		 *
-		 * @method _onClickRightControl
-		 * @param {EventFacade} event click event facade
-		 * @protected
-		 */
-		_onClickRightControl: function(event) {
-			var instance = this;
-
-			instance.next();
-
-			event.halt();
-		},
-
-		/**
-		 * Fires the click event on the links.
-		 *
-		 * @method _onClickLinks
-		 * @param {EventFacade} event click event facade
-		 * @protected
-		 */
-		_onClickLinks: function(event) {
-			var instance = this;
-			var target = event.currentTarget;
-
-			// set the current currentIndex of the clicked image
-			instance.set(
-				CURRENT_INDEX,
-				instance.get(LINKS).indexOf(target)
-			);
-
-			instance.show();
-
-			event.preventDefault();
-		},
-
-		/**
-		 * Handles the key interaction (i.e., next, prev etc).
-		 *
-		 * @method _onKeyInteraction
-		 * @param {EventFacade} event click event facade
-		 * @protected
-		 */
-		_onKeyInteraction: function(event) {
-			var instance = this;
-
-			if (!instance.get(VISIBLE)) {
-				return false; // NOTE: return
-			}
-
-			if (event.isKey(KEY_LEFT)) {
-				instance.prev();
-			}
-			else if (event.isKey(KEY_RIGHT)) {
-				instance.next();
-			}
-			else if (event.isKey(KEY_ESC)) {
-				instance.close();
-			}
-		},
-
-		/**
-		 * Fires on a image load.
-		 *
-		 * @method _onLoadImage
-		 * @param {EventFacade} event
-		 * @protected
-		 */
-		_onLoadImage: function(event) {
-			var instance = this;
-			var image = event.currentTarget;
-
-			instance._displayLoadedImage(image);
-
-			var imageAnim = instance.get(IMAGE_ANIM);
-
-			if (instance.get(ANIM)) {
-				image.setStyle(OPACITY, 0);
-
-				if (!image.fx) {
-					image.plug(NodeFx, imageAnim);
-				}
-
-				image.fx.on(&#x27;end&#x27;, function(info) {
-					instance.fire(&#x27;anim&#x27;, { anim: info, image: image });
-				});
-
-				image.fx.stop().run();
-			}
-		},
-
-		/**
-		 * Set the size of the image and the overlay respecting the
-		 * maxHeight/maxWidth ratio.
-		 *
-		 * @method _uiSetImageSize
-		 * @param {HTMLImage} image Image
-		 * @protected
-		 */
-		_uiSetImageSize: function(image) {
-			var instance = this;
-			var bodyNode = instance.bodyNode;
-			var footerNode = instance.footerNode;
-			var imageRegion = image.get(REGION);
-
-			var ratio = instance._getRatio(
-				imageRegion.width,
-				imageRegion.height
-			);
-
-			var height = (imageRegion.height / ratio);
-			var width = (imageRegion.width / ratio);
-
-			image.set(OFFSET_HEIGHT, height);
-			image.set(OFFSET_WIDTH, width);
-
-			footerNode.setStyle(&#x27;width&#x27;, width + PX);
-
-			bodyNode.setStyles({
-				height: height + PX,
-				width: width + PX
-			});
-		}
-	},
-
-	{
-		/**
-		 * Static property provides a string to identify the class.
-		 *
-		 * @property ImageViewer.NAME
-		 * @type String
-		 * @static
-		 */
-		NAME: IMAGE_VIEWER,
-
-		/**
-		 * Static property provides a string to identify the CSS prefix.
-		 *
-		 * @property ImageViewer.CSS_PREFIX
-		 * @type String
-		 * @static
-		 */
-		CSS_PREFIX: getCN(IMAGE_VIEWER),
-
-		/**
-		 * Static property used to define the default attribute
-		 * configuration for the ImageViewer.
-		 *
-		 * @property ImageViewer.ATTRS
-		 * @type Object
-		 * @static
-		 */
-		ATTRS: {
-
-			/**
-			 * If &lt;code&gt;true&lt;/code&gt; the navigation is animated.
-			 *
-			 * @attribute anim
-			 * @default true
-			 * @type Boolean
-			 */
-			anim: {
-				value: true,
-				validator: isBoolean
-			},
-
-			/**
-			 * The content of body.
-			 *
-			 * @attribute bodyContent
-			 * @type String
-			 */
-			bodyContent: {
-				value: NODE_BLANK_TEXT
-			},
-
-			/**
-			 * The caption of the displayed image.
-			 *
-			 * @attribute caption
-			 * @default &#x27;&#x27;
-			 * @type String
-			 */
-			caption: {
-				value: BLANK,
-				validator: isString
-			},
-
-			/**
-			 * If &lt;code&gt;true&lt;/code&gt; the &lt;a
-			 * href=&quot;ImageViewer.html#config_caption&quot;&gt;caption&lt;/a&gt; will be pulled
-			 * from the title DOM attribute.
-			 *
-			 * @attribute captionFromTitle
-			 * @default true
-			 * @type Boolean
-			 */
-			captionFromTitle: {
-				value: true,
-				validator: isBoolean
-			},
-
-			/**
-			 * If &lt;code&gt;true&lt;/code&gt; the Overlay with the image will be positioned
-			 * on the center of the viewport.
-			 *
-			 * @attribute centered
-			 * @default true
-			 * @type Boolean
-			 */
-			centered: {
-				value: true
-			},
-
-			/**
-			 * Index of the current image.
-			 *
-			 * @attribute currentIndex
-			 * @default 0
-			 * @type Number
-			 */
-			currentIndex: {
-				value: 0,
-				validator: isNumber
-			},
-
-			/**
-			 * Image node element used to load the images.
-			 *
-			 * @attribute image
-			 * @default Generated img element.
-			 * @readOnly
-			 * @type Node
-			 */
-			image: {
-				readOnly: true,
-				valueFn: function() {
-					return A.Node.create(TPL_IMAGE);
-				}
-			},
-
-			/**
-			 * Configuration attributes passed to the &lt;a href=&quot;Anim.html&quot;&gt;Anim&lt;/a&gt;
-			 * class.
-			 *
-			 * @attribute imageAnim
-			 * @default Predefined &lt;a href=&quot;Anim.html&quot;&gt;Anim&lt;/a&gt; configuration.
-			 * @type Object
-			 */
-			imageAnim: {
-				value: {},
-				setter: function(value) {
-					return A.merge(
-						{
-							to: {
-								opacity: 1
-							},
-							duration: 0.8
-						},
-						value
-					);
-				},
-				validator: isObject
-			},
-
-			/**
-			 * String template used to display the information.
-			 *
-			 * @attribute infoTemplate
-			 * @default &#x27;Image {current} of {total}&#x27;
-			 * @type String
-			 */
-			infoTemplate: {
-				getter: function(v) {
-					return this._getInfoTemplate(v);
-				},
-				value: INFO_LABEL_TEMPLATE,
-				validator: isString
-			},
-
-			/**
-			 * Selector or NodeList containing the links where the ImageViewer
-			 * extracts the information to generate the thumbnails.
-			 *
-			 * @attribute links
-			 * @type String | NodeList
-			 */
-			links: {
-				setter: function(v) {
-					var instance = this;
-
-					if (isNodeList(v)) {
-						return v;
-					}
-					else if (isString(v)) {
-						return A.all(v);
-					}
-
-					return new A.NodeList([v]);
-				}
-			},
-
-			/**
-			 * Whether the image is during a loading state.
-			 *
-			 * @attribute loading
-			 * @default false
-			 * @type Boolean
-			 */
-			loading: {
-				value: false,
-				validator: isBoolean
-			},
-
-			/**
-			 * Displays the modal the viewport. Set to &lt;code&gt;false&lt;/code&gt; to
-			 * disable.
-			 *
-			 * @attribute modal
-			 * @default true
-			 * @type Boolean
-			 */
-			modal: {
-				value: true
-			},
-
-			/**
-			 * Preload all images grabbed from the &lt;a
-			 * href=&quot;ImageViewer.html#config_links&quot;&gt;links&lt;/a&gt; attribute.
-			 *
-			 * @attribute preloadAllImages
-			 * @default false
-			 * @type Boolean
-			 */
-			preloadAllImages: {
-				value: false,
-				validator: isBoolean
-			},
-
-			/**
-			 * Preload the neighbor image (i.e., the previous and next image based
-			 * on the current load one).
-			 *
-			 * @attribute preloadAllImages
-			 * @default false
-			 * @type Boolean
-			 */
-			preloadNeighborImages: {
-				value: true,
-				validator: isBoolean
-			},
-
-			/**
-			 * Show close icon control.
-			 *
-			 * @attribute showClose
-			 * @default true
-			 * @type Boolean
-			 */
-			showClose: {
-				value: true,
-				validator: isBoolean
-			},
-
-			/**
-			 * Show the controls.
-			 *
-			 * @attribute showControls
-			 * @default true
-			 * @type Boolean
-			 */
-			showControls: {
-				value: true,
-				validator: isBoolean
-			},
-
-			/**
-			 * Specify the tab order of elements.
-			 *
-			 * @attribute tabIndex
-			 * @default null
-			 * @type Number
-			 */
-			tabIndex: {
-				value: null
-			},
-
-			/**
-			 * Helper attribute to get the &lt;code&gt;size&lt;/code&gt; of the &lt;a
-			 * href=&quot;ImageViewer.html#config_links&quot;&gt;links&lt;/a&gt; NodeList.
-			 *
-			 * @attribute totalLinks
-			 * @default true
-			 * @readOnly
-			 * @type Boolean
-			 */
-			totalLinks: {
-				readOnly: true,
-				getter: function(v) {
-					return this.get(LINKS).size();
-				}
-			},
-
-			/**
-			 * Determine if the ImageViewer should be visible or not.
-			 *
-			 * @attribute visible
-			 * @default false
-			 * @type Boolean
-			 */
-			visible: {
-				value: false
-			},
-
-			/**
-			 * Specify the stack order of elements.
-			 *
-			 * @attribute zIndex
-			 * @default 3000
-			 * @type Number
-			 */
-			zIndex: {
-				value: 3000,
-				validator: isNumber
-			},
-
-			/**
-			 * The element to be used as left control.
-			 *
-			 * @attribute controlLeftEl
-			 * @default Generated HTML div element.
-			 * @readOnly
-			 * @type Node
-			 */
-			controlLeftEl: {
-				readOnly: true,
-				valueFn: function() {
-					return A.Node.create(TPL_CONTROL_LEFT);
-				}
-			},
-
-			/**
-			 * The element to be used as right control.
-			 *
-			 * @attribute controlRightEl
-			 * @default Generated HTML div element.
-			 * @readOnly
-			 * @type Node
-			 */
-			controlRightEl: {
-				readOnly: true,
-				valueFn: function() {
-					return A.Node.create(TPL_CONTROL_RIGHT);
-				}
-			},
-
-			/**
-			 * The element to be used as caption.
-			 *
-			 * @attribute captionEl
-			 * @default Generated HTML div element.
-			 * @readOnly
-			 * @type Node
-			 */
-			captionEl: {
-				readOnly: true,
-				valueFn: function() {
-					return A.Node.create(TPL_CAPTION);
-				}
-			},
-
-			/**
-			 * The element to be used as close.
-			 *
-			 * @attribute closeEl
-			 * @default Generated HTML div element.
-			 * @readOnly
-			 * @type Node
-			 */
-			closeEl: {
-				readOnly: true,
-				valueFn: function() {
-					return A.Node.create(TPL_CLOSE);
-				}
-			},
-
-			/**
-			 * The element to be used as info.
-			 *
-			 * @attribute infoEl
-			 * @default Generated HTML div element.
-			 * @readOnly
-			 * @type Node
-			 */
-			infoEl: {
-				readOnly: true,
-				valueFn: function() {
-					return A.Node.create(TPL_INFO);
-				}
-			},
-
-			/**
-			 * HTML element to house the &lt;code&gt;img&lt;/code&gt; which is being loaded.
-			 *
-			 * @attribute loader
-			 * @default Generated HTML div element.
-			 * @type Node
-			 */
-			loader: {
-				readOnly: true,
-				valueFn: function() {
-					return A.Node.create(TPL_LOADER).appendTo(DOC.body);
-				}
-			},
-
-			/**
-			 * The element to be used as loading.
-			 *
-			 * @attribute loadingEl
-			 * @default Generated HTML div element.
-			 * @type Node
-			 */
-			loadingEl: {
-				valueFn: function() {
-					return A.Node.create(TPL_LOADING);
-				}
-			},
-
-			/**
-			 * The maximum height of the element
-			 *
-			 * @attribute maxHeight
-			 * @default Infinity
-			 * @type Number
-			 */
-			maxHeight: {
-				value: Infinity,
-				validator: isNumber
-			},
-
-			/**
-			 * The maximum width of the element
-			 *
-			 * @attribute maxWidth
-			 * @default Infinity
-			 * @type Number
-			 */
-			maxWidth: {
-				value: Infinity,
-				validator: isNumber
-			}
-		}
-	}
+        /**
+         * Get the current loaded node link reference.
+         *
+         * @method getCurrentLink
+         * @return {Node}
+         */
+        getCurrentLink: function() {
+            var instance = this;
+
+            return instance.getLink(
+                instance.get(CURRENT_INDEX)
+            );
+        },
+
+        /**
+         * Load an image &lt;code&gt;src&lt;/code&gt; on the ImageViewer.
+         *
+         * @method loadImage
+         * @param {String} src Image src.
+         */
+        loadImage: function(src) {
+            var instance = this;
+
+            var loader = instance.get(LOADER);
+
+            instance.set(LOADING, true);
+
+            var activeImagePool = instance._activeImagePool;
+
+            if (!activeImagePool) {
+                activeImagePool = [];
+
+                // creating the placeholder image
+                var placeholder = instance.get(IMAGE);
+
+                var image0 = placeholder.clone();
+                var image1 = placeholder.clone();
+
+                // bind the onLoad handler to the image, this handler should append the loaded image
+                var onload = A.bind(instance._onLoadImage, instance);
+
+                image0.on(&#x27;load&#x27;, onload);
+                image1.on(&#x27;load&#x27;, onload);
+
+                activeImagePool.push(image0, image1);
+
+                instance._activeImagePool = activeImagePool;
+            }
+
+            var image = activeImagePool[0];
+
+            image.removeAttribute(&#x27;height&#x27;);
+            image.removeAttribute(&#x27;width&#x27;);
+
+            image.setStyles(MAP_RESET_DIMENSIONS);
+
+            // append the placeholder image to the loader div
+            loader.append(image);
+
+            // re-sort the pool
+            activeImagePool.push(activeImagePool.shift(image));
+
+            // set the src of the image to be loaded on the placeholder image.
+            // dataURI allows cached images to refire load event in webkit, and bypass
+            // the MimeType error (c/o Paul Irish &amp; Doug Jones)
+            if (A.UA.webkit) {
+                image.attr(SRC, &#x27;data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==&#x27;);
+            }
+
+            image.attr(SRC, src);
+
+            instance.fire(&#x27;request&#x27;, {
+                image: image
+            });
+        },
+
+        /**
+         * Check if there is a node reference for the &lt;code&gt;currentIndex&lt;/code&gt;.
+         *
+         * @method hasLink
+         * @param {Number} currentIndex
+         * @return {Boolean}
+         */
+        hasLink: function(currentIndex) {
+            var instance = this;
+
+            return instance.getLink(currentIndex);
+        },
+
+        /**
+         * Check if there is a next element to navigate.
+         *
+         * @method hasNext
+         * @return {Boolean}
+         */
+        hasNext: function() {
+            var instance = this;
+
+            return instance.hasLink(
+                instance.get(CURRENT_INDEX) + 1
+            );
+        },
+
+        /**
+         * Check if there is a previous element to navigate.
+         *
+         * @method hasPrev
+         * @return {Boolean}
+         */
+        hasPrev: function() {
+            var instance = this;
+
+            return instance.hasLink(
+                instance.get(CURRENT_INDEX) - 1
+            );
+        },
+
+        /**
+         * Hide all UI controls (i.e., arrows, close icon etc).
+         *
+         * @method hideControls
+         */
+        hideControls: function() {
+            var instance = this;
+
+            instance.get(CONTROL_LEFT_EL).hide();
+            instance.get(CONTROL_RIGHT_EL).hide();
+            instance.get(CLOSE_EL).hide();
+        },
+
+        /**
+         * Load the next image.
+         *
+         * @method next
+         */
+        next: function() {
+            var instance = this;
+
+            if (instance.hasNext()) {
+                instance.set(
+                    CURRENT_INDEX,
+                    instance.get(CURRENT_INDEX) + 1
+                );
+
+                instance.show();
+            }
+        },
+
+        /**
+         * Preload all images.
+         *
+         * @method preloadAllImages
+         */
+        preloadAllImages: function() {
+            var instance = this;
+
+            instance.get(LINKS).each(function(link, index) {
+                instance.preloadImage(index);
+            });
+        },
+
+        /**
+         * Preload an image based on its &lt;code&gt;index&lt;/code&gt;.
+         *
+         * @method preloadImage
+         * @param {Number} currentIndex
+         */
+        preloadImage: function(currentIndex) {
+            var instance = this;
+            var link = instance.getLink(currentIndex);
+
+            if (link) {
+                var src = link.attr(HREF);
+
+                instance._createPreloadImage(src);
+            }
+        },
+
+        /**
+         * Load the previous image.
+         *
+         * @method next
+         */
+        prev: function() {
+            var instance = this;
+
+            if (instance.hasPrev()) {
+                instance.set(
+                    CURRENT_INDEX,
+                    instance.get(CURRENT_INDEX) - 1
+                );
+
+                instance.show();
+            }
+        },
+
+        /**
+         * Show the loading icon.
+         *
+         * @method showLoading
+         */
+        showLoading: function() {
+            var instance = this;
+            var loadingEl = instance.get(LOADING_EL);
+
+            instance.setStdModContent(BODY, loadingEl);
+
+            loadingEl.center(instance.bodyNode);
+        },
+
+        /**
+         * Show the ImageViewer UI.
+         *
+         * @method show
+         */
+        show: function() {
+            var instance = this;
+            var currentLink = instance.getCurrentLink();
+
+            if (currentLink) {
+                ImageViewer.superclass.show.apply(this, arguments);
+
+                instance.loadImage(
+                    currentLink.attr(HREF)
+                );
+            }
+        },
+
+        /**
+         * Removes the references to the preload images to free up memory.
+         *
+         * @method _clearPreloadImageFn
+         * @protected
+         */
+        _clearPreloadImageFn: function() {
+            var instance = this;
+
+            var preloadImagePool = instance._preloadImagePool;
+            var image;
+
+            for (var i in preloadImagePool) {
+                image = preloadImagePool[i];
+
+                if (image &amp;&amp; image.complete) {
+                    preloadImagePool[i] = null;
+                }
+            }
+        },
+
+        /**
+         * Creates the preload image instance, and add&#x27;s it
+         * to the internal pool.
+         *
+         * @method _createPreloadImage
+         * @param src
+         * @protected
+         */
+        _createPreloadImage: function(src) {
+            var instance = this;
+
+            var preloadImagePool = instance._preloadImagePool;
+
+            if (!preloadImagePool) {
+                preloadImagePool = instance._preloadImagePool = {};
+
+                instance._clearPreloadImageTask = A.debounce(instance._clearPreloadImageFn, 50, instance);
+            }
+
+            if (!(src in preloadImagePool)) {
+                var image = new Image();
+
+                image.onload = instance._clearPreloadImageTask;
+                image.src = src;
+
+                preloadImagePool[src] = image;
+            }
+        },
+
+        /**
+         * Render the controls UI.
+         *
+         * @method _renderControls
+         * @protected
+         */
+        _renderControls: function() {
+            var instance = this;
+            var body = A.one(BODY);
+
+            body.append(
+                instance.get(CONTROL_LEFT_EL).hide()
+            );
+
+            body.append(
+                instance.get(CONTROL_RIGHT_EL).hide()
+            );
+
+            body.append(
+                instance.get(CLOSE_EL).hide()
+            );
+        },
+
+        /**
+         * Render the footer UI.
+         *
+         * @method _renderFooter
+         * @protected
+         */
+        _renderFooter: function() {
+            var instance = this;
+
+            var boundingBox = instance.get(BOUNDING_BOX);
+
+            var docFrag = boundingBox.get(OWNER_DOCUMENT).invoke(CREATE_DOCUMENT_FRAGMENT);
+
+            docFrag.append(
+                instance.get(CAPTION_EL)
+            );
+            docFrag.append(
+                instance.get(INFO_EL)
+            );
+
+            instance.setStdModContent(
+                FOOTER,
+                docFrag
+            );
+        },
+
+        /**
+         * Sync the caption UI.
+         *
+         * @method _syncCaptionUI
+         * @protected
+         */
+        _syncCaptionUI: function() {
+            var instance = this;
+            var caption = instance.get(CAPTION);
+            var captionEl = instance.get(CAPTION_EL);
+            var captionFromTitle = instance.get(CAPTION_FROM_TITLE);
+
+            if (captionFromTitle) {
+                var currentLink = instance.getCurrentLink();
+
+                if (currentLink) {
+                    var title = currentLink.attr(TITLE);
+
+                    if (title) {
+                        caption = currentLink.attr(TITLE);
+                    }
+                }
+            }
+
+            captionEl.html(caption);
+        },
+
+        /**
+         * Sync the controls UI.
+         *
+         * @method _syncControlsUI
+         * @protected
+         */
+        _syncControlsUI: function() {
+            var instance = this;
+            var boundingBox = instance.get(BOUNDING_BOX);
+            var controlLeftEl = instance.get(CONTROL_LEFT_EL);
+            var controlRightEl = instance.get(CONTROL_RIGHT_EL);
+            var closeEl = instance.get(CLOSE_EL);
+
+            if (instance.get(VISIBLE)) {
+                if (instance.get(SHOW_CONTROLS)) {
+                    // get the viewportRegion to centralize the controls on the middle of the window viewport
+                    var viewportRegion = boundingBox.get(VIEWPORT_REGION);
+                    var heightRegion = Math.floor(viewportRegion.height / 2) + viewportRegion.top;
+
+                    // show or hide controls based on the hasPrev/hasNext information
+                    controlLeftEl[instance.hasPrev() ? SHOW : HIDE]();
+                    controlRightEl[instance.hasNext() ? SHOW : HIDE]();
+
+                    closeEl.show();
+                }
+            }
+            else {
+                // if the overlay is not visible hide all controls
+                instance.hideControls();
+            }
+        },
+
+        /**
+         * Sync the ImageViewer UI.
+         *
+         * @method _syncImageViewerUI
+         * @protected
+         */
+        _syncImageViewerUI: function() {
+            var instance = this;
+
+            instance._syncControlsUI();
+            instance._syncCaptionUI();
+            instance._syncInfoUI();
+        },
+
+        /**
+         * Sync the info UI.
+         *
+         * @method _syncInfoUI
+         * @protected
+         */
+        _syncInfoUI: function() {
+            var instance = this;
+            var infoEl = instance.get(INFO_EL);
+
+            infoEl.html(
+                instance.get(INFO_TEMPLATE)
+            );
+        },
+
+        /**
+         * Calculate the resize ratio for the loaded image.
+         *
+         * @method _getRatio
+         * @param {Number} width Image width
+         * @param {Number} height Image height
+         * @protected
+         * @return {Number}
+         */
+        _getRatio: function(width, height) {
+            var instance = this;
+
+            var ratio = 1;
+            var maxHeight = instance.get(MAX_HEIGHT);
+            var maxWidth = instance.get(MAX_WIDTH);
+
+            if ((height &gt; maxHeight) || (width &gt; maxWidth)) {
+                var hRatio = (height / maxHeight);
+                var wRatio = (width / maxWidth);
+
+                ratio = Math.max(hRatio, wRatio);
+            }
+
+            return ratio;
+        },
+
+        /**
+         * Get the &lt;a href=&quot;ImageViewer.html#config_info&quot;&gt;info&lt;/a&gt; template.
+         *
+         * @method _getInfoTemplate
+         * @param {String} v template
+         * @protected
+         * @return {String} Parsed string.
+         */
+        _getInfoTemplate: function(v) {
+            var instance = this;
+            var total = instance.get(TOTAL_LINKS);
+            var current = instance.get(CURRENT_INDEX) + 1;
+
+            return L.sub(v, {
+                current: current,
+                total: total
+            });
+        },
+
+        /**
+         * Display the image once it&#x27;s been loaded.
+         *
+         * @method _displayLoadedImage
+         * @param {Node} image The loaded image
+         * @protected
+         */
+        _displayLoadedImage: function(image) {
+            var instance = this;
+
+            instance._uiSetImageSize(image);
+
+            instance.setStdModContent(BODY, image);
+
+            instance.set(LOADING, false);
+
+            instance._syncImageViewerUI();
+
+            // invoke WidgetPosition _setAlignCenter to force center alignment
+            instance._setAlignCenter(true);
+
+            instance.fire(&#x27;load&#x27;, {
+                image: image
+            });
+
+            if (instance.get(PRELOAD_NEIGHBOR_IMAGES)) {
+                // preload neighbor images
+                var currentIndex = instance.get(CURRENT_INDEX);
+
+                instance.preloadImage(currentIndex + 1);
+                instance.preloadImage(currentIndex - 1);
+            }
+        },
+
+        /**
+         * Fires after the ImageViewer render phase.
+         *
+         * @method _afterRender
+         * @protected
+         */
+        _afterRender: function() {
+            var instance = this;
+            var bodyNode = instance.bodyNode;
+            var boundingBox = instance.get(BOUNDING_BOX);
+
+            bodyNode.addClass(CSS_IMAGE_VIEWER_BD);
+            boundingBox.addClass(CSS_WELL);
+
+            if (instance.get(PRELOAD_ALL_IMAGES)) {
+                instance.preloadAllImages();
+            }
+        },
+
+        /**
+         * Fires after the value of the
+         * &lt;a href=&quot;ImageViewer.html#config_loading&quot;&gt;loading&lt;/a&gt; attribute change.
+         *
+         * @method _afterLoadingChange
+         * @param {EventFacade} event
+         * @protected
+         */
+        _afterLoadingChange: function(event) {
+            var instance = this;
+            var boundingBox = instance.get(BOUNDING_BOX);
+
+            if (event.newVal) {
+                boundingBox.addClass(CSS_IMAGE_VIEWER_LOADING);
+
+                instance.showLoading();
+            }
+            else {
+                boundingBox.removeClass(CSS_IMAGE_VIEWER_LOADING);
+            }
+        },
+
+        /**
+         * Fires after the value of the
+         * &lt;a href=&quot;ImageViewer.html#config_visible&quot;&gt;visible&lt;/a&gt; attribute change.
+         *
+         * @method _afterVisibleChange
+         * @param {EventFacade} event
+         * @protected
+         */
+        _afterVisibleChange: function(event) {
+            var instance = this;
+
+            instance._syncControlsUI();
+        },
+
+        /**
+         * Fires the click event on the close icon.
+         *
+         * @method _onClickCloseEl
+         * @param {EventFacade} event click event facade
+         * @protected
+         */
+        _onClickCloseEl: function(event) {
+            var instance = this;
+
+            instance.close();
+
+            event.halt();
+        },
+
+        /**
+         * Fires the click event on the left control icon.
+         *
+         * @method _onClickLeftControl
+         * @param {EventFacade} event click event facade
+         * @protected
+         */
+        _onClickLeftControl: function(event) {
+            var instance = this;
+
+            instance.prev();
+
+            event.halt();
+        },
+
+        /**
+         * Fires the click event on the right control icon.
+         *
+         * @method _onClickRightControl
+         * @param {EventFacade} event click event facade
+         * @protected
+         */
+        _onClickRightControl: function(event) {
+            var instance = this;
+
+            instance.next();
+
+            event.halt();
+        },
+
+        /**
+         * Fires the click event on the links.
+         *
+         * @method _onClickLinks
+         * @param {EventFacade} event click event facade
+         * @protected
+         */
+        _onClickLinks: function(event) {
+            var instance = this;
+            var target = event.currentTarget;
+
+            // set the current currentIndex of the clicked image
+            instance.set(
+                CURRENT_INDEX,
+                instance.get(LINKS).indexOf(target)
+            );
+
+            instance.show();
+
+            event.preventDefault();
+        },
+
+        /**
+         * Handles the key interaction (i.e., next, prev etc).
+         *
+         * @method _onKeyInteraction
+         * @param {EventFacade} event click event facade
+         * @protected
+         */
+        _onKeyInteraction: function(event) {
+            var instance = this;
+
+            if (!instance.get(VISIBLE)) {
+                return false; // NOTE: return
+            }
+
+            if (event.isKey(KEY_LEFT)) {
+                instance.prev();
+            }
+            else if (event.isKey(KEY_RIGHT)) {
+                instance.next();
+            }
+            else if (event.isKey(KEY_ESC)) {
+                instance.close();
+            }
+        },
+
+        /**
+         * Fires on a image load.
+         *
+         * @method _onLoadImage
+         * @param {EventFacade} event
+         * @protected
+         */
+        _onLoadImage: function(event) {
+            var instance = this;
+            var image = event.currentTarget;
+
+            instance._displayLoadedImage(image);
+
+            var imageAnim = instance.get(IMAGE_ANIM);
+
+            if (instance.get(ANIM)) {
+                image.setStyle(OPACITY, 0);
+
+                if (!image.fx) {
+                    image.plug(NodeFx, imageAnim);
+                }
+
+                image.fx.on(&#x27;end&#x27;, function(info) {
+                    instance.fire(&#x27;anim&#x27;, {
+                        anim: info,
+                        image: image
+                    });
+                });
+
+                image.fx.stop().run();
+            }
+        },
+
+        /**
+         * Set the size of the image and the overlay respecting the
+         * maxHeight/maxWidth ratio.
+         *
+         * @method _uiSetImageSize
+         * @param {HTMLImage} image Image
+         * @protected
+         */
+        _uiSetImageSize: function(image) {
+            var instance = this;
+            var bodyNode = instance.bodyNode;
+            var footerNode = instance.footerNode;
+            var imageRegion = image.get(REGION);
+
+            var ratio = instance._getRatio(
+                imageRegion.width,
+                imageRegion.height
+            );
+
+            var height = (imageRegion.height / ratio);
+            var width = (imageRegion.width / ratio);
+
+            image.set(OFFSET_HEIGHT, height);
+            image.set(OFFSET_WIDTH, width);
+
+            footerNode.setStyle(&#x27;width&#x27;, width + PX);
+
+            bodyNode.setStyles({
+                height: height + PX,
+                width: width + PX
+            });
+        }
+    },
+
+    {
+        /**
+         * Static property provides a string to identify the class.
+         *
+         * @property ImageViewer.NAME
+         * @type String
+         * @static
+         */
+        NAME: IMAGE_VIEWER,
+
+        /**
+         * Static property provides a string to identify the CSS prefix.
+         *
+         * @property ImageViewer.CSS_PREFIX
+         * @type String
+         * @static
+         */
+        CSS_PREFIX: getCN(IMAGE_VIEWER),
+
+        /**
+         * Static property used to define the default attribute
+         * configuration for the ImageViewer.
+         *
+         * @property ImageViewer.ATTRS
+         * @type Object
+         * @static
+         */
+        ATTRS: {
+
+            /**
+             * If &lt;code&gt;true&lt;/code&gt; the navigation is animated.
+             *
+             * @attribute anim
+             * @default true
+             * @type Boolean
+             */
+            anim: {
+                value: true,
+                validator: isBoolean
+            },
+
+            /**
+             * The content of body.
+             *
+             * @attribute bodyContent
+             * @type String
+             */
+            bodyContent: {
+                value: NODE_BLANK_TEXT
+            },
+
+            /**
+             * The caption of the displayed image.
+             *
+             * @attribute caption
+             * @default &#x27;&#x27;
+             * @type String
+             */
+            caption: {
+                value: BLANK,
+                validator: isString
+            },
+
+            /**
+             * If &lt;code&gt;true&lt;/code&gt; the &lt;a
+             * href=&quot;ImageViewer.html#config_caption&quot;&gt;caption&lt;/a&gt; will be pulled
+             * from the title DOM attribute.
+             *
+             * @attribute captionFromTitle
+             * @default true
+             * @type Boolean
+             */
+            captionFromTitle: {
+                value: true,
+                validator: isBoolean
+            },
+
+            /**
+             * If &lt;code&gt;true&lt;/code&gt; the Overlay with the image will be positioned
+             * on the center of the viewport.
+             *
+             * @attribute centered
+             * @default true
+             * @type Boolean
+             */
+            centered: {
+                value: true
+            },
+
+            /**
+             * Index of the current image.
+             *
+             * @attribute currentIndex
+             * @default 0
+             * @type Number
+             */
+            currentIndex: {
+                value: 0,
+                validator: isNumber
+            },
+
+            /**
+             * Image node element used to load the images.
+             *
+             * @attribute image
+             * @default Generated img element.
+             * @readOnly
+             * @type Node
+             */
+            image: {
+                readOnly: true,
+                valueFn: function() {
+                    return A.Node.create(TPL_IMAGE);
+                }
+            },
+
+            /**
+             * Configuration attributes passed to the &lt;a href=&quot;Anim.html&quot;&gt;Anim&lt;/a&gt;
+             * class.
+             *
+             * @attribute imageAnim
+             * @default Predefined &lt;a href=&quot;Anim.html&quot;&gt;Anim&lt;/a&gt; configuration.
+             * @type Object
+             */
+            imageAnim: {
+                value: {},
+                setter: function(value) {
+                    return A.merge({
+                            to: {
+                                opacity: 1
+                            },
+                            duration: 0.8
+                        },
+                        value
+                    );
+                },
+                validator: isObject
+            },
+
+            /**
+             * String template used to display the information.
+             *
+             * @attribute infoTemplate
+             * @default &#x27;Image {current} of {total}&#x27;
+             * @type String
+             */
+            infoTemplate: {
+                getter: function(v) {
+                    return this._getInfoTemplate(v);
+                },
+                value: INFO_LABEL_TEMPLATE,
+                validator: isString
+            },
+
+            /**
+             * Selector or NodeList containing the links where the ImageViewer
+             * extracts the information to generate the thumbnails.
+             *
+             * @attribute links
+             * @type String | NodeList
+             */
+            links: {
+                setter: function(v) {
+                    var instance = this;
+
+                    if (isNodeList(v)) {
+                        return v;
+                    }
+                    else if (isString(v)) {
+                        return A.all(v);
+                    }
+
+                    return new A.NodeList([v]);
+                }
+            },
+
+            /**
+             * Whether the image is during a loading state.
+             *
+             * @attribute loading
+             * @default false
+             * @type Boolean
+             */
+            loading: {
+                value: false,
+                validator: isBoolean
+            },
+
+            /**
+             * Displays the modal the viewport. Set to &lt;code&gt;false&lt;/code&gt; to
+             * disable.
+             *
+             * @attribute modal
+             * @default true
+             * @type Boolean
+             */
+            modal: {
+                value: true
+            },
+
+            /**
+             * Preload all images grabbed from the &lt;a
+             * href=&quot;ImageViewer.html#config_links&quot;&gt;links&lt;/a&gt; attribute.
+             *
+             * @attribute preloadAllImages
+             * @default false
+             * @type Boolean
+             */
+            preloadAllImages: {
+                value: false,
+                validator: isBoolean
+            },
+
+            /**
+             * Preload the neighbor image (i.e., the previous and next image based
+             * on the current load one).
+             *
+             * @attribute preloadAllImages
+             * @default false
+             * @type Boolean
+             */
+            preloadNeighborImages: {
+                value: true,
+                validator: isBoolean
+            },
+
+            /**
+             * Show close icon control.
+             *
+             * @attribute showClose
+             * @default true
+             * @type Boolean
+             */
+            showClose: {
+                value: true,
+                validator: isBoolean
+            },
+
+            /**
+             * Show the controls.
+             *
+             * @attribute showControls
+             * @default true
+             * @type Boolean
+             */
+            showControls: {
+                value: true,
+                validator: isBoolean
+            },
+
+            /**
+             * Specify the tab order of elements.
+             *
+             * @attribute tabIndex
+             * @default null
+             * @type Number
+             */
+            tabIndex: {
+                value: null
+            },
+
+            /**
+             * Helper attribute to get the &lt;code&gt;size&lt;/code&gt; of the &lt;a
+             * href=&quot;ImageViewer.html#config_links&quot;&gt;links&lt;/a&gt; NodeList.
+             *
+             * @attribute totalLinks
+             * @default true
+             * @readOnly
+             * @type Boolean
+             */
+            totalLinks: {
+                readOnly: true,
+                getter: function(v) {
+                    return this.get(LINKS).size();
+                }
+            },
+
+            /**
+             * Determine if the ImageViewer should be visible or not.
+             *
+             * @attribute visible
+             * @default false
+             * @type Boolean
+             */
+            visible: {
+                value: false
+            },
+
+            /**
+             * Specify the stack order of elements.
+             *
+             * @attribute zIndex
+             * @default 3000
+             * @type Number
+             */
+            zIndex: {
+                value: 3000,
+                validator: isNumber
+            },
+
+            /**
+             * The element to be used as left control.
+             *
+             * @attribute controlLeftEl
+             * @default Generated HTML div element.
+             * @readOnly
+             * @type Node
+             */
+            controlLeftEl: {
+                readOnly: true,
+                valueFn: function() {
+                    return A.Node.create(TPL_CONTROL_LEFT);
+                }
+            },
+
+            /**
+             * The element to be used as right control.
+             *
+             * @attribute controlRightEl
+             * @default Generated HTML div element.
+             * @readOnly
+             * @type Node
+             */
+            controlRightEl: {
+                readOnly: true,
+                valueFn: function() {
+                    return A.Node.create(TPL_CONTROL_RIGHT);
+                }
+            },
+
+            /**
+             * The element to be used as caption.
+             *
+             * @attribute captionEl
+             * @default Generated HTML div element.
+             * @readOnly
+             * @type Node
+             */
+            captionEl: {
+                readOnly: true,
+                valueFn: function() {
+                    return A.Node.create(TPL_CAPTION);
+                }
+            },
+
+            /**
+             * The element to be used as close.
+             *
+             * @attribute closeEl
+             * @default Generated HTML div element.
+             * @readOnly
+             * @type Node
+             */
+            closeEl: {
+                readOnly: true,
+                valueFn: function() {
+                    return A.Node.create(TPL_CLOSE);
+                }
+            },
+
+            /**
+             * The element to be used as info.
+             *
+             * @attribute infoEl
+             * @default Generated HTML div element.
+             * @readOnly
+             * @type Node
+             */
+            infoEl: {
+                readOnly: true,
+                valueFn: function() {
+                    return A.Node.create(TPL_INFO);
+                }
+            },
+
+            /**
+             * HTML element to house the &lt;code&gt;img&lt;/code&gt; which is being loaded.
+             *
+             * @attribute loader
+             * @default Generated HTML div element.
+             * @type Node
+             */
+            loader: {
+                readOnly: true,
+                valueFn: function() {
+                    return A.Node.create(TPL_LOADER).appendTo(DOC.body);
+                }
+            },
+
+            /**
+             * The element to be used as loading.
+             *
+             * @attribute loadingEl
+             * @default Generated HTML div element.
+             * @type Node
+             */
+            loadingEl: {
+                valueFn: function() {
+                    return A.Node.create(TPL_LOADING);
+                }
+            },
+
+            /**
+             * The maximum height of the element
+             *
+             * @attribute maxHeight
+             * @default Infinity
+             * @type Number
+             */
+            maxHeight: {
+                value: Infinity,
+                validator: isNumber
+            },
+
+            /**
+             * The maximum width of the element
+             *
+             * @attribute maxWidth
+             * @default Infinity
+             * @type Number
+             */
+            maxWidth: {
+                value: Infinity,
+                validator: isNumber
+            }
+        }
+    }
 );
 
 A.ImageViewer = ImageViewer;

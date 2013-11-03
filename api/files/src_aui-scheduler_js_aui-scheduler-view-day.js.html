@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>2.0.0pr6</b>
+                        API Docs for Version: <b>2.0.0</b>
                     </p>
                 </li>
             </div>
@@ -83,6 +83,8 @@
             
                 <li><a href="../classes/A.ButtonGroup.html">A.ButtonGroup</a></li>
             
+                <li><a href="../classes/A.ButtonSearchCancel.html">A.ButtonSearchCancel</a></li>
+            
                 <li><a href="../classes/A.Carousel.html">A.Carousel</a></li>
             
                 <li><a href="../classes/A.CellEditorSupport.html">A.CellEditorSupport</a></li>
@@ -107,7 +109,23 @@
             
                 <li><a href="../classes/A.DataType.DateMath.html">A.DataType.DateMath</a></li>
             
+                <li><a href="../classes/A.Date.html">A.Date</a></li>
+            
                 <li><a href="../classes/A.DateCellEditor.html">A.DateCellEditor</a></li>
+            
+                <li><a href="../classes/A.DateParser.html">A.DateParser</a></li>
+            
+                <li><a href="../classes/A.DatePicker.html">A.DatePicker</a></li>
+            
+                <li><a href="../classes/A.DatePickerBase.html">A.DatePickerBase</a></li>
+            
+                <li><a href="../classes/A.DatePickerDelegate.html">A.DatePickerDelegate</a></li>
+            
+                <li><a href="../classes/A.DatePickerNative.html">A.DatePickerNative</a></li>
+            
+                <li><a href="../classes/A.DatePickerNativeBase.html">A.DatePickerNativeBase</a></li>
+            
+                <li><a href="../classes/A.DatePickerPopover.html">A.DatePickerPopover</a></li>
             
                 <li><a href="../classes/A.DiagramBuilder.html">A.DiagramBuilder</a></li>
             
@@ -260,6 +278,10 @@
                 <li><a href="../classes/A.TextCellEditor.html">A.TextCellEditor</a></li>
             
                 <li><a href="../classes/A.ThumbRating.html">A.ThumbRating</a></li>
+            
+                <li><a href="../classes/A.TimePicker.html">A.TimePicker</a></li>
+            
+                <li><a href="../classes/A.TimePickerBase.html">A.TimePickerBase</a></li>
             
                 <li><a href="../classes/A.ToggleButton.html">A.ToggleButton</a></li>
             
@@ -1057,6 +1079,8 @@
 
             <ul id="api-modules" class="apis modules tab-pane">
             
+                <li><a href="../modules/ace-autocomplete-plugin.html">ace-autocomplete-plugin</a></li>
+            
                 <li><a href="../modules/align-plugin.html">align-plugin</a></li>
             
                 <li><a href="../modules/anim.html">anim</a></li>
@@ -1143,7 +1167,7 @@
             
                 <li><a href="../modules/aui-collection.html">aui-collection</a></li>
             
-                <li><a href="../modules/aui-color-pallete.html">aui-color-pallete</a></li>
+                <li><a href="../modules/aui-color-palette.html">aui-color-palette</a></li>
             
                 <li><a href="../modules/aui-color-picker.html">aui-color-picker</a></li>
             
@@ -1164,6 +1188,16 @@
                 <li><a href="../modules/aui-datatable-selection.html">aui-datatable-selection</a></li>
             
                 <li><a href="../modules/aui-datatype.html">aui-datatype</a></li>
+            
+                <li><a href="../modules/aui-datatype-date-parse.html">aui-datatype-date-parse</a></li>
+            
+                <li><a href="../modules/aui-datepicker.html">aui-datepicker</a></li>
+            
+                <li><a href="../modules/aui-datepicker-delegate.html">aui-datepicker-delegate</a></li>
+            
+                <li><a href="../modules/aui-datepicker-native.html">aui-datepicker-native</a></li>
+            
+                <li><a href="../modules/aui-datepicker-popover.html">aui-datepicker-popover</a></li>
             
                 <li><a href="../modules/aui-diagram-builder.html">aui-diagram-builder</a></li>
             
@@ -1245,7 +1279,7 @@
             
                 <li><a href="../modules/aui-pagination.html">aui-pagination</a></li>
             
-                <li><a href="../modules/aui-pallete.html">aui-pallete</a></li>
+                <li><a href="../modules/aui-palette.html">aui-palette</a></li>
             
                 <li><a href="../modules/aui-parse-content.html">aui-parse-content</a></li>
             
@@ -1296,6 +1330,8 @@
                 <li><a href="../modules/aui-tabview.html">aui-tabview</a></li>
             
                 <li><a href="../modules/aui-text.html">aui-text</a></li>
+            
+                <li><a href="../modules/aui-timepicker.html">aui-timepicker</a></li>
             
                 <li><a href="../modules/aui-timer.html">aui-timer</a></li>
             
@@ -2060,226 +2096,229 @@
  */
 
 var Lang = A.Lang,
-	isBoolean = Lang.isBoolean,
-	isFunction = Lang.isFunction,
-	isNumber = Lang.isNumber,
-	isObject = Lang.isObject,
-	isString = Lang.isString,
+    isBoolean = Lang.isBoolean,
+    isFunction = Lang.isFunction,
+    isNumber = Lang.isNumber,
+    isObject = Lang.isObject,
+    isString = Lang.isString,
 
-	DateMath = A.DataType.DateMath,
-	WidgetStdMod = A.WidgetStdMod,
+    DateMath = A.DataType.DateMath,
+    WidgetStdMod = A.WidgetStdMod,
 
-	_ANCHOR = &#x27;a&#x27;,
-	_COMMA = &#x27;,&#x27;,
-	_DOT = &#x27;.&#x27;,
-	_EMPTY_STR = &#x27;&#x27;,
-	_PERCENT = &#x27;%&#x27;,
-	_SPACE = &#x27; &#x27;,
+    _ANCHOR = &#x27;a&#x27;,
+    _COMMA = &#x27;,&#x27;,
+    _DOT = &#x27;.&#x27;,
+    _EMPTY_STR = &#x27;&#x27;,
+    _PERCENT = &#x27;%&#x27;,
+    _SPACE = &#x27; &#x27;,
 
-	DATA_COLNUMBER = &#x27;data-colnumber&#x27;,
-	SCHEDULER_VIEW = &#x27;scheduler-view&#x27;,
-	SCHEDULER_VIEW_DAY = &#x27;scheduler-view-day&#x27;,
+    DATA_COLNUMBER = &#x27;data-colnumber&#x27;,
+    SCHEDULER_VIEW = &#x27;scheduler-view&#x27;,
+    SCHEDULER_VIEW_DAY = &#x27;scheduler-view-day&#x27;,
 
-	getScrollbarWidth = A.cached(function () {
-		var doc      = A.config.doc,
-			testNode = doc.createElement(&#x27;div&#x27;),
-			body     = doc.getElementsByTagName(&#x27;body&#x27;)[0],
-			// 0.1 because cached doesn&#x27;t support falsy refetch values
-			width    = 0.1;
+    getScrollbarWidth = A.cached(function() {
+        var doc = A.config.doc,
+            testNode = doc.createElement(&#x27;div&#x27;),
+            body = doc.getElementsByTagName(&#x27;body&#x27;)[0],
+            // 0.1 because cached doesn&#x27;t support falsy refetch values
+            width = 0.1;
 
-		if (body) {
-			testNode.style.cssText = &quot;position:absolute;visibility:hidden;overflow:scroll;width:20px;&quot;;
-			testNode.appendChild(doc.createElement(&#x27;p&#x27;)).style.height = &#x27;1px&#x27;;
-			body.insertBefore(testNode, body.firstChild);
-			width = testNode.offsetWidth - testNode.clientWidth;
+        if (body) {
+            testNode.style.cssText = &quot;position:absolute;visibility:hidden;overflow:scroll;width:20px;&quot;;
+            testNode.appendChild(doc.createElement(&#x27;p&#x27;)).style.height = &#x27;1px&#x27;;
+            body.insertBefore(testNode, body.firstChild);
+            width = testNode.offsetWidth - testNode.clientWidth;
 
-			body.removeChild(testNode);
-		}
+            body.removeChild(testNode);
+        }
 
-		return width;
-	}, null, 0.1),
+        return width;
+    }, null, 0.1),
 
-	getNodeListHTMLParser = function(selector, sizeCondition) {
-		return function(srcNode) {
-			var nodes = srcNode.all(selector);
-			return (nodes.size() &gt;= sizeCondition) ? nodes : null;
-		};
-	},
+    getNodeListHTMLParser = function(selector, sizeCondition) {
+        return function(srcNode) {
+            var nodes = srcNode.all(selector);
+            return (nodes.size() &gt;= sizeCondition) ? nodes : null;
+        };
+    },
 
-	roundToNearestMultiple = function(n, multiple) {
-		return Math.round(n/multiple)*multiple;
-	},
+    roundToNearestMultiple = function(n, multiple) {
+        return Math.round(n / multiple) * multiple;
+    },
 
-	toNumber = function(v) {
-		return parseFloat(v) || 0;
-	},
+    toNumber = function(v) {
+        return parseFloat(v) || 0;
+    },
 
-	ACTIVE_COLUMN = &#x27;activeColumn&#x27;,
-	ACTIVE_VIEW = &#x27;activeView&#x27;,
-	ALL_DAY = &#x27;allDay&#x27;,
-	BOUNDING_BOX = &#x27;boundingBox&#x27;,
-	COL = &#x27;col&#x27;,
-	COL_DAYS_NODE = &#x27;colDaysNode&#x27;,
-	COL_HEADER_DAYS_NODE = &#x27;colHeaderDaysNode&#x27;,
-	COLBLANK = &#x27;colblank&#x27;,
-	COLDATA = &#x27;coldata&#x27;,
-	COLDAY = &#x27;colday&#x27;,
-	COLGRID = &#x27;colgrid&#x27;,
-	COLSPAN = &#x27;colspan&#x27;,
-	COLTIME = &#x27;coltime&#x27;,
-	COLUMN_DATA = &#x27;columnData&#x27;,
-	COLUMN_DAY_HEADER = &#x27;columnDayHeader&#x27;,
-	COLUMN_SHIMS = &#x27;columnShims&#x27;,
-	COLUMN_TIME = &#x27;columnTime&#x27;,
-	CONTAINER = &#x27;container&#x27;,
-	CREATION_START_DATE = &#x27;creationStartDate&#x27;,
-	DATE = &#x27;date&#x27;,
-	VIEW_DATE = &#x27;viewDate&#x27;,
-	DAY = &#x27;day&#x27;,
-	DAYS = &#x27;days&#x27;,
-	DELEGATE_CONFIG = &#x27;delegateConfig&#x27;,
-	DISABLED = &#x27;disabled&#x27;,
-	DIVISION = &#x27;division&#x27;,
-	_DOTTED = &#x27;dotted&#x27;,
-	DRAGGING_EVENT = &#x27;draggingEvent&#x27;,
-	DURATION = &#x27;duration&#x27;,
-	END_DATE = &#x27;endDate&#x27;,
-	EVENT_PLACEHOLDER = &#x27;eventPlaceholder&#x27;,
-	EVENT_RECORDER = &#x27;eventRecorder&#x27;,
-	EVENT_WIDTH = &#x27;eventWidth&#x27;,
-	FILTER_FN = &#x27;filterFn&#x27;,
-	FIRST = &#x27;first&#x27;,
-	GRID = &#x27;grid&#x27;,
-	GRID_CONTAINER = &#x27;gridContainer&#x27;,
-	GRIP = &#x27;grip&#x27;,
-	HD = &#x27;hd&#x27;,
-	HEADER = &#x27;header&#x27;,
-	HEADER_DATE_FORMATTER = &#x27;headerDateFormatter&#x27;,
-	HEADER_TABLE_NODE = &#x27;headerTableNode&#x27;,
-	HEADER_VIEW = &#x27;headerView&#x27;,
-	HEADER_VIEW_CONFIG = &#x27;headerViewConfig&#x27;,
-	HEADER_VIEW_LABEL_NODE = &#x27;headerViewLabelNode&#x27;,
-	HEIGHT = &#x27;height&#x27;,
-	HORIZONTAL = &#x27;horizontal&#x27;,
-	HOST = &#x27;host&#x27;,
-	HOUR_HEIGHT = &#x27;hourHeight&#x27;,
-	ICON = &#x27;icon&#x27;,
-	ISO_TIME = &#x27;isoTime&#x27;,
-	LABEL = &#x27;label&#x27;,
-	LEFT = &#x27;left&#x27;,
-	LOCALE = &#x27;locale&#x27;,
-	MARGIN_RIGHT = &#x27;marginRight&#x27;,
-	MARKER = &#x27;marker&#x27;,
-	MARKERCELL = &#x27;markercell&#x27;,
-	MARKERCELLS_NODE = &#x27;markercellsNode&#x27;,
-	MARKERS = &#x27;markers&#x27;,
-	MARKERS_NODE = &#x27;markersNode&#x27;,
-	NODE = &#x27;node&#x27;,
-	OFFSET_HEIGHT = &#x27;offsetHeight&#x27;,
-	PAD = &#x27;pad&#x27;,
-	PARENT_NODE = &#x27;parentNode&#x27;,
-	PROXY = &#x27;proxy&#x27;,
-	PX = &#x27;px&#x27;,
-	REGION = &#x27;region&#x27;,
-	RESIZER = &#x27;resizer&#x27;,
-	RESIZER_NODE = &#x27;resizerNode&#x27;,
-	RESIZING = &#x27;resizing&#x27;,
-	RIGHT = &#x27;right&#x27;,
-	SCHEDULER = &#x27;scheduler&#x27;,
-	SCHEDULER_EVENT = &#x27;scheduler-event&#x27;,
-	SHIM = &#x27;shim&#x27;,
-	START_DATE = &#x27;startDate&#x27;,
-	START_XY = &#x27;startXY&#x27;,
-	STRINGS = &#x27;strings&#x27;,
-	TABLE = &#x27;table&#x27;,
-	TABLE_NODE = &#x27;tableNode&#x27;,
-	TIME = &#x27;time&#x27;,
-	TIMES_NODE = &#x27;timesNode&#x27;,
-	TODAY = &#x27;today&#x27;,
-	TOP = &#x27;top&#x27;,
-	VIEW = &#x27;view&#x27;,
-	VISIBLE = &#x27;visible&#x27;,
-	WIDTH = &#x27;width&#x27;,
-	DATA = &#x27;data&#x27;,
+    ACTIVE_COLUMN = &#x27;activeColumn&#x27;,
+    ACTIVE_VIEW = &#x27;activeView&#x27;,
+    ALL_DAY = &#x27;allDay&#x27;,
+    BOUNDING_BOX = &#x27;boundingBox&#x27;,
+    COL = &#x27;col&#x27;,
+    COL_DAYS_NODE = &#x27;colDaysNode&#x27;,
+    COL_HEADER_DAYS_NODE = &#x27;colHeaderDaysNode&#x27;,
+    COLBLANK = &#x27;colblank&#x27;,
+    COLDATA = &#x27;coldata&#x27;,
+    COLDAY = &#x27;colday&#x27;,
+    COLGRID = &#x27;colgrid&#x27;,
+    COLSPAN = &#x27;colspan&#x27;,
+    COLTIME = &#x27;coltime&#x27;,
+    COLUMN_DATA = &#x27;columnData&#x27;,
+    COLUMN_DAY_HEADER = &#x27;columnDayHeader&#x27;,
+    COLUMN_SHIMS = &#x27;columnShims&#x27;,
+    COLUMN_TIME = &#x27;columnTime&#x27;,
+    CONTAINER = &#x27;container&#x27;,
+    CREATION_START_DATE = &#x27;creationStartDate&#x27;,
+    DATA = &#x27;data&#x27;,
+    DATE = &#x27;date&#x27;,
+    DAY = &#x27;day&#x27;,
+    DAYS = &#x27;days&#x27;,
+    DELEGATE_CONFIG = &#x27;delegateConfig&#x27;,
+    DISABLED = &#x27;disabled&#x27;,
+    DIVISION = &#x27;division&#x27;,
+    DRAGGING_EVENT = &#x27;draggingEvent&#x27;,
+    DURATION = &#x27;duration&#x27;,
+    END_DATE = &#x27;endDate&#x27;,
+    EVENT_PLACEHOLDER = &#x27;eventPlaceholder&#x27;,
+    EVENT_RECORDER = &#x27;eventRecorder&#x27;,
+    EVENT_WIDTH = &#x27;eventWidth&#x27;,
+    FILTER_FN = &#x27;filterFn&#x27;,
+    FIRST = &#x27;first&#x27;,
+    GRID = &#x27;grid&#x27;,
+    GRID_CONTAINER = &#x27;gridContainer&#x27;,
+    GRIP = &#x27;grip&#x27;,
+    HD = &#x27;hd&#x27;,
+    HEADER = &#x27;header&#x27;,
+    HEADER_DATE_FORMATTER = &#x27;headerDateFormatter&#x27;,
+    HEADER_TABLE_NODE = &#x27;headerTableNode&#x27;,
+    HEADER_VIEW = &#x27;headerView&#x27;,
+    HEADER_VIEW_CONFIG = &#x27;headerViewConfig&#x27;,
+    HEADER_VIEW_LABEL_NODE = &#x27;headerViewLabelNode&#x27;,
+    HEIGHT = &#x27;height&#x27;,
+    HORIZONTAL = &#x27;horizontal&#x27;,
+    HOST = &#x27;host&#x27;,
+    HOUR_HEIGHT = &#x27;hourHeight&#x27;,
+    ICON = &#x27;icon&#x27;,
+    ISO_TIME = &#x27;isoTime&#x27;,
+    LABEL = &#x27;label&#x27;,
+    LEFT = &#x27;left&#x27;,
+    LOCALE = &#x27;locale&#x27;,
+    PADDING_RIGHT = &#x27;paddingRight&#x27;,
+    REGION = &#x27;region&#x27;,
+    RESIZER = &#x27;resizer&#x27;,
+    RESIZER_NODE = &#x27;resizerNode&#x27;,
+    RESIZING = &#x27;resizing&#x27;,
+    SCHEDULER = &#x27;scheduler&#x27;,
+    SCHEDULER_EVENT = &#x27;scheduler-event&#x27;,
+    SHIM = &#x27;shim&#x27;,
+    START_DATE = &#x27;startDate&#x27;,
+    START_XY = &#x27;startXY&#x27;,
+    STRINGS = &#x27;strings&#x27;,
+    TABLE = &#x27;table&#x27;,
+    TABLE_NODE = &#x27;tableNode&#x27;,
+    TIME = &#x27;time&#x27;,
+    TIMES_NODE = &#x27;timesNode&#x27;,
+    TODAY = &#x27;today&#x27;,
+    TODAY_DATE = &#x27;todayDate&#x27;,
+    TOP = &#x27;top&#x27;,
+    VIEW = &#x27;view&#x27;,
+    VIEW_DATE = &#x27;viewDate&#x27;,
+    VISIBLE = &#x27;visible&#x27;,
+    WIDTH = &#x27;width&#x27;,
+    MARKER = &#x27;marker&#x27;,
+    MARKERCELL = &#x27;markercell&#x27;,
+    MARKERCELLS_NODE = &#x27;markercellsNode&#x27;,
+    MARKERS = &#x27;markers&#x27;,
+    MARKERS_NODE = &#x27;markersNode&#x27;,
+    NODE = &#x27;node&#x27;,
+    OFFSET_HEIGHT = &#x27;offsetHeight&#x27;,
+    PARENT_NODE = &#x27;parentNode&#x27;,
+    PROXY = &#x27;proxy&#x27;,
+    PX = &#x27;px&#x27;,
 
-	getCN = A.getClassName,
+    getCN = A.getClassName,
 
-	CSS_ICON = getCN(ICON),
+    CSS_SVT_TABLE_DATA = getCN(SCHEDULER_VIEW, TABLE, DATA),
 
-	CSS_SVT_TABLE_DATA = getCN(SCHEDULER_VIEW, TABLE, DATA),
+    CSS_SCHEDULER_EVENT = getCN(SCHEDULER_EVENT),
+    CSS_SCHEDULER_EVENT_DISABLED = getCN(SCHEDULER_EVENT, DISABLED),
+    CSS_SCHEDULER_EVENT_PROXY = getCN(SCHEDULER_EVENT, PROXY),
 
-	CSS_SCHEDULER_EVENT = getCN(SCHEDULER_EVENT),
-	CSS_SCHEDULER_EVENT_DISABLED = getCN(SCHEDULER_EVENT, DISABLED),
-	CSS_SCHEDULER_EVENT_PROXY = getCN(SCHEDULER_EVENT, PROXY),
+    CSS_SCHEDULER_TODAY = getCN(SCHEDULER, TODAY),
+    CSS_SCHEDULER_TODAY_HD = getCN(SCHEDULER, TODAY, HD),
 
-	CSS_SCHEDULER_TODAY = getCN(SCHEDULER, TODAY),
-	CSS_SCHEDULER_TODAY_HD = getCN(SCHEDULER, TODAY, HD),
+    CSS_SCHEDULER_VIEW_DAY_COLDATA = getCN(SCHEDULER_VIEW, COLDATA),
+    CSS_SCHEDULER_VIEW_DAY_COLGRID = getCN(SCHEDULER_VIEW, COLGRID),
+    CSS_SCHEDULER_VIEW_DAY_GRID = getCN(SCHEDULER_VIEW, GRID),
+    CSS_SCHEDULER_VIEW_DAY_GRID_CONTAINER = getCN(SCHEDULER_VIEW, GRID, CONTAINER),
+    CSS_SCHEDULER_VIEW_DAY_HEADER_COL = getCN(SCHEDULER_VIEW, DAY, HEADER, COL),
+    CSS_SCHEDULER_VIEW_DAY_HEADER_DAY = getCN(SCHEDULER_VIEW, DAY, HEADER, DAY),
+    CSS_SCHEDULER_VIEW_DAY_HEADER_DAY_FIRST = getCN(SCHEDULER_VIEW, DAY, HEADER, DAY, FIRST),
+    CSS_SCHEDULER_VIEW_DAY_HEADER_TABLE = getCN(SCHEDULER_VIEW, DAY, HEADER, TABLE),
+    CSS_SCHEDULER_VIEW_DAY_HEADER_VIEW_LABEL = getCN(SCHEDULER_VIEW, DAY, HEADER, VIEW, LABEL),
+    CSS_SCHEDULER_VIEW_DAY_ICON_GRIP_HORIZONTAL = getCN(SCHEDULER_VIEW, ICON, GRIP, HORIZONTAL),
+    CSS_SCHEDULER_VIEW_DAY_MARKER_DIVISION = getCN(SCHEDULER_VIEW, MARKER, DIVISION),
+    CSS_SCHEDULER_VIEW_DAY_MARKERCELL = getCN(SCHEDULER_VIEW, MARKERCELL),
+    CSS_SCHEDULER_VIEW_DAY_MARKERS = getCN(SCHEDULER_VIEW, MARKERS),
+    CSS_SCHEDULER_VIEW_DAY_RESIZER = getCN(SCHEDULER_VIEW, DAY, RESIZER),
+    CSS_SCHEDULER_VIEW_DAY_RESIZER_ICON = getCN(SCHEDULER_VIEW, DAY, RESIZER, ICON),
+    CSS_SCHEDULER_VIEW_DAY_TABLE = getCN(SCHEDULER_VIEW, DAY, TABLE),
+    CSS_SCHEDULER_VIEW_DAY_TABLE_COL = getCN(SCHEDULER_VIEW, DAY, TABLE, COL),
+    CSS_SCHEDULER_VIEW_DAY_TABLE_COL_SHIM = getCN(SCHEDULER_VIEW, DAY, TABLE, COL, SHIM),
+    CSS_SCHEDULER_VIEW_DAY_TABLE_COLBLANK = getCN(SCHEDULER_VIEW, DAY, TABLE, COLBLANK),
+    CSS_SCHEDULER_VIEW_DAY_TABLE_COLDAY = getCN(SCHEDULER_VIEW, DAY, TABLE, COLDAY),
+    CSS_SCHEDULER_VIEW_DAY_TABLE_COLTIME = getCN(SCHEDULER_VIEW, DAY, TABLE, COLTIME),
+    CSS_SCHEDULER_VIEW_DAY_TABLE_TIME = getCN(SCHEDULER_VIEW, DAY, TABLE, TIME),
 
-	CSS_SCHEDULER_VIEW_DAY_COLDATA = getCN(SCHEDULER_VIEW, COLDATA),
-	CSS_SCHEDULER_VIEW_DAY_COLGRID = getCN(SCHEDULER_VIEW, COLGRID),
-	CSS_SCHEDULER_VIEW_DAY_GRID = getCN(SCHEDULER_VIEW, GRID),
-	CSS_SCHEDULER_VIEW_DAY_GRID_CONTAINER = getCN(SCHEDULER_VIEW, GRID, CONTAINER),
-	CSS_SCHEDULER_VIEW_DAY_HEADER_COL = getCN(SCHEDULER_VIEW, DAY, HEADER, COL),
-	CSS_SCHEDULER_VIEW_DAY_HEADER_DAY = getCN(SCHEDULER_VIEW, DAY, HEADER, DAY),
-	CSS_SCHEDULER_VIEW_DAY_HEADER_DAY_FIRST = getCN(SCHEDULER_VIEW, DAY, HEADER, DAY, FIRST),
-	CSS_SCHEDULER_VIEW_DAY_HEADER_DAY_PAD_RIGHT = getCN(SCHEDULER_VIEW, DAY, HEADER, DAY, PAD, RIGHT),
-	CSS_SCHEDULER_VIEW_DAY_HEADER_TABLE = getCN(SCHEDULER_VIEW, DAY, HEADER, TABLE),
-	CSS_SCHEDULER_VIEW_DAY_HEADER_VIEW_LABEL = getCN(SCHEDULER_VIEW, DAY, HEADER, VIEW, LABEL),
-	CSS_SCHEDULER_VIEW_DAY_ICON_GRIP_HORIZONTAL = getCN(SCHEDULER_VIEW, ICON, GRIP, HORIZONTAL),
-	CSS_SCHEDULER_VIEW_DAY_MARKER_DIVISION = getCN(SCHEDULER_VIEW, MARKER, DIVISION),
-	CSS_SCHEDULER_VIEW_DAY_MARKERCELL = getCN(SCHEDULER_VIEW, MARKERCELL),
-	CSS_SCHEDULER_VIEW_DAY_MARKERS = getCN(SCHEDULER_VIEW, MARKERS),
-	CSS_SCHEDULER_VIEW_DAY_RESIZER = getCN(SCHEDULER_VIEW, DAY, RESIZER),
-	CSS_SCHEDULER_VIEW_DAY_RESIZER_ICON = getCN(SCHEDULER_VIEW, DAY, RESIZER, ICON),
-	CSS_SCHEDULER_VIEW_DAY_TABLE = getCN(SCHEDULER_VIEW, DAY, TABLE),
-	CSS_SCHEDULER_VIEW_DAY_TABLE_COL = getCN(SCHEDULER_VIEW, DAY, TABLE, COL),
-	CSS_SCHEDULER_VIEW_DAY_TABLE_COL_SHIM = getCN(SCHEDULER_VIEW, DAY, TABLE, COL, SHIM),
-	CSS_SCHEDULER_VIEW_DAY_TABLE_COLBLANK = getCN(SCHEDULER_VIEW, DAY, TABLE, COLBLANK),
-	CSS_SCHEDULER_VIEW_DAY_TABLE_COLDAY = getCN(SCHEDULER_VIEW, DAY, TABLE, COLDAY),
-	CSS_SCHEDULER_VIEW_DAY_TABLE_COLTIME = getCN(SCHEDULER_VIEW, DAY, TABLE, COLTIME),
-	CSS_SCHEDULER_VIEW_DAY_TABLE_TIME = getCN(SCHEDULER_VIEW, DAY, TABLE, TIME),
+    TPL_SCHEDULER_VIEW_DAY_RESIZER = &#x27;&lt;div class=&quot;&#x27; + CSS_SCHEDULER_VIEW_DAY_RESIZER + &#x27;&quot;&gt;&#x27; +
+        &#x27;&lt;div class=&quot;&#x27; + [CSS_SCHEDULER_VIEW_DAY_ICON_GRIP_HORIZONTAL, CSS_SCHEDULER_VIEW_DAY_RESIZER_ICON].join(_SPACE) +
+        &#x27;&quot;&gt;&lt;/div&gt;&#x27; +
+        &#x27;&lt;/div&gt;&#x27;,
 
-	TPL_SCHEDULER_VIEW_DAY_RESIZER = &#x27;&lt;div class=&quot;&#x27; + CSS_SCHEDULER_VIEW_DAY_RESIZER + &#x27;&quot;&gt;&#x27; +
-										&#x27;&lt;div class=&quot;&#x27; + [CSS_SCHEDULER_VIEW_DAY_ICON_GRIP_HORIZONTAL, CSS_SCHEDULER_VIEW_DAY_RESIZER_ICON].join(_SPACE) + &#x27;&quot;&gt;&lt;/div&gt;&#x27; +
-									&#x27;&lt;/div&gt;&#x27;,
+    TPL_SCHEDULER_VIEW_DAY_MARKERCELL = &#x27;&lt;div class=&quot;&#x27; + CSS_SCHEDULER_VIEW_DAY_MARKERCELL + &#x27;&quot;&gt;&#x27; +
+        &#x27;&lt;div class=&quot;&#x27; + CSS_SCHEDULER_VIEW_DAY_MARKER_DIVISION + &#x27;&quot;&gt;&lt;/div&gt;&#x27; +
+        &#x27;&lt;/div&gt;&#x27;,
 
-	TPL_SCHEDULER_VIEW_DAY_MARKERCELL = &#x27;&lt;div class=&quot;&#x27; + CSS_SCHEDULER_VIEW_DAY_MARKERCELL + &#x27;&quot;&gt;&#x27; +
-											&#x27;&lt;div class=&quot;&#x27; + CSS_SCHEDULER_VIEW_DAY_MARKER_DIVISION + &#x27;&quot;&gt;&lt;/div&gt;&#x27; +
-										&#x27;&lt;/div&gt;&#x27;,
+    TPL_SCHEDULER_VIEW_DAY_HEADER_VIEW_LABEL = &#x27;&lt;span class=&quot;&#x27; + CSS_SCHEDULER_VIEW_DAY_HEADER_VIEW_LABEL +
+        &#x27;&quot;&gt;{label}&lt;/span&gt;&#x27;,
 
-	TPL_SCHEDULER_VIEW_DAY_HEADER_VIEW_LABEL = &#x27;&lt;span class=&quot;&#x27; + CSS_SCHEDULER_VIEW_DAY_HEADER_VIEW_LABEL + &#x27;&quot;&gt;{label}&lt;/span&gt;&#x27;,
+    TPL_SCHEDULER_VIEW_DAY_TABLE = &#x27;&lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; class=&quot;&#x27; + CSS_SCHEDULER_VIEW_DAY_TABLE +
+        &#x27;&quot;&gt;&#x27; +
+        &#x27;&lt;tbody&gt;&#x27; +
+        &#x27;&lt;tr class=&quot;&#x27; + CSS_SCHEDULER_VIEW_DAY_COLGRID + &#x27;&quot; height=&quot;1&quot;&gt;&#x27; +
+        &#x27;&lt;td height=&quot;0&quot; class=&quot;&#x27; + [CSS_SCHEDULER_VIEW_DAY_TABLE_COL, CSS_SCHEDULER_VIEW_DAY_TABLE_COLBLANK].join(
+            _SPACE) + &#x27;&quot;&gt;&lt;/td&gt;&#x27; +
+        &#x27;&lt;td class=&quot;&#x27; + CSS_SCHEDULER_VIEW_DAY_GRID_CONTAINER + &#x27;&quot; colspan=&quot;1&quot;&gt;&#x27; +
+        &#x27;&lt;div class=&quot;&#x27; + CSS_SCHEDULER_VIEW_DAY_GRID + &#x27;&quot;&gt;&#x27; +
+        &#x27;&lt;div class=&quot;&#x27; + CSS_SCHEDULER_VIEW_DAY_MARKERS + &#x27;&quot;&gt;&lt;/div&gt;&#x27; +
+        &#x27;&lt;/div&gt;&#x27; +
+        &#x27;&lt;/td&gt;&#x27; +
+        &#x27;&lt;/tr&gt;&#x27; +
+        &#x27;&lt;tr class=&quot;&#x27; + CSS_SCHEDULER_VIEW_DAY_COLDATA + &#x27;&quot;&gt;&#x27; +
+        &#x27;&lt;td class=&quot;&#x27; + [CSS_SCHEDULER_VIEW_DAY_TABLE_COL, CSS_SCHEDULER_VIEW_DAY_TABLE_COLTIME].join(_SPACE) +
+        &#x27;&quot;&gt;&lt;/td&gt;&#x27; +
+        &#x27;&lt;/tr&gt;&#x27; +
+        &#x27;&lt;/tbody&gt;&#x27; +
+        &#x27;&lt;/table&gt;&#x27;,
 
-	TPL_SCHEDULER_VIEW_DAY_TABLE = &#x27;&lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; class=&quot;&#x27; + CSS_SCHEDULER_VIEW_DAY_TABLE + &#x27;&quot;&gt;&#x27; +
-										&#x27;&lt;tbody&gt;&#x27; +
-											&#x27;&lt;tr class=&quot;&#x27; + CSS_SCHEDULER_VIEW_DAY_COLGRID + &#x27;&quot; height=&quot;1&quot;&gt;&#x27; +
-												&#x27;&lt;td height=&quot;0&quot; class=&quot;&#x27; + [ CSS_SCHEDULER_VIEW_DAY_TABLE_COL, CSS_SCHEDULER_VIEW_DAY_TABLE_COLBLANK ].join(_SPACE) + &#x27;&quot;&gt;&lt;/td&gt;&#x27; +
-												&#x27;&lt;td class=&quot;&#x27; + CSS_SCHEDULER_VIEW_DAY_GRID_CONTAINER + &#x27;&quot; colspan=&quot;1&quot;&gt;&#x27; +
-													&#x27;&lt;div class=&quot;&#x27; + CSS_SCHEDULER_VIEW_DAY_GRID + &#x27;&quot;&gt;&#x27; +
-														&#x27;&lt;div class=&quot;&#x27; + CSS_SCHEDULER_VIEW_DAY_MARKERS + &#x27;&quot;&gt;&lt;/div&gt;&#x27; +
-													&#x27;&lt;/div&gt;&#x27; +
-												&#x27;&lt;/td&gt;&#x27; +
-											&#x27;&lt;/tr&gt;&#x27; +
-											&#x27;&lt;tr class=&quot;&#x27; + CSS_SCHEDULER_VIEW_DAY_COLDATA + &#x27;&quot;&gt;&#x27; +
-												&#x27;&lt;td class=&quot;&#x27; + [ CSS_SCHEDULER_VIEW_DAY_TABLE_COL, CSS_SCHEDULER_VIEW_DAY_TABLE_COLTIME ].join(_SPACE) + &#x27;&quot;&gt;&lt;/td&gt;&#x27; +
-											&#x27;&lt;/tr&gt;&#x27; +
-										&#x27;&lt;/tbody&gt;&#x27; +
-									&#x27;&lt;/table&gt;&#x27;,
+    TPL_SCHEDULER_VIEW_DAY_TABLE_COLDAY = &#x27;&lt;td class=&quot;&#x27; + [CSS_SCHEDULER_VIEW_DAY_TABLE_COL,
+        CSS_SCHEDULER_VIEW_DAY_TABLE_COLDAY].join(_SPACE) + &#x27;&quot; data-colnumber=&quot;{colNumber}&quot;&gt;&#x27; +
+        &#x27;&lt;div class=&quot;&#x27; + CSS_SCHEDULER_VIEW_DAY_TABLE_COL_SHIM + &#x27;&quot;&gt;&amp;nbsp;&lt;/div&gt;&#x27; +
+        &#x27;&lt;/td&gt;&#x27;,
 
-	TPL_SCHEDULER_VIEW_DAY_TABLE_COLDAY = &#x27;&lt;td class=&quot;&#x27; + [ CSS_SCHEDULER_VIEW_DAY_TABLE_COL, CSS_SCHEDULER_VIEW_DAY_TABLE_COLDAY ].join(_SPACE) + &#x27;&quot; data-colnumber=&quot;{colNumber}&quot;&gt;&#x27; +
-												&#x27;&lt;div class=&quot;&#x27; + CSS_SCHEDULER_VIEW_DAY_TABLE_COL_SHIM + &#x27;&quot;&gt;&lt;/div&gt;&#x27; +
-											&#x27;&lt;/td&gt;&#x27;,
+    TPL_SCHEDULER_VIEW_DAY_TABLE_TIME = &#x27;&lt;div class=&quot;&#x27; + CSS_SCHEDULER_VIEW_DAY_TABLE_TIME + &#x27;&quot;&gt;{hour}&lt;/div&gt;&#x27;,
 
-	TPL_SCHEDULER_VIEW_DAY_TABLE_TIME = &#x27;&lt;div class=&quot;&#x27; + CSS_SCHEDULER_VIEW_DAY_TABLE_TIME + &#x27;&quot;&gt;{hour}&lt;/div&gt;&#x27;,
+    TPL_SCHEDULER_VIEW_DAY_HEADER_TABLE = &#x27;&lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; class=&quot;&#x27; +
+        CSS_SCHEDULER_VIEW_DAY_HEADER_TABLE + &#x27;&quot;&gt;&#x27; +
+        &#x27;&lt;tbody&gt;&#x27; +
+        &#x27;&lt;tr class=&quot;&#x27; + CSS_SCHEDULER_VIEW_DAY_HEADER_COL + &#x27;&quot;&gt;&lt;/tr&gt;&#x27; +
+        &#x27;&lt;/tbody&gt;&#x27; +
+        &#x27;&lt;/table&gt;&#x27;,
 
-	TPL_SCHEDULER_VIEW_DAY_HEADER_TABLE = &#x27;&lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; class=&quot;&#x27; + CSS_SCHEDULER_VIEW_DAY_HEADER_TABLE + &#x27;&quot;&gt;&#x27; +
-											&#x27;&lt;tbody&gt;&#x27; +
-												&#x27;&lt;tr class=&quot;&#x27; + CSS_SCHEDULER_VIEW_DAY_HEADER_COL + &#x27;&quot;&gt;&lt;/tr&gt;&#x27; +
-											&#x27;&lt;/tbody&gt;&#x27; +
-										&#x27;&lt;/table&gt;&#x27;,
-
-	TPL_SCHEDULER_VIEW_DAY_HEADER_DAY = &#x27;&lt;th class=&quot;&#x27; + CSS_SCHEDULER_VIEW_DAY_HEADER_DAY + &#x27;&quot; data-colnumber=&quot;{colNumber}&quot;&gt;&lt;a href=&quot;#&quot;&gt;&amp;nbsp;&lt;/a&gt;&lt;/th&gt;&#x27;,
-	TPL_SCHEDULER_VIEW_DAY_HEADER_DAY_FIRST = &#x27;&lt;td class=&quot;&#x27; + [ CSS_SCHEDULER_VIEW_DAY_HEADER_DAY, CSS_SCHEDULER_VIEW_DAY_HEADER_DAY_FIRST ].join(_SPACE) + &#x27;&quot;&gt;&lt;/td&gt;&#x27;,
-	TPL_SCHEDULER_VIEW_DAY_HEADER_DAY_PAD_RIGHT = &#x27;&lt;th class=&quot;&#x27; + [ CSS_SCHEDULER_VIEW_DAY_HEADER_DAY, CSS_SCHEDULER_VIEW_DAY_HEADER_DAY_PAD_RIGHT ].join(_SPACE) + &#x27;&quot;&gt;&amp;nbsp;&lt;/th&gt;&#x27;;
+    TPL_SCHEDULER_VIEW_DAY_HEADER_DAY = &#x27;&lt;th class=&quot;&#x27; + CSS_SCHEDULER_VIEW_DAY_HEADER_DAY +
+        &#x27;&quot; data-colnumber=&quot;{colNumber}&quot;&gt;&lt;a href=&quot;#&quot;&gt;&amp;nbsp;&lt;/a&gt;&lt;/th&gt;&#x27;,
+    TPL_SCHEDULER_VIEW_DAY_HEADER_DAY_FIRST = &#x27;&lt;td class=&quot;&#x27; + [CSS_SCHEDULER_VIEW_DAY_HEADER_DAY,
+        CSS_SCHEDULER_VIEW_DAY_HEADER_DAY_FIRST].join(_SPACE) + &#x27;&quot;&gt;&lt;/td&gt;&#x27;;
 
 /**
  * A base class for SchedulerDayView.
@@ -2291,1382 +2330,1411 @@ var Lang = A.Lang,
  */
 var SchedulerDayView = A.Component.create({
 
-	/**
-	 * Static property provides a string to identify the class.
-	 *
-	 * @property SchedulerDayView.NAME
-	 * @type String
-	 * @static
-	 */
-	NAME: SCHEDULER_VIEW_DAY,
-
-	/**
-	 * Static property used to define the default attribute
-	 * configuration for the SchedulerDayView.
-	 *
-	 * @property SchedulerDayView.ATTRS
-	 * @type Object
-	 * @static
-	 */
-	ATTRS: {
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @attribute bodyContent
-		 * @default &#x27;&#x27;
-		 * @type String
-		 */
-		bodyContent: {
-			value: _EMPTY_STR
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @attribute days
-		 * @default 1
-		 * @type Number
-		 */
-		days: {
-			value: 1,
-			validator: isNumber
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @attribute delegateConfig
-		 * @default {}
-		 * @type Object
-		 */
-		delegateConfig: {
-			value: {},
-			setter: function(val) {
-				var instance = this;
-
-				return A.merge(
-					{
-						dragConfig: {
-							useShim: false
-						},
-						bubbleTargets: instance,
-						container: instance.get(BOUNDING_BOX),
-						nodes: _DOT+CSS_SCHEDULER_EVENT,
-						invalid: &#x27;input, select, button, a, textarea, &#x27; + _DOT+CSS_SCHEDULER_EVENT_DISABLED
-					},
-					val || {}
-				);
-			},
-			validator: isObject
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @attribute eventWidth
-		 * @default 95
-		 * @type Number
-		 */
-		eventWidth: {
-			value: 95,
-			validator: isNumber
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @attribute filterFn
-		 */
-		filterFn: {
-			value: function(evt) {
-				return (evt.getHoursDuration() &lt;= 24 &amp;&amp; !evt.get(ALL_DAY));
-			}
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @attribute headerDateFormatter
-		 * @type String
-		 */
-		headerDateFormatter: {
-			value: function(date) {
-				var instance = this;
-				var scheduler = instance.get(SCHEDULER);
-
-				return A.DataType.Date.format(
-					date,
-					{
-						format: &#x27;%d %A&#x27;,
-						locale: scheduler.get(LOCALE)
-					}
-				);
-			},
-			validator: isString
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @attribute headerView
-		 * @default true
-		 * @type Boolean
-		 */
-		headerView: {
-			value: true,
-			validator: isBoolean
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @attribute headerViewConfig
-		 * @default {}
-		 * @type Object
-		 */
-		headerViewConfig: {
-			setter: function(val) {
-				var instance = this;
-
-				return A.merge(
-					{
-						displayDaysInterval: 1,
-						displayRows: 6,
-						filterFn: function(evt) {
-							return ((evt.getHoursDuration() &gt; 24) || evt.get(ALL_DAY));
-						},
-						height: &#x27;auto&#x27;,
-						visible: true
-					},
-					val || {}
-				);
-			},
-			value: {}
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @attribute hourHeight
-		 * @default 52
-		 * @type Number
-		 */
-		hourHeight: {
-			value: 52,
-			validator: isNumber
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @attribute name
-		 * @default &#x27;day&#x27;
-		 * @type String
-		 */
-		name: {
-			value: DAY
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @attribute navigationDateFormatter
-		 * @type Function
-		 */
-		navigationDateFormatter: {
-			value: function(date) {
-				var instance = this;
-				var scheduler = instance.get(SCHEDULER);
-
-				return A.DataType.Date.format(
-					date,
-					{
-						format: &#x27;%A, %B %d, %Y&#x27;,
-						locale: scheduler.get(LOCALE)
-					}
-				);
-			},
-			validator: isFunction
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @attribute strings
-		 */
-		strings: {
-			value: {
-				allDay: &#x27;All day&#x27;
-			}
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @attribute headerTableNode
-		 */
-		headerTableNode: {
-			valueFn: function() {
-				return A.Node.create(TPL_SCHEDULER_VIEW_DAY_HEADER_TABLE);
-			}
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @attribute headerViewLabelNode
-		 */
-		headerViewLabelNode: {
-			valueFn: function() {
-				var instance = this;
-
-				var strings = instance.get(STRINGS);
-
-				return A.Node.create(
-					Lang.sub(TPL_SCHEDULER_VIEW_DAY_HEADER_VIEW_LABEL, {
-						label: strings[ALL_DAY]
-					})
-				);
-			}
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @attribute resizerNode
-		 */
-		resizerNode: {
-			valueFn: function() {
-				return A.Node.create(TPL_SCHEDULER_VIEW_DAY_RESIZER);
-			}
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @attribute tableNode
-		 */
-		tableNode: {
-			valueFn: function() {
-				return A.Node.create(TPL_SCHEDULER_VIEW_DAY_TABLE);
-			}
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @attribute colDaysNode
-		 */
-		colDaysNode: {
-			valueFn: &#x27;_valueColDaysNode&#x27;
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @attribute colHeaderDaysNode
-		 */
-		colHeaderDaysNode: {
-			valueFn: &#x27;_valueColHeaderDaysNode&#x27;
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @attribute markercellsNode
-		 */
-		markercellsNode: {
-			valueFn: &#x27;_valueMarkercellsNode&#x27;
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @attribute timesNode
-		 */
-		timesNode: {
-			valueFn: &#x27;_valueTimesNode&#x27;
-		}
-	},
-
-	/**
-	 * TODO. Wanna help? Please send a Pull Request.
-	 *
-	 * @property SchedulerDayView.HTML_PARSER
-	 * @default defaultName
-	 * @type typeName
-	 * @static
-	 */
-	HTML_PARSER: {
-		colDaysNode: getNodeListHTMLParser(_DOT+CSS_SCHEDULER_VIEW_DAY_TABLE_COLDAY, 1),
-		colHeaderDaysNode: getNodeListHTMLParser(_DOT+CSS_SCHEDULER_VIEW_DAY_HEADER_DAY, 2),
-		headerTableNode: _DOT+CSS_SCHEDULER_VIEW_DAY_HEADER_TABLE,
-		headerViewLabelNode: _DOT+CSS_SCHEDULER_VIEW_DAY_HEADER_VIEW_LABEL,
-		markercellsNode: getNodeListHTMLParser(_DOT+CSS_SCHEDULER_VIEW_DAY_MARKERCELL, 24),
-		resizerNode: _DOT+CSS_SCHEDULER_VIEW_DAY_RESIZER,
-		tableNode: _DOT+CSS_SCHEDULER_VIEW_DAY_TABLE,
-		timesNode: getNodeListHTMLParser(_DOT+CSS_SCHEDULER_VIEW_DAY_TABLE_TIME, 24)
-	},
-
-	/**
-	 * Static property used to define which component it extends.
-	 *
-	 * @property SchedulerDayView.EXTENDS
-	 * @type Object
-	 * @static
-	 */
-	EXTENDS: A.SchedulerView,
-
-	prototype: {
-
-		/**
-		 * Construction logic executed during SchedulerDayView instantiation. Lifecycle.
-		 *
-		 * @method initializer
-		 * @protected
-		 */
-		initializer: function() {
-			var instance = this;
-
-			instance[COL_DAYS_NODE] = instance.get(COL_DAYS_NODE);
-			instance[COL_HEADER_DAYS_NODE] = instance.get(COL_HEADER_DAYS_NODE);
-			instance[HEADER_TABLE_NODE] = instance.get(HEADER_TABLE_NODE);
-			instance[MARKERCELLS_NODE] = instance.get(MARKERCELLS_NODE);
-			instance[RESIZER_NODE] = instance.get(RESIZER_NODE);
-			instance[TABLE_NODE] = instance.get(TABLE_NODE);
-			instance[TIMES_NODE] = instance.get(TIMES_NODE);
-
-			instance[ACTIVE_COLUMN] = null;
-			instance[COLUMN_DATA] = instance[TABLE_NODE].one(_DOT+CSS_SCHEDULER_VIEW_DAY_COLDATA);
-			instance[COLUMN_DAY_HEADER] = instance.headerTableNode.one(_DOT+CSS_SCHEDULER_VIEW_DAY_HEADER_COL);
-			instance[COLUMN_SHIMS] = instance[COL_DAYS_NODE].all(_DOT+CSS_SCHEDULER_VIEW_DAY_TABLE_COL_SHIM);
-			instance[COLUMN_TIME] = instance[TABLE_NODE].one(_DOT+CSS_SCHEDULER_VIEW_DAY_TABLE_COLTIME);
-			instance[GRID_CONTAINER] = instance[TABLE_NODE].one(_DOT+CSS_SCHEDULER_VIEW_DAY_GRID_CONTAINER);
-			instance[MARKERS_NODE] = instance[TABLE_NODE].one(_DOT+CSS_SCHEDULER_VIEW_DAY_MARKERS);
-
-			if (instance.get(HEADER_VIEW)) {
-				instance[HEADER_VIEW] = new A.SchedulerTableView(
-					instance.get(HEADER_VIEW_CONFIG)
-				);
-			}
-		},
-
-		/**
-		 * Render the SchedulerDayView component instance. Lifecycle.
-		 *
-		 * @method renderUI
-		 * @protected
-		 */
-		renderUI: function() {
-			var instance = this;
-
-			instance[COLUMN_TIME].setContent(instance[TIMES_NODE]);
-			instance[MARKERS_NODE].setContent(instance[MARKERCELLS_NODE]);
-			instance[COL_DAYS_NODE].appendTo(instance[COLUMN_DATA]);
-			instance[COL_HEADER_DAYS_NODE].appendTo(instance[COLUMN_DAY_HEADER]);
-
-			if (instance[HEADER_VIEW]) {
-				instance[HEADER_VIEW].set(SCHEDULER, instance.get(SCHEDULER));
-
-				instance[HEADER_VIEW].render();
-			}
-		},
-
-		/**
-		 * Bind the events on the SchedulerDayView UI. Lifecycle.
-		 *
-		 * @method bindUI
-		 * @protected
-		 */
-		bindUI: function() {
-			var instance = this;
-
-			instance[HEADER_TABLE_NODE].delegate(&#x27;click&#x27;, A.bind(instance._onClickDaysHeader, instance), _DOT+CSS_SCHEDULER_VIEW_DAY_HEADER_DAY);
-			instance[COLUMN_DATA].delegate(&#x27;mousedown&#x27;, A.bind(instance._onMouseDownTableCol, instance), _DOT+CSS_SCHEDULER_VIEW_DAY_TABLE_COL);
-			instance[COLUMN_DATA].delegate(&#x27;mouseenter&#x27;, A.bind(instance._onMouseEnterEvent, instance), _DOT+CSS_SCHEDULER_EVENT);
-			instance[COLUMN_DATA].delegate(&#x27;mouseleave&#x27;, A.bind(instance._onMouseLeaveEvent, instance), _DOT+CSS_SCHEDULER_EVENT);
-			instance[COLUMN_DATA].delegate(&#x27;mousemove&#x27;, A.bind(instance._onMouseMoveTableCol, instance), _DOT+CSS_SCHEDULER_VIEW_DAY_TABLE_COLDAY);
-			instance[COLUMN_DATA].delegate(&#x27;mouseup&#x27;, A.bind(instance._onMouseUpTableCol, instance), _DOT+CSS_SCHEDULER_VIEW_DAY_TABLE_COL);
-
-			instance.on(&#x27;drag:end&#x27;, instance._onEventDragEnd);
-			instance.on(&#x27;drag:start&#x27;, instance._onEventDragStart);
-			instance.on(&#x27;drag:tickAlignY&#x27;, instance._dragTickAlignY);
-			instance.on(&#x27;schedulerChange&#x27;, instance._onSchedulerChange);
-			instance.after(&#x27;drag:align&#x27;, instance._afterDragAlign);
-		},
-
-		/**
-		 * Sync the SchedulerDayView UI. Lifecycle.
-		 *
-		 * @method syncUI
-		 * @protected
-		 */
-		syncUI: function() {
-			var instance = this;
-
-			SchedulerDayView.superclass.syncUI.apply(this, arguments);
-
-			instance[GRID_CONTAINER].attr(COLSPAN, instance.get(DAYS));
-
-			instance._setupDragDrop();
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method syncStdContent
-		 */
-		syncStdContent: function() {
-			var instance = this;
-
-			instance.setStdModContent(
-				WidgetStdMod.BODY, instance[TABLE_NODE].getDOM());
-
-			var headerNodes = A.NodeList.create(instance[HEADER_TABLE_NODE]);
-
-			if (instance[HEADER_VIEW]) {
-				headerNodes.push(instance[HEADER_VIEW].get(BOUNDING_BOX));
-				headerNodes.push(instance.get(HEADER_VIEW_LABEL_NODE));
-			}
-
-			instance.setStdModContent(WidgetStdMod.HEADER, headerNodes);
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method calculateEventHeight
-		 * @param duration
-		 */
-		calculateEventHeight: function(duration) {
-			var instance = this;
-			var hourHeight = instance.get(HOUR_HEIGHT);
-
-			return Math.max(duration*(hourHeight/60), hourHeight/2);
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method calculateTop
-		 * @param date
-		 */
-		calculateTop: function(date) {
-			var instance = this;
-
-			return ((date.getHours()*60) + date.getMinutes() +
-					(date.getSeconds()/60)) * (instance.get(HOUR_HEIGHT)/60);
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method getNextDate
-		 */
-		getNextDate: function() {
-			var instance = this;
-			var viewDate = instance.get(SCHEDULER).get(VIEW_DATE);
-
-			return DateMath.toLastHour(DateMath.add(viewDate, DateMath.DAY, 1));
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method getPrevDate
-		 */
-		getPrevDate: function() {
-			var instance = this;
-			var viewDate = instance.get(SCHEDULER).get(VIEW_DATE);
-
-			return DateMath.toMidnight(DateMath.subtract(viewDate, DateMath.DAY, 1));
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method getColumnByDate
-		 * @param date
-		 */
-		getColumnByDate: function(date) {
-			var instance = this;
-
-			return instance[COL_DAYS_NODE].item(instance.getDateDaysOffset(date));
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method getColumnShimByDate
-		 * @param date
-		 */
-		getColumnShimByDate: function(date) {
-			var instance = this;
-
-			return instance[COLUMN_SHIMS].item(instance.getDateDaysOffset(date));
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method getDateByColumn
-		 * @param colNumber
-		 */
-		getDateByColumn: function(colNumber) {
-			var instance = this;
-			var viewDate = DateMath.safeClearTime(
-				instance.get(SCHEDULER).get(VIEW_DATE));
-
-			return DateMath.add(viewDate, DateMath.DAY, colNumber);
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method getDateDaysOffset
-		 * @param date
-		 */
-		getDateDaysOffset: function(date) {
-			var instance = this;
-
-			var viewDate = DateMath.safeClearTime(
-				instance.get(SCHEDULER).get(VIEW_DATE));
-
-			return DateMath.getDayOffset(
-				DateMath.safeClearTime(date), viewDate);
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method getYCoordTime
-		 * @param top
-		 */
-		getYCoordTime: function(top) {
-			var instance = this;
-			var hourHeight = instance.get(HOUR_HEIGHT);
-			var prop = toNumber((top/hourHeight).toFixed(2));
-
-			// Isolate the decimals and convert to minutes: (prop*100)%100*0.6.
-			var minutes = Math.floor((prop*100)%100*0.6);
-			var hours = Math.floor(prop);
-
-			return [ hours, minutes, 0 ];
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method plotEvent
-		 * @param evt
-		 */
-		plotEvent: function(evt) {
-			var instance = this;
-
-			var nodeList = evt.get(NODE);
-
-			if (nodeList.size() &lt; 2) {
-				evt.addPaddingNode();
-			}
-
-			var node = evt.get(NODE).item(0);
-			var paddingNode = evt.get(NODE).item(1);
-			var endShim = instance.getColumnShimByDate(evt.get(END_DATE));
-			var startShim = instance.getColumnShimByDate(evt.get(START_DATE));
-
-			if (startShim) {
-				startShim.append(node);
-
-				if (evt.get(VISIBLE)) {
-					node.show();
-				}
-			}
-			else {
-				node.hide();
-			}
-
-			if (endShim) {
-				if (endShim.compareTo(startShim) || evt.isDayBoundaryEvent()) {
-					paddingNode.hide();
-				}
-				else {
-					endShim.append(paddingNode);
-
-					if (evt.get(VISIBLE)) {
-						paddingNode.show();
-					}
-				}
-			}
-			else {
-				paddingNode.hide();
-			}
-
-			evt.syncUI();
-
-			instance.syncEventTopUI(evt);
-			instance.syncEventHeightUI(evt);
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method plotEvents
-		 */
-		plotEvents: function() {
-			var instance = this;
-			var scheduler = instance.get(SCHEDULER);
-			var filterFn = instance.get(FILTER_FN);
-
-			instance[COLUMN_SHIMS].each(function(colShimNode, i) {
-				var columnEvents = scheduler.getEventsByDay(instance.getDateByColumn(i), true);
-				var plottedEvents = [];
-
-				colShimNode.empty();
-
-				A.Array.each(columnEvents, function(evt) {
-					if (filterFn.apply(instance, [evt])) {
-						instance.plotEvent(evt);
-
-						plottedEvents.push(evt);
-					}
-				});
-
-				instance.syncEventsIntersectionUI(plottedEvents);
-			});
-
-			if (instance.get(HEADER_VIEW)) {
-				instance.syncHeaderViewUI();
-			}
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method syncColumnsUI
-		 */
-		syncColumnsUI: function() {
-			var instance = this;
-
-			instance[COL_DAYS_NODE].each(function(columnNode, i) {
-				var columnDate = instance.getDateByColumn(i);
-
-				columnNode.toggleClass(
-					CSS_SCHEDULER_TODAY, DateMath.isToday(columnDate));
-			});
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method syncDaysHeaderUI
-		 */
-		syncDaysHeaderUI: function() {
-			var instance = this;
-			var viewDate = instance.get(SCHEDULER).get(VIEW_DATE);
-			var formatter = instance.get(HEADER_DATE_FORMATTER);
-			var locale = instance.get(LOCALE);
-
-			instance[COL_HEADER_DAYS_NODE].all(_ANCHOR).each(
-				function(columnNode, i) {
-					var columnDate = DateMath.add(viewDate, DateMath.DAY, i);
-
-					columnNode.toggleClass(
-						CSS_SCHEDULER_TODAY_HD, DateMath.isToday(columnDate));
-
-					columnNode.html(formatter.call(instance, columnDate));
-				}
-			);
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method syncEventsIntersectionUI
-		 * @param columnEvents
-		 */
-		syncEventsIntersectionUI: function(columnEvents) {
-			var instance = this;
-			var eventWidth = instance.get(EVENT_WIDTH);
-
-			instance.get(SCHEDULER).flushEvents();
-
-			A.Array.each(columnEvents, function(colEvt) {
-				var intercessors = instance.findEventIntersections(
-					colEvt, columnEvents);
-
-				var total = intercessors.length;
-				var distributionRate = (eventWidth/total);
-
-				A.Array.each(intercessors, function(evt, j) {
-					var evtNode = evt.get(NODE).item(0);
-					var left = distributionRate*j;
-					var width = distributionRate*1.7;
-
-					if (j === (total - 1)) {
-						width = eventWidth - left;
-					}
-
-					evtNode.setStyle(WIDTH, width+_PERCENT);
-					evtNode.setStyle(LEFT, left+_PERCENT);
-
-					var evtParentNode = evtNode.get(PARENT_NODE);
-
-					if (evtParentNode) {
-						evtParentNode.insert(evtNode, j);
-					}
-
-					evt._filtered = true;
-				});
-			});
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method syncEventHeightUI
-		 * @param evt
-		 */
-		syncEventHeightUI: function(evt) {
-			var instance = this;
-			var endDate = evt.get(END_DATE);
-			var startDate = evt.get(START_DATE);
-
-			var maxVisibleDate = DateMath.clone(startDate);
-			maxVisibleDate.setHours(24, 0, 0);
-
-			var minutesOffset = DateMath.getMinutesOffset(
-				instance.limitDate(endDate, maxVisibleDate), startDate);
-
-			evt.get(NODE).item(0).set(OFFSET_HEIGHT, instance.calculateEventHeight(minutesOffset));
-
-			var paddingNode = evt.get(NODE).item(1);
-
-			if (paddingNode.inDoc()) {
-				var paddingMinutesOffset = DateMath.getMinutesOffset(
-					endDate, DateMath.toMidnight(evt.getClearEndDate()));
-
-				paddingNode.set(OFFSET_HEIGHT, instance.calculateEventHeight(paddingMinutesOffset));
-			}
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method syncEventTopUI
-		 * @param evt
-		 */
-		syncEventTopUI: function(evt) {
-			var instance = this;
-
-			evt.get(NODE).item(0).setStyle(TOP,
-				instance.calculateTop(evt.get(START_DATE)) + PX);
-			evt.get(NODE).item(1).setStyle(TOP, 0);
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method syncHeaderViewUI
-		 */
-		syncHeaderViewUI: function() {
-			var instance = this;
-
-			if (instance.get(HEADER_VIEW)) {
-				var headerView = instance[HEADER_VIEW];
-
-				headerView.plotEvents();
-
-				var headerViewBB = headerView.get(BOUNDING_BOX);
-
-				headerViewBB.setStyle(MARGIN_RIGHT, getScrollbarWidth());
-
-				var headerViewData = headerViewBB.one(_DOT+CSS_SVT_TABLE_DATA);
-				var height = Math.max(headerViewData.get(OFFSET_HEIGHT), 40);
-
-				headerView.set(HEIGHT, height);
-
-				instance._fillHeight();
-			}
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method calculateYDelta
-		 * @param startXY
-		 * @param xy
-		 */
-		calculateYDelta: function(startXY, xy) {
-			var instance = this;
-
-			return (xy[1] - startXY[1])/(instance.get(HOUR_HEIGHT)/2)*30;
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method findEventIntersections
-		 * @param evt
-		 * @param events
-		 */
-		findEventIntersections: function(evt, events) {
-			var instance = this;
-			var group = [];
-
-			A.Array.each(events, function(evtCmp) {
-				if (!evt._filtered &amp;&amp; evtCmp.get(VISIBLE) &amp;&amp; evt.intersectHours(evtCmp)) {
-					group.push(evtCmp);
-				}
-			});
-
-			return group;
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method getXYDelta
-		 * @param event
-		 */
-		getXYDelta: function(event) {
-			var instance = this;
-			var xy = event.currentTarget.getXY(),
-				pageXY = [event.pageX, event.pageY];
-
-			return A.Array.map(xy, function(val, i) {
-				return (pageXY[i] - val);
-			});
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method getTickY
-		 */
-		getTickY: function() {
-			var instance = this;
-
-			return roundToNearestMultiple(
-				Math.ceil(instance.get(HOUR_HEIGHT) / 2), 10);
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method roundToNearestHour
-		 * @param date
-		 * @param time
-		 */
-		roundToNearestHour: function(date, time) {
-			var instance = this;
-
-			date.setHours(
-				time[0],
-				roundToNearestMultiple(time[1], instance.getTickY()),
-				time[2]);
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method _afterDragAlign
-		 * @param event
-		 * @protected
-		 */
-		_afterDragAlign: function(event) {
-			var instance = this;
-			var dd = event.target;
-
-			if (!instance[START_XY]) {
-				instance[START_XY] = dd.actXY;
-			}
-
-			dd.actXY[0] = null;
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method _dragTickAlignX
-		 * @param activeColumn
-		 * @protected
-		 */
-		_dragTickAlignX: function(activeColumn) {
-			var instance = this;
-			var draggingEvent = instance[DRAGGING_EVENT];
-
-			if (draggingEvent &amp;&amp; !instance[RESIZING]) {
-				var placeholder = instance[EVENT_PLACEHOLDER];
-				var delta = toNumber(activeColumn.attr(DATA_COLNUMBER)) - instance.startColNumber;
-
-				instance.draggingEventStartDate = DateMath.add(draggingEvent.get(START_DATE), DateMath.DAY, delta);
-
-				var startDate = DateMath.clone(instance.draggingEventStartDate);
-
-				DateMath.copyHours(startDate, placeholder.get(START_DATE));
-
-				placeholder.move(startDate, { silent: true });
-
-				instance.plotEvent(placeholder);
-			}
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method _dragTickAlignY
-		 * @param event
-		 * @protected
-		 */
-		_dragTickAlignY: function(event) {
-			var instance = this;
-			var scheduler = instance.get(SCHEDULER);
-			var recorder = scheduler.get(EVENT_RECORDER);
-
-			var draggingEvent = instance[DRAGGING_EVENT];
-
-			if (draggingEvent) {
-				var dd = event.target.get(HOST);
-				var placeholder = instance[EVENT_PLACEHOLDER];
-				var delta = instance.calculateYDelta(instance[START_XY], dd.actXY);
-
-				if (instance[RESIZING]) {
-					var endDate = DateMath.add(instance.draggingEventEndDate, DateMath.MINUTES, delta);
-
-					if (DateMath.getMinutesOffset(endDate, instance.draggingEventStartDate) &lt; 30) {
-						return;
-					}
-
-					placeholder.set(END_DATE, endDate, { silent: true });
-				}
-				else {
-					placeholder.move(DateMath.add(instance.draggingEventStartDate, DateMath.MINUTES, delta), { silent: true });
-				}
-
-				instance.plotEvent(placeholder);
-			}
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method _setupDragDrop
-		 * @protected
-		 */
-		_setupDragDrop: function() {
-			var instance = this,
-				placeholder = instance[EVENT_PLACEHOLDER];
-
-			if (!placeholder) {
-				var scheduler = instance.get(SCHEDULER);
-
-				placeholder = new scheduler.eventModel({
-					scheduler: scheduler
-				});
-
-				placeholder.removeTarget(scheduler);
-				placeholder.get(NODE).addClass(CSS_SCHEDULER_EVENT_PROXY);
-				placeholder.set(VISIBLE, false, { silent: true });
-				instance[EVENT_PLACEHOLDER] = placeholder;
-			}
-
-			if (!instance.delegate) {
-				instance.delegate = new A.DD.Delegate(
-					instance.get(DELEGATE_CONFIG));
-			}
-
-			var dd = instance.delegate.dd;
-
-			dd.unplug(A.Plugin.DDConstrained);
-			dd.unplug(A.Plugin.DDNodeScroll);
-
-			var region = instance.bodyNode.get(REGION);
-
-			region.bottom = Infinity;
-			region.top = -Infinity;
-
-			dd.plug(A.Plugin.DDConstrained, {
-				bubbleTargets: instance,
-				constrain: region,
-				stickY: true,
-				tickY: instance.get(HOUR_HEIGHT) / 2
-			});
-
-			dd.plug(A.Plugin.DDNodeScroll, {
-				node: instance.bodyNode,
-				scrollDelay: 150
-			});
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method _uiSetDate
-		 * @param val
-		 * @protected
-		 */
-		_uiSetDate: function(val) {
-			var instance = this;
-
-			instance.syncColumnsUI();
-			instance.syncDaysHeaderUI();
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method _onClickDaysHeader
-		 * @param event
-		 * @protected
-		 */
-		_onClickDaysHeader: function(event) {
-			var instance = this;
-			var scheduler = instance.get(SCHEDULER);
-
-			if (event.target.test(_ANCHOR)) {
-				var dayView = scheduler.getViewByName(DAY);
-
-				if (dayView) {
-					var colNumber = toNumber(event.currentTarget.attr(DATA_COLNUMBER));
-
-					scheduler.set(DATE, instance.getDateByColumn(colNumber));
-					scheduler.set(ACTIVE_VIEW, dayView);
-				}
-			}
-
-			event.preventDefault();
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method _onEventDragEnd
-		 * @param event
-		 * @protected
-		 */
-		_onEventDragEnd: function(event) {
-			var instance = this;
-			var draggingEvent = instance[DRAGGING_EVENT];
-
-			if (draggingEvent) {
-				var placeholder = instance[EVENT_PLACEHOLDER];
-
-				placeholder.set(VISIBLE, false, { silent: true });
-				draggingEvent.set(VISIBLE, true, { silent: true });
-				draggingEvent.copyDates(placeholder);
-
-				instance.get(SCHEDULER).syncEventsUI();
-			}
-
-			instance[START_XY] = null;
-			instance[DRAGGING_EVENT] = null;
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method _onEventDragStart
-		 * @param event
-		 * @protected
-		 */
-		_onEventDragStart: function(event) {
-			var instance = this;
-			var draggingEvent = instance[DRAGGING_EVENT] = instance.delegate.dd.get(NODE).getData(SCHEDULER_EVENT);
-
-			if (draggingEvent) {
-				var placeholder = instance[EVENT_PLACEHOLDER];
-
-				placeholder.copyPropagateAttrValues(draggingEvent, null, { silent: true });
-
-				instance.plotEvent(placeholder);
-
-				draggingEvent.set(VISIBLE, false, { silent: true });
-
-				instance.draggingEventStartDate = DateMath.clone(draggingEvent.get(START_DATE));
-				instance.draggingEventEndDate = DateMath.clone(draggingEvent.get(END_DATE));
-
-				var startColumn = instance.getColumnByDate(draggingEvent.get(START_DATE));
-
-				instance.startColNumber = startColumn ? toNumber(startColumn.attr(DATA_COLNUMBER)) : 0;
-			}
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method _onMouseDownTableCol
-		 * @param event
-		 * @protected
-		 */
-		_onMouseDownTableCol: function(event) {
-			var instance = this;
-			var target = event.target;
-			var scheduler = instance.get(SCHEDULER);
-			var recorder = scheduler.get(EVENT_RECORDER);
-
-			if (recorder &amp;&amp; !scheduler.get(DISABLED)) {
-				recorder.hidePopover();
-
-				if (target.test(_DOT+CSS_SCHEDULER_VIEW_DAY_TABLE_COL_SHIM)) {
-					instance[START_XY] = [ event.pageX, event.pageY ];
-
-					var colNumber = toNumber(event.currentTarget.attr(DATA_COLNUMBER));
-					var startDate = instance.getDateByColumn(colNumber);
-					var clickLeftTop = instance.getXYDelta(event);
-
-					instance.roundToNearestHour(
-						startDate, instance.getYCoordTime(clickLeftTop[1]));
-
-					var endDate = DateMath.add(startDate, DateMath.MINUTES, recorder.get(DURATION));
-
-					recorder.move(startDate, { silent: true });
-
-					recorder.setAttrs({
-						allDay: false,
-						endDate: endDate
-					},
-					{ silent: true });
-
-					instance[CREATION_START_DATE] = startDate;
-
-					event.halt();
-				}
-				else if (target.test(
-							[ _DOT+CSS_SCHEDULER_VIEW_DAY_RESIZER,
-								_DOT+CSS_SCHEDULER_VIEW_DAY_RESIZER_ICON ].join(_COMMA))) {
-
-					instance[RESIZING] = true;
-				}
-			}
-
-			instance.get(BOUNDING_BOX).unselectable();
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method _onMouseEnterEvent
-		 * @param event
-		 * @protected
-		 */
-		_onMouseEnterEvent: function(event) {
-			var instance = this;
-			var target = event.currentTarget;
-			var evt = target.getData(SCHEDULER_EVENT);
-
-			if (evt &amp;&amp; !evt.get(DISABLED)) {
-				instance[RESIZER_NODE].appendTo(target);
-			}
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method _onMouseLeaveEvent
-		 * @param event
-		 * @protected
-		 */
-		_onMouseLeaveEvent: function(event) {
-			var instance = this;
-
-			if (!instance[RESIZING]) {
-				instance._removeResizer();
-			}
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method _onMouseMoveTableCol
-		 * @param event
-		 * @protected
-		 */
-		_onMouseMoveTableCol: function(event) {
-			var instance = this;
-			var activeColumn = event.currentTarget;
-			var recorder = instance.get(SCHEDULER).get(EVENT_RECORDER);
-
-			if (instance[ACTIVE_COLUMN] !== activeColumn) {
-				instance[ACTIVE_COLUMN] = activeColumn;
-				instance._dragTickAlignX(instance[ACTIVE_COLUMN]);
-			}
-
-			var creationStartDate = instance[CREATION_START_DATE];
-
-			if (creationStartDate) {
-				var delta = roundToNearestMultiple(
-					instance.calculateYDelta(instance[START_XY], [ event.pageX, event.pageY ]),
-					instance.getTickY()
-				);
-
-				var down = (delta &gt;= instance._delta);
-
-				if (instance._delta !== delta) {
-					if (delta &gt; 0) {
-						var newDelta = down ? Math.max(delta, recorder.get(DURATION)) : delta;
-
-						recorder.set(END_DATE, DateMath.add(creationStartDate, DateMath.MINUTES, newDelta), { silent: true });
-					}
-					else {
-						recorder.set(START_DATE, DateMath.add(creationStartDate, DateMath.MINUTES, delta), { silent: true });
-					}
-
-					instance.plotEvent(recorder);
-
-					instance._delta = delta;
-				}
-			}
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method _onMouseUpTableCol
-		 * @param event
-		 * @protected
-		 */
-		_onMouseUpTableCol: function(event) {
-			var instance = this;
-			var scheduler = instance.get(SCHEDULER);
-			var recorder = scheduler.get(EVENT_RECORDER);
-
-			if (recorder &amp;&amp; !scheduler.get(DISABLED)) {
-				if (instance[CREATION_START_DATE]) {
-					instance.plotEvent(recorder);
-
-					recorder.showPopover();
-				}
-			}
-
-			instance[CREATION_START_DATE] = null;
-			instance[RESIZING] = false;
-			instance[START_XY] = null;
-
-			instance._removeResizer();
-			instance.get(BOUNDING_BOX).selectable();
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method _onSchedulerChange
-		 * @param event
-		 * @protected
-		 */
-		_onSchedulerChange: function(event) {
-			var instance = this;
-
-			if (instance[HEADER_VIEW]) {
-				instance[HEADER_VIEW].set(SCHEDULER, event.newVal);
-			}
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method _removeResizer
-		 * @protected
-		 */
-		_removeResizer: function() {
-			var instance = this;
-
-			instance[RESIZER_NODE].remove();
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method _valueColDaysNode
-		 * @protected
-		 */
-		_valueColDaysNode: function() {
-			var instance = this;
-			var days = instance.get(DAYS);
-			var buffer = [], colNumber = 0;
-
-			while (days--) {
-				buffer.push(
-					A.Lang.sub(TPL_SCHEDULER_VIEW_DAY_TABLE_COLDAY, {
-						colNumber: colNumber++
-					})
-				);
-			}
-
-			return A.NodeList.create(buffer.join(_EMPTY_STR));
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method _valueColHeaderDaysNode
-		 * @protected
-		 */
-		_valueColHeaderDaysNode: function() {
-			var instance = this;
-			var days = instance.get(DAYS);
-			var buffer = [], colNumber = 0;
-
-			buffer.push(TPL_SCHEDULER_VIEW_DAY_HEADER_DAY_FIRST);
-
-			while (days--) {
-				buffer.push(
-					A.Lang.sub(TPL_SCHEDULER_VIEW_DAY_HEADER_DAY, {
-						colNumber: colNumber++
-					})
-				);
-			}
-
-			buffer.push(TPL_SCHEDULER_VIEW_DAY_HEADER_DAY_PAD_RIGHT);
-
-			return A.NodeList.create(buffer.join(_EMPTY_STR));
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method _valueMarkercellsNode
-		 * @protected
-		 */
-		_valueMarkercellsNode: function() {
-			var instance = this;
-			var buffer = [], i;
-
-			for (i = 0; i &lt;= 23; i++) {
-				buffer.push(TPL_SCHEDULER_VIEW_DAY_MARKERCELL);
-			}
-
-			return A.NodeList.create(buffer.join(_EMPTY_STR));
-		},
-
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @method _valueTimesNode
-		 * @protected
-		 */
-		_valueTimesNode: function() {
-			var instance = this;
-			var isoTime = instance.get(ISO_TIME);
-			var buffer = [], hour;
-
-			for (hour = 0; hour &lt;= 23; hour++) {
-				buffer.push(
-					Lang.sub(
-						TPL_SCHEDULER_VIEW_DAY_TABLE_TIME,
-						{
-							hour: isoTime ? DateMath.toIsoTimeString(hour) : DateMath.toUsTimeString(hour, false, true)
-						}
-					)
-				);
-			}
-
-			return A.NodeList.create(buffer.join(_EMPTY_STR));
-		}
-	}
+    /**
+     * Static property provides a string to identify the class.
+     *
+     * @property SchedulerDayView.NAME
+     * @type String
+     * @static
+     */
+    NAME: SCHEDULER_VIEW_DAY,
+
+    /**
+     * Static property used to define the default attribute
+     * configuration for the SchedulerDayView.
+     *
+     * @property SchedulerDayView.ATTRS
+     * @type Object
+     * @static
+     */
+    ATTRS: {
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @attribute bodyContent
+         * @default &#x27;&#x27;
+         * @type String
+         */
+        bodyContent: {
+            value: _EMPTY_STR
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @attribute days
+         * @default 1
+         * @type Number
+         */
+        days: {
+            value: 1,
+            validator: isNumber
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @attribute delegateConfig
+         * @default {}
+         * @type Object
+         */
+        delegateConfig: {
+            value: {},
+            setter: function(val) {
+                var instance = this;
+
+                return A.merge({
+                        dragConfig: {
+                            useShim: false
+                        },
+                        bubbleTargets: instance,
+                        container: instance.get(BOUNDING_BOX),
+                        nodes: _DOT + CSS_SCHEDULER_EVENT,
+                        invalid: &#x27;input, select, button, a, textarea, &#x27; + _DOT + CSS_SCHEDULER_EVENT_DISABLED
+                    },
+                    val || {}
+                );
+            },
+            validator: isObject
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @attribute eventWidth
+         * @default 95
+         * @type Number
+         */
+        eventWidth: {
+            value: 95,
+            validator: isNumber
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @attribute filterFn
+         */
+        filterFn: {
+            value: function(evt) {
+                return (evt.getHoursDuration() &lt;= 24 &amp;&amp; !evt.get(ALL_DAY));
+            }
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @attribute headerDateFormatter
+         * @type String
+         */
+        headerDateFormatter: {
+            value: function(date) {
+                var instance = this;
+                var scheduler = instance.get(SCHEDULER);
+
+                return A.DataType.Date.format(
+                    date, {
+                        format: &#x27;&lt;span&gt;%d&lt;/span&gt; %a&#x27;,
+                        locale: scheduler.get(LOCALE)
+                    }
+                );
+            },
+            validator: isString
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @attribute headerView
+         * @default true
+         * @type Boolean
+         */
+        headerView: {
+            value: true,
+            validator: isBoolean
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @attribute headerViewConfig
+         * @default {}
+         * @type Object
+         */
+        headerViewConfig: {
+            setter: function(val) {
+                var instance = this;
+
+                return A.merge({
+                        displayDaysInterval: 1,
+                        displayRows: 6,
+                        filterFn: function(evt) {
+                            return ((evt.getHoursDuration() &gt; 24) || evt.get(ALL_DAY));
+                        },
+                        height: &#x27;auto&#x27;,
+                        visible: true
+                    },
+                    val || {}
+                );
+            },
+            value: {}
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @attribute hourHeight
+         * @default 52
+         * @type Number
+         */
+        hourHeight: {
+            value: 52,
+            validator: isNumber
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @attribute name
+         * @default &#x27;day&#x27;
+         * @type String
+         */
+        name: {
+            value: DAY
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @attribute navigationDateFormatter
+         * @type Function
+         */
+        navigationDateFormatter: {
+            value: function(date) {
+                var instance = this;
+                var scheduler = instance.get(SCHEDULER);
+
+                return A.DataType.Date.format(
+                    date, {
+                        format: &#x27;%A, %B %d, %Y&#x27;,
+                        locale: scheduler.get(LOCALE)
+                    }
+                );
+            },
+            validator: isFunction
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @attribute strings
+         */
+        strings: {
+            value: {
+                allDay: &#x27;All day&#x27;
+            }
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @attribute headerTableNode
+         */
+        headerTableNode: {
+            valueFn: function() {
+                return A.Node.create(TPL_SCHEDULER_VIEW_DAY_HEADER_TABLE);
+            }
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @attribute headerViewLabelNode
+         */
+        headerViewLabelNode: {
+            valueFn: function() {
+                var instance = this;
+
+                var strings = instance.get(STRINGS);
+
+                return A.Node.create(
+                    Lang.sub(TPL_SCHEDULER_VIEW_DAY_HEADER_VIEW_LABEL, {
+                        label: strings[ALL_DAY]
+                    })
+                );
+            }
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @attribute resizerNode
+         */
+        resizerNode: {
+            valueFn: function() {
+                return A.Node.create(TPL_SCHEDULER_VIEW_DAY_RESIZER);
+            }
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @attribute tableNode
+         */
+        tableNode: {
+            valueFn: function() {
+                return A.Node.create(TPL_SCHEDULER_VIEW_DAY_TABLE);
+            }
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @attribute colDaysNode
+         */
+        colDaysNode: {
+            valueFn: &#x27;_valueColDaysNode&#x27;
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @attribute colHeaderDaysNode
+         */
+        colHeaderDaysNode: {
+            valueFn: &#x27;_valueColHeaderDaysNode&#x27;
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @attribute markercellsNode
+         */
+        markercellsNode: {
+            valueFn: &#x27;_valueMarkercellsNode&#x27;
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @attribute timesNode
+         */
+        timesNode: {
+            valueFn: &#x27;_valueTimesNode&#x27;
+        }
+    },
+
+    /**
+     * TODO. Wanna help? Please send a Pull Request.
+     *
+     * @property SchedulerDayView.HTML_PARSER
+     * @default defaultName
+     * @type typeName
+     * @static
+     */
+    HTML_PARSER: {
+        colDaysNode: getNodeListHTMLParser(_DOT + CSS_SCHEDULER_VIEW_DAY_TABLE_COLDAY, 1),
+        colHeaderDaysNode: getNodeListHTMLParser(_DOT + CSS_SCHEDULER_VIEW_DAY_HEADER_DAY, 2),
+        headerTableNode: _DOT + CSS_SCHEDULER_VIEW_DAY_HEADER_TABLE,
+        headerViewLabelNode: _DOT + CSS_SCHEDULER_VIEW_DAY_HEADER_VIEW_LABEL,
+        markercellsNode: getNodeListHTMLParser(_DOT + CSS_SCHEDULER_VIEW_DAY_MARKERCELL, 24),
+        resizerNode: _DOT + CSS_SCHEDULER_VIEW_DAY_RESIZER,
+        tableNode: _DOT + CSS_SCHEDULER_VIEW_DAY_TABLE,
+        timesNode: getNodeListHTMLParser(_DOT + CSS_SCHEDULER_VIEW_DAY_TABLE_TIME, 24)
+    },
+
+    /**
+     * Static property used to define which component it extends.
+     *
+     * @property SchedulerDayView.EXTENDS
+     * @type Object
+     * @static
+     */
+    EXTENDS: A.SchedulerView,
+
+    prototype: {
+
+        /**
+         * Construction logic executed during SchedulerDayView instantiation. Lifecycle.
+         *
+         * @method initializer
+         * @protected
+         */
+        initializer: function() {
+            var instance = this;
+
+            instance[COL_DAYS_NODE] = instance.get(COL_DAYS_NODE);
+            instance[COL_HEADER_DAYS_NODE] = instance.get(COL_HEADER_DAYS_NODE);
+            instance[HEADER_TABLE_NODE] = instance.get(HEADER_TABLE_NODE);
+            instance[MARKERCELLS_NODE] = instance.get(MARKERCELLS_NODE);
+            instance[RESIZER_NODE] = instance.get(RESIZER_NODE);
+            instance[TABLE_NODE] = instance.get(TABLE_NODE);
+            instance[TIMES_NODE] = instance.get(TIMES_NODE);
+
+            instance[ACTIVE_COLUMN] = null;
+            instance[COLUMN_DATA] = instance[TABLE_NODE].one(_DOT + CSS_SCHEDULER_VIEW_DAY_COLDATA);
+            instance[COLUMN_DAY_HEADER] = instance.headerTableNode.one(_DOT + CSS_SCHEDULER_VIEW_DAY_HEADER_COL);
+            instance[COLUMN_SHIMS] = instance[COL_DAYS_NODE].all(_DOT + CSS_SCHEDULER_VIEW_DAY_TABLE_COL_SHIM);
+            instance[COLUMN_TIME] = instance[TABLE_NODE].one(_DOT + CSS_SCHEDULER_VIEW_DAY_TABLE_COLTIME);
+            instance[GRID_CONTAINER] = instance[TABLE_NODE].one(_DOT + CSS_SCHEDULER_VIEW_DAY_GRID_CONTAINER);
+            instance[MARKERS_NODE] = instance[TABLE_NODE].one(_DOT + CSS_SCHEDULER_VIEW_DAY_MARKERS);
+
+            if (instance.get(HEADER_VIEW)) {
+                instance[HEADER_VIEW] = new A.SchedulerTableView(
+                    instance.get(HEADER_VIEW_CONFIG)
+                );
+            }
+        },
+
+        /**
+         * Render the SchedulerDayView component instance. Lifecycle.
+         *
+         * @method renderUI
+         * @protected
+         */
+        renderUI: function() {
+            var instance = this;
+
+            instance[COLUMN_TIME].setContent(instance[TIMES_NODE]);
+            instance[MARKERS_NODE].setContent(instance[MARKERCELLS_NODE]);
+            instance[COL_DAYS_NODE].appendTo(instance[COLUMN_DATA]);
+            instance[COL_HEADER_DAYS_NODE].appendTo(instance[COLUMN_DAY_HEADER]);
+
+            if (instance[HEADER_VIEW]) {
+                instance[HEADER_VIEW].set(SCHEDULER, instance.get(SCHEDULER));
+
+                instance[HEADER_VIEW].render();
+            }
+        },
+
+        /**
+         * Bind the events on the SchedulerDayView UI. Lifecycle.
+         *
+         * @method bindUI
+         * @protected
+         */
+        bindUI: function() {
+            var instance = this;
+
+            instance[HEADER_TABLE_NODE].delegate(&#x27;click&#x27;, A.bind(instance._onClickDaysHeader, instance), _DOT +
+                CSS_SCHEDULER_VIEW_DAY_HEADER_DAY);
+            instance[COLUMN_DATA].delegate(&#x27;mousedown&#x27;, A.bind(instance._onMouseDownTableCol, instance), _DOT +
+                CSS_SCHEDULER_VIEW_DAY_TABLE_COL);
+            instance[COLUMN_DATA].delegate(&#x27;mouseenter&#x27;, A.bind(instance._onMouseEnterEvent, instance), _DOT +
+                CSS_SCHEDULER_EVENT);
+            instance[COLUMN_DATA].delegate(&#x27;mouseleave&#x27;, A.bind(instance._onMouseLeaveEvent, instance), _DOT +
+                CSS_SCHEDULER_EVENT);
+            instance[COLUMN_DATA].delegate(&#x27;mousemove&#x27;, A.bind(instance._onMouseMoveTableCol, instance), _DOT +
+                CSS_SCHEDULER_VIEW_DAY_TABLE_COLDAY);
+            instance[COLUMN_DATA].delegate(&#x27;mouseup&#x27;, A.bind(instance._onMouseUpTableCol, instance), _DOT +
+                CSS_SCHEDULER_VIEW_DAY_TABLE_COL);
+
+            instance.on(&#x27;drag:end&#x27;, instance._onEventDragEnd);
+            instance.on(&#x27;drag:start&#x27;, instance._onEventDragStart);
+            instance.on(&#x27;drag:tickAlignY&#x27;, instance._dragTickAlignY);
+            instance.on(&#x27;schedulerChange&#x27;, instance._onSchedulerChange);
+            instance.after(&#x27;drag:align&#x27;, instance._afterDragAlign);
+        },
+
+        /**
+         * Sync the SchedulerDayView UI. Lifecycle.
+         *
+         * @method syncUI
+         * @protected
+         */
+        syncUI: function() {
+            var instance = this;
+
+            SchedulerDayView.superclass.syncUI.apply(this, arguments);
+
+            instance[GRID_CONTAINER].attr(COLSPAN, instance.get(DAYS));
+
+            instance._setupDragDrop();
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method syncStdContent
+         */
+        syncStdContent: function() {
+            var instance = this;
+
+            instance.setStdModContent(
+                WidgetStdMod.BODY, instance[TABLE_NODE].getDOM());
+
+            var headerNodes = A.NodeList.create(instance[HEADER_TABLE_NODE]);
+
+            if (instance[HEADER_VIEW]) {
+                headerNodes.push(instance[HEADER_VIEW].get(BOUNDING_BOX));
+                headerNodes.push(instance.get(HEADER_VIEW_LABEL_NODE));
+            }
+
+            instance.setStdModContent(WidgetStdMod.HEADER, headerNodes);
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method calculateEventHeight
+         * @param duration
+         */
+        calculateEventHeight: function(duration) {
+            var instance = this;
+            var hourHeight = instance.get(HOUR_HEIGHT);
+
+            return Math.max(duration * (hourHeight / 60), hourHeight / 2);
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method calculateTop
+         * @param date
+         */
+        calculateTop: function(date) {
+            var instance = this;
+
+            return ((date.getHours() * 60) + date.getMinutes() +
+                (date.getSeconds() / 60)) * (instance.get(HOUR_HEIGHT) / 60);
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method getNextDate
+         */
+        getNextDate: function() {
+            var instance = this;
+            var viewDate = instance.get(SCHEDULER).get(VIEW_DATE);
+
+            return DateMath.toLastHour(DateMath.add(viewDate, DateMath.DAY, 1));
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method getPrevDate
+         */
+        getPrevDate: function() {
+            var instance = this;
+            var viewDate = instance.get(SCHEDULER).get(VIEW_DATE);
+
+            return DateMath.toMidnight(DateMath.subtract(viewDate, DateMath.DAY, 1));
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method getColumnByDate
+         * @param date
+         */
+        getColumnByDate: function(date) {
+            var instance = this;
+
+            return instance[COL_DAYS_NODE].item(instance.getDateDaysOffset(date));
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method getColumnShimByDate
+         * @param date
+         */
+        getColumnShimByDate: function(date) {
+            var instance = this;
+
+            return instance[COLUMN_SHIMS].item(instance.getDateDaysOffset(date));
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method getDateByColumn
+         * @param colNumber
+         */
+        getDateByColumn: function(colNumber) {
+            var instance = this;
+            var viewDate = DateMath.safeClearTime(
+                instance.get(SCHEDULER).get(VIEW_DATE));
+
+            return DateMath.add(viewDate, DateMath.DAY, colNumber);
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method getDateDaysOffset
+         * @param date
+         */
+        getDateDaysOffset: function(date) {
+            var instance = this;
+
+            var viewDate = DateMath.safeClearTime(
+                instance.get(SCHEDULER).get(VIEW_DATE));
+
+            return DateMath.getDayOffset(
+                DateMath.safeClearTime(date), viewDate);
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method getYCoordTime
+         * @param top
+         */
+        getYCoordTime: function(top) {
+            var instance = this;
+            var hourHeight = instance.get(HOUR_HEIGHT);
+            var prop = toNumber((top / hourHeight).toFixed(2));
+
+            // Isolate the decimals and convert to minutes: (prop*100)%100*0.6.
+            var minutes = Math.floor((prop * 100) % 100 * 0.6);
+            var hours = Math.floor(prop);
+
+            return [hours, minutes, 0];
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method plotEvent
+         * @param evt
+         */
+        plotEvent: function(evt) {
+            var instance = this;
+
+            var nodeList = evt.get(NODE);
+
+            if (nodeList.size() &lt; 2) {
+                evt.addPaddingNode();
+            }
+
+            var node = evt.get(NODE).item(0);
+            var paddingNode = evt.get(NODE).item(1);
+            var endShim = instance.getColumnShimByDate(evt.get(END_DATE));
+            var startShim = instance.getColumnShimByDate(evt.get(START_DATE));
+
+            if (startShim) {
+                startShim.append(node);
+
+                if (evt.get(VISIBLE)) {
+                    node.show();
+                }
+            }
+            else {
+                node.hide();
+            }
+
+            if (endShim) {
+                if (endShim.compareTo(startShim) || evt.isDayBoundaryEvent()) {
+                    paddingNode.hide();
+                }
+                else {
+                    endShim.append(paddingNode);
+
+                    if (evt.get(VISIBLE)) {
+                        paddingNode.show();
+                    }
+                }
+            }
+            else {
+                paddingNode.hide();
+            }
+
+            evt.syncUI();
+
+            instance.syncEventTopUI(evt);
+            instance.syncEventHeightUI(evt);
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method plotEvents
+         */
+        plotEvents: function() {
+            var instance = this;
+            var scheduler = instance.get(SCHEDULER);
+            var filterFn = instance.get(FILTER_FN);
+
+            instance[COLUMN_SHIMS].each(function(colShimNode, i) {
+                var columnEvents = scheduler.getEventsByDay(instance.getDateByColumn(i), true);
+                var plottedEvents = [];
+
+                colShimNode.empty();
+
+                A.Array.each(columnEvents, function(evt) {
+                    if (filterFn.apply(instance, [evt])) {
+                        instance.plotEvent(evt);
+
+                        plottedEvents.push(evt);
+                    }
+                });
+
+                instance.syncEventsIntersectionUI(plottedEvents);
+            });
+
+            instance.syncHeaderViewUI();
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method syncColumnsUI
+         */
+        syncColumnsUI: function() {
+            var instance = this;
+            var todayDate = instance.get(SCHEDULER).get(TODAY_DATE);
+
+            instance[COL_DAYS_NODE].each(function(columnNode, i) {
+                var columnDate = instance.getDateByColumn(i);
+
+                columnNode.toggleClass(
+                    CSS_SCHEDULER_TODAY, !DateMath.isDayOverlap(columnDate, todayDate));
+            });
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method syncDaysHeaderUI
+         */
+        syncDaysHeaderUI: function() {
+            var instance = this;
+            var viewDate = instance.get(SCHEDULER).get(VIEW_DATE);
+            var formatter = instance.get(HEADER_DATE_FORMATTER);
+            var locale = instance.get(LOCALE);
+            var todayDate = instance.get(SCHEDULER).get(TODAY_DATE);
+
+            instance[COL_HEADER_DAYS_NODE].all(_ANCHOR).each(
+                function(columnNode, i) {
+                    var columnDate = DateMath.add(viewDate, DateMath.DAY, i);
+
+                    columnNode.toggleClass(
+                        CSS_SCHEDULER_TODAY_HD, !DateMath.isDayOverlap(columnDate, todayDate));
+
+                    columnNode.html(formatter.call(instance, columnDate));
+                }
+            );
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method syncEventsIntersectionUI
+         * @param columnEvents
+         */
+        syncEventsIntersectionUI: function(columnEvents) {
+            var instance = this;
+            var eventWidth = instance.get(EVENT_WIDTH);
+
+            instance.get(SCHEDULER).flushEvents();
+
+            A.Array.each(columnEvents, function(colEvt) {
+                var intercessors = instance.findEventIntersections(
+                    colEvt, columnEvents);
+
+                var total = intercessors.length;
+                var distributionRate = (eventWidth / total);
+
+                A.Array.each(intercessors, function(evt, j) {
+                    var evtNode = evt.get(NODE).item(0);
+                    var left = distributionRate * j;
+                    var width = distributionRate * 1.7;
+
+                    if (j === (total - 1)) {
+                        width = eventWidth - left;
+                    }
+
+                    evtNode.setStyle(WIDTH, width + _PERCENT);
+                    evtNode.setStyle(LEFT, left + _PERCENT);
+
+                    var evtParentNode = evtNode.get(PARENT_NODE);
+
+                    if (evtParentNode) {
+                        evtParentNode.insert(evtNode, j);
+                    }
+
+                    evt._filtered = true;
+                });
+            });
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method syncEventHeightUI
+         * @param evt
+         */
+        syncEventHeightUI: function(evt) {
+            var instance = this;
+            var endDate = evt.get(END_DATE);
+            var startDate = evt.get(START_DATE);
+
+            var maxVisibleDate = DateMath.clone(startDate);
+            maxVisibleDate.setHours(24, 0, 0);
+
+            var minutesOffset = DateMath.getMinutesOffset(
+                instance.limitDate(endDate, maxVisibleDate), startDate);
+
+            evt.get(NODE).item(0).set(OFFSET_HEIGHT, instance.calculateEventHeight(minutesOffset));
+
+            var paddingNode = evt.get(NODE).item(1);
+
+            if (paddingNode.inDoc()) {
+                var paddingMinutesOffset = DateMath.getMinutesOffset(
+                    endDate, DateMath.toMidnight(evt.getClearEndDate()));
+
+                paddingNode.set(OFFSET_HEIGHT, instance.calculateEventHeight(paddingMinutesOffset));
+            }
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method syncEventTopUI
+         * @param evt
+         */
+        syncEventTopUI: function(evt) {
+            var instance = this;
+
+            evt.get(NODE).item(0).setStyle(
+                TOP, instance.calculateTop(evt.get(START_DATE)) + PX);
+
+            evt.get(NODE).item(1).setStyle(TOP, 0);
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method syncHeaderViewUI
+         */
+        syncHeaderViewUI: function() {
+            var instance = this;
+
+            if (instance.get(HEADER_VIEW)) {
+                var headerView = instance[HEADER_VIEW];
+
+                headerView.plotEvents();
+
+                instance.headerNode.setStyle(PADDING_RIGHT, getScrollbarWidth());
+
+                var headerViewBB = headerView.get(BOUNDING_BOX);
+
+                var headerViewData = headerViewBB.one(_DOT + CSS_SVT_TABLE_DATA);
+                var height = Math.max(headerViewData.get(OFFSET_HEIGHT), 40);
+
+                headerView.set(HEIGHT, height);
+
+                instance._fillHeight();
+            }
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method calculateYDelta
+         * @param startXY
+         * @param xy
+         */
+        calculateYDelta: function(startXY, xy) {
+            var instance = this;
+
+            return (xy[1] - startXY[1]) / (instance.get(HOUR_HEIGHT) / 2) * 30;
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method findEventIntersections
+         * @param evt
+         * @param events
+         */
+        findEventIntersections: function(evt, events) {
+            var instance = this;
+            var group = [];
+
+            A.Array.each(events, function(evtCmp) {
+                if (!evt._filtered &amp;&amp; evtCmp.get(VISIBLE) &amp;&amp; evt.intersectHours(evtCmp)) {
+                    group.push(evtCmp);
+                }
+            });
+
+            return group;
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method getXYDelta
+         * @param event
+         */
+        getXYDelta: function(event) {
+            var instance = this;
+            var xy = event.currentTarget.getXY(),
+                pageXY = [event.pageX, event.pageY];
+
+            return A.Array.map(xy, function(val, i) {
+                return (pageXY[i] - val);
+            });
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method getTickY
+         */
+        getTickY: function() {
+            var instance = this;
+
+            return roundToNearestMultiple(
+                Math.ceil(instance.get(HOUR_HEIGHT) / 2), 10);
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method roundToNearestHour
+         * @param date
+         * @param time
+         */
+        roundToNearestHour: function(date, time) {
+            var instance = this;
+
+            date.setHours(
+                time[0],
+                roundToNearestMultiple(time[1], instance.getTickY()),
+                time[2]);
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method _afterDragAlign
+         * @param event
+         * @protected
+         */
+        _afterDragAlign: function(event) {
+            var instance = this;
+            var dd = event.target;
+
+            if (!instance[START_XY]) {
+                instance[START_XY] = dd.actXY;
+            }
+
+            dd.actXY[0] = null;
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method _dragTickAlignX
+         * @param activeColumn
+         * @protected
+         */
+        _dragTickAlignX: function(activeColumn) {
+            var instance = this;
+            var draggingEvent = instance[DRAGGING_EVENT];
+
+            if (draggingEvent &amp;&amp; !instance[RESIZING]) {
+                var placeholder = instance[EVENT_PLACEHOLDER];
+                var delta = toNumber(activeColumn.attr(DATA_COLNUMBER)) - instance.startColNumber;
+
+                instance.draggingEventStartDate = DateMath.add(draggingEvent.get(START_DATE), DateMath.DAY, delta);
+
+                var startDate = DateMath.clone(instance.draggingEventStartDate);
+
+                DateMath.copyHours(startDate, placeholder.get(START_DATE));
+
+                placeholder.move(startDate, {
+                    silent: true
+                });
+
+                instance.plotEvent(placeholder);
+            }
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method _dragTickAlignY
+         * @param event
+         * @protected
+         */
+        _dragTickAlignY: function(event) {
+            var instance = this;
+            var scheduler = instance.get(SCHEDULER);
+            var recorder = scheduler.get(EVENT_RECORDER);
+
+            var draggingEvent = instance[DRAGGING_EVENT];
+
+            if (draggingEvent) {
+                var dd = event.target.get(HOST);
+                var placeholder = instance[EVENT_PLACEHOLDER];
+                var delta = instance.calculateYDelta(instance[START_XY], dd.actXY);
+
+                if (instance[RESIZING]) {
+                    var endDate = DateMath.add(instance.draggingEventEndDate, DateMath.MINUTES, delta);
+
+                    if (DateMath.getMinutesOffset(endDate, instance.draggingEventStartDate) &lt; 30) {
+                        return;
+                    }
+
+                    placeholder.set(END_DATE, endDate, {
+                        silent: true
+                    });
+                }
+                else {
+                    placeholder.move(DateMath.add(instance.draggingEventStartDate, DateMath.MINUTES, delta), {
+                        silent: true
+                    });
+                }
+
+                instance.plotEvent(placeholder);
+            }
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method _setupDragDrop
+         * @protected
+         */
+        _setupDragDrop: function() {
+            var instance = this,
+                placeholder = instance[EVENT_PLACEHOLDER];
+
+            if (!placeholder) {
+                var scheduler = instance.get(SCHEDULER);
+
+                placeholder = new scheduler.eventModel({
+                    scheduler: scheduler
+                });
+
+                placeholder.removeTarget(scheduler);
+                placeholder.get(NODE).addClass(CSS_SCHEDULER_EVENT_PROXY);
+                placeholder.set(VISIBLE, false, {
+                    silent: true
+                });
+                instance[EVENT_PLACEHOLDER] = placeholder;
+            }
+
+            if (!instance.delegate) {
+                instance.delegate = new A.DD.Delegate(
+                    instance.get(DELEGATE_CONFIG));
+            }
+
+            var dd = instance.delegate.dd;
+
+            dd.unplug(A.Plugin.DDConstrained);
+            dd.unplug(A.Plugin.DDNodeScroll);
+
+            var region = instance.bodyNode.get(REGION);
+
+            region.bottom = Infinity;
+            region.top = -Infinity;
+
+            dd.plug(A.Plugin.DDConstrained, {
+                bubbleTargets: instance,
+                constrain: region,
+                stickY: true,
+                tickY: instance.get(HOUR_HEIGHT) / 2
+            });
+
+            dd.plug(A.Plugin.DDNodeScroll, {
+                node: instance.bodyNode,
+                scrollDelay: 150
+            });
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method _uiSetDate
+         * @param val
+         * @protected
+         */
+        _uiSetDate: function(val) {
+            var instance = this;
+
+            instance.syncColumnsUI();
+            instance.syncDaysHeaderUI();
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method _onClickDaysHeader
+         * @param event
+         * @protected
+         */
+        _onClickDaysHeader: function(event) {
+            var instance = this;
+            var scheduler = instance.get(SCHEDULER);
+
+            if (event.target.test(_ANCHOR)) {
+                var dayView = scheduler.getViewByName(DAY);
+
+                if (dayView) {
+                    var colNumber = toNumber(event.currentTarget.attr(DATA_COLNUMBER));
+
+                    scheduler.set(DATE, instance.getDateByColumn(colNumber));
+                    scheduler.set(ACTIVE_VIEW, dayView);
+                }
+            }
+
+            event.preventDefault();
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method _onEventDragEnd
+         * @param event
+         * @protected
+         */
+        _onEventDragEnd: function(event) {
+            var instance = this;
+            var draggingEvent = instance[DRAGGING_EVENT];
+
+            if (draggingEvent) {
+                var placeholder = instance[EVENT_PLACEHOLDER];
+
+                placeholder.set(VISIBLE, false, {
+                    silent: true
+                });
+                draggingEvent.set(VISIBLE, true, {
+                    silent: true
+                });
+                draggingEvent.copyDates(placeholder);
+
+                instance.get(SCHEDULER).syncEventsUI();
+            }
+
+            instance[START_XY] = null;
+            instance[DRAGGING_EVENT] = null;
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method _onEventDragStart
+         * @param event
+         * @protected
+         */
+        _onEventDragStart: function(event) {
+            var instance = this;
+            var draggingEvent = instance[DRAGGING_EVENT] = instance.delegate.dd.get(NODE).getData(SCHEDULER_EVENT);
+
+            if (draggingEvent) {
+                var placeholder = instance[EVENT_PLACEHOLDER];
+
+                placeholder.copyPropagateAttrValues(draggingEvent, null, {
+                    silent: true
+                });
+
+                instance.plotEvent(placeholder);
+
+                draggingEvent.set(VISIBLE, false, {
+                    silent: true
+                });
+
+                instance.draggingEventStartDate = DateMath.clone(draggingEvent.get(START_DATE));
+                instance.draggingEventEndDate = DateMath.clone(draggingEvent.get(END_DATE));
+
+                var startColumn = instance.getColumnByDate(draggingEvent.get(START_DATE));
+
+                instance.startColNumber = startColumn ? toNumber(startColumn.attr(DATA_COLNUMBER)) : 0;
+            }
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method _onMouseDownTableCol
+         * @param event
+         * @protected
+         */
+        _onMouseDownTableCol: function(event) {
+            var instance = this;
+            var target = event.target;
+            var scheduler = instance.get(SCHEDULER);
+            var recorder = scheduler.get(EVENT_RECORDER);
+
+            if (recorder &amp;&amp; !scheduler.get(DISABLED)) {
+                recorder.hidePopover();
+
+                if (target.test(_DOT + CSS_SCHEDULER_VIEW_DAY_TABLE_COL_SHIM)) {
+                    instance[START_XY] = [event.pageX, event.pageY];
+
+                    var colNumber = toNumber(event.currentTarget.attr(DATA_COLNUMBER));
+                    var startDate = instance.getDateByColumn(colNumber);
+                    var clickLeftTop = instance.getXYDelta(event);
+
+                    instance.roundToNearestHour(
+                        startDate, instance.getYCoordTime(clickLeftTop[1]));
+
+                    var endDate = DateMath.add(startDate, DateMath.MINUTES, recorder.get(DURATION));
+
+                    recorder.move(startDate, {
+                        silent: true
+                    });
+
+                    recorder.setAttrs({
+                        allDay: false,
+                        endDate: endDate
+                    }, {
+                        silent: true
+                    });
+
+                    instance[CREATION_START_DATE] = startDate;
+
+                    event.halt();
+                }
+                else if (target.test(
+                            [_DOT + CSS_SCHEDULER_VIEW_DAY_RESIZER,
+                             _DOT + CSS_SCHEDULER_VIEW_DAY_RESIZER_ICON].join(_COMMA))) {
+
+                    instance[RESIZING] = true;
+                }
+            }
+
+            instance.get(BOUNDING_BOX).unselectable();
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method _onMouseEnterEvent
+         * @param event
+         * @protected
+         */
+        _onMouseEnterEvent: function(event) {
+            var instance = this;
+            var target = event.currentTarget;
+            var evt = target.getData(SCHEDULER_EVENT);
+
+            if (evt &amp;&amp; !evt.get(DISABLED)) {
+                instance[RESIZER_NODE].appendTo(target);
+            }
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method _onMouseLeaveEvent
+         * @param event
+         * @protected
+         */
+        _onMouseLeaveEvent: function(event) {
+            var instance = this;
+
+            if (!instance[RESIZING]) {
+                instance._removeResizer();
+            }
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method _onMouseMoveTableCol
+         * @param event
+         * @protected
+         */
+        _onMouseMoveTableCol: function(event) {
+            var instance = this;
+            var activeColumn = event.currentTarget;
+            var recorder = instance.get(SCHEDULER).get(EVENT_RECORDER);
+
+            if (instance[ACTIVE_COLUMN] !== activeColumn) {
+                instance[ACTIVE_COLUMN] = activeColumn;
+                instance._dragTickAlignX(instance[ACTIVE_COLUMN]);
+            }
+
+            var creationStartDate = instance[CREATION_START_DATE];
+
+            if (creationStartDate) {
+                var delta = roundToNearestMultiple(
+                    instance.calculateYDelta(instance[START_XY], [event.pageX, event.pageY]),
+                    instance.getTickY()
+                );
+
+                var down = (delta &gt;= instance._delta);
+
+                if (instance._delta !== delta) {
+                    if (delta &gt; 0) {
+                        var newDelta = down ? Math.max(delta, recorder.get(DURATION)) : delta;
+
+                        recorder.set(END_DATE, DateMath.add(creationStartDate, DateMath.MINUTES, newDelta), {
+                            silent: true
+                        });
+                    }
+                    else {
+                        recorder.set(START_DATE, DateMath.add(creationStartDate, DateMath.MINUTES, delta), {
+                            silent: true
+                        });
+                    }
+
+                    instance.plotEvent(recorder);
+
+                    instance._delta = delta;
+                }
+            }
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method _onMouseUpTableCol
+         * @param event
+         * @protected
+         */
+        _onMouseUpTableCol: function(event) {
+            var instance = this;
+            var scheduler = instance.get(SCHEDULER);
+            var recorder = scheduler.get(EVENT_RECORDER);
+
+            if (recorder &amp;&amp; !scheduler.get(DISABLED)) {
+                if (instance[CREATION_START_DATE]) {
+                    instance.plotEvent(recorder);
+
+                    recorder.showPopover();
+                }
+            }
+
+            instance[CREATION_START_DATE] = null;
+            instance[RESIZING] = false;
+            instance[START_XY] = null;
+
+            instance._removeResizer();
+            instance.get(BOUNDING_BOX).selectable();
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method _onSchedulerChange
+         * @param event
+         * @protected
+         */
+        _onSchedulerChange: function(event) {
+            var instance = this;
+
+            if (instance[HEADER_VIEW]) {
+                instance[HEADER_VIEW].set(SCHEDULER, event.newVal);
+            }
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method _removeResizer
+         * @protected
+         */
+        _removeResizer: function() {
+            var instance = this;
+
+            instance[RESIZER_NODE].remove();
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method _valueColDaysNode
+         * @protected
+         */
+        _valueColDaysNode: function() {
+            var instance = this;
+            var days = instance.get(DAYS);
+            var buffer = [],
+                colNumber = 0;
+
+            while (days--) {
+                buffer.push(
+                    A.Lang.sub(TPL_SCHEDULER_VIEW_DAY_TABLE_COLDAY, {
+                        colNumber: colNumber++
+                    })
+                );
+            }
+
+            return A.NodeList.create(buffer.join(_EMPTY_STR));
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method _valueColHeaderDaysNode
+         * @protected
+         */
+        _valueColHeaderDaysNode: function() {
+            var instance = this;
+            var days = instance.get(DAYS);
+            var buffer = [],
+                colNumber = 0;
+
+            buffer.push(TPL_SCHEDULER_VIEW_DAY_HEADER_DAY_FIRST);
+
+            while (days--) {
+                buffer.push(
+                    A.Lang.sub(TPL_SCHEDULER_VIEW_DAY_HEADER_DAY, {
+                        colNumber: colNumber++
+                    })
+                );
+            }
+
+            return A.NodeList.create(buffer.join(_EMPTY_STR));
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method _valueMarkercellsNode
+         * @protected
+         */
+        _valueMarkercellsNode: function() {
+            var instance = this;
+            var buffer = [],
+                i;
+
+            for (i = 0; i &lt;= 23; i++) {
+                buffer.push(TPL_SCHEDULER_VIEW_DAY_MARKERCELL);
+            }
+
+            return A.NodeList.create(buffer.join(_EMPTY_STR));
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method _valueTimesNode
+         * @protected
+         */
+        _valueTimesNode: function() {
+            var instance = this;
+            var isoTime = instance.get(ISO_TIME);
+            var buffer = [],
+                hour;
+
+            for (hour = 0; hour &lt;= 23; hour++) {
+                buffer.push(
+                    Lang.sub(
+                        TPL_SCHEDULER_VIEW_DAY_TABLE_TIME, {
+                            hour: isoTime ? DateMath.toIsoTimeString(hour) : DateMath.toUsTimeString(hour, false,
+                                true)
+                        }
+                    )
+                );
+            }
+
+            return A.NodeList.create(buffer.join(_EMPTY_STR));
+        }
+    }
 });
 
 A.SchedulerDayView = SchedulerDayView;
+
     </pre>
 </div>
 

@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>2.0.0pr6</b>
+                        API Docs for Version: <b>2.0.0</b>
                     </p>
                 </li>
             </div>
@@ -83,6 +83,8 @@
             
                 <li><a href="../classes/A.ButtonGroup.html">A.ButtonGroup</a></li>
             
+                <li><a href="../classes/A.ButtonSearchCancel.html">A.ButtonSearchCancel</a></li>
+            
                 <li><a href="../classes/A.Carousel.html">A.Carousel</a></li>
             
                 <li><a href="../classes/A.CellEditorSupport.html">A.CellEditorSupport</a></li>
@@ -107,7 +109,23 @@
             
                 <li><a href="../classes/A.DataType.DateMath.html">A.DataType.DateMath</a></li>
             
+                <li><a href="../classes/A.Date.html">A.Date</a></li>
+            
                 <li><a href="../classes/A.DateCellEditor.html">A.DateCellEditor</a></li>
+            
+                <li><a href="../classes/A.DateParser.html">A.DateParser</a></li>
+            
+                <li><a href="../classes/A.DatePicker.html">A.DatePicker</a></li>
+            
+                <li><a href="../classes/A.DatePickerBase.html">A.DatePickerBase</a></li>
+            
+                <li><a href="../classes/A.DatePickerDelegate.html">A.DatePickerDelegate</a></li>
+            
+                <li><a href="../classes/A.DatePickerNative.html">A.DatePickerNative</a></li>
+            
+                <li><a href="../classes/A.DatePickerNativeBase.html">A.DatePickerNativeBase</a></li>
+            
+                <li><a href="../classes/A.DatePickerPopover.html">A.DatePickerPopover</a></li>
             
                 <li><a href="../classes/A.DiagramBuilder.html">A.DiagramBuilder</a></li>
             
@@ -260,6 +278,10 @@
                 <li><a href="../classes/A.TextCellEditor.html">A.TextCellEditor</a></li>
             
                 <li><a href="../classes/A.ThumbRating.html">A.ThumbRating</a></li>
+            
+                <li><a href="../classes/A.TimePicker.html">A.TimePicker</a></li>
+            
+                <li><a href="../classes/A.TimePickerBase.html">A.TimePickerBase</a></li>
             
                 <li><a href="../classes/A.ToggleButton.html">A.ToggleButton</a></li>
             
@@ -1057,6 +1079,8 @@
 
             <ul id="api-modules" class="apis modules tab-pane">
             
+                <li><a href="../modules/ace-autocomplete-plugin.html">ace-autocomplete-plugin</a></li>
+            
                 <li><a href="../modules/align-plugin.html">align-plugin</a></li>
             
                 <li><a href="../modules/anim.html">anim</a></li>
@@ -1143,7 +1167,7 @@
             
                 <li><a href="../modules/aui-collection.html">aui-collection</a></li>
             
-                <li><a href="../modules/aui-color-pallete.html">aui-color-pallete</a></li>
+                <li><a href="../modules/aui-color-palette.html">aui-color-palette</a></li>
             
                 <li><a href="../modules/aui-color-picker.html">aui-color-picker</a></li>
             
@@ -1164,6 +1188,16 @@
                 <li><a href="../modules/aui-datatable-selection.html">aui-datatable-selection</a></li>
             
                 <li><a href="../modules/aui-datatype.html">aui-datatype</a></li>
+            
+                <li><a href="../modules/aui-datatype-date-parse.html">aui-datatype-date-parse</a></li>
+            
+                <li><a href="../modules/aui-datepicker.html">aui-datepicker</a></li>
+            
+                <li><a href="../modules/aui-datepicker-delegate.html">aui-datepicker-delegate</a></li>
+            
+                <li><a href="../modules/aui-datepicker-native.html">aui-datepicker-native</a></li>
+            
+                <li><a href="../modules/aui-datepicker-popover.html">aui-datepicker-popover</a></li>
             
                 <li><a href="../modules/aui-diagram-builder.html">aui-diagram-builder</a></li>
             
@@ -1245,7 +1279,7 @@
             
                 <li><a href="../modules/aui-pagination.html">aui-pagination</a></li>
             
-                <li><a href="../modules/aui-pallete.html">aui-pallete</a></li>
+                <li><a href="../modules/aui-palette.html">aui-palette</a></li>
             
                 <li><a href="../modules/aui-parse-content.html">aui-parse-content</a></li>
             
@@ -1296,6 +1330,8 @@
                 <li><a href="../modules/aui-tabview.html">aui-tabview</a></li>
             
                 <li><a href="../modules/aui-text.html">aui-text</a></li>
+            
+                <li><a href="../modules/aui-timepicker.html">aui-timepicker</a></li>
             
                 <li><a href="../modules/aui-timer.html">aui-timer</a></li>
             
@@ -2053,9 +2089,9 @@
 <div class="file">
     <pre class="code prettyprint linenums">
 /**
- * The Pallete Utility
+ * The Palette Utility
  *
- * @module aui-pallete
+ * @module aui-palette
  */
 
 var Lang = A.Lang,
@@ -2088,7 +2124,6 @@ var Lang = A.Lang,
 
     getClassName = A.getClassName,
 
-
     CSS_PALETTE_CONTAINER = getClassName(&#x27;palette-container&#x27;),
     CSS_PALETTE_ITEM = getClassName(&#x27;palette-item&#x27;),
     CSS_PALETTE_ITEM_HOVER = getClassName(&#x27;palette-item-hover&#x27;),
@@ -2097,560 +2132,602 @@ var Lang = A.Lang,
     CSS_PALETTE_ITEMS_CONTAINER = getClassName(&#x27;palette-items-container&#x27;),
     CSS_PALETTE_ITEMS_CONTAINER_INDEX = getClassName(&#x27;palette-items-container-{index}&#x27;),
 
-/**
- * A base class for Palette.
- *
- * @class A.Palette
- * @extends A.Widget
- * @param config {Object} Object literal specifying widget configuration properties.
- * @constructor
- */
-Palette = A.Base.create(_NAME, A.Widget, [A.WidgetCssClass, A.WidgetToggle], {
-    CONTAINER_TEMPLATE: &#x27;&lt;table class=&quot;&#x27; + CSS_PALETTE_CONTAINER + &#x27;&quot;&gt;{content}&lt;/table&gt;&#x27;,
-
-    ITEMS_CONTAINER_TEMPLATE: &#x27;&lt;tr class=&quot;&#x27; + CSS_PALETTE_ITEMS_CONTAINER + _SPACE + CSS_PALETTE_ITEMS_CONTAINER_INDEX + &#x27;&quot;&gt;{content}&lt;/tr&gt;&#x27;,
-
-    ITEM_TEMPLATE:  &#x27;&lt;td class=&quot;&#x27; + CSS_PALETTE_ITEM + &#x27; {selectedClassName}&quot; data-column={column} data-index={index} data-row={row} data-value=&quot;{value}&quot;&gt;&#x27; +
-                        &#x27;&lt;a href=&quot;&quot; class=&quot;&#x27; + CSS_PALETTE_ITEM_INNER + &#x27;&quot; onclick=&quot;return false;&quot;&gt;&lt;/a&gt;&#x27; +
-                    &#x27;&lt;/td&gt;&#x27;,
-
-    _items: null,
-
     /**
-     * Construction logic executed during Palette instantiation. Lifecycle.
+     * A base class for Palette.
      *
-     * @method initializer
-     * @protected
+     * @class A.Palette
+     * @extends A.Widget
+     * @param config {Object} Object literal specifying widget configuration properties.
+     * @constructor
      */
-    initializer: function() {
-        var instance = this;
+    Palette = A.Base.create(_NAME, A.Widget, [A.WidgetCssClass, A.WidgetToggle], {
+        CONTAINER_TEMPLATE: &#x27;&lt;table class=&quot;&#x27; + CSS_PALETTE_CONTAINER + &#x27;&quot;&gt;{content}&lt;/table&gt;&#x27;,
 
-        instance.after(ITEMS_CHANGE, instance._afterItemsChange, instance);
-        instance.after(SELECTED_CHANGE, instance._afterSelectedChange, instance);
+        ITEMS_CONTAINER_TEMPLATE: &#x27;&lt;tr class=&quot;&#x27; + CSS_PALETTE_ITEMS_CONTAINER + _SPACE + CSS_PALETTE_ITEMS_CONTAINER_INDEX + &#x27;&quot;&gt;{content}&lt;/tr&gt;&#x27;,
 
-        A.after(instance._bindUIPalette, instance, RENDER_UI);
+        ITEM_TEMPLATE: &#x27;&lt;td class=&quot;&#x27; + CSS_PALETTE_ITEM + &#x27; {selectedClassName}&quot; data-column={column} data-index={index} data-row={row} data-value=&quot;{value}&quot;&gt;&#x27; + &#x27;&lt;a href=&quot;&quot; class=&quot;&#x27; + CSS_PALETTE_ITEM_INNER + &#x27;&quot; onclick=&quot;return false;&quot;&gt;&lt;/a&gt;&#x27; + &#x27;&lt;/td&gt;&#x27;,
 
-        instance.publish({
-            enter: { defaultFn: instance._defEnterFn },
-            leave: { defaultFn: instance._defLeaveFn },
-            select: { defaultFn: instance._defSelectFn },
-            unselect: { defaultFn: instance._defUnselectFn }
-        });
-    },
+        _items: null,
 
-    /**
-     * Render the Palette component instance. Lifecycle.
-     *
-     * @method renderUI
-     * @protected
-     */
-    renderUI: function() {
-        var instance = this;
+        /**
+         * Construction logic executed during Palette instantiation. Lifecycle.
+         *
+         * @method initializer
+         * @protected
+         */
+        initializer: function() {
+            var instance = this;
 
-        instance._uiSetItems(instance.get(ITEMS));
-    },
+            instance.after(ITEMS_CHANGE, instance._afterItemsChange, instance);
+            instance.after(SELECTED_CHANGE, instance._afterSelectedChange, instance);
 
-    /**
-     * TODO. Wanna help? Please send a Pull Request.
-     *
-     * @method getItem
-     * @param row
-     * @param col
-     */
-    getItem: function(row, col) {
-        var instance = this;
+            A.after(instance._bindUIPalette, instance, RENDER_UI);
 
-        return instance.getItemByIndex(
-                row*instance.get(COLUMNS) + col);
-    },
+            instance.publish({
+                enter: {
+                    defaultFn: instance._defEnterFn
+                },
+                leave: {
+                    defaultFn: instance._defLeaveFn
+                },
+                select: {
+                    defaultFn: instance._defSelectFn
+                },
+                unselect: {
+                    defaultFn: instance._defUnselectFn
+                }
+            });
+        },
 
-    /**
-     * TODO. Wanna help? Please send a Pull Request.
-     *
-     * @method getItemByIndex
-     * @param index
-     */
-    getItemByIndex: function(index) {
-        var instance = this;
+        /**
+         * Render the Palette component instance. Lifecycle.
+         *
+         * @method renderUI
+         * @protected
+         */
+        renderUI: function() {
+            var instance = this;
 
-        return instance._getIndexedItems().item(index);
-    },
+            instance._uiSetItems(instance.get(ITEMS));
+        },
 
-    /**
-     * TODO. Wanna help? Please send a Pull Request.
-     *
-     * @method getItemByValue
-     * @param value
-     */
-    getItemByValue: function (value) {
-        var instance = this,
-            itemIndex = -1,
-            items;
+        /**
+         * Returns an item in the Palette by row and column.
+         *
+         * @method getItem
+         * @param {Number} row The row in which this item is rendered
+         * @param {Number} col The column on which this item is rendered
+         * @return {Object} The found palette item
+         */
+        getItem: function(row, col) {
+            var instance = this;
 
-        if (Lang.isObject(value)) {
-            value = value.value;
-        }
+            return instance.getItemByIndex(
+                row * instance.get(COLUMNS) + col);
+        },
 
-        items = instance.get(ITEMS);
+        /**
+         * Returns an item in the Palette by its index.
+         *
+         * @method getItemByIndex
+         * @param {Number} index The index of the item
+         * @return {Object} The palette item
+         */
+        getItemByIndex: function(index) {
+            var instance = this;
 
-        items.some(function (item, index) {
-            if (item.value === value) {
-                itemIndex = index;
-                return true;
+            return instance._getIndexedItems().item(index);
+        },
+
+        /**
+         * Returns an item in the Palette by its value.
+         *
+         * @method getItemByValue
+         * @param {Object|Number|String} value If the value is an object, it should contain a property called &quot;value&quot; which will be used to retrieve the item.
+         * @return {Object} The palette item
+         */
+        getItemByValue: function(value) {
+            var instance = this,
+                itemIndex = -1,
+                items;
+
+            if (Lang.isObject(value)) {
+                value = value.value;
             }
-        });
 
-        return instance.getItemByIndex(itemIndex);
-    },
+            items = instance.get(ITEMS);
 
-    /**
-     * TODO. Wanna help? Please send a Pull Request.
-     *
-     * @method select
-     * @param valueOrIndex
-     */
-    select: function(valueOrIndex) {
-        var instance = this;
+            A.Array.some(
+                items,
+                function(item, index) {
+                    if (Lang.isObject(item)) {
+                        item = item.value;
+                    }
 
-        instance.toggleSelection(valueOrIndex, true);
-    },
+                    if (item === value) {
+                        itemIndex = index;
+                        return true;
+                    }
+                }
+            );
 
-    /**
-     * TODO. Wanna help? Please send a Pull Request.
-     *
-     * @method toggleSelection
-     * @param valueOrIndex
-     * @param force
-     */
-    toggleSelection: function(valueOrIndex, force) {
-        var instance = this,
-            item =  instance.getItemByIndex(valueOrIndex) ||
+            return instance.getItemByIndex(itemIndex);
+        },
+
+        /**
+         * Selects an item in the Palette.
+         *
+         * @method select
+         * @param {Number|Object} valueOrIndex The value or index of the item which should be selected
+         */
+        select: function(valueOrIndex) {
+            var instance = this;
+
+            instance.toggleSelection(valueOrIndex, true);
+        },
+
+        /**
+         * Toggles the section of an item. The item must be specified by its value or index. A second param indicates if the selection should be forced.
+         *
+         * @method toggleSelection
+         * @param {Number|Object} valueOrIndex The value or index of the item
+         * @param force If true, forces the selection.
+         */
+        toggleSelection: function(valueOrIndex, force) {
+            var instance = this,
+                item = instance.getItemByIndex(valueOrIndex) ||
                     instance.getItemByValue(valueOrIndex);
 
-        if (item) {
-            item.toggleClass(CSS_PALETTE_ITEM_SELECTED, force);
-        }
-    },
+            if (item) {
+                item.toggleClass(CSS_PALETTE_ITEM_SELECTED, force);
+            }
+        },
 
-    /**
-     * TODO. Wanna help? Please send a Pull Request.
-     *
-     * @method unselect
-     * @param valueOrIndex
-     */
-    unselect: function(valueOrIndex) {
-        var instance = this;
+        /**
+         * Unselects an item. The item must be specified by its value or index.
+         *
+         * @method unselect
+         * @param {Number|Object} valueOrIndex The value or index of the item
+         */
+        unselect: function(valueOrIndex) {
+            var instance = this;
 
-        instance.toggleSelection(valueOrIndex, false);
-    },
+            instance.toggleSelection(valueOrIndex, false);
+        },
 
-    /**
-     * TODO. Wanna help? Please send a Pull Request.
-     *
-     * @method _afterItemsChange
-     * @param event
-     * @protected
-     */
-    _afterItemsChange: function (event) {
-        var instance = this;
+        /**
+         * Updates the UI of the Palette after changing an item.
+         *
+         * @method _afterItemsChange
+         * @param {CustomEvent} event The event fired
+         * @protected
+         */
+        _afterItemsChange: function(event) {
+            var instance = this;
 
-        instance._items = null;
+            instance._items = null;
 
-        instance._uiSetItems(event.newVal);
-    },
+            instance._uiSetItems(event.newVal);
+        },
 
-    /**
-     * TODO. Wanna help? Please send a Pull Request.
-     *
-     * @method _afterSelectedChange
-     * @param event
-     * @protected
-     */
-    _afterSelectedChange: function (event) {
-        var instance = this;
+        /**
+         * Unselects the previous item and selects a new one.
+         *
+         * @method _afterSelectedChange
+         * @param {CustomEvent} event The event fired. Contains the previous selected element as &lt;code&gt;prevVal&lt;/code&gt; property and the new selected item as &lt;code&gt;newVal&lt;/code&gt;
+         * @protected
+         */
+        _afterSelectedChange: function(event) {
+            var instance = this;
 
-        instance.unselect(event.prevVal);
-        instance.select(event.newVal);
-    },
+            instance.unselect(event.prevVal);
+            instance.select(event.newVal);
+        },
 
-    /**
-     * TODO. Wanna help? Please send a Pull Request.
-     *
-     * @method _bindUIPalette
-     * @protected
-     */
-    _bindUIPalette: function() {
-        var instance = this,
-            boundingBox = instance.get(BOUNDING_BOX);
+        /**
+         * Binds events on the Palette.
+         *
+         * @method _bindUIPalette
+         * @protected
+         */
+        _bindUIPalette: function() {
+            var instance = this,
+                boundingBox = instance.get(BOUNDING_BOX);
 
-        boundingBox.delegate(CLICK, instance._onItemClick, _DOT+CSS_PALETTE_ITEM, instance);
-        boundingBox.delegate(HOVER, instance._onItemMouseEnter, instance._onItemMouseLeave, _DOT+CSS_PALETTE_ITEM, instance);
-    },
+            boundingBox.delegate(CLICK, instance._onItemClick, _DOT + CSS_PALETTE_ITEM, instance);
+            boundingBox.delegate(HOVER, instance._onItemMouseEnter, instance._onItemMouseLeave, _DOT +
+                CSS_PALETTE_ITEM, instance);
+        },
 
-    /**
-     * TODO. Wanna help? Please send a Pull Request.
-     *
-     * @method _defEnterFn
-     * @param event
-     * @protected
-     */
-    _defEnterFn: function(event) {
-        event.item.addClass(CSS_PALETTE_ITEM_HOVER);
-    },
+        /**
+         * The default function to be executed after &lt;code&gt;enter&lt;/code&gt; event.
+         * By default adds HOVER class to the item.
+         *
+         * @method _defEnterFn
+         * @param {CustomEvent} event The fired event
+         * @protected
+         */
+        _defEnterFn: function(event) {
+            event.item.addClass(CSS_PALETTE_ITEM_HOVER);
+        },
 
-    /**
-     * TODO. Wanna help? Please send a Pull Request.
-     *
-     * @method _defLeaveFn
-     * @param event
-     * @protected
-     */
-    _defLeaveFn: function(event) {
-        event.item.removeClass(CSS_PALETTE_ITEM_HOVER);
-    },
+        /**
+         * The default function to be executed after &lt;code&gt;leave&lt;/code&gt; event.
+         * By default removes HOVER class from the item.
+         *
+         * @method _defLeaveFn
+         * @param {CustomEvent} event The fired event
+         * @protected
+         */
+        _defLeaveFn: function(event) {
+            event.item.removeClass(CSS_PALETTE_ITEM_HOVER);
+        },
 
-    /**
-     * TODO. Wanna help? Please send a Pull Request.
-     *
-     * @method _defSelectFn
-     * @param event
-     * @protected
-     */
-    _defSelectFn: function(event) {
-        var instance = this;
+        /**
+         * The default function which executes after &lt;code&gt;select&lt;/code&gt; event.
+         * By default updates the &lt;code&gt;selected&lt;/code&gt; property with the index of the selected item.
+         *
+         * @method _defSelectFn
+         * @param {CustomEvent} event The fired event
+         * @protected
+         */
+        _defSelectFn: function(event) {
+            var instance = this;
 
-        if (event.src === UI_SRC) {
-            instance.set(SELECTED, event.index);
-        }
-    },
+            if (event.src === UI_SRC) {
+                instance.set(SELECTED, event.index);
+            }
+        },
 
-    /**
-     * TODO. Wanna help? Please send a Pull Request.
-     *
-     * @method _defUnselectFn
-     * @param event
-     * @protected
-     */
-    _defUnselectFn: function(event) {
-        var instance = this;
+        /**
+         * The default function which executes after &lt;code&gt;unselect&lt;/code&gt; event.
+         * By default updates the &lt;code&gt;selected&lt;/code&gt; property with -1.
+         *
+         * @method _defUnselectFn
+         * @param event
+         * @protected
+         */
+        _defUnselectFn: function(event) {
+            var instance = this;
 
-        if (event.src === UI_SRC) {
-            instance.set(SELECTED, -1);
-        }
-    },
+            if (event.src === UI_SRC) {
+                instance.set(SELECTED, -1);
+            }
+        },
 
-    /**
-     * TODO. Wanna help? Please send a Pull Request.
-     *
-     * @method _getContent
-     * @param items
-     * @param columns
-     * @protected
-     */
-    _getContent: function(items, columns) {
-        var instance = this,
-            formatter = instance.get(FORMATTER),
-            selected = instance.get(SELECTED),
-            column,
-            content,
-            index = 0,
-            result = _EMPTY,
-            total = items.length,
-            row,
-            rows = Math.ceil(total/columns);
+        /**
+         * Generates and retrieves the whole content of the Palette. The function uses the Formatter from &lt;code&gt;formatter&lt;/code&gt; property to format the content.
+         *
+         * @method _getContent
+         * @param {Array} items The items in the Palette
+         * @param {Array} columns The columns of the Palette
+         * @protected
+         * @return {String} The generated content
+         */
+        _getContent: function(items, columns) {
+            var instance = this,
+                formatter = instance.get(FORMATTER),
+                selected = instance.get(SELECTED),
+                column,
+                content,
+                index = 0,
+                result = _EMPTY,
+                total = items.length,
+                row,
+                rows = Math.ceil(total / columns);
 
-        for (row = 0; row &lt; rows; row++) {
-            content = _EMPTY;
+            for (row = 0; row &lt; rows; row++) {
+                content = _EMPTY;
 
-            for (column = 0; column &lt; columns; column++) {
-                index = (row*columns + column);
+                for (column = 0; column &lt; columns; column++) {
+                    index = (row * columns + column);
 
-                if (index &gt;= total) {
-                    break;
+                    if (index &gt;= total) {
+                        break;
+                    }
+
+                    content += formatter.call(instance, items, index, row, column, (selected === index));
                 }
 
-                content += formatter.call(instance, items, index, row, column, (selected === index));
+                result += instance._getRowContent(items, index, row, content);
             }
 
-            result += instance._getRowContent(items, index, row, content);
-        }
+            return instance._getPaletteContent(items, result);
+        },
 
-        return instance._getPaletteContent(items, result);
-    },
+        /**
+         * Returns an Object, which contains the following properties:
+         * column - The current column
+         * item - The current item node
+         * index - The current item index
+         * row - The current row
+         * src - UI_SRC
+         * value - The value of the item.
+         *
+         * @method _getEventsPayload
+         * @param {CustomEvent} event The fired event
+         * @protected
+         * @return {Object} The event payload
+         */
+        _getEventsPayload: function(event) {
+            var instance = this,
+                items = instance.get(ITEMS),
+                index,
+                itemNode = event.currentTarget;
 
-    /**
-     * TODO. Wanna help? Please send a Pull Request.
-     *
-     * @method _getEventsPayload
-     * @param event
-     * @protected
-     */
-    _getEventsPayload: function(event) {
-        var instance = this,
-            items = instance.get(ITEMS),
-            index,
-            itemNode = event.currentTarget;
-
-        index = Lang.toInt(itemNode.getAttribute(&#x27;data-index&#x27;));
-
-        return {
-            column: Lang.toInt(itemNode.getAttribute(&#x27;data-column&#x27;)),
-            item: itemNode,
-            index: index,
-            row: Lang.toInt(itemNode.getAttribute(&#x27;data-row&#x27;)),
-            src: UI_SRC,
-            value: items[index]
-        };
-    },
-
-    /**
-     * TODO. Wanna help? Please send a Pull Request.
-     *
-     * @method _getIndexedItems
-     * @protected
-     */
-    _getIndexedItems: function () {
-        var instance = this;
-
-        if (!instance._items) {
-            instance._items = instance.get(CONTENT_BOX).all(_DOT + CSS_PALETTE_ITEM);
-        }
-
-        return instance._items;
-    },
-
-    /**
-     * TODO. Wanna help? Please send a Pull Request.
-     *
-     * @method _getPaletteContent
-     * @param items
-     * @param content
-     * @protected
-     */
-    _getPaletteContent: function(items, content) {
-        var instance = this;
-
-        return Lang.sub(
-            instance.CONTAINER_TEMPLATE,
-            {
-                className: CSS_PALETTE_CONTAINER,
-                content: content
-            }
-        );
-    },
-
-    /**
-     * TODO. Wanna help? Please send a Pull Request.
-     *
-     * @method _getRowContent
-     * @param items
-     * @param index
-     * @param row
-     * @param content
-     * @protected
-     */
-    _getRowContent: function(items, index, row, content) {
-        var instance = this;
-
-        return Lang.sub(
-            instance.ITEMS_CONTAINER_TEMPLATE,
-            {
-                className: CSS_PALETTE_ITEMS_CONTAINER_INDEX,
-                content: content,
-                index: row
-            }
-        );
-    },
-
-    /**
-     * TODO. Wanna help? Please send a Pull Request.
-     *
-     * @method _onItemClick
-     * @param event
-     * @protected
-     */
-    _onItemClick: function(event) {
-        var instance = this,
-            selected = instance.get(SELECTED),
-            toggleSelection = instance.get(TOGGLE_SELECTION),
-            eventName,
-            itemNode = event.currentTarget,
             index = Lang.toInt(itemNode.getAttribute(&#x27;data-index&#x27;));
 
-        if (index !== selected) {
-            eventName = SELECT;
-        }
-        else if (toggleSelection) {
-            eventName = UNSELECT;
-        }
+            return {
+                column: Lang.toInt(itemNode.getAttribute(&#x27;data-column&#x27;)),
+                item: itemNode,
+                index: index,
+                row: Lang.toInt(itemNode.getAttribute(&#x27;data-row&#x27;)),
+                src: UI_SRC,
+                value: items[index]
+            };
+        },
 
-        if (eventName) {
-            instance.fire(eventName, instance._getEventsPayload(event));
-        }
-    },
+        /**
+         * Returns the items in the Palette as an &lt;code&gt;NodeList&lt;/code&gt;.
+         *
+         * @method _getIndexedItems
+         * @protected
+         * @return {NodeList} The indexed items
+         */
+        _getIndexedItems: function() {
+            var instance = this;
 
-    /**
-     * TODO. Wanna help? Please send a Pull Request.
-     *
-     * @method _onItemMouseEnter
-     * @param event
-     * @protected
-     */
-    _onItemMouseEnter: function(event) {
-        var instance = this;
-
-        instance.fire(ENTER, instance._getEventsPayload(event));
-    },
-
-    /**
-     * TODO. Wanna help? Please send a Pull Request.
-     *
-     * @method _onItemMouseLeave
-     * @param event
-     * @protected
-     */
-    _onItemMouseLeave: function(event) {
-        var instance = this;
-
-        instance.fire(LEAVE, instance._getEventsPayload(event));
-    },
-
-    /**
-     * TODO. Wanna help? Please send a Pull Request.
-     *
-     * @method _uiSetItems
-     * @param val
-     * @protected
-     */
-    _uiSetItems: function(val) {
-        var instance = this,
-            columns,
-            width = instance.get(WIDTH);
-
-        if (width) {
-            columns = val.length;
-        }
-        else {
-            columns = instance.get(COLUMNS);
-
-            if (columns === -1) {
-                columns = val.length;
+            if (!instance._items) {
+                instance._items = instance.get(CONTENT_BOX).all(_DOT + CSS_PALETTE_ITEM);
             }
-        }
 
-        instance.get(CONTENT_BOX).setHTML(
-            instance.get(CONTAINER_NODE) || instance._getContent(val, columns));
-    },
+            return instance._items;
+        },
 
-    /**
-     * TODO. Wanna help? Please send a Pull Request.
-     *
-     * @method _valueFormatterFn
-     * @protected
-     */
-    _valueFormatterFn: function() {
-        return function (items, index, row, column, selected) {
+        /**
+         * Replaces the Template of the Container with the content.
+         *
+         * @method _getPaletteContent
+         * @param {Array} items Palette items
+         * @param {String} content The generated content
+         * @protected
+         * return {String} The final content of the Palette according to the Container Template
+         */
+        _getPaletteContent: function(items, content) {
             var instance = this;
 
             return Lang.sub(
-                instance.ITEM_TEMPLATE,
-                {
-                    column: column,
-                    index: index,
-                    row: row,
-                    selectedClassName: selected ? CSS_PALETTE_ITEM_SELECTED : _EMPTY,
-                    value: items[index]
+                instance.CONTAINER_TEMPLATE, {
+                    className: CSS_PALETTE_CONTAINER,
+                    content: content
                 }
             );
-        };
-    }
-}, {
-
-    HTML_PARSER: {
-        containerNode: _DOT+CSS_PALETTE_CONTAINER
-    },
-
-    /**
-     * Static property used to define the default attribute
-     * configuration for the Palette.
-     *
-     * @property Palette.ATTRS
-     * @type Object
-     * @static
-     */
-    ATTRS: {
-
-        /**
-         * TODO. Wanna help? Please send a Pull Request.
-         *
-         * @attribute columns
-         * @default -1
-         * @type Number
-         */
-        columns: {
-            validator: Lang.isNumber,
-            value: -1
         },
 
         /**
-         * Container node of the pallete. If found, pallete widget will not
-         * generate content.
+         * Retrieves the content of a row (the container of the items) in the Palette.
          *
-         * @attribute containerNode
-         * @type Node
+         * @method _getRowContent
+         * @param {Array} items The items of the Palette
+         * @param {Number} index The index of the item
+         * @param {Number} row The row number
+         * @param {String} content The content of the row
+         * @protected
+         * @return {String} The generated content of the row
          */
-        containerNode: {
+        _getRowContent: function(items, index, row, content) {
+            var instance = this;
+
+            return Lang.sub(
+                instance.ITEMS_CONTAINER_TEMPLATE, {
+                    className: CSS_PALETTE_ITEMS_CONTAINER_INDEX,
+                    content: content,
+                    index: row
+                }
+            );
         },
 
         /**
-         * TODO. Wanna help? Please send a Pull Request.
+         * Fires &lt;code&gt;select&lt;/code&gt; or &lt;code&gt;unselect&lt;/code&gt; events together with the payload.
          *
-         * @attribute formatter
-         * @type Function
+         * @method _onItemClick
+         * @param {CustomEvent} event The fired event
+         * @protected
          */
-        formatter: {
-            validator: Lang.isFunction,
-            valueFn: &#x27;_valueFormatterFn&#x27;
+        _onItemClick: function(event) {
+            var instance = this,
+                selected = instance.get(SELECTED),
+                toggleSelection = instance.get(TOGGLE_SELECTION),
+                eventName,
+                itemNode = event.currentTarget,
+                index = Lang.toInt(itemNode.getAttribute(&#x27;data-index&#x27;));
+
+            if (index !== selected) {
+                eventName = SELECT;
+            }
+            else if (toggleSelection) {
+                eventName = UNSELECT;
+            }
+
+            if (eventName) {
+                instance.fire(eventName, instance._getEventsPayload(event));
+            }
         },
 
         /**
-         * TODO. Wanna help? Please send a Pull Request.
+         * Fires &lt;code&gt;enter&lt;/code&gt; event.
          *
-         * @attribute items
-         * @default []
-         * @type Array
+         * @method _onItemMouseEnter
+         * @param {CustomEvent} event
+         * @protected
          */
-        items: {
-            validator: Lang.isArray,
-            value: []
+        _onItemMouseEnter: function(event) {
+            var instance = this;
+
+            instance.fire(ENTER, instance._getEventsPayload(event));
         },
 
         /**
-         * TODO. Wanna help? Please send a Pull Request.
+         * Fires &lt;code&gt;leave&lt;/code&gt; event.
          *
-         * @attribute selected
-         * @type Number
+         * @method _onItemMouseLeave
+         * @param {CustomEvent} event The fired event
+         * @protected
          */
-        selected: {
-            validator: Lang.isNumber,
-            value: -1
+        _onItemMouseLeave: function(event) {
+            var instance = this;
+
+            instance.fire(LEAVE, instance._getEventsPayload(event));
         },
 
         /**
-         * TODO. Wanna help? Please send a Pull Request.
+         * Calculates the needed &lt;code&gt;columns&lt;/code&gt;, generates the content and adds the content of the &lt;code&gt;contentBox&lt;/code&gt; of the Palette.
          *
-         * @attribute toggleSelection
-         * @default true
-         * @type Boolean
+         * @method _uiSetItems
+         * @param {Array} val The items of the Palette
+         * @protected
          */
-        toggleSelection: {
-            validator: Lang.isBoolean,
-            value: true
+        _uiSetItems: function(val) {
+            var instance = this,
+                columns,
+                width = instance.get(WIDTH);
+
+            if (width) {
+                columns = val.length;
+            }
+            else {
+                columns = instance.get(COLUMNS);
+
+                if (columns === -1) {
+                    columns = val.length;
+                }
+            }
+
+            instance.get(CONTENT_BOX).setHTML(
+                instance.get(CONTAINER_NODE) || instance._getContent(val, columns));
+        },
+
+        /**
+         * Provides a default value (Function) to the &lt;code&gt;formatter&lt;/code&gt; property.
+         *
+         * @method _valueFormatterFn
+         * @protected
+         * @return {Function} The formatter function
+         */
+        _valueFormatterFn: function() {
+            return function(items, index, row, column, selected) {
+                var instance = this;
+
+                var item = items[index];
+
+                return Lang.sub(
+                    instance.ITEM_TEMPLATE, {
+                        column: column,
+                        index: index,
+                        row: row,
+                        selectedClassName: selected ? CSS_PALETTE_ITEM_SELECTED : _EMPTY,
+                        value: Lang.isObject(item) ? item.value : item
+                    }
+                );
+            };
         }
-    }
-});
+    }, {
+
+        /**
+         * Object hash, defining how attribute values have to be parsed from
+         * markup contained in the Palette&#x27;s content box.
+         *
+         * @property Palette.HTML_PARSER
+         * @type Object
+         * @static
+         */
+        HTML_PARSER: {
+            containerNode: _DOT + CSS_PALETTE_CONTAINER
+        },
+
+        /**
+         * Static property used to define the default attribute
+         * configuration for the Palette.
+         *
+         * @property Palette.ATTRS
+         * @type Object
+         * @static
+         */
+        ATTRS: {
+
+            /**
+             * Specifies how many columns should contain the Palette.
+             * If the value is a positive number, the Palette will generate as many columns as specified in this property and it will fit
+             * the provided &lt;code&gt;items&lt;/code&gt; in these columns.
+             *
+             * @attribute columns
+             * @default -1 Value of -1 means the items won&#x27;t be fit in columns. Otherwise, the items will be rendered in the provided number of columns
+             * @type Number
+             */
+            columns: {
+                validator: Lang.isNumber,
+                value: -1
+            },
+
+            /**
+             * Container node of the palette. If found, palette widget will not
+             * generate content.
+             *
+             * @attribute containerNode
+             * @type Node
+             */
+            containerNode: {},
+
+            /**
+             * Provides a function, which will be used to format the content during Palette creation.
+             *
+             * @attribute formatter
+             * @type Function
+             */
+            formatter: {
+                validator: Lang.isFunction,
+                valueFn: &#x27;_valueFormatterFn&#x27;
+            },
+
+            /**
+             * An array of Palette items. These items will be rendered in the Palette according to the specified &lt;code&gt;columns&lt;/code&gt;.
+             *
+             * @attribute items
+             * @default []
+             * @type Array
+             */
+            items: {
+                validator: Lang.isArray,
+                value: []
+            },
+
+            /**
+             * Provides the index of currently selected item.
+             *
+             * @attribute selected
+             * @type Number
+             */
+            selected: {
+                validator: Lang.isNumber,
+                value: -1
+            },
+
+            /**
+             * If true, on user interaction if the user clicks on an already selected element, it will be unselected.
+             *
+             * @attribute toggleSelection
+             * @default true
+             * @type Boolean
+             */
+            toggleSelection: {
+                validator: Lang.isBoolean,
+                value: true
+            }
+        }
+    });
 
 A.Palette = Palette;
+
     </pre>
 </div>
 

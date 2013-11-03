@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>2.0.0pr6</b>
+                        API Docs for Version: <b>2.0.0</b>
                     </p>
                 </li>
             </div>
@@ -83,6 +83,8 @@
             
                 <li><a href="../classes/A.ButtonGroup.html">A.ButtonGroup</a></li>
             
+                <li><a href="../classes/A.ButtonSearchCancel.html">A.ButtonSearchCancel</a></li>
+            
                 <li><a href="../classes/A.Carousel.html">A.Carousel</a></li>
             
                 <li><a href="../classes/A.CellEditorSupport.html">A.CellEditorSupport</a></li>
@@ -107,7 +109,23 @@
             
                 <li><a href="../classes/A.DataType.DateMath.html">A.DataType.DateMath</a></li>
             
+                <li><a href="../classes/A.Date.html">A.Date</a></li>
+            
                 <li><a href="../classes/A.DateCellEditor.html">A.DateCellEditor</a></li>
+            
+                <li><a href="../classes/A.DateParser.html">A.DateParser</a></li>
+            
+                <li><a href="../classes/A.DatePicker.html">A.DatePicker</a></li>
+            
+                <li><a href="../classes/A.DatePickerBase.html">A.DatePickerBase</a></li>
+            
+                <li><a href="../classes/A.DatePickerDelegate.html">A.DatePickerDelegate</a></li>
+            
+                <li><a href="../classes/A.DatePickerNative.html">A.DatePickerNative</a></li>
+            
+                <li><a href="../classes/A.DatePickerNativeBase.html">A.DatePickerNativeBase</a></li>
+            
+                <li><a href="../classes/A.DatePickerPopover.html">A.DatePickerPopover</a></li>
             
                 <li><a href="../classes/A.DiagramBuilder.html">A.DiagramBuilder</a></li>
             
@@ -260,6 +278,10 @@
                 <li><a href="../classes/A.TextCellEditor.html">A.TextCellEditor</a></li>
             
                 <li><a href="../classes/A.ThumbRating.html">A.ThumbRating</a></li>
+            
+                <li><a href="../classes/A.TimePicker.html">A.TimePicker</a></li>
+            
+                <li><a href="../classes/A.TimePickerBase.html">A.TimePickerBase</a></li>
             
                 <li><a href="../classes/A.ToggleButton.html">A.ToggleButton</a></li>
             
@@ -1057,6 +1079,8 @@
 
             <ul id="api-modules" class="apis modules tab-pane">
             
+                <li><a href="../modules/ace-autocomplete-plugin.html">ace-autocomplete-plugin</a></li>
+            
                 <li><a href="../modules/align-plugin.html">align-plugin</a></li>
             
                 <li><a href="../modules/anim.html">anim</a></li>
@@ -1143,7 +1167,7 @@
             
                 <li><a href="../modules/aui-collection.html">aui-collection</a></li>
             
-                <li><a href="../modules/aui-color-pallete.html">aui-color-pallete</a></li>
+                <li><a href="../modules/aui-color-palette.html">aui-color-palette</a></li>
             
                 <li><a href="../modules/aui-color-picker.html">aui-color-picker</a></li>
             
@@ -1164,6 +1188,16 @@
                 <li><a href="../modules/aui-datatable-selection.html">aui-datatable-selection</a></li>
             
                 <li><a href="../modules/aui-datatype.html">aui-datatype</a></li>
+            
+                <li><a href="../modules/aui-datatype-date-parse.html">aui-datatype-date-parse</a></li>
+            
+                <li><a href="../modules/aui-datepicker.html">aui-datepicker</a></li>
+            
+                <li><a href="../modules/aui-datepicker-delegate.html">aui-datepicker-delegate</a></li>
+            
+                <li><a href="../modules/aui-datepicker-native.html">aui-datepicker-native</a></li>
+            
+                <li><a href="../modules/aui-datepicker-popover.html">aui-datepicker-popover</a></li>
             
                 <li><a href="../modules/aui-diagram-builder.html">aui-diagram-builder</a></li>
             
@@ -1245,7 +1279,7 @@
             
                 <li><a href="../modules/aui-pagination.html">aui-pagination</a></li>
             
-                <li><a href="../modules/aui-pallete.html">aui-pallete</a></li>
+                <li><a href="../modules/aui-palette.html">aui-palette</a></li>
             
                 <li><a href="../modules/aui-parse-content.html">aui-parse-content</a></li>
             
@@ -1296,6 +1330,8 @@
                 <li><a href="../modules/aui-tabview.html">aui-tabview</a></li>
             
                 <li><a href="../modules/aui-text.html">aui-text</a></li>
+            
+                <li><a href="../modules/aui-timepicker.html">aui-timepicker</a></li>
             
                 <li><a href="../modules/aui-timer.html">aui-timer</a></li>
             
@@ -2056,7 +2092,7 @@
  * The Color Picker Component
  *
  * @module aui-color-picker
- * @submodule aui-color-pallete
+ * @submodule aui-color-palette
  */
 
 var AArray = A.Array,
@@ -2073,119 +2109,116 @@ var AArray = A.Array,
     CSS_PALETTE_ITEM_INNER = getClassName(&#x27;palette-item-inner&#x27;),
     CSS_PALETTE_ITEM_SELECTED = getClassName(&#x27;palette-item-selected&#x27;),
 
-/**
- * A base class for ColorPalette.
- *
- * @class A.ColorPalette
- * @extends A.Widget
- * @uses A.Palette
- * @param config {Object} Object literal specifying widget configuration properties.
- * @constructor
- */
-ColorPalette = A.Base.create(_NAME, A.Widget, [
+    /**
+     * A base class for ColorPalette.
+     *
+     * @class A.ColorPalette
+     * @extends A.Widget
+     * @uses A.Palette
+     * @param config {Object} Object literal specifying widget configuration properties.
+     * @constructor
+     */
+    ColorPalette = A.Base.create(_NAME, A.Widget, [
     A.Palette,
     A.WidgetCssClass,
     A.WidgetToggle
 ], {
-    ITEM_TEMPLATE:  &#x27;&lt;td class=&quot;&#x27; + CSS_PALETTE_ITEM + &#x27; {selectedClassName}&quot; data-column={column} data-index={index} data-row={row} data-value=&quot;{value}&quot;&gt;&#x27; +
-                        &#x27;&lt;a href=&quot;&quot; class=&quot;&#x27; + CSS_PALETTE_ITEM_INNER + &#x27;&quot; style=&quot;background-color:{value}&quot; onclick=&quot;return false;&quot; title=&quot;{title}&quot;&gt;&lt;/a&gt;&#x27; +
-                    &#x27;&lt;/td&gt;&#x27;,
-
-    /**
-     * TODO. Wanna help? Please send a Pull Request.
-     *
-     * @method _valueFormatterFn
-     * @protected
-     */
-    _valueFormatterFn: function() {
-        return function(items, index, row, column, selected) {
-            var instance = this,
-                item = items[index];
-
-            return Lang.sub(
-                instance.ITEM_TEMPLATE,
-                {
-                    column: column,
-                    index: index,
-                    row: row,
-                    selectedClassName: selected ? CSS_PALETTE_ITEM_SELECTED : _EMPTY,
-                    title: item.name,
-                    value: item.value
-                }
-            );
-        };
-    },
-
-    /**
-     * TODO. Wanna help? Please send a Pull Request.
-     *
-     * @method _setItems
-     * @param value
-     * @protected
-     */
-    _setItems: function(value) {
-        var instance = this,
-            result;
-
-        result = AArray.map(value, function(item, index) {
-            var tmp = item,
-                color;
-
-            if (Lang.isString(item)) {
-                color = AColor.toHex(item);
-
-                tmp = {
-                    name: color,
-                    value: color
-                };
-            }
-
-            return tmp;
-        });
-
-        instance._items = null;
-
-        return result;
-    }
-}, {
-
-    /**
-     * TODO. Wanna help? Please send a Pull Request.
-     *
-     * @property ColorPalette.CSS_PREFIX
-     * @type String
-     * @static
-     */
-    CSS_PREFIX: getClassName(_NAME),
-
-    /**
-     * Static property provides a string to identify the class.
-     *
-     * @property ColorPalette.NAME
-     * @type String
-     * @static
-     */
-    NAME: _NAME,
-
-    /**
-     * Static property used to define the default attribute
-     * configuration for the ColorPalette.
-     *
-     * @property ColorPalette.ATTRS
-     * @type Object
-     * @static
-     */
-    ATTRS: {
+        ITEM_TEMPLATE: &#x27;&lt;td class=&quot;&#x27; + CSS_PALETTE_ITEM + &#x27; {selectedClassName}&quot; data-column={column} data-index={index} data-row={row} data-value=&quot;{value}&quot;&gt;&#x27; + &#x27;&lt;a href=&quot;&quot; class=&quot;&#x27; + CSS_PALETTE_ITEM_INNER + &#x27;&quot; style=&quot;background-color:{value}&quot; onclick=&quot;return false;&quot; title=&quot;{title}&quot;&gt;&lt;/a&gt;&#x27; + &#x27;&lt;/td&gt;&#x27;,
 
         /**
          * TODO. Wanna help? Please send a Pull Request.
          *
-         * @attribute items
-         * @type Array
+         * @method _valueFormatterFn
+         * @protected
          */
-        items: {
-            setter: &#x27;_setItems&#x27;,
-            value: [
+        _valueFormatterFn: function() {
+            return function(items, index, row, column, selected) {
+                var instance = this,
+                    item = items[index];
+
+                return Lang.sub(
+                    instance.ITEM_TEMPLATE, {
+                        column: column,
+                        index: index,
+                        row: row,
+                        selectedClassName: selected ? CSS_PALETTE_ITEM_SELECTED : _EMPTY,
+                        title: item.name,
+                        value: item.value
+                    }
+                );
+            };
+        },
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @method _setItems
+         * @param value
+         * @protected
+         */
+        _setItems: function(value) {
+            var instance = this,
+                result;
+
+            result = AArray.map(value, function(item, index) {
+                var tmp = item,
+                    color;
+
+                if (Lang.isString(item)) {
+                    color = AColor.toHex(item);
+
+                    tmp = {
+                        name: color,
+                        value: color
+                    };
+                }
+
+                return tmp;
+            });
+
+            instance._items = null;
+
+            return result;
+        }
+    }, {
+
+        /**
+         * TODO. Wanna help? Please send a Pull Request.
+         *
+         * @property ColorPalette.CSS_PREFIX
+         * @type String
+         * @static
+         */
+        CSS_PREFIX: getClassName(_NAME),
+
+        /**
+         * Static property provides a string to identify the class.
+         *
+         * @property ColorPalette.NAME
+         * @type String
+         * @static
+         */
+        NAME: _NAME,
+
+        /**
+         * Static property used to define the default attribute
+         * configuration for the ColorPalette.
+         *
+         * @property ColorPalette.ATTRS
+         * @type Object
+         * @static
+         */
+        ATTRS: {
+
+            /**
+             * TODO. Wanna help? Please send a Pull Request.
+             *
+             * @attribute items
+             * @type Array
+             */
+            items: {
+                setter: &#x27;_setItems&#x27;,
+                value: [
                 &#x27;#9FC6E7&#x27;,
                 &#x27;#5484ED&#x27;,
                 &#x27;#A4BDFC&#x27;,
@@ -2198,11 +2231,12 @@ ColorPalette = A.Base.create(_NAME, A.Widget, [
                 &#x27;#E1E1E1&#x27;
             ]
 
+            }
         }
-    }
-});
+    });
 
 A.ColorPalette = ColorPalette;
+
     </pre>
 </div>
 

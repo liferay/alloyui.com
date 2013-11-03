@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>2.0.0pr6</b>
+                        API Docs for Version: <b>2.0.0</b>
                     </p>
                 </li>
             </div>
@@ -83,6 +83,8 @@
             
                 <li><a href="../classes/A.ButtonGroup.html">A.ButtonGroup</a></li>
             
+                <li><a href="../classes/A.ButtonSearchCancel.html">A.ButtonSearchCancel</a></li>
+            
                 <li><a href="../classes/A.Carousel.html">A.Carousel</a></li>
             
                 <li><a href="../classes/A.CellEditorSupport.html">A.CellEditorSupport</a></li>
@@ -107,7 +109,23 @@
             
                 <li><a href="../classes/A.DataType.DateMath.html">A.DataType.DateMath</a></li>
             
+                <li><a href="../classes/A.Date.html">A.Date</a></li>
+            
                 <li><a href="../classes/A.DateCellEditor.html">A.DateCellEditor</a></li>
+            
+                <li><a href="../classes/A.DateParser.html">A.DateParser</a></li>
+            
+                <li><a href="../classes/A.DatePicker.html">A.DatePicker</a></li>
+            
+                <li><a href="../classes/A.DatePickerBase.html">A.DatePickerBase</a></li>
+            
+                <li><a href="../classes/A.DatePickerDelegate.html">A.DatePickerDelegate</a></li>
+            
+                <li><a href="../classes/A.DatePickerNative.html">A.DatePickerNative</a></li>
+            
+                <li><a href="../classes/A.DatePickerNativeBase.html">A.DatePickerNativeBase</a></li>
+            
+                <li><a href="../classes/A.DatePickerPopover.html">A.DatePickerPopover</a></li>
             
                 <li><a href="../classes/A.DiagramBuilder.html">A.DiagramBuilder</a></li>
             
@@ -260,6 +278,10 @@
                 <li><a href="../classes/A.TextCellEditor.html">A.TextCellEditor</a></li>
             
                 <li><a href="../classes/A.ThumbRating.html">A.ThumbRating</a></li>
+            
+                <li><a href="../classes/A.TimePicker.html">A.TimePicker</a></li>
+            
+                <li><a href="../classes/A.TimePickerBase.html">A.TimePickerBase</a></li>
             
                 <li><a href="../classes/A.ToggleButton.html">A.ToggleButton</a></li>
             
@@ -1057,6 +1079,8 @@
 
             <ul id="api-modules" class="apis modules tab-pane">
             
+                <li><a href="../modules/ace-autocomplete-plugin.html">ace-autocomplete-plugin</a></li>
+            
                 <li><a href="../modules/align-plugin.html">align-plugin</a></li>
             
                 <li><a href="../modules/anim.html">anim</a></li>
@@ -1143,7 +1167,7 @@
             
                 <li><a href="../modules/aui-collection.html">aui-collection</a></li>
             
-                <li><a href="../modules/aui-color-pallete.html">aui-color-pallete</a></li>
+                <li><a href="../modules/aui-color-palette.html">aui-color-palette</a></li>
             
                 <li><a href="../modules/aui-color-picker.html">aui-color-picker</a></li>
             
@@ -1164,6 +1188,16 @@
                 <li><a href="../modules/aui-datatable-selection.html">aui-datatable-selection</a></li>
             
                 <li><a href="../modules/aui-datatype.html">aui-datatype</a></li>
+            
+                <li><a href="../modules/aui-datatype-date-parse.html">aui-datatype-date-parse</a></li>
+            
+                <li><a href="../modules/aui-datepicker.html">aui-datepicker</a></li>
+            
+                <li><a href="../modules/aui-datepicker-delegate.html">aui-datepicker-delegate</a></li>
+            
+                <li><a href="../modules/aui-datepicker-native.html">aui-datepicker-native</a></li>
+            
+                <li><a href="../modules/aui-datepicker-popover.html">aui-datepicker-popover</a></li>
             
                 <li><a href="../modules/aui-diagram-builder.html">aui-diagram-builder</a></li>
             
@@ -1245,7 +1279,7 @@
             
                 <li><a href="../modules/aui-pagination.html">aui-pagination</a></li>
             
-                <li><a href="../modules/aui-pallete.html">aui-pallete</a></li>
+                <li><a href="../modules/aui-palette.html">aui-palette</a></li>
             
                 <li><a href="../modules/aui-parse-content.html">aui-parse-content</a></li>
             
@@ -1296,6 +1330,8 @@
                 <li><a href="../modules/aui-tabview.html">aui-tabview</a></li>
             
                 <li><a href="../modules/aui-text.html">aui-text</a></li>
+            
+                <li><a href="../modules/aui-timepicker.html">aui-timepicker</a></li>
             
                 <li><a href="../modules/aui-timer.html">aui-timer</a></li>
             
@@ -2053,7 +2089,7 @@
 <div class="file">
     <pre class="code prettyprint linenums">
 /**
- * The ACE Editor Component
+ * The ACE Editor Velocity Plugin
  *
  * @module aui-ace-editor
  * @submodule aui-ace-autocomplete-velocity
@@ -2061,156 +2097,175 @@
 
 var Lang = A.Lang,
 
-	Base = A.AceEditor.AutoCompleteBase,
+    Base = A.AceEditor.AutoCompleteBase,
 
-	MATCH_DIRECTIVES = 0,
-	MATCH_VARIABLES = 1,
+    MATCH_DIRECTIVES = 0,
+    MATCH_VARIABLES = 1,
 
-	_NAME = &#x27;aui-ace-autocomplete-velocity&#x27;,
+    _NAME = &#x27;aui-ace-autocomplete-velocity&#x27;,
 
-	DIRECTIVES_MATCHER = &#x27;directivesMatcher&#x27;,
-	VARIABLES_MATCHER = &#x27;variablesMatcher&#x27;,
+    DIRECTIVES_MATCHER = &#x27;directivesMatcher&#x27;,
+    VARIABLES_MATCHER = &#x27;variablesMatcher&#x27;,
 
-/**
- * A base class for Velocity.
- *
- * @class A.Velocity
- * @extends A.AceEditor.TemplateProcessor
- * @param config {Object} Object literal specifying widget configuration properties.
- * @constructor
- */
-Velocity = A.Base.create(_NAME, A.AceEditor.TemplateProcessor, [], {
+    /**
+     * A base class for Velocity plugin.
+     *
+     * @class A.Velocity
+     * @extends A.AceEditor.TemplateProcessor
+     * @param config {Object} Object literal specifying widget configuration properties.
+     * @constructor
+     */
+    Velocity = A.Base.create(_NAME, A.AceEditor.TemplateProcessor, [], {
 
-	/**
-	 * TODO. Wanna help? Please send a Pull Request.
-	 *
-	 * @method getMatch
-	 * @param content
-	 */
-	getMatch: function(content) {
-		var instance = this,
-			match,
-			matchIndex;
+        /**
+         * Checks if the provided content contains directive or variable.
+         *
+         * @method getMatch
+         * @param {String} content The content which should be traversed for matches
+         * @return {Object} An Object which contains the following properties:
+         * content - the found content
+         * start - the start index of the match
+         * type - match type, could be 0 (DIRECTIVES) or 1 (VARIABLES)
+         */
+        getMatch: function(content) {
+            var instance = this,
+                match,
+                matchIndex;
 
-		if ((matchIndex = content.lastIndexOf(&#x27;#&#x27;)) &gt;= 0) {
-			content = content.substring(matchIndex);
+            if ((matchIndex = content.lastIndexOf(&#x27;#&#x27;)) &gt;= 0) {
+                content = content.substring(matchIndex);
 
-			if (instance.get(DIRECTIVES_MATCHER).test(content)) {
-				match = {
-					content: content.substring(1),
-					start: matchIndex,
-					type: MATCH_DIRECTIVES
-				};
-			}
-		}
-		else if ((matchIndex = content.lastIndexOf(&#x27;$&#x27;)) &gt;= 0) {
-			content = content.substring(matchIndex);
+                if (instance.get(DIRECTIVES_MATCHER).test(content)) {
+                    match = {
+                        content: content.substring(1),
+                        start: matchIndex,
+                        type: MATCH_DIRECTIVES
+                    };
+                }
+            }
+            else if ((matchIndex = content.lastIndexOf(&#x27;$&#x27;)) &gt;= 0) {
+                content = content.substring(matchIndex);
 
-			if (instance.get(VARIABLES_MATCHER).test(content)) {
-				match = {
-					content: content.substring(1),
-					start: matchIndex,
-					type: MATCH_VARIABLES
-				};
-			}
-		}
+                if (instance.get(VARIABLES_MATCHER).test(content)) {
+                    match = {
+                        content: content.substring(1),
+                        start: matchIndex,
+                        type: MATCH_VARIABLES
+                    };
+                }
+            }
 
-		return match;
-	}
-}, {
+            return match;
+        }
+    }, {
 
-	/**
-	 * Static property provides a string to identify the class.
-	 *
-	 * @property Velocity.NAME
-	 * @type String
-	 * @static
-	 */
-	NAME: _NAME,
+        /**
+         * Static property which provides a string to identify the class.
+         *
+         * @property Velocity.NAME
+         * @type String
+         * @static
+         */
+        NAME: _NAME,
 
-	/**
-	 * TODO. Wanna help? Please send a Pull Request.
-	 *
-	 * @property Velocity.NS
-	 * @type String
-	 * @static
-	 */
-	NS: _NAME,
+        /**
+         * The namespace of the plugin.
+         *
+         * @property Velocity.NS
+         * @type String
+         * @static
+         */
+        NS: _NAME,
 
-	/**
-	 * Static property used to define the default attribute
-	 * configuration for the Velocity.
-	 *
-	 * @property Velocity.ATTRS
-	 * @type Object
-	 * @static
-	 */
-	ATTRS: {
+        /**
+         * Static property used to define the default attribute
+         * configuration for the Velocity.
+         *
+         * @property Velocity.ATTRS
+         * @type Object
+         * @static
+         */
+        ATTRS: {
 
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @attribute directives
-		 * @type Array
-		 */
-		directives: {
-			validator: Lang.isArray,
-			value: [
-				&#x27;else&#x27;,
-				&#x27;elseif&#x27;,
-				&#x27;foreach&#x27;,
-				&#x27;if&#x27;,
-				&#x27;include&#x27;,
-				&#x27;macro&#x27;,
-				&#x27;parse&#x27;,
-				&#x27;set&#x27;,
-				&#x27;stop&#x27;
-			]
-		},
+            /**
+             * Contains the list of supported directives according to Velocity specification.
+             *
+             * @attribute directives
+             * @default
+             * value: [
+             *  &#x27;else&#x27;,
+             *  &#x27;elseif&#x27;,
+             *  &#x27;foreach&#x27;,
+             *  &#x27;if&#x27;,
+             *  &#x27;include&#x27;,
+             *  &#x27;macro&#x27;,
+             *  &#x27;parse&#x27;,
+             *  &#x27;set&#x27;,
+             *  &#x27;stop&#x27;
+             *]
+             * @type Array
+             */
+            directives: {
+                validator: Lang.isArray,
+                value: [
+                    &#x27;else&#x27;,
+                    &#x27;elseif&#x27;,
+                    &#x27;foreach&#x27;,
+                    &#x27;if&#x27;,
+                    &#x27;include&#x27;,
+                    &#x27;macro&#x27;,
+                    &#x27;parse&#x27;,
+                    &#x27;set&#x27;,
+                    &#x27;stop&#x27;
+               ]
+            },
 
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @attribute directivesMatcher
-		 */
-		directivesMatcher: {
-			setter: &#x27;_setRegexValue&#x27;,
-			value: /#[\w]*[^#]*$/
-		},
+            /**
+             * Contains the regular expression which checks for directive.
+             *
+             * @attribute directivesMatcher
+             * @default /#[\w]*[^#]*$/
+             */
+            directivesMatcher: {
+                setter: &#x27;_setRegexValue&#x27;,
+                value: /#[\w]*[^#]*$/
+            },
 
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @attribute host
-		 * @type Object
-		 */
-		host: {
-			validator: Lang.isObject
-		},
+            /**
+             * he Editor in which the current instance is plugged.
+             *
+             * @attribute host
+             * @type Object
+             */
+            host: {
+                validator: Lang.isObject
+            },
 
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @attribute variables
-		 * @type Object
-		 */
-		variables: {
-			validator: Lang.isObject
-		},
+            /**
+             * Contains the supported variables.
+             *
+             * @attribute variables
+             * @type Object
+             */
+            variables: {
+                validator: Lang.isObject
+            },
 
-		/**
-		 * TODO. Wanna help? Please send a Pull Request.
-		 *
-		 * @attribute variablesMatcher
-		 */
-		variablesMatcher: {
-			setter: &#x27;_setRegexValue&#x27;,
-			value: /\$[\w., ()&quot;]*(?:[^$]|\\\$)*$/
-		}
-	}
-});
+            /**
+             * Contains the regular expression which will check for variable match.
+             *
+             * @attribute variablesMatcher
+             * @default /\$[\w., ()&quot;]*(?:[^$]|\\\$)*$/
+             */
+            variablesMatcher: {
+                setter: &#x27;_setRegexValue&#x27;,
+                value: /\$[\w., ()&quot;]*(?:[^$]|\\\$)*$/
+            }
+        }
+    });
 
 A.AceEditor.AutoCompleteVelocity = Velocity;
+
     </pre>
 </div>
 

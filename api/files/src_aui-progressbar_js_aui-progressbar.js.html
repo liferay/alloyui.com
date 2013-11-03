@@ -31,7 +31,7 @@
                 <li class="divider-vertical"></li>
                 <li>
                     <p class="navbar-text">
-                        API Docs for Version: <b>2.0.0pr6</b>
+                        API Docs for Version: <b>2.0.0</b>
                     </p>
                 </li>
             </div>
@@ -83,6 +83,8 @@
             
                 <li><a href="../classes/A.ButtonGroup.html">A.ButtonGroup</a></li>
             
+                <li><a href="../classes/A.ButtonSearchCancel.html">A.ButtonSearchCancel</a></li>
+            
                 <li><a href="../classes/A.Carousel.html">A.Carousel</a></li>
             
                 <li><a href="../classes/A.CellEditorSupport.html">A.CellEditorSupport</a></li>
@@ -107,7 +109,23 @@
             
                 <li><a href="../classes/A.DataType.DateMath.html">A.DataType.DateMath</a></li>
             
+                <li><a href="../classes/A.Date.html">A.Date</a></li>
+            
                 <li><a href="../classes/A.DateCellEditor.html">A.DateCellEditor</a></li>
+            
+                <li><a href="../classes/A.DateParser.html">A.DateParser</a></li>
+            
+                <li><a href="../classes/A.DatePicker.html">A.DatePicker</a></li>
+            
+                <li><a href="../classes/A.DatePickerBase.html">A.DatePickerBase</a></li>
+            
+                <li><a href="../classes/A.DatePickerDelegate.html">A.DatePickerDelegate</a></li>
+            
+                <li><a href="../classes/A.DatePickerNative.html">A.DatePickerNative</a></li>
+            
+                <li><a href="../classes/A.DatePickerNativeBase.html">A.DatePickerNativeBase</a></li>
+            
+                <li><a href="../classes/A.DatePickerPopover.html">A.DatePickerPopover</a></li>
             
                 <li><a href="../classes/A.DiagramBuilder.html">A.DiagramBuilder</a></li>
             
@@ -260,6 +278,10 @@
                 <li><a href="../classes/A.TextCellEditor.html">A.TextCellEditor</a></li>
             
                 <li><a href="../classes/A.ThumbRating.html">A.ThumbRating</a></li>
+            
+                <li><a href="../classes/A.TimePicker.html">A.TimePicker</a></li>
+            
+                <li><a href="../classes/A.TimePickerBase.html">A.TimePickerBase</a></li>
             
                 <li><a href="../classes/A.ToggleButton.html">A.ToggleButton</a></li>
             
@@ -1057,6 +1079,8 @@
 
             <ul id="api-modules" class="apis modules tab-pane">
             
+                <li><a href="../modules/ace-autocomplete-plugin.html">ace-autocomplete-plugin</a></li>
+            
                 <li><a href="../modules/align-plugin.html">align-plugin</a></li>
             
                 <li><a href="../modules/anim.html">anim</a></li>
@@ -1143,7 +1167,7 @@
             
                 <li><a href="../modules/aui-collection.html">aui-collection</a></li>
             
-                <li><a href="../modules/aui-color-pallete.html">aui-color-pallete</a></li>
+                <li><a href="../modules/aui-color-palette.html">aui-color-palette</a></li>
             
                 <li><a href="../modules/aui-color-picker.html">aui-color-picker</a></li>
             
@@ -1164,6 +1188,16 @@
                 <li><a href="../modules/aui-datatable-selection.html">aui-datatable-selection</a></li>
             
                 <li><a href="../modules/aui-datatype.html">aui-datatype</a></li>
+            
+                <li><a href="../modules/aui-datatype-date-parse.html">aui-datatype-date-parse</a></li>
+            
+                <li><a href="../modules/aui-datepicker.html">aui-datepicker</a></li>
+            
+                <li><a href="../modules/aui-datepicker-delegate.html">aui-datepicker-delegate</a></li>
+            
+                <li><a href="../modules/aui-datepicker-native.html">aui-datepicker-native</a></li>
+            
+                <li><a href="../modules/aui-datepicker-popover.html">aui-datepicker-popover</a></li>
             
                 <li><a href="../modules/aui-diagram-builder.html">aui-diagram-builder</a></li>
             
@@ -1245,7 +1279,7 @@
             
                 <li><a href="../modules/aui-pagination.html">aui-pagination</a></li>
             
-                <li><a href="../modules/aui-pallete.html">aui-pallete</a></li>
+                <li><a href="../modules/aui-palette.html">aui-palette</a></li>
             
                 <li><a href="../modules/aui-parse-content.html">aui-parse-content</a></li>
             
@@ -1296,6 +1330,8 @@
                 <li><a href="../modules/aui-tabview.html">aui-tabview</a></li>
             
                 <li><a href="../modules/aui-text.html">aui-text</a></li>
+            
+                <li><a href="../modules/aui-timepicker.html">aui-timepicker</a></li>
             
                 <li><a href="../modules/aui-timer.html">aui-timer</a></li>
             
@@ -2127,405 +2163,403 @@ var L = A.Lang,
  * @param config {Object} Object literal specifying widget configuration properties.
  * @constructor
  */
-var ProgressBar = A.Component.create(
-    {
+var ProgressBar = A.Component.create({
+    /**
+     * Static property provides a string to identify the class.
+     *
+     * @property ProgressBar.NAME
+     * @type String
+     * @static
+     */
+    NAME: PROGRESS,
+
+    /**
+     * Static property used to define the default attribute
+     * configuration for the ProgressBar.
+     *
+     * @property ProgressBar.ATTRS
+     * @type Object
+     * @static
+     */
+    ATTRS: {
+
         /**
-         * Static property provides a string to identify the class.
+         * Boolean indicating if use of the WAI-ARIA Roles and States
+         * should be enabled.
          *
-         * @property ProgressBar.NAME
+         * @attribute useARIA
+         * @default true
+         * @type Boolean
+         */
+        useARIA: {
+            value: true
+        },
+
+        /**
+         * Display height of the progressbar.
+         *
+         * @attribute height
+         * @default 25
+         * @type int | String
+         */
+        height: {
+            valueFn: function() {
+                return this.get(BOUNDING_BOX).get(OFFSET_HEIGHT) || 25;
+            }
+        },
+
+        /**
+         * Display label of the progressbar. If not specified try to query
+         * using HTML_PARSER an element inside boundingBox which matches
+         * &lt;code&gt;aui-progressbar-text&lt;/code&gt; and get its innerHTML to be
+         * used as label.
+         *
+         * @attribute label
+         * @default undefined
          * @type String
-         * @static
          */
-        NAME: PROGRESS,
+        label: {},
 
         /**
-         * Static property used to define the default attribute
-         * configuration for the ProgressBar.
+         * Represents the top value for the bar. The bar will be fully
+         * extended when reaching this value. Values higher than this will
+         * be ignored.
          *
-         * @property ProgressBar.ATTRS
-         * @type Object
-         * @static
+         * @attribute max
+         * @default 100
+         * @type Number
          */
-        ATTRS: {
+        max: {
+            validator: isNumber,
+            value: 100
+        },
 
-            /**
-             * Boolean indicating if use of the WAI-ARIA Roles and States
-             * should be enabled.
-             *
-             * @attribute useARIA
-             * @default true
-             * @type Boolean
-             */
-            useARIA: {
-                value: true
-            },
+        /**
+         * Represents the lowest value for the bar. The bar will be
+         * totally collapsed when reaching this value. Values lower than
+         * this will be ignored.
+         *
+         * @attribute min
+         * @default 0
+         * @type Number
+         */
+        min: {
+            validator: isNumber,
+            value: 0
+        },
 
-            /**
-             * Display height of the progressbar.
-             *
-             * @attribute height
-             * @default 25
-             * @type int | String
-             */
-            height: {
-                valueFn: function() {
-                    return this.get(BOUNDING_BOX).get(OFFSET_HEIGHT) || 25;
-                }
-            },
-
-            /**
-             * Display label of the progressbar. If not specified try to query
-             * using HTML_PARSER an element inside boundingBox which matches
-             * &lt;code&gt;aui-progressbar-text&lt;/code&gt; and get its innerHTML to be
-             * used as label.
-             *
-             * @attribute label
-             * @default undefined
-             * @type String
-             */
-            label: {
-            },
-
-            /**
-             * Represents the top value for the bar. The bar will be fully
-             * extended when reaching this value. Values higher than this will
-             * be ignored.
-             *
-             * @attribute max
-             * @default 100
-             * @type Number
-             */
-            max: {
-                validator: isNumber,
-                value: 100
-            },
-
-            /**
-             * Represents the lowest value for the bar. The bar will be
-             * totally collapsed when reaching this value. Values lower than
-             * this will be ignored.
-             *
-             * @attribute min
-             * @default 0
-             * @type Number
-             */
-            min: {
-                validator: isNumber,
-                value: 0
-            },
-
-            /**
-             * Display orientation of the progressbar (i.e. vertical or
-             * horizontal).
-             *
-             * @attribute orientation
-             * @default HORIZONTAL
-             * @type String
-             */
-            orientation: {
-                value: HORIZONTAL,
-                validator: function(val) {
-                    return isString(val) &amp;&amp; (val === HORIZONTAL || val === VERTICAL);
-                }
-            },
-
-            /**
-             * Calculate the ratio based on &lt;code&gt;max&lt;/code&gt; and
-             * &lt;code&gt;min&lt;/code&gt; values.
-             *
-             * @attribute ratio
-             * @readOnly
-             * @type number
-             */
-            ratio: {
-                getter: &#x27;_getRatio&#x27;,
-                readOnly: true
-            },
-
-            /**
-             * Calculate the progressbar step based on &lt;code&gt;ratio&lt;/code&gt;
-             * value.
-             *
-             * @attribute step
-             * @readOnly
-             * @type number
-             */
-            step: {
-                getter: &#x27;_getStep&#x27;,
-                readOnly: true
-            },
-
-            /**
-             * DOM Node to display the text of the progressbar. If not
-             * specified try to query using HTML_PARSER an element inside
-             * contentBox which matches &lt;code&gt;aui-progressbar-text&lt;/code&gt;.
-             *
-             * @attribute textNode
-             * @default Generated div element.
-             * @type String
-             */
-            textNode: {
-                valueFn: function() {
-                    return A.Node.create(TPL_TEXT);
-                }
-            },
-
-            /**
-             * The value for the bar. Valid values are in between the minValue
-             * and maxValue attributes.
-             *
-             * @attribute value
-             * @default 0
-             * @type Number | String
-             */
-            value: {
-                setter: toNumber,
-                validator: function(val) {
-                    return isNumber(toNumber(val)) &amp;&amp; ((val &gt;= this.get(MIN)) &amp;&amp; (val &lt;= this.get(MAX)));
-                },
-                value: 0
+        /**
+         * Display orientation of the progressbar (i.e. vertical or
+         * horizontal).
+         *
+         * @attribute orientation
+         * @default HORIZONTAL
+         * @type String
+         */
+        orientation: {
+            value: HORIZONTAL,
+            validator: function(val) {
+                return isString(val) &amp;&amp; (val === HORIZONTAL || val === VERTICAL);
             }
         },
 
         /**
-         * Object hash, defining how attribute values are to be parsed from
-         * markup contained in the widget&#x27;s bounding box.
+         * Calculate the ratio based on &lt;code&gt;max&lt;/code&gt; and
+         * &lt;code&gt;min&lt;/code&gt; values.
          *
-         * @property ProgressBar.HTML_PARSER
-         * @type Object
-         * @static
+         * @attribute ratio
+         * @readOnly
+         * @type number
          */
-        HTML_PARSER: {
-            label: function(boundingBox) {
-                var textNode = boundingBox.one(P);
-
-                if (textNode) {
-                    return textNode.html();
-                }
-            },
-
-            textNode: P
+        ratio: {
+            getter: &#x27;_getRatio&#x27;,
+            readOnly: true
         },
 
         /**
-         * Static property used to define the UI attributes.
+         * Calculate the progressbar step based on &lt;code&gt;ratio&lt;/code&gt;
+         * value.
          *
-         * @property ProgressBar.UI_ATTRS
-         * @type Array
-         * @static
+         * @attribute step
+         * @readOnly
+         * @type number
          */
-        UI_ATTRS: [LABEL, ORIENTATION, VALUE],
+        step: {
+            getter: &#x27;_getStep&#x27;,
+            readOnly: true
+        },
 
-        prototype: {
+        /**
+         * DOM Node to display the text of the progressbar. If not
+         * specified try to query using HTML_PARSER an element inside
+         * contentBox which matches &lt;code&gt;aui-progressbar-text&lt;/code&gt;.
+         *
+         * @attribute textNode
+         * @default Generated div element.
+         * @type String
+         */
+        textNode: {
+            valueFn: function() {
+                return A.Node.create(TPL_TEXT);
+            }
+        },
 
-            /**
-             * Create the DOM structure for the ProgressBar. Lifecycle.
-             *
-             * @method renderUI
-             * @protected
-             */
-            renderUI: function() {
-                var instance = this;
+        /**
+         * The value for the bar. Valid values are in between the minValue
+         * and maxValue attributes.
+         *
+         * @attribute value
+         * @default 0
+         * @type Number | String
+         */
+        value: {
+            setter: toNumber,
+            validator: function(val) {
+                return isNumber(toNumber(val)) &amp;&amp; ((val &gt;= this.get(MIN)) &amp;&amp; (val &lt;= this.get(MAX)));
+            },
+            value: 0
+        }
+    },
 
-                instance.get(CONTENT_BOX).addClass(CSS_BAR);
+    /**
+     * Object hash, defining how attribute values are to be parsed from
+     * markup contained in the widget&#x27;s bounding box.
+     *
+     * @property ProgressBar.HTML_PARSER
+     * @type Object
+     * @static
+     */
+    HTML_PARSER: {
+        label: function(boundingBox) {
+            var textNode = boundingBox.one(P);
 
+            if (textNode) {
+                return textNode.html();
+            }
+        },
+
+        textNode: P
+    },
+
+    /**
+     * Static property used to define the UI attributes.
+     *
+     * @property ProgressBar.UI_ATTRS
+     * @type Array
+     * @static
+     */
+    UI_ATTRS: [LABEL, ORIENTATION, VALUE],
+
+    prototype: {
+
+        /**
+         * Create the DOM structure for the ProgressBar. Lifecycle.
+         *
+         * @method renderUI
+         * @protected
+         */
+        renderUI: function() {
+            var instance = this;
+
+            instance.get(CONTENT_BOX).addClass(CSS_BAR);
+
+            instance._renderTextNodeIfLabelSet();
+        },
+
+        /**
+         * Sync the ProgressBar UI. Lifecycle.
+         *
+         * @method syncUI
+         * @protected
+         */
+        syncUI: function() {
+            var instance = this;
+
+            if (instance.get(USE_ARIA)) {
+                instance.plug(A.Plugin.Aria, {
+                    attributes: {
+                        value: VALUENOW,
+                        max: VALUEMAX,
+                        min: VALUEMIN,
+                        orientation: ORIENTATION,
+                        label: LABEL
+                    }
+                });
+            }
+        },
+
+        /**
+         * Calculate the boundingBox size based on the
+         * &lt;code&gt;orientation&lt;/code&gt; of the progressbar. If the orientation
+         * is HORIZONTAL get the width, if the orientation is VERTICAL get
+         * the height.
+         *
+         * @method _getBoundingBoxSize
+         * @protected
+         * @return {Number}
+         */
+        _getBoundingBoxSize: function() {
+            var instance = this;
+            var boundingBox = instance.get(BOUNDING_BOX);
+
+            return toNumber(
+                boundingBox.getStyle(
+                    this.get(ORIENTATION) === HORIZONTAL ? WIDTH : HEIGHT
+                )
+            );
+        },
+
+        /**
+         * Calculate the number of pixels to set the &lt;code&gt;contentBox&lt;/code&gt; bar.
+         *
+         * @method _getPixelStep
+         * @protected
+         * @return {Number}
+         */
+        _getPixelStep: function() {
+            var instance = this;
+
+            return instance._getBoundingBoxSize() * instance.get(RATIO);
+        },
+
+        /**
+         * Calculate the ratio based on &lt;code&gt;max&lt;/code&gt; and
+         * &lt;code&gt;min&lt;/code&gt; values.
+         *
+         * @method _getRatio
+         * @protected
+         * @return {Number}
+         */
+        _getRatio: function() {
+            var instance = this;
+            var min = instance.get(MIN);
+            var ratio = (instance.get(VALUE) - min) / (instance.get(MAX) - min);
+
+            return Math.max(ratio, 0);
+        },
+
+        /**
+         * Calculate the progressbar step based on &lt;code&gt;ratio&lt;/code&gt;
+         * value.
+         *
+         * @method _getStep
+         * @protected
+         * @return {Number}
+         */
+        _getStep: function() {
+            return this.get(RATIO) * 100;
+        },
+
+        /**
+         * Render the &lt;code&gt;textNode&lt;/code&gt; of the progressbar if label is set.
+         *
+         * @method _renderTextNodeIfLabelSet
+         * @protected
+         */
+        _renderTextNodeIfLabelSet: function() {
+            var instance = this;
+
+            if (!isUndefined(instance.get(LABEL))) {
+                instance.get(CONTENT_BOX).append(instance.get(TEXT_NODE));
+            }
+        },
+
+        /**
+         * Invoked automatically by the UI_ATTRS Widget API when bind or sync the
+         * &lt;code&gt;label&lt;/code&gt; attribute.
+         *
+         * @method _uiSetLabel
+         * @param {String} val Display label
+         * @protected
+         */
+        _uiSetLabel: function(val) {
+            var instance = this,
+                textNode = instance.get(TEXT_NODE);
+
+            if (!textNode.inDoc()) {
                 instance._renderTextNodeIfLabelSet();
-            },
-
-            /**
-             * Sync the ProgressBar UI. Lifecycle.
-             *
-             * @method syncUI
-             * @protected
-             */
-            syncUI: function() {
-                var instance = this;
-
-                if (instance.get(USE_ARIA)) {
-                    instance.plug(A.Plugin.Aria, {
-                        attributes: {
-                            value: VALUENOW,
-                            max: VALUEMAX,
-                            min: VALUEMIN,
-                            orientation: ORIENTATION,
-                            label: LABEL
-                        }
-                    });
-                }
-            },
-
-            /**
-             * Calculate the boundingBox size based on the
-             * &lt;code&gt;orientation&lt;/code&gt; of the progressbar. If the orientation
-             * is HORIZONTAL get the width, if the orientation is VERTICAL get
-             * the height.
-             *
-             * @method _getBoundingBoxSize
-             * @protected
-             * @return {Number}
-             */
-            _getBoundingBoxSize: function() {
-                var instance = this;
-                var boundingBox = instance.get(BOUNDING_BOX);
-
-                return toNumber(
-                    boundingBox.getStyle(
-                        this.get(ORIENTATION) === HORIZONTAL ? WIDTH : HEIGHT
-                    )
-                );
-            },
-
-            /**
-             * Calculate the number of pixels to set the &lt;code&gt;contentBox&lt;/code&gt; bar.
-             *
-             * @method _getPixelStep
-             * @protected
-             * @return {Number}
-             */
-            _getPixelStep: function() {
-                var instance = this;
-
-                return instance._getBoundingBoxSize() * instance.get(RATIO);
-            },
-
-            /**
-             * Calculate the ratio based on &lt;code&gt;max&lt;/code&gt; and
-             * &lt;code&gt;min&lt;/code&gt; values.
-             *
-             * @method _getRatio
-             * @protected
-             * @return {Number}
-             */
-            _getRatio: function() {
-                var instance = this;
-                var min = instance.get(MIN);
-                var ratio = (instance.get(VALUE) - min) / (instance.get(MAX) - min);
-
-                return Math.max(ratio, 0);
-            },
-
-            /**
-             * Calculate the progressbar step based on &lt;code&gt;ratio&lt;/code&gt;
-             * value.
-             *
-             * @method _getStep
-             * @protected
-             * @return {Number}
-             */
-            _getStep: function() {
-                return this.get(RATIO) * 100;
-            },
-
-            /**
-             * Render the &lt;code&gt;textNode&lt;/code&gt; of the progressbar if label is set.
-             *
-             * @method _renderTextNodeIfLabelSet
-             * @protected
-             */
-            _renderTextNodeIfLabelSet: function() {
-                var instance = this;
-
-                if (!isUndefined(instance.get(LABEL))) {
-                    instance.get(CONTENT_BOX).append(instance.get(TEXT_NODE));
-                }
-            },
-
-            /**
-             * Invoked automatically by the UI_ATTRS Widget API when bind or sync the
-             * &lt;code&gt;label&lt;/code&gt; attribute.
-             *
-             * @method _uiSetLabel
-             * @param {String} val Display label
-             * @protected
-             */
-            _uiSetLabel: function(val) {
-                var instance = this,
-                    textNode = instance.get(TEXT_NODE);
-
-                if (!textNode.inDoc()) {
-                    instance._renderTextNodeIfLabelSet();
-                }
-
-                textNode.html(val);
-            },
-
-            /**
-             * Invoked automatically by the UI_ATTRS Widget API when bind or sync the
-             * &lt;code&gt;orientation&lt;/code&gt; attribute.
-             *
-             * @method _uiSetOrientation
-             * @param {String} val Orientation
-             * @protected
-             */
-            _uiSetOrientation: function(val) {
-                var instance = this;
-                var boundingBox = instance.get(BOUNDING_BOX);
-                var horizontal = (val === HORIZONTAL);
-
-                boundingBox.toggleClass(CSS_HORIZONTAL, horizontal);
-                boundingBox.toggleClass(CSS_VERTICAL, !horizontal);
-
-                instance._uiSetValue(instance.get(VALUE));
-                instance._uiSizeTextNode();
-            },
-
-            /**
-             * Invoked automatically by the UI_ATTRS Widget API when bind or sync the
-             * &lt;code&gt;value&lt;/code&gt; attribute.
-             *
-             * @method _uiSetValue
-             * @param {String} val Progress value
-             * @protected
-             */
-            _uiSetValue: function(val) {
-                var instance = this;
-                var pixelStep = instance._getPixelStep();
-
-                var styles = {};
-
-                if (instance.get(ORIENTATION) === HORIZONTAL) {
-                    styles = {
-                        height: &#x27;100%&#x27;,
-                        top: AUTO,
-                        width: pixelStep+PX
-                    };
-                }
-                else {
-                     styles = {
-                        height: pixelStep+PX,
-                        top: toNumber(instance._getBoundingBoxSize() - pixelStep)+PX,
-                        width: &#x27;100%&#x27;
-                    };
-                }
-
-                if (instance.get(STEP) &gt;= 100) {
-                    instance.fire(COMPLETE);
-                }
-
-                instance.get(CONTENT_BOX).setStyles(styles);
-            },
-
-            /**
-             * Sync the size of the ProgressBar when some UI attribute change.
-             *
-             * @method _uiSizeTextNode
-             * @protected
-             */
-            _uiSizeTextNode: function() {
-                var instance = this;
-                var boundingBox = instance.get(BOUNDING_BOX);
-                var textNode = instance.get(TEXT_NODE);
-
-                textNode.setStyle(
-                    LINE_HEIGHT,
-                    boundingBox.getStyle(HEIGHT)
-                );
             }
+
+            textNode.html(val);
+        },
+
+        /**
+         * Invoked automatically by the UI_ATTRS Widget API when bind or sync the
+         * &lt;code&gt;orientation&lt;/code&gt; attribute.
+         *
+         * @method _uiSetOrientation
+         * @param {String} val Orientation
+         * @protected
+         */
+        _uiSetOrientation: function(val) {
+            var instance = this;
+            var boundingBox = instance.get(BOUNDING_BOX);
+            var horizontal = (val === HORIZONTAL);
+
+            boundingBox.toggleClass(CSS_HORIZONTAL, horizontal);
+            boundingBox.toggleClass(CSS_VERTICAL, !horizontal);
+
+            instance._uiSetValue(instance.get(VALUE));
+            instance._uiSizeTextNode();
+        },
+
+        /**
+         * Invoked automatically by the UI_ATTRS Widget API when bind or sync the
+         * &lt;code&gt;value&lt;/code&gt; attribute.
+         *
+         * @method _uiSetValue
+         * @param {String} val Progress value
+         * @protected
+         */
+        _uiSetValue: function(val) {
+            var instance = this;
+            var pixelStep = instance._getPixelStep();
+
+            var styles = {};
+
+            if (instance.get(ORIENTATION) === HORIZONTAL) {
+                styles = {
+                    height: &#x27;100%&#x27;,
+                    top: AUTO,
+                    width: pixelStep + PX
+                };
+            }
+            else {
+                styles = {
+                    height: pixelStep + PX,
+                    top: toNumber(instance._getBoundingBoxSize() - pixelStep) + PX,
+                    width: &#x27;100%&#x27;
+                };
+            }
+
+            if (instance.get(STEP) &gt;= 100) {
+                instance.fire(COMPLETE);
+            }
+
+            instance.get(CONTENT_BOX).setStyles(styles);
+        },
+
+        /**
+         * Sync the size of the ProgressBar when some UI attribute change.
+         *
+         * @method _uiSizeTextNode
+         * @protected
+         */
+        _uiSizeTextNode: function() {
+            var instance = this;
+            var boundingBox = instance.get(BOUNDING_BOX);
+            var textNode = instance.get(TEXT_NODE);
+
+            textNode.setStyle(
+                LINE_HEIGHT,
+                boundingBox.getStyle(HEIGHT)
+            );
         }
     }
-);
+});
 
 A.ProgressBar = ProgressBar;
+
     </pre>
 </div>
 
