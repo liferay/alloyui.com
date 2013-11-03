@@ -20,7 +20,7 @@ module.exports = function(grunt) {
         watch: {}
     });
 
-    grunt.loadTasks('grunt');
+    grunt.loadTasks('tasks');
 
     grunt.registerTask('deploy', ['build', 'push']);
 };
