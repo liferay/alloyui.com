@@ -2,21 +2,23 @@ YUI.add("yuidoc-meta", function(Y) {
    Y.YUIDoc = { meta: {
     "classes": [
         "A.AceEditor",
-        "A.Aria",
+        "A.AceEditor.AutoCompleteBase",
+        "A.AceEditor.AutoCompleteFreemarker",
+        "A.AceEditor.AutoCompleteList",
+        "A.AceEditor.AutoCompleteVelocity",
+        "A.AceEditor.TemplateProcessor",
         "A.ArraySort",
         "A.Audio",
-        "A.AutoCompleteBase",
-        "A.AutoCompleteList",
         "A.AutosizeIframe",
         "A.AvailableField",
         "A.BaseCellEditor",
         "A.BaseOptionsCellEditor",
         "A.Button",
         "A.ButtonCore",
+        "A.ButtonExt",
         "A.ButtonGroup",
         "A.ButtonSearchCancel",
         "A.Carousel",
-        "A.CellEditorSupport",
         "A.CharCounter",
         "A.CheckboxCellEditor",
         "A.ColorPalette",
@@ -24,10 +26,12 @@ YUI.add("yuidoc-meta", function(Y) {
         "A.ColorPickerPopover",
         "A.Component",
         "A.Connector",
+        "A.DataTable.CellEditorSupport",
         "A.DataTableHighlight",
         "A.DataTableSelection",
+        "A.DataType.Boolean",
         "A.DataType.DateMath",
-        "A.Date",
+        "A.DataType.String",
         "A.DateCellEditor",
         "A.DateParser",
         "A.DatePicker",
@@ -63,7 +67,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "A.FormBuilderTextAreaField",
         "A.FormBuilderTextField",
         "A.FormValidator",
-        "A.Freemarker",
         "A.HSVAPalette",
         "A.HSVAPaletteModal",
         "A.HSVPalette",
@@ -83,6 +86,9 @@ YUI.add("yuidoc-meta", function(Y) {
         "A.Pagination",
         "A.Palette",
         "A.ParseContent",
+        "A.Plugin.AceAutoCompleteList",
+        "A.Plugin.Aria",
+        "A.Popover",
         "A.ProgressBar",
         "A.PropertyList",
         "A.RadioCellEditor",
@@ -105,7 +111,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "A.SortableList",
         "A.Tab",
         "A.TabView",
-        "A.TemplateProcessor",
         "A.TernarySearchNode",
         "A.TernarySearchTree",
         "A.TextAreaCellEditor",
@@ -118,6 +123,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "A.TogglerDelegate",
         "A.Toolbar",
         "A.ToolbarRenderer",
+        "A.Tooltip",
         "A.TooltipDelegate",
         "A.TreeData",
         "A.TreeNode",
@@ -130,11 +136,11 @@ YUI.add("yuidoc-meta", function(Y) {
         "A.TreeViewIO",
         "A.TreeViewPaginator",
         "A.Url",
-        "A.Velocity",
         "A.Video",
         "A.WidgetCssClass",
         "A.WidgetPositionAlignSuggestion",
         "A.WidgetToggle",
+        "A.WidgetToolbars",
         "A.WidgetTrigger",
         "A.io",
         "Anim",
@@ -169,7 +175,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "BottomAxisLayout",
         "Button",
         "ButtonCore",
-        "ButtonExt",
         "ButtonGroup",
         "Cache",
         "CacheOffline",
@@ -245,9 +250,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "DataTable.Scrollable",
         "DataTable.Sortable",
         "DataTable.TableView",
-        "DataType.Boolean",
-        "DataType.Date.Locale",
-        "DataType.String",
         "Date",
         "Dial",
         "Do",
@@ -369,7 +371,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "Plugin.Tree.Lazy",
         "Plugin.WidgetAnim",
         "Pollable",
-        "Popover",
         "Promise",
         "Promise.Resolver",
         "QueryString",
@@ -458,7 +459,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "TimeAxisBase",
         "TimeImpl",
         "ToggleButton",
-        "Tooltip",
         "TopAxisLayout",
         "Transition",
         "Tree",
@@ -500,7 +500,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "WidgetPositionConstrain",
         "WidgetStack",
         "WidgetStdMod",
-        "WidgetToolbars",
         "XML",
         "YQL",
         "YQLRequest",
@@ -512,7 +511,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "soon"
     ],
     "modules": [
-        "ace-autocomplete-plugin",
         "align-plugin",
         "anim",
         "anim-base",
@@ -545,6 +543,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "aui-ace-autocomplete-base",
         "aui-ace-autocomplete-freemarker",
         "aui-ace-autocomplete-list",
+        "aui-ace-autocomplete-plugin",
         "aui-ace-autocomplete-templateprocessor",
         "aui-ace-autocomplete-velocity",
         "aui-ace-editor",
@@ -1002,11 +1001,6 @@ YUI.add("yuidoc-meta", function(Y) {
     ],
     "allModules": [
         {
-            "displayName": "ace-autocomplete-plugin",
-            "name": "ace-autocomplete-plugin",
-            "description": "Binds an AutoCompleteList instance to a Node instance."
-        },
-        {
             "displayName": "align-plugin",
             "name": "align-plugin",
             "description": "Provides advanced positioning support for Node via a Plugin\nfor centering and alignment."
@@ -1164,6 +1158,11 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "aui-ace-autocomplete-list",
             "name": "aui-ace-autocomplete-list",
             "description": "The ACE Editor AutoCompleteList Overlay"
+        },
+        {
+            "displayName": "aui-ace-autocomplete-plugin",
+            "name": "aui-ace-autocomplete-plugin",
+            "description": "Binds an AutoCompleteList instance to a Node instance."
         },
         {
             "displayName": "aui-ace-autocomplete-templateprocessor",
@@ -1489,7 +1488,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "aui-pagination",
             "name": "aui-pagination",
-            "description": "The Pagination widget provides a set of controls to navigate through paged data."
+            "description": "The Pagination widget provides a set of controls to navigate through paged\ndata."
         },
         {
             "displayName": "aui-palette",
@@ -1538,7 +1537,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "aui-scheduler-base-view",
             "name": "aui-scheduler-base-view",
-            "description": "The Scheduler Component"
+            "description": "Contains the Scheduler Component"
         },
         {
             "displayName": "aui-scheduler-event-recorder",
