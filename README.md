@@ -19,11 +19,7 @@ We use [Docpad](https://github.com/bevry/docpad), a static generator in NodeJS.
 
 ## Dependencies
 
-1. Install [NodeJS](https://github.com/bevry/community/wiki/Installing-Node), if you don't have it yet.
-
-2. Install [Docpad](https://github.com/bevry/docpad) globally: `[sudo] npm install -fg docpad`
-
-3. Install [Yogi Alloy](https://github.com/liferay/yogi-alloy) globally: `[sudo] npm -g install yogi yogi-alloy`
+Install [NodeJS](https://github.com/bevry/community/wiki/Installing-Node), if you don't have it yet.
 
 ## Getting started
 
@@ -33,7 +29,7 @@ Once you have dependencies installed, you just need to:
 
 2. Then go to the project's folder: `cd alloyui.com`
 
-3. And finally run: `yogi alloy --site-watch`
+3. And finally run: `grunt watch`
 
 Now you can see the website running in `http://localhost:9778/` :D
 
@@ -78,7 +74,7 @@ List NodeJS modules dependencies.
 
 ## Deploy
 
-Go to the branch you want to deploy and run `yogi alloy --site-deploy`, now you can see your changes live at [alloyui.com](http://alloyui.com/).
+Go to the branch you want to deploy and run `grunt deploy`, now you can see your changes live at [alloyui.com](http://alloyui.com/).
 
 > **Note:** Make sure to commit everything before running this command.
 
