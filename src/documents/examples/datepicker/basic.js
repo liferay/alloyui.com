@@ -5,7 +5,7 @@ AUI().use(
       {
         appendOrder: ['m', 'd', 'y'],
         calendar: {
-          dates: ['10/10/2013']
+          dates: ['10/01/2014']
         }
       }
     ).render('#myDatePicker');
@@ -14,7 +14,7 @@ AUI().use(
       {
         calendar: {
           dateFormat: '%m/%d/%Y',
-          dates: ['10/10/2013']
+          dates: ['10/01/2014']
         },
         trigger: '#myInput'
       }
