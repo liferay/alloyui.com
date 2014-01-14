@@ -23,7 +23,7 @@ YUI({ lang: 'ja' }).use(
                 on: {
                   click: function() {
                     datepicker.clearSelection();
-                    datepicker.selectDates(new Date(2015, 2, 3, 2, 0, 0));
+                    datepicker.selectDates(new Date());
                   }
                 }
               }
