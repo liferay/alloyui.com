@@ -13,7 +13,7 @@ AUI().use(
         trigger: '#trigger',
         yearNode: '#yearNode',
         yearNodeName: 'yearSelect',
-        yearRange: [1980, 2013]
+        yearRange: [1980, new Date().getFullYear()]
       }
     );
   }
