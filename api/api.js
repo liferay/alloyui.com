@@ -118,6 +118,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "A.ThumbRating",
         "A.TimePicker",
         "A.TimePickerBase",
+        "A.Timer",
         "A.ToggleButton",
         "A.Toggler",
         "A.TogglerDelegate",
@@ -1478,7 +1479,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "aui-node-html5",
             "name": "aui-node-html5",
-            "description": "Provides support for HTML shiv natively on the Alloy DOM\nmethods. The HTML5 shiv just affects IE."
+            "description": "Provides support for HTML shiv natively on the Alloy DOM methods. The HTML5\nshiv just affects IE."
         },
         {
             "displayName": "aui-node-html5-print",
@@ -1626,7 +1627,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "aui-timer",
             "name": "aui-timer",
-            "description": "Utility for timing logics."
+            "description": "Utility for timing logics used to manage [JavaScript Timer\nCongestion](http://fitzgeraldnick.com/weblog/40/) problems."
         },
         {
             "displayName": "aui-toggler",
