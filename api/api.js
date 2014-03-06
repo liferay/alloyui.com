@@ -142,6 +142,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "A.WidgetPositionAlignSuggestion",
         "A.WidgetToggle",
         "A.WidgetToolbars",
+        "A.WidgetTransition",
         "A.WidgetTrigger",
         "A.io",
         "Anim",
@@ -654,6 +655,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "aui-widget-cssclass",
         "aui-widget-toggle",
         "aui-widget-toolbars",
+        "aui-widget-transition",
         "autocomplete",
         "autocomplete-base",
         "autocomplete-filters",
@@ -1697,6 +1699,11 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "aui-widget-toolbars",
             "name": "aui-widget-toolbars",
             "description": "The Widget Toolbars Utility"
+        },
+        {
+            "displayName": "aui-widget-transition",
+            "name": "aui-widget-transition",
+            "description": "Provides a class extension which can be used to animate widget visibility\nchanges."
         },
         {
             "displayName": "autocomplete",
