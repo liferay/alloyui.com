@@ -20,7 +20,7 @@
 </head>
 <body class="yui3-skin-sam">
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
         <div class="navbar-inner">
             <h1 class="brand">
                 <a href="/">
@@ -2101,10 +2101,7 @@
 
 var AObject = A.Object,
     Node = A.Node,
-    Selector = A.Selector,
-
-    EVENT_BEFOREACTIVATE = &#x27;beforeactivate&#x27;,
-    EVENT_CHANGE = &#x27;change&#x27;;
+    Selector = A.Selector;
 
 /**
  * Defines a new &#x60;change&#x60; event in the DOM event system.
@@ -2112,7 +2109,7 @@ var AObject = A.Object,
  * @event change
  */
 A.Event.define(
-    EVENT_CHANGE, {
+    &#x27;change&#x27;, {
         /**
          * Implementation logic for subscription via &#x60;node.delegate&#x60;.
          *
@@ -2237,8 +2234,8 @@ A.Event.define(
 
             var handles = instance._prepareHandles(subscription, node);
 
-            handles[EVENT_BEFOREACTIVATE] = node.delegate(
-                EVENT_BEFOREACTIVATE,
+            handles[&#x27;beforeactivate&#x27;] = node.delegate(
+                &#x27;beforeactivate&#x27;,
                 function(event) {
                     var activeElement = event.target;
 
@@ -2281,7 +2278,7 @@ A.Event.define(
          */
         _getEventName: A.cached(
             function(activeElement) {
-                var eventName = EVENT_CHANGE;
+                var eventName = &#x27;change&#x27;;
 
                 var tagName = activeElement.attr(&#x27;tagName&#x27;).toLowerCase();
 

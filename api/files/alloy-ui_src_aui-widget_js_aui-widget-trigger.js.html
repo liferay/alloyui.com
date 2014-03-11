@@ -20,7 +20,7 @@
 </head>
 <body class="yui3-skin-sam">
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
         <div class="navbar-inner">
             <h1 class="brand">
                 <a href="/">
@@ -2092,16 +2092,7 @@
 
 <div class="file">
     <pre class="code prettyprint linenums">
-var Lang = A.Lang,
-
-    TRIGGER_CHANGE = &#x27;triggerChange&#x27;,
-    TRIGGER = &#x27;trigger&#x27;,
-    BIND_DOM_EVENTS = &#x27;bindDOMEvents&#x27;,
-    TRIGGER = &#x27;trigger&#x27;,
-    TRIGGER_CHANGE = &#x27;triggerChange&#x27;,
-    TRIGGER_HIDE_EVENT = &#x27;triggerHideEvent&#x27;,
-    TRIGGER_TOGGLE_EVENT = &#x27;triggerToggleEvent&#x27;,
-    TRIGGER_SHOW_EVENT = &#x27;triggerShowEvent&#x27;;
+var Lang = A.Lang;
 
 /**
  * Widget extension, which can be used to add trigger support to the
@@ -2190,7 +2181,7 @@ A.mix(WidgetTrigger.prototype, {
 
         A.after(instance._afterRenderUIWT, instance, &#x27;renderUI&#x27;);
 
-        instance.after(TRIGGER_CHANGE, instance._afterTriggerChange);
+        instance.after(&#x27;triggerChange&#x27;, instance._afterTriggerChange);
     },
 
     /**
@@ -2215,7 +2206,7 @@ A.mix(WidgetTrigger.prototype, {
     _afterRenderUIWT: function() {
         var instance = this;
 
-        instance._uiSetTrigger(instance.get(TRIGGER));
+        instance._uiSetTrigger(instance.get(&#x27;trigger&#x27;));
     },
 
     /**
@@ -2247,26 +2238,26 @@ A.mix(WidgetTrigger.prototype, {
 
         (new A.EventHandle(instance._eventHandles)).detach();
 
-        if (val &amp;&amp; instance.get(BIND_DOM_EVENTS)) {
+        if (val &amp;&amp; instance.get(&#x27;bindDOMEvents&#x27;)) {
             eventHandles = instance._eventHandles = [];
 
-            triggerHideEvent = instance.get(TRIGGER_HIDE_EVENT);
-            triggerShowEvent = instance.get(TRIGGER_SHOW_EVENT);
-            triggerToggleEvent = instance.get(TRIGGER_TOGGLE_EVENT);
+            triggerHideEvent = instance.get(&#x27;triggerHideEvent&#x27;);
+            triggerShowEvent = instance.get(&#x27;triggerShowEvent&#x27;);
+            triggerToggleEvent = instance.get(&#x27;triggerToggleEvent&#x27;);
 
             if (triggerHideEvent) {
                 eventHandles.push(
-                    val.on(instance.get(TRIGGER_HIDE_EVENT), instance.hide, instance));
+                    val.on(instance.get(&#x27;triggerHideEvent&#x27;), instance.hide, instance));
             }
 
             if (triggerShowEvent) {
                 eventHandles.push(
-                    val.on(instance.get(TRIGGER_SHOW_EVENT), instance.show, instance));
+                    val.on(instance.get(&#x27;triggerShowEvent&#x27;), instance.show, instance));
             }
 
             if (triggerToggleEvent) {
                 eventHandles.push(
-                    val.on(instance.get(TRIGGER_TOGGLE_EVENT), instance.toggle, instance));
+                    val.on(instance.get(&#x27;triggerToggleEvent&#x27;), instance.toggle, instance));
             }
         }
     }

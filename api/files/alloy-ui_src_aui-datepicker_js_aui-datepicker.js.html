@@ -20,7 +20,7 @@
 </head>
 <body class="yui3-skin-sam">
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
         <div class="navbar-inner">
             <h1 class="brand">
                 <a href="/">
@@ -2102,18 +2102,7 @@ var Lang = A.Lang,
 
     clamp = function(value, min, max) {
         return Math.min(Math.max(value, min), max);
-    },
-
-    ACTIVE_INPUT = &#x27;activeInput&#x27;,
-    AUTO_HIDE = &#x27;autoHide&#x27;,
-    CALENDAR = &#x27;calendar&#x27;,
-    DATE = &#x27;date&#x27;,
-    DATE_CLICK = &#x27;dateClick&#x27;,
-    MULTIPLE = &#x27;multiple&#x27;,
-    PANES = &#x27;panes&#x27;,
-    SELECTION_CHANGE = &#x27;selectionChange&#x27;,
-    SELECTION_MODE = &#x27;selectionMode&#x27;,
-    TRIGGER = &#x27;trigger&#x27;;
+    };
 
 /**
  * A base class for &#x60;DatePickerBase&#x60;.
@@ -2203,7 +2192,7 @@ A.mix(DatePickerBase.prototype, {
     initializer: function() {
         var instance = this;
 
-        instance.after(SELECTION_CHANGE, instance._afterDatePickerSelectionChange);
+        instance.after(&#x27;selectionChange&#x27;, instance._afterDatePickerSelectionChange);
     },
 
     /**
@@ -2248,21 +2237,21 @@ A.mix(DatePickerBase.prototype, {
             // attribute, then switch it back after calendar renders.
             originalCalendarTemplate = A.CalendarBase.CONTENT_TEMPLATE;
             A.CalendarBase.CONTENT_TEMPLATE =
-                DatePickerBase.PANES[instance.get(PANES) - 1];
+                DatePickerBase.PANES[instance.get(&#x27;panes&#x27;) - 1];
 
             // Initialize the popover instance before calendar renders since it
             // will use popover.bodyNode as render node.
             instance.getPopover();
 
-            calendar = new A.Calendar(instance.get(CALENDAR));
+            calendar = new A.Calendar(instance.get(&#x27;calendar&#x27;));
             calendar.render(instance.popover.bodyNode);
             instance.calendar = calendar;
 
             calendar.after(
-                SELECTION_CHANGE, instance._afterCalendarSelectionChange,
+                &#x27;selectionChange&#x27;, instance._afterCalendarSelectionChange,
                 instance);
             calendar.after(
-                DATE_CLICK, instance._afterCalendarDateClick,
+                &#x27;dateClick&#x27;, instance._afterCalendarDateClick,
                 instance);
 
             // Restore the original CalendarBase template.
@@ -2294,8 +2283,8 @@ A.mix(DatePickerBase.prototype, {
         var instance = this,
             popover = instance.getPopover();
 
-        popover.set(TRIGGER, node);
-        instance.set(ACTIVE_INPUT, node);
+        popover.set(&#x27;trigger&#x27;, node);
+        instance.set(&#x27;activeInput&#x27;, node);
 
         instance.alignTo(node);
         instance.clearSelection(true);
@@ -2311,9 +2300,9 @@ A.mix(DatePickerBase.prototype, {
     _afterCalendarDateClick: function() {
         var instance = this,
             calendar = instance.getCalendar(),
-            selectionMode = calendar.get(SELECTION_MODE);
+            selectionMode = calendar.get(&#x27;selectionMode&#x27;);
 
-        if (instance.get(AUTO_HIDE) &amp;&amp; (selectionMode !== MULTIPLE)) {
+        if (instance.get(&#x27;autoHide&#x27;) &amp;&amp; (selectionMode !== &#x27;multiple&#x27;)) {
             instance.hide();
         }
     },
@@ -2328,7 +2317,7 @@ A.mix(DatePickerBase.prototype, {
     _afterCalendarSelectionChange: function(event) {
         var instance = this;
 
-        instance.fire(SELECTION_CHANGE, {
+        instance.fire(&#x27;selectionChange&#x27;, {
             newSelection: event.newSelection
         });
     },
@@ -2357,7 +2346,7 @@ A.mix(DatePickerBase.prototype, {
             firstSelectedDate = dates[0];
 
         if (firstSelectedDate) {
-            instance.getCalendar().set(DATE, firstSelectedDate);
+            instance.getCalendar().set(&#x27;date&#x27;, firstSelectedDate);
         }
     },
 

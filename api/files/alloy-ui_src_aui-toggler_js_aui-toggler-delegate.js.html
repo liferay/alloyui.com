@@ -20,7 +20,7 @@
 </head>
 <body class="yui3-skin-sam">
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
         <div class="navbar-inner">
             <h1 class="brand">
                 <a href="/">
@@ -2108,31 +2108,13 @@ var Lang = A.Lang,
     DOC = A.config.doc,
 
     Toggler = A.Toggler,
-
-    DOT = &#x27;.&#x27;,
-
-    ANIMATED = &#x27;animated&#x27;,
-    CLICK = &#x27;click&#x27;,
-    CLOSE_ALL_ON_EXPAND = &#x27;closeAllOnExpand&#x27;,
-    COLLAPSED = &#x27;collapsed&#x27;,
-    CONTAINER = &#x27;container&#x27;,
-    CONTENT = &#x27;content&#x27;,
     CUBIC_BEZIER = &#x27;cubic-bezier(0, 0.1, 0, 1.0)&#x27;,
-    EXPANDED = &#x27;expanded&#x27;,
-    FIRST_CHILD = &#x27;firstChild&#x27;,
-    HEADER = &#x27;header&#x27;,
-    KEYDOWN = &#x27;keydown&#x27;,
-    TOGGLER = &#x27;toggler&#x27;,
-    TOGGLER_ANIMATING_CHANGE = &#x27;toggler:animatingChange&#x27;,
-    TOGGLER_DELEGATE = &#x27;toggler-delegate&#x27;,
-    TRANSITION = &#x27;transition&#x27;,
-    WRAPPER = &#x27;wrapper&#x27;,
 
     getCN = A.getClassName,
 
-    CSS_TOGGLER_CONTENT_WRAPPER = getCN(TOGGLER, CONTENT, WRAPPER),
-    CSS_TOGGLER_HEADER_COLLAPSED = getCN(TOGGLER, HEADER, COLLAPSED),
-    CSS_TOGGLER_HEADER_EXPANDED = getCN(TOGGLER, HEADER, EXPANDED);
+    CSS_TOGGLER_CONTENT_WRAPPER = getCN(&#x27;toggler&#x27;, &#x27;content&#x27;, &#x27;wrapper&#x27;),
+    CSS_TOGGLER_HEADER_COLLAPSED = getCN(&#x27;toggler&#x27;, &#x27;header&#x27;, &#x27;collapsed&#x27;),
+    CSS_TOGGLER_HEADER_EXPANDED = getCN(&#x27;toggler&#x27;, &#x27;header&#x27;, &#x27;expanded&#x27;);
 
 /**
  * A base class for Toggler Delegate.
@@ -2154,7 +2136,7 @@ var TogglerDelegate = A.Component.create({
      * @type String
      * @static
      */
-    NAME: TOGGLER_DELEGATE,
+    NAME: &#x27;toggler-delegate&#x27;,
 
     /**
      * Static property used to define the default attribute
@@ -2289,7 +2271,7 @@ var TogglerDelegate = A.Component.create({
         renderUI: function() {
             var instance = this;
 
-            if (instance.get(CLOSE_ALL_ON_EXPAND)) {
+            if (instance.get(&#x27;closeAllOnExpand&#x27;)) {
                 instance.createAll();
             }
         },
@@ -2302,12 +2284,12 @@ var TogglerDelegate = A.Component.create({
          */
         bindUI: function() {
             var instance = this;
-            var container = instance.get(CONTAINER);
-            var header = instance.get(HEADER);
+            var container = instance.get(&#x27;container&#x27;);
+            var header = instance.get(&#x27;header&#x27;);
 
             instance._eventHandles = [
-                container.delegate([CLICK, KEYDOWN], A.bind(&#x27;headerEventHandler&#x27;, instance), header),
-                instance.on(TOGGLER_ANIMATING_CHANGE, A.bind(&#x27;_onAnimatingChange&#x27;, instance))
+                container.delegate([&#x27;click&#x27;, &#x27;keydown&#x27;], A.bind(&#x27;headerEventHandler&#x27;, instance), header),
+                instance.on(&#x27;toggler:animatingChange&#x27;, A.bind(&#x27;_onAnimatingChange&#x27;, instance))
             ];
         },
 
@@ -2350,8 +2332,8 @@ var TogglerDelegate = A.Component.create({
         createAll: function() {
             var instance = this;
 
-            instance.get(CONTAINER).all(instance.get(HEADER)).each(function(header) {
-                if (!header.getData(TOGGLER)) {
+            instance.get(&#x27;container&#x27;).all(instance.get(&#x27;header&#x27;)).each(function(header) {
+                if (!header.getData(&#x27;toggler&#x27;)) {
                     instance._create(header);
                 }
             });
@@ -2378,15 +2360,15 @@ var TogglerDelegate = A.Component.create({
          */
         findContentNode: function(header) {
             var instance = this;
-            var content = instance.get(CONTENT);
+            var content = instance.get(&#x27;content&#x27;);
 
             var contentNode = header.next(content) || header.one(content);
 
             if (!contentNode) {
-                var wrapper = header.next(DOT + CSS_TOGGLER_CONTENT_WRAPPER);
+                var wrapper = header.next(&#x27;.&#x27; + CSS_TOGGLER_CONTENT_WRAPPER);
 
                 if (wrapper) {
-                    contentNode = wrapper.get(FIRST_CHILD);
+                    contentNode = wrapper.get(&#x27;firstChild&#x27;);
                 }
             }
 
@@ -2407,16 +2389,16 @@ var TogglerDelegate = A.Component.create({
             }
 
             var target = event.currentTarget;
-            var toggler = target.getData(TOGGLER) || instance._create(target);
+            var toggler = target.getData(&#x27;toggler&#x27;) || instance._create(target);
 
-            if (Toggler.headerEventHandler(event, toggler) &amp;&amp; instance.get(CLOSE_ALL_ON_EXPAND)) {
-                var wrappingContent = toggler.get(CONTENT).ancestor(instance.get(CONTENT));
+            if (Toggler.headerEventHandler(event, toggler) &amp;&amp; instance.get(&#x27;closeAllOnExpand&#x27;)) {
+                var wrappingContent = toggler.get(&#x27;content&#x27;).ancestor(instance.get(&#x27;content&#x27;));
 
                 AArray.each(instance.items, function(item) {
-                    if ((item !== toggler) &amp;&amp; item.get(EXPANDED)) {
+                    if ((item !== toggler) &amp;&amp; item.get(&#x27;expanded&#x27;)) {
 
                         if (wrappingContent) {
-                            var itemContent = item.get(CONTENT);
+                            var itemContent = item.get(&#x27;content&#x27;);
 
                             if ((itemContent !== wrappingContent) &amp;&amp; wrappingContent.contains(itemContent)) {
                                 item.collapse();
@@ -2440,7 +2422,7 @@ var TogglerDelegate = A.Component.create({
          */
         _create: function(header) {
             var instance = this,
-                expanded = instance.get(EXPANDED);
+                expanded = instance.get(&#x27;expanded&#x27;);
 
             // Prioritize markup information to decide whether it&#x27;s expanded or
             // not
@@ -2452,13 +2434,13 @@ var TogglerDelegate = A.Component.create({
             }
 
             var toggler = new Toggler({
-                animated: instance.get(ANIMATED),
+                animated: instance.get(&#x27;animated&#x27;),
                 bindDOMEvents: false,
                 bubbleTargets: [instance],
                 content: instance.findContentNode(header),
                 expanded: expanded,
                 header: header,
-                transition: instance.get(TRANSITION)
+                transition: instance.get(&#x27;transition&#x27;)
             });
 
             instance.items.push(toggler);

@@ -20,7 +20,7 @@
 </head>
 <body class="yui3-skin-sam">
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
         <div class="navbar-inner">
             <h1 class="brand">
                 <a href="/">
@@ -2099,11 +2099,6 @@
  */
 
 var QS = A.QueryString,
-
-    _BLANK = &#x27;&#x27;,
-
-    _ANCHOR_SEPARATOR = &#x27;#&#x27;,
-    _QUERY_SEPARATOR = &#x27;?&#x27;,
     _SCHEME_SEPARATOR = &#x27;://&#x27;,
 
     URL_SOURCE = 0,
@@ -2647,19 +2642,19 @@ A.mix(Url.prototype, {
 
         if (instance._query) {
             url.push(
-                _QUERY_SEPARATOR,
+                &#x27;?&#x27;,
                 instance._query
             );
         }
 
         if (instance._anchor) {
             url.push(
-                _ANCHOR_SEPARATOR,
+                &#x27;#&#x27;,
                 instance._anchor
             );
         }
 
-        return url.join(_BLANK);
+        return url.join(&#x27;&#x27;);
     },
 
     /**
@@ -2672,7 +2667,7 @@ A.mix(Url.prototype, {
         var instance = this;
 
         if (!instance._parameters) {
-            instance._parameters = QS.parse(instance._query || _BLANK);
+            instance._parameters = QS.parse(instance._query || &#x27;&#x27;);
         }
 
         instance._query = QS.stringify(instance._parameters);

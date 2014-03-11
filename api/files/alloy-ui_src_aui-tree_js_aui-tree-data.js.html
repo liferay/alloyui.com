@@ -20,7 +20,7 @@
 </head>
 <body class="yui3-skin-sam">
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
         <div class="navbar-inner">
             <h1 class="brand">
                 <a href="/">
@@ -2105,24 +2105,6 @@ var L = A.Lang,
     isObject = L.isObject,
     isUndefined = L.isUndefined,
 
-    BOUNDING_BOX = &#x27;boundingBox&#x27;,
-    CHILDREN = &#x27;children&#x27;,
-    CONTAINER = &#x27;container&#x27;,
-    DOT = &#x27;.&#x27;,
-    ID = &#x27;id&#x27;,
-    INDEX = &#x27;index&#x27;,
-    LAZY_LOAD = &#x27;lazyLoad&#x27;,
-    LEAF = &#x27;leaf&#x27;,
-    NEXT_SIBLING = &#x27;nextSibling&#x27;,
-    NODE = &#x27;node&#x27;,
-    OWNER_TREE = &#x27;ownerTree&#x27;,
-    PARENT_NODE = &#x27;parentNode&#x27;,
-    PREV_SIBLING = &#x27;prevSibling&#x27;,
-    PREVIOUS_SIBLING = &#x27;previousSibling&#x27;,
-    TREE = &#x27;tree&#x27;,
-    TREE_NODE = &#x27;tree-node&#x27;,
-    TREE_DATA = &#x27;tree-data&#x27;,
-
     isTreeNode = function(v) {
         return (A.instanceOf(v, A.TreeNode));
     },
@@ -2133,7 +2115,7 @@ var L = A.Lang,
 
     getCN = A.getClassName,
 
-    CSS_TREE_NODE = getCN(TREE, NODE);
+    CSS_TREE_NODE = getCN(&#x27;tree&#x27;, &#x27;node&#x27;);
 
 /**
  * A base class for TreeData, providing:
@@ -2252,7 +2234,7 @@ A.mix(TreeData.prototype, {
             instance.refreshIndex();
         }
 
-        return instance.get(INDEX)[uid];
+        return instance.get(&#x27;index&#x27;)[uid];
     },
 
     /**
@@ -2265,7 +2247,7 @@ A.mix(TreeData.prototype, {
     isRegistered: function(node) {
         var instance = this;
 
-        return !!(instance.get(INDEX)[node.get(ID)]);
+        return !!(instance.get(&#x27;index&#x27;)[node.get(&#x27;id&#x27;)]);
     },
 
     /**
@@ -2278,18 +2260,18 @@ A.mix(TreeData.prototype, {
      */
     updateReferences: function(node, parentNode, ownerTree) {
         var instance = this;
-        var oldParent = node.get(PARENT_NODE);
-        var oldOwnerTree = node.get(OWNER_TREE);
+        var oldParent = node.get(&#x27;parentNode&#x27;);
+        var oldOwnerTree = node.get(&#x27;ownerTree&#x27;);
         var moved = oldParent &amp;&amp; (oldParent !== parentNode);
 
         if (oldParent) {
             if (moved) {
                 // when moved update the oldParent children
-                var children = oldParent.get(CHILDREN);
+                var children = oldParent.get(&#x27;children&#x27;);
 
                 A.Array.removeItem(children, node);
 
-                oldParent.set(CHILDREN, children);
+                oldParent.set(&#x27;children&#x27;, children);
             }
 
             oldParent.unregisterNode(node);
@@ -2300,10 +2282,10 @@ A.mix(TreeData.prototype, {
         }
 
         // update parent reference when registered
-        node.set(PARENT_NODE, parentNode);
+        node.set(&#x27;parentNode&#x27;, parentNode);
 
         // update the ownerTree of the node
-        node.set(OWNER_TREE, ownerTree);
+        node.set(&#x27;ownerTree&#x27;, ownerTree);
 
         if (parentNode) {
             // register the new node on the parentNode index
@@ -2318,7 +2300,7 @@ A.mix(TreeData.prototype, {
         if (oldOwnerTree != ownerTree) {
             // when change the OWNER_TREE update the children references also
             node.eachChildren(function(child) {
-                instance.updateReferences(child, child.get(PARENT_NODE), ownerTree);
+                instance.updateReferences(child, child.get(&#x27;parentNode&#x27;), ownerTree);
             });
         }
 
@@ -2326,7 +2308,7 @@ A.mix(TreeData.prototype, {
         if (moved) {
             var output = instance.getEventOutputMap(node);
 
-            if (!oldParent.get(CHILDREN).length) {
+            if (!oldParent.get(&#x27;children&#x27;).length) {
                 oldParent.collapse();
             }
 
@@ -2362,8 +2344,8 @@ A.mix(TreeData.prototype, {
      */
     registerNode: function(node) {
         var instance = this;
-        var uid = node.get(ID);
-        var index = instance.get(INDEX);
+        var uid = node.get(&#x27;id&#x27;);
+        var index = instance.get(&#x27;index&#x27;);
 
         if (uid) {
             index[uid] = node;
@@ -2373,7 +2355,7 @@ A.mix(TreeData.prototype, {
             node.addTarget(instance);
 
             // when the node is appended to the TreeView set the OWNER_TREE
-            node.set(OWNER_TREE, instance);
+            node.set(&#x27;ownerTree&#x27;, instance);
         }
 
         node._inheritOwnerTreeAttrs();
@@ -2393,7 +2375,7 @@ A.mix(TreeData.prototype, {
         if (index) {
             instance._indexPrimed = true;
 
-            instance.set(INDEX, index);
+            instance.set(&#x27;index&#x27;, index);
         }
     },
 
@@ -2405,9 +2387,9 @@ A.mix(TreeData.prototype, {
      */
     unregisterNode: function(node) {
         var instance = this;
-        var index = instance.get(INDEX);
+        var index = instance.get(&#x27;index&#x27;);
 
-        delete index[node.get(ID)];
+        delete index[node.get(&#x27;id&#x27;)];
 
         if (isTreeView(instance)) {
             node.removeTarget(instance);
@@ -2494,13 +2476,13 @@ A.mix(TreeData.prototype, {
      */
     eachParent: function(fn) {
         var instance = this;
-        var parentNode = instance.get(PARENT_NODE);
+        var parentNode = instance.get(&#x27;parentNode&#x27;);
 
         while (parentNode) {
             if (parentNode) {
                 fn.call(instance, parentNode);
             }
-            parentNode = parentNode.get(PARENT_NODE);
+            parentNode = parentNode.get(&#x27;parentNode&#x27;);
         }
     },
 
@@ -2521,7 +2503,7 @@ A.mix(TreeData.prototype, {
         instance.fire(eventType, args);
 
         if (!cancelBubbling) {
-            var parentNode = instance.get(PARENT_NODE);
+            var parentNode = instance.get(&#x27;parentNode&#x27;);
 
             // Avoid execution of the native action (private methods) while
             // propagate for example: private _appendChild() is invoked only on
@@ -2537,7 +2519,7 @@ A.mix(TreeData.prototype, {
 
             while (parentNode) {
                 parentNode.fire(eventType, args);
-                parentNode = parentNode.get(PARENT_NODE);
+                parentNode = parentNode.get(&#x27;parentNode&#x27;);
             }
         }
     },
@@ -2588,15 +2570,15 @@ A.mix(TreeData.prototype, {
 
         var instance = this;
         var node = event.tree.node;
-        var ownerTree = instance.get(OWNER_TREE);
-        var children = instance.get(CHILDREN);
+        var ownerTree = instance.get(&#x27;ownerTree&#x27;);
+        var children = instance.get(&#x27;children&#x27;);
 
         // updateReferences first
         instance.updateReferences(node, instance, ownerTree);
         // and then set the children, to have the appendChild propagation
         // the PARENT_NODE references should be updated
         var length = children.push(node);
-        instance.set(CHILDREN, children);
+        instance.set(&#x27;children&#x27;, children);
 
         // updating prev/nextSibling attributes
         var prevIndex = length - 2;
@@ -2606,7 +2588,7 @@ A.mix(TreeData.prototype, {
         node._prevSibling = prevSibling;
 
         // render node
-        node.render(instance.get(CONTAINER));
+        node.render(instance.get(&#x27;container&#x27;));
     },
 
     /**
@@ -2619,7 +2601,7 @@ A.mix(TreeData.prototype, {
     item: function(index) {
         var instance = this;
 
-        return instance.get(CHILDREN)[index];
+        return instance.get(&#x27;children&#x27;)[index];
     },
 
     /**
@@ -2633,7 +2615,7 @@ A.mix(TreeData.prototype, {
     indexOf: function(node) {
         var instance = this;
 
-        return A.Array.indexOf(instance.get(CHILDREN), node);
+        return A.Array.indexOf(instance.get(&#x27;children&#x27;), node);
     },
 
     /**
@@ -2658,7 +2640,7 @@ A.mix(TreeData.prototype, {
     getChildren: function(deep) {
         var instance = this;
         var cNodes = [];
-        var children = instance.get(CHILDREN);
+        var children = instance.get(&#x27;children&#x27;);
 
         cNodes = cNodes.concat(children);
 
@@ -2674,7 +2656,7 @@ A.mix(TreeData.prototype, {
     getChildrenLength: function() {
         var instance = this;
 
-        return (instance.childrenLength || instance.get(CHILDREN).length);
+        return (instance.childrenLength || instance.get(&#x27;children&#x27;).length);
     },
 
     /**
@@ -2722,17 +2704,17 @@ A.mix(TreeData.prototype, {
 
         var instance = this;
         var node = event.tree.node;
-        var ownerTree = instance.get(OWNER_TREE);
+        var ownerTree = instance.get(&#x27;ownerTree&#x27;);
 
         if (instance.isRegistered(node)) {
             // update parent reference when removed
-            node.set(PARENT_NODE, null);
+            node.set(&#x27;parentNode&#x27;, null);
 
             // unregister the node
             instance.unregisterNode(node);
 
             // no parent, no ownerTree
-            node.set(OWNER_TREE, null);
+            node.set(&#x27;ownerTree&#x27;, null);
 
             if (ownerTree) {
                 // unregister the removed node from the tree index
@@ -2740,12 +2722,12 @@ A.mix(TreeData.prototype, {
             }
 
             // remove child from the container
-            node.get(BOUNDING_BOX).remove();
+            node.get(&#x27;boundingBox&#x27;).remove();
 
-            var children = instance.get(CHILDREN);
+            var children = instance.get(&#x27;children&#x27;);
 
             A.Array.removeItem(children, node);
-            instance.set(CHILDREN, children);
+            instance.set(&#x27;children&#x27;, children);
         }
     },
 
@@ -2758,7 +2740,7 @@ A.mix(TreeData.prototype, {
         var instance = this;
 
         instance.eachChildren(function(node) {
-            var parentNode = node.get(PARENT_NODE);
+            var parentNode = node.get(&#x27;parentNode&#x27;);
 
             if (parentNode) {
                 parentNode.removeChild(node);
@@ -2782,12 +2764,12 @@ A.mix(TreeData.prototype, {
             return false; // NOTE: return
         }
 
-        var refParentTreeNode = refTreeNode.get(PARENT_NODE);
+        var refParentTreeNode = refTreeNode.get(&#x27;parentNode&#x27;);
 
         if (treeNode &amp;&amp; refParentTreeNode) {
-            var nodeBoundingBox = treeNode.get(BOUNDING_BOX);
-            var refBoundingBox = refTreeNode.get(BOUNDING_BOX);
-            var ownerTree = refTreeNode.get(OWNER_TREE);
+            var nodeBoundingBox = treeNode.get(&#x27;boundingBox&#x27;);
+            var refBoundingBox = refTreeNode.get(&#x27;boundingBox&#x27;);
+            var ownerTree = refTreeNode.get(&#x27;ownerTree&#x27;);
 
             if (where === &#x27;before&#x27;) {
                 refBoundingBox.placeBefore(nodeBoundingBox);
@@ -2799,26 +2781,26 @@ A.mix(TreeData.prototype, {
             var refSiblings = [];
             // using the YUI selector to regenerate the index based on the real dom
             // this avoid misscalculations on the nodes index number
-            var DOMChildren = refParentTreeNode.get(BOUNDING_BOX).all(&#x27;&gt; ul &gt; li&#x27;);
+            var DOMChildren = refParentTreeNode.get(&#x27;boundingBox&#x27;).all(&#x27;&gt; ul &gt; li&#x27;);
 
             DOMChildren.each(function(child) {
-                refSiblings.push(child.getData(TREE_NODE));
+                refSiblings.push(child.getData(&#x27;tree-node&#x27;));
             });
 
             // updating prev/nextSibling attributes
-            var nextSiblingNode = nodeBoundingBox.get(NEXT_SIBLING);
+            var nextSiblingNode = nodeBoundingBox.get(&#x27;nextSibling&#x27;);
 
-            treeNode.set(NEXT_SIBLING, nextSiblingNode &amp;&amp; nextSiblingNode.getData(TREE_NODE));
+            treeNode.set(&#x27;nextSibling&#x27;, nextSiblingNode &amp;&amp; nextSiblingNode.getData(&#x27;tree-node&#x27;));
 
-            var prevSiblingNode = nodeBoundingBox.get(PREVIOUS_SIBLING);
+            var prevSiblingNode = nodeBoundingBox.get(&#x27;previousSibling&#x27;);
 
-            treeNode.set(PREV_SIBLING, prevSiblingNode &amp;&amp; prevSiblingNode.getData(TREE_NODE));
+            treeNode.set(&#x27;prevSibling&#x27;, prevSiblingNode &amp;&amp; prevSiblingNode.getData(&#x27;tree-node&#x27;));
 
             // update all references
             refTreeNode.updateReferences(treeNode, refParentTreeNode, ownerTree);
 
             // updating refParentTreeNode childTreeNodes
-            refParentTreeNode.set(CHILDREN, refSiblings);
+            refParentTreeNode.set(&#x27;children&#x27;, refSiblings);
         }
 
         // render treeNode after it&#x27;s inserted
@@ -2867,10 +2849,10 @@ A.mix(TreeData.prototype, {
      */
     getNodeByChild: function(child) {
         var instance = this;
-        var treeNodeEl = child.ancestor(DOT + CSS_TREE_NODE);
+        var treeNodeEl = child.ancestor(&#x27;.&#x27; + CSS_TREE_NODE);
 
         if (treeNodeEl) {
-            return treeNodeEl.getData(TREE_NODE);
+            return treeNodeEl.getData(&#x27;tree-node&#x27;);
         }
 
         return null;
@@ -2889,7 +2871,7 @@ A.mix(TreeData.prototype, {
     _setChildren: function(v) {
         var instance = this;
         var childNodes = [];
-        var container = instance.get(CONTAINER);
+        var container = instance.get(&#x27;container&#x27;);
 
         if (!container) {
             container = instance._createNodeContainer();
@@ -2904,20 +2886,20 @@ A.mix(TreeData.prototype, {
         var ownerTree = instance;
 
         if (isTreeNode(instance)) {
-            ownerTree = instance.get(OWNER_TREE);
+            ownerTree = instance.get(&#x27;ownerTree&#x27;);
         }
 
         var hasOwnerTree = isTreeView(ownerTree);
         var lazyLoad = true;
 
         if (hasOwnerTree) {
-            lazyLoad = ownerTree.get(LAZY_LOAD);
+            lazyLoad = ownerTree.get(&#x27;lazyLoad&#x27;);
         }
 
         instance.updateIndex({});
 
         if (instance.childrenLength &gt; 0) {
-            instance.set(LEAF, false);
+            instance.set(&#x27;leaf&#x27;, false);
         }
 
         A.Array.each(v, function(node, index) {
@@ -2925,14 +2907,14 @@ A.mix(TreeData.prototype, {
                 if (!isTreeNode(node) &amp;&amp; isObject(node)) {
                     // cache and remove children to lazy add them later for
                     // performance reasons
-                    var children = node[CHILDREN];
+                    var children = node[&#x27;children&#x27;];
                     var hasChildren = children &amp;&amp; children.length;
 
-                    node[OWNER_TREE] = ownerTree;
-                    node[PARENT_NODE] = instance;
+                    node[&#x27;ownerTree&#x27;] = ownerTree;
+                    node[&#x27;parentNode&#x27;] = instance;
 
                     if (hasChildren &amp;&amp; lazyLoad) {
-                        delete node[CHILDREN];
+                        delete node[&#x27;children&#x27;];
                     }
 
                     // creating node from json
@@ -2942,7 +2924,7 @@ A.mix(TreeData.prototype, {
                         node.childrenLength = children.length;
 
                         A.setTimeout(function() {
-                            node.set(CHILDREN, children);
+                            node.set(&#x27;children&#x27;, children);
                         }, 50);
                     }
                 }

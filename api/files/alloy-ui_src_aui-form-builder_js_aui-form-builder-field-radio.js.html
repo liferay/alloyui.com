@@ -20,7 +20,7 @@
 </head>
 <body class="yui3-skin-sam">
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
         <div class="navbar-inner">
             <h1 class="brand">
                 <a href="/">
@@ -2101,38 +2101,19 @@
 
 var L = A.Lang,
 
-    BUILDER = &#x27;builder&#x27;,
-    CHECKED = &#x27;checked&#x27;,
-    CHOICE = &#x27;choice&#x27;,
-    CONTAINER = &#x27;container&#x27;,
-    DISABLED = &#x27;disabled&#x27;,
-    EMPTY_STR = &#x27;&#x27;,
-    FIELD = &#x27;field&#x27;,
-    FORM_BUILDER_FIELD = &#x27;form-builder-field&#x27;,
-    FORM_BUILDER_RADIO_FIELD = &#x27;form-builder-radio-field&#x27;,
-    ID = &#x27;id&#x27;,
-    INPUT = &#x27;input&#x27;,
-    NAME = &#x27;name&#x27;,
-    NODE = &#x27;node&#x27;,
-    OPTIONS = &#x27;options&#x27;,
-    PREDEFINED_VALUE = &#x27;predefinedValue&#x27;,
-    RADIO = &#x27;radio&#x27;,
-    SPACE = &#x27; &#x27;,
-    TEMPLATE_NODE = &#x27;templateNode&#x27;,
-
     getCN = A.getClassName,
 
-    CSS_FIELD = getCN(FIELD),
-    CSS_FIELD_CHOICE = getCN(FIELD, CHOICE),
-    CSS_FIELD_RADIO = getCN(FIELD, RADIO),
-    CSS_FORM_BUILDER_FIELD = getCN(FORM_BUILDER_FIELD),
-    CSS_FORM_BUILDER_FIELD_NODE = getCN(FORM_BUILDER_FIELD, NODE),
-    CSS_FORM_BUILDER_FIELD_OPTIONS_CONTAINER = getCN(FORM_BUILDER_FIELD, OPTIONS, CONTAINER),
+    CSS_FIELD = getCN(&#x27;field&#x27;),
+    CSS_FIELD_CHOICE = getCN(&#x27;field&#x27;, &#x27;choice&#x27;),
+    CSS_FIELD_RADIO = getCN(&#x27;field&#x27;, &#x27;radio&#x27;),
+    CSS_FORM_BUILDER_FIELD = getCN(&#x27;form-builder-field&#x27;),
+    CSS_FORM_BUILDER_FIELD_NODE = getCN(&#x27;form-builder-field&#x27;, &#x27;node&#x27;),
+    CSS_FORM_BUILDER_FIELD_OPTIONS_CONTAINER = getCN(&#x27;form-builder-field&#x27;, &#x27;options&#x27;, &#x27;container&#x27;),
 
     TPL_OPTIONS_CONTAINER = &#x27;&lt;div class=&quot;&#x27; + CSS_FORM_BUILDER_FIELD_OPTIONS_CONTAINER + &#x27;&quot;&gt;&lt;/div&gt;&#x27;,
     TPL_RADIO =
         &#x27;&lt;div&gt;&lt;input id=&quot;{id}&quot; class=&quot;&#x27; + [CSS_FIELD, CSS_FIELD_CHOICE, CSS_FIELD_RADIO, CSS_FORM_BUILDER_FIELD_NODE].join(
-            SPACE) +
+            &#x27; &#x27;) +
         &#x27;&quot; name=&quot;{name}&quot; type=&quot;radio&quot; value=&quot;{value}&quot; {checked} {disabled} /&gt;&lt;label class=&quot;field-label&quot; for=&quot;{id}&quot;&gt;{label}&lt;/label&gt;&lt;/div&gt;&#x27;;
 
 /**
@@ -2153,7 +2134,7 @@ var FormBuilderRadioField = A.Component.create({
      * @type String
      * @static
      */
-    NAME: FORM_BUILDER_RADIO_FIELD,
+    NAME: &#x27;form-builder-radio-field&#x27;,
 
     /**
      * Static property used to define the default attribute
@@ -2226,14 +2207,14 @@ var FormBuilderRadioField = A.Component.create({
          */
         _uiSetDisabled: function(val) {
             var instance = this,
-                templateNode = instance.get(TEMPLATE_NODE);
+                templateNode = instance.get(&#x27;templateNode&#x27;);
 
-            templateNode.all(INPUT).each(function(input) {
+            templateNode.all(&#x27;input&#x27;).each(function(input) {
                 if (val) {
-                    input.setAttribute(DISABLED, val);
+                    input.setAttribute(&#x27;disabled&#x27;, val);
                 }
                 else {
-                    input.removeAttribute(DISABLED);
+                    input.removeAttribute(&#x27;disabled&#x27;);
                 }
             });
         },
@@ -2250,8 +2231,8 @@ var FormBuilderRadioField = A.Component.create({
                 buffer = [],
                 counter = 0,
                 hasPredefinedValue = false,
-                predefinedValue = instance.get(PREDEFINED_VALUE),
-                templateNode = instance.get(TEMPLATE_NODE);
+                predefinedValue = instance.get(&#x27;predefinedValue&#x27;),
+                templateNode = instance.get(&#x27;templateNode&#x27;);
 
             A.each(val, function(item, index, collection) {
                 var checked = A.Array.indexOf(predefinedValue, item.value) &gt; -1;
@@ -2259,11 +2240,11 @@ var FormBuilderRadioField = A.Component.create({
                 buffer.push(
                     L.sub(
                         TPL_RADIO, {
-                            checked: checked ? &#x27;checked=&quot;checked&quot;&#x27; : EMPTY_STR,
-                            disabled: instance.get(DISABLED) ? &#x27;disabled=&quot;disabled&quot;&#x27; : EMPTY_STR,
-                            id: instance.get(ID) + counter++,
+                            checked: checked ? &#x27;checked=&quot;checked&quot;&#x27; : &#x27;&#x27;,
+                            disabled: instance.get(&#x27;disabled&#x27;) ? &#x27;disabled=&quot;disabled&quot;&#x27; : &#x27;&#x27;,
+                            id: instance.get(&#x27;id&#x27;) + counter++,
                             label: item.label,
-                            name: instance.get(NAME),
+                            name: instance.get(&#x27;name&#x27;),
                             value: item.value
                         }
                     )
@@ -2274,14 +2255,14 @@ var FormBuilderRadioField = A.Component.create({
                 }
             });
 
-            instance.optionNodes = A.NodeList.create(buffer.join(EMPTY_STR));
+            instance.optionNodes = A.NodeList.create(buffer.join(&#x27;&#x27;));
 
             templateNode.setContent(instance.optionNodes);
 
             if (!hasPredefinedValue) {
-                instance.set(PREDEFINED_VALUE, instance._valuePredefinedValueFn());
+                instance.set(&#x27;predefinedValue&#x27;, instance._valuePredefinedValueFn());
 
-                instance.get(BUILDER).editField(instance);
+                instance.get(&#x27;builder&#x27;).editField(instance);
             }
         },
 
@@ -2300,9 +2281,9 @@ var FormBuilderRadioField = A.Component.create({
                 return;
             }
 
-            optionNodes.set(CHECKED, false);
+            optionNodes.set(&#x27;checked&#x27;, false);
 
-            optionNodes.all(&#x27;input[value=&quot;&#x27; + val + &#x27;&quot;]&#x27;).set(CHECKED, true);
+            optionNodes.all(&#x27;input[value=&quot;&#x27; + val + &#x27;&quot;]&#x27;).set(&#x27;checked&#x27;, true);
         },
 
         /**
@@ -2313,7 +2294,7 @@ var FormBuilderRadioField = A.Component.create({
          */
         _valuePredefinedValueFn: function() {
             var instance = this,
-                options = instance.get(OPTIONS),
+                options = instance.get(&#x27;options&#x27;),
                 predefinedValue;
 
             if (options.length) {

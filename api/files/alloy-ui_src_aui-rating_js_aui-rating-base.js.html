@@ -20,7 +20,7 @@
 </head>
 <body class="yui3-skin-sam">
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
         <div class="navbar-inner">
             <h1 class="brand">
                 <a href="/">
@@ -2111,42 +2111,13 @@ var Lang = A.Lang,
     isNode = function(v) {
         return (v instanceof A.Node);
     },
-
-    ANCHOR = &#x27;a&#x27;,
-    BOUNDING_BOX = &#x27;boundingBox&#x27;,
-    CAN_RESET = &#x27;canReset&#x27;,
-    CONTENT_BOX = &#x27;contentBox&#x27;,
-    DEFAULT_SELECTED = &#x27;defaultSelected&#x27;,
-    DISABLED = &#x27;disabled&#x27;,
-    DOT = &#x27;.&#x27;,
-    ELEMENTS = &#x27;elements&#x27;,
     ENTER = 13,
-    HREF = &#x27;href&#x27;,
-    ID = &#x27;id&#x27;,
-    INPUT = &#x27;input&#x27;,
-    INPUT_NAME = &#x27;inputName&#x27;,
-    LABEL = &#x27;label&#x27;,
-    LABEL_NODE = &#x27;labelNode&#x27;,
-    NAME = &#x27;name&#x27;,
-    NODE_NAME = &#x27;nodeName&#x27;,
-    RATING = &#x27;rating&#x27;,
-    SELECTED_INDEX = &#x27;selectedIndex&#x27;,
-    SHOW_TITLE = &#x27;showTitle&#x27;,
-    SIZE = &#x27;size&#x27;,
-    STR_EMPTY = &#x27;&#x27;,
-    TITLE = &#x27;title&#x27;,
-    VALUE = &#x27;value&#x27;,
-
-    EV_RATING_ITEM_CLICK = &#x27;itemClick&#x27;,
-    EV_RATING_ITEM_OUT = &#x27;itemOut&#x27;,
-    EV_RATING_ITEM_OVER = &#x27;itemOver&#x27;,
-    EV_RATING_ITEM_SELECT = &#x27;itemSelect&#x27;,
 
     getCN = A.getClassName,
 
     CSS_STAR = getCN(&#x27;icon&#x27;, &#x27;star&#x27;),
     CSS_STAR_EMPTY = getCN(&#x27;icon&#x27;, &#x27;star&#x27;, &#x27;empty&#x27;),
-    CSS_RATING_LABEL = getCN(RATING, LABEL),
+    CSS_RATING_LABEL = getCN(&#x27;rating&#x27;, &#x27;label&#x27;),
 
     TPL_ELEMENT = &#x27;&lt;a class=&quot;{cssClasses}&quot; tabindex=&quot;{tabindex}&quot;&gt;&lt;/a&gt;&#x27;,
     TPL_LABEL = &#x27;&lt;span class=&quot;&#x27; + CSS_RATING_LABEL + &#x27;&quot;&gt;&lt;/span&gt;&#x27;;
@@ -2291,7 +2262,7 @@ var Rating = A.Component.create({
          * @type String
          */
         inputName: {
-            value: STR_EMPTY,
+            value: &#x27;&#x27;,
             validator: isString
         },
 
@@ -2303,7 +2274,7 @@ var Rating = A.Component.create({
          * @type String
          */
         label: {
-            value: STR_EMPTY,
+            value: &#x27;&#x27;,
             validator: isString
         },
 
@@ -2397,14 +2368,14 @@ var Rating = A.Component.create({
         },
 
         label: function(srcNode) {
-            var labelNode = srcNode.one(DOT + CSS_RATING_LABEL);
+            var labelNode = srcNode.one(&#x27;.&#x27; + CSS_RATING_LABEL);
 
             if (labelNode) {
                 return labelNode.html();
             }
         },
 
-        labelNode: DOT + CSS_RATING_LABEL
+        labelNode: &#x27;.&#x27; + CSS_RATING_LABEL
     },
 
     prototype: {
@@ -2480,7 +2451,7 @@ var Rating = A.Component.create({
             var instance = this,
                 cssClasses = instance.get(&#x27;cssClasses&#x27;);
 
-            instance.get(ELEMENTS).each(function(node) {
+            instance.get(&#x27;elements&#x27;).each(function(node) {
                 node.removeClass(cssClasses.on);
                 node.removeClass(cssClasses.hover);
                 node.addClass(cssClasses.element);
@@ -2495,30 +2466,30 @@ var Rating = A.Component.create({
          */
         select: function(index) {
             var instance = this,
-                oldIndex = instance.get(SELECTED_INDEX),
-                canReset = instance.get(CAN_RESET);
+                oldIndex = instance.get(&#x27;selectedIndex&#x27;),
+                canReset = instance.get(&#x27;canReset&#x27;);
 
             // clear selection when the selected element is clicked
             if (canReset &amp;&amp; (oldIndex === index)) {
                 index = -1;
             }
 
-            instance.set(SELECTED_INDEX, index);
+            instance.set(&#x27;selectedIndex&#x27;, index);
 
-            var selectedIndex = instance.get(SELECTED_INDEX),
+            var selectedIndex = instance.get(&#x27;selectedIndex&#x27;),
                 data = instance._getInputData(selectedIndex),
-                title = (TITLE in data) ? data.title : STR_EMPTY,
-                value = (VALUE in data) ? data.value : selectedIndex;
+                title = (&#x27;title&#x27; in data) ? data.title : &#x27;&#x27;,
+                value = (&#x27;value&#x27; in data) ? data.value : selectedIndex;
 
             instance.fillTo(selectedIndex);
 
-            instance.set(TITLE, title);
-            instance.set(VALUE, value);
+            instance.set(&#x27;title&#x27;, title);
+            instance.set(&#x27;value&#x27;, value);
 
             var hiddenInput = instance.get(&#x27;hiddenInput&#x27;);
 
-            hiddenInput.setAttribute(TITLE, title);
-            hiddenInput.setAttribute(VALUE, value);
+            hiddenInput.setAttribute(&#x27;title&#x27;, title);
+            hiddenInput.setAttribute(&#x27;value&#x27;, value);
         },
 
         /**
@@ -2537,7 +2508,7 @@ var Rating = A.Component.create({
             instance.clearSelection();
 
             if (index &gt;= 0) {
-                instance.get(ELEMENTS).some(function(node, i) {
+                instance.get(&#x27;elements&#x27;).some(function(node, i) {
                     node.addClass(className || cssClasses.on);
                     node.removeClass(cssClasses.element);
                     return (i === Math.floor(index));
@@ -2555,7 +2526,7 @@ var Rating = A.Component.create({
         indexOf: function(elem) {
             var instance = this;
 
-            return instance.get(ELEMENTS).indexOf(elem);
+            return instance.get(&#x27;elements&#x27;).indexOf(elem);
         },
 
         /**
@@ -2574,7 +2545,7 @@ var Rating = A.Component.create({
             // checks if the widget is not disabled and if the dom event is
             // firing with a item as target do not fire custom events for other
             // elements into the boundingBox
-            return !instance.get(DISABLED) &amp;&amp; domTarget.test(&#x27;a&#x27;);
+            return !instance.get(&#x27;disabled&#x27;) &amp;&amp; domTarget.test(&#x27;a&#x27;);
         },
 
         /**
@@ -2591,9 +2562,9 @@ var Rating = A.Component.create({
                 cssClasses = instance.get(&#x27;cssClasses&#x27;),
                 disabled,
                 elements = [],
-                size = this.get(SIZE);
+                size = this.get(&#x27;size&#x27;);
 
-            disabled = instance.get(DISABLED);
+            disabled = instance.get(&#x27;disabled&#x27;);
 
             for (var i = 0; i &lt; size; i++) {
                 elements.push(
@@ -2604,7 +2575,7 @@ var Rating = A.Component.create({
                 );
             }
 
-            return A.NodeList.create(elements.join(STR_EMPTY));
+            return A.NodeList.create(elements.join(&#x27;&#x27;));
         },
 
         /**
@@ -2635,7 +2606,7 @@ var Rating = A.Component.create({
              * @type {EventCustom}
              */
             publish(
-                EV_RATING_ITEM_CLICK,
+                &#x27;itemClick&#x27;,
                 this._defRatingItemClickFn
             );
 
@@ -2648,7 +2619,7 @@ var Rating = A.Component.create({
              * @type {EventCustom}
              */
             publish(
-                EV_RATING_ITEM_SELECT,
+                &#x27;itemSelect&#x27;,
                 this._defRatingItemSelectFn
             );
 
@@ -2661,7 +2632,7 @@ var Rating = A.Component.create({
              * @type {EventCustom}
              */
             publish(
-                EV_RATING_ITEM_OVER,
+                &#x27;itemOver&#x27;,
                 this._defRatingItemOverFn
             );
 
@@ -2674,7 +2645,7 @@ var Rating = A.Component.create({
              * @type {EventCustom}
              */
             publish(
-                EV_RATING_ITEM_OUT,
+                &#x27;itemOut&#x27;,
                 this._defRatingItemOutFn
             );
         },
@@ -2690,7 +2661,7 @@ var Rating = A.Component.create({
             var instance = this,
                 domEvent = event.domEvent;
 
-            instance.fire(EV_RATING_ITEM_SELECT, {
+            instance.fire(&#x27;itemSelect&#x27;, {
                 delegateEvent: event,
                 domEvent: domEvent,
                 ratingItem: domEvent.target
@@ -2723,7 +2694,7 @@ var Rating = A.Component.create({
         _defRatingItemOutFn: function() {
             var instance = this;
 
-            instance.fillTo(instance.get(SELECTED_INDEX));
+            instance.fillTo(instance.get(&#x27;selectedIndex&#x27;));
         },
 
         /**
@@ -2768,22 +2739,22 @@ var Rating = A.Component.create({
          */
         _parseInputElements: function() {
             var instance = this,
-                boundingBox = instance.get(BOUNDING_BOX),
-                inputs = boundingBox.all(INPUT),
+                boundingBox = instance.get(&#x27;boundingBox&#x27;),
+                inputs = boundingBox.all(&#x27;input&#x27;),
                 size = inputs.size(),
-                inputName = instance.get(INPUT_NAME),
+                inputName = instance.get(&#x27;inputName&#x27;),
                 hiddenInput = A.Node.create(&#x27;&lt;input type=&quot;hidden&quot; /&gt;&#x27;);
 
             if (size &gt; 0) {
-                inputName = inputName || inputs.item(0).getAttribute(NAME);
+                inputName = inputName || inputs.item(0).getAttribute(&#x27;name&#x27;);
 
-                instance.set(SIZE, size);
+                instance.set(&#x27;size&#x27;, size);
 
                 var labels = boundingBox.getElementsByTagName(&#x27;label&#x27;);
 
                 inputs.each(function(node, index) {
-                    var id = node.get(ID);
-                    var label = STR_EMPTY;
+                    var id = node.get(&#x27;id&#x27;);
+                    var label = &#x27;&#x27;;
 
                     if (id) {
                         // for a11y parse the &lt;label&gt; elments information
@@ -2799,8 +2770,8 @@ var Rating = A.Component.create({
 
                     instance.inputElementsData[index] = {
                         content: label,
-                        value: node.getAttribute(VALUE) || index,
-                        title: node.getAttribute(TITLE)
+                        value: node.getAttribute(&#x27;value&#x27;) || index,
+                        title: node.getAttribute(&#x27;title&#x27;)
                     };
                 });
 
@@ -2809,7 +2780,7 @@ var Rating = A.Component.create({
             }
 
             if (inputName) {
-                hiddenInput.setAttribute(NAME, inputName);
+                hiddenInput.setAttribute(&#x27;name&#x27;, inputName);
                 boundingBox.appendChild(hiddenInput);
             }
 
@@ -2825,8 +2796,8 @@ var Rating = A.Component.create({
         _renderLabel: function() {
             var instance = this;
 
-            instance.get(CONTENT_BOX).setContent(
-                instance.get(LABEL_NODE)
+            instance.get(&#x27;contentBox&#x27;).setContent(
+                instance.get(&#x27;labelNode&#x27;)
             );
         },
 
@@ -2838,15 +2809,15 @@ var Rating = A.Component.create({
          */
         _renderElements: function() {
             var instance = this,
-                contentBox = instance.get(CONTENT_BOX),
-                elements = instance.get(ELEMENTS);
+                contentBox = instance.get(&#x27;contentBox&#x27;),
+                elements = instance.get(&#x27;elements&#x27;);
 
             // if there are no elements in the markup, create them based on the
             // size attribute
             if (!elements || !elements.size()) {
                 elements = instance._createElements();
 
-                instance.set(ELEMENTS, elements);
+                instance.set(&#x27;elements&#x27;, elements);
             }
 
             elements.each(
@@ -2856,13 +2827,13 @@ var Rating = A.Component.create({
                         // try to use the pulled title data from the dom,
                         // otherwise use the TITLE attr, in the last case use
                         // the content
-                        title = data.title || instance.get(TITLE) || content;
+                        title = data.title || instance.get(&#x27;title&#x27;) || content;
 
                     // setting the title
-                    if (title &amp;&amp; instance.get(SHOW_TITLE)) {
-                        element.setAttribute(TITLE, title);
+                    if (title &amp;&amp; instance.get(&#x27;showTitle&#x27;)) {
+                        element.setAttribute(&#x27;title&#x27;, title);
                     }
-                    if (!element.attr(HREF) &amp;&amp; (element.get(NODE_NAME).toLowerCase() === ANCHOR)) {
+                    if (!element.attr(&#x27;href&#x27;) &amp;&amp; (element.get(&#x27;nodeName&#x27;).toLowerCase() === &#x27;a&#x27;)) {
                         element.setAttribute(&#x27;onclick&#x27;, &#x27;return false;&#x27;);
                     }
                 }
@@ -2878,9 +2849,9 @@ var Rating = A.Component.create({
          */
         _syncElements: function() {
             var instance = this,
-                selectedIndex = instance.get(DEFAULT_SELECTED) - 1;
+                selectedIndex = instance.get(&#x27;defaultSelected&#x27;) - 1;
 
-            instance.set(SELECTED_INDEX, selectedIndex);
+            instance.set(&#x27;selectedIndex&#x27;, selectedIndex);
             instance.select();
         },
 
@@ -2892,9 +2863,9 @@ var Rating = A.Component.create({
          */
         _syncLabelUI: function() {
             var instance = this,
-                labelText = instance.get(LABEL);
+                labelText = instance.get(&#x27;label&#x27;);
 
-            instance.get(LABEL_NODE).html(labelText);
+            instance.get(&#x27;labelNode&#x27;).html(labelText);
         },
 
         /**
@@ -2921,7 +2892,7 @@ var Rating = A.Component.create({
                 domEvent = event.domEvent;
 
             if (instance._canFireCustomEvent(event)) {
-                instance.fire(EV_RATING_ITEM_CLICK, {
+                instance.fire(&#x27;itemClick&#x27;, {
                     delegateEvent: event,
                     domEvent: domEvent
                 });
@@ -2942,7 +2913,7 @@ var Rating = A.Component.create({
             var instance = this;
 
             if (instance._canFireCustomEvent(event)) {
-                instance.fire(EV_RATING_ITEM_OUT, {
+                instance.fire(&#x27;itemOut&#x27;, {
                     delegateEvent: event,
                     domEvent: event.domEvent
                 });
@@ -2960,7 +2931,7 @@ var Rating = A.Component.create({
             var instance = this;
 
             if (instance._canFireCustomEvent(event)) {
-                instance.fire(EV_RATING_ITEM_OVER, {
+                instance.fire(&#x27;itemOver&#x27;, {
                     delegateEvent: event,
                     domEvent: event.domEvent
                 });

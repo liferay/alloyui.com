@@ -20,7 +20,7 @@
 </head>
 <body class="yui3-skin-sam">
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
         <div class="navbar-inner">
             <h1 class="brand">
                 <a href="/">
@@ -2099,8 +2099,6 @@
  */
 
 var L = A.Lang,
-    FALSE = &#x27;false&#x27;,
-    TRUE = &#x27;true&#x27;,
 
     NUM_SIXTY = 60,
     NUM_THOUSAND = 1000,
@@ -2137,7 +2135,7 @@ var L = A.Lang,
 DB.parse = function(data) {
     data = A.Lang.trim(data);
 
-    return (data == FALSE) ? false : !! data;
+    return (data == &#x27;false&#x27;) ? false : !! data;
 };
 
 /**
@@ -2154,7 +2152,7 @@ DS.evaluate = function(data) {
     var trimmedData = A.Lang.trim(data);
 
     // booleans
-    if (trimmedData == TRUE || trimmedData == FALSE) {
+    if (trimmedData == &#x27;true&#x27; || trimmedData == &#x27;false&#x27;) {
         return DB.parse(data);
     }
 
@@ -2183,11 +2181,7 @@ var L = A.Lang,
     S = A.Lang.String,
 
     isDate = L.isDate,
-    isValue = L.isValue,
-
-    COLON = &#x27;:&#x27;,
-    AM = &#x27;am&#x27;,
-    PM = &#x27;pm&#x27;;
+    isValue = L.isValue;
 
 A.namespace(&#x27;DataType.DateMath&#x27;);
 
@@ -3031,12 +3025,12 @@ A.mix(A.DataType.DateMath, {
         var time = padHours ? S.padNumber(hours, 2) : String(hours);
 
         if (!omitMinutes) {
-            time += COLON;
+            time += &#x27;:&#x27;;
             time += S.padNumber(minutes, 2);
         }
 
         if (!hideAmPm) {
-            time += (isPM ? PM : AM);
+            time += (isPM ? &#x27;pm&#x27; : &#x27;am&#x27;);
         }
 
         return time;
@@ -3055,12 +3049,12 @@ A.mix(A.DataType.DateMath, {
 
         var hours = date.getHours();
         var minutes = date.getMinutes();
-        var time = S.padNumber(hours, 2) + COLON + S.padNumber(minutes, 2);
+        var time = S.padNumber(hours, 2) + &#x27;:&#x27; + S.padNumber(minutes, 2);
 
         if (showSeconds) {
             var seconds = date.getSeconds();
 
-            time += COLON;
+            time += &#x27;:&#x27;;
             time += S.padNumber(seconds, 2);
         }
 

@@ -20,7 +20,7 @@
 </head>
 <body class="yui3-skin-sam">
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
         <div class="navbar-inner">
             <h1 class="brand">
                 <a href="/">
@@ -2099,15 +2099,7 @@
  * @submodule aui-search-ternary-search-tree
  */
 
-var Lang = A.Lang,
-
-    NAME = &#x27;TernarySearchTree&#x27;,
-
-    CHARACTER = &#x27;character&#x27;,
-    CHILD = &#x27;child&#x27;,
-    LARGER_NODE = &#x27;largerNode&#x27;,
-    SMALLER_NODE = &#x27;smallerNode&#x27;,
-    WORD = &#x27;word&#x27;;
+var Lang = A.Lang;
 
 /**
  * A base class for TernarySearchTree.
@@ -2127,7 +2119,7 @@ var TernarySearchTree = A.Component.create({
      * @type String
      * @static
      */
-    NAME: NAME,
+    NAME: &#x27;TernarySearchTree&#x27;,
 
     /**
      * Static property provides a string to identify the namespace.
@@ -2225,7 +2217,7 @@ var TernarySearchTree = A.Component.create({
             var node = instance._search(instance._root, prefix, 0);
 
             if (node) {
-                instance._inOrderTraversal(node.get(CHILD), results);
+                instance._inOrderTraversal(node.get(&#x27;child&#x27;), results);
             }
 
             return results;
@@ -2246,15 +2238,15 @@ var TernarySearchTree = A.Component.create({
                 return;
             }
 
-            instance._inOrderTraversal(node.get(SMALLER_NODE), results);
+            instance._inOrderTraversal(node.get(&#x27;smallerNode&#x27;), results);
 
             if (node.isEndOfWord()) {
-                results.push(node.get(WORD));
+                results.push(node.get(&#x27;word&#x27;));
             }
 
-            instance._inOrderTraversal(node.get(CHILD), results);
+            instance._inOrderTraversal(node.get(&#x27;child&#x27;), results);
 
-            instance._inOrderTraversal(node.get(LARGER_NODE), results);
+            instance._inOrderTraversal(node.get(&#x27;largerNode&#x27;), results);
         },
 
         /**
@@ -2272,19 +2264,19 @@ var TernarySearchTree = A.Component.create({
             var character = word.charAt(index);
 
             if (Lang.isValue(node)) {
-                if (character === node.get(CHARACTER)) {
+                if (character === node.get(&#x27;character&#x27;)) {
                     if (index + 1 &lt; word.length) {
-                        node.set(CHILD, instance._insert(node.get(CHILD), word, index + 1));
+                        node.set(&#x27;child&#x27;, instance._insert(node.get(&#x27;child&#x27;), word, index + 1));
                     }
                     else {
-                        node.set(WORD, word);
+                        node.set(&#x27;word&#x27;, word);
                     }
                 }
-                else if (character &lt; node.get(CHARACTER)) {
-                    node.set(SMALLER_NODE, instance._insert(node.get(SMALLER_NODE), word, index));
+                else if (character &lt; node.get(&#x27;character&#x27;)) {
+                    node.set(&#x27;smallerNode&#x27;, instance._insert(node.get(&#x27;smallerNode&#x27;), word, index));
                 }
                 else {
-                    node.set(LARGER_NODE, instance._insert(node.get(LARGER_NODE), word, index));
+                    node.set(&#x27;largerNode&#x27;, instance._insert(node.get(&#x27;largerNode&#x27;), word, index));
                 }
             }
             else {
@@ -2316,25 +2308,25 @@ var TernarySearchTree = A.Component.create({
             if (Lang.isValue(node)) {
                 var character = pattern.charAt(index);
 
-                var nodeCharacter = node.get(CHARACTER);
+                var nodeCharacter = node.get(&#x27;character&#x27;);
 
                 var patternChar = TernarySearchTree.PATTERN_CHAR;
 
                 if (character === patternChar || character &lt; nodeCharacter) {
-                    instance._patternMatch(node.get(SMALLER_NODE), pattern, index, results);
+                    instance._patternMatch(node.get(&#x27;smallerNode&#x27;), pattern, index, results);
                 }
 
                 if (character === patternChar || character === nodeCharacter) {
                     if (index + 1 &lt; pattern.length) {
-                        instance._patternMatch(node.get(CHILD), pattern, index + 1, results);
+                        instance._patternMatch(node.get(&#x27;child&#x27;), pattern, index + 1, results);
                     }
                     else if (node.isEndOfWord()) {
-                        results.push(node.get(WORD));
+                        results.push(node.get(&#x27;word&#x27;));
                     }
                 }
 
                 if (character === patternChar || character &gt; nodeCharacter) {
-                    instance._patternMatch(node.get(LARGER_NODE), pattern, index, results);
+                    instance._patternMatch(node.get(&#x27;largerNode&#x27;), pattern, index, results);
                 }
             }
         },
@@ -2356,18 +2348,18 @@ var TernarySearchTree = A.Component.create({
             if (Lang.isValue(node)) {
                 var character = word.charAt(index);
 
-                var nodeCharacter = node.get(CHARACTER);
+                var nodeCharacter = node.get(&#x27;character&#x27;);
 
                 if (character === nodeCharacter) {
                     if (index + 1 &lt; word.length) {
-                        result = instance._search(node.get(CHILD), word, index + 1);
+                        result = instance._search(node.get(&#x27;child&#x27;), word, index + 1);
                     }
                 }
                 else if (character &lt; nodeCharacter) {
-                    result = instance._search(node.get(SMALLER_NODE), word, index);
+                    result = instance._search(node.get(&#x27;smallerNode&#x27;), word, index);
                 }
                 else {
-                    result = instance._search(node.get(LARGER_NODE), word, index);
+                    result = instance._search(node.get(&#x27;largerNode&#x27;), word, index);
                 }
             }
 

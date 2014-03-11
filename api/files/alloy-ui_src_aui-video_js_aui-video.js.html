@@ -20,7 +20,7 @@
 </head>
 <body class="yui3-skin-sam">
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
         <div class="navbar-inner">
             <h1 class="brand">
                 <a href="/">
@@ -2102,33 +2102,12 @@ var Lang = A.Lang,
     UA = A.UA,
     getClassName = A.getClassName,
 
-    _NAME = &#x27;video&#x27;,
-
-    CSS_VIDEO = getClassName(_NAME),
-    CSS_VIDEO_NODE = getClassName(_NAME, &#x27;node&#x27;),
+    CSS_VIDEO = getClassName(&#x27;video&#x27;),
+    CSS_VIDEO_NODE = getClassName(&#x27;video&#x27;, &#x27;node&#x27;),
 
     DEFAULT_PLAYER_PATH = A.config.base + &#x27;aui-video/assets/player.swf?t=&#x27; + Lang.now(),
 
     DOC = A.config.doc,
-
-    _EMPTY = &#x27;&#x27;,
-
-    CONTENT_BOX = &#x27;contentBox&#x27;,
-    FIXED_ATTRIBUTES = &#x27;fixedAttributes&#x27;,
-    FLASH_VARS = &#x27;flashVars&#x27;,
-    HEIGHT = &#x27;height&#x27;,
-    MOVIE = &#x27;movie&#x27;,
-    NODE_NAME = &#x27;nodeName&#x27;,
-    OGV_URL = &#x27;ogvUrl&#x27;,
-    POSTER = &#x27;poster&#x27;,
-    SOURCE = &#x27;source&#x27;,
-    SRC = &#x27;src&#x27;,
-    SWF_URL = &#x27;swfUrl&#x27;,
-    TYPE = &#x27;type&#x27;,
-    URL = &#x27;url&#x27;,
-    VIDEO = &#x27;video&#x27;,
-    VIDEO_READY = &#x27;videoReady&#x27;,
-    WIDTH = &#x27;width&#x27;,
 
     TPL_VIDEO = &#x27;&lt;video id=&quot;{id}&quot; controls=&quot;controls&quot; class=&quot;&#x27; + CSS_VIDEO_NODE + &#x27;&quot; {height} {width}&gt;&lt;/video&gt;&#x27;,
     TPL_VIDEO_FALLBACK = &#x27;&lt;div class=&quot;&#x27; + CSS_VIDEO_NODE + &#x27;&quot;&gt;&lt;/div&gt;&#x27;;
@@ -2171,7 +2150,7 @@ var Video = A.Component.create({
      * @type String
      * @static
      */
-    NAME: _NAME,
+    NAME: &#x27;video&#x27;,
 
     /**
      * Static property used to define the default attribute
@@ -2297,7 +2276,7 @@ var Video = A.Component.create({
             instance._renderVideoTask = A.debounce(instance._renderVideo, 1, instance);
             instance._renderSwfTask = A.debounce(instance._renderSwf, 1, instance);
 
-            instance._renderVideo(!instance.get(OGV_URL));
+            instance._renderVideo(!instance.get(&#x27;ogvUrl&#x27;));
         },
 
         /**
@@ -2310,7 +2289,7 @@ var Video = A.Component.create({
             var instance = this;
 
             instance.publish(
-                VIDEO_READY, {
+                &#x27;videoReady&#x27;, {
                     fireOnce: true
                 }
             );
@@ -2366,9 +2345,9 @@ var Video = A.Component.create({
         _createSource: function(type) {
             var instance = this;
 
-            var sourceNode = new A.Node(DOC.createElement(SOURCE));
+            var sourceNode = new A.Node(DOC.createElement(&#x27;source&#x27;));
 
-            sourceNode.attr(TYPE, type);
+            sourceNode.attr(&#x27;type&#x27;, type);
 
             return sourceNode;
         },
@@ -2382,12 +2361,12 @@ var Video = A.Component.create({
         _renderSwf: function() {
             var instance = this;
 
-            var swfUrl = instance.get(SWF_URL);
+            var swfUrl = instance.get(&#x27;swfUrl&#x27;);
 
             if (swfUrl) {
-                var videoUrl = instance.get(URL);
-                var posterUrl = instance.get(POSTER);
-                var flashVars = instance.get(FLASH_VARS);
+                var videoUrl = instance.get(&#x27;url&#x27;);
+                var posterUrl = instance.get(&#x27;poster&#x27;);
+                var flashVars = instance.get(&#x27;flashVars&#x27;);
 
                 A.mix(
                     flashVars, {
@@ -2421,7 +2400,7 @@ var Video = A.Component.create({
                     tplObj += &#x27;&lt;param name=&quot;movie&quot; value=&quot;&#x27; + swfUrl + &#x27;&quot;/&gt;&#x27;;
                 }
 
-                var fixedAttributes = instance.get(FIXED_ATTRIBUTES);
+                var fixedAttributes = instance.get(&#x27;fixedAttributes&#x27;);
 
                 for (var i in fixedAttributes) {
                     tplObj += &#x27;&lt;param name=&quot;&#x27; + i + &#x27;&quot; value=&quot;&#x27; + fixedAttributes[i] + &#x27;&quot; /&gt;&#x27;;
@@ -2464,12 +2443,12 @@ var Video = A.Component.create({
                 tpl = TPL_VIDEO_FALLBACK;
             }
             else {
-                attrHeight = _EMPTY;
-                attrWidth = _EMPTY;
+                attrHeight = &#x27;&#x27;;
+                attrWidth = &#x27;&#x27;;
 
-                height = instance.get(HEIGHT);
+                height = instance.get(&#x27;height&#x27;);
 
-                width = instance.get(WIDTH);
+                width = instance.get(&#x27;width&#x27;);
 
                 if (height) {
                     attrHeight = &#x27;height=&quot;&#x27; + height + &#x27;&quot;&#x27;;
@@ -2490,7 +2469,7 @@ var Video = A.Component.create({
 
             video = A.Node.create(tplObj);
 
-            instance.get(CONTENT_BOX).append(video);
+            instance.get(&#x27;contentBox&#x27;).append(video);
 
             instance._video = video;
         },
@@ -2556,7 +2535,7 @@ var Video = A.Component.create({
                         instance._sourceOgv = sourceOgv;
                     }
 
-                    sourceOgv.attr(SRC, val);
+                    sourceOgv.attr(&#x27;src&#x27;, val);
                 }
             }
         },
@@ -2574,7 +2553,7 @@ var Video = A.Component.create({
             var video = instance._video;
 
             if (instance._usingVideo()) {
-                video.setAttribute(POSTER, val);
+                video.setAttribute(&#x27;poster&#x27;, val);
             }
 
             instance._renderSwfTask();
@@ -2603,7 +2582,7 @@ var Video = A.Component.create({
         _uiSetUrl: function(val) {
             var instance = this;
 
-            var ogvUrl = instance.get(OGV_URL);
+            var ogvUrl = instance.get(&#x27;ogvUrl&#x27;);
             var video = instance._video;
 
             var sourceMp4 = instance._sourceMp4;
@@ -2625,7 +2604,7 @@ var Video = A.Component.create({
                         instance._sourceMp4 = sourceMp4;
                     }
 
-                    sourceMp4.attr(SRC, val);
+                    sourceMp4.attr(&#x27;src&#x27;, val);
                 }
             }
 
@@ -2641,7 +2620,7 @@ var Video = A.Component.create({
         _usingVideo: function() {
             var instance = this;
 
-            return (instance._video.get(NODE_NAME).toLowerCase() === VIDEO);
+            return (instance._video.get(&#x27;nodeName&#x27;).toLowerCase() === &#x27;video&#x27;);
         }
     }
 });

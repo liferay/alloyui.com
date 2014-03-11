@@ -20,7 +20,7 @@
 </head>
 <body class="yui3-skin-sam">
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
         <div class="navbar-inner">
             <h1 class="brand">
                 <a href="/">
@@ -2099,23 +2099,12 @@
  * @module aui-rating
  */
 
-var CSS_CLASSES = &#x27;cssClasses&#x27;,
-    DOWN = &#x27;down&#x27;,
-    ELEMENTS = &#x27;elements&#x27;,
-    ICON = &#x27;icon&#x27;,
-    OFF = &#x27;off&#x27;,
-    ON = &#x27;on&#x27;,
-    RATING = &#x27;rating&#x27;,
-    THUMB_RATING = &#x27;ThumbRating&#x27;,
-    THUMBS = &#x27;thumbs&#x27;,
-    UP = &#x27;up&#x27;,
+var getCN = A.getClassName,
 
-    getCN = A.getClassName,
-
-    CSS_ICON_THUMBS_DOWN = getCN(ICON, THUMBS, DOWN),
-    CSS_ICON_THUMBS_UP = getCN(ICON, THUMBS, UP),
-    CSS_RATING_OFF = getCN(RATING, OFF),
-    CSS_RATING_ON = getCN(RATING, ON);
+    CSS_ICON_THUMBS_DOWN = getCN(&#x27;icon&#x27;, &#x27;thumbs&#x27;, &#x27;down&#x27;),
+    CSS_ICON_THUMBS_UP = getCN(&#x27;icon&#x27;, &#x27;thumbs&#x27;, &#x27;up&#x27;),
+    CSS_RATING_OFF = getCN(&#x27;rating&#x27;, &#x27;off&#x27;),
+    CSS_RATING_ON = getCN(&#x27;rating&#x27;, &#x27;on&#x27;);
 
 /**
  * A base class for ThumbRating, providing:
@@ -2139,7 +2128,7 @@ var ThumbRating = A.Component.create({
      * @type String
      * @static
      */
-    NAME: THUMB_RATING,
+    NAME: &#x27;ThumbRating&#x27;,
 
     /**
      * Static property used to define the default attribute
@@ -2201,11 +2190,11 @@ var ThumbRating = A.Component.create({
          */
         renderUI: function() {
             var instance = this,
-                cssClasses = instance.get(CSS_CLASSES);
+                cssClasses = instance.get(&#x27;cssClasses&#x27;);
 
             ThumbRating.superclass.renderUI.apply(this, arguments);
 
-            var elements = instance.get(ELEMENTS);
+            var elements = instance.get(&#x27;elements&#x27;);
 
             elements.addClass(cssClasses.off);
             elements.item(0).addClass(cssClasses.up);
@@ -2223,12 +2212,12 @@ var ThumbRating = A.Component.create({
          */
         fillTo: function(index) {
             var instance = this,
-                cssClasses = instance.get(CSS_CLASSES);
+                cssClasses = instance.get(&#x27;cssClasses&#x27;);
 
             this.clearSelection();
 
             if (index &gt;= 0) {
-                var el = this.get(ELEMENTS).item(index);
+                var el = this.get(&#x27;elements&#x27;).item(index);
                 el.addClass(cssClasses.on);
                 el.removeClass(cssClasses.off);
             }

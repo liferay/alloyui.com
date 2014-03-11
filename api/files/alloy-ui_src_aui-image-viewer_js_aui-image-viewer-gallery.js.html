@@ -20,7 +20,7 @@
 </head>
 <body class="yui3-skin-sam">
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
         <div class="navbar-inner">
             <h1 class="brand">
                 <a href="/">
@@ -2105,62 +2105,19 @@ var L = A.Lang,
     isObject = L.isObject,
     isString = L.isString,
 
-    AUTO_PLAY = &#x27;autoPlay&#x27;,
-    BODY = &#x27;body&#x27;,
-    CONTENT = &#x27;content&#x27;,
-    CURRENT_INDEX = &#x27;currentIndex&#x27;,
-    DELAY = &#x27;delay&#x27;,
-    DOT = &#x27;.&#x27;,
-    ENTRY = &#x27;entry&#x27;,
-    HANDLER = &#x27;handler&#x27;,
-    HIDDEN = &#x27;hidden&#x27;,
-    HREF = &#x27;href&#x27;,
-    ICON = &#x27;icon&#x27;,
-    IMAGE_GALLERY = &#x27;image-gallery&#x27;,
-    IMG = &#x27;img&#x27;,
-    LEFT = &#x27;left&#x27;,
-    LINKS = &#x27;links&#x27;,
-    OFFSET = &#x27;offset&#x27;,
-    OFFSET_WIDTH = &#x27;offsetWidth&#x27;,
-    PAGE = &#x27;page&#x27;,
-    PAGINATION = &#x27;pagination&#x27;,
-    PAGINATION_EL = &#x27;paginationEl&#x27;,
-    PAGINATION_INSTANCE = &#x27;paginationInstance&#x27;,
-    PAUSE = &#x27;pause&#x27;,
-    PAUSED = &#x27;paused&#x27;,
-    PAUSED_LABEL = &#x27;pausedLabel&#x27;,
-    PLAY = &#x27;play&#x27;,
-    PLAYER = &#x27;player&#x27;,
-    PLAYING = &#x27;playing&#x27;,
-    PLAYING_LABEL = &#x27;playingLabel&#x27;,
-    PX = &#x27;px&#x27;,
-    REPEAT = &#x27;repeat&#x27;,
-    SHOW_PLAYER = &#x27;showPlayer&#x27;,
-    SPACE = &#x27; &#x27;,
-    SRC = &#x27;src&#x27;,
-    THUMB = &#x27;thumb&#x27;,
-    TOOLBAR = &#x27;toolbar&#x27;,
-    TOTAL = &#x27;total&#x27;,
-    USE_ORIGINAL_IMAGE = &#x27;useOriginalImage&#x27;,
-    VIEWPORT_REGION = &#x27;viewportRegion&#x27;,
-    VISIBLE = &#x27;visible&#x27;,
-    WELL = &#x27;well&#x27;,
-
     concat = function() {
-        return Array.prototype.slice.call(arguments).join(SPACE);
+        return Array.prototype.slice.call(arguments).join(&#x27; &#x27;);
     },
 
     getCN = A.getClassName,
 
-    CSS_ICON_PAUSE = getCN(ICON, PAUSE),
-    CSS_ICON_PLAY = getCN(ICON, PLAY),
-    CSS_IMAGE_GALLERY_PAGINATION = getCN(IMAGE_GALLERY, PAGINATION),
-    CSS_IMAGE_GALLERY_PAGINATION_THUMB = getCN(IMAGE_GALLERY, PAGINATION, THUMB),
-    CSS_IMAGE_GALLERY_PLAYER = getCN(IMAGE_GALLERY, PLAYER),
-    CSS_IMAGE_GALLERY_PLAYER_CONTENT = getCN(IMAGE_GALLERY, PLAYER, CONTENT),
-    CSS_WELL = getCN(WELL),
-
-    TEMPLATE_PLAYING_LABEL = &#x27;(playing)&#x27;,
+    CSS_ICON_PAUSE = getCN(&#x27;icon&#x27;, &#x27;pause&#x27;),
+    CSS_ICON_PLAY = getCN(&#x27;icon&#x27;, &#x27;play&#x27;),
+    CSS_IMAGE_GALLERY_PAGINATION = getCN(&#x27;image-gallery&#x27;, &#x27;pagination&#x27;),
+    CSS_IMAGE_GALLERY_PAGINATION_THUMB = getCN(&#x27;image-gallery&#x27;, &#x27;pagination&#x27;, &#x27;thumb&#x27;),
+    CSS_IMAGE_GALLERY_PLAYER = getCN(&#x27;image-gallery&#x27;, &#x27;player&#x27;),
+    CSS_IMAGE_GALLERY_PLAYER_CONTENT = getCN(&#x27;image-gallery&#x27;, &#x27;player&#x27;, &#x27;content&#x27;),
+    CSS_WELL = getCN(&#x27;well&#x27;),
 
     TPL_PAGINATION_CONTAINER = &#x27;&lt;div class=&quot;&#x27; + CSS_IMAGE_GALLERY_PAGINATION + &#x27;&quot;&gt;&lt;/div&gt;&#x27;,
     TPL_PAGINATION_THUMB = &#x27;&lt;li&gt;&lt;a class=&quot;&#x27; + concat(CSS_IMAGE_GALLERY_PAGINATION_THUMB, CSS_WELL) +
@@ -2193,7 +2150,7 @@ var ImageGallery = A.Component.create({
      * @type String
      * @static
      */
-    NAME: IMAGE_GALLERY,
+    NAME: &#x27;image-gallery&#x27;,
 
     /**
      * Static property used to define the default attribute
@@ -2257,7 +2214,7 @@ var ImageGallery = A.Component.create({
                                 );
                             }
                         },
-                        render: instance.get(PAGINATION_EL),
+                        render: instance.get(&#x27;paginationEl&#x27;),
                         showControls: false
                     },
                     value
@@ -2337,7 +2294,7 @@ var ImageGallery = A.Component.create({
          * @type String
          */
         playingLabel: {
-            value: TEMPLATE_PLAYING_LABEL,
+            value: &#x27;(playing)&#x27;,
             validator: isString
         },
 
@@ -2433,7 +2390,7 @@ var ImageGallery = A.Component.create({
 
             instance._renderPagination();
 
-            if (instance.get(SHOW_PLAYER)) {
+            if (instance.get(&#x27;showPlayer&#x27;)) {
                 instance._renderPlayer();
             }
         },
@@ -2470,7 +2427,7 @@ var ImageGallery = A.Component.create({
 
             ImageGallery.superclass.destroy.apply(this, arguments);
 
-            instance.get(PAGINATION_INSTANCE).destroy();
+            instance.get(&#x27;paginationInstance&#x27;).destroy();
             instance.toolbar.destroy();
         },
 
@@ -2482,7 +2439,7 @@ var ImageGallery = A.Component.create({
         hidePagination: function() {
             var instance = this;
 
-            instance.get(PAGINATION_EL).hide();
+            instance.get(&#x27;paginationEl&#x27;).hide();
         },
 
         /**
@@ -2493,8 +2450,8 @@ var ImageGallery = A.Component.create({
         pause: function() {
             var instance = this;
 
-            instance.set(PAUSED, true);
-            instance.set(PLAYING, false);
+            instance.set(&#x27;paused&#x27;, true);
+            instance.set(&#x27;playing&#x27;, false);
 
             instance._syncInfoUI();
         },
@@ -2507,8 +2464,8 @@ var ImageGallery = A.Component.create({
         play: function() {
             var instance = this;
 
-            instance.set(PAUSED, false);
-            instance.set(PLAYING, true);
+            instance.set(&#x27;paused&#x27;, false);
+            instance.set(&#x27;playing&#x27;, true);
 
             instance._syncInfoUI();
         },
@@ -2531,10 +2488,10 @@ var ImageGallery = A.Component.create({
                 A.ImageViewer.superclass.show.apply(this, arguments);
 
                 // changeRequest on paginationInstance with the new page set
-                var paginationInstance = instance.get(PAGINATION_INSTANCE);
+                var paginationInstance = instance.get(&#x27;paginationInstance&#x27;);
 
                 paginationInstance._dispatchRequest({
-                    page: instance.get(CURRENT_INDEX) + 1
+                    page: instance.get(&#x27;currentIndex&#x27;) + 1
                 });
             }
         },
@@ -2547,7 +2504,7 @@ var ImageGallery = A.Component.create({
         showPagination: function() {
             var instance = this;
 
-            instance.get(PAGINATION_EL).show();
+            instance.get(&#x27;paginationEl&#x27;).show();
         },
 
         /**
@@ -2572,17 +2529,17 @@ var ImageGallery = A.Component.create({
          */
         _renderPagination: function() {
             var instance = this;
-            var paginationEl = instance.get(PAGINATION_EL);
+            var paginationEl = instance.get(&#x27;paginationEl&#x27;);
 
-            A.one(BODY).append(
+            A.one(&#x27;body&#x27;).append(
                 paginationEl.hide()
             );
 
             var paginationInstance = new A.Pagination(
-                instance.get(PAGINATION)
+                instance.get(&#x27;pagination&#x27;)
             ).render();
 
-            instance.set(PAGINATION_INSTANCE, paginationInstance);
+            instance.set(&#x27;paginationInstance&#x27;, paginationInstance);
         },
 
         /**
@@ -2593,7 +2550,7 @@ var ImageGallery = A.Component.create({
          */
         _renderPlayer: function() {
             var instance = this;
-            var paginationEl = instance.get(PAGINATION_EL);
+            var paginationEl = instance.get(&#x27;paginationEl&#x27;);
             var playerContent = A.Node.create(TPL_PLAYER_CONTENT);
 
             paginationEl.append(
@@ -2601,7 +2558,7 @@ var ImageGallery = A.Component.create({
             );
 
             instance.toolbar = new A.Toolbar(
-                instance.get(TOOLBAR)
+                instance.get(&#x27;toolbar&#x27;)
             ).render(playerContent);
         },
 
@@ -2615,7 +2572,7 @@ var ImageGallery = A.Component.create({
         _setToolbar: function(value) {
             var instance = this;
 
-            if (instance.get(SHOW_PLAYER)) {
+            if (instance.get(&#x27;showPlayer&#x27;)) {
                 value = A.merge({
                     children: [
                         [
@@ -2647,7 +2604,7 @@ var ImageGallery = A.Component.create({
          */
         _startTimer: function() {
             var instance = this;
-            var delay = instance.get(DELAY);
+            var delay = instance.get(&#x27;delay&#x27;);
 
             instance._cancelTimer();
 
@@ -2665,7 +2622,7 @@ var ImageGallery = A.Component.create({
 
             ImageGallery.superclass._syncControlsUI.apply(this, arguments);
 
-            if (instance.get(VISIBLE)) {
+            if (instance.get(&#x27;visible&#x27;)) {
                 instance.showPagination();
             }
             else {
@@ -2685,8 +2642,8 @@ var ImageGallery = A.Component.create({
             var instance = this;
 
             if (!instance.hasNext()) {
-                if (instance.get(REPEAT)) {
-                    instance.set(CURRENT_INDEX, -1);
+                if (instance.get(&#x27;repeat&#x27;)) {
+                    instance.set(&#x27;currentIndex&#x27;, -1);
                 }
                 else {
                     instance._cancelTimer();
@@ -2710,21 +2667,21 @@ var ImageGallery = A.Component.create({
             var page = newState.page;
 
             // only update the paginator UI when the Widget is visible
-            if (!instance.get(VISIBLE)) {
+            if (!instance.get(&#x27;visible&#x27;)) {
                 return false; // NOTE: return
             }
 
             // check if the lastState page number is different from the newState
             // page number.
             if (!lastState || (lastState &amp;&amp; lastState.page != page)) {
-                instance.set(CURRENT_INDEX, page - 1);
+                instance.set(&#x27;currentIndex&#x27;, page - 1);
 
                 instance._processChangeRequest();
             }
 
-            var linksCount = instance.get(LINKS).size(),
-                paginationInstance = instance.get(PAGINATION_INSTANCE),
-                total = paginationInstance.get(TOTAL);
+            var linksCount = instance.get(&#x27;links&#x27;).size(),
+                paginationInstance = instance.get(&#x27;paginationInstance&#x27;),
+                total = paginationInstance.get(&#x27;total&#x27;);
 
             if (linksCount &gt; total) {
                 var offset = parseInt(page / total, 10) * total + 1;
@@ -2735,7 +2692,7 @@ var ImageGallery = A.Component.create({
 
                 page = page % total || total;
 
-                paginationInstance.set(OFFSET, offset);
+                paginationInstance.set(&#x27;offset&#x27;, offset);
 
                 paginationInstance.setState({
                     page: page
@@ -2755,13 +2712,13 @@ var ImageGallery = A.Component.create({
 
             // loading current index image
             instance.loadImage(
-                instance.getCurrentLink().attr(HREF)
+                instance.getCurrentLink().attr(&#x27;href&#x27;)
             );
 
             // restart the timer if the user change the image, respecting the
             // paused state
-            var paused = instance.get(PAUSED);
-            var playing = instance.get(PLAYING);
+            var paused = instance.get(&#x27;paused&#x27;);
+            var playing = instance.get(&#x27;playing&#x27;);
 
             if (playing &amp;&amp; !paused) {
                 instance._startTimer();
@@ -2777,8 +2734,8 @@ var ImageGallery = A.Component.create({
          */
         _thumbnailFormatter: function(pageNumber) {
             var instance = this,
-                paginationInstance = instance.get(PAGINATION_INSTANCE),
-                linksCount = instance.get(LINKS).size(),
+                paginationInstance = instance.get(&#x27;paginationInstance&#x27;),
+                linksCount = instance.get(&#x27;links&#x27;).size(),
                 index = pageNumber - 1;
 
             if (pageNumber &gt; linksCount) {
@@ -2788,15 +2745,15 @@ var ImageGallery = A.Component.create({
             var link = instance.getLink(index),
                 thumbSrc = null;
 
-            if (instance.get(USE_ORIGINAL_IMAGE)) {
-                thumbSrc = link.attr(HREF);
+            if (instance.get(&#x27;useOriginalImage&#x27;)) {
+                thumbSrc = link.attr(&#x27;href&#x27;);
             }
             else {
                 // try to find a inner thumbnail image to show on the pagination
-                var innerImage = link.one(IMG);
+                var innerImage = link.one(&#x27;img&#x27;);
 
                 if (innerImage) {
-                    thumbSrc = innerImage.attr(SRC);
+                    thumbSrc = innerImage.attr(&#x27;src&#x27;);
                 }
             }
 
@@ -2816,14 +2773,14 @@ var ImageGallery = A.Component.create({
         _getInfoTemplate: function(v) {
             var label;
             var instance = this;
-            var paused = instance.get(PAUSED);
-            var playing = instance.get(PLAYING);
+            var paused = instance.get(&#x27;paused&#x27;);
+            var playing = instance.get(&#x27;playing&#x27;);
 
             if (playing) {
-                label = instance.get(PLAYING_LABEL);
+                label = instance.get(&#x27;playingLabel&#x27;);
             }
             else if (paused) {
-                label = instance.get(PAUSED_LABEL);
+                label = instance.get(&#x27;pausedLabel&#x27;);
             }
 
             return concat(
@@ -2847,7 +2804,7 @@ var ImageGallery = A.Component.create({
             ImageGallery.superclass._afterVisibleChange.apply(this, arguments);
 
             if (event.newVal) {
-                if (instance.get(AUTO_PLAY)) {
+                if (instance.get(&#x27;autoPlay&#x27;)) {
                     instance.play();
                 }
             }

@@ -20,7 +20,7 @@
 </head>
 <body class="yui3-skin-sam">
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
         <div class="navbar-inner">
             <h1 class="brand">
                 <a href="/">
@@ -2099,22 +2099,7 @@
  */
 
 var Lang = A.Lang,
-    DOC = A.config.doc,
-
-    _TOOLTIP_DELEGATE = &#x27;tooltip-delegate&#x27;,
-
-    ALIGN = &#x27;align&#x27;,
-    CONTAINER = &#x27;container&#x27;,
-    DURATION = &#x27;duration&#x27;,
-    FORMATTER = &#x27;formatter&#x27;,
-    MOUSEENTER = &#x27;mouseenter&#x27;,
-    MOUSELEAVE = &#x27;mouseleave&#x27;,
-    OPACITY = &#x27;opacity&#x27;,
-    POSITION = &#x27;position&#x27;,
-    TRIGGER = &#x27;trigger&#x27;,
-    TRIGGER_HIDE_EVENT = &#x27;triggerHideEvent&#x27;,
-    TRIGGER_SHOW_EVENT = &#x27;triggerShowEvent&#x27;,
-    Z_INDEX = &#x27;zIndex&#x27;;
+    DOC = A.config.doc;
 
 /**
  * A base class for Toggler Delegate.
@@ -2127,7 +2112,7 @@ var Lang = A.Lang,
  *     properties.
  * @constructor
  */
-A.TooltipDelegate = A.Base.create(_TOOLTIP_DELEGATE, A.Base, [], {
+A.TooltipDelegate = A.Base.create(&#x27;tooltip-delegate&#x27;, A.Base, [], {
     items: null,
 
     tooltip: null,
@@ -2168,15 +2153,15 @@ A.TooltipDelegate = A.Base.create(_TOOLTIP_DELEGATE, A.Base, [], {
         var instance = this,
             container,
             trigger;
-        container = instance.get(CONTAINER);
-        trigger = instance.get(TRIGGER);
+        container = instance.get(&#x27;container&#x27;);
+        trigger = instance.get(&#x27;trigger&#x27;);
 
         instance._eventHandles.push(
             container.delegate(
-                instance.get(TRIGGER_SHOW_EVENT),
+                instance.get(&#x27;triggerShowEvent&#x27;),
                 A.bind(instance._onUserShowInteraction, instance), trigger),
             container.delegate(
-                instance.get(TRIGGER_HIDE_EVENT),
+                instance.get(&#x27;triggerHideEvent&#x27;),
                 A.bind(instance._onUserHideInteraction, instance), trigger)
         );
     },
@@ -2187,14 +2172,14 @@ A.TooltipDelegate = A.Base.create(_TOOLTIP_DELEGATE, A.Base, [], {
 
         if (!tooltip) {
             tooltip = instance.tooltip = new A.Tooltip({
-                align: instance.get(ALIGN),
+                align: instance.get(&#x27;align&#x27;),
                 bindDOMEvents: false,
-                duration: instance.get(DURATION),
-                formatter: instance.get(FORMATTER),
-                opacity: instance.get(OPACITY),
-                position: instance.get(POSITION),
+                duration: instance.get(&#x27;duration&#x27;),
+                formatter: instance.get(&#x27;formatter&#x27;),
+                opacity: instance.get(&#x27;opacity&#x27;),
+                position: instance.get(&#x27;position&#x27;),
                 visible: false,
-                zIndex: instance.get(Z_INDEX)
+                zIndex: instance.get(&#x27;zIndex&#x27;)
             });
         }
 
@@ -2225,7 +2210,7 @@ A.TooltipDelegate = A.Base.create(_TOOLTIP_DELEGATE, A.Base, [], {
 
         trigger = event.currentTarget;
 
-        instance.getTooltip().render().set(TRIGGER, trigger).show();
+        instance.getTooltip().render().set(&#x27;trigger&#x27;, trigger).show();
     }
 }, {
     /**
@@ -2298,7 +2283,7 @@ A.TooltipDelegate = A.Base.create(_TOOLTIP_DELEGATE, A.Base, [], {
          */
         triggerHideEvent: {
             validator: Lang.isString,
-            value: MOUSELEAVE,
+            value: &#x27;mouseleave&#x27;,
             writeOnce: true
         },
 
@@ -2311,7 +2296,7 @@ A.TooltipDelegate = A.Base.create(_TOOLTIP_DELEGATE, A.Base, [], {
          */
         triggerShowEvent: {
             validator: Lang.isString,
-            value: MOUSEENTER,
+            value: &#x27;mouseenter&#x27;,
             writeOnce: true
         },
 

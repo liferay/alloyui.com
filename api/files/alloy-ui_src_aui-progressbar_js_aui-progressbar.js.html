@@ -20,7 +20,7 @@
 </head>
 <body class="yui3-skin-sam">
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
         <div class="navbar-inner">
             <h1 class="brand">
                 <a href="/">
@@ -2106,47 +2106,15 @@ var L = A.Lang,
     isString = L.isString,
     isUndefined = L.isUndefined,
 
-    BLANK = &#x27;&#x27;,
-    DOT = &#x27;.&#x27;,
-    SPACE = &#x27; &#x27;,
-
-    AUTO = &#x27;auto&#x27;,
-    BAR = &#x27;bar&#x27;,
-    BOUNDING_BOX = &#x27;boundingBox&#x27;,
-    COMPLETE = &#x27;complete&#x27;,
-    CONTENT_BOX = &#x27;contentBox&#x27;,
-    HEIGHT = &#x27;height&#x27;,
-    HORIZONTAL = &#x27;horizontal&#x27;,
-    LABEL = &#x27;label&#x27;,
-    LINE_HEIGHT = &#x27;lineHeight&#x27;,
-    MAX = &#x27;max&#x27;,
-    MIN = &#x27;min&#x27;,
-    OFFSET_HEIGHT = &#x27;offsetHeight&#x27;,
-    ORIENTATION = &#x27;orientation&#x27;,
-    P = &#x27;p&#x27;,
-    PROGRESS = &#x27;progress&#x27;,
-    PX = &#x27;px&#x27;,
-    RATIO = &#x27;ratio&#x27;,
-    STEP = &#x27;step&#x27;,
-    TEXT = &#x27;text&#x27;,
-    TEXT_NODE = &#x27;textNode&#x27;,
-    USE_ARIA = &#x27;useARIA&#x27;,
-    VALUE = &#x27;value&#x27;,
-    VALUEMAX = &#x27;valuemax&#x27;,
-    VALUEMIN = &#x27;valuemin&#x27;,
-    VALUENOW = &#x27;valuenow&#x27;,
-    VERTICAL = &#x27;vertical&#x27;,
-    WIDTH = &#x27;width&#x27;,
-
     toNumber = function(v) {
         return parseFloat(v) || 0;
     },
 
     getCN = A.getClassName,
 
-    CSS_BAR = getCN(BAR),
-    CSS_HORIZONTAL = getCN(HORIZONTAL),
-    CSS_VERTICAL = getCN(VERTICAL),
+    CSS_BAR = getCN(&#x27;bar&#x27;),
+    CSS_HORIZONTAL = getCN(&#x27;horizontal&#x27;),
+    CSS_VERTICAL = getCN(&#x27;vertical&#x27;),
 
     TPL_TEXT = &#x27;&lt;p&gt;&lt;/p&gt;&#x27;;
 
@@ -2195,7 +2163,7 @@ var ProgressBar = A.Component.create({
      * @type String
      * @static
      */
-    NAME: PROGRESS,
+    NAME: &#x27;progress&#x27;,
 
     /**
      * Static property used to define the default attribute
@@ -2228,7 +2196,7 @@ var ProgressBar = A.Component.create({
          */
         height: {
             valueFn: function() {
-                return this.get(BOUNDING_BOX).get(OFFSET_HEIGHT) || 25;
+                return this.get(&#x27;boundingBox&#x27;).get(&#x27;offsetHeight&#x27;) || 25;
             }
         },
 
@@ -2281,9 +2249,9 @@ var ProgressBar = A.Component.create({
          * @type String
          */
         orientation: {
-            value: HORIZONTAL,
+            value: &#x27;horizontal&#x27;,
             validator: function(val) {
-                return isString(val) &amp;&amp; (val === HORIZONTAL || val === VERTICAL);
+                return isString(val) &amp;&amp; (val === &#x27;horizontal&#x27; || val === &#x27;vertical&#x27;);
             }
         },
 
@@ -2337,7 +2305,7 @@ var ProgressBar = A.Component.create({
         value: {
             setter: toNumber,
             validator: function(val) {
-                return isNumber(toNumber(val)) &amp;&amp; ((val &gt;= this.get(MIN)) &amp;&amp; (val &lt;= this.get(MAX)));
+                return isNumber(toNumber(val)) &amp;&amp; ((val &gt;= this.get(&#x27;min&#x27;)) &amp;&amp; (val &lt;= this.get(&#x27;max&#x27;)));
             },
             value: 0
         }
@@ -2353,14 +2321,14 @@ var ProgressBar = A.Component.create({
      */
     HTML_PARSER: {
         label: function(boundingBox) {
-            var textNode = boundingBox.one(P);
+            var textNode = boundingBox.one(&#x27;p&#x27;);
 
             if (textNode) {
                 return textNode.html();
             }
         },
 
-        textNode: P
+        textNode: &#x27;p&#x27;
     },
 
     /**
@@ -2370,7 +2338,7 @@ var ProgressBar = A.Component.create({
      * @type Array
      * @static
      */
-    UI_ATTRS: [LABEL, ORIENTATION, VALUE],
+    UI_ATTRS: [&#x27;label&#x27;, &#x27;orientation&#x27;, &#x27;value&#x27;],
 
     prototype: {
 
@@ -2383,7 +2351,7 @@ var ProgressBar = A.Component.create({
         renderUI: function() {
             var instance = this;
 
-            instance.get(CONTENT_BOX).addClass(CSS_BAR);
+            instance.get(&#x27;contentBox&#x27;).addClass(CSS_BAR);
 
             instance._renderTextNodeIfLabelSet();
         },
@@ -2397,14 +2365,14 @@ var ProgressBar = A.Component.create({
         syncUI: function() {
             var instance = this;
 
-            if (instance.get(USE_ARIA)) {
+            if (instance.get(&#x27;useARIA&#x27;)) {
                 instance.plug(A.Plugin.Aria, {
                     attributes: {
-                        value: VALUENOW,
-                        max: VALUEMAX,
-                        min: VALUEMIN,
-                        orientation: ORIENTATION,
-                        label: LABEL
+                        value: &#x27;valuenow&#x27;,
+                        max: &#x27;valuemax&#x27;,
+                        min: &#x27;valuemin&#x27;,
+                        orientation: &#x27;orientation&#x27;,
+                        label: &#x27;label&#x27;
                     }
                 });
             }
@@ -2422,11 +2390,11 @@ var ProgressBar = A.Component.create({
          */
         _getBoundingBoxSize: function() {
             var instance = this;
-            var boundingBox = instance.get(BOUNDING_BOX);
+            var boundingBox = instance.get(&#x27;boundingBox&#x27;);
 
             return toNumber(
                 boundingBox.getStyle(
-                    this.get(ORIENTATION) === HORIZONTAL ? WIDTH : HEIGHT
+                    this.get(&#x27;orientation&#x27;) === &#x27;horizontal&#x27; ? &#x27;width&#x27; : &#x27;height&#x27;
                 )
             );
         },
@@ -2441,7 +2409,7 @@ var ProgressBar = A.Component.create({
         _getPixelStep: function() {
             var instance = this;
 
-            return instance._getBoundingBoxSize() * instance.get(RATIO);
+            return instance._getBoundingBoxSize() * instance.get(&#x27;ratio&#x27;);
         },
 
         /**
@@ -2453,8 +2421,8 @@ var ProgressBar = A.Component.create({
          */
         _getRatio: function() {
             var instance = this;
-            var min = instance.get(MIN);
-            var ratio = (instance.get(VALUE) - min) / (instance.get(MAX) - min);
+            var min = instance.get(&#x27;min&#x27;);
+            var ratio = (instance.get(&#x27;value&#x27;) - min) / (instance.get(&#x27;max&#x27;) - min);
 
             return Math.max(ratio, 0);
         },
@@ -2467,7 +2435,7 @@ var ProgressBar = A.Component.create({
          * @return {Number}
          */
         _getStep: function() {
-            return this.get(RATIO) * 100;
+            return this.get(&#x27;ratio&#x27;) * 100;
         },
 
         /**
@@ -2479,8 +2447,8 @@ var ProgressBar = A.Component.create({
         _renderTextNodeIfLabelSet: function() {
             var instance = this;
 
-            if (!isUndefined(instance.get(LABEL))) {
-                instance.get(CONTENT_BOX).append(instance.get(TEXT_NODE));
+            if (!isUndefined(instance.get(&#x27;label&#x27;))) {
+                instance.get(&#x27;contentBox&#x27;).append(instance.get(&#x27;textNode&#x27;));
             }
         },
 
@@ -2494,7 +2462,7 @@ var ProgressBar = A.Component.create({
          */
         _uiSetLabel: function(val) {
             var instance = this,
-                textNode = instance.get(TEXT_NODE);
+                textNode = instance.get(&#x27;textNode&#x27;);
 
             if (!textNode.inDoc()) {
                 instance._renderTextNodeIfLabelSet();
@@ -2513,13 +2481,13 @@ var ProgressBar = A.Component.create({
          */
         _uiSetOrientation: function(val) {
             var instance = this;
-            var boundingBox = instance.get(BOUNDING_BOX);
-            var horizontal = (val === HORIZONTAL);
+            var boundingBox = instance.get(&#x27;boundingBox&#x27;);
+            var horizontal = (val === &#x27;horizontal&#x27;);
 
             boundingBox.toggleClass(CSS_HORIZONTAL, horizontal);
             boundingBox.toggleClass(CSS_VERTICAL, !horizontal);
 
-            instance._uiSetValue(instance.get(VALUE));
+            instance._uiSetValue(instance.get(&#x27;value&#x27;));
             instance._uiSizeTextNode();
         },
 
@@ -2537,26 +2505,26 @@ var ProgressBar = A.Component.create({
 
             var styles = {};
 
-            if (instance.get(ORIENTATION) === HORIZONTAL) {
+            if (instance.get(&#x27;orientation&#x27;) === &#x27;horizontal&#x27;) {
                 styles = {
                     height: &#x27;100%&#x27;,
-                    top: AUTO,
-                    width: pixelStep + PX
+                    top: &#x27;auto&#x27;,
+                    width: pixelStep + &#x27;px&#x27;
                 };
             }
             else {
                 styles = {
-                    height: pixelStep + PX,
-                    top: toNumber(instance._getBoundingBoxSize() - pixelStep) + PX,
+                    height: pixelStep + &#x27;px&#x27;,
+                    top: toNumber(instance._getBoundingBoxSize() - pixelStep) + &#x27;px&#x27;,
                     width: &#x27;100%&#x27;
                 };
             }
 
-            if (instance.get(STEP) &gt;= 100) {
-                instance.fire(COMPLETE);
+            if (instance.get(&#x27;step&#x27;) &gt;= 100) {
+                instance.fire(&#x27;complete&#x27;);
             }
 
-            instance.get(CONTENT_BOX).setStyles(styles);
+            instance.get(&#x27;contentBox&#x27;).setStyles(styles);
         },
 
         /**
@@ -2567,12 +2535,12 @@ var ProgressBar = A.Component.create({
          */
         _uiSizeTextNode: function() {
             var instance = this;
-            var boundingBox = instance.get(BOUNDING_BOX);
-            var textNode = instance.get(TEXT_NODE);
+            var boundingBox = instance.get(&#x27;boundingBox&#x27;);
+            var textNode = instance.get(&#x27;textNode&#x27;);
 
             textNode.setStyle(
-                LINE_HEIGHT,
-                boundingBox.getStyle(HEIGHT)
+                &#x27;lineHeight&#x27;,
+                boundingBox.getStyle(&#x27;height&#x27;)
             );
         }
     }

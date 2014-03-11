@@ -1447,7 +1447,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "aui-io-request",
             "name": "aui-io-request",
-            "description": "The IORequest Utility - Provides response data normalization for XML, JSON,\nJavaScript and cache option."
+            "description": "The IORequest Utility - Provides response data normalization for 'xml', 'json',\nJavaScript and cache option."
         },
         {
             "displayName": "aui-linkedset",

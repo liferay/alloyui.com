@@ -20,7 +20,7 @@
 </head>
 <body class="yui3-skin-sam">
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
         <div class="navbar-inner">
             <h1 class="brand">
                 <a href="/">
@@ -2106,59 +2106,17 @@ var Lang = A.Lang,
 
     getCN = A.getClassName,
 
-    ATTR_DATA_INDEX = &#x27;data-index&#x27;,
+    CLASS_ENTRY = getCN(&#x27;ace-autocomplete&#x27;, &#x27;entry&#x27;),
+    CLASS_ENTRY_CONTAINER = getCN(&#x27;ace-autocomplete&#x27;, &#x27;entry&#x27;, &#x27;container&#x27;),
+    CLASS_ENTRY_CONTAINER_HIGHLIGHTED = getCN(&#x27;ace-autocomplete&#x27;, &#x27;entry&#x27;, &#x27;container&#x27;, &#x27;highlighted&#x27;),
+    CLASS_ENTRY_EMPTY = getCN(&#x27;ace-autocomplete&#x27;, &#x27;entry&#x27;, &#x27;empty&#x27;),
+    CLASS_ENTRY_LOADING = getCN(&#x27;ace-autocomplete&#x27;, &#x27;entry&#x27;, &#x27;loading&#x27;),
+    CLASS_LOADING = getCN(&#x27;ace-autocomplete&#x27;, &#x27;entry&#x27;, &#x27;loading&#x27;),
+    CLASS_RESULTS_LIST = getCN(&#x27;ace-autocomplete&#x27;, &#x27;results&#x27;),
 
-    _DOT = &#x27;.&#x27;,
-    _EMPTY_STRING = &#x27;&#x27;,
-    _NAME = &#x27;ace-autocomplete-list&#x27;,
-    _SPACE = &#x27; &#x27;,
-
-    ADD_SUGGESTION = &#x27;addSuggestion&#x27;,
-    CLICK = &#x27;click&#x27;,
-    CONTAINER = &#x27;container&#x27;,
-    CONTENT_BOX = &#x27;contentBox&#x27;,
-    CURSOR_CHANGE = &#x27;cursorChange&#x27;,
-    CURSOR_OUT = &#x27;cursorOut&#x27;,
-    EMPTY = &#x27;empty&#x27;,
-    ENTRY = &#x27;entry&#x27;,
-    ENTRY_SELECTED = &#x27;entrySelected&#x27;,
-    HIGHLIGHTED = &#x27;highlighted&#x27;,
-    INSERT_TEXT = &#x27;insertText&#x27;,
-    LIST = &#x27;list&#x27;,
-    LIST_NODE = &#x27;listNode&#x27;,
-    LOADING = &#x27;loading&#x27;,
-    LOADING_MESSAGE = &#x27;loadingMessage&#x27;,
-    MATCH = &#x27;match&#x27;,
-    MOUSEENTER = &#x27;mouseenter&#x27;,
-    MOUSELEAVE = &#x27;mouseleave&#x27;,
-    NEXT = &#x27;next&#x27;,
-    OFFSET_HEIGHT = &#x27;offsetHeight&#x27;,
-    PREVIOUS = &#x27;previous&#x27;,
-    REGION = &#x27;region&#x27;,
-    REMOVE_TEXT = &#x27;removeText&#x27;,
-    RESULTS = &#x27;results&#x27;,
-    RESULTS = &#x27;results&#x27;,
-    RESULTS_CHANGE = &#x27;resultsChange&#x27;,
-    RESULTS_ERROR = &#x27;resultsError&#x27;,
-    SELECTED = &#x27;selected&#x27;,
-    SHOW_LOADING_MESSAGE = &#x27;showLoadingMessage&#x27;,
-    VISIBLE = &#x27;visible&#x27;,
-    VISIBLE_CHANGE = &#x27;visibleChange&#x27;,
-    XY = &#x27;xy&#x27;,
-
-    CSS_PREFIX = &#x27;ace-autocomplete&#x27;,
-
-    CLASS_ENTRY = getCN(CSS_PREFIX, ENTRY),
-    CLASS_ENTRY_CONTAINER = getCN(CSS_PREFIX, ENTRY, CONTAINER),
-    CLASS_ENTRY_CONTAINER_HIGHLIGHTED = getCN(CSS_PREFIX, ENTRY, CONTAINER, HIGHLIGHTED),
-    CLASS_ENTRY_EMPTY = getCN(CSS_PREFIX, ENTRY, EMPTY),
-    CLASS_ENTRY_LOADING = getCN(CSS_PREFIX, ENTRY, LOADING),
-    CLASS_LOADING = getCN(CSS_PREFIX, ENTRY, LOADING),
-    CLASS_RESULTS_LIST = getCN(CSS_PREFIX, RESULTS),
-
-    SELECTOR_ENTRY_CONTAINER = _DOT + CLASS_ENTRY_CONTAINER,
-    SELECTOR_ENTRY_CONTAINER_SELECTED = SELECTOR_ENTRY_CONTAINER + _DOT + SELECTED,
-    SELECTOR_SELECTED_ENTRY = SELECTOR_ENTRY_CONTAINER_SELECTED + _SPACE + _DOT + CLASS_ENTRY,
+    SELECTOR_ENTRY_CONTAINER = &#x27;.&#x27; + CLASS_ENTRY_CONTAINER,
+    SELECTOR_ENTRY_CONTAINER_SELECTED = SELECTOR_ENTRY_CONTAINER + &#x27;.&#x27; + &#x27;selected&#x27;,
+    SELECTOR_SELECTED_ENTRY = SELECTOR_ENTRY_CONTAINER_SELECTED + &#x27; &#x27; + &#x27;.&#x27; + CLASS_ENTRY,
 
     TPL_FRAGMENT = &#x27;&lt;div&gt;&lt;/div&gt;&#x27;,
 
@@ -2182,7 +2140,7 @@ var Lang = A.Lang,
      *     properties.
      * @constructor
      */
-    AutoCompleteList = A.Base.create(_NAME, A.Overlay, [
+    AutoCompleteList = A.Base.create(&#x27;ace-autocomplete-list&#x27;, A.Overlay, [
     A.AceEditor.AutoCompleteBase,
     A.WidgetAutohide
 ], {
@@ -2196,16 +2154,16 @@ var Lang = A.Lang,
         bindUI: function() {
             var instance = this;
 
-            instance.on(ADD_SUGGESTION, instance.hide, instance);
-            instance.on(CURSOR_CHANGE, instance._onCursorChange, instance);
-            instance.on(CURSOR_OUT, instance.hide, instance);
-            instance.on(INSERT_TEXT, instance._onInsertText, instance);
-            instance.on(MATCH, instance._onMatch, instance);
-            instance.on(REMOVE_TEXT, instance._onRemoveText, instance);
-            instance.on(RESULTS_CHANGE, instance._onResultsChange, instance);
-            instance.on(RESULTS_ERROR, instance._setEmptyResults, instance);
-            instance.on(SHOW_LOADING_MESSAGE, instance._onShowLoadingMessage, instance);
-            instance.on(VISIBLE_CHANGE, instance._onVisibleChange, instance);
+            instance.on(&#x27;addSuggestion&#x27;, instance.hide, instance);
+            instance.on(&#x27;cursorChange&#x27;, instance._onCursorChange, instance);
+            instance.on(&#x27;cursorOut&#x27;, instance.hide, instance);
+            instance.on(&#x27;insertText&#x27;, instance._onInsertText, instance);
+            instance.on(&#x27;match&#x27;, instance._onMatch, instance);
+            instance.on(&#x27;removeText&#x27;, instance._onRemoveText, instance);
+            instance.on(&#x27;resultsChange&#x27;, instance._onResultsChange, instance);
+            instance.on(&#x27;resultsError&#x27;, instance._setEmptyResults, instance);
+            instance.on(&#x27;showLoadingMessage&#x27;, instance._onShowLoadingMessage, instance);
+            instance.on(&#x27;visibleChange&#x27;, instance._onVisibleChange, instance);
         },
 
         /**
@@ -2218,16 +2176,19 @@ var Lang = A.Lang,
             var instance = this,
                 autoCompleteResultsList;
 
-            autoCompleteResultsList = instance.get(LIST_NODE);
+            autoCompleteResultsList = instance.get(&#x27;listNode&#x27;);
 
             if (!autoCompleteResultsList) {
                 autoCompleteResultsList = instance._createListNode();
             }
 
-            autoCompleteResultsList.delegate(CLICK, instance._handleResultListClick, SELECTOR_ENTRY_CONTAINER,
-                instance);
-            autoCompleteResultsList.delegate(MOUSEENTER, instance._onMouseEnter, SELECTOR_ENTRY_CONTAINER, instance);
-            autoCompleteResultsList.delegate(MOUSELEAVE, instance._onMouseLeave, SELECTOR_ENTRY_CONTAINER);
+            autoCompleteResultsList.delegate(
+                &#x27;click&#x27;, instance._handleResultListClick, SELECTOR_ENTRY_CONTAINER, instance);
+
+            autoCompleteResultsList.delegate(
+                &#x27;mouseenter&#x27;, instance._onMouseEnter, SELECTOR_ENTRY_CONTAINER, instance);
+
+            autoCompleteResultsList.delegate(&#x27;mouseleave&#x27;, instance._onMouseLeave, SELECTOR_ENTRY_CONTAINER);
 
             instance._autoCompleteResultsList = autoCompleteResultsList;
         },
@@ -2245,7 +2206,7 @@ var Lang = A.Lang,
 
             listNode = A.Node.create(instance.TPL_LIST);
 
-            instance.get(CONTENT_BOX).append(listNode);
+            instance.get(&#x27;contentBox&#x27;).append(listNode);
 
             return listNode;
         },
@@ -2270,9 +2231,9 @@ var Lang = A.Lang,
             if (!entriesPerPage) {
                 autoCompleteResultsList = instance._autoCompleteResultsList;
 
-                entryHeight = autoCompleteResultsList.one(SELECTOR_ENTRY_CONTAINER).get(OFFSET_HEIGHT);
+                entryHeight = autoCompleteResultsList.one(SELECTOR_ENTRY_CONTAINER).get(&#x27;offsetHeight&#x27;);
 
-                containerHeight = autoCompleteResultsList.get(OFFSET_HEIGHT);
+                containerHeight = autoCompleteResultsList.get(&#x27;offsetHeight&#x27;);
 
                 entriesPerPage = Math.floor(containerHeight / entryHeight);
 
@@ -2324,10 +2285,10 @@ var Lang = A.Lang,
                 selectedEntry;
 
             if (keyCode === KEY_UP) {
-                action = PREVIOUS;
+                action = &#x27;previous&#x27;;
             }
             else if (keyCode === KEY_DONW) {
-                action = NEXT;
+                action = &#x27;next&#x27;;
             }
 
             if (action) {
@@ -2339,15 +2300,15 @@ var Lang = A.Lang,
                     entry = selectedEntry[action](SELECTOR_ENTRY_CONTAINER);
 
                     if (entry) {
-                        selectedEntry.removeClass(SELECTED);
+                        selectedEntry.removeClass(&#x27;selected&#x27;);
 
-                        entry.addClass(SELECTED);
+                        entry.addClass(&#x27;selected&#x27;);
 
-                        resultsListNodeRegion = autoCompleteResultsList.get(REGION);
+                        resultsListNodeRegion = autoCompleteResultsList.get(&#x27;region&#x27;);
 
-                        entryRegion = entry.get(REGION);
+                        entryRegion = entry.get(&#x27;region&#x27;);
 
-                        if (action === PREVIOUS) {
+                        if (action === &#x27;previous&#x27;) {
                             if (entryRegion.top &lt; resultsListNodeRegion.top) {
                                 entry.scrollIntoView(true);
                             }
@@ -2386,7 +2347,7 @@ var Lang = A.Lang,
             var instance = this,
                 result;
 
-            if (instance.get(VISIBLE)) {
+            if (instance.get(&#x27;visible&#x27;)) {
                 if (keyCode === KEY_UP || keyCode === KEY_DONW) {
                     result = instance._handleArrows(keyCode);
                 }
@@ -2428,9 +2389,9 @@ var Lang = A.Lang,
 
             selectedEntry = autoCompleteResultsList.one(SELECTOR_ENTRY_CONTAINER_SELECTED);
 
-            selectedEntryIndex = Lang.toInt(selectedEntry.attr(ATTR_DATA_INDEX));
+            selectedEntryIndex = Lang.toInt(selectedEntry.attr(&#x27;data-index&#x27;));
 
-            sudoClass = _EMPTY_STRING;
+            sudoClass = &#x27;&#x27;;
 
             scrollTop = false;
 
@@ -2445,7 +2406,7 @@ var Lang = A.Lang,
                 sudoClass = &#x27;:last-child&#x27;;
             }
 
-            nextSelectedEntry = autoCompleteResultsList.one(SELECTOR_ENTRY_CONTAINER + &#x27;[&#x27; + ATTR_DATA_INDEX + &#x27;=&quot;&#x27; +
+            nextSelectedEntry = autoCompleteResultsList.one(SELECTOR_ENTRY_CONTAINER + &#x27;[&#x27; + &#x27;data-index&#x27; + &#x27;=&quot;&#x27; +
                 nextSelectedEntryIndex + &#x27;&quot;]&#x27;);
 
             if (!nextSelectedEntry) {
@@ -2453,9 +2414,9 @@ var Lang = A.Lang,
             }
 
             if (selectedEntry !== nextSelectedEntry) {
-                selectedEntry.removeClass(SELECTED);
+                selectedEntry.removeClass(&#x27;selected&#x27;);
 
-                nextSelectedEntry.addClass(SELECTED);
+                nextSelectedEntry.addClass(&#x27;selected&#x27;);
 
                 nextSelectedEntry.scrollIntoView(scrollTop);
             }
@@ -2481,9 +2442,9 @@ var Lang = A.Lang,
             selectedEntry = instance._autoCompleteResultsList.one(SELECTOR_ENTRY_CONTAINER_SELECTED);
 
             if (entryNode !== selectedEntry) {
-                selectedEntry.removeClass(SELECTED);
+                selectedEntry.removeClass(&#x27;selected&#x27;);
 
-                entryNode.addClass(SELECTED);
+                entryNode.addClass(&#x27;selected&#x27;);
             }
 
             content = entryNode.text();
@@ -2491,7 +2452,7 @@ var Lang = A.Lang,
             instance._addSuggestion(content);
 
             instance.fire(
-                ENTRY_SELECTED, {
+                &#x27;entrySelected&#x27;, {
                     content: content
                 }
             );
@@ -2530,9 +2491,9 @@ var Lang = A.Lang,
             selectedEntry = autoCompleteResultsList.one(SELECTOR_ENTRY_CONTAINER_SELECTED);
 
             if (item !== selectedEntry) {
-                selectedEntry.removeClass(SELECTED);
+                selectedEntry.removeClass(&#x27;selected&#x27;);
 
-                item.addClass(SELECTED);
+                item.addClass(&#x27;selected&#x27;);
 
                 item.scrollIntoView(scrollTop);
             }
@@ -2551,7 +2512,7 @@ var Lang = A.Lang,
         _onCursorChange: function(event) {
             var instance = this;
 
-            if (!instance.get(VISIBLE)) {
+            if (!instance.get(&#x27;visible&#x27;)) {
                 event.preventDefault();
             }
         },
@@ -2567,7 +2528,7 @@ var Lang = A.Lang,
         _onInsertText: function(event) {
             var instance = this;
 
-            if (event.startRow !== event.endRow &amp;&amp; instance.get(VISIBLE)) {
+            if (event.startRow !== event.endRow &amp;&amp; instance.get(&#x27;visible&#x27;)) {
                 instance.hide();
             }
         },
@@ -2586,7 +2547,7 @@ var Lang = A.Lang,
                 hasResults,
                 visible;
 
-            visible = instance.get(VISIBLE);
+            visible = instance.get(&#x27;visible&#x27;);
 
             hasResults = instance._autoCompleteResultsList.hasChildNodes();
 
@@ -2595,7 +2556,7 @@ var Lang = A.Lang,
                     if (!visible) {
                         coords = event.coords;
 
-                        instance.set(XY, [coords.pageX + PADDING_HORIZ, coords.pageY + PADDING_VERT]);
+                        instance.set(&#x27;xy&#x27;, [coords.pageX + PADDING_HORIZ, coords.pageY + PADDING_VERT]);
 
                         instance.show();
                     }
@@ -2642,7 +2603,7 @@ var Lang = A.Lang,
         _onRemoveText: function(event) {
             var instance = this;
 
-            if (instance.get(VISIBLE)) {
+            if (instance.get(&#x27;visible&#x27;)) {
                 instance.hide();
             }
         },
@@ -2692,7 +2653,7 @@ var Lang = A.Lang,
             firstEntry = autoCompleteResultsList.one(SELECTOR_ENTRY_CONTAINER);
 
             if (firstEntry) {
-                firstEntry.addClass(SELECTED);
+                firstEntry.addClass(&#x27;selected&#x27;);
             }
         },
 
@@ -2714,12 +2675,12 @@ var Lang = A.Lang,
             autoCompleteResultsList.appendChild(
                 Lang.sub(
                     instance.TPL_LOADING, {
-                        label: instance.get(LOADING_MESSAGE)
+                        label: instance.get(&#x27;loadingMessage&#x27;)
                     }
                 )
             );
 
-            if (!instance.get(VISIBLE)) {
+            if (!instance.get(&#x27;visible&#x27;)) {
                 instance.show();
             }
         },
@@ -2752,7 +2713,7 @@ var Lang = A.Lang,
         _setEmptyResults: function() {
             var instance = this;
 
-            instance.set(RESULTS, []);
+            instance.set(&#x27;results&#x27;, []);
         },
 
         TPL_ENTRY: &#x27;&lt;li class=&quot;&#x27; + CLASS_ENTRY_CONTAINER + &#x27;&quot; data-index=&quot;{index}&quot;&gt;&#x27; + &#x27;&lt;span class=&quot;&#x27; + CLASS_ENTRY + &#x27;&quot;&gt;{value}&lt;/span&gt;&#x27; + &#x27;&lt;/li&gt;&#x27;,
@@ -2771,7 +2732,7 @@ var Lang = A.Lang,
          * @type String
          * @static
          */
-        NAME: _NAME,
+        NAME: &#x27;ace-autocomplete-list&#x27;,
 
         /**
          * Static property provides a string to identify the namespace.
@@ -2780,7 +2741,7 @@ var Lang = A.Lang,
          * @type String
          * @static
          */
-        NS: _NAME,
+        NS: &#x27;ace-autocomplete-list&#x27;,
 
         /**
          * Static property used to define the default attribute
@@ -2865,7 +2826,7 @@ var Lang = A.Lang,
          * @type String
          * @static
          */
-        CSS_PREFIX: CSS_PREFIX,
+        CSS_PREFIX: &#x27;ace-autocomplete&#x27;,
 
         /**
          * Object hash, defining how attribute values are to be parsed from
@@ -2875,7 +2836,7 @@ var Lang = A.Lang,
          * @static
          */
         HTML_PARSER: {
-            listNode: _DOT + CLASS_RESULTS_LIST
+            listNode: &#x27;.&#x27; + CLASS_RESULTS_LIST
         }
     });
 

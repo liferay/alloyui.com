@@ -20,7 +20,7 @@
 </head>
 <body class="yui3-skin-sam">
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
         <div class="navbar-inner">
             <h1 class="brand">
                 <a href="/">
@@ -2105,10 +2105,7 @@ var Lang = A.Lang,
         return (arr || []).concat(arr2 || []);
     },
 
-    _NAME = &#x27;component&#x27;,
-
     _INSTANCES = {},
-    _STR_BLANK = &#x27; &#x27;,
     _CONSTRUCTOR_OBJECT = A.config.win.Object.prototype.constructor,
 
     ClassNameManager = A.ClassNameManager,
@@ -2132,7 +2129,7 @@ var Lang = A.Lang,
  *     properties.
  * @constructor
  */
-var Component = A.Base.create(_NAME, A.Widget, [
+var Component = A.Base.create(&#x27;component&#x27;, A.Widget, [
         A.WidgetCssClass,
         A.WidgetToggle
     ], {
@@ -2205,8 +2202,8 @@ var Component = A.Base.create(_NAME, A.Widget, [
         var boundingBoxNodeClassName = boundingBoxNode.className;
         var contentBoxNodeClassName = contentBoxNode.className;
 
-        var boundingBoxBuffer = (boundingBoxNodeClassName) ? boundingBoxNodeClassName.split(_STR_BLANK) : [];
-        var contentBoxBuffer = (contentBoxNodeClassName) ? contentBoxNodeClassName.split(_STR_BLANK) : [];
+        var boundingBoxBuffer = (boundingBoxNodeClassName) ? boundingBoxNodeClassName.split(&#x27; &#x27;) : [];
+        var contentBoxBuffer = (contentBoxNodeClassName) ? contentBoxNodeClassName.split(&#x27; &#x27;) : [];
 
         var classes = instance._getClasses();
 
@@ -2236,12 +2233,12 @@ var Component = A.Base.create(_NAME, A.Widget, [
         contentBoxBuffer.push(instance.getClassName(&#x27;content&#x27;));
 
         if (boundingBoxNode === contentBoxNode) {
-            contentBoxNodeClassName = AArray.dedupe(contentBoxBuffer.concat(boundingBoxBuffer)).join(_STR_BLANK);
+            contentBoxNodeClassName = AArray.dedupe(contentBoxBuffer.concat(boundingBoxBuffer)).join(&#x27; &#x27;);
         }
         else {
-            boundingBoxNode.className = AArray.dedupe(boundingBoxBuffer).join(_STR_BLANK);
+            boundingBoxNode.className = AArray.dedupe(boundingBoxBuffer).join(&#x27; &#x27;);
 
-            contentBoxNodeClassName = AArray.dedupe(contentBoxBuffer).join(_STR_BLANK);
+            contentBoxNodeClassName = AArray.dedupe(contentBoxBuffer).join(&#x27; &#x27;);
         }
 
         contentBoxNode.className = contentBoxNodeClassName;

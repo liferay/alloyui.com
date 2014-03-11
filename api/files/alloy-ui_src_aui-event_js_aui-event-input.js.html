@@ -20,7 +20,7 @@
 </head>
 <body class="yui3-skin-sam">
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
         <div class="navbar-inner">
             <h1 class="brand">
                 <a href="/">
@@ -2118,11 +2118,6 @@ DOM_EVENTS.paste = 1;
 
 var KeyMap = A.Event.KeyMap,
 
-    ACTIVE_ELEMENT = &#x27;activeElement&#x27;,
-    OWNER_DOCUMENT = &#x27;ownerDocument&#x27;,
-
-    STR_VALUE = &#x27;value&#x27;,
-
     _HANDLER_DATA_KEY = &#x27;~~aui|input|event~~&#x27;,
     _INPUT_EVENT_TYPE = [&#x27;keydown&#x27;, &#x27;paste&#x27;, &#x27;drop&#x27;, &#x27;cut&#x27;],
     _SKIP_FOCUS_CHECK_MAP = {
@@ -2231,7 +2226,7 @@ A.Event.define(&#x27;input&#x27;, {
         // Since cut, drop and paste events fires before the element is focused,
         // skip focus checking.
         if (_SKIP_FOCUS_CHECK_MAP[event.type] ||
-            (input.get(OWNER_DOCUMENT).get(ACTIVE_ELEMENT) === input)) {
+            (input.get(&#x27;ownerDocument&#x27;).get(&#x27;activeElement&#x27;) === input)) {
 
             if (KeyMap.isModifyingKey(event.keyCode)) {
                 if (subscription._timer) {
@@ -2239,7 +2234,7 @@ A.Event.define(&#x27;input&#x27;, {
                     subscription._timer = null;
                 }
 
-                valueBeforeKey = KeyMap.isKey(event.keyCode, &#x27;WIN_IME&#x27;) ? null : input.get(STR_VALUE);
+                valueBeforeKey = KeyMap.isKey(event.keyCode, &#x27;WIN_IME&#x27;) ? null : input.get(&#x27;value&#x27;);
 
                 subscription._timer = A.soon(
                     A.bind(&#x27;_fireEvent&#x27;, instance, subscription, notifier, event, valueBeforeKey)
@@ -2264,7 +2259,7 @@ A.Event.define(&#x27;input&#x27;, {
 
         subscription._timer = null;
 
-        if (input.get(STR_VALUE) !== valueBeforeKey) {
+        if (input.get(&#x27;value&#x27;) !== valueBeforeKey) {
             notifier.fire(event);
         }
     }

@@ -20,7 +20,7 @@
 </head>
 <body class="yui3-skin-sam">
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
         <div class="navbar-inner">
             <h1 class="brand">
                 <a href="/">
@@ -2102,14 +2102,7 @@
 var AArray = A.Array,
     AObject = A.Object,
     Node = A.Node,
-    Selector = A.Selector,
-
-    EVENT_CLICK = &#x27;click&#x27;,
-    EVENT_SUBMIT = &#x27;submit&#x27;,
-
-    AFTER = &#x27;after&#x27;,
-    SUBMIT_DELEGATE = &#x27;submit_delegate&#x27;,
-    SUBMIT_ON = &#x27;submit_on&#x27;;
+    Selector = A.Selector;
 
 /**
  * Defines a new &#x60;submit&#x60; event in the DOM event system.
@@ -2117,7 +2110,7 @@ var AArray = A.Array,
  * @event submit
  */
 A.Event.define(
-    EVENT_SUBMIT, {
+    &#x27;submit&#x27;, {
         /**
          * Implementation logic for subscription via &#x60;node.delegate&#x60;.
          *
@@ -2132,9 +2125,9 @@ A.Event.define(
 
             var clickHandles = instance._prepareHandles(subscription, node);
 
-            if (!AObject.owns(clickHandles, EVENT_CLICK)) {
-                clickHandles[EVENT_CLICK] = node.delegate(
-                    EVENT_CLICK,
+            if (!AObject.owns(clickHandles, &#x27;click&#x27;)) {
+                clickHandles[&#x27;click&#x27;] = node.delegate(
+                    &#x27;click&#x27;,
                     function(event) {
                         var activeElement = event.target;
 
@@ -2250,9 +2243,9 @@ A.Event.define(
 
             var handles = instance._prepareHandles(subscription, form);
 
-            if (!AObject.owns(handles, EVENT_SUBMIT)) {
-                handles[EVENT_SUBMIT] = A.Event._attach([EVENT_SUBMIT, fireFn, form, notifier, filter ? SUBMIT_DELEGATE :
-                    SUBMIT_ON]);
+            if (!AObject.owns(handles, &#x27;submit&#x27;)) {
+                handles[&#x27;submit&#x27;] = A.Event._attach([&#x27;submit&#x27;, fireFn, form, notifier, filter ? &#x27;submit_delegate&#x27; :
+                    &#x27;submit_on&#x27;]);
             }
         },
 
@@ -2360,7 +2353,7 @@ function sortSubscribers(subscribers) {
     var item = AArray.some(
         subscribers,
         function(item, index) {
-            if (item.args &amp;&amp; item.args[0] === SUBMIT_DELEGATE) {
+            if (item.args &amp;&amp; item.args[0] === &#x27;submit_delegate&#x27;) {
                 var lastSubscriber = subscribers.splice(subscribers.length - 1, 1)[0];
 
                 subscribers.splice(index, 0, lastSubscriber);
@@ -2383,7 +2376,7 @@ function sortDeprecatedSubscribers(eventHandle, subscribers) {
     AObject.each(
         subscribers,
         function(subscriber, index) {
-            if (!replace &amp;&amp; subscriber.args &amp;&amp; subscriber.args[0] === SUBMIT_DELEGATE) {
+            if (!replace &amp;&amp; subscriber.args &amp;&amp; subscriber.args[0] === &#x27;submit_delegate&#x27;) {
                 orderedSubscribers[lastSubscriber.id] = lastSubscriber;
 
                 replace = true;
@@ -2405,8 +2398,8 @@ function sortDeprecatedSubscribers(eventHandle, subscribers) {
 function updateSubscribers(eventHandle, fn, context, args, when) {
     var instance = this;
 
-    if (args &amp;&amp; args[0] === SUBMIT_ON) {
-        if (when === AFTER &amp;&amp; instance._afters.length) {
+    if (args &amp;&amp; args[0] === &#x27;submit_on&#x27;) {
+        if (when === &#x27;after&#x27; &amp;&amp; instance._afters.length) {
             sortSubscribers.call(instance, instance._afters);
         }
         else if (instance._subscribers.length) {
@@ -2418,8 +2411,8 @@ function updateSubscribers(eventHandle, fn, context, args, when) {
 function updateDeprecatedSubscribers(eventHandle, fn, context, args, when) {
     var instance = this;
 
-    if (args &amp;&amp; args[0] === SUBMIT_ON) {
-        if (when === AFTER &amp;&amp; !AObject.isEmpty(instance.afters)) {
+    if (args &amp;&amp; args[0] === &#x27;submit_on&#x27;) {
+        if (when === &#x27;after&#x27; &amp;&amp; !AObject.isEmpty(instance.afters)) {
             instance.afters = sortDeprecatedSubscribers.call(instance, eventHandle, instance.afters);
         }
         else if (!AObject.isEmpty(instance.subscribers)) {

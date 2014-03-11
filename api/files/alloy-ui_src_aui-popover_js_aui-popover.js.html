@@ -20,7 +20,7 @@
 </head>
 <body class="yui3-skin-sam">
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
         <div class="navbar-inner">
             <h1 class="brand">
                 <a href="/">
@@ -2100,23 +2100,9 @@
 
 var StdMod = A.WidgetStdMod,
 
-    OWNER_DOCUMENT = &#x27;ownerDocument&#x27;,
-
     getClassName = A.getClassName,
 
-    _SPACE = &#x27; &#x27;,
-
-    ARROW = &#x27;arrow&#x27;,
-    BLOCK = &#x27;block&#x27;,
-    BOUNDING_BOX = &#x27;boundingBox&#x27;,
-    CLICK = &#x27;click&#x27;,
-    CONTENT = &#x27;content&#x27;,
-    CONTENT_BOX = &#x27;contentBox&#x27;,
-    DISPLAY = &#x27;display&#x27;,
-    NONE = &#x27;none&#x27;,
-    POPOVER = &#x27;popover&#x27;,
-
-    CSS_ARROW = getClassName(ARROW),
+    CSS_ARROW = getClassName(&#x27;arrow&#x27;),
     CSS_POPOVER_BD = getClassName(&#x27;popover-content&#x27;),
     CSS_POPOVER_FT = getClassName(&#x27;popover-footer&#x27;),
     CSS_POPOVER_HD = getClassName(&#x27;popover-title&#x27;);
@@ -2168,7 +2154,7 @@ YUI().use(
 );
 &#x60;&#x60;&#x60;
  */
-A.Popover = A.Base.create(POPOVER, A.Widget, [
+A.Popover = A.Base.create(&#x27;popover&#x27;, A.Widget, [
     A.WidgetCssClass,
     A.WidgetPosition,
     A.WidgetStdMod,
@@ -2204,7 +2190,7 @@ A.Popover = A.Base.create(POPOVER, A.Widget, [
      */
     renderUI: function() {
         var instance = this,
-            boundingBox = instance.get(BOUNDING_BOX);
+            boundingBox = instance.get(&#x27;boundingBox&#x27;);
 
         boundingBox.append(A.Popover.TEMPLATES.arrow);
 
@@ -2220,9 +2206,9 @@ A.Popover = A.Base.create(POPOVER, A.Widget, [
      */
     _afterRenderBoxClassNames: function() {
         var instance = this,
-            contentBox = instance.get(CONTENT_BOX);
+            contentBox = instance.get(&#x27;contentBox&#x27;);
 
-        contentBox.removeClass(instance.getClassName(CONTENT));
+        contentBox.removeClass(instance.getClassName(&#x27;content&#x27;));
     },
 
     /**
@@ -2234,11 +2220,11 @@ A.Popover = A.Base.create(POPOVER, A.Widget, [
      */
     _uiSetVisible: function(val) {
         var instance = this,
-            boundingBox = instance.get(BOUNDING_BOX);
+            boundingBox = instance.get(&#x27;boundingBox&#x27;);
 
         instance._widgetUiSetVisible(val);
 
-        boundingBox.setStyle(DISPLAY, val ? BLOCK : NONE);
+        boundingBox.setStyle(&#x27;display&#x27;, val ? &#x27;block&#x27; : &#x27;none&#x27;);
 
         if (val) {
             instance.suggestAlignment();
@@ -2253,7 +2239,7 @@ A.Popover = A.Base.create(POPOVER, A.Widget, [
      * @protected
      */
     _getStdModTemplate: function(section) {
-        return A.Node.create(A.Popover.TEMPLATES[section], this._stdModNode.get(OWNER_DOCUMENT));
+        return A.Node.create(A.Popover.TEMPLATES[section], this._stdModNode.get(&#x27;ownerDocument&#x27;));
     },
 
     _widgetUiSetVisible: A.Widget.prototype._uiSetVisible
@@ -2265,7 +2251,7 @@ A.Popover = A.Base.create(POPOVER, A.Widget, [
      * @type String
      * @static
      */
-    CSS_PREFIX: getClassName(POPOVER),
+    CSS_PREFIX: getClassName(&#x27;popover&#x27;),
 
     /**
      * Static property used to define the default attribute
@@ -2284,7 +2270,7 @@ A.Popover = A.Base.create(POPOVER, A.Widget, [
          * @type String
          */
         triggerToggleEvent: {
-            value: CLICK
+            value: &#x27;click&#x27;
         }
     },
 
@@ -2296,9 +2282,9 @@ A.Popover = A.Base.create(POPOVER, A.Widget, [
      * @static
      */
     TEMPLATES: {
-        header: &#x27;&lt;div class=&quot;&#x27; + StdMod.SECTION_CLASS_NAMES[StdMod.HEADER] + _SPACE + CSS_POPOVER_HD + &#x27;&quot;&gt;&lt;/div&gt;&#x27;,
-        body: &#x27;&lt;div class=&quot;&#x27; + StdMod.SECTION_CLASS_NAMES[StdMod.BODY] + _SPACE + CSS_POPOVER_BD + &#x27;&quot;&gt;&lt;/div&gt;&#x27;,
-        footer: &#x27;&lt;div class=&quot;&#x27; + StdMod.SECTION_CLASS_NAMES[StdMod.FOOTER] + _SPACE + CSS_POPOVER_FT + &#x27;&quot;&gt;&lt;/div&gt;&#x27;,
+        header: &#x27;&lt;div class=&quot;&#x27; + StdMod.SECTION_CLASS_NAMES[StdMod.HEADER] + &#x27; &#x27; + CSS_POPOVER_HD + &#x27;&quot;&gt;&lt;/div&gt;&#x27;,
+        body: &#x27;&lt;div class=&quot;&#x27; + StdMod.SECTION_CLASS_NAMES[StdMod.BODY] + &#x27; &#x27; + CSS_POPOVER_BD + &#x27;&quot;&gt;&lt;/div&gt;&#x27;,
+        footer: &#x27;&lt;div class=&quot;&#x27; + StdMod.SECTION_CLASS_NAMES[StdMod.FOOTER] + &#x27; &#x27; + CSS_POPOVER_FT + &#x27;&quot;&gt;&lt;/div&gt;&#x27;,
         arrow: &#x27;&lt;div class=&quot;&#x27; + CSS_ARROW + &#x27;&quot;&gt;&lt;/div&gt;&#x27;
     }
 });

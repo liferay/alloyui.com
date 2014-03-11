@@ -20,7 +20,7 @@
 </head>
 <body class="yui3-skin-sam">
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
         <div class="navbar-inner">
             <h1 class="brand">
                 <a href="/">
@@ -2103,28 +2103,11 @@ var Lang = A.Lang,
     isFunction = Lang.isFunction,
     isObject = Lang.isObject,
     isString = Lang.isString,
-
-    ATTRIBUTE_VALUE_FORMAT = &#x27;attributeValueFormat&#x27;,
-    ATTRIBUTES = &#x27;attributes&#x27;,
-    ARIA = &#x27;aria&#x27;,
-    ARIA_PREFIX = &#x27;aria-&#x27;,
-    ATTRIBUTE_NODE = &#x27;attributeNode&#x27;,
-    BOUNDING_BOX = &#x27;boundingBox&#x27;,
-    HOST = &#x27;host&#x27;,
-    ROLE = &#x27;role&#x27;,
-    ROLE_NAME = &#x27;roleName&#x27;,
-    ROLE_NODE = &#x27;roleNode&#x27;,
-    VALIDATE_W3C = &#x27;validateW3C&#x27;,
-    CHANGE_PREFIX = &#x27;Change&#x27;,
-
-    EMPTY_STR = &#x27;&#x27;,
     STR_REGEX = /([^a-z])/ig,
-
-    EV_PROCESS_ATTRIBUTE = &#x27;aria:processAttribute&#x27;,
 
     _toAriaRole = A.cached(function(str) {
         return str.replace(STR_REGEX, function() {
-            return EMPTY_STR;
+            return &#x27;&#x27;;
         }).toLowerCase();
     });
 
@@ -2146,7 +2129,7 @@ var Aria = A.Component.create({
      * @type String
      * @static
      */
-    NAME: ARIA,
+    NAME: &#x27;aria&#x27;,
 
     /**
      * Static property provides a string to identify the namespace.
@@ -2155,7 +2138,7 @@ var Aria = A.Component.create({
      * @type String
      * @static
      */
-    NS: ARIA,
+    NS: &#x27;aria&#x27;,
 
     /**
      * Static property used to define the default attribute configuration for
@@ -2202,7 +2185,7 @@ var Aria = A.Component.create({
             writeOnce: true,
             setter: A.one,
             valueFn: function() {
-                return this.get(HOST).get(BOUNDING_BOX);
+                return this.get(&#x27;host&#x27;).get(&#x27;boundingBox&#x27;);
             }
         },
 
@@ -2215,10 +2198,10 @@ var Aria = A.Component.create({
         roleName: {
             valueFn: function() {
                 var instance = this;
-                var host = instance.get(HOST);
-                var roleName = _toAriaRole(host.constructor.NAME || EMPTY_STR);
+                var host = instance.get(&#x27;host&#x27;);
+                var roleName = _toAriaRole(host.constructor.NAME || &#x27;&#x27;);
 
-                return (instance.isValidRole(roleName) ? roleName : EMPTY_STR);
+                return (instance.isValidRole(roleName) ? roleName : &#x27;&#x27;);
             },
             validator: isString
         },
@@ -2233,7 +2216,7 @@ var Aria = A.Component.create({
             writeOnce: true,
             setter: A.one,
             valueFn: function() {
-                return this.get(HOST).get(BOUNDING_BOX);
+                return this.get(&#x27;host&#x27;).get(&#x27;boundingBox&#x27;);
             }
         },
 
@@ -2270,16 +2253,16 @@ var Aria = A.Component.create({
         initializer: function() {
             var instance = this;
 
-            instance.publish(EV_PROCESS_ATTRIBUTE, {
+            instance.publish(&#x27;aria:processAttribute&#x27;, {
                 defaultFn: instance._defProcessFn,
                 queuable: false,
                 emitFacade: true,
                 bubbles: true,
-                prefix: ARIA
+                prefix: &#x27;aria&#x27;
             });
 
             instance._uiSetRoleName(
-                instance.get(ROLE_NAME)
+                instance.get(&#x27;roleName&#x27;)
             );
 
             instance.after(&#x27;roleNameChange&#x27;, instance._afterRoleNameChange);
@@ -2297,7 +2280,7 @@ var Aria = A.Component.create({
         isValidAttribute: function(attrName) {
             var instance = this;
 
-            return (instance.get(VALIDATE_W3C) ? A.Plugin.Aria.W3C_ATTRIBUTES[attrName] : true);
+            return (instance.get(&#x27;validateW3C&#x27;) ? A.Plugin.Aria.W3C_ATTRIBUTES[attrName] : true);
         },
 
         /**
@@ -2310,7 +2293,7 @@ var Aria = A.Component.create({
         isValidRole: function(roleName) {
             var instance = this;
 
-            return (instance.get(VALIDATE_W3C) ? A.Plugin.Aria.W3C_ROLES[roleName] : true);
+            return (instance.get(&#x27;validateW3C&#x27;) ? A.Plugin.Aria.W3C_ROLES[roleName] : true);
         },
 
         /**
@@ -2326,7 +2309,7 @@ var Aria = A.Component.create({
             var instance = this;
 
             if (instance.isValidAttribute(attrName)) {
-                (node || instance.get(ATTRIBUTE_NODE)).set(ARIA_PREFIX + attrName, attrValue);
+                (node || instance.get(&#x27;attributeNode&#x27;)).set(&#x27;aria-&#x27; + attrName, attrValue);
 
                 return true;
             }
@@ -2360,7 +2343,7 @@ var Aria = A.Component.create({
             var instance = this;
 
             if (instance.isValidRole(roleName)) {
-                (node || instance.get(ROLE_NODE)).set(ROLE, roleName);
+                (node || instance.get(&#x27;roleNode&#x27;)).set(&#x27;role&#x27;, roleName);
 
                 return true;
             }
@@ -2416,7 +2399,7 @@ var Aria = A.Component.create({
          */
         _bindHostAttributes: function() {
             var instance = this;
-            var attributes = instance.get(ATTRIBUTES);
+            var attributes = instance.get(&#x27;attributes&#x27;);
 
             A.each(attributes, function(aria, attrName) {
                 var ariaAttr = instance._getAriaAttribute(aria, attrName);
@@ -2425,7 +2408,7 @@ var Aria = A.Component.create({
                     aria: ariaAttr
                 });
 
-                instance.afterHostEvent(attrName + CHANGE_PREFIX, function(event) {
+                instance.afterHostEvent(attrName + &#x27;Change&#x27;, function(event) {
                     event.aria = ariaAttr;
                     instance._afterHostAttributeChange(event);
                 });
@@ -2456,7 +2439,7 @@ var Aria = A.Component.create({
          */
         _getAriaAttribute: function(aria, attrName) {
             var instance = this;
-            var attributeValueFormat = instance.get(ATTRIBUTE_VALUE_FORMAT);
+            var attributeValueFormat = instance.get(&#x27;attributeValueFormat&#x27;);
             var prepared = {};
 
             if (isString(aria)) {
@@ -2469,7 +2452,7 @@ var Aria = A.Component.create({
             }
             else if (isObject(aria)) {
                 prepared = A.mix(aria, {
-                    ariaName: EMPTY_STR,
+                    ariaName: &#x27;&#x27;,
                     attrName: attrName,
                     format: attributeValueFormat,
                     node: null
@@ -2489,7 +2472,7 @@ var Aria = A.Component.create({
         _handleProcessAttribute: function(event) {
             var instance = this;
 
-            instance.fire(EV_PROCESS_ATTRIBUTE, {
+            instance.fire(&#x27;aria:processAttribute&#x27;, {
                 aria: event.aria
             });
         },
@@ -2503,7 +2486,7 @@ var Aria = A.Component.create({
          */
         _setAttribute: function(ariaAttr) {
             var instance = this;
-            var host = instance.get(HOST);
+            var host = instance.get(&#x27;host&#x27;);
             var attrValue = host.get(ariaAttr.attrName);
             var attrNode = ariaAttr.node;
 

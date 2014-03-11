@@ -20,7 +20,7 @@
 </head>
 <body class="yui3-skin-sam">
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
         <div class="navbar-inner">
             <h1 class="brand">
                 <a href="/">
@@ -2092,18 +2092,7 @@
 
 <div class="file">
     <pre class="code prettyprint linenums">
-var ALIGN = &#x27;align&#x27;,
-    BOTTOM = &#x27;bottom&#x27;,
-    BOUNDING_BOX = &#x27;boundingBox&#x27;,
-    CONSTRAIN = &#x27;constrain&#x27;,
-    LEFT = &#x27;left&#x27;,
-    POSITION = &#x27;position&#x27;,
-    POSITION_CHANGE = &#x27;positionChange&#x27;,
-    RENDERED = &#x27;rendered&#x27;,
-    RIGHT = &#x27;right&#x27;,
-    TOP = &#x27;top&#x27;,
-
-    getClassName = A.getClassName;
+var getClassName = A.getClassName;
 
 /**
  * Widget extension, which can be used to suggest alignment points based on
@@ -2135,10 +2124,10 @@ PositionAlignSuggestion.ATTRS = {
      */
     position: {
         validator: function(val) {
-            return val === BOTTOM || val === TOP || val === LEFT ||
-                val === RIGHT;
+            return val === &#x27;bottom&#x27; || val === &#x27;top&#x27; || val === &#x27;left&#x27; ||
+                val === &#x27;right&#x27;;
         },
-        value: TOP
+        value: &#x27;top&#x27;
     }
 };
 
@@ -2177,7 +2166,7 @@ A.mix(PositionAlignSuggestion.prototype, {
 
         A.after(instance._afterRenderUIPAS, instance, &#x27;renderUI&#x27;);
 
-        instance.after(POSITION_CHANGE, instance._afterPositionChangePAS);
+        instance.after(&#x27;positionChange&#x27;, instance._afterPositionChangePAS);
     },
 
     /**
@@ -2190,7 +2179,7 @@ A.mix(PositionAlignSuggestion.prototype, {
         var instance = this,
             align;
 
-        align = instance.get(ALIGN) || {};
+        align = instance.get(&#x27;align&#x27;) || {};
 
         if (alignNode) {
             align.node = alignNode;
@@ -2198,10 +2187,10 @@ A.mix(PositionAlignSuggestion.prototype, {
 
         if (!instance._hasAlignmentPoints) {
             align.points = instance._getAlignPointsSuggestion(
-                instance.get(POSITION));
+                instance.get(&#x27;position&#x27;));
         }
 
-        instance.set(ALIGN, align);
+        instance.set(&#x27;align&#x27;, align);
     },
 
     /**
@@ -2227,7 +2216,7 @@ A.mix(PositionAlignSuggestion.prototype, {
     _afterRenderUIPAS: function() {
         var instance = this;
 
-        instance._uiSetPosition(instance.get(POSITION));
+        instance._uiSetPosition(instance.get(&#x27;position&#x27;));
     },
 
     /**
@@ -2259,8 +2248,8 @@ A.mix(PositionAlignSuggestion.prototype, {
      */
     _findBestPosition: function(node) {
         var instance = this,
-            position = instance.get(POSITION),
-            testPositions = [position, TOP, BOTTOM, LEFT, RIGHT];
+            position = instance.get(&#x27;position&#x27;),
+            testPositions = [position, &#x27;top&#x27;, &#x27;bottom&#x27;, &#x27;left&#x27;, &#x27;right&#x27;];
 
         testPositions = A.Array.dedupe(testPositions);
 
@@ -2297,14 +2286,14 @@ A.mix(PositionAlignSuggestion.prototype, {
         var instance = this,
             position;
 
-        if (!instance.get(CONSTRAIN) || !instance.get(RENDERED)) {
+        if (!instance.get(&#x27;constrain&#x27;) || !instance.get(&#x27;rendered&#x27;)) {
             return;
         }
 
         position = instance._findBestPosition(node);
 
         instance._syncPositionUI(
-            position, instance._lastPosition || instance.get(POSITION));
+            position, instance._lastPosition || instance.get(&#x27;position&#x27;));
 
         instance._lastPosition = position;
 
@@ -2322,7 +2311,7 @@ A.mix(PositionAlignSuggestion.prototype, {
      */
     _syncPositionUI: function(val, prevVal) {
         var instance = this,
-            boundingBox = instance.get(BOUNDING_BOX);
+            boundingBox = instance.get(&#x27;boundingBox&#x27;);
 
         if (prevVal) {
             boundingBox.removeClass(getClassName(prevVal));

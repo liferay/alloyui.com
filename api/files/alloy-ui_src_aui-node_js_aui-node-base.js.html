@@ -20,7 +20,7 @@
 </head>
 <body class="yui3-skin-sam">
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
         <div class="navbar-inner">
             <h1 class="brand">
                 <a href="/">
@@ -2123,28 +2123,13 @@ var Lang = A.Lang,
     NODE_PROTO_SHOW = NODE_PROTO._show,
     NODELIST_PROTO = ANodeList.prototype,
 
-    STR_EMPTY = &#x27;&#x27;,
+    ARRAY_EMPTY_STRINGS = [&#x27;&#x27;, &#x27;&#x27;],
 
-    ARRAY_EMPTY_STRINGS = [STR_EMPTY, STR_EMPTY],
-
-    OFFSET = &#x27;offset&#x27;,
-
-    CSS_FORCE_OFFSET = getClassName(&#x27;force&#x27;, OFFSET),
+    CSS_FORCE_OFFSET = getClassName(&#x27;force&#x27;, &#x27;offset&#x27;),
     CSS_HIDE = getClassName(&#x27;hide&#x27;),
     CSS_UNSELECTABLE = getClassName(&#x27;unselectable&#x27;),
 
-    CHILD_NODES = &#x27;childNodes&#x27;,
-    CREATE_DOCUMENT_FRAGMENT = &#x27;createDocumentFragment&#x27;,
-    INNER = &#x27;inner&#x27;,
-    INNER_HTML = &#x27;innerHTML&#x27;,
-    NEXT_SIBLING = &#x27;nextSibling&#x27;,
-    OUTER = &#x27;outer&#x27;,
-    PARENT_NODE = &#x27;parentNode&#x27;,
-    REGION = &#x27;region&#x27;,
-
     SUPPORT_CLONED_EVENTS = false,
-
-    VALUE = &#x27;value&#x27;,
 
     MAP_BORDER = {
         b: &#x27;borderBottomWidth&#x27;,
@@ -2398,7 +2383,7 @@ A.mix(NODE_PROTO, {
                     var outerHTML = this.outerHTML();
 
                     outerHTML = outerHTML.replace(REGEX_IE8_ACTION, &#x27;=&quot;$1&quot;&gt;&#x27;).replace(REGEX_LEADING_WHITE_SPACE,
-                        STR_EMPTY);
+                        &#x27;&#x27;);
 
                     clone = ANode.create(outerHTML);
                 }
@@ -2437,7 +2422,7 @@ A.mix(NODE_PROTO, {
      */
     center: function(val) {
         var instance = this,
-            nodeRegion = instance.get(REGION),
+            nodeRegion = instance.get(&#x27;region&#x27;),
             x,
             y;
 
@@ -2452,7 +2437,7 @@ A.mix(NODE_PROTO, {
                 region = val;
             }
             else {
-                region = (A.one(val) || A.getBody()).get(REGION);
+                region = (A.one(val) || A.getBody()).get(&#x27;region&#x27;);
             }
 
             x = region.left + (region.width / 2);
@@ -2528,7 +2513,7 @@ A.mix(NODE_PROTO, {
      */
     getCenterXY: function() {
         var instance = this;
-        var region = instance.get(REGION);
+        var region = instance.get(&#x27;region&#x27;);
 
         return [(region.left + region.width / 2), (region.top + region.height / 2)];
     },
@@ -2649,10 +2634,10 @@ A.mix(NODE_PROTO, {
             length = args.length;
 
         if (length) {
-            this.set(INNER_HTML, args[0]);
+            this.set(&#x27;innerHTML&#x27;, args[0]);
         }
         else {
-            return this.get(INNER_HTML);
+            return this.get(&#x27;innerHTML&#x27;);
         }
 
         return this;
@@ -2707,7 +2692,7 @@ A.mix(NODE_PROTO, {
     placeAfter: function(newNode) {
         var instance = this;
 
-        return instance._place(newNode, instance.get(NEXT_SIBLING));
+        return instance._place(newNode, instance.get(&#x27;nextSibling&#x27;));
     },
 
     /**
@@ -3014,10 +2999,10 @@ A.mix(NODE_PROTO, {
         var instance = this;
 
         if (isUndefined(value)) {
-            return instance.get(VALUE);
+            return instance.get(&#x27;value&#x27;);
         }
         else {
-            return instance.set(VALUE, value);
+            return instance.set(&#x27;value&#x27;, value);
         }
     },
 
@@ -3085,7 +3070,7 @@ A.mix(NODE_PROTO, {
             }
         }
 
-        return str.join(STR_EMPTY);
+        return str.join(&#x27;&#x27;);
     },
 
     /**
@@ -3181,7 +3166,7 @@ A.mix(NODE_PROTO, {
     _place: function(newNode, refNode) {
         var instance = this;
 
-        var parent = instance.get(PARENT_NODE);
+        var parent = instance.get(&#x27;parentNode&#x27;);
 
         if (parent) {
             if (isString(newNode)) {
@@ -3338,15 +3323,15 @@ A.each(
 
                 if (node) {
                     if ((!node.tagName &amp;&amp; node.nodeType === 9) || node.alert) {
-                        dimension = instance.get(REGION)[dimensionType];
+                        dimension = instance.get(&#x27;region&#x27;)[dimensionType];
                     }
                     else {
-                        dimension = instance.get(OFFSET + item);
+                        dimension = instance.get(&#x27;offset&#x27; + item);
 
                         if (!dimension) {
                             instance.addClass(CSS_FORCE_OFFSET);
 
-                            dimension = instance.get(OFFSET + item);
+                            dimension = instance.get(&#x27;offset&#x27; + item);
 
                             instance.removeClass(CSS_FORCE_OFFSET);
                         }
@@ -3366,16 +3351,16 @@ A.each(
             return returnValue;
         };
 
-        NODE_PROTO[INNER + item] = function() {
+        NODE_PROTO[&#x27;inner&#x27; + item] = function() {
             var instance = this;
 
             return instance[dimensionType]() + instance.getPadding(sides);
         };
 
-        NODE_PROTO[OUTER + item] = function(margin) {
+        NODE_PROTO[&#x27;outer&#x27; + item] = function(margin) {
             var instance = this;
 
-            var innerSize = instance[INNER + item]();
+            var innerSize = instance[&#x27;inner&#x27; + item]();
             var borderSize = instance.getBorderWidth(sides);
 
             var size = innerSize + borderSize;
@@ -3393,9 +3378,9 @@ if (!SUPPORT_OPTIONAL_TBODY) {
     A.DOM._ADD_HTML = A.DOM.addHTML;
 
     A.DOM.addHTML = function(node, content, where) {
-        var nodeName = (node.nodeName &amp;&amp; node.nodeName.toLowerCase()) || STR_EMPTY;
+        var nodeName = (node.nodeName &amp;&amp; node.nodeName.toLowerCase()) || &#x27;&#x27;;
 
-        var tagName = STR_EMPTY;
+        var tagName = &#x27;&#x27;;
 
         if (!isUndefined(content)) {
             if (isString(content)) {
@@ -3414,7 +3399,7 @@ if (!SUPPORT_OPTIONAL_TBODY) {
         if (nodeName === &#x27;table&#x27; &amp;&amp; tagName === &#x27;tr&#x27;) {
             node = node.getElementsByTagName(&#x27;tbody&#x27;)[0] || node.appendChild(node.ownerDocument.createElement(&#x27;tbody&#x27;));
 
-            var whereNodeName = ((where &amp;&amp; where.nodeName) || STR_EMPTY).toLowerCase();
+            var whereNodeName = ((where &amp;&amp; where.nodeName) || &#x27;&#x27;).toLowerCase();
 
             // Assuming if the &quot;where&quot; is a tbody node,
             // we&#x27;re trying to prepend to a table. Attempt to
@@ -3616,9 +3601,9 @@ NODELIST_PROTO.filter = function(value, context) {
 A.mix(
     ANodeList, {
         create: function(html) {
-            var docFrag = A.getDoc().invoke(CREATE_DOCUMENT_FRAGMENT);
+            var docFrag = A.getDoc().invoke(&#x27;createDocumentFragment&#x27;);
 
-            return docFrag.append(html).get(CHILD_NODES);
+            return docFrag.append(html).get(&#x27;childNodes&#x27;);
         }
     }
 );

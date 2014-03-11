@@ -20,7 +20,7 @@
 </head>
 <body class="yui3-skin-sam">
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
         <div class="navbar-inner">
             <h1 class="brand">
                 <a href="/">
@@ -2098,12 +2098,7 @@
  * @module aui-widget-toolbars
  */
 
-var StdMod = A.WidgetStdMod,
-
-    BOUNDING_BOX = &#x27;boundingBox&#x27;,
-    TOOLBARS = &#x27;toolbars&#x27;,
-    SYNC_UI = &#x27;syncUI&#x27;,
-    TOOLBARS_CHANGE = &#x27;toolbarsChange&#x27;;
+var StdMod = A.WidgetStdMod;
 
 /**
  * A base class for Widget Toolbars.
@@ -2161,9 +2156,9 @@ WidgetToolbars.prototype = {
 
         instance.toolbars = {};
 
-        A.after(instance._syncUIToolbars, instance, SYNC_UI);
+        A.after(instance._syncUIToolbars, instance, &#x27;syncUI&#x27;);
 
-        instance.after(TOOLBARS_CHANGE, instance._afterToolbarsChange);
+        instance.after(&#x27;toolbarsChange&#x27;, instance._afterToolbarsChange);
     },
 
     /**
@@ -2194,7 +2189,7 @@ WidgetToolbars.prototype = {
 
         instance.setStdModContent(
             section,
-            toolbar.get(BOUNDING_BOX),
+            toolbar.get(&#x27;boundingBox&#x27;),
             instance.get(&#x27;toolbarPosition.&#x27; + section));
 
         instance._syncPrimaryButtonUI();
@@ -2253,7 +2248,7 @@ WidgetToolbars.prototype = {
      */
     _syncPrimaryButtonUI: function() {
         var instance = this,
-            primaryButtonNode = instance.get(BOUNDING_BOX).one(
+            primaryButtonNode = instance.get(&#x27;boundingBox&#x27;).one(
                 &#x27;.&#x27; + A.ButtonCore.CLASS_NAMES.PRIMARY);
 
         if (primaryButtonNode) {
@@ -2271,7 +2266,7 @@ WidgetToolbars.prototype = {
     _syncUIToolbars: function() {
         var instance = this;
 
-        instance._uiSetToolbars(this.get(TOOLBARS));
+        instance._uiSetToolbars(this.get(&#x27;toolbars&#x27;));
     },
 
     /**

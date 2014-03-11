@@ -20,7 +20,7 @@
 </head>
 <body class="yui3-skin-sam">
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
         <div class="navbar-inner">
             <h1 class="brand">
                 <a href="/">
@@ -2101,9 +2101,7 @@
 
 var Lang = A.Lang,
     AArray = A.Array,
-    AObject = A.Object,
-
-    _UNDERLINE = &#x27;_&#x27;;
+    AObject = A.Object;
 
 /**
  * A base class for HashMap.
@@ -2417,7 +2415,7 @@ var HashMap = A.Base.create(&#x27;map&#x27;, A.Base, [], {
             value === Number.POSITIVE_INFINITY ||
             value === Number.NEGATIVE_INFINITY) {
 
-            value = instance.NUMBER + _UNDERLINE + value;
+            value = instance.NUMBER + &#x27;_&#x27; + value;
         }
 
         return String(value);
@@ -2435,12 +2433,12 @@ var HashMap = A.Base.create(&#x27;map&#x27;, A.Base, [], {
             valueIndex;
 
         if (instance._isObjectWithHashCode(value)) {
-            return value.hashCode();
+            return instance.OBJECT + &#x27;_&#x27; + value.hashCode();
         }
         // When object hash code is missing, falls back to O(N) implementation
         valueIndex = AArray.indexOf(instance._objects, value);
 
-        return instance.OBJECT + _UNDERLINE +
+        return instance.OBJECT + &#x27;_&#x27; +
             ((valueIndex &gt; -1) ? valueIndex :
             instance._objects.push(value) - 1);
     },

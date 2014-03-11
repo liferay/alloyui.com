@@ -20,7 +20,7 @@
 </head>
 <body class="yui3-skin-sam">
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
         <div class="navbar-inner">
             <h1 class="brand">
                 <a href="/">
@@ -2098,10 +2098,6 @@
  * @module aui-widget-cssclass
  */
 
-var BOUNDING_BOX = &#x27;boundingBox&#x27;,
-    CONTENT_BOX = &#x27;contentBox&#x27;,
-    CSS_CLASS_CHANGE = &#x27;cssClassChange&#x27;;
-
 /**
  * Widget extension, which can be used to add cssClass support to the
  * base Widget class, through the [Base.build](Base.html#method_build) method.
@@ -2152,7 +2148,7 @@ WidgetCssClass.prototype = {
         var instance = this;
 
         instance._uiSetCssClass(config.cssClass);
-        instance.after(CSS_CLASS_CHANGE, instance._afterCssClassChange);
+        instance.after(&#x27;cssClassChange&#x27;, instance._afterCssClassChange);
     },
 
     /**
@@ -2170,8 +2166,8 @@ WidgetCssClass.prototype = {
         prevVal = event.prevVal;
 
         if (prevVal) {
-            instance.get(BOUNDING_BOX).removeClass(prevVal);
-            instance.get(CONTENT_BOX).removeClass(
+            instance.get(&#x27;boundingBox&#x27;).removeClass(prevVal);
+            instance.get(&#x27;contentBox&#x27;).removeClass(
                 prevVal + WidgetCssClass.CSS_CLASS_CONTENT_SUFFIX);
         }
 
@@ -2190,8 +2186,8 @@ WidgetCssClass.prototype = {
         var instance = this;
 
         if (val) {
-            instance.get(BOUNDING_BOX).addClass(val);
-            instance.get(CONTENT_BOX).addClass(
+            instance.get(&#x27;boundingBox&#x27;).addClass(val);
+            instance.get(&#x27;contentBox&#x27;).addClass(
                 val + WidgetCssClass.CSS_CLASS_CONTENT_SUFFIX);
         }
     }

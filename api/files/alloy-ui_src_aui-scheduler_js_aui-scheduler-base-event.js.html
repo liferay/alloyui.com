@@ -20,7 +20,7 @@
 </head>
 <body class="yui3-skin-sam">
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
         <div class="navbar-inner">
             <h1 class="brand">
                 <a href="/">
@@ -2113,12 +2113,6 @@ var Lang = A.Lang,
     DateMath = A.DataType.DateMath,
     WidgetStdMod = A.WidgetStdMod,
 
-    _COLON = &#x27;:&#x27;,
-    _DOT = &#x27;.&#x27;,
-    _EMPTY_STR = &#x27;&#x27;,
-    _N_DASH = &#x27;&amp;ndash;&#x27;,
-    _SPACE = &#x27; &#x27;,
-
     isModelList = function(val) {
         return val instanceof A.ModelList;
     },
@@ -2127,145 +2121,71 @@ var Lang = A.Lang,
         return val instanceof A.SchedulerView;
     },
 
-    TITLE_DT_FORMAT_ISO = &#x27;%H:%M&#x27;,
-    TITLE_DT_FORMAT_US_HOURS = &#x27;%l&#x27;,
-    TITLE_DT_FORMAT_US_MINUTES = &#x27;%M&#x27;,
-
     getUSDateFormat = function(date) {
-        var format = [TITLE_DT_FORMAT_US_HOURS];
+        var format = [&#x27;%l&#x27;];
 
         if (date.getMinutes() &gt; 0) {
-            format.push(_COLON);
-            format.push(TITLE_DT_FORMAT_US_MINUTES);
+            format.push(&#x27;:&#x27;);
+            format.push(&#x27;%M&#x27;);
         }
 
         if (date.getHours() &gt;= 12) {
             format.push(&#x27;pm&#x27;);
         }
 
-        return format.join(_EMPTY_STR);
+        return format.join(&#x27;&#x27;);
     },
-
-    DATA_VIEW_NAME = &#x27;data-view-name&#x27;,
-    SCHEDULER_BASE = &#x27;scheduler-base&#x27;,
-    SCHEDULER_CALENDAR = &#x27;scheduler-calendar&#x27;,
-    SCHEDULER_VIEW = &#x27;scheduler-view&#x27;,
-
-    ACTIVE_VIEW = &#x27;activeView&#x27;,
-    ALL = &#x27;all&#x27;,
-    ALL_DAY = &#x27;allDay&#x27;,
-    BUTTON = &#x27;button&#x27;,
-    COLOR = &#x27;color&#x27;,
-    COLOR_BRIGHTNESS_FACTOR = &#x27;colorBrightnessFactor&#x27;,
-    COLOR_SATURATION_FACTOR = &#x27;colorSaturationFactor&#x27;,
-    CONTENT = &#x27;content&#x27;,
-    CONTROLS = &#x27;controls&#x27;,
-    CONTROLS_NODE = &#x27;controlsNode&#x27;,
-    DATE = &#x27;date&#x27;,
-    DAY = &#x27;day&#x27;,
-    DISABLED = &#x27;disabled&#x27;,
-    END_DATE = &#x27;endDate&#x27;,
-    EVENT_RECORDER = &#x27;eventRecorder&#x27;,
-    HD = &#x27;hd&#x27;,
-    HEADER = &#x27;header&#x27;,
-    HEADER_NODE = &#x27;headerNode&#x27;,
-    HIDDEN = &#x27;hidden&#x27;,
-    ICON = &#x27;icon&#x27;,
-    ICON_NEXT_NODE = &#x27;iconNextNode&#x27;,
-    ICON_PREV_NODE = &#x27;iconPrevNode&#x27;,
-    ICONS = &#x27;icons&#x27;,
-    ISO_TIME = &#x27;isoTime&#x27;,
-    LOCALE = &#x27;locale&#x27;,
-    MEETING = &#x27;meeting&#x27;,
-    NAME = &#x27;name&#x27;,
-    NAV = &#x27;nav&#x27;,
-    NAV_NODE = &#x27;navNode&#x27;,
-    NAVIGATION_DATE_FORMATTER = &#x27;navigationDateFormatter&#x27;,
-    NEXT = &#x27;next&#x27;,
-    NEXT_DATE = &#x27;nextDate&#x27;,
-    NODE = &#x27;node&#x27;,
-    NOSCROLL = &#x27;noscroll&#x27;,
-    PALETTE = &#x27;palette&#x27;,
-    PAST = &#x27;past&#x27;,
-    PREV = &#x27;prev&#x27;,
-    PREV_DATE = &#x27;prevDate&#x27;,
-    REMINDER = &#x27;reminder&#x27;,
-    RENDERED = &#x27;rendered&#x27;,
-    REPEATED = &#x27;repeated&#x27;,
-    SCHEDULER = &#x27;scheduler&#x27;,
-    SCHEDULER_EVENT = &#x27;scheduler-event&#x27;,
-    SCROLLABLE = &#x27;scrollable&#x27;,
-    SHORT = &#x27;short&#x27;,
-    START_DATE = &#x27;startDate&#x27;,
-    STRINGS = &#x27;strings&#x27;,
-    TITLE = &#x27;title&#x27;,
-    TITLE_DATE_FORMAT = &#x27;titleDateFormat&#x27;,
-    TODAY = &#x27;today&#x27;,
-    TODAY_DATE = &#x27;todayDate&#x27;,
-    TODAY_NODE = &#x27;todayNode&#x27;,
-    TRIGGER_NODE = &#x27;triggerNode&#x27;,
-    VIEW = &#x27;view&#x27;,
-    VIEW_DATE_NODE = &#x27;viewDateNode&#x27;,
-    VIEW_STACK = &#x27;viewStack&#x27;,
-    VIEWS = &#x27;views&#x27;,
-    VIEWS_NODE = &#x27;viewsNode&#x27;,
-    VISIBLE = &#x27;visible&#x27;,
-    RIGHT = &#x27;right&#x27;,
-    ACTIVE = &#x27;active&#x27;,
-    CHEVRON = &#x27;chevron&#x27;,
-    BTN = &#x27;btn&#x27;,
-    LEFT = &#x27;left&#x27;,
 
     getCN = A.getClassName,
 
-    CSS_ICON = getCN(ICON),
-    CSS_SCHEDULER_CONTROLS = getCN(SCHEDULER_BASE, CONTROLS),
+    CSS_ICON = getCN(&#x27;icon&#x27;),
+    CSS_SCHEDULER_CONTROLS = getCN(&#x27;scheduler-base&#x27;, &#x27;controls&#x27;),
 
-    CSS_SCHEDULER_HD = getCN(SCHEDULER_BASE, HD),
-    CSS_SCHEDULER_ICON_NEXT = getCN(SCHEDULER_BASE, ICON, NEXT),
-    CSS_SCHEDULER_ICON_PREV = getCN(SCHEDULER_BASE, ICON, PREV),
-    CSS_SCHEDULER_NAV = getCN(SCHEDULER_BASE, NAV),
-    CSS_SCHEDULER_TODAY = getCN(SCHEDULER_BASE, TODAY),
-    CSS_SCHEDULER_VIEW = getCN(SCHEDULER_BASE, VIEW),
-    CSS_SCHEDULER_VIEW_ = getCN(SCHEDULER_BASE, VIEW, _EMPTY_STR),
-    CSS_SCHEDULER_VIEW_DATE = getCN(SCHEDULER_BASE, VIEW, DATE),
-    CSS_SCHEDULER_VIEW_NOSCROLL = getCN(SCHEDULER_VIEW, NOSCROLL),
-    CSS_SCHEDULER_VIEW_SCROLLABLE = getCN(SCHEDULER_VIEW, SCROLLABLE),
-    CSS_SCHEDULER_VIEW_SELECTED = getCN(ACTIVE),
-    CSS_BTN = getCN(BTN),
-    CSS_ICON_CHEVRON_RIGHT = getCN(ICON, CHEVRON, RIGHT),
-    CSS_ICON_CHEVRON_LEFT = getCN(ICON, CHEVRON, LEFT),
-    CSS_SCHEDULER_VIEWS = getCN(SCHEDULER_BASE, VIEWS),
+    CSS_SCHEDULER_HD = getCN(&#x27;scheduler-base&#x27;, &#x27;hd&#x27;),
+    CSS_SCHEDULER_ICON_NEXT = getCN(&#x27;scheduler-base&#x27;, &#x27;icon&#x27;, &#x27;next&#x27;),
+    CSS_SCHEDULER_ICON_PREV = getCN(&#x27;scheduler-base&#x27;, &#x27;icon&#x27;, &#x27;prev&#x27;),
+    CSS_SCHEDULER_NAV = getCN(&#x27;scheduler-base&#x27;, &#x27;nav&#x27;),
+    CSS_SCHEDULER_TODAY = getCN(&#x27;scheduler-base&#x27;, &#x27;today&#x27;),
+    CSS_SCHEDULER_VIEW = getCN(&#x27;scheduler-base&#x27;, &#x27;view&#x27;),
+    CSS_SCHEDULER_VIEW_ = getCN(&#x27;scheduler-base&#x27;, &#x27;view&#x27;, &#x27;&#x27;),
+    CSS_SCHEDULER_VIEW_DATE = getCN(&#x27;scheduler-base&#x27;, &#x27;view&#x27;, &#x27;date&#x27;),
+    CSS_SCHEDULER_VIEW_NOSCROLL = getCN(&#x27;scheduler-view&#x27;, &#x27;noscroll&#x27;),
+    CSS_SCHEDULER_VIEW_SCROLLABLE = getCN(&#x27;scheduler-view&#x27;, &#x27;scrollable&#x27;),
+    CSS_SCHEDULER_VIEW_SELECTED = getCN(&#x27;active&#x27;),
+    CSS_BTN = getCN(&#x27;btn&#x27;),
+    CSS_ICON_CHEVRON_RIGHT = getCN(&#x27;icon&#x27;, &#x27;chevron&#x27;, &#x27;right&#x27;),
+    CSS_ICON_CHEVRON_LEFT = getCN(&#x27;icon&#x27;, &#x27;chevron&#x27;, &#x27;left&#x27;),
+    CSS_SCHEDULER_VIEWS = getCN(&#x27;scheduler-base&#x27;, &#x27;views&#x27;),
 
-    CSS_SCHEDULER_EVENT = getCN(SCHEDULER_EVENT),
-    CSS_SCHEDULER_EVENT_ALL_DAY = getCN(SCHEDULER_EVENT, ALL, DAY),
-    CSS_SCHEDULER_EVENT_CONTENT = getCN(SCHEDULER_EVENT, CONTENT),
-    CSS_SCHEDULER_EVENT_DISABLED = getCN(SCHEDULER_EVENT, DISABLED),
-    CSS_SCHEDULER_EVENT_HIDDEN = getCN(SCHEDULER_EVENT, HIDDEN),
-    CSS_SCHEDULER_EVENT_ICON_DISABLED = getCN(SCHEDULER_EVENT, ICON, DISABLED),
-    CSS_SCHEDULER_EVENT_ICON_MEETING = getCN(SCHEDULER_EVENT, ICON, MEETING),
-    CSS_SCHEDULER_EVENT_ICON_REMINDER = getCN(SCHEDULER_EVENT, ICON, REMINDER),
-    CSS_SCHEDULER_EVENT_ICON_REPEATED = getCN(SCHEDULER_EVENT, ICON, REPEATED),
-    CSS_SCHEDULER_EVENT_ICONS = getCN(SCHEDULER_EVENT, ICONS),
-    CSS_SCHEDULER_EVENT_MEETING = getCN(SCHEDULER_EVENT, MEETING),
-    CSS_SCHEDULER_EVENT_PAST = getCN(SCHEDULER_EVENT, PAST),
-    CSS_SCHEDULER_EVENT_REMINDER = getCN(SCHEDULER_EVENT, REMINDER),
-    CSS_SCHEDULER_EVENT_REPEATED = getCN(SCHEDULER_EVENT, REPEATED),
-    CSS_SCHEDULER_EVENT_SHORT = getCN(SCHEDULER_EVENT, SHORT),
-    CSS_SCHEDULER_EVENT_TITLE = getCN(SCHEDULER_EVENT, TITLE),
+    CSS_SCHEDULER_EVENT = getCN(&#x27;scheduler-event&#x27;),
+    CSS_SCHEDULER_EVENT_ALL_DAY = getCN(&#x27;scheduler-event&#x27;, &#x27;all&#x27;, &#x27;day&#x27;),
+    CSS_SCHEDULER_EVENT_CONTENT = getCN(&#x27;scheduler-event&#x27;, &#x27;content&#x27;),
+    CSS_SCHEDULER_EVENT_DISABLED = getCN(&#x27;scheduler-event&#x27;, &#x27;disabled&#x27;),
+    CSS_SCHEDULER_EVENT_HIDDEN = getCN(&#x27;scheduler-event&#x27;, &#x27;hidden&#x27;),
+    CSS_SCHEDULER_EVENT_ICON_DISABLED = getCN(&#x27;scheduler-event&#x27;, &#x27;icon&#x27;, &#x27;disabled&#x27;),
+    CSS_SCHEDULER_EVENT_ICON_MEETING = getCN(&#x27;scheduler-event&#x27;, &#x27;icon&#x27;, &#x27;meeting&#x27;),
+    CSS_SCHEDULER_EVENT_ICON_REMINDER = getCN(&#x27;scheduler-event&#x27;, &#x27;icon&#x27;, &#x27;reminder&#x27;),
+    CSS_SCHEDULER_EVENT_ICON_REPEATED = getCN(&#x27;scheduler-event&#x27;, &#x27;icon&#x27;, &#x27;repeated&#x27;),
+    CSS_SCHEDULER_EVENT_ICONS = getCN(&#x27;scheduler-event&#x27;, &#x27;icons&#x27;),
+    CSS_SCHEDULER_EVENT_MEETING = getCN(&#x27;scheduler-event&#x27;, &#x27;meeting&#x27;),
+    CSS_SCHEDULER_EVENT_PAST = getCN(&#x27;scheduler-event&#x27;, &#x27;past&#x27;),
+    CSS_SCHEDULER_EVENT_REMINDER = getCN(&#x27;scheduler-event&#x27;, &#x27;reminder&#x27;),
+    CSS_SCHEDULER_EVENT_REPEATED = getCN(&#x27;scheduler-event&#x27;, &#x27;repeated&#x27;),
+    CSS_SCHEDULER_EVENT_SHORT = getCN(&#x27;scheduler-event&#x27;, &#x27;short&#x27;),
+    CSS_SCHEDULER_EVENT_TITLE = getCN(&#x27;scheduler-event&#x27;, &#x27;title&#x27;),
 
     TPL_HTML_OPEN_SPAN = &#x27;&lt;span&gt;&#x27;,
     TPL_HTML_CLOSE_SPAN = &#x27;&lt;/span&gt;&#x27;,
     TPL_SCHEDULER_CONTROLS = &#x27;&lt;div class=&quot;span7 &#x27; + CSS_SCHEDULER_CONTROLS + &#x27;&quot;&gt;&lt;/div&gt;&#x27;,
     TPL_SCHEDULER_HD = &#x27;&lt;div class=&quot;row-fluid &#x27; + CSS_SCHEDULER_HD + &#x27;&quot;&gt;&lt;/div&gt;&#x27;,
-    TPL_SCHEDULER_ICON_NEXT = &#x27;&lt;button type=&quot;button&quot; class=&quot;&#x27; + [CSS_SCHEDULER_ICON_NEXT, CSS_BTN].join(_SPACE) +
+    TPL_SCHEDULER_ICON_NEXT = &#x27;&lt;button type=&quot;button&quot; class=&quot;&#x27; + [CSS_SCHEDULER_ICON_NEXT, CSS_BTN].join(&#x27; &#x27;) +
         &#x27;&quot;&gt;&lt;i class=&quot;&#x27; + CSS_ICON_CHEVRON_RIGHT + &#x27;&quot;&gt;&lt;/i&gt;&lt;/button&gt;&#x27;,
-    TPL_SCHEDULER_ICON_PREV = &#x27;&lt;button type=&quot;button&quot; class=&quot;&#x27; + [CSS_SCHEDULER_ICON_PREV, CSS_BTN].join(_SPACE) +
+    TPL_SCHEDULER_ICON_PREV = &#x27;&lt;button type=&quot;button&quot; class=&quot;&#x27; + [CSS_SCHEDULER_ICON_PREV, CSS_BTN].join(&#x27; &#x27;) +
         &#x27;&quot;&gt;&lt;i class=&quot;&#x27; + CSS_ICON_CHEVRON_LEFT + &#x27;&quot;&gt;&lt;/i&gt;&lt;/button&gt;&#x27;,
     TPL_SCHEDULER_NAV = &#x27;&lt;div class=&quot;btn-group&quot;&gt;&lt;/div&gt;&#x27;,
-    TPL_SCHEDULER_TODAY = &#x27;&lt;button type=&quot;button&quot; class=&quot;&#x27; + [CSS_SCHEDULER_TODAY, CSS_BTN].join(_SPACE) +
+    TPL_SCHEDULER_TODAY = &#x27;&lt;button type=&quot;button&quot; class=&quot;&#x27; + [CSS_SCHEDULER_TODAY, CSS_BTN].join(&#x27; &#x27;) +
         &#x27;&quot;&gt;{today}&lt;/button&gt;&#x27;,
-    TPL_SCHEDULER_VIEW = &#x27;&lt;button type=&quot;button&quot; class=&quot;&#x27; + [CSS_SCHEDULER_VIEW, CSS_SCHEDULER_VIEW_].join(_SPACE) +
+    TPL_SCHEDULER_VIEW = &#x27;&lt;button type=&quot;button&quot; class=&quot;&#x27; + [CSS_SCHEDULER_VIEW, CSS_SCHEDULER_VIEW_].join(&#x27; &#x27;) +
         &#x27;{name}&quot; data-view-name=&quot;{name}&quot;&gt;{label}&lt;/button&gt;&#x27;,
     TPL_SCHEDULER_VIEW_DATE = &#x27;&lt;span class=&quot;&#x27; + CSS_SCHEDULER_VIEW_DATE + &#x27;&quot;&gt;&lt;/span&gt;&#x27;,
     TPL_SCHEDULER_VIEWS = &#x27;&lt;div class=&quot;span5 &#x27; + CSS_SCHEDULER_VIEWS + &#x27;&quot;&gt;&lt;/div&gt;&#x27;;
@@ -2287,7 +2207,7 @@ var SchedulerEvent = A.Component.create({
      * @type {String}
      * @static
      */
-    NAME: SCHEDULER_EVENT,
+    NAME: &#x27;scheduler-event&#x27;,
 
     /**
      * Static property used to define the default attribute
@@ -2373,24 +2293,24 @@ var SchedulerEvent = A.Component.create({
             getter: &#x27;_getTitleDateFormat&#x27;,
             value: function() {
                 var instance = this,
-                    scheduler = instance.get(SCHEDULER),
-                    isoTime = scheduler &amp;&amp; scheduler.get(ACTIVE_VIEW).get(ISO_TIME),
+                    scheduler = instance.get(&#x27;scheduler&#x27;),
+                    isoTime = scheduler &amp;&amp; scheduler.get(&#x27;activeView&#x27;).get(&#x27;isoTime&#x27;),
 
                     format = {
-                        endDate: TPL_HTML_OPEN_SPAN + _N_DASH + _SPACE + TITLE_DT_FORMAT_ISO + TPL_HTML_CLOSE_SPAN,
-                        startDate: TITLE_DT_FORMAT_ISO
+                        endDate: TPL_HTML_OPEN_SPAN + &#x27;&amp;ndash;&#x27; + &#x27; &#x27; + &#x27;%H:%M&#x27; + TPL_HTML_CLOSE_SPAN,
+                        startDate: &#x27;%H:%M&#x27;
                     };
 
                 if (!isoTime) {
-                    format.endDate = TPL_HTML_OPEN_SPAN + _N_DASH + _SPACE + getUSDateFormat(instance.get(END_DATE)) +
+                    format.endDate = TPL_HTML_OPEN_SPAN + &#x27;&amp;ndash;&#x27; + &#x27; &#x27; + getUSDateFormat(instance.get(&#x27;endDate&#x27;)) +
                         TPL_HTML_CLOSE_SPAN;
-                    format.startDate = getUSDateFormat(instance.get(START_DATE));
+                    format.startDate = getUSDateFormat(instance.get(&#x27;startDate&#x27;));
                 }
 
                 if (instance.getMinutesDuration() &lt;= 30) {
                     delete format.endDate;
                 }
-                else if (instance.get(ALL_DAY)) {
+                else if (instance.get(&#x27;allDay&#x27;)) {
                     format = {};
                 }
 
@@ -2410,7 +2330,7 @@ var SchedulerEvent = A.Component.create({
         endDate: {
             setter: &#x27;_setDate&#x27;,
             valueFn: function() {
-                var date = DateMath.clone(this.get(START_DATE));
+                var date = DateMath.clone(this.get(&#x27;startDate&#x27;));
 
                 date.setHours(date.getHours() + 1);
 
@@ -2449,7 +2369,7 @@ var SchedulerEvent = A.Component.create({
          */
         node: {
             valueFn: function() {
-                return A.NodeList.create(A.Node.create(this.EVENT_NODE_TEMPLATE).setData(SCHEDULER_EVENT, this));
+                return A.NodeList.create(A.Node.create(this.EVENT_NODE_TEMPLATE).setData(&#x27;scheduler-event&#x27;, this));
             }
         },
 
@@ -2529,15 +2449,15 @@ var SchedulerEvent = A.Component.create({
      * @type {Array}
      * @static
      */
-    PROPAGATE_ATTRS: [ALL_DAY, START_DATE, END_DATE, CONTENT, COLOR, COLOR_BRIGHTNESS_FACTOR,
-        COLOR_SATURATION_FACTOR, TITLE_DATE_FORMAT, VISIBLE, DISABLED],
+    PROPAGATE_ATTRS: [&#x27;allDay&#x27;, &#x27;startDate&#x27;, &#x27;endDate&#x27;, &#x27;content&#x27;, &#x27;color&#x27;, &#x27;colorBrightnessFactor&#x27;,
+        &#x27;colorSaturationFactor&#x27;, &#x27;titleDateFormat&#x27;, &#x27;visible&#x27;, &#x27;disabled&#x27;],
 
     prototype: {
         EVENT_NODE_TEMPLATE: &#x27;&lt;div class=&quot;&#x27; + CSS_SCHEDULER_EVENT + &#x27;&quot;&gt;&#x27; + &#x27;&lt;div class=&quot;&#x27; + CSS_SCHEDULER_EVENT_TITLE + &#x27;&quot;&gt;&lt;/div&gt;&#x27; + &#x27;&lt;div class=&quot;&#x27; + CSS_SCHEDULER_EVENT_CONTENT + &#x27;&quot;&gt;&lt;/div&gt;&#x27; + &#x27;&lt;div class=&quot;&#x27; + CSS_SCHEDULER_EVENT_ICONS + &#x27;&quot;&gt;&#x27; + &#x27;&lt;span class=&quot;&#x27; + [
-            CSS_ICON, CSS_SCHEDULER_EVENT_ICON_DISABLED].join(_SPACE) + &#x27;&quot;&gt;&lt;/span&gt;&#x27; + &#x27;&lt;span class=&quot;&#x27; + [CSS_ICON,
-            CSS_SCHEDULER_EVENT_ICON_MEETING].join(_SPACE) + &#x27;&quot;&gt;&lt;/span&gt;&#x27; + &#x27;&lt;span class=&quot;&#x27; + [CSS_ICON,
-            CSS_SCHEDULER_EVENT_ICON_REMINDER].join(_SPACE) + &#x27;&quot;&gt;&lt;/span&gt;&#x27; + &#x27;&lt;span class=&quot;&#x27; + [CSS_ICON,
-            CSS_SCHEDULER_EVENT_ICON_REPEATED].join(_SPACE) + &#x27;&quot;&gt;&lt;/span&gt;&#x27; + &#x27;&lt;/div&gt;&#x27; + &#x27;&lt;/div&gt;&#x27;,
+            CSS_ICON, CSS_SCHEDULER_EVENT_ICON_DISABLED].join(&#x27; &#x27;) + &#x27;&quot;&gt;&lt;/span&gt;&#x27; + &#x27;&lt;span class=&quot;&#x27; + [CSS_ICON,
+            CSS_SCHEDULER_EVENT_ICON_MEETING].join(&#x27; &#x27;) + &#x27;&quot;&gt;&lt;/span&gt;&#x27; + &#x27;&lt;span class=&quot;&#x27; + [CSS_ICON,
+            CSS_SCHEDULER_EVENT_ICON_REMINDER].join(&#x27; &#x27;) + &#x27;&quot;&gt;&lt;/span&gt;&#x27; + &#x27;&lt;span class=&quot;&#x27; + [CSS_ICON,
+            CSS_SCHEDULER_EVENT_ICON_REPEATED].join(&#x27; &#x27;) + &#x27;&quot;&gt;&lt;/span&gt;&#x27; + &#x27;&lt;/div&gt;&#x27; + &#x27;&lt;/div&gt;&#x27;,
 
         /**
          * Construction logic executed during &#x60;SchedulerEvent&#x60; instantiation.
@@ -2584,31 +2504,31 @@ var SchedulerEvent = A.Component.create({
             var instance = this;
 
             instance._uiSetAllDay(
-                instance.get(ALL_DAY));
+                instance.get(&#x27;allDay&#x27;));
 
             instance._uiSetColor(
-                instance.get(COLOR));
+                instance.get(&#x27;color&#x27;));
 
             instance._uiSetDisabled(
-                instance.get(DISABLED));
+                instance.get(&#x27;disabled&#x27;));
 
             instance._uiSetEndDate(
-                instance.get(END_DATE));
+                instance.get(&#x27;endDate&#x27;));
 
             instance._uiSetMeeting(
-                instance.get(MEETING));
+                instance.get(&#x27;meeting&#x27;));
 
             instance._uiSetPast(
                 instance._isPastEvent());
 
             instance._uiSetReminder(
-                instance.get(REMINDER));
+                instance.get(&#x27;reminder&#x27;));
 
             instance._uiSetRepeated(
-                instance.get(REPEATED));
+                instance.get(&#x27;repeated&#x27;));
 
             instance._uiSetVisible(
-                instance.get(VISIBLE));
+                instance.get(&#x27;visible&#x27;));
 
             instance.syncNodeTitleUI();
             instance.syncNodeContentUI();
@@ -2624,7 +2544,7 @@ var SchedulerEvent = A.Component.create({
         destroy: function() {
             var instance = this;
 
-            instance.get(NODE).remove(true);
+            instance.get(&#x27;node&#x27;).remove(true);
         },
 
         /**
@@ -2642,7 +2562,8 @@ var SchedulerEvent = A.Component.create({
         addPaddingNode: function() {
             var instance = this;
 
-            instance.get(NODE).push(A.Node.create(instance.EVENT_NODE_TEMPLATE).setData(SCHEDULER_EVENT, instance));
+            instance.get(&#x27;node&#x27;).push(
+                A.Node.create(instance.EVENT_NODE_TEMPLATE).setData(&#x27;scheduler-event&#x27;, instance));
 
             instance.syncUI();
         },
@@ -2656,7 +2577,7 @@ var SchedulerEvent = A.Component.create({
         clone: function() {
             var instance = this,
                 cloned = null,
-                scheduler = instance.get(SCHEDULER);
+                scheduler = instance.get(&#x27;scheduler&#x27;);
 
             if (scheduler) {
                 cloned = new scheduler.eventModel();
@@ -2679,8 +2600,8 @@ var SchedulerEvent = A.Component.create({
             var instance = this;
 
             instance.setAttrs({
-                    endDate: DateMath.clone(evt.get(END_DATE)),
-                    startDate: DateMath.clone(evt.get(START_DATE))
+                    endDate: DateMath.clone(evt.get(&#x27;endDate&#x27;)),
+                    startDate: DateMath.clone(evt.get(&#x27;startDate&#x27;))
                 },
                 options);
         },
@@ -2722,7 +2643,7 @@ var SchedulerEvent = A.Component.create({
             var instance = this;
 
             return DateMath.getDayOffset(
-                instance.get(END_DATE), instance.get(START_DATE));
+                instance.get(&#x27;endDate&#x27;), instance.get(&#x27;startDate&#x27;));
         },
 
         /**
@@ -2735,7 +2656,7 @@ var SchedulerEvent = A.Component.create({
             var instance = this;
 
             return DateMath.getHoursOffset(
-                instance.get(END_DATE), instance.get(START_DATE));
+                instance.get(&#x27;endDate&#x27;), instance.get(&#x27;startDate&#x27;));
         },
 
         /**
@@ -2748,7 +2669,7 @@ var SchedulerEvent = A.Component.create({
             var instance = this;
 
             return DateMath.getMinutesOffset(
-                instance.get(END_DATE), instance.get(START_DATE));
+                instance.get(&#x27;endDate&#x27;), instance.get(&#x27;startDate&#x27;));
         },
 
         /**
@@ -2761,7 +2682,7 @@ var SchedulerEvent = A.Component.create({
             var instance = this;
 
             return DateMath.getSecondsOffset(
-                instance.get(END_DATE), instance.get(START_DATE));
+                instance.get(&#x27;endDate&#x27;), instance.get(&#x27;startDate&#x27;));
         },
 
         /**
@@ -2774,7 +2695,7 @@ var SchedulerEvent = A.Component.create({
         sameEndDate: function(evt) {
             var instance = this;
 
-            return DateMath.compare(instance.get(END_DATE), evt.get(END_DATE));
+            return DateMath.compare(instance.get(&#x27;endDate&#x27;), evt.get(&#x27;endDate&#x27;));
         },
 
         /**
@@ -2788,7 +2709,7 @@ var SchedulerEvent = A.Component.create({
             var instance = this;
 
             return DateMath.compare(
-                instance.get(START_DATE), evt.get(START_DATE));
+                instance.get(&#x27;startDate&#x27;), evt.get(&#x27;startDate&#x27;));
         },
 
         /**
@@ -2800,8 +2721,8 @@ var SchedulerEvent = A.Component.create({
          */
         isAfter: function(evt) {
             var instance = this;
-            var startDate = instance.get(START_DATE);
-            var evtStartDate = evt.get(START_DATE);
+            var startDate = instance.get(&#x27;startDate&#x27;);
+            var evtStartDate = evt.get(&#x27;startDate&#x27;);
 
             return DateMath.after(startDate, evtStartDate);
         },
@@ -2815,8 +2736,8 @@ var SchedulerEvent = A.Component.create({
          */
         isBefore: function(evt) {
             var instance = this;
-            var startDate = instance.get(START_DATE);
-            var evtStartDate = evt.get(START_DATE);
+            var startDate = instance.get(&#x27;startDate&#x27;);
+            var evtStartDate = evt.get(&#x27;startDate&#x27;);
 
             return DateMath.before(startDate, evtStartDate);
         },
@@ -2830,9 +2751,9 @@ var SchedulerEvent = A.Component.create({
          */
         intersects: function(evt) {
             var instance = this;
-            var endDate = instance.get(END_DATE);
-            var startDate = instance.get(START_DATE);
-            var evtStartDate = evt.get(START_DATE);
+            var endDate = instance.get(&#x27;endDate&#x27;);
+            var startDate = instance.get(&#x27;startDate&#x27;);
+            var evtStartDate = evt.get(&#x27;startDate&#x27;);
 
             return (instance.sameStartDate(evt) ||
                 DateMath.between(evtStartDate, startDate, endDate));
@@ -2848,11 +2769,11 @@ var SchedulerEvent = A.Component.create({
          */
         intersectHours: function(evt) {
             var instance = this;
-            var endDate = instance.get(END_DATE);
-            var startDate = instance.get(START_DATE);
+            var endDate = instance.get(&#x27;endDate&#x27;);
+            var startDate = instance.get(&#x27;startDate&#x27;);
             var evtModifiedStartDate = DateMath.clone(startDate);
 
-            DateMath.copyHours(evtModifiedStartDate, evt.get(START_DATE));
+            DateMath.copyHours(evtModifiedStartDate, evt.get(&#x27;startDate&#x27;));
 
             return (DateMath.compare(startDate, evtModifiedStartDate) ||
                 DateMath.between(evtModifiedStartDate, startDate, endDate));
@@ -2869,7 +2790,7 @@ var SchedulerEvent = A.Component.create({
             var instance = this;
 
             return DateMath.isDayBoundary(
-                instance.get(START_DATE), instance.get(END_DATE));
+                instance.get(&#x27;startDate&#x27;), instance.get(&#x27;endDate&#x27;));
         },
 
         /**
@@ -2882,7 +2803,7 @@ var SchedulerEvent = A.Component.create({
             var instance = this;
 
             return DateMath.isDayOverlap(
-                instance.get(START_DATE), instance.get(END_DATE));
+                instance.get(&#x27;startDate&#x27;), instance.get(&#x27;endDate&#x27;));
         },
 
         /**
@@ -2895,7 +2816,7 @@ var SchedulerEvent = A.Component.create({
         getClearEndDate: function() {
             var instance = this;
 
-            return DateMath.safeClearTime(instance.get(END_DATE));
+            return DateMath.safeClearTime(instance.get(&#x27;endDate&#x27;));
         },
 
         /**
@@ -2908,7 +2829,7 @@ var SchedulerEvent = A.Component.create({
         getClearStartDate: function() {
             var instance = this;
 
-            return DateMath.safeClearTime(instance.get(START_DATE));
+            return DateMath.safeClearTime(instance.get(&#x27;startDate&#x27;));
         },
 
         /**
@@ -2939,8 +2860,8 @@ var SchedulerEvent = A.Component.create({
         setContent: function(content) {
             var instance = this;
 
-            instance.get(NODE).each(function(node) {
-                var contentNode = node.one(_DOT + CSS_SCHEDULER_EVENT_CONTENT);
+            instance.get(&#x27;node&#x27;).each(function(node) {
+                var contentNode = node.one(&#x27;.&#x27; + CSS_SCHEDULER_EVENT_CONTENT);
 
                 contentNode.setContent(content);
             });
@@ -2955,8 +2876,8 @@ var SchedulerEvent = A.Component.create({
         setTitle: function(content) {
             var instance = this;
 
-            instance.get(NODE).each(function(node) {
-                var titleNode = node.one(_DOT + CSS_SCHEDULER_EVENT_TITLE);
+            instance.get(&#x27;node&#x27;).each(function(node) {
+                var titleNode = node.one(&#x27;.&#x27; + CSS_SCHEDULER_EVENT_TITLE);
 
                 titleNode.setContent(content);
             });
@@ -2971,7 +2892,7 @@ var SchedulerEvent = A.Component.create({
         syncNodeContentUI: function() {
             var instance = this;
 
-            instance.setContent(instance.get(CONTENT));
+            instance.setContent(instance.get(&#x27;content&#x27;));
         },
 
         /**
@@ -2980,9 +2901,9 @@ var SchedulerEvent = A.Component.create({
          */
         syncNodeTitleUI: function() {
             var instance = this,
-                format = instance.get(TITLE_DATE_FORMAT),
-                startDate = instance.get(START_DATE),
-                endDate = instance.get(END_DATE),
+                format = instance.get(&#x27;titleDateFormat&#x27;),
+                startDate = instance.get(&#x27;startDate&#x27;),
+                endDate = instance.get(&#x27;endDate&#x27;),
                 title = [];
 
             if (format.startDate) {
@@ -2993,7 +2914,7 @@ var SchedulerEvent = A.Component.create({
                 title.push(instance._formatDate(endDate, format.endDate));
             }
 
-            instance.setTitle(title.join(_EMPTY_STR));
+            instance.setTitle(title.join(&#x27;&#x27;));
         },
 
         /**
@@ -3006,8 +2927,8 @@ var SchedulerEvent = A.Component.create({
          */
         split: function() {
             var instance = this,
-                s1 = DateMath.clone(instance.get(START_DATE)),
-                e1 = DateMath.clone(instance.get(END_DATE));
+                s1 = DateMath.clone(instance.get(&#x27;startDate&#x27;)),
+                e1 = DateMath.clone(instance.get(&#x27;endDate&#x27;));
 
             if (instance.isDayOverlapEvent() &amp;&amp; !instance.isDayBoundaryEvent()) {
                 var s2 = DateMath.clone(s1);
@@ -3132,7 +3053,7 @@ var SchedulerEvent = A.Component.create({
          */
         _isPastEvent: function() {
             var instance = this,
-                endDate = instance.get(END_DATE);
+                endDate = instance.get(&#x27;endDate&#x27;);
 
             return (endDate.getTime() &lt; (new Date()).getTime());
         },
@@ -3164,7 +3085,7 @@ var SchedulerEvent = A.Component.create({
          */
         _formatDate: function(date, format) {
             var instance = this;
-            var locale = instance.get(LOCALE);
+            var locale = instance.get(&#x27;locale&#x27;);
 
             return A.DataType.Date.format(date, {
                 format: format,
@@ -3206,7 +3127,7 @@ var SchedulerEvent = A.Component.create({
         _uiSetAllDay: function(val) {
             var instance = this;
 
-            instance.get(NODE).toggleClass(CSS_SCHEDULER_EVENT_ALL_DAY, !! val);
+            instance.get(&#x27;node&#x27;).toggleClass(CSS_SCHEDULER_EVENT_ALL_DAY, !! val);
         },
 
         /**
@@ -3218,13 +3139,13 @@ var SchedulerEvent = A.Component.create({
          */
         _uiSetColor: function(val) {
             var instance = this;
-            var node = instance.get(NODE);
+            var node = instance.get(&#x27;node&#x27;);
 
             var color = Color.toHSL(val);
             var backgroundColor = Color.toArray(color);
 
-            backgroundColor[1] *= instance.get(COLOR_SATURATION_FACTOR);
-            backgroundColor[2] *= instance.get(COLOR_BRIGHTNESS_FACTOR);
+            backgroundColor[1] *= instance.get(&#x27;colorSaturationFactor&#x27;);
+            backgroundColor[2] *= instance.get(&#x27;colorBrightnessFactor&#x27;);
             backgroundColor = Color.fromArray(backgroundColor, Color.TYPES.HSL);
 
             // Some browsers doesn&#x27;t support HSL colors, convert to RGB for
@@ -3250,7 +3171,7 @@ var SchedulerEvent = A.Component.create({
         _uiSetDisabled: function(val) {
             var instance = this;
 
-            instance.get(NODE).toggleClass(CSS_SCHEDULER_EVENT_DISABLED, !! val);
+            instance.get(&#x27;node&#x27;).toggleClass(CSS_SCHEDULER_EVENT_DISABLED, !! val);
         },
 
         /**
@@ -3262,7 +3183,7 @@ var SchedulerEvent = A.Component.create({
         _uiSetEndDate: function() {
             var instance = this;
 
-            instance.get(NODE).toggleClass(CSS_SCHEDULER_EVENT_SHORT, instance.getMinutesDuration() &lt;= 30);
+            instance.get(&#x27;node&#x27;).toggleClass(CSS_SCHEDULER_EVENT_SHORT, instance.getMinutesDuration() &lt;= 30);
         },
 
         /**
@@ -3275,7 +3196,7 @@ var SchedulerEvent = A.Component.create({
         _uiSetMeeting: function(val) {
             var instance = this;
 
-            instance.get(NODE).toggleClass(CSS_SCHEDULER_EVENT_MEETING, !! val);
+            instance.get(&#x27;node&#x27;).toggleClass(CSS_SCHEDULER_EVENT_MEETING, !! val);
         },
 
         /**
@@ -3288,7 +3209,7 @@ var SchedulerEvent = A.Component.create({
         _uiSetPast: function(val) {
             var instance = this;
 
-            instance.get(NODE).toggleClass(CSS_SCHEDULER_EVENT_PAST, !! val);
+            instance.get(&#x27;node&#x27;).toggleClass(CSS_SCHEDULER_EVENT_PAST, !! val);
         },
 
         /**
@@ -3301,7 +3222,7 @@ var SchedulerEvent = A.Component.create({
         _uiSetReminder: function(val) {
             var instance = this;
 
-            instance.get(NODE).toggleClass(CSS_SCHEDULER_EVENT_REMINDER, !! val);
+            instance.get(&#x27;node&#x27;).toggleClass(CSS_SCHEDULER_EVENT_REMINDER, !! val);
         },
 
         /**
@@ -3314,7 +3235,7 @@ var SchedulerEvent = A.Component.create({
         _uiSetRepeated: function(val) {
             var instance = this;
 
-            instance.get(NODE).toggleClass(CSS_SCHEDULER_EVENT_REPEATED, !! val);
+            instance.get(&#x27;node&#x27;).toggleClass(CSS_SCHEDULER_EVENT_REPEATED, !! val);
         },
 
         /**
@@ -3327,7 +3248,7 @@ var SchedulerEvent = A.Component.create({
         _uiSetVisible: function(val) {
             var instance = this;
 
-            instance.get(NODE).toggleClass(CSS_SCHEDULER_EVENT_HIDDEN, !val);
+            instance.get(&#x27;node&#x27;).toggleClass(CSS_SCHEDULER_EVENT_HIDDEN, !val);
         }
     }
 });

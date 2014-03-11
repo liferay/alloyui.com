@@ -20,7 +20,7 @@
 </head>
 <body class="yui3-skin-sam">
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
         <div class="navbar-inner">
             <h1 class="brand">
                 <a href="/">
@@ -2103,36 +2103,16 @@ var L = A.Lang,
 
     AArray = A.Array,
 
-    BOOLEAN = &#x27;boolean&#x27;,
-    CHECKBOX = &#x27;checkbox&#x27;,
-    CHECKED = &#x27;checked&#x27;,
-    CHOICE = &#x27;choice&#x27;,
-    EMPTY_STR = &#x27;&#x27;,
-    FIELD = &#x27;field&#x27;,
-    FORM_BUILDER_CHECKBOX_FIELD = &#x27;form-builder-checkbox-field&#x27;,
-    FORM_BUILDER_FIELD = &#x27;form-builder-field&#x27;,
-    ID = &#x27;id&#x27;,
-    LABEL = &#x27;label&#x27;,
-    LABEL_NODE = &#x27;labelNode&#x27;,
-    NAME = &#x27;name&#x27;,
-    NO = &#x27;no&#x27;,
-    NODE = &#x27;node&#x27;,
-    PREDEFINED_VALUE = &#x27;predefinedValue&#x27;,
-    SPACE = &#x27; &#x27;,
-    TEMPLATE = &#x27;template&#x27;,
-    TEMPLATE_NODE = &#x27;templateNode&#x27;,
-    YES = &#x27;yes&#x27;,
-
     getCN = A.getClassName,
 
-    CSS_FIELD = getCN(FIELD),
-    CSS_FIELD_CHECKBOX = getCN(FIELD, CHECKBOX),
-    CSS_FIELD_CHOICE = getCN(FIELD, CHOICE),
-    CSS_FORM_BUILDER_FIELD = getCN(FORM_BUILDER_FIELD),
-    CSS_FORM_BUILDER_FIELD_NODE = getCN(FORM_BUILDER_FIELD, NODE),
+    CSS_FIELD = getCN(&#x27;field&#x27;),
+    CSS_FIELD_CHECKBOX = getCN(&#x27;field&#x27;, &#x27;checkbox&#x27;),
+    CSS_FIELD_CHOICE = getCN(&#x27;field&#x27;, &#x27;choice&#x27;),
+    CSS_FORM_BUILDER_FIELD = getCN(&#x27;form-builder-field&#x27;),
+    CSS_FORM_BUILDER_FIELD_NODE = getCN(&#x27;form-builder-field&#x27;, &#x27;node&#x27;),
 
     TPL_CHECKBOX = &#x27;&lt;input id=&quot;{id}&quot; class=&quot;&#x27; + [CSS_FORM_BUILDER_FIELD_NODE, CSS_FIELD, CSS_FIELD_CHECKBOX,
-        CSS_FIELD_CHOICE].join(SPACE) + &#x27;&quot; name=&quot;{name}&quot; type=&quot;checkbox&quot; value=&quot;{value}&quot; {checked} /&gt;&#x27;;
+        CSS_FIELD_CHOICE].join(&#x27; &#x27;) + &#x27;&quot; name=&quot;{name}&quot; type=&quot;checkbox&quot; value=&quot;{value}&quot; {checked} /&gt;&#x27;;
 
 /**
  * A base class for &#x60;A.FormBuilderCheckBoxField&#x60;.
@@ -2152,7 +2132,7 @@ var FormBuilderCheckBoxField = A.Component.create({
      * @type String
      * @static
      */
-    NAME: FORM_BUILDER_CHECKBOX_FIELD,
+    NAME: &#x27;form-builder-checkbox-field&#x27;,
 
     /**
      * Static property used to define the default attribute
@@ -2172,7 +2152,7 @@ var FormBuilderCheckBoxField = A.Component.create({
          * @type String
          */
         dataType: {
-            value: BOOLEAN
+            value: &#x27;boolean&#x27;
         },
 
         /**
@@ -2229,8 +2209,8 @@ var FormBuilderCheckBoxField = A.Component.create({
          */
         renderUI: function() {
             var instance = this,
-                templateNode = instance.get(TEMPLATE_NODE),
-                labelNode = instance.get(LABEL_NODE);
+                templateNode = instance.get(&#x27;templateNode&#x27;),
+                labelNode = instance.get(&#x27;labelNode&#x27;);
 
             A.FormBuilderCheckBoxField.superclass.renderUI.apply(instance, arguments);
 
@@ -2250,17 +2230,17 @@ var FormBuilderCheckBoxField = A.Component.create({
             var model = A.FormBuilderCheckBoxField.superclass.getPropertyModel.apply(instance, arguments);
 
             AArray.each(model, function(item, index, collection) {
-                if (item.attributeName === PREDEFINED_VALUE) {
+                if (item.attributeName === &#x27;predefinedValue&#x27;) {
                     collection[index] = {
-                        attributeName: PREDEFINED_VALUE,
+                        attributeName: &#x27;predefinedValue&#x27;,
                         editor: new A.RadioCellEditor({
                             options: {
-                                &#x27;true&#x27;: strings[YES],
-                                &#x27;false&#x27;: strings[NO]
+                                &#x27;true&#x27;: strings[&#x27;yes&#x27;],
+                                &#x27;false&#x27;: strings[&#x27;no&#x27;]
                             }
                         }),
                         formatter: A.bind(instance._booleanFormatter, instance),
-                        name: strings[PREDEFINED_VALUE]
+                        name: strings[&#x27;predefinedValue&#x27;]
                     };
                 }
             });
@@ -2276,15 +2256,15 @@ var FormBuilderCheckBoxField = A.Component.create({
          */
         getHTML: function() {
             var instance = this,
-                checked = instance.get(CHECKED);
+                checked = instance.get(&#x27;checked&#x27;);
 
             return L.sub(
-                instance.get(TEMPLATE), {
-                    checked: checked ? &#x27;checked=&quot;checked&quot;&#x27; : EMPTY_STR,
-                    id: instance.get(ID),
-                    label: instance.get(LABEL),
-                    name: instance.get(NAME),
-                    value: instance.get(PREDEFINED_VALUE)
+                instance.get(&#x27;template&#x27;), {
+                    checked: checked ? &#x27;checked=&quot;checked&quot;&#x27; : &#x27;&#x27;,
+                    id: instance.get(&#x27;id&#x27;),
+                    label: instance.get(&#x27;label&#x27;),
+                    name: instance.get(&#x27;name&#x27;),
+                    value: instance.get(&#x27;predefinedValue&#x27;)
                 }
             );
         },
@@ -2298,13 +2278,13 @@ var FormBuilderCheckBoxField = A.Component.create({
          */
         _uiSetPredefinedValue: function(val) {
             var instance = this,
-                templateNode = instance.get(TEMPLATE_NODE);
+                templateNode = instance.get(&#x27;templateNode&#x27;);
 
             if (val) {
-                templateNode.setAttribute(CHECKED, val);
+                templateNode.setAttribute(&#x27;checked&#x27;, val);
             }
             else {
-                templateNode.removeAttribute(CHECKED);
+                templateNode.removeAttribute(&#x27;checked&#x27;);
             }
         }
 

@@ -20,7 +20,7 @@
 </head>
 <body class="yui3-skin-sam">
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
         <div class="navbar-inner">
             <h1 class="brand">
                 <a href="/">
@@ -2111,46 +2111,6 @@ var Lang = A.Lang,
 
     DDM = A.DD.DDM,
 
-    APPEND = &#x27;append&#x27;,
-    CIRCLE = &#x27;circle&#x27;,
-    DELEGATE_CONFIG = &#x27;delegateConfig&#x27;,
-    DOWN = &#x27;down&#x27;,
-    DRAG = &#x27;drag&#x27;,
-    DRAG_NODE = &#x27;dragNode&#x27;,
-    DRAG_NODES = &#x27;dragNodes&#x27;,
-    DROP_CONTAINER = &#x27;dropContainer&#x27;,
-    DROP_NODES = &#x27;dropNodes&#x27;,
-    GROUPS = &#x27;groups&#x27;,
-    ICON = &#x27;icon&#x27;,
-    INDICATOR = &#x27;indicator&#x27;,
-    L = &#x27;l&#x27;,
-    LAZY_START = &#x27;lazyStart&#x27;,
-    LEFT = &#x27;left&#x27;,
-    MARGIN_BOTTOM = &#x27;marginBottom&#x27;,
-    MARGIN_TOP = &#x27;marginTop&#x27;,
-    NODE = &#x27;node&#x27;,
-    OFFSET_HEIGHT = &#x27;offsetHeight&#x27;,
-    OFFSET_WIDTH = &#x27;offsetWidth&#x27;,
-    PLACE_AFTER = &#x27;placeAfter&#x27;,
-    PLACE_BEFORE = &#x27;placeBefore&#x27;,
-    PLACEHOLDER = &#x27;placeholder&#x27;,
-    PREPEND = &#x27;prepend&#x27;,
-    PROXY = &#x27;proxy&#x27;,
-    PROXY_NODE = &#x27;proxyNode&#x27;,
-    R = &#x27;r&#x27;,
-    REGION = &#x27;region&#x27;,
-    RIGHT = &#x27;right&#x27;,
-    SORTABLE_LAYOUT = &#x27;sortable-layout&#x27;,
-    SPACE = &#x27; &#x27;,
-    TARGET = &#x27;target&#x27;,
-    TRIANGLE = &#x27;triangle&#x27;,
-    UP = &#x27;up&#x27;,
-
-    EV_PLACEHOLDER_ALIGN = &#x27;placeholderAlign&#x27;,
-    EV_QUADRANT_ENTER = &#x27;quadrantEnter&#x27;,
-    EV_QUADRANT_EXIT = &#x27;quadrantExit&#x27;,
-    EV_QUADRANT_OVER = &#x27;quadrantOver&#x27;,
-
     // caching these values for performance
     PLACEHOLDER_MARGIN_BOTTOM = 0,
     PLACEHOLDER_MARGIN_TOP = 0,
@@ -2162,7 +2122,7 @@ var Lang = A.Lang,
     },
 
     concat = function() {
-        return Array.prototype.slice.call(arguments).join(SPACE);
+        return Array.prototype.slice.call(arguments).join(&#x27; &#x27;);
     },
 
     nodeListSetter = function(val) {
@@ -2175,14 +2135,14 @@ var Lang = A.Lang,
 
     getCN = A.getClassName,
 
-    CSS_DRAG_INDICATOR = getCN(SORTABLE_LAYOUT, DRAG, INDICATOR),
-    CSS_DRAG_INDICATOR_ICON = getCN(SORTABLE_LAYOUT, DRAG, INDICATOR, ICON),
-    CSS_DRAG_INDICATOR_ICON_LEFT = getCN(SORTABLE_LAYOUT, DRAG, INDICATOR, ICON, LEFT),
-    CSS_DRAG_INDICATOR_ICON_RIGHT = getCN(SORTABLE_LAYOUT, DRAG, INDICATOR, ICON, RIGHT),
-    CSS_DRAG_TARGET_INDICATOR = getCN(SORTABLE_LAYOUT, DRAG, TARGET, INDICATOR),
-    CSS_ICON = getCN(ICON),
-    CSS_ICON_CIRCLE_TRIANGLE_L = getCN(ICON, CIRCLE, TRIANGLE, L),
-    CSS_ICON_CIRCLE_TRIANGLE_R = getCN(ICON, CIRCLE, TRIANGLE, R),
+    CSS_DRAG_INDICATOR = getCN(&#x27;sortable-layout&#x27;, &#x27;drag&#x27;, &#x27;indicator&#x27;),
+    CSS_DRAG_INDICATOR_ICON = getCN(&#x27;sortable-layout&#x27;, &#x27;drag&#x27;, &#x27;indicator&#x27;, &#x27;icon&#x27;),
+    CSS_DRAG_INDICATOR_ICON_LEFT = getCN(&#x27;sortable-layout&#x27;, &#x27;drag&#x27;, &#x27;indicator&#x27;, &#x27;icon&#x27;, &#x27;left&#x27;),
+    CSS_DRAG_INDICATOR_ICON_RIGHT = getCN(&#x27;sortable-layout&#x27;, &#x27;drag&#x27;, &#x27;indicator&#x27;, &#x27;icon&#x27;, &#x27;right&#x27;),
+    CSS_DRAG_TARGET_INDICATOR = getCN(&#x27;sortable-layout&#x27;, &#x27;drag&#x27;, &#x27;target&#x27;, &#x27;indicator&#x27;),
+    CSS_ICON = getCN(&#x27;icon&#x27;),
+    CSS_ICON_CIRCLE_TRIANGLE_L = getCN(&#x27;icon&#x27;, &#x27;circle&#x27;, &#x27;triangle&#x27;, &#x27;l&#x27;),
+    CSS_ICON_CIRCLE_TRIANGLE_R = getCN(&#x27;icon&#x27;, &#x27;circle&#x27;, &#x27;triangle&#x27;, &#x27;r&#x27;),
 
     TPL_PLACEHOLDER = &#x27;&lt;div class=&quot;&#x27; + CSS_DRAG_INDICATOR + &#x27;&quot;&gt;&#x27; +
         &#x27;&lt;div class=&quot;&#x27; + concat(CSS_DRAG_INDICATOR_ICON, CSS_DRAG_INDICATOR_ICON_LEFT, CSS_ICON,
@@ -2213,7 +2173,7 @@ var SortableLayout = A.Component.create({
      * @type String
      * @static
      */
-    NAME: SORTABLE_LAYOUT,
+    NAME: &#x27;sortable-layout&#x27;,
 
     /**
      * Static property used to define the default attribute
@@ -2240,14 +2200,14 @@ var SortableLayout = A.Component.create({
                 var config = A.merge({
                         bubbleTargets: instance,
                         dragConfig: {},
-                        nodes: instance.get(DRAG_NODES),
+                        nodes: instance.get(&#x27;dragNodes&#x27;),
                         target: true
                     },
                     val
                 );
 
                 A.mix(config.dragConfig, {
-                    groups: instance.get(GROUPS),
+                    groups: instance.get(&#x27;groups&#x27;),
                     startCentered: true
                 });
 
@@ -2307,7 +2267,7 @@ var SortableLayout = A.Component.create({
          * @type Array
          */
         groups: {
-            value: [SORTABLE_LAYOUT]
+            value: [&#x27;sortable-layout&#x27;]
         },
 
         /**
@@ -2338,13 +2298,13 @@ var SortableLayout = A.Component.create({
                     );
                 }
 
-                PLACEHOLDER_MARGIN_BOTTOM = getNumStyle(placeholder, MARGIN_BOTTOM);
-                PLACEHOLDER_MARGIN_TOP = getNumStyle(placeholder, MARGIN_TOP);
+                PLACEHOLDER_MARGIN_BOTTOM = getNumStyle(placeholder, &#x27;marginBottom&#x27;);
+                PLACEHOLDER_MARGIN_TOP = getNumStyle(placeholder, &#x27;marginTop&#x27;);
 
                 placeholder.addClass(CSS_DRAG_TARGET_INDICATOR);
 
-                PLACEHOLDER_TARGET_MARGIN_BOTTOM = getNumStyle(placeholder, MARGIN_BOTTOM);
-                PLACEHOLDER_TARGET_MARGIN_TOP = getNumStyle(placeholder, MARGIN_TOP);
+                PLACEHOLDER_TARGET_MARGIN_BOTTOM = getNumStyle(placeholder, &#x27;marginBottom&#x27;);
+                PLACEHOLDER_TARGET_MARGIN_TOP = getNumStyle(placeholder, &#x27;marginTop&#x27;);
 
                 return placeholder;
             }
@@ -2367,7 +2327,7 @@ var SortableLayout = A.Component.create({
                 };
 
                 // if proxyNode is set remove the border from the default proxy
-                if (instance.get(PROXY_NODE)) {
+                if (instance.get(&#x27;proxyNode&#x27;)) {
                     defaults.borderStyle = null;
                 }
 
@@ -2410,7 +2370,7 @@ var SortableLayout = A.Component.create({
             var instance = this;
 
             // publishing placeholderAlign event
-            instance.publish(EV_PLACEHOLDER_ALIGN, {
+            instance.publish(&#x27;placeholderAlign&#x27;, {
                 defaultFn: instance._defPlaceholderAlign,
                 queuable: false,
                 emitFacade: true,
@@ -2442,7 +2402,7 @@ var SortableLayout = A.Component.create({
                     new A.DD.Drop(
                         A.merge({
                                 bubbleTargets: instance,
-                                groups: instance.get(GROUPS),
+                                groups: instance.get(&#x27;groups&#x27;),
                                 node: node
                             },
                             config
@@ -2462,7 +2422,7 @@ var SortableLayout = A.Component.create({
             var instance = this;
 
             drop.addToGroup(
-                instance.get(GROUPS)
+                instance.get(&#x27;groups&#x27;)
             );
         },
 
@@ -2475,7 +2435,7 @@ var SortableLayout = A.Component.create({
          */
         alignPlaceholder: function(region, isTarget) {
             var instance = this;
-            var placeholder = instance.get(PLACEHOLDER);
+            var placeholder = instance.get(&#x27;placeholder&#x27;);
 
             if (!instance.lazyEvents) {
                 placeholder.show();
@@ -2506,13 +2466,13 @@ var SortableLayout = A.Component.create({
             // if the x change
             if (x != lastX) {
                 // set the drag direction
-                instance.XDirection = (x &lt; lastX) ? LEFT : RIGHT;
+                instance.XDirection = (x &lt; lastX) ? &#x27;left&#x27; : &#x27;right&#x27;;
             }
 
             // if the y change
             if (y != lastY) {
                 // set the drag direction
-                instance.YDirection = (y &lt; lastY) ? UP : DOWN;
+                instance.YDirection = (y &lt; lastY) ? &#x27;up&#x27; : &#x27;down&#x27;;
             }
 
             instance.lastX = x;
@@ -2530,7 +2490,7 @@ var SortableLayout = A.Component.create({
         calculateQuadrant: function(drag, drop) {
             var instance = this;
             var quadrant = 1;
-            var region = drop.get(NODE).get(REGION);
+            var region = drop.get(&#x27;node&#x27;).get(&#x27;region&#x27;);
             var mouseXY = drag.mouseXY;
             var mouseX = mouseXY[0];
             var mouseY = mouseXY[1];
@@ -2565,7 +2525,7 @@ var SortableLayout = A.Component.create({
          */
         getPlaceholderXY: function(region, isTarget) {
             var instance = this;
-            var placeholder = instance.get(PLACEHOLDER);
+            var placeholder = instance.get(&#x27;placeholder&#x27;);
             var marginBottom = PLACEHOLDER_MARGIN_BOTTOM;
             var marginTop = PLACEHOLDER_MARGIN_TOP;
 
@@ -2589,7 +2549,7 @@ var SortableLayout = A.Component.create({
             // 1 and 2 quadrants are the top quadrants, so align to the
             // region.top when quadrant &lt; 3
             var y = (instance.quadrant &lt; 3) ?
-                (regionTop - (placeholder.get(OFFSET_HEIGHT) + marginBottom)) : (regionBottom + marginTop);
+                (regionTop - (placeholder.get(&#x27;offsetHeight&#x27;) + marginBottom)) : (regionBottom + marginTop);
 
             return [x, y];
         },
@@ -2604,7 +2564,7 @@ var SortableLayout = A.Component.create({
             var instance = this;
 
             drop.removeFromGroup(
-                instance.get(GROUPS)
+                instance.get(&#x27;groups&#x27;)
             );
         },
 
@@ -2621,8 +2581,8 @@ var SortableLayout = A.Component.create({
             var activeDrop = instance.activeDrop;
 
             if (activeDrag &amp;&amp; activeDrop) {
-                var dragNode = activeDrag.get(NODE);
-                var dropNode = activeDrop.get(NODE);
+                var dragNode = activeDrag.get(&#x27;node&#x27;);
+                var dropNode = activeDrop.get(&#x27;node&#x27;);
 
                 return !dragNode.contains(dropNode);
             }
@@ -2639,8 +2599,8 @@ var SortableLayout = A.Component.create({
          */
         _bindDDEvents: function() {
             var instance = this;
-            var delegateConfig = instance.get(DELEGATE_CONFIG);
-            var proxy = instance.get(PROXY);
+            var delegateConfig = instance.get(&#x27;delegateConfig&#x27;);
+            var proxy = instance.get(&#x27;proxy&#x27;);
 
             // creating DD.Delegate instance
             instance.delegate = new A.DD.Delegate(delegateConfig);
@@ -2655,8 +2615,8 @@ var SortableLayout = A.Component.create({
             instance.on(&#x27;drag:start&#x27;, A.bind(instance._onDragStart, instance));
             instance.after(&#x27;drag:start&#x27;, A.bind(instance._afterDragStart, instance));
 
-            instance.on(EV_QUADRANT_ENTER, instance._syncPlaceholderUI);
-            instance.on(EV_QUADRANT_EXIT, instance._syncPlaceholderUI);
+            instance.on(&#x27;quadrantEnter&#x27;, instance._syncPlaceholderUI);
+            instance.on(&#x27;quadrantExit&#x27;, instance._syncPlaceholderUI);
         },
 
         /**
@@ -2667,7 +2627,7 @@ var SortableLayout = A.Component.create({
          */
         _bindDropZones: function() {
             var instance = this;
-            var dropNodes = instance.get(DROP_NODES);
+            var dropNodes = instance.get(&#x27;dropNodes&#x27;);
 
             if (dropNodes) {
                 dropNodes.each(function(node, i) {
@@ -2686,7 +2646,7 @@ var SortableLayout = A.Component.create({
         _defPlaceholderAlign: function(event) {
             var instance = this;
             var activeDrop = instance.activeDrop;
-            var placeholder = instance.get(PLACEHOLDER);
+            var placeholder = instance.get(&#x27;placeholder&#x27;);
 
             if (activeDrop &amp;&amp; placeholder) {
                 var node = activeDrop.get(&#x27;node&#x27;);
@@ -2699,7 +2659,7 @@ var SortableLayout = A.Component.create({
                 instance.lastAlignDrop = activeDrop;
 
                 instance.alignPlaceholder(
-                    activeDrop.get(NODE).get(REGION),
+                    activeDrop.get(&#x27;node&#x27;).get(&#x27;region&#x27;),
                     isTarget
                 );
             }
@@ -2742,7 +2702,7 @@ var SortableLayout = A.Component.create({
                 if (lastQuadrant) {
                     // merging event with the &quot;last&quot; information
                     instance.fire(
-                        EV_QUADRANT_EXIT,
+                        &#x27;quadrantExit&#x27;,
                         A.merge({
                                 lastDrag: instance.lastDrag,
                                 lastDrop: instance.lastDrop,
@@ -2756,12 +2716,12 @@ var SortableLayout = A.Component.create({
                 }
 
                 // firing EV_QUADRANT_ENTER event
-                instance.fire(EV_QUADRANT_ENTER, evOutput);
+                instance.fire(&#x27;quadrantEnter&#x27;, evOutput);
             }
 
             // firing EV_QUADRANT_OVER, align event fires like the drag over
             // without bubbling for performance reasons
-            instance.fire(EV_QUADRANT_OVER, evOutput);
+            instance.fire(&#x27;quadrantOver&#x27;, evOutput);
 
             // updating &quot;last&quot; information
             instance.lastDrag = DDM.activeDrag;
@@ -2779,7 +2739,7 @@ var SortableLayout = A.Component.create({
          * @return {Node}
          */
         _getAppendNode: function() {
-            return DDM.activeDrag.get(NODE);
+            return DDM.activeDrag.get(&#x27;node&#x27;);
         },
 
         /**
@@ -2795,7 +2755,7 @@ var SortableLayout = A.Component.create({
 
             if (activeDrop) {
                 var dragNode = instance._getAppendNode();
-                var dropNode = activeDrop.get(NODE);
+                var dropNode = activeDrop.get(&#x27;node&#x27;);
 
                 // detects if the activeDrop is a dd target (portlet) or a drop
                 // area only (column) DD.Delegate use the Drop Plugin on its
@@ -2807,15 +2767,15 @@ var SortableLayout = A.Component.create({
 
                 if (instance._alignCondition()) {
                     if (isTarget) {
-                        dropNode[topQuadrants ? PLACE_BEFORE : PLACE_AFTER](dragNode);
+                        dropNode[topQuadrants ? &#x27;placeBefore&#x27; : &#x27;placeAfter&#x27;](dragNode);
                     }
                     // interacting with the columns (drop areas only)
                     else {
                         // find the dropContainer of the dropNode, the default
                         // DROP_CONTAINER function returns the dropNode
-                        var dropContainer = instance.get(DROP_CONTAINER).apply(instance, [dropNode]);
+                        var dropContainer = instance.get(&#x27;dropContainer&#x27;).apply(instance, [dropNode]);
 
-                        dropContainer[topQuadrants ? PREPEND : APPEND](dragNode);
+                        dropContainer[topQuadrants ? &#x27;prepend&#x27; : &#x27;append&#x27;](dragNode);
                     }
                 }
             }
@@ -2833,7 +2793,7 @@ var SortableLayout = A.Component.create({
 
             if (instance._alignCondition()) {
                 // firing placeholderAlign event
-                instance.fire(EV_PLACEHOLDER_ALIGN, {
+                instance.fire(&#x27;placeholderAlign&#x27;, {
                     drop: instance.activeDrop,
                     originalEvent: event
                 });
@@ -2848,14 +2808,14 @@ var SortableLayout = A.Component.create({
          */
         _syncPlaceholderSize: function() {
             var instance = this;
-            var node = instance.activeDrop.get(NODE);
+            var node = instance.activeDrop.get(&#x27;node&#x27;);
 
-            var placeholder = instance.get(PLACEHOLDER);
+            var placeholder = instance.get(&#x27;placeholder&#x27;);
 
             if (placeholder) {
                 placeholder.set(
-                    OFFSET_WIDTH,
-                    node.get(OFFSET_WIDTH)
+                    &#x27;offsetWidth&#x27;,
+                    node.get(&#x27;offsetWidth&#x27;)
                 );
             }
         },
@@ -2869,8 +2829,8 @@ var SortableLayout = A.Component.create({
          */
         _syncProxyNodeUI: function(event) {
             var instance = this;
-            var dragNode = DDM.activeDrag.get(DRAG_NODE);
-            var proxyNode = instance.get(PROXY_NODE);
+            var dragNode = DDM.activeDrag.get(&#x27;dragNode&#x27;);
+            var proxyNode = instance.get(&#x27;proxyNode&#x27;);
 
             if (proxyNode &amp;&amp; !proxyNode.compareTo(dragNode)) {
                 dragNode.append(proxyNode);
@@ -2887,18 +2847,18 @@ var SortableLayout = A.Component.create({
          */
         _syncProxyNodeSize: function() {
             var instance = this;
-            var node = DDM.activeDrag.get(NODE);
-            var proxyNode = instance.get(PROXY_NODE);
+            var node = DDM.activeDrag.get(&#x27;node&#x27;);
+            var proxyNode = instance.get(&#x27;proxyNode&#x27;);
 
             if (node &amp;&amp; proxyNode) {
                 proxyNode.set(
-                    OFFSET_HEIGHT,
-                    node.get(OFFSET_HEIGHT)
+                    &#x27;offsetHeight&#x27;,
+                    node.get(&#x27;offsetHeight&#x27;)
                 );
 
                 proxyNode.set(
-                    OFFSET_WIDTH,
-                    node.get(OFFSET_WIDTH)
+                    &#x27;offsetWidth&#x27;,
+                    node.get(&#x27;offsetWidth&#x27;)
                 );
             }
         },
@@ -2913,7 +2873,7 @@ var SortableLayout = A.Component.create({
         _afterDragStart: function(event) {
             var instance = this;
 
-            if (instance.get(PROXY)) {
+            if (instance.get(&#x27;proxy&#x27;)) {
                 instance._syncProxyNodeUI(event);
             }
         },
@@ -2927,8 +2887,8 @@ var SortableLayout = A.Component.create({
          */
         _onDragEnd: function(event) {
             var instance = this;
-            var placeholder = instance.get(PLACEHOLDER);
-            var proxyNode = instance.get(PROXY_NODE);
+            var placeholder = instance.get(&#x27;placeholder&#x27;);
+            var proxyNode = instance.get(&#x27;proxyNode&#x27;);
 
             if (!instance.lazyEvents) {
                 instance._positionNode(event);
@@ -3025,7 +2985,7 @@ var SortableLayout = A.Component.create({
         _onDragStart: function(event) {
             var instance = this;
 
-            if (instance.get(LAZY_START)) {
+            if (instance.get(&#x27;lazyStart&#x27;)) {
                 instance.lazyEvents = true;
             }
 

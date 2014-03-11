@@ -20,7 +20,7 @@
 </head>
 <body class="yui3-skin-sam">
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
         <div class="navbar-inner">
             <h1 class="brand">
                 <a href="/">
@@ -2126,7 +2126,7 @@ var Lang = A.Lang,
         return ((1 - t) * (1 - t) * (1 - t));
     },
 
-    // Find a Cubic Bezier point based on the control points. Consider the first
+    // Find a Cubic Bézier point based on the control points. Consider the first
     // two control points as the start and end point respectively.
     getCubicBezier = function(t, startPos, endPos, cp1, cp2) {
         var x = startPos[0] * B1(t) + cp1[0] * B2(t) + cp2[0] * B3(t) + endPos[0] * B4(t);
@@ -2145,32 +2145,6 @@ var Lang = A.Lang,
     sign = function(x) {
         return x === 0 ? 0 : (x &lt; 0 ? -1 : 1);
     },
-
-    ARROW_POINTS = &#x27;arrowPoints&#x27;,
-    BUILDER = &#x27;builder&#x27;,
-    CLICK = &#x27;click&#x27;,
-    COLOR = &#x27;color&#x27;,
-    CONNECTOR = &#x27;connector&#x27;,
-    FILL = &#x27;fill&#x27;,
-    GRAPHIC = &#x27;graphic&#x27;,
-    LAZY_DRAW = &#x27;lazyDraw&#x27;,
-    MOUSEENTER = &#x27;mouseenter&#x27;,
-    MOUSELEAVE = &#x27;mouseleave&#x27;,
-    NAME = &#x27;name&#x27;,
-    NODE_NAME = &#x27;nodeName&#x27;,
-    P1 = &#x27;p1&#x27;,
-    P2 = &#x27;p2&#x27;,
-    PATH = &#x27;path&#x27;,
-    SELECTED = &#x27;selected&#x27;,
-    SHAPE = &#x27;shape&#x27;,
-    SHAPE_ARROW = &#x27;shapeArrow&#x27;,
-    SHAPE_ARROW_HOVER = &#x27;shapeArrowHover&#x27;,
-    SHAPE_ARROW_SELECTED = &#x27;shapeArrowSelected&#x27;,
-    SHAPE_HOVER = &#x27;shapeHover&#x27;,
-    SHAPE_SELECTED = &#x27;shapeSelected&#x27;,
-    SHOW_NAME = &#x27;showName&#x27;,
-    STROKE = &#x27;stroke&#x27;,
-    VISIBLE = &#x27;visible&#x27;,
 
     getCN = A.getClassName,
 
@@ -2252,7 +2226,7 @@ A.PolygonUtil = {
  * @constructor
  */
 A.Connector = A.Base.create(&#x27;line&#x27;, A.Base, [], {
-    SERIALIZABLE_ATTRS: [COLOR, LAZY_DRAW, NAME, SHAPE_SELECTED, SHAPE_HOVER, /*SHAPE,*/ P1, P2],
+    SERIALIZABLE_ATTRS: [&#x27;color&#x27;, &#x27;lazyDraw&#x27;, &#x27;name&#x27;, &#x27;shapeSelected&#x27;, &#x27;shapeHover&#x27;, /*SHAPE,*/ &#x27;p1&#x27;, &#x27;p2&#x27;],
 
     shape: null,
     shapeArrow: null,
@@ -2266,7 +2240,7 @@ A.Connector = A.Base.create(&#x27;line&#x27;, A.Base, [], {
      */
     initializer: function(config) {
         var instance = this;
-        var lazyDraw = instance.get(LAZY_DRAW);
+        var lazyDraw = instance.get(&#x27;lazyDraw&#x27;);
 
         instance.after({
             nameChange: instance._afterNameChange,
@@ -2283,10 +2257,10 @@ A.Connector = A.Base.create(&#x27;line&#x27;, A.Base, [], {
             instance.draw();
         }
 
-        instance._uiSetVisible(instance.get(VISIBLE));
-        instance._uiSetName(instance.get(NAME));
-        instance._uiSetSelected(instance.get(SELECTED), !lazyDraw);
-        instance._uiSetShowName(instance.get(SHOW_NAME));
+        instance._uiSetVisible(instance.get(&#x27;visible&#x27;));
+        instance._uiSetName(instance.get(&#x27;name&#x27;));
+        instance._uiSetSelected(instance.get(&#x27;selected&#x27;), !lazyDraw);
+        instance._uiSetShowName(instance.get(&#x27;showName&#x27;));
     },
 
     /**
@@ -2300,7 +2274,7 @@ A.Connector = A.Base.create(&#x27;line&#x27;, A.Base, [], {
 
         instance.shape.destroy();
         instance.shapeArrow.destroy();
-        instance.get(NODE_NAME).remove();
+        instance.get(&#x27;nodeName&#x27;).remove();
     },
 
     /**
@@ -2313,8 +2287,8 @@ A.Connector = A.Base.create(&#x27;line&#x27;, A.Base, [], {
         var shape = instance.shape;
         var shapeArrow = instance.shapeArrow;
 
-        var p1 = instance.get(P1),
-            p2 = instance.get(P2),
+        var p1 = instance.get(&#x27;p1&#x27;),
+            p2 = instance.get(&#x27;p2&#x27;),
             c1 = instance.toCoordinate(p1),
             c2 = instance.toCoordinate(p2),
             x1 = c1[0],
@@ -2363,11 +2337,11 @@ A.Connector = A.Base.create(&#x27;line&#x27;, A.Base, [], {
             centerXY = getCubicBezier(0.5, [x1, y1], [x2, y2], [cp[0], cp[1]], [cp[2], cp[3]]);
 
         shapeArrow.clear();
-        A.PolygonUtil.drawArrow(shapeArrow, xy2[0], xy2[1], xy1[0], xy1[1], instance.get(ARROW_POINTS));
+        A.PolygonUtil.drawArrow(shapeArrow, xy2[0], xy2[1], xy1[0], xy1[1], instance.get(&#x27;arrowPoints&#x27;));
         shapeArrow.end();
 
-        if (instance.get(SHOW_NAME)) {
-            instance.get(NODE_NAME).center(instance.toXY(centerXY));
+        if (instance.get(&#x27;showName&#x27;)) {
+            instance.get(&#x27;nodeName&#x27;).center(instance.toXY(centerXY));
         }
 
         return instance;
@@ -2401,7 +2375,7 @@ A.Connector = A.Base.create(&#x27;line&#x27;, A.Base, [], {
         var strings = instance.getStrings();
 
         return [{
-            attributeName: NAME,
+            attributeName: &#x27;name&#x27;,
             editor: new A.TextCellEditor({
                 validator: {
                     rules: {
@@ -2411,7 +2385,7 @@ A.Connector = A.Base.create(&#x27;line&#x27;, A.Base, [], {
                     }
                 }
             }),
-            name: strings[NAME]
+            name: strings[&#x27;name&#x27;]
         }];
     },
 
@@ -2432,7 +2406,7 @@ A.Connector = A.Base.create(&#x27;line&#x27;, A.Base, [], {
     hide: function() {
         var instance = this;
 
-        instance.set(VISIBLE, false);
+        instance.set(&#x27;visible&#x27;, false);
 
         return instance;
     },
@@ -2445,7 +2419,7 @@ A.Connector = A.Base.create(&#x27;line&#x27;, A.Base, [], {
     show: function() {
         var instance = this;
 
-        instance.set(VISIBLE, true);
+        instance.set(&#x27;visible&#x27;, true);
 
         return instance;
     },
@@ -2554,19 +2528,19 @@ A.Connector = A.Base.create(&#x27;line&#x27;, A.Base, [], {
     _initShapes: function() {
         var instance = this;
 
-        var shape = instance.shape = instance.get(GRAPHIC).addShape(
-            instance.get(SHAPE)
+        var shape = instance.shape = instance.get(&#x27;graphic&#x27;).addShape(
+            instance.get(&#x27;shape&#x27;)
         );
 
-        var shapeArrow = instance.shapeArrow = instance.get(GRAPHIC).addShape(
-            instance.get(SHAPE_ARROW)
+        var shapeArrow = instance.shapeArrow = instance.get(&#x27;graphic&#x27;).addShape(
+            instance.get(&#x27;shapeArrow&#x27;)
         );
 
-        shape.on(CLICK, A.bind(instance._onShapeClick, instance));
-        shape.on(MOUSEENTER, A.bind(instance._onShapeMouseEnter, instance));
-        shape.on(MOUSELEAVE, A.bind(instance._onShapeMouseLeave, instance));
-        shapeArrow.on(CLICK, A.bind(instance._onShapeClick, instance));
-        instance.get(NODE_NAME).on(CLICK, A.bind(instance._onShapeClick, instance));
+        shape.on(&#x27;click&#x27;, A.bind(instance._onShapeClick, instance));
+        shape.on(&#x27;mouseenter&#x27;, A.bind(instance._onShapeMouseEnter, instance));
+        shape.on(&#x27;mouseleave&#x27;, A.bind(instance._onShapeMouseLeave, instance));
+        shapeArrow.on(&#x27;click&#x27;, A.bind(instance._onShapeClick, instance));
+        instance.get(&#x27;nodeName&#x27;).on(&#x27;click&#x27;, A.bind(instance._onShapeClick, instance));
     },
 
     /**
@@ -2579,7 +2553,7 @@ A.Connector = A.Base.create(&#x27;line&#x27;, A.Base, [], {
      */
     _offsetXY: function(xy, sign) {
         var instance = this;
-        var offsetXY = instance.get(GRAPHIC).getXY();
+        var offsetXY = instance.get(&#x27;graphic&#x27;).getXY();
 
         return [xy[0] + offsetXY[0] * sign, xy[1] + offsetXY[1] * sign];
     },
@@ -2593,8 +2567,8 @@ A.Connector = A.Base.create(&#x27;line&#x27;, A.Base, [], {
      */
     _onShapeClick: function(event) {
         var instance = this;
-        var builder = instance.get(BUILDER);
-        var selected = instance.get(SELECTED);
+        var builder = instance.get(&#x27;builder&#x27;);
+        var selected = instance.get(&#x27;selected&#x27;);
 
         if (builder) {
             if (event.hasModifier()) {
@@ -2612,7 +2586,7 @@ A.Connector = A.Base.create(&#x27;line&#x27;, A.Base, [], {
             }
         }
 
-        instance.set(SELECTED, !selected);
+        instance.set(&#x27;selected&#x27;, !selected);
 
         event.halt();
     },
@@ -2627,9 +2601,9 @@ A.Connector = A.Base.create(&#x27;line&#x27;, A.Base, [], {
     _onShapeMouseEnter: function(event) {
         var instance = this;
 
-        if (!instance.get(SELECTED)) {
-            var shapeHover = instance.get(SHAPE_HOVER);
-            var shapeArrowHover = instance.get(SHAPE_ARROW_HOVER);
+        if (!instance.get(&#x27;selected&#x27;)) {
+            var shapeHover = instance.get(&#x27;shapeHover&#x27;);
+            var shapeArrowHover = instance.get(&#x27;shapeArrowHover&#x27;);
 
             if (shapeHover) {
                 instance._updateShape(instance.shape, shapeHover);
@@ -2651,9 +2625,9 @@ A.Connector = A.Base.create(&#x27;line&#x27;, A.Base, [], {
     _onShapeMouseLeave: function(event) {
         var instance = this;
 
-        if (!instance.get(SELECTED)) {
-            instance._updateShape(instance.shape, instance.get(SHAPE));
-            instance._updateShape(instance.shapeArrow, instance.get(SHAPE_ARROW));
+        if (!instance.get(&#x27;selected&#x27;)) {
+            instance._updateShape(instance.shape, instance.get(&#x27;shape&#x27;));
+            instance._updateShape(instance.shapeArrow, instance.get(&#x27;shapeArrow&#x27;));
         }
     },
 
@@ -2669,7 +2643,7 @@ A.Connector = A.Base.create(&#x27;line&#x27;, A.Base, [], {
 
         if (!A.instanceOf(val, A.Node)) {
             val = new A.Node.create(val);
-            instance.get(BUILDER).canvas.append(val.unselectable());
+            instance.get(&#x27;builder&#x27;).canvas.append(val.unselectable());
         }
 
         return val;
@@ -2686,9 +2660,9 @@ A.Connector = A.Base.create(&#x27;line&#x27;, A.Base, [], {
         var instance = this;
 
         return A.merge({
-                type: PATH,
+                type: &#x27;path&#x27;,
                 stroke: {
-                    color: instance.get(COLOR),
+                    color: instance.get(&#x27;color&#x27;),
                     weight: 2,
                     opacity: 1
                 }
@@ -2708,13 +2682,13 @@ A.Connector = A.Base.create(&#x27;line&#x27;, A.Base, [], {
         var instance = this;
 
         return A.merge({
-                type: PATH,
+                type: &#x27;path&#x27;,
                 fill: {
-                    color: instance.get(COLOR),
+                    color: instance.get(&#x27;color&#x27;),
                     opacity: 1
                 },
                 stroke: {
-                    color: instance.get(COLOR),
+                    color: instance.get(&#x27;color&#x27;),
                     weight: 2,
                     opacity: 1
                 }
@@ -2733,7 +2707,7 @@ A.Connector = A.Base.create(&#x27;line&#x27;, A.Base, [], {
     _uiSetName: function(val) {
         var instance = this;
 
-        instance.get(NODE_NAME).html(val);
+        instance.get(&#x27;nodeName&#x27;).html(val);
     },
 
     /**
@@ -2748,10 +2722,10 @@ A.Connector = A.Base.create(&#x27;line&#x27;, A.Base, [], {
         var instance = this;
 
         instance._updateShape(
-            instance.shape, val ? instance.get(SHAPE_SELECTED) : instance.get(SHAPE), draw);
+            instance.shape, val ? instance.get(&#x27;shapeSelected&#x27;) : instance.get(&#x27;shape&#x27;), draw);
 
         instance._updateShape(
-            instance.shapeArrow, val ? instance.get(SHAPE_ARROW_SELECTED) : instance.get(SHAPE_ARROW), draw);
+            instance.shapeArrow, val ? instance.get(&#x27;shapeArrowSelected&#x27;) : instance.get(&#x27;shapeArrow&#x27;), draw);
     },
 
     /**
@@ -2764,7 +2738,7 @@ A.Connector = A.Base.create(&#x27;line&#x27;, A.Base, [], {
     _uiSetShowName: function(val) {
         var instance = this;
 
-        instance.get(NODE_NAME).toggleClass(CSS_HIDE, !val);
+        instance.get(&#x27;nodeName&#x27;).toggleClass(CSS_HIDE, !val);
     },
 
     /**
@@ -2777,9 +2751,9 @@ A.Connector = A.Base.create(&#x27;line&#x27;, A.Base, [], {
     _uiSetVisible: function(val) {
         var instance = this;
 
-        instance.shape.set(VISIBLE, val);
-        instance.shapeArrow.set(VISIBLE, val);
-        instance._uiSetShowName(val &amp;&amp; instance.get(SHOW_NAME));
+        instance.shape.set(&#x27;visible&#x27;, val);
+        instance.shapeArrow.set(&#x27;visible&#x27;, val);
+        instance._uiSetShowName(val &amp;&amp; instance.get(&#x27;showName&#x27;));
     },
 
     /**
@@ -2794,12 +2768,12 @@ A.Connector = A.Base.create(&#x27;line&#x27;, A.Base, [], {
     _updateShape: function(shape, cShape, draw) {
         var instance = this;
 
-        if (cShape.hasOwnProperty(FILL)) {
-            shape.set(FILL, cShape[FILL]);
+        if (cShape.hasOwnProperty(&#x27;fill&#x27;)) {
+            shape.set(&#x27;fill&#x27;, cShape[&#x27;fill&#x27;]);
         }
 
-        if (cShape.hasOwnProperty(STROKE)) {
-            shape.set(STROKE, cShape[STROKE]);
+        if (cShape.hasOwnProperty(&#x27;stroke&#x27;)) {
+            shape.set(&#x27;stroke&#x27;, cShape[&#x27;stroke&#x27;]);
         }
 
         if (draw !== false) {
@@ -2879,7 +2853,7 @@ A.Connector = A.Base.create(&#x27;line&#x27;, A.Base, [], {
             valueFn: function() {
                 var instance = this;
 
-                return CONNECTOR + (++A.Env._uidx);
+                return &#x27;connector&#x27; + (++A.Env._uidx);
             },
             validator: isString
         },

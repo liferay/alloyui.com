@@ -20,7 +20,7 @@
 </head>
 <body class="yui3-skin-sam">
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
         <div class="navbar-inner">
             <h1 class="brand">
                 <a href="/">
@@ -2095,24 +2095,7 @@
 var Lang = A.Lang,
     AArray = A.Array,
 
-    _DOCUMENT = A.one(A.config.doc),
-    _NAME = &#x27;btn-search-cancel&#x27;,
-
-    AFTER = &#x27;after&#x27;,
-    CLICK = &#x27;click&#x27;,
-    CONTAINER = &#x27;container&#x27;,
-    FOCUS = &#x27;focus&#x27;,
-    GUTTER = &#x27;gutter&#x27;,
-    HIDE = &#x27;hide&#x27;,
-    ICON_CLASS = &#x27;iconClass&#x27;,
-    INPUT = &#x27;input&#x27;,
-    POSITION = &#x27;position&#x27;,
-    REGION = &#x27;region&#x27;,
-    RELATIVE = &#x27;relative&#x27;,
-    REMOVE = &#x27;remove&#x27;,
-    TRIGGER = &#x27;trigger&#x27;,
-    WINDOWRESIZE = &#x27;windowresize&#x27;,
-    Z_INDEX = &#x27;zIndex&#x27;;
+    _DOCUMENT = A.one(A.config.doc);
 
 /**
  * A base class for &#x60;ButtonSearchCancel&#x60;, providing:
@@ -2127,7 +2110,7 @@ var Lang = A.Lang,
  *     properties.
  * @constructor
  */
-var ButtonSearchCancel = A.Base.create(_NAME, A.Base, [], {
+var ButtonSearchCancel = A.Base.create(&#x27;btn-search-cancel&#x27;, A.Base, [], {
     /**
      * HTML template used on the button search cancel.
      *
@@ -2135,7 +2118,7 @@ var ButtonSearchCancel = A.Base.create(_NAME, A.Base, [], {
      * @type {String}
      * @protected
      */
-    TEMPLATE: &#x27;&lt;div class=&quot;&#x27; + A.getClassName(_NAME) + &#x27;&quot; style=&quot;padding: 5px; position: absolute; z-index: {zIndex};&quot;&gt;&#x27; + &#x27;&lt;i class=&quot;{iconClass}&quot;&gt;&lt;/i&gt;&#x27; + &#x27;&lt;/div&gt;&#x27;,
+    TEMPLATE: &#x27;&lt;div class=&quot;&#x27; + A.getClassName(&#x27;btn-search-cancel&#x27;) + &#x27;&quot; style=&quot;padding: 5px; position: absolute; z-index: {zIndex};&quot;&gt;&#x27; + &#x27;&lt;i class=&quot;{iconClass}&quot;&gt;&lt;/i&gt;&#x27; + &#x27;&lt;/div&gt;&#x27;,
 
     /**
      * Holds the created buttons for each element match from the trigger
@@ -2183,7 +2166,7 @@ var ButtonSearchCancel = A.Base.create(_NAME, A.Base, [], {
         AArray.each(instance._buttons, function(button) {
             // To avoid memory leak caused by ghost button references, clear
             // its reference from the input element first
-            button.getData(_NAME).unwrap().clearData(_NAME);
+            button.getData(&#x27;btn-search-cancel&#x27;).unwrap().clearData(&#x27;btn-search-cancel&#x27;);
             button.remove();
         });
 
@@ -2197,17 +2180,17 @@ var ButtonSearchCancel = A.Base.create(_NAME, A.Base, [], {
      */
     bindUI: function() {
         var instance = this,
-            container = instance.get(CONTAINER),
-            trigger = instance.get(TRIGGER);
+            container = instance.get(&#x27;container&#x27;),
+            trigger = instance.get(&#x27;trigger&#x27;);
 
         instance._eventHandles = [
             container.delegate(
-                [FOCUS, INPUT],
+                [&#x27;focus&#x27;, &#x27;input&#x27;],
                 A.debounce(instance._onUserInteraction, 50, instance), trigger),
             // YUI implementation for the windowresize synthetic event do not
             // support Y.on(&#x27;windowresize&#x27;, fn, context) binding, therefore
             // should be wrapped using Y.bind.
-            A.on(WINDOWRESIZE, A.bind(instance._onWindowResize, instance))
+            A.on(&#x27;windowresize&#x27;, A.bind(instance._onWindowResize, instance))
         ];
     },
 
@@ -2220,24 +2203,24 @@ var ButtonSearchCancel = A.Base.create(_NAME, A.Base, [], {
      */
     getButtonForElement: function(element) {
         var instance = this,
-            button = element.getData(_NAME);
+            button = element.getData(&#x27;btn-search-cancel&#x27;);
 
         if (!button) {
-            element.wrap(&#x27;&lt;span/&gt;&#x27;).ancestor().setStyle(POSITION, RELATIVE);
+            element.wrap(&#x27;&lt;span/&gt;&#x27;).ancestor().setStyle(&#x27;position&#x27;, &#x27;relative&#x27;);
 
             button = A.Node.create(
                 A.Lang.sub(
                     instance.TEMPLATE, {
-                        iconClass: instance.get(ICON_CLASS),
-                        zIndex: instance.get(Z_INDEX)
+                        iconClass: instance.get(&#x27;iconClass&#x27;),
+                        zIndex: instance.get(&#x27;zIndex&#x27;)
                     }));
 
             instance._buttons.push(button.hide());
 
-            button.setData(_NAME, element);
-            element.setData(_NAME, button);
+            button.setData(&#x27;btn-search-cancel&#x27;, element);
+            element.setData(&#x27;btn-search-cancel&#x27;, button);
 
-            button.on(CLICK, instance._onButtonClick, instance, element);
+            button.on(&#x27;click&#x27;, instance._onButtonClick, instance, element);
         }
 
         return button;
@@ -2281,8 +2264,8 @@ var ButtonSearchCancel = A.Base.create(_NAME, A.Base, [], {
         var instance = this;
 
         AArray.each(instance._buttons, function(button) {
-            if (!button.hasClass(HIDE)) {
-                instance._syncButtonUI(button.getData(_NAME));
+            if (!button.hasClass(&#x27;hide&#x27;)) {
+                instance._syncButtonUI(button.getData(&#x27;btn-search-cancel&#x27;));
             }
         });
     },
@@ -2307,10 +2290,10 @@ var ButtonSearchCancel = A.Base.create(_NAME, A.Base, [], {
             return;
         }
 
-        element.insert(button.show(), AFTER);
-        gutter = instance.get(GUTTER);
-        buttonRegion = button.get(REGION);
-        elementRegion = element.get(REGION);
+        element.insert(button.show(), &#x27;after&#x27;);
+        gutter = instance.get(&#x27;gutter&#x27;);
+        buttonRegion = button.get(&#x27;region&#x27;);
+        elementRegion = element.get(&#x27;region&#x27;);
 
         button.setXY([
                 elementRegion.right - buttonRegion.width + gutter[0],

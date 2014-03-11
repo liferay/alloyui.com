@@ -20,7 +20,7 @@
 </head>
 <body class="yui3-skin-sam">
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
         <div class="navbar-inner">
             <h1 class="brand">
                 <a href="/">
@@ -2100,19 +2100,6 @@
 
 var Lang = A.Lang,
 
-    BODY_CONTENT = &#x27;bodyContent&#x27;,
-    BOUNDING_BOX = &#x27;boundingBox&#x27;,
-    CONTENT_BOX = &#x27;contentBox&#x27;,
-    FORMATTER = &#x27;formatter&#x27;,
-    HOVER = &#x27;hover&#x27;,
-    MOUSEENTER = &#x27;mouseenter&#x27;,
-    TITLE = &#x27;title&#x27;,
-    TOOLTIP = &#x27;tooltip&#x27;,
-    TRIGGER = &#x27;trigger&#x27;,
-    VISIBLE = &#x27;visible&#x27;,
-
-    _DATA_TITLE = &#x27;data-title&#x27;,
-
     getClassName = A.getClassName,
 
     CSS_TOOLTIP_ARROW = getClassName(&#x27;tooltip-arrow&#x27;),
@@ -2150,7 +2137,7 @@ YUI().use(
 );
 &#x60;&#x60;&#x60;
  */
-A.Tooltip = A.Base.create(TOOLTIP, A.Widget, [
+A.Tooltip = A.Base.create(&#x27;tooltip&#x27;, A.Widget, [
     A.WidgetCssClass,
     A.WidgetPosition,
     A.WidgetStdMod,
@@ -2183,8 +2170,8 @@ A.Tooltip = A.Base.create(TOOLTIP, A.Widget, [
      */
     renderUI: function() {
         var instance = this,
-            boundingBox = instance.get(BOUNDING_BOX),
-            contentBox = instance.get(CONTENT_BOX);
+            boundingBox = instance.get(&#x27;boundingBox&#x27;),
+            contentBox = instance.get(&#x27;contentBox&#x27;);
 
         contentBox.addClass(CSS_TOOLTIP_INNER);
         boundingBox.append(A.Tooltip.TEMPLATES.arrow);
@@ -2198,20 +2185,20 @@ A.Tooltip = A.Base.create(TOOLTIP, A.Widget, [
      */
     bindUI: function() {
         var instance = this,
-            trigger = instance.get(TRIGGER);
+            trigger = instance.get(&#x27;trigger&#x27;);
 
         // Do not bind the synthetic hover event to the widget dom events
         // wrapper api. Hover bind method has a different method signature which
         // is not handled by widget yet. Bind to the &#x60;boundingBox&#x60; instead.
         if (trigger) {
             trigger.on(
-                HOVER,
+                &#x27;hover&#x27;,
                 A.bind(instance._onBoundingBoxMouseenter, instance),
                 A.bind(instance._onBoundingBoxMouseleave, instance));
         }
 
-        instance.get(BOUNDING_BOX).on(
-            HOVER,
+        instance.get(&#x27;boundingBox&#x27;).on(
+            &#x27;hover&#x27;,
             A.bind(instance._onBoundingBoxMouseenter, instance),
             A.bind(instance._onBoundingBoxMouseleave, instance));
     },
@@ -2225,7 +2212,7 @@ A.Tooltip = A.Base.create(TOOLTIP, A.Widget, [
      */
     _uiSetVisible: function(val) {
         var instance = this,
-            boundingBox = instance.get(BOUNDING_BOX);
+            boundingBox = instance.get(&#x27;boundingBox&#x27;);
 
         instance._widgetUiSetVisible(val);
 
@@ -2262,26 +2249,26 @@ A.Tooltip = A.Base.create(TOOLTIP, A.Widget, [
             formatter,
             title;
 
-        formatter = instance.get(FORMATTER);
-        trigger = instance.get(TRIGGER);
+        formatter = instance.get(&#x27;formatter&#x27;);
+        trigger = instance.get(&#x27;trigger&#x27;);
 
         if (!trigger) {
             return;
         }
 
-        dataTitle = trigger.getAttribute(_DATA_TITLE);
-        title = trigger.getAttribute(TITLE) || dataTitle;
+        dataTitle = trigger.getAttribute(&#x27;data-title&#x27;);
+        title = trigger.getAttribute(&#x27;title&#x27;) || dataTitle;
 
         if (formatter) {
             title = formatter.call(instance, title);
         }
 
         if (!dataTitle) {
-            trigger.removeAttribute(TITLE).setAttribute(_DATA_TITLE, title);
+            trigger.removeAttribute(&#x27;title&#x27;).setAttribute(&#x27;data-title&#x27;, title);
         }
 
         instance.setStdModContent(
-            A.WidgetStdMod.BODY, trigger &amp;&amp; title || instance.get(BODY_CONTENT));
+            A.WidgetStdMod.BODY, trigger &amp;&amp; title || instance.get(&#x27;bodyContent&#x27;));
     },
 
     /**
@@ -2320,7 +2307,7 @@ A.Tooltip = A.Base.create(TOOLTIP, A.Widget, [
      * @type String
      * @static
      */
-    CSS_PREFIX: getClassName(TOOLTIP),
+    CSS_PREFIX: getClassName(&#x27;tooltip&#x27;),
 
     /**
      * Static property used to define the default attribute
@@ -2384,7 +2371,7 @@ A.Tooltip = A.Base.create(TOOLTIP, A.Widget, [
          */
         triggerShowEvent: {
             validator: Lang.isString,
-            value: MOUSEENTER
+            value: &#x27;mouseenter&#x27;
         }
     },
 

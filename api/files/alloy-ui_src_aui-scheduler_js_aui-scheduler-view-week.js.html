@@ -20,7 +20,7 @@
 </head>
 <body class="yui3-skin-sam">
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
         <div class="navbar-inner">
             <h1 class="brand">
                 <a href="/">
@@ -2102,23 +2102,9 @@
 var Lang = A.Lang,
     isFunction = Lang.isFunction,
 
-    _EMPTY_STR = &#x27;&#x27;,
-    M_DASH = &#x27;&amp;mdash;&#x27;,
-    _SPACE = &#x27; &#x27;,
-
     DateMath = A.DataType.DateMath,
 
-    WEEK_LENGTH = DateMath.WEEK_LENGTH,
-
-    SCHEDULER_VIEW_WEEK = &#x27;scheduler-view-week&#x27;,
-
-    DATE = &#x27;date&#x27;,
-    DAYS = &#x27;days&#x27;,
-    FIRST_DAY_OF_WEEK = &#x27;firstDayOfWeek&#x27;,
-    LOCALE = &#x27;locale&#x27;,
-    SCHEDULER = &#x27;scheduler&#x27;,
-    VIEW_DATE = &#x27;viewDate&#x27;,
-    WEEK = &#x27;week&#x27;;
+    WEEK_LENGTH = DateMath.WEEK_LENGTH;
 
 /**
  * A base class for &#x60;SchedulerWeekView&#x60;.
@@ -2138,7 +2124,7 @@ var SchedulerWeekView = A.Component.create({
      * @type {String}
      * @static
      */
-    NAME: SCHEDULER_VIEW_WEEK,
+    NAME: &#x27;scheduler-view-week&#x27;,
 
     /**
      * Static property used to define the default attribute
@@ -2158,7 +2144,7 @@ var SchedulerWeekView = A.Component.create({
          * @type {String}
          */
         bodyContent: {
-            value: _EMPTY_STR
+            value: &#x27;&#x27;
         },
 
         /**
@@ -2191,7 +2177,7 @@ var SchedulerWeekView = A.Component.create({
          * @type {String}
          */
         name: {
-            value: WEEK
+            value: &#x27;week&#x27;
         },
 
         /**
@@ -2229,8 +2215,8 @@ var SchedulerWeekView = A.Component.create({
          */
         getAdjustedViewDate: function(date) {
             var instance = this;
-            var scheduler = instance.get(SCHEDULER);
-            var firstDayOfWeek = scheduler.get(FIRST_DAY_OF_WEEK);
+            var scheduler = instance.get(&#x27;scheduler&#x27;);
+            var firstDayOfWeek = scheduler.get(&#x27;firstDayOfWeek&#x27;);
 
             return DateMath.toMidnight(DateMath.getFirstDayOfWeek(date, firstDayOfWeek));
         },
@@ -2244,8 +2230,8 @@ var SchedulerWeekView = A.Component.create({
          */
         getNextDate: function() {
             var instance = this;
-            var scheduler = instance.get(SCHEDULER);
-            var viewDate = scheduler.get(VIEW_DATE);
+            var scheduler = instance.get(&#x27;scheduler&#x27;);
+            var viewDate = scheduler.get(&#x27;viewDate&#x27;);
 
             return DateMath.toLastHour(DateMath.add(viewDate, DateMath.WEEK, 1));
         },
@@ -2259,8 +2245,8 @@ var SchedulerWeekView = A.Component.create({
          */
         getPrevDate: function() {
             var instance = this;
-            var scheduler = instance.get(SCHEDULER);
-            var viewDate = scheduler.get(VIEW_DATE);
+            var scheduler = instance.get(&#x27;scheduler&#x27;);
+            var viewDate = scheduler.get(&#x27;viewDate&#x27;);
 
             return DateMath.toMidnight(DateMath.subtract(viewDate, DateMath.WEEK, 1));
         },
@@ -2288,8 +2274,8 @@ var SchedulerWeekView = A.Component.create({
          */
         _firstDayOfWeek: function(date) {
             var instance = this;
-            var scheduler = instance.get(SCHEDULER);
-            var firstDayOfWeek = scheduler.get(FIRST_DAY_OF_WEEK);
+            var scheduler = instance.get(&#x27;scheduler&#x27;);
+            var firstDayOfWeek = scheduler.get(&#x27;firstDayOfWeek&#x27;);
 
             return DateMath.getFirstDayOfWeek(date, firstDayOfWeek);
         },
@@ -2304,8 +2290,8 @@ var SchedulerWeekView = A.Component.create({
          */
         _valueNavigationDateFormatter: function(date) {
             var instance = this;
-            var scheduler = instance.get(SCHEDULER);
-            var locale = scheduler.get(LOCALE);
+            var scheduler = instance.get(&#x27;scheduler&#x27;);
+            var locale = scheduler.get(&#x27;locale&#x27;);
 
             var startDate = instance._firstDayOfWeek(date);
 
@@ -2316,7 +2302,7 @@ var SchedulerWeekView = A.Component.create({
                 }
             );
 
-            var endDate = DateMath.add(startDate, DateMath.DAY, instance.get(DAYS) - 1);
+            var endDate = DateMath.add(startDate, DateMath.DAY, instance.get(&#x27;days&#x27;) - 1);
 
             var endDateLabel = A.DataType.Date.format(
                 endDate, {
@@ -2325,7 +2311,7 @@ var SchedulerWeekView = A.Component.create({
                 }
             );
 
-            return [startDateLabel, M_DASH, endDateLabel].join(_SPACE);
+            return [startDateLabel, &#x27;&amp;mdash;&#x27;, endDateLabel].join(&#x27; &#x27;);
         }
     }
 });

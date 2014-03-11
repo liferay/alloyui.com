@@ -20,7 +20,7 @@
 </head>
 <body class="yui3-skin-sam">
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
         <div class="navbar-inner">
             <h1 class="brand">
                 <a href="/">
@@ -2112,50 +2112,13 @@ var Lang = A.Lang,
 
     DateMath = A.DataType.DateMath,
 
-    _COMMA = &#x27;,&#x27;,
-    _DASH = &#x27;-&#x27;,
-    _DOT = &#x27;.&#x27;,
-    _SPACE = &#x27; &#x27;,
-
-    SCHEDULER_EVENT = &#x27;scheduler-event&#x27;,
-    SCHEDULER_EVENT_RECORDER = &#x27;scheduler-event-recorder&#x27;,
-
-    ACTIVE_VIEW = &#x27;activeView&#x27;,
-    ALL_DAY = &#x27;allDay&#x27;,
-    BODY_TEMPLATE = &#x27;bodyTemplate&#x27;,
-    BOUNDING_BOX = &#x27;boundingBox&#x27;,
-    CANCEL = &#x27;cancel&#x27;,
-    CLICK = &#x27;click&#x27;,
-    CLICKOUTSIDE = &#x27;clickoutside&#x27;,
-    CONTENT = &#x27;content&#x27;,
-    CONTENT_BOX = &#x27;contentBox&#x27;,
-    DATE_FORMAT = &#x27;dateFormat&#x27;,
-    DELETE = &#x27;delete&#x27;,
-    END_DATE = &#x27;endDate&#x27;,
-    EVENT = &#x27;event&#x27;,
-    EVENT_CHANGE = &#x27;eventChange&#x27;,
-    HEADER_TEMPLATE = &#x27;headerTemplate&#x27;,
-    ISO_TIME = &#x27;isoTime&#x27;,
-    NODE = &#x27;node&#x27;,
-    POP_OVER = &#x27;popover&#x27;,
-    RECORDER = &#x27;recorder&#x27;,
-    RENDERED = &#x27;rendered&#x27;,
-    SAVE = &#x27;save&#x27;,
-    SCHEDULER = &#x27;scheduler&#x27;,
-    SCHEDULER_CHANGE = &#x27;schedulerChange&#x27;,
-    START_DATE = &#x27;startDate&#x27;,
-    STRINGS = &#x27;strings&#x27;,
-    SUBMIT = &#x27;submit&#x27;,
-    TOP = &#x27;top&#x27;,
-    VISIBLE_CHANGE = &#x27;visibleChange&#x27;,
-
     getCN = A.getClassName,
 
-    CSS_SCHEDULER_EVENT = getCN(SCHEDULER_EVENT),
+    CSS_SCHEDULER_EVENT = getCN(&#x27;scheduler-event&#x27;),
 
-    CSS_SCHEDULER_EVENT_RECORDER = getCN(SCHEDULER_EVENT, RECORDER),
-    CSS_SCHEDULER_EVENT_RECORDER_CONTENT = getCN(SCHEDULER_EVENT, RECORDER, CONTENT),
-    CSS_SCHEDULER_EVENT_RECORDER_POP_OVER = getCN(SCHEDULER_EVENT, RECORDER, POP_OVER),
+    CSS_SCHEDULER_EVENT_RECORDER = getCN(&#x27;scheduler-event&#x27;, &#x27;recorder&#x27;),
+    CSS_SCHEDULER_EVENT_RECORDER_CONTENT = getCN(&#x27;scheduler-event&#x27;, &#x27;recorder&#x27;, &#x27;content&#x27;),
+    CSS_SCHEDULER_EVENT_RECORDER_POP_OVER = getCN(&#x27;scheduler-event&#x27;, &#x27;recorder&#x27;, &#x27;popover&#x27;),
 
     TPL_FORM = &#x27;&lt;form class=&quot;&#x27; + &#x27;scheduler-event-recorder-form&#x27; + &#x27;&quot; id=&quot;schedulerEventRecorderForm&quot;&gt;&lt;/form&gt;&#x27;,
 
@@ -2184,7 +2147,7 @@ var SchedulerEventRecorder = A.Component.create({
      * @type {String}
      * @static
      */
-    NAME: SCHEDULER_EVENT_RECORDER,
+    NAME: &#x27;scheduler-event-recorder&#x27;,
 
     /**
      * Static property used to define the default attribute
@@ -2330,7 +2293,7 @@ var SchedulerEventRecorder = A.Component.create({
         initializer: function() {
             var instance = this;
 
-            instance.get(NODE).addClass(CSS_SCHEDULER_EVENT_RECORDER);
+            instance.get(&#x27;node&#x27;).addClass(CSS_SCHEDULER_EVENT_RECORDER);
 
             instance.publish(&#x27;cancel&#x27;, {
                 defaultFn: instance._defCancelEventFn
@@ -2348,12 +2311,12 @@ var SchedulerEventRecorder = A.Component.create({
                 defaultFn: instance._defSaveEventFn
             });
 
-            instance.after(EVENT_CHANGE, instance._afterEventChange);
-            instance.after(SCHEDULER_CHANGE, instance._afterSchedulerChange);
+            instance.after(&#x27;eventChange&#x27;, instance._afterEventChange);
+            instance.after(&#x27;schedulerChange&#x27;, instance._afterSchedulerChange);
 
-            instance.popover = new A.Popover(instance.get(POP_OVER));
+            instance.popover = new A.Popover(instance.get(&#x27;popover&#x27;));
 
-            instance.popover.after(VISIBLE_CHANGE, A.bind(instance._afterPopoverVisibleChange, instance));
+            instance.popover.after(&#x27;visibleChange&#x27;, A.bind(instance._afterPopoverVisibleChange, instance));
         },
 
         /**
@@ -2364,9 +2327,9 @@ var SchedulerEventRecorder = A.Component.create({
          */
         getContentNode: function() {
             var instance = this;
-            var popoverBB = instance.popover.get(BOUNDING_BOX);
+            var popoverBB = instance.popover.get(&#x27;boundingBox&#x27;);
 
-            return popoverBB.one(_DOT + CSS_SCHEDULER_EVENT_RECORDER_CONTENT);
+            return popoverBB.one(&#x27;.&#x27; + CSS_SCHEDULER_EVENT_RECORDER_CONTENT);
         },
 
         /**
@@ -2379,21 +2342,21 @@ var SchedulerEventRecorder = A.Component.create({
          */
         getFormattedDate: function() {
             var instance = this,
-                evt = (instance.get(EVENT) || instance),
-                endDate = evt.get(END_DATE),
-                startDate = evt.get(START_DATE),
-                formattedDate = evt._formatDate(startDate, instance.get(DATE_FORMAT));
+                evt = (instance.get(&#x27;event&#x27;) || instance),
+                endDate = evt.get(&#x27;endDate&#x27;),
+                startDate = evt.get(&#x27;startDate&#x27;),
+                formattedDate = evt._formatDate(startDate, instance.get(&#x27;dateFormat&#x27;));
 
-            if (evt.get(ALL_DAY)) {
+            if (evt.get(&#x27;allDay&#x27;)) {
                 return formattedDate;
             }
 
-            formattedDate = formattedDate.concat(_COMMA);
+            formattedDate = formattedDate.concat(&#x27;,&#x27;);
 
-            var scheduler = evt.get(SCHEDULER),
-                fmtHourFn = (scheduler.get(ACTIVE_VIEW).get(ISO_TIME) ? DateMath.toIsoTimeString : DateMath.toUsTimeString);
+            var scheduler = evt.get(&#x27;scheduler&#x27;),
+                fmtHourFn = (scheduler.get(&#x27;activeView&#x27;).get(&#x27;isoTime&#x27;) ? DateMath.toIsoTimeString : DateMath.toUsTimeString);
 
-            return [formattedDate, fmtHourFn(startDate), _DASH, fmtHourFn(endDate)].join(_SPACE);
+            return [formattedDate, fmtHourFn(startDate), &#x27;-&#x27;, fmtHourFn(endDate)].join(&#x27; &#x27;);
         },
 
         /**
@@ -2405,9 +2368,9 @@ var SchedulerEventRecorder = A.Component.create({
          */
         getTemplateData: function() {
             var instance = this,
-                strings = instance.get(STRINGS),
-                evt = instance.get(EVENT) || instance,
-                content = evt.get(CONTENT);
+                strings = instance.get(&#x27;strings&#x27;),
+                evt = instance.get(&#x27;event&#x27;) || instance,
+                content = evt.get(&#x27;content&#x27;);
 
             if (isUndefined(content)) {
                 content = strings[&#x27;description-hint&#x27;];
@@ -2416,8 +2379,8 @@ var SchedulerEventRecorder = A.Component.create({
             return {
                 content: content,
                 date: instance.getFormattedDate(),
-                endDate: evt.get(END_DATE).getTime(),
-                startDate: evt.get(START_DATE).getTime()
+                endDate: evt.get(&#x27;endDate&#x27;).getTime(),
+                startDate: evt.get(&#x27;startDate&#x27;).getTime()
             };
         },
 
@@ -2431,7 +2394,7 @@ var SchedulerEventRecorder = A.Component.create({
          */
         getUpdatedSchedulerEvent: function(optAttrMap) {
             var instance = this,
-                schedulerEvent = instance.get(EVENT),
+                schedulerEvent = instance.get(&#x27;event&#x27;),
                 options = {
                     silent: !schedulerEvent
                 },
@@ -2441,7 +2404,7 @@ var SchedulerEventRecorder = A.Component.create({
                 schedulerEvent = instance.clone();
             }
 
-            schedulerEvent.set(SCHEDULER, instance.get(SCHEDULER), {
+            schedulerEvent.set(&#x27;scheduler&#x27;, instance.get(&#x27;scheduler&#x27;), {
                 silent: true
             });
             schedulerEvent.setAttrs(A.merge(formValues, optAttrMap), options);
@@ -2467,8 +2430,8 @@ var SchedulerEventRecorder = A.Component.create({
          */
         populateForm: function() {
             var instance = this,
-                bodyTemplate = instance.get(BODY_TEMPLATE),
-                headerTemplate = instance.get(HEADER_TEMPLATE),
+                bodyTemplate = instance.get(&#x27;bodyTemplate&#x27;),
+                headerTemplate = instance.get(&#x27;headerTemplate&#x27;),
                 templateData = instance.getTemplateData();
 
             instance.popover.setStdModContent(&#x27;body&#x27;, A.Lang.sub(bodyTemplate, templateData));
@@ -2496,18 +2459,18 @@ var SchedulerEventRecorder = A.Component.create({
          */
         showPopover: function(node) {
             var instance = this,
-                event = instance.get(EVENT);
+                event = instance.get(&#x27;event&#x27;);
 
-            if (!instance.popover.get(RENDERED)) {
+            if (!instance.popover.get(&#x27;rendered&#x27;)) {
                 instance._renderPopover();
             }
 
             if (!node) {
                 if (event) {
-                    node = event.get(NODE);
+                    node = event.get(&#x27;node&#x27;);
                 }
                 else {
-                    node = instance.get(NODE);
+                    node = instance.get(&#x27;node&#x27;);
                 }
             }
 
@@ -2546,7 +2509,7 @@ var SchedulerEventRecorder = A.Component.create({
             if (event.newVal) {
                 instance.populateForm();
 
-                if (!instance.get(EVENT)) {
+                if (!instance.get(&#x27;event&#x27;)) {
                     var contentNode = instance.getContentNode();
 
                     if (contentNode) {
@@ -2557,11 +2520,11 @@ var SchedulerEventRecorder = A.Component.create({
                 }
             }
             else {
-                instance.set(EVENT, null, {
+                instance.set(&#x27;event&#x27;, null, {
                     silent: true
                 });
 
-                instance.get(NODE).remove();
+                instance.get(&#x27;node&#x27;).remove();
             }
         },
 
@@ -2575,9 +2538,9 @@ var SchedulerEventRecorder = A.Component.create({
         _afterSchedulerChange: function(event) {
             var instance = this;
             var scheduler = event.newVal;
-            var schedulerBB = scheduler.get(BOUNDING_BOX);
+            var schedulerBB = scheduler.get(&#x27;boundingBox&#x27;);
 
-            schedulerBB.delegate(CLICK, A.bind(instance._onClickSchedulerEvent, instance), _DOT +
+            schedulerBB.delegate(&#x27;click&#x27;, A.bind(instance._onClickSchedulerEvent, instance), &#x27;.&#x27; +
                 CSS_SCHEDULER_EVENT);
         },
 
@@ -2591,7 +2554,7 @@ var SchedulerEventRecorder = A.Component.create({
         _defCancelEventFn: function() {
             var instance = this;
 
-            instance.get(NODE).remove();
+            instance.get(&#x27;node&#x27;).remove();
 
             instance.hidePopover();
         },
@@ -2605,9 +2568,9 @@ var SchedulerEventRecorder = A.Component.create({
          */
         _defDeleteEventFn: function() {
             var instance = this;
-            var scheduler = instance.get(SCHEDULER);
+            var scheduler = instance.get(&#x27;scheduler&#x27;);
 
-            scheduler.removeEvents(instance.get(EVENT));
+            scheduler.removeEvents(instance.get(&#x27;event&#x27;));
 
             instance.hidePopover();
 
@@ -2623,7 +2586,7 @@ var SchedulerEventRecorder = A.Component.create({
          */
         _defEditEventFn: function() {
             var instance = this;
-            var scheduler = instance.get(SCHEDULER);
+            var scheduler = instance.get(&#x27;scheduler&#x27;);
 
             instance.hidePopover();
 
@@ -2639,7 +2602,7 @@ var SchedulerEventRecorder = A.Component.create({
          */
         _defSaveEventFn: function(event) {
             var instance = this;
-            var scheduler = instance.get(SCHEDULER);
+            var scheduler = instance.get(&#x27;scheduler&#x27;);
 
             scheduler.addEvents(event.newSchedulerEvent);
 
@@ -2657,17 +2620,17 @@ var SchedulerEventRecorder = A.Component.create({
          */
         _getFooterToolbar: function() {
             var instance = this,
-                event = instance.get(EVENT),
-                strings = instance.get(STRINGS),
+                event = instance.get(&#x27;event&#x27;),
+                strings = instance.get(&#x27;strings&#x27;),
                 children = [
                     {
-                        label: strings[SAVE],
+                        label: strings[&#x27;save&#x27;],
                         on: {
                             click: A.bind(instance._handleSaveEvent, instance)
                         }
                     },
                     {
-                        label: strings[CANCEL],
+                        label: strings[&#x27;cancel&#x27;],
                         on: {
                             click: A.bind(instance._handleCancelEvent, instance)
                         }
@@ -2676,7 +2639,7 @@ var SchedulerEventRecorder = A.Component.create({
 
             if (event) {
                 children.push({
-                    label: strings[DELETE],
+                    label: strings[&#x27;delete&#x27;],
                     on: {
                         click: A.bind(instance._handleDeleteEvent, instance)
                     }
@@ -2729,7 +2692,7 @@ var SchedulerEventRecorder = A.Component.create({
             var instance = this;
 
             instance.fire(&#x27;delete&#x27;, {
-                schedulerEvent: instance.get(EVENT)
+                schedulerEvent: instance.get(&#x27;event&#x27;)
             });
 
             if (event.domEvent) {
@@ -2749,7 +2712,7 @@ var SchedulerEventRecorder = A.Component.create({
         _handleEscapeEvent: function(event) {
             var instance = this;
 
-            if (instance.popover.get(RENDERED) &amp;&amp; (event.keyCode === A.Event.KeyMap.ESC)) {
+            if (instance.popover.get(&#x27;rendered&#x27;) &amp;&amp; (event.keyCode === A.Event.KeyMap.ESC)) {
                 instance.fire(&#x27;cancel&#x27;);
 
                 event.preventDefault();
@@ -2765,7 +2728,7 @@ var SchedulerEventRecorder = A.Component.create({
          */
         _handleSaveEvent: function(event) {
             var instance = this,
-                eventName = instance.get(EVENT) ? &#x27;edit&#x27; : &#x27;save&#x27;;
+                eventName = instance.get(&#x27;event&#x27;) ? &#x27;edit&#x27; : &#x27;save&#x27;;
 
             instance.fire(eventName, {
                 newSchedulerEvent: instance.getUpdatedSchedulerEvent()
@@ -2787,16 +2750,16 @@ var SchedulerEventRecorder = A.Component.create({
          */
         _onClickSchedulerEvent: function(event) {
             var instance = this;
-            var evt = event.currentTarget.getData(SCHEDULER_EVENT);
+            var evt = event.currentTarget.getData(&#x27;scheduler-event&#x27;);
 
             if (evt) {
-                instance.set(EVENT, evt, {
+                instance.set(&#x27;event&#x27;, evt, {
                     silent: true
                 });
 
                 instance.showPopover(event.currentTarget);
 
-                instance.get(NODE).remove();
+                instance.get(&#x27;node&#x27;).remove();
             }
         },
 
@@ -2821,19 +2784,19 @@ var SchedulerEventRecorder = A.Component.create({
          */
         _renderPopover: function() {
             var instance = this,
-                scheduler = instance.get(SCHEDULER),
-                schedulerBB = scheduler.get(BOUNDING_BOX);
+                scheduler = instance.get(&#x27;scheduler&#x27;),
+                schedulerBB = scheduler.get(&#x27;boundingBox&#x27;);
 
             instance.popover.render(schedulerBB);
 
             instance.formNode = A.Node.create(TPL_FORM);
 
-            instance.formNode.on(SUBMIT, A.bind(instance._onSubmitForm, instance));
+            instance.formNode.on(&#x27;submit&#x27;, A.bind(instance._onSubmitForm, instance));
 
-            instance.popover.get(BOUNDING_BOX).addClass(CSS_SCHEDULER_EVENT_RECORDER_POP_OVER);
-            instance.popover.get(CONTENT_BOX).wrap(instance.formNode);
+            instance.popover.get(&#x27;boundingBox&#x27;).addClass(CSS_SCHEDULER_EVENT_RECORDER_POP_OVER);
+            instance.popover.get(&#x27;contentBox&#x27;).wrap(instance.formNode);
 
-            schedulerBB.on(CLICKOUTSIDE, A.bind(instance._handleClickOutSide, instance));
+            schedulerBB.on(&#x27;clickoutside&#x27;, A.bind(instance._handleClickOutSide, instance));
         },
 
         /**
@@ -2857,7 +2820,7 @@ var SchedulerEventRecorder = A.Component.create({
                     constrain: true,
                     headerContent: TPL_HEADER_CONTENT,
                     preventOverlap: true,
-                    position: TOP,
+                    position: &#x27;top&#x27;,
                     toolbars: {
                         footer: instance._getFooterToolbar()
                     },

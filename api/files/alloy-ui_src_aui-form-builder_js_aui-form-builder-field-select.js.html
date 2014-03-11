@@ -20,7 +20,7 @@
 </head>
 <body class="yui3-skin-sam">
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
         <div class="navbar-inner">
             <h1 class="brand">
                 <a href="/">
@@ -2101,27 +2101,13 @@
 
 var L = A.Lang,
 
-    FORM_BUILDER_FIELD = &#x27;form-builder-field&#x27;,
-    FORM_BUILDER_SELECT_FIELD = &#x27;form-builder-select-field&#x27;,
-    ID = &#x27;id&#x27;,
-    LABEL = &#x27;label&#x27;,
-    MULTIPLE = &#x27;multiple&#x27;,
-    NAME = &#x27;name&#x27;,
-    NO = &#x27;no&#x27;,
-    NODE = &#x27;node&#x27;,
-    PREDEFINED_VALUE = &#x27;predefinedValue&#x27;,
-    SPACE = &#x27; &#x27;,
-    TEMPLATE = &#x27;template&#x27;,
-    TEMPLATE_NODE = &#x27;templateNode&#x27;,
-    YES = &#x27;yes&#x27;,
-
     getCN = A.getClassName,
 
-    CSS_FORM_BUILDER_FIELD = getCN(FORM_BUILDER_FIELD),
-    CSS_FORM_BUILDER_FIELD_NODE = getCN(FORM_BUILDER_FIELD, NODE),
+    CSS_FORM_BUILDER_FIELD = getCN(&#x27;form-builder-field&#x27;),
+    CSS_FORM_BUILDER_FIELD_NODE = getCN(&#x27;form-builder-field&#x27;, &#x27;node&#x27;),
 
     TPL_SELECT =
-        &#x27;&lt;select id=&quot;{id}&quot; class=&quot;&#x27; + [CSS_FORM_BUILDER_FIELD_NODE].join(SPACE) +
+        &#x27;&lt;select id=&quot;{id}&quot; class=&quot;&#x27; + [CSS_FORM_BUILDER_FIELD_NODE].join(&#x27; &#x27;) +
         &#x27;&quot; name=&quot;{name}&quot; value=&quot;{value}&quot;&gt;&lt;/select&gt;&#x27;;
 
 /**
@@ -2142,7 +2128,7 @@ var FormBuilderSelectField = A.Component.create({
      * @type String
      * @static
      */
-    NAME: FORM_BUILDER_SELECT_FIELD,
+    NAME: &#x27;form-builder-select-field&#x27;,
 
     /**
      * Static property used to define the default attribute
@@ -2186,7 +2172,7 @@ var FormBuilderSelectField = A.Component.create({
      * @type Array
      * @static
      */
-    UI_ATTRS: A.FormBuilderField.UI_ATTRS.concat([MULTIPLE, PREDEFINED_VALUE]),
+    UI_ATTRS: A.FormBuilderField.UI_ATTRS.concat([&#x27;multiple&#x27;, &#x27;predefinedValue&#x27;]),
 
     /**
      * Static property provides a string to identify the CSS prefix.
@@ -2218,11 +2204,11 @@ var FormBuilderSelectField = A.Component.create({
             var instance = this;
 
             return L.sub(
-                instance.get(TEMPLATE), {
-                    id: instance.get(ID),
-                    label: instance.get(LABEL),
-                    name: instance.get(NAME),
-                    value: instance.get(PREDEFINED_VALUE)
+                instance.get(&#x27;template&#x27;), {
+                    id: instance.get(&#x27;id&#x27;),
+                    label: instance.get(&#x27;label&#x27;),
+                    name: instance.get(&#x27;name&#x27;),
+                    value: instance.get(&#x27;predefinedValue&#x27;)
                 }
             );
         },
@@ -2240,15 +2226,15 @@ var FormBuilderSelectField = A.Component.create({
             var model = A.FormBuilderSelectField.superclass.getPropertyModel.apply(instance, arguments);
 
             model.push({
-                attributeName: MULTIPLE,
+                attributeName: &#x27;multiple&#x27;,
                 editor: new A.RadioCellEditor({
                     options: {
-                        &#x27;true&#x27;: strings[YES],
-                        &#x27;false&#x27;: strings[NO]
+                        &#x27;true&#x27;: strings[&#x27;yes&#x27;],
+                        &#x27;false&#x27;: strings[&#x27;no&#x27;]
                     }
                 }),
                 formatter: A.bind(instance._booleanFormatter, instance),
-                name: strings[MULTIPLE]
+                name: strings[&#x27;multiple&#x27;]
             });
 
             return model;
@@ -2263,16 +2249,16 @@ var FormBuilderSelectField = A.Component.create({
          */
         _uiSetMultiple: function(val) {
             var instance = this,
-                templateNode = instance.get(TEMPLATE_NODE);
+                templateNode = instance.get(&#x27;templateNode&#x27;);
 
             if (val) {
-                templateNode.setAttribute(MULTIPLE, MULTIPLE);
+                templateNode.setAttribute(&#x27;multiple&#x27;, &#x27;multiple&#x27;);
             }
             else {
-                templateNode.removeAttribute(MULTIPLE);
+                templateNode.removeAttribute(&#x27;multiple&#x27;);
             }
 
-            instance.predefinedValueEditor.set(MULTIPLE, val);
+            instance.predefinedValueEditor.set(&#x27;multiple&#x27;, val);
         }
 
     }

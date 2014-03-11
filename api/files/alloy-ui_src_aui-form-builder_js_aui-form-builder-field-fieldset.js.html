@@ -20,7 +20,7 @@
 </head>
 <body class="yui3-skin-sam">
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
         <div class="navbar-inner">
             <h1 class="brand">
                 <a href="/">
@@ -2101,35 +2101,14 @@
 
 var L = A.Lang,
 
-    ACCEPT_CHILDREN = &#x27;acceptChildren&#x27;,
-    BUILDER = &#x27;builder&#x27;,
-    CONTENT_BOX = &#x27;contentBox&#x27;,
-    DOT = &#x27;.&#x27;,
-    DROP = &#x27;drop&#x27;,
-    DROP_ZONE_NODE = &#x27;dropZoneNode&#x27;,
-    FORM = &#x27;form&#x27;,
-    FORM_BUILDER_FIELD = &#x27;form-builder-field&#x27;,
-    FORM_BUILDER_FIELDSET_FIELD = &#x27;form-builder-fieldset-field&#x27;,
-    ID = &#x27;id&#x27;,
-    LABEL = &#x27;label&#x27;,
-    NO = &#x27;no&#x27;,
-    NODE = &#x27;node&#x27;,
-    SHOW_LABEL = &#x27;showLabel&#x27;,
-    SPACE = &#x27; &#x27;,
-    TEMPLATE = &#x27;template&#x27;,
-    TEMPLATE_NODE = &#x27;templateNode&#x27;,
-    TYPE = &#x27;type&#x27;,
-    YES = &#x27;yes&#x27;,
-    ZONE = &#x27;zone&#x27;,
-
     getCN = A.getClassName,
 
-    CSS_FIELD_LABEL = getCN(FORM_BUILDER_FIELD, LABEL),
-    CSS_FORM_BUILDER_DROP_ZONE = getCN(FORM, BUILDER, DROP, ZONE),
-    CSS_FORM_BUILDER_FIELD = getCN(FORM_BUILDER_FIELD),
-    CSS_FORM_BUILDER_FIELD_NODE = getCN(FORM_BUILDER_FIELD, NODE),
+    CSS_FIELD_LABEL = getCN(&#x27;form-builder-field&#x27;, &#x27;label&#x27;),
+    CSS_FORM_BUILDER_DROP_ZONE = getCN(&#x27;form&#x27;, &#x27;builder&#x27;, &#x27;drop&#x27;, &#x27;zone&#x27;),
+    CSS_FORM_BUILDER_FIELD = getCN(&#x27;form-builder-field&#x27;),
+    CSS_FORM_BUILDER_FIELD_NODE = getCN(&#x27;form-builder-field&#x27;, &#x27;node&#x27;),
 
-    TPL_FIELDSET = &#x27;&lt;fieldset id=&quot;{id}&quot; class=&quot;&#x27; + [CSS_FORM_BUILDER_FIELD_NODE].join(SPACE) + &#x27;&quot;&gt;&lt;/fieldset&gt;&#x27;,
+    TPL_FIELDSET = &#x27;&lt;fieldset id=&quot;{id}&quot; class=&quot;&#x27; + [CSS_FORM_BUILDER_FIELD_NODE].join(&#x27; &#x27;) + &#x27;&quot;&gt;&lt;/fieldset&gt;&#x27;,
     TPL_LEGEND = &#x27;&lt;legend class=&quot;&#x27; + CSS_FIELD_LABEL + &#x27;&quot;&gt;&lt;/legend&gt;&#x27;;
 
 /**
@@ -2150,7 +2129,7 @@ var FormBuilderFieldsetField = A.Component.create({
      * @type String
      * @static
      */
-    NAME: FORM_BUILDER_FIELDSET_FIELD,
+    NAME: &#x27;form-builder-fieldset-field&#x27;,
 
     /**
      * Static property used to define the default attribute
@@ -2216,7 +2195,7 @@ var FormBuilderFieldsetField = A.Component.create({
      * @type Array
      * @static
      */
-    UI_ATTRS: [ACCEPT_CHILDREN, LABEL, SHOW_LABEL],
+    UI_ATTRS: [&#x27;acceptChildren&#x27;, &#x27;label&#x27;, &#x27;showLabel&#x27;],
 
     /**
      * Static property provides a string to identify the CSS prefix.
@@ -2249,8 +2228,8 @@ var FormBuilderFieldsetField = A.Component.create({
             var instance = this;
 
             return L.sub(
-                instance.get(TEMPLATE), {
-                    id: instance.get(ID)
+                instance.get(&#x27;template&#x27;), {
+                    id: instance.get(&#x27;id&#x27;)
                 }
             );
         },
@@ -2266,23 +2245,23 @@ var FormBuilderFieldsetField = A.Component.create({
                 strings = instance.getStrings();
 
             return [{
-                attributeName: TYPE,
+                attributeName: &#x27;type&#x27;,
                 editor: false,
-                name: strings[TYPE]
+                name: strings[&#x27;type&#x27;]
             }, {
-                attributeName: LABEL,
+                attributeName: &#x27;label&#x27;,
                 editor: new A.TextCellEditor(),
-                name: strings[LABEL]
+                name: strings[&#x27;label&#x27;]
             }, {
-                attributeName: SHOW_LABEL,
+                attributeName: &#x27;showLabel&#x27;,
                 editor: new A.RadioCellEditor({
                     options: {
-                        &#x27;true&#x27;: strings[YES],
-                        &#x27;false&#x27;: strings[NO]
+                        &#x27;true&#x27;: strings[&#x27;yes&#x27;],
+                        &#x27;false&#x27;: strings[&#x27;no&#x27;]
                     }
                 }),
                 formatter: A.bind(instance._booleanFormatter, instance),
-                name: strings[SHOW_LABEL]
+                name: strings[&#x27;showLabel&#x27;]
             }];
         },
 
@@ -2295,9 +2274,9 @@ var FormBuilderFieldsetField = A.Component.create({
          */
         _uiSetAcceptChildren: function(val) {
             var instance = this,
-                contentBox = instance.get(CONTENT_BOX),
-                dropZone = instance.get(DROP_ZONE_NODE),
-                markupDropZone = contentBox.one(DOT + CSS_FORM_BUILDER_DROP_ZONE);
+                contentBox = instance.get(&#x27;contentBox&#x27;),
+                dropZone = instance.get(&#x27;dropZoneNode&#x27;),
+                markupDropZone = contentBox.one(&#x27;.&#x27; + CSS_FORM_BUILDER_DROP_ZONE);
 
             if (val &amp;&amp; !markupDropZone) {
                 contentBox.append(dropZone);
@@ -2306,10 +2285,10 @@ var FormBuilderFieldsetField = A.Component.create({
                 markupDropZone.remove();
             }
             else if (val &amp;&amp; markupDropZone) {
-                instance.set(DROP_ZONE_NODE, markupDropZone);
+                instance.set(&#x27;dropZoneNode&#x27;, markupDropZone);
             }
 
-            instance.get(TEMPLATE_NODE).hide();
+            instance.get(&#x27;templateNode&#x27;).hide();
         }
 
     }

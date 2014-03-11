@@ -20,7 +20,7 @@
 </head>
 <body class="yui3-skin-sam">
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
         <div class="navbar-inner">
             <h1 class="brand">
                 <a href="/">
@@ -2115,9 +2115,6 @@ if (!IE || IE &gt;= 9 || isShivDisabled()) {
 
 var BUFFER_CSS_TEXT = [],
 
-    CSS_PRINTFIX = &#x27;printfix&#x27;,
-    CSS_PRINTFIX_PREFIX = &#x27;printfix-&#x27;,
-
     LOCATION = WIN.location,
 
     DOMAIN = LOCATION.protocol + &#x27;//&#x27; + LOCATION.host,
@@ -2137,25 +2134,8 @@ var BUFFER_CSS_TEXT = [],
     REGEX_RULE = new RegExp(&#x27;(^|[^\\n{}]*?\\s)(&#x27; + HTML5_ELEMENTS_LIST + &#x27;).*?{([^}]*)}&#x27;, &#x27;gim&#x27;),
     REGEX_TAG = new RegExp(&#x27;&lt;(\/*)(&#x27; + HTML5_ELEMENTS_LIST + &#x27;)&#x27;, &#x27;gi&#x27;),
 
-    SELECTOR_REPLACE_RULE = &#x27;.&#x27; + CSS_PRINTFIX_PREFIX + &#x27;$1&#x27;,
-
-    STR_ALL = &#x27;all&#x27;,
-    STR_BLANK = &#x27; &#x27;,
-    STR_EMPTY = &#x27;&#x27;,
-
-    STR_BRACKET_OPEN = &#x27;{&#x27;,
-    STR_BRACKET_CLOSE = &#x27;}&#x27;,
-
-    STR_CHECKBOX = &#x27;checkbox&#x27;,
-    STR_CHECKED = &#x27;checked&#x27;,
-    STR_HTTPS = &#x27;https&#x27;,
-    STR_INPUT = &#x27;INPUT&#x27;,
-    STR_OPTION = &#x27;OPTION&#x27;,
-    STR_RADIO = &#x27;radio&#x27;,
-    STR_SELECTED = &#x27;selected&#x27;,
-    STR_STAR = &#x27;*&#x27;,
-    STR_URL = &#x27;url(&#x27;,
-    STR_URL_DOMAIN = STR_URL + DOMAIN,
+    SELECTOR_REPLACE_RULE = &#x27;.&#x27; + &#x27;printfix-&#x27; + &#x27;$1&#x27;,
+    STR_URL_DOMAIN = &#x27;url(&#x27; + DOMAIN,
 
     TAG_REPLACE_ORIGINAL = &#x27;&lt;$1$2&#x27;,
     TAG_REPLACE_FONT = &#x27;&lt;$1font&#x27;;
@@ -2231,7 +2211,7 @@ A.mix(
 
             var styleSheet = instance._getStyleSheet();
 
-            styleSheet.styleSheet.cssText = STR_EMPTY;
+            styleSheet.styleSheet.cssText = &#x27;&#x27;;
         },
 
         /**
@@ -2260,7 +2240,7 @@ A.mix(
         parseCSS: function(cssText) {
             var instance = this;
 
-            var css = STR_EMPTY;
+            var css = &#x27;&#x27;;
             var rules = cssText.match(REGEX_RULE);
 
             if (rules) {
@@ -2281,7 +2261,7 @@ A.mix(
             var bodyClone = instance._getBodyClone();
             var bodyEl = instance._getBodyEl();
 
-            bodyClone.innerHTML = STR_EMPTY;
+            bodyClone.innerHTML = &#x27;&#x27;;
 
             HTML.removeChild(bodyClone);
             HTML.appendChild(bodyEl);
@@ -2322,11 +2302,11 @@ A.mix(
 
                     cssClass = node.className;
 
-                    if (cssClass.indexOf(CSS_PRINTFIX_PREFIX) == -1) {
-                        buffer[0] = CSS_PRINTFIX_PREFIX + html5Element;
+                    if (cssClass.indexOf(&#x27;printfix-&#x27;) == -1) {
+                        buffer[0] = &#x27;printfix-&#x27; + html5Element;
                         buffer[1] = cssClass;
 
-                        node.className = buffer.join(STR_BLANK);
+                        node.className = buffer.join(&#x27; &#x27;);
                     }
                 }
             }
@@ -2340,7 +2320,7 @@ A.mix(
             bodyClone.className = bodyEl.className;
             bodyClone.id = bodyEl.id;
 
-            var originalNodes = bodyEl.getElementsByTagName(STR_STAR);
+            var originalNodes = bodyEl.getElementsByTagName(&#x27;*&#x27;);
             var length = originalNodes.length;
 
             // IE will throw a mixed content warning when using https
@@ -2360,38 +2340,38 @@ A.mix(
                     backgroundImage = elStyle.backgroundImage;
 
                     if (backgroundImage &amp;&amp;
-                        backgroundImage.indexOf(STR_URL) &gt; -1 &amp;&amp;
-                        backgroundImage.indexOf(STR_HTTPS) == -1) {
+                        backgroundImage.indexOf(&#x27;url(&#x27;) &gt; -1 &amp;&amp;
+                        backgroundImage.indexOf(&#x27;https&#x27;) == -1) {
 
-                        elStyle.backgroundImage = backgroundImage.replace(STR_URL, STR_URL_DOMAIN);
+                        elStyle.backgroundImage = backgroundImage.replace(&#x27;url(&#x27;, STR_URL_DOMAIN);
                     }
                 }
 
-                bodyElStyle.display = STR_EMPTY;
+                bodyElStyle.display = &#x27;&#x27;;
             }
 
             var bodyElClone = bodyEl.cloneNode(true);
 
-            var newNodes = bodyElClone.getElementsByTagName(STR_STAR);
+            var newNodes = bodyElClone.getElementsByTagName(&#x27;*&#x27;);
 
             if (length == newNodes.length) {
                 while (length--) {
                     var newNode = newNodes[length];
                     var newNodeName = newNode.nodeName;
 
-                    if (newNodeName == STR_INPUT || newNodeName == STR_OPTION) {
+                    if (newNodeName == &#x27;INPUT&#x27; || newNodeName == &#x27;OPTION&#x27;) {
                         var originalNode = originalNodes[length];
                         var originalNodeName = originalNode.nodeName;
 
                         if (originalNodeName == newNodeName) {
                             var prop = null;
 
-                            if (newNodeName == STR_OPTION) {
-                                prop = STR_SELECTED;
+                            if (newNodeName == &#x27;OPTION&#x27;) {
+                                prop = &#x27;selected&#x27;;
                             }
-                            else if (newNodeName == STR_INPUT &amp;&amp; (newNode.type == STR_CHECKBOX || newNode.type ==
-                                STR_RADIO)) {
-                                prop = STR_CHECKED;
+                            else if (newNodeName == &#x27;INPUT&#x27; &amp;&amp; (newNode.type == &#x27;checkbox&#x27; || newNode.type ==
+                                &#x27;radio&#x27;)) {
+                                prop = &#x27;checked&#x27;;
                             }
 
                             if (prop !== null) {
@@ -2421,7 +2401,7 @@ A.mix(
             var instance = this;
 
             var buffer = [];
-            var styleSheets = instance._getAllStyleSheets(DOC.styleSheets, STR_ALL);
+            var styleSheets = instance._getAllStyleSheets(DOC.styleSheets, &#x27;all&#x27;);
             var rule;
             var cssText;
 
@@ -2441,7 +2421,7 @@ A.mix(
                 }
             }
 
-            return buffer.join(STR_BLANK);
+            return buffer.join(&#x27; &#x27;);
         },
 
         /**
@@ -2455,7 +2435,7 @@ A.mix(
         _getCSSTextFromRule: function(rule) {
             var instance = this;
 
-            var cssText = STR_EMPTY;
+            var cssText = &#x27;&#x27;;
 
             var ruleStyle = rule.style;
             var ruleCSSText;
@@ -2465,9 +2445,9 @@ A.mix(
                 REGEX_ELEMENTS_FAST.test(ruleSelectorText)) {
                 BUFFER_CSS_TEXT.length = 0;
 
-                BUFFER_CSS_TEXT.push(ruleSelectorText, STR_BRACKET_OPEN, ruleCSSText, STR_BRACKET_CLOSE);
+                BUFFER_CSS_TEXT.push(ruleSelectorText, &#x27;{&#x27;, ruleCSSText, &#x27;}&#x27;);
 
-                cssText = BUFFER_CSS_TEXT.join(STR_BLANK);
+                cssText = BUFFER_CSS_TEXT.join(&#x27; &#x27;);
             }
 
             return cssText;
@@ -2530,7 +2510,7 @@ A.mix(
                 }
             }
 
-            mediaType = STR_ALL;
+            mediaType = &#x27;all&#x27;;
 
             return buffer;
         },
@@ -2620,7 +2600,7 @@ A.mix(
                 head.insertBefore(styleSheet, head.firstChild);
 
                 styleSheet.media = &#x27;print&#x27;;
-                styleSheet.className = CSS_PRINTFIX;
+                styleSheet.className = &#x27;printfix&#x27;;
 
                 instance._styleSheet = styleSheet;
             }

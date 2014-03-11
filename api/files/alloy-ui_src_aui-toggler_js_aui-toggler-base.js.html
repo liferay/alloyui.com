@@ -20,7 +20,7 @@
 </head>
 <body class="yui3-skin-sam">
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
         <div class="navbar-inner">
             <h1 class="brand">
                 <a href="/">
@@ -2104,44 +2104,17 @@ var Lang = A.Lang,
     isUndefined = Lang.isUndefined,
 
     toInt = Lang.toInt,
-
-    ANIMATED = &#x27;animated&#x27;,
-    ANIMATING = &#x27;animating&#x27;,
-    BIND_DOM_EVENTS = &#x27;bindDOMEvents&#x27;,
-    CLICK = &#x27;click&#x27;,
-    COLLAPSED = &#x27;collapsed&#x27;,
-    CONTENT = &#x27;content&#x27;,
     CUBIC_BEZIER = &#x27;cubic-bezier(0, 0.1, 0, 1.0)&#x27;,
-    DOWN = &#x27;down&#x27;,
-    ENTER = &#x27;enter&#x27;,
-    ESC = &#x27;esc&#x27;,
-    EXPANDED = &#x27;expanded&#x27;,
-    EXPANDED_CHANGE = &#x27;expandedChange&#x27;,
-    GET_BOUNDING_CLIENT_RECT = &#x27;getBoundingClientRect&#x27;,
-    HEADER = &#x27;header&#x27;,
-    KEYDOWN = &#x27;keydown&#x27;,
-    LEFT = &#x27;left&#x27;,
-    MARGIN_TOP = &#x27;marginTop&#x27;,
-    NUM_MINUS = &#x27;num_minus&#x27;,
-    NUM_PLUS = &#x27;num_plus&#x27;,
-    OFFSET_HEIGHT = &#x27;offsetHeight&#x27;,
-    PIXEL = &#x27;px&#x27;,
-    RIGHT = &#x27;right&#x27;,
-    SPACE = &#x27;space&#x27;,
-    TOGGLER = &#x27;toggler&#x27;,
-    TRANSITION = &#x27;transition&#x27;,
-    UP = &#x27;up&#x27;,
-    WRAPPER = &#x27;wrapper&#x27;,
 
     getCN = A.getClassName,
 
-    CSS_TOGGLER_CONTENT = getCN(TOGGLER, CONTENT),
-    CSS_TOGGLER_CONTENT_COLLAPSED = getCN(TOGGLER, CONTENT, COLLAPSED),
-    CSS_TOGGLER_CONTENT_EXPANDED = getCN(TOGGLER, CONTENT, EXPANDED),
-    CSS_TOGGLER_CONTENT_WRAPPER = getCN(TOGGLER, CONTENT, WRAPPER),
-    CSS_TOGGLER_HEADER = getCN(TOGGLER, HEADER),
-    CSS_TOGGLER_HEADER_COLLAPSED = getCN(TOGGLER, HEADER, COLLAPSED),
-    CSS_TOGGLER_HEADER_EXPANDED = getCN(TOGGLER, HEADER, EXPANDED),
+    CSS_TOGGLER_CONTENT = getCN(&#x27;toggler&#x27;, &#x27;content&#x27;),
+    CSS_TOGGLER_CONTENT_COLLAPSED = getCN(&#x27;toggler&#x27;, &#x27;content&#x27;, &#x27;collapsed&#x27;),
+    CSS_TOGGLER_CONTENT_EXPANDED = getCN(&#x27;toggler&#x27;, &#x27;content&#x27;, &#x27;expanded&#x27;),
+    CSS_TOGGLER_CONTENT_WRAPPER = getCN(&#x27;toggler&#x27;, &#x27;content&#x27;, &#x27;wrapper&#x27;),
+    CSS_TOGGLER_HEADER = getCN(&#x27;toggler&#x27;, &#x27;header&#x27;),
+    CSS_TOGGLER_HEADER_COLLAPSED = getCN(&#x27;toggler&#x27;, &#x27;header&#x27;, &#x27;collapsed&#x27;),
+    CSS_TOGGLER_HEADER_EXPANDED = getCN(&#x27;toggler&#x27;, &#x27;header&#x27;, &#x27;expanded&#x27;),
 
     CSS_TOGGLER_CONTENT_STATE = {
         &#x27;false&#x27;: CSS_TOGGLER_CONTENT_COLLAPSED,
@@ -2175,7 +2148,7 @@ var Toggler = A.Component.create({
      * @type String
      * @static
      */
-    NAME: TOGGLER,
+    NAME: &#x27;toggler&#x27;,
 
     /**
      * Static property used to define the default attribute
@@ -2291,17 +2264,17 @@ var Toggler = A.Component.create({
      * @param instance
      */
     headerEventHandler: function(event, instance) {
-        if (event.type === CLICK || event.isKey(ENTER) || event.isKey(SPACE)) {
+        if (event.type === &#x27;click&#x27; || event.isKey(&#x27;enter&#x27;) || event.isKey(&#x27;space&#x27;)) {
             event.preventDefault();
 
             return instance.toggle();
         }
-        else if (event.isKey(DOWN) || event.isKey(RIGHT) || event.isKey(NUM_PLUS)) {
+        else if (event.isKey(&#x27;down&#x27;) || event.isKey(&#x27;right&#x27;) || event.isKey(&#x27;num_plus&#x27;)) {
             event.preventDefault();
 
             return instance.expand();
         }
-        else if (event.isKey(UP) || event.isKey(LEFT) || event.isKey(ESC) || event.isKey(NUM_MINUS)) {
+        else if (event.isKey(&#x27;up&#x27;) || event.isKey(&#x27;left&#x27;) || event.isKey(&#x27;esc&#x27;) || event.isKey(&#x27;num_minus&#x27;)) {
             event.preventDefault();
 
             return instance.collapse();
@@ -2322,7 +2295,7 @@ var Toggler = A.Component.create({
             instance.bindUI();
             instance.syncUI();
 
-            instance._uiSetExpanded(instance.get(EXPANDED));
+            instance._uiSetExpanded(instance.get(&#x27;expanded&#x27;));
         },
 
         /**
@@ -2333,17 +2306,17 @@ var Toggler = A.Component.create({
          */
         bindUI: function() {
             var instance = this;
-            var header = instance.get(HEADER);
+            var header = instance.get(&#x27;header&#x27;);
 
-            header.setData(TOGGLER, instance);
+            header.setData(&#x27;toggler&#x27;, instance);
 
             var eventHandles = [
-                instance.on(EXPANDED_CHANGE, A.bind(instance._onExpandedChange, instance))
+                instance.on(&#x27;expandedChange&#x27;, A.bind(instance._onExpandedChange, instance))
             ];
 
-            if (instance.get(BIND_DOM_EVENTS)) {
+            if (instance.get(&#x27;bindDOMEvents&#x27;)) {
                 eventHandles.push(
-                    header.on([CLICK, KEYDOWN], A.rbind(Toggler.headerEventHandler, null, instance))
+                    header.on([&#x27;click&#x27;, &#x27;keydown&#x27;], A.rbind(Toggler.headerEventHandler, null, instance))
                 );
             }
 
@@ -2359,8 +2332,8 @@ var Toggler = A.Component.create({
         syncUI: function() {
             var instance = this;
 
-            instance.get(CONTENT).addClass(CSS_TOGGLER_CONTENT);
-            instance.get(HEADER).addClass(CSS_TOGGLER_HEADER);
+            instance.get(&#x27;content&#x27;).addClass(CSS_TOGGLER_CONTENT);
+            instance.get(&#x27;header&#x27;).addClass(CSS_TOGGLER_HEADER);
         },
 
         /**
@@ -2372,7 +2345,7 @@ var Toggler = A.Component.create({
         destructor: function() {
             var instance = this;
 
-            instance.get(HEADER).setData(TOGGLER, null);
+            instance.get(&#x27;header&#x27;).setData(&#x27;toggler&#x27;, null);
 
             (new A.EventHandle(instance._eventHandles)).detach();
         },
@@ -2389,9 +2362,9 @@ var Toggler = A.Component.create({
 
             instance._uiSetExpanded(true);
 
-            var transition = A.merge(config, instance.get(TRANSITION));
+            var transition = A.merge(config, instance.get(&#x27;transition&#x27;));
 
-            instance.get(CONTENT).transition(transition, A.bind(fn, instance));
+            instance.get(&#x27;content&#x27;).transition(transition, A.bind(fn, instance));
         },
 
         /**
@@ -2424,23 +2397,23 @@ var Toggler = A.Component.create({
          */
         getContentHeight: function() {
             var instance = this;
-            var content = instance.get(CONTENT);
-            var expanded = instance.get(EXPANDED),
+            var content = instance.get(&#x27;content&#x27;);
+            var expanded = instance.get(&#x27;expanded&#x27;),
                 height;
 
             if (!expanded) {
                 instance._uiSetExpanded(true);
             }
 
-            if (content.hasMethod(GET_BOUNDING_CLIENT_RECT)) {
-                var preciseRegion = content.invoke(GET_BOUNDING_CLIENT_RECT);
+            if (content.hasMethod(&#x27;getBoundingClientRect&#x27;)) {
+                var preciseRegion = content.invoke(&#x27;getBoundingClientRect&#x27;);
 
                 if (preciseRegion) {
                     height = preciseRegion.bottom - preciseRegion.top;
                 }
             }
             else {
-                height = content.get(OFFSET_HEIGHT);
+                height = content.get(&#x27;offsetHeight&#x27;);
             }
 
             if (!expanded) {
@@ -2458,57 +2431,57 @@ var Toggler = A.Component.create({
          */
         toggle: function(expand, payload) {
             var instance = this,
-                header = instance.get(HEADER),
+                header = instance.get(&#x27;header&#x27;),
                 expanded;
 
             if (!header.test(&#x27;:visible&#x27;)) {
                 return;
             }
 
-            expanded = instance.get(EXPANDED);
+            expanded = instance.get(&#x27;expanded&#x27;);
 
             if (isUndefined(expand)) {
                 expand = !expanded;
             }
 
-            if (instance.get(ANIMATED) &amp;&amp; (expand !== expanded)) {
-                if (instance.get(ANIMATING)) {
+            if (instance.get(&#x27;animated&#x27;) &amp;&amp; (expand !== expanded)) {
+                if (instance.get(&#x27;animating&#x27;)) {
                     return expand;
                 }
 
-                var content = instance.get(CONTENT);
+                var content = instance.get(&#x27;content&#x27;);
 
                 var height = instance.getContentHeight();
                 var gutter = instance.contentGutter;
 
                 if (isUndefined(gutter)) {
-                    gutter = instance.contentGutter = toInt(content.getStyle(MARGIN_TOP));
+                    gutter = instance.contentGutter = toInt(content.getStyle(&#x27;marginTop&#x27;));
                 }
 
                 if (!instance.wrapped) {
                     content.wrap(TPL_CONTENT_WRAPPER);
 
                     if (expand) {
-                        content.setStyle(MARGIN_TOP, -(height + gutter));
+                        content.setStyle(&#x27;marginTop&#x27;, -(height + gutter));
                     }
 
                     instance.wrapped = true;
                 }
 
-                instance.set(ANIMATING, true);
+                instance.set(&#x27;animating&#x27;, true);
 
                 instance.animate({
-                        marginTop: (expand ? gutter : -(height + gutter)) + PIXEL
+                        marginTop: (expand ? gutter : -(height + gutter)) + &#x27;px&#x27;
                     },
                     function() {
-                        instance.set(ANIMATING, false);
+                        instance.set(&#x27;animating&#x27;, false);
 
-                        instance.set(EXPANDED, expand, payload);
+                        instance.set(&#x27;expanded&#x27;, expand, payload);
                     }
                 );
             }
             else {
-                instance.set(EXPANDED, expand, payload);
+                instance.set(&#x27;expanded&#x27;, expand, payload);
             }
 
             return expand;
@@ -2537,8 +2510,8 @@ var Toggler = A.Component.create({
         _uiSetExpanded: function(val) {
             var instance = this;
 
-            instance.get(CONTENT).replaceClass(CSS_TOGGLER_CONTENT_STATE[!val], CSS_TOGGLER_CONTENT_STATE[val]);
-            instance.get(HEADER).replaceClass(CSS_TOGGLER_HEADER_STATE[!val], CSS_TOGGLER_HEADER_STATE[val]);
+            instance.get(&#x27;content&#x27;).replaceClass(CSS_TOGGLER_CONTENT_STATE[!val], CSS_TOGGLER_CONTENT_STATE[val]);
+            instance.get(&#x27;header&#x27;).replaceClass(CSS_TOGGLER_HEADER_STATE[!val], CSS_TOGGLER_HEADER_STATE[val]);
         }
 
     }

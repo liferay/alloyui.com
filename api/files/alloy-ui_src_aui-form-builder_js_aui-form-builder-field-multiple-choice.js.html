@@ -20,7 +20,7 @@
 </head>
 <body class="yui3-skin-sam">
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
         <div class="navbar-inner">
             <h1 class="brand">
                 <a href="/">
@@ -2105,27 +2105,6 @@ var Lang = A.Lang,
 
     AArray = A.Array,
 
-    ACCEPT_CHILDREN = &#x27;acceptChildren&#x27;,
-    EDITOR = &#x27;editor&#x27;,
-    FIELD = &#x27;field&#x27;,
-    FORM_BUILDER = &#x27;form-builder&#x27;,
-    FORM_BUILDER_MULTIPLE_CHOICE_FIELD = &#x27;form-builder-multiple-choice-field&#x27;,
-    FORM_BUILDER_OPTIONS_EDITOR = &#x27;form-builder-options-editor&#x27;,
-    HIDDEN = &#x27;hidden&#x27;,
-    LABEL = &#x27;label&#x27;,
-    NAME = &#x27;name&#x27;,
-    OPTION_TEMPLATE = &#x27;optionTemplate&#x27;,
-    OPTIONS = &#x27;options&#x27;,
-    PREDEFINED_VALUE = &#x27;predefinedValue&#x27;,
-    RENDER = &#x27;render&#x27;,
-    SELECTED = &#x27;selected&#x27;,
-    SHOW_LABEL = &#x27;showLabel&#x27;,
-    TEMPLATE_NODE = &#x27;templateNode&#x27;,
-
-    _COMMA = &#x27;,&#x27;,
-    _EMPTY_STR = &#x27;&#x27;,
-    _SPACE = &#x27; &#x27;,
-
     getCN = A.getClassName,
 
     getEditorOptions = function(val) {
@@ -2141,8 +2120,8 @@ var Lang = A.Lang,
         return options;
     },
 
-    CSS_FORM_BUILDER_FIELD = getCN(FORM_BUILDER, FIELD),
-    CSS_FORM_BUILDER_OPTIONS_EDITOR_HIDDEN = getCN(FORM_BUILDER, OPTIONS, EDITOR, HIDDEN);
+    CSS_FORM_BUILDER_FIELD = getCN(&#x27;form-builder&#x27;, &#x27;field&#x27;),
+    CSS_FORM_BUILDER_OPTIONS_EDITOR_HIDDEN = getCN(&#x27;form-builder&#x27;, &#x27;options&#x27;, &#x27;editor&#x27;, &#x27;hidden&#x27;);
 
 /**
  * A base class for &#x60;A.OptionsEditor&#x60;.
@@ -2162,7 +2141,7 @@ var OptionsEditor = A.Component.create({
      * @type String
      * @static
      */
-    NAME: FORM_BUILDER_OPTIONS_EDITOR,
+    NAME: &#x27;form-builder-options-editor&#x27;,
 
     /**
      * Static property used to define the default attribute
@@ -2208,7 +2187,7 @@ var OptionsEditor = A.Component.create({
         initializer: function() {
             var instance = this;
 
-            instance.after(RENDER, function() {
+            instance.after(&#x27;render&#x27;, function() {
                 instance._onEditEvent();
             });
         },
@@ -2248,7 +2227,7 @@ var FormBuilderMultipleChoiceField = A.Component.create({
      * @type String
      * @static
      */
-    NAME: FORM_BUILDER_MULTIPLE_CHOICE_FIELD,
+    NAME: &#x27;form-builder-multiple-choice-field&#x27;,
 
     /**
      * Static property used to define the default attribute
@@ -2326,7 +2305,7 @@ var FormBuilderMultipleChoiceField = A.Component.create({
      * @type Array
      * @static
      */
-    UI_ATTRS: [ACCEPT_CHILDREN, LABEL, NAME, OPTIONS, PREDEFINED_VALUE, SHOW_LABEL],
+    UI_ATTRS: [&#x27;acceptChildren&#x27;, &#x27;label&#x27;, &#x27;name&#x27;, &#x27;options&#x27;, &#x27;predefinedValue&#x27;, &#x27;showLabel&#x27;],
 
     /**
      * Static property provides a string to identify the CSS prefix.
@@ -2357,7 +2336,7 @@ var FormBuilderMultipleChoiceField = A.Component.create({
          */
         initializer: function() {
             var instance = this,
-                options = instance.get(OPTIONS);
+                options = instance.get(&#x27;options&#x27;);
 
             instance.predefinedValueEditor = new A.DropDownCellEditor({
                 options: getEditorOptions(options)
@@ -2372,7 +2351,7 @@ var FormBuilderMultipleChoiceField = A.Component.create({
          */
         getPropertyModel: function() {
             var instance = this,
-                options = instance.get(OPTIONS),
+                options = instance.get(&#x27;options&#x27;),
                 strings = instance.getStrings();
 
             var model = A.FormBuilderMultipleChoiceField.superclass.getPropertyModel.apply(instance, arguments);
@@ -2380,12 +2359,12 @@ var FormBuilderMultipleChoiceField = A.Component.create({
             AArray.each(
                 model,
                 function(item, index, collection) {
-                    if (item.attributeName === PREDEFINED_VALUE) {
+                    if (item.attributeName === &#x27;predefinedValue&#x27;) {
                         collection[index] = A.merge(
                             item, {
                                 editor: instance.predefinedValueEditor,
                                 formatter: function(o) {
-                                    var editorOptions = instance.predefinedValueEditor.get(OPTIONS),
+                                    var editorOptions = instance.predefinedValueEditor.get(&#x27;options&#x27;),
                                         values = o.data.value;
 
                                     if (!isArray(values)) {
@@ -2396,7 +2375,7 @@ var FormBuilderMultipleChoiceField = A.Component.create({
                                         return editorOptions[val];
                                     });
 
-                                    return labels.join(_COMMA + _SPACE);
+                                    return labels.join(&#x27;,&#x27; + &#x27; &#x27;);
                                 }
                             }
                         );
@@ -2405,12 +2384,12 @@ var FormBuilderMultipleChoiceField = A.Component.create({
             );
 
             model.push({
-                attributeName: OPTIONS,
+                attributeName: &#x27;options&#x27;,
                 editor: new OptionsEditor({
                     editable: true,
                     on: {
                         optionsChange: function(event) {
-                            instance.predefinedValueEditor.set(OPTIONS, event.newVal);
+                            instance.predefinedValueEditor.set(&#x27;options&#x27;, event.newVal);
                         }
                     },
                     options: getEditorOptions(options),
@@ -2418,7 +2397,7 @@ var FormBuilderMultipleChoiceField = A.Component.create({
                         var input = [];
 
                         A.each(
-                            this.get(OPTIONS),
+                            this.get(&#x27;options&#x27;),
                             function(item, index, collection) {
                                 var option = {
                                     label: item,
@@ -2451,9 +2430,9 @@ var FormBuilderMultipleChoiceField = A.Component.create({
                         }
                     );
 
-                    return buffer.join(_COMMA + _SPACE);
+                    return buffer.join(&#x27;,&#x27; + &#x27; &#x27;);
                 },
-                name: strings[OPTIONS]
+                name: strings[&#x27;options&#x27;]
             });
 
             return model;
@@ -2476,7 +2455,7 @@ var FormBuilderMultipleChoiceField = A.Component.create({
                 function(item, index, collection) {
                     buffer.push(
                         Lang.sub(
-                            instance.get(OPTION_TEMPLATE), {
+                            instance.get(&#x27;optionTemplate&#x27;), {
                                 label: item.label,
                                 value: item.value
                             }
@@ -2485,12 +2464,12 @@ var FormBuilderMultipleChoiceField = A.Component.create({
                 }
             );
 
-            instance.optionNodes = A.NodeList.create(buffer.join(_EMPTY_STR));
+            instance.optionNodes = A.NodeList.create(buffer.join(&#x27;&#x27;));
 
-            instance.get(TEMPLATE_NODE).setContent(instance.optionNodes);
+            instance.get(&#x27;templateNode&#x27;).setContent(instance.optionNodes);
 
             instance._uiSetPredefinedValue(
-                instance.get(PREDEFINED_VALUE)
+                instance.get(&#x27;predefinedValue&#x27;)
             );
         },
 
@@ -2509,10 +2488,10 @@ var FormBuilderMultipleChoiceField = A.Component.create({
                 return;
             }
 
-            optionNodes.set(SELECTED, false);
+            optionNodes.set(&#x27;selected&#x27;, false);
 
             AArray.each(val, function(item) {
-                optionNodes.filter(&#x27;[value=&quot;&#x27; + item + &#x27;&quot;]&#x27;).set(SELECTED, true);
+                optionNodes.filter(&#x27;[value=&quot;&#x27; + item + &#x27;&quot;]&#x27;).set(&#x27;selected&#x27;, true);
             });
         }
     }

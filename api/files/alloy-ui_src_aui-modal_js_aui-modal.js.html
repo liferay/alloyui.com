@@ -20,7 +20,7 @@
 </head>
 <body class="yui3-skin-sam">
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
         <div class="navbar-inner">
             <h1 class="brand">
                 <a href="/">
@@ -2103,27 +2103,7 @@ var Lang = A.Lang,
 
     StdMod = A.WidgetStdMod,
 
-    OWNER_DOCUMENT = &#x27;ownerDocument&#x27;,
-
     getClassName = A.getClassName,
-
-    _DOT = &#x27;.&#x27;,
-    _EMPTY = &#x27;&#x27;,
-    _SPACE = &#x27; &#x27;,
-
-    BR = &#x27;br&#x27;,
-    CLICK = &#x27;click&#x27;,
-    DESTROY_ON_HIDE = &#x27;destroyOnHide&#x27;,
-    DRAGGABLE = &#x27;draggable&#x27;,
-    DRAGGABLE_CHANGE = &#x27;draggableChange&#x27;,
-    FILL_HEIGHT = &#x27;fillHeight&#x27;,
-    HEIGHT = &#x27;height&#x27;,
-    MODAL = &#x27;modal&#x27;,
-    MOUSEMOVE = &#x27;mousemove&#x27;,
-    RESIZABLE = &#x27;resizable&#x27;,
-    RESIZABLE_CHANGE = &#x27;resizableChange&#x27;,
-    VISIBLE_CHANGE = &#x27;visibleChange&#x27;,
-    WIDTH = &#x27;width&#x27;,
 
     CSS_MODAL_BD = getClassName(&#x27;modal-body&#x27;),
     CSS_MODAL_FT = getClassName(&#x27;modal-footer&#x27;),
@@ -2167,7 +2147,7 @@ YUI().use(
 );
 &#x60;&#x60;&#x60;
  */
-A.Modal = A.Base.create(MODAL, A.Widget, [
+A.Modal = A.Base.create(&#x27;modal&#x27;, A.Widget, [
     A.WidgetCssClass,
     A.WidgetPosition,
     A.WidgetStdMod,
@@ -2191,11 +2171,11 @@ A.Modal = A.Base.create(MODAL, A.Widget, [
             eventHandles;
 
         eventHandles = [
-            A.after(instance._afterFillHeight, instance, FILL_HEIGHT),
+            A.after(instance._afterFillHeight, instance, &#x27;fillHeight&#x27;),
             instance.after(&#x27;resize:end&#x27;, A.bind(instance._syncResizeDimensions, instance)),
-            instance.after(DRAGGABLE_CHANGE, instance._afterDraggableChange),
-            instance.after(RESIZABLE_CHANGE, instance._afterResizableChange),
-            instance.after(VISIBLE_CHANGE, instance._afterVisibleChange)
+            instance.after(&#x27;draggableChange&#x27;, instance._afterDraggableChange),
+            instance.after(&#x27;resizableChange&#x27;, instance._afterResizableChange),
+            instance.after(&#x27;visibleChange&#x27;, instance._afterVisibleChange)
         ];
 
         instance._applyPlugin(instance._onUserInitInteraction);
@@ -2247,7 +2227,7 @@ A.Modal = A.Base.create(MODAL, A.Widget, [
     _afterFillHeight: function() {
         var instance = this;
 
-        instance._fillMaxHeight(instance.get(HEIGHT));
+        instance._fillMaxHeight(instance.get(&#x27;height&#x27;));
     },
 
     /**
@@ -2296,7 +2276,7 @@ A.Modal = A.Base.create(MODAL, A.Widget, [
     _afterVisibleChange: function(event) {
         var instance = this;
 
-        if (!event.newVal &amp;&amp; instance.get(DESTROY_ON_HIDE)) {
+        if (!event.newVal &amp;&amp; instance.get(&#x27;destroyOnHide&#x27;)) {
             A.soon(A.bind(&#x27;destroy&#x27;, instance));
         }
     },
@@ -2316,7 +2296,7 @@ A.Modal = A.Base.create(MODAL, A.Widget, [
         }
         else if (!instance._userInteractionHandle) {
             instance._userInteractionHandle = instance.once(
-                [CLICK, MOUSEMOVE], instance._onUserInitInteraction, instance);
+                [&#x27;click&#x27;, &#x27;mousemove&#x27;], instance._onUserInitInteraction, instance);
         }
     },
 
@@ -2329,7 +2309,7 @@ A.Modal = A.Base.create(MODAL, A.Widget, [
      */
     _fillMaxHeight: function(height) {
         var instance = this,
-            fillHeight = instance.get(FILL_HEIGHT),
+            fillHeight = instance.get(&#x27;fillHeight&#x27;),
             node = instance.getStdModNode(fillHeight, true);
 
         if (node) {
@@ -2345,7 +2325,7 @@ A.Modal = A.Base.create(MODAL, A.Widget, [
      * @protected
      */
     _getStdModTemplate: function(section) {
-        return A.Node.create(A.Modal.TEMPLATES[section], this._stdModNode.get(OWNER_DOCUMENT));
+        return A.Node.create(A.Modal.TEMPLATES[section], this._stdModNode.get(&#x27;ownerDocument&#x27;));
     },
 
     /**
@@ -2371,8 +2351,8 @@ A.Modal = A.Base.create(MODAL, A.Widget, [
      */
     _onUserInitInteraction: function() {
         var instance = this,
-            draggable = instance.get(DRAGGABLE),
-            resizable = instance.get(RESIZABLE);
+            draggable = instance.get(&#x27;draggable&#x27;),
+            resizable = instance.get(&#x27;resizable&#x27;);
 
         instance._userInteractionHandle = null;
 
@@ -2393,7 +2373,7 @@ A.Modal = A.Base.create(MODAL, A.Widget, [
      */
     _plugDrag: function() {
         var instance = this,
-            draggable = instance.get(DRAGGABLE);
+            draggable = instance.get(&#x27;draggable&#x27;);
 
         instance.plug(A.Plugin.Drag, instance._addBubbleTargets(draggable));
     },
@@ -2406,7 +2386,7 @@ A.Modal = A.Base.create(MODAL, A.Widget, [
      */
     _plugResize: function() {
         var instance = this,
-            resizable = instance.get(RESIZABLE);
+            resizable = instance.get(&#x27;resizable&#x27;);
 
         instance.plug(A.Plugin.Resize, instance._addBubbleTargets(resizable));
 
@@ -2424,8 +2404,8 @@ A.Modal = A.Base.create(MODAL, A.Widget, [
         var instance = this,
             resize = event.info;
 
-        instance.set(WIDTH, resize.offsetWidth);
-        instance.set(HEIGHT, resize.offsetHeight);
+        instance.set(&#x27;width&#x27;, resize.offsetWidth);
+        instance.set(&#x27;height&#x27;, resize.offsetHeight);
     }
 }, {
 
@@ -2436,7 +2416,7 @@ A.Modal = A.Base.create(MODAL, A.Widget, [
      * @type String
      * @static
      */
-    CSS_PREFIX: getClassName(MODAL),
+    CSS_PREFIX: getClassName(&#x27;modal&#x27;),
 
     /**
      * Static property used to define the default attribute
@@ -2460,7 +2440,7 @@ A.Modal = A.Base.create(MODAL, A.Widget, [
          * @type String
          */
         bodyContent: {
-            value: _EMPTY
+            value: &#x27;&#x27;
         },
 
         /**
@@ -2484,7 +2464,7 @@ A.Modal = A.Base.create(MODAL, A.Widget, [
          */
         draggable: {
             value: {
-                handles: [_DOT + CSS_MODAL_HD],
+                handles: [&#x27;.&#x27; + CSS_MODAL_HD],
                 plugins: [
                     {
                         fn: A.Plugin.DDConstrained
@@ -2502,7 +2482,7 @@ A.Modal = A.Base.create(MODAL, A.Widget, [
          */
         resizable: {
             value: {
-                handles: BR
+                handles: &#x27;br&#x27;
             }
         },
 
@@ -2544,9 +2524,9 @@ A.Modal = A.Base.create(MODAL, A.Widget, [
      * @static
      */
     TEMPLATES: {
-        header: &#x27;&lt;div class=&quot;&#x27; + StdMod.SECTION_CLASS_NAMES[StdMod.HEADER] + _SPACE + CSS_MODAL_HD + &#x27;&quot;&gt;&lt;/div&gt;&#x27;,
-        body: &#x27;&lt;div class=&quot;&#x27; + StdMod.SECTION_CLASS_NAMES[StdMod.BODY] + _SPACE + CSS_MODAL_BD + &#x27;&quot;&gt;&lt;/div&gt;&#x27;,
-        footer: &#x27;&lt;div class=&quot;&#x27; + StdMod.SECTION_CLASS_NAMES[StdMod.FOOTER] + _SPACE + CSS_MODAL_FT + &#x27;&quot;&gt;&lt;/div&gt;&#x27;
+        header: &#x27;&lt;div class=&quot;&#x27; + StdMod.SECTION_CLASS_NAMES[StdMod.HEADER] + &#x27; &#x27; + CSS_MODAL_HD + &#x27;&quot;&gt;&lt;/div&gt;&#x27;,
+        body: &#x27;&lt;div class=&quot;&#x27; + StdMod.SECTION_CLASS_NAMES[StdMod.BODY] + &#x27; &#x27; + CSS_MODAL_BD + &#x27;&quot;&gt;&lt;/div&gt;&#x27;,
+        footer: &#x27;&lt;div class=&quot;&#x27; + StdMod.SECTION_CLASS_NAMES[StdMod.FOOTER] + &#x27; &#x27; + CSS_MODAL_FT + &#x27;&quot;&gt;&lt;/div&gt;&#x27;
     }
 });
 

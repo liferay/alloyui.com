@@ -20,7 +20,7 @@
 </head>
 <body class="yui3-skin-sam">
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
         <div class="navbar-inner">
             <h1 class="brand">
                 <a href="/">
@@ -2103,19 +2103,9 @@ var Lang = A.Lang,
     isFunction = Lang.isFunction,
     isString = Lang.isString,
 
-    EVENT_IO_REQUEST_SUCCESS = &#x27;ioRequestSuccess&#x27;,
-
-    CONTENT_BOX = &#x27;contentBox&#x27;,
-    IO = &#x27;io&#x27;,
-    OWNER_TREE = &#x27;ownerTree&#x27;,
-    LOADED = &#x27;loaded&#x27;,
-    LOADING = &#x27;loading&#x27;,
-    NODE = &#x27;node&#x27;,
-    TREE = &#x27;tree&#x27;,
-
     getCN = A.getClassName,
 
-    CSS_TREE_NODE_IO_LOADING = getCN(TREE, NODE, IO, LOADING);
+    CSS_TREE_NODE_IO_LOADING = getCN(&#x27;tree&#x27;, &#x27;node&#x27;, &#x27;io&#x27;, &#x27;loading&#x27;);
 
 /**
  * A base class for TreeViewIO.
@@ -2130,7 +2120,7 @@ function TreeViewIO(config) {
     var instance = this;
 
     instance.publish(
-        EVENT_IO_REQUEST_SUCCESS, {
+        &#x27;ioRequestSuccess&#x27;, {
             defaultFn: instance._onIOSuccessDefault
         }
     );
@@ -2187,7 +2177,7 @@ TreeViewIO.prototype = {
     initIO: function() {
         var instance = this;
 
-        var io = instance.get(IO);
+        var io = instance.get(&#x27;io&#x27;);
 
         if (isFunction(io.cfg.data)) {
             io.cfg.data = io.cfg.data.call(instance, instance);
@@ -2214,9 +2204,9 @@ TreeViewIO.prototype = {
     ioStartHandler: function() {
         var instance = this;
 
-        var contentBox = instance.get(CONTENT_BOX);
+        var contentBox = instance.get(&#x27;contentBox&#x27;);
 
-        instance.set(LOADING, true);
+        instance.set(&#x27;loading&#x27;, true);
 
         contentBox.addClass(CSS_TREE_NODE_IO_LOADING);
     },
@@ -2229,10 +2219,10 @@ TreeViewIO.prototype = {
     ioCompleteHandler: function() {
         var instance = this;
 
-        var contentBox = instance.get(CONTENT_BOX);
+        var contentBox = instance.get(&#x27;contentBox&#x27;);
 
-        instance.set(LOADING, false);
-        instance.set(LOADED, true);
+        instance.set(&#x27;loading&#x27;, false);
+        instance.set(&#x27;loaded&#x27;, true);
 
         contentBox.removeClass(CSS_TREE_NODE_IO_LOADING);
     },
@@ -2245,7 +2235,7 @@ TreeViewIO.prototype = {
     ioSuccessHandler: function() {
         var instance = this;
 
-        var io = instance.get(IO);
+        var io = instance.get(&#x27;io&#x27;);
 
         var args = Array.prototype.slice.call(arguments);
         var length = args.length;
@@ -2271,7 +2261,7 @@ TreeViewIO.prototype = {
 
         instance.createNodes(nodes);
 
-        instance.fire(EVENT_IO_REQUEST_SUCCESS, nodes);
+        instance.fire(&#x27;ioRequestSuccess&#x27;, nodes);
     },
 
     /**
@@ -2284,8 +2274,8 @@ TreeViewIO.prototype = {
 
         instance.fire(&#x27;ioRequestFailure&#x27;);
 
-        instance.set(LOADING, false);
-        instance.set(LOADED, false);
+        instance.set(&#x27;loading&#x27;, false);
+        instance.set(&#x27;loaded&#x27;, false);
     },
 
     /**
@@ -2298,7 +2288,7 @@ TreeViewIO.prototype = {
     _onIOSuccessDefault: function(event) {
         var instance = this;
 
-        var ownerTree = instance.get(OWNER_TREE);
+        var ownerTree = instance.get(&#x27;ownerTree&#x27;);
 
         if (ownerTree &amp;&amp; ownerTree.ddDelegate) {
             ownerTree.ddDelegate.syncTargets();

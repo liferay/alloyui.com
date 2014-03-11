@@ -20,7 +20,7 @@
 </head>
 <body class="yui3-skin-sam">
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
         <div class="navbar-inner">
             <h1 class="brand">
                 <a href="/">
@@ -2108,14 +2108,6 @@ var Lang = A.Lang,
 
     WEEK_LENGTH = DateMath.WEEK_LENGTH,
 
-    _DASH = &#x27;-&#x27;,
-    _DOT = &#x27;.&#x27;,
-    _EMPTY_STR = &#x27;&#x27;,
-    _SPACE = &#x27; &#x27;,
-
-    SCHEDULER_VIEW = &#x27;scheduler-view&#x27;,
-    SCHEDULER_VIEW_TABLE = &#x27;scheduler-view-table&#x27;,
-
     getNodeListHTMLParser = function(selector, sizeCondition) {
         return function(srcNode) {
             var nodes = srcNode.all(selector);
@@ -2123,94 +2115,37 @@ var Lang = A.Lang,
         };
     },
 
-    BODY = &#x27;body&#x27;,
-    BOUNDING_BOX = &#x27;boundingBox&#x27;,
-    CLOSE = &#x27;close&#x27;,
-    COL = &#x27;col&#x27;,
-    COL_HEADER_DAYS_NODE = &#x27;colHeaderDaysNode&#x27;,
-    COLGRID = &#x27;colgrid&#x27;,
-    COLSPAN = &#x27;colspan&#x27;,
-    COLUMN_DAY_HEADER = &#x27;columnDayHeader&#x27;,
-    COLUMN_TABLE_GRID = &#x27;columnTableGrid&#x27;,
-    CONTAINER = &#x27;container&#x27;,
-    CONTENT = &#x27;content&#x27;,
-    DATA = &#x27;data&#x27;,
-    DAY = &#x27;day&#x27;,
-    DISPLAY_DAYS_INTERVAL = &#x27;displayDaysInterval&#x27;,
-    DISPLAY_ROWS = &#x27;displayRows&#x27;,
-    DIV = &#x27;div&#x27;,
-    DOWN = &#x27;down&#x27;,
-    END_DATE = &#x27;endDate&#x27;,
-    EVENT = &#x27;event&#x27;,
-    EVENTS = &#x27;events&#x27;,
-    EVENTS_OVERLAY = &#x27;eventsOverlay&#x27;,
-    FILTER_FN = &#x27;filterFn&#x27;,
-    FIRST = &#x27;first&#x27;,
-    FIRST_DAY_OF_WEEK = &#x27;firstDayOfWeek&#x27;,
-    GRID = &#x27;grid&#x27;,
-    HEADER = &#x27;header&#x27;,
-    HEADER_DATE_FORMATTER = &#x27;headerDateFormatter&#x27;,
-    HEADER_TABLE_NODE = &#x27;headerTableNode&#x27;,
-    ICON = &#x27;icon&#x27;,
-    LEFT = &#x27;left&#x27;,
-    LOCALE = &#x27;locale&#x27;,
-    MORE = &#x27;more&#x27;,
-    NEXT = &#x27;next&#x27;,
-    NODE = &#x27;node&#x27;,
-    OVERLAY = &#x27;overlay&#x27;,
-    RIGHT = &#x27;right&#x27;,
-    ROW = &#x27;row&#x27;,
-    ROWS_CONTAINER_NODE = &#x27;rowsContainerNode&#x27;,
-    SCHEDULER = &#x27;scheduler&#x27;,
-    SCHEDULER_EVENT = &#x27;scheduler-event&#x27;,
-    SHOW = &#x27;show&#x27;,
-    MORE = &#x27;more&#x27;,
-    START_DATE = &#x27;startDate&#x27;,
-    STRINGS = &#x27;strings&#x27;,
-    TABLE = &#x27;table&#x27;,
-    TABLE_GRID_NODE = &#x27;tableGridNode&#x27;,
-    TABLE_ROW_CONTAINER = &#x27;tableRowContainer&#x27;,
-    TABLE_ROWS = &#x27;tableRows&#x27;,
-    TBODY = &#x27;tbody&#x27;,
-    TITLE = &#x27;title&#x27;,
-    TL = &#x27;tl&#x27;,
-    TODAY = &#x27;today&#x27;,
-    TODAY_DATE = &#x27;todayDate&#x27;,
-    TR = &#x27;tr&#x27;,
-    VIEW_DATE = &#x27;viewDate&#x27;,
-    VISIBLE = &#x27;visible&#x27;,
-
     getCN = A.getClassName,
 
-    CSS_ICON = getCN(ICON),
-    CSS_ICON_ARROWSTOP_LEFT = getCN(ICON, &#x27;arrowstop-1-l&#x27;),
-    CSS_ICON_ARROWSTOP_RIGHT = getCN(ICON, &#x27;arrowstop-1-r&#x27;),
-    CSS_SVT_COLGRID = getCN(SCHEDULER_VIEW, TABLE, COLGRID),
-    CSS_SVT_COLGRID_FIRST = getCN(SCHEDULER_VIEW, TABLE, COLGRID, FIRST),
-    CSS_SVT_COLGRID_TODAY = getCN(SCHEDULER_VIEW, TABLE, COLGRID, TODAY),
-    CSS_SVT_CONTAINER = getCN(SCHEDULER_VIEW, TABLE, CONTAINER),
-    CSS_SVT_EVENTS_OVERLAY_NODE = getCN(SCHEDULER_VIEW, TABLE, EVENTS, OVERLAY, NODE),
-    CSS_SVT_EVENTS_OVERLAY_NODE_BODY = getCN(SCHEDULER_VIEW, TABLE, EVENTS, OVERLAY, NODE, BODY),
-    CSS_SVT_EVENTS_OVERLAY_NODE_CLOSE = getCN(SCHEDULER_VIEW, TABLE, EVENTS, OVERLAY, NODE, CLOSE),
-    CSS_SVT_HEADER_COL = getCN(SCHEDULER_VIEW, TABLE, HEADER, COL),
-    CSS_SVT_HEADER_DAY = getCN(SCHEDULER_VIEW, TABLE, HEADER, DAY),
-    CSS_SVT_HEADER_TABLE = getCN(SCHEDULER_VIEW, TABLE, HEADER, TABLE),
-    CSS_SVT_MORE = getCN(SCHEDULER_VIEW, TABLE, MORE),
-    CSS_SVT_ROW = getCN(SCHEDULER_VIEW, TABLE, ROW),
-    CSS_SVT_ROW_CONTAINER = getCN(SCHEDULER_VIEW, TABLE, ROW, CONTAINER),
-    CSS_SVT_TABLE_DATA = getCN(SCHEDULER_VIEW, TABLE, DATA),
-    CSS_SVT_TABLE_DATA_COL = getCN(SCHEDULER_VIEW, TABLE, DATA, COL),
-    CSS_SVT_TABLE_DATA_COL_TITLE = getCN(SCHEDULER_VIEW, TABLE, DATA, COL, TITLE),
-    CSS_SVT_TABLE_DATA_COL_TITLE_DOWN = getCN(SCHEDULER_VIEW, TABLE, DATA, COL, TITLE, DOWN),
-    CSS_SVT_TABLE_DATA_COL_TITLE_FIRST = getCN(SCHEDULER_VIEW, TABLE, DATA, COL, TITLE, FIRST),
-    CSS_SVT_TABLE_DATA_COL_TITLE_NEXT = getCN(SCHEDULER_VIEW, TABLE, DATA, COL, TITLE, NEXT),
-    CSS_SVT_TABLE_DATA_COL_TITLE_TODAY = getCN(SCHEDULER_VIEW, TABLE, DATA, COL, TITLE, TODAY),
-    CSS_SVT_TABLE_DATA_EVENT = getCN(SCHEDULER_VIEW, TABLE, DATA, EVENT),
-    CSS_SVT_TABLE_DATA_EVENT_LEFT = getCN(SCHEDULER_VIEW, TABLE, DATA, EVENT, LEFT),
-    CSS_SVT_TABLE_DATA_EVENT_RIGHT = getCN(SCHEDULER_VIEW, TABLE, DATA, EVENT, RIGHT),
-    CSS_SVT_TABLE_DATA_FIRST = getCN(SCHEDULER_VIEW, TABLE, DATA, FIRST),
-    CSS_SVT_TABLE_GRID = getCN(SCHEDULER_VIEW, TABLE, GRID),
-    CSS_SVT_TABLE_GRID_FIRST = getCN(SCHEDULER_VIEW, TABLE, GRID, FIRST),
+    CSS_ICON = getCN(&#x27;icon&#x27;),
+    CSS_ICON_ARROWSTOP_LEFT = getCN(&#x27;icon&#x27;, &#x27;arrowstop-1-l&#x27;),
+    CSS_ICON_ARROWSTOP_RIGHT = getCN(&#x27;icon&#x27;, &#x27;arrowstop-1-r&#x27;),
+    CSS_SVT_COLGRID = getCN(&#x27;scheduler-view&#x27;, &#x27;table&#x27;, &#x27;colgrid&#x27;),
+    CSS_SVT_COLGRID_FIRST = getCN(&#x27;scheduler-view&#x27;, &#x27;table&#x27;, &#x27;colgrid&#x27;, &#x27;first&#x27;),
+    CSS_SVT_COLGRID_TODAY = getCN(&#x27;scheduler-view&#x27;, &#x27;table&#x27;, &#x27;colgrid&#x27;, &#x27;today&#x27;),
+    CSS_SVT_CONTAINER = getCN(&#x27;scheduler-view&#x27;, &#x27;table&#x27;, &#x27;container&#x27;),
+    CSS_SVT_EVENTS_OVERLAY_NODE = getCN(&#x27;scheduler-view&#x27;, &#x27;table&#x27;, &#x27;events&#x27;, &#x27;overlay&#x27;, &#x27;node&#x27;),
+    CSS_SVT_EVENTS_OVERLAY_NODE_BODY = getCN(&#x27;scheduler-view&#x27;, &#x27;table&#x27;, &#x27;events&#x27;, &#x27;overlay&#x27;, &#x27;node&#x27;, &#x27;body&#x27;),
+    CSS_SVT_EVENTS_OVERLAY_NODE_CLOSE = getCN(&#x27;scheduler-view&#x27;, &#x27;table&#x27;, &#x27;events&#x27;, &#x27;overlay&#x27;, &#x27;node&#x27;, &#x27;close&#x27;),
+    CSS_SVT_HEADER_COL = getCN(&#x27;scheduler-view&#x27;, &#x27;table&#x27;, &#x27;header&#x27;, &#x27;col&#x27;),
+    CSS_SVT_HEADER_DAY = getCN(&#x27;scheduler-view&#x27;, &#x27;table&#x27;, &#x27;header&#x27;, &#x27;day&#x27;),
+    CSS_SVT_HEADER_TABLE = getCN(&#x27;scheduler-view&#x27;, &#x27;table&#x27;, &#x27;header&#x27;, &#x27;table&#x27;),
+    CSS_SVT_MORE = getCN(&#x27;scheduler-view&#x27;, &#x27;table&#x27;, &#x27;more&#x27;),
+    CSS_SVT_ROW = getCN(&#x27;scheduler-view&#x27;, &#x27;table&#x27;, &#x27;row&#x27;),
+    CSS_SVT_ROW_CONTAINER = getCN(&#x27;scheduler-view&#x27;, &#x27;table&#x27;, &#x27;row&#x27;, &#x27;container&#x27;),
+    CSS_SVT_TABLE_DATA = getCN(&#x27;scheduler-view&#x27;, &#x27;table&#x27;, &#x27;data&#x27;),
+    CSS_SVT_TABLE_DATA_COL = getCN(&#x27;scheduler-view&#x27;, &#x27;table&#x27;, &#x27;data&#x27;, &#x27;col&#x27;),
+    CSS_SVT_TABLE_DATA_COL_TITLE = getCN(&#x27;scheduler-view&#x27;, &#x27;table&#x27;, &#x27;data&#x27;, &#x27;col&#x27;, &#x27;title&#x27;),
+    CSS_SVT_TABLE_DATA_COL_TITLE_DOWN = getCN(&#x27;scheduler-view&#x27;, &#x27;table&#x27;, &#x27;data&#x27;, &#x27;col&#x27;, &#x27;title&#x27;, &#x27;down&#x27;),
+    CSS_SVT_TABLE_DATA_COL_TITLE_FIRST = getCN(&#x27;scheduler-view&#x27;, &#x27;table&#x27;, &#x27;data&#x27;, &#x27;col&#x27;, &#x27;title&#x27;, &#x27;first&#x27;),
+    CSS_SVT_TABLE_DATA_COL_TITLE_NEXT = getCN(&#x27;scheduler-view&#x27;, &#x27;table&#x27;, &#x27;data&#x27;, &#x27;col&#x27;, &#x27;title&#x27;, &#x27;next&#x27;),
+    CSS_SVT_TABLE_DATA_COL_TITLE_TODAY = getCN(&#x27;scheduler-view&#x27;, &#x27;table&#x27;, &#x27;data&#x27;, &#x27;col&#x27;, &#x27;title&#x27;, &#x27;today&#x27;),
+    CSS_SVT_TABLE_DATA_EVENT = getCN(&#x27;scheduler-view&#x27;, &#x27;table&#x27;, &#x27;data&#x27;, &#x27;event&#x27;),
+    CSS_SVT_TABLE_DATA_EVENT_LEFT = getCN(&#x27;scheduler-view&#x27;, &#x27;table&#x27;, &#x27;data&#x27;, &#x27;event&#x27;, &#x27;left&#x27;),
+    CSS_SVT_TABLE_DATA_EVENT_RIGHT = getCN(&#x27;scheduler-view&#x27;, &#x27;table&#x27;, &#x27;data&#x27;, &#x27;event&#x27;, &#x27;right&#x27;),
+    CSS_SVT_TABLE_DATA_FIRST = getCN(&#x27;scheduler-view&#x27;, &#x27;table&#x27;, &#x27;data&#x27;, &#x27;first&#x27;),
+    CSS_SVT_TABLE_GRID = getCN(&#x27;scheduler-view&#x27;, &#x27;table&#x27;, &#x27;grid&#x27;),
+    CSS_SVT_TABLE_GRID_FIRST = getCN(&#x27;scheduler-view&#x27;, &#x27;table&#x27;, &#x27;grid&#x27;, &#x27;first&#x27;),
 
     TPL_SVT_CONTAINER = &#x27;&lt;div class=&quot;&#x27; + CSS_SVT_CONTAINER + &#x27;&quot;&gt;&#x27; +
         &#x27;&lt;div class=&quot;&#x27; + CSS_SVT_ROW_CONTAINER + &#x27;&quot;&gt;&lt;/div&gt;&#x27; +
@@ -2245,8 +2180,8 @@ var Lang = A.Lang,
         &#x27;&lt;/tbody&gt;&#x27; +
         &#x27;&lt;/table&gt;&#x27;,
 
-    TPL_SVT_EV_ICON_LEFT = &#x27;&lt;span class=&quot;&#x27; + [CSS_ICON, CSS_ICON_ARROWSTOP_LEFT].join(_SPACE) + &#x27;&quot;&gt;&lt;/span&gt;&#x27;,
-    TPL_SVT_EV_ICON_RIGHT = &#x27;&lt;span class=&quot;&#x27; + [CSS_ICON, CSS_ICON_ARROWSTOP_RIGHT].join(_SPACE) + &#x27;&quot;&gt;&lt;/span&gt;&#x27;,
+    TPL_SVT_EV_ICON_LEFT = &#x27;&lt;span class=&quot;&#x27; + [CSS_ICON, CSS_ICON_ARROWSTOP_LEFT].join(&#x27; &#x27;) + &#x27;&quot;&gt;&lt;/span&gt;&#x27;,
+    TPL_SVT_EV_ICON_RIGHT = &#x27;&lt;span class=&quot;&#x27; + [CSS_ICON, CSS_ICON_ARROWSTOP_RIGHT].join(&#x27; &#x27;) + &#x27;&quot;&gt;&lt;/span&gt;&#x27;,
 
     TPL_SVT_TABLE_DATA_COL = &#x27;&lt;td class=&quot;&#x27; + CSS_SVT_TABLE_DATA_COL + &#x27;&quot;&gt;&lt;div&gt;&lt;/div&gt;&lt;/td&gt;&#x27;,
     TPL_SVT_TABLE_DATA_ROW = &#x27;&lt;tr&gt;&lt;/tr&gt;&#x27;;
@@ -2269,7 +2204,7 @@ var SchedulerTableView = A.Component.create({
      * @type {String}
      * @static
      */
-    NAME: SCHEDULER_VIEW_TABLE,
+    NAME: &#x27;scheduler-view-table&#x27;,
 
     /**
      * Static property used to define the default attribute
@@ -2289,7 +2224,7 @@ var SchedulerTableView = A.Component.create({
          * @type {String}
          */
         bodyContent: {
-            value: _EMPTY_STR
+            value: &#x27;&#x27;
         },
 
         /**
@@ -2334,7 +2269,7 @@ var SchedulerTableView = A.Component.create({
          * @type {String}
          */
         name: {
-            value: TABLE
+            value: &#x27;table&#x27;
         },
 
         /**
@@ -2346,12 +2281,12 @@ var SchedulerTableView = A.Component.create({
         headerDateFormatter: {
             value: function(date) {
                 var instance = this;
-                var scheduler = instance.get(SCHEDULER);
+                var scheduler = instance.get(&#x27;scheduler&#x27;);
 
                 return A.DataType.Date.format(
                     date, {
                         format: &#x27;%a&#x27;,
-                        locale: scheduler.get(LOCALE)
+                        locale: scheduler.get(&#x27;locale&#x27;)
                     }
                 );
             },
@@ -2367,12 +2302,12 @@ var SchedulerTableView = A.Component.create({
         navigationDateFormatter: {
             value: function(date) {
                 var instance = this;
-                var scheduler = instance.get(SCHEDULER);
+                var scheduler = instance.get(&#x27;scheduler&#x27;);
 
                 return A.DataType.Date.format(
                     date, {
                         format: &#x27;%b %Y&#x27;,
-                        locale: scheduler.get(LOCALE)
+                        locale: scheduler.get(&#x27;locale&#x27;)
                     }
                 );
             },
@@ -2458,10 +2393,10 @@ var SchedulerTableView = A.Component.create({
      * @static
      */
     HTML_PARSER: {
-        colHeaderDaysNode: getNodeListHTMLParser(_DOT + CSS_SVT_HEADER_DAY, 7),
-        headerTableNode: _DOT + CSS_SVT_HEADER_TABLE,
-        rowsContainerNode: _DOT + CSS_SVT_CONTAINER,
-        tableGridNode: getNodeListHTMLParser(_DOT + CSS_SVT_TABLE_GRID, 7)
+        colHeaderDaysNode: getNodeListHTMLParser(&#x27;.&#x27; + CSS_SVT_HEADER_DAY, 7),
+        headerTableNode: &#x27;.&#x27; + CSS_SVT_HEADER_TABLE,
+        rowsContainerNode: &#x27;.&#x27; + CSS_SVT_CONTAINER,
+        tableGridNode: getNodeListHTMLParser(&#x27;.&#x27; + CSS_SVT_TABLE_GRID, 7)
     },
 
     /**
@@ -2492,14 +2427,14 @@ var SchedulerTableView = A.Component.create({
             instance.evtRenderedStack = {};
             instance.rowDataTableStack = {};
 
-            instance[COL_HEADER_DAYS_NODE] = instance.get(COL_HEADER_DAYS_NODE);
-            instance[HEADER_TABLE_NODE] = instance.get(HEADER_TABLE_NODE);
-            instance[ROWS_CONTAINER_NODE] = instance.get(ROWS_CONTAINER_NODE);
-            instance[TABLE_GRID_NODE] = instance.get(TABLE_GRID_NODE);
-            instance[COLUMN_DAY_HEADER] = instance.headerTableNode.one(_DOT + CSS_SVT_HEADER_COL);
-            instance[COLUMN_TABLE_GRID] = A.NodeList.create();
-            instance[TABLE_ROW_CONTAINER] = instance[ROWS_CONTAINER_NODE].one(_DOT + CSS_SVT_ROW_CONTAINER);
-            instance[TABLE_ROWS] = A.NodeList.create();
+            instance[&#x27;colHeaderDaysNode&#x27;] = instance.get(&#x27;colHeaderDaysNode&#x27;);
+            instance[&#x27;headerTableNode&#x27;] = instance.get(&#x27;headerTableNode&#x27;);
+            instance[&#x27;rowsContainerNode&#x27;] = instance.get(&#x27;rowsContainerNode&#x27;);
+            instance[&#x27;tableGridNode&#x27;] = instance.get(&#x27;tableGridNode&#x27;);
+            instance[&#x27;columnDayHeader&#x27;] = instance.headerTableNode.one(&#x27;.&#x27; + CSS_SVT_HEADER_COL);
+            instance[&#x27;columnTableGrid&#x27;] = A.NodeList.create();
+            instance[&#x27;tableRowContainer&#x27;] = instance[&#x27;rowsContainerNode&#x27;].one(&#x27;.&#x27; + CSS_SVT_ROW_CONTAINER);
+            instance[&#x27;tableRows&#x27;] = A.NodeList.create();
         },
 
         /**
@@ -2511,7 +2446,7 @@ var SchedulerTableView = A.Component.create({
         bindUI: function() {
             var instance = this;
 
-            instance[ROWS_CONTAINER_NODE].delegate(&#x27;click&#x27;, A.bind(instance._onClickMore, instance), _DOT +
+            instance[&#x27;rowsContainerNode&#x27;].delegate(&#x27;click&#x27;, A.bind(instance._onClickMore, instance), &#x27;.&#x27; +
                 CSS_SVT_MORE);
         },
 
@@ -2527,15 +2462,15 @@ var SchedulerTableView = A.Component.create({
                 rowIndex;
 
             for (rowIndex = 0; rowIndex &lt; displayRowsCount; rowIndex++) {
-                instance[TABLE_ROWS].push(
+                instance[&#x27;tableRows&#x27;].push(
                     instance.buildGridRowNode(rowIndex)
                 );
             }
 
             instance._renderEventsOverlay();
 
-            instance[COL_HEADER_DAYS_NODE].appendTo(instance[COLUMN_DAY_HEADER]);
-            instance[TABLE_ROWS].appendTo(instance[TABLE_ROW_CONTAINER]);
+            instance[&#x27;colHeaderDaysNode&#x27;].appendTo(instance[&#x27;columnDayHeader&#x27;]);
+            instance[&#x27;tableRows&#x27;].appendTo(instance[&#x27;tableRowContainer&#x27;]);
         },
 
         /**
@@ -2549,7 +2484,7 @@ var SchedulerTableView = A.Component.create({
          */
         buildEventsRow: function(rowStartDate, rowEndDate, rowDisplayIndex) {
             var instance = this;
-            var displayRows = instance.get(DISPLAY_ROWS);
+            var displayRows = instance.get(&#x27;displayRows&#x27;);
 
             var rowRenderedColumns = 0;
             var rowNode = A.Node.create(TPL_SVT_TABLE_DATA_ROW);
@@ -2563,29 +2498,29 @@ var SchedulerTableView = A.Component.create({
                 var evt = instance._getRenderableEvent(events, rowStartDate, rowEndDate, celDate);
 
                 var evtColNode = A.Node.create(TPL_SVT_TABLE_DATA_COL);
-                var evtNodeContainer = evtColNode.one(DIV);
+                var evtNodeContainer = evtColNode.one(&#x27;div&#x27;);
 
                 if ((displayRows &lt; events.length) &amp;&amp; (rowDisplayIndex === (displayRows - 1))) {
-                    var strings = instance.get(STRINGS);
+                    var strings = instance.get(&#x27;strings&#x27;);
 
                     var showMoreEventsLink = A.Node.create(
                         Lang.sub(
                             TPL_SVT_MORE, {
                                 count: (events.length - (displayRows - 1)),
-                                labelPrefix: strings[SHOW],
-                                labelSuffix: strings[MORE]
+                                labelPrefix: strings[&#x27;show&#x27;],
+                                labelSuffix: strings[&#x27;more&#x27;]
                             }
                         )
                     );
 
-                    showMoreEventsLink.setData(EVENTS, events);
+                    showMoreEventsLink.setData(&#x27;events&#x27;, events);
 
                     evtNodeContainer.append(showMoreEventsLink);
                 }
                 else if (evt) {
                     var evtSplitInfo = instance._getEvtSplitInfo(evt, celDate, rowStartDate, rowEndDate);
 
-                    evtColNode.attr(COLSPAN, evtSplitInfo.colspan);
+                    evtColNode.attr(&#x27;colspan&#x27;, evtSplitInfo.colspan);
 
                     rowRenderedColumns += (evtSplitInfo.colspan - 1);
 
@@ -2615,7 +2550,7 @@ var SchedulerTableView = A.Component.create({
          */
         buildEventsTable: function(rowStartDate, rowEndDate) {
             var instance = this,
-                displayRows = instance.get(DISPLAY_ROWS),
+                displayRows = instance.get(&#x27;displayRows&#x27;),
                 intervalStartDate = DateMath.clearTime(instance._findCurrentIntervalStart()),
                 cacheKey = String(intervalStartDate.getTime()).concat(rowStartDate.getTime()).concat(rowEndDate.getTime()),
                 rowDataTableNode = instance.rowDataTableStack[cacheKey],
@@ -2624,7 +2559,7 @@ var SchedulerTableView = A.Component.create({
             if (!rowDataTableNode) {
                 rowDataTableNode = A.Node.create(TPL_SVT_TABLE_DATA);
 
-                var tableBody = rowDataTableNode.one(TBODY);
+                var tableBody = rowDataTableNode.one(&#x27;tbody&#x27;);
                 var titleRowNode = instance.buildEventsTitleRow(rowDataTableNode, rowStartDate, rowEndDate);
 
                 tableBody.append(titleRowNode);
@@ -2653,7 +2588,7 @@ var SchedulerTableView = A.Component.create({
         buildEventsTitleRow: function(tableNode, rowStartDate, rowEndDate) {
             var instance = this;
 
-            var todayDate = instance.get(SCHEDULER).get(TODAY_DATE);
+            var todayDate = instance.get(&#x27;scheduler&#x27;).get(&#x27;todayDate&#x27;);
 
             var titleRowNode = A.Node.create(TPL_SVT_TABLE_DATA_ROW);
 
@@ -2736,7 +2671,7 @@ var SchedulerTableView = A.Component.create({
          */
         getIntersectEvents: function(date) {
             var instance = this;
-            var scheduler = instance.get(SCHEDULER);
+            var scheduler = instance.get(&#x27;scheduler&#x27;);
 
             var key = String(date.getTime());
 
@@ -2744,7 +2679,7 @@ var SchedulerTableView = A.Component.create({
                 var events = scheduler.getIntersectEvents(date);
 
                 instance.evtDateStack[key] = A.Array.filter(
-                    events, instance.get(FILTER_FN)
+                    events, instance.get(&#x27;filterFn&#x27;)
                 );
             }
 
@@ -2761,9 +2696,9 @@ var SchedulerTableView = A.Component.create({
          */
         getNextDate: function() {
             var instance = this;
-            var scheduler = instance.get(SCHEDULER);
-            var viewDate = scheduler.get(VIEW_DATE);
-            var displayDaysInterval = instance.get(DISPLAY_DAYS_INTERVAL);
+            var scheduler = instance.get(&#x27;scheduler&#x27;);
+            var viewDate = scheduler.get(&#x27;viewDate&#x27;);
+            var displayDaysInterval = instance.get(&#x27;displayDaysInterval&#x27;);
 
             return DateMath.toLastHour(DateMath.add(viewDate, DateMath.DAY, displayDaysInterval));
         },
@@ -2778,9 +2713,9 @@ var SchedulerTableView = A.Component.create({
          */
         getPrevDate: function() {
             var instance = this;
-            var scheduler = instance.get(SCHEDULER);
-            var viewDate = scheduler.get(VIEW_DATE);
-            var displayDaysInterval = instance.get(DISPLAY_DAYS_INTERVAL);
+            var scheduler = instance.get(&#x27;scheduler&#x27;);
+            var viewDate = scheduler.get(&#x27;viewDate&#x27;);
+            var displayDaysInterval = instance.get(&#x27;displayDaysInterval&#x27;);
 
             return DateMath.toMidnight(DateMath.subtract(viewDate, DateMath.DAY, displayDaysInterval));
         },
@@ -2793,7 +2728,7 @@ var SchedulerTableView = A.Component.create({
         hideEventsOverlay: function() {
             var instance = this;
 
-            instance[EVENTS_OVERLAY].set(VISIBLE, false);
+            instance[&#x27;eventsOverlay&#x27;].set(&#x27;visible&#x27;, false);
         },
 
         /**
@@ -2836,12 +2771,12 @@ var SchedulerTableView = A.Component.create({
 
             instance.hideEventsOverlay();
 
-            instance.bodyNode.all(_DOT + CSS_SVT_TABLE_DATA).remove();
+            instance.bodyNode.all(&#x27;.&#x27; + CSS_SVT_TABLE_DATA).remove();
 
-            var displayDaysInterval = instance.get(DISPLAY_DAYS_INTERVAL);
+            var displayDaysInterval = instance.get(&#x27;displayDaysInterval&#x27;);
             var weekDaysCount = Math.min(displayDaysInterval, WEEK_LENGTH);
 
-            instance[TABLE_ROWS].each(function(rowNode, index) {
+            instance[&#x27;tableRows&#x27;].each(function(rowNode, index) {
                 var rowStartDate = DateMath.add(startDateRef, DateMath.DAY, weekDaysCount * index);
                 var rowEndDate = DateMath.add(rowStartDate, DateMath.DAY, weekDaysCount - 1);
 
@@ -2863,13 +2798,13 @@ var SchedulerTableView = A.Component.create({
          */
         syncDaysHeaderUI: function() {
             var instance = this;
-            var scheduler = instance.get(SCHEDULER);
-            var viewDate = scheduler.get(VIEW_DATE);
-            var formatter = instance.get(HEADER_DATE_FORMATTER);
-            var locale = instance.get(LOCALE);
+            var scheduler = instance.get(&#x27;scheduler&#x27;);
+            var viewDate = scheduler.get(&#x27;viewDate&#x27;);
+            var formatter = instance.get(&#x27;headerDateFormatter&#x27;);
+            var locale = instance.get(&#x27;locale&#x27;);
             var firstDayOfWeekDt = instance._findFirstDayOfWeek(viewDate);
 
-            instance.colHeaderDaysNode.all(DIV).each(
+            instance.colHeaderDaysNode.all(&#x27;div&#x27;).each(
                 function(columnNode, i) {
                     var columnDate = DateMath.add(firstDayOfWeekDt, DateMath.DAY, i);
 
@@ -2886,16 +2821,16 @@ var SchedulerTableView = A.Component.create({
          */
         syncGridUI: function() {
             var instance = this;
-            var scheduler = instance.get(SCHEDULER);
-            var todayDate = scheduler.get(TODAY_DATE);
+            var scheduler = instance.get(&#x27;scheduler&#x27;);
+            var todayDate = scheduler.get(&#x27;todayDate&#x27;);
 
-            instance[COLUMN_TABLE_GRID].removeClass(CSS_SVT_COLGRID_TODAY);
+            instance[&#x27;columnTableGrid&#x27;].removeClass(CSS_SVT_COLGRID_TODAY);
 
             var intervalStartDate = instance._findCurrentIntervalStart();
             var intervalEndDate = instance._findCurrentIntervalEnd();
 
             if (DateMath.between(todayDate, intervalStartDate, intervalEndDate)) {
-                var firstDayOfWeek = scheduler.get(FIRST_DAY_OF_WEEK);
+                var firstDayOfWeek = scheduler.get(&#x27;firstDayOfWeek&#x27;);
                 var firstWeekDay = instance._findFirstDayOfWeek(todayDate);
 
                 var rowIndex = DateMath.getWeekNumber(todayDate, firstDayOfWeek) - DateMath.getWeekNumber(
@@ -2903,7 +2838,7 @@ var SchedulerTableView = A.Component.create({
                 var colIndex = (todayDate.getDate() - firstWeekDay.getDate());
                 var celIndex = instance._getCellIndex([colIndex, rowIndex]);
 
-                var todayCel = instance[COLUMN_TABLE_GRID].item(celIndex);
+                var todayCel = instance[&#x27;columnTableGrid&#x27;].item(celIndex);
 
                 if (todayCel) {
                     todayCel.addClass(CSS_SVT_COLGRID_TODAY);
@@ -2920,10 +2855,10 @@ var SchedulerTableView = A.Component.create({
             var instance = this;
 
             instance.setStdModContent(
-                WidgetStdMod.BODY, instance[ROWS_CONTAINER_NODE].getDOM());
+                WidgetStdMod.BODY, instance[&#x27;rowsContainerNode&#x27;].getDOM());
 
             instance.setStdModContent(
-                WidgetStdMod.HEADER, instance[HEADER_TABLE_NODE].getDOM());
+                WidgetStdMod.HEADER, instance[&#x27;headerTableNode&#x27;].getDOM());
         },
 
         /**
@@ -2935,9 +2870,9 @@ var SchedulerTableView = A.Component.create({
          */
         _findCurrentIntervalEnd: function() {
             var instance = this;
-            var scheduler = instance.get(SCHEDULER);
-            var viewDate = scheduler.get(VIEW_DATE);
-            var displayDaysInterval = instance.get(DISPLAY_DAYS_INTERVAL);
+            var scheduler = instance.get(&#x27;scheduler&#x27;);
+            var viewDate = scheduler.get(&#x27;viewDate&#x27;);
+            var displayDaysInterval = instance.get(&#x27;displayDaysInterval&#x27;);
 
             return DateMath.add(viewDate, DateMath.DAY, displayDaysInterval);
         },
@@ -2951,9 +2886,9 @@ var SchedulerTableView = A.Component.create({
          */
         _findCurrentIntervalStart: function() {
             var instance = this;
-            var scheduler = instance.get(SCHEDULER);
+            var scheduler = instance.get(&#x27;scheduler&#x27;);
 
-            return scheduler.get(VIEW_DATE);
+            return scheduler.get(&#x27;viewDate&#x27;);
         },
 
         /**
@@ -2966,8 +2901,8 @@ var SchedulerTableView = A.Component.create({
          */
         _findFirstDayOfWeek: function(date) {
             var instance = this;
-            var scheduler = instance.get(SCHEDULER);
-            var firstDayOfWeek = scheduler.get(FIRST_DAY_OF_WEEK);
+            var scheduler = instance.get(&#x27;scheduler&#x27;);
+            var firstDayOfWeek = scheduler.get(&#x27;firstDayOfWeek&#x27;);
 
             return DateMath.getFirstDayOfWeek(date, firstDayOfWeek);
         },
@@ -2995,7 +2930,7 @@ var SchedulerTableView = A.Component.create({
          */
         _getDisplayRowsCount: function() {
             var instance = this;
-            var displayDaysInterval = instance.get(DISPLAY_DAYS_INTERVAL);
+            var displayDaysInterval = instance.get(&#x27;displayDaysInterval&#x27;);
 
             return Math.ceil(displayDaysInterval / WEEK_LENGTH);
         },
@@ -3009,7 +2944,7 @@ var SchedulerTableView = A.Component.create({
          */
         _getDisplayRowDaysCount: function() {
             var instance = this;
-            var displayDaysInterval = instance.get(DISPLAY_DAYS_INTERVAL);
+            var displayDaysInterval = instance.get(&#x27;displayDaysInterval&#x27;);
 
             return Math.min(displayDaysInterval, WEEK_LENGTH);
         },
@@ -3024,10 +2959,10 @@ var SchedulerTableView = A.Component.create({
          */
         _getEvtLabel: function(evt) {
             var instance = this;
-            var endDate = evt.get(END_DATE);
-            var startDate = evt.get(START_DATE);
+            var endDate = evt.get(&#x27;endDate&#x27;);
+            var startDate = evt.get(&#x27;startDate&#x27;);
 
-            return [startDate.getHours(), _DASH, endDate.getHours(), _SPACE, evt.get(CONTENT)].join(_EMPTY_STR);
+            return [startDate.getHours(), &#x27;-&#x27;, endDate.getHours(), &#x27; &#x27;, evt.get(&#x27;content&#x27;)].join(&#x27;&#x27;);
         },
 
         /**
@@ -3086,7 +3021,7 @@ var SchedulerTableView = A.Component.create({
             for (i = 0; i &lt; events.length; i++) {
                 var evt = events[i];
 
-                var startDate = evt.get(START_DATE);
+                var startDate = evt.get(&#x27;startDate&#x27;);
 
                 var isEventDateContinuation = DateMath.after(celDate, startDate) &amp;&amp; !DateMath.isDayOverlap(celDate,
                     rowStartDate);
@@ -3113,9 +3048,9 @@ var SchedulerTableView = A.Component.create({
          */
         _getTableGridNode: function(rowIndex) {
             var instance = this,
-                displayDaysInterval = instance.get(DISPLAY_DAYS_INTERVAL),
-                tableGridNode = instance[TABLE_GRID_NODE].item(rowIndex),
-                firstRowNode = tableGridNode.one(TR),
+                displayDaysInterval = instance.get(&#x27;displayDaysInterval&#x27;),
+                tableGridNode = instance[&#x27;tableGridNode&#x27;].item(rowIndex),
+                firstRowNode = tableGridNode.one(&#x27;tr&#x27;),
                 i;
 
             for (i = 0; i &lt; Math.min(displayDaysInterval, WEEK_LENGTH); i++) {
@@ -3127,7 +3062,7 @@ var SchedulerTableView = A.Component.create({
                     columnNode.addClass(CSS_SVT_COLGRID_FIRST);
                 }
 
-                instance[COLUMN_TABLE_GRID].push(columnNode);
+                instance[&#x27;columnTableGrid&#x27;].push(columnNode);
             }
 
             return tableGridNode;
@@ -3144,13 +3079,13 @@ var SchedulerTableView = A.Component.create({
             var instance = this;
 
             var target = event.target;
-            var events = target.getData(EVENTS);
+            var events = target.getData(&#x27;events&#x27;);
             var eventsNodeList = A.NodeList.create();
 
             A.Array.each(events, function(evt) {
-                var evtNode = evt.get(NODE).item(0).clone();
+                var evtNode = evt.get(&#x27;node&#x27;).item(0).clone();
 
-                evtNode.setData(SCHEDULER_EVENT, evt);
+                evtNode.setData(&#x27;scheduler-event&#x27;, evt);
 
                 evtNode.setStyles({
                     height: &#x27;auto&#x27;,
@@ -3163,10 +3098,10 @@ var SchedulerTableView = A.Component.create({
                 eventsNodeList.push(evtNode);
             });
 
-            instance[EVENTS_OVERLAY].bodyNode.one(_DOT + CSS_SVT_EVENTS_OVERLAY_NODE_BODY).setContent(
+            instance[&#x27;eventsOverlay&#x27;].bodyNode.one(&#x27;.&#x27; + CSS_SVT_EVENTS_OVERLAY_NODE_BODY).setContent(
                 eventsNodeList);
 
-            instance[EVENTS_OVERLAY].setAttrs({
+            instance[&#x27;eventsOverlay&#x27;].setAttrs({
                 visible: true,
                 xy: target.getXY()
             });
@@ -3180,25 +3115,25 @@ var SchedulerTableView = A.Component.create({
          */
         _renderEventsOverlay: function() {
             var instance = this;
-            var scheduler = instance.get(SCHEDULER);
-            var strings = instance.get(STRINGS);
+            var scheduler = instance.get(&#x27;scheduler&#x27;);
+            var strings = instance.get(&#x27;strings&#x27;);
 
-            instance[EVENTS_OVERLAY] = new A.Overlay({
+            instance[&#x27;eventsOverlay&#x27;] = new A.Overlay({
                 align: {
-                    points: [TL, TL]
+                    points: [&#x27;tl&#x27;, &#x27;tl&#x27;]
                 },
                 bodyContent: Lang.sub(
                     TPL_SVT_EVENTS_OVERLAY_NODE, {
-                        label: strings[CLOSE]
+                        label: strings[&#x27;close&#x27;]
                     }
                 ),
-                render: instance.get(BOUNDING_BOX),
+                render: instance.get(&#x27;boundingBox&#x27;),
                 visible: false,
                 width: 250,
                 zIndex: 450
             });
 
-            instance[EVENTS_OVERLAY].bodyNode.delegate(&#x27;click&#x27;, A.bind(instance.hideEventsOverlay, instance), _DOT +
+            instance[&#x27;eventsOverlay&#x27;].bodyNode.delegate(&#x27;click&#x27;, A.bind(instance.hideEventsOverlay, instance), &#x27;.&#x27; +
                 CSS_SVT_EVENTS_OVERLAY_NODE_CLOSE);
         },
 
@@ -3240,11 +3175,11 @@ var SchedulerTableView = A.Component.create({
          */
         _syncEventNodeUI: function(evt, container, celDate) {
             var instance = this;
-            var scheduler = instance.get(SCHEDULER);
-            var firstDayOfWeek = scheduler.get(FIRST_DAY_OF_WEEK);
+            var scheduler = instance.get(&#x27;scheduler&#x27;);
+            var firstDayOfWeek = scheduler.get(&#x27;firstDayOfWeek&#x27;);
 
-            var evtNodeList = evt.get(NODE);
-            var startDate = evt.get(START_DATE);
+            var evtNodeList = evt.get(&#x27;node&#x27;);
+            var startDate = evt.get(&#x27;startDate&#x27;);
 
             var intervalStartDate = DateMath.clearTime(instance._findCurrentIntervalStart());
             var startDateFirstDayOfWeek = DateMath.getFirstDayOfWeek(new Date(Math.max(startDate, intervalStartDate)),
@@ -3291,7 +3226,7 @@ var SchedulerTableView = A.Component.create({
         _valueColHeaderDaysNode: function() {
             var instance = this;
 
-            var displayDaysInterval = instance.get(DISPLAY_DAYS_INTERVAL);
+            var displayDaysInterval = instance.get(&#x27;displayDaysInterval&#x27;);
             var weekDaysCount = Math.min(displayDaysInterval, WEEK_LENGTH);
 
             return instance._valueNodeList(weekDaysCount, TPL_SVT_HEADER_DAY);
@@ -3306,7 +3241,7 @@ var SchedulerTableView = A.Component.create({
         _valueTableGridNode: function() {
             var instance = this;
 
-            var displayDaysInterval = instance.get(DISPLAY_DAYS_INTERVAL);
+            var displayDaysInterval = instance.get(&#x27;displayDaysInterval&#x27;);
             var weekDaysCount = Math.min(displayDaysInterval, WEEK_LENGTH);
 
             return instance._valueNodeList(weekDaysCount, TPL_SVT_TABLE_GRID);
@@ -3328,7 +3263,7 @@ var SchedulerTableView = A.Component.create({
                 buffer.push(tpl);
             }
 
-            return A.NodeList.create(buffer.join(_EMPTY_STR));
+            return A.NodeList.create(buffer.join(&#x27;&#x27;));
         }
     }
 });

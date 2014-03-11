@@ -20,7 +20,7 @@
 </head>
 <body class="yui3-skin-sam">
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
         <div class="navbar-inner">
             <h1 class="brand">
                 <a href="/">
@@ -2101,19 +2101,6 @@
 var Lang = A.Lang,
     Do = A.Do,
 
-    STR_ABOUT_BLANK = &#x27;about:blank&#x27;,
-    STR_BODY = &#x27;body&#x27;,
-    STR_HREF = &#x27;href&#x27;,
-    STR_IFRAME = &#x27;iframe&#x27;,
-    STR_IMAGE = &#x27;image&#x27;,
-    STR_LOADING = &#x27;loading&#x27;,
-    STR_PROVIDERS = &#x27;providers&#x27;,
-    STR_SRC = &#x27;src&#x27;,
-
-    NAME = &#x27;mediaViewerPlugin&#x27;,
-
-    DATA_OPTIONS = &#x27;data-options&#x27;,
-
     DEFAULT_OPTIONS = {
         height: 360,
         width: 640,
@@ -2143,7 +2130,7 @@ var MediaViewerPlugin = A.Component.create({
      * @type String
      * @static
      */
-    NAME: NAME,
+    NAME: &#x27;mediaViewerPlugin&#x27;,
 
     /**
      * Static property provides a string to identify the namespace.
@@ -2254,10 +2241,10 @@ var MediaViewerPlugin = A.Component.create({
 
             var mediaType = instance._getMediaType(source.attr(&#x27;href&#x27;));
 
-            if (mediaType != STR_IMAGE) {
-                instance._redirectIframe(STR_ABOUT_BLANK);
+            if (mediaType != &#x27;image&#x27;) {
+                instance._redirectIframe(&#x27;about:blank&#x27;);
 
-                host.setStdModContent(STR_BODY, &#x27;&#x27;);
+                host.setStdModContent(&#x27;body&#x27;, &#x27;&#x27;);
             }
         },
 
@@ -2276,10 +2263,10 @@ var MediaViewerPlugin = A.Component.create({
 
             var result = true;
 
-            instance._redirectIframe(STR_ABOUT_BLANK);
+            instance._redirectIframe(&#x27;about:blank&#x27;);
 
-            if (mediaType != STR_IMAGE) {
-                var providers = instance.get(STR_PROVIDERS)[mediaType];
+            if (mediaType != &#x27;image&#x27;) {
+                var providers = instance.get(&#x27;providers&#x27;)[mediaType];
 
                 var source = host.getCurrentLink();
 
@@ -2299,7 +2286,7 @@ var MediaViewerPlugin = A.Component.create({
                     options
                 );
 
-                host.setStdModContent(STR_BODY, container);
+                host.setStdModContent(&#x27;body&#x27;, container);
 
                 host._syncImageViewerUI();
 
@@ -2307,7 +2294,7 @@ var MediaViewerPlugin = A.Component.create({
 
                 host._setAlignCenter(true);
 
-                host.set(STR_LOADING, false);
+                host.set(&#x27;loading&#x27;, false);
 
                 host.fire(
                     &#x27;load&#x27;, {
@@ -2344,11 +2331,11 @@ var MediaViewerPlugin = A.Component.create({
             var result = new Do.Prevent();
 
             if (currentLink) {
-                var linkHref = currentLink.attr(STR_HREF);
+                var linkHref = currentLink.attr(&#x27;href&#x27;);
 
                 var mediaType = instance._getMediaType(linkHref);
 
-                if (mediaType == STR_IMAGE) {
+                if (mediaType == &#x27;image&#x27;) {
                     result = true;
                 }
             }
@@ -2366,9 +2353,9 @@ var MediaViewerPlugin = A.Component.create({
         _getMediaType: function(source) {
             var instance = this;
 
-            var providers = instance.get(STR_PROVIDERS);
+            var providers = instance.get(&#x27;providers&#x27;);
 
-            var mediaType = STR_IMAGE;
+            var mediaType = &#x27;image&#x27;;
 
             A.some(
                 providers,
@@ -2393,10 +2380,10 @@ var MediaViewerPlugin = A.Component.create({
             var bodyNode = instance.get(&#x27;host.bodyNode&#x27;);
 
             if (bodyNode) {
-                var iframe = bodyNode.one(STR_IFRAME);
+                var iframe = bodyNode.one(&#x27;iframe&#x27;);
 
                 if (iframe) {
-                    iframe.attr(STR_SRC, source);
+                    iframe.attr(&#x27;src&#x27;, source);
                 }
             }
         },
@@ -2419,7 +2406,7 @@ var MediaViewerPlugin = A.Component.create({
 
             var mediaType = instance._getMediaType(href);
 
-            if (mediaType != STR_IMAGE &amp;&amp; !host.getStdModNode(STR_BODY).html()) {
+            if (mediaType != &#x27;image&#x27; &amp;&amp; !host.getStdModNode(&#x27;body&#x27;).html()) {
                 host._processChangeRequest();
             }
         },
@@ -2456,8 +2443,8 @@ var MediaViewerPlugin = A.Component.create({
          * @protected
          */
         _updateOptions: function(source, options) {
-            var dataOptions = source.attr(DATA_OPTIONS);
-            var linkHref = source.attr(STR_HREF);
+            var dataOptions = source.attr(&#x27;data-options&#x27;);
+            var linkHref = source.attr(&#x27;href&#x27;);
 
             A.each(
                 options,
@@ -2484,7 +2471,7 @@ var MediaViewerPlugin = A.Component.create({
         _handles: {}
     },
 
-    DATA_OPTIONS: DATA_OPTIONS,
+    DATA_OPTIONS: &#x27;data-options&#x27;,
 
     DEFAULT_OPTIONS: DEFAULT_OPTIONS,
 

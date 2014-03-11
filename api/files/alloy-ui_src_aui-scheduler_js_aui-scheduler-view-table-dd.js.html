@@ -20,7 +20,7 @@
 </head>
 <body class="yui3-skin-sam">
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
         <div class="navbar-inner">
             <h1 class="brand">
                 <a href="/">
@@ -2106,48 +2106,16 @@ var Lang = A.Lang,
 
     WEEK_LENGTH = DateMath.WEEK_LENGTH,
 
-    _DOT = &#x27;.&#x27;,
-
-    SCHEDULER_EVENT = &#x27;scheduler-event&#x27;,
-    SCHEDULER_VIEW = &#x27;scheduler-view&#x27;,
-
-    BOUNDING_BOX = &#x27;boundingBox&#x27;,
-    COL = &#x27;col&#x27;,
-    COLGRID = &#x27;colgrid&#x27;,
-    CONTENT = &#x27;content&#x27;,
-    DATA = &#x27;data&#x27;,
-    DD = &#x27;dd&#x27;,
-    DELEGATE = &#x27;delegate&#x27;,
-    DELEGATE_CONFIG = &#x27;delegateConfig&#x27;,
-    DISABLED = &#x27;disabled&#x27;,
-    DISPLAY_DAYS_INTERVAL = &#x27;displayDaysInterval&#x27;,
-    DRAG_NODE = &#x27;dragNode&#x27;,
-    DRAGGING = &#x27;dragging&#x27;,
-    DRAGGING_EVENT = &#x27;draggingEvent&#x27;,
-    EVENT_RECORDER = &#x27;eventRecorder&#x27;,
-    LASSO = &#x27;lasso&#x27;,
-    NODE = &#x27;node&#x27;,
-    OFFSET_HEIGHT = &#x27;offsetHeight&#x27;,
-    OFFSET_WIDTH = &#x27;offsetWidth&#x27;,
-    PROXY = &#x27;proxy&#x27;,
-    PROXY_NODE = &#x27;proxyNode&#x27;,
-    REGION = &#x27;region&#x27;,
-    ROWS_CONTAINER_NODE = &#x27;rowsContainerNode&#x27;,
-    SCHEDULER = &#x27;scheduler&#x27;,
-    START_DATE = &#x27;startDate&#x27;,
-    TABLE = &#x27;table&#x27;,
-    VISIBLE = &#x27;visible&#x27;,
-
     getCN = A.getClassName,
 
-    CSS_SCHEDULER_EVENT = getCN(SCHEDULER_EVENT),
-    CSS_SCHEDULER_EVENT_DISABLED = getCN(SCHEDULER_EVENT, DISABLED),
+    CSS_SCHEDULER_EVENT = getCN(&#x27;scheduler-event&#x27;),
+    CSS_SCHEDULER_EVENT_DISABLED = getCN(&#x27;scheduler-event&#x27;, &#x27;disabled&#x27;),
 
-    CSS_SVT_COLGRID = getCN(SCHEDULER_VIEW, TABLE, COLGRID),
-    CSS_SVT_DRAGGING = getCN(SCHEDULER_VIEW, TABLE, DRAGGING),
-    CSS_SVT_LASSO = getCN(SCHEDULER_VIEW, TABLE, LASSO),
-    CSS_SVT_PROXY_NODE = getCN(SCHEDULER_VIEW, TABLE, PROXY, NODE),
-    CSS_SVT_TABLE_DATA_COL = getCN(SCHEDULER_VIEW, TABLE, DATA, COL),
+    CSS_SVT_COLGRID = getCN(&#x27;scheduler-view&#x27;, &#x27;table&#x27;, &#x27;colgrid&#x27;),
+    CSS_SVT_DRAGGING = getCN(&#x27;scheduler-view&#x27;, &#x27;table&#x27;, &#x27;dragging&#x27;),
+    CSS_SVT_LASSO = getCN(&#x27;scheduler-view&#x27;, &#x27;table&#x27;, &#x27;lasso&#x27;),
+    CSS_SVT_PROXY_NODE = getCN(&#x27;scheduler-view&#x27;, &#x27;table&#x27;, &#x27;proxy&#x27;, &#x27;node&#x27;),
+    CSS_SVT_TABLE_DATA_COL = getCN(&#x27;scheduler-view&#x27;, &#x27;table&#x27;, &#x27;data&#x27;, &#x27;col&#x27;),
 
     TPL_SVT_LASSO = &#x27;&lt;div class=&quot;&#x27; + CSS_SVT_LASSO + &#x27;&quot;&gt;&lt;/div&gt;&#x27;,
     TPL_SVT_PROXY_NODE = &#x27;&lt;div class=&quot;&#x27; + CSS_SVT_PROXY_NODE + &#x27;&quot;&gt;&lt;/div&gt;&#x27;;
@@ -2190,9 +2158,9 @@ A.SchedulerTableViewDD.ATTRS = {
                         useShim: false
                     },
                     bubbleTargets: instance,
-                    container: instance.get(BOUNDING_BOX),
-                    nodes: _DOT + CSS_SCHEDULER_EVENT,
-                    invalid: &#x27;input, select, button, a, textarea, &#x27; + _DOT + CSS_SCHEDULER_EVENT_DISABLED
+                    container: instance.get(&#x27;boundingBox&#x27;),
+                    nodes: &#x27;.&#x27; + CSS_SCHEDULER_EVENT,
+                    invalid: &#x27;input, select, button, a, textarea, &#x27; + &#x27;.&#x27; + CSS_SCHEDULER_EVENT_DISABLED
                 },
                 val || {}
             );
@@ -2214,7 +2182,7 @@ A.mix(A.SchedulerTableViewDD.prototype, {
     initializer: function() {
         var instance = this;
 
-        instance[PROXY_NODE] = A.Node.create(TPL_SVT_PROXY_NODE);
+        instance[&#x27;proxyNode&#x27;] = A.Node.create(TPL_SVT_PROXY_NODE);
 
         instance.after(instance.viewDDBindUI, instance, &#x27;bindUI&#x27;);
         instance.after(instance.viewDDRenderUI, instance, &#x27;renderUI&#x27;);
@@ -2228,7 +2196,7 @@ A.mix(A.SchedulerTableViewDD.prototype, {
      */
     viewDDBindUI: function() {
         var instance = this;
-        var recorder = instance.get(SCHEDULER).get(EVENT_RECORDER);
+        var recorder = instance.get(&#x27;scheduler&#x27;).get(&#x27;eventRecorder&#x27;);
 
         if (recorder) {
             recorder.on({
@@ -2237,7 +2205,7 @@ A.mix(A.SchedulerTableViewDD.prototype, {
             });
         }
 
-        instance[ROWS_CONTAINER_NODE].on({
+        instance[&#x27;rowsContainerNode&#x27;].on({
             mousedown: A.bind(instance._onMouseDownGrid, instance),
             mousemove: A.bind(instance._onMouseMoveGrid, instance),
             mouseup: A.bind(instance._onMouseUpGrid, instance)
@@ -2277,8 +2245,8 @@ A.mix(A.SchedulerTableViewDD.prototype, {
     removeLasso: function() {
         var instance = this;
 
-        if (instance[LASSO]) {
-            instance[LASSO].remove();
+        if (instance[&#x27;lasso&#x27;]) {
+            instance[&#x27;lasso&#x27;].remove();
         }
     },
 
@@ -2290,8 +2258,8 @@ A.mix(A.SchedulerTableViewDD.prototype, {
     removeProxy: function() {
         var instance = this;
 
-        if (instance[PROXY_NODE]) {
-            instance[PROXY_NODE].remove();
+        if (instance[&#x27;proxyNode&#x27;]) {
+            instance[&#x27;proxyNode&#x27;].remove();
         }
     },
 
@@ -2354,7 +2322,7 @@ A.mix(A.SchedulerTableViewDD.prototype, {
 
             instance.lasso.push(lassoNode);
 
-            instance[ROWS_CONTAINER_NODE].append(lassoNode);
+            instance[&#x27;rowsContainerNode&#x27;].append(lassoNode);
             lassoNode.sizeTo(w, h);
             lassoNode.setXY(instance._offsetXY([x, y], 1));
         }
@@ -2371,7 +2339,7 @@ A.mix(A.SchedulerTableViewDD.prototype, {
         var instance = this;
         var dd = event.target;
 
-        var bodyRegion = instance.bodyNode.get(REGION);
+        var bodyRegion = instance.bodyNode.get(&#x27;region&#x27;);
 
         var mouseRegion = {
             bottom: event.pageY,
@@ -2384,7 +2352,7 @@ A.mix(A.SchedulerTableViewDD.prototype, {
             return;
         }
 
-        var draggingEvent = instance[DRAGGING_EVENT];
+        var draggingEvent = instance[&#x27;draggingEvent&#x27;];
         var eventXY = [event.pageX, event.pageY];
         var position = instance._findPosition(instance._offsetXY(eventXY, -1));
 
@@ -2487,7 +2455,7 @@ A.mix(A.SchedulerTableViewDD.prototype, {
      */
     _offsetXY: function(xy, sign) {
         var instance = this;
-        var offsetXY = instance[ROWS_CONTAINER_NODE].getXY();
+        var offsetXY = instance[&#x27;rowsContainerNode&#x27;].getXY();
 
         return [xy[0] + offsetXY[0] * sign, xy[1] + offsetXY[1] * sign];
     },
@@ -2501,28 +2469,28 @@ A.mix(A.SchedulerTableViewDD.prototype, {
      */
     _onEventDragEnd: function(event) {
         var instance = this;
-        var draggingEvent = instance[DRAGGING_EVENT];
+        var draggingEvent = instance[&#x27;draggingEvent&#x27;];
 
         if (draggingEvent) {
             var positionDate = instance._getPositionDate(instance.lassoLastPosition);
 
-            DateMath.copyHours(positionDate, draggingEvent.get(START_DATE));
+            DateMath.copyHours(positionDate, draggingEvent.get(&#x27;startDate&#x27;));
             draggingEvent.move(positionDate);
-            draggingEvent.set(VISIBLE, true, {
+            draggingEvent.set(&#x27;visible&#x27;, true, {
                 silent: true
             });
 
-            instance[ROWS_CONTAINER_NODE].removeClass(CSS_SVT_DRAGGING).unselectable();
+            instance[&#x27;rowsContainerNode&#x27;].removeClass(CSS_SVT_DRAGGING).unselectable();
 
-            event.target.set(DRAG_NODE, instance.originalDragNode);
+            event.target.set(&#x27;dragNode&#x27;, instance.originalDragNode);
 
             instance.removeLasso();
             instance.removeProxy();
 
-            instance.get(SCHEDULER).syncEventsUI();
+            instance.get(&#x27;scheduler&#x27;).syncEventsUI();
         }
 
-        instance[DRAGGING_EVENT] = null;
+        instance[&#x27;draggingEvent&#x27;] = null;
     },
 
     /**
@@ -2534,7 +2502,8 @@ A.mix(A.SchedulerTableViewDD.prototype, {
      */
     _onEventDragStart: function(event) {
         var instance = this;
-        var draggingEvent = instance[DRAGGING_EVENT] = instance[DELEGATE][DD].get(NODE).getData(SCHEDULER_EVENT);
+        var draggingEvent = instance[&#x27;draggingEvent&#x27;] =
+            instance[&#x27;delegate&#x27;][&#x27;dd&#x27;].get(&#x27;node&#x27;).getData(&#x27;scheduler-event&#x27;);
 
         if (draggingEvent) {
             instance._syncCellDimensions();
@@ -2553,17 +2522,17 @@ A.mix(A.SchedulerTableViewDD.prototype, {
 
             instance._syncProxyNodeUI(draggingEvent);
 
-            draggingEvent.set(VISIBLE, false, {
+            draggingEvent.set(&#x27;visible&#x27;, false, {
                 silent: true
             });
 
             instance.lassoStartPosition = instance.lassoLastPosition = startPosition;
 
-            instance[ROWS_CONTAINER_NODE].addClass(CSS_SVT_DRAGGING).unselectable();
+            instance[&#x27;rowsContainerNode&#x27;].addClass(CSS_SVT_DRAGGING).unselectable();
 
-            instance.originalDragNode = event.target.get(DRAG_NODE);
+            instance.originalDragNode = event.target.get(&#x27;dragNode&#x27;);
 
-            event.target.set(DRAG_NODE, instance[PROXY_NODE]);
+            event.target.set(&#x27;dragNode&#x27;, instance[&#x27;proxyNode&#x27;]);
         }
     },
 
@@ -2576,12 +2545,12 @@ A.mix(A.SchedulerTableViewDD.prototype, {
      */
     _onMouseDownGrid: function(event) {
         var instance = this;
-        var scheduler = instance.get(SCHEDULER);
-        var recorder = scheduler.get(EVENT_RECORDER);
+        var scheduler = instance.get(&#x27;scheduler&#x27;);
+        var recorder = scheduler.get(&#x27;eventRecorder&#x27;);
         var target = event.target;
 
-        if (recorder &amp;&amp; !scheduler.get(DISABLED) &amp;&amp;
-            target.test([_DOT + CSS_SVT_COLGRID, _DOT + CSS_SVT_TABLE_DATA_COL].join())) {
+        if (recorder &amp;&amp; !scheduler.get(&#x27;disabled&#x27;) &amp;&amp;
+            target.test([&#x27;.&#x27; + CSS_SVT_COLGRID, &#x27;.&#x27; + CSS_SVT_TABLE_DATA_COL].join())) {
 
             instance._recording = true;
 
@@ -2593,7 +2562,7 @@ A.mix(A.SchedulerTableViewDD.prototype, {
 
             instance.renderLasso(instance.lassoStartPosition, instance.lassoLastPosition);
 
-            instance[ROWS_CONTAINER_NODE].unselectable();
+            instance[&#x27;rowsContainerNode&#x27;].unselectable();
         }
     },
 
@@ -2627,10 +2596,10 @@ A.mix(A.SchedulerTableViewDD.prototype, {
      */
     _onMouseUpGrid: function(event) {
         var instance = this;
-        var scheduler = instance.get(SCHEDULER);
-        var recorder = scheduler.get(EVENT_RECORDER);
+        var scheduler = instance.get(&#x27;scheduler&#x27;);
+        var recorder = scheduler.get(&#x27;eventRecorder&#x27;);
 
-        if (recorder &amp;&amp; instance._recording &amp;&amp; !scheduler.get(DISABLED)) {
+        if (recorder &amp;&amp; instance._recording &amp;&amp; !scheduler.get(&#x27;disabled&#x27;)) {
             var startPositionDate = instance._getPositionDate(instance.lassoStartPosition);
             var endPositionDate = instance._getPositionDate(instance.lassoLastPosition);
 
@@ -2664,12 +2633,12 @@ A.mix(A.SchedulerTableViewDD.prototype, {
     _setupDragDrop: function() {
         var instance = this;
 
-        if (!instance[DELEGATE]) {
-            instance[DELEGATE] = new A.DD.Delegate(
-                instance.get(DELEGATE_CONFIG));
+        if (!instance[&#x27;delegate&#x27;]) {
+            instance[&#x27;delegate&#x27;] = new A.DD.Delegate(
+                instance.get(&#x27;delegateConfig&#x27;));
         }
 
-        var dd = instance[DELEGATE][DD];
+        var dd = instance[&#x27;delegate&#x27;][&#x27;dd&#x27;];
 
         dd.unplug(A.Plugin.DDNodeScroll);
         dd.unplug(A.Plugin.DDProxy);
@@ -2694,12 +2663,12 @@ A.mix(A.SchedulerTableViewDD.prototype, {
     _syncCellDimensions: function() {
         var instance = this;
 
-        var displayDaysInterval = instance.get(DISPLAY_DAYS_INTERVAL);
+        var displayDaysInterval = instance.get(&#x27;displayDaysInterval&#x27;);
         var displayRowsCount = Math.ceil(displayDaysInterval / WEEK_LENGTH);
         var weekDaysCount = Math.min(displayDaysInterval, WEEK_LENGTH);
 
-        instance.gridCellHeight = instance[ROWS_CONTAINER_NODE].get(OFFSET_HEIGHT) / displayRowsCount;
-        instance.gridCellWidth = instance[ROWS_CONTAINER_NODE].get(OFFSET_WIDTH) / weekDaysCount;
+        instance.gridCellHeight = instance[&#x27;rowsContainerNode&#x27;].get(&#x27;offsetHeight&#x27;) / displayRowsCount;
+        instance.gridCellWidth = instance[&#x27;rowsContainerNode&#x27;].get(&#x27;offsetWidth&#x27;) / weekDaysCount;
     },
 
     /**
@@ -2712,23 +2681,23 @@ A.mix(A.SchedulerTableViewDD.prototype, {
     _syncProxyNodeUI: function(evt) {
         var instance = this;
 
-        var eventNode = evt.get(NODE).item(0);
-        var eventNodePadding = evt.get(NODE).item(1);
+        var eventNode = evt.get(&#x27;node&#x27;).item(0);
+        var eventNodePadding = evt.get(&#x27;node&#x27;).item(1);
 
-        instance[PROXY_NODE].setStyles({
+        instance[&#x27;proxyNode&#x27;].setStyles({
             backgroundColor: eventNode.getStyle(&#x27;backgroundColor&#x27;),
             color: eventNode.getStyle(&#x27;color&#x27;),
             display: &#x27;block&#x27;
         });
 
         if (!eventNodePadding || !eventNodePadding.test(&#x27;:visible&#x27;)) {
-            var offsetWidth = eventNode.get(OFFSET_WIDTH);
+            var offsetWidth = eventNode.get(&#x27;offsetWidth&#x27;);
 
-            instance[PROXY_NODE].set(OFFSET_WIDTH, offsetWidth);
+            instance[&#x27;proxyNode&#x27;].set(&#x27;offsetWidth&#x27;, offsetWidth);
         }
 
-        instance[PROXY_NODE].appendTo(instance[ROWS_CONTAINER_NODE]);
-        instance[PROXY_NODE].setContent(evt.get(CONTENT));
+        instance[&#x27;proxyNode&#x27;].appendTo(instance[&#x27;rowsContainerNode&#x27;]);
+        instance[&#x27;proxyNode&#x27;].setContent(evt.get(&#x27;content&#x27;));
     }
 });
 

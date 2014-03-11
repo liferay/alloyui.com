@@ -20,7 +20,7 @@
 </head>
 <body class="yui3-skin-sam">
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
         <div class="navbar-inner">
             <h1 class="brand">
                 <a href="/">
@@ -2098,18 +2098,7 @@
  * @module aui-timepicker
  */
 
-var Lang = A.Lang,
-
-    ACTIVE_INPUT = &#x27;activeInput&#x27;,
-    AUTO = &#x27;auto&#x27;,
-    AUTO_HIDE = &#x27;autoHide&#x27;,
-    AUTOCOMPLETE = &#x27;autocomplete&#x27;,
-    DATE_SEPARATOR = &#x27;dateSeparator&#x27;,
-    MASK = &#x27;mask&#x27;,
-    SELECT = &#x27;select&#x27;,
-    SELECTION_CHANGE = &#x27;selectionChange&#x27;,
-    TRIGGER = &#x27;trigger&#x27;,
-    VALUES = &#x27;values&#x27;;
+var Lang = A.Lang;
 
 /**
  * A base class for &#x60;TimePickerBase&#x60;.
@@ -2272,7 +2261,7 @@ A.mix(TimePickerBase.prototype, {
     getAutoComplete: function(node) {
         var instance = this,
             autocomplete = instance.autocomplete,
-            autocompleteConfig = instance.get(AUTOCOMPLETE);
+            autocompleteConfig = instance.get(&#x27;autocomplete&#x27;);
 
         if (autocomplete) {
             autocomplete.destroy();
@@ -2283,7 +2272,7 @@ A.mix(TimePickerBase.prototype, {
         autocomplete.render(instance.getPopover().bodyNode).sendRequest();
         instance.autocomplete = autocomplete;
 
-        autocomplete.after(SELECT, instance._afterAutocompleteSelect, instance);
+        autocomplete.after(&#x27;select&#x27;, instance._afterAutocompleteSelect, instance);
 
         return autocomplete;
     },
@@ -2308,12 +2297,12 @@ A.mix(TimePickerBase.prototype, {
      */
     useInputNode: function(node) {
         var instance = this,
-            activeInput = instance.get(ACTIVE_INPUT),
+            activeInput = instance.get(&#x27;activeInput&#x27;),
             popover = instance.getPopover();
 
         if (activeInput !== node) {
-            instance.set(ACTIVE_INPUT, node);
-            popover.set(TRIGGER, node);
+            instance.set(&#x27;activeInput&#x27;, node);
+            popover.set(&#x27;trigger&#x27;, node);
             instance.getAutoComplete(node);
         }
 
@@ -2340,7 +2329,7 @@ A.mix(TimePickerBase.prototype, {
 
         instance.selectDates(parsed);
 
-        if (instance.get(AUTO_HIDE)) {
+        if (instance.get(&#x27;autoHide&#x27;)) {
             instance.hide();
         }
     },
@@ -2356,7 +2345,7 @@ A.mix(TimePickerBase.prototype, {
         var instance = this;
 
         if (selection) {
-            instance.fire(SELECTION_CHANGE, {
+            instance.fire(&#x27;selectionChange&#x27;, {
                 newSelection: selection
             });
         }
@@ -2373,8 +2362,8 @@ A.mix(TimePickerBase.prototype, {
      */
     _setAutocomplete: function(val) {
         var instance = this,
-            dateSeparator = instance.get(DATE_SEPARATOR),
-            values = instance.get(VALUES);
+            dateSeparator = instance.get(&#x27;dateSeparator&#x27;),
+            values = instance.get(&#x27;values&#x27;);
 
         return A.merge({
             align: false,
@@ -2384,7 +2373,7 @@ A.mix(TimePickerBase.prototype, {
             queryDelimiter: dateSeparator,
             source: values,
             tabSelect: false,
-            width: AUTO
+            width: &#x27;auto&#x27;
         }, val);
     },
 
@@ -2404,7 +2393,7 @@ A.mix(TimePickerBase.prototype, {
             formatted.push(
                 A.Date.format(
                     A.Date.parse(&#x27;%H:%M&#x27;, timeISOFormat), {
-                        format: instance.get(MASK)
+                        format: instance.get(&#x27;mask&#x27;)
                     }));
         });
 
