@@ -182,6 +182,8 @@ YUI.add("yuidoc-meta", function(Y) {
         "CacheOffline",
         "Calendar",
         "CalendarBase",
+        "CancellablePromise",
+        "CancellablePromise.Error",
         "CandlestickSeries",
         "CanvasCircle",
         "CanvasDrawing",
@@ -211,6 +213,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "ComboSeries",
         "ComboSplineSeries",
         "Console",
+        "ContentEditable",
         "Controller",
         "Cookie",
         "CurveUtil",
@@ -241,9 +244,12 @@ YUI.add("yuidoc-meta", function(Y) {
         "DataTable.Base",
         "DataTable.BodyView",
         "DataTable.BodyView.Formatters",
+        "DataTable.Column",
         "DataTable.ColumnWidths",
         "DataTable.Core",
         "DataTable.HeaderView",
+        "DataTable.Highlight",
+        "DataTable.KeyNav",
         "DataTable.Message",
         "DataTable.Mutable",
         "DataTable.Paginator",
@@ -272,7 +278,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "EventFacade",
         "EventHandle",
         "EventTarget",
-        "ExecCommand",
         "Features",
         "File",
         "FileFlash",
@@ -298,6 +303,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "IO",
         "ImgLoadGroup",
         "ImgLoadImgObj",
+        "InlineEditor",
         "Intl",
         "JSON",
         "JSONPRequest",
@@ -312,6 +318,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "MatrixUtil",
         "Model",
         "ModelList",
+        "ModelSync.Local",
         "ModelSync.REST",
         "Node",
         "NodeList",
@@ -357,6 +364,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Plugin.EditorParaIE",
         "Plugin.EditorTab",
         "Plugin.ExecCommand",
+        "Plugin.ExecCommand.COMMANDS",
         "Plugin.Flick",
         "Plugin.Host",
         "Plugin.NodeFX",
@@ -509,8 +517,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "YUI~substitute",
         "config",
         "plugin.NodeFocusManager",
-        "plugin.NodeMenuNav",
-        "soon"
+        "plugin.NodeMenuNav"
     ],
     "modules": [
         "align-plugin",
@@ -650,6 +657,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "aui-tree-node",
         "aui-tree-paginator",
         "aui-tree-view",
+        "aui-undo-redo",
         "aui-url",
         "aui-video",
         "aui-widget-cssclass",
@@ -706,6 +714,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "color-hsv",
         "console",
         "console-filters",
+        "content-editable",
         "cookie",
         "createlink-base",
         "dataschema",
@@ -734,6 +743,8 @@ YUI.add("yuidoc-meta", function(Y) {
         "datatable-foot",
         "datatable-formatters",
         "datatable-head",
+        "datatable-highlight",
+        "datatable-keynav",
         "datatable-message",
         "datatable-mutable",
         "datatable-paginator",
@@ -774,6 +785,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "editor-base",
         "editor-bidi",
         "editor-br",
+        "editor-inline",
         "editor-lists",
         "editor-para",
         "editor-para-base",
@@ -784,7 +796,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "event-base",
         "event-contextmenu",
         "event-custom",
-        "event-custom-base",
         "event-custom-base",
         "event-custom-complex",
         "event-delegate",
@@ -979,7 +990,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "widget-buttons",
         "widget-child",
         "widget-htmlparser",
-        "widget-locale",
         "widget-modality",
         "widget-parent",
         "widget-position",
@@ -995,8 +1005,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "yql-winjs",
         "yui",
         "yui-base",
-        "yui-base",
-        "yui-later",
         "yui-later",
         "yui-log",
         "yui-throttle",
@@ -1046,7 +1054,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "anim-shape",
             "name": "anim-shape",
-            "description": "Adds support for the <code>transform</code> and <code>fill</code> attributes of <code>Graphic</code> \nand <code>Shape</code> instances. The <code>anim-shape</code> submodule can be used for all animations\ninvolving <code>Graphic</code> <code>Shape</code> attributes."
+            "description": "Adds support for the <code>transform</code> and <code>fill</code> attributes of <code>Graphic</code>\nand <code>Shape</code> instances. The <code>anim-shape</code> submodule can be used for all animations\ninvolving <code>Graphic</code> <code>Shape</code> attributes."
         },
         {
             "displayName": "anim-shape-transform",
@@ -1676,6 +1684,11 @@ YUI.add("yuidoc-meta", function(Y) {
             "description": "The TreeView Utility"
         },
         {
+            "displayName": "aui-undo-redo",
+            "name": "aui-undo-redo",
+            "description": "The Undo/Redo Component"
+        },
+        {
             "displayName": "aui-url",
             "name": "aui-url",
             "description": "The Url Utility."
@@ -1693,7 +1706,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "aui-widget-toggle",
             "name": "aui-widget-toggle",
-            "description": "Provides standard module support for toggle sivibility method through an\nextension."
+            "description": "Provides standard module support for toggle visibility method through an\nextension."
         },
         {
             "displayName": "aui-widget-toolbars",
@@ -1908,7 +1921,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "classnamemanager",
             "name": "classnamemanager",
-            "description": "Contains a singleton (ClassNameManager) that enables easy creation and caching of \nprefixed class names."
+            "description": "Contains a singleton (ClassNameManager) that enables easy creation and caching of\nprefixed class names."
         },
         {
             "displayName": "clickable-rail",
@@ -1954,6 +1967,11 @@ YUI.add("yuidoc-meta", function(Y) {
             "description": "<p>Provides Plugin.ConsoleFilters plugin class.</p>\n\n<p>This plugin adds the ability to control which Console entries display by filtering on category and source. Two groups of checkboxes are added to the Console footer, one for categories and the other for sources.  Only those messages that match a checked category or source are displayed.</p>"
         },
         {
+            "displayName": "content-editable",
+            "name": "content-editable",
+            "description": "Creates a component to work with an elemment."
+        },
+        {
             "displayName": "cookie",
             "name": "cookie",
             "description": "Utilities for cookie management"
@@ -1976,7 +1994,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "dataschema-base",
             "name": "dataschema-base",
-            "description": "Provides the base DataSchema implementation, which can be extended to \ncreate DataSchemas for specific data formats, such XML, JSON, text and\narrays."
+            "description": "Provides the base DataSchema implementation, which can be extended to\ncreate DataSchemas for specific data formats, such XML, JSON, text and\narrays."
         },
         {
             "displayName": "dataschema-json",
@@ -2094,6 +2112,16 @@ YUI.add("yuidoc-meta", function(Y) {
             "description": "View class responsible for rendering the `<thead>` section of a table. Used as\nthe default `headerView` for `Y.DataTable.Base` and `Y.DataTable` classes."
         },
         {
+            "displayName": "datatable-highlight",
+            "name": "datatable-highlight",
+            "description": "Adds support for highlighting columns with the mouse in a DataTable"
+        },
+        {
+            "displayName": "datatable-keynav",
+            "name": "datatable-keynav",
+            "description": "Provides keyboard navigation of DataTable cells and support for adding other\nkeyboard actions."
+        },
+        {
             "displayName": "datatable-message",
             "name": "datatable-message",
             "description": "Adds support for a message container to appear in the table.  This can be used\nto indicate loading progress, lack of records, or any other communication\nneeded."
@@ -2126,7 +2154,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "datatype",
             "name": "datatype",
-            "description": "The `datatype` module is an alias for three utilities, Y.Date, \nY.Number and Y.XML, that provide type-conversion and string-formatting\nconvenience methods for various JavaScript object types."
+            "description": "The `datatype` module is an alias for three utilities, Y.Date,\nY.Number and Y.XML, that provide type-conversion and string-formatting\nconvenience methods for various JavaScript object types."
         },
         {
             "displayName": "datatype-date",
@@ -2195,7 +2223,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "dd-ddm-base",
             "name": "dd-ddm-base",
-            "description": "Provides the base Drag Drop Manger required for making a Node draggable."
+            "description": "Provides the base Drag Drop Manager required for making a Node draggable."
         },
         {
             "displayName": "dd-ddm-drop",
@@ -2291,6 +2319,11 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "editor-br",
             "name": "editor-br",
             "description": "Plugin for Editor to normalize BR's."
+        },
+        {
+            "displayName": "editor-inline",
+            "name": "editor-inline",
+            "description": "Base class for InlineEditor. Instead to use an iframe, uses content editable element via ContentEditable Plugin.\n\n     var editor = new Y.InlineEditor({\n         content: 'Foo'\n     });\n     editor.render('#demo');"
         },
         {
             "displayName": "editor-lists",
@@ -2430,12 +2463,12 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "event-valuechange",
             "name": "event-valuechange",
-            "description": "Adds a synthetic `valuechange` event that fires when the `value` property of an\n`<input>` or `<textarea>` node changes as a result of a keystroke, mouse\noperation, or input method editor (IME) input event.\n\nUsage:\n\n    YUI().use('event-valuechange', function (Y) {\n        Y.one('#my-input').on('valuechange', function (e) {\n            Y.log('previous value: ' + e.prevVal);\n            Y.log('new value: ' + e.newVal);\n        });\n    });"
+            "description": "Adds a synthetic `valuechange` event that fires when the `value` property of an\n`<input>`, `<textarea>`, `<select>`, or `[contenteditable=\"true\"]` node changes\nas a result of a keystroke, mouse operation, or input method editor (IME)\ninput event.\n\nUsage:\n\n    YUI().use('event-valuechange', function (Y) {\n        Y.one('#my-input').on('valuechange', function (e) {\n            Y.log('previous value: ' + e.prevVal);\n            Y.log('new value: ' + e.newVal);\n        });\n    });"
         },
         {
             "displayName": "exec-command",
             "name": "exec-command",
-            "description": "Plugin for the frame module to handle execCommands for Editor"
+            "description": "Static object literal of execCommand overrides"
         },
         {
             "displayName": "features",
@@ -2445,17 +2478,17 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "file",
             "name": "file",
-            "description": "The File class provides a wrapper for a file pointer, either through an HTML5 \nimplementation or as a reference to a file pointer stored in Flash. The File wrapper \nalso implements the mechanics for uploading a file and tracking its progress."
+            "description": "The File class provides a wrapper for a file pointer, either through an HTML5\nimplementation or as a reference to a file pointer stored in Flash. The File wrapper\nalso implements the mechanics for uploading a file and tracking its progress."
         },
         {
             "displayName": "file-flash",
             "name": "file-flash",
-            "description": "The FileFlash class provides a wrapper for a file pointer stored in Flash. The File wrapper \nalso implements the mechanics for uploading a file and tracking its progress."
+            "description": "The FileFlash class provides a wrapper for a file pointer stored in Flash. The File wrapper\nalso implements the mechanics for uploading a file and tracking its progress."
         },
         {
             "displayName": "file-html5",
             "name": "file-html5",
-            "description": "The FileHTML5 class provides a wrapper for a file pointer in an HTML5 The File wrapper \nalso implements the mechanics for uploading a file and tracking its progress."
+            "description": "The FileHTML5 class provides a wrapper for a file pointer in an HTML5 The File wrapper\nalso implements the mechanics for uploading a file and tracking its progress."
         },
         {
             "displayName": "frame",
@@ -2688,7 +2721,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "node-flick",
             "name": "node-flick",
-            "description": "Provide a simple Flick plugin, which can be used along with the \"flick\" gesture event, to \nanimate the motion of the host node in response to a (mouse or touch) flick gesture. \n\n<p>The current implementation is designed to move the node, relative to the bounds of a parent node and is suitable\nfor scroll/carousel type implementations. Future versions will remove that constraint, to allow open ended movement within\nthe document.</p>"
+            "description": "Provide a simple Flick plugin, which can be used along with the \"flick\" gesture event, to\nanimate the motion of the host node in response to a (mouse or touch) flick gesture.\n\n<p>The current implementation is designed to move the node, relative to the bounds of a parent node and is suitable\nfor scroll/carousel type implementations. Future versions will remove that constraint, to allow open ended movement within\nthe document.</p>"
         },
         {
             "displayName": "node-focusmanager",
@@ -2703,7 +2736,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "node-menunav",
             "name": "node-menunav",
-            "description": "<p>The MenuNav Node Plugin makes it easy to transform existing list-based \nmarkup into traditional, drop down navigational menus that are both accessible \nand easy to customize, and only require a small set of dependencies.</p>\n\n\n<p>To use the MenuNav Node Plugin, simply pass a reference to the plugin to a \nNode instance's <code>plug</code> method.</p>\n\n<p>\n<code>\n&#60;script type=\"text/javascript\"&#62; <br>\n<br>\n\t\t//\tCall the \"use\" method, passing in \"node-menunav\".  This will <br>\n\t\t//\tload the script and CSS for the MenuNav Node Plugin and all of <br>\n\t\t//\tthe required dependencies. <br>\n<br>\n\t\tYUI().use(\"node-menunav\", function(Y) { <br>\n<br>\n\t\t\t//\tUse the \"contentready\" event to initialize the menu when <br>\n\t\t\t//\tthe subtree of element representing the root menu <br>\n\t\t\t//\t(&#60;div id=\"menu-1\"&#62;) is ready to be scripted. <br>\n<br>\n\t\t\tY.on(\"contentready\", function () { <br>\n<br>\n\t\t\t\t//\tThe scope of the callback will be a Node instance <br>\n\t\t\t\t//\trepresenting the root menu (&#60;div id=\"menu-1\"&#62;). <br>\n\t\t\t\t//\tTherefore, since \"this\" represents a Node instance, it <br>\n\t\t\t\t//\tis possible to just call \"this.plug\" passing in a <br>\n\t\t\t\t//\treference to the MenuNav Node Plugin. <br>\n<br>\n\t\t\t\tthis.plug(Y.Plugin.NodeMenuNav); <br>\n<br>\n\t\t\t}, \"#menu-1\"); <br>\n<br>\t\t\n\t\t}); <br>\n<br>\t\n\t&#60;/script&#62; <br>\n</code>\n</p>\n\n<p>The MenuNav Node Plugin has several configuration properties that can be \nset via an object literal that is passed as a second argument to a Node \ninstance's <code>plug</code> method.\n</p>\n\n<p>\n<code>\n&#60;script type=\"text/javascript\"&#62; <br>\n<br>\n\t\t//\tCall the \"use\" method, passing in \"node-menunav\".  This will <br>\n\t\t//\tload the script and CSS for the MenuNav Node Plugin and all of <br>\n\t\t//\tthe required dependencies. <br>\n<br>\n\t\tYUI().use(\"node-menunav\", function(Y) { <br>\n<br>\n\t\t\t//\tUse the \"contentready\" event to initialize the menu when <br>\n\t\t\t//\tthe subtree of element representing the root menu <br>\n\t\t\t//\t(&#60;div id=\"menu-1\"&#62;) is ready to be scripted. <br>\n<br>\n\t\t\tY.on(\"contentready\", function () { <br>\n<br>\n\t\t\t\t//\tThe scope of the callback will be a Node instance <br>\n\t\t\t\t//\trepresenting the root menu (&#60;div id=\"menu-1\"&#62;). <br>\n\t\t\t\t//\tTherefore, since \"this\" represents a Node instance, it <br>\n\t\t\t\t//\tis possible to just call \"this.plug\" passing in a <br>\n\t\t\t\t//\treference to the MenuNav Node Plugin. <br>\n<br>\n\t\t\t\tthis.plug(Y.Plugin.NodeMenuNav, { mouseOutHideDelay: 1000 });\n<br><br>\n\t\t\t}, \"#menu-1\"); <br>\n<br>\t\t\n\t\t}); <br>\n<br>\t\n\t&#60;/script&#62; <br>\n</code>\n</p>\n\nDEPRECATED. The MenuNav Node Plugin has been deprecated as of YUI 3.9.0. This module will be removed from the library in a future version. If you require functionality similar to the one provided by this module, consider taking a look at the various modules in the YUI Gallery <http://yuilibrary.com/gallery/>."
+            "description": "<p>The MenuNav Node Plugin makes it easy to transform existing list-based\nmarkup into traditional, drop down navigational menus that are both accessible\nand easy to customize, and only require a small set of dependencies.</p>\n\n\n<p>To use the MenuNav Node Plugin, simply pass a reference to the plugin to a\nNode instance's <code>plug</code> method.</p>\n\n<p>\n<code>\n&#60;script type=\"text/javascript\"&#62; <br>\n<br>\n\t\t//\tCall the \"use\" method, passing in \"node-menunav\".  This will <br>\n\t\t//\tload the script and CSS for the MenuNav Node Plugin and all of <br>\n\t\t//\tthe required dependencies. <br>\n<br>\n\t\tYUI().use(\"node-menunav\", function(Y) { <br>\n<br>\n\t\t\t//\tUse the \"contentready\" event to initialize the menu when <br>\n\t\t\t//\tthe subtree of element representing the root menu <br>\n\t\t\t//\t(&#60;div id=\"menu-1\"&#62;) is ready to be scripted. <br>\n<br>\n\t\t\tY.on(\"contentready\", function () { <br>\n<br>\n\t\t\t\t//\tThe scope of the callback will be a Node instance <br>\n\t\t\t\t//\trepresenting the root menu (&#60;div id=\"menu-1\"&#62;). <br>\n\t\t\t\t//\tTherefore, since \"this\" represents a Node instance, it <br>\n\t\t\t\t//\tis possible to just call \"this.plug\" passing in a <br>\n\t\t\t\t//\treference to the MenuNav Node Plugin. <br>\n<br>\n\t\t\t\tthis.plug(Y.Plugin.NodeMenuNav); <br>\n<br>\n\t\t\t}, \"#menu-1\"); <br>\n<br>\n\t\t}); <br>\n<br>\n\t&#60;/script&#62; <br>\n</code>\n</p>\n\n<p>The MenuNav Node Plugin has several configuration properties that can be\nset via an object literal that is passed as a second argument to a Node\ninstance's <code>plug</code> method.\n</p>\n\n<p>\n<code>\n&#60;script type=\"text/javascript\"&#62; <br>\n<br>\n\t\t//\tCall the \"use\" method, passing in \"node-menunav\".  This will <br>\n\t\t//\tload the script and CSS for the MenuNav Node Plugin and all of <br>\n\t\t//\tthe required dependencies. <br>\n<br>\n\t\tYUI().use(\"node-menunav\", function(Y) { <br>\n<br>\n\t\t\t//\tUse the \"contentready\" event to initialize the menu when <br>\n\t\t\t//\tthe subtree of element representing the root menu <br>\n\t\t\t//\t(&#60;div id=\"menu-1\"&#62;) is ready to be scripted. <br>\n<br>\n\t\t\tY.on(\"contentready\", function () { <br>\n<br>\n\t\t\t\t//\tThe scope of the callback will be a Node instance <br>\n\t\t\t\t//\trepresenting the root menu (&#60;div id=\"menu-1\"&#62;). <br>\n\t\t\t\t//\tTherefore, since \"this\" represents a Node instance, it <br>\n\t\t\t\t//\tis possible to just call \"this.plug\" passing in a <br>\n\t\t\t\t//\treference to the MenuNav Node Plugin. <br>\n<br>\n\t\t\t\tthis.plug(Y.Plugin.NodeMenuNav, { mouseOutHideDelay: 1000 });\n<br><br>\n\t\t\t}, \"#menu-1\"); <br>\n<br>\n\t\t}); <br>\n<br>\n\t&#60;/script&#62; <br>\n</code>\n</p>\n\nDEPRECATED. The MenuNav Node Plugin has been deprecated as of YUI 3.9.0. This module will be removed from the library in a future version. If you require functionality similar to the one provided by this module, consider taking a look at the various modules in the YUI Gallery <http://yuilibrary.com/gallery/>."
         },
         {
             "displayName": "node-pluginhost",
@@ -2732,7 +2765,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "overlay",
             "name": "overlay",
-            "description": "Provides a basic Overlay widget, with Standard Module content support. The Overlay widget\nprovides Page XY positioning support, alignment and centering support along with basic \nstackable support (z-index and shimming)."
+            "description": "Provides a basic Overlay widget, with Standard Module content support. The Overlay widget\nprovides Page XY positioning support, alignment and centering support along with basic\nstackable support (z-index and shimming)."
         },
         {
             "displayName": "paginator",
@@ -2802,7 +2835,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "promise",
             "name": "promise",
-            "description": "Wraps the execution of asynchronous operations, providing a promise object that\ncan be used to subscribe to the various ways the operation may terminate.\n\nWhen the operation completes successfully, call the Resolver's `fulfill()`\nmethod, passing any relevant response data for subscribers.  If the operation\nencounters an error or is unsuccessful in some way, call `reject()`, again\npassing any relevant data for subscribers.\n\nThe Resolver object should be shared only with the code resposible for\nresolving or rejecting it. Public access for the Resolver is through its\n_promise_, which is returned from the Resolver's `promise` property. While both\nResolver and promise allow subscriptions to the Resolver's state changes, the\npromise may be exposed to non-controlling code. It is the preferable interface\nfor adding subscriptions.\n\nSubscribe to state changes in the Resolver with the promise's\n`then(callback, errback)` method.  `then()` wraps the passed callbacks in a\nnew Resolver and returns the corresponding promise, allowing chaining of\nasynchronous or synchronous operations. E.g.\n`promise.then(someAsyncFunc).then(anotherAsyncFunc)`"
+            "description": "Wraps the execution of asynchronous operations, providing a promise object that\ncan be used to subscribe to the various ways the operation may terminate.\n\nWhen the operation completes successfully, call the Resolver's `resolve()`\nmethod, passing any relevant response data for subscribers.  If the operation\nencounters an error or is unsuccessful in some way, call `reject()`, again\npassing any relevant data for subscribers.\n\nThe Resolver object should be shared only with the code resposible for\nresolving or rejecting it. Public access for the Resolver is through its\n_promise_, which is returned from the Resolver's `promise` property. While both\nResolver and promise allow subscriptions to the Resolver's state changes, the\npromise may be exposed to non-controlling code. It is the preferable interface\nfor adding subscriptions.\n\nSubscribe to state changes in the Resolver with the promise's\n`then(callback, errback)` method.  `then()` wraps the passed callbacks in a\nnew Resolver and returns the corresponding promise, allowing chaining of\nasynchronous or synchronous operations. E.g.\n`promise.then(someAsyncFunc).then(anotherAsyncFunc)`"
         },
         {
             "displayName": "querystring",
@@ -3192,7 +3225,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "timers",
             "name": "timers",
-            "description": "Provides utilities for timed asynchronous callback execution.\nY.soon is a setImmediate/process.nextTick/setTimeout wrapper."
+            "description": "Provides utilities for timed asynchronous callback execution.\nY.soon is a setImmediate/process.nextTick/setTimeout wrapper.\n\nThis module includes [asap.js](https://github.com/kriskowal/asap) for scheduling\nasynchronous tasks."
         },
         {
             "displayName": "transition",
@@ -3310,11 +3343,6 @@ YUI.add("yuidoc-meta", function(Y) {
             "description": "Adds HTML Parser support to the base Widget class"
         },
         {
-            "displayName": "widget-locale",
-            "name": "widget-locale",
-            "description": "Provides string support for widget with BCP 47 language tag lookup. This module has been deprecated.\nIt's replaced by the \"intl\" module which provides generic internationalization and BCP 47 language tag\nsupport with externalization."
-        },
-        {
             "displayName": "widget-modality",
             "name": "widget-modality",
             "description": "Provides modality support for Widgets, though an extension"
@@ -3387,7 +3415,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "yui-base",
             "name": "yui-base",
-            "description": "The YUI module contains the components required for building the YUI seed file.\nThis includes the script loading mechanism, a simple queue, and the core\nutilities for the library."
+            "description": "The YUI module contains the components required for building the\nYUI seed file.  This includes the script loading mechanism, a\nsimple queue, and the core utilities for the library."
         },
         {
             "displayName": "yui-later",
