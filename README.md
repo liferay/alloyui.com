@@ -17,11 +17,13 @@ If you want to report an issue about [AlloyUI's website](http://alloyui.com) you
 
 We use [Docpad](https://github.com/bevry/docpad), a static generator in NodeJS.
 
-## Dependencies
+##Mac
+
+### Dependencies
 
 Install [NodeJS](https://github.com/bevry/community/wiki/Installing-Node), if you don't have it yet.
 
-## Getting started
+### Getting started
 
 Once you have dependencies installed, you just need to:
 
@@ -31,7 +33,31 @@ Once you have dependencies installed, you just need to:
 
 3. And finally run: `grunt watch`
 
-Now you can see the website running in `http://localhost:9778/` :D
+4. Now you can see the website running in `http://localhost:9778/` :D
+
+##Windows
+
+### Dependencies
+
+1. [Install NodeJS](https://github.com/bevry/community/wiki/Installing-Node), if you don't have it yet.
+
+2. With Gitbash, install DocPad globally: `npm install -fg docpad@6.11`
+
+3. Install the following docpad plugins - `eco`, `highlightjs`, `marked`, and `related` by running the command `npm install --save docpad-plugin-<plugin-name>`
+
+Note: plugins must be installed in your alloyui.com directory, so step 3 must be taken after you clone alloyui.com to your machine (see steps below)
+
+### Getting started
+
+Once you have dependencies installed, you just need to:
+
+1. Clone the project: `git clone git@github.com:liferay/alloyui.com.git`
+
+2. Then go to the project's folder: `cd alloyui.com`
+
+3. And finally run: `docpad run`
+
+4. Now you can see the website running in `http://localhost:9778/` :D
 
 ## Structure
 
