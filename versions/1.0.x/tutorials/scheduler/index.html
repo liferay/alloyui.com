@@ -62,7 +62,8 @@
             <span class="caret"></span>
           </a>
           <ul id="version-dropdown" class="dropdown-menu">
-            <li><a tabindex="-1" href="/">v2.0.x</a></li>
+            <li><a tabindex="-1" href="/">v2.5.x</a></li>
+            <li><a tabindex="-1" href="/versions/2.0.x">v2.0.x</a></li>
             <li><a tabindex="-1" href="/versions/1.5.x">v1.5.x</a></li>
           </ul>
           <div class="pull-right">
@@ -489,31 +490,31 @@
         
       
         
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
           <li><a href="http://alloyui.com/versions/1.0.x/examples/scheduler">Basic Example</a></li>
         
       
         
           <li><a href="http://alloyui.com/versions/1.0.x/examples/scheduler/real-world">Real World Example</a></li>
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
         
       
         
@@ -581,22 +582,25 @@
       <hr>
     
 
-    <h4>Getting Started</h4>
+    <h4 id="getting-started">Getting Started</h4>
 <p>First load the seed file if you haven&#39;t yet.</p>
-<pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"http://cdn.alloyui.com/1.0.3/aui/aui-min.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></pre>
+<pre class="highlight"><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"http://cdn.alloyui.com/1.0.3/aui/aui-min.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+</code></pre>
 <p>Then initialize AlloyUI and load the Scheduler module.</p>
-<pre class="highlighted"><code class="javascript">AUI().use(
-  <span class="string">'aui-scheduler'</span>,
-  <span class="keyword">function</span>(A) {
-    <span class="comment">// code goes here</span>
+<pre class="highlight"><code class="hljs javascript">AUI().use(
+  <span class="hljs-string">'aui-scheduler'</span>,
+  <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(A)</span> {</span>
+    <span class="hljs-comment">// code goes here</span>
   }
-);</code></pre>
+);
+</code></pre>
 <hr>
-<h4>Using Scheduler</h4>
+<h4 id="using-scheduler">Using Scheduler</h4>
 <p>Create an HTML element with a wrapper div:</p>
-<pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"wrapper"</span>&gt;</span>
-  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"myScheduler"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre>
+<pre class="highlight"><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"wrapper"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"myScheduler"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+</code></pre>
 <div class="alert alert-info">
   <strong>Note:</strong> using Scheduler without a &quot;wrapper&quot; <code>div</code> may produce undesirable results due to its styling within AlloyUI.  Try it with or without a wrapper to see how Scheduler works with surrounding elements.
 </div>
@@ -604,144 +608,148 @@
 <p>Now create a new instance of Scheduler component.</p>
 <p>First, let&#39;s create an <code>events</code> variable where we stored our first calendar event, setting its name via <code>content</code> and a start and end date. Then we&#39;ll initialize the calendar view we&#39;re going to use, <code>weekView</code>.</p>
 <p>Finally, we&#39;ll create a new Scheduler with its <code>boundingBox</code> set to our HTML element, its <code>date</code> set to when we scheduled our first event, and pass in <code>events</code> for <code>items</code> and <code>weekView</code> for <code>views</code>, setting <code>render</code> to <code>true</code> so that it renders on load.</p>
-<pre class="highlighted"><code class="javascript">AUI().use(
-  <span class="string">'aui-scheduler'</span>,
-  <span class="keyword">function</span>(A) {
-    <span class="keyword">var</span> events = [
+<pre class="highlight"><code class="hljs javascript">AUI().use(
+  <span class="hljs-string">'aui-scheduler'</span>,
+  <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(A)</span> {</span>
+    <span class="hljs-keyword">var</span> events = [
       {
-        content: <span class="string">'Partial Lunar Eclipse'</span>,
-        endDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">4</span>, <span class="number">25</span>, <span class="number">5</span>),
-        startDate: <span class="keyword">new</span> Date(<span class="number">2012</span>, <span class="number">4</span>, <span class="number">25</span>, <span class="number">1</span>)
+        content: <span class="hljs-string">'Partial Lunar Eclipse'</span>,
+        endDate: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">2013</span>, <span class="hljs-number">4</span>, <span class="hljs-number">25</span>, <span class="hljs-number">5</span>),
+        startDate: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">2012</span>, <span class="hljs-number">4</span>, <span class="hljs-number">25</span>, <span class="hljs-number">1</span>)
       }
     ];
 
-    <span class="keyword">var</span> weekView = <span class="keyword">new</span> A.SchedulerWeekView();
+    <span class="hljs-keyword">var</span> weekView = <span class="hljs-keyword">new</span> A.SchedulerWeekView();
 
-    <span class="keyword">new</span> A.Scheduler(
+    <span class="hljs-keyword">new</span> A.Scheduler(
       {
-        boundingBox: <span class="string">'#myScheduler'</span>,
-        date: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">4</span>, <span class="number">25</span>),
+        boundingBox: <span class="hljs-string">'#myScheduler'</span>,
+        date: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">2013</span>, <span class="hljs-number">4</span>, <span class="hljs-number">25</span>),
         items: events,
-        render: <span class="literal">true</span>,
+        render: <span class="hljs-literal">true</span>,
         views: [weekView]
       }
     );
   }
-);</code></pre>
+);
+</code></pre>
 <div class="alert alert-info">
   <strong>Note:</strong> you don&#39;t have to set <code>date</code> inside your new Scheduler instance, but be forewarned, if you don&#39;t supply a date, Scheduler will use the current date as its starting date, sometimes making it hard to find your events!
 </div>
 
 <hr>
-<h4>Configuring Scheduler</h4>
+<h4 id="configuring-scheduler">Configuring Scheduler</h4>
 <p>There are some other optional parameters that you can pass to your Scheduler instance.</p>
 <p>For example, you can add other views to your <code>views</code> option with the Scheduler View constructors.  This will allow you to view your events in different formats.  You can also set <code>activeView</code> to the view you want Scheduler to start on.</p>
-<pre class="highlighted"><code class="javascript">AUI().use(
-  <span class="string">'aui-scheduler'</span>,
-  <span class="keyword">function</span>(A) {
-    <span class="keyword">var</span> events = [
+<pre class="highlight"><code class="hljs javascript">AUI().use(
+  <span class="hljs-string">'aui-scheduler'</span>,
+  <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(A)</span> {</span>
+    <span class="hljs-keyword">var</span> events = [
       {
-        content: <span class="string">'Partial Lunar Eclipse'</span>,
-        endDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">4</span>, <span class="number">25</span>, <span class="number">5</span>),
-        startDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">4</span>, <span class="number">25</span>, <span class="number">1</span>)
+        content: <span class="hljs-string">'Partial Lunar Eclipse'</span>,
+        endDate: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">2013</span>, <span class="hljs-number">4</span>, <span class="hljs-number">25</span>, <span class="hljs-number">5</span>),
+        startDate: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">2013</span>, <span class="hljs-number">4</span>, <span class="hljs-number">25</span>, <span class="hljs-number">1</span>)
       }
     ];
 
-    <span class="keyword">var</span> agendaView = <span class="keyword">new</span> A.SchedulerAgendaView();
-    <span class="keyword">var</span> dayView = <span class="keyword">new</span> A.SchedulerDayView();
-    <span class="keyword">var</span> weekView = <span class="keyword">new</span> A.SchedulerWeekView();
-    <span class="keyword">var</span> monthView = <span class="keyword">new</span> A.SchedulerMonthView();
+    <span class="hljs-keyword">var</span> agendaView = <span class="hljs-keyword">new</span> A.SchedulerAgendaView();
+    <span class="hljs-keyword">var</span> dayView = <span class="hljs-keyword">new</span> A.SchedulerDayView();
+    <span class="hljs-keyword">var</span> weekView = <span class="hljs-keyword">new</span> A.SchedulerWeekView();
+    <span class="hljs-keyword">var</span> monthView = <span class="hljs-keyword">new</span> A.SchedulerMonthView();
 
-    <span class="keyword">new</span> A.Scheduler(
+    <span class="hljs-keyword">new</span> A.Scheduler(
       {
         activeView: weekView,
-        boundingBox: <span class="string">'#myScheduler'</span>,
-        date: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">4</span>, <span class="number">25</span>),
+        boundingBox: <span class="hljs-string">'#myScheduler'</span>,
+        date: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">2013</span>, <span class="hljs-number">4</span>, <span class="hljs-number">25</span>),
         items: events,
-        render: <span class="literal">true</span>,
+        render: <span class="hljs-literal">true</span>,
         views: [dayView, weekView, monthView, agendaView]
       }
     );
   }
-);</code></pre>
+);
+</code></pre>
 <p>Adding <code>eventRecorder</code> to your options via the <code>NewEventRecorder</code> constructor allows you change the duration of existing events and create new events directly inside Scheduler, all of which are recorded and saved in Scheduler.</p>
-<pre class="highlighted"><code class="javascript">AUI().use(
-  <span class="string">'aui-scheduler'</span>,
-  <span class="keyword">function</span>(A) {
-    <span class="keyword">var</span> events = [
+<pre class="highlight"><code class="hljs javascript">AUI().use(
+  <span class="hljs-string">'aui-scheduler'</span>,
+  <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(A)</span> {</span>
+    <span class="hljs-keyword">var</span> events = [
       {
-        content: <span class="string">'Partial Lunar Eclipse'</span>,
-        endDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">4</span>, <span class="number">25</span>, <span class="number">5</span>),
-        startDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">4</span>, <span class="number">25</span>, <span class="number">1</span>)
+        content: <span class="hljs-string">'Partial Lunar Eclipse'</span>,
+        endDate: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">2013</span>, <span class="hljs-number">4</span>, <span class="hljs-number">25</span>, <span class="hljs-number">5</span>),
+        startDate: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">2013</span>, <span class="hljs-number">4</span>, <span class="hljs-number">25</span>, <span class="hljs-number">1</span>)
       }
     ];
 
-    <span class="keyword">var</span> agendaView = <span class="keyword">new</span> A.SchedulerAgendaView();
-    <span class="keyword">var</span> dayView = <span class="keyword">new</span> A.SchedulerDayView();
-    <span class="keyword">var</span> weekView = <span class="keyword">new</span> A.SchedulerWeekView();
-    <span class="keyword">var</span> monthView = <span class="keyword">new</span> A.SchedulerMonthView();
+    <span class="hljs-keyword">var</span> agendaView = <span class="hljs-keyword">new</span> A.SchedulerAgendaView();
+    <span class="hljs-keyword">var</span> dayView = <span class="hljs-keyword">new</span> A.SchedulerDayView();
+    <span class="hljs-keyword">var</span> weekView = <span class="hljs-keyword">new</span> A.SchedulerWeekView();
+    <span class="hljs-keyword">var</span> monthView = <span class="hljs-keyword">new</span> A.SchedulerMonthView();
 
-    <span class="keyword">var</span> eventRecorder = <span class="keyword">new</span> A.SchedulerEventRecorder();
+    <span class="hljs-keyword">var</span> eventRecorder = <span class="hljs-keyword">new</span> A.SchedulerEventRecorder();
 
-    <span class="keyword">new</span> A.Scheduler(
+    <span class="hljs-keyword">new</span> A.Scheduler(
       {
-        boundingBox: <span class="string">'#myScheduler'</span>,
-        date: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">4</span>, <span class="number">25</span>),
+        boundingBox: <span class="hljs-string">'#myScheduler'</span>,
+        date: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">2013</span>, <span class="hljs-number">4</span>, <span class="hljs-number">25</span>),
         eventRecorder: eventRecorder,
         items: events,
-        render: <span class="literal">true</span>,
+        render: <span class="hljs-literal">true</span>,
         activeView: weekView,
         views: [dayView, weekView, monthView, agendaView]
       }
     );
   }
-);</code></pre>
+);
+</code></pre>
 <p>You can even customize your individual events with a number of options, including <code>color</code>, <code>meeting</code>, <code>reminder</code>, and <code>disabled</code>.  Events can also span multiple days and overlap each other.</p>
-<pre class="highlighted"><code class="javascript">AUI().use(
-  <span class="string">'aui-scheduler'</span>,
-  <span class="keyword">function</span>(A) {
-    <span class="keyword">var</span> events = [
+<pre class="highlight"><code class="hljs javascript">AUI().use(
+  <span class="hljs-string">'aui-scheduler'</span>,
+  <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(A)</span> {</span>
+    <span class="hljs-keyword">var</span> events = [
       {
-        content: <span class="string">'Partial Lunar Eclipse'</span>,
-        endDate: <span class="keyword">new</span> Date(<span class="number">2012</span>, <span class="number">4</span>, <span class="number">25</span>, <span class="number">5</span>),
-        startDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">4</span>, <span class="number">25</span>, <span class="number">1</span>)
+        content: <span class="hljs-string">'Partial Lunar Eclipse'</span>,
+        endDate: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">2012</span>, <span class="hljs-number">4</span>, <span class="hljs-number">25</span>, <span class="hljs-number">5</span>),
+        startDate: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">2013</span>, <span class="hljs-number">4</span>, <span class="hljs-number">25</span>, <span class="hljs-number">1</span>)
       },
       {
-        color: <span class="string">"#8d8"</span>,
-        content: <span class="string">'Earth Day Lunch'</span>,
-        disabled: <span class="literal">true</span>,
-        endDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">4</span>, <span class="number">22</span>, <span class="number">13</span>),
-        meeting: <span class="literal">true</span>,
-        reminder: <span class="literal">true</span>,
-        startDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">22</span>, <span class="number">12</span>, <span class="number">12</span>)
+        color: <span class="hljs-string">"#8d8"</span>,
+        content: <span class="hljs-string">'Earth Day Lunch'</span>,
+        disabled: <span class="hljs-literal">true</span>,
+        endDate: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">2013</span>, <span class="hljs-number">4</span>, <span class="hljs-number">22</span>, <span class="hljs-number">13</span>),
+        meeting: <span class="hljs-literal">true</span>,
+        reminder: <span class="hljs-literal">true</span>,
+        startDate: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">2013</span>, <span class="hljs-number">22</span>, <span class="hljs-number">12</span>, <span class="hljs-number">12</span>)
       },
       {
-        content: <span class="string">"Weeklong"</span>,
-        endDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">4</span>, <span class="number">21</span>),
-        startDate: <span class="keyword">new</span> Date(<span class="number">2013</span>, <span class="number">4</span>, <span class="number">27</span>)
+        content: <span class="hljs-string">"Weeklong"</span>,
+        endDate: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">2013</span>, <span class="hljs-number">4</span>, <span class="hljs-number">21</span>),
+        startDate: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">2013</span>, <span class="hljs-number">4</span>, <span class="hljs-number">27</span>)
       },
     ];
 
-    <span class="keyword">var</span> agendaView = <span class="keyword">new</span> A.SchedulerAgendaView();
-    <span class="keyword">var</span> dayView = <span class="keyword">new</span> A.SchedulerDayView();
-    <span class="keyword">var</span> weekView = <span class="keyword">new</span> A.SchedulerWeekView();
-    <span class="keyword">var</span> monthView = <span class="keyword">new</span> A.SchedulerMonthView();
+    <span class="hljs-keyword">var</span> agendaView = <span class="hljs-keyword">new</span> A.SchedulerAgendaView();
+    <span class="hljs-keyword">var</span> dayView = <span class="hljs-keyword">new</span> A.SchedulerDayView();
+    <span class="hljs-keyword">var</span> weekView = <span class="hljs-keyword">new</span> A.SchedulerWeekView();
+    <span class="hljs-keyword">var</span> monthView = <span class="hljs-keyword">new</span> A.SchedulerMonthView();
 
-    <span class="keyword">var</span> eventRecorder = <span class="keyword">new</span> A.SchedulerEventRecorder();
+    <span class="hljs-keyword">var</span> eventRecorder = <span class="hljs-keyword">new</span> A.SchedulerEventRecorder();
 
-    <span class="keyword">new</span> A.Scheduler(
+    <span class="hljs-keyword">new</span> A.Scheduler(
       {
         activeView: weekView,
-        boundingBox: <span class="string">'#myScheduler'</span>,
-        date: <span class="keyword">new</span> Date(<span class="number">2012</span>, <span class="number">4</span>, <span class="number">25</span>),
+        boundingBox: <span class="hljs-string">'#myScheduler'</span>,
+        date: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">2012</span>, <span class="hljs-number">4</span>, <span class="hljs-number">25</span>),
         eventRecorder: eventRecorder,
         items: events,
-        render: <span class="literal">true</span>,
+        render: <span class="hljs-literal">true</span>,
         views: [dayView, weekView, monthView, agendaView]
       }
     );
   }
-);</code></pre>
+);
+</code></pre>
 <div class="alert alert-success">
   For more information about configuration, check out our <a href="http://alloyui.com/versions/1.0.x/api/">API Docs</a>.
 </div>
