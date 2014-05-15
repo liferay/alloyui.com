@@ -62,7 +62,8 @@
             <span class="caret"></span>
           </a>
           <ul id="version-dropdown" class="dropdown-menu">
-            <li><a tabindex="-1" href="/">v2.0.x</a></li>
+            <li><a tabindex="-1" href="/">v2.5.x</a></li>
+            <li><a tabindex="-1" href="/versions/2.0.x">v2.0.x</a></li>
             <li><a tabindex="-1" href="/versions/1.0.x">v1.0.x</a></li>
           </ul>
           <div class="pull-right">
@@ -617,27 +618,27 @@
         
       
         
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
           <li><a href="http://alloyui.com/versions/1.5.x/examples/viewport">Basic Example</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
         
       
         
@@ -655,45 +656,50 @@
       <hr>
     
 
-    <h4>What Does Viewport Do, Exactly?</h4>
+    <h4 id="what-does-viewport-do-exactly-">What Does Viewport Do, Exactly?</h4>
 <p>Good question! I&#39;m so glad you asked.</p>
 <p>Viewport allows you to customize your CSS for the four most commonly used page widths: 960px, 720px, 480px, and 320px (960 for desktops and tablets in landscape mode, 720 for tablets in portrait mode, 480 for smart phones in landscape mode, and 320 for smart phones in portrait mode).</p>
 <p>It does this through the addition of custom classes that you can then select in your stylesheets. Much like CSS Media Queries, this allows you to change your page&#39;s styling based on the width of the browser, but unlike Media Queries, Viewport is compatible with all browsers (<em>&#42;cough&#42;</em> IE) and allows for different target devices to share the same CSS. And when is saving code a bad idea?</p>
 <p>Well! Now that it&#39;s a bit more clear why you might want to use it, let&#39;s look at how you can make it happen.</p>
 <hr>
-<h4>Getting Started</h4>
+<h4 id="getting-started">Getting Started</h4>
 <p>First load the seed file, if you haven&#39;t yet.</p>
-<pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"http://cdn.alloyui.com/1.5.1/aui/aui-min.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></pre>
+<pre class="highlight"><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"http://cdn.alloyui.com/1.5.1/aui/aui-min.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+</code></pre>
 <p>Then initialize AlloyUI and load the Viewport module.</p>
-<pre class="highlighted"><code class="javascript">AUI().use(
-  <span class="string">'aui-viewport'</span>
-);</code></pre>
+<pre class="highlight"><code class="hljs javascript">AUI().use(
+  <span class="hljs-string">'aui-viewport'</span>
+);
+</code></pre>
 <p>And that&#39;s it! That&#39;s all the javascript you&#39;ll have to write to use the viewport module.</p>
 <hr>
-<h4>Using Viewport</h4>
+<h4 id="using-viewport">Using Viewport</h4>
 <p>After you&#39;ve included that one line of javascript, the rest of your interaction with the viewport module will come through CSS, using these custom classes that have been created for you:</p>
-<pre class="highlighted"><code class="css"><span class="class">.aui-view-960</span>
-<span class="class">.aui-view-720</span>
-<span class="class">.aui-view-480</span>
-<span class="class">.aui-view-320</span></code></pre>
+<pre class="highlight"><code class="hljs css"><span class="hljs-class">.aui-view-960</span>
+<span class="hljs-class">.aui-view-720</span>
+<span class="hljs-class">.aui-view-480</span>
+<span class="hljs-class">.aui-view-320</span>
+</code></pre>
 <p>These four classes form the base of the viewport functionality. However, eight more classes are added to make things a bit easier when you need to code for a larger range of browser sizes:</p>
-<pre class="highlighted"><code class="css"><span class="class">.aui-view-gt960</span>, <span class="class">.aui-view-lt960</span>
-<span class="class">.aui-view-gt720</span>, <span class="class">.aui-view-lt720</span>
-<span class="class">.aui-view-gt480</span>, <span class="class">.aui-view-lt480</span>
-<span class="class">.aui-view-gt320</span>, <span class="class">.aui-view-lt320</span></code></pre>
+<pre class="highlight"><code class="hljs css"><span class="hljs-class">.aui-view-gt960</span>, <span class="hljs-class">.aui-view-lt960</span>
+<span class="hljs-class">.aui-view-gt720</span>, <span class="hljs-class">.aui-view-lt720</span>
+<span class="hljs-class">.aui-view-gt480</span>, <span class="hljs-class">.aui-view-lt480</span>
+<span class="hljs-class">.aui-view-gt320</span>, <span class="hljs-class">.aui-view-lt320</span>
+</code></pre>
 <p>Once <code>aui-viewport</code> is initialized, every time you load the page or resize your browser the appropriate classes will be applied to the <code>&lt;html&gt;</code> element of your page, ready for use in your stylesheet.</p>
 <p>All that needs to be done from here is to use these classes to apply the necessary changes to your stylesheet. It could include something like this:</p>
-<pre class="highlighted"><code class="css"><span class="class">.aui-view-gt720</span> <span class="rules">{
-  <span class="rule"><span class="attribute">font-size</span>:<span class="value"> <span class="number">16</span>px;</span></span>
-<span class="rule">}</span></span>
+<pre class="highlight"><code class="hljs css"><span class="hljs-class">.aui-view-gt720</span> <span class="hljs-rules">{
+  <span class="hljs-rule"><span class="hljs-attribute">font-size</span>:<span class="hljs-value"> <span class="hljs-number">16</span>px</span></span>;
+<span class="hljs-rule">}</span></span>
 
-<span class="class">.aui-view-lt720</span> <span class="rules">{
-  <span class="rule"><span class="attribute">font-size</span>:<span class="value"> <span class="number">14</span>px;</span></span>
-<span class="rule">}</span></span>
+<span class="hljs-class">.aui-view-lt720</span> <span class="hljs-rules">{
+  <span class="hljs-rule"><span class="hljs-attribute">font-size</span>:<span class="hljs-value"> <span class="hljs-number">14</span>px</span></span>;
+<span class="hljs-rule">}</span></span>
 
-<span class="class">.aui-view-lt720</span> <span class="tag">img</span>, <span class="class">.aui-view-lt720</span> <span class="tag">video</span> <span class="rules">{
-  <span class="rule"><span class="attribute">display</span>:<span class="value"> none;</span></span>
-<span class="rule">}</span></span></code></pre>
+<span class="hljs-class">.aui-view-lt720</span> <span class="hljs-tag">img</span>, <span class="hljs-class">.aui-view-lt720</span> <span class="hljs-tag">video</span> <span class="hljs-rules">{
+  <span class="hljs-rule"><span class="hljs-attribute">display</span>:<span class="hljs-value"> none</span></span>;
+<span class="hljs-rule">}</span></span>
+</code></pre>
 <p>and so forth.</p>
 <div class="alert alert-success">
   For more information about configuration, check out our <a href="http://alloyui.com/versions/1.5.x/api/">API Docs</a>.

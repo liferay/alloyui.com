@@ -1,3 +1,0 @@
-YUI().use(
-  'aui-viewport'
-);
