@@ -28,7 +28,7 @@ module.exports = {
     site: {
       // Website version
       version: '2.0.x',
-      isLastVersion: true,
+      isLastVersion: false,
 
       // Production URL
       url: 'http://alloyui.com',
