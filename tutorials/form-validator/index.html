@@ -632,29 +632,29 @@
           
         
           
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
             <li><a href="http://alloyui.com/examples/form-validator">Basic Example</a></li>
           
         
           
             <li><a href="http://alloyui.com/examples/form-validator/real-world">Real World Example</a></li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
           
         
           
@@ -757,130 +757,138 @@
 
     <h4 id="getting-started">Getting Started</h4>
 <p>First load the seed and CSS files, if you haven&#39;t yet.</p>
-<pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"http://cdn.alloyui.com/2.5.0/aui/aui-min.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
-<span class="tag">&lt;<span class="title">link</span> <span class="attribute">href</span>=<span class="value">"http://cdn.alloyui.com/2.5.0/aui-css/css/bootstrap.min.css"</span> <span class="attribute">rel</span>=<span class="value">"stylesheet"</span>&gt;</span><span class="tag">&lt;/<span class="title">link</span>&gt;</span></code></pre>
+<pre class="highlight"><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"http://cdn.alloyui.com/2.5.0/aui/aui-min.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">link</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"http://cdn.alloyui.com/2.5.0/aui-css/css/bootstrap.min.css"</span> <span class="hljs-attribute">rel</span>=<span class="hljs-value">"stylesheet"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">link</span>&gt;</span>
+</code></pre>
 <p>Then initialize AlloyUI and load the Form Validator module.</p>
-<pre class="highlighted"><code class="javascript">YUI().use(
-  <span class="string">'aui-form-validator'</span>,
-  <span class="keyword">function</span>(Y) {
-    <span class="comment">// code goes here</span>
+<pre class="highlight"><code class="hljs javascript">YUI().use(
+  <span class="hljs-string">'aui-form-validator'</span>,
+  <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(Y)</span> {</span>
+    <span class="hljs-comment">// code goes here</span>
   }
-);</code></pre>
+);
+</code></pre>
 <hr>
 <h4 id="using-form-validator">Using Form Validator</h4>
 <p>In order to validate form entries, a form must first be created in HTML.</p>
-<pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">form</span> <span class="attribute">id</span>=<span class="value">"myForm"</span>&gt;</span>
-  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"control-group"</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">label</span> <span class="attribute">class</span>=<span class="value">"control-label"</span> <span class="attribute">for</span>=<span class="value">"name"</span>&gt;</span>Name:<span class="tag">&lt;/<span class="title">label</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"controls"</span>&gt;</span>
-      <span class="tag">&lt;<span class="title">input</span> <span class="attribute">name</span>=<span class="value">"name"</span> <span class="attribute">id</span>=<span class="value">"name"</span> <span class="attribute">type</span>=<span class="value">"text"</span>&gt;</span>
-    <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-  <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">form</span>&gt;</span></code></pre>
+<pre class="highlight"><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-title">form</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"myForm"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"control-group"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">label</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"control-label"</span> <span class="hljs-attribute">for</span>=<span class="hljs-value">"name"</span>&gt;</span>Name:<span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"controls"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"name"</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"name"</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text"</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">form</span>&gt;</span>
+</code></pre>
 <p>Set <code>boundingBox</code> to the form id, pass in the input element name under <code>rules</code>, and set <code>required</code> to <code>true</code>.</p>
-<pre class="highlighted"><code class="javascript">YUI().use(
-  <span class="string">'aui-form-validator'</span>,
-  <span class="keyword">function</span>(Y) {
-    <span class="keyword">new</span> Y.FormValidator(
+<pre class="highlight"><code class="hljs javascript">YUI().use(
+  <span class="hljs-string">'aui-form-validator'</span>,
+  <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(Y)</span> {</span>
+    <span class="hljs-keyword">new</span> Y.FormValidator(
       {
-        boundingBox: <span class="string">'#myForm'</span>,
+        boundingBox: <span class="hljs-string">'#myForm'</span>,
         rules: {
           name: {
-            required: <span class="literal">true</span>
+            required: <span class="hljs-literal">true</span>
           }
         }
       }
     );
   }
-);</code></pre>
+);
+</code></pre>
 <p>Now, if the user attempted to subit the form without filling out the name field, they would receive an alert reading, &quot;This field is required.&quot;</p>
 <hr>
 <h4 id="configuring-form-validator">Configuring Form Validator</h4>
 <p>Further requirements can be specified depending on the input type. For example, if the form input is for an email address, Form Validator can ensure that the text entered is a valid email address by setting <code>email</code> to <code>true</code>.</p>
-<pre class="highlighted"><code class="javascript">YUI().use(
-  <span class="string">'aui-form-validator'</span>,
-  <span class="keyword">function</span>(Y) {
-    <span class="keyword">new</span> Y.FormValidator(
+<pre class="highlight"><code class="hljs javascript">YUI().use(
+  <span class="hljs-string">'aui-form-validator'</span>,
+  <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(Y)</span> {</span>
+    <span class="hljs-keyword">new</span> Y.FormValidator(
       {
-        boundingBox: <span class="string">'#myForm'</span>,
+        boundingBox: <span class="hljs-string">'#myForm'</span>,
         rules: {
           email: {
-            email: <span class="literal">true</span>,
-            required: <span class="literal">true</span>
+            email: <span class="hljs-literal">true</span>,
+            required: <span class="hljs-literal">true</span>
           }
         }
       }
     );
   }
-);</code></pre>
+);
+</code></pre>
 <p>The same can be done for various other inputs.</p>
-<pre class="highlighted"><code class="javascript">YUI().use(
-  <span class="string">'aui-form-validator'</span>,
-  <span class="keyword">function</span>(Y) {
-    <span class="keyword">new</span> Y.FormValidator(
+<pre class="highlight"><code class="hljs javascript">YUI().use(
+  <span class="hljs-string">'aui-form-validator'</span>,
+  <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(Y)</span> {</span>
+    <span class="hljs-keyword">new</span> Y.FormValidator(
       {
-        boundingBox: <span class="string">'#myForm'</span>,
+        boundingBox: <span class="hljs-string">'#myForm'</span>,
         rules: {
           age: {
-            digits: <span class="literal">true</span>,
-            required: <span class="literal">true</span>
+            digits: <span class="hljs-literal">true</span>,
+            required: <span class="hljs-literal">true</span>
           },
           name: {
-            rangeLength: [<span class="number">2</span>,<span class="number">50</span>],
-            required: <span class="literal">true</span>
+            rangeLength: [<span class="hljs-number">2</span>,<span class="hljs-number">50</span>],
+            required: <span class="hljs-literal">true</span>
           },
           url: {
-            required: <span class="literal">true</span>,
-            url: <span class="literal">true</span>
+            required: <span class="hljs-literal">true</span>,
+            url: <span class="hljs-literal">true</span>
           }
         }
       }
     );
   }
-);</code></pre>
+);
+</code></pre>
 <p>Further configuration includes creating custom alerts that are displayed when invalid content is entered into a field (this replaces the default &quot;This feild is required&quot; message).</p>
-<pre class="highlighted"><code class="javascript">YUI().use(
-  <span class="string">'aui-form-validator'</span>,
-  <span class="keyword">function</span>(Y) {
-    <span class="keyword">new</span> Y.FormValidator(
+<pre class="highlight"><code class="hljs javascript">YUI().use(
+  <span class="hljs-string">'aui-form-validator'</span>,
+  <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(Y)</span> {</span>
+    <span class="hljs-keyword">new</span> Y.FormValidator(
       {
-        boundingBox: <span class="string">'#myForm'</span>,
+        boundingBox: <span class="hljs-string">'#myForm'</span>,
         fieldStrings: {
           name: {
-            required: <span class="string">'We need your name! (Custom message)'</span>
+            required: <span class="hljs-string">'We need your name! (Custom message)'</span>
           }
         },
         rules: {
           name: {
-            required: <span class="literal">true</span>
+            required: <span class="hljs-literal">true</span>
           }
         }
       }
     );
   }
-);</code></pre>
+);
+</code></pre>
 <p>Furthermore, the requirements can be customized beyond the default parameters. For example, one input can have the requirement of being equal to the content entered into another field.</p>
-<pre class="highlighted"><code class="javascript">YUI().use(
-  <span class="string">'aui-form-validator'</span>,
-  <span class="keyword">function</span>(Y) {
-    <span class="keyword">new</span> Y.FormValidator(
+<pre class="highlight"><code class="hljs javascript">YUI().use(
+  <span class="hljs-string">'aui-form-validator'</span>,
+  <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(Y)</span> {</span>
+    <span class="hljs-keyword">new</span> Y.FormValidator(
       {
-        boundingBox: <span class="string">'#myForm'</span>,
+        boundingBox: <span class="hljs-string">'#myForm'</span>,
         rules: {
           email: {
-            email: <span class="literal">true</span>,
-            required: <span class="literal">true</span>
+            email: <span class="hljs-literal">true</span>,
+            required: <span class="hljs-literal">true</span>
           },
           emailConfirmation: {
-            email: <span class="literal">true</span>,
-            equalTo: <span class="string">'#email'</span>,
-            required: <span class="literal">true</span>
+            email: <span class="hljs-literal">true</span>,
+            equalTo: <span class="hljs-string">'#email'</span>,
+            required: <span class="hljs-literal">true</span>
           }
         }
       }
     );
   }
-);</code></pre>
+);
+</code></pre>
 
 
     
