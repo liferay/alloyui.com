@@ -1,0 +1,131 @@
+---
+layout: single-doc
+title: Undo/Redo
+tags: undo-redo
+type: module
+category: Tutorial
+description: Allows user to undo and redo actions.
+api: http://alloyui.com/api/modules/aui-undo-redo.html
+---
+
+#### Getting Started
+
+First load the seed and CSS files, if you haven't yet.
+
+```html
+<script src="<%= @getCdnSeed() %>"></script>
+<link href="<%= @getBootstrapCSS() %>" rel="stylesheet"></link>
+```
+
+Then initialize AlloyUI and load the Undo/Redo module.
+
+``` javascript
+YUI().use(
+  'aui-undo-redo',
+  function(Y) {
+    // code goes here
+  }
+);
+```
+---
+
+#### Using Undo/Redo
+
+Create HTML elements for undo and redo buttons.
+
+``` html
+<button id="undo-button">Undo</button>
+<button id="redo-button">Redo</button>
+```
+
+Now create a new instance of Undo/Redo component.
+
+``` javascript
+YUI().use(
+  'aui-undo-redo',
+  function(Y) {
+    var undoRedo = new Y.UndoRedo();
+  }
+);
+```
+In order for the Undo and Redo buttons to function, we have to specify what should happen when they are clicked by applying either the `undo` or `redo` method.
+``` javascript
+YUI().use(
+  'aui-undo-redo',
+  function(Y) {
+    var undoRedo = new Y.UndoRedo();
+    Y.one('#undo-button').on('click', function() {
+      undoRedo.undo();
+    });
+    Y.one('#redo-button').on('click', function() {
+      undoRedo.redo();
+    });
+  }
+);
+```
+Depending on the action that the buttons are supposed to control, it may be necessary to define custom `undo` and `redo` methods. This is possible by calling `add` on your `undoRedo` instance and defining those new methods before setting the behavior of the buttons.
+``` javascript
+YUI().use(
+  'aui-undo-redo',
+  function(Y) {
+    var undoRedo = new Y.UndoRedo();
+    undoRedo.add({
+      undo: function() {
+        // custom undo method
+      },
+      redo: function() {
+        // custom redo method
+      }
+    });
+    Y.one('#undo-button').on('click', function() {
+      undoRedo.undo();
+    });
+    Y.one('#redo-button').on('click', function() {
+      undoRedo.redo();
+    });
+  }
+);
+```
+
+---
+
+#### Configuring Undo/Redo
+
+There are some other optional parameters that you can pass to your Undo/Redo instance.
+
+The `maxUndoDepth` attribute can be used to control how many actions can be undone. For example, if it is set to 3, only the 3 most recent actions can be undone. The default value is 100 and any input must be greater than or equal to 1.
+
+``` javascript
+YUI().use(
+  'aui-undo-redo',
+  function(Y) {
+    var undoRedo = new Y.UndoRedo({
+      maxUndoDepth: 3
+    });
+    Y.one('#undo-button').on('click', function() {
+      undoRedo.undo();
+    });
+    Y.one('#redo-button').on('click', function() {
+      undoRedo.redo();
+    });
+  }
+);
+```
+The `queueable` attribute defines the behavior when the user calls undo or redo while an action is in progress. By default, it is set to `false` which means these calls will be ignored. However, if it is set to `true` instead the actions will be queued, running in order as soon as the pending action finishes.
+
+``` javascript
+YUI().use(
+  'aui-undo-redo',
+  function(Y) {
+    var undoRedo = new Y.UndoRedo({
+      queueable: true
+    });
+    Y.one('#undo-button').on('click', function() {
+      undoRedo.undo();
+    });
+    Y.one('#redo-button').on('click', function() {
+      undoRedo.redo();
+    });
+  }
+);
+```
