@@ -1,0 +1,120 @@
+---
+title: Button
+description: Enables the creation of rich buttons different from traditional HTML form buttons.
+api: http://alloyui.com/api/modules/aui-button.html
+layout: single-example
+category: Examples
+intro: true
+---
+
+#### Getting Started
+
+First load the seed and CSS files, if you haven't yet.
+
+```html
+<script src="<%= @getCdnSeed() %>"></script>
+<link href="<%= @getBootstrapCSS() %>" rel="stylesheet"></link>
+```
+
+Then initialize AlloyUI and load the Button module.
+
+```javascript
+YUI().use(
+  'aui-button',
+  function(Y) {
+    // code goes here
+  }
+);
+```
+---
+
+#### Using Button
+
+The easiest way to use a button is just define a `btn` class for it. There's also additional classes that changes the style like `btn-primary`, `btn-info` and `btn-success`.
+
+``` html
+<button class="btn btn-primary">Primary</button>
+<button class="btn btn-info">Info</button>
+<button class="btn btn-success">Success</button>
+```
+
+The other way is through JavaScript. First, define an HTML tag.
+
+```html
+<button id="myButton"></button>
+```
+
+Now create a new instance of Button component by setting `srcNode` to our HTML element's selector. Also, we should include a `label` to populate the button. Finally, let's render it!
+
+``` javascript
+YUI().use(
+  'aui-button',
+  function(Y) {
+    new Y.Button(
+      {
+        label: 'Basic',
+        srcNode: '#myButton'
+      }
+    ).render();
+  }
+);
+```
+
+#### Configuring Button
+
+There are some other options that you can pass to your Button instance.
+
+For example, you can add an icon and set its position using `icon` and `iconAlign` attributes.
+
+``` javascript
+YUI().use(
+  'aui-button',
+  function(Y) {
+    new Y.Button(
+      {
+        icon: 'icon-print',
+        iconAlign: 'left',
+        label: 'Basic',
+        srcNode: '#myButton'
+      }
+    ).render();
+  }
+);
+```
+
+<div class="alert alert-info">
+  <strong>Note:</strong> you can find the entire icon list on <a href="http://liferay.github.io/alloy-bootstrap/base-css.html#icons">Alloy Bootstrap</a>.
+</div>
+
+---
+
+#### Using ButtonGroup
+
+You can include a ButtonGroup on your website too. First, define a HTML element that contains your buttons.
+
+```html
+<div id="myCheckgroup">
+  <input type="button" value="2">
+  <input class="active" type="reset" value="3">
+  <input class="active" type="submit" value="4">
+  <input type="button" value="5">
+  <input type="button" value="6">
+  <button>7</button>
+</div>
+```
+
+Now you have to define a `type` for this ButtonGroup, can be `checkbox` or `radio`. Then set `boundingBox` to your HTML parent node.
+
+``` javascript
+YUI().use(
+  'aui-button',
+  function(Y) {
+    new Y.ButtonGroup(
+      {
+        boundingBox: '#myCheckgroup',
+        type: 'checkbox'
+      }
+    ).render();
+  }
+);
+```

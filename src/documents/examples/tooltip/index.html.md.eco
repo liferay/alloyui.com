@@ -1,0 +1,110 @@
+---
+title: Tooltip
+description: Gives users contextual information or content.
+api: http://alloyui.com/api/modules/aui-tooltip.html
+layout: single-example
+category: Examples
+intro: true
+---
+
+#### Getting Started
+
+First load the seed and CSS files, if you haven't yet.
+
+```html
+<script src="<%= @getCdnSeed() %>"></script>
+<link href="<%= @getBootstrapCSS() %>" rel="stylesheet"></link>
+```
+
+Then initialize AlloyUI and load the Tooltip module.
+
+``` javascript
+YUI().use(
+  'aui-tooltip',
+  function(Y) {
+    // code goes here
+  }
+);
+```
+
+---
+
+#### Using Tooltip
+
+Create an HTML element and write some content on `title` attribute:
+
+``` html
+<button id="myTooltip" title="One fine body…">Mouseover to show a tooltip</button>
+```
+
+Now create a new instance of the Tooltip component and set the HTML element to
+`trigger`. Finally, let's render it!
+
+``` javascript
+YUI().ready(
+  'aui-tooltip',
+  function(Y) {
+    new Y.Tooltip(
+      {
+        trigger: '#myTooltip'
+      }
+    ).render();
+  }
+);
+```
+
+---
+
+#### Configuring Tooltip
+
+There are some other options that you can pass to your Tooltip instance.
+
+For example, you can set Tooltip's `position` using top, right, bottom or left
+values.
+
+``` javascript
+YUI().ready(
+  'aui-tooltip',
+  function(Y) {
+    new Y.Tooltip(
+      {
+        trigger: '#myTooltip',
+        position: 'right'
+      }
+    ).render();
+  }
+);
+```
+
+There's a "bonus" style for large content called `.tooltip-help`.
+
+``` javascript
+YUI().ready(
+  'aui-tooltip',
+  function(Y) {
+    new Y.Tooltip(
+      {
+        trigger: '#myTooltip',
+        cssClass: 'tooltip-help',
+        opacity: 1
+      }
+    ).render();
+  }
+);
+```
+
+When you need to define many elements, we recommend using `TooltipDelegate` for
+better performance results.
+
+``` javascript
+YUI().ready(
+  'aui-tooltip',
+  function(Y) {
+    new Y.TooltipDelegate(
+      {
+        trigger: '#myTooltip'
+      }
+    );
+  }
+);
+```

@@ -1,0 +1,81 @@
+---
+title: Viewport
+description: Provides a cross-browser method of adapting web design to display size.
+api: http://alloyui.com/api/
+layout: single-example
+category: Examples
+intro: true
+---
+
+#### What Does Viewport Do, Exactly?
+
+Good question! I'm so glad you asked.
+
+Viewport allows you to customize your CSS for the four most commonly used page widths: 960px, 720px, 480px, and 320px (960 for desktops and tablets in landscape mode, 720 for tablets in portrait mode, 480 for smart phones in landscape mode, and 320 for smart phones in portrait mode).
+
+It does this through the addition of custom classes that you can then select in your stylesheets. Much like CSS Media Queries, this allows you to change your page's styling based on the width of the browser, but unlike Media Queries, Viewport is compatible with all browsers (*&#42;cough&#42;* IE) and allows for different target devices to share the same CSS. And when is saving code a bad idea?
+
+Well! Now that it's a bit more clear why you might want to use it, let's look at how you can make it happen.
+
+---
+
+#### Getting Started
+
+First load the seed and CSS files, if you haven't yet.
+
+```html
+<script src="<%= @getCdnSeed() %>"></script>
+<link href="<%= @getBootstrapCSS() %>" rel="stylesheet"></link>
+```
+
+Then initialize AlloyUI and load the Viewport module.
+
+``` javascript
+YUI().use(
+  'aui-viewport'
+);
+```
+
+And that's it! That's all the javascript you'll have to write to use the viewport module.
+
+---
+
+#### Using Viewport
+
+After you've included that one line of javascript, the rest of your interaction with the viewport module will come through CSS, using these custom classes that have been created for you:
+
+``` css
+.view-960
+.view-720
+.view-480
+.view-320
+```
+
+These four classes form the base of the viewport functionality. However, eight more classes are added to make things a bit easier when you need to code for a larger range of browser sizes:
+
+``` css
+.view-gt960, .view-lt960
+.view-gt720, .view-lt720
+.view-gt480, .view-lt480
+.view-gt320, .view-lt320
+```
+
+Once `aui-viewport` is initialized, every time you load the page or resize your browser the appropriate classes will be applied to the `<html>` element of your page, ready for use in your stylesheet.
+
+All that needs to be done from here is to use these classes to apply the necessary changes to your stylesheet. It could include something like this:
+
+``` css
+.view-gt720 {
+  font-size: 16px;
+}
+
+.view-lt720 {
+  font-size: 14px;
+}
+
+.view-lt720 img, .view-lt720 video {
+  display: none;
+}
+```
+
+and so forth.

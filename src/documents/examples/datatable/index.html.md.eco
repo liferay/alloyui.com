@@ -1,0 +1,157 @@
+---
+title: Data Table
+description: Provides the user with a method of organizing, arranging, and editing tables of information.
+api: http://alloyui.com/api/modules/aui-datatable.html
+layout: single-example
+category: Examples
+intro: true
+---
+
+#### Getting Started
+
+First load the seed and CSS files, if you haven't yet.
+
+```html
+<script src="<%= @getCdnSeed() %>"></script>
+<link href="<%= @getBootstrapCSS() %>" rel="stylesheet"></link>
+```
+
+Then initialize AlloyUI and load the Data Table module.
+
+``` javascript
+YUI().use(
+  'aui-datatable',
+  function(Y) {
+    // code goes here
+  }
+);
+```
+
+---
+
+#### Using Data Table
+
+Create an HTML element to house the Data Table.
+
+``` html
+<div id="myDataTable"></div>
+```
+
+The most basic of tables require two kinds of information, table columns and data. Pass both into your Data Table after `columns` and `data`, and don't forget to render it!
+
+``` javascript
+YUI().use(
+  'aui-datatable',
+  function(Y) {
+    var columns = [
+      name,
+      age
+    ];
+
+    var data = [
+      {
+        name: 'Bob',
+        age: '28'
+      },
+      {
+        name: 'Joe',
+        age: '72'
+      },
+      {
+        name: 'Sarah',
+        age: '35'
+      }
+    ];
+
+    new Y.DataTable(
+      {
+        columns: columns,
+        data: data
+      }
+    ).render("#myDataTable");
+  }
+);
+```
+---
+
+#### Configuring Data Table
+
+A plugin can be utilized to allow the highlighting of table cells.
+
+``` javascript
+YUI().use(
+  'aui-datatable',
+  function(Y) {
+    new Y.DataTable(
+      {
+        columns: columns,
+        data: data,
+        plugins: [
+          {
+            fn: Y.Plugin.DataTableHighlight
+          }
+        ]
+      }
+    ).render("#myDataTable");
+  }
+);
+```
+
+Table cells can also be edited when permitted in the columns object. Here, `key` refers to the value displayed in the column head.
+
+``` javascript
+YUI().use(
+  'aui-datatable',
+  function(Y) {
+    var columns = [
+      {
+        editor: new Y.TextAreaCellEditor(),
+        key: 'name'
+      },
+      {
+        editor: new Y.DateCellEditor(),
+        key: 'date'
+      }
+    ];
+
+    new Y.DataTable(
+      {
+        columns: columns,
+        data: data
+      }
+    ).render("#myDataTable");
+  }
+);
+```
+
+<div class="alert alert-info">
+  <strong>Note:</strong> more editors are available for different types of data, such as drop down selectors, and radio buttons. See Data Table examples for available editors.
+</div>
+
+Columns can also be set to sort when the component `datatable-sort` is passed in, and `sortable` is set to `true` in the columns object.
+
+``` javascript
+YUI().use(
+  'aui-datatable',
+  'datatable-sort',
+  function(Y) {
+    var columns = [
+      {
+        key: 'name',
+        sortable: true
+      },
+      {
+        key: 'date',
+        sortable: true
+      }
+    ];
+
+    new Y.DataTable(
+      {
+        columns: columns,
+        data: data
+      }
+    ).render("#myDataTable");
+  }
+);
+```

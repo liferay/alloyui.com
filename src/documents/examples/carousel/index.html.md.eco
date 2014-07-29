@@ -1,0 +1,107 @@
+---
+title: Carousel
+description: Provides an interactive way of cycling through elements.
+api: http://alloyui.com/api/modules/aui-carousel.html
+layout: single-example
+category: Examples
+intro: true
+---
+
+#### Getting Started
+
+First load the seed and CSS files, if you haven't yet.
+
+```html
+<script src="<%= @getCdnSeed() %>"></script>
+<link href="<%= @getBootstrapCSS() %>" rel="stylesheet"></link>
+```
+
+Then initialize AlloyUI and load the Carousel module.
+
+``` javascript
+YUI().use(
+  'aui-carousel',
+  function(Y) {
+    // code goes here
+  }
+);
+```
+
+---
+
+#### Using Carousel
+
+Create a list of elements that contains the images you want to show:
+
+``` html
+<div id="myCarousel">
+  <div class="carousel-item" style="background: url(http://alloyui.com/carousel/img/1.jpg);"></div>
+  <div class="carousel-item" style="background: url(http://alloyui.com/carousel/img/2.jpg);"></div>
+  <div class="carousel-item" style="background: url(http://alloyui.com/carousel/img/3.jpg);"></div>
+  <div class="carousel-item" style="background: url(http://alloyui.com/carousel/img/4.jpg);"></div>
+</div>
+```
+
+Now create a new instance of Carousel component, then tell to `contentBox` where it's going to be attached and define some `width` and `height`. Finally, let's render it!
+
+``` javascript
+YUI().use(
+  'aui-carousel',
+  function(Y) {
+    new Y.Carousel(
+      {
+        contentBox: '#myCarousel',
+        height: 250,
+        width: 700
+      }
+    ).render();
+  }
+);
+```
+
+<div class="alert alert-info">
+  <strong>Note:</strong> you could also use `boundingBox`, not only `contentBox` to be initialized.<br>
+  Read more about the [differences between them](https://github.com/liferay/alloy-ui/wiki/FAQs).
+</div>
+
+---
+
+#### Configuring Carousel
+
+There are some other options that you can pass to your Carousel instance.
+
+For example, you can set the first image that will appear by defining an `activeIndex` - any number or `rand` (random value) to indicate the image.
+
+``` javascript
+YUI().use(
+  'aui-carousel',
+  function(Y) {
+    new Y.Carousel(
+      {
+        activeIndex: 'rand',
+        contentBox: '#myCarousel',
+        height: 250,
+        width: 700
+      }
+    ).render();
+  }
+);
+```
+
+Also, you can set the amount of time each image is displayed before proceeding to the next by changing the value of `intervalTime`.
+
+``` javascript
+YUI().use(
+  'aui-carousel',
+  function(Y) {
+    new Y.Carousel(
+      {
+        contentBox: '#myCarousel',
+        height: 250,
+        intervalTime: 2,
+        width: 700
+      }
+    ).render();
+  }
+);
+```
