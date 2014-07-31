@@ -2,64 +2,79 @@
 layout: default
 ---
 
-<div class="banner page-banner">
-  <div class="container">
-    <div class="presentation">
-      <h2>Examples</h2>
+<div class="row">
+    <div class="col-sm-9">
+        <h6 id="single-title"><%= @document.title %></h6>
+
+        <div id="single-dropdown" class="btn-group">
+            <button type="button" class="btn btn-default">
+                <span class="glyphicon glyphicon-new-window"></span> API Docs
+            </button>
+            <button type="button" class="btn btn-default dropdown-toggle">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="<%= @document.api %>#attributes">Attributes</a></li>
+                <li><a href="<%= @document.api %>#events">Events</a></li>
+                <li><a href="<%= @document.api %>#methods">Methods</a></li>
+            </ul>
+        </div>
+
+        <ul id="single-tabs" class="nav nav-tabs">
+            <% for example in @getCollection("examples").toJSON(): %>
+                <% if example.intro && @isRelated(example): %>
+                    <% if example.url == @document.url: %>
+                        <li class="active">
+                    <% else: %>
+                        <li>
+                    <% end %>
+                        <a href="<%= example.url %>">Introduction</a></li>
+                <% end %>
+            <% end %>
+
+            <% for example in @getCollection("examples").toJSON(): %>
+                <% if !example.intro && @isRelated(example): %>
+                    <% if example.url == @document.url: %>
+                        <li class="active">
+                    <% else: %>
+                        <li>
+                    <% end %>
+                        <a href="<%= example.url %>"><%= example.title %></a></li>
+                <% end %>
+            <% end %>
+        </ul>
+
+        <p><%= @document.description %></p>
+
+        <hr>
+
+        <%- @content %>
+
+        <div class="alert alert-info">
+            For more information about configuration, check out our <a href="<%= @document.api %>" target="_blank">API Docs</a>.
+        </div>
     </div>
-  </div>
-</div>
-
-<div class="container">
-
-  <div class="span3 bs-docs-sidebar">
-
-    <p class="related">List of modules</p>
-    <ul class="nav nav-list bs-docs-sidenav affix-top">
-      <% for example in @getCollection("examples").toJSON(): %>
-        <% if example.category && example.index: %>
-          <% if example.category == @document.category: %>
-            <li class="active"><a href="<%= @getSiteUrl() %><%= example.url %>"><i class="icon-chevron-right"></i> <%= example.category %></a></li>
-            <% else: %>
-            <li><a href="<%= @getSiteUrl() %><%= example.url %>"><i class="icon-chevron-right"></i> <%= example.category %></a></li>
-          <% end %>
-        <% end %>
-      <% end %>
-    </ul>
-
-  </div>
-
-  <div class="span9">
-
-    <h1><%= @document.category %></h1>
-
-    <ul class="nav nav-tabs">
-      <li><a href="<%= @getSiteUrl() %>/tutorials/<%= @document.slug %>/">Introduction</a></li>
-      <% for example in @getCollection("examples").toJSON(): %>
-        <% if example.tags == @document.tags: %>
-          <% if example.title == @document.title: %>
-            <li class="active"><a href="<%= @getSiteUrl() %><%= example.url %>"><%= example.title %></a></li>
-            <% else: %>
-            <li><a href="<%= @getSiteUrl() %><%= example.url %>"><%= example.title %></a></li>
-          <% end %>
-        <% end %>
-      <% end %>
-    </ul>
-
-    <%- @content %>
-
-    <div id="disqus_thread"></div>
-    <script type="text/javascript">
-        var disqus_shortname = 'alloyui';
-
-        (function() {
-            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-
-  </div>
+    <div class="col-sm-3">
+        <ul class="nav nav-pills nav-stacked">
+            <% for example in @getCollection("examples").toJSON(): %>
+                <% if example.intro: %>
+                    <% if example.url == @document.url: %>
+                        <li class="active"><a href="<%= example.url %>">
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                    <% else: %>
+                        <li><a href="<%= example.url %>">
+                    <% end %>
+                        <%= example.title %></a>
+                    </li>
+                <% end %>
+            <% end %>
+        </ul>
+    </div>
 
 </div>
+
+
+<!-- <script src="<%= @getAssetsUrl() %>/js/single.js"></script> -->
+
+<link rel="stylesheet" href="<%= @getAssetsUrl() %>/css/single.css">

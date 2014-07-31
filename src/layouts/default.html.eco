@@ -1,107 +1,19 @@
-<!doctype html>
-<html>
-<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+---
+layout: main
+---
 
-  <title><%= @getPreparedTitle() %></title>
+<header class="main-header">
+    <%- @partial('navbar') %>
+</header>
 
-  <meta charset="utf-8">
-  <meta name="author" content="Eduardo Lundgren, Nate Cavanaugh">
-  <meta name="description" content="<%= @getPreparedDescription() %>">
+<main id="<%= @document.title %>">
+    <header class="page-title">
+        <h5><%= @document.category || @document.title %></h5>
+    </header>
 
-  <!-- Facebook Tags -->
-  <meta property="fb:app_id" content="176947299114210">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="<%= @getSiteUrl() %>">
-  <meta property="og:image" content="<%= @getAssetsUrl() %>/img/facebook-share.jpg">
-  <meta property="og:title" content="<%= @getPreparedTitle() %>">
-  <meta property="og:description" content="<%= @getPreparedDescription() %>">
-
-  <!-- Favicon -->
-  <link rel="shortcut icon" type="image/x-icon" href="<%= @getAssetsUrl() %>/img/favicon.ico">
-
-  <!-- CSS: Alloy Bootstrap -->
-  <link href="<%= @getBootstrapCSS() %>" rel="stylesheet">
-
-  <!-- CSS: Website style -->
-  <link href="<%= @getAssetsUrl() %>/css/main.css" rel="stylesheet">
-
-  <!-- Fonts -->
-  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,700" rel="stylesheet">
-
-  <!-- JS -->
-  <script src="<%= @getCdnSeed() %>"></script>
-
-</head>
-<body class="yui3-skin-sam">
-
-  <div id="wrap">
-
-    <a class="github-ribbon" href="<%= @site.githubUrl %>">
-      <img src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
-    </a>
-
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
+    <div class="page-content">
         <div class="container">
-          <a class="brand" href="<%= @getSiteUrl() %>">
-            <img src="<%= @getAssetsUrl() %>/img/logo.png" alt="AlloyUI Logo" width="149" height="34">
-          </a>
-          <a href="#" id="version">
-            v<%= @site.version %>
-            <span class="caret"></span>
-          </a>
-          <ul id="version-dropdown" class="dropdown-menu" role="menu" aria-labelledby="drop">
-            <li><a tabindex="-1" href="/versions/2.0.x">v2.0.x</a></li>
-            <li><a tabindex="-1" href="/versions/1.5.x">v1.5.x</a></li>
-            <li><a tabindex="-1" href="/versions/1.0.x">v1.0.x</a></li>
-          </ul>
-          <div class="pull-right">
-            <ul class="nav">
-              <li><a href="<%= @getSiteUrl() %>/examples/">Examples</a></li>
-              <li><a href="<%= @getSiteUrl() %>/tutorials/">Tutorials</a></li>
-              <li><a href="<%= @getSiteUrl() %>/api/" target="_blank">API Docs</a></li>
-              <li><a href="<%= @getSiteUrl() %>/rosetta-stone/" target="_blank">Rosetta Stone</a></li>
-              <li><a href="http://liferay.github.io/alloy-bootstrap/" target="_blank">Bootstrap</a></li>
-              <li><a href="<%= @getSiteUrl() %>/contributing/">Contributing</a></li>
-              <li><a href="<%= @getSiteUrl() %>/about/">About</a></li>
-            </ul>
-          </div>
+            <%- @content %>
         </div>
-      </div>
     </div>
-
-    <div id="content">
-      <%- @content %>
-    </div>
-
-    <div id="push"></div>
-
-  </div>
-
-  <div class="footer navbar">
-    <div class="container">
-      <p class="pull-left">
-        <a href="http://liferay.com/">
-          <img src="<%= @getAssetsUrl() %>/img/liferay-logo.png" alt="Liferay Logo" id="liferay-logo">
-        </a>
-      </p>
-      <p class="copyright pull-right"><a href="https://github.com/liferay/alloy-ui/blob/master/LICENSE.md">BSD</a> License.</p>
-    </div>
-  </div>
-
-  <script src="<%= @getAssetsUrl() %>/js/version-dropdown.js"></script>
-
-  <script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-37033501-1']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-  </script>
-
-</body>
-</html>
+</main>

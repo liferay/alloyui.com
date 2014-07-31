@@ -1,3 +1,5 @@
+var fs = require('fs');
+
 module.exports = {
 
   prompts: false,
@@ -44,6 +46,22 @@ module.exports = {
     /* -----------------------------
      * Helpers
      */
+
+    // Get the prepared site/document title
+    getCategoryTitle: function() {
+
+      // if we have a document title, then we should use that and suffix the site's title into it
+      if (this.document.title) {
+        if (this.document.category) {
+          return "" + this.document.category + " - " + this.document.title + " | " + this.site.title;
+        } else {
+          return "" + this.document.title + " | " + this.site.title;
+        }
+      } // if our document does not have it's own title, then we should just use the site's title
+      else {
+        return this.site.title;
+      }
+    },
 
     // Get the prepared site/document title
     getPreparedTitle: function() {
@@ -107,22 +125,21 @@ module.exports = {
 
     // Read File
     readFile: function(relativePath) {
-      var fsUtil, path, result;
-      fsUtil = require('fs');
-      path = this.document.fullDirPath + '/' + relativePath;
-      result = fsUtil.readFileSync(path);
-      if (result instanceof Error) {
-        throw result;
-      } else {
-        return result.toString();
-      }
+      var path = this.document.fullDirPath + '/' + relativePath;
+      var result = fs.readFileSync(path);
+
+      return result.toString();
     },
 
     // Code File
     codeFile: function(relativePath, language) {
-      var contents;
-      contents = this.readFile(relativePath);
-      return "<pre><code class=\"" + language + "\">" + contents + "</code></pre>";
+      var contents = this.readFile(relativePath);
+      return '<pre><code class="' + language + '">' + contents + '</code></pre>';
+    },
+
+    isRelated: function(example) {
+        var path = this.document.relativeDirPath.replace('examples', '');
+        return example.title && example.url.indexOf(path) !== -1;
     }
   },
 
@@ -150,11 +167,23 @@ module.exports = {
     examples: function() {
       return this.getCollection("documents").findAllLive({
         url: {
-          $startsWith: '/examples'
+          $startsWith: '/examples',
         }
       }, [
         {
-          category: 1,
+          title: 1
+        }
+      ]);
+    },
+
+    // Get all examples sorted by category & alphabetical order
+    relatedExamples: function() {
+      return this.getCollection("documents").findAllLive({
+        url: {
+          $startsWith: '/examples',
+        }
+      }, [
+        {
           title: 1
         }
       ]);
@@ -202,7 +231,7 @@ module.exports = {
 
         // Get the absolute Development URL of the assets folder
         getAssetsUrl: function() {
-          return "" + this.site.url + "/website";
+          return "" + this.site.url;
         }
       }
     }
