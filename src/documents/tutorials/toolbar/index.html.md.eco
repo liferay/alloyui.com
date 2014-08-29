@@ -1,0 +1,123 @@
+---
+layout: single-doc
+title: Toolbar
+tags: 'toolbar'
+---
+
+# Toolbar
+
+The Toolbar component generates a bar of customizable buttons with optional icons.
+
+---
+
+#### Getting Started
+
+First load the seed file, if you haven't yet.
+
+``` html
+<script src="<%= @cdn %>"></script>
+```
+
+Then initialize AlloyUI and load the Toolbar module.
+
+``` javascript
+AUI().use('aui-toolbar', function(A) {
+  // code goes here
+});
+```
+---
+
+#### Using Toolbar
+
+Create a HTML element:
+
+``` html
+<div id="toolbar"></div>
+```
+
+Now create a new instance of Toolbar component, then pass `children` an array of child buttons, specifying each `label` so we can see the results. Finally, let's render it, passing our #toolbar container to the `render` function.
+
+``` javascript
+AUI().use('aui-toolbar', function(A) {
+
+  var toolbar = new A.Toolbar({
+    children: [
+      {
+        label: 'Add'
+      },
+      {
+        label: 'Remove'
+      },
+      {
+        label: 'Config'
+      }
+    ]
+  }).render('#toolbar');
+});
+```
+
+---
+
+#### Configuring Toolbar
+
+There are some other options that you can pass to your Toolbar instance.
+
+For example, you can add icons to each button by specifying the `icon` option on each child object.  And if you need a vertical toolbar, you can set `orientation` to `vertical`.
+
+``` javascript
+AUI().use('aui-toolbar', function(A) {
+
+  var toolbar = new A.Toolbar({
+    children: [
+      {
+        label: 'Add',
+        icon: 'plus'
+      },
+      {
+        label: 'Remove',
+        icon: 'minus'
+      },
+      {
+        label: 'Config',
+        icon: 'gear'
+      }
+    ],
+    orientation: vertical
+  }).render('#toolbar');
+});
+```
+
+Also, you can pass in event handler functions with the `handler` option.  First, we'll write our event handler function `handleButton`.  We will initialize the variable `label` and store the label of the button event that was fired.  We'll set an `alert` for the value of `label` so we confirm which button we clicked.  Then, we'll set the `handler` option to `handleButton` for each button.
+
+``` javascript
+AUI().use('aui-toolbar', function(A) {
+
+  var handleButton = function(event) {
+    var label = this.get('label');
+    alert('You clicked ' + label + '!');
+  };
+
+  var toolbar = new A.Toolbar({
+    children: [
+      {
+        handler: handleButton,
+        label: 'Add',
+        icon: 'plus'
+      },
+      {
+        handler: handleButton,
+        label: 'Remove',
+        icon: 'minus'
+      },
+      {
+        handler: handleButton,
+        label: 'Config',
+        icon: 'gear'
+      }
+    ],
+    orientation: vertical
+  }).render('#toolbar');
+});
+```
+
+For more information about configuration, check the <a href="#">API Docs</a>.
