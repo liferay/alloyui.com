@@ -122,12 +122,12 @@ YUI().use(
         editor: new Y.DateCellEditor(
           {
             calendar: {
-              dateFormat: '%m/%d/%Y',
               selectionMode: 'multiple',
               showNextMonth: false,
               showPrevMonth: false,
               width: '250px'
             },
+            dateFormat: '%m/%d/%Y',
             validator: {
               rules: {
                 value: {
