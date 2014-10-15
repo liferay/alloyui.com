@@ -1,4 +1,7 @@
-# AlloyUI.com [![Build Status](https://secure.travis-ci.org/liferay/alloyui.com.png?branch=master)](https://travis-ci.org/liferay/alloyui.com) [![Dependency Status](https://david-dm.org/liferay/alloyui.com.png)](https://david-dm.org/liferay/alloyui.com)
+# [AlloyUI.com](http://alloyui.com/)
+
+[![Build Status](http://img.shields.io/travis/liferay/alloyui.com/master.svg?style=flat)](https://travis-ci.org/liferay/alloyui.com)
+[![Dependencies Status](http://img.shields.io/david/liferay/alloyui.com.svg?style=flat)](https://david-dm.org/liferay/alloyui.com)
 
 ![AlloyUI Robo Suit](http://f.cl.ly/items/1c1z23343G2e2I3X3a3P/Screen-Shot-2013-04-08-at-9.37.36-AM.png)
 
@@ -10,16 +13,15 @@ If you want to report an issue about [AlloyUI's website](http://alloyui.com) you
 * [Dependencies](#dependencies)
 * [Getting started](#getting-started)
 * [Structure](#structure)
-* [Deploy](#deploy)
 * [Bonus](#bonus)
 
 ## How it works?
 
-We use [Docpad](https://github.com/bevry/docpad), a static generator in NodeJS.
+We use [DocPad](https://github.com/bevry/docpad), a static generator in NodeJS.
 
 ## Dependencies
 
-Install [NodeJS](https://github.com/bevry/community/wiki/Installing-Node), if you don't have it yet.
+Install [Node.JS](http://nodejs.org/), if you don't have it yet.
 
 ## Getting started
 
@@ -29,7 +31,9 @@ Once you have dependencies installed, you just need to:
 
 2. Then go to the project's folder: `cd alloyui.com`
 
-3. And finally run: `grunt watch`
+3. Install the dependencies: `npm install`
+
+4. And finally run: `npm run watch`
 
 Now you can see the website running in `http://localhost:9778/` :D
 
@@ -64,19 +68,13 @@ Has all the images, CSS and JS files.
 
 Contains some templates that are used in the application.
 
-### [docpad.coffee](https://github.com/liferay/alloyui.com/blob/master/docpad.coffee)
+### [docpad.js](https://github.com/liferay/alloyui.com/blob/master/docpad.js)
 
 Stores most settings of the application.
 
 ### [package.json](https://github.com/liferay/alloyui.com/blob/master/package.json)
 
 List NodeJS modules dependencies.
-
-## Deploy
-
-Go to the branch you want to deploy and run `grunt deploy`, now you can see your changes live at [alloyui.com](http://alloyui.com/).
-
-> **Note:** Make sure to commit everything before running this command.
 
 ## Bonus
 
