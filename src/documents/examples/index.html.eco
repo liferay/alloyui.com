@@ -15,43 +15,47 @@ layout: default
   <div class="container">
 
     <div class="row">
-      <div class="title span5">
+      <div class="title col-xs-12">
         <h3>featuring...</h3>
       </div>
     </div>
 
-    <% for example in @getCollection("featuring").toJSON(): %>
-      <% if example.category && example.index: %>
-        <div class="span4 example">
-          <h2><a href="<%= @getSiteUrl() %><%= example.url %>"><%= example.category %></a></h2>
-          <a href="<%= @getSiteUrl() %><%= example.url %>">
-            <img src="<%= @getAssetsUrl() %>/img/example-<%= example.tag %>.jpg" alt="<%= example.category %>" />
-          </a>
-          <p><%= example.description %></p>
-        </div>
+    <div class="row">
+      <% for example in @getCollection("featuring").toJSON(): %>
+        <% if example.category && example.index: %>
+          <div class="col-xs-4 example">
+            <h2><a href="<%= @getSiteUrl() %><%= example.url %>"><%= example.category %></a></h2>
+            <a href="<%= @getSiteUrl() %><%= example.url %>">
+              <img src="<%= @getAssetsUrl() %>/img/example-<%= example.tag %>.jpg" alt="<%= example.category %>" />
+            </a>
+            <p><%= example.description %></p>
+          </div>
+        <% end %>
       <% end %>
-    <% end %>
+    </div>
 
     <div class="row">
-      <div class="title span5">
+      <div class="title col-xs-12">
         <h3>and more!</h3>
       </div>
     </div>
 
-    <% for example in @getCollection("examples").toJSON(): %>
-      <% if example.category && example.index && !example.featuringOrder: %>
-        <div class="span4 example">
-          <h2><a href="<%= @getSiteUrl() %><%= example.url %>"><%= example.category %></a></h2>
-          <a href="<%= @getSiteUrl() %><%= example.url %>">
-            <img src="<%= @getAssetsUrl() %>/img/example-<%= example.tag %>.jpg" alt="<%= example.category %>" />
-          </a>
-          <p><%= example.description %></p>
-        </div>
+    <div class="row">
+      <% for example in @getCollection("examples").toJSON(): %>
+        <% if example.category && example.index && !example.featuringOrder: %>
+          <div class="col-xs-4 example">
+            <h2><a href="<%= @getSiteUrl() %><%= example.url %>"><%= example.category %></a></h2>
+            <a href="<%= @getSiteUrl() %><%= example.url %>">
+              <img src="<%= @getAssetsUrl() %>/img/example-<%= example.tag %>.jpg" alt="<%= example.category %>" />
+            </a>
+            <p><%= example.description %></p>
+          </div>
+        <% end %>
       <% end %>
-    <% end %>
+    </div>
 
     <div class="row">
-      <div class="span12 title">
+      <div class="col-xs-12 title">
         <p class="call">and this is just the beginning!</p>
       </div>
     </div>
