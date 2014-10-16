@@ -15,7 +15,7 @@ module.exports = {
 
     alloy: {
       // AlloyUI version
-      version: '2.5.0',
+      version: '3.0.0',
 
       // CDN domain
       cdnDomain: 'http://cdn.alloyui.com'
@@ -27,7 +27,7 @@ module.exports = {
 
     site: {
       // Website version
-      version: '2.5.x',
+      version: '3.0.x',
       isLastVersion: true,
 
       // Production URL
