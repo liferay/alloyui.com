@@ -7,10 +7,11 @@ YUI.add("yuidoc-meta", function(Y) {
         "A.AceEditor.AutoCompleteList",
         "A.AceEditor.AutoCompleteVelocity",
         "A.AceEditor.TemplateProcessor",
+        "A.Affix",
+        "A.Alert",
         "A.ArraySort",
         "A.Audio",
         "A.AutosizeIframe",
-        "A.AvailableField",
         "A.BaseCellEditor",
         "A.BaseOptionsCellEditor",
         "A.Button",
@@ -18,6 +19,8 @@ YUI.add("yuidoc-meta", function(Y) {
         "A.ButtonExt",
         "A.ButtonGroup",
         "A.ButtonSearchCancel",
+        "A.CancellablePromise",
+        "A.CancellablePromise.Error",
         "A.Carousel",
         "A.CharCounter",
         "A.CheckboxCellEditor",
@@ -27,6 +30,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "A.Component",
         "A.Connector",
         "A.DataTable.CellEditorSupport",
+        "A.DataTableBody",
         "A.DataTableHighlight",
         "A.DataTableSelection",
         "A.DataType.Boolean",
@@ -41,7 +45,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "A.DatePickerNativeBase",
         "A.DatePickerPopover",
         "A.DiagramBuilder",
-        "A.DiagramBuilderBase",
         "A.DiagramNode",
         "A.DiagramNodeCondition",
         "A.DiagramNodeEnd",
@@ -52,13 +55,12 @@ YUI.add("yuidoc-meta", function(Y) {
         "A.DiagramNodeState",
         "A.DiagramNodeTask",
         "A.DropDownCellEditor",
-        "A.FieldSupport",
+        "A.Dropdown",
         "A.FormBuilder",
         "A.FormBuilderAvailableField",
         "A.FormBuilderButtonField",
         "A.FormBuilderCheckBoxField",
         "A.FormBuilderField",
-        "A.FormBuilderFieldBase",
         "A.FormBuilderFieldsetField",
         "A.FormBuilderFileUploadField",
         "A.FormBuilderMultipleChoiceField",
@@ -75,10 +77,13 @@ YUI.add("yuidoc-meta", function(Y) {
         "A.HashSet",
         "A.IORequest",
         "A.ImageCropper",
-        "A.ImageGallery",
         "A.ImageViewer",
+        "A.ImageViewerBase",
+        "A.ImageViewerMultiple",
         "A.LinkedSet",
         "A.MediaViewerPlugin",
+        "A.Menu",
+        "A.MenuItem",
         "A.Modal",
         "A.Node",
         "A.NodeList",
@@ -90,6 +95,10 @@ YUI.add("yuidoc-meta", function(Y) {
         "A.Plugin.Aria",
         "A.Popover",
         "A.ProgressBar",
+        "A.PropertyBuilder",
+        "A.PropertyBuilderAvailableField",
+        "A.PropertyBuilderFieldSupport",
+        "A.PropertyBuilderSettings",
         "A.PropertyList",
         "A.RadioCellEditor",
         "A.Rating",
@@ -106,6 +115,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "A.SchedulerTableViewDD",
         "A.SchedulerView",
         "A.SchedulerWeekView",
+        "A.Scrollspy",
         "A.Selector",
         "A.SortableLayout",
         "A.SortableList",
@@ -140,6 +150,8 @@ YUI.add("yuidoc-meta", function(Y) {
         "A.Video",
         "A.WidgetCssClass",
         "A.WidgetPositionAlignSuggestion",
+        "A.WidgetResponsive",
+        "A.WidgetShortcut",
         "A.WidgetToggle",
         "A.WidgetToolbars",
         "A.WidgetTransition",
@@ -182,8 +194,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "CacheOffline",
         "Calendar",
         "CalendarBase",
-        "CancellablePromise",
-        "CancellablePromise.Error",
         "CandlestickSeries",
         "CanvasCircle",
         "CanvasDrawing",
@@ -556,12 +566,16 @@ YUI.add("yuidoc-meta", function(Y) {
         "aui-ace-autocomplete-templateprocessor",
         "aui-ace-autocomplete-velocity",
         "aui-ace-editor",
+        "aui-affix",
+        "aui-alert",
         "aui-aria",
         "aui-arraysort",
         "aui-audio",
         "aui-autosize-iframe",
         "aui-button",
         "aui-carousel",
+        "aui-carousel-swipe",
+        "aui-carousel-touch",
         "aui-char-counter",
         "aui-collection",
         "aui-color-palette",
@@ -570,7 +584,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "aui-color-picker-popover",
         "aui-component",
         "aui-datatable",
-        "aui-datatable-edit",
+        "aui-datatable-body",
         "aui-datatable-highlight",
         "aui-datatable-property-list",
         "aui-datatable-selection",
@@ -581,9 +595,8 @@ YUI.add("yuidoc-meta", function(Y) {
         "aui-datepicker-native",
         "aui-datepicker-popover",
         "aui-diagram-builder",
-        "aui-diagram-builder-base",
         "aui-diagram-builder-connector",
-        "aui-diagram-builder-impl",
+        "aui-dropdown",
         "aui-event",
         "aui-event-base",
         "aui-event-delegate-change",
@@ -591,7 +604,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "aui-event-input",
         "aui-form-builder",
         "aui-form-builder-base",
-        "aui-form-builder-field-base",
+        "aui-form-builder-field",
         "aui-form-builder-field-button",
         "aui-form-builder-field-checkbox",
         "aui-form-builder-field-fieldset",
@@ -608,14 +621,21 @@ YUI.add("yuidoc-meta", function(Y) {
         "aui-image-cropper",
         "aui-image-viewer",
         "aui-image-viewer-base",
-        "aui-image-viewer-gallery",
+        "aui-image-viewer-multiple",
+        "aui-image-viewer-multiple-swipe",
+        "aui-image-viewer-slideshow",
+        "aui-image-viewer-swipe",
         "aui-io",
         "aui-io-request",
         "aui-linkedset",
         "aui-map",
         "aui-media-viewer-plugin",
+        "aui-menu",
+        "aui-menu-item",
         "aui-modal",
+        "aui-modal-resize",
         "aui-node",
+        "aui-node-accessible",
         "aui-node-base",
         "aui-node-html5",
         "aui-node-html5-print",
@@ -624,6 +644,8 @@ YUI.add("yuidoc-meta", function(Y) {
         "aui-parse-content",
         "aui-popover",
         "aui-progressbar",
+        "aui-promise",
+        "aui-property-builder",
         "aui-rating",
         "aui-scheduler",
         "aui-scheduler-base",
@@ -631,12 +653,14 @@ YUI.add("yuidoc-meta", function(Y) {
         "aui-scheduler-base-event",
         "aui-scheduler-base-view",
         "aui-scheduler-event-recorder",
+        "aui-scheduler-touch",
         "aui-scheduler-view-agenda",
         "aui-scheduler-view-day",
         "aui-scheduler-view-month",
         "aui-scheduler-view-table",
         "aui-scheduler-view-table-dd",
         "aui-scheduler-view-week",
+        "aui-scrollspy",
         "aui-search",
         "aui-search-ternary-search-node",
         "aui-search-ternary-search-tree",
@@ -649,6 +673,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "aui-timepicker",
         "aui-timer",
         "aui-toggler",
+        "aui-toggler-accessibility",
         "aui-toolbar",
         "aui-tooltip",
         "aui-tree",
@@ -661,6 +686,9 @@ YUI.add("yuidoc-meta", function(Y) {
         "aui-url",
         "aui-video",
         "aui-widget-cssclass",
+        "aui-widget-responsive",
+        "aui-widget-shortcut",
+        "aui-widget-swipe",
         "aui-widget-toggle",
         "aui-widget-toolbars",
         "aui-widget-transition",
@@ -1191,6 +1219,16 @@ YUI.add("yuidoc-meta", function(Y) {
             "description": "The ACE Editor Component"
         },
         {
+            "displayName": "aui-affix",
+            "name": "aui-affix",
+            "description": "The Affix Component"
+        },
+        {
+            "displayName": "aui-alert",
+            "name": "aui-alert",
+            "description": "The Alert Component"
+        },
+        {
             "displayName": "aui-aria",
             "name": "aui-aria",
             "description": "The Aria Component."
@@ -1219,6 +1257,16 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "aui-carousel",
             "name": "aui-carousel",
             "description": "The Carousel Component"
+        },
+        {
+            "displayName": "aui-carousel-swipe",
+            "name": "aui-carousel-swipe",
+            "description": "The Carousel funcionality of swiping to go to the previous/next image.\nWill be mixed into the Carousel automatically when loaded."
+        },
+        {
+            "displayName": "aui-carousel-touch",
+            "name": "aui-carousel-touch",
+            "description": "The Carousel should work a little differently on mobile touch devices,\nchanging the menu contents for example.\nThis module will be mixed into the Carousel automatically when loaded."
         },
         {
             "displayName": "aui-char-counter",
@@ -1258,8 +1306,8 @@ YUI.add("yuidoc-meta", function(Y) {
             "name": "aui-datatable"
         },
         {
-            "displayName": "aui-datatable-edit",
-            "name": "aui-datatable-edit",
+            "displayName": "aui-datatable-body",
+            "name": "aui-datatable-body",
             "description": "The Datatable Component"
         },
         {
@@ -1309,12 +1357,8 @@ YUI.add("yuidoc-meta", function(Y) {
         },
         {
             "displayName": "aui-diagram-builder",
-            "name": "aui-diagram-builder"
-        },
-        {
-            "displayName": "aui-diagram-builder-base",
-            "name": "aui-diagram-builder-base",
-            "description": "The Diagram Builder Base"
+            "name": "aui-diagram-builder",
+            "description": "The Diagram Builder Component"
         },
         {
             "displayName": "aui-diagram-builder-connector",
@@ -1322,9 +1366,9 @@ YUI.add("yuidoc-meta", function(Y) {
             "description": "The Diagram Builder Connector"
         },
         {
-            "displayName": "aui-diagram-builder-impl",
-            "name": "aui-diagram-builder-impl",
-            "description": "The Diagram Builder Component"
+            "displayName": "aui-dropdown",
+            "name": "aui-dropdown",
+            "description": "The Dropdown Component"
         },
         {
             "displayName": "aui-event",
@@ -1360,8 +1404,8 @@ YUI.add("yuidoc-meta", function(Y) {
             "description": "The Form Builder Component"
         },
         {
-            "displayName": "aui-form-builder-field-base",
-            "name": "aui-form-builder-field-base",
+            "displayName": "aui-form-builder-field",
+            "name": "aui-form-builder-field",
             "description": "The Form Builder Component"
         },
         {
@@ -1436,17 +1480,33 @@ YUI.add("yuidoc-meta", function(Y) {
         },
         {
             "displayName": "aui-image-viewer",
-            "name": "aui-image-viewer"
+            "name": "aui-image-viewer",
+            "description": "The ImageViewer Utility"
         },
         {
             "displayName": "aui-image-viewer-base",
             "name": "aui-image-viewer-base",
-            "description": "The ImageViewer Utility"
+            "description": "The Image Viewer Base module."
         },
         {
-            "displayName": "aui-image-viewer-gallery",
-            "name": "aui-image-viewer-gallery",
-            "description": "The ImageGallery Utility"
+            "displayName": "aui-image-viewer-multiple",
+            "name": "aui-image-viewer-multiple",
+            "description": "The Image Viewer Multiple module."
+        },
+        {
+            "displayName": "aui-image-viewer-multiple-swipe",
+            "name": "aui-image-viewer-multiple-swipe",
+            "description": "This adds the functionality of swiping to go to the previous/ image in the\nviewer for multiple images. Will be mixed into ImageViewerMultiple automatically\nwhen loaded."
+        },
+        {
+            "displayName": "aui-image-viewer-slideshow",
+            "name": "aui-image-viewer-slideshow",
+            "description": "The slideshow functionality for image viewers."
+        },
+        {
+            "displayName": "aui-image-viewer-swipe",
+            "name": "aui-image-viewer-swipe",
+            "description": "This adds the functionality of swiping to go to the previous/ image in the\nviewer. Will be mixed into ImageViewer automatically when loaded."
         },
         {
             "displayName": "aui-io",
@@ -1473,13 +1533,33 @@ YUI.add("yuidoc-meta", function(Y) {
             "description": "The ImageViewer Media Plugin"
         },
         {
+            "displayName": "aui-menu",
+            "name": "aui-menu",
+            "description": "The Menu Component"
+        },
+        {
+            "displayName": "aui-menu-item",
+            "name": "aui-menu-item",
+            "description": "The Menu Item Component"
+        },
+        {
             "displayName": "aui-modal",
             "name": "aui-modal",
             "description": "The Modal Component"
         },
         {
+            "displayName": "aui-modal-resize",
+            "name": "aui-modal-resize",
+            "description": "The Modal Resize Component."
+        },
+        {
             "displayName": "aui-node",
             "name": "aui-node"
+        },
+        {
+            "displayName": "aui-node-accessible",
+            "name": "aui-node-accessible",
+            "description": "A set of utility methods for Node to allow 'hiding'\nwhile still allowing screen readers access."
         },
         {
             "displayName": "aui-node-base",
@@ -1522,6 +1602,16 @@ YUI.add("yuidoc-meta", function(Y) {
             "description": "The ProgressBar Utility provides a visual means of showing progress of an\nongoing operation. The ProgressBar can be enhanced via CSS styles to provide\ndifferent colors, shapes and textures. The bar can move horizontally or\nvertically. The movement can be enhanced by using the Animation utility."
         },
         {
+            "displayName": "aui-promise",
+            "name": "aui-promise",
+            "description": "An extesion to the Promise utility that provides the ability to cancel\nnested promises passing an instance of the `A.CancellablePromise.Error`."
+        },
+        {
+            "displayName": "aui-property-builder",
+            "name": "aui-property-builder",
+            "description": "The Property Builder"
+        },
+        {
             "displayName": "aui-rating",
             "name": "aui-rating",
             "description": "The Rating Utility - The Star Rating creates a non-obstrusive star rating\ncontrol, could be based on a set of radio input boxes."
@@ -1556,6 +1646,11 @@ YUI.add("yuidoc-meta", function(Y) {
             "description": "The Scheduler Component"
         },
         {
+            "displayName": "aui-scheduler-touch",
+            "name": "aui-scheduler-touch",
+            "description": "This module adds some behavior for the scheduler when running on touch devices.\nThis will be mixed into the Scheduler automatically when loaded."
+        },
+        {
             "displayName": "aui-scheduler-view-agenda",
             "name": "aui-scheduler-view-agenda",
             "description": "The Scheduler Component"
@@ -1584,6 +1679,11 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "aui-scheduler-view-week",
             "name": "aui-scheduler-view-week",
             "description": "The Scheduler Component"
+        },
+        {
+            "displayName": "aui-scrollspy",
+            "name": "aui-scrollspy",
+            "description": "The Scrollspy Component"
         },
         {
             "displayName": "aui-search",
@@ -1645,6 +1745,11 @@ YUI.add("yuidoc-meta", function(Y) {
             "description": "The Toggler Component"
         },
         {
+            "displayName": "aui-toggler-accessibility",
+            "name": "aui-toggler-accessibility",
+            "description": "The Toggler Accessibility Component"
+        },
+        {
             "displayName": "aui-toolbar",
             "name": "aui-toolbar",
             "description": "The Toolbar Component"
@@ -1702,6 +1807,21 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "aui-widget-cssclass",
             "name": "aui-widget-cssclass",
             "description": "Provides standard module support for cssClass attribute through an extension."
+        },
+        {
+            "displayName": "aui-widget-responsive",
+            "name": "aui-widget-responsive",
+            "description": "Provides support for making a widget responsive. This is specially\nuseful when the width/height ratio should be preserved, which happens\nwhen dealing with images for example."
+        },
+        {
+            "displayName": "aui-widget-shortcut",
+            "name": "aui-widget-shortcut",
+            "description": "Provides support for making a adding shortcuts to a widget."
+        },
+        {
+            "displayName": "aui-widget-swipe",
+            "name": "aui-widget-swipe",
+            "description": "This adds the functionality of swiping to go to the previous/next item\ninside a widget. After mixed in, this funcionality is enabled by default, but\nit can be disabled through the `swipe` attribute."
         },
         {
             "displayName": "aui-widget-toggle",
