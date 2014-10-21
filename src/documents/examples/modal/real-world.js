@@ -7,7 +7,6 @@ YUI().use(
         centered: true,
         destroyOnHide: false,
         headerContent: '<h3>Print</h3>',
-        height: 200,
         modal: true,
         render: '#modal',
         resizable: {
