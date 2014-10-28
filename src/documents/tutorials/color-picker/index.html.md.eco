@@ -3,7 +3,7 @@ layout: single-doc
 title: Color Picker
 type: module
 category: Tutorial
-tags: color-picker
+tag: color-picker
 description: Create a dynamic color picker that allows users to select a specific color in many ways including a popover menu, inline values or a palette.
 api: http://alloyui.com/api/modules/aui-color-picker.html
 ---
@@ -17,7 +17,7 @@ First load the seed and CSS files, if you haven't yet.
 <link href="<%= @getBootstrapCSS() %>" rel="stylesheet"></link>
 ```
 
-Then initialize AlloyUI and load the Color Picker submodule you want. There are several options available, including `aui-color-palette`, `aui-color-picker-popover`, `aui-hsv-palette`, `aui-hsva-palette`, and `aui-hsva-palette-modal`. We will use the popover version here.
+Then initialize AlloyUI and load the Color Picker submodule you want. There are several options available, including `aui-color-palette`, `aui-color-picker-popover`, `aui-hsv-palette`, `aui-hsva-palette`, and `aui-hsva-palette-modal`. Let's start with the popover version here.
 
 ``` javascript
 YUI().use(
@@ -36,7 +36,7 @@ Create an element to trigger a Color Picker Popover.
 
 ``` html
 <label>Color trigger</label>
-<input class="colorPickerPopover" type="text">
+<input class="myColorPickerPopover" type="text">
 ```
 
 Now, create a new instance of the Color Picker Popover component, define your `trigger`, and render it.
@@ -47,7 +47,7 @@ YUI().use(
   function(Y) {
     new Y.ColorPickerPopover(
       {
-        trigger: '.colorPickerPopover'
+        trigger: '.myColorPickerPopover'
       }
     ).render();
   }
@@ -63,18 +63,20 @@ There are some other options that you can pass to your Color Picker instance, su
 To use the `aui-color-palette`, create an HTML element to house the Color Picker.
 
 ``` html
-<div id="colorPalette"></div>
+<div id="myColorPalette"></div>
 ```
+
 Load the correct submodule (`aui-color-palette` in this case), create a new instance of the Color Palette, and render it. This will give you a default palette with 10 options.
 
 ``` javascript
 YUI().use(
   'aui-color-palette',
   function(Y) {
-    new Y.ColorPalette().render('#colorPalette');
+    new Y.ColorPalette().render('#myColorPalette');
   }
 );
 ```
+
 In a Color Palette, you are also able to specify the exact colors to display using the `items` parameter. For example, this Color Palette will display two options: black and white.
 
 ``` javascript
@@ -83,10 +85,11 @@ YUI().use(
   function(Y) {
     new Y.ColorPalette({
       items: [ "#000000", "#FFFFFF" ]
-    }).render('#colorPalette');
+    }).render('#myColorPalette');
   }
 );
 ```
+
 It is also possible to load the base of the Color Picker instead of the specific submodule.
 
 ``` javascript
@@ -95,36 +98,41 @@ YUI().use(
   function(Y) {
     new Y.ColorPalette({
       items: [ "#000000", "#FFFFFF" ]
-    }).render('#colorPalette');
+    }).render('#myColorPalette');
   }
 );
 ```
+
 To use the HSV or HSVA Palette, create an HTML element to house the Color Picker.
 
 ``` html
-<div id="hsvPalette"></div>
+<div id="myHsvPalette"></div>
 ```
+
 ``` html
-<div id="hsvaPalette"></div>
+<div id="myHsvaPalette"></div>
 ```
+
 Load the base submodule (the specific one would also work), create a new instance of the HSV or HSVA Palette, and render it.
 
 ``` javascript
 YUI().use(
   'aui-color-picker-base',
   function(Y) {
-    new Y.HSVPalette().render('#hsvPalette');
+    new Y.HSVPalette().render('#myHsvPalette');
   }
 );
 ```
+
 ``` javascript
 YUI().use(
   'aui-color-picker-base',
   function(Y) {
-    new Y.HSVAPalette().render('#hsvaPalette');
+    new Y.HSVAPalette().render('#myHsvaPalette');
   }
 );
 ```
+
 For both of these, there are two additional options possible, `controls` and `selected`. `controls` can be used to hide or show a set of text boxes to specify the color in Hex, RGB or HSVA values; by default they are shown. `selected` is used to set the default color that is selected when the Color Picker is first created. These can be set as follows.
 
 ``` javascript
@@ -134,10 +142,11 @@ YUI().use(
     new Y.HSVPalette({
       controls: false,
       selected: '00FF00'
-    }).render('#hsvPalette');
+    }).render('#myHsvPalette');
   }
 );
 ```
+
 ``` javascript
 YUI().use(
   'aui-color-picker-base',
@@ -145,25 +154,28 @@ YUI().use(
     new Y.HSVAPalette({
       controls: false,
       selected: '0000FF00'
-    }).render('#hsvaPalette');
+    }).render('#myHsvaPalette');
   }
 );
 ```
 
 Implementing a HSVA Palette Modal is a very similar process. First, create an HTML element for the Color Picker.
+
 ``` html
-<div id="hsvaPaletteModal"></div>
+<div id="myHsvaPaletteModal"></div>
 ```
+
 Then, create a new instance of the HSVA Palette Modal and render it.
 
 ``` javascript
 YUI().use(
   'aui-color-picker-base',
   function(Y) {
-    new Y.HSVAPaletteModal().render('#hsvaPaletteModal');
+    new Y.HSVAPaletteModal().render('#myHsvaPaletteModal');
   }
 );
 ```
+
 By default, the HSVA Palette Modal is really an HSV Palette, because there is no alpha channel (which sets transparency). However, it is possible to activate the alpha channel by using the `hsv` attribute.
 
 ``` javascript
@@ -174,7 +186,7 @@ YUI().use(
       hsv: {
         alpha: true
       }
-    }).render('#hsvaPaletteModal');
+    }).render('#myHsvaPaletteModal');
   }
 );
 ```

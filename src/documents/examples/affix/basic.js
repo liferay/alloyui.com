@@ -1,9 +1,11 @@
 YUI().use(
   'aui-affix',
   function(Y) {
-    new Y.Affix({
-      target: '#myAffix',
-      offsetTop: 200
-    });
+    new Y.Affix(
+      {
+        target: '#myAffix',
+        offsetTop: 250
+      }
+    );
   }
 );
