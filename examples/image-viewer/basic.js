@@ -1,9 +1,10 @@
 YUI().use(
-  'aui-image-viewer-base',
+  'aui-image-viewer',
   function(Y) {
     new Y.ImageViewer(
       {
-        links: '#myGallery a'
+        links: '#myGallery a',
+        zIndex: 1
       }
     ).render();
   }

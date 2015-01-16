@@ -1,19 +1,23 @@
 YUI().use(
-  'aui-image-viewer-base',
+  'aui-image-viewer',
   function(Y) {
     new Y.ImageViewer(
       {
-        anim: true,
         caption: 'Liferay Champion Soccer',
         captionFromTitle: true,
+        centered: true,
         imageAnim: {
          duration: 1,
          easing: 'easeIn'
         },
+        intervalTime: 2,
         links: '#myGallery a',
-        lockScroll: true,
+        playing: true,
         preloadAllImages: true,
-        showInfo: true
+        preloadNeighborImages: true,
+        showInfo: true,
+        showPlayer: true,
+        zIndex: 1
       }
     ).render();
   }
