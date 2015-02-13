@@ -15,7 +15,7 @@ module.exports = {
 
     alloy: {
       // AlloyUI version
-      version: '3.0.0',
+      version: '4.0.0',
 
       // CDN domain
       cdnDomain: 'http://cdn.alloyui.com'
@@ -27,7 +27,7 @@ module.exports = {
 
     site: {
       // Website version
-      version: '3.0.x',
+      version: '4.0.x',
       isLastVersion: true,
 
       // Production URL
@@ -38,7 +38,7 @@ module.exports = {
 
       // Basic info
       title: 'AlloyUI',
-      description: 'AlloyUI is a framework built on top of YUI3 (JavaScript) that uses Bootstrap (HTML/CSS) to provide a simple API for building high scalable applications.'
+      description: 'AlloyUI is a framework built on top of jQuery (JavaScript) that uses Bootstrap (HTML/CSS) to provide a simple API for building high scalable applications.'
     },
 
     /* -----------------------------
@@ -70,6 +70,11 @@ module.exports = {
     // Get the Bootstrap CSS file for this Alloy version
     getBootstrapCSS: function() {
       return "" + this.alloy.cdnDomain + "/" + this.alloy.version + "/aui-css/css/bootstrap.min.css";
+    },
+
+    // Get the Font Awesome CSS file for this Alloy version
+    getFontawesomeCSS: function() {
+      return "" + this.alloy.cdnDomain + "/" + this.alloy.version + "/aui-css/css/font-awesome.min.css";
     },
 
     // Get the CDN path for this Alloy version
@@ -188,7 +193,7 @@ module.exports = {
 
         // Development URL
         site: {
-          url: 'http://localhost:9778'
+          url: 'http://172.16.20.109:9778'
         },
 
         /* -----------------------------

@@ -1,0 +1,96 @@
+---
+layout: single-doc
+title: Test
+tag: test
+type: module
+category: Tutorial
+description: This is a test file to make sure the website is functioning as it should.
+---
+
+<div class="section-number"><span class="blue-circle white">1</span></div>
+
+#### Getting Started
+
+First load the seed and CSS files, if you haven't yet.
+
+```html
+<script src="<%= @getCdnSeed() %>"></script>
+<link href="<%= @getBootstrapCSS() %>" rel="stylesheet"></link>
+```
+
+Then initialize AlloyUI and load the Ace Editor module.
+
+``` javascript
+AUI().use(
+  'aui-test',
+  function(Y) {
+    // code goes here
+  }
+);
+```
+
+---
+
+<div class="section-number"><span class="blue-circle white">2</span></div>
+
+#### Using Test
+
+Create an HTML element for the Test.
+
+```html
+<div id="myTest"></div>
+```
+
+Now create a new instance of Test with the newly created element.
+
+```javascript
+AUI().use(
+  'aui-test',
+  function(A) {
+    new A.AceEditor(
+      {
+        boundingBox: '#myTest'
+      }
+    ).render();
+  }
+);
+```
+
+---
+
+<div class="section-number"><span class="blue-circle white">3</span></div>
+
+#### Configuring Test
+
+Once a new instance of Test is created, the mode can be set to correspond to the language being typed.
+
+```javascript
+AUI().use(
+  'aui-ace-test',
+  function(A) {
+    new A.Test(
+      {
+        boundingBox: '#myTest',
+        mode: 'javascript'
+      }
+    ).render();
+  }
+);
+```
+
+The test can also be set to load with content/code already written.
+
+```javascript
+AUI().use(
+  'aui-test',
+  function(Y) {
+    new Y.Test(
+      {
+        boundingBox: '#myTest',
+        mode: 'xml',
+        value: '<body id="content"></body>'
+      }
+    ).render();
+  }
+);
+```

@@ -1,108 +1,117 @@
-<!doctype html>
 <html>
-<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+<head>
+	<title><%= @getPreparedTitle() %></title>
 
-  <title><%= @getPreparedTitle() %></title>
+	<meta charset="utf-8">
+	<meta name="author" content="Weston Hancock">
+	<meta name="description" content="<%= @getPreparedDescription() %>">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <meta charset="utf-8">
-  <meta name="author" content="Eduardo Lundgren, Nate Cavanaugh">
-  <meta name="description" content="<%= @getPreparedDescription() %>">
 
-  <!-- Facebook Tags -->
-  <meta property="fb:app_id" content="176947299114210">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="<%= @getSiteUrl() %>">
-  <meta property="og:image" content="<%= @getAssetsUrl() %>/img/facebook-share.jpg">
-  <meta property="og:title" content="<%= @getPreparedTitle() %>">
-  <meta property="og:description" content="<%= @getPreparedDescription() %>">
+	<!-- Favicon -->
+	<link rel="shortcut icon" type="image/x-icon" href="<%= @getAssetsUrl() %>/img/favicon.ico">
 
-  <!-- Favicon -->
-  <link rel="shortcut icon" type="image/x-icon" href="<%= @getAssetsUrl() %>/img/favicon.ico">
+	<!-- CSS: Alloy Bootstrap -->
+	<link href="<%= @getSiteUrl() %>/alloy-ui/aui-css/css/bootstrap.min.css" rel="stylesheet">
+	<link href="<%= @getSiteUrl() %>/alloy-ui/aui-css/css/font-awesome.min.css" rel="stylesheet">
 
-  <!-- CSS: Alloy Bootstrap -->
-  <link href="<%= @getSiteUrl() %>/alloy-ui/aui-css/css/bootstrap.min.css" rel="stylesheet">
+	<!-- CSS: Website style -->
+	<link href="<%= @getAssetsUrl() %>/css/main.css" rel="stylesheet">
 
-  <!-- CSS: Website style -->
-  <link href="<%= @getAssetsUrl() %>/css/main.css" rel="stylesheet">
+	<!-- CSS: Fonts -->
+	<link href='http://fonts.googleapis.com/css?family=Dosis' rel='stylesheet' type='text/css'>
 
-  <!-- Fonts -->
-  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,700" rel="stylesheet">
-
-  <!-- JS -->
-  <script src="<%= @getCdnSeed() %>"></script>
+	<!-- JS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="<%= @getAssetsUrl() %>/js/bootstrap.min.js"></script>
+	<script src="<%= @getCdnSeed() %>"></script>
+	<script src="<%= @getAssetsUrl() %>/js/dropdown.js"></script>
+	<script src="<%= @getAssetsUrl() %>/js/navbar.js"></script>
 
 </head>
-<body class="yui3-skin-sam">
+<body>
+	<div id="wrapper" class="container-fluid">
+		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+			<div class="col-md-12">
+				<div class="container">
+					<a class="logo" href="<%= @getSiteUrl() %>"><img src="<%= @getAssetsUrl() %>/img/alloyui.png"></a>
+					<div id="version">
+						<span class="white"><span class="hidden-xs">v<%= @site.version %></span> <i class="fa fa-caret-down white"></i></span>
+						<ul id="versionDropdown" class="dropdown-menu" role="menu">
+							<li><a href="/versions/3.0.x">v3.0.x</a></li>
+							<li><a href="/versions/2.5.x">v2.5.x</a></li>
+							<li><a href="/versions/2.0.x">v2.0.x</a></li>
+							<li><a href="/versions/1.5.x">v1.5.x</a></li>
+							<li><a href="/versions/1.0.x">v1.0.x</a></li>
+						</ul>
+					</div>
+					<div id="navDropdown" class="pull-right">
+						<i class="fa fa-bars fa-2x" id="navMenu"></i>
+						<ul id="menu" class="nav navbar-nav pull-right">
+							<li>
+								<a href="<%= @getSiteUrl() %>/examples/">Examples</a>
+							</li>
+							<li>
+								<a href="<%= @getSiteUrl() %>/tutorials/">Tutorials</a>
+							</li>
+							<li>
+								<a href="<%= @getSiteUrl() %>/contributing/">Contributing</a>
+							</li>
+							<li>
+								<a href="<%= @getSiteUrl() %>/api/" target="_blank">API Docs</a>
+							</li>
+							<li>
+								<a href="<%= @getSiteUrl() %>/rosetta-stone/" target="_blank">Rosetta Stone</a>
+							</li>
+							<li>
+								<a href="http://jquery.com/" target="_blank">jQuery</a>
+							</li>
+							<li>
+								<a href="http://getbootstrap.com/" target="_blank">Bootstrap</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</nav>
 
-  <div id="wrap">
+		<div class="content">
+			<%- @content %>
+		</div>
 
-    <a class="github-ribbon" href="<%= @site.githubUrl %>">
-      <img src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
-    </a>
-
-    <nav class="navbar navbar-inverse navbar-fixed-top" id="siteNavigation">
-      <div class="container">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="<%= @getSiteUrl() %>">
-            <img src="<%= @getAssetsUrl() %>/img/logo.png" alt="AlloyUI Logo" width="149" height="34">
-          </a>
-          <a href="#" id="version">
-            v<%= @site.version %>
-            <span class="caret"></span>
-          </a>
-          <ul id="version-dropdown" class="dropdown-menu" role="menu" aria-labelledby="drop">
-            <li><a tabindex="-1" href="/versions/2.5.x">v2.5.x</a></li>
-            <li><a tabindex="-1" href="/versions/2.0.x">v2.0.x</a></li>
-            <li><a tabindex="-1" href="/versions/1.5.x">v1.5.x</a></li>
-            <li><a tabindex="-1" href="/versions/1.0.x">v1.0.x</a></li>
-          </ul>
-        </div>
-
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="<%= @getSiteUrl() %>/examples/">Examples</a></li>
-          <li><a href="<%= @getSiteUrl() %>/tutorials/">Tutorials</a></li>
-          <li><a href="<%= @getSiteUrl() %>/api/" target="_blank">API Docs</a></li>
-          <li><a href="<%= @getSiteUrl() %>/rosetta-stone/" target="_blank">Rosetta Stone</a></li>
-          <li><a href="http://getbootstrap.com/" target="_blank">Bootstrap</a></li>
-          <li><a href="<%= @getSiteUrl() %>/contributing/">Contributing</a></li>
-          <li><a href="<%= @getSiteUrl() %>/about/">About</a></li>
-        </ul>
-      </div>
-    </nav>
-
-    <div id="content">
-      <%- @content %>
-    </div>
-
-    <div id="push"></div>
-
-  </div>
-
-
-  <div class="footer">
-    <div class="container">
-      <p class="col-xs-6">
-        <a href="http://liferay.com/">
-          <img src="<%= @getAssetsUrl() %>/img/liferay-logo.png" alt="Liferay Logo" id="liferay-logo">
-        </a>
-      </p>
-      <p class="copyright col-xs-6"><a href="https://github.com/liferay/alloy-ui/blob/master/LICENSE.md">BSD</a> License.</p>
-    </div>
-  </div>
-
-  <script src="<%= @getAssetsUrl() %>/js/version-dropdown.js"></script>
-
-  <script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-37033501-1']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-  </script>
-
+		<div id="footer">
+			<div class="row white" id="footerTop">
+				<div class="container">
+					<div class="col-sm-12 col-md-4">
+						<ul class="list-inline list-unstyled" id="socialIcons">
+							<li><a href="https://github.com/liferay/alloy-ui" title="Github"><i class="fa fa-github-alt"></i></a></li>
+							<li><a href="https://twitter.com/alloyui" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+							<li><a href="https://www.facebook.com/liferay" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+							<li><a href="https://plus.google.com/communities/107601504271923137002/stream/cd2e96a1-ce20-491b-8a4a-015c08e7883a" title="Google Plus"><i class="fa fa-google-plus"></i></a></li>
+						</ul>
+					</div>
+					<div id="footerLinks" class="col-sm-12 col-md-8">
+						<div>
+							<span>Questions?</span>
+							<ul class="list-inline list-unstyled">
+								<li><a href="https://www.liferay.com/community/forums/-/message_boards/category/8409523" target="_blank">Liferay Forums</a></li>
+								<li><a href="https://groups.google.com/forum/" target="_blank">Google Groups</a></li>
+								<li><a href="http://stackoverflow.com/" target="_blank">Stack Overflow</a></li>
+							</ul>
+							<span><a class="btn btn-green" href="#" role="button"><i class="fa fa-cloud-download"></i> Download AlloyUI</a></span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row" id="footerBottom">
+				<div class="container">
+					<div class="col-xs-12 text-center">
+						<a href="http://www.liferay.com"><img src="<%= @getAssetsUrl() %>/img/liferay_white.png"></a>
+						<a href="https://github.com/liferay/alloy-ui/blob/master/LICENSE.md">BSD License</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

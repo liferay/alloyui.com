@@ -2,64 +2,84 @@
 layout: default
 ---
 
-<div class="banner page-banner">
-  <div class="container">
-    <div class="presentation">
-      <h2>Examples</h2>
-    </div>
-  </div>
+<div class="banner-default row" id="banner">
+	<div class="container">
+		<div class="col-md-12">
+			<h1 class="white"><strong>Examples</strong></h1>
+		</div>
+	</div>
 </div>
 
-<div class="container">
+<div class="row">
+	<div class="container">
+		<div class="col-xs-12 col-sm-3" id="modules">
+			<form class="form-horizontal visible-xs-block">
+				<div class="form-group">
+					<select class="form-control module-select">
+						<optgroup label="List of Modules">
+							<% for example in @getCollection("examples").toJSON(): %>
+								<% if example.category && example.index: %>
+									<% if example.category == @document.category: %>
+										<option value="<%= @getSiteUrl() %><%= example.url %>" selected="true"><%= example.category %></option>
+									<% else: %>
+										<option value="<%= @getSiteUrl() %><%= example.url %>"><%= example.category %></option>
+									<% end %>
+								<% end %>
+							<% end %>
+						</optgroup>
+					</select>
+				</div>
+			</form>
+			<div class="sidenav">
+				<h3>List of modules</h3>
+				<ul class="list-group">
+					<% for example in @getCollection("examples").toJSON(): %>
+						<% if example.category && example.index: %>
+							<% if example.category == @document.category: %>
+								<a class="list-group-item active" href="<%= @getSiteUrl() %><%= example.url %>"><i class="fa fa-chevron-right"></i> <%= example.category %></a>
+								<% else: %>
+								<a class="list-group-item" href="<%= @getSiteUrl() %><%= example.url %>"><i class="fa fa-chevron-right"></i> <%= example.category %></a>
+							<% end %>
+						<% end %>
+					<% end %>
+				</ul>
+			</div>
+		</div>
 
-  <div class="col-xs-3 bs-docs-sidebar">
+		<div class="col-xs-12 col-sm-9">
 
-    <p class="related">List of modules</p>
-    <ul class="list-group bs-docs-sidenav affix-top">
-      <% for example in @getCollection("examples").toJSON(): %>
-        <% if example.category && example.index: %>
-          <% if example.category == @document.category: %>
-            <a class="list-group-item active" href="<%= @getSiteUrl() %><%= example.url %>"><span class="glyphicon glyphicon-chevron-right"></span> <%= example.category %></a></li>
-            <% else: %>
-            <a class="list-group-item" href="<%= @getSiteUrl() %><%= example.url %>"><span class="glyphicon glyphicon-chevron-right"></span> <%= example.category %></a></li>
-          <% end %>
-        <% end %>
-      <% end %>
-    </ul>
+			<h1><%= @document.category %></h1>
 
-  </div>
+			<ul class="nav nav-tabs">
+				<li><a href="<%= @getSiteUrl() %>/tutorials/<%= @document.tag %>/">Introduction</a></li>
+				<% for example in @getCollection("examples").toJSON(): %>
+					<% if example.tag == @document.tag: %>
+						<% if example.title == @document.title: %>
+							<li class="active"><a href="<%= @getSiteUrl() %><%= example.url %>"><%= example.title %></a></li>
+							<% else: %>
+							<li><a href="<%= @getSiteUrl() %><%= example.url %>"><%= example.title %></a></li>
+						<% end %>
+					<% end %>
+				<% end %>
+			</ul>
 
-  <div class="col-xs-9">
+			<div class="examples">
+				<%- @content %>
+			</div>
 
-    <h1><%= @document.category %></h1>
+			<div id="disqus_thread"></div>
+			<script type="text/javascript">
+					var disqus_shortname = 'alloyui';
 
-    <ul class="nav nav-tabs">
-      <li><a href="<%= @getSiteUrl() %>/tutorials/<%= @document.tag %>/">Introduction</a></li>
-      <% for example in @getCollection("examples").toJSON(): %>
-        <% if example.tag == @document.tag: %>
-          <% if example.title == @document.title: %>
-            <li class="active"><a href="<%= @getSiteUrl() %><%= example.url %>"><%= example.title %></a></li>
-            <% else: %>
-            <li><a href="<%= @getSiteUrl() %><%= example.url %>"><%= example.title %></a></li>
-          <% end %>
-        <% end %>
-      <% end %>
-    </ul>
+					(function() {
+							var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+							dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+							(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+					})();
+			</script>
+			<script src="<%= @getAssetsUrl() %>/js/modules.js"></script>
+			<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
-    <%- @content %>
-
-    <div id="disqus_thread"></div>
-    <script type="text/javascript">
-        var disqus_shortname = 'alloyui';
-
-        (function() {
-            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-
-  </div>
-
+		</div>
+	</div>
 </div>

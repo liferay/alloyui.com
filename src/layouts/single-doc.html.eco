@@ -2,87 +2,99 @@
 layout: default
 ---
 
-<div class="banner page-banner">
-  <div class="container">
-    <div class="presentation">
-      <h2>Tutorials</h2>
-    </div>
-  </div>
+<div class="banner-default row" id="banner">
+	<div class="container">
+		<div class="col-md-12">
+			<h1 class="white"><strong>Tutorials</strong></h1>
+		</div>
+	</div>
 </div>
 
-<div class="container">
+<div class="row">
+	<div class="container">
+		<div class="col-xs-12 col-sm-3" id="modules">
+			<form class="form-horizontal visible-xs-block">
+				<div class="form-group">
+					<select class="form-control module-select">
+						<optgroup label="General">
+							<% for tutorial in @getCollection("tutorials").toJSON(): %>
+								<% if tutorial.type == "general": %>
+									<% if tutorial.title == @document.title: %>
+										<option value="<%= @getSiteUrl() %><%= tutorial.url %>" selected="true"><%= tutorial.title %></option>
+									<% else: %>
+										<option value="<%= @getSiteUrl() %><%= tutorial.url %>"><%= tutorial.title %></option>
+									<% end %>
+								<% end %>
+							<% end %>
+						</optgroup>
+						<optgroup label="List of Modules">
+							<% for tutorial in @getCollection("tutorials").toJSON(): %>
+								<% if tutorial.type == "module": %>
+									<% if tutorial.title == @document.title: %>
+										<option value="<%= @getSiteUrl() %><%= tutorial.url %>" selected="true"><%= tutorial.title %></option>
+									<% else: %>
+										<option value="<%= @getSiteUrl() %><%= tutorial.url %>"><%= tutorial.title %></option>
+									<% end %>
+								<% end %>
+							<% end %>
+						</optgroup>
+					</select>
+				</div>
+			</form>
 
-  <div class="col-xs-3 bs-docs-sidebar">
+			<div class="sidenav">
+				<h3>General</h3>
+				<ul class="list-group">
+					<% for tutorial in @getCollection("tutorials").toJSON(): %>
+						<% if tutorial.type == "general": %>
+							<% if tutorial.title == @document.title: %>
+								<a class="list-group-item active" href="<%= @getSiteUrl() %><%= tutorial.url %>"><i class="fa fa-chevron-right"></i> <%= tutorial.title %></a>
+							<% else: %>
+								<a class="list-group-item" href="<%= @getSiteUrl() %><%= tutorial.url %>"><i class="fa fa-chevron-right"></i> <%= tutorial.title %></a>
+							<% end %>
+						<% end %>
+					<% end %>
+				</ul>
 
-    <p class="related">General</p>
-    <ul class="list-group bs-docs-sidenav affix-top">
-      <% for tutorial in @getCollection("tutorials").toJSON(): %>
-        <% if tutorial.type == "general": %>
-          <% if tutorial.title == @document.title: %>
-            <a class="list-group-item active" href="<%= @getSiteUrl() %><%= tutorial.url %>"><span class="glyphicon glyphicon-chevron-right"></span> <%= tutorial.title %></a>
-            <% else: %>
-            <a class="list-group-item" href="<%= @getSiteUrl() %><%= tutorial.url %>"><span class="glyphicon glyphicon-chevron-right"></span> <%= tutorial.title %></a>
-          <% end %>
-        <% end %>
-      <% end %>
-    </ul>
+				<h3>List of modules</h3>
+				<ul class="list-group">
+					<% for tutorial in @getCollection("tutorials").toJSON(): %>
+						<% if tutorial.type == "module": %>
+							<% if tutorial.title == @document.title: %>
+								<a class="list-group-item active" href="<%= @getSiteUrl() %><%= tutorial.url %>"><i class="fa fa-chevron-right"></i> <%= tutorial.title %></a>
+							<% else: %>
+								<a class="list-group-item" href="<%= @getSiteUrl() %><%= tutorial.url %>"><i class="fa fa-chevron-right"></i> <%= tutorial.title %></a>
+							<% end %>
+						<% end %>
+					<% end %>
+				</ul>
+			</div>
+		</div>
 
-    <p class="related">List of modules</p>
-    <ul class="list-group bs-docs-sidenav affix-top">
-      <% for tutorial in @getCollection("tutorials").toJSON(): %>
-        <% if tutorial.type == "module": %>
-          <% if tutorial.title == @document.title: %>
-            <a class="list-group-item active" href="<%= @getSiteUrl() %><%= tutorial.url %>"><span class="glyphicon glyphicon-chevron-right"></span> <%= tutorial.title %></a>
-            <% else: %>
-            <a class="list-group-item" href="<%= @getSiteUrl() %><%= tutorial.url %>"><span class="glyphicon glyphicon-chevron-right"></span> <%= tutorial.title %></a>
-          <% end %>
-        <% end %>
-      <% end %>
-    </ul>
+		<div class="col-xs-12 col-sm-9">
+			<h1><%= @document.title %></h1>
+			<% if @document.description: %>
+				<p><%= @document.description %></p>
+			<% end %>
+			<% if @document.type == "general": %>
+				<hr>
+			<% end %>
 
-  </div>
+			<% if @document.type == "module": %>
+				<ul class="nav nav-tabs">
+					<li class="active"><a href="#">Introduction</a></li>
+					<% for example in @getCollection("examples").toJSON(): %>
+						<% if example.tag == @document.tag: %>
+							<li><a href="<%= @getSiteUrl() %><%= example.url %>"><%= example.title %></a></li>
+						<% end %>
+					<% end %>
+				</ul>
+			<% end %>
 
-  <div class="col-xs-9">
-
-    <h1><%= @document.title %></h1>
-
-    <% if @document.type == "module": %>
-      <ul class="nav nav-tabs">
-        <li class="active">
-          <a href="#">Introduction</a>
-        </li>
-        <% for example in @getCollection("examples").toJSON(): %>
-          <% if example.tag == @document.tag: %>
-            <li><a href="<%= @getSiteUrl() %><%= example.url %>"><%= example.title %></a></li>
-          <% end %>
-        <% end %>
-      </ul>
-    <% end %>
-
-    <% if @document.description: %>
-      <p><%= @document.description %></p>
-      <hr>
-    <% end %>
-
-    <%- @content %>
-
-    <% if @document.type == "module": %>
-    <div class="alert alert-success">
-        For more information about configuration, check out our <a href="<%= @document.api %>" target="_blank">API Docs</a>.
-    </div>
-    <% end %>
-
-    <div id="disqus_thread"></div>
-    <script type="text/javascript">
-      var disqus_shortname = 'alloyui';
-
-      (function() {
-          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-      })();
-    </script>
-
-  </div>
-
+			<div class="step-by-step">
+				<%- @content %>
+			</div>
+		</div>
+	</div>
 </div>
+<script src="<%= @getAssetsUrl() %>/js/modules.js"></script>
