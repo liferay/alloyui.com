@@ -193,7 +193,7 @@ module.exports = {
 
         // Development URL
         site: {
-          url: 'http://172.16.20.109:9778'
+          url: 'http://localhost:9778'
         },
 
         /* -----------------------------
