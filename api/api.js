@@ -447,6 +447,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "SyntheticEvent.Notifier",
         "Tab",
         "TabView",
+        "TableSortable",
         "Template",
         "Template.Micro",
         "Test.ArrayAssert",
@@ -569,6 +570,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "aui-affix",
         "aui-alert",
         "aui-aria",
+        "aui-aria-table-sortable",
         "aui-arraysort",
         "aui-audio",
         "aui-autosize-iframe",
@@ -1231,6 +1233,11 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "aui-aria",
             "name": "aui-aria",
+            "description": "The Aria Component."
+        },
+        {
+            "displayName": "aui-aria-table-sortable",
+            "name": "aui-aria-table-sortable",
             "description": "The Aria Component."
         },
         {
