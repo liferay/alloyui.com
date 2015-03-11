@@ -15,7 +15,7 @@ module.exports = {
 
     alloy: {
       // AlloyUI version
-      version: '3.0.0',
+      version: '3.0.1',
 
       // CDN domain
       cdnDomain: 'http://cdn.alloyui.com'
