@@ -3,7 +3,7 @@ layout: single-doc
 title: Unit Tests.
 type: general
 category: Tutorial
-description: Make sure your scripts are airtight with unit tests
+description: Write browser-based JavaScript tests to easily ensure code functionality through unit testing.
 ---
 
 <h4>1. Copy and paste</h4>
@@ -16,10 +16,10 @@ description: Make sure your scripts are airtight with unit tests
 
 <h4>2. Getting started!</h4>
 
-<p>Let's create a YUI instance and load the test module to begin.</p>
+<p>Let's create a YUI instance and load the <code>test</code> module to begin.</p>
 
 <pre><code class="javascript">YUI.use(
-    'test', 
+    'test',
     function(Y) {
         // Test cases are written here
     }
@@ -27,106 +27,129 @@ description: Make sure your scripts are airtight with unit tests
 
 <hr>
 
-<h4>3. Test Cases</h4>
+<h4>3. Writing Test Cases</h4>
 
-<p>Now declare a TestCase with <code>Y.Test.Case</code> and populate it with individual tests and other pertinent information. Keep in mind that each test within a TestCase should examin an individual unit of code.</p>
+<p>Create a <code>TestCase</code> object with <code>Y.Test.Case</code> constructor and pass it an object with individual test cases. Keep in mind that each test should test a specific piece of functional code.</p>
 
-<pre><code class="javascript">var yourTestCase = new Y.Test.Case({
+<p>Test methods can be named using the traditional manner of prepending the word <em>test</em> to the method name, or using a "friendly name," which is a sentence containing at least one space that describes the test's purpose.</p>
 
-    name: "Name Of Your TestCase",
+<pre><code class="javascript">var yourTestCase = new Y.Test.Case(
+    {
+        name: "TestCase Name",
 
-    // ------ Setup and tear down ------
+        // ------ Tests ------
+        testSomething: function() {
+            // code goes here
+        },
 
-    // Sometimes it is necessary to setup information
-    // to be used within each test of a TestCase and
-    // remove it once it has been used.
-
-    setUp: function() {
-        // initialize data to be used in each test
-    },
-
-    tearDown: function() {
-        // remove data after each test
-    },
-
-    // ------ Tests ------
-
-    // Tests can be named like this
-    testSomething: function() {
-        // code goes here
-    },
-
-    // or like this
-    "something should happen here": function() {
-        // code goes here
+        "something should is going to be tested here": function() {
+            // code goes here
+        }
     }
-});</code></pre>
+);</code></pre>
+
+<h4>setUp() and tearDown()</h4>
+
+<p>Sometimes it is necessary to setup information before a test is run and clean up the information after the test is run. The <code>setUp()</code> method is run before each and every test in the test case and likewise the <code>tearDown()</code> method is run after each test is run. </p>
+
+<pre><code class="javascript">var yourTestCase = new Y.Test.Case(
+    {
+        name: "TestCase Name",
+
+        // ------ Setup and Tear Down ------
+        setUp: function() {
+            // initialize data to be used in each test
+        },
+
+        tearDown: function() {
+            // remove data after each test
+        },
+
+        // ------ Tests ------
+        testSomething: function() {
+            // code goes here
+        },
+
+        "something should is going to be tested here": function() {
+            // code goes here
+        }
+    }
+);</code></pre>
+
+<h4>Assertions</h4>
+
+<p>We now have the basic structure of a test, but have not actually tested anything. Assertions allow us to check the validity of a particular action or function. In general, they accept a test condition and an optional message to display if the test fails.</p>
+
+<p>There are many types of assertions available, all of which can be found at <a href="http://yuilibrary.com/yui/docs/test/#assertions" target="_blank">http://yuilibrary.com/yui/docs/test/#assertions</a>. But for now, we will just look at some of the basics.</p>
+
+<pre><code class="javascript">var carsTestCase = new Y.Test.Case(
+    {
+        name: "Cars Test",
+
+        setUp: function() {
+            this.car = {
+                color: ['red', 'black', 'silver', 'white'],
+                make: "Toyota",
+                model: 'Camry',
+                year: 2013
+            };
+        },
+
+        tearDown: function() {
+            delete this.car;
+        },
+
+        'car colors should be listed in an array' function() {
+            Y.Assert.isArray(this.car.color);
+        },
+
+        testCarMake: function() {
+            Y.Assert.isEqual("Toyota", this.car.make, "The car make should be 'Toyota'");
+        },
+
+        testCarModel: function () {
+            Y.assert("Camry" == this.car.model, "Model should be 'Camry'");
+        },
+
+        'year should be a number': function() {
+            Y.Assert.isNumber(this.car.year, "Year should be a number");
+        }
+    }
+);</code></pre>
+
+<p>Great! Now that we have a <code>TestCase</code> set up, we can add it to a <code>TestSuite</code>.</p>
 
 <hr>
 
-<h4>4. Assertions</h4>
+<h4>4. Test Suites</h4>
 
-<p>We now have the basic structure of a test but have not actually tested anything. Assertions allow us to check the validity of a particular action or function. In general they accept a test condition and an optional message to display if the test fails. There are many types of assertions available, all of which can be found <a href="http://yuilibrary.com/yui/docs/test/#assertions" target="_blank">here</a>. But for now we will just look at some of the basics.</p>
-
-<pre><code class="javascript">var carsTestCase = new Y.Test.Case({
-
-    name: "Cars Test",
-
-    setUp: function() {
-        this.car = {make: "Toyota", model: 'Camry', year: 2013, color: ['red', 'black', 'silver', 'white']};
-    },
-
-    tearDown: function() {
-        delete this.car;
-    },
-
-    testCarModel: function () {
-        Y.assert("Camry" == this.car.model, "Model should be 'Camry'");
-    },
-
-    testCarMake: function() {
-        Y.Assert.isEqual("Toyota", this.car.make, "The car make should be 'Toyota'");
-    },
-
-    'year should be a number': function() {
-        Y.Assert.isNumber(this.car.year, "Year should be a number");
-    },
-
-    'car colors should be listed in an array' function() {
-        Y.Assert.isArray(this.car.color);
-    }
-
-});</code></pre>
-
-<p>Great! Now that we have a TestCase set up we can add it to a TestSuite.</p>
-
-<hr>
-
-<h4>5. Test Suites</h4>
-
-<p>If we are testing a large application that requires many test cases, Test Suites allow us to organize many TestCases together. Initializing TestSuites and adding TestCases to them is easy.</p>
+<p>If we are testing a large application that requires many test cases, a <code>TestSuite</code> allows us to organize a collection of <code>TestCase</code> together. Initializing <code>TestSuite</code> and adding <code>TestCase</code> to them is easy.</p>
 
 <pre><code class="javascript">var suite = new Y.Test.Suite("Name of Your TestSuite");
 
-suite.add(new Y.TestCase({
-    // code goes here
-}));
+suite.add(
+    new Y.TestCase(
+        {
+            // code goes here
+        }
+    )
+);
 
-// For our carsTestCase:
+// Adding carsTestCase to the testSuite:
 suite.add(carsTestCase);</code></pre>
 
-<p>Multiple TestSuites can also be organized together into a parent TestSuite in the same way.</p>
+<p>Multiple <code>TestSuite</code> can also be organized together into a parent <code>TestSuite</code> in the same way.</p>
 
 <hr>
 
-<h4>6. Running Tests</h4>
+<h4>5. Running Tests</h4>
 
-<p>Congratulations! You now have all the tools to write a unit test. All we have to do is run it.</p>
+<p>Congratulations! You now have all the tools to write a unit test. All we have to do is run it!</p>
 
 <pre><code class="javascript">Y.Test.Runner.add(suite);
 
 Y.Test.Runner.run();</code></pre>
 
-<div class="allert allert-success">
-    For more information about writing unit tests, checkout out <a href="http://yuilibrary.com/yui/docs/test/" target="_blank">YUI test</a> documentation.
-</div>
+<hr>
+
+<p>For more information about writing unit tests, checkout out <a href="http://yuilibrary.com/yui/docs/test/" target="_blank">YUI's test</a> documentation.</p>
