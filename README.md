@@ -54,7 +54,7 @@ The basic structure of the project is given in the following way:
 
 ### out/
 
-This is where the generated files are stored, once DocPad has been runned. However, this directory is unnecessary in versioning, so it is ignored ([.gitignore](https://github.com/liferay/alloyui.com/blob/master/.gitignore)).
+This is where the generated files are stored, once DocPad has been ran. However, this directory is unnecessary in versioning, so it is ignored ([.gitignore](https://github.com/liferay/alloyui.com/blob/master/.gitignore)).
 
 ### [src/documents/](https://github.com/liferay/alloyui.com/blob/master/src/documents)
 
