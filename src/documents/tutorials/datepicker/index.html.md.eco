@@ -111,3 +111,21 @@ YUI().use(
   }
 );
 ```
+---
+
+#### Using Datepicker with Form Validator
+
+If you plan to use Form Validator to validate your Datepicker input, please
+note, you'll need to manually call `validateField` after the `selectionChange` event.
+
+``` javascript
+var myFormValidator = new Y.FormValidator( /* ... */ );
+var myDatePicker = new Y.DatePicker( /* ... */ );
+
+myDatePicker.after(
+    'selectionChange',
+    function(event) {
+        myFormValidator.validateField('dateInputName');
+    }
+);
+```
