@@ -1,7 +1,7 @@
 ---
 title: Ace Editor
-description: What is the Ace Editor?
-layout: "guide"
+description: An embeddable code editor that matches the features of native editors.
+layout: "tutorials"
 weight: 100
 ---
 
@@ -9,49 +9,90 @@ weight: 100
 
 <article id="1">
 
-## Lorem ipsum dolor sit amet
+## Getting Started
 
-```javascript
-var hello = function() {
-  console.log('Hello, World!');
-};
+First load the seed and CSS files, if you have not yet.
+
+```html
+<script src="http://cdn.alloyui.com/3.0.1/aui/aui-min.js"></script>
+<link href="http://cdn.alloyui.com/3.0.1/aui-css/css/bootstrap.min.css" rel="stylesheet"></link>
 ```
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nulla libero, eleifend in euismod eget, fringilla id diam. Proin quis interdum ipsum. Fusce eros metus, hendrerit ut egestas nec, sagittis id velit.
+Then initialize AlloyUI and load the Ace Editor module.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nulla libero, eleifend in euismod eget, fringilla id diam. Proin quis interdum ipsum. Fusce eros metus, hendrerit ut egestas nec, sagittis id velit.
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nulla libero, eleifend in euismod eget, fringilla id diam. Proin quis interdum ipsum. Fusce eros metus, hendrerit ut egestas nec, sagittis id velit.
-
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nulla libero, eleifend in euismod eget, fringilla id diam. Proin quis interdum ipsum. Fusce eros metus, hendrerit ut egestas nec, sagittis id velit.
+```javascript
+YUI().use(
+	'aui-ace-editor',
+	function(Y) {
+		// code goes here
+	}
+);
+```
 
 </article>
 
 <article id="2">
 
-## Lorem ipsum dolor sit amet
+## Using {$page.title}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nulla libero, eleifend in euismod eget, fringilla id diam. Proin quis interdum ipsum. Fusce eros metus, hendrerit ut egestas nec, sagittis id velit.
+Create an HTML element for the Ace Editor.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nulla libero, eleifend in euismod eget, fringilla id diam. Proin quis interdum ipsum. Fusce eros metus, hendrerit ut egestas nec, sagittis id velit.
+```html
+<div id="myEditor"></div>
+```
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nulla libero, eleifend in euismod eget, fringilla id diam. Proin quis interdum ipsum. Fusce eros metus, hendrerit ut egestas nec, sagittis id velit.
+Now create a new instance of Ace Editor with the newly created element.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nulla libero, eleifend in euismod eget, fringilla id diam. Proin quis interdum ipsum. Fusce eros metus, hendrerit ut egestas nec, sagittis id velit.
+```javascript
+YUI().use(
+	'aui-ace-editor',
+	function(Y) {
+		new Y.AceEditor(
+			{
+				boundingBox: '#myEditor'
+			}
+		).render();
+	}
+);
+```
 
 </article>
 
 <article id="3">
 
-## Lorem ipsum dolor sit amet
+## Configuring {$page.title}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nulla libero, eleifend in euismod eget, fringilla id diam. Proin quis interdum ipsum. Fusce eros metus, hendrerit ut egestas nec, sagittis id velit.
+Once a new instance of Ace Editor is created, the mode can be set to correspond to the language being typed.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nulla libero, eleifend in euismod eget, fringilla id diam. Proin quis interdum ipsum. Fusce eros metus, hendrerit ut egestas nec, sagittis id velit.
+```javascript
+YUI().use(
+	'aui-ace-editor',
+	function(Y) {
+		new Y.AceEditor(
+			{
+				boundingBox: '#myEditor',
+				mode: 'javascript'
+			}
+		).render();
+	}
+);
+```
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nulla libero, eleifend in euismod eget, fringilla id diam. Proin quis interdum ipsum. Fusce eros metus, hendrerit ut egestas nec, sagittis id velit.
+The editor can also be set to load with content/code already written.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nulla libero, eleifend in euismod eget, fringilla id diam. Proin quis interdum ipsum. Fusce eros metus, hendrerit ut egestas nec, sagittis id velit.
+```javascript
+YUI().use(
+	'aui-ace-editor',
+	function(Y) {
+		new Y.AceEditor(
+			{
+				boundingBox: '#myEditor',
+				mode: 'xml',
+				value: '<body id="content"></body>'
+			}
+		).render();
+	}
+);
+```
 
 </article>
