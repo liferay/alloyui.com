@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,22 +1122,22 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>alloy-ui/src/aui-surface/js/aui-surface-base.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             var getNodeById = function(id) {
                                 return A.one(A.config.doc.getElementById(id));
                             };
-                            
+
                             A.Surface = A.Base.create(&#x27;surface&#x27;, A.Base, [], {
                                 /**
                                  * Holds the active child element.
@@ -1147,7 +1147,7 @@
                                  * @protected
                                  */
                                 activeChild: null,
-                            
+
                                 /**
                                  * Holds the default child element.
                                  *
@@ -1156,7 +1156,7 @@
                                  * @protected
                                  */
                                 defaultChild: null,
-                            
+
                                 /**
                                  * Holds the element with the specified surface id, if not found creates a
                                  * new element with the specified id.
@@ -1166,7 +1166,7 @@
                                  * @protected
                                  */
                                 el: null,
-                            
+
                                 /**
                                  * Construction logic executed during Surface instantiation.
                                  * Lifecycle.
@@ -1176,16 +1176,16 @@
                                  */
                                 initializer: function() {
                                     var id = this.get(&#x27;id&#x27;);
-                            
+
                                     if (!id) {
                                         throw new Error(&#x27;Surface element id not specified.&#x27;);
                                     }
-                            
+
                                     this.el = this.getEl(id);
-                            
+
                                     this.activeChild = this.defaultChild = this.addContent(A.Surface.DEFAULT);
                                 },
-                            
+
                                 /**
                                  * Adds screen content to a surface. If content hasn&#x27;t been passed, see if
                                  * an element exists in the DOM that matches the id. By convention, the
@@ -1201,22 +1201,22 @@
                                     if (!opt_content) {
                                         return this.getChild(screenId);
                                     }
-                            
+
                                     A.log(&#x27;Screen [&#x27; + screenId + &#x27;] add content to surface [&#x27; + this + &#x27;]&#x27;, &#x27;info&#x27;);
-                            
+
                                     var el = this.getEl(),
                                         child = this.createChild(screenId);
-                            
+
                                     child.append(opt_content);
                                     this.transition(child, null);
-                            
+
                                     if (el) {
                                         el.append(child);
                                     }
-                            
+
                                     return child;
                                 },
-                            
+
                                 /**
                                  * Creates child node of the surface.
                                  *
@@ -1227,7 +1227,7 @@
                                 createChild: function(screenId) {
                                     return A.Node.create(&#x27;&lt;div/&gt;&#x27;).setAttribute(&#x27;id&#x27;, this._makeId(screenId));
                                 },
-                            
+
                                 /**
                                  * Gets child node of the surface.
                                  *
@@ -1238,7 +1238,7 @@
                                 getChild: function(screenId) {
                                     return getNodeById(this._makeId(screenId));
                                 },
-                            
+
                                 /**
                                  * Retrieves the surface element from DOM, and sets it to the el property of
                                  * the current instance.
@@ -1252,17 +1252,17 @@
                                     if (this.el) {
                                         return this.el;
                                     }
-                            
+
                                     this.el = getNodeById(opt_id || this.get(&#x27;id&#x27;));
                                     if (this.el) {
                                         this.el.plug(A.Plugin.ParseContent, {
                                             preserveScriptNodes: true
                                         });
                                     }
-                            
+
                                     return this.el;
                                 },
-                            
+
                                 /**
                                  * Shows screen content from a surface.
                                  *
@@ -1276,30 +1276,30 @@
                                         el,
                                         from = this.activeChild,
                                         to = this.getChild(screenId);
-                            
+
                                     if (!to) {
                                         // When surface child for screen not found retrieve the default
                                         // content from DOM element with id &#x60;surfaceId-default&#x60;
                                         to = this.defaultChild;
                                     }
-                            
+
                                     if (from &amp;&amp; from !== to) {
                                         from.remove();
                                     }
-                            
+
                                     // Avoid repainting if the child is already in place or the element does
                                     // not exist
                                     el = this.getEl();
                                     if (el &amp;&amp; to &amp;&amp; !to.inDoc()) {
                                         el.append(to);
                                     }
-                            
+
                                     deferred = this.transition(from, to);
                                     this.activeChild = to;
-                            
+
                                     return deferred;
                                 },
-                            
+
                                 /**
                                  * Removes screen content from a surface.
                                  *
@@ -1308,12 +1308,12 @@
                                  */
                                 remove: function(screenId) {
                                     var child = this.getChild(screenId);
-                            
+
                                     if (child) {
                                         child.remove(true);
                                     }
                                 },
-                            
+
                                 /**
                                  * @method toString
                                  * @return {String}
@@ -1321,7 +1321,7 @@
                                 toString: function() {
                                     return this.get(&#x27;id&#x27;);
                                 },
-                            
+
                                 /**
                                  * Invokes the transition function specified on &#x60;transition&#x60; attribute.
                                  *
@@ -1334,7 +1334,7 @@
                                 transition: function(from, to) {
                                     return A.CancellablePromise.resolve(this.get(&#x27;transition&#x27;).call(this, from, to));
                                 },
-                            
+
                                 /**
                                  * Make the id for the element that holds content for a screen.
                                  *
@@ -1362,7 +1362,7 @@
                                             return A.Surface.TRANSITION;
                                         }
                                     },
-                            
+
                                     /**
                                      * The surface id.
                                      *
@@ -1376,9 +1376,9 @@
                                         writeOnce: true
                                     }
                                 },
-                            
+
                                 DEFAULT: &#x27;default&#x27;,
-                            
+
                                 /**
                                  * Transition function that returns a promise, the navigation will be paused
                                  * until all surfaces&#x27; promise have completed. This is useful for
@@ -1401,7 +1401,7 @@
                                     return null;
                                 }
                             });
-                            
+
                                 </pre>
                             </div>
                         </div>

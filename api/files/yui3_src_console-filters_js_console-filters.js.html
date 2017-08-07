@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/console-filters/js/console-filters.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1143,7 +1143,7 @@
                              * @namespace Plugin
                              * @class ConsoleFilters
                              */
-                            
+
                             // Some common strings and functions
                             var getCN = Y.ClassNameManager.getClassName,
                                 CONSOLE = &#x27;console&#x27;,
@@ -1153,27 +1153,27 @@
                                 SOURCE   = &#x27;source&#x27;,
                                 CATEGORY_DOT = &#x27;category.&#x27;,
                                 SOURCE_DOT   = &#x27;source.&#x27;,
-                            
+
                                 HOST     = &#x27;host&#x27;,
                                 CHECKED  = &#x27;checked&#x27;,
                                 DEF_VISIBILITY = &#x27;defaultVisibility&#x27;,
-                            
+
                                 DOT = &#x27;.&#x27;,
                                 EMPTY   = &#x27;&#x27;,
-                            
+
                                 C_BODY       = DOT + Y.Console.CHROME_CLASSES.console_bd_class,
                                 C_FOOT       = DOT + Y.Console.CHROME_CLASSES.console_ft_class,
-                            
+
                                 SEL_CHECK    = &#x27;input[type=checkbox].&#x27;,
-                            
+
                                 isString = Y.Lang.isString;
-                            
+
                             function ConsoleFilters() {
                                 ConsoleFilters.superclass.constructor.apply(this,arguments);
                             }
-                            
+
                             Y.namespace(&#x27;Plugin&#x27;).ConsoleFilters = Y.extend(ConsoleFilters, Y.Plugin.Base,
-                            
+
                             // Y.Plugin.ConsoleFilters prototype
                             {
                                 /**
@@ -1187,7 +1187,7 @@
                                  * @protected
                                  */
                                 _entries : null,
-                            
+
                                 /**
                                  * Maximum number of entries to store in the message cache.
                                  *
@@ -1197,7 +1197,7 @@
                                  * @protected
                                  */
                                 _cacheLimit : Number.POSITIVE_INFINITY,
-                            
+
                                 /**
                                  * The container node created to house the category filters.
                                  *
@@ -1206,7 +1206,7 @@
                                  * @protected
                                  */
                                 _categories : null,
-                            
+
                                 /**
                                  * The container node created to house the source filters.
                                  *
@@ -1215,7 +1215,7 @@
                                  * @protected
                                  */
                                 _sources : null,
-                            
+
                                 /**
                                  * Initialize entries collection and attach listeners to host events and
                                  * methods.
@@ -1225,24 +1225,24 @@
                                  */
                                 initializer : function () {
                                     this._entries = [];
-                            
+
                                     this.get(HOST).on(&quot;entry&quot;, this._onEntry, this);
-                            
+
                                     this.doAfter(&quot;renderUI&quot;, this.renderUI);
                                     this.doAfter(&quot;syncUI&quot;, this.syncUI);
                                     this.doAfter(&quot;bindUI&quot;, this.bindUI);
-                            
+
                                     this.doAfter(&quot;clearConsole&quot;, this._afterClearConsole);
-                            
+
                                     if (this.get(HOST).get(&#x27;rendered&#x27;)) {
                                         this.renderUI();
                                         this.syncUI();
                                         this.bindUI();
                                     }
-                            
+
                                     this.after(&quot;cacheLimitChange&quot;, this._afterCacheLimitChange);
                                 },
-                            
+
                                 /**
                                  * Removes the plugin UI and unwires events.
                                  *
@@ -1253,7 +1253,7 @@
                                     //TODO: grab last {consoleLimit} entries and update the console with
                                     //them (no filtering)
                                     this._entries = [];
-                            
+
                                     if (this._categories) {
                                         this._categories.remove();
                                     }
@@ -1261,7 +1261,7 @@
                                         this._sources.remove();
                                     }
                                 },
-                            
+
                                 /**
                                  * Adds the category and source filter sections to the Console footer.
                                  *
@@ -1271,22 +1271,22 @@
                                 renderUI : function () {
                                     var foot = this.get(HOST).get(&#x27;contentBox&#x27;).one(C_FOOT),
                                         html;
-                            
+
                                     if (foot) {
                                         html = Y.Lang.sub(
                                                     ConsoleFilters.CATEGORIES_TEMPLATE,
                                                     ConsoleFilters.CHROME_CLASSES);
-                            
+
                                         this._categories = foot.appendChild(Y.Node.create(html));
-                            
+
                                         html = Y.Lang.sub(
                                                     ConsoleFilters.SOURCES_TEMPLATE,
                                                     ConsoleFilters.CHROME_CLASSES);
-                            
+
                                         this._sources = foot.appendChild(Y.Node.create(html));
                                     }
                                 },
-                            
+
                                 /**
                                  * Binds to checkbox click events and internal attribute change events to
                                  * maintain the UI state.
@@ -1296,13 +1296,13 @@
                                  */
                                 bindUI : function () {
                                     this._categories.on(&#x27;click&#x27;, Y.bind(this._onCategoryCheckboxClick, this));
-                            
+
                                     this._sources.on(&#x27;click&#x27;, Y.bind(this._onSourceCheckboxClick, this));
-                            
+
                                     this.after(&#x27;categoryChange&#x27;,this._afterCategoryChange);
                                     this.after(&#x27;sourceChange&#x27;,  this._afterSourceChange);
                                 },
-                            
+
                                 /**
                                  * Updates the UI to be in accordance with the current state of the plugin.
                                  *
@@ -1312,14 +1312,14 @@
                                     Y.each(this.get(CATEGORY), function (v, k) {
                                         this._uiSetCheckbox(CATEGORY, k, v);
                                     }, this);
-                            
+
                                     Y.each(this.get(SOURCE), function (v, k) {
                                         this._uiSetCheckbox(SOURCE, k, v);
                                     }, this);
-                            
+
                                     this.refreshConsole();
                                 },
-                            
+
                                 /**
                                  * Ensures a filter is set up for any new categories or sources and
                                  * collects the messages in _entries.  If the message is stamped with a
@@ -1332,35 +1332,35 @@
                                  */
                                 _onEntry : function (e) {
                                     this._entries.push(e.message);
-                            
+
                                     var cat = CATEGORY_DOT + e.message.category,
                                         src = SOURCE_DOT + e.message.source,
                                         cat_filter = this.get(cat),
                                         src_filter = this.get(src),
                                         overLimit  = this._entries.length - this._cacheLimit,
                                         visible;
-                            
+
                                     if (overLimit &gt; 0) {
                                         this._entries.splice(0, overLimit);
                                     }
-                            
+
                                     if (cat_filter === undefined) {
                                         visible = this.get(DEF_VISIBILITY);
                                         this.set(cat, visible);
                                         cat_filter = visible;
                                     }
-                            
+
                                     if (src_filter === undefined) {
                                         visible = this.get(DEF_VISIBILITY);
                                         this.set(src, visible);
                                         src_filter = visible;
                                     }
-                            
+
                                     if (!cat_filter || !src_filter) {
                                         e.preventDefault();
                                     }
                                 },
-                            
+
                                 /**
                                  * Flushes the cached entries after a call to the Console&#x27;s clearConsole().
                                  *
@@ -1370,7 +1370,7 @@
                                 _afterClearConsole : function () {
                                     this._entries = [];
                                 },
-                            
+
                                 /**
                                  * Triggers the Console to update if a known category filter
                                  * changes value (e.g. visible =&gt; hidden).  Updates the appropriate
@@ -1384,19 +1384,19 @@
                                     var cat    = e.subAttrName.replace(/category\./, EMPTY),
                                         before = e.prevVal,
                                         after  = e.newVal;
-                            
+
                                     // Don&#x27;t update the console for new categories
                                     if (!cat || before[cat] !== undefined) {
                                         this.refreshConsole();
-                            
+
                                         this._filterBuffer();
                                     }
-                            
+
                                     if (cat &amp;&amp; !e.fromUI) {
                                         this._uiSetCheckbox(CATEGORY, cat, after[cat]);
                                     }
                                 },
-                            
+
                                 /**
                                  * Triggers the Console to update if a known source filter
                                  * changes value (e.g. visible =&gt; hidden).  Updates the appropriate
@@ -1410,19 +1410,19 @@
                                     var src     = e.subAttrName.replace(/source\./, EMPTY),
                                         before = e.prevVal,
                                         after  = e.newVal;
-                            
+
                                     // Don&#x27;t update the console for new sources
                                     if (!src || before[src] !== undefined) {
                                         this.refreshConsole();
-                            
+
                                         this._filterBuffer();
                                     }
-                            
+
                                     if (src &amp;&amp; !e.fromUI) {
                                         this._uiSetCheckbox(SOURCE, src, after[src]);
                                     }
                                 },
-                            
+
                                 /**
                                  * Flushes the Console&#x27;s print buffer of any entries that have a category
                                  * or source that is currently being excluded.
@@ -1436,7 +1436,7 @@
                                         buffer = this.get(HOST).buffer,
                                         start = null,
                                         i;
-                            
+
                                     for (i = buffer.length - 1; i &gt;= 0; --i) {
                                         if (!cats[buffer[i].category] || !srcs[buffer[i].source]) {
                                             start = start || i;
@@ -1449,7 +1449,7 @@
                                         buffer.splice(0,start + 1);
                                     }
                                 },
-                            
+
                                 /**
                                  * Trims the cache of entries to the appropriate new length.
                                  *
@@ -1460,13 +1460,13 @@
                                 _afterCacheLimitChange : function (e) {
                                     if (isFinite(e.newVal)) {
                                         var delta = this._entries.length - e.newVal;
-                            
+
                                         if (delta &gt; 0) {
                                             this._entries.splice(0,delta);
                                         }
                                     }
                                 },
-                            
+
                                 /**
                                  * Repopulates the Console with entries appropriate to the current filter
                                  * settings.
@@ -1482,10 +1482,10 @@
                                         srcs      = this.get(SOURCE),
                                         buffer    = [],
                                         i,e;
-                            
+
                                     if (body) {
                                         host._cancelPrintLoop();
-                            
+
                                         // Evaluate all entries from latest to oldest
                                         for (i = entries.length - 1; i &gt;= 0 &amp;&amp; remaining &gt;= 0; --i) {
                                             e = entries[i];
@@ -1494,13 +1494,13 @@
                                                 --remaining;
                                             }
                                         }
-                            
+
                                         body.setHTML(EMPTY);
                                         host.buffer = buffer;
                                         host.printBuffer();
                                     }
                                 },
-                            
+
                                 /**
                                  * Updates the checked property of a filter checkbox of the specified type.
                                  * If no checkbox is found for the input params, one is created.
@@ -1519,21 +1519,21 @@
                                             sel      = SEL_CHECK + getCN(CONSOLE,FILTER,item),
                                             checkbox = container.one(sel),
                                             host;
-                            
+
                                         if (!checkbox) {
                                             host = this.get(HOST);
-                            
+
                                             this._createCheckbox(container, item);
-                            
+
                                             checkbox = container.one(sel);
-                            
+
                                             host._uiSetHeight(host.get(&#x27;height&#x27;));
                                         }
-                            
+
                                         checkbox.set(CHECKED, checked);
                                     }
                                 },
-                            
+
                                 /**
                                  * Passes checkbox clicks on to the category attribute.
                                  *
@@ -1543,7 +1543,7 @@
                                  */
                                 _onCategoryCheckboxClick : function (e) {
                                     var t = e.target, cat;
-                            
+
                                     if (t.hasClass(ConsoleFilters.CHROME_CLASSES.filter)) {
                                         cat = t.get(&#x27;value&#x27;);
                                         if (cat &amp;&amp; cat in this.get(CATEGORY)) {
@@ -1551,7 +1551,7 @@
                                         }
                                     }
                                 },
-                            
+
                                 /**
                                  * Passes checkbox clicks on to the source attribute.
                                  *
@@ -1561,7 +1561,7 @@
                                  */
                                 _onSourceCheckboxClick : function (e) {
                                     var t = e.target, src;
-                            
+
                                     if (t.hasClass(ConsoleFilters.CHROME_CLASSES.filter)) {
                                         src = t.get(&#x27;value&#x27;);
                                         if (src &amp;&amp; src in this.get(SOURCE)) {
@@ -1569,7 +1569,7 @@
                                         }
                                     }
                                 },
-                            
+
                                 /**
                                  * Hides any number of categories from the UI.  Convenience method for
                                  * myConsole.filter.set(&#x27;category.foo&#x27;, false); set(&#x27;category.bar&#x27;, false);
@@ -1585,7 +1585,7 @@
                                         this.set(CATEGORY_DOT + cat, false);
                                     }
                                 },
-                            
+
                                 /**
                                  * Shows any number of categories in the UI.  Convenience method for
                                  * myConsole.filter.set(&#x27;category.foo&#x27;, true); set(&#x27;category.bar&#x27;, true);
@@ -1601,7 +1601,7 @@
                                         this.set(CATEGORY_DOT + cat, true);
                                     }
                                 },
-                            
+
                                 /**
                                  * Hides any number of sources from the UI.  Convenience method for
                                  * myConsole.filter.set(&#x27;source.foo&#x27;, false); set(&#x27;source.bar&#x27;, false);
@@ -1617,7 +1617,7 @@
                                         this.set(SOURCE_DOT + src, false);
                                     }
                                 },
-                            
+
                                 /**
                                  * Shows any number of sources in the UI.  Convenience method for
                                  * myConsole.filter.set(&#x27;source.foo&#x27;, true); set(&#x27;source.bar&#x27;, true);
@@ -1633,7 +1633,7 @@
                                         this.set(SOURCE_DOT + src, true);
                                     }
                                 },
-                            
+
                                 /**
                                  * Creates a checkbox and label from the ConsoleFilters.FILTER_TEMPLATE for
                                  * the provided type and name.  The checkbox and label are appended to the
@@ -1651,10 +1651,10 @@
                                                }),
                                         node = Y.Node.create(
                                                     Y.Lang.sub(ConsoleFilters.FILTER_TEMPLATE, info));
-                            
+
                                     container.appendChild(node);
                                 },
-                            
+
                                 /**
                                  * Validates category updates are objects and the subattribute is not too
                                  * deep.
@@ -1668,7 +1668,7 @@
                                 _validateCategory : function (cat, v) {
                                     return Y.Lang.isObject(v,true) &amp;&amp; cat.split(/\./).length &lt; 3;
                                 },
-                            
+
                                 /**
                                  * Validates source updates are objects and the subattribute is not too
                                  * deep.
@@ -1682,7 +1682,7 @@
                                 _validateSource : function (src, v) {
                                     return Y.Lang.isObject(v,true) &amp;&amp; src.split(/\./).length &lt; 3;
                                 },
-                            
+
                                 /**
                                  * Setter method for cacheLimit attribute.  Basically a validator to ensure
                                  * numeric input.
@@ -1701,7 +1701,7 @@
                                     }
                                 }
                             },
-                            
+
                             // Y.Plugin.ConsoleFilters static properties
                             {
                                 /**
@@ -1713,7 +1713,7 @@
                                  * @default &#x27;consoleFilters&#x27;
                                  */
                                 NAME : &#x27;consoleFilters&#x27;,
-                            
+
                                 /**
                                  * The namespace hung off the host object that this plugin will inhabit.
                                  *
@@ -1723,7 +1723,7 @@
                                  * @default &#x27;filter&#x27;
                                  */
                                 NS : FILTER,
-                            
+
                                 /**
                                  * Markup template used to create the container for the category filters.
                                  *
@@ -1733,7 +1733,7 @@
                                  */
                                 CATEGORIES_TEMPLATE :
                                     &#x27;&lt;div class=&quot;{categories}&quot;&gt;&lt;/div&gt;&#x27;,
-                            
+
                                 /**
                                  * Markup template used to create the container for the source filters.
                                  *
@@ -1743,7 +1743,7 @@
                                  */
                                 SOURCES_TEMPLATE :
                                     &#x27;&lt;div class=&quot;{sources}&quot;&gt;&lt;/div&gt;&#x27;,
-                            
+
                                 /**
                                  * Markup template used to create the category and source filter checkboxes.
                                  *
@@ -1760,7 +1760,7 @@
                                         &#x27;&lt;input type=&quot;checkbox&quot; value=&quot;{filter_name}&quot; &#x27;+
                                             &#x27;class=&quot;{filter} {filter_class}&quot;&gt; {filter_name}&#x27;+
                                     &#x27;&lt;/label&gt;&amp;#8201;&#x27;,
-                            
+
                                 /**
                                  * Classnames used by the templates when creating nodes.
                                  *
@@ -1777,7 +1777,7 @@
                                     filter       : getCN(CONSOLE,FILTER),
                                     filter_label : getCN(CONSOLE,FILTER,&#x27;label&#x27;)
                                 },
-                            
+
                                 ATTRS : {
                                     /**
                                      * Default visibility applied to new categories and sources.
@@ -1790,7 +1790,7 @@
                                         value : true,
                                         validator : Y.Lang.isBoolean
                                     },
-                            
+
                                     /**
                                      * &lt;p&gt;Map of entry categories to their visibility status.  Update a
                                      * particular category&#x27;s visibility by setting the subattribute to true
@@ -1816,7 +1816,7 @@
                                             return this._validateCategory(k,v);
                                         }
                                     },
-                            
+
                                     /**
                                      * &lt;p&gt;Map of entry sources to their visibility status.  Update a
                                      * particular sources&#x27;s visibility by setting the subattribute to true
@@ -1834,7 +1834,7 @@
                                             return this._validateSource(k,v);
                                         }
                                     },
-                            
+
                                     /**
                                      * Maximum number of entries to store in the message cache.  Use this to
                                      * limit the memory footprint in environments with heavy log usage.
@@ -1852,7 +1852,7 @@
                                     }
                                 }
                             });
-                            
+
                                 </pre>
                             </div>
                         </div>

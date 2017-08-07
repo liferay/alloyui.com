@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/widget/js/WidgetHTMLParser.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1141,14 +1141,14 @@
                              * @submodule widget-htmlparser
                              * @for Widget
                              */
-                            
+
                             var Widget = Y.Widget,
                                 Node = Y.Node,
                                 Lang = Y.Lang,
-                            
+
                                 SRC_NODE = &quot;srcNode&quot;,
                                 CONTENT_BOX = &quot;contentBox&quot;;
-                            
+
                             /**
                              * Object hash, defining how attribute values are to be parsed from
                              * markup contained in the widget&#x27;s content box. e.g.:
@@ -1173,7 +1173,7 @@
                              * @static
                              */
                             Widget.HTML_PARSER = {};
-                            
+
                             /**
                              * The build configuration for the Widget class.
                              * &lt;p&gt;
@@ -1190,7 +1190,7 @@
                             Widget._buildCfg = {
                                 aggregates : [&quot;HTML_PARSER&quot;]
                             };
-                            
+
                             /**
                              * The DOM node to parse for configuration values, passed to the Widget&#x27;s HTML_PARSER definition
                              *
@@ -1204,9 +1204,9 @@
                                 getter: &quot;_getSrcNode&quot;,
                                 writeOnce: true
                             };
-                            
+
                             Y.mix(Widget.prototype, {
-                            
+
                                 /**
                                  * @method _getSrcNode
                                  * @protected
@@ -1215,7 +1215,7 @@
                                 _getSrcNode : function(val) {
                                     return val || this.get(CONTENT_BOX);
                                 },
-                            
+
                                 /**
                                  * Implement the BaseCore _preAddAttrs method hook, to add
                                  * the srcNode and related attributes, so that HTML_PARSER
@@ -1234,26 +1234,26 @@
                                  * @param lazy {boolean} Whether or not to add the attributes lazily
                                  */
                                 _preAddAttrs : function(attrs, userVals, lazy) {
-                            
+
                                     var preAttrs = {
                                         id : attrs.id,
                                         boundingBox : attrs.boundingBox,
                                         contentBox : attrs.contentBox,
                                         srcNode : attrs.srcNode || Y.Object(Widget.ATTRS[SRC_NODE])
                                     };
-                            
+
                                     this.addAttrs(preAttrs, userVals, lazy);
-                            
+
                                     delete attrs.boundingBox;
                                     delete attrs.contentBox;
                                     delete attrs.srcNode;
                                     delete attrs.id;
-                            
+
                                     if (this._applyParser) {
                                         this._applyParser(userVals);
                                     }
                                 },
-                            
+
                                 /**
                                  * @method _applyParsedConfig
                                  * @protected
@@ -1262,7 +1262,7 @@
                                 _applyParsedConfig : function(node, cfg, parsedCfg) {
                                     return (parsedCfg) ? Y.mix(cfg, parsedCfg, false) : cfg;
                                 },
-                            
+
                                 /**
                                  * Utility method used to apply the &lt;code&gt;HTML_PARSER&lt;/code&gt; configuration for the
                                  * instance, to retrieve config data values.
@@ -1272,17 +1272,17 @@
                                  * @param config {Object} User configuration object (will be populated with values from Node)
                                  */
                                 _applyParser : function(config) {
-                            
+
                                     var widget = this,
                                         srcNode = this._getNodeToParse(),
                                         schema = widget._getHtmlParser(),
                                         parsedConfig,
                                         val;
-                            
+
                                     if (schema &amp;&amp; srcNode) {
                                         Y.Object.each(schema, function(v, k, o) {
                                             val = null;
-                            
+
                                             if (Lang.isFunction(v)) {
                                                 val = v.call(widget, srcNode);
                                             } else {
@@ -1295,7 +1295,7 @@
                                                     val = srcNode.one(v);
                                                 }
                                             }
-                            
+
                                             if (val !== null &amp;&amp; val !== undefined) {
                                                 parsedConfig = parsedConfig || {};
                                                 parsedConfig[k] = val;
@@ -1304,7 +1304,7 @@
                                     }
                                     config = widget._applyParsedConfig(srcNode, config, parsedConfig);
                                 },
-                            
+
                                 /**
                                  * Determines whether we have a node reference which we should try and parse.
                                  *
@@ -1319,7 +1319,7 @@
                                     var srcNode = this.get(&quot;srcNode&quot;);
                                     return (!this._cbFromTemplate) ? srcNode : null;
                                 },
-                            
+
                                 /**
                                  * Gets the HTML_PARSER definition for this instance, by merging HTML_PARSER
                                  * definitions across the class hierarchy.
@@ -1334,7 +1334,7 @@
                                     var classes = this._getClasses(),
                                         parser = {},
                                         i, p;
-                            
+
                                     for (i = classes.length - 1; i &gt;= 0; i--) {
                                         p = classes[i].HTML_PARSER;
                                         if (p) {
@@ -1344,7 +1344,7 @@
                                     return parser;
                                 }
                             });
-                            
+
                                 </pre>
                             </div>
                         </div>

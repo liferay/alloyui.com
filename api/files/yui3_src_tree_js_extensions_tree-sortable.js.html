@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,31 +1122,31 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/tree/js/extensions/tree-sortable.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /*jshint expr:true, onevar:false */
-                            
+
                             /**
                             Extension for &#x60;Tree&#x60; that makes nodes sortable.
-                            
+
                             @module tree
                             @submodule tree-sortable
                             @main tree-sortable
                             **/
-                            
+
                             /**
                             Extension for &#x60;Tree&#x60; that makes nodes sortable.
-                            
+
                             @class Tree.Sortable
                             @constructor
                             @param {Object} [config] Configuration options.
@@ -1159,10 +1159,10 @@
                                 in ascending order.
                             @extensionfor Tree
                             **/
-                            
+
                             /**
                             Fired after a node&#x27;s children are re-sorted.
-                            
+
                             @event sort
                             @param {Tree.Node} node Node whose children were sorted.
                             @param {Boolean} reverse &#x60;true&#x60; if the children were sorted in reverse
@@ -1170,45 +1170,45 @@
                             @param {String} src Source of the event.
                             **/
                             var EVT_SORT = &#x27;sort&#x27;;
-                            
+
                             function Sortable() {}
-                            
+
                             Sortable.prototype = {
                                 // -- Public Properties ----------------------------------------------------
-                            
+
                                 /**
                                 If &#x60;true&#x60;, node children will be sorted in reverse (descending) order by
                                 default. Otherwise they&#x27;ll be sorted in ascending order.
-                            
+
                                 @property {Boolean} sortReverse
                                 @default false
                                 **/
                                 sortReverse: false,
-                            
+
                                 // -- Lifecycle ------------------------------------------------------------
                                 initializer: function (config) {
                                     this.nodeExtensions = this.nodeExtensions.concat(Y.Tree.Node.Sortable);
-                            
+
                                     if (config) {
                                         if (config.sortComparator) {
                                             this.sortComparator = config.sortComparator;
                                         }
-                            
+
                                         if (&#x27;sortReverse&#x27; in config) {
                                             this.sortReverse = config.sortReverse;
                                         }
                                     }
                                 },
-                            
+
                                 // -- Public Methods -------------------------------------------------------
-                            
+
                                 /**
                                 Sorts the children of every node in this tree.
-                            
+
                                 A &#x60;sort&#x60; event will be fired for each node whose children are sorted, which
                                 can get very noisy. If this is a large tree, you may want to set the
                                 &#x60;silent&#x60; option to &#x60;true&#x60; to suppress these events.
-                            
+
                                 @method sort
                                 @param {Object} [options] Options.
                                     @param {Boolean} [options.silent] If &#x60;true&#x60;, no &#x60;sort&#x60; events will be
@@ -1228,13 +1228,13 @@
                                 sort: function (options) {
                                     return this.sortNode(this.rootNode, Y.merge(options, {deep: true}));
                                 },
-                            
+
                                 /**
                                 Default comparator function to use when sorting a node&#x27;s children if the
                                 node itself doesn&#x27;t have a custom comparator function.
-                            
+
                                 If not specified, insertion order will be used by default.
-                            
+
                                 @method sortComparator
                                 @param {Tree.Node} node Node being sorted.
                                 @return {Number|String} Value by which the node should be sorted relative to
@@ -1243,15 +1243,15 @@
                                 sortComparator: function (node) {
                                     return node.index();
                                 },
-                            
+
                                 /**
                                 Sorts the children of the specified node.
-                            
+
                                 By default, only the node&#x27;s direct children are sorted. To sort all nodes in
                                 the hierarchy (children, children&#x27;s children, etc.), set the &#x60;deep&#x60; option
                                 to &#x60;true&#x60;. If this is a very deep hierarchy, you may also want to set
                                 &#x60;silent&#x60; to true to avoid generating a flood of &#x60;sort&#x60; events.
-                            
+
                                 @method sortNode
                                 @param {Tree.Node} node Node whose children should be sorted.
                                 @param {Object} [options] Options.
@@ -1277,26 +1277,26 @@
                                     if (!node.children.length) {
                                         return this;
                                     }
-                            
+
                                     options || (options = {});
-                            
+
                                     if (options.deep) {
                                         // Unset the &#x60;deep&#x60; option so we don&#x27;t cause an infinite loop.
                                         options = Y.merge(options, {deep: false});
-                            
+
                                         var self = this;
-                            
+
                                         // Traverse and sort all nodes (including this one).
                                         this.traverseNode(node, function (nodeToSort) {
                                             self.sortNode(nodeToSort, options);
                                         });
-                            
+
                                         return this;
                                     }
-                            
+
                                     var comparator = this._getSortComparator(node, options),
                                         reverse;
-                            
+
                                     if (&#x27;sortReverse&#x27; in options) {
                                         reverse = node.sortReverse = options.sortReverse;
                                     } else if (&#x27;sortReverse&#x27; in node) {
@@ -1304,10 +1304,10 @@
                                     } else {
                                         reverse = this.sortReverse;
                                     }
-                            
+
                                     node.children.sort(Y.rbind(this._sort, this, comparator, reverse));
                                     node._isIndexStale = true;
-                            
+
                                     if (!options.silent) {
                                         this.fire(EVT_SORT, {
                                             node   : node,
@@ -1315,17 +1315,17 @@
                                             src    : options.src
                                         });
                                     }
-                            
+
                                     return this;
                                 },
-                            
+
                                 // -- Protected Methods ----------------------------------------------------
-                            
+
                                 /**
                                 Compares value _a_ to value _b_ for sorting purposes.
-                            
+
                                 Values are assumed to be the result of calling a sortComparator function.
-                            
+
                                 @method _compare
                                 @param {Mixed} a First value to compare.
                                 @param {Mixed} b Second value to compare.
@@ -1336,13 +1336,13 @@
                                 _compare: function (a, b) {
                                     return a &lt; b ? -1 : (a &gt; b ? 1 : 0);
                                 },
-                            
+
                                 /**
                                 Compares value _a_ to value _b_ for sorting purposes, but sorts them in
                                 reverse (descending) order.
-                            
+
                                 Values are assumed to be the result of calling a sortComparator function.
-                            
+
                                 @method _compareReverse
                                 @param {Mixed} a First value to compare.
                                 @param {Mixed} b Second value to compare.
@@ -1353,11 +1353,11 @@
                                 _compareReverse: function (a, b) {
                                     return b &lt; a ? -1 : (b &gt; a ? 1 : 0);
                                 },
-                            
+
                                 /**
                                 Overrides &#x60;Tree#_getDefaultNodeIndex()&#x60; to provide insertion-time sorting
                                 for nodes inserted without an explicit index.
-                            
+
                                 @method _getDefaultNodeIndex
                                 @param {Tree.Node} parent Parent node.
                                 @param {Tree.Node} node Node being inserted.
@@ -1368,17 +1368,17 @@
                                 **/
                                 _getDefaultNodeIndex: function (parent, node) {
                                     /*jshint bitwise:false */
-                            
+
                                     var children   = parent.children,
                                         comparator = this._getSortComparator(parent),
                                         max        = children.length,
                                         min        = 0,
                                         reverse    = &#x27;sortReverse&#x27; in parent ? parent.sortReverse : this.sortReverse;
-                            
+
                                     if (!max) {
                                         return max;
                                     }
-                            
+
                                     // Special case: if the sortComparator is the default sortComparator,
                                     // cheat and just return the first or last index of the children array.
                                     //
@@ -1387,31 +1387,31 @@
                                     if (comparator._unboundComparator === Sortable.prototype.sortComparator) {
                                         return reverse ? 0 : max;
                                     }
-                            
+
                                     var compare = reverse ? this._compareReverse : this._compare,
                                         needle  = comparator(node);
-                            
+
                                     // Perform an iterative binary search to determine the correct position
                                     // for the node based on the return value of the comparator function.
                                     var middle;
-                            
+
                                     while (min &lt; max) {
                                         middle = (min + max) &gt;&gt; 1; // Divide by two and discard remainder.
-                            
+
                                         if (compare(comparator(children[middle]), needle) &lt; 0) {
                                             min = middle + 1;
                                         } else {
                                             max = middle;
                                         }
                                     }
-                            
+
                                     return min;
                                 },
-                            
+
                                 /**
                                 Returns a sort comparator function derived from the given _node_ and
                                 _options_, and bound to the correct &#x60;thisObj&#x60; based on where it was found.
-                            
+
                                 @method _getSortComparator
                                 @param {Tree.Node} node Node on which to look for a &#x60;sortComparator&#x60;
                                     function.
@@ -1424,7 +1424,7 @@
                                     var boundComparator,
                                         comparator,
                                         thisObj;
-                            
+
                                     if (options &amp;&amp; options.sortComparator) {
                                         comparator = node.sortComparator = options.sortComparator;
                                     } else if (node.sortComparator) {
@@ -1434,19 +1434,19 @@
                                         comparator = this.sortComparator;
                                         thisObj    = this;
                                     }
-                            
+
                                     boundComparator = function () {
                                         return comparator.apply(thisObj, arguments);
                                     };
-                            
+
                                     boundComparator._unboundComparator = comparator;
-                            
+
                                     return boundComparator;
                                 },
-                            
+
                                 /**
                                 Array sort function used by &#x60;sortNode()&#x60; to re-sort a node&#x27;s children.
-                            
+
                                 @method _sort
                                 @param {Tree.Node} a First node to compare.
                                 @param {Tree.Node} b Second node to compare.
@@ -1461,9 +1461,9 @@
                                         comparator(a), comparator(b));
                                 }
                             };
-                            
+
                             Y.Tree.Sortable = Sortable;
-                            
+
                                 </pre>
                             </div>
                         </div>

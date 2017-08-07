@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,29 +1122,29 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/test/scripts/YTestWrapAfter.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
-                            
-                            
+
+
                             //Setting up our aliases..
                             Y.Test = YUITest;
                             Y.Object.each(YUITest, function(item, name) {
                                 var name = name.replace(&#x27;Test&#x27;, &#x27;&#x27;);
                                 Y.Test[name] = item;
                             });
-                            
+
                             } //End of else in top wrapper
-                            
+
                             Y.Assert = YUITest.Assert;
                             Y.Assert.Error = Y.Test.AssertionError;
                             Y.Assert.ComparisonFailure = Y.Test.ComparisonFailure;
@@ -1154,14 +1154,14 @@
                             Y.ArrayAssert = Y.Test.ArrayAssert;
                             Y.DateAssert = Y.Test.DateAssert;
                             Y.Test.ResultsFormat = Y.Test.TestFormat;
-                            
+
                             var itemsAreEqual = Y.Test.ArrayAssert.itemsAreEqual;
-                            
+
                             Y.Test.ArrayAssert.itemsAreEqual = function(expected, actual, message) {
                                 return itemsAreEqual.call(this, Y.Array(expected), Y.Array(actual), message);
                             };
-                            
-                            
+
+
                             /**
                              * Asserts that a given condition is true. If not, then a Y.Assert.Error object is thrown
                              * and the test fails.
@@ -1177,7 +1177,7 @@
                                     throw new Y.Assert.Error(Y.Assert._formatMessage(message, &quot;Assertion failed.&quot;));
                                 }
                             };
-                            
+
                             /**
                              * Forces an assertion error to occur. Shortcut for Y.Assert.fail().
                              * @method fail
@@ -1186,45 +1186,45 @@
                              * @static
                              */
                             Y.fail = Y.Assert.fail;
-                            
+
                             Y.Test.Runner.once = Y.Test.Runner.subscribe;
-                            
+
                             Y.Test.Runner.disableLogging = function() {
                                 Y.Test.Runner._log = false;
                             };
-                            
+
                             Y.Test.Runner.enableLogging = function() {
                                 Y.Test.Runner._log = true;
                             };
-                            
+
                             Y.Test.Runner._ignoreEmpty = true;
                             Y.Test.Runner._log = true;
-                            
+
                             Y.Test.Runner.on = Y.Test.Runner.attach;
-                            
+
                             //Only allow one instance of YUITest
                             if (!YUI.YUITest) {
-                            
+
                                 if (Y.config.win) {
                                     Y.config.win.YUITest = YUITest;
                                 }
-                            
+
                                 YUI.YUITest = Y.Test;
-                            
-                            
+
+
                                 //Only setup the listeners once.
                                 var logEvent = function(event) {
-                            
+
                                     //data variables
                                     var message = &quot;&quot;;
                                     var messageType = &quot;&quot;;
-                            
+
                                     switch(event.type){
                                         case this.BEGIN_EVENT:
                                             message = &quot;Testing began at &quot; + (new Date()).toString() + &quot;.&quot;;
                                             messageType = &quot;info&quot;;
                                             break;
-                            
+
                                         case this.COMPLETE_EVENT:
                                             message = Y.Lang.sub(&quot;Testing completed at &quot; +
                                                 (new Date()).toString() + &quot;.\n&quot; +
@@ -1233,27 +1233,27 @@
                                                 event.results);
                                             messageType = &quot;info&quot;;
                                             break;
-                            
+
                                         case this.TEST_FAIL_EVENT:
                                             message = event.testName + &quot;: failed.\n&quot; + event.error.getMessage();
                                             messageType = &quot;fail&quot;;
                                             break;
-                            
+
                                         case this.TEST_IGNORE_EVENT:
                                             message = event.testName + &quot;: ignored.&quot;;
                                             messageType = &quot;ignore&quot;;
                                             break;
-                            
+
                                         case this.TEST_PASS_EVENT:
                                             message = event.testName + &quot;: passed.&quot;;
                                             messageType = &quot;pass&quot;;
                                             break;
-                            
+
                                         case this.TEST_SUITE_BEGIN_EVENT:
                                             message = &quot;Test suite \&quot;&quot; + event.testSuite.name + &quot;\&quot; started.&quot;;
                                             messageType = &quot;info&quot;;
                                             break;
-                            
+
                                         case this.TEST_SUITE_COMPLETE_EVENT:
                                             message = Y.Lang.sub(&quot;Test suite \&quot;&quot; +
                                                 event.testSuite.name + &quot;\&quot; completed&quot; + &quot;.\n&quot; +
@@ -1262,12 +1262,12 @@
                                                 event.results);
                                             messageType = &quot;info&quot;;
                                             break;
-                            
+
                                         case this.TEST_CASE_BEGIN_EVENT:
                                             message = &quot;Test case \&quot;&quot; + event.testCase.name + &quot;\&quot; started.&quot;;
                                             messageType = &quot;info&quot;;
                                             break;
-                            
+
                                         case this.TEST_CASE_COMPLETE_EVENT:
                                             message = Y.Lang.sub(&quot;Test case \&quot;&quot; +
                                                 event.testCase.name + &quot;\&quot; completed.\n&quot; +
@@ -1280,23 +1280,23 @@
                                             message = &quot;Unexpected event &quot; + event.type;
                                             messageType = &quot;info&quot;;
                                     }
-                            
+
                                     if (Y.Test.Runner._log) {
                                         Y.log(message, messageType, &quot;TestRunner&quot;);
                                     }
                                 };
-                            
+
                                 var i, name;
-                            
+
                                 for (i in Y.Test.Runner) {
                                     name = Y.Test.Runner[i];
                                     if (i.indexOf(&#x27;_EVENT&#x27;) &gt; -1) {
                                         Y.Test.Runner.subscribe(name, logEvent);
                                     }
                                 };
-                            
+
                             } //End if for YUI.YUITest
-                            
+
                                 </pre>
                             </div>
                         </div>

@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,57 +1122,57 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/widget-buttons/js/widget-buttons.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
                             Provides header/body/footer button support for Widgets that use the
                             &#x60;WidgetStdMod&#x60; extension.
-                            
+
                             @module widget-buttons
                             @since 3.4.0
                             **/
-                            
+
                             var YArray  = Y.Array,
                                 YLang   = Y.Lang,
                                 YObject = Y.Object,
-                            
+
                                 ButtonPlugin = Y.Plugin.Button,
                                 Widget       = Y.Widget,
                                 WidgetStdMod = Y.WidgetStdMod,
-                            
+
                                 getClassName = Y.ClassNameManager.getClassName,
                                 isArray      = YLang.isArray,
                                 isNumber     = YLang.isNumber,
                                 isString     = YLang.isString,
                                 isValue      = YLang.isValue;
-                            
+
                             // Utility to determine if an object is a Y.Node instance, even if it was
                             // created in a different YUI sandbox.
                             function isNode(node) {
                                 return !!node.getDOMNode;
                             }
-                            
+
                             /**
                             Provides header/body/footer button support for Widgets that use the
                             &#x60;WidgetStdMod&#x60; extension.
-                            
+
                             This Widget extension makes it easy to declaratively configure a widget&#x27;s
                             buttons. It adds a &#x60;buttons&#x60; attribute along with button- accessor and mutator
                             methods. All button nodes have the &#x60;Y.Plugin.Button&#x60; plugin applied.
-                            
+
                             This extension also includes &#x60;HTML_PARSER&#x60; support to seed a widget&#x27;s &#x60;buttons&#x60;
                             from those which already exist in its DOM.
-                            
+
                             @class WidgetButtons
                             @extensionfor Widget
                             @since 3.4.0
@@ -1181,54 +1181,54 @@
                                 // Has to be setup before the &#x60;initializer()&#x60;.
                                 this._buttonsHandles = {};
                             }
-                            
+
                             WidgetButtons.ATTRS = {
                                 /**
                                 Collection containing a widget&#x27;s buttons.
-                            
+
                                 The collection is an Object which contains an Array of &#x60;Y.Node&#x60;s for every
                                 &#x60;WidgetStdMod&#x60; section (header, body, footer) which has one or more buttons.
                                 All button nodes have the &#x60;Y.Plugin.Button&#x60; plugin applied.
-                            
+
                                 This attribute is very flexible in the values it will accept. &#x60;buttons&#x60; can
                                 be specified as a single Array, or an Object of Arrays keyed to a particular
                                 section.
-                            
+
                                 All specified values will be normalized to this type of structure:
-                            
+
                                     {
                                         header: [...],
                                         footer: [...]
                                     }
-                            
+
                                 A button can be specified as a &#x60;Y.Node&#x60;, config Object, or String name for a
                                 predefined button on the &#x60;BUTTONS&#x60; prototype property. When a config Object
                                 is provided, it will be merged with any defaults provided by a button with
                                 the same &#x60;name&#x60; defined on the &#x60;BUTTONS&#x60; property.
-                            
+
                                 See &#x60;addButton()&#x60; for the detailed list of configuration properties.
-                            
+
                                 For convenience, a widget&#x27;s buttons will always persist and remain rendered
                                 after header/body/footer content updates. Buttons should be removed by
                                 updating this attribute or using the &#x60;removeButton()&#x60; method.
-                            
+
                                 @example
                                     {
                                         // Uses predefined &quot;close&quot; button by string name.
                                         header: [&#x27;close&#x27;],
-                            
+
                                         footer: [
                                             {
                                                 name  : &#x27;cancel&#x27;,
                                                 label : &#x27;Cancel&#x27;,
                                                 action: &#x27;hide&#x27;
                                             },
-                            
+
                                             {
                                                 name     : &#x27;okay&#x27;,
                                                 label    : &#x27;Okay&#x27;,
                                                 isDefault: true,
-                            
+
                                                 events: {
                                                     click: function (e) {
                                                         this.hide();
@@ -1237,7 +1237,7 @@
                                             }
                                         ]
                                     }
-                            
+
                                 @attribute buttons
                                 @type Object
                                 @default {}
@@ -1248,24 +1248,24 @@
                                     setter: &#x27;_setButtons&#x27;,
                                     value : {}
                                 },
-                            
+
                                 /**
                                 The current default button as configured through this widget&#x27;s &#x60;buttons&#x60;.
-                            
+
                                 A button can be configured as the default button in the following ways:
-                            
+
                                   * As a config Object with an &#x60;isDefault&#x60; property:
                                     &#x60;{label: &#x27;Okay&#x27;, isDefault: true}&#x60;.
-                            
+
                                   * As a Node with a &#x60;data-default&#x60; attribute:
                                     &#x60;&lt;button data-default=&quot;true&quot;&gt;Okay&lt;/button&gt;&#x60;.
-                            
+
                                 This attribute is **read-only**; anytime there are changes to this widget&#x27;s
                                 &#x60;buttons&#x60;, the &#x60;defaultButton&#x60; will be updated if needed.
-                            
+
                                 **Note:** If two or more buttons are configured to be the default button,
                                 the last one wins.
-                            
+
                                 @attribute defaultButton
                                 @type Node
                                 @default null
@@ -1277,10 +1277,10 @@
                                     value   : null
                                 }
                             };
-                            
+
                             /**
                             CSS classes used by &#x60;WidgetButtons&#x60;.
-                            
+
                             @property CLASS_NAMES
                             @type Object
                             @static
@@ -1291,17 +1291,17 @@
                                 buttons: Widget.getClassName(&#x27;buttons&#x27;),
                                 primary: getClassName(&#x27;button&#x27;, &#x27;primary&#x27;)
                             };
-                            
+
                             WidgetButtons.HTML_PARSER = {
                                 buttons: function (srcNode) {
                                     return this._parseButtons(srcNode);
                                 }
                             };
-                            
+
                             /**
                             The list of button configuration properties which are specific to
                             &#x60;WidgetButtons&#x60; and should not be passed to &#x60;Y.Plugin.Button.createNode()&#x60;.
-                            
+
                             @property NON_BUTTON_NODE_CFG
                             @type Array
                             @static
@@ -1310,18 +1310,18 @@
                             WidgetButtons.NON_BUTTON_NODE_CFG = [
                                 &#x27;action&#x27;, &#x27;classNames&#x27;, &#x27;context&#x27;, &#x27;events&#x27;, &#x27;isDefault&#x27;, &#x27;section&#x27;
                             ];
-                            
+
                             WidgetButtons.prototype = {
                                 // -- Public Properties ----------------------------------------------------
-                            
+
                                 /**
                                 Collection of predefined buttons mapped by name -&gt; config.
-                            
+
                                 These button configurations will serve as defaults for any button added to a
                                 widget&#x27;s buttons which have the same &#x60;name&#x60;.
-                            
+
                                 See &#x60;addButton()&#x60; for a list of possible configuration values.
-                            
+
                                 @property BUTTONS
                                 @type Object
                                 @default {}
@@ -1329,119 +1329,119 @@
                                 @since 3.5.0
                                 **/
                                 BUTTONS: {},
-                            
+
                                 /**
                                 The HTML template to use when creating the node which wraps all buttons of a
                                 section. By default it will have the CSS class: &quot;yui3-widget-buttons&quot;.
-                            
+
                                 @property BUTTONS_TEMPLATE
                                 @type String
                                 @default &quot;&lt;span /&gt;&quot;
                                 @since 3.5.0
                                 **/
                                 BUTTONS_TEMPLATE: &#x27;&lt;span /&gt;&#x27;,
-                            
+
                                 /**
                                 The default section to render buttons in when no section is specified.
-                            
+
                                 @property DEFAULT_BUTTONS_SECTION
                                 @type String
                                 @default Y.WidgetStdMod.FOOTER
                                 @since 3.5.0
                                 **/
                                 DEFAULT_BUTTONS_SECTION: WidgetStdMod.FOOTER,
-                            
+
                                 // -- Protected Properties -------------------------------------------------
-                            
+
                                 /**
                                 A map of button node &#x60;_yuid&#x60; -&gt; event-handle for all button nodes which were
                                 created by this widget.
-                            
+
                                 @property _buttonsHandles
                                 @type Object
                                 @protected
                                 @since 3.5.0
                                 **/
-                            
+
                                 /**
                                 A map of this widget&#x27;s &#x60;buttons&#x60;, both name -&gt; button and
                                 section:name -&gt; button.
-                            
+
                                 @property _buttonsMap
                                 @type Object
                                 @protected
                                 @since 3.5.0
                                 **/
-                            
+
                                 /**
                                 Internal reference to this widget&#x27;s default button.
-                            
+
                                 @property _defaultButton
                                 @type Node
                                 @protected
                                 @since 3.5.0
                                 **/
-                            
+
                                 // -- Lifecycle Methods ----------------------------------------------------
-                            
+
                                 initializer: function () {
                                     // Require &#x60;Y.WidgetStdMod&#x60;.
                                     if (!this._stdModNode) {
                                         Y.error(&#x27;WidgetStdMod must be added to a Widget before WidgetButtons.&#x27;);
                                     }
-                            
+
                                     // Creates button mappings and sets the &#x60;defaultButton&#x60;.
                                     this._mapButtons(this.get(&#x27;buttons&#x27;));
                                     this._updateDefaultButton();
-                            
+
                                     // Bound with &#x60;Y.bind()&#x60; to make more extensible.
                                     this.after({
                                         buttonsChange      : Y.bind(&#x27;_afterButtonsChange&#x27;, this),
                                         defaultButtonChange: Y.bind(&#x27;_afterDefaultButtonChange&#x27;, this)
                                     });
-                            
+
                                     Y.after(this._bindUIButtons, this, &#x27;bindUI&#x27;);
                                     Y.after(this._syncUIButtons, this, &#x27;syncUI&#x27;);
                                 },
-                            
+
                                 destructor: function () {
                                     // Detach all event subscriptions this widget added to its &#x60;buttons&#x60;.
                                     YObject.each(this._buttonsHandles, function (handle) {
                                         handle.detach();
                                     });
-                            
+
                                     delete this._buttonsHandles;
                                     delete this._buttonsMap;
                                     delete this._defaultButton;
                                 },
-                            
+
                                 // -- Public Methods -------------------------------------------------------
-                            
+
                                 /**
                                 Adds a button to this widget.
-                            
+
                                 The new button node will have the &#x60;Y.Plugin.Button&#x60; plugin applied, be added
                                 to this widget&#x27;s &#x60;buttons&#x60;, and rendered in the specified &#x60;section&#x60; at the
                                 specified &#x60;index&#x60; (or end of the section when no &#x60;index&#x60; is provided). If
                                 the section does not exist, it will be created.
-                            
+
                                 This fires the &#x60;buttonsChange&#x60; event and adds the following properties to
                                 the event facade:
-                            
+
                                   * &#x60;button&#x60;: The button node or config object to add.
-                            
+
                                   * &#x60;section&#x60;: The &#x60;WidgetStdMod&#x60; section (header/body/footer) where the
                                     button will be added.
-                            
+
                                   * &#x60;index&#x60;: The index at which the button will be in the section.
-                            
+
                                   * &#x60;src&#x60;: &quot;add&quot;
-                            
+
                                 **Note:** The &#x60;index&#x60; argument will be passed to the Array &#x60;splice()&#x60;
                                 method, therefore a negative value will insert the &#x60;button&#x60; that many items
                                 from the end. The &#x60;index&#x60; property on the &#x60;buttonsChange&#x60; event facade is
                                 the index at which the &#x60;button&#x60; was added.
-                            
+
                                 @method addButton
                                 @param {Node|Object|String} button The button to add. This can be a &#x60;Y.Node&#x60;
                                     instance, config Object, or String name for a predefined button on the
@@ -1494,36 +1494,36 @@
                                 addButton: function (button, section, index) {
                                     var buttons = this.get(&#x27;buttons&#x27;),
                                         sectionButtons, atIndex;
-                            
+
                                     // Makes sure we have the full config object.
                                     if (!isNode(button)) {
                                         button = this._mergeButtonConfig(button);
                                         section || (section = button.section);
                                     }
-                            
+
                                     section || (section = this.DEFAULT_BUTTONS_SECTION);
                                     sectionButtons = buttons[section] || (buttons[section] = []);
                                     isNumber(index) || (index = sectionButtons.length);
-                            
+
                                     // Insert new button at the correct position.
                                     sectionButtons.splice(index, 0, button);
-                            
+
                                     // Determine the index at which the &#x60;button&#x60; now exists in the array.
                                     atIndex = YArray.indexOf(sectionButtons, button);
-                            
+
                                     this.set(&#x27;buttons&#x27;, buttons, {
                                         button : button,
                                         section: section,
                                         index  : atIndex,
                                         src    : &#x27;add&#x27;
                                     });
-                            
+
                                     return this;
                                 },
-                            
+
                                 /**
                                 Returns a button node from this widget&#x27;s &#x60;buttons&#x60;.
-                            
+
                                 @method getButton
                                 @param {Number|String} name The string name or index of the button.
                                 @param {String} [section=&quot;footer&quot;] The &#x60;WidgetStdMod&#x60; section
@@ -1535,42 +1535,42 @@
                                 **/
                                 getButton: function (name, section) {
                                     if (!isValue(name)) { return; }
-                            
+
                                     var map = this._buttonsMap,
                                         buttons;
-                            
+
                                     section || (section = this.DEFAULT_BUTTONS_SECTION);
-                            
+
                                     // Supports &#x60;getButton(1, &#x27;header&#x27;)&#x60; signature.
                                     if (isNumber(name)) {
                                         buttons = this.get(&#x27;buttons&#x27;);
                                         return buttons[section] &amp;&amp; buttons[section][name];
                                     }
-                            
+
                                     // Looks up button by name or section:name.
                                     return arguments.length &gt; 1 ? map[section + &#x27;:&#x27; + name] : map[name];
                                 },
-                            
+
                                 /**
                                 Removes a button from this widget.
-                            
+
                                 The button will be removed from this widget&#x27;s &#x60;buttons&#x60; and its DOM. Any
                                 event subscriptions on the button which were created by this widget will be
                                 detached. If the content section becomes empty after removing the button
                                 node, then the section will also be removed.
-                            
+
                                 This fires the &#x60;buttonsChange&#x60; event and adds the following properties to
                                 the event facade:
-                            
+
                                   * &#x60;button&#x60;: The button node to remove.
-                            
+
                                   * &#x60;section&#x60;: The &#x60;WidgetStdMod&#x60; section (header/body/footer) where the
                                     button should be removed from.
-                            
+
                                   * &#x60;index&#x60;: The index at which the button exists in the section.
-                            
+
                                   * &#x60;src&#x60;: &quot;remove&quot;
-                            
+
                                 @method removeButton
                                 @param {Node|Number|String} button The button to remove. This can be a
                                     &#x60;Y.Node&#x60; instance, index, or String name of a button.
@@ -1583,10 +1583,10 @@
                                 **/
                                 removeButton: function (button, section) {
                                     if (!isValue(button)) { return this; }
-                            
+
                                     var buttons = this.get(&#x27;buttons&#x27;),
                                         index;
-                            
+
                                     // Shortcut if &#x60;button&#x60; is already an index which is needed for slicing.
                                     if (isNumber(button)) {
                                         section || (section = this.DEFAULT_BUTTONS_SECTION);
@@ -1599,23 +1599,23 @@
                                             // different based on the number of arguments.
                                             button = this.getButton.apply(this, arguments);
                                         }
-                            
+
                                         // Determines the &#x60;section&#x60; and &#x60;index&#x60; at which the button exists.
                                         YObject.some(buttons, function (sectionButtons, currentSection) {
                                             index = YArray.indexOf(sectionButtons, button);
-                            
+
                                             if (index &gt; -1) {
                                                 section = currentSection;
                                                 return true;
                                             }
                                         });
                                     }
-                            
+
                                     // Button was found at an appropriate index.
                                     if (button &amp;&amp; index &gt; -1) {
                                         // Remove button from &#x60;section&#x60; array.
                                         buttons[section].splice(index, 1);
-                            
+
                                         this.set(&#x27;buttons&#x27;, buttons, {
                                             button : button,
                                             section: section,
@@ -1623,16 +1623,16 @@
                                             src    : &#x27;remove&#x27;
                                         });
                                     }
-                            
+
                                     return this;
                                 },
-                            
+
                                 // -- Protected Methods ----------------------------------------------------
-                            
+
                                 /**
                                 Binds UI event listeners. This method is inserted via AOP, and will execute
                                 after &#x60;bindUI()&#x60;.
-                            
+
                                 @method _bindUIButtons
                                 @protected
                                 @since 3.4.0
@@ -1640,7 +1640,7 @@
                                 _bindUIButtons: function () {
                                     // Event handlers are bound with &#x60;bind()&#x60; to make them more extensible.
                                     var afterContentChange = Y.bind(&#x27;_afterContentChangeButtons&#x27;, this);
-                            
+
                                     this.after({
                                         visibleChange      : Y.bind(&#x27;_afterVisibleChangeButtons&#x27;, this),
                                         headerContentChange: afterContentChange,
@@ -1648,14 +1648,14 @@
                                         footerContentChange: afterContentChange
                                     });
                                 },
-                            
+
                                 /**
                                 Returns a button node based on the specified &#x60;button&#x60; node or configuration.
-                            
+
                                 The button node will either be created via &#x60;Y.Plugin.Button.createNode()&#x60;,
                                 or when &#x60;button&#x60; is specified as a node already, it will by &#x60;plug()&#x60;ed with
                                 &#x60;Y.Plugin.Button&#x60;.
-                            
+
                                 @method _createButton
                                 @param {Node|Object} button Button node or configuration object.
                                 @return {Node} The button node.
@@ -1665,62 +1665,62 @@
                                 _createButton: function (button) {
                                     var config, buttonConfig, nonButtonNodeCfg,
                                         i, len, action, context, handle;
-                            
+
                                     // Makes sure the exiting &#x60;Y.Node&#x60; instance is from this YUI sandbox and
                                     // is plugged with &#x60;Y.Plugin.Button&#x60;.
                                     if (isNode(button)) {
                                         return Y.one(button.getDOMNode()).plug(ButtonPlugin);
                                     }
-                            
+
                                     // Merge &#x60;button&#x60; config with defaults and back-compat.
                                     config = Y.merge({
                                         context: this,
                                         events : &#x27;click&#x27;,
                                         label  : button.value
                                     }, button);
-                            
+
                                     buttonConfig     = Y.merge(config);
                                     nonButtonNodeCfg = WidgetButtons.NON_BUTTON_NODE_CFG;
-                            
+
                                     // Remove all non-button Node config props.
                                     for (i = 0, len = nonButtonNodeCfg.length; i &lt; len; i += 1) {
                                         delete buttonConfig[nonButtonNodeCfg[i]];
                                     }
-                            
+
                                     // Create the button node using the button Node-only config.
                                     button = ButtonPlugin.createNode(buttonConfig);
-                            
+
                                     context = config.context;
                                     action  = config.action;
-                            
+
                                     // Supports &#x60;action&#x60; as a String name of a Function on the &#x60;context&#x60;
                                     // object.
                                     if (isString(action)) {
                                         action = Y.bind(action, context);
                                     }
-                            
+
                                     // Supports all types of crazy configs for event subscriptions and
                                     // stores a reference to the returned &#x60;EventHandle&#x60;.
                                     handle = button.on(config.events, action, context);
                                     this._buttonsHandles[Y.stamp(button, true)] = handle;
-                            
+
                                     // Tags the button with the configured &#x60;name&#x60; and &#x60;isDefault&#x60; settings.
                                     button.setData(&#x27;name&#x27;, this._getButtonName(config));
                                     button.setData(&#x27;default&#x27;, this._getButtonDefault(config));
-                            
+
                                     // Add any CSS classnames to the button node.
                                     YArray.each(YArray(config.classNames), button.addClass, button);
-                            
+
                                     return button;
                                 },
-                            
+
                                 /**
                                 Returns the buttons container for the specified &#x60;section&#x60;, passing a truthy
                                 value for &#x60;create&#x60; will create the node if it does not already exist.
-                            
+
                                 **Note:** It is up to the caller to properly insert the returned container
                                 node into the content section.
-                            
+
                                 @method _getButtonContainer
                                 @param {String} section The &#x60;WidgetStdMod&#x60; section (header/body/footer).
                                 @param {Boolean} create Whether the buttons container should be created if
@@ -1735,32 +1735,32 @@
                                         buttonsClassName = WidgetButtons.CLASS_NAMES.buttons,
                                         contentBox       = this.get(&#x27;contentBox&#x27;),
                                         containerSelector, container;
-                            
+
                                     // Search for an existing buttons container within the section.
                                     containerSelector = &#x27;.&#x27; + sectionClassName + &#x27; .&#x27; + buttonsClassName;
                                     container         = contentBox.one(containerSelector);
-                            
+
                                     // Create the &#x60;container&#x60; if it doesn&#x27;t already exist.
                                     if (!container &amp;&amp; create) {
                                         container = Y.Node.create(this.BUTTONS_TEMPLATE);
                                         container.addClass(buttonsClassName);
                                     }
-                            
+
                                     return container;
                                 },
-                            
+
                                 /**
                                 Returns whether or not the specified &#x60;button&#x60; is configured to be the
                                 default button.
-                            
+
                                 When a button node is specified, the button&#x27;s &#x60;getData()&#x60; method will be
                                 used to determine if the button is configured to be the default. When a
                                 button config object is specified, the &#x60;isDefault&#x60; prop will determine
                                 whether the button is the default.
-                            
+
                                 **Note:** &#x60;&lt;button data-default=&quot;true&quot;&gt;&lt;/button&gt;&#x60; is supported via the
                                 &#x60;button.getData(&#x27;default&#x27;)&#x60; API call.
-                            
+
                                 @method _getButtonDefault
                                 @param {Node|Object} button The button node or configuration object.
                                 @return {Boolean} Whether the button is configured to be the default button.
@@ -1770,25 +1770,25 @@
                                 _getButtonDefault: function (button) {
                                     var isDefault = isNode(button) ?
                                             button.getData(&#x27;default&#x27;) : button.isDefault;
-                            
+
                                     if (isString(isDefault)) {
                                         return isDefault.toLowerCase() === &#x27;true&#x27;;
                                     }
-                            
+
                                     return !!isDefault;
                                 },
-                            
+
                                 /**
                                 Returns the name of the specified &#x60;button&#x60;.
-                            
+
                                 When a button node is specified, the button&#x27;s &#x60;getData(&#x27;name&#x27;)&#x60; method is
                                 preferred, but will fallback to &#x60;get(&#x27;name&#x27;)&#x60;, and the result will determine
                                 the button&#x27;s name. When a button config object is specified, the &#x60;name&#x60; prop
                                 will determine the button&#x27;s name.
-                            
+
                                 **Note:** &#x60;&lt;button data-name=&quot;foo&quot;&gt;&lt;/button&gt;&#x60; is supported via the
                                 &#x60;button.getData(&#x27;name&#x27;)&#x60; API call.
-                            
+
                                 @method _getButtonName
                                 @param {Node|Object} button The button node or configuration object.
                                 @return {String} The name of the button.
@@ -1797,24 +1797,24 @@
                                 **/
                                 _getButtonName: function (button) {
                                     var name;
-                            
+
                                     if (isNode(button)) {
                                         name = button.getData(&#x27;name&#x27;) || button.get(&#x27;name&#x27;);
                                     } else {
                                         name = button &amp;&amp; (button.name || button.type);
                                     }
-                            
+
                                     return name;
                                 },
-                            
+
                                 /**
                                 Getter for the &#x60;buttons&#x60; attribute. A copy of the &#x60;buttons&#x60; object is
                                 returned so the stored state cannot be modified by the callers of
                                 &#x60;get(&#x27;buttons&#x27;)&#x60;.
-                            
+
                                 This will recreate a copy of the &#x60;buttons&#x60; object, and each section array
                                 (the button nodes are *not* copied/cloned.)
-                            
+
                                 @method _getButtons
                                 @param {Object} buttons The widget&#x27;s current &#x60;buttons&#x60; state.
                                 @return {Object} A copy of the widget&#x27;s current &#x60;buttons&#x60; state.
@@ -1823,24 +1823,24 @@
                                 **/
                                 _getButtons: function (buttons) {
                                     var buttonsCopy = {};
-                            
+
                                     // Creates a new copy of the &#x60;buttons&#x60; object.
                                     YObject.each(buttons, function (sectionButtons, section) {
                                         // Creates of copy of the array of button nodes.
                                         buttonsCopy[section] = sectionButtons.concat();
                                     });
-                            
+
                                     return buttonsCopy;
                                 },
-                            
+
                                 /**
                                 Adds the specified &#x60;button&#x60; to the buttons map (both name -&gt; button and
                                 section:name -&gt; button), and sets the button as the default if it is
                                 configured as the default button.
-                            
+
                                 **Note:** If two or more buttons are configured with the same &#x60;name&#x60; and/or
                                 configured to be the default button, the last one wins.
-                            
+
                                 @method _mapButton
                                 @param {Node} button The button node to map.
                                 @param {String} section The &#x60;WidgetStdMod&#x60; section (header/body/footer).
@@ -1851,27 +1851,27 @@
                                     var map       = this._buttonsMap,
                                         name      = this._getButtonName(button),
                                         isDefault = this._getButtonDefault(button);
-                            
+
                                     if (name) {
                                         // name -&gt; button
                                         map[name] = button;
-                            
+
                                         // section:name -&gt; button
                                         map[section + &#x27;:&#x27; + name] = button;
                                     }
-                            
+
                                     isDefault &amp;&amp; (this._defaultButton = button);
                                 },
-                            
+
                                 /**
                                 Adds the specified &#x60;buttons&#x60; to the buttons map (both name -&gt; button and
                                 section:name -&gt; button), and set the a button as the default if one is
                                 configured as the default button.
-                            
+
                                 **Note:** This will clear all previous button mappings and null-out any
                                 previous default button! If two or more buttons are configured with the same
                                 &#x60;name&#x60; and/or configured to be the default button, the last one wins.
-                            
+
                                 @method _mapButtons
                                 @param {Node[]} buttons The button nodes to map.
                                 @protected
@@ -1880,21 +1880,21 @@
                                 _mapButtons: function (buttons) {
                                     this._buttonsMap    = {};
                                     this._defaultButton = null;
-                            
+
                                     YObject.each(buttons, function (sectionButtons, section) {
                                         var i, len;
-                            
+
                                         for (i = 0, len = sectionButtons.length; i &lt; len; i += 1) {
                                             this._mapButton(sectionButtons[i], section);
                                         }
                                     }, this);
                                 },
-                            
+
                                 /**
                                 Returns a copy of the specified &#x60;config&#x60; object merged with any defaults
                                 provided by a &#x60;srcNode&#x60; and/or a predefined configuration for a button
                                 with the same &#x60;name&#x60; on the &#x60;BUTTONS&#x60; property.
-                            
+
                                 @method _mergeButtonConfig
                                 @param {Object|String} config Button configuration object, or string name.
                                 @return {Object} A copy of the button configuration object merged with any
@@ -1904,48 +1904,48 @@
                                 **/
                                 _mergeButtonConfig: function (config) {
                                     var buttonConfig, defConfig, name, button, tagName, label;
-                            
+
                                     // Makes sure &#x60;config&#x60; is an Object and a copy of the specified value.
                                     config = isString(config) ? {name: config} : Y.merge(config);
-                            
+
                                     // Seeds default values from the button node, if there is one.
                                     if (config.srcNode) {
                                         button  = config.srcNode;
                                         tagName = button.get(&#x27;tagName&#x27;).toLowerCase();
                                         label   = button.get(tagName === &#x27;input&#x27; ? &#x27;value&#x27; : &#x27;text&#x27;);
-                            
+
                                         // Makes sure the button&#x27;s current values override any defaults.
                                         buttonConfig = {
                                             disabled : !!button.get(&#x27;disabled&#x27;),
                                             isDefault: this._getButtonDefault(button),
                                             name     : this._getButtonName(button)
                                         };
-                            
+
                                         // Label should only be considered when not an empty string.
                                         label &amp;&amp; (buttonConfig.label = label);
-                            
+
                                         // Merge &#x60;config&#x60; with &#x60;buttonConfig&#x60; values.
                                         Y.mix(config, buttonConfig, false, null, 0, true);
                                     }
-                            
+
                                     name      = this._getButtonName(config);
                                     defConfig = this.BUTTONS &amp;&amp; this.BUTTONS[name];
-                            
+
                                     // Merge &#x60;config&#x60; with predefined default values.
                                     if (defConfig) {
                                         Y.mix(config, defConfig, false, null, 0, true);
                                     }
-                            
+
                                     return config;
                                 },
-                            
+
                                 /**
                                 &#x60;HTML_PARSER&#x60; implementation for the &#x60;buttons&#x60; attribute.
-                            
+
                                 **Note:** To determine a button node&#x27;s name its &#x60;data-name&#x60; and &#x60;name&#x60;
                                 attributes are examined. Whether the button should be the default is
                                 determined by its &#x60;data-default&#x60; attribute.
-                            
+
                                 @method _parseButtons
                                 @param {Node} srcNode This widget&#x27;s srcNode to search for buttons.
                                 @return {null|Object} &#x60;buttons&#x60; Config object parsed from this widget&#x27;s DOM.
@@ -1956,39 +1956,39 @@
                                     var buttonSelector = &#x27;.&#x27; + WidgetButtons.CLASS_NAMES.button,
                                         sections       = [&#x27;header&#x27;, &#x27;body&#x27;, &#x27;footer&#x27;],
                                         buttonsConfig  = null;
-                            
+
                                     YArray.each(sections, function (section) {
                                         var container = this._getButtonContainer(section),
                                             buttons   = container &amp;&amp; container.all(buttonSelector),
                                             sectionButtons;
-                            
+
                                         if (!buttons || buttons.isEmpty()) { return; }
-                            
+
                                         sectionButtons = [];
-                            
+
                                         // Creates a button config object for every button node found and
                                         // adds it to the section. This way each button configuration can be
                                         // merged with any defaults provided by predefined &#x60;BUTTONS&#x60;.
                                         buttons.each(function (button) {
                                             sectionButtons.push({srcNode: button});
                                         });
-                            
+
                                         buttonsConfig || (buttonsConfig = {});
                                         buttonsConfig[section] = sectionButtons;
                                     }, this);
-                            
+
                                     return buttonsConfig;
                                 },
-                            
+
                                 /**
                                 Setter for the &#x60;buttons&#x60; attribute. This processes the specified &#x60;config&#x60;
                                 and returns a new &#x60;buttons&#x60; object which is stored as the new state; leaving
                                 the original, specified &#x60;config&#x60; unmodified.
-                            
+
                                 The button nodes will either be created via &#x60;Y.Plugin.Button.createNode()&#x60;,
                                 or when a button is already a Node already, it will by &#x60;plug()&#x60;ed with
                                 &#x60;Y.Plugin.Button&#x60;.
-                            
+
                                 @method _setButtons
                                 @param {Array|Object} config The &#x60;buttons&#x60; configuration to process.
                                 @return {Object} The processed &#x60;buttons&#x60; object which represents the new
@@ -1999,47 +1999,47 @@
                                 _setButtons: function (config) {
                                     var defSection = this.DEFAULT_BUTTONS_SECTION,
                                         buttons    = {};
-                            
+
                                     function processButtons(buttonConfigs, currentSection) {
                                         if (!isArray(buttonConfigs)) { return; }
-                            
+
                                         var i, len, button, section;
-                            
+
                                         for (i = 0, len = buttonConfigs.length; i &lt; len; i += 1) {
                                             button  = buttonConfigs[i];
                                             section = currentSection;
-                            
+
                                             if (!isNode(button)) {
                                                 button = this._mergeButtonConfig(button);
                                                 section || (section = button.section);
                                             }
-                            
+
                                             // Always passes through &#x60;_createButton()&#x60; to make sure the node
                                             // is decorated as a button.
                                             button = this._createButton(button);
-                            
+
                                             // Use provided &#x60;section&#x60; or fallback to the default section.
                                             section || (section = defSection);
-                            
+
                                             // Add button to the array of buttons for the specified section.
                                             (buttons[section] || (buttons[section] = [])).push(button);
                                         }
                                     }
-                            
+
                                     // Handle &#x60;config&#x60; being either an Array or Object of Arrays.
                                     if (isArray(config)) {
                                         processButtons.call(this, config);
                                     } else {
                                         YObject.each(config, processButtons, this);
                                     }
-                            
+
                                     return buttons;
                                 },
-                            
+
                                 /**
                                 Syncs this widget&#x27;s current button-related state to its DOM. This method is
                                 inserted via AOP, and will execute after &#x60;syncUI()&#x60;.
-                            
+
                                 @method _syncUIButtons
                                 @protected
                                 @since 3.4.0
@@ -2049,14 +2049,14 @@
                                     this._uiSetDefaultButton(this.get(&#x27;defaultButton&#x27;));
                                     this._uiSetVisibleButtons(this.get(&#x27;visible&#x27;));
                                 },
-                            
+
                                 /**
                                 Inserts the specified &#x60;button&#x60; node into this widget&#x27;s DOM at the specified
                                 &#x60;section&#x60; and &#x60;index&#x60; and updates the section content.
-                            
+
                                 The section and button container nodes will be created if they do not
                                 already exist.
-                            
+
                                 @method _uiInsertButton
                                 @param {Node} button The button node to insert into this widget&#x27;s DOM.
                                 @param {String} section The &#x60;WidgetStdMod&#x60; section (header/body/footer).
@@ -2068,24 +2068,24 @@
                                     var buttonsClassName = WidgetButtons.CLASS_NAMES.button,
                                         buttonContainer  = this._getButtonContainer(section, true),
                                         sectionButtons   = buttonContainer.all(&#x27;.&#x27; + buttonsClassName);
-                            
+
                                     // Inserts the button node at the correct index.
                                     buttonContainer.insertBefore(button, sectionButtons.item(index));
-                            
+
                                     // Adds the button container to the section content.
                                     this.setStdModContent(section, buttonContainer, &#x27;after&#x27;);
                                 },
-                            
+
                                 /**
                                 Removes the button node from this widget&#x27;s DOM and detaches any event
                                 subscriptions on the button that were created by this widget. The section
                                 content will be updated unless &#x60;{preserveContent: true}&#x60; is passed in the
                                 &#x60;options&#x60;.
-                            
+
                                 By default the button container node will be removed when this removes the
                                 last button of the specified &#x60;section&#x60;; and if no other content remains in
                                 the section node, it will also be removed.
-                            
+
                                 @method _uiRemoveButton
                                 @param {Node} button The button to remove and destroy.
                                 @param {String} section The &#x60;WidgetStdMod&#x60; section (header/body/footer).
@@ -2100,46 +2100,46 @@
                                         handles = this._buttonsHandles,
                                         handle  = handles[yuid],
                                         buttonContainer, buttonClassName;
-                            
+
                                     if (handle) {
                                         handle.detach();
                                     }
-                            
+
                                     delete handles[yuid];
-                            
+
                                     button.remove();
-                            
+
                                     options || (options = {});
-                            
+
                                     // Remove the button container and section nodes if needed.
                                     if (!options.preserveContent) {
                                         buttonContainer = this._getButtonContainer(section);
                                         buttonClassName = WidgetButtons.CLASS_NAMES.button;
-                            
+
                                         // Only matters if we have a button container which is empty.
                                         if (buttonContainer &amp;&amp;
                                                 buttonContainer.all(&#x27;.&#x27; + buttonClassName).isEmpty()) {
-                            
+
                                             buttonContainer.remove();
                                             this._updateContentButtons(section);
                                         }
                                     }
                                 },
-                            
+
                                 /**
                                 Sets the current &#x60;buttons&#x60; state to this widget&#x27;s DOM by rendering the
                                 specified collection of &#x60;buttons&#x60; and updates the contents of each section
                                 as needed.
-                            
+
                                 Button nodes which already exist in the DOM will remain intact, or will be
                                 moved if they should be in a new position. Old button nodes which are no
                                 longer represented in the specified &#x60;buttons&#x60; collection will be removed,
                                 and any event subscriptions on the button which were created by this widget
                                 will be detached.
-                            
+
                                 If the button nodes in this widget&#x27;s DOM actually change, then each content
                                 section will be updated (or removed) appropriately.
-                            
+
                                 @method _uiSetButtons
                                 @param {Object} buttons The current &#x60;buttons&#x60; state to visually represent.
                                 @protected
@@ -2148,24 +2148,24 @@
                                 _uiSetButtons: function (buttons) {
                                     var buttonClassName = WidgetButtons.CLASS_NAMES.button,
                                         sections        = [&#x27;header&#x27;, &#x27;body&#x27;, &#x27;footer&#x27;];
-                            
+
                                     YArray.each(sections, function (section) {
                                         var sectionButtons  = buttons[section] || [],
                                             numButtons      = sectionButtons.length,
                                             buttonContainer = this._getButtonContainer(section, numButtons),
                                             buttonsUpdated  = false,
                                             oldNodes, i, button, buttonIndex;
-                            
+
                                         // When there&#x27;s no button container, there are no new buttons or old
                                         // buttons that we have to deal with for this section.
                                         if (!buttonContainer) { return; }
-                            
+
                                         oldNodes = buttonContainer.all(&#x27;.&#x27; + buttonClassName);
-                            
+
                                         for (i = 0; i &lt; numButtons; i += 1) {
                                             button      = sectionButtons[i];
                                             buttonIndex = oldNodes.indexOf(button);
-                            
+
                                             // Buttons already rendered in the Widget should remain there or
                                             // moved to their new index. New buttons will be added to the
                                             // current &#x60;buttonContainer&#x60;.
@@ -2173,7 +2173,7 @@
                                                 // Remove button from existing buttons nodeList since its in
                                                 // the DOM already.
                                                 oldNodes.splice(buttonIndex, 1);
-                            
+
                                                 // Check that the button is at the right position, if not,
                                                 // move it to its new position.
                                                 if (buttonIndex !== i) {
@@ -2187,14 +2187,14 @@
                                                 buttonsUpdated = true;
                                             }
                                         }
-                            
+
                                         // Safely removes the old button nodes which are no longer part of
                                         // this widget&#x27;s &#x60;buttons&#x60;.
                                         oldNodes.each(function (button) {
                                             this._uiRemoveButton(button, section, {preserveContent: true});
                                             buttonsUpdated = true;
                                         }, this);
-                            
+
                                         // Remove leftover empty button containers and updated the StdMod
                                         // content area.
                                         if (numButtons === 0) {
@@ -2202,18 +2202,18 @@
                                             this._updateContentButtons(section);
                                             return;
                                         }
-                            
+
                                         // Adds the button container to the section content.
                                         if (buttonsUpdated) {
                                             this.setStdModContent(section, buttonContainer, &#x27;after&#x27;);
                                         }
                                     }, this);
                                 },
-                            
+
                                 /**
                                 Adds the &quot;yui3-button-primary&quot; CSS class to the new &#x60;defaultButton&#x60; and
                                 removes it from the old default button.
-                            
+
                                 @method _uiSetDefaultButton
                                 @param {Node} newButton The new &#x60;defaultButton&#x60;.
                                 @param {Node} oldButton The old &#x60;defaultButton&#x60;.
@@ -2222,15 +2222,15 @@
                                 **/
                                 _uiSetDefaultButton: function (newButton, oldButton) {
                                     var primaryClassName = WidgetButtons.CLASS_NAMES.primary;
-                            
+
                                     if (newButton) { newButton.addClass(primaryClassName); }
                                     if (oldButton) { oldButton.removeClass(primaryClassName); }
                                 },
-                            
+
                                 /**
                                 Focuses this widget&#x27;s &#x60;defaultButton&#x60; if there is one and this widget is
                                 visible.
-                            
+
                                 @method _uiSetVisibleButtons
                                 @param {Boolean} visible Whether this widget is visible.
                                 @protected
@@ -2238,18 +2238,18 @@
                                 **/
                                 _uiSetVisibleButtons: function (visible) {
                                     if (!visible) { return; }
-                            
+
                                     var defaultButton = this.get(&#x27;defaultButton&#x27;);
                                     if (defaultButton) {
                                         defaultButton.focus();
                                     }
                                 },
-                            
+
                                 /**
                                 Removes the specified &#x60;button&#x60; from the buttons map (both name -&gt; button and
                                 section:name -&gt; button), and nulls-out the &#x60;defaultButton&#x60; if it is
                                 currently the default button.
-                            
+
                                 @method _unMapButton
                                 @param {Node} button The button node to remove from the buttons map.
                                 @param {String} section The &#x60;WidgetStdMod&#x60; section (header/body/footer).
@@ -2260,50 +2260,50 @@
                                     var map  = this._buttonsMap,
                                         name = this._getButtonName(button),
                                         sectionName;
-                            
+
                                     // Only delete the map entry if the specified &#x60;button&#x60; is mapped to it.
                                     if (name) {
                                         // name -&gt; button
                                         if (map[name] === button) {
                                             delete map[name];
                                         }
-                            
+
                                         // section:name -&gt; button
                                         sectionName = section + &#x27;:&#x27; + name;
                                         if (map[sectionName] === button) {
                                             delete map[sectionName];
                                         }
                                     }
-                            
+
                                     // Clear the default button if its the specified &#x60;button&#x60;.
                                     if (this._defaultButton === button) {
                                         this._defaultButton = null;
                                     }
                                 },
-                            
+
                                 /**
                                 Updates the &#x60;defaultButton&#x60; attribute if it needs to be updated by comparing
                                 its current value with the protected &#x60;_defaultButton&#x60; property.
-                            
+
                                 @method _updateDefaultButton
                                 @protected
                                 @since 3.5.0
                                 **/
                                 _updateDefaultButton: function () {
                                     var defaultButton = this._defaultButton;
-                            
+
                                     if (this.get(&#x27;defaultButton&#x27;) !== defaultButton) {
                                         this._set(&#x27;defaultButton&#x27;, defaultButton);
                                     }
                                 },
-                            
+
                                 /**
                                 Updates the content attribute which corresponds to the specified &#x60;section&#x60;.
-                            
+
                                 The method updates the section&#x27;s content to its current &#x60;childNodes&#x60;
                                 (text and/or HTMLElement), or will null-out its contents if the section is
                                 empty. It also specifies a &#x60;src&#x60; of &#x60;buttons&#x60; on the change event facade.
-                            
+
                                 @method _updateContentButtons
                                 @param {String} section The &#x60;WidgetStdMod&#x60; section (header/body/footer) to
                                     update.
@@ -2313,22 +2313,22 @@
                                 _updateContentButtons: function (section) {
                                     // &#x60;childNodes&#x60; return text nodes and HTMLElements.
                                     var sectionContent = this.getStdModNode(section).get(&#x27;childNodes&#x27;);
-                            
+
                                     // Updates the section to its current contents, or null if it is empty.
                                     this.set(section + &#x27;Content&#x27;, sectionContent.isEmpty() ? null :
                                         sectionContent, {src: &#x27;buttons&#x27;});
                                 },
-                            
+
                                 // -- Protected Event Handlers ---------------------------------------------
-                            
+
                                 /**
                                 Handles this widget&#x27;s &#x60;buttonsChange&#x60; event which fires anytime the
                                 &#x60;buttons&#x60; attribute is modified.
-                            
+
                                 **Note:** This method special-cases the &#x60;buttons&#x60; modifications caused by
                                 &#x60;addButton()&#x60; and &#x60;removeButton()&#x60;, both of which set the &#x60;src&#x60; property on
                                 the event facade to &quot;add&quot; and &quot;remove&quot; respectively.
-                            
+
                                 @method _afterButtonsChange
                                 @param {EventFacade} e
                                 @protected
@@ -2340,44 +2340,44 @@
                                         index   = e.index,
                                         src     = e.src,
                                         button;
-                            
+
                                     // Special cases &#x60;addButton()&#x60; to only set and insert the new button.
                                     if (src === &#x27;add&#x27;) {
                                         // Make sure we have the button node.
                                         button = buttons[section][index];
-                            
+
                                         this._mapButton(button, section);
                                         this._updateDefaultButton();
                                         this._uiInsertButton(button, section, index);
-                            
+
                                         return;
                                     }
-                            
+
                                     // Special cases &#x60;removeButton()&#x60; to only remove the specified button.
                                     if (src === &#x27;remove&#x27;) {
                                         // Button node already exists on the event facade.
                                         button = e.button;
-                            
+
                                         this._unMapButton(button, section);
                                         this._updateDefaultButton();
                                         this._uiRemoveButton(button, section);
-                            
+
                                         return;
                                     }
-                            
+
                                     this._mapButtons(buttons);
                                     this._updateDefaultButton();
                                     this._uiSetButtons(buttons);
                                 },
-                            
+
                                 /**
                                 Handles this widget&#x27;s &#x60;headerContentChange&#x60;, &#x60;bodyContentChange&#x60;,
                                 &#x60;footerContentChange&#x60; events by making sure the &#x60;buttons&#x60; remain rendered
                                 after changes to the content areas.
-                            
+
                                 These events are very chatty, so extra caution is taken to avoid doing extra
                                 work or getting into an infinite loop.
-                            
+
                                 @method _afterContentChangeButtons
                                 @param {EventFacade} e
                                 @protected
@@ -2387,18 +2387,18 @@
                                     var src     = e.src,
                                         pos     = e.stdModPosition,
                                         replace = !pos || pos === WidgetStdMod.REPLACE;
-                            
+
                                     // Only do work when absolutely necessary.
                                     if (replace &amp;&amp; src !== &#x27;buttons&#x27; &amp;&amp; src !== Widget.UI_SRC) {
                                         this._uiSetButtons(this.get(&#x27;buttons&#x27;));
                                     }
                                 },
-                            
+
                                 /**
                                 Handles this widget&#x27;s &#x60;defaultButtonChange&#x60; event by adding the
                                 &quot;yui3-button-primary&quot; CSS class to the new &#x60;defaultButton&#x60; and removing it
                                 from the old default button.
-                            
+
                                 @method _afterDefaultButtonChange
                                 @param {EventFacade} e
                                 @protected
@@ -2407,11 +2407,11 @@
                                 _afterDefaultButtonChange: function (e) {
                                     this._uiSetDefaultButton(e.newVal, e.prevVal);
                                 },
-                            
+
                                 /**
                                 Handles this widget&#x27;s &#x60;visibleChange&#x60; event by focusing the &#x60;defaultButton&#x60;
                                 if there is one.
-                            
+
                                 @method _afterVisibleChangeButtons
                                 @param {EventFacade} e
                                 @protected
@@ -2421,9 +2421,9 @@
                                     this._uiSetVisibleButtons(e.newVal);
                                 }
                             };
-                            
+
                             Y.WidgetButtons = WidgetButtons;
-                            
+
                                 </pre>
                             </div>
                         </div>

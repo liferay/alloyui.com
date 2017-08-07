@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/recordset/js/recordset-indexer.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1147,12 +1147,12 @@
                             function RecordsetIndexer(config) {
                                 RecordsetIndexer.superclass.constructor.apply(this, arguments);
                             }
-                            
+
                             Y.mix(RecordsetIndexer, {
                                 NS: &quot;indexer&quot;,
-                            
+
                                 NAME: &quot;recordsetIndexer&quot;,
-                            
+
                                 ATTRS: {
                                     /**
                                     * @description Collection of all the hashTables created by the plugin.
@@ -1164,37 +1164,37 @@
                                     */
                                     hashTables: {
                                         value: {
-                            
+
                                         }
                                     },
-                            
-                            
+
+
                                     keys: {
                                         value: {
-                            
+
                                         }
                                     }
                                 }
                             });
-                            
-                            
+
+
                             Y.extend(RecordsetIndexer, Y.Plugin.Base, {
-                            
+
                                 initializer: function(config) {
                                     var host = this.get(&#x27;host&#x27;);
-                            
+
                                     //setup listeners on recordset events
                                     this.onHostEvent(&#x27;add&#x27;, Y.bind(&quot;_defAddHash&quot;, this), host);
                                     this.onHostEvent(&#x27;remove&#x27;, Y.bind(&#x27;_defRemoveHash&#x27;, this), host);
                                     this.onHostEvent(&#x27;update&#x27;, Y.bind(&#x27;_defUpdateHash&#x27;, this), host);
-                            
+
                                 },
-                            
+
                                 destructor: function(config) {
-                            
+
                                 },
-                            
-                            
+
+
                                 /**
                                  * @description Setup the hash table for a given key with all existing records in the recordset
                                  *
@@ -1208,17 +1208,17 @@
                                     obj = {},
                                     i = 0,
                                     len = host.getLength();
-                            
+
                                     for (; i &lt; len; i++) {
                                         obj[host._items[i].getValue(key)] = host._items[i];
                                     }
                                     return obj;
                                 },
-                            
+
                                 //---------------------------------------------
                                 // Syncing Methods
                                 //---------------------------------------------
-                            
+
                                 /**
                                  * @description Updates all hash tables when a record is added to the recordset
                                  *
@@ -1227,8 +1227,8 @@
                                  */
                                 _defAddHash: function(e) {
                                     var tbl = this.get(&#x27;hashTables&#x27;);
-                            
-                            
+
+
                                     //Go through every hashtable that is stored.
                                     //in each hashtable, look to see if the key is represented in the object being added.
                                     Y.each(tbl,
@@ -1241,9 +1241,9 @@
                                             }
                                         });
                                     });
-                            
+
                                 },
-                            
+
                                 /**
                                  * @description Updates all hash tables when a record is removed from the recordset
                                  *
@@ -1253,7 +1253,7 @@
                                 _defRemoveHash: function(e) {
                                     var tbl = this.get(&#x27;hashTables&#x27;),
                                     reckey;
-                            
+
                                     //Go through every hashtable that is stored.
                                     //in each hashtable, look to see if the key is represented in the object being deleted.
                                     Y.each(tbl,
@@ -1261,7 +1261,7 @@
                                         Y.each(e.removed || e.overwritten,
                                         function(o) {
                                             reckey = o.getValue(key);
-                            
+
                                             //if the hashtable has a key storing a record, and the key and the record both match the record being deleted, delete that row from the hashtable
                                             if (reckey &amp;&amp; v[reckey] === o) {
                                                 delete v[reckey];
@@ -1269,7 +1269,7 @@
                                         });
                                     });
                                 },
-                            
+
                                 /**
                                  * @description Updates all hash tables when the recordset is updated (a combination of add and remove)
                                  *
@@ -1277,31 +1277,31 @@
                                  * @private
                                  */
                                 _defUpdateHash: function(e) {
-                            
+
                                     //TODO: It will be more performant to create a new method rather than using _defAddHash, _defRemoveHash, due to the number of loops. See commented code.
                                     e.added = e.updated;
                                     e.removed = e.overwritten;
                                     this._defAddHash(e);
                                     this._defRemoveHash(e);
-                            
+
                                     /*
                                                 var tbl = this.get(&#x27;hashTables&#x27;), reckey;
-                            
+
                                                 Y.each(tbl, function(v, key) {
                                                     Y.each(e.updated, function(o, i) {
-                            
+
                                                         //delete record from hashtable if it has been overwritten
                                                         reckey = o.getValue(key);
-                            
+
                                                         if (reckey) {
                                                             v[reckey] = o;
                                                         }
-                            
+
                                                         //the undefined case is if more records are updated than currently exist in the recordset.
                                                         if (e.overwritten[i] &amp;&amp; (v[e.overwritten[i].getValue(key)] === e.overwritten[i])) {
                                                             delete v[e.overwritten[i].getValue(key)];
                                                         }
-                            
+
                                                         // if (v[reckey] === o) {
                                                         //  delete v[reckey];
                                                         // }
@@ -1310,16 +1310,16 @@
                                                         // if (o.getValue(key)) {
                                                         //  v[o.getValue(key)] = o;
                                                         // }
-                            
+
                                                     });
                                                 });
                                         */
                                 },
-                            
+
                                 //---------------------------------------------
                                 // Public Methods
                                 //---------------------------------------------
-                            
+
                                 /**
                                  * @description Creates a new hash table.
                                  *
@@ -1332,11 +1332,11 @@
                                     var tbls = this.get(&#x27;hashTables&#x27;);
                                     tbls[key] = this._setHashTable(key);
                                     this.set(&#x27;hashTables&#x27;, tbls);
-                            
+
                                     return tbls[key];
                                 },
-                            
-                            
+
+
                                 /**
                                  * @description Get a hash table that hashes records by a given key.
                                  *
@@ -1348,15 +1348,15 @@
                                 getTable: function(key) {
                                     return this.get(&#x27;hashTables&#x27;)[key];
                                 }
-                            
-                            
-                            
-                            
-                            
+
+
+
+
+
                             });
                             Y.namespace(&quot;Plugin&quot;).RecordsetIndexer = RecordsetIndexer;
-                            
-                            
+
+
                                 </pre>
                             </div>
                         </div>

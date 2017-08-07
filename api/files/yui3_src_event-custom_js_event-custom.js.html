@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,30 +1122,30 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/event-custom/js/event-custom.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
-                            
+
                             /**
                              * Custom event engine, DOM event listener abstraction layer, synthetic DOM
                              * events.
                              * @module event-custom
                              * @submodule event-custom-base
                              */
-                            
-                            
+
+
                             // var onsubscribeType = &quot;_event:onsub&quot;,
                             var YArray = Y.Array,
-                            
+
                                 AFTER = &#x27;after&#x27;,
                                 CONFIGS = [
                                     &#x27;broadcast&#x27;,
@@ -1169,26 +1169,26 @@
                                     &#x27;target&#x27;,
                                     &#x27;type&#x27;
                                 ],
-                            
+
                                 CONFIGS_HASH = YArray.hash(CONFIGS),
-                            
+
                                 nativeSlice = Array.prototype.slice,
-                            
+
                                 YUI3_SIGNATURE = 9,
                                 YUI_LOG = &#x27;yui:log&#x27;,
-                            
+
                                 mixConfigs = function(r, s, ov) {
                                     var p;
-                            
+
                                     for (p in s) {
                                         if (CONFIGS_HASH[p] &amp;&amp; (ov || !(p in r))) {
                                             r[p] = s[p];
                                         }
                                     }
-                            
+
                                     return r;
                                 };
-                            
+
                             /**
                              * The CustomEvent class lets you define events for your application
                              * that can be subscribed to by one or more independent component.
@@ -1199,29 +1199,29 @@
                              * @class CustomEvent
                              * @constructor
                              */
-                            
+
                              /**
                              * The type of event, returned to subscribers when the event fires
                              * @property type
                              * @type string
                              */
-                            
+
                             /**
                              * By default all custom events are logged in the debug build, set silent
                              * to true to disable debug outpu for this event.
                              * @property silent
                              * @type boolean
                              */
-                            
+
                             Y.CustomEvent = function(type, defaults) {
-                            
+
                                 this._kds = Y.CustomEvent.keepDeprecatedSubs;
-                            
+
                                 this.id = Y.guid();
-                            
+
                                 this.type = type;
                                 this.silent = this.logSystem = (type === YUI_LOG);
-                            
+
                                 if (this._kds) {
                                     /**
                                      * The subscribers to this event
@@ -1229,7 +1229,7 @@
                                      * @type Subscriber {}
                                      * @deprecated
                                      */
-                            
+
                                     /**
                                      * &#x27;After&#x27; subscribers
                                      * @property afters
@@ -1239,12 +1239,12 @@
                                     this.subscribers = {};
                                     this.afters = {};
                                 }
-                            
+
                                 if (defaults) {
                                     mixConfigs(this, defaults, true);
                                 }
                             };
-                            
+
                             /**
                              * Static flag to enable population of the &lt;a href=&quot;#property_subscribers&quot;&gt;&#x60;subscribers&#x60;&lt;/a&gt;
                              * and  &lt;a href=&quot;#property_subscribers&quot;&gt;&#x60;afters&#x60;&lt;/a&gt; properties held on a &#x60;CustomEvent&#x60; instance.
@@ -1269,20 +1269,20 @@
                              * @deprecated
                              */
                             Y.CustomEvent.keepDeprecatedSubs = false;
-                            
+
                             Y.CustomEvent.mixConfigs = mixConfigs;
-                            
+
                             Y.CustomEvent.prototype = {
-                            
+
                                 constructor: Y.CustomEvent,
-                            
+
                                 /**
                                  * Monitor when an event is attached or detached.
                                  *
                                  * @property monitored
                                  * @type boolean
                                  */
-                            
+
                                 /**
                                  * If 0, this event does not broadcast.  If 1, the YUI instance is notified
                                  * every time this event fires.  If 2, the YUI instance and the YUI global
@@ -1291,7 +1291,7 @@
                                  * @property broadcast
                                  * @type int
                                  */
-                            
+
                                 /**
                                  * Specifies whether this event should be queued when the host is actively
                                  * processing an event.  This will effect exectution order of the callbacks
@@ -1300,7 +1300,7 @@
                                  * @type boolean
                                  * @default false
                                  */
-                            
+
                                 /**
                                  * This event has fired if true
                                  *
@@ -1308,14 +1308,14 @@
                                  * @type boolean
                                  * @default false;
                                  */
-                            
+
                                 /**
                                  * An array containing the arguments the custom event
                                  * was last fired with.
                                  * @property firedWith
                                  * @type Array
                                  */
-                            
+
                                 /**
                                  * This event should only fire one time if true, and if
                                  * it has fired, any new subscribers should be notified
@@ -1325,7 +1325,7 @@
                                  * @type boolean
                                  * @default false;
                                  */
-                            
+
                                 /**
                                  * fireOnce listeners will fire syncronously unless async
                                  * is set to true
@@ -1333,7 +1333,7 @@
                                  * @type boolean
                                  * @default false
                                  */
-                            
+
                                 /**
                                  * Flag for stopPropagation that is modified during fire()
                                  * 1 means to stop propagation to bubble targets.  2 means
@@ -1341,21 +1341,21 @@
                                  * @property stopped
                                  * @type int
                                  */
-                            
+
                                 /**
                                  * Flag for preventDefault that is modified during fire().
                                  * if it is not 0, the default behavior for this event
                                  * @property prevented
                                  * @type int
                                  */
-                            
+
                                 /**
                                  * Specifies the host for this custom event.  This is used
                                  * to enable event bubbling
                                  * @property host
                                  * @type EventTarget
                                  */
-                            
+
                                 /**
                                  * The default function to execute after event listeners
                                  * have fire, but only if the default action was not
@@ -1363,7 +1363,7 @@
                                  * @property defaultFn
                                  * @type Function
                                  */
-                            
+
                                 /**
                                  * Flag for the default function to execute only if the
                                  * firing event is the current target. This happens only
@@ -1375,35 +1375,35 @@
                                  * @type Boolean
                                  * @default false
                                  */
-                            
+
                                 /**
                                  * The function to execute if a subscriber calls
                                  * stopPropagation or stopImmediatePropagation
                                  * @property stoppedFn
                                  * @type Function
                                  */
-                            
+
                                 /**
                                  * The function to execute if a subscriber calls
                                  * preventDefault
                                  * @property preventedFn
                                  * @type Function
                                  */
-                            
+
                                 /**
                                  * The subscribers to this event
                                  * @property _subscribers
                                  * @type Subscriber []
                                  * @private
                                  */
-                            
+
                                 /**
                                  * &#x27;After&#x27; subscribers
                                  * @property _afters
                                  * @type Subscriber []
                                  * @private
                                  */
-                            
+
                                 /**
                                  * If set to true, the custom event will deliver an EventFacade object
                                  * that is similar to a DOM event object.
@@ -1411,7 +1411,7 @@
                                  * @type boolean
                                  * @default false
                                  */
-                            
+
                                 /**
                                  * Supports multiple options for listener signatures in order to
                                  * port YUI 2 apps.
@@ -1420,7 +1420,7 @@
                                  * @default 9
                                  */
                                 signature : YUI3_SIGNATURE,
-                            
+
                                 /**
                                  * The context the the event will fire from by default.  Defaults to the YUI
                                  * instance.
@@ -1428,7 +1428,7 @@
                                  * @type object
                                  */
                                 context : Y,
-                            
+
                                 /**
                                  * Specifies whether or not this event&#x27;s default function
                                  * can be cancelled by a subscriber by executing preventDefault()
@@ -1438,7 +1438,7 @@
                                  * @default true
                                  */
                                 preventable : true,
-                            
+
                                 /**
                                  * Specifies whether or not a subscriber can stop the event propagation
                                  * via stopPropagation(), stopImmediatePropagation(), or halt()
@@ -1450,7 +1450,7 @@
                                  * @default true
                                  */
                                 bubbles : true,
-                            
+
                                 /**
                                  * Returns the number of subscribers for this event as the sum of the on()
                                  * subscribers and after() subscribers.
@@ -1464,35 +1464,35 @@
                                         subs = this._subscribers,
                                         afters = this._afters,
                                         sib = this.sibling;
-                            
+
                                     if (subs) {
                                         s = subs.length;
                                     }
-                            
+
                                     if (afters) {
                                         a = afters.length;
                                     }
-                            
+
                                     if (sib) {
                                         subs = sib._subscribers;
                                         afters = sib._afters;
-                            
+
                                         if (subs) {
                                             s += subs.length;
                                         }
-                            
+
                                         if (afters) {
                                             a += afters.length;
                                         }
                                     }
-                            
+
                                     if (when) {
                                         return (when === &#x27;after&#x27;) ? a : s;
                                     }
-                            
+
                                     return (s + a);
                                 },
-                            
+
                                 /**
                                  * Monitor the event state for the subscribed event.  The first parameter
                                  * is what should be monitored, the rest are the normal parameters when
@@ -1508,25 +1508,25 @@
                                     args[0] = type;
                                     return this.host.on.apply(this.host, args);
                                 },
-                            
+
                                 /**
                                  * Get all of the subscribers to this event and any sibling event
                                  * @method getSubs
                                  * @return {Array} first item is the on subscribers, second the after.
                                  */
                                 getSubs: function() {
-                            
+
                                     var sibling = this.sibling,
                                         subs = this._subscribers,
                                         afters = this._afters,
                                         siblingSubs,
                                         siblingAfters;
-                            
+
                                     if (sibling) {
                                         siblingSubs = sibling._subscribers;
                                         siblingAfters = sibling._afters;
                                     }
-                            
+
                                     if (siblingSubs) {
                                         if (subs) {
                                             subs = subs.concat(siblingSubs);
@@ -1540,7 +1540,7 @@
                                             subs = [];
                                         }
                                     }
-                            
+
                                     if (siblingAfters) {
                                         if (afters) {
                                             afters = afters.concat(siblingAfters);
@@ -1554,10 +1554,10 @@
                                             afters = [];
                                         }
                                     }
-                            
+
                                     return [subs, afters];
                                 },
-                            
+
                                 /**
                                  * Apply configuration properties.  Only applies the CONFIG whitelist
                                  * @method applyConfig
@@ -1568,7 +1568,7 @@
                                 applyConfig: function(o, force) {
                                     mixConfigs(this, o, force);
                                 },
-                            
+
                                 /**
                                  * Create the Subscription for subscribing function, context, and bound
                                  * arguments.  If this is a fireOnce event, the subscriber is immediately
@@ -1583,30 +1583,30 @@
                                  * @protected
                                  */
                                 _on: function(fn, context, args, when) {
-                            
+
                                     if (!fn) { this.log(&#x27;Invalid callback for CE: &#x27; + this.type); }
-                            
+
                                     var s = new Y.Subscriber(fn, context, args, when),
                                         firedWith;
-                            
+
                                     if (this.fireOnce &amp;&amp; this.fired) {
-                            
+
                                         firedWith = this.firedWith;
-                            
+
                                         // It&#x27;s a little ugly for this to know about facades,
                                         // but given the current breakup, not much choice without
                                         // moving a whole lot of stuff around.
                                         if (this.emitFacade &amp;&amp; this._addFacadeToArgs) {
                                             this._addFacadeToArgs(firedWith);
                                         }
-                            
+
                                         if (this.async) {
                                             setTimeout(Y.bind(this._notify, this, s, firedWith), 0);
                                         } else {
                                             this._notify(s, firedWith);
                                         }
                                     }
-                            
+
                                     if (when === AFTER) {
                                         if (!this._afters) {
                                             this._afters = [];
@@ -1618,7 +1618,7 @@
                                         }
                                         this._subscribers.push(s);
                                     }
-                            
+
                                     if (this._kds) {
                                         if (when === AFTER) {
                                             this.afters[s.id] = s;
@@ -1626,10 +1626,10 @@
                                             this.subscribers[s.id] = s;
                                         }
                                     }
-                            
+
                                     return new Y.EventHandle(this, s);
                                 },
-                            
+
                                 /**
                                  * Listen for this event
                                  * @method subscribe
@@ -1642,7 +1642,7 @@
                                     var a = (arguments.length &gt; 2) ? nativeSlice.call(arguments, 2) : null;
                                     return this._on(fn, context, a, true);
                                 },
-                            
+
                                 /**
                                  * Listen for this event
                                  * @method on
@@ -1654,7 +1654,7 @@
                                  */
                                 on: function(fn, context) {
                                     var a = (arguments.length &gt; 2) ? nativeSlice.call(arguments, 2) : null;
-                            
+
                                     if (this.monitored &amp;&amp; this.host) {
                                         this.host._monitor(&#x27;attach&#x27;, this, {
                                             args: arguments
@@ -1662,7 +1662,7 @@
                                     }
                                     return this._on(fn, context, a, true);
                                 },
-                            
+
                                 /**
                                  * Listen for this event after the normal subscribers have been notified and
                                  * the default behavior has been applied.  If a normal subscriber prevents the
@@ -1678,7 +1678,7 @@
                                     var a = (arguments.length &gt; 2) ? nativeSlice.call(arguments, 2) : null;
                                     return this._on(fn, context, a, AFTER);
                                 },
-                            
+
                                 /**
                                  * Detach listeners.
                                  * @method detach
@@ -1692,12 +1692,12 @@
                                     if (fn &amp;&amp; fn.detach) {
                                         return fn.detach();
                                     }
-                            
+
                                     var i, s,
                                         found = 0,
                                         subs = this._subscribers,
                                         afters = this._afters;
-                            
+
                                     if (subs) {
                                         for (i = subs.length; i &gt;= 0; i--) {
                                             s = subs[i];
@@ -1707,7 +1707,7 @@
                                             }
                                         }
                                     }
-                            
+
                                     if (afters) {
                                         for (i = afters.length; i &gt;= 0; i--) {
                                             s = afters[i];
@@ -1717,10 +1717,10 @@
                                             }
                                         }
                                     }
-                            
+
                                     return found;
                                 },
-                            
+
                                 /**
                                  * Detach listeners.
                                  * @method unsubscribe
@@ -1733,7 +1733,7 @@
                                 unsubscribe: function() {
                                     return this.detach.apply(this, arguments);
                                 },
-                            
+
                                 /**
                                  * Notify a single subscriber
                                  * @method _notify
@@ -1742,21 +1742,21 @@
                                  * @protected
                                  */
                                 _notify: function(s, args, ef) {
-                            
+
                                     this.log(this.type + &#x27;-&gt;&#x27; + &#x27;sub: &#x27; + s.id);
-                            
+
                                     var ret;
-                            
+
                                     ret = s.notify(args, this);
-                            
+
                                     if (false === ret || this.stopped &gt; 1) {
                                         this.log(this.type + &#x27; cancelled by subscriber&#x27;);
                                         return false;
                                     }
-                            
+
                                     return true;
                                 },
-                            
+
                                 /**
                                  * Logger abstraction to centralize the application of the silent flag
                                  * @method log
@@ -1766,7 +1766,7 @@
                                 log: function(msg, cat) {
                                     if (!this.silent) { Y.log(this.id + &#x27;: &#x27; + msg, cat || &#x27;info&#x27;, &#x27;event&#x27;); }
                                 },
-                            
+
                                 /**
                                  * Notifies the subscribers.  The callback functions will be executed
                                  * from the context specified when the event was created, and with the
@@ -1785,17 +1785,17 @@
                                  *
                                  */
                                 fire: function() {
-                            
+
                                     // push is the fastest way to go from arguments to arrays
                                     // for most browsers currently
                                     // http://jsperf.com/push-vs-concat-vs-slice/2
-                            
+
                                     var args = [];
                                     args.push.apply(args, arguments);
-                            
+
                                     return this._fire(args);
                                 },
-                            
+
                                 /**
                                  * Private internal implementation for &#x60;fire&#x60;, which is can be used directly by
                                  * &#x60;EventTarget&#x60; and other event module classes which have already converted from
@@ -1807,21 +1807,21 @@
                                  * @return {boolean} false if one of the subscribers returned false, true otherwise.
                                  */
                                 _fire: function(args) {
-                            
+
                                     if (this.fireOnce &amp;&amp; this.fired) {
                                         this.log(&#x27;fireOnce event: &#x27; + this.type + &#x27; already fired&#x27;);
                                         return true;
                                     } else {
-                            
+
                                         // this doesn&#x27;t happen if the event isn&#x27;t published
                                         // this.host._monitor(&#x27;fire&#x27;, this.type, args);
-                            
+
                                         this.fired = true;
-                            
+
                                         if (this.fireOnce) {
                                             this.firedWith = args;
                                         }
-                            
+
                                         if (this.emitFacade) {
                                             return this.fireComplex(args);
                                         } else {
@@ -1829,7 +1829,7 @@
                                         }
                                     }
                                 },
-                            
+
                                 /**
                                  * Set up for notifying subscribers of non-emitFacade events.
                                  *
@@ -1851,14 +1851,14 @@
                                     }
                                     return this.stopped ? false : true;
                                 },
-                            
+
                                 // Requires the event-custom-complex module for full funcitonality.
                                 fireComplex: function(args) {
                                     this.log(&#x27;Missing event-custom-complex needed to emit a facade for: &#x27; + this.type);
                                     args[0] = args[0] || {};
                                     return this.fireSimple(args);
                                 },
-                            
+
                                 /**
                                  * Notifies a list of subscribers.
                                  *
@@ -1873,7 +1873,7 @@
                                  */
                                 _procSubs: function(subs, args, ef) {
                                     var s, i, l;
-                            
+
                                     for (i = 0, l = subs.length; i &lt; l; i++) {
                                         s = subs[i];
                                         if (s &amp;&amp; s.fn) {
@@ -1885,10 +1885,10 @@
                                             }
                                         }
                                     }
-                            
+
                                     return true;
                                 },
-                            
+
                                 /**
                                  * Notifies the YUI instance if the event is configured with broadcast = 1,
                                  * and both the YUI instance and Y.Global if configured with broadcast = 2.
@@ -1899,20 +1899,20 @@
                                  */
                                 _broadcast: function(args) {
                                     if (!this.stopped &amp;&amp; this.broadcast) {
-                            
+
                                         var a = args.concat();
                                         a.unshift(this.type);
-                            
+
                                         if (this.host !== Y) {
                                             Y.fire.apply(Y, a);
                                         }
-                            
+
                                         if (this.broadcast === 2) {
                                             Y.Global.fire.apply(Y.Global, a);
                                         }
                                     }
                                 },
-                            
+
                                 /**
                                  * Removes all listeners
                                  * @method unsubscribeAll
@@ -1922,7 +1922,7 @@
                                 unsubscribeAll: function() {
                                     return this.detachAll.apply(this, arguments);
                                 },
-                            
+
                                 /**
                                  * Removes all listeners
                                  * @method detachAll
@@ -1931,7 +1931,7 @@
                                 detachAll: function() {
                                     return this.detach();
                                 },
-                            
+
                                 /**
                                  * Deletes the subscriber from the internal store of on() and after()
                                  * subscribers.
@@ -1944,19 +1944,19 @@
                                  */
                                 _delete: function(s, subs, i) {
                                     var when = s._when;
-                            
+
                                     if (!subs) {
                                         subs = (when === AFTER) ? this._afters : this._subscribers;
                                     }
-                            
+
                                     if (subs) {
                                         i = YArray.indexOf(subs, s, 0);
-                            
+
                                         if (s &amp;&amp; subs[i] === s) {
                                             subs.splice(i, 1);
                                         }
                                     }
-                            
+
                                     if (this._kds) {
                                         if (when === AFTER) {
                                             delete this.afters[s.id];
@@ -1964,20 +1964,20 @@
                                             delete this.subscribers[s.id];
                                         }
                                     }
-                            
+
                                     if (this.monitored &amp;&amp; this.host) {
                                         this.host._monitor(&#x27;detach&#x27;, this, {
                                             ce: this,
                                             sub: s
                                         });
                                     }
-                            
+
                                     if (s) {
                                         s.deleted = true;
                                     }
                                 }
                             };
-                            
+
                                 </pre>
                             </div>
                         </div>

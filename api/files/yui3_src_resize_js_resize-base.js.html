@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/resize/js/resize-base.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1139,23 +1139,23 @@
                              * @module resize
                              * @main resize
                              */
-                            
+
                             var Lang = Y.Lang,
                                 isArray = Lang.isArray,
                                 isBoolean = Lang.isBoolean,
                                 isNumber = Lang.isNumber,
                                 isString = Lang.isString,
-                            
+
                                 yArray  = Y.Array,
                                 trim = Lang.trim,
                                 indexOf = yArray.indexOf,
-                            
+
                                 COMMA = &#x27;,&#x27;,
                                 DOT = &#x27;.&#x27;,
                                 EMPTY_STR = &#x27;&#x27;,
                                 HANDLE_SUB = &#x27;{handle}&#x27;,
                                 SPACE = &#x27; &#x27;,
-                            
+
                                 ACTIVE = &#x27;active&#x27;,
                                 ACTIVE_HANDLE = &#x27;activeHandle&#x27;,
                                 ACTIVE_HANDLE_NODE = &#x27;activeHandleNode&#x27;,
@@ -1193,13 +1193,13 @@
                                 WRAP = &#x27;wrap&#x27;,
                                 WRAPPER = &#x27;wrapper&#x27;,
                                 WRAP_TYPES = &#x27;wrapTypes&#x27;,
-                            
+
                                 EV_MOUSE_UP = &#x27;resize:mouseUp&#x27;,
                                 EV_RESIZE = &#x27;resize:resize&#x27;,
                                 EV_RESIZE_ALIGN = &#x27;resize:align&#x27;,
                                 EV_RESIZE_END = &#x27;resize:end&#x27;,
                                 EV_RESIZE_START = &#x27;resize:start&#x27;,
-                            
+
                                 T = &#x27;t&#x27;,
                                 TR = &#x27;tr&#x27;,
                                 R = &#x27;r&#x27;,
@@ -1208,50 +1208,50 @@
                                 BL = &#x27;bl&#x27;,
                                 L = &#x27;l&#x27;,
                                 TL = &#x27;tl&#x27;,
-                            
+
                                 concat = function() {
                                     return Array.prototype.slice.call(arguments).join(SPACE);
                                 },
-                            
+
                                 // round the passed number to get rid of pixel-flickering
                                 toRoundNumber = function(num) {
                                     return Math.round(parseFloat(num)) || 0;
                                 },
-                            
+
                                 getCompStyle = function(node, val) {
                                     return node.getComputedStyle(val);
                                 },
-                            
+
                                 handleAttrName = function(handle) {
                                     return HANDLE + handle.toUpperCase();
                                 },
-                            
+
                                 isNode = function(v) {
                                     return (v instanceof Y.Node);
                                 },
-                            
+
                                 toInitialCap = Y.cached(
                                     function(str) {
                                         return str.substring(0, 1).toUpperCase() + str.substring(1);
                                     }
                                 ),
-                            
+
                                 capitalize = Y.cached(function() {
                                     var out = [],
                                         args = yArray(arguments, 0, true);
-                            
+
                                     yArray.each(args, function(part, i) {
                                         if (i &gt; 0) {
                                             part = toInitialCap(part);
                                         }
                                         out.push(part);
                                     });
-                            
+
                                     return out.join(EMPTY_STR);
                                 }),
-                            
+
                                 getCN = Y.ClassNameManager.getClassName,
-                            
+
                                 CSS_RESIZE = getCN(RESIZE),
                                 CSS_RESIZE_HANDLE = getCN(RESIZE, HANDLE),
                                 CSS_RESIZE_HANDLE_ACTIVE = getCN(RESIZE, HANDLE, ACTIVE),
@@ -1261,10 +1261,10 @@
                                 CSS_RESIZE_HIDDEN_HANDLES = getCN(RESIZE, HIDDEN, HANDLES),
                                 CSS_RESIZE_HANDLES_WRAPPER = getCN(RESIZE, HANDLES, WRAPPER),
                                 CSS_RESIZE_WRAPPER = getCN(RESIZE, WRAPPER);
-                            
+
                             /**
                             A base class for Resize, providing:
-                            
+
                                * Basic Lifecycle (initializer, renderUI, bindUI, syncUI, destructor)
                                * Applies drag handles to an element to make it resizable
                                * Here is the list of valid resize handles:
@@ -1275,9 +1275,9 @@
                                    absolute. Some elements, such as a textarea or image, don&#x27;t support
                                    children. To overcome that, set wrap:true in your config and the
                                    element willbe wrapped for you automatically.
-                            
+
                             Quick Example:
-                            
+
                                 var instance = new Y.Resize({
                                     node: &#x27;#resize1&#x27;,
                                     preserveRatio: true,
@@ -1286,20 +1286,20 @@
                                     maxWidth: 400,
                                     handles: &#x27;t, tr, r, br, b, bl, l, tl&#x27;
                                 });
-                            
+
                             Check the list of &lt;a href=&quot;Resize.html#attrs&quot;&gt;Configuration Attributes&lt;/a&gt; available for
                             Resize.
-                            
+
                             @class Resize
                             @param config {Object} Object literal specifying widget configuration properties.
                             @constructor
                             @extends Base
                             */
-                            
+
                             function Resize() {
                                 Resize.superclass.constructor.apply(this, arguments);
                             }
-                            
+
                             Y.mix(Resize, {
                                 /**
                                  * Static property provides a string to identify the class.
@@ -1309,7 +1309,7 @@
                                  * @static
                                  */
                                 NAME: RESIZE,
-                            
+
                                 /**
                                  * Static property used to define the default attribute
                                  * configuration for the Resize.
@@ -1333,7 +1333,7 @@
                                             return Y.Lang.isString(v) || Y.Lang.isNull(v);
                                         }
                                     },
-                            
+
                                     /**
                                      * Stores the active handle element during the resize.
                                      *
@@ -1346,7 +1346,7 @@
                                         value: null,
                                         validator: isNode
                                     },
-                            
+
                                     /**
                                      * False to ensure that the resize handles are always visible, true to
                                      * display them only when the user mouses over the resizable borders.
@@ -1359,7 +1359,7 @@
                                         value: false,
                                         validator: isBoolean
                                     },
-                            
+
                                     /**
                                      * The default minimum height of the element. Only used when
                                      * ResizeConstrained is not plugged.
@@ -1372,7 +1372,7 @@
                                         value: 15,
                                         validator: isNumber
                                     },
-                            
+
                                     /**
                                      * The default minimum width of the element. Only used when
                                      * ResizeConstrained is not plugged.
@@ -1385,7 +1385,7 @@
                                         value: 15,
                                         validator: isNumber
                                     },
-                            
+
                                     /**
                                      * The handles to use (any combination of): &#x27;t&#x27;, &#x27;b&#x27;, &#x27;r&#x27;, &#x27;l&#x27;, &#x27;bl&#x27;,
                                      * &#x27;br&#x27;, &#x27;tl&#x27;, &#x27;tr&#x27;. Can use a shortcut of All.
@@ -1398,7 +1398,7 @@
                                         setter: &#x27;_setHandles&#x27;,
                                         value: ALL
                                     },
-                            
+
                                     /**
                                      * Node to wrap the resize handles.
                                      *
@@ -1410,7 +1410,7 @@
                                         setter: Y.one,
                                         valueFn: &#x27;_valueHandlesWrapper&#x27;
                                     },
-                            
+
                                     /**
                                      * The selector or element to resize. Required.
                                      *
@@ -1420,7 +1420,7 @@
                                     node: {
                                         setter: Y.one
                                     },
-                            
+
                                     /**
                                      * True when the element is being Resized.
                                      *
@@ -1432,7 +1432,7 @@
                                         value: false,
                                         validator: isBoolean
                                     },
-                            
+
                                     /**
                                      * True to wrap an element with a div if needed (required for textareas
                                      * and images, defaults to false) in favor of the handles config option.
@@ -1448,7 +1448,7 @@
                                         value: false,
                                         validator: isBoolean
                                     },
-                            
+
                                     /**
                                      * Elements that requires a wrapper by default. Normally are elements
                                      * which cannot have children elements.
@@ -1462,7 +1462,7 @@
                                         readOnly: true,
                                         value: /^canvas|textarea|input|select|button|img|iframe|table|embed$/i
                                     },
-                            
+
                                     /**
                                      * Element to wrap the &lt;code&gt;wrapTypes&lt;/code&gt;. This element will house
                                      * the handles elements.
@@ -1478,62 +1478,62 @@
                                         writeOnce: true
                                     }
                                 },
-                            
+
                                 RULES: {
                                     b: function(instance, dx, dy) {
                                         var info = instance.info,
                                             originalInfo = instance.originalInfo;
-                            
+
                                         info.offsetHeight = originalInfo.offsetHeight + dy;
                                     },
-                            
+
                                     l: function(instance, dx) {
                                         var info = instance.info,
                                             originalInfo = instance.originalInfo;
-                            
+
                                         info.left = originalInfo.left + dx;
                                         info.offsetWidth = originalInfo.offsetWidth - dx;
                                     },
-                            
+
                                     r: function(instance, dx) {
                                         var info = instance.info,
                                             originalInfo = instance.originalInfo;
-                            
+
                                         info.offsetWidth = originalInfo.offsetWidth + dx;
                                     },
-                            
+
                                     t: function(instance, dx, dy) {
                                         var info = instance.info,
                                             originalInfo = instance.originalInfo;
-                            
+
                                         info.top = originalInfo.top + dy;
                                         info.offsetHeight = originalInfo.offsetHeight - dy;
                                     },
-                            
+
                                     tr: function() {
                                         this.t.apply(this, arguments);
                                         this.r.apply(this, arguments);
                                     },
-                            
+
                                     bl: function() {
                                         this.b.apply(this, arguments);
                                         this.l.apply(this, arguments);
                                     },
-                            
+
                                     br: function() {
                                         this.b.apply(this, arguments);
                                         this.r.apply(this, arguments);
                                     },
-                            
+
                                     tl: function() {
                                         this.t.apply(this, arguments);
                                         this.l.apply(this, arguments);
                                     }
                                 },
-                            
+
                                 capitalize: capitalize
                             });
-                            
+
                             Y.Resize = Y.extend(
                                 Resize,
                                 Y.Base,
@@ -1545,7 +1545,7 @@
                                      * @type {String}
                                      */
                                     ALL_HANDLES: [ T, TR, R, BR, B, BL, L, TL ],
-                            
+
                                     /**
                                      * Regex which matches with the handles that could change the height of
                                      * the resizable element.
@@ -1554,7 +1554,7 @@
                                      * @type {String}
                                      */
                                     REGEX_CHANGE_HEIGHT: /^(t|tr|b|bl|br|tl)$/i,
-                            
+
                                     /**
                                      * Regex which matches with the handles that could change the left of
                                      * the resizable element.
@@ -1563,7 +1563,7 @@
                                      * @type {String}
                                      */
                                     REGEX_CHANGE_LEFT: /^(tl|l|bl)$/i,
-                            
+
                                     /**
                                      * Regex which matches with the handles that could change the top of
                                      * the resizable element.
@@ -1572,7 +1572,7 @@
                                      * @type {String}
                                      */
                                     REGEX_CHANGE_TOP: /^(tl|t|tr)$/i,
-                            
+
                                     /**
                                      * Regex which matches with the handles that could change the width of
                                      * the resizable element.
@@ -1581,7 +1581,7 @@
                                      * @type {String}
                                      */
                                     REGEX_CHANGE_WIDTH: /^(bl|br|l|r|tl|tr)$/i,
-                            
+
                                     /**
                                      * Template used to create the resize wrapper for the handles.
                                      *
@@ -1589,7 +1589,7 @@
                                      * @type {String}
                                      */
                                     HANDLES_WRAP_TEMPLATE: &#x27;&lt;div class=&quot;&#x27;+CSS_RESIZE_HANDLES_WRAPPER+&#x27;&quot;&gt;&lt;/div&gt;&#x27;,
-                            
+
                                     /**
                                      * Template used to create the resize wrapper node when needed.
                                      *
@@ -1597,7 +1597,7 @@
                                      * @type {String}
                                      */
                                     WRAP_TEMPLATE: &#x27;&lt;div class=&quot;&#x27;+CSS_RESIZE_WRAPPER+&#x27;&quot;&gt;&lt;/div&gt;&#x27;,
-                            
+
                                     /**
                                      * Template used to create each resize handle.
                                      *
@@ -1607,8 +1607,8 @@
                                     HANDLE_TEMPLATE: &#x27;&lt;div class=&quot;&#x27;+concat(CSS_RESIZE_HANDLE, CSS_RESIZE_HANDLE_PLACEHOLDER)+&#x27;&quot;&gt;&#x27; +
                                                         &#x27;&lt;div class=&quot;&#x27;+concat(CSS_RESIZE_HANDLE_INNER, CSS_RESIZE_HANDLE_INNER_PLACEHOLDER)+&#x27;&quot;&gt;&amp;nbsp;&lt;/div&gt;&#x27; +
                                                     &#x27;&lt;/div&gt;&#x27;,
-                            
-                            
+
+
                                     /**
                                      * Each box has a content area and optional surrounding padding and
                                      * border areas. This property stores the sum of all horizontal
@@ -1619,7 +1619,7 @@
                                      * @type number
                                      */
                                     totalHSurrounding: 0,
-                            
+
                                     /**
                                      * Each box has a content area and optional surrounding padding and
                                      * border areas. This property stores the sum of all vertical
@@ -1630,7 +1630,7 @@
                                      * @type number
                                      */
                                     totalVSurrounding: 0,
-                            
+
                                     /**
                                      * Stores the &lt;a href=&quot;Resize.html#attr_node&quot;&gt;node&lt;/a&gt;
                                      * surrounding information retrieved from
@@ -1641,7 +1641,7 @@
                                      * @default null
                                      */
                                     nodeSurrounding: null,
-                            
+
                                     /**
                                      * Stores the &lt;a href=&quot;Resize.html#attr_wrapper&quot;&gt;wrapper&lt;/a&gt;
                                      * surrounding information retrieved from
@@ -1652,7 +1652,7 @@
                                      * @default null
                                      */
                                     wrapperSurrounding: null,
-                            
+
                                     /**
                                      * Whether the handle being dragged can change the height.
                                      *
@@ -1661,7 +1661,7 @@
                                      * @type boolean
                                      */
                                     changeHeightHandles: false,
-                            
+
                                     /**
                                      * Whether the handle being dragged can change the left.
                                      *
@@ -1670,7 +1670,7 @@
                                      * @type boolean
                                      */
                                     changeLeftHandles: false,
-                            
+
                                     /**
                                      * Whether the handle being dragged can change the top.
                                      *
@@ -1679,7 +1679,7 @@
                                      * @type boolean
                                      */
                                     changeTopHandles: false,
-                            
+
                                     /**
                                      * Whether the handle being dragged can change the width.
                                      *
@@ -1688,7 +1688,7 @@
                                      * @type boolean
                                      */
                                     changeWidthHandles: false,
-                            
+
                                     /**
                                      * Store DD.Delegate reference for the respective Resize instance.
                                      *
@@ -1697,7 +1697,7 @@
                                      * @type Object
                                      */
                                     delegate: null,
-                            
+
                                     /**
                                      * Stores the current values for the height, width, top and left. You are
                                      * able to manipulate these values on resize in order to change the resize
@@ -1708,7 +1708,7 @@
                                      * @protected
                                      */
                                     info: null,
-                            
+
                                     /**
                                      * Stores the last values for the height, width, top and left.
                                      *
@@ -1717,7 +1717,7 @@
                                      * @protected
                                      */
                                     lastInfo: null,
-                            
+
                                     /**
                                      * Stores the original values for the height, width, top and left, stored
                                      * on resize start.
@@ -1727,7 +1727,7 @@
                                      * @protected
                                      */
                                     originalInfo: null,
-                            
+
                                     /**
                                      * Construction logic executed during Resize instantiation. Lifecycle.
                                      *
@@ -1736,10 +1736,10 @@
                                      */
                                     initializer: function() {
                                         this._eventHandles = [];
-                            
+
                                         this.renderer();
                                     },
-                            
+
                                     /**
                                      * Create the DOM structure for the Resize. Lifecycle.
                                      *
@@ -1748,10 +1748,10 @@
                                      */
                                     renderUI: function() {
                                         var instance = this;
-                            
+
                                         instance._renderHandles();
                                     },
-                            
+
                                     /**
                                      * Bind the events on the Resize UI. Lifecycle.
                                      *
@@ -1760,12 +1760,12 @@
                                      */
                                     bindUI: function() {
                                         var instance = this;
-                            
+
                                         instance._createEvents();
                                         instance._bindDD();
                                         instance._bindHandle();
                                     },
-                            
+
                                     /**
                                      * Sync the Resize UI.
                                      *
@@ -1774,15 +1774,15 @@
                                      */
                                     syncUI: function() {
                                         var instance = this;
-                            
+
                                         this.get(NODE).addClass(CSS_RESIZE);
-                            
+
                                         // hide handles if AUTO_HIDE is true
                                         instance._setHideHandlesUI(
                                             instance.get(AUTO_HIDE)
                                         );
                                     },
-                            
+
                                     /**
                                      * Destructor lifecycle implementation for the Resize class.
                                      * Detaches all previously attached listeners and removes the Resize handles.
@@ -1795,41 +1795,41 @@
                                             node = instance.get(NODE),
                                             wrapper = instance.get(WRAPPER),
                                             pNode = wrapper.get(PARENT_NODE);
-                            
+
                                         Y.each(
                                             instance._eventHandles,
                                             function(handle) {
                                                 handle.detach();
                                             }
                                         );
-                            
+
                                         instance._eventHandles.length = 0;
-                            
+
                                         // destroy handles dd and remove them from the dom
                                         instance.eachHandle(function(handleEl) {
                                             instance.delegate.dd.destroy();
-                            
+
                                             // remove handle
                                             handleEl.remove(true);
                                         });
-                            
+
                                         instance.delegate.destroy();
-                            
+
                                         // unwrap node
                                         if (instance.get(WRAP)) {
                                             instance._copyStyles(wrapper, node);
-                            
+
                                             if (pNode) {
                                                 pNode.insertBefore(node, wrapper);
                                             }
-                            
+
                                             wrapper.remove(true);
                                         }
-                            
+
                                         node.removeClass(CSS_RESIZE);
                                         node.removeClass(CSS_RESIZE_HIDDEN_HANDLES);
                                     },
-                            
+
                                     /**
                                      * Creates DOM (or manipulates DOM for progressive enhancement)
                                      * This method is invoked by initializer(). It&#x27;s chained automatically for
@@ -1843,7 +1843,7 @@
                                         this.bindUI();
                                         this.syncUI();
                                     },
-                            
+
                                     /**
                                      * &lt;p&gt;Loop through each handle which is being used and executes a callback.&lt;/p&gt;
                                      * &lt;p&gt;Example:&lt;/p&gt;
@@ -1856,19 +1856,19 @@
                                      */
                                     eachHandle: function(fn) {
                                         var instance = this;
-                            
+
                                         Y.each(
                                             instance.get(HANDLES),
                                             function(handle, i) {
                                                 var handleEl = instance.get(
                                                     handleAttrName(handle)
                                                 );
-                            
+
                                                 fn.apply(instance, [handleEl, handle, i]);
                                             }
                                         );
                                     },
-                            
+
                                     /**
                                      * Bind the handles DragDrop events to the Resize instance.
                                      *
@@ -1877,7 +1877,7 @@
                                      */
                                     _bindDD: function() {
                                         var instance = this;
-                            
+
                                         instance.delegate = new Y.DD.Delegate(
                                             {
                                                 bubbleTargets: instance,
@@ -1892,7 +1892,7 @@
                                                 target: false
                                             }
                                         );
-                            
+
                                         instance._eventHandles.push(
                                             instance.on(&#x27;drag:drag&#x27;, instance._handleResizeEvent),
                                             instance.on(&#x27;drag:dropmiss&#x27;, instance._handleMouseUpEvent),
@@ -1900,7 +1900,7 @@
                                             instance.on(&#x27;drag:start&#x27;, instance._handleResizeStartEvent)
                                         );
                                     },
-                            
+
                                     /**
                                      * Bind the events related to the handles (_onHandleMouseEnter, _onHandleMouseLeave).
                                      *
@@ -1910,7 +1910,7 @@
                                     _bindHandle: function() {
                                         var instance = this,
                                             wrapper = instance.get(WRAPPER);
-                            
+
                                         instance._eventHandles.push(
                                             wrapper.on(&#x27;mouseenter&#x27;, Y.bind(instance._onWrapperMouseEnter, instance)),
                                             wrapper.on(&#x27;mouseleave&#x27;, Y.bind(instance._onWrapperMouseLeave, instance)),
@@ -1918,7 +1918,7 @@
                                             wrapper.delegate(&#x27;mouseleave&#x27;, Y.bind(instance._onHandleMouseLeave, instance), DOT+CSS_RESIZE_HANDLE)
                                         );
                                     },
-                            
+
                                     /**
                                      * Create the custom events used on the Resize.
                                      *
@@ -1937,7 +1937,7 @@
                                                     prefix: RESIZE
                                                 });
                                             };
-                            
+
                                         /**
                                          * Handles the resize start event. Fired when a handle starts to be
                                          * dragged.
@@ -1948,7 +1948,7 @@
                                          * @bubbles Resize
                                          */
                                         publish(EV_RESIZE_START, this._defResizeStartFn);
-                            
+
                                         /**
                                          * Handles the resize event. Fired on each pixel when the handle is
                                          * being dragged.
@@ -1959,7 +1959,7 @@
                                          * @bubbles Resize
                                          */
                                         publish(EV_RESIZE, this._defResizeFn);
-                            
+
                                         /**
                                          * Handles the resize align event.
                                          *
@@ -1969,7 +1969,7 @@
                                          * @bubbles Resize
                                          */
                                         publish(EV_RESIZE_ALIGN, this._defResizeAlignFn);
-                            
+
                                         /**
                                          * Handles the resize end event. Fired when a handle stop to be
                                          * dragged.
@@ -1980,7 +1980,7 @@
                                          * @bubbles Resize
                                          */
                                         publish(EV_RESIZE_END, this._defResizeEndFn);
-                            
+
                                         /**
                                          * Handles the resize mouseUp event. Fired when a mouseUp event happens on a
                                          * handle.
@@ -1992,7 +1992,7 @@
                                          */
                                         publish(EV_MOUSE_UP, this._defMouseUpFn);
                                     },
-                            
+
                                     /**
                                       * Responsible for loop each handle element and append to the wrapper.
                                       *
@@ -2003,14 +2003,14 @@
                                         var instance = this,
                                             wrapper = instance.get(WRAPPER),
                                             handlesWrapper = instance.get(HANDLES_WRAPPER);
-                            
+
                                         instance.eachHandle(function(handleEl) {
                                             handlesWrapper.append(handleEl);
                                         });
-                            
+
                                         wrapper.append(handlesWrapper);
                                     },
-                            
+
                                     /**
                                      * Creates the handle element based on the handle name and initialize the
                                      * DragDrop on it.
@@ -2021,14 +2021,14 @@
                                      */
                                     _buildHandle: function(handle) {
                                         var instance = this;
-                            
+
                                         return Y.Node.create(
                                             Y.Lang.sub(instance.HANDLE_TEMPLATE, {
                                                 handle: handle
                                             })
                                         );
                                     },
-                            
+
                                     /**
                                      * Basic resize calculations.
                                      *
@@ -2040,10 +2040,10 @@
                                             handle = instance.handle,
                                             info = instance.info,
                                             originalInfo = instance.originalInfo,
-                            
+
                                             dx = info.actXY[0] - originalInfo.actXY[0],
                                             dy = info.actXY[1] - originalInfo.actXY[1];
-                            
+
                                         if (handle &amp;&amp; Y.Resize.RULES[handle]) {
                                             Y.Resize.RULES[handle](instance, dx, dy);
                                         }
@@ -2051,7 +2051,7 @@
                                             Y.log(&#x27;Handle rule not found: &#x27; + handle, &#x27;warn&#x27;, &#x27;resize&#x27;);
                                         }
                                     },
-                            
+
                                     /**
                                      * Helper method to update the current size value on
                                      * &lt;a href=&quot;Resize.html#property_info&quot;&gt;info&lt;/a&gt; to respect the
@@ -2067,19 +2067,19 @@
                                             info = instance.info,
                                             originalInfo = instance.originalInfo,
                                             axis = (offset === OFFSET_HEIGHT) ? TOP : LEFT;
-                            
+
                                         // forcing the offsetHeight/offsetWidth to be the passed size
                                         info[offset] = size;
-                            
+
                                         // predicting, based on the original information, the last left valid in case of reach the min/max dimension
                                         // this calculation avoid browser event leaks when user interact very fast
                                         if (((axis === LEFT) &amp;&amp; instance.changeLeftHandles) ||
                                             ((axis === TOP) &amp;&amp; instance.changeTopHandles)) {
-                            
+
                                             info[axis] = originalInfo[axis] + originalInfo[offset] - size;
                                         }
                                     },
-                            
+
                                     /**
                                      * Copy relevant styles of the &lt;a href=&quot;Resize.html#attr_node&quot;&gt;node&lt;/a&gt;
                                      * to the &lt;a href=&quot;Resize.html#attr_wrapper&quot;&gt;wrapper&lt;/a&gt;.
@@ -2093,48 +2093,48 @@
                                         var position = node.getStyle(POSITION).toLowerCase(),
                                             surrounding = this._getBoxSurroundingInfo(node),
                                             wrapperStyle;
-                            
+
                                         // resizable wrapper should be positioned
                                         if (position === STATIC) {
                                             position = RELATIVE;
                                         }
-                            
+
                                         wrapperStyle = {
                                             position: position,
                                             left: getCompStyle(node, LEFT),
                                             top: getCompStyle(node, TOP)
                                         };
-                            
+
                                         Y.mix(wrapperStyle, surrounding.margin);
                                         Y.mix(wrapperStyle, surrounding.border);
-                            
+
                                         wrapper.setStyles(wrapperStyle);
-                            
+
                                         // remove margin and border from the internal node
                                         node.setStyles({ border: 0, margin: 0 });
-                            
+
                                         wrapper.sizeTo(
                                             node.get(OFFSET_WIDTH) + surrounding.totalHBorder,
                                             node.get(OFFSET_HEIGHT) + surrounding.totalVBorder
                                         );
                                     },
-                            
+
                                     // extract handle name from a string
                                     // using Y.cached to memoize the function for performance
                                     _extractHandleName: Y.cached(
                                         function(node) {
                                             var className = node.get(CLASS_NAME),
-                            
+
                                                 match = className.match(
                                                     new RegExp(
                                                         getCN(RESIZE, HANDLE, &#x27;(\\w{1,2})\\b&#x27;)
                                                     )
                                                 );
-                            
+
                                             return match ? match[1] : null;
                                         }
                                     ),
-                            
+
                                     /**
                                      * &lt;p&gt;Generates metadata to the &lt;a href=&quot;Resize.html#property_info&quot;&gt;info&lt;/a&gt;
                                      * and &lt;a href=&quot;Resize.html#property_originalInfo&quot;&gt;originalInfo&lt;/a&gt;&lt;/p&gt;
@@ -2153,12 +2153,12 @@
                                             nodeY = nodeXY[1],
                                             offsetHeight = node.get(OFFSET_HEIGHT),
                                             offsetWidth = node.get(OFFSET_WIDTH);
-                            
+
                                         if (event) {
                                             // the xy that the node will be set to. Changing this will alter the position as it&#x27;s dragged.
                                             actXY = (drag.actXY.length ? drag.actXY : drag.lastXY);
                                         }
-                            
+
                                         return {
                                             actXY: actXY,
                                             bottom: (nodeY + offsetHeight),
@@ -2169,7 +2169,7 @@
                                             top: nodeY
                                         };
                                     },
-                            
+
                                     /**
                                      * Each box has a content area and optional surrounding margin,
                                      * padding and * border areas. This method get all this information from
@@ -2188,7 +2188,7 @@
                                             margin: {},
                                             border: {}
                                         };
-                            
+
                                         if (isNode(node)) {
                                             Y.each([ TOP, RIGHT, BOTTOM, LEFT ], function(dir) {
                                                 var paddingProperty = capitalize(PADDING, dir),
@@ -2196,7 +2196,7 @@
                                                     borderWidthProperty = capitalize(BORDER, dir, WIDTH),
                                                     borderColorProperty = capitalize(BORDER, dir, COLOR),
                                                     borderStyleProperty = capitalize(BORDER, dir, STYLE);
-                            
+
                                                 info.border[borderColorProperty] = getCompStyle(node, borderColorProperty);
                                                 info.border[borderStyleProperty] = getCompStyle(node, borderStyleProperty);
                                                 info.border[borderWidthProperty] = getCompStyle(node, borderWidthProperty);
@@ -2204,15 +2204,15 @@
                                                 info.padding[paddingProperty] = getCompStyle(node, paddingProperty);
                                             });
                                         }
-                            
+
                                         info.totalHBorder = (toRoundNumber(info.border.borderLeftWidth) + toRoundNumber(info.border.borderRightWidth));
                                         info.totalHPadding = (toRoundNumber(info.padding.paddingLeft) + toRoundNumber(info.padding.paddingRight));
                                         info.totalVBorder = (toRoundNumber(info.border.borderBottomWidth) + toRoundNumber(info.border.borderTopWidth));
                                         info.totalVPadding = (toRoundNumber(info.padding.paddingBottom) + toRoundNumber(info.padding.paddingTop));
-                            
+
                                         return info;
                                     },
-                            
+
                                     /**
                                      * Sync the Resize UI with internal values from
                                      * &lt;a href=&quot;Resize.html#property_info&quot;&gt;info&lt;/a&gt;.
@@ -2226,13 +2226,13 @@
                                             wrapperSurrounding = instance.wrapperSurrounding,
                                             wrapper = instance.get(WRAPPER),
                                             node = instance.get(NODE);
-                            
+
                                         wrapper.sizeTo(info.offsetWidth, info.offsetHeight);
-                            
+
                                         if (instance.changeLeftHandles || instance.changeTopHandles) {
                                             wrapper.setXY([info.left, info.top]);
                                         }
-                            
+
                                         // if a wrap node is being used
                                         if (!wrapper.compareTo(node)) {
                                             // the original internal node borders were copied to the wrapper on
@@ -2242,13 +2242,13 @@
                                                 info.offsetHeight - wrapperSurrounding.totalVBorder
                                             );
                                         }
-                            
+
                                         // prevent webkit textarea resize
                                         if (Y.UA.webkit) {
                                             node.setStyle(RESIZE, NONE);
                                         }
                                     },
-                            
+
                                     /**
                                      * Update &lt;code&gt;instance.changeHeightHandles,
                                      * instance.changeLeftHandles, instance.changeTopHandles,
@@ -2259,13 +2259,13 @@
                                      */
                                     _updateChangeHandleInfo: function(handle) {
                                         var instance = this;
-                            
+
                                         instance.changeHeightHandles = instance.REGEX_CHANGE_HEIGHT.test(handle);
                                         instance.changeLeftHandles = instance.REGEX_CHANGE_LEFT.test(handle);
                                         instance.changeTopHandles = instance.REGEX_CHANGE_TOP.test(handle);
                                         instance.changeWidthHandles = instance.REGEX_CHANGE_WIDTH.test(handle);
                                     },
-                            
+
                                     /**
                                      * Update &lt;a href=&quot;Resize.html#property_info&quot;&gt;info&lt;/a&gt; values (bottom, actXY, left, top, offsetHeight, offsetWidth, right).
                                      *
@@ -2274,10 +2274,10 @@
                                      */
                                     _updateInfo: function(event) {
                                         var instance = this;
-                            
+
                                         instance.info = instance._getInfo(instance.get(WRAPPER), event);
                                     },
-                            
+
                                     /**
                                      * Update properties
                                      * &lt;a href=&quot;Resize.html#property_nodeSurrounding&quot;&gt;nodeSurrounding&lt;/a&gt;,
@@ -2294,14 +2294,14 @@
                                             wrapper = instance.get(WRAPPER),
                                             nodeSurrounding = instance._getBoxSurroundingInfo(node),
                                             wrapperSurrounding = instance._getBoxSurroundingInfo(wrapper);
-                            
+
                                         instance.nodeSurrounding = nodeSurrounding;
                                         instance.wrapperSurrounding = wrapperSurrounding;
-                            
+
                                         instance.totalVSurrounding = (nodeSurrounding.totalVPadding + wrapperSurrounding.totalVBorder);
                                         instance.totalHSurrounding = (nodeSurrounding.totalHPadding + wrapperSurrounding.totalHBorder);
                                     },
-                            
+
                                     /**
                                      * Set the active state of the handles.
                                      *
@@ -2312,7 +2312,7 @@
                                     _setActiveHandlesUI: function(val) {
                                         var instance = this,
                                             activeHandleNode = instance.get(ACTIVE_HANDLE_NODE);
-                            
+
                                         if (activeHandleNode) {
                                             if (val) {
                                                 // remove CSS_RESIZE_HANDLE_ACTIVE from all handles before addClass on the active
@@ -2321,7 +2321,7 @@
                                                         handleEl.removeClass(CSS_RESIZE_HANDLE_ACTIVE);
                                                     }
                                                 );
-                            
+
                                                 activeHandleNode.addClass(CSS_RESIZE_HANDLE_ACTIVE);
                                             }
                                             else {
@@ -2329,7 +2329,7 @@
                                             }
                                         }
                                     },
-                            
+
                                     /**
                                      * Setter for the handles attribute
                                      *
@@ -2340,7 +2340,7 @@
                                     _setHandles: function(val) {
                                         var instance = this,
                                             handles = [];
-                            
+
                                         // handles attr accepts both array or string
                                         if (isArray(val)) {
                                             handles = val;
@@ -2356,7 +2356,7 @@
                                                     val.split(COMMA),
                                                     function(node) {
                                                         var handle = trim(node);
-                            
+
                                                         // if its a valid handle, add it to the handles output
                                                         if (indexOf(instance.ALL_HANDLES, handle) &gt; -1) {
                                                             handles.push(handle);
@@ -2365,10 +2365,10 @@
                                                 );
                                             }
                                         }
-                            
+
                                         return handles;
                                     },
-                            
+
                                     /**
                                      * Set the visibility of the handles.
                                      *
@@ -2379,7 +2379,7 @@
                                     _setHideHandlesUI: function(val) {
                                         var instance = this,
                                             wrapper = instance.get(WRAPPER);
-                            
+
                                         if (!instance.get(RESIZING)) {
                                             if (val) {
                                                 wrapper.addClass(CSS_RESIZE_HIDDEN_HANDLES);
@@ -2389,7 +2389,7 @@
                                             }
                                         }
                                     },
-                            
+
                                     /**
                                      * Setter for the wrap attribute
                                      *
@@ -2402,15 +2402,15 @@
                                             node = instance.get(NODE),
                                             nodeName = node.get(NODE_NAME),
                                             typeRegex = instance.get(WRAP_TYPES);
-                            
+
                                         // if nodeName is listed on WRAP_TYPES force use the wrapper
                                         if (typeRegex.test(nodeName)) {
                                             val = true;
                                         }
-                            
+
                                         return val;
                                     },
-                            
+
                                     /**
                                      * Default resize:mouseUp handler
                                      *
@@ -2420,10 +2420,10 @@
                                      */
                                     _defMouseUpFn: function() {
                                         var instance = this;
-                            
+
                                         instance.set(RESIZING, false);
                                     },
-                            
+
                                     /**
                                      * Default resize:resize handler
                                      *
@@ -2433,10 +2433,10 @@
                                      */
                                     _defResizeFn: function(event) {
                                         var instance = this;
-                            
+
                                         instance._resize(event);
                                     },
-                            
+
                                     /**
                                      * Logic method for _defResizeFn. Allow AOP.
                                      *
@@ -2446,13 +2446,13 @@
                                      */
                                     _resize: function(event) {
                                         var instance = this;
-                            
+
                                         instance._handleResizeAlignEvent(event.dragEvent);
-                            
+
                                         // _syncUI of the wrapper, not using proxy
                                         instance._syncUI();
                                     },
-                            
+
                                     /**
                                      * Default resize:align handler
                                      *
@@ -2462,10 +2462,10 @@
                                      */
                                     _defResizeAlignFn: function(event) {
                                         var instance = this;
-                            
+
                                         instance._resizeAlign(event);
                                     },
-                            
+
                                     /**
                                      * Logic method for _defResizeAlignFn. Allow AOP.
                                      *
@@ -2478,32 +2478,32 @@
                                             info,
                                             defMinHeight,
                                             defMinWidth;
-                            
+
                                         instance.lastInfo = instance.info;
-                            
+
                                         // update the instance.info values
                                         instance._updateInfo(event);
-                            
+
                                         info = instance.info;
-                            
+
                                         // basic resize calculations
                                         instance._calcResize();
-                            
+
                                         // if Y.Plugin.ResizeConstrained is not plugged, check for min dimension
                                         if (!instance.con) {
                                             defMinHeight = (instance.get(DEF_MIN_HEIGHT) + instance.totalVSurrounding);
                                             defMinWidth = (instance.get(DEF_MIN_WIDTH) + instance.totalHSurrounding);
-                            
+
                                             if (info.offsetHeight &lt;= defMinHeight) {
                                                 instance._checkSize(OFFSET_HEIGHT, defMinHeight);
                                             }
-                            
+
                                             if (info.offsetWidth &lt;= defMinWidth) {
                                                 instance._checkSize(OFFSET_WIDTH, defMinWidth);
                                             }
                                         }
                                     },
-                            
+
                                     /**
                                      * Default resize:end handler
                                      *
@@ -2513,10 +2513,10 @@
                                      */
                                     _defResizeEndFn: function(event) {
                                         var instance = this;
-                            
+
                                         instance._resizeEnd(event);
                                     },
-                            
+
                                     /**
                                      * Logic method for _defResizeEndFn. Allow AOP.
                                      *
@@ -2527,21 +2527,21 @@
                                     _resizeEnd: function(event) {
                                         var instance = this,
                                             drag = event.dragEvent.target;
-                            
+
                                         // reseting actXY from drag when drag end
                                         drag.actXY = [];
-                            
+
                                         // syncUI when resize end
                                         instance._syncUI();
-                            
+
                                         instance._setActiveHandlesUI(false);
-                            
+
                                         instance.set(ACTIVE_HANDLE, null);
                                         instance.set(ACTIVE_HANDLE_NODE, null);
-                            
+
                                         instance.handle = null;
                                     },
-                            
+
                                     /**
                                      * Default resize:start handler
                                      *
@@ -2551,10 +2551,10 @@
                                      */
                                     _defResizeStartFn: function(event) {
                                         var instance = this;
-                            
+
                                         instance._resizeStart(event);
                                     },
-                            
+
                                     /**
                                      * Logic method for _defResizeStartFn. Allow AOP.
                                      *
@@ -2565,19 +2565,19 @@
                                     _resizeStart: function(event) {
                                         var instance = this,
                                             wrapper = instance.get(WRAPPER);
-                            
+
                                         instance.handle = instance.get(ACTIVE_HANDLE);
-                            
+
                                         instance.set(RESIZING, true);
-                            
+
                                         instance._updateSurroundingInfo();
-                            
+
                                         // create an originalInfo information for reference
                                         instance.originalInfo = instance._getInfo(wrapper, event);
-                            
+
                                         instance._updateInfo(event);
                                     },
-                            
+
                                     /**
                                      * Fires the resize:mouseUp event.
                                      *
@@ -2588,7 +2588,7 @@
                                     _handleMouseUpEvent: function(event) {
                                         this.fire(EV_MOUSE_UP, { dragEvent: event, info: this.info });
                                     },
-                            
+
                                     /**
                                      * Fires the resize:resize event.
                                      *
@@ -2599,7 +2599,7 @@
                                     _handleResizeEvent: function(event) {
                                         this.fire(EV_RESIZE, { dragEvent: event, info: this.info });
                                     },
-                            
+
                                     /**
                                      * Fires the resize:align event.
                                      *
@@ -2610,7 +2610,7 @@
                                     _handleResizeAlignEvent: function(event) {
                                         this.fire(EV_RESIZE_ALIGN, { dragEvent: event, info: this.info });
                                     },
-                            
+
                                     /**
                                      * Fires the resize:end event.
                                      *
@@ -2621,7 +2621,7 @@
                                     _handleResizeEndEvent: function(event) {
                                         this.fire(EV_RESIZE_END, { dragEvent: event, info: this.info });
                                     },
-                            
+
                                     /**
                                      * Fires the resize:start event.
                                      *
@@ -2636,7 +2636,7 @@
                                         }
                                         this.fire(EV_RESIZE_START, { dragEvent: event, info: this.info });
                                     },
-                            
+
                                     /**
                                      * Mouseenter event handler for the &lt;a href=&quot;Resize.html#attr_wrapper&quot;&gt;wrapper&lt;/a&gt;.
                                      *
@@ -2646,12 +2646,12 @@
                                      */
                                     _onWrapperMouseEnter: function() {
                                         var instance = this;
-                            
+
                                         if (instance.get(AUTO_HIDE)) {
                                             instance._setHideHandlesUI(false);
                                         }
                                     },
-                            
+
                                     /**
                                      * Mouseleave event handler for the &lt;a href=&quot;Resize.html#attr_wrapper&quot;&gt;wrapper&lt;/a&gt;.
                                      *
@@ -2661,12 +2661,12 @@
                                      */
                                     _onWrapperMouseLeave: function() {
                                         var instance = this;
-                            
+
                                         if (instance.get(AUTO_HIDE)) {
                                             instance._setHideHandlesUI(true);
                                         }
                                     },
-                            
+
                                     /**
                                      * Handles setting the activeHandle from a node, used from startDrag (for touch) and mouseenter (for mouse).
                                      *
@@ -2677,16 +2677,16 @@
                                     _setHandleFromNode: function(node) {
                                         var instance = this,
                                             handle = instance._extractHandleName(node);
-                            
+
                                         if (!instance.get(RESIZING)) {
                                             instance.set(ACTIVE_HANDLE, handle);
                                             instance.set(ACTIVE_HANDLE_NODE, node);
-                            
+
                                             instance._setActiveHandlesUI(true);
                                             instance._updateChangeHandleInfo(handle);
                                         }
                                     },
-                            
+
                                     /**
                                      * Mouseenter event handler for the handles.
                                      *
@@ -2697,7 +2697,7 @@
                                     _onHandleMouseEnter: function(event) {
                                         this._setHandleFromNode(event.currentTarget);
                                     },
-                            
+
                                     /**
                                      * Mouseout event handler for the handles.
                                      *
@@ -2707,12 +2707,12 @@
                                      */
                                     _onHandleMouseLeave: function() {
                                         var instance = this;
-                            
+
                                         if (!instance.get(RESIZING)) {
                                             instance._setActiveHandlesUI(false);
                                         }
                                     },
-                            
+
                                     /**
                                      * Default value for the wrapper handles node attribute
                                      *
@@ -2723,7 +2723,7 @@
                                     _valueHandlesWrapper: function() {
                                         return Y.Node.create(this.HANDLES_WRAP_TEMPLATE);
                                     },
-                            
+
                                     /**
                                      * Default value for the wrapper attribute
                                      *
@@ -2737,19 +2737,19 @@
                                             pNode = node.get(PARENT_NODE),
                                             // by deafult the wrapper is always the node
                                             wrapper = node;
-                            
+
                                         // if the node is listed on the wrapTypes or wrap is set to true, create another wrapper
                                         if (instance.get(WRAP)) {
                                             wrapper = Y.Node.create(instance.WRAP_TEMPLATE);
-                            
+
                                             if (pNode) {
                                                 pNode.insertBefore(wrapper, node);
                                             }
-                            
+
                                             wrapper.append(node);
-                            
+
                                             instance._copyStyles(node, wrapper);
-                            
+
                                             // remove positioning of wrapped node, the WRAPPER take care about positioning
                                             node.setStyles({
                                                 position: STATIC,
@@ -2757,12 +2757,12 @@
                                                 top: 0
                                             });
                                         }
-                            
+
                                         return wrapper;
                                     }
                                 }
                             );
-                            
+
                             Y.each(Y.Resize.prototype.ALL_HANDLES, function(handle) {
                                 // creating ATTRS with the handles elements
                                 Y.Resize.ATTRS[handleAttrName(handle)] = {
@@ -2773,7 +2773,7 @@
                                     writeOnce: true
                                 };
                             });
-                            
+
                                 </pre>
                             </div>
                         </div>

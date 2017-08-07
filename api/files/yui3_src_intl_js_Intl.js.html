@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,30 +1122,30 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/intl/js/Intl.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             var _mods = {},
-                            
+
                                 ROOT_LANG = &quot;yuiRootLang&quot;,
                                 ACTIVE_LANG = &quot;yuiActiveLang&quot;,
                                 NONE = [];
-                            
+
                             /**
                              * Provides utilities to support the management of localized resources (strings and formatting patterns).
                              *
                              * @module intl
                              */
-                            
+
                             /**
                              * The Intl utility provides a central location for managing sets of localized resources (strings and formatting patterns).
                              *
@@ -1154,7 +1154,7 @@
                              * @static
                              */
                             Y.mix(Y.namespace(&quot;Intl&quot;), {
-                            
+
                                 /**
                                  * Private method to retrieve the language hash for a given module.
                                  *
@@ -1170,7 +1170,7 @@
                                     }
                                     return _mods[module];
                                 },
-                            
+
                                 /**
                                  * Sets the active language for the given module.
                                  *
@@ -1186,15 +1186,15 @@
                                     var langs = this._mod(module),
                                         currLang = langs[ACTIVE_LANG],
                                         exists = !!langs[lang];
-                            
+
                                     if (exists &amp;&amp; lang !== currLang) {
                                         langs[ACTIVE_LANG] = lang;
                                         this.fire(&quot;intl:langChange&quot;, {module: module, prevVal: currLang, newVal: (lang === ROOT_LANG) ? &quot;&quot; : lang});
                                     }
-                            
+
                                     return exists;
                                 },
-                            
+
                                 /**
                                  * Get the currently active language for the given module.
                                  *
@@ -1207,7 +1207,7 @@
                                     var lang = this._mod(module)[ACTIVE_LANG];
                                     return (lang === ROOT_LANG) ? &quot;&quot; : lang;
                                 },
-                            
+
                                 /**
                                  * Register a hash of localized resources for the given module and language
                                  *
@@ -1222,7 +1222,7 @@
                                     this._mod(module)[lang] = strings;
                                     this.setLang(module, lang);
                                 },
-                            
+
                                 /**
                                  * Gets the module&#x27;s localized resources for the currently active language (as provided by the &lt;a href=&quot;#method_getLang&quot;&gt;getLang&lt;/a&gt; method).
                                  * &lt;p&gt;
@@ -1239,13 +1239,13 @@
                                 get : function(module, key, lang) {
                                     var mod = this._mod(module),
                                         strs;
-                            
+
                                     lang = lang || mod[ACTIVE_LANG];
                                     strs = mod[lang] || {};
-                            
+
                                     return (key) ? strs[key] : Y.merge(strs);
                                 },
-                            
+
                                 /**
                                  * Gets the list of languages for which localized resources are available for a given module, based on the module
                                  * meta-data (part of loader). If loader is not on the page, returns an empty array.
@@ -1259,12 +1259,12 @@
                                         mod = loader &amp;&amp; loader.moduleInfo[module],
                                         langs = mod &amp;&amp; mod.lang;
                                     return (langs) ? langs.concat() : NONE;
-                            
+
                                 }
                             });
-                            
+
                             Y.augment(Y.Intl, Y.EventTarget);
-                            
+
                             /**
                              * Notification event to indicate when the lang for a module has changed. There is no default behavior associated with this event,
                              * so the on and after moments are equivalent.
@@ -1279,7 +1279,7 @@
                              * &lt;/dl&gt;
                              */
                             Y.Intl.publish(&quot;intl:langChange&quot;, {emitFacade:true});
-                            
+
                                 </pre>
                             </div>
                         </div>

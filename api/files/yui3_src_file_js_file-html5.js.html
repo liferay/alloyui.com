@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/file/js/file-html5.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                                 /**
@@ -1139,7 +1139,7 @@
                                  * also implements the mechanics for uploading a file and tracking its progress.
                                  * @module file-html5
                                  */
-                            
+
                                 /**
                                  * The class provides a wrapper for a file pointer.
                                  * @class FileHTML5
@@ -1150,11 +1150,11 @@
                                 var Lang = Y.Lang,
                                     Bind = Y.bind,
                                     Win = Y.config.win;
-                            
+
                                 var FileHTML5 = function(o) {
-                            
+
                                     var file = null;
-                            
+
                                     if (FileHTML5.isValidFile(o)) {
                                         file = o;
                                     }
@@ -1164,35 +1164,35 @@
                                     else {
                                         file = false;
                                     }
-                            
+
                                     FileHTML5.superclass.constructor.apply(this, arguments);
-                            
+
                                     if (file &amp;&amp; FileHTML5.canUpload()) {
                                        if (!this.get(&quot;file&quot;)) {
                                            this._set(&quot;file&quot;, file);
                                        }
-                            
+
                                        if (!this.get(&quot;name&quot;)) {
                                        this._set(&quot;name&quot;, file.name || file.fileName);
                                        }
-                            
+
                                        if (this.get(&quot;size&quot;) != (file.size || file.fileSize)) {
                                        this._set(&quot;size&quot;, file.size || file.fileSize);
                                        }
-                            
+
                                        if (!this.get(&quot;type&quot;)) {
                                        this._set(&quot;type&quot;, file.type);
                                        }
-                            
+
                                        if (file.hasOwnProperty(&quot;lastModifiedDate&quot;) &amp;&amp; !this.get(&quot;dateModified&quot;)) {
                                            this._set(&quot;dateModified&quot;, file.lastModifiedDate);
                                        }
                                     }
                                 };
-                            
-                            
+
+
                                 Y.extend(FileHTML5, Y.Base, {
-                            
+
                                    /**
                                     * Construction logic executed during FileHTML5 instantiation.
                                     *
@@ -1204,7 +1204,7 @@
                                             this._set(&quot;id&quot;, Y.guid(&quot;file&quot;));
                                         }
                                     },
-                            
+
                                    /**
                                     * Handler of events dispatched by the XMLHTTPRequest.
                                     *
@@ -1214,7 +1214,7 @@
                                     */
                                     _uploadEventHandler: function (event) {
                                         var xhr = this.get(&quot;xhr&quot;);
-                            
+
                                         switch (event.type) {
                                             case &quot;progress&quot;:
                                               /**
@@ -1241,7 +1241,7 @@
                                                                            });
                                                this._set(&quot;bytesUploaded&quot;, event.loaded);
                                                break;
-                            
+
                                             case &quot;load&quot;:
                                               /**
                                                * Signals that this file&#x27;s upload has completed and data has been received from the server.
@@ -1256,20 +1256,20 @@
                                                *          &lt;dd&gt;The data returned by the server.&lt;/dd&gt;
                                                *  &lt;/dl&gt;
                                                */
-                            
+
                                                if (xhr.status &gt;= 200 &amp;&amp; xhr.status &lt;= 299) {
                                                     this.fire(&quot;uploadcomplete&quot;, {originEvent: event,
                                                                                  data: event.target.responseText});
                                                     var xhrupload = xhr.upload,
                                                         boundEventHandler = this.get(&quot;boundEventHandler&quot;);
-                            
+
                                                     xhrupload.removeEventListener (&quot;progress&quot;, boundEventHandler);
                                                     xhrupload.removeEventListener (&quot;error&quot;, boundEventHandler);
                                                     xhrupload.removeEventListener (&quot;abort&quot;, boundEventHandler);
                                                     xhr.removeEventListener (&quot;load&quot;, boundEventHandler);
                                                     xhr.removeEventListener (&quot;error&quot;, boundEventHandler);
                                                     xhr.removeEventListener (&quot;readystatechange&quot;, boundEventHandler);
-                            
+
                                                     this._set(&quot;xhr&quot;, null);
                                                }
                                                else {
@@ -1280,7 +1280,7 @@
                                                                               source: &quot;http&quot;});
                                                }
                                                break;
-                            
+
                                             case &quot;error&quot;:
                                               /**
                                                * Signals that this file&#x27;s upload has encountered an error.
@@ -1310,9 +1310,9 @@
                                                                               statusText: xhr.statusText,
                                                                               source: &quot;io&quot;});
                                                break;
-                            
+
                                             case &quot;abort&quot;:
-                            
+
                                               /**
                                                * Signals that this file&#x27;s upload has been cancelled.
                                                *
@@ -1326,9 +1326,9 @@
                                                */
                                                this.fire(&quot;uploadcancel&quot;, {originEvent: event});
                                                break;
-                            
+
                                             case &quot;readystatechange&quot;:
-                            
+
                                               /**
                                                * Signals that XMLHttpRequest has fired a readystatechange event.
                                                *
@@ -1347,7 +1347,7 @@
                                                break;
                                         }
                                     },
-                            
+
                                    /**
                                     * Starts the upload of a specific file.
                                     *
@@ -1357,24 +1357,24 @@
                                     * @param fileFieldName {String} (optional) The name of the POST variable that should contain the uploaded file (&#x27;Filedata&#x27; by default)
                                     */
                                     startUpload: function(url, parameters, fileFieldName) {
-                            
+
                                         this._set(&quot;bytesUploaded&quot;, 0);
-                            
+
                                         this._set(&quot;xhr&quot;, new XMLHttpRequest());
                                         this._set(&quot;boundEventHandler&quot;, Bind(this._uploadEventHandler, this));
-                            
+
                                         var uploadData = new FormData(),
                                             fileField = fileFieldName || &quot;Filedata&quot;,
                                             xhr = this.get(&quot;xhr&quot;),
                                             xhrupload = this.get(&quot;xhr&quot;).upload,
                                             boundEventHandler = this.get(&quot;boundEventHandler&quot;);
-                            
+
                                         Y.each(parameters, function (value, key) {uploadData.append(key, value);});
                                         uploadData.append(fileField, this.get(&quot;file&quot;));
-                            
-                            
-                            
-                            
+
+
+
+
                                         xhr.addEventListener (&quot;loadstart&quot;, boundEventHandler, false);
                                         xhrupload.addEventListener (&quot;progress&quot;, boundEventHandler, false);
                                         xhr.addEventListener (&quot;load&quot;, boundEventHandler, false);
@@ -1384,17 +1384,17 @@
                                         xhr.addEventListener (&quot;abort&quot;, boundEventHandler, false);
                                         xhr.addEventListener (&quot;loadend&quot;, boundEventHandler, false);
                                         xhr.addEventListener (&quot;readystatechange&quot;, boundEventHandler, false);
-                            
+
                                         xhr.open(&quot;POST&quot;, url, true);
-                            
+
                                         xhr.withCredentials = this.get(&quot;xhrWithCredentials&quot;);
-                            
+
                                         Y.each(this.get(&quot;xhrHeaders&quot;), function (value, key) {
                                              xhr.setRequestHeader(key, value);
                                         });
-                            
+
                                         xhr.send(uploadData);
-                            
+
                                         /**
                                          * Signals that this file&#x27;s upload has started.
                                          *
@@ -1407,9 +1407,9 @@
                                          *  &lt;/dl&gt;
                                          */
                                          this.fire(&quot;uploadstart&quot;, {xhr: xhr});
-                            
+
                                     },
-                            
+
                                    /**
                                     * Cancels the upload of a specific file, if currently in progress.
                                     *
@@ -1421,10 +1421,10 @@
                                             xhr.abort();
                                         }
                                     }
-                            
-                            
+
+
                                 }, {
-                            
+
                                    /**
                                     * The identity of the class.
                                     *
@@ -1436,7 +1436,7 @@
                                     * @static
                                     */
                                     NAME: &#x27;file&#x27;,
-                            
+
                                    /**
                                     * The type of transport.
                                     *
@@ -1448,7 +1448,7 @@
                                     * @static
                                     */
                                     TYPE: &#x27;html5&#x27;,
-                            
+
                                    /**
                                     * Static property used to define the default attribute configuration of
                                     * the File.
@@ -1459,7 +1459,7 @@
                                     * @static
                                     */
                                     ATTRS: {
-                            
+
                                    /**
                                     * A String containing the unique id of the file wrapped by the FileFlash instance.
                                     * The id is supplied by the Flash player uploader.
@@ -1472,7 +1472,7 @@
                                         writeOnce: &quot;initOnly&quot;,
                                         value: null
                                     },
-                            
+
                                    /**
                                     * The size of the file wrapped by FileHTML5. This value is supplied by the instance of File().
                                     *
@@ -1484,7 +1484,7 @@
                                         writeOnce: &quot;initOnly&quot;,
                                         value: 0
                                     },
-                            
+
                                    /**
                                     * The name of the file wrapped by FileHTML5. This value is supplied by the instance of File().
                                     *
@@ -1496,7 +1496,7 @@
                                         writeOnce: &quot;initOnly&quot;,
                                         value: null
                                     },
-                            
+
                                    /**
                                     * The date that the file wrapped by FileHTML5 was created on. This value is supplied by the instance of File().
                                     *
@@ -1509,7 +1509,7 @@
                                         writeOnce: &quot;initOnly&quot;,
                                         value: null
                                     },
-                            
+
                                    /**
                                     * The date that the file wrapped by FileHTML5 was last modified on. This value is supplied by the instance of File().
                                     *
@@ -1521,7 +1521,7 @@
                                         writeOnce: &quot;initOnly&quot;,
                                         value: null
                                     },
-                            
+
                                    /**
                                     * The number of bytes of the file that has been uploaded to the server. This value is
                                     * non-zero only while a file is being uploaded.
@@ -1534,7 +1534,7 @@
                                         readOnly: true,
                                         value: 0
                                     },
-                            
+
                                    /**
                                     * The type of the file wrapped by FileHTML. This value is provided by the instance of File()
                                     *
@@ -1546,7 +1546,7 @@
                                         writeOnce: &quot;initOnly&quot;,
                                         value: null
                                     },
-                            
+
                                    /**
                                     * The pointer to the instance of File() wrapped by FileHTML5.
                                     *
@@ -1558,7 +1558,7 @@
                                         writeOnce: &quot;initOnly&quot;,
                                         value: null
                                     },
-                            
+
                                    /**
                                     * The pointer to the instance of XMLHttpRequest used by FileHTML5 to upload the file.
                                     *
@@ -1570,7 +1570,7 @@
                                         readOnly: true,
                                         value: null
                                     },
-                            
+
                                    /**
                                     * The dictionary of headers that should be set on the XMLHttpRequest object before
                                     * sending it.
@@ -1582,7 +1582,7 @@
                                     xhrHeaders: {
                                         value: {}
                                     },
-                            
+
                                    /**
                                     * A Boolean indicating whether the XMLHttpRequest should be sent with user credentials.
                                     * This does not affect same-site requests.
@@ -1594,7 +1594,7 @@
                                     xhrWithCredentials: {
                                         value: true
                                     },
-                            
+
                                    /**
                                     * The bound event handler used to handle events from XMLHttpRequest.
                                     *
@@ -1607,7 +1607,7 @@
                                         value: null
                                     }
                                     },
-                            
+
                                    /**
                                     * Checks whether a specific native file instance is valid
                                     *
@@ -1618,7 +1618,7 @@
                                     isValidFile: function (file) {
                                         return (Win &amp;&amp; Win.File &amp;&amp; file instanceof File);
                                     },
-                            
+
                                    /**
                                     * Checks whether the browser has a native upload capability
                                     * via XMLHttpRequest Level 2.
@@ -1630,9 +1630,9 @@
                                         return (Win &amp;&amp; Win.FormData &amp;&amp; Win.XMLHttpRequest);
                                     }
                                 });
-                            
+
                                 Y.FileHTML5 = FileHTML5;
-                            
+
                                 </pre>
                             </div>
                         </div>

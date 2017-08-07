@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/charts/tests/unit/assets/charts-domevents-tests.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             YUI.add(&#x27;charts-domevents-tests&#x27;, function(Y) {
@@ -1152,35 +1152,35 @@
                                     parentDiv = Y.DOM.create(&#x27;&lt;div style=&quot;position:absolute;top:500px;left:0px;width:500px;height:400px&quot; id=&quot;testdiv&quot;&gt;&lt;/div&gt;&#x27;);
                                 DOC.body.appendChild(parentDiv);
                                 DOC.body.appendChild(testbutton);
-                            
+
                                 domTest = new Y.Test.Case({
                                     //---------------------------------------------------------------------
                                     // Setup and teardown of test harnesses
                                     //---------------------------------------------------------------------
-                            
+
                                     _should: {
                                         ignore: {
                                             &#x27;testDefault&#x27;: (Y.UA.phantomjs)
                                         }
                                     },
-                            
+
                                     /**
                                      * Sets up dom elements needed for the test.
                                      */
                                     setUp : function() {
                                         this.eventType = isTouch ? &quot;touchend&quot; : &quot;click&quot;;
-                            
+
                                         //create the chart
                                         this.chart = new Y.Chart({
                                             dataProvider: dataProvider,
                                             render: &quot;#testdiv&quot;
                                         });
-                            
+
                                         this.contentBox = this.chart.get(&quot;contentBox&quot;);
-                            
+
                                         //reset the result
                                         this.result = null;
-                            
+
                                         //assign event handler
                                         if(UA.ie &amp;&amp; UA.ie &lt; 9) {
                                             this.handler = Y.on(this.eventType, Y.bind(this.handleEvent,this), Y.config.doc);
@@ -1188,7 +1188,7 @@
                                             this.handler = Y.on(this.eventType, Y.bind(this.handleEvent,this));
                                         }
                                     },
-                            
+
                                     /**
                                      * Removes event handlers and dom elemements that were used during the test.
                                      */
@@ -1197,7 +1197,7 @@
                                         this.chart.destroy(true);
                                         Y.Event.purgeElement(DOC, false);
                                     },
-                            
+
                                     /**
                                      * Tests to ensures that clicks and/or touches outside the chart are not halted.
                                      */
@@ -1215,7 +1215,7 @@
                                         }
                                         Y.Assert.isNotNull(this.result, &quot;The event did not fire.&quot;);
                                         Y.Assert.areEqual(testbutton, this.result.target.getDOMNode());
-                            
+
                                         if(isTouch) {
                                             this.result = null;
                                             Y.Event.simulate(this.contentBox.getDOMNode(), this.eventType, {
@@ -1226,13 +1226,13 @@
                                             });
                                             Y.Assert.isNull(this.result, &quot;The event should not fire.&quot;);
                                         }
-                            
+
                                     },
-                            
+
                                     //---------------------------------------------------------------------
                                     // Event handler
                                     //---------------------------------------------------------------------
-                            
+
                                     /*
                                      * Uses to trap and assign the event object for interrogation.
                                      * @param {Event} event The event object created from the event.
@@ -1241,13 +1241,13 @@
                                         this.result = event;
                                     }
                                 });
-                            
-                            
-                            
+
+
+
                                 suite.add(domTest);
                                 Y.Test.Runner.add(suite);
                             }, &#x27;@VERSION@&#x27; ,{requires:[&#x27;event-touch&#x27;, &#x27;event-simulate&#x27;, &#x27;charts&#x27;, &#x27;test&#x27;]});
-                            
+
                                 </pre>
                             </div>
                         </div>

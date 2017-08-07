@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/yui/js/yui-lang.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1141,19 +1141,19 @@
                              * @module yui
                              * @submodule yui-base
                              */
-                            
+
                             /**
                              * Provides core language utilites and extensions used throughout YUI.
                              *
                              * @class Lang
                              * @static
                              */
-                            
+
                             var L = Y.Lang || (Y.Lang = {}),
-                            
+
                             STRING_PROTO = String.prototype,
                             TOSTRING     = Object.prototype.toString,
-                            
+
                             TYPES = {
                                 &#x27;undefined&#x27;        : &#x27;undefined&#x27;,
                                 &#x27;number&#x27;           : &#x27;number&#x27;,
@@ -1165,37 +1165,37 @@
                                 &#x27;[object Date]&#x27;    : &#x27;date&#x27;,
                                 &#x27;[object Error]&#x27;   : &#x27;error&#x27;
                             },
-                            
+
                             SUBREGEX         = /\{\s*([^|}]+?)\s*(?:\|([^}]*))?\s*\}/g,
-                            
+
                             WHITESPACE       = &quot;\x09\x0A\x0B\x0C\x0D\x20\xA0\u1680\u180E\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200A\u2028\u2029\u202F\u205F\u3000\uFEFF&quot;,
                             WHITESPACE_CLASS = &quot;[\x09-\x0D\x20\xA0\u1680\u180E\u2000-\u200A\u2028\u2029\u202F\u205F\u3000\uFEFF]+&quot;,
                             TRIM_LEFT_REGEX  = new RegExp(&quot;^&quot; + WHITESPACE_CLASS),
                             TRIM_RIGHT_REGEX = new RegExp(WHITESPACE_CLASS + &quot;$&quot;),
                             TRIMREGEX        = new RegExp(TRIM_LEFT_REGEX.source + &quot;|&quot; + TRIM_RIGHT_REGEX.source, &quot;g&quot;),
-                            
+
                             NATIVE_FN_REGEX  = /\{\s*\[(?:native code|function)\]\s*\}/i;
-                            
+
                             // -- Protected Methods --------------------------------------------------------
-                            
+
                             /**
                             Returns &#x60;true&#x60; if the given function appears to be implemented in native code,
                             &#x60;false&#x60; otherwise. Will always return &#x60;false&#x60; -- even in ES5-capable browsers --
                             if the &#x60;useNativeES5&#x60; YUI config option is set to &#x60;false&#x60;.
-                            
+
                             This isn&#x27;t guaranteed to be 100% accurate and won&#x27;t work for anything other than
                             functions, but it can be useful for determining whether a function like
                             &#x60;Array.prototype.forEach&#x60; is native or a JS shim provided by another library.
-                            
+
                             There&#x27;s a great article by @kangax discussing certain flaws with this technique:
                             &lt;http://perfectionkills.com/detecting-built-in-host-methods/&gt;
-                            
+
                             While his points are valid, it&#x27;s still possible to benefit from this function
                             as long as it&#x27;s used carefully and sparingly, and in such a way that false
                             negatives have minimal consequences. It&#x27;s used internally to avoid using
                             potentially broken non-native ES5 shims that have been added to the page by
                             other libraries.
-                            
+
                             @method _isNative
                             @param {Function} fn Function to test.
                             @return {Boolean} &#x60;true&#x60; if _fn_ appears to be native, &#x60;false&#x60; otherwise.
@@ -1206,9 +1206,9 @@
                             L._isNative = function (fn) {
                                 return !!(Y.config.useNativeES5 &amp;&amp; fn &amp;&amp; NATIVE_FN_REGEX.test(fn));
                             };
-                            
+
                             // -- Public Methods -----------------------------------------------------------
-                            
+
                             /**
                              * Determines whether or not the provided item is an array.
                              *
@@ -1224,7 +1224,7 @@
                             L.isArray = L._isNative(Array.isArray) ? Array.isArray : function (o) {
                                 return L.type(o) === &#x27;array&#x27;;
                             };
-                            
+
                             /**
                              * Determines whether or not the provided item is a boolean.
                              * @method isBoolean
@@ -1235,7 +1235,7 @@
                             L.isBoolean = function(o) {
                                 return typeof o === &#x27;boolean&#x27;;
                             };
-                            
+
                             /**
                              * Determines whether or not the supplied item is a date instance.
                              * @method isDate
@@ -1246,7 +1246,7 @@
                             L.isDate = function(o) {
                                 return L.type(o) === &#x27;date&#x27; &amp;&amp; o.toString() !== &#x27;Invalid Date&#x27; &amp;&amp; !isNaN(o);
                             };
-                            
+
                             /**
                              * &lt;p&gt;
                              * Determines whether or not the provided item is a function.
@@ -1274,7 +1274,7 @@
                             L.isFunction = function(o) {
                                 return L.type(o) === &#x27;function&#x27;;
                             };
-                            
+
                             /**
                              * Determines whether or not the provided item is null.
                              * @method isNull
@@ -1285,7 +1285,7 @@
                             L.isNull = function(o) {
                                 return o === null;
                             };
-                            
+
                             /**
                              * Determines whether or not the provided item is a legal number.
                              * @method isNumber
@@ -1296,7 +1296,7 @@
                             L.isNumber = function(o) {
                                 return typeof o === &#x27;number&#x27; &amp;&amp; isFinite(o);
                             };
-                            
+
                             /**
                              * Determines whether or not the provided item is of type object
                              * or function. Note that arrays are also objects, so
@@ -1313,7 +1313,7 @@
                                 return (o &amp;&amp; (t === &#x27;object&#x27; ||
                                     (!failfn &amp;&amp; (t === &#x27;function&#x27; || L.isFunction(o))))) || false;
                             };
-                            
+
                             /**
                              * Determines whether or not the provided value is a regexp.
                              * @method isRegExp
@@ -1324,7 +1324,7 @@
                             L.isRegExp = function(value) {
                                 return L.type(value) === &#x27;regexp&#x27;;
                             };
-                            
+
                             /**
                              * Determines whether or not the provided item is a string.
                              * @method isString
@@ -1335,7 +1335,7 @@
                             L.isString = function(o) {
                                 return typeof o === &#x27;string&#x27;;
                             };
-                            
+
                             /**
                              * Determines whether or not the provided item is undefined.
                              * @method isUndefined
@@ -1346,7 +1346,7 @@
                             L.isUndefined = function(o) {
                                 return typeof o === &#x27;undefined&#x27;;
                             };
-                            
+
                             /**
                              * A convenience method for detecting a legitimate non-null value.
                              * Returns false for null/undefined/NaN, true for other values,
@@ -1358,20 +1358,20 @@
                              */
                             L.isValue = function(o) {
                                 var t = L.type(o);
-                            
+
                                 switch (t) {
                                     case &#x27;number&#x27;:
                                         return isFinite(o);
-                            
+
                                     case &#x27;null&#x27;: // fallthru
                                     case &#x27;undefined&#x27;:
                                         return false;
-                            
+
                                     default:
                                         return !!t;
                                 }
                             };
-                            
+
                             /**
                              * Returns the current time in milliseconds.
                              *
@@ -1383,7 +1383,7 @@
                             L.now = Date.now || function () {
                                 return new Date().getTime();
                             };
-                            
+
                             /**
                              * Performs &#x60;{placeholder}&#x60; substitution on a string. The object passed as the
                              * second parameter provides values to replace the &#x60;{placeholder}&#x60;s.
@@ -1402,7 +1402,7 @@
                              * @since 3.2.0
                              */
                             L.sub = function(s, o) {
-                            
+
                                 /**
                                 Finds the value of &#x60;key&#x60; in given object.
                                 If the key has a &#x27;dot&#x27; notation e.g. &#x27;foo.bar.baz&#x27;, the function will
@@ -1416,29 +1416,29 @@
                                 @private
                                 **/
                                 function value(obj, key) {
-                            
+
                                     var subkey;
-                            
+
                                     if ( typeof obj[key] !== &#x27;undefined&#x27; ) {
                                         return obj[key];
                                     }
-                            
+
                                     key    = key.split(&#x27;.&#x27;);         // given &#x27;a.b.c&#x27;
                                     subkey = key.slice(1).join(&#x27;.&#x27;); // &#x27;b.c&#x27;
                                     key    = key[0];                 // &#x27;a&#x27;
-                            
+
                                     // special case for null as typeof returns object and we don&#x27;t want that.
                                     if ( subkey &amp;&amp; typeof obj[key] === &#x27;object&#x27; &amp;&amp; obj[key] !== null ) {
                                         return value(obj[key], subkey);
                                     }
                                 }
-                            
+
                                 return s.replace ? s.replace(SUBREGEX, function (match, key) {
                                     var val = key.indexOf(&#x27;.&#x27;)&gt;-1 ? value(o, key) : o[key];
                                     return typeof val === &#x27;undefined&#x27; ? match : val;
                                 }) : s;
                             };
-                            
+
                             /**
                              * Returns a string without any leading or trailing whitespace.  If
                              * the input is not a string, the input will be returned untouched.
@@ -1456,7 +1456,7 @@
                                     return s;
                                 }
                             };
-                            
+
                             /**
                              * Returns a string without any leading whitespace.
                              * @method trimLeft
@@ -1469,7 +1469,7 @@
                             } : function (s) {
                                 return s.replace(TRIM_LEFT_REGEX, &#x27;&#x27;);
                             };
-                            
+
                             /**
                              * Returns a string without any trailing whitespace.
                              * @method trimRight
@@ -1482,11 +1482,11 @@
                             } : function (s) {
                                 return s.replace(TRIM_RIGHT_REGEX, &#x27;&#x27;);
                             };
-                            
+
                             /**
                             Returns one of the following strings, representing the type of the item passed
                             in:
-                            
+
                              * &quot;array&quot;
                              * &quot;boolean&quot;
                              * &quot;date&quot;
@@ -1498,13 +1498,13 @@
                              * &quot;regexp&quot;
                              * &quot;string&quot;
                              * &quot;undefined&quot;
-                            
+
                             Known issues:
-                            
+
                              * &#x60;typeof HTMLElementCollection&#x60; returns function in Safari, but
                                 &#x60;Y.Lang.type()&#x60; reports &quot;object&quot;, which could be a good thing --
                                 but it actually caused the logic in &lt;code&gt;Y.Lang.isObject&lt;/code&gt; to fail.
-                            
+
                             @method type
                             @param o the item to test.
                             @return {string} the detected type.
@@ -1513,7 +1513,7 @@
                             L.type = function(o) {
                                 return TYPES[typeof o] || TYPES[TOSTRING.call(o)] || (o ? &#x27;object&#x27; : &#x27;null&#x27;);
                             };
-                            
+
                                 </pre>
                             </div>
                         </div>

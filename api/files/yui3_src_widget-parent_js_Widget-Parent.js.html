@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/widget-parent/js/Widget-Parent.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1139,11 +1139,11 @@
                              *
                              * @module widget-parent
                              */
-                            
+
                             var Lang = Y.Lang,
                                 RENDERED = &quot;rendered&quot;,
                                 BOUNDING_BOX = &quot;boundingBox&quot;;
-                            
+
                             /**
                              * Widget extension providing functionality enabling a Widget to be a
                              * parent of another Widget.
@@ -1161,7 +1161,7 @@
                              * @param {Object} config User configuration object.
                              */
                             function Parent(config) {
-                            
+
                                 /**
                                 * Fires when a Widget is add as a child.  The event object will have a
                                 * &#x27;child&#x27; property that returns a reference to the child Widget, as well
@@ -1184,8 +1184,8 @@
                                     defaultTargetOnly: true,
                                     defaultFn: this._defAddChildFn
                                 });
-                            
-                            
+
+
                                 /**
                                 * Fires when a child Widget is removed.  The event object will have a
                                 * &#x27;child&#x27; property that returns a reference to the child Widget, as well
@@ -1207,38 +1207,38 @@
                                     defaultTargetOnly: true,
                                     defaultFn: this._defRemoveChildFn
                                 });
-                            
+
                                 this._items = [];
-                            
+
                                 var children,
                                     handle;
-                            
+
                                 if (config &amp;&amp; config.children) {
-                            
+
                                     children = config.children;
-                            
+
                                     handle = this.after(&quot;initializedChange&quot;, function (e) {
                                         this._add(children);
                                         handle.detach();
                                     });
-                            
+
                                 }
-                            
+
                                 //  Widget method overlap
                                 Y.after(this._renderChildren, this, &quot;renderUI&quot;);
                                 Y.after(this._bindUIParent, this, &quot;bindUI&quot;);
-                            
+
                                 this.after(&quot;selectionChange&quot;, this._afterSelectionChange);
                                 this.after(&quot;selectedChange&quot;, this._afterParentSelectedChange);
                                 this.after(&quot;activeDescendantChange&quot;, this._afterActiveDescendantChange);
-                            
+
                                 this._hDestroyChild = this.after(&quot;*:destroy&quot;, this._afterDestroyChild);
                                 this.after(&quot;*:focusedChange&quot;, this._updateActiveDescendant);
-                            
+
                             }
-                            
+
                             Parent.ATTRS = {
-                            
+
                                 /**
                                  * @attribute defaultChildType
                                  * @type {String|Object}
@@ -1249,18 +1249,18 @@
                                  */
                                 defaultChildType: {
                                     setter: function (val) {
-                            
+
                                         var returnVal = Y.Attribute.INVALID_VALUE,
                                             FnConstructor = Lang.isString(val) ? Y[val] : val;
-                            
+
                                         if (Lang.isFunction(FnConstructor)) {
                                             returnVal = FnConstructor;
                                         }
-                            
+
                                         return returnVal;
                                     }
                                 },
-                            
+
                                 /**
                                  * @attribute activeDescendant
                                  * @type Widget
@@ -1271,7 +1271,7 @@
                                 activeDescendant: {
                                     readOnly: true
                                 },
-                            
+
                                 /**
                                  * @attribute multiple
                                  * @type Boolean
@@ -1292,8 +1292,8 @@
                                         return (root &amp;&amp; root != this) ? root.get(&quot;multiple&quot;) : value;
                                     }
                                 },
-                            
-                            
+
+
                                 /**
                                  * @attribute selection
                                  * @type {ArrayList|Widget}
@@ -1313,10 +1313,10 @@
                                         return selection;
                                     }
                                 },
-                            
+
                                 selected: {
                                     setter: function (value) {
-                            
+
                                         //  Enforces selection behavior on for parent Widgets.  Parent&#x27;s
                                         //  selected attribute can be set to the following:
                                         //  0 - Not selected
@@ -1326,22 +1326,22 @@
                                         //  on a parent Widget to 1 unless multiple selection is enabled.
                                         //  2 - Partially selected, meaning one ore more (but not all)
                                         //  children are selected.
-                            
+
                                         var returnVal = value;
-                            
+
                                         if (value === 1 &amp;&amp; !this.get(&quot;multiple&quot;)) {
                                             Y.log(&#x27;The selected attribute can only be set to 1 if the &quot;multiple&quot; attribute is set to true.&#x27;, &quot;error&quot;, &quot;widget&quot;);
                                             returnVal = Y.Attribute.INVALID_VALUE;
                                         }
-                            
+
                                         return returnVal;
                                     }
                                 }
-                            
+
                             };
-                            
+
                             Parent.prototype = {
-                            
+
                                 /**
                                  * The destructor implementation for Parent widgets. Destroys all children.
                                  * @method destructor
@@ -1349,7 +1349,7 @@
                                 destructor: function() {
                                     this._destroyChildren();
                                 },
-                            
+
                                 /**
                                  * Destroy event listener for each child Widget, responsible for removing
                                  * the destroyed child Widget from the parent&#x27;s internal array of children
@@ -1361,12 +1361,12 @@
                                  */
                                 _afterDestroyChild: function (event) {
                                     var child = event.target;
-                            
+
                                     if (child.get(&quot;parent&quot;) == this) {
                                         child.remove();
                                     }
                                 },
-                            
+
                                 /**
                                  * Attribute change listener for the &lt;code&gt;selection&lt;/code&gt;
                                  * attribute, responsible for setting the value of the
@@ -1377,33 +1377,33 @@
                                  * @param {EventFacade} event The event facade for the attribute change.
                                  */
                                 _afterSelectionChange: function (event) {
-                            
+
                                     if (event.target == this &amp;&amp; event.src != this) {
-                            
+
                                         var selection = event.newVal,
                                             selectedVal = 0;    //  Not selected
-                            
-                            
+
+
                                         if (selection) {
-                            
+
                                             selectedVal = 2;    //  Assume partially selected, confirm otherwise
-                            
-                            
+
+
                                             if (Y.instanceOf(selection, Y.ArrayList) &amp;&amp;
                                                 (selection.size() === this.size())) {
-                            
+
                                                 selectedVal = 1;    //  Fully selected
-                            
+
                                             }
-                            
+
                                         }
-                            
+
                                         this.set(&quot;selected&quot;, selectedVal, { src: this });
-                            
+
                                     }
                                 },
-                            
-                            
+
+
                                 /**
                                  * Attribute change listener for the &lt;code&gt;activeDescendant&lt;/code&gt;
                                  * attribute, responsible for setting the value of the
@@ -1415,12 +1415,12 @@
                                  */
                                 _afterActiveDescendantChange: function (event) {
                                     var parent = this.get(&quot;parent&quot;);
-                            
+
                                     if (parent) {
                                         parent._set(&quot;activeDescendant&quot;, event.newVal);
                                     }
                                 },
-                            
+
                                 /**
                                  * Attribute change listener for the &lt;code&gt;selected&lt;/code&gt;
                                  * attribute, responsible for syncing the selected state of all children to
@@ -1432,27 +1432,27 @@
                                  * @param {EventFacade} event The event facade for the attribute change.
                                  */
                                 _afterParentSelectedChange: function (event) {
-                            
+
                                     var value = event.newVal;
-                            
+
                                     if (this == event.target &amp;&amp; event.src != this &amp;&amp;
                                         (value === 0 || value === 1)) {
-                            
+
                                         this.each(function (child) {
-                            
+
                                             //  Specify the source of this change as the parent so that
                                             //  value of the parent&#x27;s &quot;selection&quot; attribute isn&#x27;t
                                             //  recalculated
-                            
+
                                             child.set(&quot;selected&quot;, value, { src: this });
-                            
+
                                         }, this);
-                            
+
                                     }
-                            
+
                                 },
-                            
-                            
+
+
                                 /**
                                  * Default setter for &lt;code&gt;selection&lt;/code&gt; attribute changes.
                                  *
@@ -1462,40 +1462,40 @@
                                  * @return {Widget|Array} Widget or Array of Widget instances.
                                  */
                                 _setSelection: function (child) {
-                            
+
                                     var selection = null,
                                         selected;
-                            
+
                                     if (this.get(&quot;multiple&quot;) &amp;&amp; !this.isEmpty()) {
-                            
+
                                         selected = [];
-                            
+
                                         this.each(function (v) {
-                            
+
                                            if (v.get(&quot;selected&quot;) &gt; 0) {
                                                selected.push(v);
                                            }
-                            
+
                                         });
-                            
+
                                         if (selected.length &gt; 0) {
                                             selection = selected;
                                         }
-                            
+
                                     }
                                     else {
-                            
+
                                         if (child.get(&quot;selected&quot;) &gt; 0) {
                                             selection = child;
                                         }
-                            
+
                                     }
-                            
+
                                     return selection;
-                            
+
                                 },
-                            
-                            
+
+
                                 /**
                                  * Attribute change listener for the &lt;code&gt;selected&lt;/code&gt;
                                  * attribute of child Widgets, responsible for setting the value of the
@@ -1506,38 +1506,38 @@
                                  * @param {EventFacade} event The event facade for the attribute change.
                                  */
                                 _updateSelection: function (event) {
-                            
+
                                     var child = event.target,
                                         selection;
-                            
+
                                     if (child.get(&quot;parent&quot;) == this) {
-                            
+
                                         if (event.src != &quot;_updateSelection&quot;) {
-                            
+
                                             selection = this.get(&quot;selection&quot;);
-                            
+
                                             if (!this.get(&quot;multiple&quot;) &amp;&amp; selection &amp;&amp; event.newVal &gt; 0) {
-                            
+
                                                 //  Deselect the previously selected child.
                                                 //  Set src equal to the current context to prevent
                                                 //  unnecessary re-calculation of the selection.
-                            
+
                                                 selection.set(&quot;selected&quot;, 0, { src: &quot;_updateSelection&quot; });
-                            
+
                                             }
-                            
+
                                             this._set(&quot;selection&quot;, child);
-                            
+
                                         }
-                            
+
                                         if (event.src == this) {
                                             this._set(&quot;selection&quot;, child, { src: this });
                                         }
-                            
+
                                     }
-                            
+
                                 },
-                            
+
                                 /**
                                  * Attribute change listener for the &lt;code&gt;focused&lt;/code&gt;
                                  * attribute of child Widgets, responsible for setting the value of the
@@ -1551,7 +1551,7 @@
                                     var activeDescendant = (event.newVal === true) ? event.target : null;
                                     this._set(&quot;activeDescendant&quot;, activeDescendant);
                                 },
-                            
+
                                 /**
                                  * Creates an instance of a child Widget using the specified configuration.
                                  * By default Widget instances will be created of the type specified
@@ -1567,34 +1567,34 @@
                                  * used to create an instance of a Widget.
                                  */
                                 _createChild: function (config) {
-                            
+
                                     var defaultType = this.get(&quot;defaultChildType&quot;),
                                         altType = config.childType || config.type,
                                         child,
                                         Fn,
                                         FnConstructor;
-                            
+
                                     if (altType) {
                                         Fn = Lang.isString(altType) ? Y[altType] : altType;
                                     }
-                            
+
                                     if (Lang.isFunction(Fn)) {
                                         FnConstructor = Fn;
                                     } else if (defaultType) {
                                         // defaultType is normalized to a function in it&#x27;s setter
                                         FnConstructor = defaultType;
                                     }
-                            
+
                                     if (FnConstructor) {
                                         child = new FnConstructor(config);
                                     } else {
                                         Y.error(&quot;Could not create a child instance because its constructor is either undefined or invalid.&quot;);
                                     }
-                            
+
                                     return child;
-                            
+
                                 },
-                            
+
                                 /**
                                  * Default addChild handler
                                  *
@@ -1607,34 +1607,34 @@
                                  * which the child will be inserted.
                                  */
                                 _defAddChildFn: function (event) {
-                            
+
                                     var child = event.child,
                                         index = event.index,
                                         children = this._items;
-                            
+
                                     if (child.get(&quot;parent&quot;)) {
                                         child.remove();
                                     }
-                            
+
                                     if (Lang.isNumber(index)) {
                                         children.splice(index, 0, child);
                                     }
                                     else {
                                         children.push(child);
                                     }
-                            
+
                                     child._set(&quot;parent&quot;, this);
                                     child.addTarget(this);
-                            
+
                                     // Update index in case it got normalized after addition
                                     // (e.g. user passed in 10, and there are only 3 items, the actual index would be 3. We don&#x27;t want to pass 10 around in the event facade).
                                     event.index = child.get(&quot;index&quot;);
-                            
+
                                     //  TO DO: Remove in favor of using event bubbling
                                     child.after(&quot;selectedChange&quot;, Y.bind(this._updateSelection, this));
                                 },
-                            
-                            
+
+
                                 /**
                                  * Default removeChild handler
                                  *
@@ -1646,26 +1646,26 @@
                                  * be removed.
                                  */
                                 _defRemoveChildFn: function (event) {
-                            
+
                                     var child = event.child,
                                         index = event.index,
                                         children = this._items;
-                            
+
                                     if (child.get(&quot;focused&quot;)) {
                                         child.blur(); // focused is readOnly, so use the public i/f to unset it
                                     }
-                            
+
                                     if (child.get(&quot;selected&quot;)) {
                                         child.set(&quot;selected&quot;, 0);
                                     }
-                            
+
                                     children.splice(index, 1);
-                            
+
                                     child.removeTarget(this);
                                     child._oldParent = child.get(&quot;parent&quot;);
                                     child._set(&quot;parent&quot;, null);
                                 },
-                            
+
                                 /**
                                 * @method _add
                                 * @protected
@@ -1681,52 +1681,52 @@
                                 * will return undefined.
                                 */
                                 _add: function (child, index) {
-                            
+
                                     var children,
                                         oChild,
                                         returnVal;
-                            
-                            
+
+
                                     if (Lang.isArray(child)) {
-                            
+
                                         children = [];
-                            
+
                                         Y.each(child, function (v, k) {
-                            
+
                                             oChild = this._add(v, (index + k));
-                            
+
                                             if (oChild) {
                                                 children.push(oChild);
                                             }
-                            
+
                                         }, this);
-                            
-                            
+
+
                                         if (children.length &gt; 0) {
                                             returnVal = children;
                                         }
-                            
+
                                     }
                                     else {
-                            
+
                                         if (Y.instanceOf(child, Y.Widget)) {
                                             oChild = child;
                                         }
                                         else {
                                             oChild = this._createChild(child);
                                         }
-                            
+
                                         if (oChild &amp;&amp; this.fire(&quot;addChild&quot;, { child: oChild, index: index })) {
                                             returnVal = oChild;
                                         }
-                            
+
                                     }
-                            
+
                                     return returnVal;
-                            
+
                                 },
-                            
-                            
+
+
                                 /**
                                 * @method add
                                 * @param child {Widget|Object|Array} The Widget instance, or configuration
@@ -1747,15 +1747,15 @@
                                 * Y.ArrayList instance.
                                 */
                                 add: function () {
-                            
+
                                     var added = this._add.apply(this, arguments),
                                         children = added ? (Lang.isArray(added) ? added : [added]) : [];
-                            
+
                                     return (new Y.ArrayList(children));
-                            
+
                                 },
-                            
-                            
+
+
                                 /**
                                 * @method remove
                                 * @param index {Number} (Optional.)  Number representing the index of the
@@ -1766,19 +1766,19 @@
                                 * undefined.
                                 */
                                 remove: function (index) {
-                            
+
                                     var child = this._items[index],
                                         returnVal;
-                            
+
                                     if (child &amp;&amp; this.fire(&quot;removeChild&quot;, { child: child, index: index })) {
                                         returnVal = child;
                                     }
-                            
+
                                     return returnVal;
-                            
+
                                 },
-                            
-                            
+
+
                                 /**
                                 * @method removeAll
                                 * @description Removes all of the children from the Widget.
@@ -1787,24 +1787,24 @@
                                 * Y.ArrayList instance.
                                 */
                                 removeAll: function () {
-                            
+
                                     var removed = [],
                                         child;
-                            
+
                                     Y.each(this._items.concat(), function () {
-                            
+
                                         child = this.remove(0);
-                            
+
                                         if (child) {
                                             removed.push(child);
                                         }
-                            
+
                                     }, this);
-                            
+
                                     return (new Y.ArrayList(removed));
-                            
+
                                 },
-                            
+
                                 /**
                                  * Selects the child at the given index (zero-based).
                                  *
@@ -1814,7 +1814,7 @@
                                 selectChild: function(i) {
                                     this.item(i).set(&#x27;selected&#x27;, 1);
                                 },
-                            
+
                                 /**
                                  * Selects all children.
                                  *
@@ -1823,7 +1823,7 @@
                                 selectAll: function () {
                                     this.set(&quot;selected&quot;, 1);
                                 },
-                            
+
                                 /**
                                  * Deselects all children.
                                  *
@@ -1832,7 +1832,7 @@
                                 deselectAll: function () {
                                     this.set(&quot;selected&quot;, 0);
                                 },
-                            
+
                                 /**
                                  * Updates the UI in response to a child being added.
                                  *
@@ -1843,52 +1843,52 @@
                                  * child Widget is to be rendered.
                                  */
                                 _uiAddChild: function (child, parentNode) {
-                            
+
                                     child.render(parentNode);
-                            
+
                                     // TODO: Ideally this should be in Child&#x27;s render UI.
-                            
+
                                     var childBB = child.get(&quot;boundingBox&quot;),
                                         siblingBB,
                                         nextSibling = child.next(false),
                                         prevSibling;
-                            
+
                                     // Insert or Append to last child.
-                            
+
                                     // Avoiding index, and using the current sibling
                                     // state (which should be accurate), means we don&#x27;t have
                                     // to worry about decorator elements which may be added
                                     // to the _childContainer node.
-                            
+
                                     if (nextSibling &amp;&amp; nextSibling.get(RENDERED)) {
-                            
+
                                         siblingBB = nextSibling.get(BOUNDING_BOX);
                                         siblingBB.insert(childBB, &quot;before&quot;);
-                            
+
                                     } else {
-                            
+
                                         prevSibling = child.previous(false);
-                            
+
                                         if (prevSibling &amp;&amp; prevSibling.get(RENDERED)) {
-                            
+
                                             siblingBB = prevSibling.get(BOUNDING_BOX);
                                             siblingBB.insert(childBB, &quot;after&quot;);
-                            
+
                                         } else if (!parentNode.contains(childBB)) {
-                            
+
                                             // Based on pull request from andreas-karlsson
                                             // https://github.com/yui/yui3/pull/25#issuecomment-2103536
-                            
+
                                             // Account for case where a child was rendered independently of the
                                             // parent-child framework, to a node outside of the parentNode,
                                             // and there are no siblings.
-                            
+
                                             parentNode.appendChild(childBB);
                                         }
                                     }
-                            
+
                                 },
-                            
+
                                 /**
                                  * Updates the UI in response to a child being removed.
                                  *
@@ -1899,23 +1899,23 @@
                                 _uiRemoveChild: function (child) {
                                     child.get(&quot;boundingBox&quot;).remove();
                                 },
-                            
+
                                 _afterAddChild: function (event) {
                                     var child = event.child;
-                            
+
                                     if (child.get(&quot;parent&quot;) == this) {
                                         this._uiAddChild(child, this._childrenContainer);
                                     }
                                 },
-                            
+
                                 _afterRemoveChild: function (event) {
                                     var child = event.child;
-                            
+
                                     if (child._oldParent == this) {
                                         this._uiRemoveChild(child);
                                     }
                                 },
-                            
+
                                 /**
                                  * Sets up DOM and CustomEvent listeners for the parent widget.
                                  * &lt;p&gt;
@@ -1930,7 +1930,7 @@
                                     this.after(&quot;addChild&quot;, this._afterAddChild);
                                     this.after(&quot;removeChild&quot;, this._afterRemoveChild);
                                 },
-                            
+
                                 /**
                                  * Renders all child Widgets for the parent.
                                  * &lt;p&gt;
@@ -1941,7 +1941,7 @@
                                  * @protected
                                  */
                                 _renderChildren: function () {
-                            
+
                                     /**
                                      * &lt;p&gt;By default WidgetParent will render it&#x27;s children to the parent&#x27;s content box.&lt;/p&gt;
                                      *
@@ -1956,14 +1956,14 @@
                                      * @type Node
                                      */
                                     var renderTo = this._childrenContainer || this.get(&quot;contentBox&quot;);
-                            
+
                                     this._childrenContainer = renderTo;
-                            
+
                                     this.each(function (child) {
                                         child.render(renderTo);
                                     });
                                 },
-                            
+
                                 /**
                                  * Destroys all child Widgets for the parent.
                                  * &lt;p&gt;
@@ -1974,7 +1974,7 @@
                                  * @protected
                                  */
                                 _destroyChildren: function () {
-                            
+
                                     //  Detach the handler responsible for removing children in
                                     //  response to destroying them since:
                                     //  1)  It is unnecessary/inefficient at this point since we are doing
@@ -1983,19 +1983,19 @@
                                     //      children since the size of _items will be changing as we
                                     //      iterate.
                                     this._hDestroyChild.detach();
-                            
+
                                     //  Need to clone the _items array since
                                     this.each(function (child) {
                                         child.destroy();
                                     });
                                 }
-                            
+
                             };
-                            
+
                             Y.augment(Parent, Y.ArrayList);
-                            
+
                             Y.WidgetParent = Parent;
-                            
+
                                 </pre>
                             </div>
                         </div>

@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,23 +1122,23 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/promise/js/resolver.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
                             Represents an asynchronous operation. Provides a
                             standard API for subscribing to the moment that the operation completes either
                             successfully (&#x60;fulfill()&#x60;) or unsuccessfully (&#x60;reject()&#x60;).
-                            
+
                             @class Promise.Resolver
                             @constructor
                             @param {Promise} promise The promise instance this resolver will be handling
@@ -1146,59 +1146,59 @@
                             function Resolver(promise) {
                                 /**
                                 List of success callbacks
-                            
+
                                 @property _callbacks
                                 @type Array
                                 @private
                                 **/
                                 this._callbacks = [];
-                            
+
                                 /**
                                 List of failure callbacks
-                            
+
                                 @property _errbacks
                                 @type Array
                                 @private
                                 **/
                                 this._errbacks = [];
-                            
+
                                 /**
                                 The promise for this Resolver.
-                            
+
                                 @property promise
                                 @type Promise
                                 @deprecated
                                 **/
                                 this.promise = promise;
-                            
+
                                 /**
                                 The status of the operation. This property may take only one of the following
                                 values: &#x27;pending&#x27;, &#x27;fulfilled&#x27; or &#x27;rejected&#x27;.
-                            
+
                                 @property _status
                                 @type String
                                 @default &#x27;pending&#x27;
                                 @private
                                 **/
                                 this._status = &#x27;pending&#x27;;
-                            
+
                                 /**
                                 This value that this promise represents.
-                            
+
                                 @property _result
                                 @type Any
                                 @private
                                 **/
                                 this._result = null;
                             }
-                            
+
                             Y.mix(Resolver.prototype, {
                                 /**
                                 Resolves the promise, signaling successful completion of the
                                 represented operation. All &quot;onFulfilled&quot; subscriptions are executed and passed
                                 the value provided to this method. After calling &#x60;fulfill()&#x60;, &#x60;reject()&#x60; and
                                 &#x60;notify()&#x60; are disabled.
-                            
+
                                 @method fulfill
                                 @param {Any} value Value to pass along to the &quot;onFulfilled&quot; subscribers
                                 **/
@@ -1207,30 +1207,30 @@
                                         this._result = value;
                                         this._status = &#x27;fulfilled&#x27;;
                                     }
-                            
+
                                     if (this._status === &#x27;fulfilled&#x27;) {
                                         this._notify(this._callbacks, this._result);
-                            
+
                                         // Reset the callback list so that future calls to fulfill()
                                         // won&#x27;t call the same callbacks again. Promises keep a list
                                         // of callbacks, they&#x27;re not the same as events. In practice,
                                         // calls to fulfill() after the first one should not be made by
                                         // the user but by then()
                                         this._callbacks = [];
-                            
+
                                         // Once a promise gets fulfilled it can&#x27;t be rejected, so
                                         // there is no point in keeping the list. Remove it to help
                                         // garbage collection
                                         this._errbacks = null;
                                     }
                                 },
-                            
+
                                 /**
                                 Resolves the promise, signaling *un*successful completion of the
                                 represented operation. All &quot;onRejected&quot; subscriptions are executed with
                                 the value provided to this method. After calling &#x60;reject()&#x60;, &#x60;resolve()&#x60;
                                 and &#x60;notify()&#x60; are disabled.
-                            
+
                                 @method reject
                                 @param {Any} value Value to pass along to the &quot;reject&quot; subscribers
                                 **/
@@ -1239,30 +1239,30 @@
                                         this._result = reason;
                                         this._status = &#x27;rejected&#x27;;
                                     }
-                            
+
                                     if (this._status === &#x27;rejected&#x27;) {
                                         if (!this._errbacks.length) { Y.log(&#x27;This promise was rejected but no error handlers were registered to it&#x27;, &#x27;info&#x27;, NAME); }
                                         this._notify(this._errbacks, this._result);
-                            
+
                                         // See fulfill()
                                         this._callbacks = null;
                                         this._errbacks = [];
                                     }
                                 },
-                            
+
                                 /*
                                 Given a certain value A passed as a parameter, this method resolves the
                                 promise to the value A.
-                            
+
                                 If A is a promise, &#x60;resolve&#x60; will cause the resolver to adopt the state of A
                                 and once A is resolved, it will resolve the resolver&#x27;s promise as well.
                                 This behavior &quot;flattens&quot; A by calling &#x60;then&#x60; recursively and essentially
                                 disallows promises-for-promises.
-                            
+
                                 This is the default algorithm used when using the function passed as the
                                 first argument to the promise initialization function. This means that
                                 the following code returns a promise for the value &#x27;hello world&#x27;:
-                            
+
                                     var promise1 = new Y.Promise(function (resolve) {
                                         resolve(&#x27;hello world&#x27;);
                                     });
@@ -1272,13 +1272,13 @@
                                     promise2.then(function (value) {
                                         assert(value === &#x27;hello world&#x27;); // true
                                     });
-                            
+
                                 @method resolve
                                 @param [Any] value A regular JS value or a promise
                                 */
                                 resolve: function (value) {
                                     var self = this;
-                            
+
                                     if (Promise.isPromise(value)) {
                                         value.then(function (value) {
                                             self.resolve(value);
@@ -1289,7 +1289,7 @@
                                         this.fulfill(value);
                                     }
                                 },
-                            
+
                                 /**
                                 Schedule execution of a callback to either or both of &quot;resolve&quot; and
                                 &quot;reject&quot; resolutions for the Resolver.  The callbacks
@@ -1297,7 +1297,7 @@
                                 is returned.  This allows operation chaining ala
                                 &#x60;functionA().then(functionB).then(functionC)&#x60; where &#x60;functionA&#x60; returns
                                 a promise, and &#x60;functionB&#x60; and &#x60;functionC&#x60; _may_ return promises.
-                            
+
                                 @method then
                                 @param {Function} [callback] function to execute if the Resolver
                                             resolves successfully
@@ -1310,12 +1310,12 @@
                                 then: function (callback, errback) {
                                     return this.promise.then(callback, errback);
                                 },
-                            
+
                                 /**
                                 Schedule execution of a callback to either or both of &quot;resolve&quot; and
                                 &quot;reject&quot; resolutions of this resolver. If the resolver is not pending,
                                 the correct callback gets called automatically.
-                            
+
                                 @method _addCallbacks
                                 @param {Function} [callback] function to execute if the Resolver
                                             resolves successfully
@@ -1328,14 +1328,14 @@
                                         errbackList  = this._errbacks,
                                         status       = this._status,
                                         result       = this._result;
-                            
+
                                     if (callbackList &amp;&amp; typeof callback === &#x27;function&#x27;) {
                                         callbackList.push(callback);
                                     }
                                     if (errbackList &amp;&amp; typeof errback === &#x27;function&#x27;) {
                                         errbackList.push(errback);
                                     }
-                            
+
                                     // If a promise is already fulfilled or rejected, notify the newly added
                                     // callbacks by calling fulfill() or reject()
                                     if (status === &#x27;fulfilled&#x27;) {
@@ -1344,11 +1344,11 @@
                                         this.reject(result);
                                     }
                                 },
-                            
+
                                 /**
                                 Returns the current status of the Resolver as a string &quot;pending&quot;,
                                 &quot;fulfilled&quot;, or &quot;rejected&quot;.
-                            
+
                                 @method getStatus
                                 @return {String}
                                 @deprecated
@@ -1357,11 +1357,11 @@
                                     Y.log(&#x27;resolver.getStatus() will be removed in the future&#x27;, &#x27;warn&#x27;, NAME);
                                     return this._status;
                                 },
-                            
+
                                 /**
                                 Executes an array of callbacks from a specified context, passing a set of
                                 arguments.
-                            
+
                                 @method _notify
                                 @param {Function[]} subs The array of subscriber callbacks
                                 @param {Any} result Value to pass the callbacks
@@ -1378,18 +1378,18 @@
                                         // (especially in Node.js)
                                         Y.soon(function () {
                                             var i, len;
-                            
+
                                             for (i = 0, len = subs.length; i &lt; len; ++i) {
                                                 subs[i](result);
                                             }
                                         });
                                     }
                                 }
-                            
+
                             }, true);
-                            
+
                             Y.Promise.Resolver = Resolver;
-                            
+
                                 </pre>
                             </div>
                         </div>

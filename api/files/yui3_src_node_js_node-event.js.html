@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,23 +1122,23 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/node/js/node-event.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
                              * @module node
                              * @submodule node-base
                              */
-                            
+
                             var Y_Node = Y.Node;
                             var Y_NodeList = Y.NodeList;
                             /**
@@ -1147,7 +1147,7 @@
                              * @property DOM_EVENTS
                              * @for Node
                              */
-                            
+
                             Y_Node.DOM_EVENTS = {
                                 abort: 1,
                                 beforeunload: 1,
@@ -1197,14 +1197,14 @@
                                 unload: 1,
                                 invalid: 1
                             };
-                            
+
                             // Add custom event adaptors to this list.  This will make it so
                             // that delegate, key, available, contentready, etc all will
                             // be available through Node.on
                             Y.mix(Y_Node.DOM_EVENTS, Y.Env.evt.plugins);
-                            
+
                             Y.augment(Y_Node, Y.EventTarget);
-                            
+
                             Y.mix(Y_Node.prototype, {
                                 /**
                                  * Removes event listeners from the node and (optionally) its subtree
@@ -1219,60 +1219,60 @@
                                     Y.Event.purgeElement(this._node, recurse, type);
                                     return this;
                                 }
-                            
+
                             });
-                            
+
                             Y.mix(Y.NodeList.prototype, {
                                 _prepEvtArgs: function(type, fn, context) {
                                     // map to Y.on/after signature (type, fn, nodes, context, arg1, arg2, etc)
                                     var args = Y.Array(arguments, 0, true);
-                            
+
                                     if (args.length &lt; 2) { // type only (event hash) just add nodes
                                         args[2] = this._nodes;
                                     } else {
                                         args.splice(2, 0, this._nodes);
                                     }
-                            
+
                                     args[3] = context || this; // default to NodeList instance as context
-                            
+
                                     return args;
                                 },
-                            
+
                                 /**
                                 Subscribe a callback function for each &#x60;Node&#x60; in the collection to execute
                                 in response to a DOM event.
-                            
+
                                 NOTE: Generally, the &#x60;on()&#x60; method should be avoided on &#x60;NodeLists&#x60;, in
                                 favor of using event delegation from a parent Node.  See the Event user
                                 guide for details.
-                            
+
                                 Most DOM events are associated with a preventable default behavior, such as
                                 link clicks navigating to a new page.  Callbacks are passed a
                                 &#x60;DOMEventFacade&#x60; object as their first argument (usually called &#x60;e&#x60;) that
                                 can be used to prevent this default behavior with &#x60;e.preventDefault()&#x60;. See
                                 the &#x60;DOMEventFacade&#x60; API for all available properties and methods on the
                                 object.
-                            
+
                                 By default, the &#x60;this&#x60; object will be the &#x60;NodeList&#x60; that the subscription
                                 came from, &lt;em&gt;not the &#x60;Node&#x60; that received the event&lt;/em&gt;.  Use
                                 &#x60;e.currentTarget&#x60; to refer to the &#x60;Node&#x60;.
-                            
+
                                 Returning &#x60;false&#x60; from a callback is supported as an alternative to calling
                                 &#x60;e.preventDefault(); e.stopPropagation();&#x60;.  However, it is recommended to
                                 use the event methods.
-                            
+
                                 @example
-                            
+
                                     Y.all(&quot;.sku&quot;).on(&quot;keydown&quot;, function (e) {
                                         if (e.keyCode === 13) {
                                             e.preventDefault();
-                            
+
                                             // Use e.currentTarget to refer to the individual Node
                                             var item = Y.MyApp.searchInventory( e.currentTarget.get(&#x27;value&#x27;) );
                                             // etc ...
                                         }
                                     });
-                            
+
                                 @method on
                                 @param {String} type The name of the event
                                 @param {Function} fn The callback to execute in response to the event
@@ -1285,7 +1285,7 @@
                                 on: function(type, fn, context) {
                                     return Y.on.apply(Y, this._prepEvtArgs.apply(this, arguments));
                                 },
-                            
+
                                 /**
                                  * Applies an one-time event listener to each Node bound to the NodeList.
                                  * @method once
@@ -1300,7 +1300,7 @@
                                 once: function(type, fn, context) {
                                     return Y.once.apply(Y, this._prepEvtArgs.apply(this, arguments));
                                 },
-                            
+
                                 /**
                                  * Applies an event listener to each Node bound to the NodeList.
                                  * The handler is called only after all on() handlers are called
@@ -1317,7 +1317,7 @@
                                 after: function(type, fn, context) {
                                     return Y.after.apply(Y, this._prepEvtArgs.apply(this, arguments));
                                 },
-                            
+
                                 /**
                                  * Applies an one-time event listener to each Node bound to the NodeList
                                  * that will be called only after all on() handlers are called and the
@@ -1336,7 +1336,7 @@
                                     return Y.onceAfter.apply(Y, this._prepEvtArgs.apply(this, arguments));
                                 }
                             });
-                            
+
                             Y_NodeList.importMethod(Y.Node.prototype, [
                                 /**
                                   * Called on each Node instance
@@ -1345,7 +1345,7 @@
                                   * @for NodeList
                                   */
                                 &#x27;detach&#x27;,
-                            
+
                                 /** Called on each Node instance
                                   * @method detachAll
                                   * @see Node.detachAll
@@ -1353,37 +1353,37 @@
                                   */
                                 &#x27;detachAll&#x27;
                             ]);
-                            
+
                             /**
                             Subscribe a callback function to execute in response to a DOM event or custom
                             event.
-                            
+
                             Most DOM events are associated with a preventable default behavior such as
                             link clicks navigating to a new page.  Callbacks are passed a &#x60;DOMEventFacade&#x60;
                             object as their first argument (usually called &#x60;e&#x60;) that can be used to
                             prevent this default behavior with &#x60;e.preventDefault()&#x60;. See the
                             &#x60;DOMEventFacade&#x60; API for all available properties and methods on the object.
-                            
+
                             If the event name passed as the first parameter is not a whitelisted DOM event,
                             it will be treated as a custom event subscriptions, allowing
                             &#x60;node.fire(&#x27;customEventName&#x27;)&#x60; later in the code.  Refer to the Event user guide
                             for the full DOM event whitelist.
-                            
+
                             By default, the &#x60;this&#x60; object in the callback will refer to the subscribed
                             &#x60;Node&#x60;.
-                            
+
                             Returning &#x60;false&#x60; from a callback is supported as an alternative to calling
                             &#x60;e.preventDefault(); e.stopPropagation();&#x60;.  However, it is recommended to use
                             the event methods.
-                            
+
                             @example
-                            
+
                                 Y.one(&quot;#my-form&quot;).on(&quot;submit&quot;, function (e) {
                                     e.preventDefault();
-                            
+
                                     // proceed with ajax form submission instead...
                                 });
-                            
+
                             @method on
                             @param {String} type The name of the event
                             @param {Function} fn The callback to execute in response to the event
@@ -1393,8 +1393,8 @@
                                                   subscription
                             @for Node
                             **/
-                            
-                            
+
+
                                 </pre>
                             </div>
                         </div>

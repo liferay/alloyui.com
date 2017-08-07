@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/widget-child/js/Widget-Child.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1139,9 +1139,9 @@
                              *
                              * @module widget-child
                              */
-                            
+
                             var Lang = Y.Lang;
-                            
+
                             /**
                              * Widget extension providing functionality enabling a Widget to be a
                              * child of another Widget.
@@ -1150,15 +1150,15 @@
                              * @param {Object} config User configuration object.
                             */
                             function Child() {
-                            
+
                                 //  Widget method overlap
                                 Y.after(this._syncUIChild, this, &quot;syncUI&quot;);
                                 Y.after(this._bindUIChild, this, &quot;bindUI&quot;);
-                            
+
                             }
-                            
+
                             Child.ATTRS = {
-                            
+
                                 /**
                                  * @attribute selected
                                  * @type Number
@@ -1176,8 +1176,8 @@
                                     value: 0,
                                     validator: Lang.isNumber
                                 },
-                            
-                            
+
+
                                 /**
                                  * @attribute index
                                  * @type Number
@@ -1189,20 +1189,20 @@
                                 index: {
                                     readOnly: true,
                                     getter: function () {
-                            
+
                                         var parent = this.get(&quot;parent&quot;),
                                             index = -1;
-                            
+
                                         if (parent) {
                                             index = parent.indexOf(this);
                                         }
-                            
+
                                         return index;
-                            
+
                                     }
                                 },
-                            
-                            
+
+
                                 /**
                                  * @attribute parent
                                  * @type Widget
@@ -1213,8 +1213,8 @@
                                 parent: {
                                     readOnly: true
                                 },
-                            
-                            
+
+
                                 /**
                                  * @attribute depth
                                  * @type Number
@@ -1227,28 +1227,28 @@
                                 depth: {
                                     readOnly: true,
                                     getter: function () {
-                            
+
                                         var parent = this.get(&quot;parent&quot;),
                                             root = this.get(&quot;root&quot;),
                                             depth = -1;
-                            
+
                                         while (parent) {
-                            
+
                                             depth = (depth + 1);
-                            
+
                                             if (parent == root) {
                                                 break;
                                             }
-                            
+
                                             parent = parent.get(&quot;parent&quot;);
-                            
+
                                         }
-                            
+
                                         return depth;
-                            
+
                                     }
                                 },
-                            
+
                                 /**
                                  * @attribute root
                                  * @type Widget
@@ -1261,30 +1261,30 @@
                                 root: {
                                     readOnly: true,
                                     getter: function () {
-                            
+
                                         var getParent = function (child) {
-                            
+
                                             var parent = child.get(&quot;parent&quot;),
                                                 FnRootType = child.ROOT_TYPE,
                                                 criteria = parent;
-                            
+
                                             if (FnRootType) {
                                                 criteria = (parent &amp;&amp; Y.instanceOf(parent, FnRootType));
                                             }
-                            
+
                                             return (criteria ? getParent(parent) : child);
-                            
+
                                         };
-                            
+
                                         return getParent(this);
-                            
+
                                     }
                                 }
-                            
+
                             };
-                            
+
                             Child.prototype = {
-                            
+
                                 /**
                                  * Constructor reference used to determine the root of a Widget-based
                                  * object tree.
@@ -1299,7 +1299,7 @@
                                  * @type Object
                                  */
                                 ROOT_TYPE: null,
-                            
+
                                 /**
                                  * Returns the node on which to bind delegate listeners.
                                  *
@@ -1316,14 +1316,14 @@
                                 _getUIEventNode: function () {
                                     var root = this.get(&quot;root&quot;),
                                         returnVal;
-                            
+
                                     if (root) {
                                         returnVal = root.get(&quot;boundingBox&quot;);
                                     }
-                            
+
                                     return returnVal;
                                 },
-                            
+
                                 /**
                                 * @method next
                                 * @description Returns the Widget&#x27;s next sibling.
@@ -1332,23 +1332,23 @@
                                 * @return {Widget} Widget instance.
                                 */
                                 next: function (circular) {
-                            
+
                                     var parent = this.get(&quot;parent&quot;),
                                         sibling;
-                            
+
                                     if (parent) {
                                         sibling = parent.item((this.get(&quot;index&quot;)+1));
                                     }
-                            
+
                                     if (!sibling &amp;&amp; circular) {
                                         sibling = parent.item(0);
                                     }
-                            
+
                                     return sibling;
-                            
+
                                 },
-                            
-                            
+
+
                                 /**
                                 * @method previous
                                 * @description Returns the Widget&#x27;s previous sibling.
@@ -1357,49 +1357,49 @@
                                 * @return {Widget} Widget instance.
                                 */
                                 previous: function (circular) {
-                            
+
                                     var parent = this.get(&quot;parent&quot;),
                                         index = this.get(&quot;index&quot;),
                                         sibling;
-                            
+
                                     if (parent &amp;&amp; index &gt; 0) {
                                         sibling = parent.item([(index-1)]);
                                     }
-                            
+
                                     if (!sibling &amp;&amp; circular) {
                                         sibling = parent.item((parent.size() - 1));
                                     }
-                            
+
                                     return sibling;
-                            
+
                                 },
-                            
-                            
+
+
                                 //  Override of Y.WidgetParent.remove()
                                 //  Sugar implementation allowing a child to remove itself from its parent.
                                 remove: function (index) {
-                            
+
                                     var parent,
                                         removed;
-                            
+
                                     if (Lang.isNumber(index)) {
                                         removed = Y.WidgetParent.prototype.remove.apply(this, arguments);
                                     }
                                     else {
-                            
+
                                         parent = this.get(&quot;parent&quot;);
-                            
+
                                         if (parent) {
                                             removed = parent.remove(this.get(&quot;index&quot;));
                                         }
-                            
+
                                     }
-                            
+
                                     return removed;
-                            
+
                                 },
-                            
-                            
+
+
                                 /**
                                 * @method isRoot
                                 * @description Determines if the Widget is the root Widget in the
@@ -1410,8 +1410,8 @@
                                 isRoot: function () {
                                     return (this == this.get(&quot;root&quot;));
                                 },
-                            
-                            
+
+
                                 /**
                                 * @method ancestor
                                 * @description Returns the Widget instance at the specified depth.
@@ -1419,25 +1419,25 @@
                                 * @return {Widget} Widget instance.
                                 */
                                 ancestor: function (depth) {
-                            
+
                                     var root = this.get(&quot;root&quot;),
                                         parent;
-                            
+
                                     if (this.get(&quot;depth&quot;) &gt; depth)  {
-                            
+
                                         parent = this.get(&quot;parent&quot;);
-                            
+
                                         while (parent != root &amp;&amp; parent.get(&quot;depth&quot;) &gt; depth) {
                                             parent = parent.get(&quot;parent&quot;);
                                         }
-                            
+
                                     }
-                            
+
                                     return parent;
-                            
+
                                 },
-                            
-                            
+
+
                                 /**
                                  * Updates the UI to reflect the &lt;code&gt;selected&lt;/code&gt; attribute value.
                                  *
@@ -1446,20 +1446,20 @@
                                  * @param {number} selected The selected value to be reflected in the UI.
                                  */
                                 _uiSetChildSelected: function (selected) {
-                            
+
                                     var box = this.get(&quot;boundingBox&quot;),
                                         sClassName = this.getClassName(&quot;selected&quot;);
-                            
+
                                     if (selected === 0) {
                                         box.removeClass(sClassName);
                                     }
                                     else {
                                         box.addClass(sClassName);
                                     }
-                            
+
                                 },
-                            
-                            
+
+
                                 /**
                                  * Default attribute change listener for the &lt;code&gt;selected&lt;/code&gt;
                                  * attribute, responsible for updating the UI, in response to
@@ -1472,8 +1472,8 @@
                                 _afterChildSelectedChange: function (event) {
                                     this._uiSetChildSelected(event.newVal);
                                 },
-                            
-                            
+
+
                                 /**
                                  * Synchronizes the UI to match the WidgetChild state.
                                  * &lt;p&gt;
@@ -1487,8 +1487,8 @@
                                 _syncUIChild: function () {
                                     this._uiSetChildSelected(this.get(&quot;selected&quot;));
                                 },
-                            
-                            
+
+
                                 /**
                                  * Binds event listeners responsible for updating the UI state in response
                                  * to WidgetChild related state changes.
@@ -1502,11 +1502,11 @@
                                 _bindUIChild: function () {
                                     this.after(&quot;selectedChange&quot;, this._afterChildSelectedChange);
                                 }
-                            
+
                             };
-                            
+
                             Y.WidgetChild = Child;
-                            
+
                                 </pre>
                             </div>
                         </div>

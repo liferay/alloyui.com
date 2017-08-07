@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/test/js/TestFormat.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1142,7 +1142,7 @@
                              * @static
                              */
                             YUITest.TestFormat = function(){
-                            
+
                                 /* (intentionally not documented)
                                  * Basic XML escaping method. Replaces quotes, less-than, greater-than,
                                  * apostrophe, and ampersand characters with their corresponding entities.
@@ -1150,7 +1150,7 @@
                                  * @return {String} The XML-escaped text.
                                  */
                                 function xmlEscape(text){
-                            
+
                                     return text.replace(/[&lt;&gt;&quot;&#x27;&amp;]/g, function(value){
                                         switch(value){
                                             case &quot;&lt;&quot;:   return &quot;&amp;lt;&quot;;
@@ -1160,12 +1160,12 @@
                                             case &quot;&amp;&quot;:   return &quot;&amp;amp;&quot;;
                                         }
                                     });
-                            
+
                                 }
-                            
-                            
+
+
                                 return {
-                            
+
                                     /**
                                      * Returns test results formatted as a JSON string. Requires JSON utility.
                                      * @param {Object} result The results object created by TestRunner.
@@ -1176,7 +1176,7 @@
                                     JSON: function(results) {
                                         return YUITest.Util.JSON.stringify(results);
                                     },
-                            
+
                                     /**
                                      * Returns test results formatted as an XML string.
                                      * @param {Object} result The results object created by TestRunner.
@@ -1185,14 +1185,14 @@
                                      * @static
                                      */
                                     XML: function(results) {
-                            
+
                                         function serializeToXML(results){
                                             var xml = &quot;&lt;&quot; + results.type + &quot; name=\&quot;&quot; + xmlEscape(results.name) + &quot;\&quot;&quot;;
-                            
+
                                             if (typeof(results.duration)==&quot;number&quot;){
                                                 xml += &quot; duration=\&quot;&quot; + results.duration + &quot;\&quot;&quot;;
                                             }
-                            
+
                                             if (results.type == &quot;test&quot;){
                                                 xml += &quot; result=\&quot;&quot; + results.result + &quot;\&quot; message=\&quot;&quot; + xmlEscape(results.message) + &quot;\&quot;&gt;&quot;;
                                             } else {
@@ -1205,17 +1205,17 @@
                                                     }
                                                 }
                                             }
-                            
+
                                             xml += &quot;&lt;/&quot; + results.type + &quot;&gt;&quot;;
-                            
+
                                             return xml;
                                         }
-                            
+
                                         return &quot;&lt;?xml version=\&quot;1.0\&quot; encoding=\&quot;UTF-8\&quot;?&gt;&quot; + serializeToXML(results);
-                            
+
                                     },
-                            
-                            
+
+
                                     /**
                                      * Returns test results formatted in JUnit XML format.
                                      * @param {Object} result The results object created by TestRunner.
@@ -1224,10 +1224,10 @@
                                      * @static
                                      */
                                     JUnitXML: function(results) {
-                            
+
                                         function serializeToJUnitXML(results){
                                             var xml = &quot;&quot;;
-                            
+
                                             switch (results.type){
                                                 //equivalent to testcase in JUnit
                                                 case &quot;test&quot;:
@@ -1239,12 +1239,12 @@
                                                         xml+= &quot;&lt;/testcase&gt;&quot;;
                                                     }
                                                     break;
-                            
+
                                                 //equivalent to testsuite in JUnit
                                                 case &quot;testcase&quot;:
-                            
+
                                                     xml = &quot;&lt;testsuite name=\&quot;&quot; + xmlEscape(results.name) + &quot;\&quot; tests=\&quot;&quot; + results.total + &quot;\&quot; failures=\&quot;&quot; + results.failed + &quot;\&quot; time=\&quot;&quot; + (results.duration/1000) + &quot;\&quot;&gt;&quot;;
-                            
+
                                                     for (var prop in results){
                                                         if (results.hasOwnProperty(prop)){
                                                             if (results[prop] &amp;&amp; typeof results[prop] == &quot;object&quot; &amp;&amp; !(results[prop] instanceof Array)){
@@ -1252,10 +1252,10 @@
                                                             }
                                                         }
                                                     }
-                            
+
                                                     xml += &quot;&lt;/testsuite&gt;&quot;;
                                                     break;
-                            
+
                                                 //no JUnit equivalent, don&#x27;t output anything
                                                 case &quot;testsuite&quot;:
                                                     for (var prop in results){
@@ -1266,12 +1266,12 @@
                                                         }
                                                     }
                                                     break;
-                            
+
                                                 //top-level, equivalent to testsuites in JUnit
                                                 case &quot;report&quot;:
-                            
+
                                                     xml = &quot;&lt;testsuites&gt;&quot;;
-                            
+
                                                     for (var prop in results){
                                                         if (results.hasOwnProperty(prop)){
                                                             if (results[prop] &amp;&amp; typeof results[prop] == &quot;object&quot; &amp;&amp; !(results[prop] instanceof Array)){
@@ -1279,19 +1279,19 @@
                                                             }
                                                         }
                                                     }
-                            
+
                                                     xml += &quot;&lt;/testsuites&gt;&quot;;
-                            
+
                                                 //no default
                                             }
-                            
+
                                             return xml;
-                            
+
                                         }
-                            
+
                                         return &quot;&lt;?xml version=\&quot;1.0\&quot; encoding=\&quot;UTF-8\&quot;?&gt;&quot; + serializeToJUnitXML(results);
                                     },
-                            
+
                                     /**
                                      * Returns test results formatted in TAP format.
                                      * For more information, see &lt;a href=&quot;http://testanything.org/&quot;&gt;Test Anything Protocol&lt;/a&gt;.
@@ -1301,33 +1301,33 @@
                                      * @static
                                      */
                                     TAP: function(results) {
-                            
+
                                         var currentTestNum = 1;
-                            
+
                                         function serializeToTAP(results){
                                             var text = &quot;&quot;;
-                            
+
                                             switch (results.type){
-                            
+
                                                 case &quot;test&quot;:
                                                     if (results.result != &quot;ignore&quot;){
-                            
+
                                                         text = &quot;ok &quot; + (currentTestNum++) + &quot; - &quot; + results.name;
-                            
+
                                                         if (results.result == &quot;fail&quot;){
                                                             text = &quot;not &quot; + text + &quot; - &quot; + results.message;
                                                         }
-                            
+
                                                         text += &quot;\n&quot;;
                                                     } else {
                                                         text = &quot;#Ignored test &quot; + results.name + &quot;\n&quot;;
                                                     }
                                                     break;
-                            
+
                                                 case &quot;testcase&quot;:
-                            
+
                                                     text = &quot;#Begin testcase &quot; + results.name + &quot;(&quot; + results.failed + &quot; failed of &quot; + results.total + &quot;)\n&quot;;
-                            
+
                                                     for (var prop in results){
                                                         if (results.hasOwnProperty(prop)){
                                                             if (results[prop] &amp;&amp; typeof results[prop] == &quot;object&quot; &amp;&amp; !(results[prop] instanceof Array)){
@@ -1335,16 +1335,16 @@
                                                             }
                                                         }
                                                     }
-                            
+
                                                     text += &quot;#End testcase &quot; + results.name + &quot;\n&quot;;
-                            
-                            
+
+
                                                     break;
-                            
+
                                                 case &quot;testsuite&quot;:
-                            
+
                                                     text = &quot;#Begin testsuite &quot; + results.name + &quot;(&quot; + results.failed + &quot; failed of &quot; + results.total + &quot;)\n&quot;;
-                            
+
                                                     for (var prop in results){
                                                         if (results.hasOwnProperty(prop)){
                                                             if (results[prop] &amp;&amp; typeof results[prop] == &quot;object&quot; &amp;&amp; !(results[prop] instanceof Array)){
@@ -1352,12 +1352,12 @@
                                                             }
                                                         }
                                                     }
-                            
+
                                                     text += &quot;#End testsuite &quot; + results.name + &quot;\n&quot;;
                                                     break;
-                            
+
                                                 case &quot;report&quot;:
-                            
+
                                                     for (var prop in results){
                                                         if (results.hasOwnProperty(prop)){
                                                             if (results[prop] &amp;&amp; typeof results[prop] == &quot;object&quot; &amp;&amp; !(results[prop] instanceof Array)){
@@ -1365,20 +1365,20 @@
                                                             }
                                                         }
                                                     }
-                            
+
                                                 //no default
                                             }
-                            
+
                                             return text;
-                            
+
                                         }
-                            
+
                                         return &quot;1..&quot; + results.total + &quot;\n&quot; + serializeToTAP(results);
                                     }
-                            
+
                                 };
                             }();
-                            
+
                                 </pre>
                             </div>
                         </div>

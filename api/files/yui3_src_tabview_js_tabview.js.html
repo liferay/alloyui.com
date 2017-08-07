@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/tabview/js/tabview.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1139,9 +1139,9 @@
                              *
                              * @module tabview
                              */
-                            
+
                             var DOT = &#x27;.&#x27;,
-                            
+
                                 /**
                                  * Provides a tabbed widget interface
                                  * @param config {Object} Object literal specifying tabview configuration properties.
@@ -1152,44 +1152,44 @@
                                  * @uses WidgetParent
                                  */
                                 TabView = Y.Base.create(&#x27;tabView&#x27;, Y.Widget, [Y.WidgetParent], {
-                            
+
                                 _afterChildAdded: function() {
                                     this.get(&#x27;contentBox&#x27;).focusManager.refresh();
                                 },
-                            
+
                                 _defListNodeValueFn: function() {
                                     var node = Y.Node.create(this.LIST_TEMPLATE);
-                            
+
                                     node.addClass(Y.TabviewBase._classNames.tabviewList);
-                            
+
                                     return node;
                                 },
-                            
+
                                 _defPanelNodeValueFn: function() {
                                     var node = Y.Node.create(this.PANEL_TEMPLATE);
-                            
+
                                     node.addClass(Y.TabviewBase._classNames.tabviewPanel);
-                            
+
                                     return node;
                                 },
-                            
+
                                 _afterChildRemoved: function(e) { // update the selected tab when removed
                                     var i = e.index,
                                         selection = this.get(&#x27;selection&#x27;);
-                            
+
                                     if (!selection) { // select previous item if selection removed
                                         selection = this.item(i - 1) || this.item(0);
                                         if (selection) {
                                             selection.set(&#x27;selected&#x27;, 1);
                                         }
                                     }
-                            
+
                                     this.get(&#x27;contentBox&#x27;).focusManager.refresh();
                                 },
-                            
+
                                 _initAria: function(contentBox) {
                                     var tablist = contentBox.one(Y.TabviewBase._queries.tabviewList);
-                            
+
                                     if (tablist) {
                                         tablist.setAttrs({
                                             //&#x27;aria-labelledby&#x27;:
@@ -1197,24 +1197,24 @@
                                         });
                                     }
                                 },
-                            
+
                                 bindUI: function() {
                                     //  Use the Node Focus Manager to add keyboard support:
                                     //  Pressing the left and right arrow keys will move focus
                                     //  among each of the tabs.
-                            
+
                                     this.get(&#x27;contentBox&#x27;).plug(Y.Plugin.NodeFocusManager, {
                                                     descendants: DOT + Y.TabviewBase._classNames.tabLabel,
                                                     keys: { next: &#x27;down:39&#x27;, // Right arrow
                                                             previous: &#x27;down:37&#x27; },  // Left arrow
                                                     circular: true
                                                 });
-                            
+
                                     this.after(&#x27;render&#x27;, this._setDefSelection);
                                     this.after(&#x27;addChild&#x27;, this._afterChildAdded);
                                     this.after(&#x27;removeChild&#x27;, this._afterChildRemoved);
                                 },
-                            
+
                                 renderUI: function() {
                                     var contentBox = this.get(&#x27;contentBox&#x27;);
                                     this._renderListBox(contentBox);
@@ -1223,11 +1223,11 @@
                                     this._renderTabs(contentBox);
                                     this._initAria(contentBox);
                                 },
-                            
+
                                 _setDefSelection: function() {
                                     //  If no tab is selected, select the first tab.
                                     var selection = this.get(&#x27;selection&#x27;) || this.item(0);
-                            
+
                                     this.some(function(tab) {
                                         if (tab.get(&#x27;selected&#x27;)) {
                                             selection = tab;
@@ -1240,21 +1240,21 @@
                                         selection.set(&#x27;selected&#x27;, 1);
                                     }
                                 },
-                            
+
                                 _renderListBox: function(contentBox) {
                                     var node = this.get(&#x27;listNode&#x27;);
                                     if (!node.inDoc()) {
                                         contentBox.append(node);
                                     }
                                 },
-                            
+
                                 _renderPanelBox: function(contentBox) {
                                     var node = this.get(&#x27;panelNode&#x27;);
                                     if (!node.inDoc()) {
                                         contentBox.append(node);
                                     }
                                 },
-                            
+
                                 _renderTabs: function(contentBox) {
                                     var _classNames = Y.TabviewBase._classNames,
                                         _queries = Y.TabviewBase._queries,
@@ -1262,12 +1262,12 @@
                                         panelNode = this.get(&#x27;panelNode&#x27;),
                                         panels = (panelNode) ? this.get(&#x27;panelNode&#x27;).get(&#x27;children&#x27;) : null,
                                         tabview = this;
-                            
+
                                     if (tabs) { // add classNames and fill in Tab fields from markup when possible
                                         tabs.addClass(_classNames.tab);
                                         contentBox.all(_queries.tabLabel).addClass(_classNames.tabLabel);
                                         contentBox.all(_queries.tabPanel).addClass(_classNames.tabPanel);
-                            
+
                                         tabs.each(function(node, i) {
                                             var panelNode = (panels) ? panels.item(i) : null;
                                             tabview.add({
@@ -1283,7 +1283,7 @@
                                     defaultChildType: {
                                         value: &#x27;Tab&#x27;
                                     },
-                            
+
                                     listNode: {
                                         setter: function(node) {
                                             node = Y.one(node);
@@ -1292,10 +1292,10 @@
                                             }
                                             return node;
                                         },
-                            
+
                                         valueFn: &#x27;_defListNodeValueFn&#x27;
                                     },
-                            
+
                                     panelNode: {
                                         setter: function(node) {
                                             node = Y.one(node);
@@ -1304,16 +1304,16 @@
                                             }
                                             return node;
                                         },
-                            
+
                                         valueFn: &#x27;_defPanelNodeValueFn&#x27;
                                     },
-                            
+
                                     tabIndex: {
                                         value: null
                                         //validator: &#x27;_validTabIndex&#x27;
                                     }
                                 },
-                            
+
                                 HTML_PARSER: {
                                     listNode: function(srcNode) {
                                         return srcNode.one(Y.TabviewBase._queries.tabviewList);
@@ -1322,18 +1322,18 @@
                                         return srcNode.one(Y.TabviewBase._queries.tabviewPanel);
                                     }
                                 },
-                            
+
                                 // Static for legacy support.
                                 LIST_TEMPLATE: &#x27;&lt;ul&gt;&lt;/ul&gt;&#x27;,
                                 PANEL_TEMPLATE: &#x27;&lt;div&gt;&lt;/div&gt;&#x27;
                             });
-                            
+
                             // Map to static values by default.
                             TabView.prototype.LIST_TEMPLATE = TabView.LIST_TEMPLATE;
                             TabView.prototype.PANEL_TEMPLATE = TabView.PANEL_TEMPLATE;
-                            
+
                             Y.TabView = TabView;
-                            
+
                                 </pre>
                             </div>
                         </div>

@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/history/js/history-hash-ie.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1143,7 +1143,7 @@
                              * @submodule history-hash-ie
                              * @since 3.2.0
                              */
-                            
+
                             // Combination of a UA sniff to ensure this is IE (or a browser that wants us to
                             // treat it like IE) and feature detection for native hashchange support (false
                             // for IE &lt; 8 or IE8/9 in IE7 mode).
@@ -1151,10 +1151,10 @@
                                 var Do          = Y.Do,
                                     GlobalEnv   = YUI.namespace(&#x27;Env.HistoryHash&#x27;),
                                     HistoryHash = Y.HistoryHash,
-                            
+
                                     iframe = GlobalEnv._iframe,
                                     win    = Y.config.win;
-                            
+
                                 /**
                                  * Gets the raw (not decoded) current location hash from the IE iframe,
                                  * minus the preceding &#x27;#&#x27; character and the hashPrefix (if one is set).
@@ -1167,14 +1167,14 @@
                                     if (!iframe || !iframe.contentWindow) {
                                         return &#x27;&#x27;;
                                     }
-                            
+
                                     var prefix = HistoryHash.hashPrefix,
                                         hash   = iframe.contentWindow.location.hash.substr(1);
-                            
+
                                     return prefix &amp;&amp; hash.indexOf(prefix) === 0 ?
                                                 hash.replace(prefix, &#x27;&#x27;) : hash;
                                 };
-                            
+
                                 /**
                                  * Updates the history iframe with the specified hash.
                                  *
@@ -1189,13 +1189,13 @@
                                 HistoryHash._updateIframe = function (hash, replace) {
                                     var iframeDoc      = iframe &amp;&amp; iframe.contentWindow &amp;&amp; iframe.contentWindow.document,
                                         iframeLocation = iframeDoc &amp;&amp; iframeDoc.location;
-                            
+
                                     if (!iframeDoc || !iframeLocation) {
                                         return;
                                     }
-                            
+
                                     Y.log(&#x27;updating history iframe: &#x27; + hash + &#x27;, replace: &#x27; + !!replace, &#x27;info&#x27;, &#x27;history&#x27;);
-                            
+
                                     if (replace) {
                                         iframeLocation.replace(hash.charAt(0) === &#x27;#&#x27; ? hash : &#x27;#&#x27; + hash);
                                     } else {
@@ -1203,13 +1203,13 @@
                                         iframeLocation.hash = hash;
                                     }
                                 };
-                            
+
                                 Do.before(HistoryHash._updateIframe, HistoryHash, &#x27;replaceHash&#x27;, HistoryHash, true);
-                            
+
                                 if (!iframe) {
                                     Y.on(&#x27;domready&#x27;, function () {
                                         var lastUrlHash = HistoryHash.getHash();
-                            
+
                                         // Create a hidden iframe to store history state, following the
                                         // iframe-hiding recommendations from
                                         // http://www.paciellogroup.com/blog/?p=604.
@@ -1228,37 +1228,37 @@
                                         // added significant complexity, it has been removed, and IE6 and 7
                                         // now get slightly degraded history support.
                                         Y.log(&#x27;creating dynamic history iframe&#x27;, &#x27;info&#x27;, &#x27;history&#x27;);
-                            
+
                                         iframe = GlobalEnv._iframe = Y.Node.getDOMNode(Y.Node.create(
                                             &#x27;&lt;iframe src=&quot;javascript:0&quot; style=&quot;display:none&quot; height=&quot;0&quot; width=&quot;0&quot; tabindex=&quot;-1&quot; title=&quot;empty&quot;/&gt;&#x27;
                                         ));
-                            
+
                                         // Append the iframe to the documentElement rather than the body.
                                         // Keeping it outside the body prevents scrolling on the initial
                                         // page load (hat tip to Ben Alman and jQuery BBQ for this
                                         // technique).
                                         Y.config.doc.documentElement.appendChild(iframe);
-                            
+
                                         // Update the iframe with the initial location hash, if any. This
                                         // will create an initial history entry that the user can return to
                                         // after the state has changed.
                                         HistoryHash._updateIframe(lastUrlHash || &#x27;#&#x27;);
-                            
+
                                         // Listen for hashchange events and keep the iframe&#x27;s hash in sync
                                         // with the parent frame&#x27;s hash.
                                         Y.on(&#x27;hashchange&#x27;, function (e) {
                                             lastUrlHash = e.newHash;
-                            
+
                                             if (HistoryHash.getIframeHash() !== lastUrlHash) {
                                                 Y.log(&#x27;updating iframe hash to match URL hash&#x27;, &#x27;info&#x27;, &#x27;history&#x27;);
                                                 HistoryHash._updateIframe(lastUrlHash);
                                             }
                                         }, win);
-                            
+
                                         // Watch the iframe hash in order to detect back/forward navigation.
                                         Y.later(50, null, function () {
                                             var iframeHash = HistoryHash.getIframeHash();
-                            
+
                                             if (iframeHash !== lastUrlHash) {
                                                 Y.log(&#x27;updating URL hash to match iframe hash&#x27;, &#x27;info&#x27;, &#x27;history&#x27;);
                                                 HistoryHash.setHash(iframeHash);
@@ -1267,7 +1267,7 @@
                                     });
                                 }
                             }
-                            
+
                                 </pre>
                             </div>
                         </div>

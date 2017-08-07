@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/event-custom/js/subscriber.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1144,7 +1144,7 @@
                              * @constructor
                              */
                             Y.Subscriber = function(fn, context, args, when) {
-                            
+
                                 /**
                                  * The callback that will be execute when the event fires
                                  * This is wrapped by Y.rbind if obj was supplied.
@@ -1152,48 +1152,48 @@
                                  * @type Function
                                  */
                                 this.fn = fn;
-                            
+
                                 /**
                                  * Optional &#x27;this&#x27; keyword for the listener
                                  * @property context
                                  * @type Object
                                  */
                                 this.context = context;
-                            
+
                                 /**
                                  * Unique subscriber id
                                  * @property id
                                  * @type String
                                  */
                                 this.id = Y.guid();
-                            
+
                                 /**
                                  * Additional arguments to propagate to the subscriber
                                  * @property args
                                  * @type Array
                                  */
                                 this.args = args;
-                            
+
                                 this._when = when;
-                            
+
                                 /**
                                  * Custom events for a given fire transaction.
                                  * @property events
                                  * @type {EventTarget}
                                  */
                                 // this.events = null;
-                            
+
                                 /**
                                  * This listener only reacts to the event once
                                  * @property once
                                  */
                                 // this.once = false;
-                            
+
                             };
-                            
+
                             Y.Subscriber.prototype = {
                                 constructor: Y.Subscriber,
-                            
+
                                 _notify: function(c, args, ce) {
                                     if (this.deleted &amp;&amp; !this.postponed) {
                                         if (this.postponed) {
@@ -1221,14 +1221,14 @@
                                                 ret = this.fn.call(c);
                                             }
                                     }
-                            
+
                                     if (this.once) {
                                         ce._delete(this);
                                     }
-                            
+
                                     return ret;
                                 },
-                            
+
                                 /**
                                  * Executes the subscriber.
                                  * @method notify
@@ -1238,11 +1238,11 @@
                                 notify: function(args, ce) {
                                     var c = this.context,
                                         ret = true;
-                            
+
                                     if (!c) {
                                         c = (ce.contextFn) ? ce.contextFn() : ce.context;
                                     }
-                            
+
                                     // only catch errors if we will not re-throw them.
                                     if (Y.config &amp;&amp; Y.config.throwFail) {
                                         ret = this._notify(c, args, ce);
@@ -1253,10 +1253,10 @@
                                             Y.error(this + &#x27; failed: &#x27; + e.message, e);
                                         }
                                     }
-                            
+
                                     return ret;
                                 },
-                            
+
                                 /**
                                  * Returns true if the fn and obj match this objects properties.
                                  * Used by the unsubscribe method to match the right subscriber.
@@ -1274,13 +1274,13 @@
                                         return (this.fn === fn);
                                     }
                                 },
-                            
+
                                 valueOf : function() {
                                     return this.id;
                                 }
-                            
+
                             };
-                            
+
                                 </pre>
                             </div>
                         </div>

@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>alloy-ui/src/aui-component/js/aui-component.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1139,26 +1139,26 @@
                              *
                              * @module aui-component
                              */
-                            
+
                             var Lang = A.Lang,
                                 AArray = A.Array,
-                            
+
                                 concat = function(arr, arr2) {
                                     return (arr || []).concat(arr2 || []);
                                 },
-                            
+
                                 _INSTANCES = {},
                                 _CONSTRUCTOR_OBJECT = A.config.win.Object.prototype.constructor,
-                            
+
                                 ClassNameManager = A.ClassNameManager,
-                            
+
                                 _getClassName = ClassNameManager.getClassName,
                                 _getWidgetClassName = A.Widget.getClassName,
-                            
+
                                 getClassName = A.getClassName,
-                            
+
                                 CSS_HIDE = getClassName(&#x27;hide&#x27;);
-                            
+
                             /**
                              * A base class for &#x60;A.Component&#x60;, providing:
                              *
@@ -1177,14 +1177,14 @@
                                 ], {
                                 initializer: function(config) {
                                     var instance = this;
-                            
+
                                     instance._originalConfig = config;
-                            
+
                                     instance._setRender(config);
-                            
+
                                     _INSTANCES[instance.get(&#x27;id&#x27;)] = instance;
                                 },
-                            
+
                                 /**
                                  * Clone the current &#x60;A.Component&#x60;.
                                  *
@@ -1194,16 +1194,16 @@
                                  */
                                 clone: function(config) {
                                     var instance = this;
-                            
+
                                     config = config || {};
-                            
+
                                     config.id = config.id || A.guid();
-                            
+
                                     A.mix(config, instance._originalConfig);
-                            
+
                                     return new instance.constructor(config);
                                 },
-                            
+
                                 /**
                                  * Set the visibility on the UI.
                                  *
@@ -1213,22 +1213,22 @@
                                  */
                                 _uiSetVisible: function(value) {
                                     var instance = this;
-                            
+
                                     var superUISetVisible = Component.superclass._uiSetVisible;
-                            
+
                                     if (superUISetVisible) {
                                         superUISetVisible.apply(instance, arguments);
                                     }
-                            
+
                                     var hideClass = instance.get(&#x27;hideClass&#x27;);
-                            
+
                                     if (hideClass !== false) {
                                         var boundingBox = instance.get(&#x27;boundingBox&#x27;);
-                            
+
                                         boundingBox.toggleClass(hideClass || CSS_HIDE, !value);
                                     }
                                 },
-                            
+
                                 /**
                                  * Applies standard class names to the &#x60;boundingBox&#x60; and &#x60;contentBox&#x60;.
                                  *
@@ -1237,55 +1237,55 @@
                                  */
                                 _renderBoxClassNames: function() {
                                     var instance = this;
-                            
+
                                     var boundingBoxNode = instance.get(&#x27;boundingBox&#x27;)._node;
                                     var contentBoxNode = instance.get(&#x27;contentBox&#x27;)._node;
-                            
+
                                     var boundingBoxNodeClassName = boundingBoxNode.className;
                                     var contentBoxNodeClassName = contentBoxNode.className;
-                            
+
                                     var boundingBoxBuffer = (boundingBoxNodeClassName) ? boundingBoxNodeClassName.split(&#x27; &#x27;) : [];
                                     var contentBoxBuffer = (contentBoxNodeClassName) ? contentBoxNodeClassName.split(&#x27; &#x27;) : [];
-                            
+
                                     var classes = instance._getClasses();
-                            
+
                                     var classLength = classes.length;
-                            
+
                                     var auiClassesLength = classLength - 4;
-                            
+
                                     var classItem;
                                     var classItemName;
-                            
+
                                     boundingBoxBuffer.push(_getWidgetClassName());
-                            
+
                                     for (var i = classLength - 3; i &gt;= 0; i--) {
                                         classItem = classes[i];
-                            
+
                                         classItemName = String(classItem.NAME).toLowerCase();
-                            
+
                                         boundingBoxBuffer.push(classItem.CSS_PREFIX || _getClassName(classItemName));
-                            
+
                                         if (i &lt;= auiClassesLength) {
                                             classItemName = classItemName;
-                            
+
                                             contentBoxBuffer.push(getClassName(classItemName, &#x27;content&#x27;));
                                         }
                                     }
-                            
+
                                     contentBoxBuffer.push(instance.getClassName(&#x27;content&#x27;));
-                            
+
                                     if (boundingBoxNode === contentBoxNode) {
                                         contentBoxNodeClassName = AArray.dedupe(contentBoxBuffer.concat(boundingBoxBuffer)).join(&#x27; &#x27;);
                                     }
                                     else {
                                         boundingBoxNode.className = AArray.dedupe(boundingBoxBuffer).join(&#x27; &#x27;);
-                            
+
                                         contentBoxNodeClassName = AArray.dedupe(contentBoxBuffer).join(&#x27; &#x27;);
                                     }
-                            
+
                                     contentBoxNode.className = contentBoxNodeClassName;
                                 },
-                            
+
                                 /**
                                  * Renders the &#x60;A.Component&#x60; based upon a passed in interaction.
                                  *
@@ -1296,18 +1296,18 @@
                                  */
                                 _renderInteraction: function(event, parentNode) {
                                     var instance = this;
-                            
+
                                     instance.render(parentNode);
-                            
+
                                     var renderHandles = instance._renderHandles;
-                            
+
                                     for (var i = renderHandles.length - 1; i &gt;= 0; i--) {
                                         var handle = renderHandles.pop();
-                            
+
                                         handle.detach();
                                     }
                                 },
-                            
+
                                 /**
                                  * Sets the interaction and render behavior based upon an object (intercepts
                                  * the default rendering behavior).
@@ -1318,31 +1318,31 @@
                                  */
                                 _setRender: function(config) {
                                     var instance = this;
-                            
+
                                     var render = config &amp;&amp; config.render;
-                            
+
                                     if (render &amp;&amp; render.constructor === _CONSTRUCTOR_OBJECT) {
                                         var eventType = render.eventType || &#x27;mousemove&#x27;;
                                         var parentNode = render.parentNode;
                                         var selector = render.selector || parentNode;
-                            
+
                                         if (selector) {
                                             instance._renderHandles = [];
-                            
+
                                             var renderHandles = instance._renderHandles;
-                            
+
                                             if (!Lang.isArray(eventType)) {
                                                 eventType = [eventType];
                                             }
-                            
+
                                             var renderInteraction = A.rbind(instance._renderInteraction, instance, parentNode);
-                            
+
                                             var interactionNode = A.one(selector);
-                            
+
                                             for (var i = eventType.length - 1; i &gt;= 0; i--) {
                                                 renderHandles[i] = interactionNode.once(eventType[i], renderInteraction);
                                             }
-                            
+
                                             delete config.render;
                                         }
                                     }
@@ -1371,7 +1371,7 @@
                                         value: false,
                                         validator: Lang.isBoolean
                                     },
-                            
+
                                     /**
                                      * CSS class added to hide the &#x60;boundingBox&#x60; when
                                      * [visible](A.Component.html#attr_visible) is set to &#x60;false&#x60;.
@@ -1383,7 +1383,7 @@
                                     hideClass: {
                                         value: CSS_HIDE
                                     },
-                            
+
                                     /**
                                      * If &#x60;true&#x60; the render phase will be autimatically invoked preventing
                                      * the &#x60;.render()&#x60; manual call.
@@ -1399,7 +1399,7 @@
                                     }
                                 }
                             });
-                            
+
                             /**
                              * Static property used to define the map to store Component instances by id.
                              *
@@ -1408,7 +1408,7 @@
                              * @static
                              */
                             Component._INSTANCES = _INSTANCES;
-                            
+
                             /**
                              * Gets component&#x27;s instance by id.
                              *
@@ -1418,9 +1418,9 @@
                             Component.getById = function(id) {
                                 return _INSTANCES[id];
                             };
-                            
+
                             var DEFAULT_UI_ATTRS = A.Widget.prototype._UI_ATTRS;
-                            
+
                             /**
                              * Applies a CSS prefix on a component.
                              *
@@ -1432,10 +1432,10 @@
                                 if (component &amp;&amp; component.NAME &amp;&amp; !(&#x27;CSS_PREFIX&#x27; in component)) {
                                     component.CSS_PREFIX = A.getClassName(String(component.NAME).toLowerCase());
                                 }
-                            
+
                                 return component;
                             };
-                            
+
                             /**
                              * Applies standard extensions from a given config to create a new class using
                              * the static &#x60;Base.build&#x60; method.
@@ -1445,69 +1445,69 @@
                              */
                             Component.create = function(config) {
                                 config = config || {};
-                            
+
                                 var extendsClass = config.EXTENDS || A.Component;
-                            
+
                                 var component = config.constructor;
-                            
+
                                 if (!A.Object.owns(config, &#x27;constructor&#x27;)) {
                                     component = function() {
                                         component.superclass.constructor.apply(this, arguments);
                                     };
                                 }
-                            
+
                                 var configProto = config.prototype;
-                            
+
                                 if (configProto) {
                                     if (config.UI_ATTRS || config.BIND_UI_ATTRS || config.SYNC_UI_ATTRS) {
                                         var BIND_UI_ATTRS = concat(config.BIND_UI_ATTRS, config.UI_ATTRS);
                                         var SYNC_UI_ATTRS = concat(config.SYNC_UI_ATTRS, config.UI_ATTRS);
-                            
+
                                         var extendsProto = extendsClass.prototype;
                                         var extendsUIAttrs = (extendsProto &amp;&amp; extendsProto._UI_ATTRS) || DEFAULT_UI_ATTRS;
-                            
+
                                         BIND_UI_ATTRS = concat(extendsUIAttrs.BIND, BIND_UI_ATTRS);
                                         SYNC_UI_ATTRS = concat(extendsUIAttrs.SYNC, SYNC_UI_ATTRS);
-                            
+
                                         var configProtoUIAttrs = configProto._UI_ATTRS;
-                            
+
                                         if (!configProtoUIAttrs) {
                                             configProtoUIAttrs = configProto._UI_ATTRS = {};
                                         }
-                            
+
                                         if (BIND_UI_ATTRS.length) {
                                             configProtoUIAttrs.BIND = BIND_UI_ATTRS;
                                         }
-                            
+
                                         if (SYNC_UI_ATTRS.length) {
                                             configProtoUIAttrs.SYNC = SYNC_UI_ATTRS;
                                         }
                                     }
                                 }
-                            
+
                                 var augmentsClasses = config.AUGMENTS;
-                            
+
                                 if (augmentsClasses &amp;&amp; !Lang.isArray(augmentsClasses)) {
                                     augmentsClasses = [augmentsClasses];
                                 }
-                            
+
                                 A.mix(component, config);
-                            
+
                                 delete component.prototype;
-                            
+
                                 A.extend(component, extendsClass, configProto);
-                            
+
                                 if (augmentsClasses) {
                                     component = A.Base.build(config.NAME, component, augmentsClasses, {
                                         dynamic: false
                                     });
                                 }
-                            
+
                                 Component._applyCssPrefix(component);
-                            
+
                                 return component;
                             };
-                            
+
                             /**
                              * Static property provides a string to identify the CSS prefix.
                              *
@@ -1516,9 +1516,9 @@
                              * @static
                              */
                             Component.CSS_PREFIX = getClassName(&#x27;component&#x27;);
-                            
+
                             var Base = A.Base;
-                            
+
                             /**
                              * Applies extensions to a class using the static &#x60;Base.build&#x60; method.
                              *
@@ -1526,14 +1526,14 @@
                              */
                             Component.build = function() {
                                 var component = Base.build.apply(Base, arguments);
-                            
+
                                 Component._applyCssPrefix(component);
-                            
+
                                 return component;
                             };
-                            
+
                             A.Component = Component;
-                            
+
                                 </pre>
                             </div>
                         </div>

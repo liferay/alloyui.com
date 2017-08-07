@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,35 +1122,35 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/app/js/app-base.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
                             The App Framework provides simple MVC-like building blocks (models, model lists,
                             views, and URL-based routing) for writing single-page JavaScript applications.
-                            
+
                             @main app
                             @module app
                             @since 3.4.0
                             **/
-                            
+
                             /**
                             Provides a top-level application component which manages navigation and views.
-                            
+
                             @module app
                             @submodule app-base
                             @since 3.5.0
                             **/
-                            
+
                             // TODO: Better handling of lifecycle for registered views:
                             //
                             //   * [!] Just redo basically everything with view management so there are no
@@ -1170,27 +1170,27 @@
                             //
                             //   * Should named views support a collection of instances instead of just one?
                             //
-                            
+
                             var Lang    = Y.Lang,
                                 YObject = Y.Object,
-                            
+
                                 PjaxBase = Y.PjaxBase,
                                 Router   = Y.Router,
                                 View     = Y.View,
-                            
+
                                 getClassName = Y.ClassNameManager.getClassName,
-                            
+
                                 win = Y.config.win,
-                            
+
                                 AppBase;
-                            
+
                             /**
                             Provides a top-level application component which manages navigation and views.
-                            
+
                             This gives you a foundation and structure on which to build your application; it
                             combines robust URL navigation with powerful routing and flexible view
                             management.
-                            
+
                             @class App.Base
                             @param {Object} [config] The following are configuration properties that can be
                                 specified _in addition_ to default attribute values and the non-attribute
@@ -1208,40 +1208,40 @@
                             **/
                             AppBase = Y.Base.create(&#x27;app&#x27;, Y.Base, [View, Router, PjaxBase], {
                                 // -- Public Properties ----------------------------------------------------
-                            
+
                                 /**
                                 Hash of view-name to metadata used to declaratively describe an
                                 application&#x27;s views and their relationship with the app and its other views.
-                            
+
                                 The view metadata is composed of Objects keyed to a view-name that can have
                                 any or all of the following properties:
-                            
+
                                   * &#x60;type&#x60;: Function or a string representing the view constructor to use to
                                     create view instances. If a string is used, the constructor function is
                                     assumed to be on the &#x60;Y&#x60; object; e.g. &#x60;&quot;SomeView&quot;&#x60; -&gt; &#x60;Y.SomeView&#x60;.
-                            
+
                                   * &#x60;preserve&#x60;: Boolean for whether the view instance should be retained. By
                                     default, the view instance will be destroyed when it is no longer the
                                     &#x60;activeView&#x60;. If &#x60;true&#x60; the view instance will simply be &#x60;removed()&#x60;
                                     from the DOM when it is no longer active. This is useful when the view
                                     is frequently used and may be expensive to re-create.
-                            
+
                                   * &#x60;parent&#x60;: String to another named view in this hash that represents the
                                     parent view within the application&#x27;s view hierarchy; e.g. a &#x60;&quot;photo&quot;&#x60;
                                     view could have &#x60;&quot;album&quot;&#x60; has its &#x60;parent&#x60; view. This parent/child
                                     relationship is a useful cue for things like transitions.
-                            
+
                                   * &#x60;instance&#x60;: Used internally to manage the current instance of this named
                                     view. This can be used if your view instance is created up-front, or if
                                     you would rather manage the View lifecycle, but you probably should just
                                     let this be handled for you.
-                            
+
                                 If &#x60;views&#x60; are specified at instantiation time, the metadata in the &#x60;views&#x60;
                                 Object here will be used as defaults when creating the instance&#x27;s &#x60;views&#x60;.
-                            
+
                                 Every &#x60;Y.App&#x60; instance gets its own copy of a &#x60;views&#x60; object so this Object
                                 on the prototype will not be polluted.
-                            
+
                                 @example
                                     // Imagine that &#x60;Y.UsersView&#x60; and &#x60;Y.UserView&#x60; have been defined.
                                     var app = new Y.App({
@@ -1250,81 +1250,81 @@
                                                 type    : Y.UsersView,
                                                 preserve: true
                                             },
-                            
+
                                             user: {
                                                 type  : Y.UserView,
                                                 parent: &#x27;users&#x27;
                                             }
                                         }
                                     });
-                            
+
                                 @property views
                                 @type Object
                                 @default {}
                                 @since 3.5.0
                                 **/
                                 views: {},
-                            
+
                                 // -- Protected Properties -------------------------------------------------
-                            
+
                                 /**
                                 Map of view instance id (via &#x60;Y.stamp()&#x60;) to view-info object in &#x60;views&#x60;.
-                            
+
                                 This mapping is used to tie a specific view instance back to its metadata by
                                 adding a reference to the the related view info on the &#x60;views&#x60; object.
-                            
+
                                 @property _viewInfoMap
                                 @type Object
                                 @default {}
                                 @protected
                                 @since 3.5.0
                                 **/
-                            
+
                                 // -- Lifecycle Methods ----------------------------------------------------
                                 initializer: function (config) {
                                     config || (config = {});
-                            
+
                                     var views = {};
-                            
+
                                     // Merges-in specified view metadata into local &#x60;views&#x60; object.
                                     function mergeViewConfig(view, name) {
                                         views[name] = Y.merge(views[name], view);
                                     }
-                            
+
                                     // First, each view in the &#x60;views&#x60; prototype object gets its metadata
                                     // merged-in, providing the defaults.
                                     YObject.each(this.views, mergeViewConfig);
-                            
+
                                     // Then, each view in the specified &#x60;config.views&#x60; object gets its
                                     // metadata merged-in.
                                     YObject.each(config.views, mergeViewConfig);
-                            
+
                                     // The resulting hodgepodge of metadata is then stored as the instance&#x27;s
                                     // &#x60;views&#x60; object, and no one&#x27;s objects were harmed in the making.
                                     this.views        = views;
                                     this._viewInfoMap = {};
-                            
+
                                     // Using &#x60;bind()&#x60; to aid extensibility.
                                     this.after(&#x27;activeViewChange&#x27;, Y.bind(&#x27;_afterActiveViewChange&#x27;, this));
-                            
+
                                     // PjaxBase will bind click events when &#x60;html5&#x60; is &#x60;true&#x60;, so this just
                                     // forces the binding when &#x60;serverRouting&#x60; and &#x60;html5&#x60; are both falsy.
                                     if (!this.get(&#x27;serverRouting&#x27;)) {
                                         this._pjaxBindUI();
                                     }
                                 },
-                            
+
                                 // TODO: &#x60;destructor&#x60; to destroy the &#x60;activeView&#x60;?
-                            
+
                                 // -- Public Methods -------------------------------------------------------
-                            
+
                                 /**
                                 Creates and returns a new view instance using the provided &#x60;name&#x60; to look up
                                 the view info metadata defined in the &#x60;views&#x60; object. The passed-in &#x60;config&#x60;
                                 object is passed to the view constructor function.
-                            
+
                                 This function also maps a view instance back to its view info metadata.
-                            
+
                                 @method createView
                                 @param {String} name The name of a view defined on the &#x60;views&#x60; object.
                                 @param {Object} [config] The configuration object passed to the view
@@ -1336,22 +1336,22 @@
                                     var viewInfo = this.getViewInfo(name),
                                         type     = (viewInfo &amp;&amp; viewInfo.type) || View,
                                         ViewConstructor, view;
-                            
+
                                     // Looks for a namespaced constructor function on &#x60;Y&#x60;.
                                     ViewConstructor = Lang.isString(type) ?
                                             YObject.getValue(Y, type.split(&#x27;.&#x27;)) : type;
-                            
+
                                     // Create the view instance and map it with its metadata.
                                     view = new ViewConstructor(config);
                                     this._viewInfoMap[Y.stamp(view, true)] = viewInfo;
-                            
+
                                     return view;
                                 },
-                            
+
                                 /**
                                 Returns the metadata associated with a view instance or view name defined on
                                 the &#x60;views&#x60; object.
-                            
+
                                 @method getViewInfo
                                 @param {View|String} view View instance, or name of a view defined on the
                                   &#x60;views&#x60; object.
@@ -1363,27 +1363,27 @@
                                     if (Lang.isString(view)) {
                                         return this.views[view];
                                     }
-                            
+
                                     return view &amp;&amp; this._viewInfoMap[Y.stamp(view, true)];
                                 },
-                            
+
                                 /**
                                 Navigates to the specified URL if there is a route handler that matches. In
                                 browsers capable of using HTML5 history or when &#x60;serverRouting&#x60; is falsy,
                                 the navigation will be enhanced by firing the &#x60;navigate&#x60; event and having
                                 the app handle the &quot;request&quot;. When &#x60;serverRouting&#x60; is &#x60;true&#x60;, non-HTML5
                                 browsers will navigate to the new URL via a full page reload.
-                            
+
                                 When there is a route handler for the specified URL and it is being
                                 navigated to, this method will return &#x60;true&#x60;, otherwise it will return
                                 &#x60;false&#x60;.
-                            
+
                                 **Note:** The specified URL _must_ be of the same origin as the current URL,
                                 otherwise an error will be logged and navigation will not occur. This is
                                 intended as both a security constraint and a purposely imposed limitation as
                                 it does not make sense to tell the app to navigate to a URL on a
                                 different scheme, host, or port.
-                            
+
                                 @method navigate
                                 @param {String} url The URL to navigate to. This must be of the same origin
                                   as the current URL.
@@ -1398,20 +1398,20 @@
                                 @see PjaxBase.navigate()
                                 **/
                                 // Does not override &#x60;navigate()&#x60; but does use extra &#x60;options&#x60;.
-                            
+
                                 /**
                                 Renders this application by appending the &#x60;viewContainer&#x60; node to the
                                 &#x60;container&#x60; node if it isn&#x27;t already a child of the container, and the
                                 &#x60;activeView&#x60; will be appended the view container, if it isn&#x27;t already.
-                            
+
                                 You should call this method at least once, usually after the initialization
                                 of your app instance so the proper DOM structure is setup and optionally
                                 append the container to the DOM if it&#x27;s not there already.
-                            
+
                                 You may override this method to customize the app&#x27;s rendering, but you
                                 should expect that the &#x60;viewContainer&#x60;&#x27;s contents will be modified by the
                                 app for the purpose of rendering the &#x60;activeView&#x60; when it changes.
-                            
+
                                 @method render
                                 @chainable
                                 @see View.render()
@@ -1423,41 +1423,41 @@
                                         activeView          = this.get(&#x27;activeView&#x27;),
                                         activeViewContainer = activeView &amp;&amp; activeView.get(&#x27;container&#x27;),
                                         areSame             = container.compareTo(viewContainer);
-                            
+
                                     container.addClass(CLASS_NAMES.app);
                                     viewContainer.addClass(CLASS_NAMES.views);
-                            
+
                                     // Prevents needless shuffling around of nodes and maintains DOM order.
                                     if (activeView &amp;&amp; !viewContainer.contains(activeViewContainer)) {
                                         viewContainer.appendChild(activeViewContainer);
                                     }
-                            
+
                                     // Prevents needless shuffling around of nodes and maintains DOM order.
                                     if (!container.contains(viewContainer) &amp;&amp; !areSame) {
                                         container.appendChild(viewContainer);
                                     }
-                            
+
                                     return this;
                                 },
-                            
+
                                 /**
                                 Sets which view is active/visible for the application. This will set the
                                 app&#x27;s &#x60;activeView&#x60; attribute to the specified &#x60;view&#x60;.
-                            
+
                                 The &#x60;view&#x60; will be &quot;attached&quot; to this app, meaning it will be both rendered
                                 into this app&#x27;s &#x60;viewContainer&#x60; node and all of its events will bubble to
                                 the app. The previous &#x60;activeView&#x60; will be &quot;detached&quot; from this app.
-                            
+
                                 When a string-name is provided for a view which has been registered on this
                                 app&#x27;s &#x60;views&#x60; object, the referenced metadata will be used and the
                                 &#x60;activeView&#x60; will be set to either a preserved view instance, or a new
                                 instance of the registered view will be created using the specified &#x60;config&#x60;
                                 object passed-into this method.
-                            
+
                                 A callback function can be specified as either the third or fourth argument,
                                 and this function will be called after the new &#x60;view&#x60; becomes the
                                 &#x60;activeView&#x60;, is rendered to the &#x60;viewContainer&#x60;, and is ready to use.
-                            
+
                                 @example
                                     var app = new Y.App({
                                         views: {
@@ -1466,17 +1466,17 @@
                                                 type: Y.UsersView
                                             }
                                         },
-                            
+
                                         users: new Y.ModelList()
                                     });
-                            
+
                                     app.route(&#x27;/users/&#x27;, function () {
                                         this.showView(&#x27;usersView&#x27;, {users: this.get(&#x27;users&#x27;)});
                                     });
-                            
+
                                     app.render();
                                     app.navigate(&#x27;/uses/&#x27;); // =&gt; Creates a new &#x60;Y.UsersView&#x60; and shows it.
-                            
+
                                 @method showView
                                 @param {String|View} view The name of a view defined in the &#x60;views&#x60; object,
                                     or a view instance which should become this app&#x27;s &#x60;activeView&#x60;.
@@ -1508,26 +1508,26 @@
                                 **/
                                 showView: function (view, config, options, callback) {
                                     var viewInfo, created;
-                            
+
                                     options || (options = {});
-                            
+
                                     // Support the callback function being either the third or fourth arg.
                                     if (callback) {
                                         options = Y.merge(options, {callback: callback});
                                     } else if (Lang.isFunction(options)) {
                                         options = {callback: options};
                                     }
-                            
+
                                     if (Lang.isString(view)) {
                                         viewInfo = this.getViewInfo(view);
-                            
+
                                         // Use the preserved view instance, or create a new view.
                                         // TODO: Maybe we can remove the strict check for &#x60;preserve&#x60; and
                                         // assume we&#x27;ll use a View instance if it is there, and just check
                                         // &#x60;preserve&#x60; when detaching?
                                         if (viewInfo &amp;&amp; viewInfo.preserve &amp;&amp; viewInfo.instance) {
                                             view = viewInfo.instance;
-                            
+
                                             // Make sure there&#x27;s a mapping back to the view metadata.
                                             this._viewInfoMap[Y.stamp(view, true)] = viewInfo;
                                         } else {
@@ -1536,21 +1536,21 @@
                                             // This will allow the app to be notified for about _all_ of the
                                             // view&#x27;s events. **Note:** This should _only_ happen if the
                                             // view is created _after_ &#x60;activeViewChange&#x60;.
-                            
+
                                             view    = this.createView(view, config);
                                             created = true;
                                         }
                                     }
-                            
+
                                     // Update the specified or preserved &#x60;view&#x60; when signaled to do so.
                                     // There&#x27;s no need to updated a view if it was _just_ created.
                                     if (options.update &amp;&amp; !created) {
                                         view.setAttrs(config);
                                     }
-                            
+
                                     // TODO: Hold off on rendering the view until after it has been
                                     // &quot;attached&quot;, and move the call to render into &#x60;_attachView()&#x60;.
-                            
+
                                     // When a value is specified for &#x60;options.render&#x60;, prefer it because it
                                     // represents the developer&#x27;s intent. When no value is specified, the
                                     // &#x60;view&#x60; will only be rendered if it was just created.
@@ -1561,17 +1561,17 @@
                                     } else if (created) {
                                         view.render();
                                     }
-                            
+
                                     return this._set(&#x27;activeView&#x27;, view, {options: options});
                                 },
-                            
+
                                 // -- Protected Methods ----------------------------------------------------
-                            
+
                                 /**
                                 Helper method to attach the view instance to the application by making the
                                 app a bubble target of the view, append the view to the &#x60;viewContainer&#x60;, and
                                 assign it to the &#x60;instance&#x60; property of the associated view info metadata.
-                            
+
                                 @method _attachView
                                 @param {View} view View to attach.
                                 @param {Boolean} prepend=false Whether the view should be prepended instead
@@ -1583,32 +1583,32 @@
                                     if (!view) {
                                         return;
                                     }
-                            
+
                                     var viewInfo      = this.getViewInfo(view),
                                         viewContainer = this.get(&#x27;viewContainer&#x27;);
-                            
+
                                     // Bubble the view&#x27;s events to this app.
                                     view.addTarget(this);
-                            
+
                                     // Save the view instance in the &#x60;views&#x60; registry.
                                     if (viewInfo) {
                                         viewInfo.instance = view;
                                     }
-                            
+
                                     // TODO: Attach events here for persevered Views?
                                     // See related TODO in &#x60;_detachView&#x60;.
-                            
+
                                     // TODO: Actually render the view here so that it gets &quot;attached&quot; before
                                     // it gets rendered?
-                            
+
                                     // Insert view into the DOM.
                                     viewContainer[prepend ? &#x27;prepend&#x27; : &#x27;append&#x27;](view.get(&#x27;container&#x27;));
                                 },
-                            
+
                                 /**
                                 Overrides View&#x27;s container destruction to deal with the &#x60;viewContainer&#x60; and
                                 checks to make sure not to remove and purge the &#x60;&lt;body&gt;&#x60;.
-                            
+
                                 @method _destroyContainer
                                 @protected
                                 @see View._destroyContainer()
@@ -1618,15 +1618,15 @@
                                         container     = this.get(&#x27;container&#x27;),
                                         viewContainer = this.get(&#x27;viewContainer&#x27;),
                                         areSame       = container.compareTo(viewContainer);
-                            
+
                                     // We do not want to remove or destroy the &#x60;&lt;body&gt;&#x60;.
                                     if (Y.one(&#x27;body&#x27;).compareTo(container)) {
                                         // Just clean-up our events listeners.
                                         this.detachEvents();
-                            
+
                                         // Clean-up &#x60;yui3-app&#x60; CSS class on the &#x60;container&#x60;.
                                         container.removeClass(CLASS_NAMES.app);
-                            
+
                                         if (areSame) {
                                             // Clean-up &#x60;yui3-app-views&#x60; CSS class on the &#x60;container&#x60;.
                                             container.removeClass(CLASS_NAMES.views);
@@ -1634,25 +1634,25 @@
                                             // Destroy and purge the &#x60;viewContainer&#x60;.
                                             viewContainer.remove(true);
                                         }
-                            
+
                                         return;
                                     }
-                            
+
                                     // Remove and purge events from both containers.
-                            
+
                                     viewContainer.remove(true);
-                            
+
                                     if (!areSame) {
                                         container.remove(true);
                                     }
                                 },
-                            
+
                                 /**
                                 Helper method to detach the view instance from the application by removing
                                 the application as a bubble target of the view, and either just removing the
                                 view if it is intended to be preserved, or destroying the instance
                                 completely.
-                            
+
                                 @method _detachView
                                 @param {View} view View to detach.
                                 @protected
@@ -1662,9 +1662,9 @@
                                     if (!view) {
                                         return;
                                     }
-                            
+
                                     var viewInfo = this.getViewInfo(view) || {};
-                            
+
                                     if (viewInfo.preserve) {
                                         view.remove();
                                         // TODO: Detach events here for preserved Views? It is possible that
@@ -1672,28 +1672,28 @@
                                         // View&#x27;s &#x60;container&#x60;.
                                     } else {
                                         view.destroy({remove: true});
-                            
+
                                         // TODO: The following should probably happen automagically from
                                         // &#x60;destroy()&#x60; being called! Possibly &#x60;removeTarget()&#x60; as well.
-                            
+
                                         // Remove from view to view-info map.
                                         delete this._viewInfoMap[Y.stamp(view, true)];
-                            
+
                                         // Remove from view-info instance property.
                                         if (view === viewInfo.instance) {
                                             delete viewInfo.instance;
                                         }
                                     }
-                            
+
                                     view.removeTarget(this);
                                 },
-                            
+
                                 /**
                                 Gets a request object that can be passed to a route handler.
-                            
+
                                 This delegates to &#x60;Y.Router&#x60;&#x27;s &#x60;_getRequest()&#x60; method and adds a reference
                                 to this app instance at &#x60;req.app&#x60;.
-                            
+
                                 @method _getRequest
                                 @param {String} src What initiated the URL change and need for the request.
                                 @return {Object} Request object.
@@ -1705,10 +1705,10 @@
                                     req.app = this;
                                     return req;
                                 },
-                            
+
                                 /**
                                 Getter for the &#x60;viewContainer&#x60; attribute.
-                            
+
                                 @method _getViewContainer
                                 @param {Node|null} value Current attribute value.
                                 @return {Node} View container node.
@@ -1719,7 +1719,7 @@
                                     // This wackiness is necessary to enable fully lazy creation of the
                                     // container node both when no container is specified and when one is
                                     // specified via a valueFn.
-                            
+
                                     if (!value &amp;&amp; !this._viewContainer) {
                                         // Create a default container and set that as the new attribute
                                         // value. The &#x60;this._viewContainer&#x60; property prevents infinite
@@ -1727,20 +1727,20 @@
                                         value = this._viewContainer = this.create();
                                         this._set(&#x27;viewContainer&#x27;, value);
                                     }
-                            
+
                                     return value;
                                 },
-                            
+
                                 /**
                                 Provides the default value for the &#x60;html5&#x60; attribute.
-                            
+
                                 The value returned is dependent on the value of the &#x60;serverRouting&#x60;
                                 attribute. When &#x60;serverRouting&#x60; is explicit set to &#x60;false&#x60; (not just falsy),
                                 the default value for &#x60;html5&#x60; will be set to &#x60;false&#x60; for *all* browsers.
-                            
+
                                 When &#x60;serverRouting&#x60; is &#x60;true&#x60; or &#x60;undefined&#x60; the returned value will be
                                 dependent on the browser&#x27;s capability of using HTML5 history.
-                            
+
                                 @method _initHtml5
                                 @return {Boolean} Whether or not HTML5 history should be used.
                                 @protected
@@ -1752,17 +1752,17 @@
                                     if (this.get(&#x27;serverRouting&#x27;) === false) {
                                         return false;
                                     }
-                            
+
                                     // Defaults to whether or not the browser supports HTML5 history.
                                     return Router.html5;
                                 },
-                            
+
                                 /**
                                 Determines if the specified &#x60;view&#x60; is configured as a child of the specified
                                 &#x60;parent&#x60; view. This requires both views to be either named-views, or view
                                 instances created using configuration data that exists in the &#x60;views&#x60;
                                 object, e.g. created by the &#x60;createView()&#x60; or &#x60;showView()&#x60; method.
-                            
+
                                 @method _isChildView
                                 @param {View|String} view The name of a view defined in the &#x60;views&#x60; object,
                                   or a view instance.
@@ -1775,20 +1775,20 @@
                                 _isChildView: function (view, parent) {
                                     var viewInfo   = this.getViewInfo(view),
                                         parentInfo = this.getViewInfo(parent);
-                            
+
                                     if (viewInfo &amp;&amp; parentInfo) {
                                         return this.getViewInfo(viewInfo.parent) === parentInfo;
                                     }
-                            
+
                                     return false;
                                 },
-                            
+
                                 /**
                                 Determines if the specified &#x60;view&#x60; is configured as the parent of the
                                 specified &#x60;child&#x60; view. This requires both views to be either named-views,
                                 or view instances created using configuration data that exists in the
                                 &#x60;views&#x60; object, e.g. created by the &#x60;createView()&#x60; or &#x60;showView()&#x60; method.
-                            
+
                                 @method _isParentView
                                 @param {View|String} view The name of a view defined in the &#x60;views&#x60; object,
                                   or a view instance.
@@ -1801,17 +1801,17 @@
                                 _isParentView: function (view, child) {
                                     var viewInfo  = this.getViewInfo(view),
                                         childInfo = this.getViewInfo(child);
-                            
+
                                     if (viewInfo &amp;&amp; childInfo) {
                                         return this.getViewInfo(childInfo.parent) === viewInfo;
                                     }
-                            
+
                                     return false;
                                 },
-                            
+
                                 /**
                                 Underlying implementation for &#x60;navigate()&#x60;.
-                            
+
                                 @method _navigate
                                 @param {String} url The fully-resolved URL that the app should dispatch to
                                   its route handlers to fulfill the enhanced navigation &quot;request&quot;, or use to
@@ -1835,24 +1835,24 @@
                                         // properly handle the request.
                                         options = Y.merge({force: true}, options);
                                     }
-                            
+
                                     return PjaxBase.prototype._navigate.call(this, url, options);
                                 },
-                            
+
                                 /**
                                 Will either save a history entry using &#x60;pushState()&#x60; or the location hash,
                                 or gracefully-degrade to sending a request to the server causing a full-page
                                 reload.
-                            
+
                                 Overrides Router&#x27;s &#x60;_save()&#x60; method to preform graceful-degradation when the
                                 app&#x27;s &#x60;serverRouting&#x60; is &#x60;true&#x60; and &#x60;html5&#x60; is &#x60;false&#x60; by updating the full
                                 URL via standard assignment to &#x60;window.location&#x60; or by calling
                                 &#x60;window.location.replace()&#x60;; both of which will cause a request to the
                                 server resulting in a full-page reload.
-                            
+
                                 Otherwise this will just delegate off to Router&#x27;s &#x60;_save()&#x60; method allowing
                                 the client-side enhanced routing to occur.
-                            
+
                                 @method _save
                                 @param {String} [url] URL for the history entry.
                                 @param {Boolean} [replace=false] If &#x60;true&#x60;, the current history entry will
@@ -1863,7 +1863,7 @@
                                 **/
                                 _save: function (url, replace) {
                                     var path;
-                            
+
                                     // Forces full-path URLs to always be used by modifying
                                     // &#x60;window.location&#x60; in non-HTML5 history capable browsers.
                                     if (this.get(&#x27;serverRouting&#x27;) &amp;&amp; !this.get(&#x27;html5&#x27;)) {
@@ -1872,41 +1872,41 @@
                                             Y.error(&#x27;Security error: The new URL must be of the same origin as the current URL.&#x27;);
                                             return this;
                                         }
-                            
+
                                         // Either replace the current history entry or create a new one
                                         // while navigating to the &#x60;url&#x60;.
                                         if (win) {
                                             // Results in the URL&#x27;s full path starting with &#x27;/&#x27;.
                                             path = this._joinURL(url || &#x27;&#x27;);
-                            
+
                                             if (replace) {
                                                 win.location.replace(path);
                                             } else {
                                                 win.location = path;
                                             }
                                         }
-                            
+
                                         return this;
                                     }
-                            
+
                                     return Router.prototype._save.apply(this, arguments);
                                 },
-                            
+
                                 /**
                                 Performs the actual change of this app&#x27;s &#x60;activeView&#x60; by attaching the
                                 &#x60;newView&#x60; to this app, and detaching the &#x60;oldView&#x60; from this app using any
                                 specified &#x60;options&#x60;.
-                            
+
                                 The &#x60;newView&#x60; is attached to the app by rendering it to the &#x60;viewContainer&#x60;,
                                 and making this app a bubble target of its events.
-                            
+
                                 The &#x60;oldView&#x60; is detached from the app by removing it from the
                                 &#x60;viewContainer&#x60;, and removing this app as a bubble target for its events.
                                 The &#x60;oldView&#x60; will either be preserved or properly destroyed.
-                            
+
                                 **Note:** The &#x60;activeView&#x60; attribute is read-only and can be changed by
                                 calling the &#x60;showView()&#x60; method.
-                            
+
                                 @method _uiSetActiveView
                                 @param {View} newView The View which is now this app&#x27;s &#x60;activeView&#x60;.
                                 @param {View} [oldView] The View which was this app&#x27;s &#x60;activeView&#x60;.
@@ -1930,36 +1930,36 @@
                                 **/
                                 _uiSetActiveView: function (newView, oldView, options) {
                                     options || (options = {});
-                            
+
                                     var callback = options.callback,
                                         isChild  = this._isChildView(newView, oldView),
                                         isParent = !isChild &amp;&amp; this._isParentView(newView, oldView),
                                         prepend  = !!options.prepend || isParent;
-                            
+
                                     // Prevent detaching (thus removing) the view we want to show. Also hard
                                     // to animate out and in, the same view.
                                     if (newView === oldView) {
                                         return callback &amp;&amp; callback.call(this, newView);
                                     }
-                            
+
                                     this._attachView(newView, prepend);
                                     this._detachView(oldView);
-                            
+
                                     if (callback) {
                                         callback.call(this, newView);
                                     }
                                 },
-                            
+
                                 // -- Protected Event Handlers ---------------------------------------------
-                            
+
                                 /**
                                 Handles the application&#x27;s &#x60;activeViewChange&#x60; event (which is fired when the
                                 &#x60;activeView&#x60; attribute changes) by detaching the old view, attaching the new
                                 view.
-                            
+
                                 The &#x60;activeView&#x60; attribute is read-only, so the public API to change its
                                 value is through the &#x60;showView()&#x60; method.
-                            
+
                                 @method _afterActiveViewChange
                                 @param {EventFacade} e
                                 @protected
@@ -1972,10 +1972,10 @@
                                 ATTRS: {
                                     /**
                                     The application&#x27;s active/visible view.
-                            
+
                                     This attribute is read-only, to set the &#x60;activeView&#x60; use the
                                     &#x60;showView()&#x60; method.
-                            
+
                                     @attribute activeView
                                     @type View
                                     @default null
@@ -1987,31 +1987,31 @@
                                         value   : null,
                                         readOnly: true
                                     },
-                            
+
                                     /**
                                     Container node which represents the application&#x27;s bounding-box, into
                                     which this app&#x27;s content will be rendered.
-                            
+
                                     The container node serves as the host for all DOM events attached by the
                                     app. Delegation is used to handle events on children of the container,
                                     allowing the container&#x27;s contents to be re-rendered at any time without
                                     losing event subscriptions.
-                            
+
                                     The default container is the &#x60;&lt;body&gt;&#x60; Node, but you can override this in
                                     a subclass, or by passing in a custom &#x60;container&#x60; config value at
                                     instantiation time.
-                            
+
                                     When &#x60;container&#x60; is overridden by a subclass or passed as a config
                                     option at instantiation time, it may be provided as a selector string, a
                                     DOM element, or a &#x60;Y.Node&#x60; instance. During initialization, this app&#x27;s
                                     &#x60;create()&#x60; method will be called to convert the container into a
                                     &#x60;Y.Node&#x60; instance if it isn&#x27;t one already and stamp it with the CSS
                                     class: &#x60;&quot;yui3-app&quot;&#x60;.
-                            
+
                                     The container is not added to the page automatically. This allows you to
                                     have full control over how and when your app is actually rendered to
                                     the page.
-                            
+
                                     @attribute container
                                     @type HTMLElement|Node|String
                                     @default Y.one(&#x27;body&#x27;)
@@ -2022,17 +2022,17 @@
                                             return Y.one(&#x27;body&#x27;);
                                         }
                                     },
-                            
+
                                     /**
                                     Whether or not this browser is capable of using HTML5 history.
-                            
+
                                     This value is dependent on the value of &#x60;serverRouting&#x60; and will default
                                     accordingly.
-                            
+
                                     Setting this to &#x60;false&#x60; will force the use of hash-based history even on
                                     HTML5 browsers, but please don&#x27;t do this unless you understand the
                                     consequences.
-                            
+
                                     @attribute html5
                                     @type Boolean
                                     @initOnly
@@ -2041,19 +2041,19 @@
                                     html5: {
                                         valueFn: &#x27;_initHtml5&#x27;
                                     },
-                            
+
                                     /**
                                     CSS selector string used to filter link click events so that only the
                                     links which match it will have the enhanced-navigation behavior of pjax
                                     applied.
-                            
+
                                     When a link is clicked and that link matches this selector, navigating
                                     to the link&#x27;s &#x60;href&#x60; URL using the enhanced, pjax, behavior will be
                                     attempted; and the browser&#x27;s default way to navigate to new pages will
                                     be the fallback.
-                            
+
                                     By default this selector will match _all_ links on the page.
-                            
+
                                     @attribute linkSelector
                                     @type String|Function
                                     @default &quot;a&quot;
@@ -2061,72 +2061,72 @@
                                     linkSelector: {
                                         value: &#x27;a&#x27;
                                     },
-                            
+
                                     /**
                                     Whether or not this application&#x27;s server is capable of properly routing
                                     all requests and rendering the initial state in the HTML responses.
-                            
+
                                     This can have three different values, each having particular
                                     implications on how the app will handle routing and navigation:
-                            
+
                                       * &#x60;undefined&#x60;: The best form of URLs will be chosen based on the
                                         capabilities of the browser. Given no information about the server
                                         environmentm a balanced approach to routing and navigation is
                                         chosen.
-                            
+
                                         The server should be capable of handling full-path requests, since
                                         full-URLs will be generated by browsers using HTML5 history. If this
                                         is a client-side-only app the server could handle full-URL requests
                                         by sending a redirect back to the root with a hash-based URL, e.g:
-                            
+
                                             Request:     http://example.com/users/1
                                             Redirect to: http://example.com/#/users/1
-                            
+
                                       * &#x60;true&#x60;: The server is *fully* capable of properly handling requests
                                         to all full-path URLs the app can produce.
-                            
+
                                         This is the best option for progressive-enhancement because it will
                                         cause **all URLs to always have full-paths**, which means the server
                                         will be able to accurately handle all URLs this app produces. e.g.
-                            
+
                                             http://example.com/users/1
-                            
+
                                         To meet this strict full-URL requirement, browsers which are not
                                         capable of using HTML5 history will make requests to the server
                                         resulting in full-page reloads.
-                            
+
                                       * &#x60;false&#x60;: The server is *not* capable of properly handling requests
                                         to all full-path URLs the app can produce, therefore all routing
                                         will be handled by this App instance.
-                            
+
                                         Be aware that this will cause **all URLs to always be hash-based**,
                                         even in browsers that are capable of using HTML5 history. e.g.
-                            
+
                                             http://example.com/#/users/1
-                            
+
                                         A single-page or client-side-only app where the server sends a
                                         &quot;shell&quot; page with JavaScript to the client might have this
                                         restriction. If you&#x27;re setting this to &#x60;false&#x60;, read the following:
-                            
+
                                     **Note:** When this is set to &#x60;false&#x60;, the server will *never* receive
                                     the full URL because browsers do not send the fragment-part to the
                                     server, that is everything after and including the &quot;#&quot;.
-                            
+
                                     Consider the following example:
-                            
+
                                         URL shown in browser: http://example.com/#/users/1
                                         URL sent to server:   http://example.com/
-                            
+
                                     You should feel bad about hurting our precious web if you forcefully set
                                     either &#x60;serverRouting&#x60; or &#x60;html5&#x60; to &#x60;false&#x60;, because you&#x27;re basically
                                     punching the web in the face here with your lossy URLs! Please make sure
                                     you know what you&#x27;re doing and that you understand the implications.
-                            
+
                                     Ideally you should always prefer full-path URLs (not /#/foo/), and want
                                     full-page reloads when the client&#x27;s browser is not capable of enhancing
                                     the experience using the HTML5 history APIs. Setting this to &#x60;true&#x60; is
                                     the best option for progressive-enhancement (and graceful-degradation).
-                            
+
                                     @attribute serverRouting
                                     @type Boolean
                                     @default undefined
@@ -2137,27 +2137,27 @@
                                         valueFn  : function () { return Y.App.serverRouting; },
                                         writeOnce: &#x27;initOnly&#x27;
                                     },
-                            
+
                                     /**
                                     The node into which this app&#x27;s &#x60;views&#x60; will be rendered when they become
                                     the &#x60;activeView&#x60;.
-                            
+
                                     The view container node serves as the container to hold the app&#x27;s
                                     &#x60;activeView&#x60;. Each time the &#x60;activeView&#x60; is set via &#x60;showView()&#x60;, the
                                     previous view will be removed from this node, and the new active view&#x27;s
                                     &#x60;container&#x60; node will be appended.
-                            
+
                                     The default view container is a &#x60;&lt;div&gt;&#x60; Node, but you can override this
                                     in a subclass, or by passing in a custom &#x60;viewContainer&#x60; config value at
                                     instantiation time. The &#x60;viewContainer&#x60; may be provided as a selector
                                     string, DOM element, or a &#x60;Y.Node&#x60; instance (having the &#x60;viewContainer&#x60;
                                     and the &#x60;container&#x60; be the same node is also supported).
-                            
+
                                     The app&#x27;s &#x60;render()&#x60; method will stamp the view container with the CSS
                                     class &#x60;&quot;yui3-app-views&quot;&#x60; and append it to the app&#x27;s &#x60;container&#x60; node if
                                     it isn&#x27;t already, and any &#x60;activeView&#x60; will be appended to this node if
                                     it isn&#x27;t already.
-                            
+
                                     @attribute viewContainer
                                     @type HTMLElement|Node|String
                                     @default Y.Node.create(this.containerTemplate)
@@ -2170,11 +2170,11 @@
                                         writeOnce: true
                                     }
                                 },
-                            
+
                                 /**
                                 Properties that shouldn&#x27;t be turned into ad-hoc attributes when passed to
                                 App&#x27;s constructor.
-                            
+
                                 @property _NON_ATTRS_CFG
                                 @type Array
                                 @static
@@ -2183,28 +2183,28 @@
                                 **/
                                 _NON_ATTRS_CFG: [&#x27;views&#x27;]
                             });
-                            
+
                             // -- Namespace ----------------------------------------------------------------
                             Y.namespace(&#x27;App&#x27;).Base = AppBase;
-                            
+
                             /**
                             Provides a top-level application component which manages navigation and views.
-                            
+
                             This gives you a foundation and structure on which to build your application; it
                             combines robust URL navigation with powerful routing and flexible view
                             management.
-                            
+
                             &#x60;Y.App&#x60; is both a namespace and constructor function. The &#x60;Y.App&#x60; class is
                             special in that any &#x60;Y.App&#x60; class extensions that are included in the YUI
                             instance will be **auto-mixed** on to the &#x60;Y.App&#x60; class. Consider this example:
-                            
+
                                 YUI().use(&#x27;app-base&#x27;, &#x27;app-transitions&#x27;, function (Y) {
                                     // This will create two YUI Apps, &#x60;basicApp&#x60; will not have transitions,
                                     // but &#x60;fancyApp&#x60; will have transitions support included and turn it on.
                                     var basicApp = new Y.App.Base(),
                                         fancyApp = new Y.App({transitions: true});
                                 });
-                            
+
                             @class App
                             @param {Object} [config] The following are configuration properties that can be
                                 specified _in addition_ to default attribute values and the non-attribute
@@ -2221,10 +2221,10 @@
                             @since 3.5.0
                             **/
                             Y.App = Y.mix(Y.Base.create(&#x27;app&#x27;, AppBase, []), Y.App, true);
-                            
+
                             /**
                             CSS classes used by &#x60;Y.App&#x60;.
-                            
+
                             @property CLASS_NAMES
                             @type Object
                             @default {}
@@ -2235,17 +2235,17 @@
                                 app  : getClassName(&#x27;app&#x27;),
                                 views: getClassName(&#x27;app&#x27;, &#x27;views&#x27;)
                             };
-                            
+
                             /**
                             Default &#x60;serverRouting&#x60; attribute value for all apps.
-                            
+
                             @property serverRouting
                             @type Boolean
                             @default undefined
                             @static
                             @since 3.6.0
                             **/
-                            
+
                                 </pre>
                             </div>
                         </div>

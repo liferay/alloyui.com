@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>alloy-ui/src/aui-scheduler/js/aui-scheduler-view-day.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1140,64 +1140,64 @@
                              * @module aui-scheduler
                              * @submodule aui-scheduler-view-day
                              */
-                            
+
                             var Lang = A.Lang,
                                 isBoolean = Lang.isBoolean,
                                 isFunction = Lang.isFunction,
                                 isNumber = Lang.isNumber,
                                 isObject = Lang.isObject,
-                            
+
                                 DateMath = A.DataType.DateMath,
                                 WidgetStdMod = A.WidgetStdMod,
-                            
+
                                 getScrollbarWidth = A.cached(function() {
                                     var doc = A.config.doc,
                                         testNode = doc.createElement(&#x27;div&#x27;),
                                         body = doc.getElementsByTagName(&#x27;body&#x27;)[0],
                                         // 0.1 because cached doesn&#x27;t support falsy refetch values
                                         width = 0.1;
-                            
+
                                     if (body) {
                                         testNode.style.cssText = &#x27;position:absolute;visibility:hidden;overflow:scroll;width:20px;&#x27;;
                                         testNode.appendChild(doc.createElement(&#x27;p&#x27;)).style.height = &#x27;1px&#x27;;
                                         body.insertBefore(testNode, body.firstChild);
                                         width = testNode.offsetWidth - testNode.clientWidth;
-                            
+
                                         body.removeChild(testNode);
                                     }
-                            
+
                                     return width;
                                 }, null, 0.1),
-                            
+
                                 getNodeListHTMLParser = function(selector, sizeCondition) {
                                     return function(srcNode) {
                                         var nodes = srcNode.all(selector);
                                         return (nodes.size() &gt;= sizeCondition) ? nodes : null;
                                     };
                                 },
-                            
+
                                 roundToNearestMultiple = function(n, multiple) {
                                     return Math.round(n / multiple) * multiple;
                                 },
-                            
+
                                 toNumber = function(v) {
                                     return parseFloat(v) || 0;
                                 },
-                            
+
                                 getCN = A.getClassName,
-                            
+
                                 CSS_SVT_TABLE_DATA = getCN(&#x27;scheduler-view&#x27;, &#x27;table&#x27;, &#x27;data&#x27;),
-                            
+
                                 CSS_SCHEDULER_EVENT = getCN(&#x27;scheduler-event&#x27;),
                                 CSS_SCHEDULER_EVENT_DISABLED = getCN(&#x27;scheduler-event&#x27;, &#x27;disabled&#x27;),
                                 CSS_SCHEDULER_EVENT_INTERSECTING = getCN(&#x27;scheduler-event&#x27;, &#x27;intersecting&#x27;),
                                 CSS_SCHEDULER_EVENT_PROXY = getCN(&#x27;scheduler-event&#x27;, &#x27;proxy&#x27;),
-                            
+
                                 CSS_SCHEDULER_TODAY = getCN(&#x27;scheduler&#x27;, &#x27;today&#x27;),
                                 CSS_SCHEDULER_TODAY_HD = getCN(&#x27;scheduler&#x27;, &#x27;today&#x27;, &#x27;hd&#x27;),
-                            
+
                                 CSS_SCHEDULER_VIEW_SCROLLABLE = getCN(&#x27;scheduler-view&#x27;, &#x27;scrollable&#x27;),
-                            
+
                                 CSS_SCHEDULER_VIEW_DAY_COLDATA = getCN(&#x27;scheduler-view&#x27;, &#x27;coldata&#x27;),
                                 CSS_SCHEDULER_VIEW_DAY_COLGRID = getCN(&#x27;scheduler-view&#x27;, &#x27;colgrid&#x27;),
                                 CSS_SCHEDULER_VIEW_DAY_CURRENT_TIME = getCN(&#x27;scheduler-view&#x27;, &#x27;day&#x27;, &#x27;current&#x27;, &#x27;time&#x27;),
@@ -1223,22 +1223,22 @@
                                 CSS_SCHEDULER_VIEW_DAY_TABLE_COLDAY = getCN(&#x27;scheduler-view&#x27;, &#x27;day&#x27;, &#x27;table&#x27;, &#x27;colday&#x27;),
                                 CSS_SCHEDULER_VIEW_DAY_TABLE_COLTIME = getCN(&#x27;scheduler-view&#x27;, &#x27;day&#x27;, &#x27;table&#x27;, &#x27;coltime&#x27;),
                                 CSS_SCHEDULER_VIEW_DAY_TABLE_TIME = getCN(&#x27;scheduler-view&#x27;, &#x27;day&#x27;, &#x27;table&#x27;, &#x27;time&#x27;),
-                            
+
                                 TPL_SCHEDULER_VIEW_DAY_CURRENT_TIME = &#x27;&lt;div class=&quot;&#x27; + CSS_SCHEDULER_VIEW_DAY_CURRENT_TIME +
                                     &#x27;&quot;&gt;&lt;/div&gt;&#x27;,
-                            
+
                                 TPL_SCHEDULER_VIEW_DAY_RESIZER = &#x27;&lt;div class=&quot;&#x27; + CSS_SCHEDULER_VIEW_DAY_RESIZER + &#x27;&quot;&gt;&#x27; +
                                     &#x27;&lt;div class=&quot;&#x27; + [CSS_SCHEDULER_VIEW_DAY_ICON_GRIP_HORIZONTAL, CSS_SCHEDULER_VIEW_DAY_RESIZER_ICON].join(&#x27; &#x27;) +
                                     &#x27;&quot;&gt;&lt;/div&gt;&#x27; +
                                     &#x27;&lt;/div&gt;&#x27;,
-                            
+
                                 TPL_SCHEDULER_VIEW_DAY_MARKERCELL = &#x27;&lt;div class=&quot;&#x27; + CSS_SCHEDULER_VIEW_DAY_MARKERCELL + &#x27;&quot;&gt;&#x27; +
                                     &#x27;&lt;div class=&quot;&#x27; + CSS_SCHEDULER_VIEW_DAY_MARKER_DIVISION + &#x27;&quot;&gt;&lt;/div&gt;&#x27; +
                                     &#x27;&lt;/div&gt;&#x27;,
-                            
+
                                 TPL_SCHEDULER_VIEW_DAY_HEADER_VIEW_LABEL = &#x27;&lt;span class=&quot;&#x27; + CSS_SCHEDULER_VIEW_DAY_HEADER_VIEW_LABEL +
                                     &#x27;&quot;&gt;{label}&lt;/span&gt;&#x27;,
-                            
+
                                 TPL_SCHEDULER_VIEW_DAY_TABLE = &#x27;&lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; class=&quot;&#x27; + CSS_SCHEDULER_VIEW_DAY_TABLE +
                                     &#x27;&quot;&gt;&#x27; +
                                     &#x27;&lt;tbody&gt;&#x27; +
@@ -1257,28 +1257,28 @@
                                     &#x27;&lt;/tr&gt;&#x27; +
                                     &#x27;&lt;/tbody&gt;&#x27; +
                                     &#x27;&lt;/table&gt;&#x27;,
-                            
+
                                 TPL_SCHEDULER_VIEW_DAY_TABLE_COLDAY = &#x27;&lt;td class=&quot;&#x27; + [CSS_SCHEDULER_VIEW_DAY_TABLE_COL,
                                     CSS_SCHEDULER_VIEW_DAY_TABLE_COLDAY].join(&#x27; &#x27;) + &#x27;&quot; data-colnumber=&quot;{colNumber}&quot;&gt;&#x27; +
                                     &#x27;&lt;div class=&quot;&#x27; + CSS_SCHEDULER_VIEW_DAY_TABLE_COL_SHIM + &#x27;&quot;&gt;&amp;nbsp;&lt;/div&gt;&#x27; +
                                     &#x27;&lt;/td&gt;&#x27;,
-                            
+
                                 TPL_SCHEDULER_VIEW_DAY_TABLE_TIME = &#x27;&lt;div class=&quot;&#x27; + CSS_SCHEDULER_VIEW_DAY_TABLE_TIME + &#x27;&quot;&gt;{hour}&lt;/div&gt;&#x27;,
-                            
+
                                 TPL_SCHEDULER_VIEW_DAY_HEADER_TABLE = &#x27;&lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; class=&quot;&#x27; +
                                     CSS_SCHEDULER_VIEW_DAY_HEADER_TABLE + &#x27;&quot;&gt;&#x27; +
                                     &#x27;&lt;tbody&gt;&#x27; +
                                     &#x27;&lt;tr class=&quot;&#x27; + CSS_SCHEDULER_VIEW_DAY_HEADER_COL + &#x27;&quot;&gt;&lt;/tr&gt;&#x27; +
                                     &#x27;&lt;/tbody&gt;&#x27; +
                                     &#x27;&lt;/table&gt;&#x27;,
-                            
+
                                 TPL_SCHEDULER_VIEW_DAY_HEADER_DAY = &#x27;&lt;th class=&quot;&#x27; + CSS_SCHEDULER_VIEW_DAY_HEADER_DAY +
                                     &#x27;&quot; data-colnumber=&quot;{colNumber}&quot;&gt;&lt;a href=&quot;#&quot;&gt;&amp;nbsp;&lt;/a&gt;&lt;/th&gt;&#x27;,
                                 TPL_SCHEDULER_VIEW_DAY_HEADER_DAY_CONTENT = &#x27;&lt;span class=&quot;&#x27; + CSS_SCHEDULER_VIEW_DAY_HEADER_DAY_WEEKDAY + &#x27;&quot;&gt;%a&lt;/span&gt; &lt;span class=&quot;&#x27; +
                                     CSS_SCHEDULER_VIEW_DAY_HEADER_DAY_NUMBER + &#x27;&quot;&gt;%d&lt;/span&gt;&#x27;,
                                 TPL_SCHEDULER_VIEW_DAY_HEADER_DAY_FIRST = &#x27;&lt;td class=&quot;&#x27; + [CSS_SCHEDULER_VIEW_DAY_HEADER_DAY,
                                     CSS_SCHEDULER_VIEW_DAY_HEADER_DAY_FIRST].join(&#x27; &#x27;) + &#x27;&quot;&gt;&lt;/td&gt;&#x27;;
-                            
+
                             /**
                              * A base class for &#x60;SchedulerDayView&#x60;.
                              *
@@ -1289,7 +1289,7 @@
                              * @constructor
                              */
                             var SchedulerDayView = A.Component.create({
-                            
+
                                 /**
                                  * Static property provides a string to identify the class.
                                  *
@@ -1298,7 +1298,7 @@
                                  * @static
                                  */
                                 NAME: &#x27;scheduler-view-day&#x27;,
-                            
+
                                 /**
                                  * Static property used to define the default attribute
                                  * configuration for the &#x60;SchedulerDayView&#x60;.
@@ -1308,7 +1308,7 @@
                                  * @static
                                  */
                                 ATTRS: {
-                            
+
                                     /**
                                      * Determines the content of Scheduler day view&#x27;s body section.
                                      *
@@ -1319,7 +1319,7 @@
                                     bodyContent: {
                                         value: &#x27;&#x27;
                                     },
-                            
+
                                     /**
                                      * Contains the function that returns the &#x60;currentTime&#x60; node.
                                      *
@@ -1331,7 +1331,7 @@
                                             return A.Node.create(TPL_SCHEDULER_VIEW_DAY_CURRENT_TIME);
                                         }
                                     },
-                            
+
                                     /**
                                      * Contains the number of day columns this view displays.
                                      *
@@ -1343,7 +1343,7 @@
                                         value: 1,
                                         validator: isNumber
                                     },
-                            
+
                                     /**
                                      * Configures this view&#x27;s &#x60;DD.Delegate&#x60;.
                                      *
@@ -1355,7 +1355,7 @@
                                         value: {},
                                         setter: function(val) {
                                             var instance = this;
-                            
+
                                             return A.merge({
                                                     dragConfig: {
                                                         useShim: false
@@ -1370,7 +1370,7 @@
                                         },
                                         validator: isObject
                                     },
-                            
+
                                     /**
                                      * Contains the width of a &#x60;SchedulerView&#x60; in pixels.
                                      *
@@ -1382,7 +1382,7 @@
                                         value: 95,
                                         validator: isNumber
                                     },
-                            
+
                                     /**
                                      * Applies a filter to &#x60;SchedulerEvent&#x60;s.
                                      *
@@ -1394,7 +1394,7 @@
                                             return (evt.getHoursDuration() &lt;= 24 &amp;&amp; !evt.get(&#x27;allDay&#x27;));
                                         }
                                     },
-                            
+
                                     /**
                                      * Contains the function that formats the header date.
                                      *
@@ -1405,7 +1405,7 @@
                                         value: function(date) {
                                             var instance = this;
                                             var scheduler = instance.get(&#x27;scheduler&#x27;);
-                            
+
                                             return A.DataType.Date.format(
                                                 date, {
                                                     format: TPL_SCHEDULER_VIEW_DAY_HEADER_DAY_CONTENT,
@@ -1415,7 +1415,7 @@
                                         },
                                         validator: isFunction
                                     },
-                            
+
                                     /**
                                      * Contains the header view.
                                      *
@@ -1427,7 +1427,7 @@
                                         value: true,
                                         validator: isBoolean
                                     },
-                            
+
                                     /**
                                      * Configures the header day view.
                                      *
@@ -1451,7 +1451,7 @@
                                         },
                                         value: {}
                                     },
-                            
+
                                     /**
                                      * Contains the height of an hour in pixels.
                                      *
@@ -1463,7 +1463,7 @@
                                         value: 52,
                                         validator: isNumber
                                     },
-                            
+
                                     /**
                                      * Determines the name for this day view.
                                      *
@@ -1474,7 +1474,7 @@
                                     name: {
                                         value: &#x27;day&#x27;
                                     },
-                            
+
                                     /**
                                      * Contains the function that formats the navigation date.
                                      *
@@ -1485,7 +1485,7 @@
                                         value: function(date) {
                                             var instance = this;
                                             var scheduler = instance.get(&#x27;scheduler&#x27;);
-                            
+
                                             return A.DataType.Date.format(
                                                 date, {
                                                     format: &#x27;%A, %B %d, %Y&#x27;,
@@ -1495,7 +1495,7 @@
                                         },
                                         validator: isFunction
                                     },
-                            
+
                                     /**
                                      * Contains the collection of strings used to label elements of the UI.
                                      *
@@ -1507,7 +1507,7 @@
                                             allDay: &#x27;All day&#x27;
                                         }
                                     },
-                            
+
                                     /**
                                      * Contains the function that returns the &#x60;headerTable&#x60; node.
                                      *
@@ -1519,7 +1519,7 @@
                                             return A.Node.create(TPL_SCHEDULER_VIEW_DAY_HEADER_TABLE);
                                         }
                                     },
-                            
+
                                     /**
                                      * Contains the function that returns the &#x60;headerViewLabel&#x60; node.
                                      *
@@ -1529,9 +1529,9 @@
                                     headerViewLabelNode: {
                                         valueFn: function() {
                                             var instance = this;
-                            
+
                                             var strings = instance.get(&#x27;strings&#x27;);
-                            
+
                                             return A.Node.create(
                                                 Lang.sub(TPL_SCHEDULER_VIEW_DAY_HEADER_VIEW_LABEL, {
                                                     label: strings.allDay
@@ -1539,7 +1539,7 @@
                                             );
                                         }
                                     },
-                            
+
                                     /**
                                      * Contains the function that returns the &#x60;resizer&#x60; node.
                                      *
@@ -1551,7 +1551,7 @@
                                             return A.Node.create(TPL_SCHEDULER_VIEW_DAY_RESIZER);
                                         }
                                     },
-                            
+
                                     /**
                                      * Contains the function that returns the &#x60;table&#x60; node.
                                      *
@@ -1563,7 +1563,7 @@
                                             return A.Node.create(TPL_SCHEDULER_VIEW_DAY_TABLE);
                                         }
                                     },
-                            
+
                                     /**
                                      * Contains the function that returns the &#x60;colDays&#x60; node.
                                      *
@@ -1573,7 +1573,7 @@
                                     colDaysNode: {
                                         valueFn: &#x27;_valueColDaysNode&#x27;
                                     },
-                            
+
                                     /**
                                      * Contains the function that returns the &#x60;colHeaderDays&#x60; node.
                                      *
@@ -1583,7 +1583,7 @@
                                     colHeaderDaysNode: {
                                         valueFn: &#x27;_valueColHeaderDaysNode&#x27;
                                     },
-                            
+
                                     /**
                                      * Contains the function that returns the &#x60;markercells&#x60; node.
                                      *
@@ -1593,7 +1593,7 @@
                                     markercellsNode: {
                                         valueFn: &#x27;_valueMarkercellsNode&#x27;
                                     },
-                            
+
                                     /**
                                      * Contains the function that returns the &#x60;times&#x60; node.
                                      *
@@ -1604,7 +1604,7 @@
                                         valueFn: &#x27;_valueTimesNode&#x27;
                                     }
                                 },
-                            
+
                                 /**
                                  * Contains an object hash, defining how attribute values are to be parsed
                                  * from markup contained in the widget&#x27;s bounding box.
@@ -1625,7 +1625,7 @@
                                     tableNode: &#x27;.&#x27; + CSS_SCHEDULER_VIEW_DAY_TABLE,
                                     timesNode: getNodeListHTMLParser(&#x27;.&#x27; + CSS_SCHEDULER_VIEW_DAY_TABLE_TIME, 24)
                                 },
-                            
+
                                 /**
                                  * Static property used to define which component it extends.
                                  *
@@ -1634,9 +1634,9 @@
                                  * @static
                                  */
                                 EXTENDS: A.SchedulerView,
-                            
+
                                 prototype: {
-                            
+
                                     /**
                                      * Construction logic executed during &#x60;SchedulerDayView&#x60; instantiation.
                                      * Lifecycle.
@@ -1646,7 +1646,7 @@
                                      */
                                     initializer: function() {
                                         var instance = this;
-                            
+
                                         instance.colDaysNode = instance.get(&#x27;colDaysNode&#x27;);
                                         instance.colHeaderDaysNode = instance.get(&#x27;colHeaderDaysNode&#x27;);
                                         instance.currentTimeNode = instance.get(&#x27;currentTimeNode&#x27;);
@@ -1655,7 +1655,7 @@
                                         instance.resizerNode = instance.get(&#x27;resizerNode&#x27;);
                                         instance.tableNode = instance.get(&#x27;tableNode&#x27;);
                                         instance.timesNode = instance.get(&#x27;timesNode&#x27;);
-                            
+
                                         instance.activeColumn = null;
                                         instance.columnData = instance.tableNode.one(&#x27;.&#x27; + CSS_SCHEDULER_VIEW_DAY_COLDATA);
                                         instance.columnDayHeader = instance.headerTableNode.one(&#x27;.&#x27; + CSS_SCHEDULER_VIEW_DAY_HEADER_COL);
@@ -1663,14 +1663,14 @@
                                         instance.columnTime = instance.tableNode.one(&#x27;.&#x27; + CSS_SCHEDULER_VIEW_DAY_TABLE_COLTIME);
                                         instance.gridContainer = instance.tableNode.one(&#x27;.&#x27; + CSS_SCHEDULER_VIEW_DAY_GRID_CONTAINER);
                                         instance.markersNode = instance.tableNode.one(&#x27;.&#x27; + CSS_SCHEDULER_VIEW_DAY_MARKERS);
-                            
+
                                         if (instance.get(&#x27;headerView&#x27;)) {
                                             instance.headerView = new A.SchedulerTableView(
                                                 instance.get(&#x27;headerViewConfig&#x27;)
                                             );
                                         }
                                     },
-                            
+
                                     /**
                                      * Destructor implementation. Lifecycle.
                                      *
@@ -1681,10 +1681,10 @@
                                         if (this._eventHandles) {
                                             (new A.EventHandle(this._eventHandles)).detach();
                                         }
-                            
+
                                         clearInterval(this._currentTimeInterval);
                                     },
-                            
+
                                     /**
                                      * Renders the &#x60;SchedulerDayView&#x60; component instance. Lifecycle.
                                      *
@@ -1693,19 +1693,19 @@
                                      */
                                     renderUI: function() {
                                         var instance = this;
-                            
+
                                         instance.columnTime.setContent(instance.timesNode);
                                         instance.markersNode.setContent(instance.markercellsNode);
                                         instance.colDaysNode.appendTo(instance.columnData);
                                         instance.colHeaderDaysNode.appendTo(instance.columnDayHeader);
-                            
+
                                         if (instance.headerView) {
                                             instance.headerView.set(&#x27;scheduler&#x27;, instance.get(&#x27;scheduler&#x27;));
-                            
+
                                             instance.headerView.render();
                                         }
                                     },
-                            
+
                                     /**
                                      * Binds the events on the &#x60;SchedulerDayView&#x60; UI. Lifecycle.
                                      *
@@ -1714,21 +1714,21 @@
                                      */
                                     bindUI: function() {
                                         var instance = this;
-                            
+
                                         instance.headerTableNode.delegate(
                                             &#x27;click&#x27;, A.bind(instance._onClickDaysHeader, instance), &#x27;.&#x27; + CSS_SCHEDULER_VIEW_DAY_HEADER_DAY);
-                            
+
                                         this._bindMouseEvents();
-                            
+
                                         this._bindCurrentTimeInterval();
-                            
+
                                         instance.on(&#x27;drag:end&#x27;, instance._onEventDragEnd);
                                         instance.on(&#x27;drag:start&#x27;, instance._onEventDragStart);
                                         instance.on(&#x27;drag:tickAlignY&#x27;, instance._dragTickAlignY);
                                         instance.on(&#x27;schedulerChange&#x27;, instance._onSchedulerChange);
                                         instance.after(&#x27;drag:align&#x27;, instance._afterDragAlign);
                                     },
-                            
+
                                     /**
                                      * Syncs the &#x60;SchedulerDayView&#x60; UI. Lifecycle.
                                      *
@@ -1737,16 +1737,16 @@
                                      */
                                     syncUI: function() {
                                         var instance = this;
-                            
+
                                         SchedulerDayView.superclass.syncUI.apply(this, arguments);
-                            
+
                                         instance.gridContainer.attr(&#x27;colspan&#x27;, instance.get(&#x27;days&#x27;));
-                            
+
                                         instance.syncCurrentTimeUI();
-                            
+
                                         instance._setupDragDrop();
                                     },
-                            
+
                                     /**
                                      * Sync SchedulerView StdContent.
                                      *
@@ -1754,20 +1754,20 @@
                                      */
                                     syncStdContent: function() {
                                         var instance = this;
-                            
+
                                         instance.setStdModContent(
                                             WidgetStdMod.BODY, instance.tableNode.getDOM());
-                            
+
                                         var headerNodes = A.NodeList.create(instance.headerTableNode);
-                            
+
                                         if (instance.headerView) {
                                             headerNodes.push(instance.headerView.get(&#x27;boundingBox&#x27;));
                                             headerNodes.push(instance.get(&#x27;headerViewLabelNode&#x27;));
                                         }
-                            
+
                                         instance.setStdModContent(WidgetStdMod.HEADER, headerNodes);
                                     },
-                            
+
                                     /**
                                      * Calculates and returns the height of an event based on a given
                                      * &#x60;duration&#x60;.
@@ -1779,10 +1779,10 @@
                                     calculateEventHeight: function(duration) {
                                         var instance = this;
                                         var hourHeight = instance.get(&#x27;hourHeight&#x27;);
-                            
+
                                         return Math.max(duration * (hourHeight / 60), hourHeight / 2);
                                     },
-                            
+
                                     /**
                                      * Calculates and returns the value needed to get the &#x60;top&#x60; property
                                      * give a &#x60;date&#x60;.
@@ -1794,11 +1794,11 @@
                                      */
                                     calculateTop: function(date) {
                                         var instance = this;
-                            
+
                                         return ((date.getHours() * 60) + date.getMinutes() +
                                             (date.getSeconds() / 60)) * (instance.get(&#x27;hourHeight&#x27;) / 60);
                                     },
-                            
+
                                     /**
                                      * Returns the value of the date that follows the day view&#x27;s current
                                      * date.
@@ -1809,10 +1809,10 @@
                                     getNextDate: function() {
                                         var instance = this;
                                         var viewDate = instance.get(&#x27;scheduler&#x27;).get(&#x27;viewDate&#x27;);
-                            
+
                                         return DateMath.toLastHour(DateMath.add(viewDate, DateMath.DAY, 1));
                                     },
-                            
+
                                     /**
                                      * Returns the value of the date that preceeds the day view&#x27;s current
                                      * date.
@@ -1823,10 +1823,10 @@
                                     getPrevDate: function() {
                                         var instance = this;
                                         var viewDate = instance.get(&#x27;scheduler&#x27;).get(&#x27;viewDate&#x27;);
-                            
+
                                         return DateMath.toMidnight(DateMath.subtract(viewDate, DateMath.DAY, 1));
                                     },
-                            
+
                                     /**
                                      * Returns the column &#x60;Node&#x60; determined by a given &#x60;Date&#x60;.
                                      *
@@ -1836,10 +1836,10 @@
                                      */
                                     getColumnByDate: function(date) {
                                         var instance = this;
-                            
+
                                         return instance.colDaysNode.item(instance.getDateDaysOffset(date));
                                     },
-                            
+
                                     /**
                                      * Returns the column shim &#x60;Node&#x60; determined by a given &#x60;Date&#x60;.
                                      *
@@ -1849,10 +1849,10 @@
                                      */
                                     getColumnShimByDate: function(date) {
                                         var instance = this;
-                            
+
                                         return instance.columnShims.item(instance.getDateDaysOffset(date));
                                     },
-                            
+
                                     /**
                                      * Returns the &#x60;Date&#x60; determined by a given column &#x60;Node&#x60;.
                                      *
@@ -1864,10 +1864,10 @@
                                         var instance = this;
                                         var viewDate = DateMath.safeClearTime(
                                             instance.get(&#x27;scheduler&#x27;).get(&#x27;viewDate&#x27;));
-                            
+
                                         return DateMath.add(viewDate, DateMath.DAY, colNumber);
                                     },
-                            
+
                                     /**
                                      * Returns the number of offset days.
                                      *
@@ -1877,14 +1877,14 @@
                                      */
                                     getDateDaysOffset: function(date) {
                                         var instance = this;
-                            
+
                                         var viewDate = DateMath.safeClearTime(
                                             instance.get(&#x27;scheduler&#x27;).get(&#x27;viewDate&#x27;));
-                            
+
                                         return DateMath.getDayOffset(
                                             DateMath.safeClearTime(date), viewDate);
                                     },
-                            
+
                                     /**
                                      * Returns the time at the Y coordinate from a given top position.
                                      *
@@ -1896,14 +1896,14 @@
                                         var instance = this;
                                         var hourHeight = instance.get(&#x27;hourHeight&#x27;);
                                         var prop = toNumber((top / hourHeight).toFixed(2));
-                            
+
                                         // Isolate the decimals and convert to minutes: (prop*100)%100*0.6.
                                         var minutes = Math.floor((prop * 100) % 100 * 0.6);
                                         var hours = Math.floor(prop);
-                            
+
                                         return [hours, minutes, 0];
                                     },
-                            
+
                                     /**
                                      * Plots a given event for the day view.
                                      *
@@ -1912,21 +1912,21 @@
                                      */
                                     plotEvent: function(evt) {
                                         var instance = this;
-                            
+
                                         var nodeList = evt.get(&#x27;node&#x27;);
-                            
+
                                         if (nodeList.size() &lt; 2) {
                                             evt.addPaddingNode();
                                         }
-                            
+
                                         var node = evt.get(&#x27;node&#x27;).item(0);
                                         var paddingNode = evt.get(&#x27;node&#x27;).item(1);
                                         var endShim = instance.getColumnShimByDate(evt.get(&#x27;endDate&#x27;));
                                         var startShim = instance.getColumnShimByDate(evt.get(&#x27;startDate&#x27;));
-                            
+
                                         if (startShim) {
                                             startShim.append(node);
-                            
+
                                             if (evt.get(&#x27;visible&#x27;)) {
                                                 node.show();
                                             }
@@ -1934,14 +1934,14 @@
                                         else {
                                             node.hide();
                                         }
-                            
+
                                         if (endShim) {
                                             if (endShim.compareTo(startShim) || evt.isDayBoundaryEvent()) {
                                                 paddingNode.hide();
                                             }
                                             else {
                                                 endShim.append(paddingNode);
-                            
+
                                                 if (evt.get(&#x27;visible&#x27;)) {
                                                     paddingNode.show();
                                                 }
@@ -1950,13 +1950,13 @@
                                         else {
                                             paddingNode.hide();
                                         }
-                            
+
                                         evt.syncUI();
-                            
+
                                         instance.syncEventTopUI(evt);
                                         instance.syncEventHeightUI(evt);
                                     },
-                            
+
                                     /**
                                      * Plots all events in the current view.
                                      *
@@ -1966,28 +1966,28 @@
                                         var instance = this;
                                         var scheduler = instance.get(&#x27;scheduler&#x27;);
                                         var filterFn = instance.get(&#x27;filterFn&#x27;);
-                            
+
                                         instance.columnShims.each(function(colShimNode, i) {
                                             var columnEvents = scheduler.getEventsByDay(instance.getDateByColumn(i), true);
                                             var plottedEvents = [];
-                            
+
                                             colShimNode.empty();
-                            
+
                                             A.Array.each(columnEvents, function(evt) {
                                                 if (filterFn.apply(instance, [evt])) {
                                                     instance.plotEvent(evt);
-                            
+
                                                     plottedEvents.push(evt);
                                                 }
                                             });
-                            
+
                                             instance.syncEventsIntersectionUI(plottedEvents);
                                         });
-                            
+
                                         instance.syncHeaderViewUI();
                                         instance.syncCurrentTimeUI();
                                     },
-                            
+
                                     /**
                                      * Scrolls to given date.
                                      *
@@ -1996,12 +1996,12 @@
                                      */
                                     scrollToDate: function(date) {
                                         var scrollNode = this.get(&#x27;boundingBox&#x27;).one(&#x27;.&#x27; + CSS_SCHEDULER_VIEW_SCROLLABLE);
-                            
+
                                         if (this.get(&#x27;scrollable&#x27;) &amp;&amp; scrollNode) {
                                             scrollNode.set(&#x27;scrollTop&#x27;, this.calculateTop(date));
                                         }
                                     },
-                            
+
                                     /**
                                      * Syncs the &#x60;SchedulerView&#x60; &#x60;columns&#x60; instance. Lifecycle.
                                      *
@@ -2010,17 +2010,17 @@
                                     syncColumnsUI: function() {
                                         var instance = this;
                                         var todayDate = instance.get(&#x27;scheduler&#x27;).get(&#x27;todayDate&#x27;);
-                            
+
                                         instance.colDaysNode.each(function(columnNode, i) {
                                             var columnDate = instance.getDateByColumn(i);
-                            
+
                                             columnNode.toggleClass(
                                                 CSS_SCHEDULER_TODAY, !DateMath.isDayOverlap(columnDate, todayDate));
                                         });
-                            
+
                                         this.syncCurrentTimeUI();
                                     },
-                            
+
                                     /**
                                      * Syncs the &#x60;SchedulerView&#x60; current time marker. Lifecycle.
                                      *
@@ -2029,17 +2029,17 @@
                                     syncCurrentTimeUI: function() {
                                         var currentTimeNode = this.get(&#x27;currentTimeNode&#x27;),
                                             todayColumn = this.colDaysNode.get(&#x27;parentNode&#x27;).one(&#x27;.&#x27; + CSS_SCHEDULER_TODAY);
-                            
+
                                         if (todayColumn) {
                                             todayColumn.one(&#x27;.&#x27; + CSS_SCHEDULER_VIEW_DAY_TABLE_COL_SHIM).append(currentTimeNode);
-                            
+
                                             currentTimeNode.setStyle(&#x27;top&#x27;, this.calculateTop(new Date()) + &#x27;px&#x27;);
                                         }
                                         else {
                                             currentTimeNode.remove();
                                         }
                                     },
-                            
+
                                     /**
                                      * Syncs the &#x60;SchedulerView&#x60; &#x60;daysHeader&#x60; instance. Lifecycle.
                                      *
@@ -2050,19 +2050,19 @@
                                         var viewDate = instance.get(&#x27;scheduler&#x27;).get(&#x27;viewDate&#x27;);
                                         var formatter = instance.get(&#x27;headerDateFormatter&#x27;);
                                         var todayDate = instance.get(&#x27;scheduler&#x27;).get(&#x27;todayDate&#x27;);
-                            
+
                                         instance.colHeaderDaysNode.all(&#x27;a&#x27;).each(
                                             function(columnNode, i) {
                                                 var columnDate = DateMath.add(viewDate, DateMath.DAY, i);
-                            
+
                                                 columnNode.toggleClass(
                                                     CSS_SCHEDULER_TODAY_HD, !DateMath.isDayOverlap(columnDate, todayDate));
-                            
+
                                                 columnNode.html(formatter.call(instance, columnDate));
                                             }
                                         );
                                     },
-                            
+
                                     /**
                                      * Syncs the &#x60;SchedulerView&#x60; &#x60;eventsIntersection&#x60; instance. Lifecycle.
                                      *
@@ -2072,46 +2072,46 @@
                                     syncEventsIntersectionUI: function(columnEvents) {
                                         var instance = this;
                                         var eventWidth = instance.get(&#x27;eventWidth&#x27;);
-                            
+
                                         instance.get(&#x27;scheduler&#x27;).flushEvents();
-                            
+
                                         A.Array.each(columnEvents, function(colEvt) {
                                             var intercessors = instance.findEventIntersections(
                                                 colEvt, columnEvents);
-                            
+
                                             var total = intercessors.length;
                                             var distributionRate = (eventWidth / total);
-                            
+
                                             A.Array.each(intercessors, function(evt, j) {
                                                 var evtNode = evt.get(&#x27;node&#x27;).item(0);
                                                 var left = distributionRate * j;
                                                 var width = distributionRate * 1.7;
-                            
+
                                                 if (j === (total - 1)) {
                                                     width = eventWidth - left;
                                                 }
-                            
+
                                                 evtNode.setStyle(&#x27;width&#x27;, width + &#x27;%&#x27;);
                                                 evtNode.setStyle(&#x27;left&#x27;, left + &#x27;%&#x27;);
-                            
+
                                                 if (total &gt; 1) {
                                                     evtNode.addClass(CSS_SCHEDULER_EVENT_INTERSECTING);
                                                 }
                                                 else {
                                                     evtNode.removeClass(CSS_SCHEDULER_EVENT_INTERSECTING);
                                                 }
-                            
+
                                                 var evtParentNode = evtNode.get(&#x27;parentNode&#x27;);
-                            
+
                                                 if (evtParentNode) {
                                                     evtParentNode.insert(evtNode, j);
                                                 }
-                            
+
                                                 evt._filtered = true;
                                             });
                                         });
                                     },
-                            
+
                                     /**
                                      * Syncs the &#x60;SchedulerView&#x60; &#x60;eventHeight&#x60; instance. Lifecycle.
                                      *
@@ -2122,25 +2122,25 @@
                                         var instance = this;
                                         var endDate = evt.get(&#x27;endDate&#x27;);
                                         var startDate = evt.get(&#x27;startDate&#x27;);
-                            
+
                                         var maxVisibleDate = DateMath.clone(startDate);
                                         maxVisibleDate.setHours(24, 0, 0);
-                            
+
                                         var minutesOffset = DateMath.getMinutesOffset(
                                             instance.limitDate(endDate, maxVisibleDate), startDate);
-                            
+
                                         evt.get(&#x27;node&#x27;).item(0).set(&#x27;offsetHeight&#x27;, instance.calculateEventHeight(minutesOffset));
-                            
+
                                         var paddingNode = evt.get(&#x27;node&#x27;).item(1);
-                            
+
                                         if (paddingNode.inDoc()) {
                                             var paddingMinutesOffset = DateMath.getMinutesOffset(
                                                 endDate, DateMath.toMidnight(evt.getClearEndDate()));
-                            
+
                                             paddingNode.set(&#x27;offsetHeight&#x27;, instance.calculateEventHeight(paddingMinutesOffset));
                                         }
                                     },
-                            
+
                                     /**
                                      * Syncs the &#x60;SchedulerView&#x60; &#x60;eventTop&#x60; instance. Lifecycle.
                                      *
@@ -2149,13 +2149,13 @@
                                      */
                                     syncEventTopUI: function(evt) {
                                         var instance = this;
-                            
+
                                         evt.get(&#x27;node&#x27;).item(0).setStyle(
                                             &#x27;top&#x27;, instance.calculateTop(evt.get(&#x27;startDate&#x27;)) + &#x27;px&#x27;);
-                            
+
                                         evt.get(&#x27;node&#x27;).item(1).setStyle(&#x27;top&#x27;, 0);
                                     },
-                            
+
                                     /**
                                      * Syncs the &#x60;SchedulerView&#x60; &#x60;headerView&#x60; instance. Lifecycle.
                                      *
@@ -2163,25 +2163,25 @@
                                      */
                                     syncHeaderViewUI: function() {
                                         var instance = this;
-                            
+
                                         if (instance.get(&#x27;headerView&#x27;)) {
                                             var headerView = instance.headerView;
-                            
+
                                             headerView.plotEvents();
-                            
+
                                             instance.headerNode.setStyle(&#x27;paddingRight&#x27;, getScrollbarWidth());
-                            
+
                                             var headerViewBB = headerView.get(&#x27;boundingBox&#x27;);
-                            
+
                                             var headerViewData = headerViewBB.one(&#x27;.&#x27; + CSS_SVT_TABLE_DATA);
                                             var height = Math.max(headerViewData.get(&#x27;offsetHeight&#x27;), 40);
-                            
+
                                             headerView.set(&#x27;height&#x27;, height);
-                            
+
                                             instance._fillHeight();
                                         }
                                     },
-                            
+
                                     /**
                                      * Calculates the Y delta between two XY coordinates.
                                      *
@@ -2191,10 +2191,10 @@
                                      */
                                     calculateYDelta: function(startXY, xy) {
                                         var instance = this;
-                            
+
                                         return (xy[1] - startXY[1]) / (instance.get(&#x27;hourHeight&#x27;) / 2) * 30;
                                     },
-                            
+
                                     /**
                                      * Returns a collection of &#x60;SchedulerEvents&#x60; as the parameter &#x60;events&#x60;
                                      * that intersect with &#x60;evt&#x60;.
@@ -2206,16 +2206,16 @@
                                      */
                                     findEventIntersections: function(evt, events) {
                                         var group = [];
-                            
+
                                         A.Array.each(events, function(evtCmp) {
                                             if (!evt._filtered &amp;&amp; evtCmp.get(&#x27;visible&#x27;) &amp;&amp; evt.intersects(evtCmp)) {
                                                 group.push(evtCmp);
                                             }
                                         });
-                            
+
                                         return group;
                                     },
-                            
+
                                     /**
                                      * Calculates the XY delta between the &#x60;event.currentTarget&#x60; XY
                                      * coordinates as well as the XY coordinates from the event page.
@@ -2226,12 +2226,12 @@
                                     getXYDelta: function(event) {
                                         var xy = event.currentTarget.getXY(),
                                             pageXY = [event.pageX, event.pageY];
-                            
+
                                         return A.Array.map(xy, function(val, i) {
                                             return (pageXY[i] - val);
                                         });
                                     },
-                            
+
                                     /**
                                      * Returns the nearest multiple of 10 to half the height of this
                                      * &#x60;SchedulerView&#x60;.
@@ -2242,11 +2242,11 @@
                                      */
                                     getTickY: function() {
                                         var instance = this;
-                            
+
                                         return roundToNearestMultiple(
                                             Math.ceil(instance.get(&#x27;hourHeight&#x27;) / 2), 10);
                                     },
-                            
+
                                     /**
                                      * Rounds a given &#x60;Date&#x60; to a given hour represented as time.
                                      *
@@ -2256,13 +2256,13 @@
                                      */
                                     roundToNearestHour: function(date, time) {
                                         var instance = this;
-                            
+
                                         date.setHours(
                                             time[0],
                                             roundToNearestMultiple(time[1], instance.getTickY()),
                                             time[2]);
                                     },
-                            
+
                                     /**
                                      * Handles &#x60;dragAlign&#x60; events.
                                      *
@@ -2273,14 +2273,14 @@
                                     _afterDragAlign: function(event) {
                                         var instance = this;
                                         var dd = event.target;
-                            
+
                                         if (!instance.startXY) {
                                             instance.startXY = dd.actXY;
                                         }
-                            
+
                                         dd.actXY[0] = null;
                                     },
-                            
+
                                     /**
                                      * Binds the events related to the mouse.
                                      *
@@ -2291,24 +2291,24 @@
                                         this.columnData.delegate(
                                             &#x27;gesturemovestart&#x27;, A.bind(this._onGestureMoveStartTableCol, this), &#x27;.&#x27; +
                                             CSS_SCHEDULER_VIEW_DAY_TABLE_COL);
-                            
+
                                         this.columnData.delegate(
                                             &#x27;mouseenter&#x27;, A.bind(this._onMouseEnterEvent, this), &#x27;.&#x27; + CSS_SCHEDULER_EVENT);
-                            
+
                                         this.columnData.delegate(
                                             &#x27;mouseleave&#x27;, A.bind(this._onMouseLeaveEvent, this), &#x27;.&#x27; + CSS_SCHEDULER_EVENT);
-                            
+
                                         this.columnData.delegate(
                                             &#x27;gesturemove&#x27;,
                                             A.bind(this._onGestureMoveTableCol, this),
                                             &#x27;.&#x27; + CSS_SCHEDULER_VIEW_DAY_TABLE_COLDAY,
                                             {standAlone: true}
                                         );
-                            
+
                                         this.columnData.delegate(
                                             &#x27;gesturemoveend&#x27;, A.bind(this._onGestureMoveEndTableCol, this), &#x27;.&#x27; + CSS_SCHEDULER_VIEW_DAY_TABLE_COL);
                                     },
-                            
+
                                     /**
                                      * Fired after the &#x60;visible&#x60; attribute changes.
                                      *
@@ -2317,12 +2317,12 @@
                                      */
                                     _afterVisibleChange: function() {
                                         clearInterval(this._currentTimeInterval);
-                            
+
                                         if (this.get(&#x27;visible&#x27;)) {
                                             this._bindCurrentTimeInterval();
                                         }
                                     },
-                            
+
                                     /**
                                      * Binds the listener that updates the current time marker every minute.
                                      *
@@ -2332,7 +2332,7 @@
                                     _bindCurrentTimeInterval: function() {
                                         this._currentTimeInterval = setInterval(A.bind(this.syncCurrentTimeUI, this), 60000);
                                     },
-                            
+
                                     /**
                                      * Aligns the dragging &#x60;SchedulerEvent&#x60; to the X axis while bound to the
                                      * Y axis on the &#x60;activeColumn&#x60;.
@@ -2344,25 +2344,25 @@
                                     _dragTickAlignX: function(activeColumn) {
                                         var instance = this;
                                         var draggingEvent = instance.draggingEvent;
-                            
+
                                         if (draggingEvent &amp;&amp; !instance.resizing) {
                                             var placeholder = instance.eventPlaceholder;
                                             var delta = toNumber(activeColumn.attr(&#x27;data-colnumber&#x27;)) - instance.startColNumber;
-                            
+
                                             instance.draggingEventStartDate = DateMath.add(draggingEvent.get(&#x27;startDate&#x27;), DateMath.DAY, delta);
-                            
+
                                             var startDate = DateMath.clone(instance.draggingEventStartDate);
-                            
+
                                             DateMath.copyHours(startDate, placeholder.get(&#x27;startDate&#x27;));
-                            
+
                                             placeholder.move(startDate, {
                                                 silent: true
                                             });
-                            
+
                                             instance.plotEvent(placeholder);
                                         }
                                     },
-                            
+
                                     /**
                                      * Aligns the dragging &#x60;SchedulerEvent&#x60; to the Y axis by either setting
                                      * the end date if the event is a &#x60;resize&#x60;, or moves the event
@@ -2374,21 +2374,21 @@
                                      */
                                     _dragTickAlignY: function(event) {
                                         var instance = this;
-                            
+
                                         var draggingEvent = instance.draggingEvent;
-                            
+
                                         if (draggingEvent) {
                                             var dd = event.target.get(&#x27;host&#x27;);
                                             var placeholder = instance.eventPlaceholder;
                                             var delta = instance.calculateYDelta(instance.startXY, dd.actXY);
-                            
+
                                             if (instance.resizing) {
                                                 var endDate = DateMath.add(instance.draggingEventEndDate, DateMath.MINUTES, delta);
-                            
+
                                                 if (DateMath.getMinutesOffset(endDate, instance.draggingEventStartDate) &lt; 30) {
                                                     return;
                                                 }
-                            
+
                                                 placeholder.set(&#x27;endDate&#x27;, endDate, {
                                                     silent: true
                                                 });
@@ -2398,11 +2398,11 @@
                                                     silent: true
                                                 });
                                             }
-                            
+
                                             instance.plotEvent(placeholder);
                                         }
                                     },
-                            
+
                                     /**
                                      * Finds and returns the column related to the given event.
                                      *
@@ -2413,7 +2413,7 @@
                                     _findActiveColumn: function(event) {
                                         return event.currentTarget;
                                     },
-                            
+
                                     /**
                                      * Configures a &#x60;DD.Delegate&#x60; that handles &#x60;DD&#x60; events for this
                                      * &#x60;SchedulerDayView&#x60;.
@@ -2424,14 +2424,14 @@
                                     _setupDragDrop: function() {
                                         var instance = this,
                                             placeholder = instance.eventPlaceholder;
-                            
+
                                         if (!placeholder) {
                                             var scheduler = instance.get(&#x27;scheduler&#x27;);
-                            
+
                                             placeholder = new scheduler.eventModel({
                                                 scheduler: scheduler
                                             });
-                            
+
                                             placeholder.removeTarget(scheduler);
                                             placeholder.get(&#x27;node&#x27;).addClass(CSS_SCHEDULER_EVENT_PROXY);
                                             placeholder.set(&#x27;visible&#x27;, false, {
@@ -2439,35 +2439,35 @@
                                             });
                                             instance.eventPlaceholder = placeholder;
                                         }
-                            
+
                                         if (!instance.delegate) {
                                             instance.delegate = new A.DD.Delegate(
                                                 instance.get(&#x27;delegateConfig&#x27;));
                                         }
-                            
+
                                         var dd = instance.delegate.dd;
-                            
+
                                         dd.unplug(A.Plugin.DDConstrained);
                                         dd.unplug(A.Plugin.DDNodeScroll);
-                            
+
                                         var region = instance.bodyNode.get(&#x27;region&#x27;);
-                            
+
                                         region.bottom = Infinity;
                                         region.top = -Infinity;
-                            
+
                                         dd.plug(A.Plugin.DDConstrained, {
                                             bubbleTargets: instance,
                                             constrain: region,
                                             stickY: true,
                                             tickY: instance.get(&#x27;hourHeight&#x27;) / 2
                                         });
-                            
+
                                         dd.plug(A.Plugin.DDNodeScroll, {
                                             node: instance.bodyNode,
                                             scrollDelay: 150
                                         });
                                     },
-                            
+
                                     /**
                                      * Sets &#x60;date&#x60; on the UI.
                                      *
@@ -2476,11 +2476,11 @@
                                      */
                                     _uiSetDate: function() {
                                         var instance = this;
-                            
+
                                         instance.syncColumnsUI();
                                         instance.syncDaysHeaderUI();
                                     },
-                            
+
                                     /**
                                      * Handles &#x60;clickDays&#x60; events.
                                      *
@@ -2491,21 +2491,21 @@
                                     _onClickDaysHeader: function(event) {
                                         var instance = this;
                                         var scheduler = instance.get(&#x27;scheduler&#x27;);
-                            
+
                                         if (event.target.test(&#x27;a, a span&#x27;)) {
                                             var dayView = scheduler.getViewByName(&#x27;day&#x27;);
-                            
+
                                             if (dayView) {
                                                 var colNumber = toNumber(event.currentTarget.attr(&#x27;data-colnumber&#x27;));
-                            
+
                                                 scheduler.set(&#x27;date&#x27;, instance.getDateByColumn(colNumber));
                                                 scheduler.set(&#x27;activeView&#x27;, dayView);
                                             }
                                         }
-                            
+
                                         event.preventDefault();
                                     },
-                            
+
                                     /**
                                      * Handles &#x60;eventDrag&#x60; events.
                                      *
@@ -2516,10 +2516,10 @@
                                     _onEventDragEnd: function() {
                                         var instance = this;
                                         var draggingEvent = instance.draggingEvent;
-                            
+
                                         if (draggingEvent) {
                                             var placeholder = instance.eventPlaceholder;
-                            
+
                                             placeholder.set(&#x27;visible&#x27;, false, {
                                                 silent: true
                                             });
@@ -2527,14 +2527,14 @@
                                                 silent: true
                                             });
                                             draggingEvent.copyDates(placeholder);
-                            
+
                                             instance.get(&#x27;scheduler&#x27;).syncEventsUI();
                                         }
-                            
+
                                         instance.startXY = null;
                                         instance.draggingEvent = null;
                                     },
-                            
+
                                     /**
                                      * Handles &#x60;eventDrag&#x60; events.
                                      *
@@ -2546,29 +2546,29 @@
                                         var instance = this;
                                         var draggingEvent = instance.draggingEvent =
                                             instance.delegate.dd.get(&#x27;node&#x27;).getData(&#x27;scheduler-event&#x27;);
-                            
+
                                         if (draggingEvent) {
                                             var placeholder = instance.eventPlaceholder;
-                            
+
                                             placeholder.copyPropagateAttrValues(draggingEvent, null, {
                                                 silent: true
                                             });
-                            
+
                                             instance.plotEvent(placeholder);
-                            
+
                                             draggingEvent.set(&#x27;visible&#x27;, false, {
                                                 silent: true
                                             });
-                            
+
                                             instance.draggingEventStartDate = DateMath.clone(draggingEvent.get(&#x27;startDate&#x27;));
                                             instance.draggingEventEndDate = DateMath.clone(draggingEvent.get(&#x27;endDate&#x27;));
-                            
+
                                             var startColumn = instance.getColumnByDate(draggingEvent.get(&#x27;startDate&#x27;));
-                            
+
                                             instance.startColNumber = startColumn ? toNumber(startColumn.attr(&#x27;data-colnumber&#x27;)) : 0;
                                         }
                                     },
-                            
+
                                     /**
                                      * Handles &#x60;gesturemoveend&#x60; events.
                                      *
@@ -2579,23 +2579,23 @@
                                         var instance = this;
                                         var scheduler = instance.get(&#x27;scheduler&#x27;);
                                         var recorder = scheduler.get(&#x27;eventRecorder&#x27;);
-                            
+
                                         if (recorder &amp;&amp; !scheduler.get(&#x27;disabled&#x27;)) {
                                             if (instance.creationStartDate) {
                                                 instance.plotEvent(recorder);
-                            
+
                                                 recorder.showPopover();
                                             }
                                         }
-                            
+
                                         instance.creationStartDate = null;
                                         instance.resizing = false;
                                         instance.startXY = null;
-                            
+
                                         instance._removeResizer();
                                         instance.get(&#x27;boundingBox&#x27;).selectable();
                                     },
-                            
+
                                     /**
                                      * Handles &#x60;gestureMoveStart&#x60; events.
                                      *
@@ -2608,24 +2608,24 @@
                                         var target = event.target;
                                         var scheduler = instance.get(&#x27;scheduler&#x27;);
                                         var recorder = scheduler.get(&#x27;eventRecorder&#x27;);
-                            
+
                                         if (recorder &amp;&amp; !scheduler.get(&#x27;disabled&#x27;)) {
                                             recorder.hidePopover();
-                            
+
                                             if (target.test(&#x27;.&#x27; + CSS_SCHEDULER_VIEW_DAY_TABLE_COL_SHIM)) {
                                                 this._prepareEventCreation(event);
                                             }
                                             else if (target.test(
                                                         [&#x27;.&#x27; + CSS_SCHEDULER_VIEW_DAY_RESIZER,
                                                          &#x27;.&#x27; + CSS_SCHEDULER_VIEW_DAY_RESIZER_ICON].join(&#x27;,&#x27;))) {
-                            
+
                                                 instance.resizing = true;
                                             }
                                         }
-                            
+
                                         instance.get(&#x27;boundingBox&#x27;).unselectable();
                                     },
-                            
+
                                     /**
                                      * Handles &#x60;gesturemove&#x60; events.
                                      *
@@ -2637,26 +2637,26 @@
                                         var instance = this;
                                         var activeColumn = this._findActiveColumn(event);
                                         var recorder = instance.get(&#x27;scheduler&#x27;).get(&#x27;eventRecorder&#x27;);
-                            
+
                                         if (instance.activeColumn !== activeColumn) {
                                             instance.activeColumn = activeColumn;
                                             instance._dragTickAlignX(instance.activeColumn);
                                         }
-                            
+
                                         var creationStartDate = instance.creationStartDate;
-                            
+
                                         if (creationStartDate) {
                                             var delta = roundToNearestMultiple(
                                                 instance.calculateYDelta(instance.startXY, [event.pageX, event.pageY]),
                                                 instance.getTickY()
                                             );
-                            
+
                                             var down = (delta &gt;= instance._delta);
-                            
+
                                             if (instance._delta !== delta) {
                                                 if (delta &gt; 0) {
                                                     var newDelta = down ? Math.max(delta, recorder.get(&#x27;duration&#x27;)) : delta;
-                            
+
                                                     recorder.set(&#x27;endDate&#x27;, DateMath.add(creationStartDate, DateMath.MINUTES, newDelta), {
                                                         silent: true
                                                     });
@@ -2666,14 +2666,14 @@
                                                         silent: true
                                                     });
                                                 }
-                            
+
                                                 instance.plotEvent(recorder);
-                            
+
                                                 instance._delta = delta;
                                             }
                                         }
                                     },
-                            
+
                                     /**
                                      * Handles &#x60;mouseEnter&#x60; events.
                                      *
@@ -2685,12 +2685,12 @@
                                         var instance = this;
                                         var target = event.currentTarget;
                                         var evt = target.getData(&#x27;scheduler-event&#x27;);
-                            
+
                                         if (evt &amp;&amp; !evt.get(&#x27;disabled&#x27;)) {
                                             instance.resizerNode.appendTo(target);
                                         }
                                     },
-                            
+
                                     /**
                                      * Handles &#x60;mouseLeave&#x60; events.
                                      *
@@ -2700,12 +2700,12 @@
                                      */
                                     _onMouseLeaveEvent: function() {
                                         var instance = this;
-                            
+
                                         if (!instance.resizing) {
                                             instance._removeResizer();
                                         }
                                     },
-                            
+
                                     /**
                                      * Handles &#x60;scheduler&#x60; value change.
                                      *
@@ -2715,12 +2715,12 @@
                                      */
                                     _onSchedulerChange: function(event) {
                                         var instance = this;
-                            
+
                                         if (instance.headerView) {
                                             instance.headerView.set(&#x27;scheduler&#x27;, event.newVal);
                                         }
                                     },
-                            
+
                                     /**
                                      * Prepares for the creation of a new scheduler event.
                                      *
@@ -2733,32 +2733,32 @@
                                             endDate,
                                             startDate = this.getDateByColumn(colNumber),
                                             recorder = this.get(&#x27;scheduler&#x27;).get(&#x27;eventRecorder&#x27;);
-                            
+
                                         this.startXY = [event.pageX, event.pageY];
-                            
+
                                         this.roundToNearestHour(startDate, this.getYCoordTime(clickLeftTop[1]));
-                            
+
                                         if (!duration) {
                                             duration = recorder.get(&#x27;duration&#x27;);
                                         }
                                         endDate = DateMath.add(startDate, DateMath.MINUTES, duration);
-                            
+
                                         recorder.move(startDate, {
                                             silent: true
                                         });
-                            
+
                                         recorder.setAttrs({
                                             allDay: false,
                                             endDate: endDate
                                         }, {
                                             silent: true
                                         });
-                            
+
                                         this.creationStartDate = startDate;
-                            
+
                                         event.halt();
                                     },
-                            
+
                                     /**
                                      * Removes the &#x60;SchedulerView&#x60;&#x27;s resizer &#x60;Node&#x60; from the DOM.
                                      *
@@ -2767,10 +2767,10 @@
                                      */
                                     _removeResizer: function() {
                                         var instance = this;
-                            
+
                                         instance.resizerNode.remove();
                                     },
-                            
+
                                     /**
                                      * Returns the value of &#x60;colDaysNode&#x60;.
                                      *
@@ -2783,7 +2783,7 @@
                                         var days = instance.get(&#x27;days&#x27;);
                                         var buffer = [],
                                             colNumber = 0;
-                            
+
                                         while (days--) {
                                             buffer.push(
                                                 A.Lang.sub(TPL_SCHEDULER_VIEW_DAY_TABLE_COLDAY, {
@@ -2791,10 +2791,10 @@
                                                 })
                                             );
                                         }
-                            
+
                                         return A.NodeList.create(buffer.join(&#x27;&#x27;));
                                     },
-                            
+
                                     /**
                                      * Returns the &#x60;colHeaderDaysNode&#x60; value.
                                      *
@@ -2807,9 +2807,9 @@
                                         var days = instance.get(&#x27;days&#x27;);
                                         var buffer = [],
                                             colNumber = 0;
-                            
+
                                         buffer.push(TPL_SCHEDULER_VIEW_DAY_HEADER_DAY_FIRST);
-                            
+
                                         while (days--) {
                                             buffer.push(
                                                 A.Lang.sub(TPL_SCHEDULER_VIEW_DAY_HEADER_DAY, {
@@ -2817,10 +2817,10 @@
                                                 })
                                             );
                                         }
-                            
+
                                         return A.NodeList.create(buffer.join(&#x27;&#x27;));
                                     },
-                            
+
                                     /**
                                      * Returns the &#x60;markercellsNode&#x60; value.
                                      *
@@ -2831,14 +2831,14 @@
                                     _valueMarkercellsNode: function() {
                                         var buffer = [],
                                             i;
-                            
+
                                         for (i = 0; i &lt;= 23; i++) {
                                             buffer.push(TPL_SCHEDULER_VIEW_DAY_MARKERCELL);
                                         }
-                            
+
                                         return A.NodeList.create(buffer.join(&#x27;&#x27;));
                                     },
-                            
+
                                     /**
                                      * Returns the &#x60;timesNode&#x60; value.
                                      *
@@ -2851,7 +2851,7 @@
                                         var isoTime = instance.get(&#x27;isoTime&#x27;);
                                         var buffer = [],
                                             hour;
-                            
+
                                         for (hour = 0; hour &lt;= 23; hour++) {
                                             buffer.push(
                                                 Lang.sub(
@@ -2862,14 +2862,14 @@
                                                 )
                                             );
                                         }
-                            
+
                                         return A.NodeList.create(buffer.join(&#x27;&#x27;));
                                     }
                                 }
                             });
-                            
+
                             A.SchedulerDayView = SchedulerDayView;
-                            
+
                                 </pre>
                             </div>
                         </div>

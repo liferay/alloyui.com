@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>alloy-ui/src/aui-ace-editor/js/aui-ace-autocomplete-base.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1140,17 +1140,17 @@
                              * @module aui-ace-editor
                              * @submodule aui-ace-autocomplete-base
                              */
-                            
+
                             var Lang = A.Lang,
                                 AArray = A.Array,
                                 Do = A.Do,
                                 ADOM = A.DOM,
-                            
+
                                 FILL_MODE_INSERT = 1,
                                 FILL_MODE_OVERWRITE = 0,
-                            
+
                                 Base = function() {};
-                            
+
                             /**
                              * A base class for AutoCompleteBase.
                              *
@@ -1160,7 +1160,7 @@
                              * @constructor
                              */
                             Base.prototype = {
-                            
+
                                 /**
                                  * Construction logic executed during AutoCompleteBase instantiation.
                                  * Lifecycle.
@@ -1171,21 +1171,21 @@
                                 initializer: function() {
                                     var instance = this,
                                         processor;
-                            
+
                                     instance._editorCommands = [];
-                            
+
                                     A.after(instance._bindUIACBase, instance, &#x27;renderUI&#x27;);
-                            
+
                                     processor = instance.get(&#x27;processor&#x27;);
-                            
+
                                     if (processor &amp;&amp; !processor.get(&#x27;host&#x27;)) {
                                         processor.set(&#x27;host&#x27;, instance);
                                     }
-                            
+
                                     instance._onResultsErrorFn = A.bind(&#x27;_onResultsError&#x27;, instance);
                                     instance._onResultsSuccessFn = A.bind(&#x27;_onResultsSuccess&#x27;, instance);
                                 },
-                            
+
                                 /**
                                  * Inserts the provided suggestion as a string to the editor. The added text
                                  * can overwrite the match or to be inserted depending on the &#x60;fillMode&#x60;
@@ -1206,41 +1206,41 @@
                                         Range,
                                         startColumn,
                                         startRow;
-                            
+
                                     instance._lockEditor = true;
-                            
+
                                     editor = instance._getEditor();
-                            
+
                                     data = instance.get(&#x27;processor&#x27;).getSuggestion(instance._matchParams.match, content);
-                            
+
                                     if (instance.get(&#x27;fillMode&#x27;) === Base.FILL_MODE_OVERWRITE) {
                                         matchParams = instance._matchParams;
-                            
+
                                         startRow = matchParams.row;
-                            
+
                                         startColumn = matchParams.column - matchParams.match.content.length;
-                            
+
                                         cursorPosition = editor.getCursorPosition();
-                            
+
                                         Range = require(&#x27;ace/range&#x27;).Range;
-                            
+
                                         overwriteRange = new Range(startRow, startColumn, cursorPosition.row, cursorPosition.column);
-                            
+
                                         editor.getSession().replace(overwriteRange, data);
                                     }
                                     else {
                                         editor.insert(data);
                                     }
-                            
+
                                     editor.focus();
-                            
+
                                     instance._lockEditor = false;
-                            
+
                                     instance.fire(&#x27;addSuggestion&#x27;, data);
-                            
+
                                     return new Do.Halt(null);
                                 },
-                            
+
                                 /**
                                  * Binds editor events.
                                  *
@@ -1250,19 +1250,19 @@
                                 _bindUIACBase: function() {
                                     var instance = this,
                                         editor;
-                            
+
                                     instance.publish(
                                         &#x27;cursorChange&#x27;, {
                                             defaultFn: instance._defaultCursorChangeFn
                                         }
                                     );
-                            
+
                                     editor = instance._getEditor();
-                            
+
                                     instance._onChangeFn = A.bind(&#x27;_onEditorChange&#x27;, instance);
-                            
+
                                     editor.on(&#x27;change&#x27;, instance._onChangeFn);
-                            
+
                                     editor.commands.addCommand({
                                         name: &#x27;showAutoComplete&#x27;,
                                         bindKey: A.merge(
@@ -1272,18 +1272,18 @@
                                         ),
                                         exec: function() {
                                             var cursorPosition = editor.getCursorPosition();
-                            
+
                                             instance._processAutoComplete(cursorPosition.row, cursorPosition.column);
                                         }
                                     });
-                            
+
                                     instance._onEditorChangeCursorFn = A.bind(&#x27;_onEditorChangeCursor&#x27;, instance);
-                            
+
                                     editor.getSelection().on(&#x27;changeCursor&#x27;, instance._onEditorChangeCursorFn);
-                            
+
                                     instance.on(&#x27;destroy&#x27;, instance._destroyUIACBase, instance);
                                 },
-                            
+
                                 /**
                                  * Checks if the cursor is out of the row/column on the latest match. If so,
                                  * fires an &#x60;cursorOut&#x60; event.
@@ -1299,21 +1299,21 @@
                                         editor,
                                         matchParams,
                                         row;
-                            
+
                                     editor = instance._getEditor();
-                            
+
                                     cursorPosition = editor.getCursorPosition();
-                            
+
                                     row = cursorPosition.row;
                                     column = cursorPosition.column;
-                            
+
                                     matchParams = instance._matchParams;
-                            
+
                                     if (row !== matchParams.row || column &lt; matchParams.match.start) {
                                         instance.fire(&#x27;cursorOut&#x27;);
                                     }
                                 },
-                            
+
                                 /**
                                  * Removes the listeners to editor commands.
                                  *
@@ -1323,18 +1323,18 @@
                                 _destroyUIACBase: function() {
                                     var instance = this,
                                         editor;
-                            
+
                                     editor = instance._getEditor();
-                            
+
                                     editor.commands.removeCommand(&#x27;showAutoComplete&#x27;);
-                            
+
                                     editor.removeListener(&#x27;change&#x27;, instance._onChangeFn);
-                            
+
                                     editor.getSelection().removeListener(&#x27;changeCursor&#x27;, instance._onEditorChangeCursorFn);
-                            
+
                                     instance._removeAutoCompleteCommands();
                                 },
-                            
+
                                 /**
                                  * Returns the editor instance.
                                  *
@@ -1344,10 +1344,10 @@
                                  */
                                 _getEditor: function() {
                                     var instance = this;
-                            
+
                                     return instance.get(&#x27;host&#x27;).getEditor();
                                 },
-                            
+
                                 /**
                                  * Filters and sorts the found suggestions using the existing chain of
                                  * &#x60;filters&#x60; and &#x60;sorters&#x60;.
@@ -1364,30 +1364,30 @@
                                         i,
                                         length,
                                         sorters;
-                            
+
                                     filters = instance.get(&#x27;filters&#x27;);
-                            
+
                                     for (i = 0, length = filters.length; i &lt; length; ++i) {
                                         results = filters[i].call(instance, content, results.concat());
-                            
+
                                         if (!results.length) {
                                             break;
                                         }
                                     }
-                            
+
                                     sorters = instance.get(&#x27;sorters&#x27;);
-                            
+
                                     for (i = 0, length = sorters.length; i &lt; length; ++i) {
                                         results = sorters[i].call(instance, content, results.concat());
-                            
+
                                         if (!results.length) {
                                             break;
                                         }
                                     }
-                            
+
                                     return results;
                                 },
-                            
+
                                 /**
                                  * Checks for new line or tab character and adds a suggestion to the editor
                                  * if so.
@@ -1401,14 +1401,14 @@
                                 _handleEnter: function(text) {
                                     var instance = this,
                                         selectedEntry;
-                            
+
                                     if (text === &#x27;\n&#x27; || text === &#x27;\t&#x27;) {
                                         selectedEntry = instance._getSelectedEntry();
-                            
+
                                         return instance._addSuggestion(selectedEntry);
                                     }
                                 },
-                            
+
                                 /**
                                  * Handles editor change event. If editor is not locked and data action is
                                  * insert or remove text, process auto complete.
@@ -1425,22 +1425,22 @@
                                         dataRange,
                                         endRow,
                                         startRow;
-                            
+
                                     data = event.data;
-                            
+
                                     dataAction = data.action;
-                            
+
                                     if (!instance._lockEditor &amp;&amp; (dataAction === &#x27;insertText&#x27; || dataAction === &#x27;removeText&#x27;)) {
                                         dataRange = data.range;
-                            
+
                                         column = dataRange.start.column;
                                         endRow = dataRange.end.row;
                                         startRow = dataRange.start.row;
-                            
+
                                         if (dataAction === &#x27;insertText&#x27; &amp;&amp; startRow === endRow) {
                                             instance._processAutoComplete(startRow, column + 1);
                                         }
-                            
+
                                         instance.fire(
                                             dataAction, {
                                                 column: column,
@@ -1451,7 +1451,7 @@
                                         );
                                     }
                                 },
-                            
+
                                 /**
                                  * Fires cursor change event providing the current position as event
                                  * payload.
@@ -1462,10 +1462,10 @@
                                  */
                                 _onEditorChangeCursor: function() {
                                     var instance = this;
-                            
+
                                     instance.fire(&#x27;cursorChange&#x27;, instance._getEditor().getCursorPosition());
                                 },
-                            
+
                                 /**
                                  * Fires an &#x60;resultsError&#x60; event containing the error.
                                  *
@@ -1475,10 +1475,10 @@
                                  */
                                 _onResultsError: function(error) {
                                     var instance = this;
-                            
+
                                     instance.fire(&#x27;resultsError&#x27;, error);
                                 },
-                            
+
                                 /**
                                  * Updates &#x60;results&#x60; attribute with the provided results.
                                  *
@@ -1488,10 +1488,10 @@
                                  */
                                 _onResultsSuccess: function(results) {
                                     var instance = this;
-                            
+
                                     instance.set(&#x27;results&#x27;, results);
                                 },
-                            
+
                                 /**
                                  * Overwrites the following editor commands:
                                  * onTextInput,
@@ -1511,11 +1511,11 @@
                                     var instance = this,
                                         commands,
                                         editor;
-                            
+
                                     editor = instance._getEditor();
-                            
+
                                     commands = editor.commands.commands;
-                            
+
                                     instance._editorCommands.push(
                                         Do.before(instance._handleEnter, editor, &#x27;onTextInput&#x27;, instance),
                                         Do.before(instance._handleKey, commands.golinedown, &#x27;exec&#x27;, instance, 40),
@@ -1528,7 +1528,7 @@
                                         Do.before(instance._handleKey, commands.gotostart, &#x27;exec&#x27;, instance, 36)
                                     );
                                 },
-                            
+
                                 /**
                                  * Checks for phrase match.
                                  *
@@ -1543,32 +1543,32 @@
                                     if (!content) {
                                         return results;
                                     }
-                            
+
                                     return AArray.filter(
                                         results,
                                         function(item) {
                                             var result = true;
-                            
+
                                             if (item === content) {
                                                 result = false;
                                             }
                                             else {
                                                 if (!caseSensitive) {
                                                     item = item.toLowerCase();
-                            
+
                                                     content = content.toLowerCase();
                                                 }
-                            
+
                                                 if (item.indexOf(content) === -1) {
                                                     result = false;
                                                 }
                                             }
-                            
+
                                             return result;
                                         }
                                     );
                                 },
-                            
+
                                 /**
                                  * Invokes the loaded content processor and checks for match. If found,
                                  * provides the match together with information about current row and column
@@ -1591,34 +1591,34 @@
                                         line,
                                         match,
                                         processor;
-                            
+
                                     col = column;
-                            
+
                                     editor = instance._getEditor();
-                            
+
                                     line = editor.getSession().getLine(row);
-                            
+
                                     line = line.substring(0, column);
-                            
+
                                     processor = instance.get(&#x27;processor&#x27;);
-                            
+
                                     match = processor.getMatch(line);
-                            
+
                                     if (Lang.isObject(match)) {
                                         coords = editor.renderer.textToScreenCoordinates(row, column);
-                            
+
                                         coords.pageX += ADOM.docScrollX();
                                         coords.pageY += ADOM.docScrollY();
-                            
+
                                         instance._matchParams = {
                                             column: column,
                                             match: match,
                                             row: row
                                         };
-                            
+
                                         processor.getResults(match, instance._onResultsSuccessFn, instance._onResultsErrorFn);
                                     }
-                            
+
                                     instance.fire(
                                         &#x27;match&#x27;, {
                                             column: column,
@@ -1629,7 +1629,7 @@
                                         }
                                     );
                                 },
-                            
+
                                 /**
                                  * Detaches the previously attached editor commands.
                                  *
@@ -1638,12 +1638,12 @@
                                  */
                                 _removeAutoCompleteCommands: function() {
                                     var instance = this;
-                            
+
                                     (new A.EventHandle(instance._editorCommands)).detach();
-                            
+
                                     instance._editorCommands.length = 0;
                                 },
-                            
+
                                 /**
                                  * Sorts the results in ascending order, taking in consideration the length
                                  * of the content.
@@ -1662,19 +1662,19 @@
                                             var index1,
                                                 index2,
                                                 result;
-                            
+
                                             result = 0;
-                            
+
                                             if (!caseSensitive) {
                                                 item1 = item1.toLowerCase();
-                            
+
                                                 item2 = item2.toLowerCase();
                                             }
-                            
+
                                             index1 = item1.indexOf(content);
-                            
+
                                             index2 = item2.indexOf(content);
-                            
+
                                             if (index1 === 0 &amp;&amp; index2 === 0) {
                                                 result = item1.localeCompare(item2);
                                             }
@@ -1687,12 +1687,12 @@
                                             else {
                                                 result = item1.localeCompare(item2);
                                             }
-                            
+
                                             return result;
                                         }
                                     );
                                 },
-                            
+
                                 /**
                                  * Validates the value of &#x60;fillMode&#x60; attribute.
                                  *
@@ -1706,7 +1706,7 @@
                                     return (value === Base.FILL_MODE_OVERWRITE || value === Base.FILL_MODE_INSERT);
                                 }
                             };
-                            
+
                             /**
                              * Exposes a constant for insert fill mode. See &#x60;fillMode&#x60; for more information.
                              *
@@ -1714,7 +1714,7 @@
                              * @static
                              */
                             Base.FILL_MODE_INSERT = FILL_MODE_INSERT;
-                            
+
                             /**
                              * Exposes a constant for overwrite fill mode. See &#x60;fillMode&#x60; for more
                              * information.
@@ -1723,7 +1723,7 @@
                              * @static
                              */
                             Base.FILL_MODE_OVERWRITE = FILL_MODE_OVERWRITE;
-                            
+
                             /**
                              * Static property which provides a string to identify the class.
                              *
@@ -1732,7 +1732,7 @@
                              * @static
                              */
                             Base.NAME = &#x27;ace-autocomplete-base&#x27;;
-                            
+
                             /**
                              * Static property which provides a string to identify the namespace.
                              *
@@ -1741,7 +1741,7 @@
                              * @static
                              */
                             Base.NS = &#x27;ace-autocomplete-base&#x27;;
-                            
+
                             /**
                              * Static property used to define the default attribute
                              * configuration for AutoCompleteBase.
@@ -1751,7 +1751,7 @@
                              * @static
                              */
                             Base.ATTRS = {
-                            
+
                                 /**
                                  * The mode in which the AutoComplete should operate. Can be one of these:
                                  * INSERT - value &#x27;0&#x27; or OVERWRITE - value &#x27;1&#x27;. In case of INSERT mode, when
@@ -1767,7 +1767,7 @@
                                     validator: &#x27;_validateFillMode&#x27;,
                                     value: Base.FILL_MODE_OVERWRITE
                                 },
-                            
+
                                 /**
                                  * Provides an array of filter functions which will filter the results. By
                                  * default there is one function which provides phrase match filtering.
@@ -1779,13 +1779,13 @@
                                 filters: {
                                     valueFn: function() {
                                         var instance = this;
-                            
+
                                         return [
                                             instance._phraseMatch
                                             ];
                                     }
                                 },
-                            
+
                                 /**
                                  * The default processor which will be used to process matches.
                                  *
@@ -1797,7 +1797,7 @@
                                         return Lang.isObject(value) || Lang.isFunction(value);
                                     }
                                 },
-                            
+
                                 /**
                                  * The keyboard combination which should be used to show the list with found
                                  * results.
@@ -1813,7 +1813,7 @@
                                         win: &#x27;Ctrl-Space&#x27;
                                     }
                                 },
-                            
+
                                 /**
                                  * Provides an array of sorter functions which will sort the results. By
                                  * default there is one function which sorts the results in ascending order.
@@ -1825,16 +1825,16 @@
                                 sorters: {
                                     valueFn: function() {
                                         var instance = this;
-                            
+
                                         return [
                                             instance._sortAscLength
                                             ];
                                     }
                                 }
                             };
-                            
+
                             A.AceEditor.AutoCompleteBase = Base;
-                            
+
                                 </pre>
                             </div>
                         </div>

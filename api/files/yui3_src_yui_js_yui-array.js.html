@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,45 +1122,45 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/yui/js/yui-array.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
                             @module yui
                             @submodule yui-base
                             */
-                            
+
                             var Lang   = Y.Lang,
                                 Native = Array.prototype,
-                            
+
                                 hasOwn = Object.prototype.hasOwnProperty;
-                            
+
                             /**
                             Provides utility methods for working with arrays. Additional array helpers can
                             be found in the &#x60;collection&#x60; and &#x60;array-extras&#x60; modules.
-                            
+
                             &#x60;Y.Array(thing)&#x60; returns a native array created from _thing_. Depending on
                             _thing_&#x27;s type, one of the following will happen:
-                            
+
                               * Arrays are returned unmodified unless a non-zero _startIndex_ is
                                 specified.
                               * Array-like collections (see &#x60;Array.test()&#x60;) are converted to arrays.
                               * For everything else, a new array is created with _thing_ as the sole
                                 item.
-                            
+
                             Note: elements that are also collections, such as &#x60;&lt;form&gt;&#x60; and &#x60;&lt;select&gt;&#x60;
                             elements, are not automatically converted to arrays. To force a conversion,
                             pass &#x60;true&#x60; as the value of the _force_ parameter.
-                            
+
                             @class Array
                             @constructor
                             @param {Any} thing The thing to arrayify.
@@ -1174,41 +1174,41 @@
                             **/
                             function YArray(thing, startIndex, force) {
                                 var len, result;
-                            
+
                                 /*jshint expr: true*/
                                 startIndex || (startIndex = 0);
-                            
+
                                 if (force || YArray.test(thing)) {
                                     // IE throws when trying to slice HTMLElement collections.
                                     try {
                                         return Native.slice.call(thing, startIndex);
                                     } catch (ex) {
                                         result = [];
-                            
+
                                         for (len = thing.length; startIndex &lt; len; ++startIndex) {
                                             result.push(thing[startIndex]);
                                         }
-                            
+
                                         return result;
                                     }
                                 }
-                            
+
                                 return [thing];
                             }
-                            
+
                             Y.Array = YArray;
-                            
+
                             /**
                             Dedupes an array of strings, returning an array that&#x27;s guaranteed to contain
                             only one copy of a given string.
-                            
+
                             This method differs from &#x60;Array.unique()&#x60; in that it&#x27;s optimized for use only
                             with arrays consisting entirely of strings or entirely of numbers, whereas
                             &#x60;unique&#x60; may be used with other value types (but is slower).
-                            
+
                             Using &#x60;dedupe()&#x60; with values other than strings or numbers, or with arrays
                             containing a mix of strings and numbers, may result in unexpected behavior.
-                            
+
                             @method dedupe
                             @param {String[]|Number[]} array Array of strings or numbers to dedupe.
                             @return {Array} Copy of _array_ containing no duplicate values.
@@ -1219,38 +1219,38 @@
                                 var hash    = Object.create(null),
                                     results = [],
                                     i, item, len;
-                            
+
                                 for (i = 0, len = array.length; i &lt; len; ++i) {
                                     item = array[i];
-                            
+
                                     if (!hash[item]) {
                                         hash[item] = 1;
                                         results.push(item);
                                     }
                                 }
-                            
+
                                 return results;
                             } : function (array) {
                                 var hash    = {},
                                     results = [],
                                     i, item, len;
-                            
+
                                 for (i = 0, len = array.length; i &lt; len; ++i) {
                                     item = array[i];
-                            
+
                                     if (!hasOwn.call(hash, item)) {
                                         hash[item] = 1;
                                         results.push(item);
                                     }
                                 }
-                            
+
                                 return results;
                             };
-                            
+
                             /**
                             Executes the supplied function on each item in the array. This method wraps
                             the native ES5 &#x60;Array.forEach()&#x60; method if available.
-                            
+
                             @method each
                             @param {Array} array Array to iterate.
                             @param {Function} fn Function to execute on each item in the array. The function
@@ -1271,28 +1271,28 @@
                                         fn.call(thisObj || Y, array[i], i, array);
                                     }
                                 }
-                            
+
                                 return Y;
                             };
-                            
+
                             /**
                             Alias for &#x60;each()&#x60;.
-                            
+
                             @method forEach
                             @static
                             **/
-                            
+
                             /**
                             Returns an object using the first array as keys and the second as values. If
                             the second array is not provided, or if it doesn&#x27;t contain the same number of
                             values as the first array, then &#x60;true&#x60; will be used in place of the missing
                             values.
-                            
+
                             @example
-                            
+
                                 Y.Array.hash([&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;], [&#x27;foo&#x27;, &#x27;bar&#x27;]);
                                 // =&gt; {a: &#x27;foo&#x27;, b: &#x27;bar&#x27;, c: true}
-                            
+
                             @method hash
                             @param {String[]} keys Array of strings to use as keys.
                             @param {Array} [values] Array to use as values.
@@ -1303,22 +1303,22 @@
                                 var hash = {},
                                     vlen = (values &amp;&amp; values.length) || 0,
                                     i, len;
-                            
+
                                 for (i = 0, len = keys.length; i &lt; len; ++i) {
                                     if (i in keys) {
                                         hash[keys[i]] = vlen &gt; i &amp;&amp; i in values ? values[i] : true;
                                     }
                                 }
-                            
+
                                 return hash;
                             };
-                            
+
                             /**
                             Returns the index of the first item in the array that&#x27;s equal (using a strict
                             equality check) to the specified _value_, or &#x60;-1&#x60; if the value isn&#x27;t found.
-                            
+
                             This method wraps the native ES5 &#x60;Array.indexOf()&#x60; method if available.
-                            
+
                             @method indexOf
                             @param {Array} array Array to search.
                             @param {Any} value Value to search for.
@@ -1332,40 +1332,40 @@
                             } : function (array, value, from) {
                                 // http://es5.github.com/#x15.4.4.14
                                 var len = array.length;
-                            
+
                                 from = +from || 0;
                                 from = (from &gt; 0 || -1) * Math.floor(Math.abs(from));
-                            
+
                                 if (from &lt; 0) {
                                     from += len;
-                            
+
                                     if (from &lt; 0) {
                                         from = 0;
                                     }
                                 }
-                            
+
                                 for (; from &lt; len; ++from) {
                                     if (from in array &amp;&amp; array[from] === value) {
                                         return from;
                                     }
                                 }
-                            
+
                                 return -1;
                             };
-                            
+
                             /**
                             Numeric sort convenience function.
-                            
+
                             The native &#x60;Array.prototype.sort()&#x60; function converts values to strings and
                             sorts them in lexicographic order, which is unsuitable for sorting numeric
                             values. Provide &#x60;Array.numericSort&#x60; as a custom sort function when you want
                             to sort values in numeric order.
-                            
+
                             @example
-                            
+
                                 [42, 23, 8, 16, 4, 15].sort(Y.Array.numericSort);
                                 // =&gt; [4, 8, 15, 16, 23, 42]
-                            
+
                             @method numericSort
                             @param {Number} a First value to compare.
                             @param {Number} b Second value to compare.
@@ -1375,11 +1375,11 @@
                             YArray.numericSort = function (a, b) {
                                 return a - b;
                             };
-                            
+
                             /**
                             Executes the supplied function on each item in the array. Returning a truthy
                             value from the function will stop the processing of remaining items.
-                            
+
                             @method some
                             @param {Array} array Array to iterate over.
                             @param {Function} fn Function to execute on each item. The function will receive
@@ -1400,31 +1400,31 @@
                                         return true;
                                     }
                                 }
-                            
+
                                 return false;
                             };
-                            
+
                             /**
                             Evaluates _obj_ to determine if it&#x27;s an array, an array-like collection, or
                             something else. This is useful when working with the function &#x60;arguments&#x60;
                             collection and &#x60;HTMLElement&#x60; collections.
-                            
+
                             Note: This implementation doesn&#x27;t consider elements that are also
                             collections, such as &#x60;&lt;form&gt;&#x60; and &#x60;&lt;select&gt;&#x60;, to be array-like.
-                            
+
                             @method test
                             @param {Object} obj Object to test.
                             @return {Number} A number indicating the results of the test:
-                            
+
                               * 0: Neither an array nor an array-like collection.
                               * 1: Real array.
                               * 2: Array-like collection.
-                            
+
                             @static
                             **/
                             YArray.test = function (obj) {
                                 var result = 0;
-                            
+
                                 if (Lang.isArray(obj)) {
                                     result = 1;
                                 } else if (Lang.isObject(obj)) {
@@ -1437,10 +1437,10 @@
                                         }
                                     } catch (ex) {}
                                 }
-                            
+
                                 return result;
                             };
-                            
+
                                 </pre>
                             </div>
                         </div>

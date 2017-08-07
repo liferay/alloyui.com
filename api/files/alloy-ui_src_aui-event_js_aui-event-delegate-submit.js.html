@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>alloy-ui/src/aui-event/js/aui-event-delegate-submit.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1140,11 +1140,11 @@
                              * @module aui-event
                              * @submodule aui-event-delegate-submit
                              */
-                            
+
                             var AArray = A.Array,
                                 AObject = A.Object,
                                 Selector = A.Selector;
-                            
+
                             /**
                              * Defines a new &#x60;submit&#x60; event in the DOM event system.
                              *
@@ -1163,19 +1163,19 @@
                                      */
                                     delegate: function(node, subscription, notifier, filter) {
                                         var instance = this;
-                            
+
                                         var clickHandles = instance._prepareHandles(subscription, node);
-                            
+
                                         if (!AObject.owns(clickHandles, &#x27;click&#x27;)) {
                                             clickHandles.click = node.delegate(
                                                 &#x27;click&#x27;,
                                                 function(event) {
                                                     var activeElement = event.target;
-                            
+
                                                     if (instance._getNodeName(activeElement, &#x27;input&#x27;) || instance._getNodeName(activeElement,
                                                         &#x27;button&#x27;)) {
                                                         var form = activeElement.get(&#x27;form&#x27;);
-                            
+
                                                         if (form) {
                                                             instance._attachEvent(form, node, subscription, notifier, filter);
                                                         }
@@ -1185,7 +1185,7 @@
                                             );
                                         }
                                     },
-                            
+
                                     /**
                                      * Implementation logic for cleaning up a detached subscription.
                                      *
@@ -1196,10 +1196,10 @@
                                      */
                                     detach: function(node, subscription, notifier) {
                                         var instance = this;
-                            
+
                                         instance._detachEvents(node, subscription, notifier);
                                     },
-                            
+
                                     /**
                                      * Implementation logic for cleaning up a detached delegate
                                      * subscription.
@@ -1211,10 +1211,10 @@
                                      */
                                     detachDelegate: function(node, subscription, notifier) {
                                         var instance = this;
-                            
+
                                         instance._detachEvents(node, subscription, notifier);
                                     },
-                            
+
                                     /**
                                      * Implementation logic for event subscription.
                                      *
@@ -1225,10 +1225,10 @@
                                      */
                                     on: function(node, subscription, notifier) {
                                         var instance = this;
-                            
+
                                         instance._attachEvent(node, node, subscription, notifier);
                                     },
-                            
+
                                     /**
                                      * Adds an event subscription.
                                      *
@@ -1242,54 +1242,54 @@
                                      */
                                     _attachEvent: function(form, node, subscription, notifier, filter) {
                                         var instance = this;
-                            
+
                                         var fireFn = function(event) {
                                             var result = true;
-                            
+
                                             if (filter) {
                                                 if (!event.stopped || !instance._hasParent(event._stoppedOnNode, node)) {
                                                     var delegateEl = node.getDOM();
-                            
+
                                                     var tmpEl = form.getDOM();
-                            
+
                                                     do {
                                                         if (tmpEl &amp;&amp; Selector.test(tmpEl, filter)) {
                                                             event.currentTarget = A.one(tmpEl);
                                                             event.container = node;
-                            
+
                                                             result = notifier.fire(event);
-                            
+
                                                             if (event.stopped &amp;&amp; !event._stoppedOnNode) {
                                                                 event._stoppedOnNode = node;
                                                             }
                                                         }
-                            
+
                                                         tmpEl = tmpEl.parentNode;
                                                     }
                                                     while (result !== false &amp;&amp; !event.stopped &amp;&amp; tmpEl &amp;&amp; tmpEl !== delegateEl);
-                            
+
                                                     result = ((result !== false) &amp;&amp; (event.stopped !== 2));
                                                 }
                                             }
                                             else {
                                                 result = notifier.fire(event);
-                            
+
                                                 if (event.stopped &amp;&amp; !event._stoppedOnNode) {
                                                     event._stoppedOnNode = node;
                                                 }
                                             }
-                            
+
                                             return result;
                                         };
-                            
+
                                         var handles = instance._prepareHandles(subscription, form);
-                            
+
                                         if (!AObject.owns(handles, &#x27;submit&#x27;)) {
                                             handles.submit = A.Event._attach([&#x27;submit&#x27;, fireFn, form, notifier, filter ? &#x27;submit_delegate&#x27; :
                                                 &#x27;submit_on&#x27;]);
                                         }
                                     },
-                            
+
                                     /**
                                      * Deletes a group of event subscriptions.
                                      *
@@ -1311,10 +1311,10 @@
                                                 );
                                             }
                                         );
-                            
+
                                         delete subscription._handles;
                                     },
-                            
+
                                     /**
                                      * Gets a node name.
                                      *
@@ -1325,10 +1325,10 @@
                                      */
                                     _getNodeName: function(elem, name) {
                                         var nodeName = elem.get(&#x27;nodeName&#x27;);
-                            
+
                                         return nodeName &amp;&amp; nodeName.toLowerCase() === name.toLowerCase();
                                     },
-                            
+
                                     /**
                                      * Checks if a node has parent.
                                      *
@@ -1345,7 +1345,7 @@
                                             false
                                         );
                                     },
-                            
+
                                     /**
                                      * Prepares event handles.
                                      *
@@ -1358,70 +1358,70 @@
                                         if (!AObject.owns(subscription, &#x27;_handles&#x27;)) {
                                             subscription._handles = {};
                                         }
-                            
+
                                         var handles = subscription._handles;
-                            
+
                                         if (!AObject.owns(handles, node)) {
                                             handles[node] = {};
                                         }
-                            
+
                                         return handles[node];
                                     }
                                 },
                                 true
                             );
-                            
+
                             var originalOn = A.CustomEvent.prototype._on;
-                            
+
                             function sortSubscribers(subscribers) {
                                 AArray.some(
                                     subscribers,
                                     function(item, index) {
                                         if (item.args &amp;&amp; item.args[0] === &#x27;submit_delegate&#x27;) {
                                             var lastSubscriber = subscribers.splice(subscribers.length - 1, 1)[0];
-                            
+
                                             subscribers.splice(index, 0, lastSubscriber);
-                            
+
                                             return true;
                                         }
                                     }
                                 );
                             }
-                            
+
                             function sortDeprecatedSubscribers(eventHandle, subscribers) {
                                 var result = subscribers;
-                            
+
                                 var orderedSubscribers = {};
-                            
+
                                 var lastSubscriber = subscribers[eventHandle.sub.id];
-                            
+
                                 var replace = false;
-                            
+
                                 AObject.each(
                                     subscribers,
                                     function(subscriber) {
                                         if (!replace &amp;&amp; subscriber.args &amp;&amp; subscriber.args[0] === &#x27;submit_delegate&#x27;) {
                                             orderedSubscribers[lastSubscriber.id] = lastSubscriber;
-                            
+
                                             replace = true;
                                         }
-                            
+
                                         if (subscriber !== lastSubscriber) {
                                             orderedSubscribers[subscriber.id] = subscriber;
                                         }
                                     }
                                 );
-                            
+
                                 if (replace) {
                                     result = orderedSubscribers;
                                 }
-                            
+
                                 return result;
                             }
-                            
+
                             function updateSubscribers(eventHandle, fn, context, args, when) {
                                 var instance = this;
-                            
+
                                 if (args &amp;&amp; args[0] === &#x27;submit_on&#x27;) {
                                     if (when === &#x27;after&#x27; &amp;&amp; instance._afters.length) {
                                         sortSubscribers.call(instance, instance._afters);
@@ -1431,10 +1431,10 @@
                                     }
                                 }
                             }
-                            
+
                             function updateDeprecatedSubscribers(eventHandle, fn, context, args, when) {
                                 var instance = this;
-                            
+
                                 if (args &amp;&amp; args[0] === &#x27;submit_on&#x27;) {
                                     if (when === &#x27;after&#x27; &amp;&amp; !AObject.isEmpty(instance.afters)) {
                                         instance.afters = sortDeprecatedSubscribers.call(instance, eventHandle, instance.afters);
@@ -1444,22 +1444,22 @@
                                     }
                                 }
                             }
-                            
+
                             A.CustomEvent.prototype._on = function(fn, context, args, when) {
                                 var instance = this;
-                            
+
                                 var eventHandle = originalOn.apply(instance, arguments);
-                            
+
                                 if (instance._kds) {
                                     updateDeprecatedSubscribers.call(instance, eventHandle, fn, context, args, when);
                                 }
                                 else {
                                     updateSubscribers.call(instance, eventHandle, fn, context, args, when);
                                 }
-                            
+
                                 return eventHandle;
                             };
-                            
+
                                 </pre>
                             </div>
                         </div>

@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,41 +1122,41 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/tree/js/plugins/tree-lazy.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /*jshint expr:true, maxlen:200, onevar:false */
-                            
+
                             /**
                             Provides &#x60;Plugin.Tree.Lazy&#x60;, a plugin for &#x60;Tree.Openable&#x60; that makes it easy to
                             lazily load and populate the contents of tree nodes the first time they&#x27;re
                             opened.
-                            
+
                             @module tree
                             @submodule tree-lazy
                             **/
-                            
+
                             /**
                             A plugin for &#x60;Tree.Openable&#x60; that makes it easy to lazily load and populate the
                             contents of tree nodes the first time they&#x27;re opened.
-                            
+
                             ### Example
-                            
+
                                 YUI().use(&#x27;jsonp&#x27;, &#x27;tree-openable&#x27;, &#x27;tree-lazy&#x27;, function (Y) {
                                     var Tree = Y.Base.create(&#x27;openableTree&#x27;, Y.Tree, [Y.Tree.Openable]),
                                         tree = new Tree();
-                            
+
                                     tree.plug(Y.Plugin.Tree.Lazy, {
-                            
+
                                         // Custom function that Plugin.Tree.Lazy will call when it needs to
                                         // load the children for a node.
                                         load: function (node, callback) {
@@ -1167,145 +1167,145 @@
                                                     callback(new Error(&#x27;No data!&#x27;));
                                                     return;
                                                 }
-                            
+
                                                 // Append the children to the node (assume &#x60;data.children&#x60; is
                                                 // an array of child node data for the sake of this example).
                                                 node.append(data.children);
-                            
+
                                                 // Call the callback function to tell Plugin.Tree.Lazy that
                                                 // we&#x27;re done loading data.
                                                 callback();
                                             });
                                         }
-                            
+
                                     });
                                 });
-                            
+
                             @class Plugin.Tree.Lazy
                             @param {Object} config Config object.
-                            
+
                                 @param {Function} config.load Custom &#x60;load()&#x60; function that will be called
                                     when a node&#x27;s children need to be loaded. This function must call the
                                     provided callback to indicate completion.
-                            
+
                                     @param {Function} config.load.callback Callback function. The custom
                                         &#x60;load()&#x60; function must call this callback to indicate completion.
-                            
+
                                         @param {Error} [config.load.callback.err] Error object. If provided,
                                             the load action will be considered a failure, and an &#x60;error&#x60;
                                             event will be fired. Omit this argument (or set it to &#x60;null&#x60;) to
                                             indicate success.
-                            
+
                             @extends Plugin.Base
                             @constructor
                             **/
-                            
+
                             /**
                             Fired just before the custom &#x60;load()&#x60; method is called to load child nodes for a
                             node.
-                            
+
                             Calling &#x60;preventDefault()&#x60; on this event&#x27;s facade will cancel the load action
                             and prevent the &#x60;load()&#x60; method from being called.
-                            
+
                             @event beforeLoad
                             @param {Tree.Node} node Tree node whose children will be loaded.
                             @preventable _defBeforeLoadFn
                             **/
                             var EVT_BEFORE_LOAD = &#x27;beforeLoad&#x27;;
-                            
+
                             /**
                             Fired when the &#x60;load()&#x60; method indicates there was an error loading child nodes.
-                            
+
                             @event error
                             @param {Error} error Error provided by the &#x60;load()&#x60; method.
                             @param {String} src Source of the error (defaults to &quot;load&quot;).
                             **/
                             var EVT_ERROR = &#x27;error&#x27;;
-                            
+
                             /**
                             Fired after child nodes have finished loading and have been added to the tree.
-                            
+
                             @event load
                             @param {Tree.Node} node Tree node whose children have been loaded.
                             **/
                             var EVT_LOAD = &#x27;load&#x27;;
-                            
+
                             Y.namespace(&#x27;Plugin.Tree&#x27;).Lazy = Y.Base.create(&#x27;lazyTreePlugin&#x27;, Y.Plugin.Base, [], {
                                 // -- Lifecycle Methods ----------------------------------------------------
                                 initializer: function (config) {
                                     this._host = config.host;
-                            
+
                                     if (config.load) {
                                         this.load = config.load;
                                     }
-                            
+
                                     // Make sure we&#x27;ve been plugged into a Tree that mixes in the
                                     // Tree.Openable extension.
                                     if (!this._host.openNode) {
                                         Y.log(&quot;Plugin.Tree.Lazy was plugged into a Tree that doesn&#x27;t mix in the Tree.Openable extension. This probably won&#x27;t do you much good.&quot;, &#x27;warn&#x27;, &#x27;tree-lazy&#x27;);
                                     }
-                            
+
                                     this._published = {};
                                     this._attachEvents();
                                 },
-                            
+
                                 // -- Public Methods -------------------------------------------------------
                                 load: function (node, callback) {
                                     callback(new Error(&#x27;Plugin.Tree.Lazy: Please provide a custom &#x60;load&#x60; method when instantiating this plugin.&#x27;));
                                 },
-                            
+
                                 // -- Protected Methods ----------------------------------------------------
                                 _attachEvents: function () {
                                     this.onHostEvent(&#x27;open&#x27;, this._onOpen);
                                 },
-                            
+
                                 // -- Protected Event Handlers ---------------------------------------------
                                 _onOpen: function (e) {
                                     var node = e.node;
-                            
+
                                     // Nothing to do if this node can&#x27;t have children or if its children
                                     // have already been (or are already being) loaded.
                                     if (!node.canHaveChildren || node.state.loaded || node.state.loading) {
                                         return;
                                     }
-                            
+
                                     if (!this._published[EVT_BEFORE_LOAD]) {
                                         this._published[EVT_BEFORE_LOAD] = this.publish(EVT_BEFORE_LOAD, {
                                             defaultFn: this._defLoadingFn
                                         });
                                     }
-                            
+
                                     this.fire(EVT_BEFORE_LOAD, {node: node});
                                 },
-                            
+
                                 // -- Default Event Handlers -----------------------------------------------
                                 _defLoadingFn: function (e) {
                                     var node = e.node,
                                         self = this;
-                            
+
                                     node.state.loading = true;
-                            
+
                                     this.load(node, function (err) {
                                         delete node.state.loading;
-                            
+
                                         if (err) {
                                             self.fire(EVT_ERROR, {
                                                 error: err,
                                                 src  : &#x27;load&#x27;
                                             });
-                            
+
                                             return;
                                         }
-                            
+
                                         node.state.loaded = true;
-                            
+
                                         self.fire(EVT_LOAD, {node: node});
                                     });
                                 }
                             }, {
                                 NS: &#x27;lazy&#x27;
                             });
-                            
+
                                 </pre>
                             </div>
                         </div>

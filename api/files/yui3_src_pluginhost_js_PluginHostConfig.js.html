@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,26 +1122,26 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/pluginhost/js/PluginHostConfig.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                                 /**
                                  * Adds pluginhost constructor configuration and static configuration support
                                  * @submodule pluginhost-config
                                  */
-                            
+
                                 var PluginHost = Y.Plugin.Host,
                                     L = Y.Lang;
-                            
+
                                 /**
                                  * A protected initialization method, used by the host class to initialize
                                  * plugin configurations passed the constructor, through the config object.
@@ -1155,30 +1155,30 @@
                                  * @for Plugin.Host
                                  */
                                 PluginHost.prototype._initConfigPlugins = function(config) {
-                            
+
                                     // Class Configuration
                                     var classes = (this._getClasses) ? this._getClasses() : [this.constructor],
                                         plug = [],
                                         unplug = {},
                                         constructor, i, classPlug, classUnplug, pluginClassName;
-                            
+
                                     // TODO: Room for optimization. Can we apply statically/unplug in same pass?
                                     for (i = classes.length - 1; i &gt;= 0; i--) {
                                         constructor = classes[i];
-                            
+
                                         classUnplug = constructor._UNPLUG;
                                         if (classUnplug) {
                                             // subclasses over-write
                                             Y.mix(unplug, classUnplug, true);
                                         }
-                            
+
                                         classPlug = constructor._PLUG;
                                         if (classPlug) {
                                             // subclasses over-write
                                             Y.mix(plug, classPlug, true);
                                         }
                                     }
-                            
+
                                     for (pluginClassName in plug) {
                                         if (plug.hasOwnProperty(pluginClassName)) {
                                             if (!unplug[pluginClassName]) {
@@ -1186,13 +1186,13 @@
                                             }
                                         }
                                     }
-                            
+
                                     // User Configuration
                                     if (config &amp;&amp; config.plugins) {
                                         this.plug(config.plugins);
                                     }
                                 };
-                            
+
                                 /**
                                  * Registers plugins to be instantiated at the class level (plugins
                                  * which should be plugged into every instance of the class by default).
@@ -1208,17 +1208,17 @@
                                 PluginHost.plug = function(hostClass, plugin, config) {
                                     // Cannot plug into Base, since Plugins derive from Base [ will cause infinite recurrsion ]
                                     var p, i, l, name;
-                            
+
                                     if (hostClass !== Y.Base) {
                                         hostClass._PLUG = hostClass._PLUG || {};
-                            
+
                                         if (!L.isArray(plugin)) {
                                             if (config) {
                                                 plugin = {fn:plugin, cfg:config};
                                             }
                                             plugin = [plugin];
                                         }
-                            
+
                                         for (i = 0, l = plugin.length; i &lt; l;i++) {
                                             p = plugin[i];
                                             name = p.NAME || p.fn.NAME;
@@ -1226,7 +1226,7 @@
                                         }
                                     }
                                 };
-                            
+
                                 /**
                                  * Unregisters any class level plugins which have been registered by the host class, or any
                                  * other class in the hierarchy.
@@ -1240,14 +1240,14 @@
                                  */
                                 PluginHost.unplug = function(hostClass, plugin) {
                                     var p, i, l, name;
-                            
+
                                     if (hostClass !== Y.Base) {
                                         hostClass._UNPLUG = hostClass._UNPLUG || {};
-                            
+
                                         if (!L.isArray(plugin)) {
                                             plugin = [plugin];
                                         }
-                            
+
                                         for (i = 0, l = plugin.length; i &lt; l; i++) {
                                             p = plugin[i];
                                             name = p.NAME;
@@ -1259,7 +1259,7 @@
                                         }
                                     }
                                 };
-                            
+
                                 </pre>
                             </div>
                         </div>

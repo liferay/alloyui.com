@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/text/js/text-wordbreak.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1141,7 +1141,7 @@
                              * @module text
                              * @submodule text-wordbreak
                              */
-                            
+
                             /**
                              * &lt;p&gt;
                              * Provides utility methods for splitting strings on word breaks and determining
@@ -1163,10 +1163,10 @@
                              * @class Text.WordBreak
                              * @static
                              */
-                            
+
                             var Text   = Y.Text,
                                 WBData = Text.Data.WordBreak,
-                            
+
                             // Constants representing code point classifications.
                             ALETTER      = 0,
                             MIDNUMLET    = 1,
@@ -1181,7 +1181,7 @@
                             KATAKANA     = 10,
                             EXTENDNUMLET = 11,
                             OTHER        = 12,
-                            
+
                             // RegExp objects generated from code point data. Each regex matches a single
                             // character against a set of Unicode code points. The index of each item in
                             // this array must match its corresponding code point constant value defined
@@ -1200,14 +1200,14 @@
                                 new RegExp(WBData.katakana),
                                 new RegExp(WBData.extendnumlet)
                             ],
-                            
+
                             EMPTY_STRING = &#x27;&#x27;,
                             PUNCTUATION  = new RegExp(&#x27;^&#x27; + WBData.punctuation + &#x27;$&#x27;),
                             WHITESPACE   = /\s/,
-                            
+
                             WordBreak = {
                                 // -- Public Static Methods ------------------------------------------------
-                            
+
                                 /**
                                  * Splits the specified string into an array of individual words.
                                  *
@@ -1247,46 +1247,46 @@
                                         chr,
                                         includePunctuation,
                                         includeWhitespace;
-                            
+
                                     if (!options) {
                                         options = {};
                                     }
-                            
+
                                     if (options.ignoreCase) {
                                         string = string.toLowerCase();
                                     }
-                            
+
                                     includePunctuation = options.includePunctuation;
                                     includeWhitespace  = options.includeWhitespace;
-                            
+
                                     // Loop through each character in the classification map and determine
                                     // whether it precedes a word boundary, building an array of distinct
                                     // words as we go.
                                     for (; i &lt; len; ++i) {
                                         chr = string.charAt(i);
-                            
+
                                         // Append this character to the current word.
                                         word.push(chr);
-                            
+
                                         // If there&#x27;s a word boundary between the current character and the
                                         // next character, append the current word to the words array and
                                         // start building a new word.
                                         if (WordBreak._isWordBoundary(map, i)) {
                                             word = word.join(EMPTY_STRING);
-                            
+
                                             if (word &amp;&amp;
                                                     (includeWhitespace  || !WHITESPACE.test(word)) &amp;&amp;
                                                     (includePunctuation || !PUNCTUATION.test(word))) {
                                                 words.push(word);
                                             }
-                            
+
                                             word = [];
                                         }
                                     }
-                            
+
                                     return words;
                                 },
-                            
+
                                 /**
                                  * Returns an array containing only unique words from the specified string.
                                  * For example, the string &lt;code&gt;&#x27;foo bar baz foo&#x27;&lt;/code&gt; would result in
@@ -1302,7 +1302,7 @@
                                 getUniqueWords: function (string, options) {
                                     return Y.Array.unique(WordBreak.getWords(string, options));
                                 },
-                            
+
                                 /**
                                  * &lt;p&gt;
                                  * Returns &lt;code&gt;true&lt;/code&gt; if there is a word boundary between the
@@ -1326,9 +1326,9 @@
                                 isWordBoundary: function (string, index) {
                                     return WordBreak._isWordBoundary(WordBreak._classify(string), index);
                                 },
-                            
+
                                 // -- Protected Static Methods ---------------------------------------------
-                            
+
                                 /**
                                  * Returns a character classification map for the specified string.
                                  *
@@ -1347,26 +1347,26 @@
                                         stringLength = string.length,
                                         setsLength   = SETS.length,
                                         type;
-                            
+
                                     for (; i &lt; stringLength; ++i) {
                                         chr  = string.charAt(i);
                                         type = OTHER;
-                            
+
                                         for (j = 0; j &lt; setsLength; ++j) {
                                             set = SETS[j];
-                            
+
                                             if (set &amp;&amp; set.test(chr)) {
                                                 type = j;
                                                 break;
                                             }
                                         }
-                            
+
                                         map.push(type);
                                     }
-                            
+
                                     return map;
                                 },
-                            
+
                                 /**
                                  * &lt;p&gt;
                                  * Returns &lt;code&gt;true&lt;/code&gt; if there is a word boundary between the
@@ -1393,42 +1393,42 @@
                                         type     = map[index],
                                         nextType = map[index + 1],
                                         nextNextType;
-                            
+
                                     if (index &lt; 0 || (index &gt; map.length - 1 &amp;&amp; index !== 0)) {
                                         Y.log(&#x27;isWordBoundary: index out of bounds&#x27;, &#x27;warn&#x27;, &#x27;text-wordbreak&#x27;);
                                         return false;
                                     }
-                            
+
                                     // WB5. Don&#x27;t break between most letters.
                                     if (type === ALETTER &amp;&amp; nextType === ALETTER) {
                                         return false;
                                     }
-                            
+
                                     nextNextType = map[index + 2];
-                            
+
                                     // WB6. Don&#x27;t break letters across certain punctuation.
                                     if (type === ALETTER &amp;&amp;
                                             (nextType === MIDLETTER || nextType === MIDNUMLET) &amp;&amp;
                                             nextNextType === ALETTER) {
                                         return false;
                                     }
-                            
+
                                     prevType = map[index - 1];
-                            
+
                                     // WB7. Don&#x27;t break letters across certain punctuation.
                                     if ((type === MIDLETTER || type === MIDNUMLET) &amp;&amp;
                                             nextType === ALETTER &amp;&amp;
                                             prevType === ALETTER) {
                                         return false;
                                     }
-                            
+
                                     // WB8/WB9/WB10. Don&#x27;t break inside sequences of digits or digits
                                     // adjacent to letters.
                                     if ((type === NUMERIC || type === ALETTER) &amp;&amp;
                                             (nextType === NUMERIC || nextType === ALETTER)) {
                                         return false;
                                     }
-                            
+
                                     // WB11. Don&#x27;t break inside numeric sequences like &quot;3.2&quot; or
                                     // &quot;3,456.789&quot;.
                                     if ((type === MIDNUM || type === MIDNUMLET) &amp;&amp;
@@ -1436,7 +1436,7 @@
                                             prevType === NUMERIC) {
                                         return false;
                                     }
-                            
+
                                     // WB12. Don&#x27;t break inside numeric sequences like &quot;3.2&quot; or
                                     // &quot;3,456.789&quot;.
                                     if (type === NUMERIC &amp;&amp;
@@ -1444,55 +1444,55 @@
                                             nextNextType === NUMERIC) {
                                         return false;
                                     }
-                            
+
                                     // WB4. Ignore format and extend characters.
                                     if (type === EXTEND || type === FORMAT ||
                                             prevType === EXTEND || prevType === FORMAT ||
                                             nextType === EXTEND || nextType === FORMAT) {
                                         return false;
                                     }
-                            
+
                                     // WB3. Don&#x27;t break inside CRLF.
                                     if (type === CR &amp;&amp; nextType === LF) {
                                         return false;
                                     }
-                            
+
                                     // WB3a. Break before newlines (including CR and LF).
                                     if (type === NEWLINE || type === CR || type === LF) {
                                         return true;
                                     }
-                            
+
                                     // WB3b. Break after newlines (including CR and LF).
                                     if (nextType === NEWLINE || nextType === CR || nextType === LF) {
                                         return true;
                                     }
-                            
+
                                     // WB13. Don&#x27;t break between Katakana characters.
                                     if (type === KATAKANA &amp;&amp; nextType === KATAKANA) {
                                         return false;
                                     }
-                            
+
                                     // WB13a. Don&#x27;t break from extenders.
                                     if (nextType === EXTENDNUMLET &amp;&amp;
                                             (type === ALETTER || type === NUMERIC || type === KATAKANA ||
                                             type === EXTENDNUMLET)) {
                                         return false;
                                     }
-                            
+
                                     // WB13b. Don&#x27;t break from extenders.
                                     if (type === EXTENDNUMLET &amp;&amp;
                                             (nextType === ALETTER || nextType === NUMERIC ||
                                             nextType === KATAKANA)) {
                                         return false;
                                     }
-                            
+
                                     // Break after any character not covered by the rules above.
                                     return true;
                                 }
                             };
-                            
+
                             Text.WordBreak = WordBreak;
-                            
+
                                 </pre>
                             </div>
                         </div>

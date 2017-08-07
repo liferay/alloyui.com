@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,35 +1122,35 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/handlebars/js/yui-handlebars-compiler-after.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             // This file contains YUI-specific wrapper code and overrides for the
                             // handlebars-compiler module.
-                            
+
                             /**
                             Handlebars parser and compiler. Use this module when you need to compile
                             Handlebars templates.
-                            
+
                             @module handlebars
                             @submodule handlebars-compiler
                             */
-                            
+
                             var levels = [&#x27;debug&#x27;, &#x27;info&#x27;, &#x27;warn&#x27;, &#x27;error&#x27;];
-                            
+
                             /**
                             Logs a debugging message. Note that messages will only be logged when the
                             handlebars module is loaded in &quot;debug&quot; mode.
-                            
+
                             @method log
                             @param {String} level Log level for this message. Supported levels are &quot;debug&quot;,
                                 &quot;info&quot;, &quot;warn&quot;, and &quot;error&quot;.
@@ -1160,23 +1160,23 @@
                             Handlebars.logger.log = function (level, message) {
                                 Y.log(message, levels[level] || &#x27;error&#x27;, &#x27;Handlebars&#x27;);
                             };
-                            
+
                             /**
                             Compiles and renders a Handlebars template string in a single step.
-                            
+
                             If you&#x27;ll be using a template more than once, it&#x27;s more efficient to compile it
                             into a function once using &#x60;compile()&#x60;, and then render it whenever you need to
                             by simply executing the compiled function. However, if you only need to compile
                             and render a template once, &#x60;render()&#x60; is a handy shortcut for doing both in a
                             single step.
-                            
+
                             @example
-                            
+
                                 Y.Handlebars.render(&#x27;The pie of the day is {{pie}}!&#x27;, {
                                     pie: &#x27;Maple Custard&#x27;
                                 });
                                 // =&gt; &quot;The pie of the day is Maple Custard!&quot;
-                            
+
                             @method render
                             @param {String} string Handlebars template string to render.
                             @param {Object} context Context object to pass to the template.
@@ -1189,42 +1189,42 @@
                             Handlebars.render = function (string, context, options) {
                                 return this.compile(string)(context, options);
                             };
-                            
+
                             // The rest of this file is just API docs for methods defined in Handlebars
                             // itself.
-                            
+
                             /**
                             Compiles a Handlebars template string into a function. To render the template,
                             call the function and pass in a context object.
-                            
+
                             @example
-                            
+
                                 var template = Y.Handlebars.compile(&#x27;The pie of the day is {{pie}}!.&#x27;);
                                 template({pie: &#x27;Pecan&#x27;});
                                 // =&gt; &quot;The pie of the day is Pecan!&quot;
-                            
+
                             @method compile
                             @param {String} string Handlebars template string to compile.
                             @param {Object} [options] Compiler options.
                             @return {Function} Compiled template function.
                             */
-                            
+
                             /**
                             Precompiles a Handlebars template string into a string of JavaScript code. This
                             can be used to precompile a template at build time or on the server, and the
                             resulting template can then be rendered at runtime or on the client without
                             needing to go through a compile step.
-                            
+
                             To render a precompiled template, evaluate the code and then pass the resulting
                             function to &#x60;Y.Handlebars.template()&#x60; to get back an executable template
                             function.
-                            
+
                             @method precompile
                             @param {String} string Handlebars template string to compile.
                             @param {Object} [options] Compiler options.
                             @return {String} Precompiled template code.
                             */
-                            
+
                                 </pre>
                             </div>
                         </div>

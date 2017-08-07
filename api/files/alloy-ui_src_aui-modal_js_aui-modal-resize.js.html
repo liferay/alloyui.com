@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>alloy-ui/src/aui-modal/js/aui-modal-resize.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1139,9 +1139,9 @@
                              *
                              * @module aui-modal-resize
                              */
-                            
+
                             function ModalResize() {}
-                            
+
                             ModalResize.prototype = {
                                 /**
                                  * Construction logic executed during instantiation.
@@ -1152,16 +1152,16 @@
                                  */
                                 initializer: function() {
                                     var instance = this;
-                            
+
                                     instance._eventHandles.push(
                                         A.after(instance._plugResize, instance, &#x27;_plugDrag&#x27;),
                                         instance.after(&#x27;resizableChange&#x27;, instance._afterResizableChange),
                                         instance.after(&#x27;resize:end&#x27;, A.bind(instance._syncResizeDimensions, instance))
                                     );
-                            
+
                                     instance._applyPlugin(instance._plugResize);
                                 },
-                            
+
                                 /**
                                  * Fire after resize changes.
                                  *
@@ -1171,7 +1171,7 @@
                                  */
                                 _afterResizableChange: function(event) {
                                     var instance = this;
-                            
+
                                     if (event.newVal) {
                                         instance._applyPlugin(instance._plugResize);
                                     }
@@ -1179,7 +1179,7 @@
                                         instance.unplug(A.Plugin.Resize);
                                     }
                                 },
-                            
+
                                 /**
                                  * Fire before resizing to the correct dimensions.
                                  *
@@ -1189,12 +1189,12 @@
                                  */
                                 _beforeResizeCorrectDimensions: function() {
                                     var instance = this;
-                            
+
                                     if (instance.resize.proxy) {
                                         return new A.Do.Prevent();
                                     }
                                 },
-                            
+
                                 /**
                                  * Plug the resize Plugin
                                  *
@@ -1204,14 +1204,14 @@
                                 _plugResize: function() {
                                     var instance = this,
                                         resizable = instance.get(&#x27;resizable&#x27;);
-                            
+
                                     if (resizable &amp;&amp; !instance.hasPlugin(&#x27;resizable&#x27;)) {
                                         instance.plug(A.Plugin.Resize, instance._addBubbleTargets(resizable));
-                            
+
                                         A.before(instance._beforeResizeCorrectDimensions, instance.resize, &#x27;_correctDimensions&#x27;, instance);
                                     }
                                 },
-                            
+
                                 /**
                                  * Sync width/height dimensions on resize.
                                  *
@@ -1223,13 +1223,13 @@
                                     var instance = this,
                                         boundingBox = instance.get(&#x27;boundingBox&#x27;),
                                         resize = event.info;
-                            
+
                                     instance.set(
                                         &#x27;width&#x27;,
                                         resize.offsetWidth -
                                         parseInt(boundingBox.getComputedStyle(&#x27;borderRightWidth&#x27;), 10) -
                                         parseInt(boundingBox.getComputedStyle(&#x27;borderLeftWidth&#x27;), 10));
-                            
+
                                     instance.set(
                                         &#x27;height&#x27;,
                                         resize.offsetHeight -
@@ -1237,7 +1237,7 @@
                                         parseInt(boundingBox.getComputedStyle(&#x27;borderBottomWidth&#x27;), 10));
                                 }
                             };
-                            
+
                             ModalResize.ATTRS = {
                                 /**
                                  * Determine if Modal should be resizable or not.
@@ -1252,9 +1252,9 @@
                                     }
                                 }
                             };
-                            
+
                             A.Base.mix(A.Modal, [ModalResize]);
-                            
+
                                 </pre>
                             </div>
                         </div>

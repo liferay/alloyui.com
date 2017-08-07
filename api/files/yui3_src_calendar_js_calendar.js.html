@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/calendar/js/calendar.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1144,7 +1144,7 @@
                              *
                              * @module calendar
                              */
-                            
+
                             var getCN             = Y.ClassNameManager.getClassName,
                                 CALENDAR          = &#x27;calendar&#x27;,
                                 KEY_DOWN          = 40,
@@ -1162,7 +1162,7 @@
                                 ydate             = Y.DataType.Date,
                                 CAL_PANE          = getCN(CALENDAR, &#x27;pane&#x27;),
                                 os                = Y.UA.os;
-                            
+
                             /** Create a calendar view to represent a single or multiple
                                 * month range of dates, rendered as a grid with date and
                                 * weekday labels.
@@ -1175,13 +1175,13 @@
                             function Calendar() {
                                 Calendar.superclass.constructor.apply ( this, arguments );
                             }
-                            
+
                             Y.Calendar = Y.extend(Calendar, Y.CalendarBase, {
-                            
+
                                 _keyEvents: [],
-                            
+
                                 _highlightedDateNode: null,
-                            
+
                                 /**
                                  * A property tracking the last selected date on the calendar, for the
                                  * purposes of multiple selection.
@@ -1192,7 +1192,7 @@
                                  * @private
                                  */
                                 _lastSelectedDate: null,
-                            
+
                                 /**
                                  * Designated initializer. Activates the navigation plugin for the calendar.
                                  *
@@ -1200,12 +1200,12 @@
                                  */
                                 initializer : function () {
                                     this.plug(Y.Plugin.CalendarNavigator);
-                            
+
                                     this._keyEvents = [];
                                     this._highlightedDateNode = null;
                                     this._lastSelectedDate = null;
                                 },
-                            
+
                                 /**
                                  * Overrides the _bindCalendarEvents placeholder in CalendarBase
                                  * and binds calendar events during bindUI stage.
@@ -1215,18 +1215,18 @@
                                 _bindCalendarEvents : function () {
                                     var contentBox = this.get(&#x27;contentBox&#x27;),
                                         pane       = contentBox.one(&quot;.&quot; + CAL_PANE);
-                            
+
                                     pane.on(&quot;selectstart&quot;, this._preventSelectionStart);
                                     pane.delegate(&quot;click&quot;, this._clickCalendar, &quot;.&quot; + CAL_DAY + &quot;, .&quot; + CAL_PREVMONTH_DAY + &quot;, .&quot; + CAL_NEXTMONTH_DAY, this);
                                     pane.delegate(&quot;keydown&quot;, this._keydownCalendar, &quot;.&quot; + CAL_GRID, this);
                                     pane.delegate(&quot;focus&quot;, this._focusCalendarGrid, &quot;.&quot; + CAL_GRID, this);
                                     pane.delegate(&quot;focus&quot;, this._focusCalendarCell, &quot;.&quot; + CAL_DAY, this);
                                     pane.delegate(&quot;blur&quot;, this._blurCalendarGrid, &quot;.&quot; + CAL_GRID + &quot;,.&quot; + CAL_DAY, this);
-                            
-                            
+
+
                                     this.after([&#x27;minimumDateChange&#x27;, &#x27;maximumDateChange&#x27;], this._afterCustomRendererChange);
                                 },
-                            
+
                                 /**
                                  * Prevents text selection if it is started within the calendar pane
                                  * @method _preventSelectionStart
@@ -1236,7 +1236,7 @@
                                 _preventSelectionStart : function (event) {
                                     event.preventDefault();
                                 },
-                            
+
                                 /**
                                  * Highlights a specific date node with keyboard highlight class
                                  * @method _highlightDateNode
@@ -1249,7 +1249,7 @@
                                     newNode.focus();
                                     newNode.addClass(CAL_DAY_HILITED);
                                 },
-                            
+
                                 /**
                                  * Unhighlights a specific date node currently highlighted with keyboard highlight class
                                  * @method _unhighlightCurrentDateNode
@@ -1261,7 +1261,7 @@
                                         allHilitedNodes.removeClass(CAL_DAY_HILITED);
                                     }
                                 },
-                            
+
                                 /**
                                  * Returns the grid number for a specific calendar grid (for multi-grid templates)
                                  * @method _getGridNumber
@@ -1270,10 +1270,10 @@
                                  */
                                 _getGridNumber : function (gridNode) {
                                     var idParts = gridNode.get(&quot;id&quot;).split(&quot;_&quot;).reverse();
-                            
+
                                     return parseInt(idParts[0], 10);
                                 },
-                            
+
                                 /**
                                  * Handler for loss of focus of calendar grid
                                  * @method _blurCalendarGrid
@@ -1282,8 +1282,8 @@
                                 _blurCalendarGrid : function () {
                                     this._unhighlightCurrentDateNode();
                                 },
-                            
-                            
+
+
                                 /**
                                  * Handler for gain of focus of calendar cell
                                  * @method _focusCalendarCell
@@ -1293,7 +1293,7 @@
                                     this._highlightedDateNode = ev.target;
                                     ev.stopPropagation();
                                 },
-                            
+
                                 /**
                                  * Handler for gain of focus of calendar grid
                                  * @method _focusCalendarGrid
@@ -1303,7 +1303,7 @@
                                     this._unhighlightCurrentDateNode();
                                     this._highlightedDateNode = null;
                                 },
-                            
+
                                 /**
                                  * Handler for keyboard press on a calendar grid
                                  * @method _keydownCalendar
@@ -1320,7 +1320,7 @@
                                         startDate,
                                         endDate,
                                         lastPaneDate;
-                            
+
                                     switch(keyCode) {
                                         case KEY_DOWN:
                                             dayNum = 7;
@@ -1355,27 +1355,27 @@
                                             }
                                             break;
                                     }
-                            
-                            
+
+
                                     if (keyCode === KEY_DOWN || keyCode === KEY_UP || keyCode === KEY_LEFT || keyCode === KEY_RIGHT) {
-                            
+
                                         if (!curDate) {
                                             curDate = ydate.addMonths(this.get(&quot;date&quot;), gridNum);
                                             dayNum = 0;
                                         }
-                            
+
                                         ev.preventDefault();
-                            
+
                                         newDate = ydate.addDays(curDate, dayNum);
                                         startDate = this.get(&quot;date&quot;);
                                         endDate = ydate.addMonths(this.get(&quot;date&quot;), this._paneNumber - 1);
                                         lastPaneDate = new Date(endDate);
                                         endDate.setDate(ydate.daysInMonth(endDate));
-                            
+
                                         if (ydate.isInRange(newDate, startDate, endDate)) {
                             /*
                                             var paneShift = (newDate.getMonth() - curDate.getMonth()) % 10;
-                            
+
                                             if (paneShift != 0) {
                                                 var newGridNum = gridNum + paneShift,
                                                         contentBox = this.get(&#x27;contentBox&#x27;),
@@ -1397,7 +1397,7 @@
                                         }
                                     }
                                 },
-                            
+
                                 /**
                                  * Handles the calendar clicks based on selection mode.
                                  * @method _clickCalendar
@@ -1409,10 +1409,10 @@
                                         clickedCellIsDay = clickedCell.hasClass(CAL_DAY) &amp;&amp;
                                                             !clickedCell.hasClass(CAL_PREVMONTH_DAY) &amp;&amp;
                                                             !clickedCell.hasClass(CAL_NEXTMONTH_DAY),
-                            
+
                                     clickedCellIsSelected = clickedCell.hasClass(CAL_DAY_SELECTED),
                                     selectedDate;
-                            
+
                                     switch (this.get(&quot;selectionMode&quot;)) {
                                         case(&quot;single&quot;):
                                             if (clickedCellIsDay) {
@@ -1469,7 +1469,7 @@
                                             }
                                             break;
                                     }
-                            
+
                                     if (clickedCellIsDay) {
                                         /**
                                         * Fired when a specific date cell in the calendar is clicked. The event carries a
@@ -1497,7 +1497,7 @@
                                         this.fire(&quot;nextMonthClick&quot;);
                                     }
                                 },
-                            
+
                                 /**
                                  * Overrides CalendarBase.prototype._canBeSelected to disable
                                  * nodes earlier than minimumDate and later than maximumDate
@@ -1507,15 +1507,15 @@
                                 _canBeSelected : function (date) {
                                     var minDate = this.get(&#x27;minimumDate&#x27;),
                                         maxDate = this.get(&#x27;maximumDate&#x27;);
-                            
+
                                     if ((minDate &amp;&amp; !ydate.isGreaterOrEqual(date, minDate)) ||
                                         (maxDate &amp;&amp;  ydate.isGreater(date, maxDate))) {
                                         return false;
                                     }
-                            
+
                                     return Calendar.superclass._canBeSelected.call(this, date);
                                 },
-                            
+
                                 /**
                                  * Overrides CalendarBase.prototype._renderCustomRules to disable
                                  * nodes earlier than minimumDate and later than maximumDate
@@ -1524,23 +1524,23 @@
                                  */
                                 _renderCustomRules: function () {
                                     Calendar.superclass._renderCustomRules.call(this);
-                            
+
                                     var minDate = this.get(&#x27;minimumDate&#x27;),
                                         maxDate = this.get(&#x27;maximumDate&#x27;),
                                         dates = [],
                                         i, l,
                                         paneDate,
                                         paneNum;
-                            
+
                                     if (!minDate &amp;&amp; !maxDate) {
                                         return;
                                     }
-                            
+
                                     for (paneNum = 0; paneNum &lt; this._paneNumber; paneNum++) {
                                         paneDate = ydate.addMonths(this.get(&quot;date&quot;), paneNum);
                                         dates = dates.concat(ydate.listOfDatesInMonth(paneDate));
                                     }
-                            
+
                                     if (minDate) {
                                         for (i = 0, l = dates.length; i &lt; l; i++) {
                                             if (!ydate.isGreaterOrEqual(dates[i], minDate)) {
@@ -1550,7 +1550,7 @@
                                             }
                                         }
                                     }
-                            
+
                                     if (maxDate) {
                                         for (i = dates.length - 1; i &gt;= 0; i--) {
                                             if (ydate.isGreater(dates[i], maxDate)) {
@@ -1561,7 +1561,7 @@
                                         }
                                     }
                                 },
-                            
+
                                 /**
                                  * Subtracts one month from the current calendar view.
                                  * @method subtractMonth
@@ -1575,7 +1575,7 @@
                                     }
                                     return this;
                                 },
-                            
+
                                 /**
                                  * Subtracts one year from the current calendar view.
                                  * @method subtractYear
@@ -1589,7 +1589,7 @@
                                     }
                                     return this;
                                 },
-                            
+
                                 /**
                                  * Adds one month to the current calendar view.
                                  * @method addMonth
@@ -1603,7 +1603,7 @@
                                     }
                                     return this;
                                 },
-                            
+
                                 /**
                                  * Adds one year to the current calendar view.
                                  * @method addYear
@@ -1629,7 +1629,7 @@
                                 * @static
                                 */
                                 NAME: &quot;calendar&quot;,
-                            
+
                                 /**
                                 * Static property used to define the default attribute configuration of
                                 * the Widget.
@@ -1640,7 +1640,7 @@
                                 * @static
                                 */
                                 ATTRS: {
-                            
+
                                     /**
                                      * A setting specifying the type of selection the calendar allows.
                                      * Possible values include:
@@ -1658,7 +1658,7 @@
                                     selectionMode: {
                                         value: &quot;single&quot;
                                     },
-                            
+
                                     /**
                                      * The date corresponding to the current calendar view. Always
                                      * normalized to the first of the month that contains the date
@@ -1673,12 +1673,12 @@
                                         value: new Date(),
                                         lazyAdd: false,
                                         setter: function (val) {
-                            
+
                                             var newDate    = this._normalizeDate(val),
                                                 newEndDate = ydate.addMonths(newDate, this._paneNumber - 1),
                                                 minDate    = this.get(&quot;minimumDate&quot;),
                                                 maxDate    = this.get(&quot;maximumDate&quot;);
-                            
+
                                             if ((!minDate || ydate.isGreaterOrEqual(newDate, minDate)) &amp;&amp;
                                                 (!maxDate || ydate.isGreaterOrEqual(maxDate, newEndDate))
                                             ) {
@@ -1690,7 +1690,7 @@
                                             }
                                         }
                                     },
-                            
+
                                     /**
                                      * Unless minimumDate is null, it will not be possible to display and select dates earlier than this one.
                                      *
@@ -1713,7 +1713,7 @@
                                             }
                                         }
                                     },
-                            
+
                                     /**
                                      * Unless maximumDate is null, it will not be possible to display and select dates later than this one.
                                      *
@@ -1726,11 +1726,11 @@
                                         setter: function (val) {
                                             if (Y.Lang.isDate(val)) {
                                                 var curDate = this.get(&#x27;date&#x27;);
-                            
+
                                                 if (curDate &amp;&amp; !ydate.isGreaterOrEqual(val, ydate.addMonths(curDate, this._paneNumber - 1))) {
                                                     this.set(&#x27;date&#x27;, ydate.addMonths(this._normalizeDate(val), 1 - this._paneNumber));
                                                 }
-                            
+
                                                 return this._normalizeTime(val);
                                             } else {
                                                 return null;
@@ -1739,7 +1739,7 @@
                                     }
                                 }
                             });
-                            
+
                                 </pre>
                             </div>
                         </div>

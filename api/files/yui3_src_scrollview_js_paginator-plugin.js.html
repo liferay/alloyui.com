@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/scrollview/js/paginator-plugin.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1154,7 +1154,7 @@
                                 AXIS = &#x27;axis&#x27;,
                                 DIM_X = &#x27;x&#x27;,
                                 DIM_Y = &#x27;y&#x27;;
-                            
+
                             /**
                              * Scrollview plugin that adds support for paging
                              *
@@ -1166,9 +1166,9 @@
                             function PaginatorPlugin() {
                                 PaginatorPlugin.superclass.constructor.apply(this, arguments);
                             }
-                            
+
                             Y.extend(PaginatorPlugin, Y.Plugin.Base, {
-                            
+
                                 /**
                                  * Designated initializer
                                  *
@@ -1178,32 +1178,32 @@
                                 initializer: function (config) {
                                     var paginator = this,
                                         host = paginator.get(HOST);
-                            
+
                                     // Initialize &amp; default
                                     paginator._pageDims = [];
                                     paginator._pageBuffer = 1;
                                     paginator._optimizeMemory = false;
-                            
+
                                     // Cache some values
                                     paginator._host = host;
                                     paginator._bb = host._bb;
                                     paginator._cb = host._cb;
                                     paginator._cIndex = paginator.get(INDEX);
                                     paginator._cAxis = paginator.get(AXIS);
-                            
+
                                     // Apply configs
                                     if (config._optimizeMemory) {
                                         paginator._optimizeMemory = config._optimizeMemory;
                                     }
-                            
+
                                     if (config._pageBuffer) {
                                         paginator._pageBuffer = config._pageBuffer;
                                     }
-                            
+
                                     // Attach event bindings
                                     paginator._bindAttrs();
                                 },
-                            
+
                                 /**
                                  *
                                  *
@@ -1212,13 +1212,13 @@
                                  */
                                 _bindAttrs: function () {
                                     var paginator = this;
-                            
+
                                     // Event listeners
                                     paginator.after({
                                         &#x27;indexChange&#x27;: paginator._afterIndexChange,
                                         &#x27;axisChange&#x27;: paginator._afterAxisChange
                                     });
-                            
+
                                     // Host method listeners
                                     paginator.beforeHostMethod(&#x27;scrollTo&#x27;, paginator._beforeHostScrollTo);
                                     paginator.beforeHostMethod(&#x27;_mousewheel&#x27;, paginator._beforeHostMousewheel);
@@ -1226,12 +1226,12 @@
                                     paginator.afterHostMethod(&#x27;_onGestureMoveEnd&#x27;, paginator._afterHostGestureMoveEnd);
                                     paginator.afterHostMethod(&#x27;_uiDimensionsChange&#x27;, paginator._afterHostUIDimensionsChange);
                                     paginator.afterHostMethod(&#x27;syncUI&#x27;, paginator._afterHostSyncUI);
-                            
+
                                     // Host event listeners
                                     paginator.afterHostEvent(&#x27;render&#x27;, paginator._afterHostRender);
                                     paginator.afterHostEvent(&#x27;scrollEnd&#x27;, paginator._afterHostScrollEnded);
                                 },
-                            
+
                                 /**
                                  * After host render
                                  *
@@ -1248,29 +1248,29 @@
                                         pageNodes = paginator._getPageNodes(),
                                         size = pageNodes.size(),
                                         pageDim = paginator._pageDims[index];
-                            
+
                                     if (paginatorAxis[DIM_Y]) {
                                         host._maxScrollX = pageDim.maxScrollX;
                                     }
                                     else if (paginatorAxis[DIM_X]) {
                                         host._maxScrollY = pageDim.maxScrollY;
                                     }
-                            
+
                                     // Set the page count
                                     paginator.set(TOTAL, size);
-                            
+
                                     // Jump to the index
                                     if (index !== 0) {
                                         paginator.scrollToIndex(index, 0);
                                     }
-                            
+
                                     // Add the paginator class
                                     bb.addClass(CLASS_PAGED);
-                            
+
                                     // Trigger the optimization process
                                     paginator._optimize();
                                 },
-                            
+
                                 /**
                                  * After host syncUI
                                  *
@@ -1283,16 +1283,16 @@
                                         host = paginator._host,
                                         pageNodes = paginator._getPageNodes(),
                                         size = pageNodes.size();
-                            
+
                                     // Set the page count
                                     paginator.set(TOTAL, size);
-                            
+
                                     // If paginator&#x27;s &#x27;axis&#x27; property is to be automatically determined, inherit host&#x27;s property
                                     if (paginator._cAxis === undefined) {
                                         paginator._set(AXIS, host.get(AXIS));
                                     }
                                 },
-                            
+
                                 /**
                                  * After host _uiDimensionsChange
                                  *
@@ -1301,47 +1301,47 @@
                                  * @protected
                                  */
                                 _afterHostUIDimensionsChange: function () {
-                            
+
                                     var paginator = this,
                                         host = paginator._host,
                                         dims = host._getScrollDims(),
                                         widgetWidth = dims.offsetWidth,
                                         widgetHeight = dims.offsetHeight,
                                         pageNodes = paginator._getPageNodes();
-                            
+
                                     // Inefficient. Should not reinitialize every page every syncUI
                                     pageNodes.each(function (node, i) {
                                         var scrollWidth = node.get(&#x27;scrollWidth&#x27;),
                                             scrollHeight = node.get(&#x27;scrollHeight&#x27;),
                                             maxScrollX = Math.max(0, scrollWidth - widgetWidth), // Math.max to ensure we don&#x27;t set it to a negative value
                                             maxScrollY = Math.max(0, scrollHeight - widgetHeight);
-                            
+
                                         // Don&#x27;t initialize any page _pageDims that already have been.
                                         if (!paginator._pageDims[i]) {
-                            
+
                                             paginator._pageDims[i] = {
-                            
+
                                                 // Current scrollX &amp; scrollY positions (default to 0)
                                                 scrollX: 0,
                                                 scrollY: 0,
-                            
+
                                                 // Maximum scrollable values
                                                 maxScrollX: maxScrollX,
                                                 maxScrollY: maxScrollY,
-                            
+
                                                 // Height &amp; width of the page
                                                 width: scrollWidth,
                                                 height: scrollHeight
                                             };
-                            
+
                                         } else {
                                             paginator._pageDims[i].maxScrollX = maxScrollX;
                                             paginator._pageDims[i].maxScrollY = maxScrollY;
                                         }
-                            
+
                                     });
                                 },
-                            
+
                                 /**
                                  * Executed before host.scrollTo
                                  *
@@ -1361,28 +1361,28 @@
                                         paginatorAxis = paginator._cAxis,
                                         pageNodes = paginator._getPageNodes(),
                                         gestureAxis;
-                            
+
                                     if (gesture) {
                                         gestureAxis = gesture.axis;
-                            
+
                                         // Null the opposite axis so it won&#x27;t be modified by host.scrollTo
                                         if (gestureAxis === DIM_Y) {
                                             x = null;
                                         } else {
                                             y = null;
                                         }
-                            
+
                                         // If they are scrolling against the specified axis, pull out the page&#x27;s node to have its own offset
                                         if (paginatorAxis[gestureAxis] === false) {
                                             node = pageNodes.item(index);
                                         }
-                            
+
                                     }
-                            
+
                                     // Return the modified argument list
                                     return new Y.Do.AlterArgs(&quot;new args&quot;, [x, y, duration, easing, node]);
                                 },
-                            
+
                                 /**
                                  * Executed after host._gestureMoveEnd
                                  * Determines if the gesture should page prev or next (if at all)
@@ -1392,12 +1392,12 @@
                                  * @protected
                                  */
                                 _afterHostGestureMoveEnd: function () {
-                            
+
                                     // This was a flick, so we don&#x27;t need to do anything here
                                     if (this._host._gesture.flick) {
                                         return;
                                     }
-                            
+
                                     var paginator = this,
                                         host = paginator._host,
                                         gesture = host._gesture,
@@ -1412,7 +1412,7 @@
                                         isHalfway = (Math.abs(delta) &gt;= halfway),
                                         canScroll = paginatorAxis[gestureAxis],
                                         rtl = host.rtl;
-                            
+
                                     if (canScroll) {
                                         if (isHalfway) { // TODO: This condition should probably be configurable
                                             // Fire next()/prev()
@@ -1424,7 +1424,7 @@
                                         }
                                     }
                                 },
-                            
+
                                 /**
                                  * Executed before host._mousewheel
                                  * Prevents mousewheel events in some conditions
@@ -1439,21 +1439,21 @@
                                         bb = host._bb,
                                         isForward = (e.wheelDelta &lt; 0),
                                         paginatorAxis = paginator._cAxis;
-                            
+
                                     // Only if the mousewheel event occurred on a DOM node inside the BB
                                     if (bb.contains(e.target) &amp;&amp; paginatorAxis[DIM_Y]) {
-                            
+
                                         // Fire next()/prev()
                                         paginator[(isForward ? &#x27;next&#x27; : &#x27;prev&#x27;)]();
-                            
+
                                         // prevent browser default behavior on mousewheel
                                         e.preventDefault();
-                            
+
                                         // Block host._mousewheel from running
                                         return new Y.Do.Prevent();
                                     }
                                 },
-                            
+
                                 /**
                                  * Executed before host._flick
                                  * Prevents flick events in some conditions
@@ -1463,17 +1463,17 @@
                                  * @protected
                                  */
                                 _beforeHostFlick: function (e) {
-                            
+
                                     // If the widget is disabled
                                     if (this._host.get(DISABLED)) {
                                         return false;
                                     }
-                            
+
                                     // The drag was out of bounds, so do nothing (which will cause a snapback)
                                     if (this._host._isOutOfBounds()){
                                         return new Y.Do.Prevent();
                                     }
-                            
+
                                     var paginator = this,
                                         host = paginator._host,
                                         gesture = host._gesture,
@@ -1484,25 +1484,25 @@
                                         isForward = (velocity &lt; 0),
                                         canScroll = paginatorAxis[flickAxis],
                                         rtl = host.rtl;
-                            
+
                                     // Store the flick data in the this._host._gesture object so it knows this was a flick
                                     if (gesture) {
                                         gesture.flick = flick;
                                     }
-                            
+
                                     // Can we scroll along this axis?
                                     if (canScroll) {
-                            
+
                                         // Fire next()/prev()
                                         paginator[(rtl === isForward ? &#x27;prev&#x27; : &#x27;next&#x27;)]();
-                            
+
                                         // Prevent flicks on the paginated axis
                                         if (paginatorAxis[flickAxis]) {
                                             return new Y.Do.Prevent();
                                         }
                                     }
                                 },
-                            
+
                                 /**
                                  * Executes after host&#x27;s &#x27;scrollEnd&#x27; event
                                  * Runs cleanup operations
@@ -1518,16 +1518,16 @@
                                         scrollX = host.get(SCROLL_X),
                                         scrollY = host.get(SCROLL_Y),
                                         paginatorAxis = paginator._cAxis;
-                            
+
                                     if (paginatorAxis[DIM_Y]) {
                                         paginator._pageDims[index].scrollX = scrollX;
                                     } else {
                                         paginator._pageDims[index].scrollY = scrollY;
                                     }
-                            
+
                                     paginator._optimize();
                                 },
-                            
+
                                 /**
                                  * index attr change handler
                                  *
@@ -1542,10 +1542,10 @@
                                         pageDims = paginator._pageDims[index],
                                         hostAxis = host._cAxis,
                                         paginatorAxis = paginator._cAxis;
-                            
+
                                     // Cache the new index value
                                     paginator._cIndex = index;
-                            
+
                                     // For dual-axis instances, we need to hack some host properties to the
                                     // current page&#x27;s max height/width and current stored offset
                                     if (hostAxis[DIM_X] &amp;&amp; hostAxis[DIM_Y]) {
@@ -1558,12 +1558,12 @@
                                             host.set(SCROLL_Y, pageDims.scrollY, { src: UI });
                                         }
                                     }
-                            
+
                                     if (e.src !== UI) {
                                         paginator.scrollToIndex(index);
                                     }
                                 },
-                            
+
                                 /**
                                  * Optimization: Hides the pages not near the viewport
                                  *
@@ -1571,20 +1571,20 @@
                                  * @protected
                                  */
                                 _optimize: function () {
-                            
+
                                     if (!this._optimizeMemory) {
                                         return false;
                                     }
-                            
+
                                     var paginator = this,
                                         currentIndex = paginator._cIndex,
                                         pageNodes = paginator._getStage(currentIndex);
-                            
+
                                     // Show the pages in/near the viewport &amp; hide the rest
                                     paginator._showNodes(pageNodes.visible);
                                     paginator._hideNodes(pageNodes.hidden);
                                 },
-                            
+
                                 /**
                                  * Optimization: Determines which nodes should be visible, and which should be hidden.
                                  *
@@ -1600,13 +1600,13 @@
                                         pageNodes = paginator._getPageNodes(),
                                         start = Math.max(0, index - pageBuffer),
                                         end = Math.min(pageCount, index + 1 + pageBuffer); // noninclusive
-                            
+
                                     return {
                                         visible: pageNodes.splice(start, end - start),
                                         hidden: pageNodes
                                     };
                                 },
-                            
+
                                 /**
                                  * A utility method to show node(s)
                                  *
@@ -1619,7 +1619,7 @@
                                         nodeList.removeClass(CLASS_HIDDEN).setStyle(&#x27;visibility&#x27;, &#x27;&#x27;);
                                     }
                                 },
-                            
+
                                 /**
                                  * A utility method to hide node(s)
                                  *
@@ -1632,7 +1632,7 @@
                                         nodeList.addClass(CLASS_HIDDEN).setStyle(&#x27;visibility&#x27;, &#x27;hidden&#x27;);
                                     }
                                 },
-                            
+
                                 /**
                                  * Gets a nodeList for the &quot;pages&quot;
                                  *
@@ -1646,10 +1646,10 @@
                                         cb = host._cb,
                                         pageSelector = paginator.get(SELECTOR),
                                         pageNodes = (pageSelector ? cb.all(pageSelector) : cb.get(&#x27;children&#x27;));
-                            
+
                                     return pageNodes;
                                 },
-                            
+
                                 /**
                                  * Scroll to the next page, with animation
                                  *
@@ -1661,21 +1661,21 @@
                                         index = paginator._cIndex,
                                         target = index + 1,
                                         total = paginator.get(TOTAL);
-                            
+
                                     // If the widget is disabled, ignore
                                     if (scrollview.get(DISABLED)) {
                                         return;
                                     }
-                            
+
                                     // If the target index is greater than the page count, ignore
                                     if (target &gt;= total) {
                                         return;
                                     }
-                            
+
                                     // Update the index
                                     paginator.set(INDEX, target);
                                 },
-                            
+
                                 /**
                                  * Scroll to the previous page, with animation
                                  *
@@ -1686,21 +1686,21 @@
                                         scrollview = paginator._host,
                                         index = paginator._cIndex,
                                         target = index - 1;
-                            
+
                                     // If the widget is disabled, ignore
                                     if (scrollview.get(DISABLED)) {
                                         return;
                                     }
-                            
+
                                     // If the target index is before the first page, ignore
                                     if (target &lt; 0) {
                                         return;
                                     }
-                            
+
                                     // Update the index
                                     paginator.set(INDEX, target);
                                 },
-                            
+
                                 /**
                                  * Deprecated for 3.7.0.
                                  * @method scrollTo
@@ -1709,7 +1709,7 @@
                                 scrollTo: function () {
                                     return this.scrollToIndex.apply(this, arguments);
                                 },
-                            
+
                                 /**
                                  * Scroll to a given page in the scrollview
                                  *
@@ -1725,23 +1725,23 @@
                                         pageNode = paginator._getPageNodes().item(index),
                                         scrollAxis = (paginator._cAxis[DIM_X] ? SCROLL_X : SCROLL_Y),
                                         scrollOffset = pageNode.get(scrollAxis === SCROLL_X ? &#x27;offsetLeft&#x27; : &#x27;offsetTop&#x27;);
-                            
+
                                     duration = (duration !== undefined) ? duration : PaginatorPlugin.TRANSITION.duration;
                                     easing = (easing !== undefined) ? easing : PaginatorPlugin.TRANSITION.easing;
-                            
+
                                     // Set the index ATTR to the specified index value
                                     paginator.set(INDEX, index, { src: UI });
-                            
+
                                     // Makes sure the viewport nodes are visible
                                     paginator._showNodes(pageNode);
-                            
+
                                     // Scroll to the offset
                                     host.set(scrollAxis, scrollOffset, {
                                         duration: duration,
                                         easing: easing
                                     });
                                 },
-                            
+
                                 /**
                                  * Setter for &#x27;axis&#x27; attribute
                                  *
@@ -1753,7 +1753,7 @@
                                  * @protected
                                  */
                                 _axisSetter: function (val) {
-                            
+
                                     // Turn a string into an axis object
                                     if (Y.Lang.isString(val)) {
                                         return {
@@ -1762,8 +1762,8 @@
                                         };
                                     }
                                 },
-                            
-                            
+
+
                                 /**
                                  * After listener for the axis attribute
                                  *
@@ -1774,13 +1774,13 @@
                                 _afterAxisChange: function (e) {
                                     this._cAxis = e.newVal;
                                 }
-                            
+
                                 // End prototype properties
-                            
+
                             }, {
-                            
+
                                 // Static properties
-                            
+
                                 /**
                                  * The identity of the plugin
                                  *
@@ -1792,7 +1792,7 @@
                                  * @static
                                  */
                                 NAME: &#x27;pluginScrollViewPaginator&#x27;,
-                            
+
                                 /**
                                  * The namespace on which the plugin will reside
                                  *
@@ -1802,7 +1802,7 @@
                                  * @static
                                  */
                                 NS: &#x27;pages&#x27;,
-                            
+
                                 /**
                                  * The default attribute configuration for the plugin
                                  *
@@ -1811,7 +1811,7 @@
                                  * @static
                                  */
                                 ATTRS: {
-                            
+
                                     /**
                                      * Specifies ability to scroll on x, y, or x and y axis/axes.
                                      *  If unspecified, it inherits from the host instance.
@@ -1823,7 +1823,7 @@
                                         setter: &#x27;_axisSetter&#x27;,
                                         writeOnce: &#x27;initOnly&#x27;
                                     },
-                            
+
                                     /**
                                      * CSS selector for a page inside the scrollview. The scrollview
                                      * will snap to the closest page.
@@ -1835,7 +1835,7 @@
                                     selector: {
                                         value: null
                                     },
-                            
+
                                     /**
                                      * The active page number for a paged scrollview
                                      *
@@ -1846,7 +1846,7 @@
                                     index: {
                                         value: 0
                                     },
-                            
+
                                     /**
                                      * The total number of pages
                                      *
@@ -1858,7 +1858,7 @@
                                         value: 0
                                     }
                                 },
-                            
+
                                 /**
                                  * The default snap to current duration and easing values used on scroll end.
                                  *
@@ -1869,13 +1869,13 @@
                                     duration: 300,
                                     easing: &#x27;ease-out&#x27;
                                 }
-                            
+
                                 // End static properties
-                            
+
                             });
-                            
+
                             Y.namespace(&#x27;Plugin&#x27;).ScrollViewPaginator = PaginatorPlugin;
-                            
+
                                 </pre>
                             </div>
                         </div>

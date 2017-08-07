@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,19 +1122,19 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/editor/js/exec-command.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
-                            
+
                                 /**
                                  * Plugin for the frame module to handle execCommands for Editor
                                  * @class Plugin.ExecCommand
@@ -1160,30 +1160,30 @@
                                             sel = doc.selection.createRange(),
                                             o = doc.queryCommandValue(cmd),
                                             html, reg, m, p, d, s, c;
-                            
+
                                         if (o) {
                                             html = sel.htmlText;
                                             reg = new RegExp(rule, &#x27;g&#x27;);
                                             m = html.match(reg);
-                            
+
                                             if (m) {
                                                 html = html.replace(rule + &#x27;;&#x27;, &#x27;&#x27;).replace(rule, &#x27;&#x27;);
-                            
+
                                                 sel.pasteHTML(&#x27;&lt;var id=&quot;yui-ie-bs&quot;&gt;&#x27;);
-                            
+
                                                 p = doc.getElementById(&#x27;yui-ie-bs&#x27;);
                                                 d = doc.createElement(&#x27;div&#x27;);
                                                 s = doc.createElement(tag);
-                            
+
                                                 d.innerHTML = html;
                                                 if (p.parentNode !== inst.config.doc.body) {
                                                     p = p.parentNode;
                                                 }
-                            
+
                                                 c = d.childNodes;
-                            
+
                                                 p.parentNode.replaceChild(s, p);
-                            
+
                                                 Y.each(c, function(f) {
                                                     s.appendChild(f);
                                                 });
@@ -1196,7 +1196,7 @@
                                         }
                                         this._command(cmd);
                                     };
-                            
+
                                     Y.extend(ExecCommand, Y.Base, {
                                         /**
                                         * An internal reference to the keyCode of the last key that was pressed.
@@ -1219,7 +1219,7 @@
                                         */
                                         command: function(action, value) {
                                             var fn = ExecCommand.COMMANDS[action];
-                            
+
                                             Y.log(&#x27;execCommand(&#x27; + action + &#x27;): &quot;&#x27; + value + &#x27;&quot;&#x27;, &#x27;info&#x27;, &#x27;exec-command&#x27;);
                                             if (fn) {
                                                 Y.log(&#x27;OVERIDE execCommand(&#x27; + action + &#x27;): &quot;&#x27; + value + &#x27;&quot;&#x27;, &#x27;info&#x27;, &#x27;exec-command&#x27;);
@@ -1272,14 +1272,14 @@
                                                     return this.exec._command(action, value);
                                                 }
                                             });
-                            
+
                                             this.get(&#x27;host&#x27;).on(&#x27;dom:keypress&#x27;, Y.bind(function(e) {
                                                 this._lastKey = e.keyCode;
                                             }, this));
                                         },
                                         _wrapContent: function(str, override) {
                                             var useP = (this.getInstance().host.editorPara &amp;&amp; !override ? true : false);
-                            
+
                                             if (useP) {
                                                 str = &#x27;&lt;p&gt;&#x27; + str + &#x27;&lt;/p&gt;&#x27;;
                                             } else {
@@ -1376,14 +1376,14 @@
                                                         n.insert(c, &#x27;before&#x27;);
                                                         return c;
                                                     };
-                            
+
                                                 if (sel._selection.pasteHTML) {
                                                     sel._selection.pasteHTML(html);
                                                 } else {
                                                     this._command(&#x27;inserthtml&#x27;, html);
                                                 }
-                            
-                            
+
+
                                                 root.all(q).each(function(n) {
                                                     var g = true, s;
                                                     if (Y.UA.webkit) {
@@ -1453,7 +1453,7 @@
                                             forecolor: function(cmd, val) {
                                                 var inst = this.getInstance(),
                                                     sel = new inst.EditorSelection(), n;
-                            
+
                                                 if (!Y.UA.ie) {
                                                     this._command(&#x27;useCSS&#x27;, false);
                                                 }
@@ -1485,7 +1485,7 @@
                                             backcolor: function(cmd, val) {
                                                 var inst = this.getInstance(),
                                                     sel = new inst.EditorSelection(), n;
-                            
+
                                                 if (Y.UA.gecko || Y.UA.opera) {
                                                     cmd = &#x27;hilitecolor&#x27;;
                                                 }
@@ -1534,7 +1534,7 @@
                                                 this._command(&#x27;fontname&#x27;, val);
                                                 var inst = this.getInstance(),
                                                     sel = new inst.EditorSelection();
-                            
+
                                                 if (sel.isCollapsed &amp;&amp; (this._lastKey !== 32)) {
                                                     if (sel.anchorNode.test(&#x27;font&#x27;)) {
                                                         sel.anchorNode.set(&#x27;face&#x27;, val);
@@ -1552,10 +1552,10 @@
                                             */
                                             fontsize2: function(cmd, val) {
                                                 this._command(&#x27;fontsize&#x27;, val);
-                            
+
                                                 var inst = this.getInstance(),
                                                     sel = new inst.EditorSelection(), p;
-                            
+
                                                 if (sel.isCollapsed &amp;&amp; sel.anchorNode &amp;&amp; (this._lastKey !== 32)) {
                                                     if (Y.UA.webkit) {
                                                         if (sel.anchorNode.getStyle(&#x27;lineHeight&#x27;)) {
@@ -1611,14 +1611,14 @@
                                                     sdir, hasPParent, fc,
                                                     root = inst.EditorSelection.ROOT,
                                                     sel = new inst.EditorSelection();
-                            
+
                                                 cmd = &#x27;insert&#x27; + ((tag === &#x27;ul&#x27;) ? &#x27;un&#x27; : &#x27;&#x27;) + &#x27;orderedlist&#x27;;
-                            
+
                                                 if (Y.UA.ie &amp;&amp; Y.UA.ie &lt; 11 &amp;&amp; !sel.isCollapsed) {
                                                     range = sel._selection;
                                                     html = range.htmlText;
                                                     div = inst.Node.create(html) || root;
-                            
+
                                                     if (div.test(&#x27;li&#x27;) || div.one(&#x27;li&#x27;)) {
                                                         this._command(cmd, null);
                                                         return;
@@ -1627,7 +1627,7 @@
                                                         elm = range.item ? range.item(0) : range.parentElement();
                                                         n = inst.one(elm);
                                                         lis = n.all(&#x27;li&#x27;);
-                            
+
                                                         str = &#x27;&lt;div&gt;&#x27;;
                                                         lis.each(function(l) {
                                                             str = self._wrapContent(l.get(&#x27;innerHTML&#x27;));
@@ -1668,7 +1668,7 @@
                                                         } else {
                                                             tmp = inst.Node.create(html);
                                                             ps = tmp ? tmp.all(&#x27;p&#x27;) : null;
-                            
+
                                                             if (ps &amp;&amp; ps.size()) {
                                                                 html = [];
                                                                 ps.each(function(n) {
@@ -1732,7 +1732,7 @@
                                                     if (!par) { //No parent, find the first block under the anchorNode
                                                         par = sel.anchorNode.one(inst.EditorSelection.BLOCKS);
                                                     }
-                            
+
                                                     if (par &amp;&amp; par.hasAttribute(DIR)) {
                                                         dir = par.getAttribute(DIR);
                                                     }
@@ -1770,7 +1770,7 @@
                                                             });
                                                         }
                                                     }
-                            
+
                                                     list.removeClass(cls);
                                                 }
                                             },
@@ -1787,7 +1787,7 @@
                                                         sel = new inst.EditorSelection(),
                                                         aNode = sel.anchorNode, html,
                                                         bgColor = aNode.getStyle(&#x27;backgroundColor&#x27;);
-                            
+
                                                         this._command(val);
                                                         sel = new inst.EditorSelection();
                                                         if (sel.anchorNode.test(&#x27;div&#x27;)) {
@@ -1834,7 +1834,7 @@
                                             }
                                         }
                                     });
-                            
+
                                     if (Y.UA.ie &amp;&amp; Y.UA.ie &lt; 11) {
                                         ExecCommand.COMMANDS.bold = function() {
                                             fixIETags.call(this, &#x27;bold&#x27;, &#x27;b&#x27;, &#x27;FONT-WEIGHT: bold&#x27;);
@@ -1846,11 +1846,11 @@
                                             fixIETags.call(this, &#x27;underline&#x27;, &#x27;u&#x27;, &#x27;TEXT-DECORATION: underline&#x27;);
                                         };
                                     }
-                            
+
                                     Y.namespace(&#x27;Plugin&#x27;);
                                     Y.Plugin.ExecCommand = ExecCommand;
-                            
-                            
+
+
                                 </pre>
                             </div>
                         </div>

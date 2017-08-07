@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,71 +1122,71 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/pjax/js/pjax-content.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
                             &#x60;Y.Router&#x60; extension that provides the content fetching and handling needed to
                             implement the standard pjax (HTMP5 pushState + Ajax) functionality.
-                            
+
                             @module pjax
                             @submodule pjax-content
                             @since 3.7.0
                             **/
-                            
+
                             /**
                             &#x60;Y.Router&#x60; extension that provides the content fetching and handling needed to
                             implement the standard pjax (HTMP5 pushState + Ajax) functionality.
-                            
+
                             This makes it easy to fetch server rendered content for URLs using Ajax. By
                             helping the router to fulfill the &quot;request&quot; for the content you can avoid full
                             page loads.
-                            
+
                             The &#x60;PjaxContent&#x60; class isn&#x27;t useful on its own, but can be mixed into a
                             &#x60;Router&#x60;-based class along with the &#x60;PjaxBase&#x60; class to add Pjax functionality
                             to that Router. For a pre-made standalone Pjax router, see the &#x60;Pjax&#x60; class.
-                            
+
                                 var MyRouter = Y.Base.create(&#x27;myRouter&#x27;, Y.Router, [
                                     Y.PjaxBase,
                                     Y.PjaxContent
                                 ], {
                                     // ...
                                 });
-                            
+
                             @class PjaxContent
                             @extensionfor Router
                             @since 3.7.0
                             **/
                             function PjaxContent() {}
-                            
+
                             PjaxContent.prototype = {
                                 // -- Public Methods -------------------------------------------------------
-                            
+
                                 /**
                                 Extracts and returns the relevant HTML content from an Ajax response. The
                                 content is extracted using the &#x60;contentSelector&#x60; attribute as a CSS
                                 selector. If &#x60;contentSelector&#x60; is &#x60;null&#x60;, the entire response will be
                                 returned.
-                            
+
                                 The return value is an object containing two properties:
-                            
+
                                   * &#x60;node&#x60;: A &#x60;Y.Node&#x60; instance for a document fragment containing the
                                     extracted HTML content.
-                            
+
                                   * &#x60;title&#x60;: The title of the HTML page, if any, extracted using the
                                     &#x60;titleSelector&#x60; attribute (which defaults to looking for a &#x60;&lt;title&gt;&#x60;
                                     element). If &#x60;titleSelector&#x60; is not set or if a title could not be
                                     found, this property will be &#x60;undefined&#x60;.
-                            
+
                                 @method getContent
                                 @param {String} responseText Raw Ajax response text.
                                 @return {Object} Content object with the properties described above.
@@ -1198,49 +1198,49 @@
                                         frag            = Y.Node.create(responseText || &#x27;&#x27;),
                                         titleSelector   = this.get(&#x27;titleSelector&#x27;),
                                         titleNode;
-                            
+
                                     if (contentSelector &amp;&amp; frag) {
                                         content.node = frag.all(contentSelector).toFrag();
                                     } else {
                                         content.node = frag;
                                     }
-                            
+
                                     if (titleSelector &amp;&amp; frag) {
                                         titleNode = frag.one(titleSelector);
-                            
+
                                         if (titleNode) {
                                             content.title = titleNode.get(&#x27;text&#x27;);
                                         }
                                     }
-                            
+
                                     return content;
                                 },
-                            
+
                                 /**
                                 Pjax route middleware to load content from a server. This makes an Ajax
                                 request for the requested URL, parses the returned content and puts it on
                                 the route&#x27;s response object.
-                            
+
                                 This is route middleware and not intended to be the final callback for a
                                 route. This will add the following information to the route&#x27;s request and
                                 response objects:
-                            
+
                                   - &#x60;req.ioURL&#x60;: The full URL that was used to make the &#x60;Y.io()&#x60; XHR. This
                                     may contain &#x60;&quot;pjax=1&quot;&#x60; if the &#x60;addPjaxParam&#x60; option is set.
-                            
+
                                   - &#x60;res.content&#x60;: An object containing &#x60;node&#x60; and &#x60;title&#x60; properties for
                                     the content extracted from the server&#x27;s response. See &#x60;getContent()&#x60; for
                                     more details.
-                            
+
                                   - &#x60;res.ioResponse&#x60;: The full &#x60;Y.io()&#x60; response object. This is useful if
                                     you need access to the XHR&#x27;s response &#x60;status&#x60; or HTTP headers.
-                            
+
                                 @example
                                     router.route(&#x27;/foo/&#x27;, &#x27;loadContent&#x27;, function (req, res, next) {
                                         Y.one(&#x27;container&#x27;).setHTML(res.content.node);
                                         Y.config.doc.title = res.content.title;
                                     });
-                            
+
                                 @method loadContent
                                 @param {Object} req Request object.
                                 @param {Object} res Response Object.
@@ -1250,12 +1250,12 @@
                                 **/
                                 loadContent: function (req, res, next) {
                                     var url = req.url;
-                            
+
                                     // If there&#x27;s an outstanding request, abort it.
                                     if (this._request) {
                                         this._request.abort();
                                     }
-                            
+
                                     // Add a &#x27;pjax=1&#x27; query parameter if enabled.
                                     if (this.get(&#x27;addPjaxParam&#x27;)) {
                                         // Captures the path with query, and hash parts of the URL. Then
@@ -1266,7 +1266,7 @@
                                             return path + (hash || &#x27;&#x27;);
                                         });
                                     }
-                            
+
                                     // Send a request.
                                     this._request = Y.io(url, {
                                         &#x27;arguments&#x27;: {
@@ -1275,29 +1275,29 @@
                                                 res : res,
                                                 next: next
                                             },
-                            
+
                                             url: url
                                         },
-                            
+
                                         context: this,
                                         headers: {&#x27;X-PJAX&#x27;: &#x27;true&#x27;},
                                         timeout: this.get(&#x27;timeout&#x27;),
-                            
+
                                         on: {
                                             complete: this._onPjaxIOComplete,
                                             end     : this._onPjaxIOEnd
                                         }
                                     });
                                 },
-                            
+
                                 // -- Event Handlers -------------------------------------------------------
-                            
+
                                 /**
                                 Handles IO complete events.
-                            
+
                                 This parses the content from the &#x60;Y.io()&#x60; response and puts it on the
                                 route&#x27;s response object.
-                            
+
                                 @method _onPjaxIOComplete
                                 @param {String} id The &#x60;Y.io&#x60; transaction id.
                                 @param {Object} ioResponse The &#x60;Y.io&#x60; response object.
@@ -1310,21 +1310,21 @@
                                         route   = details.route,
                                         req     = route.req,
                                         res     = route.res;
-                            
+
                                     // Put the URL requested through &#x60;Y.io&#x60; on the route&#x27;s &#x60;req&#x60; object.
                                     req.ioURL = details.url;
-                            
+
                                     // Put the parsed content and &#x60;Y.io&#x60; response object on the route&#x27;s
                                     // &#x60;res&#x60; object.
                                     res.content    = content;
                                     res.ioResponse = ioResponse;
-                            
+
                                     route.next();
                                 },
-                            
+
                                 /**
                                 Handles IO end events.
-                            
+
                                 @method _onPjaxIOEnd
                                 @param {String} id The &#x60;Y.io&#x60; transaction id.
                                 @param {Object} details Extra details carried through from &#x60;loadContent()&#x60;.
@@ -1335,21 +1335,21 @@
                                     this._request = null;
                                 }
                             };
-                            
+
                             PjaxContent.ATTRS = {
                                 /**
                                 If &#x60;true&#x60;, a &quot;pjax=1&quot; query parameter will be appended to all URLs
                                 requested via Pjax.
-                            
+
                                 Browsers ignore HTTP request headers when caching content, so if the
                                 same URL is used to request a partial Pjax page and a full page, the
                                 browser will cache them under the same key and may later load the
                                 cached partial page when the user actually requests a full page (or vice
                                 versa).
-                            
+
                                 To prevent this, we can add a bogus query parameter to the URL so that
                                 Pjax URLs will always be cached separately from non-Pjax URLs.
-                            
+
                                 @attribute addPjaxParam
                                 @type Boolean
                                 @default true
@@ -1358,17 +1358,17 @@
                                 addPjaxParam: {
                                     value: true
                                 },
-                            
+
                                 /**
                                 CSS selector used to extract a specific portion of the content of a page
                                 loaded via Pjax.
-                            
+
                                 For example, if you wanted to load the page &#x60;example.html&#x60; but only use
                                 the content within an element with the id &quot;pjax-content&quot;, you&#x27;d set
                                 &#x60;contentSelector&#x60; to &quot;#pjax-content&quot;.
-                            
+
                                 If not set, the entire page will be used.
-                            
+
                                 @attribute contentSelector
                                 @type String
                                 @default null
@@ -1377,16 +1377,16 @@
                                 contentSelector: {
                                     value: null
                                 },
-                            
+
                                 /**
                                 CSS selector used to extract a page title from the content of a page
                                 loaded via Pjax.
-                            
+
                                 By default this is set to extract the title from the &#x60;&lt;title&gt;&#x60; element,
                                 but you could customize it to extract the title from an &#x60;&lt;h1&gt;&#x60;, or from
                                 any other element, if that&#x27;s more appropriate for the content you&#x27;re
                                 loading.
-                            
+
                                 @attribute titleSelector
                                 @type String
                                 @default &quot;title&quot;
@@ -1395,10 +1395,10 @@
                                 titleSelector: {
                                     value: &#x27;title&#x27;
                                 },
-                            
+
                                 /**
                                 Time in milliseconds after which an Ajax request should time out.
-                            
+
                                 @attribute timeout
                                 @type Number
                                 @default 30000
@@ -1408,9 +1408,9 @@
                                     value: 30000
                                 }
                             };
-                            
+
                             Y.PjaxContent = PjaxContent;
-                            
+
                                 </pre>
                             </div>
                         </div>

@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>alloy-ui/src/aui-color-picker/js/aui-hsva-palette-modal.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1140,14 +1140,14 @@
                              * @module aui-color-picker
                              * @submodule aui-hsv-palette-modal
                              */
-                            
+
                             var AWidget = A.Widget,
                                 Lang = A.Lang,
-                            
+
                                 getClassName = A.getClassName,
-                            
+
                                 CSS_HSV_PALETTE_MODAL = getClassName(&#x27;hsv-palette-modal&#x27;),
-                            
+
                                 /**
                                  * A base class for &#x60;HSVAPaletteModal&#x60;.
                                  *
@@ -1158,7 +1158,7 @@
                                  * @constructor
                                  */
                                 HSVAPaletteModal = A.Base.create(&#x27;hsv-palette-modal&#x27;, A.Modal, [A.WidgetCssClass, A.WidgetToggle], {
-                            
+
                                     /**
                                      * Construction logic executed during &#x60;HSVAPaletteModal&#x60; instantiation.
                                      * Lifecycle.
@@ -1168,12 +1168,12 @@
                                      */
                                     initializer: function() {
                                         var instance = this;
-                            
+
                                         instance.after(&#x27;render&#x27;, instance._renderHSVAPalette, instance);
-                            
+
                                         instance.on(&#x27;selectedChange&#x27;, instance._onSelectionChange, instance);
                                     },
-                            
+
                                     /**
                                      * Returns the currently selected value of the &#x60;HSVPalette&#x60;.
                                      *
@@ -1183,10 +1183,10 @@
                                      */
                                     _getSelected: function() {
                                         var instance = this;
-                            
+
                                         return instance._hsvPalette.get(&#x27;selected&#x27;);
                                     },
-                            
+
                                     /**
                                      * Sets selected value of the &#x60;HSVPalette&#x60;.
                                      *
@@ -1196,12 +1196,12 @@
                                      */
                                     _onSelectionChange: function(event) {
                                         var instance = this;
-                            
+
                                         if (event.src !== AWidget.UI_SRC) {
                                             instance._hsvPalette.set(&#x27;selected&#x27;, event.newVal);
                                         }
                                     },
-                            
+
                                     /**
                                      * Renders the &#x60;HSVPalette&#x60;.
                                      *
@@ -1215,29 +1215,29 @@
                                             HsvClass,
                                             hsvOptions,
                                             useAlpha;
-                            
+
                                         contentBox = instance.get(&#x27;contentBox&#x27;);
-                            
+
                                         hsvOptions = instance.get(&#x27;hsv&#x27;);
-                            
+
                                         useAlpha = hsvOptions.alpha;
-                            
+
                                         HsvClass = A.HSVPalette;
-                            
+
                                         if (useAlpha) {
                                             HsvClass = A.HSVAPalette;
                                         }
-                            
+
                                         contentBox.addClass(CSS_HSV_PALETTE_MODAL);
-                            
+
                                         body = instance.getStdModNode(A.WidgetStdMod.BODY);
-                            
+
                                         instance._hsvPalette = new HsvClass(hsvOptions).render(body);
-                            
+
                                         if (instance.get(&#x27;centered&#x27;)) {
                                             instance.align();
                                         }
-                            
+
                                         instance._hsvPalette.after(
                                             &#x27;selectedChange&#x27;,
                                             function(event) {
@@ -1248,7 +1248,7 @@
                                         );
                                     }
                                 }, {
-                            
+
                                     /**
                                      * Static property used to define the default attribute
                                      * configuration for the &#x60;HSVAPaletteModal&#x60;.
@@ -1258,7 +1258,7 @@
                                      * @static
                                      */
                                     ATTRS: {
-                            
+
                                         /**
                                          * Configuration options for the &#x60;HSVPalette&#x60;.
                                          *
@@ -1271,7 +1271,7 @@
                                                 alpha: false
                                             }
                                         },
-                            
+
                                         /**
                                          * Currently &#x60;selected&#x60; color value.
                                          *
@@ -1285,7 +1285,7 @@
                                             value: &#x27;&#x27;
                                         }
                                     },
-                            
+
                                     /**
                                      * Static property provides a string to identify the CSS prefix.
                                      *
@@ -1294,7 +1294,7 @@
                                      * @static
                                      */
                                     CSS_PREFIX: getClassName(&#x27;hsv-palette-modal&#x27;),
-                            
+
                                     /**
                                      * Static property provides a string to identify the class.
                                      *
@@ -1303,7 +1303,7 @@
                                      * @static
                                      */
                                     NAME: &#x27;hsv-palette-modal&#x27;,
-                            
+
                                     /**
                                      * Static property provides a string to identify the namespace.
                                      *
@@ -1313,9 +1313,9 @@
                                      */
                                     NS: &#x27;hsv-palette-modal&#x27;
                                 });
-                            
+
                             A.HSVAPaletteModal = HSVAPaletteModal;
-                            
+
                                 </pre>
                             </div>
                         </div>

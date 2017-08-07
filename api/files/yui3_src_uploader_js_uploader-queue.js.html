@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/uploader/js/uploader-queue.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1140,9 +1140,9 @@
                             * and automatically advances to the next upload when a preceding one has completed.
                             * @module uploader-queue
                             */
-                            
-                            
-                            
+
+
+
                             /**
                             * This class manages a queue of files to be uploaded to the server.
                             * @class Uploader.Queue
@@ -1157,13 +1157,13 @@
                                 this.currentFiles = {};
                                 this.totalBytesUploaded = 0;
                                 this.totalBytes = 0;
-                            
+
                                 UploaderQueue.superclass.constructor.apply(this, arguments);
                             };
-                            
-                            
+
+
                             Y.extend(UploaderQueue, Y.Base, {
-                            
+
                                 /**
                                 * Stored value of the current queue state
                                 * @property _currentState
@@ -1172,7 +1172,7 @@
                                 * @default UploaderQueue.STOPPED
                                 */
                                 _currentState: UploaderQueue.STOPPED,
-                            
+
                                 /**
                                 * Construction logic executed during UploaderQueue instantiation.
                                 *
@@ -1180,7 +1180,7 @@
                                 * @protected
                                 */
                                 initializer : function () {},
-                            
+
                                 /**
                                 * Handles and retransmits upload start event.
                                 *
@@ -1192,10 +1192,10 @@
                                     var updatedEvent = event;
                                     updatedEvent.file = event.target;
                                     updatedEvent.originEvent = event;
-                            
+
                                     this.fire(&quot;uploadstart&quot;, updatedEvent);
                                 },
-                            
+
                                 /**
                                 * Handles and retransmits upload error event.
                                 *
@@ -1208,24 +1208,24 @@
                                         updatedEvent = event,
                                         fileid,
                                         retries;
-                            
+
                                     updatedEvent.file = event.target;
                                     updatedEvent.originEvent = event;
-                            
+
                                     this.numberOfUploads-=1;
                                     delete this.currentFiles[event.target.get(&quot;id&quot;)];
                                     this._detachFileEvents(event.target);
-                            
+
                                     event.target.cancelUpload();
-                            
+
                                     if (errorAction === UploaderQueue.STOP) {
                                         this.pauseUpload();
                                     }
-                            
+
                                     else if (errorAction === UploaderQueue.RESTART_ASAP) {
                                         fileid = event.target.get(&quot;id&quot;);
                                         retries = this.uploadRetries[fileid] || 0;
-                            
+
                                         if (retries &lt; this.get(&quot;retryCount&quot;)) {
                                             this.uploadRetries[fileid] = retries + 1;
                                             this.addToQueueTop(event.target);
@@ -1235,17 +1235,17 @@
                                     else if (errorAction === UploaderQueue.RESTART_AFTER) {
                                         fileid = event.target.get(&quot;id&quot;);
                                         retries = this.uploadRetries[fileid] || 0;
-                            
+
                                         if (retries &lt; this.get(&quot;retryCount&quot;)) {
                                             this.uploadRetries[fileid] = retries + 1;
                                             this.addToQueueBottom(event.target);
                                         }
                                         this._startNextFile();
                                     }
-                            
+
                                     this.fire(&quot;uploaderror&quot;, updatedEvent);
                                 },
-                            
+
                                 /**
                                 * Launches the upload of the next file in the queue.
                                 *
@@ -1258,24 +1258,24 @@
                                             fileId = currentFile.get(&quot;id&quot;),
                                             parameters = this.get(&quot;perFileParameters&quot;),
                                             fileParameters = parameters.hasOwnProperty(fileId) ? parameters[fileId] : parameters;
-                            
+
                                         this.currentUploadedByteValues[fileId] = 0;
-                            
+
                                         currentFile.on(&quot;uploadstart&quot;, this._uploadStartHandler, this);
                                         currentFile.on(&quot;uploadprogress&quot;, this._uploadProgressHandler, this);
                                         currentFile.on(&quot;uploadcomplete&quot;, this._uploadCompleteHandler, this);
                                         currentFile.on(&quot;uploaderror&quot;, this._uploadErrorHandler, this);
                                         currentFile.on(&quot;uploadcancel&quot;, this._uploadCancelHandler, this);
-                            
+
                                         currentFile.set(&quot;xhrHeaders&quot;, this.get(&quot;uploadHeaders&quot;));
                                         currentFile.set(&quot;xhrWithCredentials&quot;, this.get(&quot;withCredentials&quot;));
-                            
+
                                         currentFile.startUpload(this.get(&quot;uploadURL&quot;), fileParameters, this.get(&quot;fileFieldName&quot;));
-                            
+
                                         this._registerUpload(currentFile);
                                     }
                                 },
-                            
+
                                 /**
                                 * Register a new upload process.
                                 *
@@ -1286,7 +1286,7 @@
                                     this.numberOfUploads += 1;
                                     this.currentFiles[file.get(&quot;id&quot;)] = file;
                                 },
-                            
+
                                 /**
                                 * Unregisters a new upload process.
                                 *
@@ -1297,13 +1297,13 @@
                                     if (this.numberOfUploads &gt; 0) {
                                         this.numberOfUploads -= 1;
                                     }
-                            
+
                                     delete this.currentFiles[file.get(&quot;id&quot;)];
                                     delete this.uploadRetries[file.get(&quot;id&quot;)];
-                            
+
                                     this._detachFileEvents(file);
                                 },
-                            
+
                                 _detachFileEvents : function (file) {
                                     file.detach(&quot;uploadstart&quot;, this._uploadStartHandler);
                                     file.detach(&quot;uploadprogress&quot;, this._uploadProgressHandler);
@@ -1311,7 +1311,7 @@
                                     file.detach(&quot;uploaderror&quot;, this._uploadErrorHandler);
                                     file.detach(&quot;uploadcancel&quot;, this._uploadCancelHandler);
                                 },
-                            
+
                                 /**
                                 * Handles and retransmits upload complete event.
                                 *
@@ -1320,42 +1320,42 @@
                                 * @private
                                 */
                                 _uploadCompleteHandler : function (event) {
-                            
+
                                     this._unregisterUpload(event.target);
-                            
+
                                     this.totalBytesUploaded += event.target.get(&quot;size&quot;);
                                     delete this.currentUploadedByteValues[event.target.get(&quot;id&quot;)];
-                            
-                            
+
+
                                     if (this.queuedFiles.length &gt; 0 &amp;&amp; this._currentState === UploaderQueue.UPLOADING) {
                                         this._startNextFile();
                                     }
-                            
+
                                     var updatedEvent = event,
                                         uploadedTotal = this.totalBytesUploaded,
                                         percentLoaded = Math.min(100, Math.round(10000*uploadedTotal/this.totalBytes) / 100);
-                            
+
                                     updatedEvent.file = event.target;
                                     updatedEvent.originEvent = event;
-                            
+
                                     Y.each(this.currentUploadedByteValues, function (value) {
                                         uploadedTotal += value;
                                     });
-                            
+
                                     this.fire(&quot;totaluploadprogress&quot;, {
                                         bytesLoaded: uploadedTotal,
                                         bytesTotal: this.totalBytes,
                                         percentLoaded: percentLoaded
                                     });
-                            
+
                                     this.fire(&quot;uploadcomplete&quot;, updatedEvent);
-                            
+
                                     if (this.queuedFiles.length === 0 &amp;&amp; this.numberOfUploads &lt;= 0) {
                                         this.fire(&quot;alluploadscomplete&quot;);
                                         this._currentState = UploaderQueue.STOPPED;
                                     }
                                 },
-                            
+
                                 /**
                                 * Handles and retransmits upload cancel event.
                                 *
@@ -1364,16 +1364,16 @@
                                 * @private
                                 */
                                 _uploadCancelHandler : function (event) {
-                            
+
                                     var updatedEvent = event;
                                     updatedEvent.originEvent = event;
                                     updatedEvent.file = event.target;
-                            
+
                                     this.fire(&quot;uploadcancel&quot;, updatedEvent);
                                 },
-                            
-                            
-                            
+
+
+
                                 /**
                                 * Handles and retransmits upload progress event.
                                 *
@@ -1382,29 +1382,29 @@
                                 * @private
                                 */
                                 _uploadProgressHandler : function (event) {
-                            
+
                                     this.currentUploadedByteValues[event.target.get(&quot;id&quot;)] = event.bytesLoaded;
-                            
+
                                     var updatedEvent = event,
                                         uploadedTotal = this.totalBytesUploaded,
                                         percentLoaded = Math.min(100, Math.round(10000*uploadedTotal/this.totalBytes) / 100);
-                            
+
                                     updatedEvent.originEvent = event;
                                     updatedEvent.file = event.target;
-                            
+
                                     this.fire(&quot;uploadprogress&quot;, updatedEvent);
-                            
+
                                     Y.each(this.currentUploadedByteValues, function (value) {
                                         uploadedTotal += value;
                                     });
-                            
+
                                     this.fire(&quot;totaluploadprogress&quot;, {
                                         bytesLoaded: uploadedTotal,
                                         bytesTotal: this.totalBytes,
                                         percentLoaded: percentLoaded
                                     });
                                 },
-                            
+
                                 /**
                                 * Starts uploading the queued up file list.
                                 *
@@ -1416,14 +1416,14 @@
                                     this.currentUploadedByteValues = {};
                                     this.currentFiles = {};
                                     this.totalBytesUploaded = 0;
-                            
+
                                     this._currentState = UploaderQueue.UPLOADING;
-                            
+
                                     while (this.numberOfUploads &lt; this.get(&quot;simUploads&quot;) &amp;&amp; this.queuedFiles.length &gt; 0) {
                                         this._startNextFile();
                                     }
                                 },
-                            
+
                                 /**
                                 * Pauses the upload process. The ongoing file uploads
                                 * will complete after this method is called, but no
@@ -1434,7 +1434,7 @@
                                 pauseUpload: function () {
                                     this._currentState = UploaderQueue.STOPPED;
                                 },
-                            
+
                                 /**
                                 * Restarts a paused upload process.
                                 *
@@ -1446,7 +1446,7 @@
                                          this._startNextFile();
                                     }
                                 },
-                            
+
                                 /**
                                 * If a particular file is stuck in an ongoing upload without
                                 * any progress events, this method allows to force its reupload
@@ -1464,7 +1464,7 @@
                                         this._startNextFile();
                                     }
                                 },
-                            
+
                                 /**
                                 * Add a new file to the top of the queue (the upload will be
                                 * launched as soon as the current number of uploading files
@@ -1476,7 +1476,7 @@
                                 addToQueueTop: function (file) {
                                         this.queuedFiles.unshift(file);
                                 },
-                            
+
                                 /**
                                 * Add a new file to the bottom of the queue (the upload will be
                                 * launched after all the other queued files are uploaded.)
@@ -1487,7 +1487,7 @@
                                 addToQueueBottom: function (file) {
                                         this.queuedFiles.push(file);
                                 },
-                            
+
                                 /**
                                 * Cancels a specific file&#x27;s upload. If no argument is passed,
                                 * all ongoing uploads are cancelled and the upload process is
@@ -1501,10 +1501,10 @@
                                     var id,
                                         i,
                                         fid;
-                            
+
                                     if (file) {
                                         id = file.get(&quot;id&quot;);
-                            
+
                                         if (this.currentFiles[id]) {
                                             this.currentFiles[id].cancelUpload();
                                             this._unregisterUpload(this.currentFiles[id]);
@@ -1526,7 +1526,7 @@
                                             this.currentFiles[fid].cancelUpload();
                                             this._unregisterUpload(this.currentFiles[fid]);
                                         }
-                            
+
                                         this.currentUploadedByteValues = {};
                                         this.currentFiles = {};
                                         this.totalBytesUploaded = 0;
@@ -1545,7 +1545,7 @@
                                 * @static
                                 */
                                 CONTINUE: &quot;continue&quot;,
-                            
+
                                 /**
                                 * Static constant for the value of the &#x60;errorAction&#x60; attribute:
                                 * prescribes the queue to stop uploading files in case of
@@ -1556,7 +1556,7 @@
                                 * @static
                                 */
                                 STOP: &quot;stop&quot;,
-                            
+
                                 /**
                                 * Static constant for the value of the &#x60;errorAction&#x60; attribute:
                                 * prescribes the queue to restart a file upload immediately in case of
@@ -1567,7 +1567,7 @@
                                 * @static
                                 */
                                 RESTART_ASAP: &quot;restartasap&quot;,
-                            
+
                                 /**
                                 * Static constant for the value of the &#x60;errorAction&#x60; attribute:
                                 * prescribes the queue to restart an errored out file upload after
@@ -1578,7 +1578,7 @@
                                 * @static
                                 */
                                 RESTART_AFTER: &quot;restartafter&quot;,
-                            
+
                                 /**
                                 * Static constant for the value of the &#x60;_currentState&#x60; property:
                                 * implies that the queue is currently not uploading files.
@@ -1588,7 +1588,7 @@
                                 * @static
                                 */
                                 STOPPED: &quot;stopped&quot;,
-                            
+
                                 /**
                                 * Static constant for the value of the &#x60;_currentState&#x60; property:
                                 * implies that the queue is currently uploading files.
@@ -1598,7 +1598,7 @@
                                 * @static
                                 */
                                 UPLOADING: &quot;uploading&quot;,
-                            
+
                                 /**
                                 * The identity of the class.
                                 *
@@ -1610,7 +1610,7 @@
                                 * @static
                                 */
                                 NAME: &#x27;uploaderqueue&#x27;,
-                            
+
                                 /**
                                 * Static property used to define the default attribute configuration of
                                 * the class.
@@ -1621,7 +1621,7 @@
                                 * @static
                                 */
                                 ATTRS: {
-                            
+
                                     /**
                                     * Maximum number of simultaneous uploads; must be in the
                                     * range between 1 and 5. The value of &#x60;2&#x60; is default. It
@@ -1636,7 +1636,7 @@
                                                      return (val &gt;= 1 &amp;&amp; val &lt;= 5);
                                              }
                                      },
-                            
+
                                     /**
                                     * The action to take in case of error. The valid values for this attribute are:
                                     * &#x60;Y.Uploader.Queue.CONTINUE&#x60; (the upload process should continue on other files,
@@ -1660,7 +1660,7 @@
                                             );
                                         }
                                     },
-                            
+
                                     /**
                                     * The total number of bytes that has been uploaded.
                                     * @attribute bytesUploaded
@@ -1670,7 +1670,7 @@
                                         readOnly: true,
                                         value: 0
                                     },
-                            
+
                                     /**
                                     * The total number of bytes in the queue.
                                     * @attribute bytesTotal
@@ -1680,7 +1680,7 @@
                                         readOnly: true,
                                         value: 0
                                     },
-                            
+
                                     /**
                                     * The queue file list. This file list should only be modified
                                     * before the upload has been started; modifying it after starting
@@ -1697,11 +1697,11 @@
                                             Y.Array.each(newValue, function (value) {
                                                 this.totalBytes += value.get(&quot;size&quot;);
                                             }, this);
-                            
+
                                             return val;
                                         }
                                     },
-                            
+
                                     /**
                                     * A String specifying what should be the POST field name for the file
                                     * content in the upload request.
@@ -1713,7 +1713,7 @@
                                     fileFieldName: {
                                         value: &quot;Filedata&quot;
                                     },
-                            
+
                                     /**
                                     * The URL to POST the file upload requests to.
                                     *
@@ -1724,7 +1724,7 @@
                                     uploadURL: {
                                         value: &quot;&quot;
                                     },
-                            
+
                                     /**
                                     * Additional HTTP headers that should be included
                                     * in the upload request. Due to Flash Player security
@@ -1738,7 +1738,7 @@
                                     uploadHeaders: {
                                         value: {}
                                     },
-                            
+
                                     /**
                                     * A Boolean that specifies whether the file should be
                                     * uploaded with the appropriate user credentials for the
@@ -1752,8 +1752,8 @@
                                     withCredentials: {
                                         value: true
                                     },
-                            
-                            
+
+
                                     /**
                                     * An object, keyed by &#x60;fileId&#x60;, containing sets of key-value pairs
                                     * that should be passed as POST variables along with each corresponding
@@ -1766,7 +1766,7 @@
                                     perFileParameters: {
                                         value: {}
                                     },
-                            
+
                                     /**
                                     * The number of times to try re-uploading a file that failed to upload before
                                     * cancelling its upload.
@@ -1778,14 +1778,14 @@
                                     retryCount: {
                                         value: 3
                                     }
-                            
+
                                 }
                             });
-                            
-                            
+
+
                             Y.namespace(&#x27;Uploader&#x27;);
                             Y.Uploader.Queue = UploaderQueue;
-                            
+
                                 </pre>
                             </div>
                         </div>

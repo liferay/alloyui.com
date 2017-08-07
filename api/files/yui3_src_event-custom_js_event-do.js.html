@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/event-custom/js/event-do.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1140,19 +1140,19 @@
                              * @module event-custom
                              * @submodule event-custom-base
                              */
-                            
+
                             /**
                              * Allows for the insertion of methods that are executed before or after
                              * a specified method
                              * @class Do
                              * @static
                              */
-                            
+
                             var DO_BEFORE = 0,
                                 DO_AFTER = 1,
-                            
+
                             DO = {
-                            
+
                                 /**
                                  * Cache of objects touched by the utility
                                  * @property objs
@@ -1166,7 +1166,7 @@
                                  * we need to expose hooks for that functionality more formally.
                                  */
                                 objs: null,
-                            
+
                                 /**
                                  * &lt;p&gt;Execute the supplied method before the specified function.  Wrapping
                                  * function may optionally return an instance of the following classes to
@@ -1201,10 +1201,10 @@
                                         a = [fn, c].concat(Y.Array(arguments, 4, true));
                                         f = Y.rbind.apply(Y, a);
                                     }
-                            
+
                                     return this._inject(DO_BEFORE, f, obj, sFn);
                                 },
-                            
+
                                 /**
                                  * &lt;p&gt;Execute the supplied method after the specified function.  Wrapping
                                  * function may optionally return an instance of the following classes to
@@ -1238,10 +1238,10 @@
                                         a = [fn, c].concat(Y.Array(arguments, 4, true));
                                         f = Y.rbind.apply(Y, a);
                                     }
-                            
+
                                     return this._inject(DO_AFTER, f, obj, sFn);
                                 },
-                            
+
                                 /**
                                  * Execute the supplied method before or after the specified function.
                                  * Used by &lt;code&gt;before&lt;/code&gt; and &lt;code&gt;after&lt;/code&gt;.
@@ -1259,33 +1259,33 @@
                                 _inject: function(when, fn, obj, sFn) {
                                     // object id
                                     var id = Y.stamp(obj), o, sid;
-                            
+
                                     if (!obj._yuiaop) {
                                         // create a map entry for the obj if it doesn&#x27;t exist, to hold overridden methods
                                         obj._yuiaop = {};
                                     }
-                            
+
                                     o = obj._yuiaop;
-                            
+
                                     if (!o[sFn]) {
                                         // create a map entry for the method if it doesn&#x27;t exist
                                         o[sFn] = new Y.Do.Method(obj, sFn);
-                            
+
                                         // re-route the method to our wrapper
                                         obj[sFn] = function() {
                                             return o[sFn].exec.apply(o[sFn], arguments);
                                         };
                                     }
-                            
+
                                     // subscriber id
                                     sid = id + Y.stamp(fn) + sFn;
-                            
+
                                     // register the callback
                                     o[sFn].register(sid, fn, when);
-                            
+
                                     return new Y.EventHandle(o[sFn], sid);
                                 },
-                            
+
                                 /**
                                  * Detach a before or after subscription.
                                  *
@@ -1299,11 +1299,11 @@
                                     }
                                 }
                             };
-                            
+
                             Y.Do = DO;
-                            
+
                             //////////////////////////////////////////////////////////////////////////
-                            
+
                             /**
                              * Contains the return value from the wrapped method, accessible
                              * by &#x27;after&#x27; event listeners.
@@ -1312,7 +1312,7 @@
                              * @static
                              * @since 3.2.0
                              */
-                            
+
                             /**
                              * Contains the current state of the return value, consumable by
                              * &#x27;after&#x27; event listeners, and updated if an after subscriber
@@ -1322,9 +1322,9 @@
                              * @static
                              * @since 3.2.0
                              */
-                            
+
                             //////////////////////////////////////////////////////////////////////////
-                            
+
                             /**
                              * Wrapper for a displaced method with aop enabled
                              * @class Do.Method
@@ -1339,7 +1339,7 @@
                                 this.before = {};
                                 this.after = {};
                             };
-                            
+
                             /**
                              * Register a aop subscriber
                              * @method register
@@ -1354,7 +1354,7 @@
                                     this.before[sid] = fn;
                                 }
                             };
-                            
+
                             /**
                              * Unregister a aop subscriber
                              * @method delete
@@ -1367,7 +1367,7 @@
                                 delete this.before[sid];
                                 delete this.after[sid];
                             };
-                            
+
                             /**
                              * &lt;p&gt;Execute the wrapped method.  All arguments are passed into the wrapping
                              * functions.  If any of the before wrappers return an instance of
@@ -1383,13 +1383,13 @@
                              * @return {any} Return value of wrapped function unless overwritten (see above)
                              */
                             DO.Method.prototype.exec = function () {
-                            
+
                                 var args = Y.Array(arguments, 0, true),
                                     i, ret, newRet,
                                     bf = this.before,
                                     af = this.after,
                                     prevented = false;
-                            
+
                                 // execute before
                                 for (i in bf) {
                                     if (bf.hasOwnProperty(i)) {
@@ -1409,15 +1409,15 @@
                                         }
                                     }
                                 }
-                            
+
                                 // execute method
                                 if (!prevented) {
                                     ret = this.method.apply(this.obj, args);
                                 }
-                            
+
                                 DO.originalRetVal = ret;
                                 DO.currentRetVal = ret;
-                            
+
                                 // execute after methods.
                                 for (i in af) {
                                     if (af.hasOwnProperty(i)) {
@@ -1433,12 +1433,12 @@
                                         }
                                     }
                                 }
-                            
+
                                 return ret;
                             };
-                            
+
                             //////////////////////////////////////////////////////////////////////////
-                            
+
                             /**
                              * Return an AlterArgs object when you want to change the arguments that
                              * were passed into the function.  Useful for Do.before subscribers.  An
@@ -1454,7 +1454,7 @@
                                 this.msg = msg;
                                 this.newArgs = newArgs;
                             };
-                            
+
                             /**
                              * Return an AlterReturn object when you want to change the result returned
                              * from the core method to the caller.  Useful for Do.after subscribers.
@@ -1468,7 +1468,7 @@
                                 this.msg = msg;
                                 this.newRetVal = newRetVal;
                             };
-                            
+
                             /**
                              * Return a Halt object when you want to terminate the execution
                              * of all subsequent subscribers as well as the wrapped method
@@ -1483,7 +1483,7 @@
                                 this.msg = msg;
                                 this.retVal = retVal;
                             };
-                            
+
                             /**
                              * Return a Prevent object when you want to prevent the wrapped function
                              * from executing, but want the remaining listeners to execute.  Useful
@@ -1495,7 +1495,7 @@
                             DO.Prevent = function(msg) {
                                 this.msg = msg;
                             };
-                            
+
                             /**
                              * Return an Error object when you want to terminate the execution
                              * of all subsequent method calls.
@@ -1507,10 +1507,10 @@
                              * @deprecated use Y.Do.Halt or Y.Do.Prevent
                              */
                             DO.Error = DO.Halt;
-                            
-                            
+
+
                             //////////////////////////////////////////////////////////////////////////
-                            
+
                                 </pre>
                             </div>
                         </div>

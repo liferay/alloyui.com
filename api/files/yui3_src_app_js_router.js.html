@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,64 +1122,64 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/app/js/router.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
                             Provides URL-based routing using HTML5 &#x60;pushState()&#x60; or the location hash.
-                            
+
                             @module app
                             @submodule router
                             @since 3.4.0
                             **/
-                            
+
                             var HistoryHash = Y.HistoryHash,
                                 QS          = Y.QueryString,
                                 YArray      = Y.Array,
                                 YLang       = Y.Lang,
                                 YObject     = Y.Object,
-                            
+
                                 win = Y.config.win,
-                            
+
                                 // Holds all the active router instances. This supports the static
                                 // &#x60;dispatch()&#x60; method which causes all routers to dispatch.
                                 instances = [],
-                            
+
                                 // We have to queue up pushState calls to avoid race conditions, since the
                                 // popstate event doesn&#x27;t actually provide any info on what URL it&#x27;s
                                 // associated with.
                                 saveQueue = [],
-                            
+
                                 /**
                                 Fired when the router is ready to begin dispatching to route handlers.
-                            
+
                                 You shouldn&#x27;t need to wait for this event unless you plan to implement some
                                 kind of custom dispatching logic. It&#x27;s used internally in order to avoid
                                 dispatching to an initial route if a browser history change occurs first.
-                            
+
                                 @event ready
                                 @param {Boolean} dispatched &#x60;true&#x60; if routes have already been dispatched
                                   (most likely due to a history change).
                                 @fireOnce
                                 **/
                                 EVT_READY = &#x27;ready&#x27;;
-                            
+
                             /**
                             Provides URL-based routing using HTML5 &#x60;pushState()&#x60; or the location hash.
-                            
+
                             This makes it easy to wire up route handlers for different application states
                             while providing full back/forward navigation support and bookmarkable, shareable
                             URLs.
-                            
+
                             @class Router
                             @param {Object} [config] Config properties.
                                 @param {Boolean} [config.html5] Overrides the default capability detection
@@ -1195,141 +1195,141 @@
                             function Router() {
                                 Router.superclass.constructor.apply(this, arguments);
                             }
-                            
+
                             Y.Router = Y.extend(Router, Y.Base, {
                                 // -- Protected Properties -------------------------------------------------
-                            
+
                                 /**
                                 Whether or not &#x60;_dispatch()&#x60; has been called since this router was
                                 instantiated.
-                            
+
                                 @property _dispatched
                                 @type Boolean
                                 @default undefined
                                 @protected
                                 **/
-                            
+
                                 /**
                                 Whether or not we&#x27;re currently in the process of dispatching to routes.
-                            
+
                                 @property _dispatching
                                 @type Boolean
                                 @default undefined
                                 @protected
                                 **/
-                            
+
                                 /**
                                 History event handle for the &#x60;history:change&#x60; or &#x60;hashchange&#x60; event
                                 subscription.
-                            
+
                                 @property _historyEvents
                                 @type EventHandle
                                 @protected
                                 **/
-                            
+
                                 /**
                                 Cached copy of the &#x60;html5&#x60; attribute for internal use.
-                            
+
                                 @property _html5
                                 @type Boolean
                                 @protected
                                 **/
-                            
+
                                 /**
                                 Map which holds the registered param handlers in the form:
                                 &#x60;name&#x60; -&gt; RegExp | Function.
-                            
+
                                 @property _params
                                 @type Object
                                 @protected
                                 @since 3.12.0
                                 **/
-                            
+
                                 /**
                                 Whether or not the &#x60;ready&#x60; event has fired yet.
-                            
+
                                 @property _ready
                                 @type Boolean
                                 @default undefined
                                 @protected
                                 **/
-                            
+
                                 /**
                                 Regex used to break up a URL string around the URL&#x27;s path.
-                            
+
                                 Subpattern captures:
-                            
+
                                   1. Origin, everything before the URL&#x27;s path-part.
                                   2. The URL&#x27;s path-part.
                                   3. The URL&#x27;s query.
                                   4. The URL&#x27;s hash fragment.
-                            
+
                                 @property _regexURL
                                 @type RegExp
                                 @protected
                                 @since 3.5.0
                                 **/
                                 _regexURL: /^((?:[^\/#?:]+:\/\/|\/\/)[^\/]*)?([^?#]*)(\?[^#]*)?(#.*)?$/,
-                            
+
                                 /**
                                 Regex used to match parameter placeholders in route paths.
-                            
+
                                 Subpattern captures:
-                            
+
                                   1. Parameter prefix character. Either a &#x60;:&#x60; for subpath parameters that
                                      should only match a single level of a path, or &#x60;*&#x60; for splat parameters
                                      that should match any number of path levels.
-                            
+
                                   2. Parameter name, if specified, otherwise it is a wildcard match.
-                            
+
                                 @property _regexPathParam
                                 @type RegExp
                                 @protected
                                 **/
                                 _regexPathParam: /([:*])([\w\-]+)?/g,
-                            
+
                                 /**
                                 Regex that matches and captures the query portion of a URL, minus the
                                 preceding &#x60;?&#x60; character, and discarding the hash portion of the URL if any.
-                            
+
                                 @property _regexUrlQuery
                                 @type RegExp
                                 @protected
                                 **/
                                 _regexUrlQuery: /\?([^#]*).*$/,
-                            
+
                                 /**
                                 Regex that matches everything before the path portion of a URL (the origin).
                                 This will be used to strip this part of the URL from a string when we
                                 only want the path.
-                            
+
                                 @property _regexUrlOrigin
                                 @type RegExp
                                 @protected
                                 **/
                                 _regexUrlOrigin: /^(?:[^\/#?:]+:\/\/|\/\/)[^\/]*/,
-                            
+
                                 /**
                                 Collection of registered routes.
-                            
+
                                 @property _routes
                                 @type Array
                                 @protected
                                 **/
-                            
+
                                 // -- Lifecycle Methods ----------------------------------------------------
                                 initializer: function (config) {
                                     var self = this;
-                            
+
                                     self._html5  = self.get(&#x27;html5&#x27;);
                                     self._params = {};
                                     self._routes = [];
                                     self._url    = self._getURL();
-                            
+
                                     // Necessary because setters don&#x27;t run on init.
                                     self._setRoutes(config &amp;&amp; config.routes ? config.routes :
                                             self.get(&#x27;routes&#x27;));
-                            
+
                                     // Set up a history instance or hashchange listener.
                                     if (self._html5) {
                                         self._history       = new Y.HistoryHTML5({force: true});
@@ -1339,7 +1339,7 @@
                                         self._historyEvents =
                                                 Y.on(&#x27;hashchange&#x27;, self._afterHistoryChange, win, self);
                                     }
-                            
+
                                     // Fire a &#x60;ready&#x60; event once we&#x27;re ready to route. We wait first for all
                                     // subclass initializers to finish, then for window.onload, and then an
                                     // additional 20ms to allow the browser to fire a useless initial
@@ -1349,7 +1349,7 @@
                                         fireOnce   : true,
                                         preventable: false
                                     });
-                            
+
                                     self.once(&#x27;initializedChange&#x27;, function () {
                                         Y.once(&#x27;load&#x27;, function () {
                                             setTimeout(function () {
@@ -1357,72 +1357,72 @@
                                             }, 20);
                                         });
                                     });
-                            
+
                                     // Store this router in the collection of all active router instances.
                                     instances.push(this);
                                 },
-                            
+
                                 destructor: function () {
                                     var instanceIndex = YArray.indexOf(instances, this);
-                            
+
                                     // Remove this router from the collection of active router instances.
                                     if (instanceIndex &gt; -1) {
                                         instances.splice(instanceIndex, 1);
                                     }
-                            
+
                                     if (this._historyEvents) {
                                         this._historyEvents.detach();
                                     }
                                 },
-                            
+
                                 // -- Public Methods -------------------------------------------------------
-                            
+
                                 /**
                                 Dispatches to the first route handler that matches the current URL, if any.
-                            
+
                                 If &#x60;dispatch()&#x60; is called before the &#x60;ready&#x60; event has fired, it will
                                 automatically wait for the &#x60;ready&#x60; event before dispatching. Otherwise it
                                 will dispatch immediately.
-                            
+
                                 @method dispatch
                                 @chainable
                                 **/
                                 dispatch: function () {
                                     this.once(EVT_READY, function () {
                                         var req, res;
-                            
+
                                         this._ready = true;
-                            
+
                                         if (!this.upgrade()) {
                                             req = this._getRequest(&#x27;dispatch&#x27;);
                                             res = this._getResponse(req);
-                            
+
                                             this._dispatch(req, res);
                                         }
                                     });
-                            
+
                                     return this;
                                 },
-                            
+
                                 /**
                                 Gets the current route path.
-                            
+
                                 @method getPath
                                 @return {String} Current route path.
                                 **/
                                 getPath: function () {
                                     return this._getPath();
                                 },
-                            
+
                                 /**
                                 Returns &#x60;true&#x60; if this router has at least one route that matches the
                                 specified URL, &#x60;false&#x60; otherwise. This also checks that any named &#x60;param&#x60;
                                 handlers also accept app param values in the &#x60;url&#x60;.
-                            
+
                                 This method enforces the same-origin security constraint on the specified
                                 &#x60;url&#x60;; any URL which is not from the same origin as the current URL will
                                 always return &#x60;false&#x60;.
-                            
+
                                 @method hasRoute
                                 @param {String} url URL to match.
                                 @return {Boolean} &#x60;true&#x60; if there&#x27;s at least one matching route, &#x60;false&#x60;
@@ -1430,26 +1430,26 @@
                                 **/
                                 hasRoute: function (url) {
                                     var path, routePath, routes;
-                            
+
                                     if (!this._hasSameOrigin(url)) {
                                         return false;
                                     }
-                            
+
                                     if (!this._html5) {
                                         url = this._upgradeURL(url);
                                     }
-                            
+
                                     // Get just the path portion of the specified &#x60;url&#x60;. The &#x60;match()&#x60;
                                     // method does some special checking that the &#x60;path&#x60; is within the root.
                                     path   = this.removeQuery(url.replace(this._regexUrlOrigin, &#x27;&#x27;));
                                     routes = this.match(path);
-                            
+
                                     if (!routes.length) {
                                         return false;
                                     }
-                            
+
                                     routePath = this.removeRoot(path);
-                            
+
                                     // Check that there&#x27;s at least one route whose param handlers also
                                     // accept all the param values.
                                     return !!YArray.filter(routes, function (route) {
@@ -1460,36 +1460,36 @@
                                         return this._getParamValues(route, routePath);
                                     }, this).length;
                                 },
-                            
+
                                 /**
                                 Returns an array of route objects that match the specified URL path.
-                            
+
                                 If this router has a &#x60;root&#x60;, then the specified &#x60;path&#x60; _must_ be
                                 semantically within the &#x60;root&#x60; path to match any routes.
-                            
+
                                 This method is called internally to determine which routes match the current
                                 path whenever the URL changes. You may override it if you want to customize
                                 the route matching logic, although this usually shouldn&#x27;t be necessary.
-                            
+
                                 Each returned route object has the following properties:
-                            
+
                                   * &#x60;callback&#x60;: A function or a string representing the name of a function
                                     this router that should be executed when the route is triggered.
-                            
+
                                   * &#x60;keys&#x60;: An array of strings representing the named parameters defined in
                                     the route&#x27;s path specification, if any.
-                            
+
                                   * &#x60;path&#x60;: The route&#x27;s path specification, which may be either a string or
                                     a regex.
-                            
+
                                   * &#x60;regex&#x60;: A regular expression version of the route&#x27;s path specification.
                                     This regex is used to determine whether the route matches a given path.
-                            
+
                                 @example
                                     router.route(&#x27;/foo&#x27;, function () {});
                                     router.match(&#x27;/foo&#x27;);
                                     // =&gt; [{callback: ..., keys: [], path: &#x27;/foo&#x27;, regex: ...}]
-                            
+
                                 @method match
                                 @param {String} path URL path to match. This should be an absolute path that
                                     starts with a slash: &quot;/&quot;.
@@ -1497,7 +1497,7 @@
                                 **/
                                 match: function (path) {
                                     var root = this.get(&#x27;root&#x27;);
-                            
+
                                     if (root) {
                                         // The &#x60;path&#x60; must be semantically within this router&#x27;s &#x60;root&#x60; path
                                         // or mount point, if it&#x27;s not then no routes should be considered a
@@ -1505,61 +1505,61 @@
                                         if (!this._pathHasRoot(root, path)) {
                                             return [];
                                         }
-                            
+
                                         // Remove this router&#x27;s &#x60;root&#x60; from the &#x60;path&#x60; before checking the
                                         // routes for any matches.
                                         path = this.removeRoot(path);
                                     }
-                            
+
                                     return YArray.filter(this._routes, function (route) {
                                         return path.search(route.regex) &gt; -1;
                                     });
                                 },
-                            
+
                                 /**
                                 Adds a handler for a route param specified by _name_.
-                            
+
                                 Param handlers can be registered via this method and are used to
                                 validate/format values of named params in routes before dispatching to the
                                 route&#x27;s handler functions. Using param handlers allows routes to defined
                                 using string paths which allows for &#x60;req.params&#x60; to use named params, but
                                 still applying extra validation or formatting to the param values parsed
                                 from the URL.
-                            
+
                                 If a param handler regex or function returns a value of &#x60;false&#x60;, &#x60;null&#x60;,
                                 &#x60;undefined&#x60;, or &#x60;NaN&#x60;, the current route will not match and be skipped. All
                                 other return values will be used in place of the original param value parsed
                                 from the URL.
-                            
+
                                 @example
                                     router.param(&#x27;postId&#x27;, function (value) {
                                         return parseInt(value, 10);
                                     });
-                            
+
                                     router.param(&#x27;username&#x27;, /^\w+$/);
-                            
+
                                     router.route(&#x27;/posts/:postId&#x27;, function (req) {
                                         Y.log(&#x27;Post: &#x27; + req.params.id);
                                     });
-                            
+
                                     router.route(&#x27;/users/:username&#x27;, function (req) {
                                         // &#x60;req.params.username&#x60; is an array because the result of calling
                                         // &#x60;exec()&#x60; on the regex is assigned as the param&#x27;s value.
                                         Y.log(&#x27;User: &#x27; + req.params.username[0]);
                                     });
-                            
+
                                     router.route(&#x27;*&#x27;, function () {
                                         Y.log(&#x27;Catch-all no routes matched!&#x27;);
                                     });
-                            
+
                                     // URLs which match routes:
                                     router.save(&#x27;/posts/1&#x27;);     // =&gt; &quot;Post: 1&quot;
                                     router.save(&#x27;/users/ericf&#x27;); // =&gt; &quot;User: ericf&quot;
-                            
+
                                     // URLs which do not match routes because params fail validation:
                                     router.save(&#x27;/posts/a&#x27;);            // =&gt; &quot;Catch-all no routes matched!&quot;
                                     router.save(&#x27;/users/ericf,rgrove&#x27;); // =&gt; &quot;Catch-all no routes matched!&quot;
-                            
+
                                 @method param
                                 @param {String} name Name of the param used in route paths.
                                 @param {Function|RegExp} handler Function to invoke or regular expression to
@@ -1577,11 +1577,11 @@
                                     this._params[name] = handler;
                                     return this;
                                 },
-                            
+
                                 /**
                                 Removes the &#x60;root&#x60; URL from the front of _url_ (if it&#x27;s there) and returns
                                 the result. The returned path will always have a leading &#x60;/&#x60;.
-                            
+
                                 @method removeRoot
                                 @param {String} url URL.
                                 @return {String} Rootless path.
@@ -1589,31 +1589,31 @@
                                 removeRoot: function (url) {
                                     var root = this.get(&#x27;root&#x27;),
                                         path;
-                            
+
                                     // Strip out the non-path part of the URL, if any (e.g.
                                     // &quot;http://foo.com&quot;), so that we&#x27;re left with just the path.
                                     url = url.replace(this._regexUrlOrigin, &#x27;&#x27;);
-                            
+
                                     // Return the host-less URL if there&#x27;s no &#x60;root&#x60; path to further remove.
                                     if (!root) {
                                         return url;
                                     }
-                            
+
                                     path = this.removeQuery(url);
-                            
+
                                     // Remove the &#x60;root&#x60; from the &#x60;url&#x60; if it&#x27;s the same or its path is
                                     // semantically within the root path.
                                     if (path === root || this._pathHasRoot(root, path)) {
                                         url = url.substring(root.length);
                                     }
-                            
+
                                     return url.charAt(0) === &#x27;/&#x27; ? url : &#x27;/&#x27; + url;
                                 },
-                            
+
                                 /**
                                 Removes a query string from the end of the _url_ (if one exists) and returns
                                 the result.
-                            
+
                                 @method removeQuery
                                 @param {String} url URL.
                                 @return {String} Queryless path.
@@ -1621,30 +1621,30 @@
                                 removeQuery: function (url) {
                                     return url.replace(/\?.*$/, &#x27;&#x27;);
                                 },
-                            
+
                                 /**
                                 Replaces the current browser history entry with a new one, and dispatches to
                                 the first matching route handler, if any.
-                            
+
                                 Behind the scenes, this method uses HTML5 &#x60;pushState()&#x60; in browsers that
                                 support it (or the location hash in older browsers and IE) to change the
                                 URL.
-                            
+
                                 The specified URL must share the same origin (i.e., protocol, host, and
                                 port) as the current page, or an error will occur.
-                            
+
                                 @example
                                     // Starting URL: http://example.com/
-                            
+
                                     router.replace(&#x27;/path/&#x27;);
                                     // New URL: http://example.com/path/
-                            
+
                                     router.replace(&#x27;/path?foo=bar&#x27;);
                                     // New URL: http://example.com/path?foo=bar
-                            
+
                                     router.replace(&#x27;/&#x27;);
                                     // New URL: http://example.com/
-                            
+
                                 @method replace
                                 @param {String} [url] URL to set. This URL needs to be of the same origin as
                                   the current URL. This can be a URL relative to the router&#x27;s &#x60;root&#x60;
@@ -1655,10 +1655,10 @@
                                 replace: function (url) {
                                     return this._queue(url, true);
                                 },
-                            
+
                                 /**
                                 Adds a route handler for the specified &#x60;route&#x60;.
-                            
+
                                 The &#x60;route&#x60; parameter may be a string or regular expression to represent a
                                 URL path, or a route object. If it&#x27;s a string (which is most common), it may
                                 contain named parameters: &#x60;:param&#x60; will match any single part of a URL path
@@ -1666,11 +1666,11 @@
                                 of a URL path (including &#x60;/&#x60; characters). These named parameters will be
                                 made available as keys on the &#x60;req.params&#x60; object that&#x27;s passed to route
                                 handlers.
-                            
+
                                 If the &#x60;route&#x60; parameter is a regex, all pattern matches will be made
                                 available as numbered keys on &#x60;req.params&#x60;, starting with &#x60;0&#x60; for the full
                                 match, then &#x60;1&#x60; for the first subpattern match, and so on.
-                            
+
                                 Alternatively, an object can be provided to represent the route and it may
                                 contain a &#x60;path&#x60; property which is a string or regular expression which
                                 causes the route to be process as described above. If the route object
@@ -1679,26 +1679,26 @@
                                 specified on the object and those specified as parameters to this method.
                                 **Note:** Any additional data contained on the route object will be
                                 preserved.
-                            
+
                                 Here&#x27;s a set of sample routes along with URL paths that they match:
-                            
+
                                   * Route: &#x60;/photos/:tag/:page&#x60;
                                     * URL: &#x60;/photos/kittens/1&#x60;, params: &#x60;{tag: &#x27;kittens&#x27;, page: &#x27;1&#x27;}&#x60;
                                     * URL: &#x60;/photos/puppies/2&#x60;, params: &#x60;{tag: &#x27;puppies&#x27;, page: &#x27;2&#x27;}&#x60;
-                            
+
                                   * Route: &#x60;/file/*path&#x60;
                                     * URL: &#x60;/file/foo/bar/baz.txt&#x60;, params: &#x60;{path: &#x27;foo/bar/baz.txt&#x27;}&#x60;
                                     * URL: &#x60;/file/foo&#x60;, params: &#x60;{path: &#x27;foo&#x27;}&#x60;
-                            
+
                                 **Middleware**: Routes also support an arbitrary number of callback
                                 functions. This allows you to easily reuse parts of your route-handling code
                                 with different route. This method is liberal in how it processes the
                                 specified &#x60;callbacks&#x60;, you can specify them as separate arguments, or as
                                 arrays, or both.
-                            
+
                                 If multiple route match a given URL, they will be executed in the order they
                                 were added. The first route that was added will be the first to be executed.
-                            
+
                                 **Passing Control**: Invoking the &#x60;next()&#x60; function within a route callback
                                 will pass control to the next callback function (if any) or route handler
                                 (if any). If a value is passed to &#x60;next()&#x60;, it&#x27;s assumed to be an error,
@@ -1706,25 +1706,25 @@
                                 which is special case and dispatching will skip to the next route handler.
                                 This allows middleware to skip any remaining middleware for a particular
                                 route.
-                            
+
                                 @example
                                     router.route(&#x27;/photos/:tag/:page&#x27;, function (req, res, next) {
                                         Y.log(&#x27;Current tag: &#x27; + req.params.tag);
                                         Y.log(&#x27;Current page number: &#x27; + req.params.page);
                                     });
-                            
+
                                     // Using middleware.
-                            
+
                                     router.findUser = function (req, res, next) {
                                         req.user = this.get(&#x27;users&#x27;).findById(req.params.user);
                                         next();
                                     };
-                            
+
                                     router.route(&#x27;/users/:user&#x27;, &#x27;findUser&#x27;, function (req, res, next) {
                                         // The &#x60;findUser&#x60; middleware puts the &#x60;user&#x60; object on the &#x60;req&#x60;.
                                         Y.log(&#x27;Current user:&#x27; req.user.get(&#x27;name&#x27;));
                                     });
-                            
+
                                 @method route
                                 @param {String|RegExp|Object} route Route to match. May be a string or a
                                   regular expression, or a route object.
@@ -1732,10 +1732,10 @@
                                     whenever this route is triggered. These can be specified as separate
                                     arguments, or in arrays, or both. If a callback is specified as a
                                     string, the named function will be called on this router instance.
-                            
+
                                   @param {Object} callbacks.req Request object containing information about
                                       the request. It contains the following properties.
-                            
+
                                     @param {Array|Object} callbacks.req.params Captured parameters matched
                                       by the route path specification. If a string path was used and
                                       contained named parameters, then this will be a key/value hash mapping
@@ -1758,12 +1758,12 @@
                                       will have a value of &quot;popstate&quot;. When the &#x60;dispath()&#x60; method is
                                       called, the &#x60;src&#x60; will be &#x60;&quot;dispatch&quot;&#x60;.
                                     @param {String} callbacks.req.url The full URL.
-                            
+
                                   @param {Object} callbacks.res Response object containing methods and
                                       information that relate to responding to a request. It contains the
                                       following properties.
                                     @param {Object} callbacks.res.req Reference to the request object.
-                            
+
                                   @param {Function} callbacks.next Function to pass control to the next
                                       callback or the next matching route if no more callbacks (middleware)
                                       exist for the current route handler. If you don&#x27;t call this function,
@@ -1782,18 +1782,18 @@
                                 route: function (route, callbacks) {
                                     // Grab callback functions from var-args.
                                     callbacks = YArray(arguments, 1, true);
-                            
+
                                     var keys, regex;
-                            
+
                                     // Supports both the &#x60;route(path, callbacks)&#x60; and &#x60;route(config)&#x60; call
                                     // signatures, allowing for fully-processed route configs to be passed.
                                     if (typeof route === &#x27;string&#x27; || YLang.isRegExp(route)) {
                                         // Flatten &#x60;callbacks&#x60; into a single dimension array.
                                         callbacks = YArray.flatten(callbacks);
-                            
+
                                         keys  = [];
                                         regex = this._getRegex(route, keys);
-                            
+
                                         route = {
                                             callbacks: callbacks,
                                             keys     : keys,
@@ -1807,18 +1807,18 @@
                                         callbacks = YArray.flatten(
                                             [route.callbacks || route.callback || []].concat(callbacks)
                                         );
-                            
+
                                         // Check for previously generated regex, also fallback to &#x60;regexp&#x60;
                                         // for greater interop.
                                         keys  = route.keys;
                                         regex = route.regex || route.regexp;
-                            
+
                                         // Generates the route&#x27;s regex if it doesn&#x27;t already have one.
                                         if (!regex) {
                                             keys  = [];
                                             regex = this._getRegex(route.path, keys);
                                         }
-                            
+
                                         // Merge specified &#x60;route&#x60; config object with processed data.
                                         route = Y.merge(route, {
                                             callbacks: callbacks,
@@ -1827,34 +1827,34 @@
                                             regex    : regex
                                         });
                                     }
-                            
+
                                     this._routes.push(route);
                                     return this;
                                 },
-                            
+
                                 /**
                                 Saves a new browser history entry and dispatches to the first matching route
                                 handler, if any.
-                            
+
                                 Behind the scenes, this method uses HTML5 &#x60;pushState()&#x60; in browsers that
                                 support it (or the location hash in older browsers and IE) to change the
                                 URL and create a history entry.
-                            
+
                                 The specified URL must share the same origin (i.e., protocol, host, and
                                 port) as the current page, or an error will occur.
-                            
+
                                 @example
                                     // Starting URL: http://example.com/
-                            
+
                                     router.save(&#x27;/path/&#x27;);
                                     // New URL: http://example.com/path/
-                            
+
                                     router.save(&#x27;/path?foo=bar&#x27;);
                                     // New URL: http://example.com/path?foo=bar
-                            
+
                                     router.save(&#x27;/&#x27;);
                                     // New URL: http://example.com/
-                            
+
                                 @method save
                                 @param {String} [url] URL to set. This URL needs to be of the same origin as
                                   the current URL. This can be a URL relative to the router&#x27;s &#x60;root&#x60;
@@ -1865,11 +1865,11 @@
                                 save: function (url) {
                                     return this._queue(url);
                                 },
-                            
+
                                 /**
                                 Upgrades a hash-based URL to an HTML5 URL if necessary. In non-HTML5
                                 browsers, this method is a noop.
-                            
+
                                 @method upgrade
                                 @return {Boolean} &#x60;true&#x60; if the URL was upgraded, &#x60;false&#x60; otherwise.
                                 **/
@@ -1877,10 +1877,10 @@
                                     if (!this._html5) {
                                         return false;
                                     }
-                            
+
                                     // Get the resolve hash path.
                                     var hashPath = this._getHashPath();
-                            
+
                                     if (hashPath) {
                                         // This is an HTML5 browser and we have a hash-based path in the
                                         // URL, so we need to upgrade the URL to a non-hash URL. This
@@ -1889,19 +1889,19 @@
                                         this.once(EVT_READY, function () {
                                             this.replace(hashPath);
                                         });
-                            
+
                                         return true;
                                     }
-                            
+
                                     return false;
                                 },
-                            
+
                                 // -- Protected Methods ----------------------------------------------------
-                            
+
                                 /**
                                 Wrapper around &#x60;decodeURIComponent&#x60; that also converts &#x60;+&#x60; chars into
                                 spaces.
-                            
+
                                 @method _decode
                                 @param {String} string String to decode.
                                 @return {String} Decoded string.
@@ -1910,11 +1910,11 @@
                                 _decode: function (string) {
                                     return decodeURIComponent(string.replace(/\+/g, &#x27; &#x27;));
                                 },
-                            
+
                                 /**
                                 Shifts the topmost &#x60;_save()&#x60; call off the queue and executes it. Does
                                 nothing if the queue is empty.
-                            
+
                                 @method _dequeue
                                 @chainable
                                 @see _queue
@@ -1923,7 +1923,7 @@
                                 _dequeue: function () {
                                     var self = this,
                                         fn;
-                            
+
                                     // If window.onload hasn&#x27;t yet fired, wait until it has before
                                     // dequeueing. This will ensure that we don&#x27;t call pushState() before an
                                     // initial popstate event has fired.
@@ -1931,21 +1931,21 @@
                                         Y.once(&#x27;load&#x27;, function () {
                                             self._dequeue();
                                         });
-                            
+
                                         return this;
                                     }
-                            
+
                                     fn = saveQueue.shift();
                                     return fn ? fn() : this;
                                 },
-                            
+
                                 /**
                                 Dispatches to the first route handler that matches the specified _path_.
-                            
+
                                 If called before the &#x60;ready&#x60; event has fired, the dispatch will be aborted.
                                 This ensures normalized behavior between Chrome (which fires a &#x60;popstate&#x60;
                                 event on every pageview) and other browsers (which do not).
-                            
+
                                 @method _dispatch
                                 @param {object} req Request object.
                                 @param {String} res Response object.
@@ -1957,19 +1957,19 @@
                                         routes    = self.match(req.path),
                                         callbacks = [],
                                         routePath, paramValues;
-                            
+
                                     self._dispatching = self._dispatched = true;
-                            
+
                                     if (!routes || !routes.length) {
                                         self._dispatching = false;
                                         return self;
                                     }
-                            
+
                                     routePath = self.removeRoot(req.path);
-                            
+
                                     function next(err) {
                                         var callback, name, route;
-                            
+
                                         if (err) {
                                             // Special case &quot;route&quot; to skip to the next route handler
                                             // avoiding any additional callbacks for the current route.
@@ -1979,60 +1979,60 @@
                                             } else {
                                                 Y.error(err);
                                             }
-                            
+
                                         } else if ((callback = callbacks.shift())) {
                                             if (typeof callback === &#x27;string&#x27;) {
                                                 name     = callback;
                                                 callback = self[name];
-                            
+
                                                 if (!callback) {
                                                     Y.error(&#x27;Router: Callback not found: &#x27; + name, null, &#x27;router&#x27;);
                                                 }
                                             }
-                            
+
                                             // Allow access to the number of remaining callbacks for the
                                             // route.
                                             req.pendingCallbacks = callbacks.length;
-                            
+
                                             callback.call(self, req, res, next);
-                            
+
                                         } else if ((route = routes.shift())) {
                                             paramValues = self._getParamValues(route, routePath);
-                            
+
                                             if (!paramValues) {
                                                 // Skip this route because one of the param handlers
                                                 // rejected a param value in the &#x60;routePath&#x60;.
                                                 next(&#x27;route&#x27;);
                                                 return;
                                             }
-                            
+
                                             // Expose the processed param values.
                                             req.params = paramValues;
-                            
+
                                             // Allow access to current route and the number of remaining
                                             // routes for this request.
                                             req.route         = route;
                                             req.pendingRoutes = routes.length;
-                            
+
                                             // Make a copy of this route&#x27;s &#x60;callbacks&#x60; so the original array
                                             // is preserved.
                                             callbacks = route.callbacks.concat();
-                            
+
                                             // Execute this route&#x27;s &#x60;callbacks&#x60;.
                                             next();
                                         }
                                     }
-                            
+
                                     next();
-                            
+
                                     self._dispatching = false;
                                     return self._dequeue();
                                 },
-                            
+
                                 /**
                                 Returns the resolved path from the hash fragment, or an empty string if the
                                 hash is not path-like.
-                            
+
                                 @method _getHashPath
                                 @param {String} [hash] Hash fragment to resolve into a path. By default this
                                     will be the hash from the current URL.
@@ -2041,21 +2041,21 @@
                                 **/
                                 _getHashPath: function (hash) {
                                     hash || (hash = HistoryHash.getHash());
-                            
+
                                     // Make sure the &#x60;hash&#x60; is path-like.
                                     if (hash &amp;&amp; hash.charAt(0) === &#x27;/&#x27;) {
                                         return this._joinURL(hash);
                                     }
-                            
+
                                     return &#x27;&#x27;;
                                 },
-                            
+
                                 /**
                                 Gets the location origin (i.e., protocol, host, and port) as a URL.
-                            
+
                                 @example
                                     http://example.com
-                            
+
                                 @method _getOrigin
                                 @return {String} Location origin (i.e., protocol, host, and port).
                                 @protected
@@ -2064,10 +2064,10 @@
                                     var location = Y.getLocation();
                                     return location.origin || (location.protocol + &#x27;//&#x27; + location.host);
                                 },
-                            
+
                                 /**
                                 Getter for the &#x60;params&#x60; attribute.
-                            
+
                                 @method _getParams
                                 @return {Object} Mapping of param handlers: &#x60;name&#x60; -&gt; RegExp | Function.
                                 @protected
@@ -2076,14 +2076,14 @@
                                 _getParams: function () {
                                     return Y.merge(this._params);
                                 },
-                            
+
                                 /**
                                 Gets the param values for the specified &#x60;route&#x60; and &#x60;path&#x60;, suitable to use
                                 form &#x60;req.params&#x60;.
-                            
+
                                 **Note:** This method will return &#x60;false&#x60; if a named param handler rejects a
                                 param value.
-                            
+
                                 @method _getParamValues
                                 @param {Object} route The route to get param values for.
                                 @param {String} path The route path (root removed) that provides the param
@@ -2098,7 +2098,7 @@
                                 **/
                                 _getParamValues: function (route, path) {
                                     var matches, paramsMatch, paramValues;
-                            
+
                                     // Decode each of the path params so that the any URL-encoded path
                                     // segments are decoded in the &#x60;req.params&#x60; object.
                                     matches = YArray.map(route.regex.exec(path) || [], function (match) {
@@ -2109,25 +2109,25 @@
                                         // https://github.com/yui/yui3/issues/1076
                                         return (match &amp;&amp; this._decode(match)) || &#x27;&#x27;;
                                     }, this);
-                            
+
                                     // Simply return the array of decoded values when the route does *not*
                                     // use named parameters.
                                     if (matches.length - 1 !== route.keys.length) {
                                         return matches;
                                     }
-                            
+
                                     // Remove the first &quot;match&quot; from the param values, because it&#x27;s just the
                                     // &#x60;path&#x60; processed by the route&#x27;s regex, and map the values to the keys
                                     // to create the name params collection.
                                     paramValues = YArray.hash(route.keys, matches.slice(1));
-                            
+
                                     // Pass each named param value to its handler, if there is one, for
                                     // validation/processing. If a param value is rejected by a handler,
                                     // then the params don&#x27;t match and a falsy value is returned.
                                     paramsMatch = YArray.every(route.keys, function (name) {
                                         var paramHandler = this._params[name],
                                             value        = paramValues[name];
-                            
+
                                         if (paramHandler &amp;&amp; value &amp;&amp; typeof value === &#x27;string&#x27;) {
                                             // Check if &#x60;paramHandler&#x60; is a RegExp, because this
                                             // is true in Android 2.3 and other browsers!
@@ -2135,31 +2135,31 @@
                                             value = YLang.isRegExp(paramHandler) ?
                                                     paramHandler.exec(value) :
                                                     paramHandler.call(this, value, name);
-                            
+
                                             if (value !== false &amp;&amp; YLang.isValue(value)) {
                                                 // Update the named param to the value from the handler.
                                                 paramValues[name] = value;
                                                 return true;
                                             }
-                            
+
                                             // Consider the param value as rejected by the handler.
                                             return false;
                                         }
-                            
+
                                         return true;
                                     }, this);
-                            
+
                                     if (paramsMatch) {
                                         return paramValues;
                                     }
-                            
+
                                     // Signal that a param value was rejected by a named param handler.
                                     return false;
                                 },
-                            
+
                                 /**
                                 Gets the current route path.
-                            
+
                                 @method _getPath
                                 @return {String} Current route path.
                                 @protected
@@ -2167,16 +2167,16 @@
                                 _getPath: function () {
                                     var path = (!this._html5 &amp;&amp; this._getHashPath()) ||
                                             Y.getLocation().pathname;
-                            
+
                                     return this.removeQuery(path);
                                 },
-                            
+
                                 /**
                                 Returns the current path root after popping off the last path segment,
                                 making it useful for resolving other URL paths against.
-                            
+
                                 The path root will always begin and end with a &#x27;/&#x27;.
-                            
+
                                 @method _getPathRoot
                                 @return {String} The URL&#x27;s path root.
                                 @protected
@@ -2186,20 +2186,20 @@
                                     var slash = &#x27;/&#x27;,
                                         path  = Y.getLocation().pathname,
                                         segments;
-                            
+
                                     if (path.charAt(path.length - 1) === slash) {
                                         return path;
                                     }
-                            
+
                                     segments = path.split(slash);
                                     segments.pop();
-                            
+
                                     return segments.join(slash) + slash;
                                 },
-                            
+
                                 /**
                                 Gets the current route query string.
-                            
+
                                 @method _getQuery
                                 @return {String} Current route query string.
                                 @protected
@@ -2207,21 +2207,21 @@
                                 _getQuery: function () {
                                     var location = Y.getLocation(),
                                         hash, matches;
-                            
+
                                     if (this._html5) {
                                         return location.search.substring(1);
                                     }
-                            
+
                                     hash    = HistoryHash.getHash();
                                     matches = hash.match(this._regexUrlQuery);
-                            
+
                                     return hash &amp;&amp; matches ? matches[1] : location.search.substring(1);
                                 },
-                            
+
                                 /**
                                 Creates a regular expression from the given route specification. If _path_
                                 is already a regex, it will be returned unmodified.
-                            
+
                                 @method _getRegex
                                 @param {String|RegExp} path Route path specification.
                                 @param {Array} keys Array reference to which route parameter names will be
@@ -2233,29 +2233,29 @@
                                     if (YLang.isRegExp(path)) {
                                         return path;
                                     }
-                            
+
                                     // Special case for catchall paths.
                                     if (path === &#x27;*&#x27;) {
                                         return (/.*/);
                                     }
-                            
+
                                     path = path.replace(this._regexPathParam, function (match, operator, key) {
                                         // Only &#x60;*&#x60; operators are supported for key-less matches to allowing
                                         // in-path wildcards like: &#x27;/foo/*&#x27;.
                                         if (!key) {
                                             return operator === &#x27;*&#x27; ? &#x27;.*&#x27; : match;
                                         }
-                            
+
                                         keys.push(key);
                                         return operator === &#x27;*&#x27; ? &#x27;(.*?)&#x27; : &#x27;([^/#?]+)&#x27;;
                                     });
-                            
+
                                     return new RegExp(&#x27;^&#x27; + path + &#x27;$&#x27;);
                                 },
-                            
+
                                 /**
                                 Gets a request object that can be passed to a route handler.
-                            
+
                                 @method _getRequest
                                 @param {String} src What initiated the URL change and need for the request.
                                 @return {Object} Request object.
@@ -2270,10 +2270,10 @@
                                         src   : src
                                     };
                                 },
-                            
+
                                 /**
                                 Gets a response object that can be passed to a route handler.
-                            
+
                                 @method _getResponse
                                 @param {Object} req Request object.
                                 @return {Object} Response Object.
@@ -2282,10 +2282,10 @@
                                 _getResponse: function (req) {
                                     return {req: req};
                                 },
-                            
+
                                 /**
                                 Getter for the &#x60;routes&#x60; attribute.
-                            
+
                                 @method _getRoutes
                                 @return {Object[]} Array of route objects.
                                 @protected
@@ -2293,31 +2293,31 @@
                                 _getRoutes: function () {
                                     return this._routes.concat();
                                 },
-                            
+
                                 /**
                                 Gets the current full URL.
-                            
+
                                 @method _getURL
                                 @return {String} URL.
                                 @protected
                                 **/
                                 _getURL: function () {
                                     var url = Y.getLocation().toString();
-                            
+
                                     if (!this._html5) {
                                         url = this._upgradeURL(url);
                                     }
-                            
+
                                     return url;
                                 },
-                            
+
                                 /**
                                 Returns &#x60;true&#x60; when the specified &#x60;url&#x60; is from the same origin as the
                                 current URL; i.e., the protocol, host, and port of the URLs are the same.
-                            
+
                                 All host or path relative URLs are of the same origin. A scheme-relative URL
                                 is first prefixed with the current scheme before being evaluated.
-                            
+
                                 @method _hasSameOrigin
                                 @param {String} url URL to compare origin with the current URL.
                                 @return {Boolean} Whether the URL has the same origin of the current URL.
@@ -2325,28 +2325,28 @@
                                 **/
                                 _hasSameOrigin: function (url) {
                                     var origin = ((url &amp;&amp; url.match(this._regexUrlOrigin)) || [])[0];
-                            
+
                                     // Prepend current scheme to scheme-relative URLs.
                                     if (origin &amp;&amp; origin.indexOf(&#x27;//&#x27;) === 0) {
                                         origin = Y.getLocation().protocol + origin;
                                     }
-                            
+
                                     return !origin || origin === this._getOrigin();
                                 },
-                            
+
                                 /**
                                 Joins the &#x60;root&#x60; URL to the specified _url_, normalizing leading/trailing
                                 &#x60;/&#x60; characters.
-                            
+
                                 @example
                                     router.set(&#x27;root&#x27;, &#x27;/foo&#x27;);
                                     router._joinURL(&#x27;bar&#x27;);  // =&gt; &#x27;/foo/bar&#x27;
                                     router._joinURL(&#x27;/bar&#x27;); // =&gt; &#x27;/foo/bar&#x27;
-                            
+
                                     router.set(&#x27;root&#x27;, &#x27;/foo/&#x27;);
                                     router._joinURL(&#x27;bar&#x27;);  // =&gt; &#x27;/foo/bar&#x27;
                                     router._joinURL(&#x27;/bar&#x27;); // =&gt; &#x27;/foo/bar&#x27;
-                            
+
                                 @method _joinURL
                                 @param {String} url URL to append to the &#x60;root&#x60; URL.
                                 @return {String} Joined URL.
@@ -2354,23 +2354,23 @@
                                 **/
                                 _joinURL: function (url) {
                                     var root = this.get(&#x27;root&#x27;);
-                            
+
                                     // Causes &#x60;url&#x60; to _always_ begin with a &quot;/&quot;.
                                     url = this.removeRoot(url);
-                            
+
                                     if (url.charAt(0) === &#x27;/&#x27;) {
                                         url = url.substring(1);
                                     }
-                            
+
                                     return root &amp;&amp; root.charAt(root.length - 1) === &#x27;/&#x27; ?
                                             root + url :
                                             root + &#x27;/&#x27; + url;
                                 },
-                            
+
                                 /**
                                 Returns a normalized path, ridding it of any &#x27;..&#x27; segments and properly
                                 handling leading and trailing slashes.
-                            
+
                                 @method _normalizePath
                                 @param {String} path URL path to normalize.
                                 @return {String} Normalized path.
@@ -2381,38 +2381,38 @@
                                     var dots  = &#x27;..&#x27;,
                                         slash = &#x27;/&#x27;,
                                         i, len, normalized, segments, segment, stack;
-                            
+
                                     if (!path || path === slash) {
                                         return slash;
                                     }
-                            
+
                                     segments = path.split(slash);
                                     stack    = [];
-                            
+
                                     for (i = 0, len = segments.length; i &lt; len; ++i) {
                                         segment = segments[i];
-                            
+
                                         if (segment === dots) {
                                             stack.pop();
                                         } else if (segment) {
                                             stack.push(segment);
                                         }
                                     }
-                            
+
                                     normalized = slash + stack.join(slash);
-                            
+
                                     // Append trailing slash if necessary.
                                     if (normalized !== slash &amp;&amp; path.charAt(path.length - 1) === slash) {
                                         normalized += slash;
                                     }
-                            
+
                                     return normalized;
                                 },
-                            
+
                                 /**
                                 Parses a URL query string into a key/value hash. If &#x60;Y.QueryString.parse&#x60; is
                                 available, this method will be an alias to that.
-                            
+
                                 @method _parseQuery
                                 @param {String} query Query string to parse.
                                 @return {Object} Hash of key/value pairs for query parameters.
@@ -2425,35 +2425,35 @@
                                         len    = params.length,
                                         result = {},
                                         param;
-                            
+
                                     for (; i &lt; len; ++i) {
                                         param = params[i].split(&#x27;=&#x27;);
-                            
+
                                         if (param[0]) {
                                             result[decode(param[0])] = decode(param[1] || &#x27;&#x27;);
                                         }
                                     }
-                            
+
                                     return result;
                                 },
-                            
+
                                 /**
                                 Returns &#x60;true&#x60; when the specified &#x60;path&#x60; is semantically within the
                                 specified &#x60;root&#x60; path.
-                            
+
                                 If the &#x60;root&#x60; does not end with a trailing slash (&quot;/&quot;), one will be added
                                 before the &#x60;path&#x60; is evaluated against the root path.
-                            
+
                                 @example
                                     this._pathHasRoot(&#x27;/app&#x27;,  &#x27;/app/foo&#x27;); // =&gt; true
                                     this._pathHasRoot(&#x27;/app/&#x27;, &#x27;/app/foo&#x27;); // =&gt; true
                                     this._pathHasRoot(&#x27;/app/&#x27;, &#x27;/app/&#x27;);    // =&gt; true
-                            
+
                                     this._pathHasRoot(&#x27;/app&#x27;,  &#x27;/foo/bar&#x27;); // =&gt; false
                                     this._pathHasRoot(&#x27;/app/&#x27;, &#x27;/foo/bar&#x27;); // =&gt; false
                                     this._pathHasRoot(&#x27;/app/&#x27;, &#x27;/app&#x27;);     // =&gt; false
                                     this._pathHasRoot(&#x27;/app&#x27;,  &#x27;/app&#x27;);     // =&gt; false
-                            
+
                                 @method _pathHasRoot
                                 @param {String} root Root path used to evaluate whether the specificed
                                     &#x60;path&#x60; is semantically within. A trailing slash (&quot;/&quot;) will be added if
@@ -2468,18 +2468,18 @@
                                     var rootPath = root.charAt(root.length - 1) === &#x27;/&#x27; ? root : root + &#x27;/&#x27;;
                                     return path.indexOf(rootPath) === 0;
                                 },
-                            
+
                                 /**
                                 Queues up a &#x60;_save()&#x60; call to run after all previously-queued calls have
                                 finished.
-                            
+
                                 This is necessary because if we make multiple &#x60;_save()&#x60; calls before the
                                 first call gets dispatched, then both calls will dispatch to the last call&#x27;s
                                 URL.
-                            
+
                                 All arguments passed to &#x60;_queue()&#x60; will be passed on to &#x60;_save()&#x60; when the
                                 queued function is executed.
-                            
+
                                 @method _queue
                                 @chainable
                                 @see _dequeue
@@ -2488,7 +2488,7 @@
                                 _queue: function () {
                                     var args = arguments,
                                         self = this;
-                            
+
                                     saveQueue.push(function () {
                                         if (self._html5) {
                                             if (Y.UA.ios &amp;&amp; Y.UA.ios &lt; 5) {
@@ -2507,17 +2507,17 @@
                                             self._dispatching = true; // otherwise we&#x27;ll dequeue too quickly
                                             self._save.apply(self, args);
                                         }
-                            
+
                                         return self;
                                     });
-                            
+
                                     return !this._dispatching ? this._dequeue() : this;
                                 },
-                            
+
                                 /**
                                 Returns the normalized result of resolving the &#x60;path&#x60; against the current
                                 path. Falsy values for &#x60;path&#x60; will return just the current path.
-                            
+
                                 @method _resolvePath
                                 @param {String} path URL path to resolve.
                                 @return {String} Resolved path.
@@ -2528,23 +2528,23 @@
                                     if (!path) {
                                         return Y.getLocation().pathname;
                                     }
-                            
+
                                     if (path.charAt(0) !== &#x27;/&#x27;) {
                                         path = this._getPathRoot() + path;
                                     }
-                            
+
                                     return this._normalizePath(path);
                                 },
-                            
+
                                 /**
                                 Resolves the specified URL against the current URL.
-                            
+
                                 This method resolves URLs like a browser does and will always return an
                                 absolute URL. When the specified URL is already absolute, it is assumed to
                                 be fully resolved and is simply returned as is. Scheme-relative URLs are
                                 prefixed with the current protocol. Relative URLs are giving the current
                                 URL&#x27;s origin and are resolved and normalized against the current path root.
-                            
+
                                 @method _resolveURL
                                 @param {String} url URL to resolve.
                                 @return {String} Resolved URL.
@@ -2554,46 +2554,46 @@
                                 _resolveURL: function (url) {
                                     var parts    = url &amp;&amp; url.match(this._regexURL),
                                         origin, path, query, hash, resolved;
-                            
+
                                     if (!parts) {
                                         return Y.getLocation().toString();
                                     }
-                            
+
                                     origin = parts[1];
                                     path   = parts[2];
                                     query  = parts[3];
                                     hash   = parts[4];
-                            
+
                                     // Absolute and scheme-relative URLs are assumed to be fully-resolved.
                                     if (origin) {
                                         // Prepend the current scheme for scheme-relative URLs.
                                         if (origin.indexOf(&#x27;//&#x27;) === 0) {
                                             origin = Y.getLocation().protocol + origin;
                                         }
-                            
+
                                         return origin + (path || &#x27;/&#x27;) + (query || &#x27;&#x27;) + (hash || &#x27;&#x27;);
                                     }
-                            
+
                                     // Will default to the current origin and current path.
                                     resolved = this._getOrigin() + this._resolvePath(path);
-                            
+
                                     // A path or query for the specified URL trumps the current URL&#x27;s.
                                     if (path || query) {
                                         return resolved + (query || &#x27;&#x27;) + (hash || &#x27;&#x27;);
                                     }
-                            
+
                                     query = this._getQuery();
-                            
+
                                     return resolved + (query ? (&#x27;?&#x27; + query) : &#x27;&#x27;) + (hash || &#x27;&#x27;);
                                 },
-                            
+
                                 /**
                                 Saves a history entry using either &#x60;pushState()&#x60; or the location hash.
-                            
+
                                 This method enforces the same-origin security constraint; attempting to save
                                 a &#x60;url&#x60; that is not from the same origin as the current URL will result in
                                 an error.
-                            
+
                                 @method _save
                                 @param {String} [url] URL for the history entry.
                                 @param {Boolean} [replace=false] If &#x60;true&#x60;, the current history entry will
@@ -2604,40 +2604,40 @@
                                 _save: function (url, replace) {
                                     var urlIsString = typeof url === &#x27;string&#x27;,
                                         currentPath, root, hash;
-                            
+
                                     // Perform same-origin check on the specified URL.
                                     if (urlIsString &amp;&amp; !this._hasSameOrigin(url)) {
                                         Y.error(&#x27;Security error: The new URL must be of the same origin as the current URL.&#x27;);
                                         return this;
                                     }
-                            
+
                                     // Joins the &#x60;url&#x60; with the &#x60;root&#x60;.
                                     if (urlIsString) {
                                         url = this._joinURL(url);
                                     }
-                            
+
                                     // Force _ready to true to ensure that the history change is handled
                                     // even if _save is called before the &#x60;ready&#x60; event fires.
                                     this._ready = true;
-                            
+
                                     if (this._html5) {
                                         this._history[replace ? &#x27;replace&#x27; : &#x27;add&#x27;](null, {url: url});
                                     } else {
                                         currentPath = Y.getLocation().pathname;
                                         root        = this.get(&#x27;root&#x27;);
                                         hash        = HistoryHash.getHash();
-                            
+
                                         if (!urlIsString) {
                                             url = hash;
                                         }
-                            
+
                                         // Determine if the &#x60;root&#x60; already exists in the current location&#x27;s
                                         // &#x60;pathname&#x60;, and if it does then we can exclude it from the
                                         // hash-based path. No need to duplicate the info in the URL.
                                         if (root === currentPath || root === this._getPathRoot()) {
                                             url = this.removeRoot(url);
                                         }
-                            
+
                                         // The &#x60;hashchange&#x60; event only fires when the new hash is actually
                                         // different. This makes sure we&#x27;ll always dequeue and dispatch
                                         // _all_ router instances, mimicking the HTML5 behavior.
@@ -2647,13 +2647,13 @@
                                             HistoryHash[replace ? &#x27;replaceHash&#x27; : &#x27;setHash&#x27;](url);
                                         }
                                     }
-                            
+
                                     return this;
                                 },
-                            
+
                                 /**
                                 Setter for the &#x60;params&#x60; attribute.
-                            
+
                                 @method _setParams
                                 @param {Object} params Map in the form: &#x60;name&#x60; -&gt; RegExp | Function.
                                 @return {Object} The map of params: &#x60;name&#x60; -&gt; RegExp | Function.
@@ -2662,17 +2662,17 @@
                                 **/
                                 _setParams: function (params) {
                                     this._params = {};
-                            
+
                                     YObject.each(params, function (regex, name) {
                                         this.param(name, regex);
                                     }, this);
-                            
+
                                     return Y.merge(this._params);
                                 },
-                            
+
                                 /**
                                 Setter for the &#x60;routes&#x60; attribute.
-                            
+
                                 @method _setRoutes
                                 @param {Object[]} routes Array of route objects.
                                 @return {Object[]} Array of route objects.
@@ -2680,24 +2680,24 @@
                                 **/
                                 _setRoutes: function (routes) {
                                     this._routes = [];
-                            
+
                                     YArray.each(routes, function (route) {
                                         this.route(route);
                                     }, this);
-                            
+
                                     return this._routes.concat();
                                 },
-                            
+
                                 /**
                                 Upgrades a hash-based URL to a full-path URL, if necessary.
-                            
+
                                 The specified &#x60;url&#x60; will be upgraded if its of the same origin as the
                                 current URL and has a path-like hash. URLs that don&#x27;t need upgrading will be
                                 returned as-is.
-                            
+
                                 @example
                                     app._upgradeURL(&#x27;http://example.com/#/foo/&#x27;); // =&gt; &#x27;http://example.com/foo/&#x27;;
-                            
+
                                 @method _upgradeURL
                                 @param {String} url The URL to upgrade from hash-based to full-path.
                                 @return {String} The upgraded URL, or the specified URL untouched.
@@ -2709,33 +2709,33 @@
                                     if (!this._hasSameOrigin(url)) {
                                         return url;
                                     }
-                            
+
                                     var hash       = (url.match(/#(.*)$/) || [])[1] || &#x27;&#x27;,
                                         hashPrefix = Y.HistoryHash.hashPrefix,
                                         hashPath;
-                            
+
                                     // Strip any hash prefix, like hash-bangs.
                                     if (hashPrefix &amp;&amp; hash.indexOf(hashPrefix) === 0) {
                                         hash = hash.replace(hashPrefix, &#x27;&#x27;);
                                     }
-                            
+
                                     // If the hash looks like a URL path, assume it is, and upgrade it!
                                     if (hash) {
                                         hashPath = this._getHashPath(hash);
-                            
+
                                         if (hashPath) {
                                             return this._resolveURL(hashPath);
                                         }
                                     }
-                            
+
                                     return url;
                                 },
-                            
+
                                 // -- Protected Event Handlers ---------------------------------------------
-                            
+
                                 /**
                                 Handles &#x60;history:change&#x60; and &#x60;hashchange&#x60; events.
-                            
+
                                 @method _afterHistoryChange
                                 @param {EventFacade} e
                                 @protected
@@ -2746,9 +2746,9 @@
                                         prevURL    = self._url,
                                         currentURL = self._getURL(),
                                         req, res;
-                            
+
                                     self._url = currentURL;
-                            
+
                                     // Handles the awkwardness that is the &#x60;popstate&#x60; event. HTML5 browsers
                                     // fire &#x60;popstate&#x60; right before they fire &#x60;hashchange&#x60;, and Chrome fires
                                     // &#x60;popstate&#x60; on page load. If this router is not ready or the previous
@@ -2756,21 +2756,21 @@
                                     // this &#x60;popstate&#x60; event.
                                     if (src === &#x27;popstate&#x27; &amp;&amp;
                                             (!self._ready || prevURL.replace(/#.*$/, &#x27;&#x27;) === currentURL.replace(/#.*$/, &#x27;&#x27;))) {
-                            
+
                                         return;
                                     }
-                            
+
                                     req = self._getRequest(src);
                                     res = self._getResponse(req);
-                            
+
                                     self._dispatch(req, res);
                                 },
-                            
+
                                 // -- Default Event Handlers -----------------------------------------------
-                            
+
                                 /**
                                 Default handler for the &#x60;ready&#x60; event.
-                            
+
                                 @method _defReadyFn
                                 @param {EventFacade} e
                                 @protected
@@ -2781,15 +2781,15 @@
                             }, {
                                 // -- Static Properties ----------------------------------------------------
                                 NAME: &#x27;router&#x27;,
-                            
+
                                 ATTRS: {
                                     /**
                                     Whether or not this browser is capable of using HTML5 history.
-                            
+
                                     Setting this to &#x60;false&#x60; will force the use of hash-based history even on
                                     HTML5 browsers, but please don&#x27;t do this unless you understand the
                                     consequences.
-                            
+
                                     @attribute html5
                                     @type Boolean
                                     @initOnly
@@ -2803,19 +2803,19 @@
                                         valueFn: function () { return Y.Router.html5; },
                                         writeOnce: &#x27;initOnly&#x27;
                                     },
-                            
+
                                     /**
                                     Map of params handlers in the form: &#x60;name&#x60; -&gt; RegExp | Function.
-                            
+
                                     If a param handler regex or function returns a value of &#x60;false&#x60;, &#x60;null&#x60;,
                                     &#x60;undefined&#x60;, or &#x60;NaN&#x60;, the current route will not match and be skipped.
                                     All other return values will be used in place of the original param
                                     value parsed from the URL.
-                            
+
                                     This attribute is intended to be used to set params at init time, or to
                                     completely reset all params after init. To add params after init without
                                     resetting all existing params, use the &#x60;param()&#x60; method.
-                            
+
                                     @attribute params
                                     @type Object
                                     @default &#x60;{}&#x60;
@@ -2827,27 +2827,27 @@
                                         getter: &#x27;_getParams&#x27;,
                                         setter: &#x27;_setParams&#x27;
                                     },
-                            
+
                                     /**
                                     Absolute root path from which all routes should be evaluated.
-                            
+
                                     For example, if your router is running on a page at
                                     &#x60;http://example.com/myapp/&#x60; and you add a route with the path &#x60;/&#x60;, your
                                     route will never execute, because the path will always be preceded by
                                     &#x60;/myapp&#x60;. Setting &#x60;root&#x60; to &#x60;/myapp&#x60; would cause all routes to be
                                     evaluated relative to that root URL, so the &#x60;/&#x60; route would then execute
                                     when the user browses to &#x60;http://example.com/myapp/&#x60;.
-                            
+
                                     @example
                                         router.set(&#x27;root&#x27;, &#x27;/myapp&#x27;);
                                         router.route(&#x27;/foo&#x27;, function () { ... });
-                            
+
                                         Y.log(router.hasRoute(&#x27;/foo&#x27;));       // =&gt; false
                                         Y.log(router.hasRoute(&#x27;/myapp/foo&#x27;)); // =&gt; true
-                            
+
                                         // Updates the URL to: &quot;/myapp/foo&quot;
                                         router.save(&#x27;/foo&#x27;);
-                            
+
                                     @attribute root
                                     @type String
                                     @default &#x60;&#x27;&#x27;&#x60;
@@ -2855,40 +2855,40 @@
                                     root: {
                                         value: &#x27;&#x27;
                                     },
-                            
+
                                     /**
                                     Array of route objects.
-                            
+
                                     Each item in the array must be an object with the following properties
                                     in order to be processed by the router:
-                            
+
                                       * &#x60;path&#x60;: String or regex representing the path to match. See the docs
                                         for the &#x60;route()&#x60; method for more details.
-                            
+
                                       * &#x60;callbacks&#x60;: Function or a string representing the name of a
                                         function on this router instance that should be called when the
                                         route is triggered. An array of functions and/or strings may also be
                                         provided. See the docs for the &#x60;route()&#x60; method for more details.
-                            
+
                                     If a route object contains a &#x60;regex&#x60; or &#x60;regexp&#x60; property, or if its
                                     &#x60;path&#x60; is a regular express, then the route will be considered to be
                                     fully-processed. Any fully-processed routes may contain the following
                                     properties:
-                            
+
                                       * &#x60;regex&#x60;: The regular expression representing the path to match, this
                                         property may also be named &#x60;regexp&#x60; for greater compatibility.
-                            
+
                                       * &#x60;keys&#x60;: Array of named path parameters used to populate &#x60;req.params&#x60;
                                         objects when dispatching to route handlers.
-                            
+
                                     Any additional data contained on these route objects will be retained.
                                     This is useful to store extra metadata about a route; e.g., a &#x60;name&#x60; to
                                     give routes logical names.
-                            
+
                                     This attribute is intended to be used to set routes at init time, or to
                                     completely reset all routes after init. To add routes after init without
                                     resetting all existing routes, use the &#x60;route()&#x60; method.
-                            
+
                                     @attribute routes
                                     @type Object[]
                                     @default &#x60;[]&#x60;
@@ -2900,46 +2900,46 @@
                                         setter: &#x27;_setRoutes&#x27;
                                     }
                                 },
-                            
+
                                 // Used as the default value for the &#x60;html5&#x60; attribute, and for testing.
                                 html5: Y.HistoryBase.html5 &amp;&amp; (!Y.UA.android || Y.UA.android &gt;= 3),
-                            
+
                                 // To make this testable.
                                 _instances: instances,
-                            
+
                                 /**
                                 Dispatches to the first route handler that matches the specified &#x60;path&#x60; for
                                 all active router instances.
-                            
+
                                 This provides a mechanism to cause all active router instances to dispatch
                                 to their route handlers without needing to change the URL or fire the
                                 &#x60;history:change&#x60; or &#x60;hashchange&#x60; event.
-                            
+
                                 @method dispatch
                                 @static
                                 @since 3.6.0
                                 **/
                                 dispatch: function () {
                                     var i, len, router, req, res;
-                            
+
                                     for (i = 0, len = instances.length; i &lt; len; i += 1) {
                                         router = instances[i];
-                            
+
                                         if (router) {
                                             req = router._getRequest(&#x27;dispatch&#x27;);
                                             res = router._getResponse(req);
-                            
+
                                             router._dispatch(req, res);
                                         }
                                     }
                                 }
                             });
-                            
+
                             /**
                             The &#x60;Controller&#x60; class was deprecated in YUI 3.5.0 and is now an alias for the
                             &#x60;Router&#x60; class. Use that class instead. This alias will be removed in a future
                             version of YUI.
-                            
+
                             @class Controller
                             @constructor
                             @extends Base
@@ -2947,7 +2947,7 @@
                             @see Router
                             **/
                             Y.Controller = Y.Router;
-                            
+
                                 </pre>
                             </div>
                         </div>

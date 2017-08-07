@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/history/js/history-html5.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1141,7 +1141,7 @@
                              * @submodule history-html5
                              * @since 3.2.0
                              */
-                            
+
                             /**
                              * &lt;p&gt;
                              * Provides browser history management using the HTML5 history API.
@@ -1179,43 +1179,43 @@
                              * @constructor
                              * @param {Object} config (optional) Configuration object.
                              */
-                            
+
                             var HistoryBase     = Y.HistoryBase,
                                 Lang            = Y.Lang,
                                 win             = Y.config.win,
                                 useHistoryHTML5 = Y.config.useHistoryHTML5,
-                            
+
                                 SRC_POPSTATE    = &#x27;popstate&#x27;,
                                 SRC_REPLACE     = HistoryBase.SRC_REPLACE;
-                            
+
                             function HistoryHTML5() {
                                 HistoryHTML5.superclass.constructor.apply(this, arguments);
                             }
-                            
+
                             Y.extend(HistoryHTML5, HistoryBase, {
                                 // -- Initialization -------------------------------------------------------
                                 _init: function (config) {
                                     var bookmarkedState;
-                            
+
                                     try {
                                         bookmarkedState = win.history.state;
                                     } catch(e) {
                                         bookmarkedState = null;
                                     }
-                            
+
                                     // Treat empty state objects as &#x60;null&#x60; so they&#x27;re not processed further.
                                     if (Y.Object.isEmpty(bookmarkedState)) {
                                         bookmarkedState = null;
                                     }
-                            
+
                                     config || (config = {});
-                            
+
                                     // If both the initial state and the bookmarked state are objects, merge
                                     // them (bookmarked state wins).
                                     if (config.initialState
                                             &amp;&amp; Lang.type(config.initialState) === &#x27;object&#x27;
                                             &amp;&amp; Lang.type(bookmarkedState) === &#x27;object&#x27;) {
-                            
+
                                         this._initialState = Y.merge(config.initialState, bookmarkedState);
                                     } else {
                                         // Otherwise, the bookmarked state always wins if there is one. If
@@ -1223,14 +1223,14 @@
                                         // falling back to config.initialState or null.
                                         this._initialState = bookmarkedState;
                                     }
-                            
+
                                     Y.on(&#x27;popstate&#x27;, this._onPopState, win, this);
-                            
+
                                     HistoryHTML5.superclass._init.apply(this, arguments);
                                 },
-                            
+
                                 // -- Protected Methods ----------------------------------------------------
-                            
+
                                 /**
                                  * Overrides HistoryBase&#x27;s &lt;code&gt;_storeState()&lt;/code&gt; and pushes or replaces
                                  * a history entry using the HTML5 history API when necessary.
@@ -1249,12 +1249,12 @@
                                             options.url || Y.config.doc.URL
                                         );
                                     }
-                            
+
                                     HistoryHTML5.superclass._storeState.apply(this, arguments);
                                 },
-                            
+
                                 // -- Protected Event Handlers ---------------------------------------------
-                            
+
                                 /**
                                  * Handler for popstate events.
                                  *
@@ -1268,7 +1268,7 @@
                             }, {
                                 // -- Public Static Properties ---------------------------------------------
                                 NAME: &#x27;historyhtml5&#x27;,
-                            
+
                                 /**
                                  * Constant used to identify state changes originating from
                                  * &lt;code&gt;popstate&lt;/code&gt; events.
@@ -1280,13 +1280,13 @@
                                  */
                                 SRC_POPSTATE: SRC_POPSTATE
                             });
-                            
+
                             if (!Y.Node.DOM_EVENTS.popstate) {
                                 Y.Node.DOM_EVENTS.popstate = 1;
                             }
-                            
+
                             Y.HistoryHTML5 = HistoryHTML5;
-                            
+
                             /**
                              * &lt;p&gt;
                              * If &lt;code&gt;true&lt;/code&gt;, the &lt;code&gt;Y.History&lt;/code&gt; alias will always point to
@@ -1311,14 +1311,14 @@
                              * @for config
                              * @since 3.2.0
                              */
-                            
+
                             // HistoryHTML5 will always win over HistoryHash unless useHistoryHTML5 is false
                             // or HTML5 history is not supported.
                             if (useHistoryHTML5 === true || (useHistoryHTML5 !== false &amp;&amp;
                                     HistoryBase.html5)) {
                                 Y.History = HistoryHTML5;
                             }
-                            
+
                                 </pre>
                             </div>
                         </div>

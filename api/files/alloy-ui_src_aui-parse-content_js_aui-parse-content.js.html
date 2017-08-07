@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>alloy-ui/src/aui-parse-content/js/aui-parse-content.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1141,25 +1141,25 @@
                              *
                              * @module aui-parse-content
                              */
-                            
+
                             /*
                              * NOTE: The inspiration of ParseContent cames from the &quot;Caridy Patino&quot; Node
                              *       Dispatcher Plugin http://github.com/caridy/yui3-gallery/blob/master/src
                              *       /gallery-dispatcher/
                              */
-                            
+
                             var L = A.Lang,
                                 isString = L.isString,
-                            
+
                                 DOC = A.config.doc,
                                 PADDING_NODE = &#x27;&lt;div&gt;_&lt;/div&gt;&#x27;,
-                            
+
                                 SCRIPT_TYPES = {
                                     &#x27;&#x27;: 1,
                                     &#x27;text/javascript&#x27;: 1,
                                     &#x27;text/parsed&#x27;: 1
                                 };
-                            
+
                             /**
                              * A base class for ParseContent, providing:
                              *
@@ -1195,7 +1195,7 @@
                                  * @static
                                  */
                                 NAME: &#x27;ParseContent&#x27;,
-                            
+
                                 /**
                                  * Static property provides a string to identify the namespace.
                                  *
@@ -1204,7 +1204,7 @@
                                  * @static
                                  */
                                 NS: &#x27;ParseContent&#x27;,
-                            
+
                                 /**
                                  * Static property used to define the default attribute
                                  * configuration for the ParseContent.
@@ -1223,7 +1223,7 @@
                                     queue: {
                                         value: null
                                     },
-                            
+
                                     /**
                                      * When true, script nodes will not be removed from original content,
                                      * instead the script type attribute will be set to &#x60;text/plain&#x60;.
@@ -1236,7 +1236,7 @@
                                         value: false
                                     }
                                 },
-                            
+
                                 /**
                                  * Static property used to define which component it extends.
                                  *
@@ -1245,9 +1245,9 @@
                                  * @static
                                  */
                                 EXTENDS: A.Plugin.Base,
-                            
+
                                 prototype: {
-                            
+
                                     /**
                                      * Construction logic executed during ParseContent instantiation.
                                      * Lifecycle.
@@ -1257,17 +1257,17 @@
                                      */
                                     initializer: function() {
                                         var instance = this;
-                            
+
                                         ParseContent.superclass.initializer.apply(this, arguments);
-                            
+
                                         instance.set(
                                             &#x27;queue&#x27;,
                                             new A.AsyncQueue()
                                         );
-                            
+
                                         instance._bindAOP();
                                     },
-                            
+
                                     /**
                                      * Global eval the &lt;data&gt;data&lt;/data&gt; passed.
                                      *
@@ -1277,22 +1277,22 @@
                                     globalEval: function(data) {
                                         var doc = A.getDoc();
                                         var head = doc.one(&#x27;head&#x27;) || doc.get(&#x27;documentElement&#x27;);
-                            
+
                                         // NOTE: A.Node.create(&#x27;&lt;script&gt;&lt;/script&gt;&#x27;) doesn&#x27;t work correctly
                                         // on Opera
                                         var newScript = DOC.createElement(&#x27;script&#x27;);
-                            
+
                                         newScript.type = &#x27;text/javascript&#x27;;
-                            
+
                                         if (data) {
                                             // NOTE: newScript.set(TEXT, data) breaks on IE, YUI BUG.
                                             newScript.text = L.trim(data);
                                         }
-                            
+
                                         //removes the script node immediately after executing it
                                         head.appendChild(newScript).remove();
                                     },
-                            
+
                                     /**
                                      * Extract the &#x60;script&#x60; tags from the string content and
                                      * evaluate the chunks.
@@ -1303,14 +1303,14 @@
                                      */
                                     parseContent: function(content) {
                                         var instance = this;
-                            
+
                                         var output = instance._extractScripts(content);
-                            
+
                                         instance._dispatch(output);
-                            
+
                                         return output;
                                     },
-                            
+
                                     /**
                                      * Add inline script data to the queue.
                                      *
@@ -1321,7 +1321,7 @@
                                      */
                                     _addInlineScript: function(data) {
                                         var instance = this;
-                            
+
                                         instance.get(&#x27;queue&#x27;).add({
                                             args: data,
                                             context: instance,
@@ -1329,7 +1329,7 @@
                                             timeout: 0
                                         });
                                     },
-                            
+
                                     /**
                                      * Bind listeners on the &#x60;insert&#x60; and &#x60;setContent&#x60; methods of the Node
                                      * instance where you are plugging the ParseContent. These listeners are
@@ -1340,30 +1340,30 @@
                                      */
                                     _bindAOP: function() {
                                         var instance = this;
-                            
+
                                         var cleanFirstArg = function(content) {
                                             var args = Array.prototype.slice.call(arguments);
                                             var output = instance.parseContent(content);
-                            
+
                                             // replace the first argument with the clean fragment
                                             args.splice(0, 1, output.fragment);
-                            
+
                                             return new A.Do.AlterArgs(null, args);
                                         };
-                            
+
                                         this.doBefore(&#x27;insert&#x27;, cleanFirstArg);
                                         this.doBefore(&#x27;replaceChild&#x27;, cleanFirstArg);
-                            
+
                                         var cleanArgs = function(content) {
                                             var output = instance.parseContent(content);
-                            
+
                                             return new A.Do.AlterArgs(null, [output.fragment]);
                                         };
-                            
+
                                         this.doBefore(&#x27;replace&#x27;, cleanArgs);
                                         this.doBefore(&#x27;setContent&#x27;, cleanArgs);
                                     },
-                            
+
                                     /**
                                      * Create an HTML fragment with the String passed, extract all the
                                      * script tags and return an Object with a reference for the extracted
@@ -1379,24 +1379,24 @@
                                             fragment = A.Node.create(&#x27;&lt;div&gt;&lt;/div&gt;&#x27;),
                                             output = {},
                                             preserveScriptNodes = instance.get(&#x27;preserveScriptNodes&#x27;);
-                            
+
                                         // For PADDING_NODE, instead of fixing all tags in the content to be
                                         // &quot;XHTML&quot;-style, we make the firstChild be a valid non-empty tag,
                                         // then we remove it later
-                            
+
                                         if (isString(content)) {
                                             content = PADDING_NODE + content;
-                            
+
                                             // create fragment from {String}
                                             A.DOM.addHTML(fragment, content, &#x27;append&#x27;);
                                         }
                                         else {
                                             fragment.append(PADDING_NODE);
-                            
+
                                             // create fragment from {Y.Node | HTMLElement}
                                             fragment.append(content);
                                         }
-                            
+
                                         output.js = fragment.all(&#x27;script&#x27;).filter(function(script) {
                                             var includeScript = SCRIPT_TYPES[script.getAttribute(&#x27;type&#x27;).toLowerCase()];
                                             if (preserveScriptNodes) {
@@ -1404,7 +1404,7 @@
                                             }
                                             return includeScript;
                                         });
-                            
+
                                         if (!preserveScriptNodes) {
                                             output.js.each(
                                                 function(node) {
@@ -1412,15 +1412,15 @@
                                                 }
                                             );
                                         }
-                            
+
                                         // remove PADDING_NODE
                                         fragment.get(&#x27;firstChild&#x27;).remove();
-                            
+
                                         output.fragment = fragment.get(&#x27;childNodes&#x27;).toFrag();
-                            
+
                                         return output;
                                     },
-                            
+
                                     /**
                                      * Loop trough all extracted &#x60;script&#x60; tags and evaluate them.
                                      *
@@ -1432,21 +1432,21 @@
                                      */
                                     _dispatch: function(output) {
                                         var instance = this;
-                            
+
                                         var queue = instance.get(&#x27;queue&#x27;);
-                            
+
                                         var scriptContent = [];
-                            
+
                                         output.js.each(function(node) {
                                             var src = node.get(&#x27;src&#x27;);
-                            
+
                                             if (src) {
                                                 if (scriptContent.length) {
                                                     instance._addInlineScript(scriptContent.join(&#x27;;&#x27;));
-                            
+
                                                     scriptContent.length = 0;
                                                 }
-                            
+
                                                 queue.add({
                                                     autoContinue: false,
                                                     fn: function() {
@@ -1464,22 +1464,22 @@
                                             }
                                             else {
                                                 var dom = node._node;
-                            
+
                                                 scriptContent.push(dom.text || dom.textContent || dom.innerHTML || &#x27;&#x27;);
                                             }
                                         });
-                            
+
                                         if (scriptContent.length) {
                                             instance._addInlineScript(scriptContent.join(&#x27;;&#x27;));
                                         }
-                            
+
                                         queue.run();
                                     }
                                 }
                             });
-                            
+
                             A.namespace(&#x27;Plugin&#x27;).ParseContent = ParseContent;
-                            
+
                                 </pre>
                             </div>
                         </div>

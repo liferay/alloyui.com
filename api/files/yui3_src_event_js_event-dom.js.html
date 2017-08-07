@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,20 +1122,20 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/event/js/event-dom.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             (function() {
-                            
+
                             /**
                              * The event utility provides functions to add and remove event listeners,
                              * event cleansing.  It also tries to automatically remove listeners it
@@ -1144,7 +1144,7 @@
                              * @main event
                              * @submodule event-base
                              */
-                            
+
                             /**
                              * The event utility provides functions to add and remove event listeners,
                              * event cleansing.  It also tries to automatically remove listeners it
@@ -1153,30 +1153,30 @@
                              * @class Event
                              * @static
                              */
-                            
+
                             Y.Env.evt.dom_wrappers = {};
                             Y.Env.evt.dom_map = {};
-                            
+
                             var _eventenv = Y.Env.evt,
                                 config = Y.config,
                                 win = config.win,
                                 add = YUI.Env.add,
                                 remove = YUI.Env.remove,
-                            
+
                                 onLoad = function() {
                                     YUI.Env.windowLoaded = true;
                                     Y.Event._load();
                                     remove(win, &quot;load&quot;, onLoad);
                                 },
-                            
+
                                 onUnload = function() {
                                     Y.Event._unload();
                                 },
-                            
+
                                 EVENT_READY = &#x27;domready&#x27;,
-                            
+
                                 COMPAT_ARG = &#x27;~yui|2|compat~&#x27;,
-                            
+
                                 shouldIterate = function(o) {
                                     try {
                                         // TODO: See if there&#x27;s a more performant way to return true early on this, for the common case
@@ -1186,23 +1186,23 @@
                                         return false;
                                     }
                                 },
-                            
+
                                 // aliases to support DOM event subscription clean up when the last
                                 // subscriber is detached. deleteAndClean overrides the DOM event&#x27;s wrapper
                                 // CustomEvent _delete method.
                                 _ceProtoDelete = Y.CustomEvent.prototype._delete,
                                 _deleteAndClean = function(s) {
                                     var ret = _ceProtoDelete.apply(this, arguments);
-                            
+
                                     if (!this.hasSubs()) {
                                         Y.Event._clean(this);
                                     }
-                            
+
                                     return ret;
                                 },
-                            
+
                             Event = function() {
-                            
+
                                 /**
                                  * True after the onload event has fired
                                  * @property _loadComplete
@@ -1211,7 +1211,7 @@
                                  * @private
                                  */
                                 var _loadComplete =  false,
-                            
+
                                 /**
                                  * The number of times to poll after window.onload.  This number is
                                  * increased if additional late-bound handlers are requested after
@@ -1221,7 +1221,7 @@
                                  * @private
                                  */
                                 _retryCount = 0,
-                            
+
                                 /**
                                  * onAvailable listeners
                                  * @property _avail
@@ -1229,7 +1229,7 @@
                                  * @private
                                  */
                                 _avail = [],
-                            
+
                                 /**
                                  * Custom event wrappers for DOM events.  Key is
                                  * &#x27;event:&#x27; + Element uid stamp + event type
@@ -1239,9 +1239,9 @@
                                  * @private
                                  */
                                 _wrappers = _eventenv.dom_wrappers,
-                            
+
                                 _windowLoadKey = null,
-                            
+
                                 /**
                                  * Custom event wrapper map DOM events.  Key is
                                  * Element uid stamp.  Each item is a hash of custom event
@@ -1252,9 +1252,9 @@
                                  * @private
                                  */
                                 _el_events = _eventenv.dom_map;
-                            
+
                                 return {
-                            
+
                                     /**
                                      * The number of times we should look for elements that are not
                                      * in the DOM at the time the event is requested after the document
@@ -1267,7 +1267,7 @@
                                      * @final
                                      */
                                     POLL_RETRYS: 1000,
-                            
+
                                     /**
                                      * The poll interval in milliseconds
                                      * @property POLL_INTERVAL
@@ -1276,7 +1276,7 @@
                                      * @final
                                      */
                                     POLL_INTERVAL: 40,
-                            
+
                                     /**
                                      * addListener/removeListener can throw errors in unexpected scenarios.
                                      * These errors are suppressed, the method returns false, and this property
@@ -1286,8 +1286,8 @@
                                      * @type Error
                                      */
                                     lastError: null,
-                            
-                            
+
+
                                     /**
                                      * poll handle
                                      * @property _interval
@@ -1295,7 +1295,7 @@
                                      * @private
                                      */
                                     _interval: null,
-                            
+
                                     /**
                                      * document readystate poll handle
                                      * @property _dri
@@ -1303,7 +1303,7 @@
                                      * @private
                                      */
                                      _dri: null,
-                            
+
                                     /**
                                      * True when the document is initially usable
                                      * @property DOMReady
@@ -1311,7 +1311,7 @@
                                      * @static
                                      */
                                     DOMReady: false,
-                            
+
                                     /**
                                      * @method startInterval
                                      * @static
@@ -1322,7 +1322,7 @@
                             Event._interval = setInterval(Event._poll, Event.POLL_INTERVAL);
                                         }
                                     },
-                            
+
                                     /**
                                      * Executes the supplied callback when the item with the supplied
                                      * id is found.  This is meant to be used to execute behavior as
@@ -1350,9 +1350,9 @@
                                      */
                                     // @TODO fix arguments
                                     onAvailable: function(id, fn, p_obj, p_override, checkContent, compat) {
-                            
+
                                         var a = Y.Array(id), i, availHandle;
-                            
+
                                         for (i=0; i&lt;a.length; i=i+1) {
                                             _avail.push({
                                                 id:         a[i],
@@ -1364,21 +1364,21 @@
                                             });
                                         }
                                         _retryCount = this.POLL_RETRYS;
-                            
+
                                         // We want the first test to be immediate, but async
                                         setTimeout(Event._poll, 0);
-                            
+
                                         availHandle = new Y.EventHandle({
-                            
+
                                             _delete: function() {
                                                 // set by the event system for lazy DOM listeners
                                                 if (availHandle.handle) {
                                                     availHandle.handle.detach();
                                                     return;
                                                 }
-                            
+
                                                 var i, j;
-                            
+
                                                 // otherwise try to remove the onAvailable listener(s)
                                                 for (i = 0; i &lt; a.length; i++) {
                                                     for (j = 0; j &lt; _avail.length; j++) {
@@ -1388,12 +1388,12 @@
                                                     }
                                                 }
                                             }
-                            
+
                                         });
-                            
+
                                         return availHandle;
                                     },
-                            
+
                                     /**
                                      * Works the same way as onAvailable, but additionally checks the
                                      * state of sibling elements to determine if the content of the
@@ -1419,7 +1419,7 @@
                                     onContentReady: function(id, fn, obj, override, compat) {
                                         return Event.onAvailable(id, fn, obj, override, true, compat);
                                     },
-                            
+
                                     /**
                                      * Adds an event listener
                                      *
@@ -1436,28 +1436,28 @@
                                      *
                                      * @static
                                      */
-                            
+
                                     attach: function(type, fn, el, context) {
                                         return Event._attach(Y.Array(arguments, 0, true));
                                     },
-                            
+
                                     _createWrapper: function (el, type, capture, compat, facade) {
-                            
+
                                         var cewrapper,
                                             ek  = Y.stamp(el),
                                             key = &#x27;event:&#x27; + ek + type;
-                            
+
                                         if (false === facade) {
                                             key += &#x27;native&#x27;;
                                         }
                                         if (capture) {
                                             key += &#x27;capture&#x27;;
                                         }
-                            
-                            
+
+
                                         cewrapper = _wrappers[key];
-                            
-                            
+
+
                                         if (!cewrapper) {
                                             // create CE wrapper
                                             cewrapper = Y.publish(key, {
@@ -1473,9 +1473,9 @@
                                                     }
                                                 }
                                             });
-                            
+
                                             cewrapper.overrides = {};
-                            
+
                                             // for later removeListener calls
                                             cewrapper.el = el;
                                             cewrapper.key = key;
@@ -1485,27 +1485,27 @@
                                                 cewrapper.fire(Event.getEvent(e, el, (compat || (false === facade))));
                                             };
                                             cewrapper.capture = capture;
-                            
+
                                             if (el == win &amp;&amp; type == &quot;load&quot;) {
                                                 // window load happens once
                                                 cewrapper.fireOnce = true;
                                                 _windowLoadKey = key;
                                             }
                                             cewrapper._delete = _deleteAndClean;
-                            
+
                                             _wrappers[key] = cewrapper;
                                             _el_events[ek] = _el_events[ek] || {};
                                             _el_events[ek][key] = cewrapper;
-                            
+
                                             add(el, type, cewrapper.fn, capture);
                                         }
-                            
+
                                         return cewrapper;
-                            
+
                                     },
-                            
+
                                     _attach: function(args, conf) {
-                            
+
                                         var compat,
                                             handles, oEl, cewrapper, context,
                                             fireNow = false, ret,
@@ -1515,44 +1515,44 @@
                                             facade = conf &amp;&amp; conf.facade,
                                             capture = conf &amp;&amp; conf.capture,
                                             overrides = conf &amp;&amp; conf.overrides;
-                            
+
                                         if (args[args.length-1] === COMPAT_ARG) {
                                             compat = true;
                                         }
-                            
+
                                         if (!fn || !fn.call) {
                                             Y.log(type + &quot; attach call failed, invalid callback&quot;, &quot;error&quot;, &quot;event&quot;);
                                             return false;
                                         }
-                            
+
                                         // The el argument can be an array of elements or element ids.
                                         if (shouldIterate(el)) {
-                            
+
                                             handles=[];
-                            
+
                                             Y.each(el, function(v, k) {
                                                 args[2] = v;
                                                 handles.push(Event._attach(args.slice(), conf));
                                             });
-                            
+
                                             // return (handles.length === 1) ? handles[0] : handles;
                                             return new Y.EventHandle(handles);
-                            
+
                                         // If the el argument is a string, we assume it is
                                         // actually the id of the element.  If the page is loaded
                                         // we convert el to the actual element, otherwise we
                                         // defer attaching the event until the element is
                                         // ready
                                         } else if (Y.Lang.isString(el)) {
-                            
+
                                             // oEl = (compat) ? Y.DOM.byId(el) : Y.Selector.query(el);
-                            
+
                                             if (compat) {
                                                 oEl = Y.DOM.byId(el);
                                             } else {
-                            
+
                                                 oEl = Y.Selector.query(el);
-                            
+
                                                 switch (oEl.length) {
                                                     case 0:
                                                         oEl = null;
@@ -1565,42 +1565,42 @@
                                                         return Event._attach(args, conf);
                                                 }
                                             }
-                            
+
                                             if (oEl) {
-                            
+
                                                 el = oEl;
-                            
+
                                             // Not found = defer adding the event until the element is available
                                             } else {
-                            
+
                                                 ret = Event.onAvailable(el, function() {
-                            
+
                                                     ret.handle = Event._attach(args, conf);
-                            
+
                                                 }, Event, true, false, compat);
-                            
+
                                                 return ret;
-                            
+
                                             }
                                         }
-                            
+
                                         // Element should be an html element or node
                                         if (!el) {
                                             Y.log(&quot;unable to attach event &quot; + type, &quot;warn&quot;, &quot;event&quot;);
                                             return false;
                                         }
-                            
+
                                         if (Y.Node &amp;&amp; Y.instanceOf(el, Y.Node)) {
                                             el = Y.Node.getDOMNode(el);
                                         }
-                            
+
                                         cewrapper = Event._createWrapper(el, type, capture, compat, facade);
                                         if (overrides) {
                                             Y.mix(cewrapper.overrides, overrides);
                                         }
-                            
+
                                         if (el == win &amp;&amp; type == &quot;load&quot;) {
-                            
+
                                             // if the load is complete, fire immediately.
                                             // all subscribers, including the current one
                                             // will be notified.
@@ -1608,25 +1608,25 @@
                                                 fireNow = true;
                                             }
                                         }
-                            
+
                                         if (compat) {
                                             args.pop();
                                         }
-                            
+
                                         context = args[3];
-                            
+
                                         // set context to the Node if not specified
                                         // ret = cewrapper.on.apply(cewrapper, trimmedArgs);
                                         ret = cewrapper._on(fn, context, (args.length &gt; 4) ? args.slice(4) : null);
-                            
+
                                         if (fireNow) {
                                             cewrapper.fire();
                                         }
-                            
+
                                         return ret;
-                            
+
                                     },
-                            
+
                                     /**
                                      * Removes an event listener.  Supports the signature the event was bound
                                      * with, but the preferred way to remove listeners is using the handle
@@ -1645,22 +1645,22 @@
                                      * @static
                                      */
                                     detach: function(type, fn, el, obj) {
-                            
+
                                         var args=Y.Array(arguments, 0, true), compat, l, ok, i,
                                             id, ce;
-                            
+
                                         if (args[args.length-1] === COMPAT_ARG) {
                                             compat = true;
                                             // args.pop();
                                         }
-                            
+
                                         if (type &amp;&amp; type.detach) {
                                             return type.detach();
                                         }
-                            
+
                                         // The el argument can be a string
                                         if (typeof el == &quot;string&quot;) {
-                            
+
                                             // el = (compat) ? Y.DOM.byId(el) : Y.all(el);
                                             if (compat) {
                                                 el = Y.DOM.byId(el);
@@ -1675,11 +1675,11 @@
                                             }
                                             // return Event.detach.apply(Event, args);
                                         }
-                            
+
                                         if (!el) {
                                             return false;
                                         }
-                            
+
                                         if (el.detach) {
                                             args.splice(2, 1);
                                             return el.detach.apply(el, args);
@@ -1690,25 +1690,25 @@
                                                 args[2] = el[i];
                                                 ok = ( Y.Event.detach.apply(Y.Event, args) &amp;&amp; ok );
                                             }
-                            
+
                                             return ok;
                                         }
-                            
+
                                         if (!type || !fn || !fn.call) {
                                             return Event.purgeElement(el, false, type);
                                         }
-                            
+
                                         id = &#x27;event:&#x27; + Y.stamp(el) + type;
                                         ce = _wrappers[id];
-                            
+
                                         if (ce) {
                                             return ce.detach(fn);
                                         } else {
                                             return false;
                                         }
-                            
+
                                     },
-                            
+
                                     /**
                                      * Finds the event in the window object, the caller&#x27;s arguments, or
                                      * in the arguments of another method in the callstack.  This is
@@ -1723,11 +1723,11 @@
                                      */
                                     getEvent: function(e, el, noFacade) {
                                         var ev = e || win.event;
-                            
+
                                         return (noFacade) ? ev :
                                             new Y.DOMEventFacade(ev, el, _wrappers[&#x27;event:&#x27; + Y.stamp(el) + e.type]);
                                     },
-                            
+
                                     /**
                                      * Generates an unique ID for the element if it does not already
                                      * have one.
@@ -1739,7 +1739,7 @@
                                     generateId: function(el) {
                                         return Y.DOM.generateID(el);
                                     },
-                            
+
                                     /**
                                      * We want to be able to use getElementsByTagName as a collection
                                      * to attach a group of events to.  Unfortunately, different
@@ -1754,7 +1754,7 @@
                                      * @private
                                      */
                                     _isValidCollection: shouldIterate,
-                            
+
                                     /**
                                      * hook up any deferred listeners
                                      * @method _load
@@ -1764,13 +1764,13 @@
                                     _load: function(e) {
                                         if (!_loadComplete) {
                                             _loadComplete = true;
-                            
+
                                             // Just in case DOMReady did not go off for some reason
                                             // E._ready();
                                             if (Y.fire) {
                                                 Y.fire(EVENT_READY);
                                             }
-                            
+
                                             // Available elements may not have been detected before the
                                             // window load event fires. Try to find them now so that the
                                             // the user is more likely to get the onAvailable notifications
@@ -1778,7 +1778,7 @@
                                             Event._poll();
                                         }
                                     },
-                            
+
                                     /**
                                      * Polling function that runs before the onload event fires,
                                      * attempting to attach to DOM Nodes as soon as they are
@@ -1791,7 +1791,7 @@
                                         if (Event.locked) {
                                             return;
                                         }
-                            
+
                                         if (Y.UA.ie &amp;&amp; !YUI.Env.DOMReady) {
                                             // Hold off if DOMReady has not fired and check current
                                             // readyState to protect against the IE operation aborted
@@ -1799,23 +1799,23 @@
                                             Event.startInterval();
                                             return;
                                         }
-                            
+
                                         Event.locked = true;
-                            
+
                                         // keep trying until after the page is loaded.  We need to
                                         // check the page load state prior to trying to bind the
                                         // elements so that we can be certain all elements have been
                                         // tested appropriately
                                         var i, len, item, el, notAvail, executeItem,
                                             tryAgain = !_loadComplete;
-                            
+
                                         if (!tryAgain) {
                                             tryAgain = (_retryCount &gt; 0);
                                         }
-                            
+
                                         // onAvailable
                                         notAvail = [];
-                            
+
                                         executeItem = function (el, item) {
                                             var context, ov = item.override;
                                             try {
@@ -1838,15 +1838,15 @@
                                                 Y.log(&quot;Error in available or contentReady callback&quot;, &#x27;error&#x27;, &#x27;event&#x27;);
                                             }
                                         };
-                            
+
                                         // onAvailable
                                         for (i=0,len=_avail.length; i&lt;len; ++i) {
                                             item = _avail[i];
                                             if (item &amp;&amp; !item.checkReady) {
-                            
+
                                                 // el = (item.compat) ? Y.DOM.byId(item.id) : Y.one(item.id);
                                                 el = (item.compat) ? Y.DOM.byId(item.id) : Y.Selector.query(item.id, null, true);
-                            
+
                                                 if (el) {
                                                     executeItem(el, item);
                                                     _avail[i] = null;
@@ -1855,15 +1855,15 @@
                                                 }
                                             }
                                         }
-                            
+
                                         // onContentReady
                                         for (i=0,len=_avail.length; i&lt;len; ++i) {
                                             item = _avail[i];
                                             if (item &amp;&amp; item.checkReady) {
-                            
+
                                                 // el = (item.compat) ? Y.DOM.byId(item.id) : Y.one(item.id);
                                                 el = (item.compat) ? Y.DOM.byId(item.id) : Y.Selector.query(item.id, null, true);
-                            
+
                                                 if (el) {
                                                     // The element is available, but not necessarily ready
                                                     // @todo should we test parentNode.nextSibling?
@@ -1876,9 +1876,9 @@
                                                 }
                                             }
                                         }
-                            
+
                                         _retryCount = (notAvail.length === 0) ? 0 : _retryCount - 1;
-                            
+
                                         if (tryAgain) {
                                             // we may need to strip the nulled out items here
                                             Event.startInterval();
@@ -1886,13 +1886,13 @@
                                             clearInterval(Event._interval);
                                             Event._interval = null;
                                         }
-                            
+
                                         Event.locked = false;
-                            
+
                                         return;
-                            
+
                                     },
-                            
+
                                     /**
                                      * Removes all listeners attached to the given element via addListener.
                                      * Optionally, the node&#x27;s children can also be purged.
@@ -1909,7 +1909,7 @@
                                         // var oEl = (Y.Lang.isString(el)) ? Y.one(el) : el,
                                         var oEl = (Y.Lang.isString(el)) ?  Y.Selector.query(el, null, true) : el,
                                             lis = Event.getListeners(oEl, type), i, len, children, child;
-                            
+
                                         if (recurse &amp;&amp; oEl) {
                                             lis = lis || [];
                                             children = Y.Selector.query(&#x27;*&#x27;, oEl);
@@ -1921,15 +1921,15 @@
                                                 }
                                             }
                                         }
-                            
+
                                         if (lis) {
                                             for (i = 0, len = lis.length; i &lt; len; ++i) {
                                                 lis[i].detachAll();
                                             }
                                         }
-                            
+
                                     },
-                            
+
                                     /**
                                      * Removes all object references and the DOM proxy subscription for
                                      * a given event for a DOM node.
@@ -1944,7 +1944,7 @@
                                     _clean: function (wrapper) {
                                         var key    = wrapper.key,
                                             domkey = wrapper.domkey;
-                            
+
                                         remove(wrapper.el, wrapper.type, wrapper.fn, wrapper.capture);
                                         delete _wrappers[key];
                                         delete Y._yuievt.events[key];
@@ -1955,7 +1955,7 @@
                                             }
                                         }
                                     },
-                            
+
                                     /**
                                      * Returns all listeners attached to the given element via addListener.
                                      * Optionally, you can specify a specific type of event to return.
@@ -1970,36 +1970,36 @@
                                         var ek = Y.stamp(el, true), evts = _el_events[ek],
                                             results=[] , key = (type) ? &#x27;event:&#x27; + ek + type : null,
                                             adapters = _eventenv.plugins;
-                            
+
                                         if (!evts) {
                                             return null;
                                         }
-                            
+
                                         if (key) {
                                             // look for synthetic events
                                             if (adapters[type] &amp;&amp; adapters[type].eventDef) {
                                                 key += &#x27;_synth&#x27;;
                                             }
-                            
+
                                             if (evts[key]) {
                                                 results.push(evts[key]);
                                             }
-                            
+
                                             // get native events as well
                                             key += &#x27;native&#x27;;
                                             if (evts[key]) {
                                                 results.push(evts[key]);
                                             }
-                            
+
                                         } else {
                                             Y.each(evts, function(v, k) {
                                                 results.push(v);
                                             });
                                         }
-                            
+
                                         return (results.length) ? results : null;
                                     },
-                            
+
                                     /**
                                      * Removes all listeners registered by pe.event.  Called
                                      * automatically during the unload event.
@@ -2016,7 +2016,7 @@
                                         });
                                         remove(win, &quot;unload&quot;, onUnload);
                                     },
-                            
+
                                     /**
                                      * Adds a DOM event directly without the caching, cleanup, context adj, etc
                                      *
@@ -2029,7 +2029,7 @@
                                      * @private
                                      */
                                     nativeAdd: add,
-                            
+
                                     /**
                                      * Basic remove listener
                                      *
@@ -2043,21 +2043,21 @@
                                      */
                                     nativeRemove: remove
                                 };
-                            
+
                             }();
-                            
+
                             Y.Event = Event;
-                            
+
                             if (config.injected || YUI.Env.windowLoaded) {
                                 onLoad();
                             } else {
                                 add(win, &quot;load&quot;, onLoad);
                             }
-                            
+
                             // Process onAvailable/onContentReady items when when the DOM is ready in IE
                             if (Y.UA.ie) {
                                 Y.on(EVENT_READY, Event._poll);
-                            
+
                                 // In IE6 and below, detach event handlers when the page is unloaded in
                                 // order to try and prevent cross-page memory leaks. This isn&#x27;t done in
                                 // other browsers because a) it&#x27;s not necessary, and b) it breaks the
@@ -2070,17 +2070,17 @@
                                     }
                                 }
                             }
-                            
+
                             Event.Custom = Y.CustomEvent;
                             Event.Subscriber = Y.Subscriber;
                             Event.Target = Y.EventTarget;
                             Event.Handle = Y.EventHandle;
                             Event.Facade = Y.EventFacade;
-                            
+
                             Event._poll();
-                            
+
                             }());
-                            
+
                                 </pre>
                             </div>
                         </div>

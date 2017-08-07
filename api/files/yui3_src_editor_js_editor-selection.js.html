@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/editor/js/editor-selection.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                                 /**
@@ -1141,37 +1141,37 @@
                                  * @module editor
                                  * @submodule selection
                                  */
-                            
+
                                 //TODO This shouldn&#x27;t be there, Y.Node doesn&#x27;t normalize getting textnode content.
                                 var textContent = &#x27;textContent&#x27;,
                                 INNER_HTML = &#x27;innerHTML&#x27;,
                                 FONT_FAMILY = &#x27;fontFamily&#x27;;
-                            
+
                                 if (Y.UA.ie &amp;&amp; Y.UA.ie &lt; 11) {
                                     textContent = &#x27;nodeValue&#x27;;
                                 }
-                            
+
                                 Y.EditorSelection = function(domEvent) {
                                     var sel, par, ieNode, nodes, rng, i,
                                         comp, moved = 0, n, id, root = Y.EditorSelection.ROOT;
-                            
-                            
+
+
                                     if (Y.config.win.getSelection &amp;&amp; (!Y.UA.ie || Y.UA.ie &lt; 9 || Y.UA.ie &gt; 10)) {
                                         sel = Y.config.win.getSelection();
                                     } else if (Y.config.doc.selection) {
                                         sel = Y.config.doc.selection.createRange();
                                     }
                                     this._selection = sel;
-                            
+
                                     if (!sel) {
                                         return false;
                                     }
-                            
+
                                     if (sel.pasteHTML) {
                                         this.isCollapsed = (sel.compareEndPoints(&#x27;StartToEnd&#x27;, sel)) ? false : true;
                                         if (this.isCollapsed) {
                                             this.anchorNode = this.focusNode = Y.one(sel.parentElement());
-                            
+
                                             if (domEvent) {
                                                 ieNode = Y.config.doc.elementFromPoint(domEvent.clientX, domEvent.clientY);
                                             }
@@ -1179,7 +1179,7 @@
                                             if (!ieNode) {
                                                 par = sel.parentElement();
                                                 nodes = par.childNodes;
-                            
+
                                                 for (i = 0; i &lt; nodes.length; i++) {
                                                     //This causes IE to not allow a selection on a doubleclick
                                                     //rng.select(nodes[i]);
@@ -1190,9 +1190,9 @@
                                                     }
                                                 }
                                             }
-                            
+
                                             this.ieNode = ieNode;
-                            
+
                                             if (ieNode) {
                                                 if (ieNode.nodeType !== 3) {
                                                     if (ieNode.firstChild) {
@@ -1205,7 +1205,7 @@
                                                     }
                                                 }
                                                 this.anchorNode = this.focusNode = Y.EditorSelection.resolve(ieNode);
-                            
+
                                                 rng.moveToElementText(sel.parentElement());
                                                 comp = sel.compareEndPoints(&#x27;StartToStart&#x27;, rng);
                                                 if (comp) {
@@ -1214,13 +1214,13 @@
                                                     moved = this.getEditorOffset(root);
                                                     sel.move(&#x27;character&#x27;, -(moved));
                                                 }
-                            
+
                                                 this.anchorOffset = this.focusOffset = moved;
-                            
+
                                                 this.anchorTextNode = this.focusTextNode = Y.one(ieNode);
                                             }
-                            
-                            
+
+
                                         } else {
                                             //This helps IE deal with a selection and nodeChange events
                                             if (sel.htmlText &amp;&amp; sel.htmlText !== &#x27;&#x27;) {
@@ -1234,7 +1234,7 @@
                                                 }
                                             }
                                         }
-                            
+
                                         //var self = this;
                                         //debugger;
                                     } else {
@@ -1243,7 +1243,7 @@
                                         this.focusNode = Y.EditorSelection.resolve(sel.focusNode);
                                         this.anchorOffset = sel.anchorOffset;
                                         this.focusOffset = sel.focusOffset;
-                            
+
                                         this.anchorTextNode = Y.one(sel.anchorNode || this.anchorNode);
                                         this.focusTextNode = Y.one(sel.focusNode || this.focusNode);
                                     }
@@ -1257,7 +1257,7 @@
                                         }
                                     }
                                 };
-                            
+
                                 /**
                                 * Utility method to remove dead font-family styles from an element.
                                 * @static
@@ -1274,7 +1274,7 @@
                                         n.setAttribute(&#x27;style&#x27;, s);
                                     }
                                 };
-                            
+
                                 /**
                                 * Performs a prefilter on all nodes in the editor. Looks for nodes with a style: fontFamily or font face
                                 * It then creates a dynamic class assigns it and removed the property. This is so that we don&#x27;t lose
@@ -1284,7 +1284,7 @@
                                 */
                                 Y.EditorSelection.filter = function(blocks) {
                                     Y.log(&#x27;Filtering nodes&#x27;, &#x27;info&#x27;, &#x27;editor-selection&#x27;);
-                            
+
                                     var startTime = (new Date()).getTime(),
                                         editorSelection = Y.EditorSelection,
                                         root = editorSelection.ROOT,
@@ -1295,29 +1295,29 @@
                                         classNames = {}, cssString = &#x27;&#x27;,
                                         ls, startTime1 = (new Date()).getTime(),
                                         endTime1;
-                            
+
                                     nodes.each(function(n) {
                                         var raw = Y.Node.getDOMNode(n);
                                         if (raw.style[FONT_FAMILY]) {
                                             classNames[&#x27;.&#x27; + n._yuid] = raw.style[FONT_FAMILY];
                                             n.addClass(n._yuid);
-                            
+
                                             editorSelection.removeFontFamily(raw);
                                         }
                                     });
                                     endTime1 = (new Date()).getTime();
                                     Y.log(&#x27;Node Filter Timer: &#x27; + (endTime1 - startTime1) + &#x27;ms&#x27;, &#x27;info&#x27;, &#x27;editor-selection&#x27;);
-                            
+
                                     root.all(&#x27;.hr&#x27;).addClass(&#x27;yui-skip&#x27;).addClass(&#x27;yui-non&#x27;);
-                            
+
                                     if (Y.UA.ie) {
                                         hrs = Y.Node.getDOMNode(root).getElementsByTagName(&#x27;hr&#x27;);
                                         Y.each(hrs, function(hr) {
                                             var el = doc.createElement(&#x27;div&#x27;),
                                             s = el.style;
-                            
+
                                             el.className = &#x27;hr yui-non yui-skip&#x27;;
-                            
+
                                             el.setAttribute(&#x27;readonly&#x27;, true);
                                             el.setAttribute(&#x27;contenteditable&#x27;, false); //Keep it from being Edited
                                             if (hr.parentNode) {
@@ -1335,14 +1335,14 @@
                                             s.padding = &#x27;0&#x27;;
                                         });
                                     }
-                            
-                            
+
+
                                     Y.each(classNames, function(v, k) {
                                         cssString += k + &#x27; { font-family: &#x27; + v.replace(/&quot;/gi, &#x27;&#x27;) + &#x27;; }&#x27;;
                                     });
                                     Y.StyleSheet(cssString, &#x27;editor&#x27;);
-                            
-                            
+
+
                                     //Not sure about this one?
                                     baseNodes.each(function(n, k) {
                                         var t = n.get(&#x27;tagName&#x27;).toLowerCase(),
@@ -1352,7 +1352,7 @@
                                         }
                                         editorSelection.prototype._swap(baseNodes.item(k), newTag);
                                     });
-                            
+
                                     //Filter out all the empty UL/OL&#x27;s
                                     ls = root.all(&#x27;ol,ul&#x27;);
                                     ls.each(function(v) {
@@ -1361,14 +1361,14 @@
                                             v.remove();
                                         }
                                     });
-                            
+
                                     if (blocks) {
                                         editorSelection.filterBlocks();
                                     }
                                     endTime = (new Date()).getTime();
                                     Y.log(&#x27;Filter Timer: &#x27; + (endTime - startTime) + &#x27;ms&#x27;, &#x27;info&#x27;, &#x27;editor-selection&#x27;);
                                 };
-                            
+
                                 /**
                                 * Method attempts to replace all &quot;orphined&quot; text nodes in the main body by wrapping them with a &lt;p&gt;. Called from filter.
                                 * @static
@@ -1379,7 +1379,7 @@
                                     var startTime = (new Date()).getTime(), endTime,
                                         childs = Y.Node.getDOMNode(Y.EditorSelection.ROOT).childNodes, i, node, wrapped = false, doit = true,
                                         sel, single, br, c, s, html;
-                            
+
                                     if (childs) {
                                         for (i = 0; i &lt; childs.length; i++) {
                                             node = Y.one(childs[i]);
@@ -1390,7 +1390,7 @@
                                                     s = childs[i][textContent].match(Y.EditorSelection.REG_NON);
                                                     if (c === null &amp;&amp; s) {
                                                         doit = false;
-                            
+
                                                     }
                                                 }
                                                 if (doit) {
@@ -1405,7 +1405,7 @@
                                         }
                                         wrapped = Y.EditorSelection._wrapBlock(wrapped);
                                     }
-                            
+
                                     single = Y.all(Y.EditorSelection.DEFAULT_BLOCK_TAG);
                                     if (single.size() === 1) {
                                         Y.log(&#x27;Only One default block tag (&#x27; + Y.EditorSelection.DEFAULT_BLOCK_TAG + &#x27;), focus it..&#x27;, &#x27;info&#x27;, &#x27;editor-selection&#x27;);
@@ -1434,40 +1434,40 @@
                                             }
                                         });
                                     }
-                            
+
                                     endTime = (new Date()).getTime();
                                     Y.log(&#x27;FilterBlocks Timer: &#x27; + (endTime - startTime) + &#x27;ms&#x27;, &#x27;info&#x27;, &#x27;editor-selection&#x27;);
                                 };
-                            
+
                                 /**
                                 * Regular Expression used to find dead font-family styles
                                 * @static
                                 * @property REG_FONTFAMILY
                                 */
                                 Y.EditorSelection.REG_FONTFAMILY = /font-family:\s*;/;
-                            
+
                                 /**
                                 * Regular Expression to determine if a string has a character in it
                                 * @static
                                 * @property REG_CHAR
                                 */
                                 Y.EditorSelection.REG_CHAR = /[a-zA-Z-0-9_!@#\$%\^&amp;*\(\)-=_+\[\]\\{}|;&#x27;:&quot;,.\/&lt;&gt;\?]/gi;
-                            
+
                                 /**
                                 * Regular Expression to determine if a string has a non-character in it
                                 * @static
                                 * @property REG_NON
                                 */
                                 Y.EditorSelection.REG_NON = /[\s|\n|\t]/gi;
-                            
+
                                 /**
                                 * Regular Expression to remove all HTML from a string
                                 * @static
                                 * @property REG_NOHTML
                                 */
                                 Y.EditorSelection.REG_NOHTML = /&lt;\S[^&gt;&lt;]*&gt;/g;
-                            
-                            
+
+
                                 /**
                                 * Wraps an array of elements in a Block level tag
                                 * @static
@@ -1478,7 +1478,7 @@
                                     if (wrapped) {
                                         var newChild = Y.Node.create(&#x27;&lt;&#x27; + Y.EditorSelection.DEFAULT_BLOCK_TAG + &#x27;&gt;&lt;/&#x27; + Y.EditorSelection.DEFAULT_BLOCK_TAG + &#x27;&gt;&#x27;),
                                             firstChild = Y.one(wrapped[0]), i;
-                            
+
                                         for (i = 1; i &lt; wrapped.length; i++) {
                                             newChild.append(wrapped[i]);
                                         }
@@ -1487,7 +1487,7 @@
                                     }
                                     return false;
                                 };
-                            
+
                                 /**
                                 * Undoes what filter does enough to return the HTML from the Editor, then re-applies the filter.
                                 * @static
@@ -1499,9 +1499,9 @@
                                         nodes = root.all(&#x27;[class]&#x27;),
                                         html = &#x27;&#x27;, nons, ids,
                                         body = root;
-                            
+
                                     Y.log(&#x27;UnFiltering nodes&#x27;, &#x27;info&#x27;, &#x27;editor-selection&#x27;);
-                            
+
                                     nodes.each(function(n) {
                                         if (n.hasClass(n._yuid)) {
                                             //One of ours
@@ -1512,7 +1512,7 @@
                                             }
                                         }
                                     });
-                            
+
                                     nons = root.all(&#x27;.yui-non&#x27;);
                                     nons.each(function(n) {
                                         if (!n.hasClass(&#x27;yui-skip&#x27;) &amp;&amp; n.get(&#x27;innerHTML&#x27;) === &#x27;&#x27;) {
@@ -1521,7 +1521,7 @@
                                             n.removeClass(&#x27;yui-non&#x27;).removeClass(&#x27;yui-skip&#x27;);
                                         }
                                     });
-                            
+
                                     ids = root.all(&#x27;[id]&#x27;);
                                     ids.each(function(n) {
                                         if (n.get(&#x27;id&#x27;).indexOf(&#x27;yui_3_&#x27;) === 0) {
@@ -1529,13 +1529,13 @@
                                             n.removeAttribute(&#x27;_yuid&#x27;);
                                         }
                                     });
-                            
+
                                     if (body) {
                                         html = body.get(&#x27;innerHTML&#x27;);
                                     }
-                            
+
                                     root.all(&#x27;.hr&#x27;).addClass(&#x27;yui-skip&#x27;).addClass(&#x27;yui-non&#x27;);
-                            
+
                                     /*
                                     nodes.each(function(n) {
                                         n.addClass(n._yuid);
@@ -1545,7 +1545,7 @@
                                         }
                                     });
                                     */
-                            
+
                                     return html;
                                 };
                                 /**
@@ -1559,7 +1559,7 @@
                                     if (!n) {
                                         return Y.EditorSelection.ROOT;
                                     }
-                            
+
                                     if (n &amp;&amp; n.nodeType === 3) {
                                         //Adding a try/catch here because in rare occasions IE will
                                         //Throw a error accessing the parentNode of a stranded text node.
@@ -1572,7 +1572,7 @@
                                     }
                                     return Y.one(n);
                                 };
-                            
+
                                 /**
                                 * Returns the innerHTML of a node with all HTML tags removed.
                                 * @static
@@ -1586,17 +1586,17 @@
                                     txt = txt.replace(&#x27;&lt;span&gt;&lt;br&gt;&lt;/span&gt;&#x27;, &#x27;&#x27;).replace(&#x27;&lt;br&gt;&#x27;, &#x27;&#x27;);
                                     return txt;
                                 };
-                            
+
                                 //Y.EditorSelection.DEFAULT_BLOCK_TAG = &#x27;div&#x27;;
                                 Y.EditorSelection.DEFAULT_BLOCK_TAG = &#x27;p&#x27;;
-                            
+
                                 /**
                                 * The selector to use when looking for Nodes to cache the value of: [style],font[face]
                                 * @static
                                 * @property ALL
                                 */
                                 Y.EditorSelection.ALL = &#x27;[style],font[face]&#x27;;
-                            
+
                                 /**
                                 * The selector to use when looking for block level items.
                                 * @static
@@ -1615,41 +1615,41 @@
                                 * @property DEFAULT_TAG
                                 */
                                 Y.EditorSelection.DEFAULT_TAG = &#x27;span&#x27;;
-                            
+
                                 /**
                                 * The id of the outer cursor wrapper
                                 * @static
                                 * @property CURID
                                 */
                                 Y.EditorSelection.CURID = &#x27;yui-cursor&#x27;;
-                            
+
                                 /**
                                 * The id used to wrap the inner space of the cursor position
                                 * @static
                                 * @property CUR_WRAPID
                                 */
                                 Y.EditorSelection.CUR_WRAPID = &#x27;yui-cursor-wrapper&#x27;;
-                            
+
                                 /**
                                 * The default HTML used to focus the cursor..
                                 * @static
                                 * @property CURSOR
                                 */
                                 Y.EditorSelection.CURSOR = &#x27;&lt;span&gt;&lt;br class=&quot;yui-cursor&quot;&gt;&lt;/span&gt;&#x27;;
-                            
+
                                 /**
                                 * The default HTML element from which data will be retrieved. Default: body
                                 * @static
                                 * @property ROOT
                                 */
                                 Y.EditorSelection.ROOT = Y.one(&#x27;body&#x27;);
-                            
+
                                 Y.EditorSelection.hasCursor = function() {
                                     var cur = Y.all(&#x27;#&#x27; + Y.EditorSelection.CUR_WRAPID);
                                     Y.log(&#x27;Has Cursor: &#x27; + cur.size(), &#x27;info&#x27;, &#x27;editor-selection&#x27;);
                                     return cur.size();
                                 };
-                            
+
                                 /**
                                 * Called from Editor keydown to remove the &quot;extra&quot; space before the cursor.
                                 * @static
@@ -1686,7 +1686,7 @@
                                     }
                                     */
                                 };
-                            
+
                                 Y.EditorSelection.prototype = {
                                     /**
                                     * Range text value
@@ -1783,11 +1783,11 @@
                                             root = editorSelection.ROOT,
                                             nodes,
                                             items = [];
-                            
+
                                         editorSelection.filter();
                                         Y.config.doc.execCommand(&#x27;fontname&#x27;, null, editorSelection.TMP);
                                         nodes = root.all(editorSelection.ALL);
-                            
+
                                         nodes.each(function(n, k) {
                                             if (n.getStyle(FONT_FAMILY) === editorSelection.TMP) {
                                                 n.setStyle(FONT_FAMILY, &#x27;&#x27;);
@@ -1820,14 +1820,14 @@
                                     insertAtCursor: function(html, node, offset, collapse) {
                                         var cur = Y.Node.create(&#x27;&lt;&#x27; + Y.EditorSelection.DEFAULT_TAG + &#x27; class=&quot;yui-non&quot;&gt;&lt;/&#x27; + Y.EditorSelection.DEFAULT_TAG + &#x27;&gt;&#x27;),
                                             inHTML, txt, txt2, newNode, range = this.createRange(), b, root = Y.EditorSelection.ROOT;
-                            
+
                                         if (root.compareTo(node)) {
                                             b = Y.Node.create(&#x27;&lt;span&gt;&lt;/span&gt;&#x27;);
                                             node.append(b);
                                             node = b;
                                         }
-                            
-                            
+
+
                                         if (range.pasteHTML) {
                                             if (offset === 0 &amp;&amp; node &amp;&amp; !node.previous() &amp;&amp; node.get(&#x27;nodeType&#x27;) === 3) {
                                                 /*
@@ -1877,10 +1877,10 @@
                                             //txt2 = Y.one(Y.Node.create(inHTML.substr(offset)));
                                             if (offset &gt; 0) {
                                                 inHTML = node.get(textContent);
-                            
+
                                                 txt = Y.one(Y.config.doc.createTextNode(inHTML.substr(0, offset)));
                                                 txt2 = Y.one(Y.config.doc.createTextNode(inHTML.substr(offset)));
-                            
+
                                                 node.replace(txt, node);
                                                 newNode = Y.Node.create(html);
                                                 if (newNode.get(&#x27;nodeType&#x27;) === 11) {
@@ -1925,12 +1925,12 @@
                                     */
                                     wrapContent: function(tag) {
                                         tag = (tag) ? tag : Y.EditorSelection.DEFAULT_TAG;
-                            
+
                                         if (!this.isCollapsed) {
                                             Y.log(&#x27;Wrapping selection with: &#x27; + tag, &#x27;info&#x27;, &#x27;editor-selection&#x27;);
                                             var items = this.getSelected(),
                                                 changed = [], range, last, first, range2;
-                            
+
                                             items.each(function(n, k) {
                                                 var t = n.get(&#x27;tagName&#x27;).toLowerCase();
                                                 if (t === &#x27;font&#x27;) {
@@ -1939,7 +1939,7 @@
                                                     changed.push(this._wrap(items.item(k), tag));
                                                 }
                                             }, this);
-                            
+
                                             range = this.createRange();
                                             first = changed[0];
                                             last = changed[changed.length - 1];
@@ -1957,12 +1957,12 @@
                                                 }
                                                 range.select();
                                             }
-                            
+
                                             changed = Y.all(changed);
                                             Y.log(&#x27;Returning NodeList with (&#x27; + changed.size() + &#x27;) item(s)&#x27; , &#x27;info&#x27;, &#x27;editor-selection&#x27;);
                                             return changed;
-                            
-                            
+
+
                                         } else {
                                             Y.log(&#x27;Can not wrap a collapsed selection, use insertContent&#x27;, &#x27;error&#x27;, &#x27;editor-selection&#x27;);
                                             return Y.all([]);
@@ -1979,7 +1979,7 @@
                                     replace: function(se,re) {
                                         Y.log(&#x27;replacing (&#x27; + se + &#x27;) with (&#x27; + re + &#x27;)&#x27;);
                                         var range = this.createRange(), node, txt, index, newNode;
-                            
+
                                         if (range.getBookmark) {
                                             index = range.getBookmark();
                                             txt = this.anchorNode.get(&#x27;innerHTML&#x27;).replace(se, re);
@@ -1990,7 +1990,7 @@
                                             node = this.anchorTextNode;
                                             txt = node.get(textContent);
                                             index = txt.indexOf(se);
-                            
+
                                             txt = txt.replace(se, &#x27;&#x27;);
                                             node.set(textContent, txt);
                                             newNode = this.insertAtCursor(re, node, index, true);
@@ -2127,7 +2127,7 @@
                                     toString: function() {
                                         return &#x27;EditorSelection Object&#x27;;
                                     },
-                            
+
                                     /**
                                      Gets the offset of the selection for the selection within the current
                                      editor
@@ -2145,7 +2145,7 @@
                                             sel,
                                             range,
                                             preCaretRange;
-                            
+
                                         if (typeof win.getSelection !== &quot;undefined&quot;) {
                                             range = win.getSelection().getRangeAt(0);
                                             preCaretRange = range.cloneRange();
@@ -2154,7 +2154,7 @@
                                             caretOffset = preCaretRange.toString().length;
                                         } else {
                                             sel = doc.selection;
-                            
+
                                             if ( sel &amp;&amp; sel.type !== &quot;Control&quot;) {
                                                 range = sel.createRange();
                                                 preCaretRange = doc.body.createTextRange();
@@ -2163,15 +2163,15 @@
                                                 caretOffset = preCaretRange.text.length;
                                             }
                                         }
-                            
+
                                         return caretOffset;
                                     }
                                 };
-                            
+
                                 //TODO Remove this alias in 3.6.0
                                 Y.Selection = Y.EditorSelection;
-                            
-                            
+
+
                                 </pre>
                             </div>
                         </div>

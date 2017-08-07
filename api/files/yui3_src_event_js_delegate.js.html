@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/event/js/delegate.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1140,7 +1140,7 @@
                              * @module event
                              * @submodule event-delegate
                              */
-                            
+
                             var toArray          = Y.Array,
                                 YLang            = Y.Lang,
                                 isString         = YLang.isString,
@@ -1148,7 +1148,7 @@
                                 isArray          = YLang.isArray,
                                 selectorTest     = Y.Selector.test,
                                 detachCategories = Y.Env.evt.handles;
-                            
+
                             /**
                              * &lt;p&gt;Sets up event delegation on a container element.  The delegated event
                              * will use a supplied selector or filtering function to test if the event
@@ -1189,12 +1189,12 @@
                                 var args     = toArray(arguments, 0, true),
                                     query    = isString(el) ? el : null,
                                     typeBits, synth, container, categories, cat, i, len, handles, handle;
-                            
+
                                 // Support Y.delegate({ click: fnA, key: fnB }, el, filter, ...);
                                 // and Y.delegate([&#x27;click&#x27;, &#x27;key&#x27;], fn, el, filter, ...);
                                 if (isObject(type)) {
                                     handles = [];
-                            
+
                                     if (isArray(type)) {
                                         for (i = 0, len = type.length; i &lt; len; ++i) {
                                             args[0] = type[i];
@@ -1204,7 +1204,7 @@
                                         // Y.delegate({&#x27;click&#x27;, fn}, el, filter) =&gt;
                                         // Y.delegate(&#x27;click&#x27;, fn, el, filter)
                                         args.unshift(null); // one arg becomes two; need to make space
-                            
+
                                         for (i in type) {
                                             if (type.hasOwnProperty(i)) {
                                                 args[0] = i;
@@ -1213,62 +1213,62 @@
                                             }
                                         }
                                     }
-                            
+
                                     return new Y.EventHandle(handles);
                                 }
-                            
+
                                 typeBits = type.split(/\|/);
-                            
+
                                 if (typeBits.length &gt; 1) {
                                     cat  = typeBits.shift();
                                     args[0] = type = typeBits.shift();
                                 }
-                            
+
                                 synth = Y.Node.DOM_EVENTS[type];
-                            
+
                                 if (isObject(synth) &amp;&amp; synth.delegate) {
                                     handle = synth.delegate.apply(synth, arguments);
                                 }
-                            
+
                                 if (!handle) {
                                     if (!type || !fn || !el || !filter) {
                                         Y.log(&quot;delegate requires type, callback, parent, &amp; filter&quot;, &quot;warn&quot;);
                                         return;
                                     }
-                            
+
                                     container = (query) ? Y.Selector.query(query, null, true) : el;
-                            
+
                                     if (!container &amp;&amp; isString(el)) {
                                         handle = Y.on(&#x27;available&#x27;, function () {
                                             Y.mix(handle, Y.delegate.apply(Y, args), true);
                                         }, el);
                                     }
-                            
+
                                     if (!handle &amp;&amp; container) {
                                         args.splice(2, 2, container); // remove the filter
-                            
+
                                         handle = Y.Event._attach(args, { facade: false });
                                         handle.sub.filter  = filter;
                                         handle.sub._notify = delegate.notifySub;
                                     }
                                 }
-                            
+
                                 if (handle &amp;&amp; cat) {
                                     categories = detachCategories[cat]  || (detachCategories[cat] = {});
                                     categories = categories[type] || (categories[type] = []);
                                     categories.push(handle);
                                 }
-                            
+
                                 return handle;
                             }
-                            
+
                             /**
                             Overrides the &lt;code&gt;_notify&lt;/code&gt; method on the normal DOM subscription to
                             inject the filtering logic and only proceed in the case of a match.
-                            
+
                             This method is hosted as a private property of the &#x60;delegate&#x60; method
                             (e.g. &#x60;Y.delegate.notifySub&#x60;)
-                            
+
                             @method notifySub
                             @param thisObj {Object} default &#x27;this&#x27; object for the callback
                             @param args {Array} arguments passed to the event&#x27;s &lt;code&gt;fire()&lt;/code&gt;
@@ -1285,50 +1285,50 @@
                                 if (this.args) {
                                     args.push.apply(args, this.args);
                                 }
-                            
+
                                 // Only notify subs if the event occurred on a targeted element
                                 var currentTarget = delegate._applyFilter(this.filter, args, ce),
                                     //container     = e.currentTarget,
                                     e, i, len, ret;
-                            
+
                                 if (currentTarget) {
                                     // Support multiple matches up the the container subtree
                                     currentTarget = toArray(currentTarget);
-                            
+
                                     // The second arg is the currentTarget, but we&#x27;ll be reusing this
                                     // facade, replacing the currentTarget for each use, so it doesn&#x27;t
                                     // matter what element we seed it with.
                                     e = args[0] = new Y.DOMEventFacade(args[0], ce.el, ce);
-                            
+
                                     e.container = Y.one(ce.el);
-                            
+
                                     for (i = 0, len = currentTarget.length; i &lt; len &amp;&amp; !e.stopped; ++i) {
                                         e.currentTarget = Y.one(currentTarget[i]);
-                            
+
                                         ret = this.fn.apply(this.context || e.currentTarget, args);
-                            
+
                                         if (ret === false) { // stop further notifications
                                             break;
                                         }
                                     }
-                            
+
                                     return ret;
                                 }
                             };
-                            
+
                             /**
                             Compiles a selector string into a filter function to identify whether
                             Nodes along the parent axis of an event&#x27;s target should trigger event
                             notification.
-                            
+
                             This function is memoized, so previously compiled filter functions are
                             returned if the same selector string is provided.
-                            
+
                             This function may be useful when defining synthetic events for delegate
                             handling.
-                            
+
                             Hosted as a property of the &#x60;delegate&#x60; method (e.g. &#x60;Y.delegate.compileFilter&#x60;).
-                            
+
                             @method compileFilter
                             @param selector {String} the selector string to base the filtration on
                             @return {Function}
@@ -1341,7 +1341,7 @@
                                         (e.currentTarget === e.target) ? null : e.currentTarget._node);
                                 };
                             });
-                            
+
                             /**
                             Regex to test for disabled elements during filtering. This is only relevant to
                             IE to normalize behavior with other browsers, which swallow events that occur
@@ -1351,22 +1351,22 @@
                             acts more like &#x60;e.preventDefault()&#x60; plus styling. That issue is not handled here
                             because other browsers fire the event on the &#x60;&lt;a&gt;&#x60;, so delegate is supported in
                             both cases.
-                            
+
                             @property _disabledRE
                             @type {RegExp}
                             @protected
                             @since 3.8.1
                             **/
                             delegate._disabledRE = /^(?:button|input|select|textarea)$/i;
-                            
+
                             /**
                             Walks up the parent axis of an event&#x27;s target, and tests each element
                             against a supplied filter function.  If any Nodes, including the container,
                             satisfy the filter, the delegated callback will be triggered for each.
-                            
+
                             Hosted as a protected property of the &#x60;delegate&#x60; method (e.g.
                             &#x60;Y.delegate._applyFilter&#x60;).
-                            
+
                             @method _applyFilter
                             @param filter {Function} boolean function to test for inclusion in event
                                              notification
@@ -1381,12 +1381,12 @@
                                     target    = e.target || e.srcElement,
                                     match     = [],
                                     isContainer = false;
-                            
+
                                 // Resolve text nodes to their containing element
                                 if (target.nodeType === 3) {
                                     target = target.parentNode;
                                 }
-                            
+
                                 // For IE. IE propagates events from the parent element of disabled
                                 // elements, where other browsers swallow the event entirely. To normalize
                                 // this in IE, filtering for matching elements should abort if the target
@@ -1394,56 +1394,56 @@
                                 if (target.disabled &amp;&amp; delegate._disabledRE.test(target.nodeName)) {
                                     return match;
                                 }
-                            
+
                                 // passing target as the first arg rather than leaving well enough alone
                                 // making &#x27;this&#x27; in the filter function refer to the target.  This is to
                                 // support bound filter functions.
                                 args.unshift(target);
-                            
+
                                 if (isString(filter)) {
                                     while (target) {
                                         isContainer = (target === container);
                                         if (selectorTest(target, filter, (isContainer ? null: container))) {
                                             match.push(target);
                                         }
-                            
+
                                         if (isContainer) {
                                             break;
                                         }
-                            
+
                                         target = target.parentNode;
                                     }
                                 } else {
                                     // filter functions are implementer code and should receive wrappers
                                     args[0] = Y.one(target);
                                     args[1] = new Y.DOMEventFacade(e, container, ce);
-                            
+
                                     while (target) {
                                         // filter(target, e, extra args...) - this === target
                                         if (filter.apply(args[0], args)) {
                                             match.push(target);
                                         }
-                            
+
                                         if (target === container) {
                                             break;
                                         }
-                            
+
                                         target = target.parentNode;
                                         args[0] = Y.one(target);
                                     }
                                     args[1] = e; // restore the raw DOM event
                                 }
-                            
+
                                 if (match.length &lt;= 1) {
                                     match = match[0]; // single match or undefined
                                 }
-                            
+
                                 // remove the target
                                 args.shift();
-                            
+
                                 return match;
                             };
-                            
+
                             /**
                              * Sets up event delegation on a container element.  The delegated event
                              * will use a supplied filter to test if the callback should be executed.
@@ -1477,7 +1477,7 @@
                              * @for YUI
                              */
                             Y.delegate = Y.Event.delegate = delegate;
-                            
+
                                 </pre>
                             </div>
                         </div>

@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,22 +1122,22 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/event/js/event-facade-dom-touch.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
                             Adds touch event facade normalization properties (touches, changedTouches, targetTouches etc.) to the DOM event facade. Adds
                             touch events to the DOM events whitelist.
-                            
+
                             @example
                                 YUI().use(&#x27;event-touch&#x27;, function (Y) {
                                     Y.one(&#x27;#myDiv&#x27;).on(&#x27;touchstart&#x27;, function(e) {
@@ -1152,7 +1152,7 @@
                                 IDENTIFIER = &quot;identifier&quot;,
                                 win = Y.config.win,
                                 GESTURE_MAP = {};
-                            
+
                             /**
                              * Adds touch event facade normalization properties to the DOM event facade
                              *
@@ -1164,14 +1164,14 @@
                              * @param wrapper {CustomEvent} the custom event wrapper for this DOM event
                              */
                             Y.DOMEventFacade.prototype._touch = function(e, currentTarget, wrapper) {
-                            
+
                                 var i,l, etCached, et,touchCache;
-                            
+
                                 Y.log(&quot;Calling facade._touch() with e = &quot; + e, &quot;debug&quot;, &quot;event-touch&quot;);
-                            
+
                                 if (e.touches) {
                                     Y.log(&quot;Found e.touches. Replicating on facade&quot;, &quot;info&quot;, &quot;event-touch&quot;);
-                            
+
                                     /**
                                      * Array of individual touch events for touch points that are still in
                                      * contact with the touch surface.
@@ -1181,16 +1181,16 @@
                                      */
                                     this.touches = [];
                                     touchCache = {};
-                            
+
                                     for (i = 0, l = e.touches.length; i &lt; l; ++i) {
                                         et = e.touches[i];
                                         touchCache[Y.stamp(et)] = this.touches[i] = new Y.DOMEventFacade(et, currentTarget, wrapper);
                                     }
                                 }
-                            
+
                                 if (e.targetTouches) {
                                     Y.log(&quot;Found e.targetTouches. Replicating on facade&quot;, &quot;info&quot;, &quot;event-touch&quot;);
-                            
+
                                     /**
                                      * Array of individual touch events still in contact with the touch
                                      * surface and whose &#x60;touchstart&#x60; event occurred inside the same taregt
@@ -1200,60 +1200,60 @@
                                      * @type {DOMEventFacade[]}
                                      */
                                     this.targetTouches = [];
-                            
+
                                     for (i = 0, l = e.targetTouches.length; i &lt; l; ++i) {
                                         et = e.targetTouches[i];
                                         etCached = touchCache &amp;&amp; touchCache[Y.stamp(et, true)];
-                            
+
                                         this.targetTouches[i] = etCached || new Y.DOMEventFacade(et, currentTarget, wrapper);
-                            
+
                                         if (etCached) { Y.log(&quot;Found native event in touches. Using same facade in targetTouches&quot;, &quot;info&quot;, &quot;event-touch&quot;); }
                                     }
                                 }
-                            
+
                                 if (e.changedTouches) {
                                     Y.log(&quot;Found e.changedTouches. Replicating on facade&quot;, &quot;info&quot;, &quot;event-touch&quot;);
-                            
+
                                     /**
                                     An array of event-specific touch events.
-                            
+
                                     For &#x60;touchstart&#x60;, the touch points that became active with the current
                                     event.
-                            
+
                                     For &#x60;touchmove&#x60;, the touch points that have changed since the last
                                     event.
-                            
+
                                     For &#x60;touchend&#x60;, the touch points that have been removed from the touch
                                     surface.
-                            
+
                                     @property changedTouches
                                     @type {DOMEventFacade[]}
                                     **/
                                     this.changedTouches = [];
-                            
+
                                     for (i = 0, l = e.changedTouches.length; i &lt; l; ++i) {
                                         et = e.changedTouches[i];
                                         etCached = touchCache &amp;&amp; touchCache[Y.stamp(et, true)];
-                            
+
                                         this.changedTouches[i] = etCached || new Y.DOMEventFacade(et, currentTarget, wrapper);
-                            
+
                                         if (etCached) { Y.log(&quot;Found native event in touches. Using same facade in changedTouches&quot;, &quot;info&quot;, &quot;event-touch&quot;); }
                                     }
                                 }
-                            
+
                                 if (SCALE in e) {
                                     this[SCALE] = e[SCALE];
                                 }
-                            
+
                                 if (ROTATION in e) {
                                     this[ROTATION] = e[ROTATION];
                                 }
-                            
+
                                 if (IDENTIFIER in e) {
                                     this[IDENTIFIER] = e[IDENTIFIER];
                                 }
                             };
-                            
+
                             //Adding MSPointer events to whitelisted DOM Events. MSPointer event payloads
                             //have the same properties as mouse events.
                             if (Y.Node.DOM_EVENTS) {
@@ -1275,7 +1275,7 @@
                                     pointercancel:1
                                 });
                             }
-                            
+
                             //Add properties to Y.EVENT.GESTURE_MAP based on feature detection.
                             if ((win &amp;&amp; (&quot;ontouchstart&quot; in win)) &amp;&amp; !(Y.UA.chrome &amp;&amp; Y.UA.chrome &lt; 6)) {
                                 GESTURE_MAP.start = [&quot;touchstart&quot;, &quot;mousedown&quot;];
@@ -1283,28 +1283,28 @@
                                 GESTURE_MAP.move = [&quot;touchmove&quot;, &quot;mousemove&quot;];
                                 GESTURE_MAP.cancel = [&quot;touchcancel&quot;, &quot;mousecancel&quot;];
                             }
-                            
+
                             else if (win &amp;&amp; win.PointerEvent) {
                                 GESTURE_MAP.start = &quot;pointerdown&quot;;
                                 GESTURE_MAP.end = &quot;pointerup&quot;;
                                 GESTURE_MAP.move = &quot;pointermove&quot;;
                                 GESTURE_MAP.cancel = &quot;pointercancel&quot;;
                             }
-                            
+
                             else if (win &amp;&amp; (&quot;msPointerEnabled&quot; in win.navigator)) {
                                 GESTURE_MAP.start = &quot;MSPointerDown&quot;;
                                 GESTURE_MAP.end = &quot;MSPointerUp&quot;;
                                 GESTURE_MAP.move = &quot;MSPointerMove&quot;;
                                 GESTURE_MAP.cancel = &quot;MSPointerCancel&quot;;
                             }
-                            
+
                             else {
                                 GESTURE_MAP.start = &quot;mousedown&quot;;
                                 GESTURE_MAP.end = &quot;mouseup&quot;;
                                 GESTURE_MAP.move = &quot;mousemove&quot;;
                                 GESTURE_MAP.cancel = &quot;mousecancel&quot;;
                             }
-                            
+
                             /**
                              * A object literal with keys &quot;start&quot;, &quot;end&quot;, and &quot;move&quot;. The value for each key is a
                              * string representing the event for that environment. For touch environments, the respective
@@ -1316,7 +1316,7 @@
                              * @static
                              */
                             Y.Event._GESTURE_MAP = GESTURE_MAP;
-                            
+
                                 </pre>
                             </div>
                         </div>

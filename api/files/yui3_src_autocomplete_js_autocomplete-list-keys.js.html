@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,44 +1122,44 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/autocomplete/js/autocomplete-list-keys.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
                             Mixes keyboard support into AutoCompleteList. By default, this module is not
                             loaded for iOS and Android devices.
-                            
+
                             @module autocomplete
                             @submodule autocomplete-list-keys
                             **/
-                            
+
                              // keyCode constants.
                             var KEY_DOWN  = 40,
                                 KEY_ENTER = 13,
                                 KEY_ESC   = 27,
                                 KEY_TAB   = 9,
                                 KEY_UP    = 38;
-                            
+
                             function ListKeys() {
                                 Y.after(this._bindKeys, this, &#x27;bindUI&#x27;);
                                 this._initKeys();
                             }
-                            
+
                             ListKeys.prototype = {
                                 // -- Lifecycle Methods ----------------------------------------------------
-                            
+
                                 /**
                                 Initializes keyboard command mappings.
-                            
+
                                 @method _initKeys
                                 @protected
                                 @for AutoCompleteList
@@ -1167,38 +1167,38 @@
                                 _initKeys: function () {
                                     var keys        = {},
                                         keysVisible = {};
-                            
+
                                     // Register keyboard command handlers. _keys contains handlers that will
                                     // always be called; _keysVisible contains handlers that will only be
                                     // called when the list is visible.
                                     keys[KEY_DOWN] = this._keyDown;
-                            
+
                                     keysVisible[KEY_ENTER] = this._keyEnter;
                                     keysVisible[KEY_ESC]   = this._keyEsc;
                                     keysVisible[KEY_TAB]   = this._keyTab;
                                     keysVisible[KEY_UP]    = this._keyUp;
-                            
+
                                     this._keys        = keys;
                                     this._keysVisible = keysVisible;
                                 },
-                            
+
                                 destructor: function () {
                                     this._unbindKeys();
                                 },
-                            
+
                                 /**
                                 Binds keyboard events.
-                            
+
                                 @method _bindKeys
                                 @protected
                                 **/
                                 _bindKeys: function () {
                                     this._keyEvents = this._inputNode.on(&#x27;keydown&#x27;, this._onInputKey, this);
                                 },
-                            
+
                                 /**
                                 Unbinds keyboard events.
-                            
+
                                 @method _unbindKeys
                                 @protected
                                 **/
@@ -1206,12 +1206,12 @@
                                     this._keyEvents &amp;&amp; this._keyEvents.detach();
                                     this._keyEvents = null;
                                 },
-                            
+
                                 // -- Protected Methods ----------------------------------------------------
-                            
+
                                 /**
                                 Called when the down arrow key is pressed.
-                            
+
                                 @method _keyDown
                                 @protected
                                 **/
@@ -1222,16 +1222,16 @@
                                         this.show();
                                     }
                                 },
-                            
+
                                 /**
                                 Called when the enter key is pressed.
-                            
+
                                 @method _keyEnter
                                 @protected
                                 **/
                                 _keyEnter: function (e) {
                                     var item = this.get(&#x27;activeItem&#x27;);
-                            
+
                                     if (item) {
                                         this.selectItem(item, e);
                                     } else {
@@ -1239,53 +1239,53 @@
                                         return false;
                                     }
                                 },
-                            
+
                                 /**
                                 Called when the escape key is pressed.
-                            
+
                                 @method _keyEsc
                                 @protected
                                 **/
                                 _keyEsc: function () {
                                     this.hide();
                                 },
-                            
+
                                 /**
                                 Called when the tab key is pressed.
-                            
+
                                 @method _keyTab
                                 @protected
                                 **/
                                 _keyTab: function (e) {
                                     var item;
-                            
+
                                     if (this.get(&#x27;tabSelect&#x27;)) {
                                         item = this.get(&#x27;activeItem&#x27;);
-                            
+
                                         if (item) {
                                             this.selectItem(item, e);
                                             return true;
                                         }
                                     }
-                            
+
                                     return false;
                                 },
-                            
+
                                 /**
                                 Called when the up arrow key is pressed.
-                            
+
                                 @method _keyUp
                                 @protected
                                 **/
                                 _keyUp: function () {
                                     this._activatePrevItem();
                                 },
-                            
+
                                 // -- Protected Event Handlers ---------------------------------------------
-                            
+
                                 /**
                                 Handles &#x60;inputNode&#x60; key events.
-                            
+
                                 @method _onInputKey
                                 @param {EventTarget} e
                                 @protected
@@ -1293,16 +1293,16 @@
                                 _onInputKey: function (e) {
                                     var handler,
                                         keyCode = e.keyCode;
-                            
+
                                     this._lastInputKey = keyCode;
-                            
+
                                     if (this.get(&#x27;results&#x27;).length) {
                                         handler = this._keys[keyCode];
-                            
+
                                         if (!handler &amp;&amp; this.get(&#x27;visible&#x27;)) {
                                             handler = this._keysVisible[keyCode];
                                         }
-                            
+
                                         if (handler) {
                                             // A handler may return false to indicate that it doesn&#x27;t wish
                                             // to prevent the default key behavior.
@@ -1313,9 +1313,9 @@
                                     }
                                 }
                             };
-                            
+
                             Y.Base.mix(Y.AutoCompleteList, [ListKeys]);
-                            
+
                                 </pre>
                             </div>
                         </div>

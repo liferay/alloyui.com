@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/io/js/io-queue.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1142,7 +1142,7 @@
                             @for IO
                             **/
                             var io = Y.io._map[&#x27;io:0&#x27;] || new Y.IO();
-                            
+
                             Y.mix(Y.IO.prototype, {
                                /**
                                 * Array of transactions queued for processing
@@ -1155,7 +1155,7 @@
                                 _q: new Y.Queue(),
                                 _qActiveId: null,
                                 _qInit: false,
-                            
+
                                /**
                                 * Property to determine whether the queue is set to
                                 * 1 (active) or 0 (inactive).  When inactive, transactions
@@ -1167,7 +1167,7 @@
                                 * @type {Number}
                                 */
                                 _qState: 1,
-                            
+
                                /**
                                 * Method Process the first transaction from the
                                 * queue in FIFO order.
@@ -1179,12 +1179,12 @@
                                 _qShift: function() {
                                     var io = this,
                                         o = io._q.next();
-                            
+
                                     io._qActiveId = o.id;
                                     io._qState = 0;
                                     io.send(o.uri, o.cfg, o.id);
                                 },
-                            
+
                                /**
                                 * Method for queueing a transaction before the request is sent to the
                                 * resource, to ensure sequential processing.
@@ -1196,21 +1196,21 @@
                                 queue: function(uri, c) {
                                     var io = this,
                                         o = { uri: uri, cfg:c, id: this._id++ };
-                            
+
                                     if(!io._qInit) {
                                         Y.on(&#x27;io:complete&#x27;, function(id, o) { io._qNext(id); }, io);
                                         io._qInit = true;
                                     }
-                            
+
                                     io._q.add(o);
                                     if (io._qState === 1) {
                                         io._qShift();
                                     }
-                            
+
                                     Y.log(&#x27;Object queued.  Transaction id is&#x27; + o.id, &#x27;info&#x27;, &#x27;io&#x27;);
                                     return o;
                                 },
-                            
+
                                 _qNext: function(id) {
                                     var io = this;
                                     io._qState = 1;
@@ -1218,7 +1218,7 @@
                                         io._qShift();
                                     }
                                 },
-                            
+
                                /**
                                 * Method for promoting a transaction to the top of the queue.
                                 *
@@ -1228,7 +1228,7 @@
                                 qPromote: function(o) {
                                     this._q.promote(o);
                                 },
-                            
+
                                /**
                                 * Method for removing a specific, pending transaction from
                                 * the queue.
@@ -1240,7 +1240,7 @@
                                 qRemove: function(o) {
                                     this._q.remove(o);
                                 },
-                            
+
                                /**
                                 * Method for cancel all pending transaction from
                                 * the queue.
@@ -1252,17 +1252,17 @@
                                 qEmpty: function() {
                                     this._q = new Y.Queue();
                                 },
-                            
+
                                 qStart: function() {
                                     var io = this;
                                     io._qState = 1;
-                            
+
                                     if (io._q.size() &gt; 0) {
                                         io._qShift();
                                     }
                                     Y.log(&#x27;Queue started.&#x27;, &#x27;info&#x27;, &#x27;io&#x27;);
                                 },
-                            
+
                                /**
                                 * Method for setting queue processing to inactive.
                                 * Transaction requests to YUI.io.queue() will be stored in the queue, but
@@ -1276,7 +1276,7 @@
                                     this._qState = 0;
                                     Y.log(&#x27;Queue stopped.&#x27;, &#x27;info&#x27;, &#x27;io&#x27;);
                                 },
-                            
+
                                /**
                                 * Method to query the current size of the queue.
                                 *
@@ -1288,13 +1288,13 @@
                                 qSize: function() {
                                     return this._q.size();
                                 }
-                            
+
                             }, true);
-                            
+
                             function _queue(u, c) {
                                 return io.queue.apply(io, [u, c]);
                             }
-                            
+
                             _queue.start = function () { io.qStart(); };
                             _queue.stop = function () { io.qStop(); };
                             _queue.promote = function (o) { io.qPromote(o); };
@@ -1302,7 +1302,7 @@
                             _queue.size = function () { io.qSize(); };
                             _queue.empty = function () { io.qEmpty(); };
                             Y.io.queue = _queue;
-                            
+
                                 </pre>
                             </div>
                         </div>

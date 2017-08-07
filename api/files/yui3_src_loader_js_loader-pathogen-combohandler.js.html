@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/loader/js/loader-pathogen-combohandler.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /*jslint vars: true */
@@ -1144,7 +1144,7 @@
                                 GALLERY_RE = /^(?:yui:)?gallery-([^\/]+)/,
                                 TYPES = { js: true, css: true },
                                 customComboBase;
-                            
+
                             Y.mix(Y.Loader.prototype, {
                                 /**
                                  * Encodes combo urls based on modules  and appends them to an object hash of arrays from &#x60;loader.resolve&#x60;.
@@ -1164,7 +1164,7 @@
                                         modKey,
                                         group,
                                         type;
-                            
+
                                     // Check to see if anything needs to be combined.
                                     if (!combine) {
                                         for (group in this.groups) {
@@ -1176,43 +1176,43 @@
                                             }
                                         }
                                     }
-                            
+
                                     // Add the pathogen namespace to the combo base.
                                     if (Y.config.customComboBase) {
                                         customComboBase = Y.config.customComboBase;
                                     }
-                            
+
                                     if (customComboBase &amp;&amp; combine) {
                                         maxURLLength = this.maxURLLength;
-                            
+
                                         for (type in TYPES) {
                                             /*jslint forin: false*/
                                             if (!TYPES.hasOwnProperty(type)) {
                                             /*jslint forin: true*/
                                                 continue;
                                             }
-                            
+
                                             urlKey  = type;
                                             modKey  = type + &#x27;Mods&#x27;;
-                            
+
                                             resolved[urlKey] = resolvedUrls = resolved[urlKey] || [];
                                             resolved[modKey] = resolvedMods = resolved[modKey] || [];
-                            
+
                                             // Generate custom combo urls.
                                             comboUrls = this._customResolve(resolvedMods, type);
-                            
+
                                             Y.log(&#x27;Default encoding resulted in &#x27; + resolved[type].length + &#x27; URLs&#x27;, &#x27;info&#x27;, NAME);
                                             Y.log(Y.dump(resolved[type]), &#x27;info&#x27;, NAME);
                                             Y.log(&#x27;Custom encoding resulted in &#x27; + comboUrls.length + &#x27; URLs&#x27;, &#x27;info&#x27;, NAME);
                                             Y.log(Y.dump(comboUrls), &#x27;info&#x27;, NAME);
-                                                
+
                                             resolved[type] = resolved[type].concat(comboUrls);
                                         }
                                     }
-                            
+
                                     return resolved;
                                 },
-                            
+
                                 /**
                                 Build each combo url from the bottom up. There&#x27;s probably room for optimization
                                 here, but let&#x27;s keep it simple for now.
@@ -1230,7 +1230,7 @@
                                         filter,
                                         match,
                                         url;
-                            
+
                                     // Determine the combo tail (e.g., &#x27;.debug.js&#x27;). Assumption: &#x60;filter&#x60; is
                                     // global to the resolve() and should match the filter on loader.
                                     if (!filter) {
@@ -1240,16 +1240,16 @@
                                         comboTail = filter === &#x27;min&#x27; ? &#x27;&#x27; : &#x27;.&#x27; + filter;
                                         comboTail = comboTail + &#x27;.&#x27; + type;
                                     }
-                            
+
                                     url = this._buildCombo(groups, customComboBase, comboTail);
                                     while (url) {
                                         comboUrls.push(url);
                                         url = this._buildCombo(groups, customComboBase, comboTail);
                                     }
-                            
+
                                     return comboUrls;
                                 },
-                            
+
                                 /**
                                 Aggregate modules into groups with unique keys. The key is &quot;$name+$version&quot; for
                                 core and gallery groups, and just &quot;$root&quot; for all other groups.
@@ -1267,12 +1267,12 @@
                                         key,
                                         len,
                                         i;
-                            
+
                                     // Segment the modules for efficient combo encoding.
                                     for (i = 0, len = modules.length; i &lt; len; i += 1) {
                                         mod     = modules[i];
                                         name    = mod.name;
-                            
+
                                         // Skip modules that should be loaded singly. This is kind of confusing
                                         // because it mimics the behavior of the loader (also confusing):
                                         // https://github.com/ekashida/yui3/blob/632167a36d57da7a884aacf0f4488dd5b8619c7c/src/loader/js/loader.js#L2563
@@ -1287,7 +1287,7 @@
                                         if (!mod.combine &amp;&amp; mod.ext) {
                                             continue;
                                         }
-                            
+
                                         // YUI core modules =&gt; core group
                                         if (!mod.group) {
                                             key = &#x27;c&#x27; + SUB_GROUP_DELIM + YUI.version;
@@ -1305,7 +1305,7 @@
                                         // into the &#x60;root&#x60; group.
                                         else if (mod.path.indexOf(name + &#x27;/&#x27; + name) === 0) {
                                             key = meta.root;
-                            
+
                                             // Trim &#x27;/&#x27; from both ends.
                                             if (key.charAt(0) === &#x27;/&#x27;) {
                                                 key = key.slice(1);
@@ -1313,7 +1313,7 @@
                                             if (key.charAt(key.length - 1) === &#x27;/&#x27;) {
                                                 key = key.slice(0, -1);
                                             }
-                            
+
                                             key = &#x27;r&#x27; + SUB_GROUP_DELIM + key;
                                         }
                                         // If the path does not follow the YUI build convention, then we
@@ -1322,26 +1322,26 @@
                                         else {
                                             // remove file extension
                                             name = mod.path.split(EXTENSION_RE).shift();
-                            
+
                                             if (meta &amp;&amp; meta.root) {
                                                 name = meta.root + name;
                                             }
-                            
+
                                             if (name.charAt(0) === &#x27;/&#x27;) {
                                                 name = name.slice(1);
                                             }
-                            
+
                                             // Tag this module as &#x60;path&#x60; so that we know to include the
                                             // full path in the combo url later on
                                             key = &#x27;path&#x27; + SUB_GROUP_DELIM + name;
                                         }
-                            
+
                                         source[key] = source[key] || [];
                                         source[key].push(name);
                                     }
                                     return source;
                                 },
-                            
+
                                 /**
                                 Build each combo url from the bottom up. There&#x27;s probably room for optimization
                                 here, but let&#x27;s keep it simple for now.
@@ -1363,17 +1363,17 @@
                                         group,
                                         len,
                                         i;
-                            
+
                                     for (i = 0, len = groups.length; i &lt; len; i += 1) {
                                         group       = groups[i];
                                         currDelim   = comboUrl === comboBase ? &#x27;&#x27; : GROUP_DELIM;
                                         currKey     = group.key;
                                         modules     = group.modules;
-                            
+
                                         while (modules.length) {
                                             prepend = currDelim + currKey;
                                             prepend = prepend ? prepend + SUB_GROUP_DELIM : MODULE_DELIM;
-                            
+
                                             // Since modules with custom paths are treated as their own
                                             // segment, we override the prepend value so that it is only ever
                                             // set to the group delimiter. TODO: refactor this while loop into
@@ -1381,9 +1381,9 @@
                                             if (group.key.indexOf(&#x27;path&#x27;) === 0) {
                                                 prepend = currDelim;
                                             }
-                            
+
                                             token = prepend + modules[0];
-                            
+
                                             if (currLen + token.length &lt; this.maxURLLength) {
                                                 comboUrl += token;
                                                 currLen  += token.length;
@@ -1391,21 +1391,21 @@
                                             } else {
                                                 return comboUrl + comboTail;
                                             }
-                            
+
                                             currDelim = currKey = &#x27;&#x27;;
                                         }
                                     }
-                            
+
                                     comboUrl += comboTail;
-                            
+
                                     // If no modules were encoded in the combo url.
                                     if (comboUrl.length === comboBase.length + comboTail.length) {
                                         comboUrl = null;
                                     }
-                            
+
                                     return comboUrl;
                                 },
-                            
+
                                 /**
                                 Sort the aggregated groups, and the modules within them. Minimizes cache misses
                                 in Yahoo&#x27;s infrastructure by encoding predictable combo urls across browsers
@@ -1420,7 +1420,7 @@
                                         key,
                                         len,
                                         i;
-                            
+
                                     for (key in groups) {
                                         if (groups.hasOwnProperty(key)) {
                                             sorted.push({
@@ -1429,7 +1429,7 @@
                                             });
                                         }
                                     }
-                            
+
                                     // Sort the groups.
                                     sorted.sort(function (a, b) {
                                         if(a.key &lt; b.key) {
@@ -1440,16 +1440,16 @@
                                             return 0;
                                         }
                                     });
-                            
+
                                     // Sort the modules.
                                     for (i = 0, len = sorted.length; i &lt; len; i += 1) {
                                         sorted[i].modules.sort();
                                     }
-                            
+
                                     return sorted;
                                 }
                             }, true);
-                            
+
                                 </pre>
                             </div>
                         </div>

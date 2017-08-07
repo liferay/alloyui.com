@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>alloy-ui/src/aui-node/js/aui-node-base.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1140,7 +1140,7 @@
                              * @module aui-node
                              * @submodule aui-node-base
                              */
-                            
+
                             var Lang = A.Lang,
                                 isArray = Lang.isArray,
                                 isFunction = Lang.isFunction,
@@ -1148,31 +1148,31 @@
                                 isString = Lang.isString,
                                 isUndefined = Lang.isUndefined,
                                 isValue = Lang.isValue,
-                            
+
                                 AArray = A.Array,
                                 ANode = A.Node,
                                 ANodeList = A.NodeList,
-                            
+
                                 getClassName = A.getClassName,
                                 getRegExp = A.DOM._getRegExp,
-                            
+
                                 CONFIG = A.config,
                                 DOC = CONFIG.doc,
                                 WIN = CONFIG.win,
-                            
+
                                 NODE_PROTO = ANode.prototype,
                                 NODE_PROTO_HIDE = NODE_PROTO._hide,
                                 NODE_PROTO_SHOW = NODE_PROTO._show,
                                 NODELIST_PROTO = ANodeList.prototype,
-                            
+
                                 ARRAY_EMPTY_STRINGS = [&#x27;&#x27;, &#x27;&#x27;],
-                            
+
                                 CSS_HIDE = getClassName(&#x27;hide&#x27;),
                                 CSS_UNSELECTABLE_VALUE = &#x27;none&#x27;,
                                 CSS_SELECTABLE_VALUE = &#x27;text&#x27;,
-                            
+
                                 SUPPORT_CLONED_EVENTS = false,
-                            
+
                                 MAP_BORDER = {
                                     b: &#x27;borderBottomWidth&#x27;,
                                     l: &#x27;borderLeftWidth&#x27;,
@@ -1191,58 +1191,58 @@
                                     r: &#x27;paddingRight&#x27;,
                                     t: &#x27;paddingTop&#x27;
                                 };
-                            
+
                             /* Parts of this file are used from jQuery (http://jquery.com)
                              * Dual-licensed under MIT/GPL
                              */
                             var div = DOC.createElement(&#x27;div&#x27;);
-                            
+
                             div.style.display = &#x27;none&#x27;;
                             div.innerHTML = &#x27;   &lt;table&gt;&lt;/table&gt;&amp;nbsp;&#x27;;
-                            
+
                             if (div.attachEvent &amp;&amp; div.fireEvent) {
                                 div.attachEvent(
                                     &#x27;onclick&#x27;,
                                     function detach() {
                                         SUPPORT_CLONED_EVENTS = true;
-                            
+
                                         div.detachEvent(&#x27;onclick&#x27;, detach);
                                     }
                                 );
-                            
+
                                 div.cloneNode(true).fireEvent(&#x27;onclick&#x27;);
                             }
-                            
+
                             var SUPPORT_OPTIONAL_TBODY = !div.getElementsByTagName(&#x27;tbody&#x27;).length;
-                            
+
                             var REGEX_LEADING_WHITE_SPACE = /^\s+/,
                                 REGEX_IE8_ACTION = /\=([^=\x27\x22&gt;\s]+\/)&gt;/g,
                                 REGEX_TAGNAME = /&lt;([\w:]+)/;
-                            
+
                             div = null;
-                            
+
                             var _setUnselectable = function(element, unselectable, noRecurse) {
                                 var descendants,
                                     value = unselectable ? &#x27;on&#x27; : &#x27;&#x27;,
                                     i,
                                     descendant;
-                            
+
                                 element.setAttribute(&#x27;unselectable&#x27;, value);
-                            
+
                                 if (!noRecurse) {
                                     descendants = element.getElementsByTagName(&#x27;*&#x27;);
-                            
+
                                     for (i = 0;
                                         (descendant = descendants[i]); i++) {
                                         descendant.setAttribute(&#x27;unselectable&#x27;, value);
                                     }
                                 }
                             };
-                            
+
                             /**
                              * Augments the [YUI3 Node](Node.html) with more util methods.
                              *
-                             * Check the [live demo](http://alloyui.com/examples/node/).
+                             * Check the [live demo](https://alloyui.com/examples/node/).
                              *
                              * @class A.Node
                              * @uses Node
@@ -1259,7 +1259,7 @@
                               function(Y) {
                                 // Select the node(s) using a css selector string
                                 var node = Y.one(&#x27;#toggleColor&#x27;);
-                            
+
                                 // Change the background color on a &#x60;click&#x60; event
                                 node.on(
                                   &#x27;click&#x27;,
@@ -1273,7 +1273,7 @@
                             &#x60;&#x60;&#x60;
                              */
                             A.mix(NODE_PROTO, {
-                            
+
                                 /**
                                  * Returns the current ancestors of the node element filtered by a
                                  * className. This is an optimized method for finding ancestors by a
@@ -1294,26 +1294,26 @@
                                  */
                                 ancestorsByClassName: function(className, testSelf) {
                                     var instance = this;
-                            
+
                                     var ancestors = [];
                                     var cssRE = new RegExp(&#x27;\\b&#x27; + className + &#x27;\\b&#x27;);
                                     var currentEl = instance.getDOM();
-                            
+
                                     if (!testSelf) {
                                         currentEl = currentEl.parentNode;
                                     }
-                            
+
                                     while (currentEl &amp;&amp; currentEl.nodeType !== 9) {
                                         if (currentEl.nodeType === 1 &amp;&amp; cssRE.test(currentEl.className)) {
                                             ancestors.push(currentEl);
                                         }
-                            
+
                                         currentEl = currentEl.parentNode;
                                     }
-                            
+
                                     return A.all(ancestors);
                                 },
-                            
+
                                 /**
                                  * Gets or sets the value of an attribute for the first element in the set
                                  * of matched elements. If only the &#x60;name&#x60; is passed it works as a getter.
@@ -1335,17 +1335,17 @@
                                 attr: function(name, value) {
                                     var instance = this,
                                         i;
-                            
+
                                     if (!isUndefined(value)) {
                                         var el = instance.getDOM();
-                            
+
                                         if (name in el) {
                                             instance.set(name, value);
                                         }
                                         else {
                                             instance.setAttribute(name, value);
                                         }
-                            
+
                                         return instance;
                                     }
                                     else {
@@ -1355,20 +1355,20 @@
                                                     instance.attr(i, name[i]);
                                                 }
                                             }
-                            
+
                                             return instance;
                                         }
-                            
+
                                         var currentValue = instance.get(name);
-                            
+
                                         if (!Lang.isValue(currentValue)) {
                                             currentValue = instance.getAttribute(name);
                                         }
-                            
+
                                         return currentValue;
                                     }
                                 },
-                            
+
                                 /**
                                  * Normalizes the behavior of cloning a node, which by default should not
                                  * clone the events that are attached to it.
@@ -1385,24 +1385,24 @@
                                  */
                                 clone: (function() {
                                     var clone;
-                            
+
                                     if (SUPPORT_CLONED_EVENTS) {
                                         clone = function() {
                                             var el = this.getDOM();
                                             var clone;
-                            
+
                                             if (el.nodeType !== 3) {
                                                 var outerHTML = this.outerHTML();
-                            
+
                                                 outerHTML = outerHTML.replace(REGEX_IE8_ACTION, &#x27;=&quot;$1&quot;&gt;&#x27;).replace(REGEX_LEADING_WHITE_SPACE,
                                                     &#x27;&#x27;);
-                            
+
                                                 clone = ANode.create(outerHTML);
                                             }
                                             else {
                                                 clone = A.one(el.cloneNode());
                                             }
-                            
+
                                             return clone;
                                         };
                                     }
@@ -1411,10 +1411,10 @@
                                             return this.cloneNode(true);
                                         };
                                     }
-                            
+
                                     return clone;
                                 }()),
-                            
+
                                 /**
                                  * Centralizes the current Node instance with the passed &#x60;val&#x60; Array, Node,
                                  * String, or Region, if not specified, the body will be used.
@@ -1437,28 +1437,28 @@
                                         nodeRegion = instance.get(&#x27;region&#x27;),
                                         x,
                                         y;
-                            
+
                                     if (isArray(val)) {
                                         x = val[0];
                                         y = val[1];
                                     }
                                     else {
                                         var region;
-                            
+
                                         if (isObject(val) &amp;&amp; !A.instanceOf(val, ANode)) {
                                             region = val;
                                         }
                                         else {
                                             region = (A.one(val) || A.getBody()).get(&#x27;region&#x27;);
                                         }
-                            
+
                                         x = region.left + (region.width / 2);
                                         y = region.top + (region.height / 2);
                                     }
-                            
+
                                     instance.setXY([x - (nodeRegion.width / 2), y - (nodeRegion.height / 2)]);
                                 },
-                            
+
                                 /**
                                  * Removes not only child (and other descendant) elements, but also any text
                                  * within the set of matched elements. This is because, according to the DOM
@@ -1477,18 +1477,18 @@
                                  */
                                 empty: function() {
                                     var instance = this;
-                            
+
                                     instance.all(&#x27;&gt;*&#x27;).remove().purge();
-                            
+
                                     var el = ANode.getDOMNode(instance);
-                            
+
                                     while (el.firstChild) {
                                         el.removeChild(el.firstChild);
                                     }
-                            
+
                                     return instance;
                                 },
-                            
+
                                 /**
                                  * Retrieves the DOM node bound to a Node instance. See
                                  * [getDOMNode](Node.html#method_getDOMNode).
@@ -1498,10 +1498,10 @@
                                  */
                                 getDOM: function() {
                                     var instance = this;
-                            
+
                                     return ANode.getDOMNode(instance);
                                 },
-                            
+
                                 /**
                                  * Returns the combined width of the border for the specified sides.
                                  *
@@ -1512,10 +1512,10 @@
                                  */
                                 getBorderWidth: function(sides) {
                                     var instance = this;
-                            
+
                                     return instance._getBoxStyleAsNumber(sides, MAP_BORDER);
                                 },
-                            
+
                                 /**
                                  * Gets the current center position of the node in page coordinates.
                                  *
@@ -1526,10 +1526,10 @@
                                 getCenterXY: function() {
                                     var instance = this;
                                     var region = instance.get(&#x27;region&#x27;);
-                            
+
                                     return [(region.left + region.width / 2), (region.top + region.height / 2)];
                                 },
-                            
+
                                 /**
                                  * Returns the combined size of the margin for the specified sides.
                                  *
@@ -1540,10 +1540,10 @@
                                  */
                                 getMargin: function(sides) {
                                     var instance = this;
-                            
+
                                     return instance._getBoxStyleAsNumber(sides, MAP_MARGIN);
                                 },
-                            
+
                                 /**
                                  * Returns the combined width of the border for the specified sides.
                                  *
@@ -1554,10 +1554,10 @@
                                  */
                                 getPadding: function(sides) {
                                     var instance = this;
-                            
+
                                     return instance._getBoxStyleAsNumber(sides, MAP_PADDING);
                                 },
-                            
+
                                 /**
                                  * Sets the id of the Node instance if the object does not have one. The
                                  * generated id is based on a guid created by the
@@ -1569,16 +1569,16 @@
                                 guid: function() {
                                     var instance = this;
                                     var currentId = instance.get(&#x27;id&#x27;);
-                            
+
                                     if (!currentId) {
                                         currentId = A.stamp(instance);
-                            
+
                                         instance.set(&#x27;id&#x27;, currentId);
                                     }
-                            
+
                                     return currentId;
                                 },
-                            
+
                                 /**
                                  * Creates a hover interaction.
                                  *
@@ -1589,15 +1589,15 @@
                                  */
                                 hover: function(overFn, outFn) {
                                     var instance = this;
-                            
+
                                     var hoverOptions;
                                     var defaultHoverOptions = instance._defaultHoverOptions;
-                            
+
                                     if (isObject(overFn, true)) {
                                         hoverOptions = overFn;
-                            
+
                                         hoverOptions = A.mix(hoverOptions, defaultHoverOptions);
-                            
+
                                         overFn = hoverOptions.over;
                                         outFn = hoverOptions.out;
                                     }
@@ -1609,12 +1609,12 @@
                                             defaultHoverOptions
                                         );
                                     }
-                            
+
                                     instance._hoverOptions = hoverOptions;
-                            
+
                                     hoverOptions.overTask = A.debounce(instance._hoverOverTaskFn, null, instance);
                                     hoverOptions.outTask = A.debounce(instance._hoverOutTaskFn, null, instance);
-                            
+
                                     return new A.EventHandle(
                                [
                                 instance.on(hoverOptions.overEventType, instance._hoverOverHandler, instance),
@@ -1622,7 +1622,7 @@
                                ]
                                     );
                                 },
-                            
+
                                 /**
                                  * Gets or sets the HTML contents of the node. If the &#x60;value&#x60; is passed it&#x27;s
                                  * set the content of the element, otherwise it works as a getter for the
@@ -1644,17 +1644,17 @@
                                 html: function() {
                                     var args = arguments,
                                         length = args.length;
-                            
+
                                     if (length) {
                                         this.set(&#x27;innerHTML&#x27;, args[0]);
                                     }
                                     else {
                                         return this.get(&#x27;innerHTML&#x27;);
                                     }
-                            
+
                                     return this;
                                 },
-                            
+
                                 /**
                                  * Gets the outerHTML of a node, which islike innerHTML, except that it
                                  * actually contains the HTML of the node itself.
@@ -1665,16 +1665,16 @@
                                 outerHTML: function() {
                                     var instance = this;
                                     var domEl = instance.getDOM();
-                            
+
                                     // IE, Opera and WebKit all have outerHTML.
                                     if (&#x27;outerHTML&#x27; in domEl) {
                                         return domEl.outerHTML;
                                     }
-                            
+
                                     var temp = ANode.create(&#x27;&lt;div&gt;&lt;/div&gt;&#x27;).append(
                                         this.clone()
                                     );
-                            
+
                                     try {
                                         return temp.html();
                                     }
@@ -1683,7 +1683,7 @@
                                         temp = null;
                                     }
                                 },
-                            
+
                                 /**
                                  * Inserts a &#x60;newNode&#x60; after the node instance (i.e., as the next sibling).
                                  * If the reference node has no parent, then does nothing.
@@ -1703,10 +1703,10 @@
                                  */
                                 placeAfter: function(newNode) {
                                     var instance = this;
-                            
+
                                     return instance._place(newNode, instance.get(&#x27;nextSibling&#x27;));
                                 },
-                            
+
                                 /**
                                  * Inserts a &#x60;newNode&#x60; before the node instance (i.e., as the previous
                                  * sibling). If the reference node has no parent, then does nothing.
@@ -1726,10 +1726,10 @@
                                  */
                                 placeBefore: function(newNode) {
                                     var instance = this;
-                            
+
                                     return instance._place(newNode, instance);
                                 },
-                            
+
                                 /**
                                  * Inserts the node instance to the begining of the &#x60;selector&#x60; node (i.e.,
                                  * insert before the &#x60;firstChild&#x60; of the &#x60;selector&#x60;).
@@ -1747,12 +1747,12 @@
                                  */
                                 prependTo: function(selector) {
                                     var instance = this;
-                            
+
                                     A.one(selector).prepend(instance);
-                            
+
                                     return instance;
                                 },
-                            
+
                                 /**
                                  * Adds one or more CSS classes to an element and remove the class(es) from
                                  * the siblings of the element.
@@ -1763,32 +1763,32 @@
                                  */
                                 radioClass: function(cssClass) {
                                     var instance = this;
-                            
+
                                     var siblings = instance.siblings();
-                            
+
                                     if (isString(cssClass)) {
                                         siblings.removeClass(cssClass);
-                            
+
                                         instance.addClass(cssClass);
                                     }
                                     else if (isArray(cssClass)) {
                                         var siblingNodes = siblings.getDOM();
-                            
+
                                         var regex = getRegExp(&#x27;(?:^|\\s+)(?:&#x27; + cssClass.join(&#x27;|&#x27;) + &#x27;)(?=\\s+|$)&#x27;, &#x27;g&#x27;),
                                             node,
                                             i;
-                            
+
                                         for (i = siblingNodes.length - 1; i &gt;= 0; i--) {
                                             node = siblingNodes[i];
                                             node.className = node.className.replace(regex, &#x27;&#x27;);
                                         }
-                            
+
                                         instance.addClass(cssClass.join(&#x27; &#x27;));
                                     }
-                            
+
                                     return instance;
                                 },
-                            
+
                                 /**
                                  * Generates an unique identifier and reset the id attribute of the node
                                  * instance using the new value. Invokes the [guid](Node.html#method_guid).
@@ -1799,12 +1799,12 @@
                                  */
                                 resetId: function(prefix) {
                                     var instance = this;
-                            
+
                                     instance.attr(&#x27;id&#x27;, A.guid(prefix));
-                            
+
                                     return instance;
                                 },
-                            
+
                                 /**
                                  * Selects a substring of text inside of the input element.
                                  *
@@ -1814,13 +1814,13 @@
                                  */
                                 selectText: function(start, end) {
                                     var instance = this;
-                            
+
                                     var textField = instance.getDOM();
                                     var length = instance.val().length;
-                            
+
                                     end = isValue(end) ? end : length;
                                     start = isValue(start) ? start : 0;
-                            
+
                                     // Some form elements could throw a (NS_ERROR_FAILURE)
                                     // [nsIDOMNSHTMLInputElement.setSelectionRange] error when invoke the
                                     // setSelectionRange on firefox. Wrapping in a try/catch to prevent the
@@ -1831,25 +1831,25 @@
                                         }
                                         else if (textField.createTextRange) {
                                             var range = textField.createTextRange();
-                            
+
                                             range.moveStart(&#x27;character&#x27;, start);
                                             range.moveEnd(&#x27;character&#x27;, end - length);
-                            
+
                                             range.select();
                                         }
                                         else {
                                             textField.select();
                                         }
-                            
+
                                         if (textField !== DOC.activeElement) {
                                             textField.focus();
                                         }
                                     }
                                     catch (e) {}
-                            
+
                                     return instance;
                                 },
-                            
+
                                 /**
                                  * Enables text selection for this element (normalized across browsers).
                                  *
@@ -1859,7 +1859,7 @@
                                  */
                                 selectable: function(noRecurse) {
                                     var instance = this;
-                            
+
                                     instance.setStyles({
                                         &#x27;-webkit-user-select&#x27;: CSS_SELECTABLE_VALUE,
                                         &#x27;-khtml-user-select&#x27;: CSS_SELECTABLE_VALUE,
@@ -1868,14 +1868,14 @@
                                         &#x27;-o-user-select&#x27;: CSS_SELECTABLE_VALUE,
                                         &#x27;user-select&#x27;: CSS_SELECTABLE_VALUE
                                     });
-                            
+
                                     if (A.UA.ie || A.UA.opera) {
                                         _setUnselectable(instance._node, false, noRecurse);
                                     }
-                            
+
                                     return instance;
                                 },
-                            
+
                                 /**
                                  * Stops the specified event(s) from bubbling and optionally prevents the
                                  * default action.
@@ -1896,19 +1896,19 @@
                                  */
                                 swallowEvent: function(eventName, preventDefault) {
                                     var instance = this;
-                            
+
                                     var fn = function(event) {
                                         event.stopPropagation();
-                            
+
                                         if (preventDefault) {
                                             event.preventDefault();
-                            
+
                                             event.halt();
                                         }
-                            
+
                                         return false;
                                     };
-                            
+
                                     if (isArray(eventName)) {
                                         AArray.each(
                                             eventName,
@@ -1916,16 +1916,16 @@
                                                 instance.on(name, fn);
                                             }
                                         );
-                            
+
                                         return this;
                                     }
                                     else {
                                         instance.on(eventName, fn);
                                     }
-                            
+
                                     return instance;
                                 },
-                            
+
                                 /**
                                  * Gets or sets the combined text contents of the node instance, including
                                  * it&#x27;s descendants. If the &#x60;text&#x60; is passed it&#x27;s set the content of the
@@ -1947,16 +1947,16 @@
                                 text: function(text) {
                                     var instance = this;
                                     var el = instance.getDOM();
-                            
+
                                     if (!isUndefined(text)) {
                                         text = A.DOM._getDoc(el).createTextNode(text);
-                            
+
                                         return instance.empty().append(text);
                                     }
-                            
+
                                     return instance._getText(el.childNodes);
                                 },
-                            
+
                                 /**
                                  * Displays or hide the node instance.
                                  *
@@ -1972,12 +1972,12 @@
                                  */
                                 toggle: function() {
                                     var instance = this;
-                            
+
                                     instance._toggleView.apply(instance, arguments);
-                            
+
                                     return instance;
                                 },
-                            
+
                                 /**
                                  * Disables text selection for this element (normalized across browsers).
                                  *
@@ -1987,7 +1987,7 @@
                                  */
                                 unselectable: function(noRecurse) {
                                     var instance = this;
-                            
+
                                     instance.setStyles({
                                         &#x27;-webkit-user-select&#x27;: CSS_UNSELECTABLE_VALUE,
                                         &#x27;-khtml-user-select&#x27;: CSS_UNSELECTABLE_VALUE,
@@ -1996,14 +1996,14 @@
                                         &#x27;-o-user-select&#x27;: CSS_UNSELECTABLE_VALUE,
                                         &#x27;user-select&#x27;: CSS_UNSELECTABLE_VALUE
                                     });
-                            
+
                                     if (A.UA.ie || A.UA.opera) {
                                         _setUnselectable(instance._node, true, noRecurse);
                                     }
-                            
+
                                     return instance;
                                 },
-                            
+
                                 /**
                                  * Gets or sets the value attribute of the node instance. If the &#x60;value&#x60; is
                                  * passed it&#x27;s set the value of the element, otherwise it works as a getter
@@ -2023,7 +2023,7 @@
                                  */
                                 val: function(value) {
                                     var instance = this;
-                            
+
                                     if (isUndefined(value)) {
                                         return instance.get(&#x27;value&#x27;);
                                     }
@@ -2031,7 +2031,7 @@
                                         return instance.set(&#x27;value&#x27;, value);
                                     }
                                 },
-                            
+
                                 /**
                                  * Returns the combined size of the box style for the specified sides.
                                  *
@@ -2045,28 +2045,28 @@
                                  */
                                 _getBoxStyleAsNumber: function(sides, map) {
                                     var instance = this;
-                            
+
                                     var sidesArray = sides.match(/\w/g),
                                         value = 0,
                                         side,
                                         sideKey,
                                         i;
-                            
+
                                     for (i = sidesArray.length - 1; i &gt;= 0; i--) {
                                         sideKey = sidesArray[i];
                                         side = 0;
-                            
+
                                         if (sideKey) {
                                             side = parseFloat(instance.getComputedStyle(map[sideKey]));
                                             side = Math.abs(side);
-                            
+
                                             value += side || 0;
                                         }
                                     }
-                            
+
                                     return value;
                                 },
-                            
+
                                 /**
                                  * Extracts text content from the passed nodes.
                                  *
@@ -2076,29 +2076,29 @@
                                  */
                                 _getText: function(childNodes) {
                                     var instance = this;
-                            
+
                                     var length = childNodes.length,
                                         childNode,
                                         str = [],
                                         i;
-                            
+
                                     for (i = 0; i &lt; length; i++) {
                                         childNode = childNodes[i];
-                            
+
                                         if (childNode &amp;&amp; childNode.nodeType !== 8) {
                                             if (childNode.nodeType !== 1) {
                                                 str.push(childNode.nodeValue);
                                             }
-                            
+
                                             if (childNode.childNodes) {
                                                 str.push(instance._getText(childNode.childNodes));
                                             }
                                         }
                                     }
-                            
+
                                     return str.join(&#x27;&#x27;);
                                 },
-                            
+
                                 /**
                                  * Overrides Y.Node._hide. Adds aui-hide to the node&#x27;s cssClass
                                  *
@@ -2107,12 +2107,12 @@
                                  */
                                 _hide: function() {
                                     var instance = this;
-                            
+
                                     instance.addClass(CSS_HIDE);
-                            
+
                                     return NODE_PROTO_HIDE.apply(instance, arguments);
                                 },
-                            
+
                                 /**
                                  * The event handler for the &quot;out&quot; function that is fired for events
                                  * attached via the hover method.
@@ -2123,12 +2123,12 @@
                                  */
                                 _hoverOutHandler: function(event) {
                                     var instance = this;
-                            
+
                                     var hoverOptions = instance._hoverOptions;
-                            
+
                                     hoverOptions.outTask.delay(hoverOptions.outDelay, event);
                                 },
-                            
+
                                 /**
                                  * The event handler for the &quot;over&quot; function that is fired for events
                                  * attached via the hover method.
@@ -2139,12 +2139,12 @@
                                  */
                                 _hoverOverHandler: function(event) {
                                     var instance = this;
-                            
+
                                     var hoverOptions = instance._hoverOptions;
-                            
+
                                     hoverOptions.overTask.delay(hoverOptions.overDelay, event);
                                 },
-                            
+
                                 /**
                                  * Cancels the over task, and fires the users custom &quot;out&quot; function for the
                                  * hover method
@@ -2155,14 +2155,14 @@
                                  */
                                 _hoverOutTaskFn: function(event) {
                                     var instance = this;
-                            
+
                                     var hoverOptions = instance._hoverOptions;
-                            
+
                                     hoverOptions.overTask.cancel();
-                            
+
                                     hoverOptions.out.apply(hoverOptions.context || event.currentTarget, arguments);
                                 },
-                            
+
                                 /**
                                  * Cancels the out task, and fires the users custom &quot;over&quot; function for the
                                  * hover method
@@ -2173,14 +2173,14 @@
                                  */
                                 _hoverOverTaskFn: function(event) {
                                     var instance = this;
-                            
+
                                     var hoverOptions = instance._hoverOptions;
-                            
+
                                     hoverOptions.outTask.cancel();
-                            
+
                                     hoverOptions.over.apply(hoverOptions.context || event.currentTarget, arguments);
                                 },
-                            
+
                                 /**
                                  * Places a node or html string at a specific location
                                  *
@@ -2191,20 +2191,20 @@
                                  */
                                 _place: function(newNode, refNode) {
                                     var instance = this;
-                            
+
                                     var parent = instance.get(&#x27;parentNode&#x27;);
-                            
+
                                     if (parent) {
                                         if (isString(newNode)) {
                                             newNode = ANode.create(newNode);
                                         }
-                            
+
                                         parent.insertBefore(newNode, refNode);
                                     }
-                            
+
                                     return instance;
                                 },
-                            
+
                                 /**
                                  * Overrides Y.Node._show. Removes aui-hide from the node&#x27;s cssClass
                                  *
@@ -2213,12 +2213,12 @@
                                  */
                                 _show: function() {
                                     var instance = this;
-                            
+
                                     instance.removeClass(CSS_HIDE);
-                            
+
                                     return NODE_PROTO_SHOW.apply(instance, arguments);
                                 },
-                            
+
                                 _defaultHoverOptions: {
                                     overEventType: &#x27;mouseenter&#x27;,
                                     outEventType: &#x27;mouseleave&#x27;,
@@ -2228,15 +2228,15 @@
                                     out: Lang.emptyFn
                                 }
                             }, true);
-                            
+
                             NODE_PROTO.__isHidden = NODE_PROTO._isHidden;
-                            
+
                             NODE_PROTO._isHidden = function() {
                                 var instance = this;
-                            
+
                                 return NODE_PROTO.__isHidden.call(instance) || instance.hasClass(instance._hideClass || CSS_HIDE);
                             };
-                            
+
                             /**
                              * Returns the width of the content, not including the padding, border or
                              * margin. If a width is passed, the node&#x27;s overall width is set to that size.
@@ -2252,7 +2252,7 @@
                              * @method width
                              * @return {number}
                              */
-                            
+
                             /**
                              * Returns the height of the content, not including the padding, border or
                              * margin. If a height is passed, the node&#x27;s overall height is set to that size.
@@ -2268,7 +2268,7 @@
                              * @method height
                              * @return {number}
                              */
-                            
+
                             /**
                              * Returns the size of the box from inside of the border, which is the
                              * &#x60;offsetWidth&#x60; plus the padding on the left and right.
@@ -2283,7 +2283,7 @@
                              * @method innerWidth
                              * @return {number}
                              */
-                            
+
                             /**
                              * Returns the size of the box from inside of the border, which is offsetHeight
                              * plus the padding on the top and bottom.
@@ -2298,7 +2298,7 @@
                              * @method innerHeight
                              * @return {number}
                              */
-                            
+
                             /**
                              * Returns the outer width of the box including the border, if true is passed as
                              * the first argument, the margin is included.
@@ -2314,7 +2314,7 @@
                              * @method outerWidth
                              * @return {number}
                              */
-                            
+
                             /**
                              * Returns the outer height of the box including the border, if true is passed
                              * as the first argument, the margin is included.
@@ -2330,96 +2330,96 @@
                              * @method outerHeight
                              * @return {number}
                              */
-                            
+
                             A.each(
                              [&#x27;Height&#x27;, &#x27;Width&#x27;],
                                 function(item, index) {
                                     var sides = index ? &#x27;lr&#x27; : &#x27;tb&#x27;;
-                            
+
                                     var dimensionType = item.toLowerCase();
-                            
+
                                     NODE_PROTO[dimensionType] = function(size) {
                                         var instance = this;
-                            
+
                                         var returnValue = instance;
-                            
+
                                         if (isUndefined(size)) {
                                             var node = instance._node;
                                             var dimension;
-                            
+
                                             if (node) {
                                                 if ((!node.tagName &amp;&amp; node.nodeType === 9) || node.alert) {
                                                     dimension = instance.get(&#x27;region&#x27;)[dimensionType];
                                                 }
                                                 else {
                                                     dimension = instance.get(&#x27;offset&#x27; + item);
-                            
+
                                                     if (!dimension) {
                                                         var originalDisplay = instance.getStyle(&#x27;display&#x27;);
                                                         var originalPosition = instance.getStyle(&#x27;position&#x27;);
                                                         var originalVisibility = instance.getStyle(&#x27;visibility&#x27;);
-                            
+
                                                         instance.setStyles({
                                                             display: &#x27;block !important&#x27;,
                                                             position: &#x27;absolute !important&#x27;,
                                                             visibility: &#x27;hidden !important&#x27;
                                                         });
-                            
+
                                                         dimension = instance.get(&#x27;offset&#x27; + item);
-                            
+
                                                         instance.setStyles({
                                                             display: originalDisplay,
                                                             position: originalPosition,
                                                             visibility: originalVisibility
                                                         });
                                                     }
-                            
+
                                                     if (dimension) {
                                                         dimension -= (instance.getPadding(sides) + instance.getBorderWidth(sides));
                                                     }
                                                 }
                                             }
-                            
+
                                             returnValue = dimension;
                                         }
                                         else {
                                             instance.setStyle(dimensionType, size);
                                         }
-                            
+
                                         return returnValue;
                                     };
-                            
+
                                     NODE_PROTO[&#x27;inner&#x27; + item] = function() {
                                         var instance = this;
-                            
+
                                         return instance[dimensionType]() + instance.getPadding(sides);
                                     };
-                            
+
                                     NODE_PROTO[&#x27;outer&#x27; + item] = function(margin) {
                                         var instance = this;
-                            
+
                                         var innerSize = instance[&#x27;inner&#x27; + item]();
                                         var borderSize = instance.getBorderWidth(sides);
-                            
+
                                         var size = innerSize + borderSize;
-                            
+
                                         if (margin) {
                                             size += instance.getMargin(sides);
                                         }
-                            
+
                                         return size;
                                     };
                                 }
                             );
-                            
+
                             if (!SUPPORT_OPTIONAL_TBODY) {
                                 A.DOM._ADD_HTML = A.DOM.addHTML;
-                            
+
                                 A.DOM.addHTML = function(node, content, where) {
                                     var nodeName = (node.nodeName &amp;&amp; node.nodeName.toLowerCase()) || &#x27;&#x27;;
-                            
+
                                     var tagName = &#x27;&#x27;;
-                            
+
                                     if (!isUndefined(content)) {
                                         if (isString(content)) {
                                             tagName = (REGEX_TAGNAME.exec(content) || ARRAY_EMPTY_STRINGS)[1];
@@ -2430,15 +2430,15 @@
                                         else if (content.nodeName) { // a node
                                             tagName = content.nodeName;
                                         }
-                            
+
                                         tagName = tagName &amp;&amp; tagName.toLowerCase();
                                     }
-                            
+
                                     if (nodeName === &#x27;table&#x27; &amp;&amp; tagName === &#x27;tr&#x27;) {
                                         node = node.getElementsByTagName(&#x27;tbody&#x27;)[0] || node.appendChild(node.ownerDocument.createElement(&#x27;tbody&#x27;));
-                            
+
                                         var whereNodeName = ((where &amp;&amp; where.nodeName) || &#x27;&#x27;).toLowerCase();
-                            
+
                                         // Assuming if the &quot;where&quot; is a tbody node,
                                         // we&#x27;re trying to prepend to a table. Attempt to
                                         // grab the first child of the tbody.
@@ -2446,11 +2446,11 @@
                                             where = where.firstChild;
                                         }
                                     }
-                            
+
                                     return A.DOM._ADD_HTML(node, content, where);
                                 };
                             }
-                            
+
                             /**
                              * Augments the [YUI3 NodeList](NodeList.html) with more util methods.
                              *
@@ -2464,61 +2464,61 @@
                             ANodeList.importMethod(
                                 NODE_PROTO, [
                               &#x27;after&#x27;,
-                            
+
                               &#x27;appendTo&#x27;,
-                            
+
                               &#x27;attr&#x27;,
-                            
+
                               &#x27;before&#x27;,
-                            
+
                               &#x27;empty&#x27;,
-                            
+
                               &#x27;getX&#x27;,
-                            
+
                               &#x27;getXY&#x27;,
-                            
+
                               &#x27;getY&#x27;,
-                            
+
                               &#x27;hover&#x27;,
-                            
+
                               &#x27;html&#x27;,
-                            
+
                               &#x27;innerHeight&#x27;,
-                            
+
                               &#x27;innerWidth&#x27;,
-                            
+
                               &#x27;outerHeight&#x27;,
-                            
+
                               &#x27;outerHTML&#x27;,
-                            
+
                               &#x27;outerWidth&#x27;,
-                            
+
                               &#x27;prepend&#x27;,
-                            
+
                               &#x27;prependTo&#x27;,
-                            
+
                               &#x27;purge&#x27;,
-                            
+
                               &#x27;selectText&#x27;,
-                            
+
                               &#x27;selectable&#x27;,
-                            
+
                               &#x27;setX&#x27;,
-                            
+
                               &#x27;setXY&#x27;,
-                            
+
                               &#x27;setY&#x27;,
-                            
+
                               &#x27;text&#x27;,
-                            
+
                               &#x27;toggle&#x27;,
-                            
+
                               &#x27;unselectable&#x27;,
-                            
+
                               &#x27;val&#x27;
                              ]
                             );
-                            
+
                             A.mix(
                                 NODELIST_PROTO, {
                                     /**
@@ -2533,20 +2533,20 @@
                                             length = nodes.length,
                                             subList,
                                             i;
-                            
+
                                         for (i = 0; i &lt; length; i++) {
                                             subList = A.Selector.query(selector, nodes[i]);
-                            
+
                                             if (subList &amp;&amp; subList.length) {
                                                 newNodeList.push.apply(newNodeList, subList);
                                             }
                                         }
-                            
+
                                         newNodeList = AArray.unique(newNodeList);
-                            
+
                                         return A.all(newNodeList);
                                     },
-                            
+
                                     /**
                                      * Returns the first element in the node list collection.
                                      *
@@ -2555,10 +2555,10 @@
                                      */
                                     first: function() {
                                         var instance = this;
-                            
+
                                         return instance.item(0);
                                     },
-                            
+
                                     /**
                                      * See [Node getDOMNode](Node.html#method_getDOMNode).
                                      *
@@ -2567,7 +2567,7 @@
                                     getDOM: function() {
                                         return ANodeList.getDOMNodes(this);
                                     },
-                            
+
                                     /**
                                      * Returns the last element in the node list collection.
                                      *
@@ -2576,10 +2576,10 @@
                                      */
                                     last: function() {
                                         var instance = this;
-                            
+
                                         return instance.item(instance._nodes.length - 1);
                                     },
-                            
+
                                     /**
                                      * See [Node one](Node.html#method_one).
                                      *
@@ -2591,32 +2591,32 @@
                                             nodes = instance._nodes,
                                             length = nodes.length,
                                             i;
-                            
+
                                         for (i = 0; i &lt; length; i++) {
                                             newNode = A.Selector.query(selector, nodes[i], true);
-                            
+
                                             if (newNode) {
                                                 newNode = A.one(newNode);
-                            
+
                                                 break;
                                             }
                                         }
-                            
+
                                         return newNode;
                                     }
                                 }
                             );
-                            
+
                             NODELIST_PROTO.__filter = NODELIST_PROTO.filter;
-                            
+
                             NODELIST_PROTO.filter = function(value, context) {
                                 var instance = this;
-                            
+
                                 var newNodeList;
-                            
+
                                 if (isFunction(value)) {
                                     var nodes = [];
-                            
+
                                     instance.each(
                                         function(item, index, collection) {
                                             if (value.call(context || item, item, index, collection)) {
@@ -2624,26 +2624,26 @@
                                             }
                                         }
                                     );
-                            
+
                                     newNodeList = A.all(nodes);
                                 }
                                 else {
                                     newNodeList = NODELIST_PROTO.__filter.call(instance, value);
                                 }
-                            
+
                                 return newNodeList;
                             };
-                            
+
                             A.mix(
                                 ANodeList, {
                                     create: function(html) {
                                         var docFrag = A.getDoc().invoke(&#x27;createDocumentFragment&#x27;);
-                            
+
                                         return docFrag.append(html).get(&#x27;childNodes&#x27;);
                                     }
                                 }
                             );
-                            
+
                             A.mix(
                                 A, {
                                     /**
@@ -2653,14 +2653,14 @@
                                      */
                                     getBody: function() {
                                         var instance = this;
-                            
+
                                         if (!instance._bodyNode) {
                                             instance._bodyNode = A.one(DOC.body);
                                         }
-                            
+
                                         return instance._bodyNode;
                                     },
-                            
+
                                     /**
                                      * Gets the document node. Shortcut to &#x60;A.one(document)&#x60;.
                                      *
@@ -2668,14 +2668,14 @@
                                      */
                                     getDoc: function() {
                                         var instance = this;
-                            
+
                                         if (!instance._documentNode) {
                                             instance._documentNode = A.one(DOC);
                                         }
-                            
+
                                         return instance._documentNode;
                                     },
-                            
+
                                     /**
                                      * Gets the window node. Shortcut to &#x60;A.one(window)&#x60;.
                                      *
@@ -2683,16 +2683,16 @@
                                      */
                                     getWin: function() {
                                         var instance = this;
-                            
+
                                         if (!instance._windowNode) {
                                             instance._windowNode = A.one(WIN);
                                         }
-                            
+
                                         return instance._windowNode;
                                     }
                                 }
                             );
-                            
+
                                 </pre>
                             </div>
                         </div>

@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/dom/js/selector-native.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             (function(Y) {
@@ -1141,37 +1141,37 @@
                              * @submodule selector-native
                              * @for Selector
                              */
-                            
+
                             /**
                              * Provides support for using CSS selectors to query the DOM
                              * @class Selector
                              * @static
                              * @for Selector
                              */
-                            
+
                             Y.namespace(&#x27;Selector&#x27;); // allow native module to standalone
-                            
+
                             var COMPARE_DOCUMENT_POSITION = &#x27;compareDocumentPosition&#x27;,
                                 OWNER_DOCUMENT = &#x27;ownerDocument&#x27;;
-                            
+
                             var Selector = {
                                 _types: {
                                     esc: {
                                         token: &#x27;\uE000&#x27;,
                                         re: /\\[:\[\]\(\)#\.\&#x27;\&gt;+~&quot;]/gi
                                     },
-                            
+
                                     attr: {
                                         token: &#x27;\uE001&#x27;,
                                         re: /(\[[^\]]*\])/g
                                     },
-                            
+
                                     pseudo: {
                                         token: &#x27;\uE002&#x27;,
                                         re: /(\([^\)]*\))/g
                                     }
                                 },
-                            
+
                                 /**
                                  *  Use the native version of &#x60;querySelectorAll&#x60;, if it exists.
                                  *
@@ -1180,27 +1180,27 @@
                                  * @static
                                  */
                                 useNative: true,
-                            
+
                                 _escapeId: function(id) {
                                     if (id) {
                                         id = id.replace(/([:\[\]\(\)#\.&#x27;&lt;&gt;+~&quot;])/g,&#x27;\\$1&#x27;);
                                     }
                                     return id;
                                 },
-                            
+
                                 _compare: (&#x27;sourceIndex&#x27; in Y.config.doc.documentElement) ?
                                     function(nodeA, nodeB) {
                                         var a = nodeA.sourceIndex,
                                             b = nodeB.sourceIndex;
-                            
+
                                         if (a === b) {
                                             return 0;
                                         } else if (a &gt; b) {
                                             return 1;
                                         }
-                            
+
                                         return -1;
-                            
+
                                     } : (Y.config.doc.documentElement[COMPARE_DOCUMENT_POSITION] ?
                                     function(nodeA, nodeB) {
                                         if (nodeA[COMPARE_DOCUMENT_POSITION](nodeB) &amp; 4) {
@@ -1218,11 +1218,11 @@
                                             rangeB.setStart(nodeB, 0);
                                             compare = rangeA.compareBoundaryPoints(1, rangeB); // 1 === Range.START_TO_END
                                         }
-                            
+
                                         return compare;
-                            
+
                                 }),
-                            
+
                                 _sort: function(nodes) {
                                     if (nodes) {
                                         nodes = Y.Array(nodes, 0, true);
@@ -1230,29 +1230,29 @@
                                             nodes.sort(Selector._compare);
                                         }
                                     }
-                            
+
                                     return nodes;
                                 },
-                            
+
                                 _deDupe: function(nodes) {
                                     var ret = [],
                                         i, node;
-                            
+
                                     for (i = 0; (node = nodes[i++]);) {
                                         if (!node._found) {
                                             ret[ret.length] = node;
                                             node._found = true;
                                         }
                                     }
-                            
+
                                     for (i = 0; (node = ret[i++]);) {
                                         node._found = null;
                                         node.removeAttribute(&#x27;_found&#x27;);
                                     }
-                            
+
                                     return ret;
                                 },
-                            
+
                                 /**
                                  * Retrieves a set of nodes based on a given CSS selector.
                                  * @method query
@@ -1272,14 +1272,14 @@
                                         result,
                                         i,
                                         fn = (useNative) ? Y.Selector._nativeQuery : Y.Selector._bruteQuery;
-                            
+
                                     if (selector &amp;&amp; fn) {
                                         // split group into seperate queries
                                         if (!skipNative &amp;&amp; // already done if skipping
                                                 (!useNative || root.tagName)) { // split native when element scoping is needed
                                             queries = Selector._splitQueries(selector, root);
                                         }
-                            
+
                                         for (i = 0; (query = queries[i++]);) {
                                             result = fn(query[0], query[1], firstOnly);
                                             if (!firstOnly) { // coerce DOM Collection to Array
@@ -1289,32 +1289,32 @@
                                                 ret = ret.concat(result);
                                             }
                                         }
-                            
+
                                         if (queries.length &gt; 1) { // remove dupes and sort by doc order
                                             ret = Selector._sort(Selector._deDupe(ret));
                                         }
                                     }
-                            
+
                                     Y.log(&#x27;query: &#x27; + selector + &#x27; returning: &#x27; + ret.length, &#x27;info&#x27;, &#x27;Selector&#x27;);
                                     return (firstOnly) ? (ret[0] || null) : ret;
-                            
+
                                 },
-                            
+
                                 _replaceSelector: function(selector) {
                                     var esc = Y.Selector._parse(&#x27;esc&#x27;, selector), // pull escaped colon, brackets, etc.
                                         attrs,
                                         pseudos;
-                            
+
                                     // first replace escaped chars, which could be present in attrs or pseudos
                                     selector = Y.Selector._replace(&#x27;esc&#x27;, selector);
-                            
+
                                     // then replace pseudos before attrs to avoid replacing :not([foo])
                                     pseudos = Y.Selector._parse(&#x27;pseudo&#x27;, selector);
                                     selector = Selector._replace(&#x27;pseudo&#x27;, selector);
-                            
+
                                     attrs = Y.Selector._parse(&#x27;attr&#x27;, selector);
                                     selector = Y.Selector._replace(&#x27;attr&#x27;, selector);
-                            
+
                                     return {
                                         esc: esc,
                                         attrs: attrs,
@@ -1322,7 +1322,7 @@
                                         selector: selector
                                     };
                                 },
-                            
+
                                 _restoreSelector: function(replaced) {
                                     var selector = replaced.selector;
                                     selector = Y.Selector._restore(&#x27;attr&#x27;, selector, replaced.attrs);
@@ -1330,11 +1330,11 @@
                                     selector = Y.Selector._restore(&#x27;esc&#x27;, selector, replaced.esc);
                                     return selector;
                                 },
-                            
+
                                 _replaceCommas: function(selector) {
                                     var replaced = Y.Selector._replaceSelector(selector),
                                         selector = replaced.selector;
-                            
+
                                     if (selector) {
                                         selector = selector.replace(/,/g, &#x27;\uE007&#x27;);
                                         replaced.selector = selector;
@@ -1342,43 +1342,43 @@
                                     }
                                     return selector;
                                 },
-                            
+
                                 // allows element scoped queries to begin with combinator
                                 // e.g. query(&#x27;&gt; p&#x27;, document.body) === query(&#x27;body &gt; p&#x27;)
                                 _splitQueries: function(selector, node) {
                                     if (selector.indexOf(&#x27;,&#x27;) &gt; -1) {
                                         selector = Y.Selector._replaceCommas(selector);
                                     }
-                            
+
                                     var groups = selector.split(&#x27;\uE007&#x27;), // split on replaced comma token
                                         queries = [],
                                         prefix = &#x27;&#x27;,
                                         id,
                                         i,
                                         len;
-                            
+
                                     if (node) {
                                         // enforce for element scoping
                                         if (node.nodeType === 1) { // Elements only
                                             id = Y.Selector._escapeId(Y.DOM.getId(node));
-                            
+
                                             if (!id) {
                                                 id = Y.guid();
                                                 Y.DOM.setId(node, id);
                                             }
-                            
+
                                             prefix = &#x27;[id=&quot;&#x27; + id + &#x27;&quot;] &#x27;;
                                         }
-                            
+
                                         for (i = 0, len = groups.length; i &lt; len; ++i) {
                                             selector =  prefix + groups[i];
                                             queries.push([selector, node]);
                                         }
                                     }
-                            
+
                                     return queries;
                                 },
-                            
+
                                 _nativeQuery: function(selector, root, one) {
                                     if (
                                         (Y.UA.webkit || Y.UA.opera) &amp;&amp;          // webkit (chrome, safari) and Opera
@@ -1395,7 +1395,7 @@
                                         return Y.Selector.query(selector, root, one, true); // redo with skipNative true
                                     }
                                 },
-                            
+
                                 /**
                                  * Filters out nodes that do not match the given CSS selector.
                                  * @method filter
@@ -1408,7 +1408,7 @@
                                 filter: function(nodes, selector) {
                                     var ret = [],
                                         i, node;
-                            
+
                                     if (nodes &amp;&amp; selector) {
                                         for (i = 0; (node = nodes[i++]);) {
                                             if (Y.Selector.test(node, selector)) {
@@ -1419,10 +1419,10 @@
                                         Y.log(&#x27;invalid filter input (nodes: &#x27; + nodes +
                                                 &#x27;, selector: &#x27; + selector + &#x27;)&#x27;, &#x27;warn&#x27;, &#x27;Selector&#x27;);
                                     }
-                            
+
                                     return ret;
                                 },
-                            
+
                                 /**
                                  * Determines whether or not the given node matches the given CSS selector.
                                  * @method test
@@ -1443,9 +1443,9 @@
                                         frag,
                                         id,
                                         i, j, group;
-                            
+
                                     if (node &amp;&amp; node.tagName) { // only test HTMLElements
-                            
+
                                         if (typeof selector == &#x27;function&#x27;) { // test with function
                                             ret = selector.call(node, node);
                                         } else { // test with query
@@ -1463,17 +1463,17 @@
                                                 }
                                             }
                                             root = root || node[OWNER_DOCUMENT];
-                            
+
                                             id = Y.Selector._escapeId(Y.DOM.getId(node));
                                             if (!id) {
                                                 id = Y.guid();
                                                 Y.DOM.setId(node, id);
                                             }
-                            
+
                                             for (i = 0; (group = groups[i++]);) { // TODO: off-dom test
                                                 group += &#x27;[id=&quot;&#x27; + id + &#x27;&quot;]&#x27;;
                                                 items = Y.Selector.query(group, root);
-                            
+
                                                 for (j = 0; item = items[j++];) {
                                                     if (item === node) {
                                                         ret = true;
@@ -1484,16 +1484,16 @@
                                                     break;
                                                 }
                                             }
-                            
+
                                             if (useFrag) { // cleanup
                                                 frag.removeChild(node);
                                             }
                                         };
                                     }
-                            
+
                                     return ret;
                                 },
-                            
+
                                 /**
                                  * A convenience method to emulate Y.Node&#x27;s aNode.ancestor(selector).
                                  * @method ancestor
@@ -1509,16 +1509,16 @@
                                         return Y.Selector.test(n, selector);
                                     }, testSelf);
                                 },
-                            
+
                                 _parse: function(name, selector) {
                                     return selector.match(Y.Selector._types[name].re);
                                 },
-                            
+
                                 _replace: function(name, selector) {
                                     var o = Y.Selector._types[name];
                                     return selector.replace(o.re, o.token);
                                 },
-                            
+
                                 _restore: function(name, selector, items) {
                                     if (items) {
                                         var token = Y.Selector._types[name].token,
@@ -1530,11 +1530,11 @@
                                     return selector;
                                 }
                             };
-                            
+
                             Y.mix(Y.Selector, Selector, true);
-                            
+
                             })(Y);
-                            
+
                                 </pre>
                             </div>
                         </div>

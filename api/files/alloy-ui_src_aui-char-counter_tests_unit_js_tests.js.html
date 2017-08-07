@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,26 +1122,26 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>alloy-ui/src/aui-char-counter/tests/unit/js/tests.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             YUI.add(&#x27;aui-char-counter-tests&#x27;, function(Y) {
-                            
+
                                 var Lang = Y.Lang,
                                     suite = new Y.Test.Suite(&#x27;aui-char-counter&#x27;);
-                            
+
                                 suite.add(new Y.Test.Case({
                                     name: &#x27;Char Counter Tests&#x27;,
-                            
+
                                     init: function() {
                                         // Remove &#x27;input&#x27; from DOM_EVENTS so we can simulate it
                                         // in the test by just calling &#x27;fire&#x27;, instead of having to
@@ -1149,26 +1149,26 @@
                                         // tested separately.
                                         delete Y.Node.DOM_EVENTS.input;
                                     },
-                            
+
                                     setUp: function() {
                                         this.input = Y.one(&#x27;#input&#x27;);
                                         this.input.set(&#x27;value&#x27;, &#x27;&#x27;);
-                            
+
                                         this.inputCounter = Y.one(&#x27;#inputCounter&#x27;);
                                         this.inputCounter.set(&#x27;text&#x27;, &#x27;&#x27;);
-                            
+
                                         this.textarea = Y.one(&#x27;#textarea&#x27;);
                                         this.textarea.set(&#x27;value&#x27;, &#x27;&#x27;);
-                            
+
                                         this.textareaCounter = Y.one(&#x27;#textareaCounter&#x27;);
                                         this.textareaCounter.set(&#x27;text&#x27;, &#x27;&#x27;);
                                     },
-                            
+
                                     tearDown: function() {
                                         this.inputCharCounter &amp;&amp; this.inputCharCounter.destroy();
                                         this.textareaCharCounter &amp;&amp; this.textareaCharCounter.destroy();
                                     },
-                            
+
                                     /**
                                      * Changes the test input&#x27;s content and manually triggers the
                                      * &#x27;input&#x27; event on it.
@@ -1176,67 +1176,67 @@
                                     changeInputContent: function(content) {
                                         this.input.set(&#x27;value&#x27;, content);
                                         this.input.fire(&#x27;input&#x27;);
-                            
+
                                         this.textarea.set(&#x27;value&#x27;, content);
                                         this.textarea.fire(&#x27;input&#x27;);
                                     },
-                            
+
                                     &#x27;should not allow text to exceed max&#x27;: function() {
                                         this.inputCharCounter = new Y.CharCounter({
                                             input: this.input,
                                             maxLength: 5
                                         });
-                            
+
                                         this.textareaCharCounter = new Y.CharCounter({
                                             input: this.textarea,
                                             maxLength: 5
                                         });
-                            
+
                                         this.changeInputContent(&#x27;1&#x27;);
                                         Y.Assert.areEqual(&#x27;1&#x27;, this.input.val());
                                         Y.Assert.areEqual(&#x27;1&#x27;, this.textarea.val());
-                            
+
                                         this.changeInputContent(&#x27;12345&#x27;);
                                         Y.Assert.areEqual(&#x27;12345&#x27;, this.input.val());
                                         Y.Assert.areEqual(&#x27;12345&#x27;, this.textarea.val());
-                            
+
                                         this.changeInputContent(&#x27;123456&#x27;);
                                         Y.Assert.areEqual(&#x27;12345&#x27;, this.input.val(),
                                             &#x27;The string 123456 exceeds the limit, so it should be cropped.&#x27;);
                                         Y.Assert.areEqual(&#x27;12345&#x27;, this.textarea.val(),
                                             &#x27;The string 123456 exceeds the limit, so it should be cropped.&#x27;);
                                     },
-                            
+
                                     &#x27;should not allow text to exceed max initially&#x27;: function() {
                                         this.changeInputContent(&#x27;123456&#x27;);
-                            
+
                                         this.inputCharCounter = new Y.CharCounter({
                                             input: this.input,
                                             maxLength: 5
                                         });
-                            
+
                                         this.textareaCharCounter = new Y.CharCounter({
                                             input: this.textarea,
                                             maxLength: 5
                                         });
-                            
+
                                         Y.Assert.areEqual(&#x27;12345&#x27;, this.input.val(),
                                             &#x27;The value 123456 should be cropped after initializing the CharCounter.&#x27;);
                                         Y.Assert.areEqual(&#x27;12345&#x27;, this.textarea.val(),
                                             &#x27;The value 123456 should be cropped after initializing the CharCounter.&#x27;);
                                     },
-                            
+
                                     &#x27;should be able to trigger length check manually&#x27;: function() {
                                         this.inputCharCounter = new Y.CharCounter({
                                             input: this.input,
                                             maxLength: 5
                                         });
-                            
+
                                         this.textareaCharCounter = new Y.CharCounter({
                                             input: this.textarea,
                                             maxLength: 5
                                         });
-                            
+
                                         // Just setting the value directly won&#x27;t trigger the &#x27;input&#x27;
                                         // event that CharCounter listens to, so the user needs to
                                         // manually call checkLength instead.
@@ -1244,98 +1244,98 @@
                                         this.textarea.set(&#x27;value&#x27;, &#x27;123456&#x27;);
                                         Y.Assert.areEqual(&#x27;123456&#x27;, this.input.val());
                                         Y.Assert.areEqual(&#x27;123456&#x27;, this.textarea.val());
-                            
+
                                         this.inputCharCounter.checkLength();
                                         this.textareaCharCounter.checkLength();
-                            
+
                                         Y.Assert.areEqual(&#x27;12345&#x27;, this.input.val());
                                         Y.Assert.areEqual(&#x27;12345&#x27;, this.textarea.val());
                                     },
-                            
+
                                     &#x27;should ignore calls if input is not defined&#x27;: function() {
                                         this.inputCharCounter = new Y.CharCounter({
                                             maxLength: 5
                                         });
-                            
+
                                         Y.Assert.isFalse(this.inputCharCounter.checkLength());
                                     },
-                            
+
                                     &#x27;should return truthy if input is defined&#x27;: function() {
                                         this.inputCharCounter = new Y.CharCounter({
                                             input: this.input,
                                             maxLength: 1
                                         });
-                            
+
                                         Y.Assert.isTrue(this.inputCharCounter.checkLength());
                                     },
-                            
+
                                     &#x27;should return trimmed value length if input is trimmed&#x27;: function() {
                                         this.inputCharCounter = new Y.CharCounter({
                                             input: this.input,
                                             maxLength: 1
                                         });
-                            
+
                                         this.changeInputContent(&#x27;12&#x27;);
-                            
+
                                         Y.Assert.areEqual(&#x27;1&#x27;, this.inputCharCounter.checkLength());
                                     },
-                            
-                            
+
+
                                     &#x27;should render remaining char count&#x27;: function() {
                                         this.inputCharCounter = new Y.CharCounter({
                                             input: this.input,
                                             counter: this.inputCounter,
                                             maxLength: 5
                                         });
-                            
+
                                         this.textareaCharCounter = new Y.CharCounter({
                                             input: this.textarea,
                                             counter: this.textareaCounter,
                                             maxLength: 5
                                         });
-                            
+
                                         Y.Assert.areEqual(5, Lang.toInt(this.inputCounter.text()),
                                             &#x27;Limit is set to 5 characters, initially there should be 5 characters remaining.&#x27;);
                                         Y.Assert.areEqual(5, Lang.toInt(this.textareaCounter.text()),
                                             &#x27;Limit is set to 5 characters, initially there should be 5 characters remaining.&#x27;);
-                            
+
                                         this.changeInputContent(&#x27;1&#x27;);
                                         Y.Assert.areEqual(4, Lang.toInt(this.inputCounter.text()),
                                             &#x27;Limit is set to 5 characters, 1 character added, remaining should be 4.&#x27;);
                                         Y.Assert.areEqual(4, Lang.toInt(this.textareaCounter.text()),
                                             &#x27;Limit is set to 5 characters, 1 character added, remaining should be 4.&#x27;);
-                            
+
                                         this.changeInputContent(&#x27;12345&#x27;);
                                         Y.Assert.areEqual(0, Lang.toInt(this.inputCounter.text()),
                                             &#x27;Limit is set to 5 characters, remaining should be 0.&#x27;);
                                         Y.Assert.areEqual(0, Lang.toInt(this.textareaCounter.text()),
                                             &#x27;Limit is set to 5 characters, remaining should be 0.&#x27;);
-                            
+
                                         this.changeInputContent(&#x27;123456&#x27;);
                                         Y.Assert.areEqual(0, Lang.toInt(this.inputCounter.text()),
                                             &#x27;Limit is set to 5 characters, remaining should be 0 and value should be cropped.&#x27;);
                                         Y.Assert.areEqual(0, Lang.toInt(this.textareaCounter.text()),
                                             &#x27;Limit is set to 5 characters, remaining should be 0 and value should be cropped.&#x27;);
                                     },
-                            
+
                                     &#x27;should work with max length changes&#x27;: function() {
                                         this.inputCharCounter = new Y.CharCounter({
                                             input: this.input,
                                             counter: this.inputCounter,
                                             maxLength: 5
                                         });
-                            
+
                                         this.textareaCharCounter = new Y.CharCounter({
                                             input: this.textarea,
                                             counter: this.textareaCounter,
                                             maxLength: 5
                                         });
-                            
+
                                         this.changeInputContent(&#x27;12345&#x27;);
-                            
+
                                         this.inputCharCounter.set(&#x27;maxLength&#x27;, 2);
                                         this.textareaCharCounter.set(&#x27;maxLength&#x27;, 2);
-                            
+
                                         Y.Assert.areEqual(&#x27;12&#x27;, this.input.val(),
                                             &#x27;Max length set to 2, value should be cropped to \&#x27;12\&#x27;.&#x27;);
                                         Y.Assert.areEqual(&#x27;12&#x27;, this.textarea.val(),
@@ -1343,113 +1343,113 @@
                                         Y.Assert.areEqual(0, Lang.toInt(this.inputCounter.text()), &#x27;Expecting 0 remaining characters.&#x27;);
                                         Y.Assert.areEqual(0, Lang.toInt(this.textareaCounter.text()), &#x27;Expecting 0 remaining characters.&#x27;);
                                     },
-                            
+
                                     &#x27;should trigger event when max length is reached&#x27;: function() {
                                         var eventTriggered = false;
-                            
+
                                         this.inputCharCounter = new Y.CharCounter({
                                             input: this.input,
                                             maxLength: 5
                                         });
-                            
+
                                         this.textareaCharCounter = new Y.CharCounter({
                                             input: this.textarea,
                                             maxLength: 5
                                         });
-                            
+
                                         this.inputCharCounter.on(&#x27;maxLength&#x27;, function() {
                                             eventTriggered = true;
                                         });
-                            
+
                                         this.textareaCharCounter.on(&#x27;maxLength&#x27;, function() {
                                             eventTriggered = true;
                                         });
-                            
+
                                         this.changeInputContent(&#x27;123&#x27;);
                                         Y.Assert.isFalse(eventTriggered, &#x27;maxlength event should not be fired yet.&#x27;);
-                            
+
                                         this.changeInputContent(&#x27;12345&#x27;);
                                         Y.Assert.isTrue(eventTriggered,
                                             &#x27;Max length is set to 5 characters, and value to \&#x27;12345\&#x27;,  maxLength event should be fired now.&#x27;
                                         );
                                     },
-                            
+
                                     &#x27;should be destroyed correctly&#x27;: function() {
                                         this.inputCharCounter = new Y.CharCounter({
                                             input: this.input,
                                             maxLength: 5
                                         });
-                            
+
                                         this.textareaCharCounter = new Y.CharCounter({
                                             input: this.textarea,
                                             maxLength: 5
                                         });
-                            
+
                                         this.inputCharCounter.destroy();
                                         this.textareaCharCounter.destroy();
-                            
+
                                         // We invoked destroy manually, prevent double destroying in tearDown.
                                         this.inputCharCounter = null;
                                         this.textareaCharCounter = null;
-                            
+
                                         this.changeInputContent(&#x27;123456&#x27;);
                                         Y.Assert.areEqual(&#x27;123456&#x27;, this.input.val());
                                         Y.Assert.areEqual(&#x27;123456&#x27;, this.textarea.val());
                                     },
-                            
+
                                     &#x27;should treat new lines in textareas as 2 characters&#x27;: function() {
                                         this.inputCharCounter = new Y.CharCounter({
                                             input: this.input,
                                             maxLength: 10
                                         });
-                            
+
                                         this.textareaCharCounter = new Y.CharCounter({
                                             input: this.textarea,
                                             maxLength: 10
                                         });
-                            
+
                                         this.changeInputContent(&#x27;12345\n67890&#x27;);
-                            
+
                                         Y.Assert.areEqual(10, this.input.val().length);
                                         Y.Assert.areEqual(9, this.textarea.val().length);
-                            
+
                                         this.changeInputContent(&#x27;12345\r\n67890&#x27;);
-                            
+
                                         Y.Assert.areEqual(10, this.input.val().length);
                                         Y.Assert.areEqual(9, this.textarea.val().length);
                                     },
-                            
+
                                     &#x27;character counter should never be negative&#x27;: function() {
                                         this.inputCharCounter = new Y.CharCounter({
                                             input: this.input,
                                             counter: this.inputCounter,
                                             maxLength: 10
                                         });
-                            
+
                                         this.textareaCharCounter = new Y.CharCounter({
                                             input: this.textarea,
                                             counter: this.textareaCounter,
                                             maxLength: 10
                                         });
-                            
+
                                         this.changeInputContent(&#x27;12345\n67890&#x27;);
-                            
+
                                         Y.Assert.isTrue(Lang.toInt(this.inputCounter.text()) &gt;= 0);
                                         Y.Assert.isTrue(Lang.toInt(this.textareaCounter.text()) &gt;= 0);
-                            
+
                                         this.changeInputContent(&#x27;12345\r\n67890&#x27;);
-                            
+
                                         Y.Assert.isTrue(Lang.toInt(this.inputCounter.text()) &gt;= 0);
                                         Y.Assert.isTrue(Lang.toInt(this.textareaCounter.text()) &gt;= 0);
                                     }
                                 }));
-                            
+
                                 Y.Test.Runner.add(suite);
-                            
+
                             }, &#x27;&#x27;, {
                                 requires: [&#x27;test&#x27;, &#x27;aui-char-counter&#x27;, &#x27;node&#x27;]
                             });
-                            
+
                                 </pre>
                             </div>
                         </div>

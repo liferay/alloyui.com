@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/event/js/tap.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1139,39 +1139,39 @@
                             across touch and mouse or pointer based input devices.  This can be used by application developers
                             to build input device agnostic components which behave the same in response to either touch or mouse based
                             interaction.
-                            
+
                             &#x27;tap&#x27; is like a touchscreen &#x27;click&#x27;, only it requires much less finger-down time since it listens to touch events,
                             but reverts to mouse events if touch is not supported.
-                            
+
                             @example
-                            
+
                                 YUI().use(&#x27;event-tap&#x27;, function (Y) {
                                     Y.one(&#x27;#my-button&#x27;).on(&#x27;tap&#x27;, function (e) {
                                         Y.log(&#x27;Button was tapped on&#x27;);
                                     });
                                 });
-                            
+
                             @module event
                             @submodule event-tap
                             @author Andres Garza, matuzak and tilo mitra
                             @since 3.7.0
-                            
+
                             */
                             var doc = Y.config.doc,
                                 GESTURE_MAP = Y.Event._GESTURE_MAP,
                                 EVT_START = GESTURE_MAP.start,
                                 EVT_TAP = &#x27;tap&#x27;,
                                 POINTER_EVENT_TEST = /pointer/i,
-                            
+
                                 HANDLES = {
                                     START: &#x27;Y_TAP_ON_START_HANDLE&#x27;,
                                     END: &#x27;Y_TAP_ON_END_HANDLE&#x27;,
                                     CANCEL: &#x27;Y_TAP_ON_CANCEL_HANDLE&#x27;
                                 };
-                            
+
                             function detachHandles(subscription, handles) {
                                 handles = handles || Y.Object.values(HANDLES);
-                            
+
                                 Y.Array.each(handles, function (item) {
                                     var handle = subscription[item];
                                     if (handle) {
@@ -1179,15 +1179,15 @@
                                         subscription[item] = null;
                                     }
                                 });
-                            
+
                             }
-                            
-                            
+
+
                             /**
                             Sets up a &quot;tap&quot; event, that is fired on touch devices in response to a tap event (finger down, finder up).
                             This event can be used instead of listening for click events which have a 500ms delay on most touch devices.
                             This event can also be listened for using node.delegate().
-                            
+
                             @event tap
                             @param type {string} &quot;tap&quot;
                             @param fn {function} The method the event invokes. It receives the event facade of the underlying DOM event.
@@ -1200,7 +1200,7 @@
                                         var sub = e.target.once(&#x27;click&#x27;, function (click) {
                                             click.preventDefault();
                                         });
-                            
+
                                         // Make sure to detach the subscription during the next event loop
                                         // so this doesn&#x27;t &#x60;preventDefault()&#x60; on the wrong click event.
                                         setTimeout(function () {
@@ -1211,12 +1211,12 @@
                                         }, 100);
                                     }
                                 },
-                            
+
                                 processArgs: function (args, isDelegate) {
-                            
+
                                     //if we return for the delegate use case, then the &#x60;filter&#x60; argument
                                     //returns undefined, and we have to get the filter from sub._extra[0] (ugly)
-                            
+
                                     if (!isDelegate) {
                                         var extra = args[3];
                                         // remove the extra arguments from the array as specified by
@@ -1227,13 +1227,13 @@
                                 },
                                 /**
                                 This function should set up the node that will eventually fire the event.
-                            
+
                                 Usage:
-                            
+
                                     node.on(&#x27;tap&#x27;, function (e) {
                                         Y.log(&#x27;the node was tapped on&#x27;);
                                     });
-                            
+
                                 @method on
                                 @param {Node} node
                                 @param {Array} subscription
@@ -1244,10 +1244,10 @@
                                 on: function (node, subscription, notifier) {
                                     subscription[HANDLES.START] = node.on(EVT_START, this._start, this, node, subscription, notifier);
                                 },
-                            
+
                                 /**
                                 Detaches all event subscriptions set up by the event-tap module
-                            
+
                                 @method detach
                                 @param {Node} node
                                 @param {Array} subscription
@@ -1258,18 +1258,18 @@
                                 detach: function (node, subscription, notifier) {
                                     detachHandles(subscription);
                                 },
-                            
+
                                 /**
                                 Event delegation for the &#x27;tap&#x27; event. The delegated event will use a
                                 supplied selector or filtering function to test if the event references at least one
                                 node that should trigger the subscription callback.
-                            
+
                                 Usage:
-                            
+
                                     node.delegate(&#x27;tap&#x27;, function (e) {
                                         Y.log(&#x27;li a inside node was tapped.&#x27;);
                                     }, &#x27;li a&#x27;);
-                            
+
                                 @method delegate
                                 @param {Node} node
                                 @param {Array} subscription
@@ -1283,11 +1283,11 @@
                                         this._start(e, node, subscription, notifier, true);
                                     }, node, filter, this);
                                 },
-                            
+
                                 /**
                                 Detaches the delegated event subscriptions set up by the event-tap module.
                                 Only used if you use node.delegate(...) instead of node.on(...);
-                            
+
                                 @method detachDelegate
                                 @param {Node} node
                                 @param {Array} subscription
@@ -1298,10 +1298,10 @@
                                 detachDelegate: function (node, subscription, notifier) {
                                     detachHandles(subscription);
                                 },
-                            
+
                                 /**
                                 Called when the monitor(s) are tapped on, either through touchstart or mousedown.
-                            
+
                                 @method _start
                                 @param {DOMEventFacade} event
                                 @param {Node} node
@@ -1312,26 +1312,26 @@
                                 @static
                                 **/
                                 _start: function (event, node, subscription, notifier, delegate) {
-                            
+
                                     var context = {
                                             canceled: false,
                                             eventType: event.type
                                         },
                                         preventMouse = subscription.preventMouse || false;
-                            
+
                                     //move ways to quit early to the top.
                                     // no right clicks
                                     if (event.button &amp;&amp; event.button === 3) {
                                         return;
                                     }
-                            
+
                                     // for now just support a 1 finger count (later enhance via config)
                                     if (event.touches &amp;&amp; event.touches.length !== 1) {
                                         return;
                                     }
-                            
+
                                     context.node = delegate ? event.currentTarget : node;
-                            
+
                                     //There is a double check in here to support event simulation tests, in which
                                     //event.touches can be undefined when simulating &#x27;touchstart&#x27; on touch devices.
                                     if (event.touches) {
@@ -1340,27 +1340,27 @@
                                     else {
                                       context.startXY = [ event.pageX, event.pageY ];
                                     }
-                            
+
                                     //If &#x60;onTouchStart()&#x60; was called by a touch event, set up touch event subscriptions.
                                     //Otherwise, set up mouse/pointer event event subscriptions.
                                     if (event.touches) {
-                            
+
                                         subscription[HANDLES.END] = node.once(&#x27;touchend&#x27;, this._end, this, node, subscription, notifier, delegate, context);
                                         subscription[HANDLES.CANCEL] = node.once(&#x27;touchcancel&#x27;, this.detach, this, node, subscription, notifier, delegate, context);
-                            
+
                                         //Since this is a touch* event, there will be corresponding mouse events
                                         //that will be fired. We don&#x27;t want these events to get picked up and fire
                                         //another &#x60;tap&#x60; event, so we&#x27;ll set this variable to &#x60;true&#x60;.
                                         subscription.preventMouse = true;
                                     }
-                            
+
                                     //Only add these listeners if preventMouse is &#x60;false&#x60;
                                     //ie: not when touch events have already been subscribed to
                                     else if (context.eventType.indexOf(&#x27;mouse&#x27;) !== -1 &amp;&amp; !preventMouse) {
                                         subscription[HANDLES.END] = node.once(&#x27;mouseup&#x27;, this._end, this, node, subscription, notifier, delegate, context);
                                         subscription[HANDLES.CANCEL] = node.once(&#x27;mousecancel&#x27;, this.detach, this, node, subscription, notifier, delegate, context);
                                     }
-                            
+
                                     //If a mouse event comes in after a touch event, it will go in here and
                                     //reset preventMouse to &#x60;true&#x60;.
                                     //If a mouse event comes in without a prior touch event, preventMouse will be
@@ -1368,19 +1368,19 @@
                                     else if (context.eventType.indexOf(&#x27;mouse&#x27;) !== -1 &amp;&amp; preventMouse) {
                                         subscription.preventMouse = false;
                                     }
-                            
+
                                     else if (POINTER_EVENT_TEST.test(context.eventType)) {
                                         subscription[HANDLES.END] = node.once(GESTURE_MAP.end, this._end, this, node, subscription, notifier, delegate, context);
                                         subscription[HANDLES.CANCEL] = node.once(GESTURE_MAP.cancel, this.detach, this, node, subscription, notifier, delegate, context);
                                     }
-                            
+
                                 },
-                            
-                            
+
+
                                 /**
                                 Called when the monitor(s) fires a touchend event (or the mouse equivalent).
                                 This method fires the &#x27;tap&#x27; event if certain requirements are met.
-                            
+
                                 @method _end
                                 @param {DOMEventFacade} event
                                 @param {Node} node
@@ -1396,11 +1396,11 @@
                                         endXY,
                                         clientXY,
                                         sensitivity = 15;
-                            
+
                                     if (subscription._extra &amp;&amp; subscription._extra.sensitivity &gt;= 0) {
                                         sensitivity = subscription._extra.sensitivity;
                                     }
-                            
+
                                     //There is a double check in here to support event simulation tests, in which
                                     //event.touches can be undefined when simulating &#x27;touchstart&#x27; on touch devices.
                                     if (event.changedTouches) {
@@ -1411,24 +1411,24 @@
                                       endXY = [ event.pageX, event.pageY ];
                                       clientXY = [event.clientX, event.clientY];
                                     }
-                            
+
                                     // make sure mouse didn&#x27;t move
                                     if (Math.abs(endXY[0] - startXY[0]) &lt;= sensitivity &amp;&amp; Math.abs(endXY[1] - startXY[1]) &lt;= sensitivity) {
-                            
+
                                         event.type = EVT_TAP;
                                         event.pageX = endXY[0];
                                         event.pageY = endXY[1];
                                         event.clientX = clientXY[0];
                                         event.clientY = clientXY[1];
                                         event.currentTarget = context.node;
-                            
+
                                         notifier.fire(event);
                                     }
-                            
+
                                     detachHandles(subscription, [HANDLES.END, HANDLES.CANCEL]);
                                 }
                             });
-                            
+
                                 </pre>
                             </div>
                         </div>

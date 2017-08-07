@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,39 +1122,39 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/app/js/model-list.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
                             Provides an API for managing an ordered list of Model instances.
-                            
+
                             @module app
                             @submodule model-list
                             @since 3.4.0
                             **/
-                            
+
                             /**
                             Provides an API for managing an ordered list of Model instances.
-                            
+
                             In addition to providing convenient &#x60;add&#x60;, &#x60;create&#x60;, &#x60;reset&#x60;, and &#x60;remove&#x60;
                             methods for managing the models in the list, ModelLists are also bubble targets
                             for events on the model instances they contain. This means, for example, that
                             you can add several models to a list, and then subscribe to the &#x60;*:change&#x60; event
                             on the list to be notified whenever any model in the list changes.
-                            
+
                             ModelLists also maintain sort order efficiently as models are added and removed,
                             based on a custom &#x60;comparator&#x60; function you may define (if no comparator is
                             defined, models are sorted in insertion order).
-                            
+
                             @class ModelList
                             @extends Base
                             @uses ArrayList
@@ -1165,50 +1165,50 @@
                                     init. The &#x60;add&#x60; event will not be fired for models added on init.
                             @since 3.4.0
                             **/
-                            
+
                             var AttrProto = Y.Attribute.prototype,
                                 Lang      = Y.Lang,
                                 YArray    = Y.Array,
-                            
+
                                 /**
                                 Fired when a model is added to the list.
-                            
+
                                 Listen to the &#x60;on&#x60; phase of this event to be notified before a model is
                                 added to the list. Calling &#x60;e.preventDefault()&#x60; during the &#x60;on&#x60; phase will
                                 prevent the model from being added.
-                            
+
                                 Listen to the &#x60;after&#x60; phase of this event to be notified after a model has
                                 been added to the list.
-                            
+
                                 @event add
                                 @param {Model} model The model being added.
                                 @param {Number} index The index at which the model will be added.
                                 @preventable _defAddFn
                                 **/
                                 EVT_ADD = &#x27;add&#x27;,
-                            
+
                                 /**
                                 Fired when a model is created or updated via the &#x60;create()&#x60; method, but
                                 before the model is actually saved or added to the list. The &#x60;add&#x60; event
                                 will be fired after the model has been saved and added to the list.
-                            
+
                                 @event create
                                 @param {Model} model The model being created/updated.
                                 @since 3.5.0
                                 **/
                                 EVT_CREATE = &#x27;create&#x27;,
-                            
+
                                 /**
                                 Fired when an error occurs, such as when an attempt is made to add a
                                 duplicate model to the list, or when a sync layer response can&#x27;t be parsed.
-                            
+
                                 @event error
                                 @param {Any} error Error message, object, or exception generated by the
                                   error. Calling &#x60;toString()&#x60; on this should result in a meaningful error
                                   message.
                                 @param {String} src Source of the error. May be one of the following (or any
                                   custom error source defined by a ModelList subclass):
-                            
+
                                   * &#x60;add&#x60;: Error while adding a model (probably because it&#x27;s already in the
                                      list and can&#x27;t be added again). The model in question will be provided
                                      as the &#x60;model&#x60; property on the event facade.
@@ -1219,10 +1219,10 @@
                                     the &#x60;model&#x60; property on the event facade.
                                 **/
                                 EVT_ERROR = &#x27;error&#x27;,
-                            
+
                                 /**
                                 Fired after models are loaded from a sync layer.
-                            
+
                                 @event load
                                 @param {Object} parsed The parsed version of the sync layer&#x27;s response to
                                     the load request.
@@ -1231,35 +1231,35 @@
                                 @since 3.5.0
                                 **/
                                 EVT_LOAD = &#x27;load&#x27;,
-                            
+
                                 /**
                                 Fired when a model is removed from the list.
-                            
+
                                 Listen to the &#x60;on&#x60; phase of this event to be notified before a model is
                                 removed from the list. Calling &#x60;e.preventDefault()&#x60; during the &#x60;on&#x60; phase
                                 will prevent the model from being removed.
-                            
+
                                 Listen to the &#x60;after&#x60; phase of this event to be notified after a model has
                                 been removed from the list.
-                            
+
                                 @event remove
                                 @param {Model} model The model being removed.
                                 @param {Number} index The index of the model being removed.
                                 @preventable _defRemoveFn
                                 **/
                                 EVT_REMOVE = &#x27;remove&#x27;,
-                            
+
                                 /**
                                 Fired when the list is completely reset via the &#x60;reset()&#x60; method or sorted
                                 via the &#x60;sort()&#x60; method.
-                            
+
                                 Listen to the &#x60;on&#x60; phase of this event to be notified before the list is
                                 reset. Calling &#x60;e.preventDefault()&#x60; during the &#x60;on&#x60; phase will prevent
                                 the list from being reset.
-                            
+
                                 Listen to the &#x60;after&#x60; phase of this event to be notified after the list has
                                 been reset.
-                            
+
                                 @event reset
                                 @param {Model[]} models Array of the list&#x27;s new models after the reset.
                                 @param {String} src Source of the event. May be either &#x60;&#x27;reset&#x27;&#x60; or
@@ -1267,38 +1267,38 @@
                                 @preventable _defResetFn
                                 **/
                                 EVT_RESET = &#x27;reset&#x27;;
-                            
+
                             function ModelList() {
                                 ModelList.superclass.constructor.apply(this, arguments);
                             }
-                            
+
                             Y.ModelList = Y.extend(ModelList, Y.Base, {
                                 // -- Public Properties ----------------------------------------------------
-                            
+
                                 /**
                                 The &#x60;Model&#x60; class or subclass of the models in this list.
-                            
+
                                 The class specified here will be used to create model instances
                                 automatically based on attribute hashes passed to the &#x60;add()&#x60;, &#x60;create()&#x60;,
                                 and &#x60;reset()&#x60; methods.
-                            
+
                                 You may specify the class as an actual class reference or as a string that
                                 resolves to a class reference at runtime (the latter can be useful if the
                                 specified class will be loaded lazily).
-                            
+
                                 @property model
                                 @type Model|String
                                 @default Y.Model
                                 **/
                                 model: Y.Model,
-                            
+
                                 // -- Protected Properties -------------------------------------------------
-                            
+
                                 /**
                                 Total hack to allow us to identify ModelList instances without using
                                 &#x60;instanceof&#x60;, which won&#x27;t work when the instance was created in another
                                 window or YUI sandbox.
-                            
+
                                 @property _isYUIModelList
                                 @type Boolean
                                 @default true
@@ -1306,63 +1306,63 @@
                                 @since 3.5.0
                                 **/
                                 _isYUIModelList: true,
-                            
+
                                 // -- Lifecycle Methods ----------------------------------------------------
                                 initializer: function (config) {
                                     config || (config = {});
-                            
+
                                     var model = this.model = config.model || this.model;
-                            
+
                                     if (typeof model === &#x27;string&#x27;) {
                                         // Look for a namespaced Model class on &#x60;Y&#x60;.
                                         this.model = Y.Object.getValue(Y, model.split(&#x27;.&#x27;));
-                            
+
                                         if (!this.model) {
                                             Y.error(&#x27;ModelList: Model class not found: &#x27; + model);
                                         }
                                     }
-                            
+
                                     this.publish(EVT_ADD,    {defaultFn: this._defAddFn});
                                     this.publish(EVT_RESET,  {defaultFn: this._defResetFn});
                                     this.publish(EVT_REMOVE, {defaultFn: this._defRemoveFn});
-                            
+
                                     this.after(&#x27;*:idChange&#x27;, this._afterIdChange);
-                            
+
                                     this._clear();
-                            
+
                                     if (config.items) {
                                         this.add(config.items, {silent: true});
                                     }
                                 },
-                            
+
                                 destructor: function () {
                                     this._clear();
                                 },
-                            
+
                                 // -- Public Methods -------------------------------------------------------
-                            
+
                                 /**
                                 Adds the specified model or array of models to this list. You may also pass
                                 another ModelList instance, in which case all the models in that list will
                                 be added to this one as well.
-                            
+
                                 @example
-                            
+
                                     // Add a single model instance.
                                     list.add(new Model({foo: &#x27;bar&#x27;}));
-                            
+
                                     // Add a single model, creating a new instance automatically.
                                     list.add({foo: &#x27;bar&#x27;});
-                            
+
                                     // Add multiple models, creating new instances automatically.
                                     list.add([
                                         {foo: &#x27;bar&#x27;},
                                         {baz: &#x27;quux&#x27;}
                                     ]);
-                            
+
                                     // Add all the models in another ModelList instance.
                                     list.add(otherList);
-                            
+
                                 @method add
                                 @param {Model|Model[]|ModelList|Object|Object[]} models Model or array of
                                     models to add. May be existing model instances or hashes of model
@@ -1371,23 +1371,23 @@
                                     contains.
                                 @param {Object} [options] Data to be mixed into the event facade of the
                                     &#x60;add&#x60; event(s) for the added models.
-                            
+
                                     @param {Number} [options.index] Index at which to insert the added
                                         models. If not specified, the models will automatically be inserted
                                         in the appropriate place according to the current sort order as
                                         dictated by the &#x60;comparator()&#x60; method, if any.
                                     @param {Boolean} [options.silent=false] If &#x60;true&#x60;, no &#x60;add&#x60; event(s)
                                         will be fired.
-                            
+
                                 @return {Model|Model[]} Added model or array of added models.
                                 **/
                                 add: function (models, options) {
                                     var isList = models._isYUIModelList;
-                            
+
                                     if (isList || Lang.isArray(models)) {
                                         return YArray.map(isList ? models.toArray() : models, function (model, index) {
                                             var modelOptions = options || {};
-                            
+
                                             // When an explicit insertion index is specified, ensure that
                                             // the index is increased by one for each subsequent item in the
                                             // array.
@@ -1396,41 +1396,41 @@
                                                     index: modelOptions.index + index
                                                 });
                                             }
-                            
+
                                             return this._add(model, modelOptions);
                                         }, this);
                                     } else {
                                         return this._add(models, options);
                                     }
                                 },
-                            
+
                                 /**
                                 Define this method to provide a function that takes a model as a parameter
                                 and returns a value by which that model should be sorted relative to other
                                 models in this list.
-                            
+
                                 By default, no comparator is defined, meaning that models will not be sorted
                                 (they&#x27;ll be stored in the order they&#x27;re added).
-                            
+
                                 @example
                                     var list = new Y.ModelList({model: Y.Model});
-                            
+
                                     list.comparator = function (model) {
                                         return model.get(&#x27;id&#x27;); // Sort models by id.
                                     };
-                            
+
                                 @method comparator
                                 @param {Model} model Model being sorted.
                                 @return {Number|String} Value by which the model should be sorted relative
                                   to other models in this list.
                                 **/
-                            
+
                                 // comparator is not defined by default
-                            
+
                                 /**
                                 Creates or updates the specified model on the server, then adds it to this
                                 list if the server indicates success.
-                            
+
                                 @method create
                                 @param {Model|Object} model Model to create. May be an existing model
                                   instance or a hash of model attributes, in which case a new model instance
@@ -1448,44 +1448,44 @@
                                 **/
                                 create: function (model, options, callback) {
                                     var self = this;
-                            
+
                                     // Allow callback as second arg.
                                     if (typeof options === &#x27;function&#x27;) {
                                         callback = options;
                                         options  = {};
                                     }
-                            
+
                                     options || (options = {});
-                            
+
                                     if (!model._isYUIModel) {
                                         model = new this.model(model);
                                     }
-                            
+
                                     self.fire(EVT_CREATE, Y.merge(options, {
                                         model: model
                                     }));
-                            
+
                                     return model.save(options, function (err) {
                                         if (!err) {
                                             self.add(model, options);
                                         }
-                            
+
                                         if (callback) {
                                             callback.apply(null, arguments);
                                         }
                                     });
                                 },
-                            
+
                                 /**
                                 Executes the supplied function on each model in this list.
-                            
+
                                 By default, the callback function&#x27;s &#x60;this&#x60; object will refer to the model
                                 currently being iterated. Specify a &#x60;thisObj&#x60; to override the &#x60;this&#x60; object
                                 if desired.
-                            
+
                                 Note: Iteration is performed on a copy of the internal array of models, so
                                 it&#x27;s safe to delete a model from the list during iteration.
-                            
+
                                 @method each
                                 @param {Function} callback Function to execute on each model.
                                     @param {Model} callback.model Model instance.
@@ -1499,47 +1499,47 @@
                                 each: function (callback, thisObj) {
                                     var items = this._items.concat(),
                                         i, item, len;
-                            
+
                                     for (i = 0, len = items.length; i &lt; len; i++) {
                                         item = items[i];
                                         callback.call(thisObj || item, item, i, this);
                                     }
-                            
+
                                     return this;
                                 },
-                            
+
                                 /**
                                 Executes the supplied function on each model in this list. Returns an array
                                 containing the models for which the supplied function returned a truthy
                                 value.
-                            
+
                                 The callback function&#x27;s &#x60;this&#x60; object will refer to this ModelList. Use
                                 &#x60;Y.bind()&#x60; to bind the &#x60;this&#x60; object to another object if desired.
-                            
+
                                 @example
-                            
+
                                     // Get an array containing only the models whose &quot;enabled&quot; attribute is
                                     // truthy.
                                     var filtered = list.filter(function (model) {
                                         return model.get(&#x27;enabled&#x27;);
                                     });
-                            
+
                                     // Get a new ModelList containing only the models whose &quot;enabled&quot;
                                     // attribute is truthy.
                                     var filteredList = list.filter({asList: true}, function (model) {
                                         return model.get(&#x27;enabled&#x27;);
                                     });
-                            
+
                                 @method filter
                                 @param {Object} [options] Filter options.
                                     @param {Boolean} [options.asList=false] If truthy, results will be
                                         returned as a new ModelList instance rather than as an array.
-                            
+
                                 @param {Function} callback Function to execute on each model.
                                     @param {Model} callback.model Model instance.
                                     @param {Number} callback.index Index of the current model.
                                     @param {ModelList} callback.list The ModelList being filtered.
-                            
+
                                 @return {Model[]|ModelList} Array of models for which the callback function
                                     returned a truthy value (empty if it never returned a truthy value). If
                                     the &#x60;options.asList&#x60; option is truthy, a new ModelList instance will be
@@ -1550,39 +1550,39 @@
                                     var filtered = [],
                                         items    = this._items,
                                         i, item, len, list;
-                            
+
                                     // Allow options as first arg.
                                     if (typeof options === &#x27;function&#x27;) {
                                         callback = options;
                                         options  = {};
                                     }
-                            
+
                                     for (i = 0, len = items.length; i &lt; len; ++i) {
                                         item = items[i];
-                            
+
                                         if (callback.call(this, item, i, this)) {
                                             filtered.push(item);
                                         }
                                     }
-                            
+
                                     if (options.asList) {
                                         list = new this.constructor({model: this.model});
-                            
+
                                         if (filtered.length) {
                                             list.add(filtered, {silent: true});
                                         }
-                            
+
                                         return list;
                                     } else {
                                         return filtered;
                                     }
                                 },
-                            
+
                                 /**
                                 If _name_ refers to an attribute on this ModelList instance, returns the
                                 value of that attribute. Otherwise, returns an array containing the values
                                 of the specified attribute from each model in this list.
-                            
+
                                 @method get
                                 @param {String} name Attribute name or object property path.
                                 @return {Any|Any[]} Attribute value or array of attribute values.
@@ -1592,18 +1592,18 @@
                                     if (this.attrAdded(name)) {
                                         return AttrProto.get.apply(this, arguments);
                                     }
-                            
+
                                     return this.invoke(&#x27;get&#x27;, name);
                                 },
-                            
+
                                 /**
                                 If _name_ refers to an attribute on this ModelList instance, returns the
                                 HTML-escaped value of that attribute. Otherwise, returns an array containing
                                 the HTML-escaped values of the specified attribute from each model in this
                                 list.
-                            
+
                                 The values are escaped using &#x60;Escape.html()&#x60;.
-                            
+
                                 @method getAsHTML
                                 @param {String} name Attribute name or object property path.
                                 @return {String|String[]} HTML-escaped value or array of HTML-escaped
@@ -1614,18 +1614,18 @@
                                     if (this.attrAdded(name)) {
                                         return Y.Escape.html(AttrProto.get.apply(this, arguments));
                                     }
-                            
+
                                     return this.invoke(&#x27;getAsHTML&#x27;, name);
                                 },
-                            
+
                                 /**
                                 If _name_ refers to an attribute on this ModelList instance, returns the
                                 URL-encoded value of that attribute. Otherwise, returns an array containing
                                 the URL-encoded values of the specified attribute from each model in this
                                 list.
-                            
+
                                 The values are encoded using the native &#x60;encodeURIComponent()&#x60; function.
-                            
+
                                 @method getAsURL
                                 @param {String} name Attribute name or object property path.
                                 @return {String|String[]} URL-encoded value or array of URL-encoded values.
@@ -1635,13 +1635,13 @@
                                     if (this.attrAdded(name)) {
                                         return encodeURIComponent(AttrProto.get.apply(this, arguments));
                                     }
-                            
+
                                     return this.invoke(&#x27;getAsURL&#x27;, name);
                                 },
-                            
+
                                 /**
                                 Returns the model with the specified _clientId_, or &#x60;null&#x60; if not found.
-                            
+
                                 @method getByClientId
                                 @param {String} clientId Client id.
                                 @return {Model} Model, or &#x60;null&#x60; if not found.
@@ -1649,14 +1649,14 @@
                                 getByClientId: function (clientId) {
                                     return this._clientIdMap[clientId] || null;
                                 },
-                            
+
                                 /**
                                 Returns the model with the specified _id_, or &#x60;null&#x60; if not found.
-                            
+
                                 Note that models aren&#x27;t expected to have an id until they&#x27;re saved, so if
                                 you&#x27;re working with unsaved models, it may be safer to call
                                 &#x60;getByClientId()&#x60;.
-                            
+
                                 @method getById
                                 @param {String|Number} id Model id.
                                 @return {Model} Model, or &#x60;null&#x60; if not found.
@@ -1664,11 +1664,11 @@
                                 getById: function (id) {
                                     return this._idMap[id] || null;
                                 },
-                            
+
                                 /**
                                 Calls the named method on every model in the list. Any arguments provided
                                 after _name_ will be passed on to the invoked method.
-                            
+
                                 @method invoke
                                 @param {String} name Name of the method to call on each model.
                                 @param {Any} [args*] Zero or more arguments to pass to the invoked method.
@@ -1679,27 +1679,27 @@
                                     var args = [this._items, name].concat(YArray(arguments, 1, true));
                                     return YArray.invoke.apply(YArray, args);
                                 },
-                            
+
                                 /**
                                 Returns the model at the specified _index_.
-                            
+
                                 @method item
                                 @param {Number} index Index of the model to fetch.
                                 @return {Model} The model at the specified index, or &#x60;undefined&#x60; if there
                                   isn&#x27;t a model there.
                                 **/
-                            
+
                                 // item() is inherited from ArrayList.
-                            
+
                                 /**
                                 Loads this list of models from the server.
-                            
+
                                 This method delegates to the &#x60;sync()&#x60; method to perform the actual load
                                 operation, which is an asynchronous action. Specify a _callback_ function to
                                 be notified of success or failure.
-                            
+
                                 If the load operation succeeds, a &#x60;reset&#x60; event will be fired.
-                            
+
                                 @method load
                                 @param {Object} [options] Options to be passed to &#x60;sync()&#x60; and to
                                   &#x60;reset()&#x60; when adding the loaded models. It&#x27;s up to the custom sync
@@ -1715,27 +1715,27 @@
                                 **/
                                 load: function (options, callback) {
                                     var self = this;
-                            
+
                                     // Allow callback as only arg.
                                     if (typeof options === &#x27;function&#x27;) {
                                         callback = options;
                                         options  = {};
                                     }
-                            
+
                                     options || (options = {});
-                            
+
                                     this.sync(&#x27;read&#x27;, options, function (err, response) {
                                         var facade = {
                                                 options : options,
                                                 response: response
                                             },
-                            
+
                                             parsed;
-                            
+
                                         if (err) {
                                             facade.error = err;
                                             facade.src   = &#x27;load&#x27;;
-                            
+
                                             self.fire(EVT_ERROR, facade);
                                         } else {
                                             // Lazy publish.
@@ -1744,25 +1744,25 @@
                                                     preventable: false
                                                 });
                                             }
-                            
+
                                             parsed = facade.parsed = self._parse(response);
-                            
+
                                             self.reset(parsed, options);
                                             self.fire(EVT_LOAD, facade);
                                         }
-                            
+
                                         if (callback) {
                                             callback.apply(null, arguments);
                                         }
                                     });
-                            
+
                                     return this;
                                 },
-                            
+
                                 /**
                                 Executes the specified function on each model in this list and returns an
                                 array of the function&#x27;s collected return values.
-                            
+
                                 @method map
                                 @param {Function} fn Function to execute on each model.
                                   @param {Model} fn.model Current model being iterated.
@@ -1774,21 +1774,21 @@
                                 map: function (fn, thisObj) {
                                     return YArray.map(this._items, fn, thisObj);
                                 },
-                            
+
                                 /**
                                 Called to parse the _response_ when the list is loaded from the server.
                                 This method receives a server _response_ and is expected to return an array
                                 of model attribute hashes.
-                            
+
                                 The default implementation assumes that _response_ is either an array of
                                 attribute hashes or a JSON string that can be parsed into an array of
                                 attribute hashes. If _response_ is a JSON string and either &#x60;Y.JSON&#x60; or the
                                 native &#x60;JSON&#x60; object are available, it will be parsed automatically. If a
                                 parse error occurs, an &#x60;error&#x60; event will be fired and the model will not be
                                 updated.
-                            
+
                                 You may override this method to implement custom parsing logic if necessary.
-                            
+
                                 @method parse
                                 @param {Any} response Server response.
                                 @return {Object[]} Array of model attribute hashes.
@@ -1803,34 +1803,34 @@
                                                 response: response,
                                                 src     : &#x27;parse&#x27;
                                             });
-                            
+
                                             return null;
                                         }
                                     }
-                            
+
                                     return response || [];
                                 },
-                            
+
                                 /**
                                 Removes the specified model or array of models from this list. You may also
                                 pass another ModelList instance to remove all the models that are in both
                                 that instance and this instance, or pass numerical indices to remove the
                                 models at those indices.
-                            
+
                                 @method remove
                                 @param {Model|Model[]|ModelList|Number|Number[]} models Models or indices of
                                     models to remove.
                                 @param {Object} [options] Data to be mixed into the event facade of the
                                     &#x60;remove&#x60; event(s) for the removed models.
-                            
+
                                     @param {Boolean} [options.silent=false] If &#x60;true&#x60;, no &#x60;remove&#x60; event(s)
                                         will be fired.
-                            
+
                                 @return {Model|Model[]} Removed model or array of removed models.
                                 **/
                                 remove: function (models, options) {
                                     var isList = models._isYUIModelList;
-                            
+
                                     if (isList || Lang.isArray(models)) {
                                         // We can&#x27;t remove multiple models by index because the indices will
                                         // change as we remove them, so we need to get the actual models
@@ -1839,10 +1839,10 @@
                                             if (Lang.isNumber(model)) {
                                                 return this.item(model);
                                             }
-                            
+
                                             return model;
                                         }, this);
-                            
+
                                         return YArray.map(models, function (model) {
                                             return this._remove(model, options);
                                         }, this);
@@ -1850,15 +1850,15 @@
                                         return this._remove(models, options);
                                     }
                                 },
-                            
+
                                 /**
                                 Completely replaces all models in the list with those specified, and fires a
                                 single &#x60;reset&#x60; event.
-                            
+
                                 Use &#x60;reset&#x60; when you want to add or remove a large number of items at once
                                 with less overhead, and without firing &#x60;add&#x60; or &#x60;remove&#x60; events for each
                                 one.
-                            
+
                                 @method reset
                                 @param {Model[]|ModelList|Object[]} [models] Models to add. May be existing
                                     model instances or hashes of model attributes, in which case new model
@@ -1867,18 +1867,18 @@
                                     without passing in any models will clear the list.
                                 @param {Object} [options] Data to be mixed into the event facade of the
                                     &#x60;reset&#x60; event.
-                            
+
                                     @param {Boolean} [options.silent=false] If &#x60;true&#x60;, no &#x60;reset&#x60; event will
                                         be fired.
-                            
+
                                 @chainable
                                 **/
                                 reset: function (models, options) {
                                     models  || (models  = []);
                                     options || (options = {});
-                            
+
                                     var facade = Y.merge({src: &#x27;reset&#x27;}, options);
-                            
+
                                     if (models._isYUIModelList) {
                                         models = models.toArray();
                                     } else {
@@ -1886,9 +1886,9 @@
                                             return model._isYUIModel ? model : new this.model(model);
                                         }, this);
                                     }
-                            
+
                                     facade.models = models;
-                            
+
                                     if (options.silent) {
                                         this._defResetFn(facade);
                                     } else {
@@ -1896,24 +1896,24 @@
                                         if (this.comparator) {
                                             models.sort(Y.bind(this._sort, this));
                                         }
-                            
+
                                         this.fire(EVT_RESET, facade);
                                     }
-                            
+
                                     return this;
                                 },
-                            
+
                                 /**
                                 Executes the supplied function on each model in this list, and stops
                                 iterating if the callback returns &#x60;true&#x60;.
-                            
+
                                 By default, the callback function&#x27;s &#x60;this&#x60; object will refer to the model
                                 currently being iterated. Specify a &#x60;thisObj&#x60; to override the &#x60;this&#x60; object
                                 if desired.
-                            
+
                                 Note: Iteration is performed on a copy of the internal array of models, so
                                 it&#x27;s safe to delete a model from the list during iteration.
-                            
+
                                 @method some
                                 @param {Function} callback Function to execute on each model.
                                     @param {Model} callback.model Model instance.
@@ -1928,26 +1928,26 @@
                                 some: function (callback, thisObj) {
                                     var items = this._items.concat(),
                                         i, item, len;
-                            
+
                                     for (i = 0, len = items.length; i &lt; len; i++) {
                                         item = items[i];
-                            
+
                                         if (callback.call(thisObj || item, item, i, this)) {
                                             return true;
                                         }
                                     }
-                            
+
                                     return false;
                                 },
-                            
+
                                 /**
                                 Forcibly re-sorts the list.
-                            
+
                                 Usually it shouldn&#x27;t be necessary to call this method since the list
                                 maintains its sort order when items are added and removed, but if you change
                                 the &#x60;comparator&#x60; function after items are already in the list, you&#x27;ll need
                                 to re-sort.
-                            
+
                                 @method sort
                                 @param {Object} [options] Data to be mixed into the event facade of the
                                     &#x60;reset&#x60; event.
@@ -1961,48 +1961,48 @@
                                     if (!this.comparator) {
                                         return this;
                                     }
-                            
+
                                     var models = this._items.concat(),
                                         facade;
-                            
+
                                     options || (options = {});
-                            
+
                                     models.sort(Y.rbind(this._sort, this, options));
-                            
+
                                     facade = Y.merge(options, {
                                         models: models,
                                         src   : &#x27;sort&#x27;
                                     });
-                            
+
                                     if (options.silent) {
                                         this._defResetFn(facade);
                                     } else {
                                         this.fire(EVT_RESET, facade);
                                     }
-                            
+
                                     return this;
                                 },
-                            
+
                                 /**
                                 Override this method to provide a custom persistence implementation for this
                                 list. The default method just calls the callback without actually doing
                                 anything.
-                            
+
                                 This method is called internally by &#x60;load()&#x60; and its implementations relies
                                 on the callback being called. This effectively means that when a callback is
                                 provided, it must be called at some point for the class to operate correctly.
-                            
+
                                 @method sync
                                 @param {String} action Sync action to perform. May be one of the following:
-                            
+
                                   * &#x60;create&#x60;: Store a list of newly-created models for the first time.
                                   * &#x60;delete&#x60;: Delete a list of existing models.
                                   * &#x60;read&#x60;  : Load a list of existing models.
                                   * &#x60;update&#x60;: Update a list of existing models.
-                            
+
                                   Currently, model lists only make use of the &#x60;read&#x60; action, but other
                                   actions may be used in future versions.
-                            
+
                                 @param {Object} [options] Sync options. It&#x27;s up to the custom sync
                                   implementation to determine what options it supports or requires, if any.
                                 @param {Function} [callback] Called when the sync operation finishes.
@@ -2015,29 +2015,29 @@
                                 **/
                                 sync: function (/* action, options, callback */) {
                                     var callback = YArray(arguments, 0, true).pop();
-                            
+
                                     if (typeof callback === &#x27;function&#x27;) {
                                         callback();
                                     }
                                 },
-                            
+
                                 /**
                                 Returns an array containing the models in this list.
-                            
+
                                 @method toArray
                                 @return {Model[]} Array containing the models in this list.
                                 **/
                                 toArray: function () {
                                     return this._items.concat();
                                 },
-                            
+
                                 /**
                                 Returns an array containing attribute hashes for each model in this list,
                                 suitable for being passed to &#x60;Y.JSON.stringify()&#x60;.
-                            
+
                                 Under the hood, this method calls &#x60;toJSON()&#x60; on each model in the list and
                                 pushes the results into an array.
-                            
+
                                 @method toJSON
                                 @return {Object[]} Array of model attribute hashes.
                                 @see Model.toJSON()
@@ -2047,15 +2047,15 @@
                                         return model.toJSON();
                                     });
                                 },
-                            
+
                                 // -- Protected Methods ----------------------------------------------------
-                            
+
                                 /**
                                 Adds the specified _model_ if it isn&#x27;t already in this list.
-                            
+
                                 If the model&#x27;s &#x60;clientId&#x60; or &#x60;id&#x60; matches that of a model that&#x27;s already in
                                 the list, an &#x60;error&#x60; event will be fired and the model will not be added.
-                            
+
                                 @method _add
                                 @param {Model|Object} model Model or object to add.
                                 @param {Object} [options] Data to be mixed into the event facade of the
@@ -2067,44 +2067,44 @@
                                 **/
                                 _add: function (model, options) {
                                     var facade, id;
-                            
+
                                     options || (options = {});
-                            
+
                                     if (!model._isYUIModel) {
                                         model = new this.model(model);
                                     }
-                            
+
                                     id = model.get(&#x27;id&#x27;);
-                            
+
                                     if (this._clientIdMap[model.get(&#x27;clientId&#x27;)]
                                             || (Lang.isValue(id) &amp;&amp; this._idMap[id])) {
-                            
+
                                         this.fire(EVT_ERROR, {
                                             error: &#x27;Model is already in the list.&#x27;,
                                             model: model,
                                             src  : &#x27;add&#x27;
                                         });
-                            
+
                                         return;
                                     }
-                            
+
                                     facade = Y.merge(options, {
                                         index: &#x27;index&#x27; in options ? options.index : this._findIndex(model),
                                         model: model
                                     });
-                            
+
                                     if (options.silent) {
                                         this._defAddFn(facade);
                                     } else {
                                         this.fire(EVT_ADD, facade);
                                     }
-                            
+
                                     return model;
                                 },
-                            
+
                                 /**
                                 Adds this list as a bubble target for the specified model&#x27;s events.
-                            
+
                                 @method _attachList
                                 @param {Model} model Model to attach to this list.
                                 @protected
@@ -2114,28 +2114,28 @@
                                     model.lists.push(this);
                                     model.addTarget(this);
                                 },
-                            
+
                                 /**
                                 Clears all internal state and the internal list of models, returning this
                                 list to an empty state. Automatically detaches all models in the list.
-                            
+
                                 @method _clear
                                 @protected
                                 **/
                                 _clear: function () {
                                     YArray.each(this._items, this._detachList, this);
-                            
+
                                     this._clientIdMap = {};
                                     this._idMap       = {};
                                     this._items       = [];
                                 },
-                            
+
                                 /**
                                 Compares the value _a_ to the value _b_ for sorting purposes. Values are
                                 assumed to be the result of calling a model&#x27;s &#x60;comparator()&#x60; method. You can
                                 override this method to implement custom sorting logic, such as a descending
                                 sort or multi-field sorting.
-                            
+
                                 @method _compare
                                 @param {Mixed} a First value to compare.
                                 @param {Mixed} b Second value to compare.
@@ -2147,27 +2147,27 @@
                                 _compare: function (a, b) {
                                     return a &lt; b ? -1 : (a &gt; b ? 1 : 0);
                                 },
-                            
+
                                 /**
                                 Removes this list as a bubble target for the specified model&#x27;s events.
-                            
+
                                 @method _detachList
                                 @param {Model} model Model to detach.
                                 @protected
                                 **/
                                 _detachList: function (model) {
                                     var index = YArray.indexOf(model.lists, this);
-                            
+
                                     if (index &gt; -1) {
                                         model.lists.splice(index, 1);
                                         model.removeTarget(this);
                                     }
                                 },
-                            
+
                                 /**
                                 Returns the index at which the given _model_ should be inserted to maintain
                                 the sort order of the list.
-                            
+
                                 @method _findIndex
                                 @param {Model} model The model being inserted.
                                 @return {Number} Index at which the model should be inserted.
@@ -2178,36 +2178,36 @@
                                         max   = items.length,
                                         min   = 0,
                                         item, middle, needle;
-                            
+
                                     if (!this.comparator || !max) {
                                         return max;
                                     }
-                            
+
                                     needle = this.comparator(model);
-                            
+
                                     // Perform an iterative binary search to determine the correct position
                                     // based on the return value of the &#x60;comparator&#x60; function.
                                     while (min &lt; max) {
                                         middle = (min + max) &gt;&gt; 1; // Divide by two and discard remainder.
                                         item   = items[middle];
-                            
+
                                         if (this._compare(this.comparator(item), needle) &lt; 0) {
                                             min = middle + 1;
                                         } else {
                                             max = middle;
                                         }
                                     }
-                            
+
                                     return min;
                                 },
-                            
+
                                 /**
                                 Calls the public, overrideable &#x60;parse()&#x60; method and returns the result.
-                            
+
                                 Override this method to provide a custom pre-parsing implementation. This
                                 provides a hook for custom persistence implementations to &quot;prep&quot; a response
                                 before calling the &#x60;parse()&#x60; method.
-                            
+
                                 @method _parse
                                 @param {Any} response Server response.
                                 @return {Object[]} Array of model attribute hashes.
@@ -2218,10 +2218,10 @@
                                 _parse: function (response) {
                                     return this.parse(response);
                                 },
-                            
+
                                 /**
                                 Removes the specified _model_ if it&#x27;s in this list.
-                            
+
                                 @method _remove
                                 @param {Model|Number} model Model or index of the model to remove.
                                 @param {Object} [options] Data to be mixed into the event facade of the
@@ -2233,16 +2233,16 @@
                                 **/
                                 _remove: function (model, options) {
                                     var index, facade;
-                            
+
                                     options || (options = {});
-                            
+
                                     if (Lang.isNumber(model)) {
                                         index = model;
                                         model = this.item(index);
                                     } else {
                                         index = this.indexOf(model);
                                     }
-                            
+
                                     if (index === -1 || !model) {
                                         this.fire(EVT_ERROR, {
                                             error: &#x27;Model is not in the list.&#x27;,
@@ -2250,27 +2250,27 @@
                                             model: model,
                                             src  : &#x27;remove&#x27;
                                         });
-                            
+
                                         return;
                                     }
-                            
+
                                     facade = Y.merge(options, {
                                         index: index,
                                         model: model
                                     });
-                            
+
                                     if (options.silent) {
                                         this._defRemoveFn(facade);
                                     } else {
                                         this.fire(EVT_REMOVE, facade);
                                     }
-                            
+
                                     return model;
                                 },
-                            
+
                                 /**
                                 Array sort function used by &#x60;sort()&#x60; to re-sort the models in the list.
-                            
+
                                 @method _sort
                                 @param {Model} a First model to compare.
                                 @param {Model} b Second model to compare.
@@ -2283,21 +2283,21 @@
                                 **/
                                 _sort: function (a, b, options) {
                                     var result = this._compare(this.comparator(a), this.comparator(b));
-                            
+
                                     // Early return when items are equal in their sort comparison.
                                     if (result === 0) {
                                         return result;
                                     }
-                            
+
                                     // Flips sign when the sort is to be peformed in descending order.
                                     return options &amp;&amp; options.descending ? -result : result;
                                 },
-                            
+
                                 // -- Event Handlers -------------------------------------------------------
-                            
+
                                 /**
                                 Updates the model maps when a model&#x27;s &#x60;id&#x60; attribute changes.
-                            
+
                                 @method _afterIdChange
                                 @param {EventFacade} e
                                 @protected
@@ -2306,7 +2306,7 @@
                                     var newVal  = e.newVal,
                                         prevVal = e.prevVal,
                                         target  = e.target;
-                            
+
                                     if (Lang.isValue(prevVal)) {
                                         if (this._idMap[prevVal] === target) {
                                             delete this._idMap[prevVal];
@@ -2322,17 +2322,17 @@
                                             return;
                                         }
                                     }
-                            
+
                                     if (Lang.isValue(newVal)) {
                                         this._idMap[newVal] = target;
                                     }
                                 },
-                            
+
                                 // -- Default Event Handlers -----------------------------------------------
-                            
+
                                 /**
                                 Default event handler for &#x60;add&#x60; events.
-                            
+
                                 @method _defAddFn
                                 @param {EventFacade} e
                                 @protected
@@ -2340,20 +2340,20 @@
                                 _defAddFn: function (e) {
                                     var model = e.model,
                                         id    = model.get(&#x27;id&#x27;);
-                            
+
                                     this._clientIdMap[model.get(&#x27;clientId&#x27;)] = model;
-                            
+
                                     if (Lang.isValue(id)) {
                                         this._idMap[id] = model;
                                     }
-                            
+
                                     this._attachList(model);
                                     this._items.splice(e.index, 0, model);
                                 },
-                            
+
                                 /**
                                 Default event handler for &#x60;remove&#x60; events.
-                            
+
                                 @method _defRemoveFn
                                 @param {EventFacade} e
                                 @protected
@@ -2361,20 +2361,20 @@
                                 _defRemoveFn: function (e) {
                                     var model = e.model,
                                         id    = model.get(&#x27;id&#x27;);
-                            
+
                                     this._detachList(model);
                                     delete this._clientIdMap[model.get(&#x27;clientId&#x27;)];
-                            
+
                                     if (Lang.isValue(id)) {
                                         delete this._idMap[id];
                                     }
-                            
+
                                     this._items.splice(e.index, 1);
                                 },
-                            
+
                                 /**
                                 Default event handler for &#x60;reset&#x60; events.
-                            
+
                                 @method _defResetFn
                                 @param {EventFacade} e
                                 @protected
@@ -2386,9 +2386,9 @@
                                         this._items = e.models.concat();
                                         return;
                                     }
-                            
+
                                     this._clear();
-                            
+
                                     if (e.models.length) {
                                         this.add(e.models, {silent: true});
                                     }
@@ -2396,9 +2396,9 @@
                             }, {
                                 NAME: &#x27;modelList&#x27;
                             });
-                            
+
                             Y.augment(ModelList, Y.ArrayList);
-                            
+
                                 </pre>
                             </div>
                         </div>

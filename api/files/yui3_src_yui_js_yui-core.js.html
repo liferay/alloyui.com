@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,46 +1122,46 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/yui/js/yui-core.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
                             The YUI module contains the components required for building the YUI seed file.
                             This includes the script loading mechanism, a simple queue, and the core
                             utilities for the library.
-                            
+
                             @module yui
                             @submodule yui-base
                             **/
-                            
+
                             var CACHED_DELIMITER = &#x27;__&#x27;,
-                            
+
                                 hasOwn   = Object.prototype.hasOwnProperty,
                                 isObject = Y.Lang.isObject;
-                            
+
                             /**
                             Returns a wrapper for a function which caches the return value of that function,
                             keyed off of the combined string representation of the argument values provided
                             when the wrapper is called.
-                            
+
                             Calling this function again with the same arguments will return the cached value
                             rather than executing the wrapped function.
-                            
+
                             Note that since the cache is keyed off of the string representation of arguments
                             passed to the wrapper function, arguments that aren&#x27;t strings and don&#x27;t provide
                             a meaningful &#x60;toString()&#x60; method may result in unexpected caching behavior. For
                             example, the objects &#x60;{}&#x60; and &#x60;{foo: &#x27;bar&#x27;}&#x60; would both be converted to the
                             string &#x60;[object Object]&#x60; when used as a cache key.
-                            
+
                             @method cached
                             @param {Function} source The function to memoize.
                             @param {Object} [cache={}] Object in which to store cached values. You may seed
@@ -1175,32 +1175,32 @@
                             Y.cached = function (source, cache, refetch) {
                                 /*jshint expr: true*/
                                 cache || (cache = {});
-                            
+
                                 return function (arg) {
                                     var key = arguments.length &gt; 1 ?
                                             Array.prototype.join.call(arguments, CACHED_DELIMITER) :
                                             String(arg);
-                            
+
                                     /*jshint eqeqeq: false*/
                                     if (!(key in cache) || (refetch &amp;&amp; cache[key] == refetch)) {
                                         cache[key] = source.apply(source, arguments);
                                     }
-                            
+
                                     return cache[key];
                                 };
                             };
-                            
+
                             /**
                             Returns the &#x60;location&#x60; object from the window/frame in which this YUI instance
                             operates, or &#x60;undefined&#x60; when executing in a non-browser environment
                             (e.g. Node.js).
-                            
+
                             It is _not_ recommended to hold references to the &#x60;window.location&#x60; object
                             outside of the scope of a function in which its properties are being accessed or
                             its methods are being called. This is because of a nasty bug/issue that exists
                             in both Safari and MobileSafari browsers:
                             [WebKit Bug 34679](https://bugs.webkit.org/show_bug.cgi?id=34679).
-                            
+
                             @method getLocation
                             @return {location} The &#x60;location&#x60; object from the window/frame in which this YUI
                                 instance operates.
@@ -1211,22 +1211,22 @@
                                 // YUI instance before a user&#x27;s config is applied; i.e. &#x60;Y.config.win&#x60; does
                                 // not point the correct window object when this file is loaded.
                                 var win = Y.config.win;
-                            
+
                                 // It is not safe to hold a reference to the &#x60;location&#x60; object outside the
                                 // scope in which it is being used. The WebKit engine used in Safari and
                                 // MobileSafari will &quot;disconnect&quot; the &#x60;location&#x60; object from the &#x60;window&#x60;
                                 // when a page is restored from back/forward history cache.
                                 return win &amp;&amp; win.location;
                             };
-                            
+
                             /**
                             Returns a new object containing all of the properties of all the supplied
                             objects. The properties from later objects will overwrite those in earlier
                             objects.
-                            
+
                             Passing in a single object will create a shallow copy of it. For a deep copy,
                             use &#x60;clone()&#x60;.
-                            
+
                             @method merge
                             @param {Object} objects* One or more objects to merge.
                             @return {Object} A new merged object.
@@ -1237,36 +1237,36 @@
                                     result = {},
                                     key,
                                     obj;
-                            
+
                                 for (; i &lt; len; ++i) {
                                     obj = arguments[i];
-                            
+
                                     for (key in obj) {
                                         if (hasOwn.call(obj, key)) {
                                             result[key] = obj[key];
                                         }
                                     }
                                 }
-                            
+
                                 return result;
                             };
-                            
+
                             /**
                             Mixes _supplier_&#x27;s properties into _receiver_.
-                            
+
                             Properties on _receiver_ or _receiver_&#x27;s prototype will not be overwritten or
                             shadowed unless the _overwrite_ parameter is &#x60;true&#x60;, and will not be merged
                             unless the _merge_ parameter is &#x60;true&#x60;.
-                            
+
                             In the default mode (0), only properties the supplier owns are copied (prototype
                             properties are not copied). The following copying modes are available:
-                            
+
                               * &#x60;0&#x60;: _Default_. Object to object.
                               * &#x60;1&#x60;: Prototype to prototype.
                               * &#x60;2&#x60;: Prototype to prototype and object to object.
                               * &#x60;3&#x60;: Prototype to object.
                               * &#x60;4&#x60;: Object to prototype.
-                            
+
                             @method mix
                             @param {Function|Object} receiver The object or function to receive the mixed
                               properties.
@@ -1287,14 +1287,14 @@
                             **/
                             Y.mix = function(receiver, supplier, overwrite, whitelist, mode, merge) {
                                 var alwaysOverwrite, exists, from, i, key, len, to;
-                            
+
                                 // If no supplier is given, we return the receiver. If no receiver is given,
                                 // we return Y. Returning Y doesn&#x27;t make much sense to me, but it&#x27;s
                                 // grandfathered in for backcompat reasons.
                                 if (!receiver || !supplier) {
                                     return receiver || Y;
                                 }
-                            
+
                                 if (mode) {
                                     // In mode 2 (prototype to prototype and object to object), we recurse
                                     // once to do the proto to proto mix. The object to object mix will be
@@ -1303,12 +1303,12 @@
                                         Y.mix(receiver.prototype, supplier.prototype, overwrite,
                                                 whitelist, 0, merge);
                                     }
-                            
+
                                     // Depending on which mode is specified, we may be copying from or to
                                     // the prototypes of the supplier and receiver.
                                     from = mode === 1 || mode === 3 ? supplier.prototype : supplier;
                                     to   = mode === 1 || mode === 4 ? receiver.prototype : receiver;
-                            
+
                                     // If either the supplier or receiver doesn&#x27;t actually have a
                                     // prototype property, then we could end up with an undefined &#x60;from&#x60;
                                     // or &#x60;to&#x60;. If that happens, we abort and return the receiver.
@@ -1319,15 +1319,15 @@
                                     from = supplier;
                                     to   = receiver;
                                 }
-                            
+
                                 // If &#x60;overwrite&#x60; is truthy and &#x60;merge&#x60; is falsy, then we can skip a
                                 // property existence check on each iteration and save some time.
                                 alwaysOverwrite = overwrite &amp;&amp; !merge;
-                            
+
                                 if (whitelist) {
                                     for (i = 0, len = whitelist.length; i &lt; len; ++i) {
                                         key = whitelist[i];
-                            
+
                                         // We call &#x60;Object.prototype.hasOwnProperty&#x60; instead of calling
                                         // &#x60;hasOwnProperty&#x60; on the object itself, since the object&#x27;s
                                         // &#x60;hasOwnProperty&#x60; method may have been overridden or removed.
@@ -1336,12 +1336,12 @@
                                         if (!hasOwn.call(from, key)) {
                                             continue;
                                         }
-                            
+
                                         // The &#x60;key in to&#x60; check here is (sadly) intentional for backwards
                                         // compatibility reasons. It prevents undesired shadowing of
                                         // prototype members on &#x60;to&#x60;.
                                         exists = alwaysOverwrite ? false : key in to;
-                            
+
                                         if (merge &amp;&amp; exists &amp;&amp; isObject(to[key], true)
                                                 &amp;&amp; isObject(from[key], true)) {
                                             // If we&#x27;re in merge mode, and the key is present on both
@@ -1370,12 +1370,12 @@
                                         if (!hasOwn.call(from, key)) {
                                             continue;
                                         }
-                            
+
                                         // The &#x60;key in to&#x60; check here is (sadly) intentional for backwards
                                         // compatibility reasons. It prevents undesired shadowing of
                                         // prototype members on &#x60;to&#x60;.
                                         exists = alwaysOverwrite ? false : key in to;
-                            
+
                                         if (merge &amp;&amp; exists &amp;&amp; isObject(to[key], true)
                                                 &amp;&amp; isObject(from[key], true)) {
                                             Y.mix(to[key], from[key], overwrite, null, 0, merge);
@@ -1383,7 +1383,7 @@
                                             to[key] = from[key];
                                         }
                                     }
-                            
+
                                     // If this is an IE browser with the JScript enumeration bug, force
                                     // enumeration of the buggy properties by making a recursive call with
                                     // the buggy properties as the whitelist.
@@ -1391,10 +1391,10 @@
                                         Y.mix(to, from, overwrite, Y.Object._forceEnum, mode, merge);
                                     }
                                 }
-                            
+
                                 return receiver;
                             };
-                            
+
                                 </pre>
                             </div>
                         </div>

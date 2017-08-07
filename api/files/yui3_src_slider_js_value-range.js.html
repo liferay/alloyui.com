@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/slider/js/value-range.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1142,16 +1142,16 @@
                              * @module slider
                              * @submodule slider-value-range
                              */
-                            
+
                             // Constants for compression or performance
                             var MIN       = &#x27;min&#x27;,
                                 MAX       = &#x27;max&#x27;,
                                 VALUE     = &#x27;value&#x27;,
                             //     MINORSTEP = &#x27;minorStep&#x27;,
                             //     MAJORSTEP = &#x27;majorStep&#x27;,
-                            
+
                                 round = Math.round;
-                            
+
                             /**
                              * One class of value algorithm that can be built onto SliderBase.  By default,
                              * values range between 0 and 100, but you can configure these on the
@@ -1164,12 +1164,12 @@
                             function SliderValueRange() {
                                 this._initSliderValueRange();
                             }
-                            
+
                             Y.SliderValueRange = Y.mix( SliderValueRange, {
-                            
+
                                 // Prototype properties and methods that will be added onto host class
                                 prototype: {
-                            
+
                                     /**
                                      * Factor used to translate value -&amp;gt; position -&amp;gt; value.
                                      *
@@ -1178,7 +1178,7 @@
                                      * @protected
                                      */
                                     _factor: 1,
-                            
+
                                     /**
                                      * Stub for construction logic.  Override if extending this class and
                                      * you need to set something up during the initializer phase.
@@ -1187,7 +1187,7 @@
                                      * @protected
                                      */
                                     _initSliderValueRange: function () {},
-                            
+
                                     /**
                                      * Override of stub method in SliderBase that is called at the end of
                                      * its bindUI stage of render().  Subscribes to internal events to
@@ -1203,7 +1203,7 @@
                                             valueChange: this._afterValueChange
                                         } );
                                     },
-                            
+
                                     /**
                                      * Move the thumb to appropriate position if necessary.  Also resets
                                      * the cached offsets and recalculates the conversion factor to
@@ -1214,10 +1214,10 @@
                                      */
                                     _syncThumbPosition: function () {
                                         this._calculateFactor();
-                            
+
                                         this._setPosition( this.get( VALUE ) );
                                     },
-                            
+
                                     /**
                                      * Calculates and caches
                                      * (range between max and min) / (rail length)
@@ -1231,19 +1231,19 @@
                                             thumbSize = this.thumb.getStyle( this._key.dim ),
                                             min       = this.get( MIN ),
                                             max       = this.get( MAX );
-                            
+
                                         // The default thumb width is based on Sam skin&#x27;s thumb dimension.
                                         // This attempts to allow for rendering off-DOM, then attaching
                                         // without the need to call syncUI().  It is still recommended
                                         // to call syncUI() in these cases though, just to be sure.
                                         length = parseFloat( length ) || 150;
                                         thumbSize = parseFloat( thumbSize ) || 15;
-                            
+
                                         this._factor = ( max - min ) / ( length - thumbSize );
-                            
+
                                         Y.log(&quot;Calculating factor(~&quot; + this._factor.toFixed(3) + &quot; = (max(&quot; + max + &quot;) - min(&quot; + min + &quot;)) / (length(&quot; + length + &quot;) - thumb size(&quot; + thumbSize + &quot;))&quot;,&quot;info&quot;,&quot;slider&quot;);
                                     },
-                            
+
                                     /**
                                      * Dispatch the new position of the thumb into the value setting
                                      * operations.
@@ -1258,7 +1258,7 @@
                                             this.set(VALUE, this._offsetToValue(e.offset));
                                         }
                                     },
-                            
+
                                     /**
                                      * &lt;p&gt;Converts a pixel position into a value.  Calculates current
                                      * thumb offset from the leading edge of the rail multiplied by the
@@ -1273,13 +1273,13 @@
                                      * @protected
                                      */
                                     _offsetToValue: function ( offset ) {
-                            
+
                                         var value = round( offset * this._factor ) + this.get( MIN );
-                            
+
                                         Y.log(&quot;Offset: &quot; + offset + &quot; =&gt; Value: &quot; + value, &quot;info&quot;, &quot;slider&quot;);
                                         return round( this._nearestValue( value ) );
                                     },
-                            
+
                                     /**
                                      * Converts a value into a pixel offset for use in positioning
                                      * the thumb according to the reverse of the
@@ -1292,11 +1292,11 @@
                                      */
                                     _valueToOffset: function ( value ) {
                                         var offset = round( ( value - this.get( MIN ) ) / this._factor );
-                            
+
                                         Y.log(&quot;Value: &quot; + value + &quot; =&gt; Offset: &quot; + offset, &quot;info&quot;, &quot;slider&quot;);
                                         return offset;
                                     },
-                            
+
                                     /**
                                      * Returns the current value.  Override this if you want to introduce
                                      * output formatting. Otherwise equivalent to slider.get( &quot;value&quot; );
@@ -1307,7 +1307,7 @@
                                     getValue: function () {
                                         return this.get( VALUE );
                                     },
-                            
+
                                     /**
                                      * Updates the current value.  Override this if you want to introduce
                                      * input value parsing or preprocessing.  Otherwise equivalent to
@@ -1321,7 +1321,7 @@
                                     setValue: function ( val ) {
                                         return this.set( VALUE, val );
                                     },
-                            
+
                                     /**
                                      * Update position according to new min value.  If the new min results
                                      * in the current value being out of range, the value is set to the
@@ -1333,10 +1333,10 @@
                                      */
                                     _afterMinChange: function ( e ) {
                                         this._verifyValue();
-                            
+
                                         this._syncThumbPosition();
                                     },
-                            
+
                                     /**
                                      * Update position according to new max value.  If the new max results
                                      * in the current value being out of range, the value is set to the
@@ -1348,10 +1348,10 @@
                                      */
                                     _afterMaxChange: function ( e ) {
                                         this._verifyValue();
-                            
+
                                         this._syncThumbPosition();
                                     },
-                            
+
                                     /**
                                      * Verifies that the current value is within the min - max range.  If
                                      * not, value is set to either min or max, depending on which is
@@ -1363,7 +1363,7 @@
                                     _verifyValue: function () {
                                         var value   = this.get( VALUE ),
                                             nearest = this._nearestValue( value );
-                            
+
                                         if ( value !== nearest ) {
                                             // @TODO Can/should valueChange, minChange, etc be queued
                                             // events? To make dd.set( &#x27;min&#x27;, n ); execute after minChange
@@ -1371,7 +1371,7 @@
                                             this.set( VALUE, nearest );
                                         }
                                     },
-                            
+
                                     /**
                                      * Propagate change to the thumb position unless the change originated
                                      * from the thumbMove event.
@@ -1385,7 +1385,7 @@
                                         Y.log(&quot;Positioning thumb after set(&#x27;value&#x27;,x)&quot;,&quot;info&quot;,&quot;slider&quot;);
                                         this._setPosition( val, { source: &#x27;set&#x27; } );
                                     },
-                            
+
                                     /**
                                      * Positions the thumb and its ARIA attributes in accordance with the
                                      * translated value.
@@ -1400,7 +1400,7 @@
                                         this.thumb.set(&#x27;aria-valuenow&#x27;, value);
                                         this.thumb.set(&#x27;aria-valuetext&#x27;, value);
                                     },
-                            
+
                                     /**
                                      * Validates new values assigned to &lt;code&gt;min&lt;/code&gt; attribute.  Numbers
                                      * are acceptable.  Override this to enforce different rules.
@@ -1413,7 +1413,7 @@
                                     _validateNewMin: function ( value ) {
                                         return Y.Lang.isNumber( value );
                                     },
-                            
+
                                     /**
                                      * Validates new values assigned to &lt;code&gt;max&lt;/code&gt; attribute.  Numbers
                                      * are acceptable.  Override this to enforce different rules.
@@ -1426,7 +1426,7 @@
                                     _validateNewMax: function ( value ) {
                                         return Y.Lang.isNumber( value );
                                     },
-                            
+
                                     /**
                                      * Restricts new values assigned to &lt;code&gt;value&lt;/code&gt; attribute to be
                                      * between the configured &lt;code&gt;min&lt;/code&gt; and &lt;code&gt;max&lt;/code&gt;.
@@ -1443,7 +1443,7 @@
                                         }
                                         return Y.Attribute.INVALID_VALUE;
                                     },
-                            
+
                                     /**
                                      * Returns the nearest valid value to the value input.  If the provided
                                      * value is outside the min - max range, accounting for min &gt; max
@@ -1459,21 +1459,21 @@
                                         var min = this.get( MIN ),
                                             max = this.get( MAX ),
                                             tmp;
-                            
+
                                         // Account for reverse value range (min &gt; max)
                                         tmp = ( max &gt; min ) ? max : min;
                                         min = ( max &gt; min ) ? min : max;
                                         max = tmp;
-                            
+
                                         return ( value &lt; min ) ?
                                                 min :
                                                 ( value &gt; max ) ?
                                                     max :
                                                     value;
                                     }
-                            
+
                                 },
-                            
+
                                 /**
                                  * Attributes that will be added onto host class.
                                  *
@@ -1496,7 +1496,7 @@
                                         value    : 0,
                                         validator: &#x27;_validateNewMin&#x27;
                                     },
-                            
+
                                     /**
                                      * The value associated with the farthest bottom, right position of
                                      * the rail.  Can be less than the configured &lt;code&gt;min&lt;/code&gt; if
@@ -1510,7 +1510,7 @@
                                         value    : 100,
                                         validator: &#x27;_validateNewMax&#x27;
                                     },
-                            
+
                                     /**
                                      * amount to increment/decrement the Slider value
                                      * when the arrow up/down/left/right keys are pressed
@@ -1522,7 +1522,7 @@
                                     minorStep : {
                                         value: 1
                                     },
-                            
+
                                     /**
                                      * amount to increment/decrement the Slider value
                                      * when the page up/down keys are pressed
@@ -1534,7 +1534,7 @@
                                     majorStep : {
                                         value: 10
                                     },
-                            
+
                                     /**
                                      * The value associated with the thumb&#x27;s current position on the
                                      * rail. Defaults to the value inferred from the thumb&#x27;s current
@@ -1551,7 +1551,7 @@
                                     }
                                 }
                             }, true );
-                            
+
                                 </pre>
                             </div>
                         </div>

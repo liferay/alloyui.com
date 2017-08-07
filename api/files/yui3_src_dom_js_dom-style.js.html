@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/dom/js/dom-style.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1140,7 +1140,7 @@
                              * @submodule dom-style
                              * @for DOM
                              */
-                            
+
                             var DOCUMENT_ELEMENT = &#x27;documentElement&#x27;,
                                 DEFAULT_VIEW = &#x27;defaultView&#x27;,
                                 OWNER_DOCUMENT = &#x27;ownerDocument&#x27;,
@@ -1151,11 +1151,11 @@
                                 TRANSPARENT = &#x27;transparent&#x27;,
                                 GET_COMPUTED_STYLE = &#x27;getComputedStyle&#x27;,
                                 GET_BOUNDING_CLIENT_RECT = &#x27;getBoundingClientRect&#x27;,
-                            
+
                                 DOCUMENT = Y.config.doc,
-                            
+
                                 Y_DOM = Y.DOM,
-                            
+
                                 TRANSFORM,
                                 TRANSFORMORIGIN,
                                 VENDOR_TRANSFORM = [
@@ -1165,23 +1165,23 @@
                                     &#x27;msTransform&#x27;,
                                     &#x27;transform&#x27;
                                 ],
-                            
+
                                 re_unit = /width|height|top|left|right|bottom|margin|padding/i;
-                            
+
                             Y.Array.each(VENDOR_TRANSFORM, function(val) {
                                 if (val in DOCUMENT[DOCUMENT_ELEMENT].style) {
                                     TRANSFORM = val;
                                     TRANSFORMORIGIN = val + &quot;Origin&quot;;
                                 }
                             });
-                            
+
                             Y.mix(Y_DOM, {
                                 DEFAULT_UNIT: &#x27;px&#x27;,
-                            
+
                                 CUSTOM_STYLES: {
                                 },
-                            
-                            
+
+
                                 /**
                                  * Sets a style property for a given element.
                                  * @method setStyle
@@ -1193,14 +1193,14 @@
                                 setStyle: function(node, att, val, style) {
                                     style = style || node.style;
                                     var CUSTOM_STYLES = Y_DOM.CUSTOM_STYLES;
-                            
+
                                     if (style) {
                                         if (val === null || val === &#x27;&#x27;) { // normalize unsetting
                                             val = &#x27;&#x27;;
                                         } else if (!isNaN(Number(val)) &amp;&amp; re_unit.test(att)) { // number values may need a unit
                                             val += Y_DOM.DEFAULT_UNIT;
                                         }
-                            
+
                                         if (att in CUSTOM_STYLES) {
                                             if (CUSTOM_STYLES[att].set) {
                                                 CUSTOM_STYLES[att].set(node, val, style);
@@ -1215,7 +1215,7 @@
                                         style[att] = val;
                                     }
                                 },
-                            
+
                                 /**
                                  * Returns the current style value for the given property.
                                  * @method getStyle
@@ -1227,7 +1227,7 @@
                                     style = style || node.style;
                                     var CUSTOM_STYLES = Y_DOM.CUSTOM_STYLES,
                                         val = &#x27;&#x27;;
-                            
+
                                     if (style) {
                                         if (att in CUSTOM_STYLES) {
                                             if (CUSTOM_STYLES[att].get) {
@@ -1241,10 +1241,10 @@
                                             val = Y_DOM[GET_COMPUTED_STYLE](node, att);
                                         }
                                     }
-                            
+
                                     return val;
                                 },
-                            
+
                                 /**
                                  * Sets multiple style properties.
                                  * @method setStyles
@@ -1257,7 +1257,7 @@
                                         Y_DOM.setStyle(node, n, v, style);
                                     }, Y_DOM);
                                 },
-                            
+
                                 /**
                                  * Returns the computed style for the given node.
                                  * @method getComputedStyle
@@ -1269,7 +1269,7 @@
                                     var val = &#x27;&#x27;,
                                         doc = node[OWNER_DOCUMENT],
                                         computed;
-                            
+
                                     if (node[STYLE] &amp;&amp; doc[DEFAULT_VIEW] &amp;&amp; doc[DEFAULT_VIEW][GET_COMPUTED_STYLE]) {
                                         computed = doc[DEFAULT_VIEW][GET_COMPUTED_STYLE](node, null);
                                         if (computed) { // FF may be null in some cases (ticket #2530548)
@@ -1279,36 +1279,36 @@
                                     return val;
                                 }
                             });
-                            
+
                             // normalize reserved word float alternatives (&quot;cssFloat&quot; or &quot;styleFloat&quot;)
                             if (DOCUMENT[DOCUMENT_ELEMENT][STYLE][CSS_FLOAT] !== undefined) {
                                 Y_DOM.CUSTOM_STYLES[FLOAT] = CSS_FLOAT;
                             } else if (DOCUMENT[DOCUMENT_ELEMENT][STYLE][STYLE_FLOAT] !== undefined) {
                                 Y_DOM.CUSTOM_STYLES[FLOAT] = STYLE_FLOAT;
                             }
-                            
+
                             // safari converts transparent to rgba(), others use &quot;transparent&quot;
                             if (Y.UA.webkit) {
                                 Y_DOM[GET_COMPUTED_STYLE] = function(node, att) {
                                     var view = node[OWNER_DOCUMENT][DEFAULT_VIEW],
                                         val = view[GET_COMPUTED_STYLE](node, &#x27;&#x27;)[att];
-                            
+
                                     if (val === &#x27;rgba(0, 0, 0, 0)&#x27;) {
                                         val = TRANSPARENT;
                                     }
-                            
+
                                     return val;
                                 };
-                            
+
                             }
-                            
+
                             Y.DOM._getAttrOffset = function(node, attr) {
                                 var val = Y.DOM[GET_COMPUTED_STYLE](node, attr),
                                     offsetParent = node.offsetParent,
                                     position,
                                     parentOffset,
                                     offset;
-                            
+
                                 if (val === &#x27;auto&#x27;) {
                                     position = Y.DOM.getStyle(node, &#x27;position&#x27;);
                                     if (position === &#x27;static&#x27; || position === &#x27;relative&#x27;) {
@@ -1323,10 +1323,10 @@
                                         }
                                     }
                                 }
-                            
+
                                 return val;
                             };
-                            
+
                             Y.DOM._getOffset = function(node, dir) {
                                 var pos,
                                     xy = null,
@@ -1339,9 +1339,9 @@
                                         right: &#x27;marginRight&#x27;
                                     },
                                     margin;
-                            
+
                                 dir = dir || &#x27;left&#x27;;
-                            
+
                                 if (node) {
                                     pos = Y_DOM.getStyle(node, &#x27;position&#x27;);
                                     margin = parseInt(Y_DOM[GET_COMPUTED_STYLE](node, margins[dir]), 10);
@@ -1349,14 +1349,14 @@
                                         parseInt(Y_DOM[GET_COMPUTED_STYLE](node, dir), 10),
                                         parseInt(Y_DOM[GET_COMPUTED_STYLE](node, &#x27;top&#x27;), 10)
                                     ];
-                            
+
                                     if ( isNaN(xy[0]) ) { // in case of &#x27;auto&#x27;
                                         xy[0] = parseInt(Y_DOM.getStyle(node, dir), 10); // try inline
                                         if ( isNaN(xy[0]) ) { // default to offset value
                                             xy[0] = (pos === &#x27;relative&#x27;) ? 0 : (node[offset[dir]] - margin) || 0;
                                         }
                                     }
-                            
+
                                     if ( isNaN(xy[1]) ) { // in case of &#x27;auto&#x27;
                                         xy[1] = parseInt(Y_DOM.getStyle(node, &#x27;top&#x27;), 10); // try inline
                                         if ( isNaN(xy[1]) ) { // default to offset value
@@ -1364,33 +1364,33 @@
                                         }
                                     }
                                 }
-                            
+
                                 return xy;
-                            
+
                             };
-                            
+
                             if (TRANSFORM) {
                                 Y_DOM.CUSTOM_STYLES.transform = {
                                     set: function(node, val, style) {
                                         style[TRANSFORM] = val;
                                     },
-                            
+
                                     get: function(node) {
                                         return Y_DOM[GET_COMPUTED_STYLE](node, TRANSFORM);
                                     }
                                 };
-                            
+
                                 Y_DOM.CUSTOM_STYLES.transformOrigin = {
                                     set: function(node, val, style) {
                                         style[TRANSFORMORIGIN] = val;
                                     },
-                            
+
                                     get: function(node) {
                                         return Y_DOM[GET_COMPUTED_STYLE](node, TRANSFORMORIGIN);
                                     }
                                 };
                             }
-                            
+
                                 </pre>
                             </div>
                         </div>

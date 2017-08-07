@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,26 +1122,26 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/event-custom/js/event-target.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
-                            
+
                             /**
                              * Custom event engine, DOM event listener abstraction layer, synthetic DOM
                              * events.
                              * @module event-custom
                              * @submodule event-custom-base
                              */
-                            
+
                             /**
                              * EventTarget provides the implementation for any object to
                              * publish, subscribe and fire to custom events, and also
@@ -1158,17 +1158,17 @@
                              * facade payloads by default (default false)
                              * @config prefix {String} the prefix to apply to non-prefixed event names
                              */
-                            
+
                             var L = Y.Lang,
                                 PREFIX_DELIMITER = &#x27;:&#x27;,
                                 CATEGORY_DELIMITER = &#x27;|&#x27;,
                                 AFTER_PREFIX = &#x27;~AFTER~&#x27;,
                                 WILD_TYPE_RE = /(.*?)(:)(.*?)/,
-                            
+
                                 _wildType = Y.cached(function(type) {
                                     return type.replace(WILD_TYPE_RE, &quot;*$2$3&quot;);
                                 }),
-                            
+
                                 /**
                                  * If the instance has a prefix attribute and the
                                  * event type is not prefixed, the instance prefix is
@@ -1177,14 +1177,14 @@
                                  * @private
                                  */
                                 _getType = function(type, pre) {
-                            
+
                                     if (!pre || (typeof type !== &quot;string&quot;) || type.indexOf(PREFIX_DELIMITER) &gt; -1) {
                                         return type;
                                     }
-                            
+
                                     return pre + PREFIX_DELIMITER + type;
                                 },
-                            
+
                                 /**
                                  * Returns an array with the detach key (if provided),
                                  * and the prefixed event name from _getType
@@ -1193,22 +1193,22 @@
                                  * @private
                                  */
                                 _parseType = Y.cached(function(type, pre) {
-                            
+
                                     var t = type, detachcategory, after, i;
-                            
+
                                     if (!L.isString(t)) {
                                         return t;
                                     }
-                            
+
                                     i = t.indexOf(AFTER_PREFIX);
-                            
+
                                     if (i &gt; -1) {
                                         after = true;
                                         t = t.substr(AFTER_PREFIX.length);
                                     }
-                            
+
                                     i = t.indexOf(CATEGORY_DELIMITER);
-                            
+
                                     if (i &gt; -1) {
                                         detachcategory = t.substr(0, (i));
                                         t = t.substr(i+1);
@@ -1216,16 +1216,16 @@
                                             t = null;
                                         }
                                     }
-                            
+
                                     // detach category, full type with instance prefix, is this an after listener, short type
                                     return [detachcategory, (pre) ? _getType(t, pre) : t, after, t];
                                 }),
-                            
+
                                 ET = function(opts) {
-                            
+
                                     var etState = this._yuievt,
                                         etConfig;
-                            
+
                                     if (!etState) {
                                         etState = this._yuievt = {
                                             events: {},    // PERF: Not much point instantiating lazily. We&#x27;re bound to have events
@@ -1237,26 +1237,26 @@
                                             chain: Y.config.chain
                                         };
                                     }
-                            
+
                                     etConfig = etState.config;
-                            
+
                                     if (opts) {
                                         mixConfigs(etConfig, opts, true);
-                            
+
                                         if (opts.chain !== undefined) {
                                             etState.chain = opts.chain;
                                         }
-                            
+
                                         if (opts.prefix) {
                                             etConfig.prefix = opts.prefix;
                                         }
                                     }
                                 };
-                            
+
                             ET.prototype = {
-                            
+
                                 constructor: ET,
-                            
+
                                 /**
                                  * Listen to a custom event hosted by this object one time.
                                  * This is the equivalent to &lt;code&gt;on&lt;/code&gt; except the
@@ -1278,7 +1278,7 @@
                                     });
                                     return handle;
                                 },
-                            
+
                                 /**
                                  * Listen to a custom event hosted by this object one time.
                                  * This is the equivalent to &lt;code&gt;after&lt;/code&gt; except the
@@ -1300,7 +1300,7 @@
                                     });
                                     return handle;
                                 },
-                            
+
                                 /**
                                  * Takes the type parameter passed to &#x27;on&#x27; and parses out the
                                  * various pieces that could be included in the type.  If the
@@ -1320,7 +1320,7 @@
                                 parseType: function(type, pre) {
                                     return _parseType(type, pre || this._yuievt.config.prefix);
                                 },
-                            
+
                                 /**
                                  * Subscribe a callback function to a custom event fired by this object or
                                  * from an object that bubbles its events to this object.
@@ -1361,61 +1361,61 @@
                                  *                       subscription
                                  */
                                 on: function(type, fn, context) {
-                            
+
                                     var yuievt = this._yuievt,
                                         parts = _parseType(type, yuievt.config.prefix), f, c, args, ret, ce,
                                         detachcategory, handle, store = Y.Env.evt.handles, after, adapt, shorttype,
                                         Node = Y.Node, n, domevent, isArr;
-                            
+
                                     // full name, args, detachcategory, after
                                     this._monitor(&#x27;attach&#x27;, parts[1], {
                                         args: arguments,
                                         category: parts[0],
                                         after: parts[2]
                                     });
-                            
+
                                     if (L.isObject(type)) {
-                            
+
                                         if (L.isFunction(type)) {
                                             return Y.Do.before.apply(Y.Do, arguments);
                                         }
-                            
+
                                         f = fn;
                                         c = context;
                                         args = nativeSlice.call(arguments, 0);
                                         ret = [];
-                            
+
                                         if (L.isArray(type)) {
                                             isArr = true;
                                         }
-                            
+
                                         after = type._after;
                                         delete type._after;
-                            
+
                                         Y.each(type, function(v, k) {
-                            
+
                                             if (L.isObject(v)) {
                                                 f = v.fn || ((L.isFunction(v)) ? v : f);
                                                 c = v.context || c;
                                             }
-                            
+
                                             var nv = (after) ? AFTER_PREFIX : &#x27;&#x27;;
-                            
+
                                             args[0] = nv + ((isArr) ? v : k);
                                             args[1] = f;
                                             args[2] = c;
-                            
+
                                             ret.push(this.on.apply(this, args));
-                            
+
                                         }, this);
-                            
+
                                         return (yuievt.chain) ? this : new Y.EventHandle(ret);
                                     }
-                            
+
                                     detachcategory = parts[0];
                                     after = parts[2];
                                     shorttype = parts[3];
-                            
+
                                     // extra redirection so we catch adaptor events too.  take a look at this.
                                     if (Node &amp;&amp; Y.instanceOf(this, Node) &amp;&amp; (shorttype in Node.DOM_EVENTS)) {
                                         args = nativeSlice.call(arguments, 0);
@@ -1423,32 +1423,32 @@
                                         // Y.log(&quot;Node detected, redirecting with these args: &quot; + args);
                                         return Y.on.apply(Y, args);
                                     }
-                            
+
                                     type = parts[1];
-                            
+
                                     if (Y.instanceOf(this, YUI)) {
-                            
+
                                         adapt = Y.Env.evt.plugins[type];
                                         args  = nativeSlice.call(arguments, 0);
                                         args[0] = shorttype;
-                            
+
                                         if (Node) {
                                             n = args[2];
-                            
+
                                             if (Y.instanceOf(n, Y.NodeList)) {
                                                 n = Y.NodeList.getDOMNodes(n);
                                             } else if (Y.instanceOf(n, Node)) {
                                                 n = Node.getDOMNode(n);
                                             }
-                            
+
                                             domevent = (shorttype in Node.DOM_EVENTS);
-                            
+
                                             // Captures both DOM events and event plugins.
                                             if (domevent) {
                                                 args[2] = n;
                                             }
                                         }
-                            
+
                                         // check for the existance of an event adaptor
                                         if (adapt) {
                                             Y.log(&#x27;Using adaptor for &#x27; + shorttype + &#x27;, &#x27; + n, &#x27;info&#x27;, &#x27;event&#x27;);
@@ -1456,29 +1456,29 @@
                                         } else if ((!type) || domevent) {
                                             handle = Y.Event._attach(args);
                                         }
-                            
+
                                     }
-                            
+
                                     if (!handle) {
                                         ce = yuievt.events[type] || this.publish(type);
                                         handle = ce._on(fn, context, (arguments.length &gt; 3) ? nativeSlice.call(arguments, 3) : null, (after) ? &#x27;after&#x27; : true);
-                            
+
                                         // TODO: More robust regex, accounting for category
                                         if (type.indexOf(&quot;*:&quot;) !== -1) {
                                             this._hasSiblings = true;
                                         }
                                     }
-                            
+
                                     if (detachcategory) {
                                         store[detachcategory] = store[detachcategory] || {};
                                         store[detachcategory][type] = store[detachcategory][type] || [];
                                         store[detachcategory][type].push(handle);
                                     }
-                            
+
                                     return (yuievt.chain) ? this : handle;
-                            
+
                                 },
-                            
+
                                 /**
                                  * subscribe to an event
                                  * @method subscribe
@@ -1488,7 +1488,7 @@
                                     Y.log(&#x27;EventTarget subscribe() is deprecated, use on()&#x27;, &#x27;warn&#x27;, &#x27;deprecated&#x27;);
                                     return this.on.apply(this, arguments);
                                 },
-                            
+
                                 /**
                                  * Detach one or more listeners the from the specified event
                                  * @method detach
@@ -1506,12 +1506,12 @@
                                  * @return {EventTarget} the host
                                  */
                                 detach: function(type, fn, context) {
-                            
+
                                     var evts = this._yuievt.events,
                                         i,
                                         Node = Y.Node,
                                         isNode = Node &amp;&amp; (Y.instanceOf(this, Node));
-                            
+
                                     // detachAll disabled on the Y instance.
                                     if (!type &amp;&amp; (this !== Y)) {
                                         for (i in evts) {
@@ -1522,16 +1522,16 @@
                                         if (isNode) {
                                             Y.Event.purgeElement(Node.getDOMNode(this));
                                         }
-                            
+
                                         return this;
                                     }
-                            
+
                                     var parts = _parseType(type, this._yuievt.config.prefix),
                                     detachcategory = L.isArray(parts) ? parts[0] : null,
                                     shorttype = (parts) ? parts[3] : null,
                                     adapt, store = Y.Env.evt.handles, detachhost, cat, args,
                                     ce,
-                            
+
                                     keyDetacher = function(lcat, ltype, host) {
                                         var handles = lcat[ltype], ce, i;
                                         if (handles) {
@@ -1543,13 +1543,13 @@
                                             }
                                         }
                                     };
-                            
+
                                     if (detachcategory) {
-                            
+
                                         cat = store[detachcategory];
                                         type = parts[1];
                                         detachhost = (isNode) ? Y.Node.getDOMNode(this) : this;
-                            
+
                                         if (cat) {
                                             if (type) {
                                                 keyDetacher(cat, type, detachhost);
@@ -1560,10 +1560,10 @@
                                                     }
                                                 }
                                             }
-                            
+
                                             return this;
                                         }
-                            
+
                                     // If this is an event handle, use it to detach
                                     } else if (L.isObject(type) &amp;&amp; type.detach) {
                                         type.detach();
@@ -1575,9 +1575,9 @@
                                         Y.detach.apply(Y, args);
                                         return this;
                                     }
-                            
+
                                     adapt = Y.Env.evt.plugins[shorttype];
-                            
+
                                     // The YUI instance handles DOM events and adaptors
                                     if (Y.instanceOf(this, YUI)) {
                                         args = nativeSlice.call(arguments, 0);
@@ -1592,16 +1592,16 @@
                                             return this;
                                         }
                                     }
-                            
+
                                     // ce = evts[type];
                                     ce = evts[parts[1]];
                                     if (ce) {
                                         ce.detach(fn, context);
                                     }
-                            
+
                                     return this;
                                 },
-                            
+
                                 /**
                                  * detach a listener
                                  * @method unsubscribe
@@ -1611,7 +1611,7 @@
                             Y.log(&#x27;EventTarget unsubscribe() is deprecated, use detach()&#x27;, &#x27;warn&#x27;, &#x27;deprecated&#x27;);
                                     return this.detach.apply(this, arguments);
                                 },
-                            
+
                                 /**
                                  * Removes all listeners from the specified event.  If the event type
                                  * is not specified, all listeners from all hosted custom events will
@@ -1622,7 +1622,7 @@
                                 detachAll: function(type) {
                                     return this.detach(type);
                                 },
-                            
+
                                 /**
                                  * Removes all listeners from the specified event.  If the event type
                                  * is not specified, all listeners from all hosted custom events will
@@ -1635,7 +1635,7 @@
                             Y.log(&#x27;EventTarget unsubscribeAll() is deprecated, use detachAll()&#x27;, &#x27;warn&#x27;, &#x27;deprecated&#x27;);
                                     return this.detachAll.apply(this, arguments);
                                 },
-                            
+
                                 /**
                                  * Creates a new custom event of the specified type.  If a custom event
                                  * by that name already exists, it will not be re-created.  In either
@@ -1671,12 +1671,12 @@
                                  *
                                  */
                                 publish: function(type, opts) {
-                            
+
                                     var ret,
                                         etState = this._yuievt,
                                         etConfig = etState.config,
                                         pre = etConfig.prefix;
-                            
+
                                     if (typeof type === &quot;string&quot;)  {
                                         if (pre) {
                                             type = _getType(type, pre);
@@ -1684,19 +1684,19 @@
                                         ret = this._publish(type, etConfig, opts);
                                     } else {
                                         ret = {};
-                            
+
                                         Y.each(type, function(v, k) {
                                             if (pre) {
                                                 k = _getType(k, pre);
                                             }
                                             ret[k] = this._publish(k, etConfig, v || opts);
                                         }, this);
-                            
+
                                     }
-                            
+
                                     return ret;
                                 },
-                            
+
                                 /**
                                  * Returns the fully qualified type, given a short type string.
                                  * That is, returns &quot;foo:bar&quot; when given &quot;bar&quot; if &quot;foo&quot; is the configured prefix.
@@ -1711,16 +1711,16 @@
                                  * @return {String} The prefixed type, if a prefix is set, otherwise the type passed in
                                  */
                                 _getFullType : function(type) {
-                            
+
                                     var pre = this._yuievt.config.prefix;
-                            
+
                                     if (pre) {
                                         return pre + PREFIX_DELIMITER + type;
                                     } else {
                                         return type;
                                     }
                                 },
-                            
+
                                 /**
                                  * The low level event publish implementation. It expects all the massaging to have been done
                                  * outside of this method. e.g. the &#x60;type&#x60; to &#x60;fullType&#x60; conversion. It&#x27;s designed to be a fast
@@ -1735,40 +1735,40 @@
                                  * be the default &#x60;CustomEvent&#x60; instance, and can be configured independently.
                                  */
                                 _publish : function(fullType, etOpts, ceOpts) {
-                            
+
                                     var ce,
                                         etState = this._yuievt,
                                         etConfig = etState.config,
                                         host = etConfig.host,
                                         context = etConfig.context,
                                         events = etState.events;
-                            
+
                                     ce = events[fullType];
-                            
+
                                     // PERF: Hate to pull the check out of monitor, but trying to keep critical path tight.
                                     if ((etConfig.monitored &amp;&amp; !ce) || (ce &amp;&amp; ce.monitored)) {
                                         this._monitor(&#x27;publish&#x27;, fullType, {
                                             args: arguments
                                         });
                                     }
-                            
+
                                     if (!ce) {
                                         // Publish event
                                         ce = events[fullType] = new Y.CustomEvent(fullType, etOpts);
-                            
+
                                         if (!etOpts) {
                                             ce.host = host;
                                             ce.context = context;
                                         }
                                     }
-                            
+
                                     if (ceOpts) {
                                         mixConfigs(ce, ceOpts, true);
                                     }
-                            
+
                                     return ce;
                                 },
-                            
+
                                 /**
                                  * This is the entry point for the event monitoring system.
                                  * You can monitor &#x27;attach&#x27;, &#x27;detach&#x27;, &#x27;fire&#x27;, and &#x27;publish&#x27;.
@@ -1788,7 +1788,7 @@
                                  */
                                 _monitor: function(what, eventType, o) {
                                     var monitorevt, ce, type;
-                            
+
                                     if (eventType) {
                                         if (typeof eventType === &quot;string&quot;) {
                                             type = eventType;
@@ -1797,7 +1797,7 @@
                                             ce = eventType;
                                             type = eventType.type;
                                         }
-                            
+
                                         if ((this._yuievt.config.monitored &amp;&amp; (!ce || ce.monitored)) || (ce &amp;&amp; ce.monitored)) {
                                             monitorevt = type + &#x27;_&#x27; + what;
                                             o.monitored = what;
@@ -1805,7 +1805,7 @@
                                         }
                                     }
                                 },
-                            
+
                                 /**
                                  * Fire a custom event by name.  The callback functions will be executed
                                  * from the context specified when the event was created, and with the
@@ -1835,7 +1835,7 @@
                                  * false if at any point the event propagation was halted.
                                  */
                                 fire: function(type) {
-                            
+
                                     var typeIncluded = (typeof type === &quot;string&quot;),
                                         argCount = arguments.length,
                                         t = type,
@@ -1846,11 +1846,11 @@
                                         ce,
                                         ce2,
                                         args;
-                            
+
                                     if (typeIncluded &amp;&amp; argCount &lt;= 3) {
-                            
+
                                         // PERF: Try to avoid slice/iteration for the common signatures
-                            
+
                                         // Most common
                                         if (argCount === 2) {
                                             args = [arguments[1]]; // fire(&quot;foo&quot;, {})
@@ -1859,59 +1859,59 @@
                                         } else {
                                             args = []; // fire(&quot;foo&quot;)
                                         }
-                            
+
                                     } else {
                                         args = nativeSlice.call(arguments, ((typeIncluded) ? 1 : 0));
                                     }
-                            
+
                                     if (!typeIncluded) {
                                         t = (type &amp;&amp; type.type);
                                     }
-                            
+
                                     if (pre) {
                                         t = _getType(t, pre);
                                     }
-                            
+
                                     ce = yuievt.events[t];
-                            
+
                                     if (this._hasSiblings) {
                                         ce2 = this.getSibling(t, ce);
-                            
+
                                         if (ce2 &amp;&amp; !ce) {
                                             ce = this.publish(t);
                                         }
                                     }
-                            
+
                                     // PERF: trying to avoid function call, since this is a critical path
                                     if ((etConfig.monitored &amp;&amp; (!ce || ce.monitored)) || (ce &amp;&amp; ce.monitored)) {
                                         this._monitor(&#x27;fire&#x27;, (ce || t), {
                                             args: args
                                         });
                                     }
-                            
+
                                     // this event has not been published or subscribed to
                                     if (!ce) {
                                         if (yuievt.hasTargets) {
                                             return this.bubble({ type: t }, args, this);
                                         }
-                            
+
                                         // otherwise there is nothing to be done
                                         ret = true;
                                     } else {
-                            
+
                                         if (ce2) {
                                             ce.sibling = ce2;
                                         }
-                            
+
                                         ret = ce._fire(args);
                                     }
-                            
+
                                     return (yuievt.chain) ? this : ret;
                                 },
-                            
+
                                 getSibling: function(type, ce) {
                                     var ce2;
-                            
+
                                     // delegate to *:type events if there are subscribers
                                     if (type.indexOf(PREFIX_DELIMITER) &gt; -1) {
                                         type = _wildType(type);
@@ -1922,10 +1922,10 @@
                                             ce2.broadcast = 0;
                                         }
                                     }
-                            
+
                                     return ce2;
                                 },
-                            
+
                                 /**
                                  * Returns the custom event of the provided type has been created, a
                                  * falsy value otherwise
@@ -1936,7 +1936,7 @@
                                  */
                                 getEvent: function(type, prefixed) {
                                     var pre, e;
-                            
+
                                     if (!prefixed) {
                                         pre = this._yuievt.config.prefix;
                                         type = (pre) ? _getType(type, pre) : type;
@@ -1944,7 +1944,7 @@
                                     e = this._yuievt.events;
                                     return e[type] || null;
                                 },
-                            
+
                                 /**
                                  * Subscribe to a custom event hosted by this object.  The
                                  * supplied callback will execute after any listeners add
@@ -1960,9 +1960,9 @@
                                  *                       subscription
                                  */
                                 after: function(type, fn) {
-                            
+
                                     var a = nativeSlice.call(arguments, 0);
-                            
+
                                     switch (L.type(type)) {
                                         case &#x27;function&#x27;:
                                             return Y.Do.after.apply(Y.Do, arguments);
@@ -1977,11 +1977,11 @@
                                         default:
                                             a[0] = AFTER_PREFIX + type;
                                     }
-                            
+
                                     return this.on.apply(this, a);
-                            
+
                                 },
-                            
+
                                 /**
                                  * Executes the callback before a DOM event, custom event
                                  * or method.  If the first argument is a function, it
@@ -2000,17 +2000,17 @@
                                 before: function() {
                                     return this.on.apply(this, arguments);
                                 }
-                            
+
                             };
-                            
+
                             Y.EventTarget = ET;
-                            
+
                             // make Y an event target
                             Y.mix(Y, ET.prototype);
                             ET.call(Y, { bubbles: false });
-                            
+
                             YUI.Env.globalEvents = YUI.Env.globalEvents || new ET();
-                            
+
                             /**
                              * Hosts YUI page level events.  This is where events bubble to
                              * when the broadcast config is set to 2.  This property is
@@ -2020,12 +2020,12 @@
                              * @for YUI
                              */
                             Y.Global = YUI.Env.globalEvents;
-                            
+
                             // @TODO implement a global namespace function on Y.Global?
-                            
+
                             /**
                             &#x60;Y.on()&#x60; can do many things:
-                            
+
                             &lt;ul&gt;
                                 &lt;li&gt;Subscribe to custom events &#x60;publish&#x60;ed and &#x60;fire&#x60;d from Y&lt;/li&gt;
                                 &lt;li&gt;Subscribe to custom events &#x60;publish&#x60;ed with &#x60;broadcast&#x60; 1 or 2 and
@@ -2034,41 +2034,41 @@
                                 &lt;li&gt;Subscribe to the execution of a method on any object, effectively
                                 treating that method as an event&lt;/li&gt;
                             &lt;/ul&gt;
-                            
+
                             For custom event subscriptions, pass the custom event name as the first argument
                             and callback as the second. The &#x60;this&#x60; object in the callback will be &#x60;Y&#x60; unless
                             an override is passed as the third argument.
-                            
+
                                 Y.on(&#x27;io:complete&#x27;, function () {
                                     Y.MyApp.updateStatus(&#x27;Transaction complete&#x27;);
                                 });
-                            
+
                             To subscribe to DOM events, pass the name of a DOM event as the first argument
                             and a CSS selector string as the third argument after the callback function.
                             Alternately, the third argument can be a &#x60;Node&#x60;, &#x60;NodeList&#x60;, &#x60;HTMLElement&#x60;,
                             array, or simply omitted (the default is the &#x60;window&#x60; object).
-                            
+
                                 Y.on(&#x27;click&#x27;, function (e) {
                                     e.preventDefault();
-                            
+
                                     // proceed with ajax form submission
                                     var url = this.get(&#x27;action&#x27;);
                                     ...
                                 }, &#x27;#my-form&#x27;);
-                            
+
                             The &#x60;this&#x60; object in DOM event callbacks will be the &#x60;Node&#x60; targeted by the CSS
                             selector or other identifier.
-                            
+
                             &#x60;on()&#x60; subscribers for DOM events or custom events &#x60;publish&#x60;ed with a
                             &#x60;defaultFn&#x60; can prevent the default behavior with &#x60;e.preventDefault()&#x60; from the
                             event object passed as the first parameter to the subscription callback.
-                            
+
                             To subscribe to the execution of an object method, pass arguments corresponding to the call signature for
                             &lt;a href=&quot;../classes/Do.html#methods_before&quot;&gt;&#x60;Y.Do.before(...)&#x60;&lt;/a&gt;.
-                            
+
                             NOTE: The formal parameter list below is for events, not for function
                             injection.  See &#x60;Y.Do.before&#x60; for that signature.
-                            
+
                             @method on
                             @param {String} type DOM or custom event name
                             @param {Function} fn The callback to execute in response to the event
@@ -2079,14 +2079,14 @@
                             @see Do.before
                             @for YUI
                             **/
-                            
+
                             /**
                             Listen for an event one time.  Equivalent to &#x60;on()&#x60;, except that
                             the listener is immediately detached when executed.
-                            
+
                             See the &lt;a href=&quot;#methods_on&quot;&gt;&#x60;on()&#x60; method&lt;/a&gt; for additional subscription
                             options.
-                            
+
                             @see on
                             @method once
                             @param {String} type DOM or custom event name
@@ -2097,19 +2097,19 @@
                                                   subscription
                             @for YUI
                             **/
-                            
+
                             /**
                             Listen for an event one time.  Equivalent to &#x60;once()&#x60;, except, like &#x60;after()&#x60;,
                             the subscription callback executes after all &#x60;on()&#x60; subscribers and the event&#x27;s
                             &#x60;defaultFn&#x60; (if configured) have executed.  Like &#x60;after()&#x60; if any &#x60;on()&#x60; phase
                             subscriber calls &#x60;e.preventDefault()&#x60;, neither the &#x60;defaultFn&#x60; nor the &#x60;after()&#x60;
                             subscribers will execute.
-                            
+
                             The listener is immediately detached when executed.
-                            
+
                             See the &lt;a href=&quot;#methods_on&quot;&gt;&#x60;on()&#x60; method&lt;/a&gt; for additional subscription
                             options.
-                            
+
                             @see once
                             @method onceAfter
                             @param {String} type The custom event name
@@ -2120,21 +2120,21 @@
                                                   subscription
                             @for YUI
                             **/
-                            
+
                             /**
                             Like &#x60;on()&#x60;, this method creates a subscription to a custom event or to the
                             execution of a method on an object.
-                            
+
                             For events, &#x60;after()&#x60; subscribers are executed after the event&#x27;s
                             &#x60;defaultFn&#x60; unless &#x60;e.preventDefault()&#x60; was called from an &#x60;on()&#x60; subscriber.
-                            
+
                             See the &lt;a href=&quot;#methods_on&quot;&gt;&#x60;on()&#x60; method&lt;/a&gt; for additional subscription
                             options.
-                            
+
                             NOTE: The subscription signature shown is for events, not for function
                             injection.  See &lt;a href=&quot;../classes/Do.html#methods_after&quot;&gt;&#x60;Y.Do.after&#x60;&lt;/a&gt;
                             for that signature.
-                            
+
                             @see on
                             @see Do.after
                             @method after
@@ -2146,7 +2146,7 @@
                                                   subscription
                             @for YUI
                             **/
-                            
+
                                 </pre>
                             </div>
                         </div>

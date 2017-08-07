@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/uploader/js/file-flash.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                                 /**
@@ -1146,13 +1146,13 @@
                                  * @constructor
                                  * @param {Object} config Configuration object.
                                  */
-                            
+
                                 var FileFlash = function(o) {
                                     FileFlash.superclass.constructor.apply(this, arguments);
                                 };
-                            
+
                                 Y.extend(FileFlash, Y.Base, {
-                            
+
                                    /**
                                     * Construction logic executed during FileFlash instantiation.
                                     *
@@ -1164,7 +1164,7 @@
                                             this._set(&quot;id&quot;, Y.guid(&quot;file&quot;));
                                         }
                                     },
-                            
+
                                    /**
                                     * Handler of events dispatched by the Flash player.
                                     *
@@ -1190,7 +1190,7 @@
                                              this.fire(&quot;uploadstart&quot;, {uploader: this.get(&quot;uploader&quot;)});
                                              break;
                                         case &quot;uploadprogress&quot;:
-                            
+
                                               /**
                                                * Signals that progress has been made on the upload of this file.
                                                *
@@ -1216,7 +1216,7 @@
                                              this._set(&quot;bytesUploaded&quot;, event.bytesLoaded);
                                              break;
                                         case &quot;uploadcomplete&quot;:
-                            
+
                                               /**
                                                * Signals that this file&#x27;s upload has completed, but data has not yet been received from the server.
                                                *
@@ -1248,7 +1248,7 @@
                                                                           data: event.data});
                                              break;
                                         case &quot;uploadcancel&quot;:
-                            
+
                                             /**
                                              * Signals that this file&#x27;s upload has been cancelled.
                                              *
@@ -1263,7 +1263,7 @@
                                              this.fire(&quot;uploadcancel&quot;, {originEvent: event});
                                              break;
                                         case &quot;uploaderror&quot;:
-                            
+
                                             /**
                                              * Signals that this file&#x27;s upload has encountered an error.
                                              *
@@ -1284,11 +1284,11 @@
                                              *  &lt;/dl&gt;
                                              */
                                              this.fire(&quot;uploaderror&quot;, {originEvent: event, status: event.status, statusText: event.message, source: event.source});
-                            
+
                                       }
                                     }
                                     },
-                            
+
                                    /**
                                     * Starts the upload of a specific file.
                                     *
@@ -1298,27 +1298,27 @@
                                     * @param fileFieldName {String} (optional) The name of the POST variable that should contain the uploaded file (&#x27;Filedata&#x27; by default)
                                     */
                                     startUpload: function(url, parameters, fileFieldName) {
-                            
+
                                     if (this.get(&quot;uploader&quot;)) {
-                            
+
                                         var myUploader = this.get(&quot;uploader&quot;),
                                             fileField = fileFieldName || &quot;Filedata&quot;,
                                             id = this.get(&quot;id&quot;),
                                             params = parameters || null;
-                            
+
                                         this._set(&quot;bytesUploaded&quot;, 0);
-                            
+
                                         myUploader.on(&quot;uploadstart&quot;, this._swfEventHandler, this);
                                         myUploader.on(&quot;uploadprogress&quot;, this._swfEventHandler, this);
                                         myUploader.on(&quot;uploadcomplete&quot;, this._swfEventHandler, this);
                                         myUploader.on(&quot;uploadcompletedata&quot;, this._swfEventHandler, this);
                                         myUploader.on(&quot;uploaderror&quot;, this._swfEventHandler, this);
-                            
+
                                         myUploader.callSWF(&quot;upload&quot;, [id, url, params, fileField]);
                                      }
-                            
+
                                     },
-                            
+
                                    /**
                                     * Cancels the upload of a specific file, if currently in progress.
                                     *
@@ -1330,9 +1330,9 @@
                                        this.fire(&quot;uploadcancel&quot;);
                                      }
                                     }
-                            
+
                                 }, {
-                            
+
                                    /**
                                     * The identity of the class.
                                     *
@@ -1344,7 +1344,7 @@
                                     * @static
                                     */
                                     NAME: &#x27;file&#x27;,
-                            
+
                                    /**
                                     * The type of transport.
                                     *
@@ -1356,7 +1356,7 @@
                                     * @static
                                     */
                                     TYPE: &quot;flash&quot;,
-                            
+
                                    /**
                                     * Static property used to define the default attribute configuration of
                                     * the File.
@@ -1367,7 +1367,7 @@
                                     * @static
                                     */
                                     ATTRS: {
-                            
+
                                    /**
                                     * A String containing the unique id of the file wrapped by the FileFlash instance.
                                     * The id is supplied by the Flash player uploader.
@@ -1380,7 +1380,7 @@
                                         writeOnce: &quot;initOnly&quot;,
                                         value: null
                                     },
-                            
+
                                    /**
                                     * The size of the file wrapped by FileFlash. This value is supplied by the Flash player uploader.
                                     *
@@ -1392,7 +1392,7 @@
                                         writeOnce: &quot;initOnly&quot;,
                                         value: 0
                                     },
-                            
+
                                    /**
                                     * The name of the file wrapped by FileFlash. This value is supplied by the Flash player uploader.
                                     *
@@ -1404,7 +1404,7 @@
                                         writeOnce: &quot;initOnly&quot;,
                                         value: null
                                     },
-                            
+
                                    /**
                                     * The date that the file wrapped by FileFlash was created on. This value is supplied by the Flash player uploader.
                                     *
@@ -1416,7 +1416,7 @@
                                         writeOnce: &quot;initOnly&quot;,
                                         value: null
                                     },
-                            
+
                                    /**
                                     * The date that the file wrapped by FileFlash was last modified on. This value is supplied by the Flash player uploader.
                                     *
@@ -1428,7 +1428,7 @@
                                         writeOnce: &quot;initOnly&quot;,
                                         value: null
                                     },
-                            
+
                                    /**
                                     * The number of bytes of the file that has been uploaded to the server. This value is
                                     * non-zero only while a file is being uploaded.
@@ -1441,7 +1441,7 @@
                                         readOnly: true,
                                         value: 0
                                     },
-                            
+
                                    /**
                                     * The type of the file wrapped by FileFlash. This value is provided by the Flash player
                                     * uploader.
@@ -1454,7 +1454,7 @@
                                         writeOnce: &quot;initOnly&quot;,
                                         value: null
                                     },
-                            
+
                                    /**
                                     * The instance of Y.SWF wrapping the Flash player uploader associated with this file.
                                     *
@@ -1468,9 +1468,9 @@
                                     }
                                     }
                                 });
-                            
+
                                 Y.FileFlash = FileFlash;
-                            
+
                                 </pre>
                             </div>
                         </div>

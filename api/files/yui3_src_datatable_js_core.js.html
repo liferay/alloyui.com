@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,70 +1122,70 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/datatable/js/core.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
                             The core implementation of the &#x60;DataTable&#x60; and &#x60;DataTable.Base&#x60; Widgets.
-                            
+
                             @module datatable
                             @submodule datatable-core
                             @since 3.5.0
                             **/
-                            
+
                             var INVALID = Y.Attribute.INVALID_VALUE,
-                            
+
                                 Lang         = Y.Lang,
                                 isFunction   = Lang.isFunction,
                                 isObject     = Lang.isObject,
                                 isArray      = Lang.isArray,
                                 isString     = Lang.isString,
                                 isNumber     = Lang.isNumber,
-                            
+
                                 toArray = Y.Array,
-                            
+
                                 keys = Y.Object.keys,
-                            
+
                                 Table;
-                            
+
                             /**
                             _API docs for this extension are included in the DataTable class._
-                            
+
                             Class extension providing the core API and structure for the DataTable Widget.
-                            
+
                             Use this class extension with Widget or another Base-based superclass to create
                             the basic DataTable model API and composing class structure.
-                            
+
                             @class DataTable.Core
                             @for DataTable
                             @since 3.5.0
                             **/
                             Table = Y.namespace(&#x27;DataTable&#x27;).Core = function () {};
-                            
+
                             Table.ATTRS = {
                                 /**
                                 Columns to include in the rendered table.
-                            
+
                                 If omitted, the attributes on the configured &#x60;recordType&#x60; or the first item
                                 in the &#x60;data&#x60; collection will be used as a source.
-                            
+
                                 This attribute takes an array of strings or objects (mixing the two is
                                 fine).  Each string or object is considered a column to be rendered.
                                 Strings are converted to objects, so &#x60;columns: [&#x27;first&#x27;, &#x27;last&#x27;]&#x60; becomes
                                 &#x60;columns: [{ key: &#x27;first&#x27; }, { key: &#x27;last&#x27; }]&#x60;.
-                            
+
                                 DataTable.Core only concerns itself with a few properties of columns.
                                 These properties are:
-                            
+
                                 * &#x60;key&#x60; - Used to identify the record field/attribute containing content for
                                   this column.  Also used to create a default Model if no &#x60;recordType&#x60; or
                                   &#x60;data&#x60; are provided during construction.  If &#x60;name&#x60; is not specified, this
@@ -1207,7 +1207,7 @@
                                 * &#x60;_yuid&#x60; - Guid stamp assigned to the column object.
                                 * &#x60;_parent&#x60; - Assigned to all child columns, referencing their parent
                                   column.
-                            
+
                                 @attribute columns
                                 @type {Object[]|String[]}
                                 @default (from &#x60;recordType&#x60; ATTRS or first item in the &#x60;data&#x60;)
@@ -1219,14 +1219,14 @@
                                     setter: &#x27;_setColumns&#x27;,
                                     getter: &#x27;_getColumns&#x27;
                                 },
-                            
+
                                 /**
                                 Model subclass to use as the &#x60;model&#x60; for the ModelList stored in the &#x60;data&#x60;
                                 attribute.
-                            
+
                                 If not provided, it will try really hard to figure out what to use.  The
                                 following attempts will be made to set a default value:
-                            
+
                                 1. If the &#x60;data&#x60; attribute is set with a ModelList instance and its &#x60;model&#x60;
                                    property is set, that will be used.
                                 2. If the &#x60;data&#x60; attribute is set with a ModelList instance, and its
@@ -1241,7 +1241,7 @@
                                 5. If neither &#x60;data&#x60; nor &#x60;columns&#x60; is set or populated, a change event
                                    subscriber will listen for the first to be changed and try all over
                                    again.
-                            
+
                                 @attribute recordType
                                 @type {Function}
                                 @default (see description)
@@ -1251,19 +1251,19 @@
                                     getter: &#x27;_getRecordType&#x27;,
                                     setter: &#x27;_setRecordType&#x27;
                                 },
-                            
+
                                 /**
                                 The collection of data records to display.  This attribute is a pass
                                 through to a &#x60;data&#x60; property, which is a ModelList instance.
-                            
+
                                 If this attribute is passed a ModelList or subclass, it will be assigned to
                                 the property directly.  If an array of objects is passed, a new ModelList
                                 will be created using the configured &#x60;recordType&#x60; as its &#x60;model&#x60; property
                                 and seeded with the array.
-                            
+
                                 Retrieving this attribute will return the ModelList stored in the &#x60;data&#x60;
                                 property.
-                            
+
                                 @attribute data
                                 @type {ModelList|Object[]}
                                 @default &#x60;new ModelList()&#x60;
@@ -1274,35 +1274,35 @@
                                     setter : &#x27;_setData&#x27;,
                                     lazyAdd: false
                                 },
-                            
+
                                 /**
                                 Content for the &#x60;&lt;table summary=&quot;ATTRIBUTE VALUE HERE&quot;&gt;&#x60;.  Values assigned
                                 to this attribute will be HTML escaped for security.
-                            
+
                                 @attribute summary
                                 @type {String}
                                 @default &#x27;&#x27; (empty string)
                                 @since 3.5.0
                                 **/
                                 //summary: {},
-                            
+
                                 /**
                                 HTML content of an optional &#x60;&lt;caption&gt;&#x60; element to appear above the table.
                                 Leave this config unset or set to a falsy value to remove the caption.
-                            
+
                                 @attribute caption
                                 @type HTML
                                 @default &#x27;&#x27; (empty string)
                                 @since 3.5.0
                                 **/
                                 //caption: {},
-                            
+
                                 /**
                                 Deprecated as of 3.5.0. Passes through to the &#x60;data&#x60; attribute.
-                            
+
                                 WARNING: &#x60;get(&#x27;recordset&#x27;)&#x60; will NOT return a Recordset instance as of
                                 3.5.0.  This is a break in backward compatibility.
-                            
+
                                 @attribute recordset
                                 @type {Object[]|Recordset}
                                 @deprecated Use the &#x60;data&#x60; attribute
@@ -1313,13 +1313,13 @@
                                     getter: &#x27;_getRecordset&#x27;,
                                     lazyAdd: false
                                 },
-                            
+
                                 /**
                                 Deprecated as of 3.5.0. Passes through to the &#x60;columns&#x60; attribute.
-                            
+
                                 WARNING: &#x60;get(&#x27;columnset&#x27;)&#x60; will NOT return a Columnset instance as of
                                 3.5.0.  This is a break in backward compatibility.
-                            
+
                                 @attribute columnset
                                 @type {Object[]}
                                 @deprecated Use the &#x60;columns&#x60; attribute
@@ -1331,31 +1331,31 @@
                                     lazyAdd: false
                                 }
                             };
-                            
+
                             Y.mix(Table.prototype, {
                                 // -- Instance properties -------------------------------------------------
                                 /**
                                 The ModelList that manages the table&#x27;s data.
-                            
+
                                 @property data
                                 @type {ModelList}
                                 @default undefined (initially unset)
                                 @since 3.5.0
                                 **/
                                 //data: null,
-                            
+
                                 // -- Public methods ------------------------------------------------------
-                            
+
                                 /**
                                 Gets the column configuration object for the given key, name, or index.  For
                                 nested columns, &#x60;name&#x60; can be an array of indexes, each identifying the index
                                 of that column in the respective parent&#x27;s &quot;children&quot; array.
-                            
+
                                 If you pass a column object, it will be returned.
-                            
+
                                 For columns with keys, you can also fetch the column with
                                 &#x60;instance.get(&#x27;columns.foo&#x27;)&#x60;.
-                            
+
                                 @method getColumn
                                 @param {String|Number|Number[]} name Key, &quot;name&quot;, index, or index array to
                                             identify the column
@@ -1364,7 +1364,7 @@
                                 **/
                                 getColumn: function (name) {
                                     var col, columns, i, len, cols;
-                            
+
                                     if (isObject(name) &amp;&amp; !isArray(name)) {
                                         if (name &amp;&amp; name._node) {
                                             col = this.body.getColumn(name);
@@ -1374,35 +1374,35 @@
                                     } else {
                                         col = this.get(&#x27;columns.&#x27; + name);
                                     }
-                            
+
                                     if (col) {
                                         return col;
                                     }
-                            
+
                                     columns = this.get(&#x27;columns&#x27;);
-                            
+
                                     if (isNumber(name) || isArray(name)) {
                                         name = toArray(name);
                                         cols = columns;
-                            
+
                                         for (i = 0, len = name.length - 1; cols &amp;&amp; i &lt; len; ++i) {
                                             cols = cols[name[i]] &amp;&amp; cols[name[i]].children;
                                         }
-                            
+
                                         return (cols &amp;&amp; cols[name[i]]) || null;
                                     }
-                            
+
                                     return null;
                                 },
-                            
+
                                 /**
                                 Returns the Model associated to the record &#x60;id&#x60;, &#x60;clientId&#x60;, or index (not
                                 row index).  If none of those yield a Model from the &#x60;data&#x60; ModelList, the
                                 arguments will be passed to the &#x60;view&#x60; instance&#x27;s &#x60;getRecord&#x60; method
                                 if it has one.
-                            
+
                                 If no Model can be found, &#x60;null&#x60; is returned.
-                            
+
                                 @method getRecord
                                 @param {Number|String|Node} seed Record &#x60;id&#x60;, &#x60;clientId&#x60;, index, Node, or
                                     identifier for a row or child element
@@ -1411,28 +1411,28 @@
                                 **/
                                 getRecord: function (seed) {
                                     var record = this.data.getById(seed) || this.data.getByClientId(seed);
-                            
+
                                     if (!record) {
                                         if (isNumber(seed)) {
                                             record = this.data.item(seed);
                                         }
-                            
+
                                         // TODO: this should be split out to base somehow
                                         if (!record &amp;&amp; this.view &amp;&amp; this.view.getRecord) {
                                             record = this.view.getRecord.apply(this.view, arguments);
                                         }
                                     }
-                            
+
                                     return record || null;
                                 },
-                            
+
                                 // -- Protected and private properties and methods ------------------------
-                            
+
                                 /**
                                 This tells &#x60;Y.Base&#x60; that it should create ad-hoc attributes for config
                                 properties passed to DataTable&#x27;s constructor. This is useful for setting
                                 configurations on the DataTable that are intended for the rendering View(s).
-                            
+
                                 @property _allowAdHocAttrs
                                 @type Boolean
                                 @default true
@@ -1440,11 +1440,11 @@
                                 @since 3.6.0
                                 **/
                                 _allowAdHocAttrs: true,
-                            
+
                                 /**
                                 A map of column key to column configuration objects parsed from the
                                 &#x60;columns&#x60; attribute.
-                            
+
                                 @property _columnMap
                                 @type {Object}
                                 @default undefined (initially unset)
@@ -1452,12 +1452,12 @@
                                 @since 3.5.0
                                 **/
                                 //_columnMap: null,
-                            
+
                                 /**
                                 The Node instance of the table containing the data rows.  This is set when
                                 the table is rendered.  It may also be set by progressive enhancement,
                                 though this extension does not provide the logic to parse from source.
-                            
+
                                 @property _tableNode
                                 @type {Node}
                                 @default undefined (initially unset)
@@ -1465,11 +1465,11 @@
                                 @since 3.5.0
                                 **/
                                 //_tableNode: null,
-                            
+
                                 /**
                                 Updates the &#x60;_columnMap&#x60; property in response to changes in the &#x60;columns&#x60;
                                 attribute.
-                            
+
                                 @method _afterColumnsChange
                                 @param {EventFacade} e The &#x60;columnsChange&#x60; event object
                                 @protected
@@ -1478,11 +1478,11 @@
                                 _afterColumnsChange: function (e) {
                                     this._setColumnMap(e.newVal);
                                 },
-                            
+
                                 /**
                                 Updates the &#x60;modelList&#x60; attributes of the rendered views in response to the
                                 &#x60;data&#x60; attribute being assigned a new ModelList.
-                            
+
                                 @method _afterDataChange
                                 @param {EventFacade} e the &#x60;dataChange&#x60; event
                                 @protected
@@ -1490,19 +1490,19 @@
                                 **/
                                 _afterDataChange: function (e) {
                                     var modelList = e.newVal;
-                            
+
                                     this.data = e.newVal;
-                            
+
                                     if (!this.get(&#x27;columns&#x27;) &amp;&amp; modelList.size()) {
                                         // TODO: this will cause a re-render twice because the Views are
                                         // subscribed to columnsChange
                                         this._initColumns();
                                     }
                                 },
-                            
+
                                 /**
                                 Assigns to the new recordType as the model for the data ModelList
-                            
+
                                 @method _afterRecordTypeChange
                                 @param {EventFacade} e recordTypeChange event
                                 @protected
@@ -1510,11 +1510,11 @@
                                 **/
                                 _afterRecordTypeChange: function (e) {
                                     var data = this.data.toJSON();
-                            
+
                                     this.data.model = e.newVal;
-                            
+
                                     this.data.reset(data);
-                            
+
                                     if (!this.get(&#x27;columns&#x27;) &amp;&amp; data) {
                                         if (data.length) {
                                             this._initColumns();
@@ -1523,13 +1523,13 @@
                                         }
                                     }
                                 },
-                            
+
                                 /**
                                 Creates a Model subclass from an array of attribute names or an object of
                                 attribute definitions.  This is used to generate a class suitable to
                                 represent the data passed to the &#x60;data&#x60; attribute if no &#x60;recordType&#x60; is
                                 set.
-                            
+
                                 @method _createRecordClass
                                 @param {String[]|Object} attrs Names assigned to the Model subclass&#x27;s
                                             &#x60;ATTRS&#x60; or its entire &#x60;ATTRS&#x60; definition object
@@ -1539,23 +1539,23 @@
                                 **/
                                 _createRecordClass: function (attrs) {
                                     var ATTRS, i, len;
-                            
+
                                     if (isArray(attrs)) {
                                         ATTRS = {};
-                            
+
                                         for (i = 0, len = attrs.length; i &lt; len; ++i) {
                                             ATTRS[attrs[i]] = {};
                                         }
                                     } else if (isObject(attrs)) {
                                         ATTRS = attrs;
                                     }
-                            
+
                                     return Y.Base.create(&#x27;record&#x27;, Y.Model, [], null, { ATTRS: ATTRS });
                                 },
-                            
+
                                 /**
                                 Tears down the instance.
-                            
+
                                 @method destructor
                                 @protected
                                 @since 3.6.0
@@ -1563,12 +1563,12 @@
                                 destructor: function () {
                                     new Y.EventHandle(Y.Object.values(this._eventHandles)).detach();
                                 },
-                            
+
                                 /**
                                 The getter for the &#x60;columns&#x60; attribute.  Returns the array of column
                                 configuration objects if &#x60;instance.get(&#x27;columns&#x27;)&#x60; is called, or the
                                 specific column object if &#x60;instance.get(&#x27;columns.columnKey&#x27;)&#x60; is called.
-                            
+
                                 @method _getColumns
                                 @param {Object[]} columns The full array of column objects
                                 @param {String} name The attribute name requested
@@ -1582,14 +1582,14 @@
                                     // Note &#x27;columns.&#x27; is 8 characters
                                     return name.length &gt; 8 ? this._columnMap : columns;
                                 },
-                            
+
                                 /**
                                 Relays the &#x60;get()&#x60; request for the deprecated &#x60;columnset&#x60; attribute to the
                                 &#x60;columns&#x60; attribute.
-                            
+
                                 THIS BREAKS BACKWARD COMPATIBILITY.  3.4.1 and prior implementations will
                                 expect a Columnset instance returned from &#x60;get(&#x27;columnset&#x27;)&#x60;.
-                            
+
                                 @method _getColumnset
                                 @param {Object} ignored The current value stored in the &#x60;columnset&#x60; state
                                 @param {String} name The attribute name requested
@@ -1602,11 +1602,11 @@
                                 _getColumnset: function (_, name) {
                                     return this.get(name.replace(/^columnset/, &#x27;columns&#x27;));
                                 },
-                            
+
                                 /**
                                 Returns the Model class of the instance&#x27;s &#x60;data&#x60; attribute ModelList.  If
                                 not set, returns the explicitly configured value.
-                            
+
                                 @method _getRecordType
                                 @param {Model} val The currently configured value
                                 @return {Model}
@@ -1620,13 +1620,13 @@
                                     // this.data.model = e.newVal
                                     return val || (this.data &amp;&amp; this.data.model);
                                 },
-                            
+
                                 /**
                                 Initializes the &#x60;_columnMap&#x60; property from the configured &#x60;columns&#x60;
                                 attribute.  If &#x60;columns&#x60; is not set, but there are records in the &#x60;data&#x60;
                                 ModelList, use
                                 &#x60;ATTRS&#x60; of that class.
-                            
+
                                 @method _initColumns
                                 @protected
                                 @since 3.5.0
@@ -1634,25 +1634,25 @@
                                 _initColumns: function () {
                                     var columns = this.get(&#x27;columns&#x27;) || [],
                                         item;
-                            
+
                                     // Default column definition from the configured recordType
                                     if (!columns.length &amp;&amp; this.data.size()) {
                                         // TODO: merge superclass attributes up to Model?
                                         item = this.data.item(0);
-                            
+
                                         if (item.toJSON) {
                                             item = item.toJSON();
                                         }
-                            
+
                                         this.set(&#x27;columns&#x27;, keys(item));
                                     }
-                            
+
                                     this._setColumnMap(columns);
                                 },
-                            
+
                                 /**
                                 Sets up the change event subscriptions to maintain internal state.
-                            
+
                                 @method _initCoreEvents
                                 @protected
                                 @since 3.6.0
@@ -1664,12 +1664,12 @@
                                         dataChange      : Y.bind(&#x27;_afterDataChange&#x27;, this)
                                     });
                                 },
-                            
+
                                 /**
                                 Defaults the &#x60;data&#x60; attribute to an empty ModelList if not set during
                                 construction.  Uses the configured &#x60;recordType&#x60; for the ModelList&#x27;s &#x60;model&#x60;
                                 proeprty if set.
-                            
+
                                 @method _initData
                                 @protected
                                 @return {ModelList}
@@ -1679,21 +1679,21 @@
                                     var recordType = this.get(&#x27;recordType&#x27;),
                                         // TODO: LazyModelList if recordType doesn&#x27;t have complex ATTRS
                                         modelList = new Y.ModelList();
-                            
+
                                     if (recordType) {
                                         modelList.model = recordType;
                                     }
-                            
+
                                     return modelList;
                                 },
-                            
+
                                 /**
                                 Initializes the instance&#x27;s &#x60;data&#x60; property from the value of the &#x60;data&#x60;
                                 attribute.  If the attribute value is a ModelList, it is assigned directly
                                 to &#x60;this.data&#x60;.  If it is an array, a ModelList is created, its &#x60;model&#x60;
                                 property is set to the configured &#x60;recordType&#x60; class, and it is seeded with
                                 the array data.  This ModelList is then assigned to &#x60;this.data&#x60;.
-                            
+
                                 @method _initDataProperty
                                 @param {Array|ModelList|ArrayList} data Collection of data to populate the
                                         DataTable
@@ -1702,13 +1702,13 @@
                                 **/
                                 _initDataProperty: function (data) {
                                     var recordType;
-                            
+
                                     if (!this.data) {
                                         recordType = this.get(&#x27;recordType&#x27;);
-                            
+
                                         if (data &amp;&amp; data.each &amp;&amp; data.toJSON) {
                                             this.data = data;
-                            
+
                                             if (recordType) {
                                                 this.data.model = recordType;
                                             }
@@ -1716,12 +1716,12 @@
                                             // TODO: customize the ModelList or read the ModelList class
                                             // from a configuration option?
                                             this.data = new Y.ModelList();
-                            
+
                                             if (recordType) {
                                                 this.data.model = recordType;
                                             }
                                         }
-                            
+
                                         // TODO: Replace this with an event relay for specific events.
                                         // Using bubbling causes subscription conflicts with the models&#x27;
                                         // aggregated change event and &#x27;change&#x27; events from DOM elements
@@ -1729,10 +1729,10 @@
                                         this.data.addTarget(this);
                                     }
                                 },
-                            
+
                                 /**
                                 Initializes the columns, &#x60;recordType&#x60; and data ModelList.
-                            
+
                                 @method initializer
                                 @param {Object} config Configuration object passed to constructor
                                 @protected
@@ -1742,11 +1742,11 @@
                                     var data       = config.data,
                                         columns    = config.columns,
                                         recordType;
-                            
+
                                     // Referencing config.data to allow _setData to be more stringent
                                     // about its behavior
                                     this._initDataProperty(data);
-                            
+
                                     // Default columns from recordType ATTRS if recordType is supplied at
                                     // construction.  If no recordType is supplied, but the data is
                                     // supplied as a non-empty array, use the keys of the first item
@@ -1754,31 +1754,31 @@
                                     if (!columns) {
                                         recordType = (config.recordType || config.data === this.data) &amp;&amp;
                                                         this.get(&#x27;recordType&#x27;);
-                            
+
                                         if (recordType) {
                                             columns = keys(recordType.ATTRS);
                                         } else if (isArray(data) &amp;&amp; data.length) {
                                             columns = keys(data[0]);
                                         }
-                            
+
                                         if (columns) {
                                             this.set(&#x27;columns&#x27;, columns);
                                         }
                                     }
-                            
+
                                     this._initColumns();
-                            
+
                                     this._eventHandles = {};
-                            
+
                                     this._initCoreEvents();
                                 },
-                            
+
                                 /**
                                 Iterates the array of column configurations to capture all columns with a
                                 &#x60;key&#x60; property.  An map is built with column keys as the property name and
                                 the corresponding column object as the associated value.  This map is then
                                 assigned to the instance&#x27;s &#x60;_columnMap&#x60; property.
-                            
+
                                 @method _setColumnMap
                                 @param {Object[]|String[]} columns The array of column config objects
                                 @protected
@@ -1786,14 +1786,14 @@
                                 **/
                                 _setColumnMap: function (columns) {
                                     var map = {};
-                            
+
                                     function process(cols) {
                                         var i, len, col, key;
-                            
+
                                         for (i = 0, len = cols.length; i &lt; len; ++i) {
                                             col = cols[i];
                                             key = col.key;
-                            
+
                                             // First in wins for multiple columns with the same key
                                             // because the first call to genId (in _setColumns) will
                                             // return the same key, which will then be overwritten by the
@@ -1806,22 +1806,22 @@
                                             if (map[col._id]) {Y.log(&#x27;Key of column matches existing key or name: &#x27; + col._id, &#x27;warn&#x27;, NAME);}
                                             //TODO: named columns can conflict with keyed columns
                                             map[col._id] = col;
-                            
+
                                             if (col.children) {
                                                 process(col.children);
                                             }
                                         }
                                     }
-                            
+
                                     process(columns);
-                            
+
                                     this._columnMap = map;
                                 },
-                            
+
                                 /**
                                 Translates string columns into objects with that string as the value of its
                                 &#x60;key&#x60; property.
-                            
+
                                 All columns are assigned a &#x60;_yuid&#x60; stamp and &#x60;_id&#x60; property corresponding
                                 to the column&#x27;s configured &#x60;name&#x60; or &#x60;key&#x60; property with any spaces
                                 replaced with dashes.  If the same &#x60;name&#x60; or &#x60;key&#x60; appears in multiple
@@ -1830,7 +1830,7 @@
                                 attribute twice, the first will get &#x60;_id&#x60; of &quot;foo&quot;, and the second an &#x60;_id&#x60;
                                 of &quot;foo1&quot;).  Columns that are children of other columns will have the
                                 &#x60;_parent&#x60; property added, assigned the column object to which they belong.
-                            
+
                                 @method _setColumns
                                 @param {null|Object[]|String[]} val Array of config objects or strings
                                 @return {null|Object[]}
@@ -1841,57 +1841,57 @@
                                         known = [],
                                         knownCopies = [],
                                         arrayIndex = Y.Array.indexOf;
-                            
+
                                     function copyObj(o) {
                                         var copy = {},
                                             key, val, i;
-                            
+
                                         known.push(o);
                                         knownCopies.push(copy);
-                            
+
                                         for (key in o) {
                                             if (o.hasOwnProperty(key)) {
                                                 val = o[key];
-                            
+
                                                 if (isArray(val)) {
                                                     copy[key] = val.slice();
                                                 } else if (isObject(val, true)) {
                                                     i = arrayIndex(known, val);
-                            
+
                                                     copy[key] = i === -1 ? copyObj(val) : knownCopies[i];
                                                 } else {
                                                     copy[key] = o[key];
                                                 }
                                             }
                                         }
-                            
+
                                         return copy;
                                     }
-                            
+
                                     function genId(name) {
                                         // Sanitize the name for use in generated CSS classes.
                                         // TODO: is there more to do for other uses of _id?
                                         name = name.replace(/\s+/, &#x27;-&#x27;);
-                            
+
                                         if (keys[name]) {
                                             name += (keys[name]++);
                                         } else {
                                             keys[name] = 1;
                                         }
-                            
+
                                         return name;
                                     }
-                            
+
                                     function process(cols, parent) {
                                         var columns = [],
                                             i, len, col, yuid;
-                            
+
                                         for (i = 0, len = cols.length; i &lt; len; ++i) {
                                             columns[i] = // chained assignment
                                             col = isString(cols[i]) ? { key: cols[i] } : copyObj(cols[i]);
-                            
+
                                             yuid = Y.stamp(col);
-                            
+
                                             // For backward compatibility
                                             if (!col.id) {
                                                 // Implementers can shoot themselves in the foot by setting
@@ -1903,34 +1903,34 @@
                                                 // fields or schema.resultFields
                                                 col.name = col.field;
                                             }
-                            
+
                                             if (parent) {
                                                 col._parent = parent;
                                             } else {
                                                 delete col._parent;
                                             }
-                            
+
                                             // Unique id based on the column&#x27;s configured name or key,
                                             // falling back to the yuid.  Duplicates will have a counter
                                             // added to the end.
                                             col._id = genId(col.name || col.key || col.id);
-                            
+
                                             if (isArray(col.children)) {
                                                 col.children = process(col.children, col);
                                             }
                                         }
-                            
+
                                         return columns;
                                     }
-                            
+
                                     return val &amp;&amp; process(val);
                                 },
-                            
+
                                 /**
                                 Relays attribute assignments of the deprecated &#x60;columnset&#x60; attribute to the
                                 &#x60;columns&#x60; attribute.  If a Columnset is object is passed, its basic object
                                 structure is mined.
-                            
+
                                 @method _setColumnset
                                 @param {Array|Columnset} val The columnset value to relay
                                 @deprecated This will be removed with the deprecated &#x60;columnset&#x60; attribute
@@ -1940,23 +1940,23 @@
                                 **/
                                 _setColumnset: function (val) {
                                     this.set(&#x27;columns&#x27;, val);
-                            
+
                                     return isArray(val) ? val : INVALID;
                                 },
-                            
+
                                 /**
                                 Accepts an object with &#x60;each&#x60; and &#x60;getAttrs&#x60; (preferably a ModelList or
                                 subclass) or an array of data objects.  If an array is passes, it will
                                 create a ModelList to wrap the data.  In doing so, it will set the created
                                 ModelList&#x27;s &#x60;model&#x60; property to the class in the &#x60;recordType&#x60; attribute,
                                 which will be defaulted if not yet set.
-                            
+
                                 If the &#x60;data&#x60; property is already set with a ModelList, passing an array as
                                 the value will call the ModelList&#x27;s &#x60;reset()&#x60; method with that array rather
                                 than replacing the stored ModelList wholesale.
-                            
+
                                 Any non-ModelList-ish and non-array value is invalid.
-                            
+
                                 @method _setData
                                 @protected
                                 @since 3.5.0
@@ -1965,16 +1965,16 @@
                                     if (val === null) {
                                         val = [];
                                     }
-                            
+
                                     if (isArray(val)) {
                                         this._initDataProperty();
-                            
+
                                         // silent to prevent subscribers to both reset and dataChange
                                         // from reacting to the change twice.
                                         // TODO: would it be better to return INVALID to silence the
                                         // dataChange event, or even allow both events?
                                         this.data.reset(val, { silent: true });
-                            
+
                                         // Return the instance ModelList to avoid storing unprocessed
                                         // data in the state and their vivified Model representations in
                                         // the instance&#x27;s data property.  Decreases memory consumption.
@@ -1983,15 +1983,15 @@
                                         // ModelList/ArrayList duck typing
                                         val = INVALID;
                                     }
-                            
+
                                     return val;
                                 },
-                            
+
                                 /**
                                 Relays the value assigned to the deprecated &#x60;recordset&#x60; attribute to the
                                 &#x60;data&#x60; attribute.  If a Recordset instance is passed, the raw object data
                                 will be culled from it.
-                            
+
                                 @method _setRecordset
                                 @param {Object[]|Recordset} val The recordset value to relay
                                 @deprecated This will be removed with the deprecated &#x60;recordset&#x60; attribute
@@ -2001,7 +2001,7 @@
                                 **/
                                 _setRecordset: function (val) {
                                     var data;
-                            
+
                                     if (val &amp;&amp; Y.Recordset &amp;&amp; val instanceof Y.Recordset) {
                                         data = [];
                                         val.each(function (record) {
@@ -2009,20 +2009,20 @@
                                         });
                                         val = data;
                                     }
-                            
+
                                     this.set(&#x27;data&#x27;, val);
-                            
+
                                     return val;
                                 },
-                            
+
                                 /**
                                 Accepts a Base subclass (preferably a Model subclass). Alternately, it will
                                 generate a custom Model subclass from an array of attribute names or an
                                 object defining attributes and their respective configurations (it is
                                 assigned as the &#x60;ATTRS&#x60; of the new class).
-                            
+
                                 Any other value is invalid.
-                            
+
                                 @method _setRecordType
                                 @param {Function|String[]|Object} val The Model subclass, array of
                                         attribute names, or the &#x60;ATTRS&#x60; definition for a custom model
@@ -2033,58 +2033,58 @@
                                 **/
                                 _setRecordType: function (val) {
                                     var modelClass;
-                            
+
                                     // Duck type based on known/likely consumed APIs
                                     if (isFunction(val) &amp;&amp; val.prototype.toJSON &amp;&amp; val.prototype.setAttrs) {
                                         modelClass = val;
                                     } else if (isObject(val)) {
                                         modelClass = this._createRecordClass(val);
                                     }
-                            
+
                                     return modelClass || INVALID;
                                 }
-                            
+
                             });
-                            
-                            
-                            
+
+
+
                             /**
                             _This is a documentation entry only_
-                            
+
                             Columns are described by object literals with a set of properties.
                             There is not an actual &#x60;DataTable.Column&#x60; class.
                             However, for the purpose of documenting it, this pseudo-class is declared here.
-                            
+
                             DataTables accept an array of column definitions in their [columns](DataTable.html#attr_columns)
                             attribute.  Each entry in this array is a column definition which may contain
                             any combination of the properties listed below.
-                            
+
                             There are no mandatory properties though a column will usually have a
                             [key](#property_key) property to reference the data it is supposed to show.
                             The [columns](DataTable.html#attr_columns) attribute can accept a plain string
                             in lieu of an object literal, which is the equivalent of an object with the
                             [key](#property_key) property set to that string.
-                            
+
                             @class DataTable.Column
                             */
-                            
+
                             /**
                             Binds the column values to the named property in the [data](DataTable.html#attr_data).
-                            
+
                             Optional if [formatter](#property_formatter), [nodeFormatter](#property_nodeFormatter),
                             or [cellTemplate](#property_cellTemplate) is used to populate the content.
-                            
+
                             It should not be set if [children](#property_children) is set.
-                            
+
                             The value is used for the [\_id](#property__id) property unless the [name](#property_name)
                             property is also set.
-                            
+
                                 { key: &#x27;username&#x27; }
-                            
+
                             The above column definition can be reduced to this:
-                            
+
                                 &#x27;username&#x27;
-                            
+
                             @property key
                             @type String
                              */
@@ -2093,37 +2093,37 @@
                             [getColumn](DataTable.html#method_getColumn)
                             or style columns with class &#x60;yui3-datatable-col-NAME&#x60; after dropping characters
                             that are not valid for CSS class names.
-                            
+
                             It defaults to the [key](#property_key).
-                            
+
                             The value is used for the [\_id](#property__id) property.
-                            
+
                                 { name: &#x27;fullname&#x27;, formatter: ... }
-                            
+
                             @property name
                             @type String
                             */
                             /**
                             An alias for [name](#property_name) for backward compatibility.
-                            
+
                                 { field: &#x27;fullname&#x27;, formatter: ... }
-                            
+
                             @property field
                             @type String
                             */
                             /**
                             Overrides the default unique id assigned &#x60;&lt;th id=&quot;HERE&quot;&gt;&#x60;.
-                            
+
                             __Use this with caution__, since it can result in
                             duplicate ids in the DOM.
-                            
+
                                 {
                                     name: &#x27;checkAll&#x27;,
                                     id: &#x27;check-all&#x27;,
                                     label: ...
                                     formatter: ...
                                 }
-                            
+
                             @property id
                             @type String
                              */
@@ -2131,53 +2131,53 @@
                             HTML to populate the header &#x60;&lt;th&gt;&#x60; for the column.
                             It defaults to the value of the [key](#property_key) property or the text
                             &#x60;Column n&#x60; where _n_ is an ordinal number.
-                            
+
                                 { key: &#x27;MfgvaPrtNum&#x27;, label: &#x27;Part Number&#x27; }
-                            
+
                             @property label
                             @type {String}
                              */
                             /**
                             Used to create stacked headers.
-                            
+
                             Child columns may also contain &#x60;children&#x60;. There is no limit
                             to the depth of nesting.
-                            
+
                             Columns configured with &#x60;children&#x60; are for display only and
                             &lt;strong&gt;should not&lt;/strong&gt; be configured with a [key](#property_key).
                             Configurations relating to the display of data, such as
                             [formatter](#property_formatter), [nodeFormatter](#property_nodeFormatter),
                             [emptyCellValue](#property_emptyCellValue), etc. are ignored.
-                            
+
                                 { label: &#x27;Name&#x27;, children: [
                                     { key: &#x27;firstName&#x27;, label: &#x27;First&#x60;},
                                     { key: &#x27;lastName&#x27;, label: &#x27;Last&#x60;}
                                 ]}
-                            
+
                             @property  children
                             @type Array
                             */
                             /**
                             Assigns the value &#x60;&lt;th abbr=&quot;HERE&quot;&gt;&#x60;.
-                            
+
                                 {
                                   key  : &#x27;forecast&#x27;,
                                   label: &#x27;1yr Target Forecast&#x27;,
                                   abbr : &#x27;Forecast&#x27;
                                 }
-                            
+
                             @property abbr
                             @type String
                              */
                             /**
                             Assigns the value &#x60;&lt;th title=&quot;HERE&quot;&gt;&#x60;.
-                            
+
                                 {
                                   key  : &#x27;forecast&#x27;,
                                   label: &#x27;1yr Target Forecast&#x27;,
                                   title: &#x27;Target Forecast for the Next 12 Months&#x27;
                                 }
-                            
+
                             @property title
                             @type String
                              */
@@ -2187,13 +2187,13 @@
                             for this column.  This is necessary when more control is
                             needed over the markup for the header itself, rather than
                             its content.
-                            
+
                             Use the [label](#property_label) configuration if you don&#x27;t need to
                             customize the &#x60;&lt;th&gt;&#x60; iteself.
-                            
+
                             Implementers are strongly encouraged to preserve at least
                             the &#x60;{id}&#x60; and &#x60;{_id}&#x60; placeholders in the custom value.
-                            
+
                                 {
                                     headerTemplate:
                                         &#x27;&lt;th id=&quot;{id}&quot; &#x27; +
@@ -2201,7 +2201,7 @@
                                             &#x27;class=&quot;{className}&quot; &#x27; +
                                             &#x27;{_id}&gt;&amp;#9679;&lt;/th&gt;&#x27;
                                 }
-                            
+
                             @property headerTemplate
                             @type HTML
                              */
@@ -2211,7 +2211,7 @@
                             for this column.  This is necessary when more control is
                             needed over the markup for the &#x60;&lt;td&gt;&#x60; itself, rather than
                             its content.
-                            
+
                                 {
                                     key: &#x27;id&#x27;,
                                     cellTemplate:
@@ -2220,28 +2220,28 @@
                                                  &#x27;id=&quot;{content}&quot;&gt;&#x27; +
                                         &#x27;&lt;/td&gt;&#x27;
                                 }
-                            
-                            
+
+
                             @property cellTemplate
                             @type String
                              */
                             /**
                             String or function used to translate the raw record data for each cell in a
                             given column into a format better suited to display.
-                            
+
                             If it is a string, it will initially be assumed to be the name of one of the
                             formatting functions in
                             [Y.DataTable.BodyView.Formatters](DataTable.BodyView.Formatters.html).
                             If one such formatting function exists, it will be used.
-                            
+
                             If no such named formatter is found, it will be assumed to be a template
                             string and will be expanded.  The placeholders can contain the key to any
                             field in the record or the placeholder &#x60;{value}&#x60; which represents the value
                             of the current field.
-                            
+
                             If the value is a function, it will be assumed to be a formatting function.
                             A formatting function receives a single argument, an object with the following properties:
-                            
+
                             * __value__ The raw value from the record Model to populate this cell.
                               Equivalent to &#x60;o.record.get(o.column.key)&#x60; or &#x60;o.data[o.column.key]&#x60;.
                             * __data__ The Model data for this row in simple object format.
@@ -2253,12 +2253,12 @@
                               Typically correlates to the row index as well.
                             * __rowClass__ A string of css classes to add &#x60;&lt;tr class=&quot;HERE&quot;&gt;&lt;td....&#x60;
                               This is useful to avoid the need for nodeFormatters to add classes to the containing row.
-                            
+
                             The formatter function may return a string value that will be used for the cell
                             contents or it may change the value of the &#x60;value&#x60;, &#x60;className&#x60; or &#x60;rowClass&#x60;
                             properties which well then be used to format the cell.  If the value for the cell
                             is returned in the &#x60;value&#x60; property of the input argument, no value should be returned.
-                            
+
                                 {
                                     key: &#x27;name&#x27;,
                                     formatter: &#x27;link&#x27;,  // named formatter
@@ -2280,28 +2280,28 @@
                                         if (o.value &gt; 3) {    // and a className to apply to the cell
                                             o.className += &#x27;expensive&#x27;;
                                         }
-                            
+
                                         return &#x27;$&#x27; + o.value.toFixed(2);
                                     }
                                 },
                             @property formatter
                             @type String || Function
-                            
+
                             */
                             /**
                             Used to customize the content of the data cells for this column.
-                            
+
                             &#x60;nodeFormatter&#x60; is significantly slower than [formatter](#property_formatter)
                             and should be avoided if possible. Unlike [formatter](#property_formatter),
                             &#x60;nodeFormatter&#x60; has access to the &#x60;&lt;td&gt;&#x60; element and its ancestors.
-                            
+
                             The function provided is expected to fill in the &#x60;&lt;td&gt;&#x60; element itself.
                             __Node formatters should return &#x60;false&#x60;__ except in certain conditions as described
                             in the users guide.
-                            
+
                             The function receives a single object
                             argument with the following properties:
-                            
+
                             * __td__	The &#x60;&lt;td&gt;&#x60; Node for this cell.
                             * __cell__	If the cell &#x60;&lt;td&gt; contains an element with class &#x60;yui3-datatable-liner,
                               this will refer to that Node. Otherwise, it is equivalent to &#x60;td&#x60; (default behavior).
@@ -2312,72 +2312,72 @@
                             * __column__	The column configuration object.
                             * __rowIndex__	The index of the current Model in the ModelList.
                              _Typically_ correlates to the row index as well.
-                            
+
                             @example
                                 nodeFormatter: function (o) {
                                     if (o.value &lt; o.data.quota) {
                                         o.td.setAttribute(&#x27;rowspan&#x27;, 2);
                                         o.td.setAttribute(&#x27;data-term-id&#x27;, this.record.get(&#x27;id&#x27;));
-                            
+
                                         o.td.ancestor().insert(
                                             &#x27;&lt;tr&gt;&lt;td colspan&quot;3&quot;&gt;&#x27; +
                                                 &#x27;&lt;button class=&quot;term&quot;&gt;terminate&lt;/button&gt;&#x27; +
                                             &#x27;&lt;/td&gt;&lt;/tr&gt;&#x27;,
                                             &#x27;after&#x27;);
                                     }
-                            
+
                                     o.cell.setHTML(o.value);
                                     return false;
                                 }
-                            
+
                             @property nodeFormatter
                             @type Function
                             */
                             /**
                             Provides the default value to populate the cell if the data
                             for that cell is &#x60;undefined&#x60;, &#x60;null&#x60;, or an empty string.
-                            
+
                                 {
                                     key: &#x27;price&#x27;,
                                     emptyCellValue: &#x27;???&#x27;
                                 }
-                            
+
                             @property emptyCellValue
                             @type {String} depending on the setting of allowHTML
                              */
                             /**
                             Skips the security step of HTML escaping the value for cells
                             in this column.
-                            
+
                             This is also necessary if [emptyCellValue](#property_emptyCellValue)
                             is set with an HTML string.
                             &#x60;nodeFormatter&#x60;s ignore this configuration.  If using a
                             &#x60;nodeFormatter&#x60;, it is recommended to use
                             [Y.Escape.html()](Escape.html#method_html)
                             on any user supplied content that is to be displayed.
-                            
+
                                 {
                                     key: &#x27;preview&#x27;,
                                     allowHTML: true
                                 }
-                            
+
                             @property allowHTML
                             @type Boolean
                             */
                             /**
                             A string of CSS classes that will be added to the &#x60;&lt;td&gt;&#x60;&#x27;s
                             &#x60;class&#x60; attribute.
-                            
+
                             Note, all cells will automatically have a class in the
                             form of &quot;yui3-datatable-col-XXX&quot; added to the &#x60;&lt;td&gt;&#x60;, where
                             XXX is the column&#x27;s configured &#x60;name&#x60;, &#x60;key&#x60;, or &#x60;id&#x60; (in
                             that order of preference) sanitized from invalid characters.
-                            
+
                                 {
                                     key: &#x27;symbol&#x27;,
                                     className: &#x27;no-hide&#x27;
                                 }
-                            
+
                             @property className
                             @type String
                             */
@@ -2387,7 +2387,7 @@
                             the &#x60;_id&#x60; if none of [name](#property_name),
                             [field](#property_field), [key](#property_key), or [id](#property_id) are
                             set.
-                            
+
                             @property _yuid
                             @type String
                             @protected
@@ -2398,7 +2398,7 @@
                             to create the column&#x27;s classname, as the input name
                             &#x60;table.getColumn(HERE)&#x60;, and in the column header&#x27;s
                             &#x60;&lt;th data-yui3-col-id=&quot;HERE&quot;&gt;&#x60;.
-                            
+
                             The value is populated by the first of [name](#property_name),
                             [field](#property_field), [key](#property_key), [id](#property_id),
                              or [_yuid](#property__yuid) to have a value.  If that value
@@ -2408,7 +2408,7 @@
                             &quot;id&quot; and &quot;id2&quot;.  &#x60;table.getColumn(&quot;id&quot;)&#x60; will return the
                             first column, and &#x60;table.getColumn(&quot;id2&quot;)&#x60; will return the
                             second.
-                            
+
                             @property _id
                             @type String
                             @protected
@@ -2417,7 +2417,7 @@
                             (__read-only__) Used by
                             &#x60;Y.DataTable.HeaderView&#x60; when building stacked column
                             headers.
-                            
+
                             @property _colspan
                             @type Integer
                             @protected
@@ -2426,7 +2426,7 @@
                             (__read-only__) Used by
                             &#x60;Y.DataTable.HeaderView&#x60; when building stacked column
                             headers.
-                            
+
                             @property _rowspan
                             @type Integer
                             @protected
@@ -2435,7 +2435,7 @@
                             (__read-only__) Assigned to all columns in a
                             column&#x27;s &#x60;children&#x60; collection.  References the parent
                             column object.
-                            
+
                             @property _parent
                             @type DataTable.Column
                             @protected
@@ -2445,12 +2445,12 @@
                             column and all parent columns.  Used by
                             &#x60;Y.DataTable.BodyView&#x60; to populate &#x60;&lt;td headers=&quot;THIS&quot;&gt;&#x60;
                             when a cell references more than one header.
-                            
+
                             @property _headers
                             @type Array
                             @protected
                             */
-                            
+
                                 </pre>
                             </div>
                         </div>

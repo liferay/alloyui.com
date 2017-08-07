@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,85 +1122,85 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/app/js/model-extensions/model-sync-rest.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
                             An extension which provides a RESTful XHR sync implementation that can be mixed
                             into a Model or ModelList subclass.
-                            
+
                             @module app
                             @submodule model-sync-rest
                             @since 3.6.0
                             **/
-                            
+
                             var Lang = Y.Lang;
-                            
+
                             /**
                             An extension which provides a RESTful XHR sync implementation that can be mixed
                             into a Model or ModelList subclass.
-                            
+
                             This makes it trivial for your Model or ModelList subclasses communicate and
                             transmit their data via RESTful XHRs. In most cases you&#x27;ll only need to provide
                             a value for &#x60;root&#x60; when sub-classing &#x60;Y.Model&#x60;.
-                            
+
                                 Y.User = Y.Base.create(&#x27;user&#x27;, Y.Model, [Y.ModelSync.REST], {
                                     root: &#x27;/users&#x27;
                                 });
-                            
+
                                 Y.Users = Y.Base.create(&#x27;users&#x27;, Y.ModelList, [Y.ModelSync.REST], {
                                     // By convention &#x60;Y.User&#x60;&#x27;s &#x60;root&#x60; will be used for the lists&#x27; URL.
                                     model: Y.User
                                 });
-                            
+
                                 var users = new Y.Users();
-                            
+
                                 // GET users list from: &quot;/users&quot;
                                 users.load(function () {
                                     var firstUser = users.item(0);
-                            
+
                                     firstUser.get(&#x27;id&#x27;); // =&gt; &quot;1&quot;
-                            
+
                                     // PUT updated user data at: &quot;/users/1&quot;
                                     firstUser.set(&#x27;name&#x27;, &#x27;Eric&#x27;).save();
                                 });
-                            
+
                             @class ModelSync.REST
                             @extensionfor Model
                             @extensionfor ModelList
                             @since 3.6.0
                             **/
                             function RESTSync() {}
-                            
+
                             /**
                             A request authenticity token to validate HTTP requests made by this extension
                             with the server when the request results in changing persistent state. This
                             allows you to protect your server from Cross-Site Request Forgery attacks.
-                            
+
                             A CSRF token provided by the server can be embedded in the HTML document and
                             assigned to &#x60;YUI.Env.CSRF_TOKEN&#x60; like this:
-                            
+
                                 &lt;script&gt;
                                     YUI.Env.CSRF_TOKEN = {{session.authenticityToken}};
                                 &lt;/script&gt;
-                            
+
                             The above should come after YUI seed file so that &#x60;YUI.Env&#x60; will be defined.
-                            
+
                             **Note:** This can be overridden on a per-request basis. See &#x60;sync()&#x60; method.
-                            
+
                             When a value for the CSRF token is provided, either statically or via &#x60;options&#x60;
                             passed to the &#x60;save()&#x60; and &#x60;destroy()&#x60; methods, the applicable HTTP requests
                             will have a &#x60;X-CSRF-Token&#x60; header added with the token value.
-                            
+
                             @property CSRF_TOKEN
                             @type String
                             @default YUI.Env.CSRF_TOKEN
@@ -1208,15 +1208,15 @@
                             @since 3.6.0
                             **/
                             RESTSync.CSRF_TOKEN = YUI.Env.CSRF_TOKEN;
-                            
+
                             /**
                             Static flag to use the HTTP POST method instead of PUT or DELETE.
-                            
+
                             If the server-side HTTP framework isn&#x27;t RESTful, setting this flag to &#x60;true&#x60;
                             will cause all PUT and DELETE requests to instead use the POST HTTP method, and
                             add a &#x60;X-HTTP-Method-Override&#x60; HTTP header with the value of the method type
                             which was overridden.
-                            
+
                             @property EMULATE_HTTP
                             @type Boolean
                             @default false
@@ -1224,19 +1224,19 @@
                             @since 3.6.0
                             **/
                             RESTSync.EMULATE_HTTP = false;
-                            
+
                             /**
                             Default headers used with all XHRs.
-                            
+
                             By default the &#x60;Accept&#x60; and &#x60;Content-Type&#x60; headers are set to
                             &quot;application/json&quot;, this signals to the HTTP server to process the request
                             bodies as JSON and send JSON responses. If you&#x27;re sending and receiving content
                             other than JSON, you can override these headers and the &#x60;parse()&#x60; and
                             &#x60;serialize()&#x60; methods.
-                            
+
                             **Note:** These headers will be merged with any request-specific headers, and
                             the request-specific headers will take precedence.
-                            
+
                             @property HTTP_HEADERS
                             @type Object
                             @default
@@ -1251,10 +1251,10 @@
                                 &#x27;Accept&#x27;      : &#x27;application/json&#x27;,
                                 &#x27;Content-Type&#x27;: &#x27;application/json&#x27;
                             };
-                            
+
                             /**
                             Static mapping of RESTful HTTP methods corresponding to CRUD actions.
-                            
+
                             @property HTTP_METHODS
                             @type Object
                             @default
@@ -1273,13 +1273,13 @@
                                 &#x27;update&#x27;: &#x27;PUT&#x27;,
                                 &#x27;delete&#x27;: &#x27;DELETE&#x27;
                             };
-                            
+
                             /**
                             The number of milliseconds before the XHRs will timeout/abort. This defaults to
                             30 seconds.
-                            
+
                             **Note:** This can be overridden on a per-request basis. See &#x60;sync()&#x60; method.
-                            
+
                             @property HTTP_TIMEOUT
                             @type Number
                             @default 30000
@@ -1287,11 +1287,11 @@
                             @since 3.6.0
                             **/
                             RESTSync.HTTP_TIMEOUT = 30000;
-                            
+
                             /**
                             Properties that shouldn&#x27;t be turned into ad-hoc attributes when passed to a
                             Model or ModelList constructor.
-                            
+
                             @property _NON_ATTRS_CFG
                             @type Array
                             @default [&quot;root&quot;, &quot;url&quot;]
@@ -1300,160 +1300,160 @@
                             @since 3.6.0
                             **/
                             RESTSync._NON_ATTRS_CFG = [&#x27;root&#x27;, &#x27;url&#x27;];
-                            
+
                             RESTSync.prototype = {
-                            
+
                                 // -- Public Properties ----------------------------------------------------
-                            
+
                                 /**
                                 A string which represents the root or collection part of the URL which
                                 relates to a Model or ModelList. Usually this value should be same for all
                                 instances of a specific Model/ModelList subclass.
-                            
+
                                 When sub-classing &#x60;Y.Model&#x60;, usually you&#x27;ll only need to override this
                                 property, which lets the URLs for the XHRs be generated by convention. If
                                 the &#x60;root&#x60; string ends with a trailing-slash, XHR URLs will also end with a
                                 &quot;/&quot;, and if the &#x60;root&#x60; does not end with a slash, neither will the XHR URLs.
-                            
+
                                 @example
                                     Y.User = Y.Base.create(&#x27;user&#x27;, Y.Model, [Y.ModelSync.REST], {
                                         root: &#x27;/users&#x27;
                                     });
-                            
+
                                     var currentUser, newUser;
-                            
+
                                     // GET the user data from: &quot;/users/123&quot;
                                     currentUser = new Y.User({id: &#x27;123&#x27;}).load();
-                            
+
                                     // POST the new user data to: &quot;/users&quot;
                                     newUser = new Y.User({name: &#x27;Eric Ferraiuolo&#x27;}).save();
-                            
+
                                 When sub-classing &#x60;Y.ModelList&#x60;, usually you&#x27;ll want to ignore configuring
                                 the &#x60;root&#x60; and simply rely on the build-in convention of the list&#x27;s
                                 generated URLs defaulting to the &#x60;root&#x60; specified by the list&#x27;s &#x60;model&#x60;.
-                            
+
                                 @property root
                                 @type String
                                 @default &quot;&quot;
                                 @since 3.6.0
                                 **/
                                 root: &#x27;&#x27;,
-                            
+
                                 /**
                                 A string which specifies the URL to use when making XHRs, if not value is
                                 provided, the URLs used to make XHRs will be generated by convention.
-                            
+
                                 While a &#x60;url&#x60; can be provided for each Model/ModelList instance, usually
                                 you&#x27;ll want to either rely on the default convention or provide a tokenized
                                 string on the prototype which can be used for all instances.
-                            
+
                                 When sub-classing &#x60;Y.Model&#x60;, you will probably be able to rely on the
                                 default convention of generating URLs in conjunction with the &#x60;root&#x60;
                                 property and whether the model is new or not (i.e. has an &#x60;id&#x60;). If the
                                 &#x60;root&#x60; property ends with a trailing-slash, the generated URL for the
                                 specific model will also end with a trailing-slash.
-                            
+
                                 @example
                                     Y.User = Y.Base.create(&#x27;user&#x27;, Y.Model, [Y.ModelSync.REST], {
                                         root: &#x27;/users/&#x27;
                                     });
-                            
+
                                     var currentUser, newUser;
-                            
+
                                     // GET the user data from: &quot;/users/123/&quot;
                                     currentUser = new Y.User({id: &#x27;123&#x27;}).load();
-                            
+
                                     // POST the new user data to: &quot;/users/&quot;
                                     newUser = new Y.User({name: &#x27;Eric Ferraiuolo&#x27;}).save();
-                            
+
                                 If a &#x60;url&#x60; is specified, it will be processed by &#x60;Y.Lang.sub()&#x60;, which is
                                 useful when the URLs for a Model/ModelList subclass match a specific pattern
                                 and can use simple replacement tokens; e.g.:
-                            
+
                                 @example
                                     Y.User = Y.Base.create(&#x27;user&#x27;, Y.Model, [Y.ModelSync.REST], {
                                         root: &#x27;/users&#x27;,
                                         url : &#x27;/users/{username}&#x27;
                                     });
-                            
+
                                 **Note:** String subsitituion of the &#x60;url&#x60; only use string an number values
                                 provided by this object&#x27;s attribute and/or the &#x60;options&#x60; passed to the
                                 &#x60;getURL()&#x60; method. Do not expect something fancy to happen with Object,
                                 Array, or Boolean values, they will simply be ignored.
-                            
+
                                 If your URLs have plural roots or collection URLs, while the specific item
                                 resources are under a singular name, e.g. &quot;/users&quot; (plural) and &quot;/user/123&quot;
                                 (singular), you&#x27;ll probably want to configure the &#x60;root&#x60; and &#x60;url&#x60;
                                 properties like this:
-                            
+
                                 @example
                                     Y.User = Y.Base.create(&#x27;user&#x27;, Y.Model, [Y.ModelSync.REST], {
                                         root: &#x27;/users&#x27;,
                                         url : &#x27;/user/{id}&#x27;
                                     });
-                            
+
                                     var currentUser, newUser;
-                            
+
                                     // GET the user data from: &quot;/user/123&quot;
                                     currentUser = new Y.User({id: &#x27;123&#x27;}).load();
-                            
+
                                     // POST the new user data to: &quot;/users&quot;
                                     newUser = new Y.User({name: &#x27;Eric Ferraiuolo&#x27;}).save();
-                            
+
                                 When sub-classing &#x60;Y.ModelList&#x60;, usually you&#x27;ll be able to rely on the
                                 associated &#x60;model&#x60; to supply its &#x60;root&#x60; to be used as the model list&#x27;s URL.
                                 If this needs to be customized, you can provide a simple string for the
                                 &#x60;url&#x60; property.
-                            
+
                                 @example
                                     Y.Users = Y.Base.create(&#x27;users&#x27;, Y.ModelList, [Y.ModelSync.REST], {
                                         // Leverages &#x60;Y.User&#x60;&#x27;s &#x60;root&#x60;, which is &quot;/users&quot;.
                                         model: Y.User
                                     });
-                            
+
                                     // Or specified explicitly...
-                            
+
                                     Y.Users = Y.Base.create(&#x27;users&#x27;, Y.ModelList, [Y.ModelSync.REST], {
                                         model: Y.User,
                                         url  : &#x27;/users&#x27;
                                     });
-                            
+
                                 @property url
                                 @type String
                                 @default &quot;&quot;
                                 @since 3.6.0
                                 **/
                                 url: &#x27;&#x27;,
-                            
+
                                 // -- Lifecycle Methods ----------------------------------------------------
-                            
+
                                 initializer: function (config) {
                                     config || (config = {});
-                            
+
                                     // Overrides &#x60;root&#x60; at the instance level.
                                     if (&#x27;root&#x27; in config) {
                                         this.root = config.root || &#x27;&#x27;;
                                     }
-                            
+
                                     // Overrides &#x60;url&#x60; at the instance level.
                                     if (&#x27;url&#x27; in config) {
                                         this.url = config.url || &#x27;&#x27;;
                                     }
                                 },
-                            
+
                                 // -- Public Methods -------------------------------------------------------
-                            
+
                                 /**
                                 Returns the URL for this model or model list for the given &#x60;action&#x60; and
                                 &#x60;options&#x60;, if specified.
-                            
+
                                 This method correctly handles the variations of &#x60;root&#x60; and &#x60;url&#x60; values and
                                 is called by the &#x60;sync()&#x60; method to get the URLs used to make the XHRs.
-                            
+
                                 You can override this method if you need to provide a specific
                                 implementation for how the URLs of your Model and ModelList subclasses need
                                 to be generated.
-                            
+
                                 @method getURL
                                 @param {String} [action] Optional &#x60;sync()&#x60; action for which to generate the
                                     URL.
@@ -1466,7 +1466,7 @@
                                 getURL: function (action, options) {
                                     var root = this.root,
                                         url  = this.url;
-                            
+
                                     // If this is a model list, use its &#x60;url&#x60; and substitute placeholders,
                                     // but default to the &#x60;root&#x60; of its &#x60;model&#x60;. By convention a model&#x27;s
                                     // &#x60;root&#x60; is the location to a collection resource.
@@ -1474,44 +1474,44 @@
                                         if (!url) {
                                             return this.model.prototype.root;
                                         }
-                            
+
                                         return this._substituteURL(url, Y.merge(this.getAttrs(), options));
                                     }
-                            
+
                                     // Assume &#x60;this&#x60; is a model.
-                            
+
                                     // When a model is new, i.e. has no &#x60;id&#x60;, the &#x60;root&#x60; should be used. By
                                     // convention a model&#x27;s &#x60;root&#x60; is the location to a collection resource.
                                     // The model&#x27;s &#x60;url&#x60; will be used as a fallback if &#x60;root&#x60; isn&#x27;t defined.
                                     if (root &amp;&amp; (action === &#x27;create&#x27; || this.isNew())) {
                                         return root;
                                     }
-                            
+
                                     // When a model&#x27;s &#x60;url&#x60; is not provided, we&#x27;ll generate a URL to use by
                                     // convention. This will combine the model&#x27;s &#x60;id&#x60; with its configured
                                     // &#x60;root&#x60; and add a trailing-slash if the root ends with &quot;/&quot;.
                                     if (!url) {
                                         return this._joinURL(this.getAsURL(&#x27;id&#x27;) || &#x27;&#x27;);
                                     }
-                            
+
                                     // Substitute placeholders in the &#x60;url&#x60; with URL-encoded values from the
                                     // model&#x27;s attribute values or the specified &#x60;options&#x60;.
                                     return this._substituteURL(url, Y.merge(this.getAttrs(), options));
                                 },
-                            
+
                                 /**
                                 Called to parse the response object returned from &#x60;Y.io()&#x60;. This method
                                 receives the full response object and is expected to &quot;prep&quot; a response which
                                 is suitable to pass to the &#x60;parse()&#x60; method.
-                            
+
                                 By default the response body is returned (&#x60;responseText&#x60;), because it
                                 usually represents the entire entity of this model on the server.
-                            
+
                                 If you need to parse data out of the response&#x27;s headers you should do so by
                                 overriding this method. If you&#x27;d like the entire response object from the
                                 XHR to be passed to your &#x60;parse()&#x60; method, you can simply assign this
                                 property to &#x60;false&#x60;.
-                            
+
                                 @method parseIOResponse
                                 @param {Object} response Response object from &#x60;Y.io()&#x60;.
                                 @return {Any} The modified response to pass along to the &#x60;parse()&#x60; method.
@@ -1520,22 +1520,22 @@
                                 parseIOResponse: function (response) {
                                     return response.responseText;
                                 },
-                            
+
                                 /**
                                 Serializes &#x60;this&#x60; model to be used as the HTTP request entity body.
-                            
+
                                 By default this model will be serialized to a JSON string via its &#x60;toJSON()&#x60;
                                 method.
-                            
+
                                 You can override this method when the HTTP server expects a different
                                 representation of this model&#x27;s data that is different from the default JSON
                                 serialization. If you&#x27;re sending and receive content other than JSON, be
                                 sure change the &#x60;Accept&#x60; and &#x60;Content-Type&#x60; &#x60;HTTP_HEADERS&#x60; as well.
-                            
+
                                 **Note:** A model&#x27;s &#x60;toJSON()&#x60; method can also be overridden. If you only
                                 need to modify which attributes are serialized to JSON, that&#x27;s a better
                                 place to start.
-                            
+
                                 @method serialize
                                 @param {String} [action] Optional &#x60;sync()&#x60; action for which to generate the
                                     the serialized representation of this model.
@@ -1545,24 +1545,24 @@
                                 serialize: function (action) {
                                     return Y.JSON.stringify(this);
                                 },
-                            
+
                                 /**
                                 Communicates with a RESTful HTTP server by sending and receiving data via
                                 XHRs. This method is called internally by load(), save(), and destroy().
-                            
+
                                 The URL used for each XHR will be retrieved by calling the &#x60;getURL()&#x60; method
                                 and passing it the specified &#x60;action&#x60; and &#x60;options&#x60;.
-                            
+
                                 This method relies heavily on standard RESTful HTTP conventions
-                            
+
                                 @method sync
                                 @param {String} action Sync action to perform. May be one of the following:
-                            
+
                                   * &#x60;create&#x60;: Store a newly-created model for the first time.
                                   * &#x60;delete&#x60;: Delete an existing model.
                                   * &#x60;read&#x60;  : Load an existing model.
                                   * &#x60;update&#x60;: Update an existing model.
-                            
+
                                 @param {Object} [options] Sync options:
                                   @param {String} [options.csrfToken] The authenticity token used by the
                                     server to verify the validity of this request and protected against CSRF
@@ -1581,14 +1581,14 @@
                                 **/
                                 sync: function (action, options, callback) {
                                     options || (options = {});
-                            
+
                                     var url       = this.getURL(action, options),
                                         method    = RESTSync.HTTP_METHODS[action],
                                         headers   = Y.merge(RESTSync.HTTP_HEADERS, options.headers),
                                         timeout   = options.timeout || RESTSync.HTTP_TIMEOUT,
                                         csrfToken = options.csrfToken || RESTSync.CSRF_TOKEN,
                                         entity;
-                            
+
                                     // Prepare the content if we are sending data to the server.
                                     if (method === &#x27;POST&#x27; || method === &#x27;PUT&#x27;) {
                                         entity = this.serialize(action);
@@ -1596,26 +1596,26 @@
                                         // Remove header, no content is being sent.
                                         delete headers[&#x27;Content-Type&#x27;];
                                     }
-                            
+
                                     // Setup HTTP emulation for older servers if we need it.
                                     if (RESTSync.EMULATE_HTTP &amp;&amp;
                                             (method === &#x27;PUT&#x27; || method === &#x27;DELETE&#x27;)) {
-                            
+
                                         // Pass along original method type in the headers.
                                         headers[&#x27;X-HTTP-Method-Override&#x27;] = method;
-                            
+
                                         // Fall-back to using POST method type.
                                         method = &#x27;POST&#x27;;
                                     }
-                            
+
                                     // Add CSRF token to HTTP request headers if one is specified and the
                                     // request will cause side effects on the server.
                                     if (csrfToken &amp;&amp;
                                             (method === &#x27;POST&#x27; || method === &#x27;PUT&#x27; || method === &#x27;DELETE&#x27;)) {
-                            
+
                                         headers[&#x27;X-CSRF-Token&#x27;] = csrfToken;
                                     }
-                            
+
                                     this._sendSyncIORequest({
                                         action  : action,
                                         callback: callback,
@@ -1626,22 +1626,22 @@
                                         url     : url
                                     });
                                 },
-                            
+
                                 // -- Protected Methods ----------------------------------------------------
-                            
+
                                 /**
                                 Joins the &#x60;root&#x60; URL to the specified &#x60;url&#x60;, normalizing leading/trailing
                                 &quot;/&quot; characters.
-                            
+
                                 @example
                                     model.root = &#x27;/foo&#x27;
                                     model._joinURL(&#x27;bar&#x27;);  // =&gt; &#x27;/foo/bar&#x27;
                                     model._joinURL(&#x27;/bar&#x27;); // =&gt; &#x27;/foo/bar&#x27;
-                            
+
                                     model.root = &#x27;/foo/&#x27;
                                     model._joinURL(&#x27;bar&#x27;);  // =&gt; &#x27;/foo/bar/&#x27;
                                     model._joinURL(&#x27;/bar&#x27;); // =&gt; &#x27;/foo/bar/&#x27;
-                            
+
                                 @method _joinURL
                                 @param {String} url URL to append to the &#x60;root&#x60; URL.
                                 @return {String} Joined URL.
@@ -1650,32 +1650,32 @@
                                 **/
                                 _joinURL: function (url) {
                                     var root = this.root;
-                            
+
                                     if (!(root || url)) {
                                         return &#x27;&#x27;;
                                     }
-                            
+
                                     if (url.charAt(0) === &#x27;/&#x27;) {
                                         url = url.substring(1);
                                     }
-                            
+
                                     // Combines the &#x60;root&#x60; with the &#x60;url&#x60; and adds a trailing-slash if the
                                     // &#x60;root&#x60; has a trailing-slash.
                                     return root &amp;&amp; root.charAt(root.length - 1) === &#x27;/&#x27; ?
                                             root + url + &#x27;/&#x27; :
                                             root + &#x27;/&#x27; + url;
                                 },
-                            
-                            
+
+
                                 /**
                                 Calls both public, overrideable methods: &#x60;parseIOResponse()&#x60;, then &#x60;parse()&#x60;
                                 and returns the result.
-                            
+
                                 This will call into &#x60;parseIOResponse()&#x60;, if it&#x27;s defined as a method,
                                 passing it the full response object from the XHR and using its return value
                                 to pass along to the &#x60;parse()&#x60;. This enables developers to easily parse data
                                 out of the response headers which should be used by the &#x60;parse()&#x60; method.
-                            
+
                                 @method _parse
                                 @param {Object} response Response object from &#x60;Y.io()&#x60;.
                                 @return {Object|Object[]} Attribute hash or Array of model attribute hashes.
@@ -1689,15 +1689,15 @@
                                     if (typeof this.parseIOResponse === &#x27;function&#x27;) {
                                         response = this.parseIOResponse(response);
                                     }
-                            
+
                                     return this.parse(response);
                                 },
-                            
+
                                 /**
                                 Performs the XHR and returns the resulting &#x60;Y.io()&#x60; request object.
-                            
+
                                 This method is called by &#x60;sync()&#x60;.
-                            
+
                                 @method _sendSyncIORequest
                                 @param {Object} config An object with the following properties:
                                   @param {String} config.action The &#x60;sync()&#x60; action being performed.
@@ -1719,13 +1719,13 @@
                                             callback: config.callback,
                                             url     : config.url
                                         },
-                            
+
                                         context: this,
                                         data   : config.entity,
                                         headers: config.headers,
                                         method : config.method,
                                         timeout: config.timeout,
-                            
+
                                         on: {
                                             start  : this._onSyncIOStart,
                                             failure: this._onSyncIOFailure,
@@ -1734,18 +1734,18 @@
                                         }
                                     });
                                 },
-                            
+
                                 /**
                                 Utility which takes a tokenized &#x60;url&#x60; string and substitutes its
                                 placeholders using a specified &#x60;data&#x60; object.
-                            
+
                                 This method will property URL-encode any values before substituting them.
                                 Also, only expect it to work with String and Number values.
-                            
+
                                 @example
                                     var url = this._substituteURL(&#x27;/users/{name}&#x27;, {id: &#x27;Eric F&#x27;});
                                     // =&gt; &quot;/users/Eric%20F&quot;
-                            
+
                                 @method _substituteURL
                                 @param {String} url Tokenized URL string to substitute placeholder values.
                                 @param {Object} data Set of data to fill in the &#x60;url&#x60;&#x27;s placeholders.
@@ -1757,9 +1757,9 @@
                                     if (!url) {
                                         return &#x27;&#x27;;
                                     }
-                            
+
                                     var values = {};
-                            
+
                                     // Creates a hash of the string and number values only to be used to
                                     // replace any placeholders in a tokenized &#x60;url&#x60;.
                                     Y.Object.each(data, function (v, k) {
@@ -1768,18 +1768,18 @@
                                             values[k] = encodeURIComponent(v);
                                         }
                                     });
-                            
+
                                     return Lang.sub(url, values);
                                 },
-                            
+
                                 // -- Event Handlers -------------------------------------------------------
-                            
+
                                 /**
                                 Called when the &#x60;Y.io&#x60; request has finished, after &quot;success&quot; or &quot;failure&quot;
                                 has been determined.
-                            
+
                                 This is a no-op by default, but provides a hook for overriding.
-                            
+
                                 @method _onSyncIOEnd
                                 @param {String} txId The &#x60;Y.io&#x60; transaction id.
                                 @param {Object} details Extra details carried through from &#x60;sync()&#x60;:
@@ -1790,13 +1790,13 @@
                                 @since 3.6.0
                                 **/
                                 _onSyncIOEnd: function (txId, details) {},
-                            
+
                                 /**
                                 Called when the &#x60;Y.io&#x60; request has finished unsuccessfully.
-                            
+
                                 By default this calls the &#x60;details.callback&#x60; function passing it the HTTP
                                 status code and message as an error object along with the response body.
-                            
+
                                 @method _onSyncIOFailure
                                 @param {String} txId The &#x60;Y.io&#x60; transaction id.
                                 @param {Object} res The &#x60;Y.io&#x60; response object.
@@ -1809,7 +1809,7 @@
                                 **/
                                 _onSyncIOFailure: function (txId, res, details) {
                                     var callback = details.callback;
-                            
+
                                     if (callback) {
                                         callback({
                                             code: res.status,
@@ -1817,13 +1817,13 @@
                                         }, res);
                                     }
                                 },
-                            
+
                                 /**
                                 Called when the &#x60;Y.io&#x60; request has finished successfully.
-                            
+
                                 By default this calls the &#x60;details.callback&#x60; function passing it the
                                 response body.
-                            
+
                                 @method _onSyncIOSuccess
                                 @param {String} txId The &#x60;Y.io&#x60; transaction id.
                                 @param {Object} res The &#x60;Y.io&#x60; response object.
@@ -1836,17 +1836,17 @@
                                 **/
                                 _onSyncIOSuccess: function (txId, res, details) {
                                     var callback = details.callback;
-                            
+
                                     if (callback) {
                                         callback(null, res);
                                     }
                                 },
-                            
+
                                 /**
                                 Called when the &#x60;Y.io&#x60; request is made.
-                            
+
                                 This is a no-op by default, but provides a hook for overriding.
-                            
+
                                 @method _onSyncIOStart
                                 @param {String} txId The &#x60;Y.io&#x60; transaction id.
                                 @param {Object} details Extra details carried through from &#x60;sync()&#x60;:
@@ -1858,11 +1858,11 @@
                                 **/
                                 _onSyncIOStart: function (txId, details) {}
                             };
-                            
+
                             // -- Namespace ----------------------------------------------------------------
-                            
+
                             Y.namespace(&#x27;ModelSync&#x27;).REST = RESTSync;
-                            
+
                                 </pre>
                             </div>
                         </div>

@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>alloy-ui/src/aui-ace-editor/js/aui-ace-autocomplete-templateprocessor.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1140,19 +1140,19 @@
                              * @module aui-ace-editor
                              * @submodule aui-ace-autocomplete-templateprocessor
                              */
-                            
+
                             var Lang = A.Lang,
                                 AArray = A.Array,
                                 AObject = A.Object,
                                 Base = A.AceEditor.AutoCompleteBase,
-                            
+
                                 MATCH_DIRECTIVES = 0,
                                 MATCH_VARIABLES = 1,
-                            
+
                                 TOKEN_PUNCTUATOR_DOT = 1,
                                 TOKEN_UNRECOGNIZED = -1,
                                 TOKEN_VARIABLE = 0,
-                            
+
                                 /**
                                  * A base class for TemplateProcessor.
                                  *
@@ -1164,7 +1164,7 @@
                                  */
                                 TemplateProcessor = A.Base.create(&#x27;aui-ace-autocomplete-templateprocessor&#x27;, A.Base, [
                             ], {
-                            
+
                                     /**
                                      * Accepts match and depending on its type processes directives or
                                      * variables. In case of success, calls the provided success callback,
@@ -1185,32 +1185,32 @@
                                             matchDirectives,
                                             matches,
                                             type;
-                            
+
                                         type = match.type;
-                            
+
                                         if (type === MATCH_DIRECTIVES) {
                                             matchDirectives = instance.get(&#x27;directives&#x27;);
-                            
+
                                             content = match.content.toLowerCase();
-                            
+
                                             if (content.length) {
                                                 host = instance.get(&#x27;host&#x27;);
-                            
+
                                                 matchDirectives = host._filterResults(content, matchDirectives);
                                             }
-                            
+
                                             callbackSuccess(matchDirectives);
                                         }
                                         else if (type === MATCH_VARIABLES) {
                                             matches = instance._getVariableMatches(match.content);
-                            
+
                                             callbackSuccess(matches);
                                         }
                                         else {
                                             callbackError();
                                         }
                                     },
-                            
+
                                     /**
                                      * Formats the selected suggestion depending on the match type and
                                      * currently selected editor mode. The match type can be one of:
@@ -1233,14 +1233,14 @@
                                             result,
                                             type,
                                             variables;
-                            
+
                                         result = selectedSuggestion || &#x27;&#x27;;
-                            
+
                                         if (selectedSuggestion) {
                                             fillMode = instance.get(&#x27;host&#x27;).get(&#x27;fillMode&#x27;);
-                            
+
                                             type = match.type;
-                            
+
                                             if (fillMode === Base.FILL_MODE_INSERT) {
                                                 if (type === MATCH_DIRECTIVES) {
                                                     if (match.content &amp;&amp; selectedSuggestion.indexOf(match.content) === 0) {
@@ -1249,9 +1249,9 @@
                                                 }
                                                 else if (type === MATCH_VARIABLES) {
                                                     variables = match.content.split(&#x27;.&#x27;);
-                            
+
                                                     lastEntry = variables[variables.length - 1];
-                            
+
                                                     if (lastEntry &amp;&amp; selectedSuggestion.indexOf(lastEntry) === 0) {
                                                         result = selectedSuggestion.substring(lastEntry.length);
                                                     }
@@ -1259,16 +1259,16 @@
                                             }
                                             else if (type === MATCH_VARIABLES) {
                                                 variables = match.content.split(&#x27;.&#x27;);
-                            
+
                                                 variables[variables.length - 1] = selectedSuggestion;
-                            
+
                                                 result = variables.join(&#x27;.&#x27;);
                                             }
                                         }
-                            
+
                                         return result;
                                     },
-                            
+
                                     /**
                                      * Checks if the the provided index is the last token in the list of
                                      * tokens.
@@ -1283,7 +1283,7 @@
                                     _isLastToken: function(index, tokens) {
                                         return index === tokens.length - 1;
                                     },
-                            
+
                                     /**
                                      * Retrieves the type of a token. It can be one of these:
                                      * TOKEN_PUNCTUATOR_DOT = 1
@@ -1297,7 +1297,7 @@
                                      */
                                     _getTokenType: function(token) {
                                         var tokenType = TOKEN_UNRECOGNIZED;
-                            
+
                                         if (Lang.isString(token)) {
                                             if (token.length) {
                                                 tokenType = TOKEN_VARIABLE;
@@ -1306,10 +1306,10 @@
                                                 tokenType = TOKEN_PUNCTUATOR_DOT;
                                             }
                                         }
-                            
+
                                         return tokenType;
                                     },
-                            
+
                                     /**
                                      * Scans the content and extracts variables.
                                      *
@@ -1336,25 +1336,25 @@
                                             tokenType,
                                             variableData,
                                             variableType;
-                            
+
                                         results = [];
-                            
+
                                         data = instance.get(&#x27;variables&#x27;);
-                            
+
                                         resultsData = {};
-                            
+
                                         curVariableData = data.variables;
-                            
+
                                         if (content) {
                                             tokens = content.split(&#x27;.&#x27;);
-                            
+
                                             lastEntry = tokens[tokens.length - 1];
-                            
+
                                             for (i = 0; i &lt; tokens.length; i++) {
                                                 token = tokens[i];
-                            
+
                                                 tokenType = instance._getTokenType(token);
-                            
+
                                                 if (tokenType === TOKEN_PUNCTUATOR_DOT) {
                                                     if (i === 0) {
                                                         curVariableData = {};
@@ -1365,21 +1365,21 @@
                                                 }
                                                 else if (tokenType === TOKEN_VARIABLE) {
                                                     isLastToken = instance._isLastToken(i, tokens);
-                            
+
                                                     if (isLastToken) {
                                                         resultsData = curVariableData;
-                            
+
                                                         break;
                                                     }
-                            
+
                                                     leftPartheseIndex = token.indexOf(&#x27;(&#x27;);
-                            
+
                                                     if (leftPartheseIndex !== -1) {
                                                         token = token.substring(0, leftPartheseIndex);
                                                     }
-                            
+
                                                     variableData = curVariableData[token];
-                            
+
                                                     if (variableData) {
                                                         if (i === 0) {
                                                             variableType = variableData.type;
@@ -1387,17 +1387,17 @@
                                                         else {
                                                             variableType = variableData.returnType;
                                                         }
-                            
+
                                                         curVariableData = data.types[variableType] || {};
                                                     }
                                                     else if (isLastToken) {
                                                         resultsData = curVariableData;
-                            
+
                                                         break;
                                                     }
                                                     else {
                                                         resultsData = {};
-                            
+
                                                         break;
                                                     }
                                                 }
@@ -1406,36 +1406,36 @@
                                         else {
                                             resultsData = data.variables;
                                         }
-                            
+
                                         results = AObject.keys(resultsData);
-                            
+
                                         matches = results.sort();
-                            
+
                                         if (lastEntry) {
                                             host = instance.get(&#x27;host&#x27;);
-                            
+
                                             matches = host._filterResults(lastEntry, matches);
                                         }
-                            
+
                                         if (matches.length) {
                                             matches = AArray.map(
                                                 matches,
                                                 function(item) {
                                                     var args,
                                                         data;
-                            
+
                                                     data = resultsData[item];
-                            
+
                                                     if (data.type === &#x27;Method&#x27;) {
                                                         args = AArray.map(
                                                             data.argumentTypes,
                                                             function(item) {
                                                                 var parts = item.split(&#x27;.&#x27;);
-                            
+
                                                                 return parts[parts.length - 1];
                                                             }
                                                         );
-                            
+
                                                         return item + &#x27;(&#x27; + args.join(&#x27;, &#x27;) + &#x27;)&#x27;;
                                                     }
                                                     else {
@@ -1444,10 +1444,10 @@
                                                 }
                                             );
                                         }
-                            
+
                                         return matches;
                                     },
-                            
+
                                     /**
                                      * Normalizes a regualr expression value. If the value is String, it
                                      * will be converted to an RegExp.
@@ -1459,18 +1459,18 @@
                                      */
                                     _setRegexValue: function(value) {
                                         var result = A.AttributeCore.INVALID_VALUE;
-                            
+
                                         if (Lang.isString(value)) {
                                             result = new RegExp(value);
                                         }
                                         else if (value instanceof RegExp) {
                                             result = value;
                                         }
-                            
+
                                         return result;
                                     }
                                 }, {
-                            
+
                                     /**
                                      * Static property which provides a string to identify the class.
                                      *
@@ -1479,7 +1479,7 @@
                                      * @static
                                      */
                                     NAME: &#x27;aui-ace-autocomplete-templateprocessor&#x27;,
-                            
+
                                     /**
                                      * Static property provides a string to identify the namespace.
                                      *
@@ -1488,7 +1488,7 @@
                                      * @static
                                      */
                                     NS: &#x27;aui-ace-autocomplete-templateprocessor&#x27;,
-                            
+
                                     /**
                                      * Static property used to define the default attribute
                                      * configuration for the TemplateProcessor.
@@ -1498,7 +1498,7 @@
                                      * @static
                                      */
                                     ATTRS: {
-                            
+
                                         /**
                                          * Contains an array of all possible directives for the
                                          * corresponding language.
@@ -1509,7 +1509,7 @@
                                         directives: {
                                             validator: Lang.isArray
                                         },
-                            
+
                                         /**
                                          * The Editor in which the current instance is plugged.
                                          *
@@ -1519,7 +1519,7 @@
                                         host: {
                                             validator: Lang.isObject
                                         },
-                            
+
                                         /**
                                          * Contains the supported variables for the corresponding language.
                                          *
@@ -1531,9 +1531,9 @@
                                         }
                                     }
                                 });
-                            
+
                             A.AceEditor.TemplateProcessor = TemplateProcessor;
-                            
+
                                 </pre>
                             </div>
                         </div>

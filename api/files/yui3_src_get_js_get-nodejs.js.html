@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/get/js/get-nodejs.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                                 /**
@@ -1140,9 +1140,9 @@
                                 * @module get-nodejs
                                 * @class GetNodeJS
                                 */
-                            
+
                                 var Module = require(&#x27;module&#x27;),
-                            
+
                                     path = require(&#x27;path&#x27;),
                                     fs = require(&#x27;fs&#x27;),
                                     request = require(&#x27;request&#x27;),
@@ -1165,17 +1165,17 @@
                                         }
                                         end(cb, er, &#x27;fail&#x27;);
                                     };
-                            
-                            
+
+
                                 Y.Get = function() {
                                 };
-                            
+
                                 //Setup the default config base path
                                 Y.config.base = path.join(__dirname, &#x27;../&#x27;);
-                            
+
                                 YUI.require = require;
                                 YUI.process = process;
-                            
+
                                 /**
                                 * Takes the raw JS files and wraps them to be executed in the YUI context so they can be loaded
                                 * into the YUI object
@@ -1187,12 +1187,12 @@
                                 * @param {Error} cb.err=null Error object
                                 * @param {String} cb.url The URL that was just parsed
                                 */
-                            
+
                                 Y.Get._exec = function(data, url, cb) {
                                     if (data.charCodeAt(0) === 0xFEFF) {
                                         data = data.slice(1);
                                     }
-                            
+
                                     var mod = new Module(url, module);
                                     mod.filename = url;
                                     mod.paths = Module._nodeModulePaths(path.dirname(url));
@@ -1202,15 +1202,15 @@
                                     mod._compile(&#x27;module.exports = function (YUI) {&#x27; +
                                         &#x27;return (function () {&#x27;+ data + &#x27;\n;return YUI;}).apply(global);&#x27; +
                                     &#x27;};&#x27;, url);
-                            
+
                                     /*global YUI:true */
                                     YUI = mod.exports(YUI);
-                            
+
                                     mod.loaded = true;
-                            
+
                                     cb(null, url);
                                 };
-                            
+
                                 /**
                                 * Fetches the content from a remote URL or a file from disc and passes the content
                                 * off to &#x60;_exec&#x60; for parsing
@@ -1223,7 +1223,7 @@
                                     var cfg,
                                         mod,
                                         self = this;
-                            
+
                                     if (url.match(/^https?:\/\//)) {
                                         cfg = {
                                             url: url,
@@ -1241,7 +1241,7 @@
                                         try {
                                             // Try to resolve paths relative to the module that required yui.
                                             url = Module._findPath(url, Module._resolveLookupPaths(url, module.parent.parent)[1]);
-                            
+
                                             if (Y.config.useSync) {
                                                 //Needs to be in useSync
                                                 mod = fs.readFileSync(url,&#x27;utf8&#x27;);
@@ -1259,12 +1259,12 @@
                                             cb(err, url);
                                             return;
                                         }
-                            
+
                                         Y.Get._exec(mod, url, cb);
                                     }
                                 };
-                            
-                            
+
+
                                 /**
                                 * Override for Get.script for loading local or remote YUI modules.
                                 * @method js
@@ -1278,15 +1278,15 @@
                                                 pass(options);
                                             }
                                         };
-                            
-                            
+
+
                                     /*jshint loopfunc: true */
                                     for (i=0; i&lt;l; i++) {
                                         url = urls[i];
                                         if (Y.Lang.isObject(url)) {
                                             url = url.url;
                                         }
-                            
+
                                         url = url.replace(/&#x27;/g, &#x27;%27&#x27;);
                                         Y.log(&#x27;URL: &#x27; + url, &#x27;info&#x27;, &#x27;get&#x27;);
                                         Y.Get._include(url, function(err, url) {
@@ -1310,26 +1310,26 @@
                                             }
                                         });
                                     }
-                            
+
                                     //Keeping Signature in the browser.
                                     return {
                                         execute: function() {}
                                     };
                                 };
-                            
+
                                 /**
                                 * Alias for &#x60;Y.Get.js&#x60;
                                 * @method script
                                 */
                                 Y.Get.script = Y.Get.js;
-                            
+
                                 //Place holder for SS Dom access
                                 Y.Get.css = function(s, cb) {
                                     Y.log(&#x27;Y.Get.css is not supported, just reporting that it has loaded but not fetching.&#x27;, &#x27;warn&#x27;, &#x27;get&#x27;);
                                     pass(cb);
                                 };
-                            
-                            
+
+
                                 </pre>
                             </div>
                         </div>

@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>alloy-ui/src/aui-promise/js/aui-promise.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1140,7 +1140,7 @@
                              *
                              * @module aui-promise
                              */
-                            
+
                             /**
                              * Adds a callback that will be invoked whether the Promise is fulfilled or
                              * rejected. The callback receives no argument, and a new child Promise is
@@ -1155,14 +1155,14 @@
                              */
                             A.Promise.prototype.thenAlways = function(callback) {
                                 var instance = this;
-                            
+
                                 return this.then(function() {
                                     callback.call(instance);
                                 }, function() {
                                     callback.call(instance);
                                 });
                             };
-                            
+
                             /**
                              * Adds a callback that will be invoked only if the Promise is rejected. This is
                              * equivalent to &#x60;then(null, onRejected)&#x60;.
@@ -1175,7 +1175,7 @@
                             A.Promise.prototype.thenCatch = function(reject) {
                                 return this.then(null, reject);
                             };
-                            
+
                             /**
                              * Cancellable promise.
                              *
@@ -1188,12 +1188,12 @@
                              * @param {Function} opt_errorCallback Optional error callback to be fired
                              *     whenever a cancellable promise is cancelled.
                              */
-                            
+
                             function CancellablePromise(fn, opt_errorCallback) {
                                 this._errorCallback = opt_errorCallback;
                                 CancellablePromise.superclass.constructor.apply(this, arguments);
                             }
-                            
+
                             A.extend(CancellablePromise, A.Promise, {
                                 /**
                                  * Holds the list of children promises.
@@ -1203,7 +1203,7 @@
                                  * @protected
                                  */
                                 _childPromises: null,
-                            
+
                                 /**
                                  * Holds the Optional error callback to be fired whenever a cancellable
                                  * promise is cancelled.
@@ -1213,7 +1213,7 @@
                                  * @protected
                                  */
                                 _errorCallback: null,
-                            
+
                                 /**
                                  * Cancels the Promise by rejecting it with a &#x60;A.CancellablePromise.Error&#x60;. No
                                  * action is performed if the Promise is already resolved.
@@ -1238,14 +1238,14 @@
                                     resolver.reject(error);
                                     return this;
                                 },
-                            
+
                                 /**
                                  * @override
                                  */
                                 then: function(onFulfilled, onRejected) {
                                     var instance = this,
                                         child;
-                            
+
                                     function onFulfilledInternal() {
                                         var valueOrReason = onFulfilled.apply(instance, arguments);
                                         if (!instance._childPromises) {
@@ -1254,7 +1254,7 @@
                                         instance._childPromises.push(valueOrReason);
                                         return valueOrReason;
                                     }
-                            
+
                                     child = CancellablePromise.superclass.then.call(this, onFulfilledInternal, function(reason) {
                                         try {
                                             if (A.Lang.isFunction(onRejected)) {
@@ -1273,10 +1273,10 @@
                                     // available for future cancellation. The same may be achieve linking
                                     // the parent child reference on each child
                                     child.cancel = A.bind(instance.cancel, instance);
-                            
+
                                     return child;
                                 },
-                            
+
                                 /**
                                  * Cancels children Promises. If the Promise has not already been resolved,
                                  * reject it with a cancel error. If there are no other children in the list
@@ -1294,7 +1294,7 @@
                                     this._childPromises = null;
                                 }
                             });
-                            
+
                             /*
                              * Ensures that a certain value is a cancellable promise. If it is not a
                              * promise, it wraps it in one.
@@ -1305,7 +1305,7 @@
                              * @static
                              */
                             CancellablePromise.resolve = A.Promise.resolve;
-                            
+
                             /*
                              * A shorthand for creating a rejected cancellable promise.
                              *
@@ -1316,7 +1316,7 @@
                              * @static
                              */
                             CancellablePromise.reject = A.Promise.reject;
-                            
+
                             /*
                              * Returns a cancellable promise that is resolved or rejected when all values
                              * are resolved or any is rejected. This is useful for waiting for the
@@ -1331,18 +1331,18 @@
                              */
                             CancellablePromise.all = function(values) {
                                 var children = [];
-                            
+
                                 return new A.CancellablePromise(
                                     function(resolve, reject) {
                                         if (!A.Lang.isArray(values)) {
                                             reject(new TypeError(&#x27;CancellablePromise.all expects an array of values or promises&#x27;));
                                             return;
                                         }
-                            
+
                                         var instance = this,
                                             results = [],
                                             remaining = values.length;
-                            
+
                                         function resolveInternal(childPos, val) {
                                             results[childPos - 1] = val;
                                             remaining--;
@@ -1350,7 +1350,7 @@
                                                 resolve(results);
                                             }
                                         }
-                            
+
                                         A.Array.each(values, function(maybePromise) {
                                             var child = A.CancellablePromise.resolve(maybePromise);
                                             child.then(
@@ -1364,9 +1364,9 @@
                                     }
                                 );
                             };
-                            
+
                             A.CancellablePromise = CancellablePromise;
-                            
+
                             /**
                              * Error used as a rejection reason for canceled Promises.
                              *
@@ -1376,18 +1376,18 @@
                              * @param {String} opt_message An optional debugging message for describing the
                              *     cancellation reason.
                              */
-                            
+
                             function CancellablePromiseError(opt_message) {
                                 CancellablePromiseError.superclass.constructor.apply(this, arguments);
                                 this.message = opt_message;
                             }
-                            
+
                             A.extend(CancellablePromiseError, Error, {
                                 name: &#x27;cancel&#x27;
                             });
-                            
+
                             A.CancellablePromise.Error = CancellablePromiseError;
-                            
+
                                 </pre>
                             </div>
                         </div>

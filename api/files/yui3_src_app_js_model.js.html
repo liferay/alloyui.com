@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,50 +1122,50 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/app/js/model.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
                             Attribute-based data model with APIs for getting, setting, validating, and
                             syncing attribute values, as well as events for being notified of model changes.
-                            
+
                             @module app
                             @submodule model
                             @since 3.4.0
                             **/
-                            
+
                             /**
                             Attribute-based data model with APIs for getting, setting, validating, and
                             syncing attribute values, as well as events for being notified of model changes.
-                            
+
                             In most cases, you&#x27;ll want to create your own subclass of &#x60;Y.Model&#x60; and
                             customize it to meet your needs. In particular, the &#x60;sync()&#x60; and &#x60;validate()&#x60;
                             methods are meant to be overridden by custom implementations. You may also want
                             to override the &#x60;parse()&#x60; method to parse non-generic server responses.
-                            
+
                             @class Model
                             @constructor
                             @extends Base
                             @since 3.4.0
                             **/
-                            
+
                             var GlobalEnv = YUI.namespace(&#x27;Env.Model&#x27;),
                                 Lang      = Y.Lang,
                                 YArray    = Y.Array,
                                 YObject   = Y.Object,
-                            
+
                                 /**
                                 Fired when one or more attributes on this model are changed.
-                            
+
                                 @event change
                                 @param {Object} changed Hash of change information for each attribute that
                                     changed. Each item in the hash has the following properties:
@@ -1174,37 +1174,37 @@
                                   @param {String|null} changed.src Source of the change event, if any.
                                 **/
                                 EVT_CHANGE = &#x27;change&#x27;,
-                            
+
                                 /**
                                 Fired when an error occurs, such as when the model doesn&#x27;t validate or when
                                 a sync layer response can&#x27;t be parsed.
-                            
+
                                 @event error
                                 @param {Any} error Error message, object, or exception generated by the
                                   error. Calling &#x60;toString()&#x60; on this should result in a meaningful error
                                   message.
                                 @param {String} src Source of the error. May be one of the following (or any
                                   custom error source defined by a Model subclass):
-                            
+
                                   * &#x60;load&#x60;: An error loading the model from a sync layer. The sync layer&#x27;s
                                     response (if any) will be provided as the &#x60;response&#x60; property on the
                                     event facade.
-                            
+
                                   * &#x60;parse&#x60;: An error parsing a JSON response. The response in question will
                                     be provided as the &#x60;response&#x60; property on the event facade.
-                            
+
                                   * &#x60;save&#x60;: An error saving the model to a sync layer. The sync layer&#x27;s
                                     response (if any) will be provided as the &#x60;response&#x60; property on the
                                     event facade.
-                            
+
                                   * &#x60;validate&#x60;: The model failed to validate. The attributes being validated
                                     will be provided as the &#x60;attributes&#x60; property on the event facade.
                                 **/
                                 EVT_ERROR = &#x27;error&#x27;,
-                            
+
                                 /**
                                 Fired after model attributes are loaded from a sync layer.
-                            
+
                                 @event load
                                 @param {Object} parsed The parsed version of the sync layer&#x27;s response to
                                     the load request.
@@ -1213,10 +1213,10 @@
                                 @since 3.5.0
                                 **/
                                 EVT_LOAD = &#x27;load&#x27;,
-                            
+
                                 /**
                                 Fired after model attributes are saved to a sync layer.
-                            
+
                                 @event save
                                 @param {Object} [parsed] The parsed version of the sync layer&#x27;s response to
                                     the save request, if there was a response.
@@ -1225,67 +1225,67 @@
                                 @since 3.5.0
                                 **/
                                 EVT_SAVE = &#x27;save&#x27;;
-                            
+
                             function Model() {
                                 Model.superclass.constructor.apply(this, arguments);
                             }
-                            
+
                             Y.Model = Y.extend(Model, Y.Base, {
                                 // -- Public Properties ----------------------------------------------------
-                            
+
                                 /**
                                 Hash of attributes that have changed since the last time this model was
                                 saved.
-                            
+
                                 @property changed
                                 @type Object
                                 @default {}
                                 **/
-                            
+
                                 /**
                                 Name of the attribute to use as the unique id (or primary key) for this
                                 model.
-                            
+
                                 The default is &#x60;id&#x60;, but if your persistence layer uses a different name for
                                 the primary key (such as &#x60;_id&#x60; or &#x60;uid&#x60;), you can specify that here.
-                            
+
                                 The built-in &#x60;id&#x60; attribute will always be an alias for whatever attribute
                                 name you specify here, so getting and setting &#x60;id&#x60; will always behave the
                                 same as getting and setting your custom id attribute.
-                            
+
                                 @property idAttribute
                                 @type String
                                 @default &#x60;&#x27;id&#x27;&#x60;
                                 **/
                                 idAttribute: &#x27;id&#x27;,
-                            
+
                                 /**
                                 Hash of attributes that were changed in the last &#x60;change&#x60; event. Each item
                                 in this hash is an object with the following properties:
-                            
+
                                   * &#x60;newVal&#x60;: The new value of the attribute after it changed.
                                   * &#x60;prevVal&#x60;: The old value of the attribute before it changed.
                                   * &#x60;src&#x60;: The source of the change, or &#x60;null&#x60; if no source was specified.
-                            
+
                                 @property lastChange
                                 @type Object
                                 @default {}
                                 **/
-                            
+
                                 /**
                                 Array of &#x60;ModelList&#x60; instances that contain this model.
-                            
+
                                 When a model is in one or more lists, the model&#x27;s events will bubble up to
                                 those lists. You can subscribe to a model event on a list to be notified
                                 when any model in the list fires that event.
-                            
+
                                 This property is updated automatically when this model is added to or
                                 removed from a &#x60;ModelList&#x60; instance. You shouldn&#x27;t alter it manually. When
                                 working with models in a list, you should always add and remove models using
                                 the list&#x27;s &#x60;add()&#x60; and &#x60;remove()&#x60; methods.
-                            
+
                                 @example Subscribing to model events on a list:
-                            
+
                                     // Assuming &#x60;list&#x60; is an existing Y.ModelList instance.
                                     list.on(&#x27;*:change&#x27;, function (e) {
                                         // This function will be called whenever any model in the list
@@ -1294,20 +1294,20 @@
                                         // &#x60;e.target&#x60; will refer to the model instance that fired the
                                         // event.
                                     });
-                            
+
                                 @property lists
                                 @type ModelList[]
                                 @default &#x60;[]&#x60;
                                 **/
-                            
+
                                 // -- Protected Properties -------------------------------------------------
-                            
+
                                 /**
                                 This tells &#x60;Y.Base&#x60; that it should create ad-hoc attributes for config
                                 properties passed to Model&#x27;s constructor. This makes it possible to
                                 instantiate a model and set a bunch of attributes without having to subclass
                                 &#x60;Y.Model&#x60; and declare all those attributes first.
-                            
+
                                 @property _allowAdHocAttrs
                                 @type Boolean
                                 @default true
@@ -1315,12 +1315,12 @@
                                 @since 3.5.0
                                 **/
                                 _allowAdHocAttrs: true,
-                            
+
                                 /**
                                 Total hack to allow us to identify Model instances without using
                                 &#x60;instanceof&#x60;, which won&#x27;t work when the instance was created in another
                                 window or YUI sandbox.
-                            
+
                                 @property _isYUIModel
                                 @type Boolean
                                 @default true
@@ -1328,29 +1328,29 @@
                                 @since 3.5.0
                                 **/
                                 _isYUIModel: true,
-                            
+
                                 // -- Lifecycle Methods ----------------------------------------------------
                                 initializer: function (config) {
                                     this.changed    = {};
                                     this.lastChange = {};
                                     this.lists      = [];
                                 },
-                            
+
                                 // -- Public Methods -------------------------------------------------------
-                            
+
                                 /**
                                 Destroys this model instance and removes it from its containing lists, if
                                 any.
-                            
+
                                 The _callback_, if one is provided, will be called after the model is
                                 destroyed.
-                            
+
                                 If &#x60;options.remove&#x60; is &#x60;true&#x60;, then this method delegates to the &#x60;sync()&#x60;
                                 method to delete the model from the persistence layer, which is an
                                 asynchronous action. In this case, the _callback_ (if provided) will be
                                 called after the sync layer indicates success or failure of the delete
                                 operation.
-                            
+
                                 @method destroy
                                 @param {Object} [options] Sync options. It&#x27;s up to the custom sync
                                     implementation to determine what options it supports or requires, if
@@ -1365,13 +1365,13 @@
                                 **/
                                 destroy: function (options, callback) {
                                     var self = this;
-                            
+
                                     // Allow callback as only arg.
                                     if (typeof options === &#x27;function&#x27;) {
                                         callback = options;
                                         options  = null;
                                     }
-                            
+
                                     self.onceAfter(&#x27;destroy&#x27;, function () {
                                         function finish(err) {
                                             if (!err) {
@@ -1379,25 +1379,25 @@
                                                     list.remove(self, options);
                                                 });
                                             }
-                            
+
                                             callback &amp;&amp; callback.apply(null, arguments);
                                         }
-                            
+
                                         if (options &amp;&amp; (options.remove || options[&#x27;delete&#x27;])) {
                                             self.sync(&#x27;delete&#x27;, options, finish);
                                         } else {
                                             finish();
                                         }
                                     });
-                            
+
                                     return Model.superclass.destroy.call(self);
                                 },
-                            
+
                                 /**
                                 Returns a clientId string that&#x27;s unique among all models on the current page
                                 (even models in other YUI instances). Uniqueness across pageviews is
                                 unlikely.
-                            
+
                                 @method generateClientId
                                 @return {String} Unique clientId.
                                 **/
@@ -1405,14 +1405,14 @@
                                     GlobalEnv.lastId || (GlobalEnv.lastId = 0);
                                     return this.constructor.NAME + &#x27;_&#x27; + (GlobalEnv.lastId += 1);
                                 },
-                            
+
                                 /**
                                 Returns the value of the specified attribute.
-                            
+
                                 If the attribute&#x27;s value is an object, _name_ may use dot notation to
                                 specify the path to a specific property within the object, and the value of
                                 that property will be returned.
-                            
+
                                 @example
                                     // Set the &#x27;foo&#x27; attribute to an object.
                                     myModel.set(&#x27;foo&#x27;, {
@@ -1420,27 +1420,27 @@
                                             baz: &#x27;quux&#x27;
                                         }
                                     });
-                            
+
                                     // Get the value of &#x27;foo&#x27;.
                                     myModel.get(&#x27;foo&#x27;);
                                     // =&gt; {bar: {baz: &#x27;quux&#x27;}}
-                            
+
                                     // Get the value of &#x27;foo.bar.baz&#x27;.
                                     myModel.get(&#x27;foo.bar.baz&#x27;);
                                     // =&gt; &#x27;quux&#x27;
-                            
+
                                 @method get
                                 @param {String} name Attribute name or object property path.
                                 @return {Any} Attribute value, or &#x60;undefined&#x60; if the attribute doesn&#x27;t
                                   exist.
                                 **/
-                            
+
                                 // get() is defined by Y.Attribute.
-                            
+
                                 /**
                                 Returns an HTML-escaped version of the value of the specified string
                                 attribute. The value is escaped using &#x60;Y.Escape.html()&#x60;.
-                            
+
                                 @method getAsHTML
                                 @param {String} name Attribute name or object property path.
                                 @return {String} HTML-escaped attribute value.
@@ -1449,12 +1449,12 @@
                                     var value = this.get(name);
                                     return Y.Escape.html(Lang.isValue(value) ? String(value) : &#x27;&#x27;);
                                 },
-                            
+
                                 /**
                                 Returns a URL-encoded version of the value of the specified string
                                 attribute. The value is encoded using the native &#x60;encodeURIComponent()&#x60;
                                 function.
-                            
+
                                 @method getAsURL
                                 @param {String} name Attribute name or object property path.
                                 @return {String} URL-encoded attribute value.
@@ -1463,14 +1463,14 @@
                                     var value = this.get(name);
                                     return encodeURIComponent(Lang.isValue(value) ? String(value) : &#x27;&#x27;);
                                 },
-                            
+
                                 /**
                                 Returns &#x60;true&#x60; if any attribute of this model has been changed since the
                                 model was last saved.
-                            
+
                                 New models (models for which &#x60;isNew()&#x60; returns &#x60;true&#x60;) are implicitly
                                 considered to be &quot;modified&quot; until the first time they&#x27;re saved.
-                            
+
                                 @method isModified
                                 @return {Boolean} &#x60;true&#x60; if this model has changed since it was last saved,
                                   &#x60;false&#x60; otherwise.
@@ -1478,36 +1478,36 @@
                                 isModified: function () {
                                     return this.isNew() || !YObject.isEmpty(this.changed);
                                 },
-                            
+
                                 /**
                                 Returns &#x60;true&#x60; if this model is &quot;new&quot;, meaning it hasn&#x27;t been saved since it
                                 was created.
-                            
+
                                 Newness is determined by checking whether the model&#x27;s &#x60;id&#x60; attribute has
                                 been set. An empty id is assumed to indicate a new model, whereas a
                                 non-empty id indicates a model that was either loaded or has been saved
                                 since it was created.
-                            
+
                                 @method isNew
                                 @return {Boolean} &#x60;true&#x60; if this model is new, &#x60;false&#x60; otherwise.
                                 **/
                                 isNew: function () {
                                     return !Lang.isValue(this.get(&#x27;id&#x27;));
                                 },
-                            
+
                                 /**
                                 Loads this model from the server.
-                            
+
                                 This method delegates to the &#x60;sync()&#x60; method to perform the actual load
                                 operation, which is an asynchronous action. Specify a _callback_ function to
                                 be notified of success or failure.
-                            
+
                                 A successful load operation will fire a &#x60;load&#x60; event, while an unsuccessful
                                 load operation will fire an &#x60;error&#x60; event with the &#x60;src&#x60; value &quot;load&quot;.
-                            
+
                                 If the load operation succeeds and one or more of the loaded attributes
                                 differ from this model&#x27;s current attributes, a &#x60;change&#x60; event will be fired.
-                            
+
                                 @method load
                                 @param {Object} [options] Options to be passed to &#x60;sync()&#x60; and to &#x60;set()&#x60;
                                   when setting the loaded attributes. It&#x27;s up to the custom sync
@@ -1523,27 +1523,27 @@
                                 **/
                                 load: function (options, callback) {
                                     var self = this;
-                            
+
                                     // Allow callback as only arg.
                                     if (typeof options === &#x27;function&#x27;) {
                                         callback = options;
                                         options  = {};
                                     }
-                            
+
                                     options || (options = {});
-                            
+
                                     self.sync(&#x27;read&#x27;, options, function (err, response) {
                                         var facade = {
                                                 options : options,
                                                 response: response
                                             },
-                            
+
                                             parsed;
-                            
+
                                         if (err) {
                                             facade.error = err;
                                             facade.src   = &#x27;load&#x27;;
-                            
+
                                             self.fire(EVT_ERROR, facade);
                                         } else {
                                             // Lazy publish.
@@ -1552,34 +1552,34 @@
                                                     preventable: false
                                                 });
                                             }
-                            
+
                                             parsed = facade.parsed = self._parse(response);
-                            
+
                                             self.setAttrs(parsed, options);
                                             self.changed = {};
-                            
+
                                             self.fire(EVT_LOAD, facade);
                                         }
-                            
+
                                         callback &amp;&amp; callback.apply(null, arguments);
                                     });
-                            
+
                                     return self;
                                 },
-                            
+
                                 /**
                                 Called to parse the _response_ when the model is loaded from the server.
                                 This method receives a server _response_ and is expected to return an
                                 attribute hash.
-                            
+
                                 The default implementation assumes that _response_ is either an attribute
                                 hash or a JSON string that can be parsed into an attribute hash. If
                                 _response_ is a JSON string and either &#x60;Y.JSON&#x60; or the native &#x60;JSON&#x60; object
                                 are available, it will be parsed automatically. If a parse error occurs, an
                                 &#x60;error&#x60; event will be fired and the model will not be updated.
-                            
+
                                 You may override this method to implement custom parsing logic if necessary.
-                            
+
                                 @method parse
                                 @param {Any} response Server response.
                                 @return {Object} Attribute hash.
@@ -1594,28 +1594,28 @@
                                                 response: response,
                                                 src     : &#x27;parse&#x27;
                                             });
-                            
+
                                             return null;
                                         }
                                     }
-                            
+
                                     return response;
                                 },
-                            
+
                                 /**
                                 Saves this model to the server.
-                            
+
                                 This method delegates to the &#x60;sync()&#x60; method to perform the actual save
                                 operation, which is an asynchronous action. Specify a _callback_ function to
                                 be notified of success or failure.
-                            
+
                                 A successful save operation will fire a &#x60;save&#x60; event, while an unsuccessful
                                 save operation will fire an &#x60;error&#x60; event with the &#x60;src&#x60; value &quot;save&quot;.
-                            
+
                                 If the save operation succeeds and one or more of the attributes returned in
                                 the server&#x27;s response differ from this model&#x27;s current attributes, a
                                 &#x60;change&#x60; event will be fired.
-                            
+
                                 @method save
                                 @param {Object} [options] Options to be passed to &#x60;sync()&#x60; and to &#x60;set()&#x60;
                                   when setting synced attributes. It&#x27;s up to the custom sync implementation
@@ -1631,33 +1631,33 @@
                                 **/
                                 save: function (options, callback) {
                                     var self = this;
-                            
+
                                     // Allow callback as only arg.
                                     if (typeof options === &#x27;function&#x27;) {
                                         callback = options;
                                         options  = {};
                                     }
-                            
+
                                     options || (options = {});
-                            
+
                                     self._validate(self.toJSON(), function (err) {
                                         if (err) {
                                             callback &amp;&amp; callback.call(null, err);
                                             return;
                                         }
-                            
+
                                         self.sync(self.isNew() ? &#x27;create&#x27; : &#x27;update&#x27;, options, function (err, response) {
                                             var facade = {
                                                     options : options,
                                                     response: response
                                                 },
-                            
+
                                                 parsed;
-                            
+
                                             if (err) {
                                                 facade.error = err;
                                                 facade.src   = &#x27;save&#x27;;
-                            
+
                                                 self.fire(EVT_ERROR, facade);
                                             } else {
                                                 // Lazy publish.
@@ -1666,32 +1666,32 @@
                                                         preventable: false
                                                     });
                                                 }
-                            
+
                                                 if (response) {
                                                     parsed = facade.parsed = self._parse(response);
                                                     self.setAttrs(parsed, options);
                                                 }
-                            
+
                                                 self.changed = {};
                                                 self.fire(EVT_SAVE, facade);
                                             }
-                            
+
                                             callback &amp;&amp; callback.apply(null, arguments);
                                         });
                                     });
-                            
+
                                     return self;
                                 },
-                            
+
                                 /**
                                 Sets the value of a single attribute. If model validation fails, the
                                 attribute will not be set and an &#x60;error&#x60; event will be fired.
-                            
+
                                 Use &#x60;setAttrs()&#x60; to set multiple attributes at once.
-                            
+
                                 @example
                                     model.set(&#x27;foo&#x27;, &#x27;bar&#x27;);
-                            
+
                                 @method set
                                 @param {String} name Attribute name or object property path.
                                 @param {any} value Value to set.
@@ -1704,20 +1704,20 @@
                                 set: function (name, value, options) {
                                     var attributes = {};
                                     attributes[name] = value;
-                            
+
                                     return this.setAttrs(attributes, options);
                                 },
-                            
+
                                 /**
                                 Sets the values of multiple attributes at once. If model validation fails,
                                 the attributes will not be set and an &#x60;error&#x60; event will be fired.
-                            
+
                                 @example
                                     model.setAttrs({
                                         foo: &#x27;bar&#x27;,
                                         baz: &#x27;quux&#x27;
                                     });
-                            
+
                                 @method setAttrs
                                 @param {Object} attributes Hash of attribute names and values to set.
                                 @param {Object} [options] Data to be mixed into the event facade of the
@@ -1729,41 +1729,41 @@
                                 setAttrs: function (attributes, options) {
                                     var idAttribute = this.idAttribute,
                                         changed, e, key, lastChange, transaction;
-                            
+
                                     // Makes a shallow copy of the &#x60;options&#x60; object before adding the
                                     // &#x60;_transaction&#x60; object to it so we don&#x27;t modify someone else&#x27;s object.
                                     options     = Y.merge(options);
                                     transaction = options._transaction = {};
-                            
+
                                     // When a custom id attribute is in use, always keep the default &#x60;id&#x60;
                                     // attribute in sync.
                                     if (idAttribute !== &#x27;id&#x27;) {
                                         // So we don&#x27;t modify someone else&#x27;s object.
                                         attributes = Y.merge(attributes);
-                            
+
                                         if (YObject.owns(attributes, idAttribute)) {
                                             attributes.id = attributes[idAttribute];
                                         } else if (YObject.owns(attributes, &#x27;id&#x27;)) {
                                             attributes[idAttribute] = attributes.id;
                                         }
                                     }
-                            
+
                                     for (key in attributes) {
                                         if (YObject.owns(attributes, key)) {
                                             this._setAttr(key, attributes[key], options);
                                         }
                                     }
-                            
+
                                     if (!YObject.isEmpty(transaction)) {
                                         changed    = this.changed;
                                         lastChange = this.lastChange = {};
-                            
+
                                         for (key in transaction) {
                                             if (YObject.owns(transaction, key)) {
                                                 e = transaction[key];
-                            
+
                                                 changed[key] = e.newVal;
-                            
+
                                                 lastChange[key] = {
                                                     newVal : e.newVal,
                                                     prevVal: e.prevVal,
@@ -1771,7 +1771,7 @@
                                                 };
                                             }
                                         }
-                            
+
                                         if (!options.silent) {
                                             // Lazy publish for the change event.
                                             if (!this._changeEvent) {
@@ -1779,33 +1779,33 @@
                                                     preventable: false
                                                 });
                                             }
-                            
+
                                             options.changed = lastChange;
-                            
+
                                             this.fire(EVT_CHANGE, options);
                                         }
                                     }
-                            
+
                                     return this;
                                 },
-                            
+
                                 /**
                                 Override this method to provide a custom persistence implementation for this
                                 model. The default just calls the callback without actually doing anything.
-                            
+
                                 This method is called internally by &#x60;load()&#x60;, &#x60;save()&#x60;, and &#x60;destroy()&#x60;, and
                                 their implementations rely on the callback being called. This effectively
                                 means that when a callback is provided, it must be called at some point for
                                 the class to operate correctly.
-                            
+
                                 @method sync
                                 @param {String} action Sync action to perform. May be one of the following:
-                            
+
                                   * &#x60;create&#x60;: Store a newly-created model for the first time.
                                   * &#x60;delete&#x60;: Delete an existing model.
                                   * &#x60;read&#x60;  : Load an existing model.
                                   * &#x60;update&#x60;: Update an existing model.
-                            
+
                                 @param {Object} [options] Sync options. It&#x27;s up to the custom sync
                                   implementation to determine what options it supports or requires, if any.
                                 @param {Function} [callback] Called when the sync operation finishes.
@@ -1816,58 +1816,58 @@
                                 **/
                                 sync: function (/* action, options, callback */) {
                                     var callback = YArray(arguments, 0, true).pop();
-                            
+
                                     if (typeof callback === &#x27;function&#x27;) {
                                         callback();
                                     }
                                 },
-                            
+
                                 /**
                                 Returns a copy of this model&#x27;s attributes that can be passed to
                                 &#x60;Y.JSON.stringify()&#x60; or used for other nefarious purposes.
-                            
+
                                 The &#x60;clientId&#x60; attribute is not included in the returned object.
-                            
+
                                 If you&#x27;ve specified a custom attribute name in the &#x60;idAttribute&#x60; property,
                                 the default &#x60;id&#x60; attribute will not be included in the returned object.
-                            
+
                                 Note: The ECMAScript 5 specification states that objects may implement a
                                 &#x60;toJSON&#x60; method to provide an alternate object representation to serialize
                                 when passed to &#x60;JSON.stringify(obj)&#x60;.  This allows class instances to be
                                 serialized as if they were plain objects.  This is why Model&#x27;s &#x60;toJSON&#x60;
                                 returns an object, not a JSON string.
-                            
+
                                 See &lt;http://es5.github.com/#x15.12.3&gt; for details.
-                            
+
                                 @method toJSON
                                 @return {Object} Copy of this model&#x27;s attributes.
                                 **/
                                 toJSON: function () {
                                     var attrs = this.getAttrs();
-                            
+
                                     delete attrs.clientId;
                                     delete attrs.destroyed;
                                     delete attrs.initialized;
-                            
+
                                     if (this.idAttribute !== &#x27;id&#x27;) {
                                         delete attrs.id;
                                     }
-                            
+
                                     return attrs;
                                 },
-                            
+
                                 /**
                                 Reverts the last change to the model.
-                            
+
                                 If an _attrNames_ array is provided, then only the named attributes will be
                                 reverted (and only if they were modified in the previous change). If no
                                 _attrNames_ array is provided, then all changed attributes will be reverted
                                 to their previous values.
-                            
+
                                 Note that only one level of undo is available: from the current state to the
                                 previous state. If &#x60;undo()&#x60; is called when no previous state is available,
                                 it will simply do nothing.
-                            
+
                                 @method undo
                                 @param {String[]} [attrNames] Array of specific attribute names to revert. If
                                   not specified, all attributes modified in the last change will be
@@ -1883,49 +1883,49 @@
                                         idAttribute = this.idAttribute,
                                         toUndo      = {},
                                         needUndo;
-                            
+
                                     attrNames || (attrNames = YObject.keys(lastChange));
-                            
+
                                     YArray.each(attrNames, function (name) {
                                         if (YObject.owns(lastChange, name)) {
                                             // Don&#x27;t generate a double change for custom id attributes.
                                             name = name === idAttribute ? &#x27;id&#x27; : name;
-                            
+
                                             needUndo     = true;
                                             toUndo[name] = lastChange[name].prevVal;
                                         }
                                     });
-                            
+
                                     return needUndo ? this.setAttrs(toUndo, options) : this;
                                 },
-                            
+
                                 /**
                                 Override this method to provide custom validation logic for this model.
-                            
+
                                 While attribute-specific validators can be used to validate individual
                                 attributes, this method gives you a hook to validate a hash of all
                                 attributes before the model is saved. This method is called automatically
                                 before &#x60;save()&#x60; takes any action. If validation fails, the &#x60;save()&#x60; call
                                 will be aborted.
-                            
+
                                 In your validation method, call the provided &#x60;callback&#x60; function with no
                                 arguments to indicate success. To indicate failure, pass a single argument,
                                 which may contain an error message, an array of error messages, or any other
                                 value. This value will be passed along to the &#x60;error&#x60; event.
-                            
+
                                 @example
-                            
+
                                     model.validate = function (attrs, callback) {
                                         if (attrs.pie !== true) {
                                             // No pie?! Invalid!
                                             callback(&#x27;Must provide pie.&#x27;);
                                             return;
                                         }
-                            
+
                                         // Success!
                                         callback();
                                     };
-                            
+
                                 @method validate
                                 @param {Object} attrs Attribute hash containing all model attributes to
                                     be validated.
@@ -1933,7 +1933,7 @@
                                     validation logic finishes. To trigger a validation failure, pass any
                                     value as the first argument to the callback (ideally a meaningful
                                     validation error of some kind).
-                            
+
                                     @param {Any} [callback.err] Validation error. Don&#x27;t provide this
                                         argument if validation succeeds. If validation fails, set this to an
                                         error message or some other meaningful value. It will be passed
@@ -1942,17 +1942,17 @@
                                 validate: function (attrs, callback) {
                                     callback &amp;&amp; callback();
                                 },
-                            
+
                                 // -- Protected Methods ----------------------------------------------------
-                            
+
                                 /**
                                 Duckpunches the &#x60;addAttr&#x60; method provided by &#x60;Y.Attribute&#x60; to keep the
                                 &#x60;id&#x60; attribute’s value and a custom id attribute’s (if provided) value
                                 in sync when adding the attributes to the model instance object.
-                            
+
                                 Marked as protected to hide it from Model&#x27;s public API docs, even though
                                 this is a public method in Attribute.
-                            
+
                                 @method addAttr
                                 @param {String} name The name of the attribute.
                                 @param {Object} config An object with attribute configuration property/value
@@ -1966,15 +1966,15 @@
                                 addAttr: function (name, config, lazy) {
                                     var idAttribute = this.idAttribute,
                                         idAttrCfg, id;
-                            
+
                                     if (idAttribute &amp;&amp; name === idAttribute) {
                                         idAttrCfg = this._isLazyAttr(&#x27;id&#x27;) || this._getAttrCfg(&#x27;id&#x27;);
                                         id        = config.value === config.defaultValue ? null : config.value;
-                            
+
                                         if (!Lang.isValue(id)) {
                                             // Hunt for the id value.
                                             id = idAttrCfg.value === idAttrCfg.defaultValue ? null : idAttrCfg.value;
-                            
+
                                             if (!Lang.isValue(id)) {
                                                 // No id value provided on construction, check defaults.
                                                 id = Lang.isValue(config.defaultValue) ?
@@ -1982,13 +1982,13 @@
                                                     idAttrCfg.defaultValue;
                                             }
                                         }
-                            
+
                                         config.value = id;
-                            
+
                                         // Make sure &#x60;id&#x60; is in sync.
                                         if (idAttrCfg.value !== id) {
                                             idAttrCfg.value = id;
-                            
+
                                             if (this._isLazyAttr(&#x27;id&#x27;)) {
                                                 this._state.add(&#x27;id&#x27;, &#x27;lazy&#x27;, idAttrCfg);
                                             } else {
@@ -1996,17 +1996,17 @@
                                             }
                                         }
                                     }
-                            
+
                                     return Model.superclass.addAttr.apply(this, arguments);
                                 },
-                            
+
                                 /**
                                 Calls the public, overrideable &#x60;parse()&#x60; method and returns the result.
-                            
+
                                 Override this method to provide a custom pre-parsing implementation. This
                                 provides a hook for custom persistence implementations to &quot;prep&quot; a response
                                 before calling the &#x60;parse()&#x60; method.
-                            
+
                                 @method _parse
                                 @param {Any} response Server response.
                                 @return {Object} Attribute hash.
@@ -2017,11 +2017,11 @@
                                 _parse: function (response) {
                                     return this.parse(response);
                                 },
-                            
+
                                 /**
                                 Calls the public, overridable &#x60;validate()&#x60; method and fires an &#x60;error&#x60; event
                                 if validation fails.
-                            
+
                                 @method _validate
                                 @param {Object} attributes Attribute hash.
                                 @param {Function} callback Validation callback.
@@ -2030,7 +2030,7 @@
                                 **/
                                 _validate: function (attributes, callback) {
                                     var self = this;
-                            
+
                                     function handler(err) {
                                         if (Lang.isValue(err)) {
                                             // Validation failed. Fire an error.
@@ -2039,14 +2039,14 @@
                                                 error     : err,
                                                 src       : &#x27;validate&#x27;
                                             });
-                            
+
                                             callback(err);
                                             return;
                                         }
-                            
+
                                         callback();
                                     }
-                            
+
                                     if (self.validate.length === 1) {
                                         // Backcompat for 3.4.x-style synchronous validate() functions that
                                         // don&#x27;t take a callback argument.
@@ -2056,16 +2056,16 @@
                                         self.validate(attributes, handler);
                                     }
                                 },
-                            
+
                                 // -- Private Methods ----------------------------------------------------
-                            
+
                                 /**
                                  Overrides AttributeCore&#x27;s &#x60;_setAttrVal&#x60;, to register the changed value if it&#x27;s part
                                  of a Model &#x60;setAttrs&#x60; transaction.
-                            
+
                                  NOTE: AttributeCore&#x27;s &#x60;_setAttrVal&#x60; is currently private, but until we support coalesced
                                  change events in attribute, we need this override.
-                            
+
                                  @method _setAttrVal
                                  @private
                                  @param {String} attrName The attribute name.
@@ -2075,15 +2075,15 @@
                                  @param {Object} [opts] Optional data providing the circumstances for the change.
                                  @param {Object} [attrCfg] Optional config hash for the attribute. This is added for performance along the critical path,
                                  where the calling method has already obtained the config from state.
-                            
+
                                  @return {boolean} true if the new attribute value was stored, false if not.
                                  **/
                                 _setAttrVal : function(attrName, subAttrName, prevVal, newVal, opts, attrCfg) {
-                            
+
                                     var didChange = Model.superclass._setAttrVal.apply(this, arguments),
                                         transaction = opts &amp;&amp; opts._transaction,
                                         initializing = attrCfg &amp;&amp; attrCfg.initializing;
-                            
+
                                     // value actually changed inside a model setAttrs transaction
                                     if (didChange &amp;&amp; transaction &amp;&amp; !initializing) {
                                         transaction[attrName] = {
@@ -2092,22 +2092,22 @@
                                             src: opts.src || null
                                         };
                                     }
-                            
+
                                     return didChange;
                                 }
-                            
+
                             }, {
                                 NAME: &#x27;model&#x27;,
-                            
+
                                 ATTRS: {
                                     /**
                                     A client-only identifier for this model.
-                            
+
                                     Like the &#x60;id&#x60; attribute, &#x60;clientId&#x60; may be used to retrieve model
                                     instances from lists. Unlike the &#x60;id&#x60; attribute, &#x60;clientId&#x60; is
                                     automatically generated, and is only intended to be used on the client
                                     during the current pageview.
-                            
+
                                     @attribute clientId
                                     @type String
                                     @readOnly
@@ -2116,20 +2116,20 @@
                                         valueFn : &#x27;generateClientId&#x27;,
                                         readOnly: true
                                     },
-                            
+
                                     /**
                                     A unique identifier for this model. Among other things, this id may be
                                     used to retrieve model instances from lists, so it should be unique.
-                            
+
                                     If the id is empty, this model instance is assumed to represent a new
                                     item that hasn&#x27;t yet been saved.
-                            
+
                                     If you would prefer to use a custom attribute as this model&#x27;s id instead
                                     of using the &#x60;id&#x60; attribute (for example, maybe you&#x27;d rather use &#x60;_id&#x60;
                                     or &#x60;uid&#x60; as the primary id), you may set the &#x60;idAttribute&#x60; property to
                                     the name of your custom id attribute. The &#x60;id&#x60; attribute will then
                                     act as an alias for your custom attribute.
-                            
+
                                     @attribute id
                                     @type String|Number|null
                                     @default &#x60;null&#x60;
@@ -2137,7 +2137,7 @@
                                     id: {value: null}
                                 }
                             });
-                            
+
                                 </pre>
                             </div>
                         </div>

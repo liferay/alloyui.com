@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/io/js/io-nodejs.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /*global Y: false, Buffer: false, clearInterval: false, clearTimeout: false, console: false, exports: false, global: false, module: false, process: false, querystring: false, require: false, setInterval: false, setTimeout: false, __filename: false, __dirname: false */
@@ -1153,9 +1153,9 @@
                                     // maintained across requests.
                                     Y.IO.request = require(&#x27;request&#x27;).defaults({jar: false});
                                 }
-                            
+
                                 var codes = require(&#x27;http&#x27;).STATUS_CODES;
-                            
+
                                 /**
                                 Flatten headers object
                                 @method flatten
@@ -1171,9 +1171,9 @@
                                     });
                                     return str.join(&#x27;\n&#x27;);
                                 };
-                            
+
                                 Y.log(&#x27;Loading NodeJS Request Transport&#x27;, &#x27;info&#x27;, &#x27;io&#x27;);
-                            
+
                                 /**
                                 NodeJS IO transport, uses the NodeJS &lt;a href=&quot;https://github.com/mikeal/request&quot;&gt;request&lt;/a&gt;
                                 module under the hood to perform all network IO.
@@ -1183,7 +1183,7 @@
                                 @return {Object} This object contains only a &#x60;send&#x60; method that accepts a
                                 &#x60;transaction object&#x60;, &#x60;uri&#x60; and the &#x60;config object&#x60;.
                                 @example
-                            
+
                                     Y.io(&#x27;https://somedomain.com/url&#x27;, {
                                         method: &#x27;PUT&#x27;,
                                         data: &#x27;?foo=bar&#x27;,
@@ -1217,21 +1217,21 @@
                                         }
                                     });
                                 */
-                            
+
                                 Y.IO.transports.nodejs = function() {
                                     return {
                                         send: function (transaction, uri, config) {
-                            
+
                                             Y.log(&#x27;Starting Request Transaction&#x27;, &#x27;info&#x27;, &#x27;io&#x27;);
                                             config.notify(&#x27;start&#x27;, transaction, config);
                                             config.method = config.method || &#x27;GET&#x27;;
                                             config.method = config.method.toUpperCase();
-                            
+
                                             var rconf = {
                                                 method: config.method,
                                                 uri: uri
                                             };
-                            
+
                                             if (config.data) {
                                                 if (Y.Lang.isString(config.data)) {
                                                     rconf.body = config.data;
@@ -1253,7 +1253,7 @@
                                             Y.log(&#x27;Initiating &#x27; + rconf.method + &#x27; request to: &#x27; + rconf.uri, &#x27;info&#x27;, &#x27;io&#x27;);
                                             Y.IO.request(rconf, function(err, data) {
                                                 Y.log(&#x27;Request Transaction Complete&#x27;, &#x27;info&#x27;, &#x27;io&#x27;);
-                            
+
                                                 if (err) {
                                                     Y.log(&#x27;An IO error occurred&#x27;, &#x27;warn&#x27;, &#x27;io&#x27;);
                                                     transaction.c = err;
@@ -1277,11 +1277,11 @@
                                                     };
                                                 }
                                                 Y.log(&#x27;Request Transaction Complete&#x27;, &#x27;info&#x27;, &#x27;io&#x27;);
-                            
+
                                                 config.notify(&#x27;complete&#x27;, transaction, config);
                                                 config.notify(((data &amp;&amp; (data.statusCode &gt;= 200 &amp;&amp; data.statusCode &lt;= 299)) ? &#x27;success&#x27; : &#x27;failure&#x27;), transaction, config);
                                             });
-                            
+
                                             var ret = {
                                                 io: transaction
                                             };
@@ -1289,10 +1289,10 @@
                                         }
                                     };
                                 };
-                            
+
                                 Y.IO.defaultTransport(&#x27;nodejs&#x27;);
-                            
-                            
+
+
                                 </pre>
                             </div>
                         </div>

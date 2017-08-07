@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,43 +1122,43 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/get/js/get.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /*jslint boss:true, expr:true, laxbreak: true */
-                            
+
                             /**
                             Provides dynamic loading of remote JavaScript and CSS resources.
-                            
+
                             @module get
                             @class Get
                             @static
                             **/
-                            
+
                             var Lang = Y.Lang,
-                            
+
                                 CUSTOM_ATTRS, // defined lazily in Y.Get.Transaction._createNode()
-                            
+
                                 Get, Transaction;
-                            
+
                             Y.Get = Get = {
                                 // -- Public Properties ----------------------------------------------------
-                            
+
                                 /**
                                 Default options for CSS requests. Options specified here will override
                                 global defaults for CSS requests.
-                            
+
                                 See the &#x60;options&#x60; property for all available options.
-                            
+
                                 @property cssOptions
                                 @type Object
                                 @static
@@ -1168,17 +1168,17 @@
                                     attributes: {
                                         rel: &#x27;stylesheet&#x27;
                                     },
-                            
+
                                     doc         : Y.config.linkDoc || Y.config.doc,
                                     pollInterval: 50
                                 },
-                            
+
                                 /**
                                 Default options for JS requests. Options specified here will override global
                                 defaults for JS requests.
-                            
+
                                 See the &#x60;options&#x60; property for all available options.
-                            
+
                                 @property jsOptions
                                 @type Object
                                 @static
@@ -1188,84 +1188,84 @@
                                     autopurge: true,
                                     doc      : Y.config.scriptDoc || Y.config.doc
                                 },
-                            
+
                                 /**
                                 Default options to use for all requests.
-                            
+
                                 Note that while all available options are documented here for ease of
                                 discovery, some options (like callback functions) only make sense at the
                                 transaction level.
-                            
+
                                 Callback functions specified via the options object or the &#x60;options&#x60;
                                 parameter of the &#x60;css()&#x60;, &#x60;js()&#x60;, or &#x60;load()&#x60; methods will receive the
                                 transaction object as a parameter. See &#x60;Y.Get.Transaction&#x60; for details on
                                 the properties and methods available on transactions.
-                            
+
                                 @static
                                 @since 3.5.0
                                 @property {Object} options
-                            
+
                                 @property {Boolean} [options.async=false] Whether or not to load scripts
                                     asynchronously, meaning they&#x27;re requested in parallel and execution
                                     order is not guaranteed. Has no effect on CSS, since CSS is always
                                     loaded asynchronously.
-                            
+
                                 @property {Object} [options.attributes] HTML attribute name/value pairs that
                                     should be added to inserted nodes. By default, the &#x60;charset&#x60; attribute
                                     will be set to &quot;utf-8&quot; and nodes will be given an auto-generated &#x60;id&#x60;
                                     attribute, but you can override these with your own values if desired.
-                            
+
                                 @property {Boolean} [options.autopurge] Whether or not to automatically
                                     purge inserted nodes after the purge threshold is reached. This is
                                     &#x60;true&#x60; by default for JavaScript, but &#x60;false&#x60; for CSS since purging a
                                     CSS node will also remove any styling applied by the referenced file.
-                            
+
                                 @property {Object} [options.context] &#x60;this&#x60; object to use when calling
                                     callback functions. Defaults to the transaction object.
-                            
+
                                 @property {Mixed} [options.data] Arbitrary data object to pass to &quot;on*&quot;
                                     callbacks.
-                            
+
                                 @property {Document} [options.doc] Document into which nodes should be
                                     inserted. By default, the current document is used.
-                            
+
                                 @property {HTMLElement|String} [options.insertBefore] HTML element or id
                                     string of an element before which all generated nodes should be
                                     inserted. If not specified, Get will automatically determine the best
                                     place to insert nodes for maximum compatibility.
-                            
+
                                 @property {Function} [options.onEnd] Callback to execute after a transaction
                                     is complete, regardless of whether it succeeded or failed.
-                            
+
                                 @property {Function} [options.onFailure] Callback to execute after a
                                     transaction fails, times out, or is aborted.
-                            
+
                                 @property {Function} [options.onProgress] Callback to execute after each
                                     individual request in a transaction either succeeds or fails.
-                            
+
                                 @property {Function} [options.onSuccess] Callback to execute after a
                                     transaction completes successfully with no errors. Note that in browsers
                                     that don&#x27;t support the &#x60;error&#x60; event on CSS &#x60;&lt;link&gt;&#x60; nodes, a failed CSS
                                     request may still be reported as a success because in these browsers
                                     it can be difficult or impossible to distinguish between success and
                                     failure for CSS resources.
-                            
+
                                 @property {Function} [options.onTimeout] Callback to execute after a
                                     transaction times out.
-                            
+
                                 @property {Number} [options.pollInterval=50] Polling interval (in
                                     milliseconds) for detecting CSS load completion in browsers that don&#x27;t
                                     support the &#x60;load&#x60; event on &#x60;&lt;link&gt;&#x60; nodes. This isn&#x27;t used for
                                     JavaScript.
-                            
+
                                 @property {Number} [options.purgethreshold=20] Number of nodes to insert
                                     before triggering an automatic purge when &#x60;autopurge&#x60; is &#x60;true&#x60;.
-                            
+
                                 @property {Number} [options.timeout] Number of milliseconds to wait before
                                     aborting a transaction. When a timeout occurs, the &#x60;onTimeout&#x60; callback
                                     is called, followed by &#x60;onFailure&#x60; and finally &#x60;onEnd&#x60;. By default,
                                     there is no timeout.
-                            
+
                                 @property {String} [options.type] Resource type (&quot;css&quot; or &quot;js&quot;). This option
                                     is set automatically by the &#x60;css()&#x60; and &#x60;js()&#x60; functions and will be
                                     ignored there, but may be useful when using the &#x60;load()&#x60; function. If
@@ -1276,16 +1276,16 @@
                                     attributes: {
                                         charset: &#x27;utf-8&#x27;
                                     },
-                            
+
                                     purgethreshold: 20
                                 },
-                            
+
                                 // -- Protected Properties -------------------------------------------------
-                            
+
                                 /**
                                 Regex that matches a CSS URL. Used to guess the file type when it&#x27;s not
                                 specified.
-                            
+
                                 @property REGEX_CSS
                                 @type RegExp
                                 @final
@@ -1294,11 +1294,11 @@
                                 @since 3.5.0
                                 **/
                                 REGEX_CSS: /\.css(?:[?;].*)?$/i,
-                            
+
                                 /**
                                 Regex that matches a JS URL. Used to guess the file type when it&#x27;s not
                                 specified.
-                            
+
                                 @property REGEX_JS
                                 @type RegExp
                                 @final
@@ -1307,25 +1307,25 @@
                                 @since 3.5.0
                                 **/
                                 REGEX_JS : /\.js(?:[?;].*)?$/i,
-                            
+
                                 /**
                                 Contains information about the current environment, such as what script and
                                 link injection features it supports.
-                            
+
                                 This object is created and populated the first time the &#x60;_getEnv()&#x60; method
                                 is called.
-                            
+
                                 @property _env
                                 @type Object
                                 @protected
                                 @static
                                 @since 3.5.0
                                 **/
-                            
+
                                 /**
                                 Mapping of document _yuid strings to &lt;head&gt; or &lt;base&gt; node references so we
                                 don&#x27;t have to look the node up each time we want to insert a request node.
-                            
+
                                 @property _insertCache
                                 @type Object
                                 @protected
@@ -1333,14 +1333,14 @@
                                 @since 3.5.0
                                 **/
                                 _insertCache: {},
-                            
+
                                 /**
                                 Information about the currently pending transaction, if any.
-                            
+
                                 This is actually an object with two properties: &#x60;callback&#x60;, containing the
                                 optional callback passed to &#x60;css()&#x60;, &#x60;load()&#x60;, or &#x60;js()&#x60;; and &#x60;transaction&#x60;,
                                 containing the actual transaction instance.
-                            
+
                                 @property _pending
                                 @type Object
                                 @protected
@@ -1348,10 +1348,10 @@
                                 @since 3.5.0
                                 **/
                                 _pending: null,
-                            
+
                                 /**
                                 HTML nodes eligible to be purged next time autopurge is triggered.
-                            
+
                                 @property _purgeNodes
                                 @type HTMLElement[]
                                 @protected
@@ -1359,10 +1359,10 @@
                                 @since 3.5.0
                                 **/
                                 _purgeNodes: [],
-                            
+
                                 /**
                                 Queued transactions and associated callbacks.
-                            
+
                                 @property _queue
                                 @type Object[]
                                 @protected
@@ -1370,20 +1370,20 @@
                                 @since 3.5.0
                                 **/
                                 _queue: [],
-                            
+
                                 // -- Public Methods -------------------------------------------------------
-                            
+
                                 /**
                                 Aborts the specified transaction.
-                            
+
                                 This will cause the transaction&#x27;s &#x60;onFailure&#x60; callback to be called and
                                 will prevent any new script and link nodes from being added to the document,
                                 but any resources that have already been requested will continue loading
                                 (there&#x27;s no safe way to prevent this, unfortunately).
-                            
+
                                 *Note:* This method is deprecated as of 3.5.0, and will be removed in a
                                 future version of YUI. Use the transaction-level &#x60;abort()&#x60; method instead.
-                            
+
                                 @method abort
                                 @param {Get.Transaction} transaction Transaction to abort.
                                 @deprecated Use the &#x60;abort()&#x60; method on the transaction instead.
@@ -1391,21 +1391,21 @@
                                 **/
                                 abort: function (transaction) {
                                     var i, id, item, len, pending;
-                            
+
                                     Y.log(&#x27;&#x60;Y.Get.abort()&#x60; is deprecated as of 3.5.0. Use the &#x60;abort()&#x60; method on the transaction instead.&#x27;, &#x27;warn&#x27;, &#x27;get&#x27;);
-                            
+
                                     if (!transaction.abort) {
                                         id          = transaction;
                                         pending     = this._pending;
                                         transaction = null;
-                            
+
                                         if (pending &amp;&amp; pending.transaction.id === id) {
                                             transaction   = pending.transaction;
                                             this._pending = null;
                                         } else {
                                             for (i = 0, len = this._queue.length; i &lt; len; ++i) {
                                                 item = this._queue[i].transaction;
-                            
+
                                                 if (item.id === id) {
                                                     transaction = item;
                                                     this._queue.splice(i, 1);
@@ -1414,29 +1414,29 @@
                                             }
                                         }
                                     }
-                            
+
                                     transaction &amp;&amp; transaction.abort();
                                 },
-                            
+
                                 /**
                                 Loads one or more CSS files.
-                            
+
                                 The _urls_ parameter may be provided as a URL string, a request object,
                                 or an array of URL strings and/or request objects.
-                            
+
                                 A request object is just an object that contains a &#x60;url&#x60; property and zero
                                 or more options that should apply specifically to that request.
                                 Request-specific options take priority over transaction-level options and
                                 default options.
-                            
+
                                 URLs may be relative or absolute, and do not have to have the same origin
                                 as the current page.
-                            
+
                                 The &#x60;options&#x60; parameter may be omitted completely and a callback passed in
                                 its place, if desired.
-                            
+
                                 @example
-                            
+
                                     // Load a single CSS file and log a message on completion.
                                     Y.Get.css(&#x27;foo.css&#x27;, function (err) {
                                         if (err) {
@@ -1445,11 +1445,11 @@
                                             Y.log(&#x27;foo.css was loaded successfully&#x27;);
                                         }
                                     });
-                            
+
                                     // Load multiple CSS files and log a message when all have finished
                                     // loading.
                                     var urls = [&#x27;foo.css&#x27;, &#x27;http://example.com/bar.css&#x27;, &#x27;baz/quux.css&#x27;];
-                            
+
                                     Y.Get.css(urls, function (err) {
                                         if (err) {
                                             Y.log(&#x27;one or more files failed to load!&#x27;);
@@ -1457,21 +1457,21 @@
                                             Y.log(&#x27;all files loaded successfully&#x27;);
                                         }
                                     });
-                            
+
                                     // Specify transaction-level options, which will apply to all requests
                                     // within the transaction.
                                     Y.Get.css(urls, {
                                         attributes: {&#x27;class&#x27;: &#x27;my-css&#x27;},
                                         timeout   : 5000
                                     });
-                            
+
                                     // Specify per-request options, which override transaction-level and
                                     // default options.
                                     Y.Get.css([
                                         {url: &#x27;foo.css&#x27;, attributes: {id: &#x27;foo&#x27;}},
                                         {url: &#x27;bar.css&#x27;, attributes: {id: &#x27;bar&#x27;, charset: &#x27;iso-8859-1&#x27;}}
                                     ]);
-                            
+
                                 @method css
                                 @param {String|Object|Array} urls URL string, request object, or array
                                     of URLs and/or request objects to load.
@@ -1481,41 +1481,41 @@
                                     This is a general callback and will be called before any more granular
                                     callbacks (&#x60;onSuccess&#x60;, &#x60;onFailure&#x60;, etc.) specified in the &#x60;options&#x60;
                                     object.
-                            
+
                                     @param {Array|null} callback.err Array of errors that occurred during
                                         the transaction, or &#x60;null&#x60; on success.
                                     @param {Get.Transaction} callback.transaction Transaction object.
-                            
+
                                 @return {Get.Transaction} Transaction object.
                                 @static
                                 **/
                                 css: function (urls, options, callback) {
                                     return this._load(&#x27;css&#x27;, urls, options, callback);
                                 },
-                            
+
                                 /**
                                 Loads one or more JavaScript resources.
-                            
+
                                 The _urls_ parameter may be provided as a URL string, a request object,
                                 or an array of URL strings and/or request objects.
-                            
+
                                 A request object is just an object that contains a &#x60;url&#x60; property and zero
                                 or more options that should apply specifically to that request.
                                 Request-specific options take priority over transaction-level options and
                                 default options.
-                            
+
                                 URLs may be relative or absolute, and do not have to have the same origin
                                 as the current page.
-                            
+
                                 The &#x60;options&#x60; parameter may be omitted completely and a callback passed in
                                 its place, if desired.
-                            
+
                                 Scripts will be executed in the order they&#x27;re specified unless the &#x60;async&#x60;
                                 option is &#x60;true&#x60;, in which case they&#x27;ll be loaded in parallel and executed
                                 in whatever order they finish loading.
-                            
+
                                 @example
-                            
+
                                     // Load a single JS file and log a message on completion.
                                     Y.Get.js(&#x27;foo.js&#x27;, function (err) {
                                         if (err) {
@@ -1524,11 +1524,11 @@
                                             Y.log(&#x27;foo.js was loaded successfully&#x27;);
                                         }
                                     });
-                            
+
                                     // Load multiple JS files, execute them in order, and log a message when
                                     // all have finished loading.
                                     var urls = [&#x27;foo.js&#x27;, &#x27;http://example.com/bar.js&#x27;, &#x27;baz/quux.js&#x27;];
-                            
+
                                     Y.Get.js(urls, function (err) {
                                         if (err) {
                                             Y.log(&#x27;one or more files failed to load!&#x27;);
@@ -1536,21 +1536,21 @@
                                             Y.log(&#x27;all files loaded successfully&#x27;);
                                         }
                                     });
-                            
+
                                     // Specify transaction-level options, which will apply to all requests
                                     // within the transaction.
                                     Y.Get.js(urls, {
                                         attributes: {&#x27;class&#x27;: &#x27;my-js&#x27;},
                                         timeout   : 5000
                                     });
-                            
+
                                     // Specify per-request options, which override transaction-level and
                                     // default options.
                                     Y.Get.js([
                                         {url: &#x27;foo.js&#x27;, attributes: {id: &#x27;foo&#x27;}},
                                         {url: &#x27;bar.js&#x27;, attributes: {id: &#x27;bar&#x27;, charset: &#x27;iso-8859-1&#x27;}}
                                     ]);
-                            
+
                                 @method js
                                 @param {String|Object|Array} urls URL string, request object, or array
                                     of URLs and/or request objects to load.
@@ -1560,11 +1560,11 @@
                                     This is a general callback and will be called before any more granular
                                     callbacks (&#x60;onSuccess&#x60;, &#x60;onFailure&#x60;, etc.) specified in the &#x60;options&#x60;
                                     object.
-                            
+
                                     @param {Array|null} callback.err Array of errors that occurred during
                                         the transaction, or &#x60;null&#x60; on success.
                                     @param {Get.Transaction} callback.transaction Transaction object.
-                            
+
                                 @return {Get.Transaction} Transaction object.
                                 @since 3.5.0
                                 @static
@@ -1572,23 +1572,23 @@
                                 js: function (urls, options, callback) {
                                     return this._load(&#x27;js&#x27;, urls, options, callback);
                                 },
-                            
+
                                 /**
                                 Loads one or more CSS and/or JavaScript resources in the same transaction.
-                            
+
                                 Use this method when you want to load both CSS and JavaScript in a single
                                 transaction and be notified when all requested URLs have finished loading,
                                 regardless of type.
-                            
+
                                 Behavior and options are the same as for the &#x60;css()&#x60; and &#x60;js()&#x60; methods. If
                                 a resource type isn&#x27;t specified in per-request options or transaction-level
                                 options, Get will guess the file type based on the URL&#x27;s extension (&#x60;.css&#x60;
                                 or &#x60;.js&#x60;, with or without a following query string). If the file type can&#x27;t
                                 be guessed from the URL, a warning will be logged and Get will assume the
                                 URL is a JavaScript resource.
-                            
+
                                 @example
-                            
+
                                     // Load both CSS and JS files in a single transaction, and log a message
                                     // when all files have finished loading.
                                     Y.Get.load([&#x27;foo.css&#x27;, &#x27;bar.js&#x27;, &#x27;baz.css&#x27;], function (err) {
@@ -1598,7 +1598,7 @@
                                             Y.log(&#x27;all files loaded successfully&#x27;);
                                         }
                                     });
-                            
+
                                 @method load
                                 @param {String|Object|Array} urls URL string, request object, or array
                                     of URLs and/or request objects to load.
@@ -1608,11 +1608,11 @@
                                     This is a general callback and will be called before any more granular
                                     callbacks (&#x60;onSuccess&#x60;, &#x60;onFailure&#x60;, etc.) specified in the &#x60;options&#x60;
                                     object.
-                            
+
                                     @param {Array|null} err Array of errors that occurred during the
                                         transaction, or &#x60;null&#x60; on success.
                                     @param {Get.Transaction} Transaction object.
-                            
+
                                 @return {Get.Transaction} Transaction object.
                                 @since 3.5.0
                                 @static
@@ -1620,12 +1620,12 @@
                                 load: function (urls, options, callback) {
                                     return this._load(null, urls, options, callback);
                                 },
-                            
+
                                 // -- Protected Methods ----------------------------------------------------
-                            
+
                                 /**
                                 Triggers an automatic purge if the purge threshold has been reached.
-                            
+
                                 @method _autoPurge
                                 @param {Number} threshold Purge threshold to use, in milliseconds.
                                 @protected
@@ -1638,11 +1638,11 @@
                                         this._purge(this._purgeNodes);
                                     }
                                 },
-                            
+
                                 /**
                                 Populates the &#x60;_env&#x60; property with information about the current
                                 environment.
-                            
+
                                 @method _getEnv
                                 @return {Object} Environment information.
                                 @protected
@@ -1652,25 +1652,25 @@
                                 _getEnv: function () {
                                     var doc = Y.config.doc,
                                         ua  = Y.UA;
-                            
+
                                     // Note: some of these checks require browser sniffs since it&#x27;s not
                                     // feasible to load test files on every pageview just to perform a
                                     // feature test. I&#x27;m sorry if this makes you sad.
                                     return (this._env = {
-                            
+
                                         // True if this is a browser that supports disabling async mode on
                                         // dynamically created script nodes. See
                                         // https://developer.mozilla.org/En/HTML/Element/Script#Attributes
-                            
+
                                         // IE10 doesn&#x27;t return true for the MDN feature test, so setting it explicitly,
                                         // because it is async by default, and allows you to disable async by setting it to false
                                         async: (doc &amp;&amp; doc.createElement(&#x27;script&#x27;).async === true) || (ua.ie &gt;= 10),
-                            
+
                                         // True if this browser fires an event when a dynamically injected
                                         // link node fails to load. This is currently true for Firefox 9+
                                         // and WebKit 535.24+
                                         cssFail: ua.gecko &gt;= 9 || ua.compareVersions(ua.webkit, 535.24) &gt;= 0,
-                            
+
                                         // True if this browser fires an event when a dynamically injected
                                         // link node finishes loading. This is currently true for IE, Opera,
                                         // Firefox 9+, and WebKit 535.24+. Note that IE versions &lt;9 fire the
@@ -1681,32 +1681,32 @@
                                                 (!ua.gecko &amp;&amp; !ua.webkit) || ua.gecko &gt;= 9 ||
                                                 ua.compareVersions(ua.webkit, 535.24) &gt;= 0
                                             ) &amp;&amp; !(ua.chrome &amp;&amp; ua.chrome &lt;= 18),
-                            
+
                                         // True if this browser preserves script execution order while
                                         // loading scripts in parallel as long as the script node&#x27;s &#x60;async&#x60;
                                         // attribute is set to false to explicitly disable async execution.
                                         preservesScriptOrder: !!(ua.gecko || ua.opera || (ua.ie &amp;&amp; ua.ie &gt;= 10))
                                     });
                                 },
-                            
+
                                 _getTransaction: function (urls, options) {
                                     var requests = [],
                                         i, len, req, url;
-                            
+
                                     if (!Lang.isArray(urls)) {
                                         urls = [urls];
                                     }
-                            
+
                                     options = Y.merge(this.options, options);
-                            
+
                                     // Clone the attributes object so we don&#x27;t end up modifying it by ref.
                                     options.attributes = Y.merge(this.options.attributes,
                                             options.attributes);
-                            
+
                                     for (i = 0, len = urls.length; i &lt; len; ++i) {
                                         url = urls[i];
                                         req = {attributes: {}};
-                            
+
                                         // If &#x60;url&#x60; is a string, we create a URL object for it, then mix in
                                         // global options and request-specific options. If it&#x27;s an object
                                         // with a &quot;url&quot; property, we assume it&#x27;s a request object containing
@@ -1722,9 +1722,9 @@
                                             Y.log(&#x27;URL must be a string or an object with a &#x60;url&#x60; property.&#x27;, &#x27;error&#x27;, &#x27;get&#x27;);
                                             continue;
                                         }
-                            
+
                                         Y.mix(req, options, false, null, 0, true);
-                            
+
                                         // If we didn&#x27;t get an explicit type for this URL either in the
                                         // request options or the URL-specific options, try to determine
                                         // one from the file extension.
@@ -1735,19 +1735,19 @@
                                                 if (!this.REGEX_JS.test(url)) {
                                                     Y.log(&quot;Can&#x27;t guess file type from URL. Assuming JS: &quot; + url, &#x27;warn&#x27;, &#x27;get&#x27;);
                                                 }
-                            
+
                                                 req.type = &#x27;js&#x27;;
                                             }
                                         }
-                            
+
                                         // Mix in type-specific default options, but don&#x27;t overwrite any
                                         // options that have already been set.
                                         Y.mix(req, req.type === &#x27;js&#x27; ? this.jsOptions : this.cssOptions,
                                             false, null, 0, true);
-                            
+
                                         // Give the node an id attribute if it doesn&#x27;t already have one.
                                         req.attributes.id || (req.attributes.id = Y.guid());
-                            
+
                                         // Backcompat for &lt;3.5.0 behavior.
                                         if (req.win) {
                                             Y.log(&#x27;The &#x60;win&#x60; option is deprecated as of 3.5.0. Use &#x60;doc&#x60; instead.&#x27;, &#x27;warn&#x27;, &#x27;get&#x27;);
@@ -1755,82 +1755,82 @@
                                         } else {
                                             req.win = req.doc.defaultView || req.doc.parentWindow;
                                         }
-                            
+
                                         if (req.charset) {
                                             Y.log(&#x27;The &#x60;charset&#x60; option is deprecated as of 3.5.0. Set &#x60;attributes.charset&#x60; instead.&#x27;, &#x27;warn&#x27;, &#x27;get&#x27;);
                                             req.attributes.charset = req.charset;
                                         }
-                            
+
                                         requests.push(req);
                                     }
-                            
+
                                     return new Transaction(requests, options);
                                 },
-                            
+
                                 _load: function (type, urls, options, callback) {
                                     var transaction;
-                            
+
                                     // Allow callback as third param.
                                     if (typeof options === &#x27;function&#x27;) {
                                         callback = options;
                                         options  = {};
                                     }
-                            
+
                                     options || (options = {});
                                     options.type = type;
-                            
+
                                     options._onFinish = Get._onTransactionFinish;
-                            
+
                                     if (!this._env) {
                                         this._getEnv();
                                     }
-                            
+
                                     transaction = this._getTransaction(urls, options);
-                            
+
                                     this._queue.push({
                                         callback   : callback,
                                         transaction: transaction
                                     });
-                            
+
                                     this._next();
-                            
+
                                     return transaction;
                                 },
-                            
+
                                 _onTransactionFinish : function() {
                                     Get._pending = null;
                                     Get._next();
                                 },
-                            
+
                                 _next: function () {
                                     var item;
-                            
+
                                     if (this._pending) {
                                         return;
                                     }
-                            
+
                                     item = this._queue.shift();
-                            
+
                                     if (item) {
                                         this._pending = item;
                                         item.transaction.execute(item.callback);
                                     }
                                 },
-                            
+
                                 _purge: function (nodes) {
                                     var purgeNodes    = this._purgeNodes,
                                         isTransaction = nodes !== purgeNodes,
                                         index, node;
-                            
+
                                     while (node = nodes.pop()) { // assignment
                                         // Don&#x27;t purge nodes that haven&#x27;t finished loading (or errored out),
                                         // since this can hang the transaction.
                                         if (!node._yuiget_finished) {
                                             continue;
                                         }
-                            
+
                                         node.parentNode &amp;&amp; node.parentNode.removeChild(node);
-                            
+
                                         // If this is a transaction-level purge and this node also exists in
                                         // the Get-level _purgeNodes array, we need to remove it from
                                         // _purgeNodes to avoid creating a memory leak. The indexOf lookup
@@ -1839,7 +1839,7 @@
                                         // not be in the same document).
                                         if (isTransaction) {
                                             index = Y.Array.indexOf(purgeNodes, node);
-                            
+
                                             if (index &gt; -1) {
                                                 purgeNodes.splice(index, 1);
                                             }
@@ -1847,128 +1847,128 @@
                                     }
                                 }
                             };
-                            
+
                             /**
                             Alias for &#x60;js()&#x60;.
-                            
+
                             @method script
                             @static
                             **/
                             Get.script = Get.js;
-                            
+
                             /**
                             Represents a Get transaction, which may contain requests for one or more JS or
                             CSS files.
-                            
+
                             This class should not be instantiated manually. Instances will be created and
                             returned as needed by Y.Get&#x27;s &#x60;css()&#x60;, &#x60;js()&#x60;, and &#x60;load()&#x60; methods.
-                            
+
                             @class Get.Transaction
                             @constructor
                             @since 3.5.0
                             **/
                             Get.Transaction = Transaction = function (requests, options) {
                                 var self = this;
-                            
+
                                 self.id       = Transaction._lastId += 1;
                                 self.data     = options.data;
                                 self.errors   = [];
                                 self.nodes    = [];
                                 self.options  = options;
                                 self.requests = requests;
-                            
+
                                 self._callbacks = []; // callbacks to call after execution finishes
                                 self._queue     = [];
                                 self._reqsWaiting   = 0;
-                            
+
                                 // Deprecated pre-3.5.0 properties.
                                 self.tId = self.id; // Use &#x60;id&#x60; instead.
                                 self.win = options.win || Y.config.win;
                             };
-                            
+
                             /**
                             Arbitrary data object associated with this transaction.
-                            
+
                             This object comes from the options passed to &#x60;Get.css()&#x60;, &#x60;Get.js()&#x60;, or
                             &#x60;Get.load()&#x60;, and will be &#x60;undefined&#x60; if no data object was specified.
-                            
+
                             @property {Object} data
                             **/
-                            
+
                             /**
                             Array of errors that have occurred during this transaction, if any. Each error
                             object has the following properties:
                             &#x60;errors.error&#x60;: Error message.
                             &#x60;errors.request&#x60;: Request object related to the error.
-                            
+
                             @since 3.5.0
                             @property {Object[]} errors
                             **/
-                            
+
                             /**
                             Numeric id for this transaction, unique among all transactions within the same
                             YUI sandbox in the current pageview.
-                            
+
                             @property {Number} id
                             @since 3.5.0
                             **/
-                            
+
                             /**
                             HTMLElement nodes (native ones, not YUI Node instances) that have been inserted
                             during the current transaction.
-                            
+
                             @property {HTMLElement[]} nodes
                             **/
-                            
+
                             /**
                             Options associated with this transaction.
-                            
+
                             See &#x60;Get.options&#x60; for the full list of available options.
-                            
+
                             @property {Object} options
                             @since 3.5.0
                             **/
-                            
+
                             /**
                             Request objects contained in this transaction. Each request object represents
                             one CSS or JS URL that will be (or has been) requested and loaded into the page.
-                            
+
                             @property {Object} requests
                             @since 3.5.0
                             **/
-                            
+
                             /**
                             Id of the most recent transaction.
-                            
+
                             @property _lastId
                             @type Number
                             @protected
                             @static
                             **/
                             Transaction._lastId = 0;
-                            
+
                             Transaction.prototype = {
                                 // -- Public Properties ----------------------------------------------------
-                            
+
                                 /**
                                 Current state of this transaction. One of &quot;new&quot;, &quot;executing&quot;, or &quot;done&quot;.
-                            
+
                                 @property _state
                                 @type String
                                 @protected
                                 **/
                                 _state: &#x27;new&#x27;, // &quot;new&quot;, &quot;executing&quot;, or &quot;done&quot;
-                            
+
                                 // -- Public Methods -------------------------------------------------------
-                            
+
                                 /**
                                 Aborts this transaction.
-                            
+
                                 This will cause the transaction&#x27;s &#x60;onFailure&#x60; callback to be called and
                                 will prevent any new script and link nodes from being added to the document,
                                 but any resources that have already been requested will continue loading
                                 (there&#x27;s no safe way to prevent this, unfortunately).
-                            
+
                                 @method abort
                                 @param {String} [msg=&quot;Aborted.&quot;] Optional message to use in the &#x60;errors&#x60;
                                     array describing why the transaction was aborted.
@@ -1979,25 +1979,25 @@
                                     this._pollTimer  = clearTimeout(this._pollTimer);
                                     this._queue      = [];
                                     this._reqsWaiting    = 0;
-                            
+
                                     this.errors.push({error: msg || &#x27;Aborted&#x27;});
                                     this._finish();
                                 },
-                            
+
                                 /**
                                 Begins execting the transaction.
-                            
+
                                 There&#x27;s usually no reason to call this manually, since Get will call it
                                 automatically when other pending transactions have finished. If you really
                                 want to execute your transaction before Get does, you can, but be aware that
                                 this transaction&#x27;s scripts may end up executing before the scripts in other
                                 pending transactions.
-                            
+
                                 If the transaction is already executing, the specified callback (if any)
                                 will be queued and called after execution finishes. If the transaction has
                                 already finished, the callback will be called immediately (the transaction
                                 will not be executed again).
-                            
+
                                 @method execute
                                 @param {Function} callback Callback function to execute after all requests
                                     in the transaction are complete, or after the transaction is aborted.
@@ -2007,32 +2007,32 @@
                                         requests = self.requests,
                                         state    = self._state,
                                         i, len, queue, req;
-                            
+
                                     if (state === &#x27;done&#x27;) {
                                         callback &amp;&amp; callback(self.errors.length ? self.errors : null, self);
                                         return;
                                     } else {
                                         callback &amp;&amp; self._callbacks.push(callback);
-                            
+
                                         if (state === &#x27;executing&#x27;) {
                                             return;
                                         }
                                     }
-                            
+
                                     self._state = &#x27;executing&#x27;;
                                     self._queue = queue = [];
-                            
+
                                     if (self.options.timeout) {
                                         self._timeout = setTimeout(function () {
                                             self.abort(&#x27;Timeout&#x27;);
                                         }, self.options.timeout);
                                     }
-                            
+
                                     self._reqsWaiting = requests.length;
-                            
+
                                     for (i = 0, len = requests.length; i &lt; len; ++i) {
                                         req = requests[i];
-                            
+
                                         if (req.async || req.type === &#x27;css&#x27;) {
                                             // No need to queue CSS or fully async JS.
                                             self._insert(req);
@@ -2040,28 +2040,28 @@
                                             queue.push(req);
                                         }
                                     }
-                            
+
                                     self._next();
                                 },
-                            
+
                                 /**
                                 Manually purges any &#x60;&lt;script&gt;&#x60; or &#x60;&lt;link&gt;&#x60; nodes this transaction has
                                 created.
-                            
+
                                 Be careful when purging a transaction that contains CSS requests, since
                                 removing &#x60;&lt;link&gt;&#x60; nodes will also remove any styles they applied.
-                            
+
                                 @method purge
                                 **/
                                 purge: function () {
                                     Get._purge(this.nodes);
                                 },
-                            
+
                                 // -- Protected Methods ----------------------------------------------------
                                 _createNode: function (name, attrs, doc) {
                                     var node = doc.createElement(name),
                                         attr, testEl;
-                            
+
                                     if (!CUSTOM_ATTRS) {
                                         // IE6 and IE7 expect property names rather than attribute names for
                                         // certain attributes. Rather than sniffing, we do a quick feature
@@ -2069,61 +2069,61 @@
                                         // need to provide a workaround.
                                         testEl = doc.createElement(&#x27;div&#x27;);
                                         testEl.setAttribute(&#x27;class&#x27;, &#x27;a&#x27;);
-                            
+
                                         CUSTOM_ATTRS = testEl.className === &#x27;a&#x27; ? {} : {
                                             &#x27;for&#x27;  : &#x27;htmlFor&#x27;,
                                             &#x27;class&#x27;: &#x27;className&#x27;
                                         };
                                     }
-                            
+
                                     for (attr in attrs) {
                                         if (attrs.hasOwnProperty(attr)) {
                                             node.setAttribute(CUSTOM_ATTRS[attr] || attr, attrs[attr]);
                                         }
                                     }
-                            
+
                                     return node;
                                 },
-                            
+
                                 _finish: function () {
                                     var errors  = this.errors.length ? this.errors : null,
                                         options = this.options,
                                         thisObj = options.context || this,
                                         data, i, len;
-                            
+
                                     if (this._state === &#x27;done&#x27;) {
                                         return;
                                     }
-                            
+
                                     this._state = &#x27;done&#x27;;
-                            
+
                                     for (i = 0, len = this._callbacks.length; i &lt; len; ++i) {
                                         this._callbacks[i].call(thisObj, errors, this);
                                     }
-                            
+
                                     data = this._getEventData();
-                            
+
                                     if (errors) {
                                         if (options.onTimeout &amp;&amp; errors[errors.length - 1].error === &#x27;Timeout&#x27;) {
                                             options.onTimeout.call(thisObj, data);
                                         }
-                            
+
                                         if (options.onFailure) {
                                             options.onFailure.call(thisObj, data);
                                         }
                                     } else if (options.onSuccess) {
                                         options.onSuccess.call(thisObj, data);
                                     }
-                            
+
                                     if (options.onEnd) {
                                         options.onEnd.call(thisObj, data);
                                     }
-                            
+
                                     if (options._onFinish) {
                                         options._onFinish();
                                     }
                                 },
-                            
+
                                 _getEventData: function (req) {
                                     if (req) {
                                         // This merge is necessary for backcompat. I hate it.
@@ -2138,33 +2138,33 @@
                                         return this;
                                     }
                                 },
-                            
+
                                 _getInsertBefore: function (req) {
                                     var doc = req.doc,
                                         el  = req.insertBefore,
                                         cache, docStamp;
-                            
+
                                     if (el) {
                                         return typeof el === &#x27;string&#x27; ? doc.getElementById(el) : el;
                                     }
-                            
+
                                     cache    = Get._insertCache;
                                     docStamp = Y.stamp(doc);
-                            
+
                                     if ((el = cache[docStamp])) { // assignment
                                         return el;
                                     }
-                            
+
                                     // Inserting before a &lt;base&gt; tag apparently works around an IE bug
                                     // (according to a comment from pre-3.5.0 Y.Get), but I&#x27;m not sure what
                                     // bug that is, exactly. Better safe than sorry?
                                     if ((el = doc.getElementsByTagName(&#x27;base&#x27;)[0])) { // assignment
                                         return (cache[docStamp] = el);
                                     }
-                            
+
                                     // Look for a &lt;head&gt; element.
                                     el = doc.head || doc.getElementsByTagName(&#x27;head&#x27;)[0];
-                            
+
                                     if (el) {
                                         // Create a marker node at the end of &lt;head&gt; to use as an insertion
                                         // point. Inserting before this node will ensure that all our CSS
@@ -2172,12 +2172,12 @@
                                         el.appendChild(doc.createTextNode(&#x27;&#x27;));
                                         return (cache[docStamp] = el.lastChild);
                                     }
-                            
+
                                     // If all else fails, just insert before the first script node on the
                                     // page, which is virtually guaranteed to exist.
                                     return (cache[docStamp] = doc.getElementsByTagName(&#x27;script&#x27;)[0]);
                                 },
-                            
+
                                 _insert: function (req) {
                                     var env          = Get._env,
                                         insertBefore = this._getInsertBefore(req),
@@ -2186,7 +2186,7 @@
                                         self         = this,
                                         ua           = Y.UA,
                                         cssTimeout, nodeType;
-                            
+
                                     if (!node) {
                                         if (isScript) {
                                             nodeType = &#x27;script&#x27;;
@@ -2195,27 +2195,27 @@
                                         } else {
                                             nodeType = &#x27;link&#x27;;
                                         }
-                            
+
                                         node = req.node = this._createNode(nodeType, req.attributes,
                                             req.doc);
                                     }
-                            
+
                                     function onError() {
                                         self._progress(&#x27;Failed to load &#x27; + req.url, req);
                                     }
-                            
+
                                     function onLoad() {
                                         if (cssTimeout) {
                                             clearTimeout(cssTimeout);
                                         }
-                            
+
                                         self._progress(null, req);
                                     }
-                            
+
                                     // Deal with script asynchronicity.
                                     if (isScript) {
                                         node.setAttribute(&#x27;src&#x27;, req.url);
-                            
+
                                         if (req.async) {
                                             // Explicitly indicate that we want the browser to execute this
                                             // script asynchronously. This is necessary for older browsers
@@ -2229,7 +2229,7 @@
                                                 // async.
                                                 node.async = false;
                                             }
-                            
+
                                             // If this browser doesn&#x27;t preserve script execution order based
                                             // on insertion order, we&#x27;ll need to avoid inserting other
                                             // scripts until this one finishes loading.
@@ -2253,7 +2253,7 @@
                                             node.setAttribute(&#x27;href&#x27;, req.url);
                                         }
                                     }
-                            
+
                                     // Inject the node.
                                     if (isScript &amp;&amp; ua.ie &amp;&amp; (ua.ie &lt; 9 || (document.documentMode &amp;&amp; document.documentMode &lt; 9))) {
                                         // Script on IE &lt; 9, and IE 9+ when in IE 8 or older modes, including quirks mode.
@@ -2269,13 +2269,13 @@
                                     } else {
                                         // Script or CSS on everything else. Using DOM 0 events because that
                                         // evens the playing field with older IEs.
-                            
+
                                         if (ua.ie &gt;= 10) {
-                            
+
                                             // We currently need to introduce a timeout for IE10, since it
                                             // calls onerror/onload synchronously for 304s - messing up existing
                                             // program flow.
-                            
+
                                             // Remove this block if the following bug gets fixed by GA
                                             /*jshint maxlen: 1500 */
                                             // https://connect.microsoft.com/IE/feedback/details/763871/dynamically-loaded-scripts-with-304s-responses-interrupt-the-currently-executing-js-thread-onload
@@ -2285,23 +2285,23 @@
                                             node.onerror = onError;
                                             node.onload  = onLoad;
                                         }
-                            
+
                                         // If this browser doesn&#x27;t fire an event when CSS fails to load,
                                         // fail after a timeout to avoid blocking the transaction queue.
                                         if (!env.cssFail &amp;&amp; !isScript) {
                                             cssTimeout = setTimeout(onError, req.timeout || 3000);
                                         }
                                     }
-                            
+
                                     this.nodes.push(node);
                                     insertBefore.parentNode.insertBefore(node, insertBefore);
                                 },
-                            
+
                                 _next: function () {
                                     if (this._pending) {
                                         return;
                                     }
-                            
+
                                     // If there are requests in the queue, insert the next queued request.
                                     // Otherwise, if we&#x27;re waiting on already-inserted requests to finish,
                                     // wait longer. If there are no queued requests and we&#x27;re not waiting
@@ -2312,39 +2312,39 @@
                                         this._finish();
                                     }
                                 },
-                            
+
                                 _poll: function (newReq) {
                                     var self       = this,
                                         pendingCSS = self._pendingCSS,
                                         isWebKit   = Y.UA.webkit,
                                         i, hasRules, j, nodeHref, req, sheets;
-                            
+
                                     if (newReq) {
                                         pendingCSS || (pendingCSS = self._pendingCSS = []);
                                         pendingCSS.push(newReq);
-                            
+
                                         if (self._pollTimer) {
                                             // A poll timeout is already pending, so no need to create a
                                             // new one.
                                             return;
                                         }
                                     }
-                            
+
                                     self._pollTimer = null;
-                            
+
                                     // Note: in both the WebKit and Gecko hacks below, a CSS URL that 404s
                                     // will still be treated as a success. There&#x27;s no good workaround for
                                     // this.
-                            
+
                                     for (i = 0; i &lt; pendingCSS.length; ++i) {
                                         req = pendingCSS[i];
-                            
+
                                         if (isWebKit) {
                                             // Look for a stylesheet matching the pending URL.
                                             sheets   = req.doc.styleSheets;
                                             j        = sheets.length;
                                             nodeHref = req.node.href;
-                            
+
                                             while (--j &gt;= 0) {
                                                 if (sheets[j].href === nodeHref) {
                                                     pendingCSS.splice(i, 1);
@@ -2365,7 +2365,7 @@
                                                 // use it again, but if we don&#x27;t store it, Closure Compiler
                                                 // assumes the code is useless and removes it.
                                                 hasRules = !!req.node.sheet.cssRules;
-                            
+
                                                 // If we get here, the stylesheet has loaded.
                                                 pendingCSS.splice(i, 1);
                                                 i -= 1;
@@ -2375,35 +2375,35 @@
                                             }
                                         }
                                     }
-                            
+
                                     if (pendingCSS.length) {
                                         self._pollTimer = setTimeout(function () {
                                             self._poll.call(self);
                                         }, self.options.pollInterval);
                                     }
                                 },
-                            
+
                                 _progress: function (err, req) {
                                     var options = this.options;
-                            
+
                                     if (err) {
                                         req.error = err;
-                            
+
                                         this.errors.push({
                                             error  : err,
                                             request: req
                                         });
-                            
+
                                         Y.log(err, &#x27;error&#x27;, &#x27;get&#x27;);
                                     }
-                            
+
                                     req.node._yuiget_finished = req.finished = true;
-                            
+
                                     if (options.onProgress) {
                                         options.onProgress.call(options.context || this,
                                             this._getEventData(req));
                                     }
-                            
+
                                     if (req.autopurge) {
                                         // Pre-3.5.0 Get always excludes the most recent node from an
                                         // autopurge. I find this odd, but I&#x27;m keeping that behavior for
@@ -2411,17 +2411,17 @@
                                         Get._autoPurge(this.options.purgethreshold);
                                         Get._purgeNodes.push(req.node);
                                     }
-                            
+
                                     if (this._pending === req) {
                                         this._pending = null;
                                     }
-                            
+
                                     this._reqsWaiting -= 1;
-                            
+
                                     this._next();
                                 }
                             };
-                            
+
                                 </pre>
                             </div>
                         </div>

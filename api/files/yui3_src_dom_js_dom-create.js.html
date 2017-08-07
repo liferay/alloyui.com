@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,52 +1122,52 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/dom/js/dom-create.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             var re_tag = /&lt;([a-z]+)/i,
-                            
+
                                 Y_DOM = Y.DOM,
-                            
+
                                 addFeature = Y.Features.add,
                                 testFeature = Y.Features.test,
-                            
+
                                 creators = {},
-                            
+
                                 createFromDIV = function(html, tag) {
                                     var div = Y.config.doc.createElement(&#x27;div&#x27;),
                                         ret = true;
-                            
+
                                     div.innerHTML = html;
                                     if (!div.firstChild || div.firstChild.tagName !== tag.toUpperCase()) {
                                         ret = false;
                                     }
-                            
+
                                     return ret;
                                 },
-                            
+
                                 re_tbody = /(?:\/(?:thead|tfoot|tbody|caption|col|colgroup)&gt;)+\s*&lt;tbody/,
-                            
+
                                 TABLE_OPEN = &#x27;&lt;table&gt;&#x27;,
                                 TABLE_CLOSE = &#x27;&lt;/table&gt;&#x27;,
-                            
+
                                 selectedIndex;
-                            
+
                             Y.mix(Y.DOM, {
                                 _fragClones: {},
-                            
+
                                 _create: function(html, doc, tag) {
                                     tag = tag || &#x27;div&#x27;;
-                            
+
                                     var frag = Y_DOM._fragClones[tag];
                                     if (frag) {
                                         frag = frag.cloneNode(false);
@@ -1177,14 +1177,14 @@
                                     frag.innerHTML = html;
                                     return frag;
                                 },
-                            
+
                                 _children: function(node, tag) {
                                         var i = 0,
                                         children = node.children,
                                         childNodes,
                                         hasComments,
                                         child;
-                            
+
                                     if (children &amp;&amp; children.tags) { // use tags filter when possible
                                         if (tag) {
                                             children = node.children.tags(tag);
@@ -1192,7 +1192,7 @@
                                             hasComments = children.tags(&#x27;!&#x27;).length;
                                         }
                                     }
-                            
+
                                     if (!children || (!children.tags &amp;&amp; tag) || hasComments) {
                                         childNodes = children || node.childNodes;
                                         children = [];
@@ -1204,10 +1204,10 @@
                                             }
                                         }
                                     }
-                            
+
                                     return children || [];
                                 },
-                            
+
                                 /**
                                  * Creates a new dom node using the provided markup string.
                                  * @method create
@@ -1220,16 +1220,16 @@
                                 create: function(html, doc) {
                                     if (typeof html === &#x27;string&#x27;) {
                                         html = Y.Lang.trim(html); // match IE which trims whitespace from innerHTML
-                            
+
                                     }
-                            
+
                                     doc = doc || Y.config.doc;
                                     var m = re_tag.exec(html),
                                         create = Y_DOM._create,
                                         custom = creators,
                                         ret = null,
                                         creator, tag, node, nodes;
-                            
+
                                     if (html != undefined) { // not undefined or null
                                         if (m &amp;&amp; m[1]) {
                                             creator = custom[m[1].toLowerCase()];
@@ -1239,15 +1239,15 @@
                                                 tag = creator;
                                             }
                                         }
-                            
+
                                         node = create(html, doc, tag);
                                         nodes = node.childNodes;
-                            
+
                                         if (nodes.length === 1) { // return single node, breaking parentNode ref from &quot;fragment&quot;
                                             ret = node.removeChild(nodes[0]);
                                         } else if (nodes[0] &amp;&amp; nodes[0].className === &#x27;yui3-big-dummy&#x27;) { // using dummy node to preserve some attributes (e.g. OPTION not selected)
                                             selectedIndex = node.selectedIndex;
-                            
+
                                             if (nodes.length === 2) {
                                                 ret = nodes[0].nextSibling;
                                             } else {
@@ -1257,31 +1257,31 @@
                                         } else { // return multiple nodes as a fragment
                                              ret = Y_DOM._nl2frag(nodes, doc);
                                         }
-                            
+
                                     }
-                            
+
                                     return ret;
                                 },
-                            
+
                                 _nl2frag: function(nodes, doc) {
                                     var ret = null,
                                         i, len;
-                            
+
                                     if (nodes &amp;&amp; (nodes.push || nodes.item) &amp;&amp; nodes[0]) {
                                         doc = doc || nodes[0].ownerDocument;
                                         ret = doc.createDocumentFragment();
-                            
+
                                         if (nodes.item) { // convert live list to static array
                                             nodes = Y.Array(nodes, 0, true);
                                         }
-                            
+
                                         for (i = 0, len = nodes.length; i &lt; len; i++) {
                                             ret.appendChild(nodes[i]);
                                         }
                                     } // else inline with log for minification
                                     return ret;
                                 },
-                            
+
                                 /**
                                  * Inserts content in a node at the given location
                                  * @method addHTML
@@ -1309,8 +1309,8 @@
                                         item,
                                         ret = content,
                                         newNode;
-                            
-                            
+
+
                                     if (content != undefined) { // not null or undefined (maybe 0)
                                         if (content.nodeType) { // DOM node, just add it
                                             newNode = content;
@@ -1323,7 +1323,7 @@
                                             }
                                         }
                                     }
-                            
+
                                     if (where) {
                                         if (newNode &amp;&amp; where.parentNode) { // insert regardless of relationship to node
                                             where.parentNode.insertBefore(newNode, where);
@@ -1360,36 +1360,36 @@
                                     } else if (newNode) {
                                         node.appendChild(newNode);
                                     }
-                            
+
                                     // &#x60;select&#x60; elements are the only elements with &#x60;selectedIndex&#x60;.
                                     // Don&#x27;t grab the dummy &#x60;option&#x60; element&#x27;s &#x60;selectedIndex&#x60;.
                                     if (node.nodeName == &quot;SELECT&quot; &amp;&amp; selectedIndex &gt; 0) {
                                         node.selectedIndex = selectedIndex - 1;
                                     }
-                            
+
                                     return ret;
                                 },
-                            
+
                                 wrap: function(node, html) {
                                     var parent = (html &amp;&amp; html.nodeType) ? html : Y.DOM.create(html),
                                         nodes = parent.getElementsByTagName(&#x27;*&#x27;);
-                            
+
                                     if (nodes.length) {
                                         parent = nodes[nodes.length - 1];
                                     }
-                            
+
                                     if (node.parentNode) {
                                         node.parentNode.replaceChild(parent, node);
                                     }
                                     parent.appendChild(node);
                                 },
-                            
+
                                 unwrap: function(node) {
                                     var parent = node.parentNode,
                                         lastChild = parent.lastChild,
                                         next = node,
                                         grandparent;
-                            
+
                                     if (parent) {
                                         grandparent = parent.parentNode;
                                         if (grandparent) {
@@ -1406,7 +1406,7 @@
                                     }
                                 }
                             });
-                            
+
                             addFeature(&#x27;innerhtml&#x27;, &#x27;table&#x27;, {
                                 test: function() {
                                     var node = Y.config.doc.createElement(&#x27;table&#x27;);
@@ -1418,66 +1418,66 @@
                                     return (node.firstChild &amp;&amp; node.firstChild.nodeName === &#x27;TBODY&#x27;);
                                 }
                             });
-                            
+
                             addFeature(&#x27;innerhtml-div&#x27;, &#x27;tr&#x27;, {
                                 test: function() {
                                     return createFromDIV(&#x27;&lt;tr&gt;&lt;/tr&gt;&#x27;, &#x27;tr&#x27;);
                                 }
                             });
-                            
+
                             addFeature(&#x27;innerhtml-div&#x27;, &#x27;script&#x27;, {
                                 test: function() {
                                     return createFromDIV(&#x27;&lt;script&gt;&lt;/script&gt;&#x27;, &#x27;script&#x27;);
                                 }
                             });
-                            
+
                             if (!testFeature(&#x27;innerhtml&#x27;, &#x27;table&#x27;)) {
                                 // TODO: thead/tfoot with nested tbody
                                     // IE adds TBODY when creating TABLE elements (which may share this impl)
                                 creators.tbody = function(html, doc) {
                                     var frag = Y_DOM.create(TABLE_OPEN + html + TABLE_CLOSE, doc),
                                         tb = Y.DOM._children(frag, &#x27;tbody&#x27;)[0];
-                            
+
                                     if (frag.children.length &gt; 1 &amp;&amp; tb &amp;&amp; !re_tbody.test(html)) {
                                         tb.parentNode.removeChild(tb); // strip extraneous tbody
                                     }
                                     return frag;
                                 };
                             }
-                            
+
                             if (!testFeature(&#x27;innerhtml-div&#x27;, &#x27;script&#x27;)) {
                                 creators.script = function(html, doc) {
                                     var frag = doc.createElement(&#x27;div&#x27;);
-                            
+
                                     frag.innerHTML = &#x27;-&#x27; + html;
                                     frag.removeChild(frag.firstChild);
                                     return frag;
                                 };
-                            
+
                                 creators.link = creators.style = creators.script;
                             }
-                            
+
                             if (!testFeature(&#x27;innerhtml-div&#x27;, &#x27;tr&#x27;)) {
                                 Y.mix(creators, {
                                     option: function(html, doc) {
                                         return Y_DOM.create(&#x27;&lt;select&gt;&lt;option class=&quot;yui3-big-dummy&quot; selected&gt;&lt;/option&gt;&#x27; + html + &#x27;&lt;/select&gt;&#x27;, doc);
                                     },
-                            
+
                                     tr: function(html, doc) {
                                         return Y_DOM.create(&#x27;&lt;tbody&gt;&#x27; + html + &#x27;&lt;/tbody&gt;&#x27;, doc);
                                     },
-                            
+
                                     td: function(html, doc) {
                                         return Y_DOM.create(&#x27;&lt;tr&gt;&#x27; + html + &#x27;&lt;/tr&gt;&#x27;, doc);
                                     },
-                            
+
                                     col: function(html, doc) {
                                         return Y_DOM.create(&#x27;&lt;colgroup&gt;&#x27; + html + &#x27;&lt;/colgroup&gt;&#x27;, doc);
                                     },
-                            
+
                                     tbody: &#x27;table&#x27;
                                 });
-                            
+
                                 Y.mix(creators, {
                                     legend: &#x27;fieldset&#x27;,
                                     th: creators.td,
@@ -1488,9 +1488,9 @@
                                     optgroup: creators.option
                                 });
                             }
-                            
+
                             Y_DOM.creators = creators;
-                            
+
                                 </pre>
                             </div>
                         </div>

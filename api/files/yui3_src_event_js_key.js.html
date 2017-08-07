@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/event/js/key.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1139,14 +1139,14 @@
                              * @module event
                              * @submodule event-key
                              */
-                            
+
                             var ALT      = &quot;+alt&quot;,
                                 CTRL     = &quot;+ctrl&quot;,
                                 META     = &quot;+meta&quot;,
                                 SHIFT    = &quot;+shift&quot;,
-                            
+
                                 trim     = Y.Lang.trim,
-                            
+
                                 eventDef = {
                                     KEY_MAP: {
                                         enter    : 13,
@@ -1157,10 +1157,10 @@
                                         pageup   : 33,
                                         pagedown : 34
                                     },
-                            
+
                                     _typeRE: /^(up|down|press):/,
                                     _keysRE: /^(?:up|down|press):|\+(alt|ctrl|meta|shift)/g,
-                            
+
                                     processArgs: function (args) {
                                         var spec = args.splice(3,1)[0],
                                             mods = Y.Array.hash(spec.match(/\+(?:alt|ctrl|meta|shift)\b/g) || []),
@@ -1172,27 +1172,27 @@
                                             // strip type and modifiers from spec, leaving only keyCodes
                                             bits = spec.replace(this._keysRE, &#x27;&#x27;),
                                             chr, uc, lc, i;
-                            
+
                                         if (bits) {
                                             bits = bits.split(&#x27;,&#x27;);
-                            
+
                                             config.keys = {};
-                            
+
                                             // FIXME: need to support &#x27;65,esc&#x27; =&gt; keypress, keydown
                                             for (i = bits.length - 1; i &gt;= 0; --i) {
                                                 chr = trim(bits[i]);
-                            
+
                                                 // catch sloppy filters, trailing commas, etc &#x27;a,,&#x27;
                                                 if (!chr) {
                                                     continue;
                                                 }
-                            
+
                                                 // non-numerics are single characters or key names
                                                 if (+chr == chr) {
                                                     config.keys[chr] = mods;
                                                 } else {
                                                     lc = chr.toLowerCase();
-                            
+
                                                     if (this.KEY_MAP[lc]) {
                                                         config.keys[this.KEY_MAP[lc]] = mods;
                                                         // FIXME: &#x27;65,enter&#x27; defaults keydown for both
@@ -1205,11 +1205,11 @@
                                                         // from the keyCode, which is wrong.
                                                         chr = chr.charAt(0);
                                                         uc  = chr.toUpperCase();
-                            
+
                                                         if (mods[&quot;+shift&quot;]) {
                                                             chr = uc;
                                                         }
-                            
+
                                                         // FIXME: stupid assumption that
                                                         // the keycode of the lower case == the
                                                         // charCode of the upper case
@@ -1223,20 +1223,20 @@
                                                 }
                                             }
                                         }
-                            
+
                                         if (!config.type) {
                                             config.type = &quot;press&quot;;
                                         }
-                            
+
                                         return config;
                                     },
-                            
+
                                     on: function (node, sub, notifier, filter) {
                                         var spec   = sub._extra,
                                             type   = &quot;key&quot; + spec.type,
                                             keys   = spec.keys,
                                             method = (filter) ? &quot;delegate&quot; : &quot;on&quot;;
-                            
+
                                         // Note: without specifying any keyCodes, this becomes a
                                         // horribly inefficient alias for &#x27;keydown&#x27; (et al), but I
                                         // can&#x27;t abort this subscription for a simple
@@ -1245,7 +1245,7 @@
                                         // keyup, or keypress
                                         sub._detach = node[method](type, function (e) {
                                             var key = keys ? keys[e.which] : spec.mods;
-                            
+
                                             if (key &amp;&amp;
                                                 (!key[ALT]   || (key[ALT]   &amp;&amp; e.altKey)) &amp;&amp;
                                                 (!key[CTRL]  || (key[CTRL]  &amp;&amp; e.ctrlKey)) &amp;&amp;
@@ -1256,15 +1256,15 @@
                                             }
                                         }, filter);
                                     },
-                            
+
                                     detach: function (node, sub, notifier) {
                                         sub._detach.detach();
                                     }
                                 };
-                            
+
                             eventDef.delegate = eventDef.on;
                             eventDef.detachDelegate = eventDef.detach;
-                            
+
                             /**
                              * &lt;p&gt;Add a key listener.  The listener will only be notified if the
                              * keystroke detected meets the supplied specification.  The
@@ -1301,7 +1301,7 @@
                              * @return {Event.Handle} the detach handle
                              */
                             Y.Event.define(&#x27;key&#x27;, eventDef, true);
-                            
+
                                 </pre>
                             </div>
                         </div>

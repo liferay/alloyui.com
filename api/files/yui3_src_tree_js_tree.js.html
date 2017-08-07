@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,43 +1122,43 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/tree/js/tree.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /*jshint boss:true, expr:true, onevar:false */
-                            
+
                             /**
                             Provides a generic tree data structure and related functionality.
-                            
+
                             A tree has a root node, which may contain any number of child nodes, which may
                             themselves contain child nodes, ad infinitum.
-                            
+
                             Child nodes are lightweight function instances which delegate to the tree for
                             all significant functionality, so trees remain performant and memory-efficient
                             even with thousands and thousands of nodes.
-                            
+
                             @module tree
                             @main tree
                             **/
-                            
+
                             /**
                             The &#x60;Tree&#x60; class represents a generic tree data structure. A tree has a root
                             node, which may contain any number of child nodes, which may themselves contain
                             child nodes, ad infinitum.
-                            
+
                             This class doesn&#x27;t expose any UI, but is intended to be used as a data structure
                             or base class for other components. For example, the SmugMug TreeView gallery
                             module extends Tree and provides a TreeView UI.
-                            
+
                             @class Tree
                             @param {Object} [config] Config options.
                                 @param {Object[]|Tree.Node[]} [config.nodes] Array of tree node config
@@ -1169,13 +1169,13 @@
                             @constructor
                             @extends Base
                             **/
-                            
+
                             var Lang = Y.Lang,
-                            
+
                                 /**
                                 Fired when a node is added to this Tree. The &#x60;src&#x60; property will indicate
                                 how the node was added (&quot;append&quot;, &quot;insert&quot;, &quot;prepend&quot;, etc.).
-                            
+
                                 @event add
                                 @param {Number} index Index at which the node will be added.
                                 @param {Tree.Node} node Node being added.
@@ -1185,10 +1185,10 @@
                                 @preventable _defAddFn
                                 **/
                                 EVT_ADD = &#x27;add&#x27;,
-                            
+
                                 /**
                                 Fired when this Tree is cleared.
-                            
+
                                 @event clear
                                 @param {Tree.Node} rootNode New root node of this tree (the old root node is
                                     always destroyed when a tree is cleared).
@@ -1196,10 +1196,10 @@
                                 @preventable _defClearFn
                                 **/
                                 EVT_CLEAR = &#x27;clear&#x27;,
-                            
+
                                 /**
                                 Fired when a node is removed from this Tree.
-                            
+
                                 @event remove
                                 @param {Boolean} destroy Whether or not the node will be destroyed after
                                     being removed from this tree.
@@ -1209,142 +1209,142 @@
                                 @preventable _defRemoveFn
                                 **/
                                 EVT_REMOVE = &#x27;remove&#x27;;
-                            
+
                             var Tree = Y.Base.create(&#x27;tree&#x27;, Y.Base, [], {
                                 // -- Public Properties ----------------------------------------------------
-                            
+
                                 /**
                                 Reference to the &#x60;children&#x60; array of this Tree&#x27;s &#x60;rootNode&#x60;.
-                            
+
                                 This is a convenience property to allow you to type &#x60;tree.children&#x60; instead
                                 of &#x60;tree.rootNode.children&#x60;.
-                            
+
                                 @property {Tree.Node[]} children
                                 @readOnly
                                 **/
-                            
+
                                 /**
                                 The &#x60;Tree.Node&#x60; class or subclass that should be used for nodes created by
                                 this tree.
-                            
+
                                 You may specify an actual class reference or a string that resolves to a
                                 class reference at runtime.
-                            
+
                                 @property {String|Tree.Node} nodeClass
                                 @default Y.Tree.Node
                                 **/
                                 nodeClass: Y.Tree.Node,
-                            
+
                                 /**
                                 Optional array containing one or more extension classes that should be mixed
                                 into the &#x60;nodeClass&#x60; when this Tree is instantiated. The resulting composed
                                 node class will be unique to this Tree instance and will not affect any
                                 other instances, nor will it modify the defined &#x60;nodeClass&#x60; itself.
-                            
+
                                 This provides a late-binding extension mechanism for nodes that doesn&#x27;t
                                 require them to extend &#x60;Y.Base&#x60;, which would incur a significant performance
                                 hit.
-                            
+
                                 @property {Array} nodeExtensions
                                 @default []
                                 **/
                                 nodeExtensions: [],
-                            
+
                                 /**
                                 Root node of this Tree.
-                            
+
                                 @property {Tree.Node} rootNode
                                 @readOnly
                                 **/
-                            
+
                                 // -- Protected Properties -------------------------------------------------
-                            
+
                                 /**
                                 Simple way to type-check that this is a Tree instance.
-                            
+
                                 @property {Boolean} _isYUITree
                                 @default true
                                 @protected
                                 **/
                                 _isYUITree: true,
-                            
+
                                 /**
                                 Composed node class based on &#x60;nodeClass&#x60; that mixes in any extensions
                                 specified in &#x60;nodeExtensions&#x60;. If there are no extensions, this will just be
                                 a reference to &#x60;nodeClass&#x60;.
-                            
+
                                 @property {Tree.Node} _nodeClass
                                 @protected
                                 **/
-                            
+
                                 /**
                                 Mapping of node ids to node instances for nodes in this tree.
-                            
+
                                 @property {Object} _nodeMap
                                 @protected
                                 **/
-                            
+
                                 /**
                                 Default config object for the root node.
-                            
+
                                 @property {Object} _rootNodeConfig
                                 @protected
                                 **/
                                 _rootNodeConfig: {canHaveChildren: true},
-                            
+
                                 // -- Lifecycle ------------------------------------------------------------
                                 initializer: function (config) {
                                     config || (config = {});
-                            
+
                                     if (config.nodeClass) {
                                         this.nodeClass = config.nodeClass;
                                     }
-                            
+
                                     if (config.nodeExtensions) {
                                         this.nodeExtensions = this.nodeExtensions.concat(config.nodeExtensions);
                                     }
-                            
+
                                     /**
                                     Hash of published custom events.
-                            
+
                                     @property {Object} _published
                                     @default {}
                                     @protected
                                     **/
                                     this._published || (this._published = {});
                                     this._nodeMap = {};
-                            
+
                                     // Allow all extensions to initialize, then finish up.
                                     this.onceAfter(&#x27;initializedChange&#x27;, function () {
                                         this._composeNodeClass();
-                            
+
                                         this.clear(config.rootNode, {silent: true});
-                            
+
                                         if (config.nodes) {
                                             this.insertNode(this.rootNode, config.nodes, {silent: true});
                                         }
                                     });
                                 },
-                            
+
                                 destructor: function () {
                                     this.destroyNode(this.rootNode, {silent: true});
-                            
+
                                     this.children   = null;
                                     this.rootNode   = null;
                                     this._nodeClass = null;
                                     this._nodeMap   = null;
                                     this._published = null;
                                 },
-                            
+
                                 // -- Public Methods -------------------------------------------------------
-                            
+
                                 /**
                                 Appends a node or array of nodes as the last child of the specified parent
                                 node.
-                            
+
                                 If a node being appended is from another tree, it and all its children will
                                 be removed from that tree and moved to this one.
-                            
+
                                 @method appendNode
                                 @param {Tree.Node} parent Parent node.
                                 @param {Object|Object[]|Tree.Node|Tree.Node[]} node Child node, node config
@@ -1363,12 +1363,12 @@
                                         src  : &#x27;append&#x27;
                                     }));
                                 },
-                            
+
                                 /**
                                 Clears this tree by destroying the root node and all its children. If a
                                 &#x60;rootNode&#x60; argument is provided, that node will become the root node of this
                                 tree; otherwise, a new root node will be created.
-                            
+
                                 @method clear
                                 @param {Object|Tree.Node} [rootNode] If specified, this node will be used as
                                     the new root node.
@@ -1390,11 +1390,11 @@
                                         silent   : options &amp;&amp; options.silent
                                     });
                                 },
-                            
+
                                 /**
                                 Creates and returns a new &#x60;Tree.Node&#x60; instance associated with (but not
                                 yet appended to) this tree.
-                            
+
                                 @method createNode
                                 @param {Object|Tree.Node} [config] Node configuration. If a &#x60;Tree.Node&#x60;
                                     instance is specified instead of a config object, that node will be
@@ -1405,7 +1405,7 @@
                                 **/
                                 createNode: function (config) {
                                     config || (config = {});
-                            
+
                                     // If &#x60;config&#x60; is already a node, just ensure it hasn&#x27;t been destroyed
                                     // and is in the node map, then return it.
                                     if (config._isYUITreeNode) {
@@ -1413,32 +1413,32 @@
                                             Y.error(&#x27;Cannot insert a node that has already been destroyed.&#x27;, null, &#x27;tree&#x27;);
                                             return null;
                                         }
-                            
+
                                         this._adoptNode(config);
                                         return config;
                                     }
-                            
+
                                     // First, create nodes for any children of this node.
                                     if (config.children) {
                                         var children = [];
-                            
+
                                         for (var i = 0, len = config.children.length; i &lt; len; i++) {
                                             children.push(this.createNode(config.children[i]));
                                         }
-                            
+
                                         config = Y.merge(config, {children: children});
                                     }
-                            
+
                                     var node = new this._nodeClass(this, config);
-                            
+
                                     return this._nodeMap[node.id] = node;
                                 },
-                            
+
                                 /**
                                 Removes and destroys a node and all its child nodes. Once destroyed, a node
                                 is eligible for garbage collection and cannot be reused or re-added to the
                                 tree.
-                            
+
                                 @method destroyNode
                                 @param {Tree.Node} node Node to destroy.
                                 @param {Object} [options] Options.
@@ -1452,40 +1452,40 @@
                                 **/
                                 destroyNode: function (node, options) {
                                     var child, i, len;
-                            
+
                                     options || (options = {});
-                            
+
                                     for (i = 0, len = node.children.length; i &lt; len; i++) {
                                         child = node.children[i];
-                            
+
                                         // Manually remove the child from its parent; this makes destroying
                                         // all children of the parent much faster since there&#x27;s no splicing
                                         // involved.
                                         child.parent = null;
-                            
+
                                         // Destroy the child.
                                         this.destroyNode(child, options);
                                     }
-                            
+
                                     if (node.parent) {
                                         this.removeNode(node, options);
                                     }
-                            
+
                                     node.children  = [];
                                     node.data      = {};
                                     node.state     = {destroyed: true};
                                     node.tree      = null;
                                     node._indexMap = {};
-                            
+
                                     delete this._nodeMap[node.id];
-                            
+
                                     return this;
                                 },
-                            
+
                                 /**
                                 Removes all children from the specified node. The removed children will
                                 still be reusable unless the &#x60;destroy&#x60; option is truthy.
-                            
+
                                 @method emptyNode
                                 @param {Tree.Node} node Node to empty.
                                 @param {Object} [options] Options.
@@ -1503,23 +1503,23 @@
                                 emptyNode: function (node, options) {
                                     var children = node.children,
                                         removed  = [];
-                            
+
                                     for (var i = children.length - 1; i &gt; -1; --i) {
                                         removed[i] = this.removeNode(children[i], options);
                                     }
-                            
+
                                     return removed;
                                 },
-                            
+
                                 /**
                                 Performs a depth-first traversal of _node_, passing it and each of its
                                 descendants to the specified _callback_, and returning the first node for
                                 which the callback returns a truthy value.
-                            
+
                                 Traversal will stop as soon as a truthy value is returned from the callback.
-                            
+
                                 See &#x60;traverseNode()&#x60; for more details on how depth-first traversal works.
-                            
+
                                 @method findNode
                                 @param {Tree.Node} node Node to traverse.
                                 @param {Object} [options] Options.
@@ -1529,9 +1529,9 @@
                                 @param {Function} callback Callback function to call with the traversed
                                     node and each of its descendants. If this function returns a truthy
                                     value, traversal will be stopped and the current node will be returned.
-                            
+
                                     @param {Tree.Node} callback.node Node being traversed.
-                            
+
                                 @param {Object} [thisObj] &#x60;this&#x60; object to use when executing _callback_.
                                 @return {Tree.Node|null} Returns the first node for which the _callback_
                                     returns a truthy value, or &#x60;null&#x60; if the callback never returns a truthy
@@ -1539,28 +1539,28 @@
                                 **/
                                 findNode: function (node, options, callback, thisObj) {
                                     var match = null;
-                            
+
                                     // Allow callback as second argument.
                                     if (typeof options === &#x27;function&#x27;) {
                                         thisObj  = callback;
                                         callback = options;
                                         options  = {};
                                     }
-                            
+
                                     this.traverseNode(node, options, function (descendant) {
                                         if (callback.call(thisObj, descendant)) {
                                             match = descendant;
                                             return Tree.STOP_TRAVERSAL;
                                         }
                                     });
-                            
+
                                     return match;
                                 },
-                            
+
                                 /**
                                 Returns the tree node with the specified id, or &#x60;undefined&#x60; if the node
                                 doesn&#x27;t exist in this tree.
-                            
+
                                 @method getNodeById
                                 @param {String} id Node id.
                                 @return {Tree.Node} Node, or &#x60;undefined&#x60; if not found.
@@ -1568,21 +1568,21 @@
                                 getNodeById: function (id) {
                                     return this._nodeMap[id];
                                 },
-                            
+
                                 /**
                                 Inserts a node or array of nodes at the specified index under the given
                                 parent node, or appends them to the parent if no index is specified.
-                            
+
                                 If a node being inserted is from another tree, it and all its children will
                                 be removed from that tree and moved to this one.
-                            
+
                                 @method insertNode
                                 @param {Tree.Node} parent Parent node.
                                 @param {Object|Object[]|Tree.Node|Tree.Node[]} node Child node, node config
                                     object, array of child nodes, or array of node config objects to insert
                                     under the given parent. Node config objects will automatically be
                                     converted into node instances.
-                            
+
                                 @param {Object} [options] Options.
                                     @param {Number} [options.index] Index at which to insert the child node.
                                         If not specified, the node will be appended as the last child of the
@@ -1593,13 +1593,13 @@
                                         passed along to the event facade of the resulting event. This can be
                                         used to distinguish between changes triggered by a user and changes
                                         triggered programmatically, for example.
-                            
+
                                 @return {Tree.Node|Tree.Node[]} Node or array of nodes that were inserted.
                                 **/
                                 insertNode: function (parent, node, options) {
                                     options || (options = {});
                                     parent  || (parent = this.rootNode);
-                            
+
                                     // If &#x60;node&#x60; is an array, recurse to insert each node it contains.
                                     //
                                     // Note: If you&#x27;re getting an exception here because &#x60;node&#x60; is null when
@@ -1616,31 +1616,31 @@
                                         var hasIndex      = &#x27;index&#x27; in options,
                                             insertedNodes = [],
                                             insertedNode;
-                            
+
                                         for (var i = 0, len = node.length; i &lt; len; i++) {
                                             insertedNode = this.insertNode(parent, node[i], options);
-                            
+
                                             if (insertedNode) {
                                                 insertedNodes.push(insertedNode);
-                            
+
                                                 if (hasIndex) {
                                                     options.index += 1;
                                                 }
                                             }
                                         }
-                            
+
                                         return insertedNodes;
                                     }
-                            
+
                                     node = this.createNode(node);
-                            
+
                                     if (node) {
                                         var index = options.index;
-                            
+
                                         if (typeof index === &#x27;undefined&#x27;) {
                                             index = this._getDefaultNodeIndex(parent, node, options);
                                         }
-                            
+
                                         this._fireTreeEvent(EVT_ADD, {
                                             index : index,
                                             node  : node,
@@ -1651,17 +1651,17 @@
                                             silent   : options.silent
                                         });
                                     }
-                            
+
                                     return node;
                                 },
-                            
+
                                 /**
                                 Prepends a node or array of nodes at the beginning of the specified parent
                                 node.
-                            
+
                                 If a node being prepended is from another tree, it and all its children will
                                 be removed from that tree and moved to this one.
-                            
+
                                 @method prependNode
                                 @param {Tree.Node} parent Parent node.
                                 @param {Object|Object[]|Tree.Node|Tree.Node[]} node Child node,
@@ -1680,11 +1680,11 @@
                                         src  : &#x27;prepend&#x27;
                                     }));
                                 },
-                            
+
                                 /**
                                 Removes the specified node from its parent node. The removed node will still
                                 be reusable unless the &#x60;destroy&#x60; option is truthy.
-                            
+
                                 @method removeNode
                                 @param {Tree.Node} node Node to remove.
                                 @param {Object} [options] Options.
@@ -1701,7 +1701,7 @@
                                 **/
                                 removeNode: function (node, options) {
                                     options || (options = {});
-                            
+
                                     this._fireTreeEvent(EVT_REMOVE, {
                                         destroy: !!options.destroy,
                                         node   : node,
@@ -1711,43 +1711,43 @@
                                         defaultFn: this._defRemoveFn,
                                         silent   : options.silent
                                     });
-                            
+
                                     return node;
                                 },
-                            
+
                                 /**
                                 Returns the total number of nodes in this tree, at all levels.
-                            
+
                                 Use &#x60;rootNode.children.length&#x60; to get only the number of top-level nodes.
-                            
+
                                 @method size
                                 @return {Number} Total number of nodes in this tree.
                                 **/
                                 size: function () {
                                     return this.rootNode.size() + 1;
                                 },
-                            
+
                                 /**
                                 Serializes this tree to an object suitable for use in JSON.
-                            
+
                                 @method toJSON
                                 @return {Object} Serialized tree object.
                                 **/
                                 toJSON: function () {
                                     return this.rootNode.toJSON();
                                 },
-                            
+
                                 /**
                                 Performs a depth-first traversal of _node_, passing it and each of its
                                 descendants to the specified _callback_.
-                            
+
                                 If the callback function returns &#x60;Tree.STOP_TRAVERSAL&#x60;, traversal will be
                                 stopped immediately. Otherwise, it will continue until the deepest
                                 descendant of _node_ has been traversed, or until each branch has been
                                 traversed to the optional maximum depth limit.
-                            
+
                                 Since traversal is depth-first, that means nodes are traversed like this:
-                            
+
                                             1
                                           / | \
                                          2  8  9
@@ -1755,7 +1755,7 @@
                                        3   7    10
                                      / | \      / \
                                     4  5  6    11 12
-                            
+
                                 @method traverseNode
                                 @param {Tree.Node} node Node to traverse.
                                 @param {Object} [options] Options.
@@ -1764,9 +1764,9 @@
                                         on.
                                 @param {Function} callback Callback function to call with the traversed
                                     node and each of its descendants.
-                            
+
                                     @param {Tree.Node} callback.node Node being traversed.
-                            
+
                                 @param {Object} [thisObj] &#x60;this&#x60; object to use when executing _callback_.
                                 @return {Mixed} Returns &#x60;Tree.STOP_TRAVERSAL&#x60; if traversal was stopped;
                                     otherwise returns &#x60;undefined&#x60;.
@@ -1776,28 +1776,28 @@
                                         Y.error(&#x27;Cannot traverse a node that has been destroyed.&#x27;, null, &#x27;tree&#x27;);
                                         return;
                                     }
-                            
+
                                     // Allow callback as second argument.
                                     if (typeof options === &#x27;function&#x27;) {
                                         thisObj  = callback;
                                         callback = options;
                                         options  = {};
                                     }
-                            
+
                                     options || (options = {});
-                            
+
                                     var stop      = Tree.STOP_TRAVERSAL,
                                         unlimited = typeof options.depth === &#x27;undefined&#x27;;
-                            
+
                                     if (callback.call(thisObj, node) === stop) {
                                         return stop;
                                     }
-                            
+
                                     var children = node.children;
-                            
+
                                     if (unlimited || options.depth &gt; 0) {
                                         var childOptions = unlimited ? options : {depth: options.depth - 1};
-                            
+
                                         for (var i = 0, len = children.length; i &lt; len; i++) {
                                             if (this.traverseNode(children[i], childOptions, callback, thisObj) === stop) {
                                                 return stop;
@@ -1805,13 +1805,13 @@
                                         }
                                     }
                                 },
-                            
+
                                 // -- Protected Methods ----------------------------------------------------
-                            
+
                                 /**
                                 Moves the specified node and all its children from another tree to this
                                 tree.
-                            
+
                                 @method _adoptNode
                                 @param {Tree.Node} node Node to adopt.
                                 @param {Object} [options] Options to pass along to &#x60;removeNode()&#x60;.
@@ -1820,51 +1820,51 @@
                                 _adoptNode: function (node, options) {
                                     var oldTree = node.tree,
                                         child;
-                            
+
                                     if (oldTree === this) {
                                         return;
                                     }
-                            
+
                                     for (var i = 0, len = node.children.length; i &lt; len; i++) {
                                         child = node.children[i];
-                            
+
                                         child.parent = null; // Prevents the child from being removed from
                                                              // its parent during the adoption.
-                            
+
                                         this._adoptNode(child, {silent: true});
                                         child.parent = node;
                                     }
-                            
+
                                     if (node.parent) {
                                         oldTree.removeNode(node, options);
                                     }
-                            
+
                                     delete oldTree._nodeMap[node.id];
-                            
+
                                     // If this node isn&#x27;t an instance of this tree&#x27;s composed _nodeClass,
                                     // then we need to recreate it to avoid potentially breaking things in
                                     // really weird ways.
                                     if (!(node instanceof this._nodeClass)
                                             || oldTree._nodeClass !== this._nodeClass) {
-                            
+
                                         node = this.createNode(node.toJSON());
                                     }
-                            
+
                                     node.tree = this;
                                     node._isIndexStale = true;
-                            
+
                                     this._nodeMap[node.id] = node;
                                 },
-                            
+
                                 /**
                                 Composes a custom late-bound tree node class (if necessary) based on the
                                 classes specified in this Tree&#x27;s &#x60;nodeClass&#x60; and &#x60;nodeExtensions&#x60;
                                 properties.
-                            
+
                                 The composed class is stored in this Tree&#x27;s &#x60;_nodeClass&#x60; property. If
                                 composition wasn&#x27;t necessary, then &#x60;_nodeClass&#x60; will just be a reference to
                                 &#x60;nodeClass&#x60;.
-                            
+
                                 @method _composeNodeClass
                                 @protected
                                 **/
@@ -1872,11 +1872,11 @@
                                     var nodeClass      = this.nodeClass,
                                         nodeExtensions = this.nodeExtensions,
                                         composedClass;
-                            
+
                                     if (typeof nodeClass === &#x27;string&#x27;) {
                                         // Look for a namespaced node class on &#x60;Y&#x60;.
                                         nodeClass = Y.Object.getValue(Y, nodeClass.split(&#x27;.&#x27;));
-                            
+
                                         if (nodeClass) {
                                             this.nodeClass = nodeClass;
                                         } else {
@@ -1884,36 +1884,36 @@
                                             return;
                                         }
                                     }
-                            
+
                                     if (!nodeExtensions.length) {
                                         this._nodeClass = nodeClass;
                                         return;
                                     }
-                            
+
                                     // Compose a new class by mixing extensions into nodeClass.
                                     composedClass = function () {
                                         var extensions = composedClass._nodeExtensions;
-                            
+
                                         nodeClass.apply(this, arguments);
-                            
+
                                         for (var i = 0, len = extensions.length; i &lt; len; i++) {
                                             extensions[i].apply(this, arguments);
                                         }
                                     };
-                            
+
                                     Y.extend(composedClass, nodeClass);
-                            
+
                                     for (var i = 0, len = nodeExtensions.length; i &lt; len; i++) {
                                         Y.mix(composedClass.prototype, nodeExtensions[i].prototype, true);
                                     }
-                            
+
                                     composedClass._nodeExtensions = nodeExtensions;
                                     this._nodeClass = composedClass;
                                 },
-                            
+
                                 /**
                                 Utility method for lazily publishing and firing events.
-                            
+
                                 @method _fireTreeEvent
                                 @param {String} name Event name to fire.
                                 @param {Object} facade Event facade.
@@ -1936,20 +1936,20 @@
                                                 defaultFn: options.defaultFn
                                             });
                                         }
-                            
+
                                         this.fire(name, facade);
                                     }
-                            
+
                                     return this;
                                 },
-                            
+
                                 /**
                                 Returns the default insertion index that should be used when _node_ is
                                 inserted as a child of _parent_ without an explicit index.
-                            
+
                                 The primary purpose of this method is to serve as a hook point for
                                 extensions and plugins that need to customize insertion order.
-                            
+
                                 @method _getDefaultNodeIndex
                                 @param {Tree.Node} parent Parent node.
                                 @param {Tree.Node} node Node being inserted.
@@ -1961,10 +1961,10 @@
                                 _getDefaultNodeIndex: function (parent/*, node, options*/) {
                                     return parent.children.length;
                                 },
-                            
+
                                 /**
                                 Removes the specified node from its parent node if it has one.
-                            
+
                                 @method _removeNodeFromParent
                                 @param {Tree.Node} node Node to remove.
                                 @protected
@@ -1972,39 +1972,39 @@
                                 _removeNodeFromParent: function (node) {
                                     var parent = node.parent,
                                         index;
-                            
+
                                     if (parent) {
                                         index = parent.indexOf(node);
-                            
+
                                         if (index &gt; -1) {
                                             var children = parent.children;
-                            
+
                                             if (index === children.length - 1) {
                                                 children.pop();
                                             } else {
                                                 children.splice(index, 1);
                                                 parent._isIndexStale = true;
                                             }
-                            
+
                                             node.parent = null;
                                         }
                                     }
                                 },
-                            
+
                                 // -- Default Event Handlers -----------------------------------------------
                                 _defAddFn: function (e) {
                                     var index  = e.index,
                                         node   = e.node,
                                         parent = e.parent,
                                         oldIndex;
-                            
+
                                     // Remove the node from its existing parent if it has one.
                                     if (node.parent) {
                                         // If the node&#x27;s existing parent is the same parent it&#x27;s being
                                         // inserted into, adjust the index to avoid an off-by-one error.
                                         if (node.parent === parent) {
                                             oldIndex = parent.indexOf(node);
-                            
+
                                             if (oldIndex === index) {
                                                 // Old index is the same as the new index, so just don&#x27;t do
                                                 // anything.
@@ -2015,38 +2015,38 @@
                                                 index -= 1;
                                             }
                                         }
-                            
+
                                         this.removeNode(node, {
                                             silent: e.silent,
                                             src   : &#x27;add&#x27;
                                         });
                                     }
-                            
+
                                     // Add the node to its new parent at the desired index.
                                     node.parent = parent;
                                     parent.children.splice(index, 0, node);
-                            
+
                                     parent.canHaveChildren = true;
                                     parent._isIndexStale   = true;
                                 },
-                            
+
                                 _defClearFn: function (e) {
                                     var newRootNode = e.rootNode;
-                            
+
                                     if (this.rootNode) {
                                         this.destroyNode(this.rootNode, {silent: true});
                                     }
-                            
+
                                     this._nodeMap = {};
                                     this._nodeMap[newRootNode.id] = newRootNode;
-                            
+
                                     this.rootNode = newRootNode;
                                     this.children = newRootNode.children;
                                 },
-                            
+
                                 _defRemoveFn: function (e) {
                                     var node = e.node;
-                            
+
                                     if (e.destroy) {
                                         this.destroyNode(node, {silent: true});
                                     } else if (e.parent) {
@@ -2061,15 +2061,15 @@
                                 /**
                                 Return this value from a &#x60;Tree#traverseNode()&#x60; or &#x60;Tree.Node#traverse()&#x60;
                                 callback to immediately stop traversal.
-                            
+
                                 @property STOP_TRAVERSAL
                                 @static
                                 **/
                                 STOP_TRAVERSAL: {}
                             });
-                            
+
                             Y.Tree = Y.mix(Tree, Y.Tree);
-                            
+
                                 </pre>
                             </div>
                         </div>

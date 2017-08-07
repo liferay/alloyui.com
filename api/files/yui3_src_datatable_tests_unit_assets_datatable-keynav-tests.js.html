@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/datatable/tests/unit/assets/datatable-keynav-tests.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             YUI.add(&#x27;datatable-keynav-tests&#x27;, function(Y) {
@@ -1146,7 +1146,7 @@
                                     isTrue = Assert.isTrue,
                                     isNull = Assert.isNull,
                                     isNotNull = Assert.isNotNull,
-                            
+
                                     SPACE = 32,
                                     PGUP = 33,
                                     PGDN = 34,
@@ -1156,80 +1156,80 @@
                                     UP = 38,
                                     RIGHT = 39,
                                     DOWN = 40;
-                            
+
                             /***********  Please Read ****************************
-                            
+
                             It happens that the native DOM property &#x60;document.activeElement&#x60; is not always
                             reliable, not in all browsers (guess which?).  The only reliable way to
                             find out which element has the focus is to set listeners for the &#x60;focus&#x60; event.
-                            
+
                             Since &#x60;focus&#x60; does not bubble and since this is a test suite and not a final product,
                             individual listeners are set on each individual cell that might get the focus.
-                            
+
                             Also, some browsers (yes the same ones) don&#x27;t fire &#x60;focus&#x60; synchronously
                             but do so at the first idle moment.  This means that you have to pause execution
                             so the event can fire.  It can be done via &#x60;window.setTimeout&#x60; or, within a test
                             suite, using method &#x60;wait&#x60;.
-                            
+
                             That is why this &#x60;activeElement&#x60; variable exists.  It replaces the native
                             &#x60;document.activeElement&#x60;.
-                            
+
                             For any test that has to check which cell got the focus, you have to call
                             &#x60;setFocusListeners&#x60; first which will set all the listeners to track the cell
                             with the focus.
-                            
+
                             &#x60;setFocusListeners&#x60; is an asynchronous method since its first task is to
                             force the first &#x60;focus&#x60; event to get fired. To do that it calls the &#x60;blur&#x60;
                             method of the datatable instance before setting the listeners
                             and the&#x60;focus&#x60; method  after so as to pick the initial focused element.
                             Since the &#x60;focus&#x60; event is asynchronous, the &#x60;setFocusListeners&#x60; is forced
                             to be asynchronous as well.
-                            
+
                             Note that &#x60;fireKey&#x60; also needs to know which element has the focus so even
                             if the test doesn&#x27;t directly need to check the focused element, if you use
                             &#x60;fireKey&#x60; you also need to call &#x60;setFocusListeners.
-                            
+
                             */
-                            
+
                                 var activeElement,
                                     eventHandles,
                                     data = [];
-                            
+
                                 for (var i = 1; i &lt; 20; ++i) {
                                     data.push({a: &#x27;a&#x27; + i , b: &#x27;b&#x27; + i, c: &#x27;c&#x27; + i, d: &#x27;d&#x27; + i, e: &#x27;e&#x27; + i});
                                 }
                                 var makeDTScroll = function (config_arg ) {
                                     config_arg = config_arg || {};
-                            
+
                                     var basic_config = {
                                         columns: [&#x27;a&#x27;,&#x27;b&#x27;,&#x27;c&#x27;,&#x27;d&#x27;,&#x27;e&#x27;],
                                         data: data
                                     };
-                            
+
                                     return new Y.DataTable(Y.merge(basic_config,config_arg)).render(&#x27;#dtable&#x27;);
                                 };
-                            
+
                                 var makeDT = function (config_arg ) {
                                     config_arg = config_arg || {};
-                            
+
                                     var basic_config = {
                                             columns: [&#x27;a&#x27;,&#x27;b&#x27;,&#x27;c&#x27;,&#x27;d&#x27;,&#x27;e&#x27;],
                                             data: data
                                         },
                                         DT = Y.Base.create(&#x27;datatable&#x27;, Y.DataTable.Base, [Y.DataTable.KeyNav]);
-                            
+
                                     return new DT(Y.merge(basic_config,config_arg)).render(&#x27;#dtable&#x27;);
                                 };
-                            
+
                                 var fireKey = function( key, opts) {
                                     opts = Y.merge({keyCode: key}, opts);
-                            
+
                                     activeElement.simulate(&#x27;keydown&#x27;, opts);
                                     activeElement.simulate(&#x27;keypress&#x27;, opts);
                                     activeElement.simulate(&#x27;keyup&#x27;, opts);
                                 };
-                            
-                            
+
+
                                 var setFocusListeners = function (dt, callback) {
                                     var self = this;
                                     dt.blur();
@@ -1244,12 +1244,12 @@
                                         self.wait(callback, 1);
                                     }, 1);
                                 };
-                            
+
                                 var dropFocusListeners = function () {
                                     eventHandles &amp;&amp; eventHandles.detach &amp;&amp; eventHandles.detach();
                                     eventHandles = null;
                                 };
-                            
+
                                 var moveAndCheck = function (dt, sequence) {
                                     var seq = sequence.slice(0),
                                         step = seq.shift(),
@@ -1267,14 +1267,14 @@
                                         };
                                     setFocusListeners.call(this, dt, doStep);
                                 };
-                            
-                            
-                            
-                            
-                            
+
+
+
+
+
                                 suite.add(new Y.Test.Case({
                                     name: &quot;Moving about&quot;,
-                            
+
                                     _moveAbout: function (dt) {
                                         moveAndCheck.call(this, dt,[
                                             /*
@@ -1306,16 +1306,16 @@
                                             [PGDN,&#x27;d19&#x27;,16],
                                             [DOWN,&#x27;d19&#x27;,17]
                                         ]);
-                            
+
                                     },
-                            
+
                                     &quot;test moving about normal DT&quot;: function () {
                                         var dt = makeDT();
-                            
+
                                         this._moveAbout(dt);
                                     },
-                            
-                            
+
+
                                     &quot;test moving about scrollable DT&quot;: function () {
                                         var dt = makeDTScroll({
                                             scrollable: &#x27;xy&#x27;,
@@ -1324,7 +1324,7 @@
                                         });
                                         this._moveAbout(dt);
                                     },
-                            
+
                                     &quot;test moving about excluding headers&quot;: function () {
                                         var dt = makeDT({keyIntoHeaders: false});
                                         moveAndCheck.call(this, dt,[
@@ -1335,11 +1335,11 @@
                                         ]);
                                     }
                                 }));
-                            
-                            
+
+
                                 suite.add(new Y.Test.Case({
                                     name: &quot;Various features&quot;,
-                            
+
                                     setUp: function () {
                                         this.dt = makeDT();
                                     },
@@ -1351,10 +1351,10 @@
                                         }
                                         dropFocusListeners();
                                     },
-                            
+
                                     &#x27;test click on cells&#x27;: function () {
                                         var dt = this.dt;
-                            
+
                                         var td = Y.all(&#x27;.yui3-datatable-col-c&#x27;).item(2);
                                         isNotNull(td);
                                         setFocusListeners.call(this, dt, function () {
@@ -1363,7 +1363,7 @@
                                             areSame(td, activeElement, &#x27;clicked cell should be activeElement&#x27;);
                                         });
                                     },
-                            
+
                                     &#x27;test add function to keyActions&#x27;: function () {
                                         var dt = this.dt,
                                             eventFacade = null,
@@ -1380,7 +1380,7 @@
                                             areSame(dt, self);
                                         });
                                     },
-                            
+
                                     &#x27;test add event to keyActions&#x27;: function () {
                                         var dt = this.dt,
                                             ev = null,
@@ -1388,7 +1388,7 @@
                                             self = null,
                                             ch = &#x27;a&#x27;.charCodeAt(0);
                                         dt.keyActions[ch] = &#x27;someEvent&#x27;;
-                            
+
                                         dt.on(&#x27;someEvent&#x27;, function (e,e1) {
                                             ev = e;
                                             ev1 = e1;
@@ -1404,7 +1404,7 @@
                                             areSame(dt, self);
                                         });
                                     },
-                            
+
                                     &#x27;test add to keyActions with modifier&#x27;: function () {
                                         var dt = this.dt,
                                             eventFacade = null,
@@ -1421,11 +1421,11 @@
                                         });
                                     }
                                 }));
-                            
-                            
+
+
                                 suite.add(new Y.Test.Case({
                                     name: &quot;nested headers&quot;,
-                            
+
                                     &#x27;test cell focusing&#x27;: function () {
                                         var dt =  makeDT({
                                             columns: [
@@ -1442,13 +1442,13 @@
                                                 ]}
                                             ]
                                         });
-                            
+
                                         dt.set(&#x27;focusedCell&#x27;, dt.getCell([1,1]));
                                         dt.set(&#x27;focusedCell&#x27;, null);
                                         dt.focus();
                                         Y.Assert.areSame(&#x27;abc&#x27;, dt.get(&#x27;focusedCell&#x27;).get(&#x27;text&#x27;));
                                     },
-                            
+
                                     &#x27;test nested headers&#x27;: function () {
                                         var dt =  makeDT({
                                             columns: [
@@ -1465,7 +1465,7 @@
                                                 ]}
                                             ]
                                         });
-                            
+
                                         moveAndCheck.call(this, dt,[
                                             [null, &#x27;abc&#x27;, 1],
                                             [DOWN, &#x27;ab&#x27;,  2],
@@ -1502,13 +1502,13 @@
                                         ]);
                                     }
                                 }));
-                            
-                            
+
+
                                 Y.Test.Runner.add(suite);
-                            
-                            
+
+
                             },&#x27;&#x27;, {requires: [ &#x27;test&#x27;, &#x27;datatable-keynav&#x27;, &#x27;node-event-simulate&#x27;,&#x27;datatable-scroll&#x27;, &quot;base-build&quot;, &#x27;event&#x27;]});
-                            
+
                                 </pre>
                             </div>
                         </div>

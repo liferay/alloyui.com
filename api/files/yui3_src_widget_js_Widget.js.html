@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/widget/js/Widget.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1140,7 +1140,7 @@
                              * @module widget
                              * @main widget
                              */
-                            
+
                             /**
                              * Provides the base Widget class
                              *
@@ -1149,16 +1149,16 @@
                              */
                             var L = Y.Lang,
                                 Node = Y.Node,
-                            
+
                                 ClassNameManager = Y.ClassNameManager,
-                            
+
                                 _getClassName = ClassNameManager.getClassName,
                                 _getWidgetClassName,
-                            
+
                                 _toInitialCap = Y.cached(function(str) {
                                     return str.substring(0, 1).toUpperCase() + str.substring(1);
                                 }),
-                            
+
                                 // K-Weight, IE GC optimizations
                                 CONTENT = &quot;content&quot;,
                                 VISIBLE = &quot;visible&quot;,
@@ -1183,24 +1183,24 @@
                                 DIV = &quot;&lt;div&gt;&lt;/div&gt;&quot;,
                                 CHANGE = &quot;Change&quot;,
                                 LOADING = &quot;loading&quot;,
-                            
+
                                 _UISET = &quot;_uiSet&quot;,
-                            
+
                                 EMPTY_STR = &quot;&quot;,
                                 EMPTY_FN = function() {},
-                            
+
                                 TRUE = true,
                                 FALSE = false,
-                            
+
                                 UI,
                                 ATTRS = {},
                                 UI_ATTRS = [VISIBLE, DISABLED, HEIGHT, WIDTH, FOCUSED, TAB_INDEX],
-                            
+
                                 WEBKIT = Y.UA.webkit,
-                            
+
                                 // Widget nodeid-to-instance map.
                                 _instances = {};
-                            
+
                             /**
                              * A base class for widgets, providing:
                              * &lt;ul&gt;
@@ -1220,23 +1220,23 @@
                              */
                             function Widget(config) {
                                 Y.log(&#x27;constructor called&#x27;, &#x27;life&#x27;, &#x27;widget&#x27;);
-                            
+
                                 // kweight
                                 var widget = this,
                                     parentNode,
                                     render,
                                     constructor = widget.constructor;
-                            
+
                                 widget._strs = {};
                                 widget._cssPrefix = constructor.CSS_PREFIX || _getClassName(constructor.NAME.toLowerCase());
-                            
+
                                 // We need a config for HTML_PARSER to work.
                                 config = config || {};
-                            
+
                                 Widget.superclass.constructor.call(widget, config);
-                            
+
                                 render = widget.get(RENDER);
-                            
+
                                 if (render) {
                                     // Render could be a node or boolean
                                     if (render !== TRUE) {
@@ -1245,7 +1245,7 @@
                                     widget.render(parentNode);
                                 }
                             }
-                            
+
                             /**
                              * Static property provides a string to identify the class.
                              * &lt;p&gt;
@@ -1258,7 +1258,7 @@
                              * @static
                              */
                             Widget.NAME = &quot;widget&quot;;
-                            
+
                             /**
                              * Constant used to identify state changes originating from
                              * the DOM (as opposed to the JavaScript model).
@@ -1269,7 +1269,7 @@
                              * @final
                              */
                             UI = Widget.UI_SRC = &quot;ui&quot;;
-                            
+
                             /**
                              * Static property used to define the default attribute
                              * configuration for the Widget.
@@ -1279,21 +1279,21 @@
                              * @static
                              */
                             Widget.ATTRS = ATTRS;
-                            
+
                             // Trying to optimize kweight by setting up attrs this way saves about 0.4K min&#x27;d
-                            
+
                             /**
                              * @attribute id
                              * @writeOnce
                              * @default Generated using guid()
                              * @type String
                              */
-                            
+
                             ATTRS[ID] = {
                                 valueFn: &quot;_guid&quot;,
                                 writeOnce: TRUE
                             };
-                            
+
                             /**
                              * Flag indicating whether or not this Widget
                              * has been through the render lifecycle phase.
@@ -1307,7 +1307,7 @@
                                 value:FALSE,
                                 readOnly: TRUE
                             };
-                            
+
                             /**
                              * @attribute boundingBox
                              * @description The outermost DOM node for the Widget, used for sizing and positioning
@@ -1321,7 +1321,7 @@
                                 setter: &quot;_setBB&quot;,
                                 writeOnce: TRUE
                             };
-                            
+
                             /**
                              * @attribute contentBox
                              * @description A DOM node that is a direct descendant of a Widget&#x27;s bounding box that
@@ -1334,7 +1334,7 @@
                                 setter: &quot;_setCB&quot;,
                                 writeOnce: TRUE
                             };
-                            
+
                             /**
                              * @attribute tabIndex
                              * @description Number (between -32767 to 32767) indicating the widget&#x27;s
@@ -1350,7 +1350,7 @@
                                 value: null,
                                 validator: &quot;_validTabIndex&quot;
                             };
-                            
+
                             /**
                              * @attribute focused
                              * @description Boolean indicating if the Widget, or one of its descendants,
@@ -1363,7 +1363,7 @@
                                 value: FALSE,
                                 readOnly:TRUE
                             };
-                            
+
                             /**
                              * @attribute disabled
                              * @description Boolean indicating if the Widget should be disabled. The disabled implementation
@@ -1374,7 +1374,7 @@
                             ATTRS[DISABLED] = {
                                 value: FALSE
                             };
-                            
+
                             /**
                              * @attribute visible
                              * @description Boolean indicating whether or not the Widget is visible.
@@ -1384,7 +1384,7 @@
                             ATTRS[VISIBLE] = {
                                 value: TRUE
                             };
-                            
+
                             /**
                              * @attribute height
                              * @description String with units, or number, representing the height of the Widget. If a number is provided,
@@ -1395,7 +1395,7 @@
                             ATTRS[HEIGHT] = {
                                 value: EMPTY_STR
                             };
-                            
+
                             /**
                              * @attribute width
                              * @description String with units, or number, representing the width of the Widget. If a number is provided,
@@ -1406,7 +1406,7 @@
                             ATTRS[WIDTH] = {
                                 value: EMPTY_STR
                             };
-                            
+
                             /**
                              * @attribute strings
                              * @description Collection of strings used to label elements of the Widget&#x27;s UI.
@@ -1418,7 +1418,7 @@
                                 setter: &quot;_strSetter&quot;,
                                 getter: &quot;_strGetter&quot;
                             };
-                            
+
                             /**
                              * Whether or not to render the widget automatically after init, and optionally, to which parent node.
                              *
@@ -1430,7 +1430,7 @@
                                 value:FALSE,
                                 writeOnce:TRUE
                             };
-                            
+
                             /**
                              * The css prefix which the static Widget.getClassName method should use when constructing class names
                              *
@@ -1441,7 +1441,7 @@
                              * @static
                              */
                             Widget.CSS_PREFIX = _getClassName(Widget.NAME.toLowerCase());
-                            
+
                             /**
                              * Generate a standard prefixed classname for the Widget, prefixed by the default prefix defined
                              * by the &lt;code&gt;Y.config.classNamePrefix&lt;/code&gt; attribute used by &lt;code&gt;ClassNameManager&lt;/code&gt; and
@@ -1459,9 +1459,9 @@
                                 // arguments needs to be array&#x27;fied to concat
                                 return _getClassName.apply(ClassNameManager, [Widget.CSS_PREFIX].concat(Y.Array(arguments), true));
                             };
-                            
+
                             _getWidgetClassName = Widget.getClassName;
-                            
+
                             /**
                              * Returns the widget instance whose bounding box contains, or is, the given node.
                              * &lt;p&gt;
@@ -1477,7 +1477,7 @@
                             Widget.getByNode = function(node) {
                                 var widget,
                                     widgetMarker = _getWidgetClassName();
-                            
+
                                 node = Node.one(node);
                                 if (node) {
                                     node = node.ancestor(&quot;.&quot; + widgetMarker, true);
@@ -1485,12 +1485,12 @@
                                         widget = _instances[Y.stamp(node, true)];
                                     }
                                 }
-                            
+
                                 return widget || null;
                             };
-                            
+
                             Y.extend(Widget, Y.Base, {
-                            
+
                                 /**
                                  * Returns a class name prefixed with the the value of the
                                  * &lt;code&gt;YUI.config.classNamePrefix&lt;/code&gt; attribute + the instances &lt;code&gt;NAME&lt;/code&gt; property.
@@ -1512,7 +1512,7 @@
                                 getClassName: function () {
                                     return _getClassName.apply(ClassNameManager, [this._cssPrefix].concat(Y.Array(arguments), true));
                                 },
-                            
+
                                 /**
                                  * Initializer lifecycle implementation for the Widget class. Registers the
                                  * widget instance, and runs through the Widget&#x27;s HTML_PARSER definition.
@@ -1523,13 +1523,13 @@
                                  */
                                 initializer: function(config) {
                                     Y.log(&#x27;initializer called&#x27;, &#x27;life&#x27;, &#x27;widget&#x27;);
-                            
+
                                     var bb = this.get(BOUNDING_BOX);
-                            
+
                                     if (bb instanceof Node) {
                                         this._mapInstance(Y.stamp(bb));
                                     }
-                            
+
                                     /**
                                      * Notification event, which widget implementations can fire, when
                                      * they change the content of the widget. This event has no default
@@ -1542,7 +1542,7 @@
                                      * @param {EventFacade} e The Event Facade
                                      */
                                 },
-                            
+
                                 /**
                                  * Utility method used to add an entry to the boundingBox id to instance map.
                                  *
@@ -1555,7 +1555,7 @@
                                 _mapInstance : function(id) {
                                     _instances[id] = this;
                                 },
-                            
+
                                 /**
                                  * Destructor lifecycle implementation for the Widget class. Purges events attached
                                  * to the bounding box and content box, removes them from the DOM and removes
@@ -1566,21 +1566,21 @@
                                  */
                                 destructor: function() {
                                     Y.log(&#x27;destructor called&#x27;, &#x27;life&#x27;, &#x27;widget&#x27;);
-                            
+
                                     var boundingBox = this.get(BOUNDING_BOX),
                                         bbGuid;
-                            
+
                                     if (boundingBox instanceof Node) {
                                         bbGuid = Y.stamp(boundingBox,true);
-                            
+
                                         if (bbGuid in _instances) {
                                             delete _instances[bbGuid];
                                         }
-                            
+
                                         this._destroyBox();
                                     }
                                 },
-                            
+
                                 /**
                                  * &lt;p&gt;
                                  * Destroy lifecycle method. Fires the destroy
@@ -1604,7 +1604,7 @@
                                     this._destroyAllNodes = destroyAllNodes;
                                     return Widget.superclass.destroy.apply(this);
                                 },
-                            
+
                                 /**
                                  * Removes and destroys the widgets rendered boundingBox, contentBox,
                                  * and detaches bound UI events.
@@ -1613,27 +1613,27 @@
                                  * @protected
                                  */
                                 _destroyBox : function() {
-                            
+
                                     var boundingBox = this.get(BOUNDING_BOX),
                                         contentBox = this.get(CONTENT_BOX),
                                         deep = this._destroyAllNodes,
                                         same;
-                            
+
                                     same = boundingBox &amp;&amp; boundingBox.compareTo(contentBox);
-                            
+
                                     if (this.UI_EVENTS) {
                                         this._destroyUIEvents();
                                     }
-                            
+
                                     this._unbindUI(boundingBox);
-                            
+
                                     if (contentBox) {
                                         if (deep) {
                                             contentBox.empty();
                                         }
                                         contentBox.remove(TRUE);
                                     }
-                            
+
                                     if (!same) {
                                         if (deep) {
                                             boundingBox.empty();
@@ -1641,7 +1641,7 @@
                                         boundingBox.remove(TRUE);
                                     }
                                 },
-                            
+
                                 /**
                                  * Establishes the initial DOM for the widget. Invoking this
                                  * method will lead to the creating of all DOM elements for
@@ -1670,7 +1670,7 @@
                                  */
                                 render: function(parentNode) {
                                     if (this.get(DESTROYED)) { Y.log(&quot;Render failed; widget has been destroyed&quot;, &quot;error&quot;, &quot;widget&quot;); }
-                            
+
                                     if (!this.get(DESTROYED) &amp;&amp; !this.get(RENDERED)) {
                                          /**
                                           * Lifecycle event for the render phase, fired prior to rendering the UI
@@ -1694,12 +1694,12 @@
                                             defaultTargetOnly:TRUE,
                                             defaultFn: this._defRenderFn
                                         });
-                            
+
                                         this.fire(RENDER, {parentNode: (parentNode) ? Node.one(parentNode) : null});
                                     }
                                     return this;
                                 },
-                            
+
                                 /**
                                  * Default render handler
                                  *
@@ -1710,13 +1710,13 @@
                                  */
                                 _defRenderFn : function(e) {
                                     this._parentNode = e.parentNode;
-                            
+
                                     this.renderer();
                                     this._set(RENDERED, TRUE);
-                            
+
                                     this._removeLoadingClassNames();
                                 },
-                            
+
                                 /**
                                  * Creates DOM (or manipulates DOM for progressive enhancement)
                                  * This method is invoked by render() and is not chained
@@ -1729,17 +1729,17 @@
                                 renderer: function() {
                                     // kweight
                                     var widget = this;
-                            
+
                                     widget._renderUI();
                                     widget.renderUI();
-                            
+
                                     widget._bindUI();
                                     widget.bindUI();
-                            
+
                                     widget._syncUI();
                                     widget.syncUI();
                                 },
-                            
+
                                 /**
                                  * Configures/Sets up listeners to bind Widget State to UI/DOM
                                  *
@@ -1750,7 +1750,7 @@
                                  * @protected
                                  */
                                 bindUI: EMPTY_FN,
-                            
+
                                 /**
                                  * Adds nodes to the DOM
                                  *
@@ -1761,7 +1761,7 @@
                                  * @protected
                                  */
                                 renderUI: EMPTY_FN,
-                            
+
                                 /**
                                  * Refreshes the rendered UI, based on Widget State
                                  *
@@ -1773,7 +1773,7 @@
                                  *
                                  */
                                 syncUI: EMPTY_FN,
-                            
+
                                 /**
                                  * @method hide
                                  * @description Hides the Widget by setting the &quot;visible&quot; attribute to &quot;false&quot;.
@@ -1782,7 +1782,7 @@
                                 hide: function() {
                                     return this.set(VISIBLE, FALSE);
                                 },
-                            
+
                                 /**
                                  * @method show
                                  * @description Shows the Widget by setting the &quot;visible&quot; attribute to &quot;true&quot;.
@@ -1791,7 +1791,7 @@
                                 show: function() {
                                     return this.set(VISIBLE, TRUE);
                                 },
-                            
+
                                 /**
                                  * @method focus
                                  * @description Causes the Widget to receive the focus by setting the &quot;focused&quot;
@@ -1801,7 +1801,7 @@
                                 focus: function () {
                                     return this._set(FOCUSED, TRUE);
                                 },
-                            
+
                                 /**
                                  * @method blur
                                  * @description Causes the Widget to lose focus by setting the &quot;focused&quot; attribute
@@ -1811,7 +1811,7 @@
                                 blur: function () {
                                     return this._set(FOCUSED, FALSE);
                                 },
-                            
+
                                 /**
                                  * @method enable
                                  * @description Set the Widget&#x27;s &quot;disabled&quot; attribute to &quot;false&quot;.
@@ -1820,7 +1820,7 @@
                                 enable: function() {
                                     return this.set(DISABLED, FALSE);
                                 },
-                            
+
                                 /**
                                  * @method disable
                                  * @description Set the Widget&#x27;s &quot;disabled&quot; attribute to &quot;true&quot;.
@@ -1829,7 +1829,7 @@
                                 disable: function() {
                                     return this.set(DISABLED, TRUE);
                                 },
-                            
+
                                 /**
                                  * @method _uiSizeCB
                                  * @protected
@@ -1838,7 +1838,7 @@
                                 _uiSizeCB : function(expand) {
                                     this.get(CONTENT_BOX).toggleClass(_getWidgetClassName(CONTENT, &quot;expanded&quot;), expand);
                                 },
-                            
+
                                 /**
                                  * Helper method to collect the boundingBox and contentBox and append to the provided parentNode, if not
                                  * already a child. The owner document of the boundingBox, or the owner document of the contentBox will be used
@@ -1852,22 +1852,22 @@
                                  * the contentBox are not currently in the document, the widget will be rendered to the current document&#x27;s body.
                                  */
                                 _renderBox: function(parentNode) {
-                            
+
                                     // TODO: Performance Optimization [ More effective algo to reduce Node refs, compares, replaces? ]
-                            
+
                                     var widget = this, // kweight
                                         contentBox = widget.get(CONTENT_BOX),
                                         boundingBox = widget.get(BOUNDING_BOX),
                                         srcNode = widget.get(SRC_NODE),
                                         defParentNode = widget.DEF_PARENT_NODE,
-                            
+
                                         doc = (srcNode &amp;&amp; srcNode.get(OWNER_DOCUMENT)) || boundingBox.get(OWNER_DOCUMENT) || contentBox.get(OWNER_DOCUMENT);
-                            
+
                                     // If srcNode (assume it&#x27;s always in doc), have contentBox take its place (widget render responsible for re-use of srcNode contents)
                                     if (srcNode &amp;&amp; !srcNode.compareTo(contentBox) &amp;&amp; !contentBox.inDoc(doc)) {
                                         srcNode.replace(contentBox);
                                     }
-                            
+
                                     if (!boundingBox.compareTo(contentBox.get(PARENT_NODE)) &amp;&amp; !boundingBox.compareTo(contentBox)) {
                                         // If contentBox box is already in the document, have boundingBox box take it&#x27;s place
                                         if (contentBox.inDoc(doc)) {
@@ -1875,16 +1875,16 @@
                                         }
                                         boundingBox.appendChild(contentBox);
                                     }
-                            
+
                                     parentNode = parentNode || (defParentNode &amp;&amp; Node.one(defParentNode));
-                            
+
                                     if (parentNode) {
                                         parentNode.appendChild(boundingBox);
                                     } else if (!boundingBox.inDoc(doc)) {
                                         Node.one(BODY).insert(boundingBox, 0);
                                     }
                                 },
-                            
+
                                 /**
                                  * Setter for the boundingBox attribute
                                  *
@@ -1896,7 +1896,7 @@
                                 _setBB: function(node) {
                                     return this._setBox(this.get(ID), node, this.BOUNDING_TEMPLATE, true);
                                 },
-                            
+
                                 /**
                                  * Setter for the contentBox attribute
                                  *
@@ -1908,7 +1908,7 @@
                                 _setCB: function(node) {
                                     return (this.CONTENT_TEMPLATE === null) ? this.get(BOUNDING_BOX) : this._setBox(null, node, this.CONTENT_TEMPLATE, false);
                                 },
-                            
+
                                 /**
                                  * Returns the default value for the boundingBox attribute.
                                  *
@@ -1924,10 +1924,10 @@
                                 _defaultBB : function() {
                                     var node = this.get(SRC_NODE),
                                         nullCT = (this.CONTENT_TEMPLATE === null);
-                            
+
                                     return ((node &amp;&amp; nullCT) ? node : null);
                                 },
-                            
+
                                 /**
                                  * Returns the default value for the contentBox attribute.
                                  *
@@ -1940,7 +1940,7 @@
                                 _defaultCB : function(node) {
                                     return this.get(SRC_NODE) || null;
                                 },
-                            
+
                                 /**
                                  * Helper method to set the bounding/content box, or create it from
                                  * the provided template if not found.
@@ -1955,26 +1955,26 @@
                                  * @return {Node} The node
                                  */
                                 _setBox : function(id, node, template, isBounding) {
-                            
+
                                     node = Node.one(node);
-                            
+
                                     if (!node) {
                                         node = Node.create(template);
-                            
+
                                         if (isBounding) {
                                             this._bbFromTemplate = true;
                                         } else {
                                             this._cbFromTemplate = true;
                                         }
                                     }
-                            
+
                                     if (!node.get(ID)) {
                                         node.set(ID, id || Y.guid());
                                     }
-                            
+
                                     return node;
                                 },
-                            
+
                                 /**
                                  * Initializes the UI state for the Widget&#x27;s bounding/content boxes.
                                  *
@@ -1985,7 +1985,7 @@
                                     this._renderBoxClassNames();
                                     this._renderBox(this._parentNode);
                                 },
-                            
+
                                 /**
                                  * Applies standard class names to the boundingBox and contentBox
                                  *
@@ -1997,19 +1997,19 @@
                                         cl,
                                         boundingBox = this.get(BOUNDING_BOX),
                                         i;
-                            
+
                                     boundingBox.addClass(_getWidgetClassName());
-                            
+
                                     // Start from Widget Sub Class
                                     for (i = classes.length-3; i &gt;= 0; i--) {
                                         cl = classes[i];
                                         boundingBox.addClass(cl.CSS_PREFIX || _getClassName(cl.NAME.toLowerCase()));
                                     }
-                            
+
                                     // Use instance based name for content box
                                     this.get(CONTENT_BOX).addClass(this.getClassName(CONTENT));
                                 },
-                            
+
                                 /**
                                  * Removes class names representative of the widget&#x27;s loading state from
                                  * the boundingBox.
@@ -2018,19 +2018,19 @@
                                  * @protected
                                  */
                                 _removeLoadingClassNames: function () {
-                            
+
                                     var boundingBox = this.get(BOUNDING_BOX),
                                         contentBox = this.get(CONTENT_BOX),
                                         instClass = this.getClassName(LOADING),
                                         widgetClass = _getWidgetClassName(LOADING);
-                            
+
                                     boundingBox.removeClass(widgetClass)
                                                .removeClass(instClass);
-                            
+
                                     contentBox.removeClass(widgetClass)
                                               .removeClass(instClass);
                                 },
-                            
+
                                 /**
                                  * Sets up DOM and CustomEvent listeners for the widget.
                                  *
@@ -2041,7 +2041,7 @@
                                     this._bindAttrUI(this._UI_ATTRS.BIND);
                                     this._bindDOM();
                                 },
-                            
+
                                 /**
                                  * @method _unbindUI
                                  * @protected
@@ -2049,7 +2049,7 @@
                                 _unbindUI : function(boundingBox) {
                                     this._unbindDOM(boundingBox);
                                 },
-                            
+
                                 /**
                                  * Sets up DOM listeners, on elements rendered by the widget.
                                  *
@@ -2059,7 +2059,7 @@
                                 _bindDOM : function() {
                                     var oDocument = this.get(BOUNDING_BOX).get(OWNER_DOCUMENT),
                                         focusHandle = Widget._hDocFocus;
-                            
+
                                     // Shared listener across all Widgets.
                                     if (!focusHandle) {
                                         focusHandle = Widget._hDocFocus = oDocument.on(&quot;focus&quot;, this._onDocFocus, this);
@@ -2067,10 +2067,10 @@
                                             count: 0
                                         };
                                     }
-                            
+
                                     focusHandle.listeners[Y.stamp(this, true)] = true;
                                     focusHandle.listeners.count++;
-                            
+
                                     //	Fix for Webkit:
                                     //	Document doesn&#x27;t receive focus in Webkit when the user mouses
                                     //	down on it, so the &quot;focused&quot; attribute won&#x27;t get set to the
@@ -2080,38 +2080,38 @@
                                         this._hDocMouseDown = oDocument.on(&quot;mousedown&quot;, this._onDocMouseDown, this);
                                     }
                                 },
-                            
+
                                 /**
                                  * @method _unbindDOM
                                  * @protected
                                  */
                                 _unbindDOM : function(boundingBox) {
-                            
+
                                     var focusHandle = Widget._hDocFocus,
                                         yuid = Y.stamp(this, true),
                                         focusListeners,
                                         mouseHandle = this._hDocMouseDown;
-                            
+
                                     if (focusHandle) {
-                            
+
                                         focusListeners = focusHandle.listeners;
-                            
+
                                         if (focusListeners[yuid]) {
                                             delete focusListeners[yuid];
                                             focusListeners.count--;
                                         }
-                            
+
                                         if (focusListeners.count === 0) {
                                             focusHandle.detach();
                                             Widget._hDocFocus = null;
                                         }
                                     }
-                            
+
                                     if (WEBKIT &amp;&amp; mouseHandle) {
                                         mouseHandle.detach();
                                     }
                                 },
-                            
+
                                 /**
                                  * Updates the widget UI to reflect the attribute state.
                                  *
@@ -2121,7 +2121,7 @@
                                 _syncUI: function() {
                                     this._syncAttrUI(this._UI_ATTRS.SYNC);
                                 },
-                            
+
                                 /**
                                  * Sets the height on the widget&#x27;s bounding box element
                                  *
@@ -2133,7 +2133,7 @@
                                     this._uiSetDim(HEIGHT, val);
                                     this._uiSizeCB((val !== EMPTY_STR &amp;&amp; val !== AUTO));
                                 },
-                            
+
                                 /**
                                  * Sets the width on the widget&#x27;s bounding box element
                                  *
@@ -2144,7 +2144,7 @@
                                 _uiSetWidth: function(val) {
                                     this._uiSetDim(WIDTH, val);
                                 },
-                            
+
                                 /**
                                  * @method _uiSetDim
                                  * @private
@@ -2154,7 +2154,7 @@
                                 _uiSetDim: function(dimension, val) {
                                     this.get(BOUNDING_BOX).setStyle(dimension, L.isNumber(val) ? val + this.DEF_UNIT : val);
                                 },
-                            
+
                                 /**
                                  * Sets the visible state for the UI
                                  *
@@ -2165,7 +2165,7 @@
                                 _uiSetVisible: function(val) {
                                     this.get(BOUNDING_BOX).toggleClass(this.getClassName(HIDDEN), !val);
                                 },
-                            
+
                                 /**
                                  * Sets the disabled state for the UI
                                  *
@@ -2176,7 +2176,7 @@
                                 _uiSetDisabled: function(val) {
                                     this.get(BOUNDING_BOX).toggleClass(this.getClassName(DISABLED), val);
                                 },
-                            
+
                                 /**
                                  * Sets the focused state for the UI
                                  *
@@ -2189,7 +2189,7 @@
                                 _uiSetFocused: function(val, src) {
                                      var boundingBox = this.get(BOUNDING_BOX);
                                      boundingBox.toggleClass(this.getClassName(FOCUSED), val);
-                            
+
                                      if (src !== UI) {
                                         if (val) {
                                             boundingBox.focus();
@@ -2198,7 +2198,7 @@
                                         }
                                      }
                                 },
-                            
+
                                 /**
                                  * Set the tabIndex on the widget&#x27;s rendered UI
                                  *
@@ -2208,14 +2208,14 @@
                                  */
                                 _uiSetTabIndex: function(index) {
                                     var boundingBox = this.get(BOUNDING_BOX);
-                            
+
                                     if (L.isNumber(index)) {
                                         boundingBox.set(TAB_INDEX, index);
                                     } else {
                                         boundingBox.removeAttribute(TAB_INDEX);
                                     }
                                 },
-                            
+
                                 /**
                                  * @method _onDocMouseDown
                                  * @description &quot;mousedown&quot; event handler for the owner document of the
@@ -2228,7 +2228,7 @@
                                         this._onDocFocus(evt);
                                     }
                                 },
-                            
+
                                 /**
                                  * DOM focus event handler, used to sync the state of the Widget with the DOM
                                  *
@@ -2239,22 +2239,22 @@
                                 _onDocFocus: function (evt) {
                                     var widget = Widget.getByNode(evt.target),
                                         activeWidget = Widget._active;
-                            
+
                                     if (activeWidget &amp;&amp; (activeWidget !== widget)) {
                                         activeWidget._domFocus = false;
                                         activeWidget._set(FOCUSED, false, {src:UI});
-                            
+
                                         Widget._active = null;
                                     }
-                            
+
                                     if (widget) {
                                         widget._domFocus = true;
                                         widget._set(FOCUSED, true, {src:UI});
-                            
+
                                         Widget._active = widget;
                                     }
                                 },
-                            
+
                                 /**
                                  * Generic toString implementation for all widgets.
                                  *
@@ -2265,7 +2265,7 @@
                                     // Using deprecated name prop for kweight squeeze.
                                     return this.name + &quot;[&quot; + this.get(ID) + &quot;]&quot;;
                                 },
-                            
+
                                 /**
                                  * Default unit to use for dimension values
                                  *
@@ -2273,7 +2273,7 @@
                                  * @type String
                                  */
                                 DEF_UNIT : &quot;px&quot;,
-                            
+
                                 /**
                                  * Default node to render the bounding box to. If not set,
                                  * will default to the current document body.
@@ -2282,7 +2282,7 @@
                                  * @type String | Node
                                  */
                                 DEF_PARENT_NODE : null,
-                            
+
                                 /**
                                  * Property defining the markup template for content box. If your Widget doesn&#x27;t
                                  * need the dual boundingBox/contentBox structure, set CONTENT_TEMPLATE to null,
@@ -2292,7 +2292,7 @@
                                  * @type String
                                  */
                                 CONTENT_TEMPLATE : DIV,
-                            
+
                                 /**
                                  * Property defining the markup template for bounding box.
                                  *
@@ -2300,7 +2300,7 @@
                                  * @type String
                                  */
                                 BOUNDING_TEMPLATE : DIV,
-                            
+
                                 /**
                                  * @method _guid
                                  * @protected
@@ -2308,7 +2308,7 @@
                                 _guid : function() {
                                     return Y.guid();
                                 },
-                            
+
                                 /**
                                  * @method _validTabIndex
                                  * @protected
@@ -2317,7 +2317,7 @@
                                 _validTabIndex : function (tabIndex) {
                                     return (L.isNumber(tabIndex) || L.isNull(tabIndex));
                                 },
-                            
+
                                 /**
                                  * Binds after listeners for the list of attributes provided
                                  *
@@ -2328,12 +2328,12 @@
                                 _bindAttrUI : function(attrs) {
                                     var i,
                                         l = attrs.length;
-                            
+
                                     for (i = 0; i &lt; l; i++) {
                                         this.after(attrs[i] + CHANGE, this._setAttrUI);
                                     }
                                 },
-                            
+
                                 /**
                                  * Invokes the _uiSet&amp;#61;ATTR NAME&amp;#62; method for the list of attributes provided
                                  *
@@ -2348,7 +2348,7 @@
                                         this[_UISET + _toInitialCap(attr)](this.get(attr));
                                     }
                                 },
-                            
+
                                 /**
                                  * @method _setAttrUI
                                  * @private
@@ -2359,7 +2359,7 @@
                                         this[_UISET + _toInitialCap(e.attrName)](e.newVal, e.src);
                                     }
                                 },
-                            
+
                                 /**
                                  * The default setter for the strings attribute. Merges partial sets
                                  * into the full string set, to allow users to partial sets of strings
@@ -2372,7 +2372,7 @@
                                 _strSetter : function(strings) {
                                     return Y.merge(this.get(STRINGS), strings);
                                 },
-                            
+
                                 /**
                                  * Helper method to get a specific string value
                                  *
@@ -2384,7 +2384,7 @@
                                 getString : function(key) {
                                     return this.get(STRINGS)[key];
                                 },
-                            
+
                                 /**
                                  * Helper method to get the complete set of strings for the widget
                                  *
@@ -2396,7 +2396,7 @@
                                 getStrings : function() {
                                     return this.get(STRINGS);
                                 },
-                            
+
                                 /**
                                  * The lists of UI attributes to bind and sync for widget&#x27;s _bindUI and _syncUI implementations
                                  *
@@ -2409,9 +2409,9 @@
                                     SYNC: UI_ATTRS
                                 }
                             });
-                            
+
                             Y.Widget = Widget;
-                            
+
                                 </pre>
                             </div>
                         </div>

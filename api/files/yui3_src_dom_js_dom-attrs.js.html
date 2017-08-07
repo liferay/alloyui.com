@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/dom/js/dom-attrs.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1145,7 +1145,7 @@
                                 EMPTY_STRING = &#x27;&#x27;,
                                 addFeature = Y.Features.add,
                                 testFeature = Y.Features.test;
-                            
+
                             Y.mix(Y_DOM, {
                                 /**
                                  * Returns the text content of the HTMLElement.
@@ -1167,7 +1167,7 @@
                                         }
                                         return ret || &#x27;&#x27;;
                                     },
-                            
+
                                 /**
                                  * Sets the text content of the HTMLElement.
                                  * @method setText
@@ -1186,7 +1186,7 @@
                                             element.nodeValue = content;
                                         }
                                 },
-                            
+
                                 CUSTOM_ATTRIBUTES: (!documentElement.hasAttribute) ? { // IE &lt; 8
                                     &#x27;for&#x27;: &#x27;htmlFor&#x27;,
                                     &#x27;class&#x27;: &#x27;className&#x27;
@@ -1194,7 +1194,7 @@
                                     &#x27;htmlFor&#x27;: &#x27;for&#x27;,
                                     &#x27;className&#x27;: &#x27;class&#x27;
                                 },
-                            
+
                                 /**
                                  * Provides a normalized attribute interface.
                                  * @method setAttribute
@@ -1209,8 +1209,8 @@
                                     }
                                     else { Y.log(&#x27;bad input to setAttribute&#x27;, &#x27;warn&#x27;, &#x27;dom&#x27;); }
                                 },
-                            
-                            
+
+
                                 /**
                                  * Provides a normalized attribute interface.
                                  * @method getAttribute
@@ -1225,7 +1225,7 @@
                                         attr = Y_DOM.CUSTOM_ATTRIBUTES[attr] || attr;
                                         // BUTTON value issue for IE &lt; 8
                                         ret = (el.tagName === &quot;BUTTON&quot; &amp;&amp; attr === &#x27;value&#x27;) ? Y_DOM.getValue(el) : el.getAttribute(attr, ieAttr);
-                            
+
                                         if (ret === null) {
                                             ret = &#x27;&#x27;; // per DOM spec
                                         }
@@ -1233,37 +1233,37 @@
                                     else { Y.log(&#x27;bad input to getAttribute&#x27;, &#x27;warn&#x27;, &#x27;dom&#x27;); }
                                     return ret;
                                 },
-                            
+
                                 VALUE_SETTERS: {},
-                            
+
                                 VALUE_GETTERS: {},
-                            
+
                                 getValue: function(node) {
                                     var ret = &#x27;&#x27;, // TODO: return null?
                                         getter;
-                            
+
                                     if (node &amp;&amp; node[TAG_NAME]) {
                                         getter = Y_DOM.VALUE_GETTERS[node[TAG_NAME].toLowerCase()];
-                            
+
                                         if (getter) {
                                             ret = getter(node);
                                         } else {
                                             ret = node.value;
                                         }
                                     }
-                            
+
                                     // workaround for IE8 JSON stringify bug
                                     // which converts empty string values to null
                                     if (ret === EMPTY_STRING) {
                                         ret = EMPTY_STRING; // for real
                                     }
-                            
+
                                     return (typeof ret === &#x27;string&#x27;) ? ret : &#x27;&#x27;;
                                 },
-                            
+
                                 setValue: function(node, val) {
                                     var setter;
-                            
+
                                     if (node &amp;&amp; node[TAG_NAME]) {
                                         setter = Y_DOM.VALUE_SETTERS[node[TAG_NAME].toLowerCase()];
                                         val = (val === null) ? &#x27;&#x27; : val;
@@ -1274,10 +1274,10 @@
                                         }
                                     }
                                 },
-                            
+
                                 creators: {}
                             });
-                            
+
                             addFeature(&#x27;value-set&#x27;, &#x27;select&#x27;, {
                                 test: function() {
                                     var node = Y.config.doc.createElement(&#x27;select&#x27;);
@@ -1286,7 +1286,7 @@
                                     return (node.value &amp;&amp; node.value === &#x27;2&#x27;);
                                 }
                             });
-                            
+
                             if (!testFeature(&#x27;value-set&#x27;, &#x27;select&#x27;)) {
                                 Y_DOM.VALUE_SETTERS.select = function(node, val) {
                                     for (var i = 0, options = node.getElementsByTagName(&#x27;option&#x27;), option;
@@ -1299,13 +1299,13 @@
                                     }
                                 };
                             }
-                            
+
                             Y.mix(Y_DOM.VALUE_GETTERS, {
                                 button: function(node) {
                                     return (node.attributes &amp;&amp; node.attributes.value) ? node.attributes.value.value : &#x27;&#x27;;
                                 }
                             });
-                            
+
                             Y.mix(Y_DOM.VALUE_SETTERS, {
                                 // IE: node.value changes the button text, which should be handled via innerHTML
                                 button: function(node, val) {
@@ -1314,22 +1314,22 @@
                                         attr = node[OWNER_DOCUMENT].createAttribute(&#x27;value&#x27;);
                                         node.setAttributeNode(attr);
                                     }
-                            
+
                                     attr.value = val;
                                 }
                             });
-                            
-                            
+
+
                             Y.mix(Y_DOM.VALUE_GETTERS, {
                                 option: function(node) {
                                     var attrs = node.attributes;
                                     return (attrs.value &amp;&amp; attrs.value.specified) ? node.value : node.text;
                                 },
-                            
+
                                 select: function(node) {
                                     var val = node.value,
                                         options = node.options;
-                            
+
                                     if (options &amp;&amp; options.length) {
                                         // TODO: implement multipe select
                                         if (node.multiple) {
@@ -1338,11 +1338,11 @@
                                             val = Y_DOM.getValue(options[node.selectedIndex]);
                                         }
                                     }
-                            
+
                                     return val;
                                 }
                             });
-                            
+
                                 </pre>
                             </div>
                         </div>

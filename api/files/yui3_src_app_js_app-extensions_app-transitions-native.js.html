@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,85 +1122,85 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/app/js/app-extensions/app-transitions-native.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
                             Provides the implementation of view transitions for &#x60;Y.App.Transitions&#x60; in
                             browsers which support native CSS3 transitions.
-                            
+
                             @module app
                             @submodule app-transitions-native
                             @since 3.5.0
                             **/
-                            
+
                             var AppTransitions = Y.App.Transitions;
-                            
+
                             /**
                             Provides the implementation of view transitions for &#x60;Y.App.Transitions&#x60; in
                             browsers which support native CSS3 transitions.
-                            
+
                             When this module is used, &#x60;Y.App.TransitionsNative&#x60; will automatically mix
                             itself in to &#x60;Y.App&#x60;.
-                            
+
                             @class App.TransitionsNative
                             @extensionfor App
                             @since 3.5.0
                             **/
                             function AppTransitionsNative() {}
-                            
+
                             AppTransitionsNative.prototype = {
                                 // -- Protected Properties -------------------------------------------------
-                            
+
                                 /**
                                 Whether this app is currently transitioning its &#x60;activeView&#x60;.
-                            
+
                                 @property _transitioning
                                 @type Boolean
                                 @default false
                                 @protected
                                 @since 3.5.0
                                 **/
-                            
+
                                 /**
                                 A queue that holds pending calls to this app&#x27;s &#x60;_uiTransitionActiveView()&#x60;
                                 method.
-                            
+
                                 @property _viewTransitionQueue
                                 @type Array
                                 @default []
                                 @protected
                                 @since 3.5.0
                                 **/
-                            
+
                                 // -- Lifecycle Methods ----------------------------------------------------
-                            
+
                                 initializer: function () {
                                     this._transitioning       = false;
                                     this._viewTransitionQueue = [];
-                            
+
                                     // TODO: Consider the AOP approach that &#x60;Plugin.WidgetAnim&#x60; uses.
                                     Y.Do.before(this._queueActiveView, this, &#x27;_uiSetActiveView&#x27;);
                                 },
-                            
+
                                 // -- Protected Methods ----------------------------------------------------
-                            
+
                                 /**
                                 Dequeues any pending calls to &#x60;_uiTransitionActiveView()&#x60;.
-                            
+
                                 **Note:** When there is more than one queued transition, only the most
                                 recent &#x60;activeView&#x60; change will be visually transitioned, while the others
                                 will have their &#x60;transition&#x60; option overridden to &#x60;false&#x60;.
-                            
+
                                 @method _dequeueActiveView
                                 @protected
                                 @since 3.5.0
@@ -1209,7 +1209,7 @@
                                     var queue      = this._viewTransitionQueue,
                                         transition = queue.shift(),
                                         options;
-                            
+
                                     if (transition) {
                                         // When items are still left in the queue, override the transition
                                         // so it does not run.
@@ -1218,15 +1218,15 @@
                                             options = Y.merge(transition[2], {transition: false});
                                             transition.splice(2, 1, options);
                                         }
-                            
+
                                         this._uiTransitionActiveView.apply(this, transition);
                                     }
                                 },
-                            
+
                                 /**
                                 Returns an object containing a named fx for both &#x60;viewIn&#x60; and &#x60;viewOut&#x60;
                                 based on the relationship between the specified &#x60;newView&#x60; and &#x60;oldView&#x60;.
-                            
+
                                 @method _getFx
                                 @param {View} newView The view being transitioned-in.
                                 @param {View} oldView The view being transitioned-out.
@@ -1239,66 +1239,66 @@
                                 _getFx: function (newView, oldView, transition) {
                                     var fx          = AppTransitions.FX,
                                         transitions = this.get(&#x27;transitions&#x27;);
-                            
+
                                     if (transition === false || !transitions) {
                                         return null;
                                     }
-                            
+
                                     if (transition) {
                                         return fx[transition];
                                     }
-                            
+
                                     if (this._isChildView(newView, oldView)) {
                                         return fx[transitions.toChild];
                                     }
-                            
+
                                     if (this._isParentView(newView, oldView)) {
                                         return fx[transitions.toParent];
                                     }
-                            
+
                                     return fx[transitions.navigate];
                                 },
-                            
+
                                 /**
                                 Queues calls to &#x60;_uiTransitionActiveView()&#x60; to make sure a currently running
                                 transition isn&#x27;t interrupted.
-                            
+
                                 **Note:** This method prevents the default &#x60;_uiSetActiveView()&#x60; method from
                                 running.
-                            
+
                                 @method _queueActiveView
                                 @protected
                                 @since 3.5.0
                                 **/
                                 _queueActiveView: function () {
                                     var args = Y.Array(arguments, 0, true);
-                            
+
                                     this._viewTransitionQueue.push(args);
-                            
+
                                     if (!this._transitioning) {
                                         this._dequeueActiveView();
                                     }
-                            
+
                                     return new Y.Do.Prevent();
                                 },
-                            
+
                                 /**
                                 Performs the actual change of this app&#x27;s &#x60;activeView&#x60; by visually
                                 transitioning between the &#x60;newView&#x60; and &#x60;oldView&#x60; using any specified
                                 &#x60;options&#x60;.
-                            
+
                                 The &#x60;newView&#x60; is attached to the app by rendering it to the &#x60;viewContainer&#x60;,
                                 and making this app a bubble target of its events.
-                            
+
                                 The &#x60;oldView&#x60; is detached from the app by removing it from the
                                 &#x60;viewContainer&#x60;, and removing this app as a bubble target for its events.
                                 The &#x60;oldView&#x60; will either be preserved or properly destroyed.
-                            
+
                                 **Note:** This method overrides &#x60;_uiSetActiveView()&#x60; and provides all of its
                                 functionality plus supports visual transitions. Also, the &#x60;activeView&#x60;
                                 attribute is read-only and can be changed by calling the &#x60;showView()&#x60;
                                 method.
-                            
+
                                 @method _uiTransitionActiveView
                                 @param {View} newView The View which is now this app&#x27;s &#x60;activeView&#x60;.
                                 @param {View} [oldView] The View which was this app&#x27;s &#x60;activeView&#x60;.
@@ -1325,127 +1325,127 @@
                                 **/
                                 _uiTransitionActiveView: function (newView, oldView, options) {
                                     options || (options = {});
-                            
+
                                     var callback = options.callback,
                                         container, transitioning, isChild, isParent, prepend,
                                         fx, fxConfig, transitions;
-                            
+
                                     // Quits early when to new and old views are the same.
                                     if (newView === oldView) {
                                         callback &amp;&amp; callback.call(this, newView);
-                            
+
                                         this._transitioning = false;
                                         return this._dequeueActiveView();
                                     }
-                            
+
                                     fx       = this._getFx(newView, oldView, options.transition);
                                     isChild  = this._isChildView(newView, oldView);
                                     isParent = !isChild &amp;&amp; this._isParentView(newView, oldView);
                                     prepend  = !!options.prepend || isParent;
-                            
+
                                     // Preforms simply attach/detach of the new and old view respectively
                                     // when there&#x27;s no transition to perform.
                                     if (!fx) {
                                         this._attachView(newView, prepend);
                                         this._detachView(oldView);
                                         callback &amp;&amp; callback.call(this, newView);
-                            
+
                                         this._transitioning = false;
                                         return this._dequeueActiveView();
                                     }
-                            
+
                                     this._transitioning = true;
-                            
+
                                     container     = this.get(&#x27;container&#x27;);
                                     transitioning = Y.App.CLASS_NAMES.transitioning;
-                            
+
                                     container.addClass(transitioning);
-                            
+
                                     this._attachView(newView, prepend);
-                            
+
                                     // Called when view transitions completed, if none were added this will
                                     // run right away.
                                     function complete() {
                                         this._detachView(oldView);
                                         container.removeClass(transitioning);
                                         callback &amp;&amp; callback.call(this, newView);
-                            
+
                                         this._transitioning = false;
                                         return this._dequeueActiveView();
                                     }
-                            
+
                                     // Setup a new stack to run the view transitions in parallel.
                                     transitions = new Y.Parallel({context: this});
                                     fxConfig    = {
                                         crossView: !!oldView &amp;&amp; !!newView,
                                         prepended: prepend
                                     };
-                            
+
                                     // Transition the new view first to prevent a gap when sliding.
                                     if (newView &amp;&amp; fx.viewIn) {
                                         newView.get(&#x27;container&#x27;)
                                             .transition(fx.viewIn, fxConfig, transitions.add());
                                     }
-                            
+
                                     if (oldView &amp;&amp; fx.viewOut) {
                                         oldView.get(&#x27;container&#x27;)
                                             .transition(fx.viewOut, fxConfig, transitions.add());
                                     }
-                            
+
                                     transitions.done(complete);
                                 }
                             };
-                            
+
                             // -- Transition fx ------------------------------------------------------------
                             Y.mix(Y.Transition.fx, {
                                 &#x27;app:fadeIn&#x27;: {
                                     opacity : 1,
                                     duration: 0.3,
-                            
+
                                     on: {
                                         start: function (data) {
                                             var styles = {opacity: 0},
                                                 config = data.config;
-                            
+
                                             if (config.crossView &amp;&amp; !config.prepended) {
                                                 styles.transform = &#x27;translateX(-100%)&#x27;;
                                             }
-                            
+
                                             this.setStyles(styles);
                                         },
-                            
+
                                         end: function () {
                                             this.setStyle(&#x27;transform&#x27;, &#x27;translateX(0)&#x27;);
                                         }
                                     }
                                 },
-                            
+
                                 &#x27;app:fadeOut&#x27;: {
                                     opacity : 0,
                                     duration: 0.3,
-                            
+
                                     on: {
                                         start: function (data) {
                                             var styles = {opacity: 1},
                                                 config = data.config;
-                            
+
                                             if (config.crossView &amp;&amp; config.prepended) {
                                                 styles.transform = &#x27;translateX(-100%)&#x27;;
                                             }
-                            
+
                                             this.setStyles(styles);
                                         },
-                            
+
                                         end: function () {
                                             this.setStyle(&#x27;transform&#x27;, &#x27;translateX(0)&#x27;);
                                         }
                                     }
                                 },
-                            
+
                                 &#x27;app:slideLeft&#x27;: {
                                     duration : 0.3,
                                     transform: &#x27;translateX(-100%)&#x27;,
-                            
+
                                     on: {
                                         start: function () {
                                             this.setStyles({
@@ -1453,17 +1453,17 @@
                                                 transform: &#x27;translateX(0%)&#x27;
                                             });
                                         },
-                            
+
                                         end: function () {
                                             this.setStyle(&#x27;transform&#x27;, &#x27;translateX(0)&#x27;);
                                         }
                                     }
                                 },
-                            
+
                                 &#x27;app:slideRight&#x27;: {
                                     duration : 0.3,
                                     transform: &#x27;translateX(0)&#x27;,
-                            
+
                                     on: {
                                         start: function () {
                                             this.setStyles({
@@ -1471,18 +1471,18 @@
                                                 transform: &#x27;translateX(-100%)&#x27;
                                             });
                                         },
-                            
+
                                         end: function () {
                                             this.setStyle(&#x27;transform&#x27;, &#x27;translateX(0)&#x27;);
                                         }
                                     }
                                 }
                             });
-                            
+
                             // -- Namespacae ---------------------------------------------------------------
                             Y.App.TransitionsNative = AppTransitionsNative;
                             Y.Base.mix(Y.App, [AppTransitionsNative]);
-                            
+
                                 </pre>
                             </div>
                         </div>

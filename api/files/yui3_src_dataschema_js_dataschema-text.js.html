@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/dataschema/js/dataschema-text.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1141,24 +1141,24 @@
                              * @module dataschema
                              * @submodule dataschema-text
                              */
-                            
+
                             /**
                             Provides a DataSchema implementation which can be used to work with
                             delimited text data.
-                            
+
                             See the &#x60;apply&#x60; method for usage.
-                            
+
                             @class DataSchema.Text
                             @extends DataSchema.Base
                             @static
                             **/
-                            
+
                             var Lang = Y.Lang,
                                 isString = Lang.isString,
                                 isUndef  = Lang.isUndefined,
-                            
+
                                 SchemaText = {
-                            
+
                                     ////////////////////////////////////////////////////////////////////////
                                     //
                                     // DataSchema.Text static methods
@@ -1170,30 +1170,30 @@
                                     the response object is present for consistency, but is assigned an
                                     empty object.  If the input data is absent or not a string, an &#x60;error&#x60;
                                     property will be added.
-                            
+
                                     Use _schema.resultDelimiter_ and _schema.fieldDelimiter_ to instruct
                                     &#x60;apply&#x60; how to split up the string into an array of data arrays for
                                     processing.
-                            
+
                                     Use _schema.resultFields_ to specify the keys in the generated result
                                     objects in &#x60;response.results&#x60;. The key:value pairs will be assigned
                                     in the order of the _schema.resultFields_ array, assuming the values
                                     in the data records are defined in the same order.
-                            
+
                                     _schema.resultFields_ field identifiers are objects with the following
                                     properties:
-                            
+
                                       * &#x60;key&#x60;   : &lt;strong&gt;(required)&lt;/strong&gt; The property name you want
                                             the data value assigned to in the result object (String)
                                       * &#x60;parser&#x60;: A function or the name of a function on &#x60;Y.Parsers&#x60; used
                                             to convert the input value into a normalized type.  Parser
                                             functions are passed the value as input and are expected to
                                             return a value.
-                            
+
                                     If no value parsing is needed, you can use just the desired property
                                     name string as the field identifier instead of an object (see example
                                     below).
-                            
+
                                     @example
                                         // Process simple csv
                                         var schema = {
@@ -1202,12 +1202,12 @@
                                                 resultFields: [ &#x27;fruit&#x27;, &#x27;color&#x27; ]
                                             },
                                             data = &quot;Banana,yellow\nOrange,orange\nEggplant,purple&quot;;
-                            
+
                                         var response = Y.DataSchema.Text.apply(schema, data);
-                            
+
                                         // response.results[0] is { fruit: &quot;Banana&quot;, color: &quot;yellow&quot; }
-                            
-                            
+
+
                                         // Use parsers
                                         schema.resultFields = [
                                             {
@@ -1216,11 +1216,11 @@
                                             },
                                             &#x27;color&#x27; // mix and match objects and strings
                                         ];
-                            
+
                                         response = Y.DataSchema.Text.apply(schema, data);
-                            
+
                                         // response.results[0] is { fruit: &quot;BANANA&quot;, color: &quot;yellow&quot; }
-                            
+
                                     @method apply
                                     @param {Object} schema Schema to apply.  Supported configuration
                                         properties are:
@@ -1239,7 +1239,7 @@
                                     apply: function(schema, data) {
                                         var data_in = data,
                                             data_out = { results: [], meta: {} };
-                            
+
                                         if (isString(data) &amp;&amp; schema &amp;&amp; isString(schema.resultDelimiter)) {
                                             // Parse results data
                                             data_out = SchemaText._parseResults.call(this, schema, data_in, data_out);
@@ -1247,10 +1247,10 @@
                                             Y.log(&quot;Text data could not be schema-parsed: &quot; + Y.dump(data) + &quot; &quot; + Y.dump(data), &quot;error&quot;, &quot;dataschema-text&quot;);
                                             data_out.error = new Error(&quot;Text schema parse failure&quot;);
                                         }
-                            
+
                                         return data_out;
                                     },
-                            
+
                                     /**
                                      * Schema-parsed list of results from full data
                                      *
@@ -1271,22 +1271,22 @@
                                             parse       = Y.DataSchema.Base.parse,
                                             results_in, fields_in, result, item,
                                             field, key, value, i, j;
-                            
+
                                         // Delete final delimiter at end of string if there
                                         if (text_in.slice(-resultDelim.length) === resultDelim) {
                                             text_in = text_in.slice(0, -resultDelim.length);
                                         }
-                            
+
                                         // Split into results
                                         results_in = text_in.split(schema.resultDelimiter);
-                            
+
                                         if (fieldDelim) {
                                             for (i = results_in.length - 1; i &gt;= 0; --i) {
                                                 result = {};
                                                 item = results_in[i];
-                            
+
                                                 fields_in = item.split(schema.fieldDelimiter);
-                            
+
                                                 for (j = fields.length - 1; j &gt;= 0; --j) {
                                                     field = fields[j];
                                                     key = (!isUndef(field.key)) ? field.key : field;
@@ -1295,24 +1295,24 @@
                                                     value = (!isUndef(fields_in[key])) ?
                                                                 fields_in[key] :
                                                                 fields_in[j];
-                            
+
                                                     result[key] = parse.call(this, value, field);
                                                 }
-                            
+
                                                 results[i] = result;
                                             }
                                         } else {
                                             results = results_in;
                                         }
-                            
+
                                         data_out.results = results;
-                            
+
                                         return data_out;
                                     }
                                 };
-                            
+
                             Y.DataSchema.Text = Y.mix(SchemaText, Y.DataSchema.Base);
-                            
+
                                 </pre>
                             </div>
                         </div>

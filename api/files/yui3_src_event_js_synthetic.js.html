@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/event/js/synthetic.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1149,7 +1149,7 @@
                                 isArray  = YLang.isArray,
                                 query    = Y.Selector.query,
                                 noop     = function () {};
-                            
+
                             /**
                              * &lt;p&gt;The triggering mechanism used by SyntheticEvents.&lt;/p&gt;
                              *
@@ -1171,7 +1171,7 @@
                                 this.handle     = handle;
                                 this.emitFacade = emitFacade;
                             }
-                            
+
                             /**
                              * &lt;p&gt;Executes the subscription callback, passing the firing arguments as the
                              * first parameters to that callback. For events that are configured with
@@ -1206,11 +1206,11 @@
                                     delegate = sub.filter,
                                     event    = e || {},
                                     ret;
-                            
+
                                 if (this.emitFacade) {
                                     if (!e || !e.preventDefault) {
                                         event = ce._getFacade();
-                            
+
                                         if (isObject(e) &amp;&amp; !e.preventDefault) {
                                             Y.mix(event, e, true);
                                             args[0] = event;
@@ -1218,37 +1218,37 @@
                                             args.unshift(event);
                                         }
                                     }
-                            
+
                                     event.type    = ce.type;
                                     event.details = args.slice();
-                            
+
                                     if (delegate) {
                                         event.container = ce.host;
                                     }
                                 } else if (delegate &amp;&amp; isObject(e) &amp;&amp; e.currentTarget) {
                                     args.shift();
                                 }
-                            
+
                                 sub.context = thisObj || event.currentTarget || ce.host;
                                 ret = ce.fire.apply(ce, args);
-                            
+
                                 // have to handle preventedFn and stoppedFn manually because
                                 // Notifier CustomEvents are forced to emitFacade=false
                                 if (e.prevented &amp;&amp; ce.preventedFn) {
                                     ce.preventedFn.apply(ce, args);
                                 }
-                            
+
                                 if (e.stopped &amp;&amp; ce.stoppedFn) {
                                     ce.stoppedFn.apply(ce, args);
                                 }
-                            
+
                                 sub.context = thisObj; // reset for future firing
-                            
+
                                 // to capture callbacks that return false to stopPropagation.
                                 // Useful for delegate implementations
                                 return ret;
                             };
-                            
+
                             /**
                              * Manager object for synthetic event subscriptions to aggregate multiple synths on the
                              * same node without colliding with actual DOM subscription entries in the global map of
@@ -1268,16 +1268,16 @@
                                 this.key     = key;
                                 this.domkey  = yuid;
                             }
-                            
+
                             SynthRegistry.prototype = {
                                 constructor: SynthRegistry,
-                            
+
                                 // A few object properties to fake the CustomEvent interface for page
                                 // unload cleanup.  DON&#x27;T TOUCH!
                                 type      : &#x27;_synth&#x27;,
                                 fn        : noop,
                                 capture   : false,
-                            
+
                                 /**
                                  * Adds a subscription from the Notifier registry.
                                  *
@@ -1289,7 +1289,7 @@
                                     handle.evt.registry = this;
                                     this.handles.push(handle);
                                 },
-                            
+
                                 /**
                                  * Removes the subscription from the Notifier registry.
                                  *
@@ -1301,14 +1301,14 @@
                                     var handles = this.handles,
                                         events = DOMMap[this.domkey],
                                         i;
-                            
+
                                     for (i = handles.length - 1; i &gt;= 0; --i) {
                                         if (handles[i].sub === sub) {
                                             handles.splice(i, 1);
                                             break;
                                         }
                                     }
-                            
+
                                     // Clean up left over objects when there are no more subscribers.
                                     if (!handles.length) {
                                         delete events[this.key];
@@ -1317,7 +1317,7 @@
                                         }
                                     }
                                 },
-                            
+
                                 /**
                                  * Used by the event system&#x27;s unload cleanup process.  When navigating
                                  * away from the page, the event system iterates the global map of element
@@ -1333,13 +1333,13 @@
                                 detachAll : function () {
                                     var handles = this.handles,
                                         i = handles.length;
-                            
+
                                     while (--i &gt;= 0) {
                                         handles[i].detach();
                                     }
                                 }
                             };
-                            
+
                             /**
                              * &lt;p&gt;Wrapper class for the integration of new events into the YUI event
                              * infrastructure.  Don&#x27;t instantiate this object directly, use
@@ -1357,11 +1357,11 @@
                             function SyntheticEvent() {
                                 this._init.apply(this, arguments);
                             }
-                            
+
                             Y.mix(SyntheticEvent, {
                                 Notifier: Notifier,
                                 SynthRegistry: SynthRegistry,
-                            
+
                                 /**
                                  * Returns the array of subscription handles for a node for the given event
                                  * type.  Passing true as the third argument will create a registry entry
@@ -1382,7 +1382,7 @@
                                         yuid   = Y.stamp(el),
                                         key    = &#x27;event:&#x27; + yuid + type + &#x27;_synth&#x27;,
                                         events = DOMMap[yuid];
-                            
+
                                     if (create) {
                                         if (!events) {
                                             events = DOMMap[yuid] = {};
@@ -1391,10 +1391,10 @@
                                             events[key] = new SynthRegistry(el, yuid, key);
                                         }
                                     }
-                            
+
                                     return (events &amp;&amp; events[key]) || null;
                                 },
-                            
+
                                 /**
                                  * Alternate &lt;code&gt;_delete()&lt;/code&gt; method for the CustomEvent object
                                  * created to manage SyntheticEvent subscriptions.
@@ -1408,25 +1408,25 @@
                                     if (sub &amp;&amp; sub.fn) {
                                         var synth = this.eventDef,
                                             method = (sub.filter) ? &#x27;detachDelegate&#x27; : &#x27;detach&#x27;;
-                            
+
                                         this._subscribers = [];
-                            
+
                                         if (CustomEvent.keepDeprecatedSubs) {
                                             this.subscribers = {};
                                         }
-                            
+
                                         synth[method](sub.node, sub, this.notifier, sub.filter);
                                         this.registry.unregister(sub);
-                            
+
                                         delete sub.fn;
                                         delete sub.node;
                                         delete sub.context;
                                     }
                                 },
-                            
+
                                 prototype: {
                                     constructor: SyntheticEvent,
-                            
+
                                     /**
                                      * Construction logic for the event.
                                      *
@@ -1435,14 +1435,14 @@
                                      */
                                     _init: function () {
                                         var config = this.publishConfig || (this.publishConfig = {});
-                            
+
                                         // The notification mechanism handles facade creation
                                         this.emitFacade = (&#x27;emitFacade&#x27; in config) ?
                                                             config.emitFacade :
                                                             true;
                                         config.emitFacade  = false;
                                     },
-                            
+
                                     /**
                                      * &lt;p&gt;Implementers MAY provide this method definition.&lt;/p&gt;
                                      *
@@ -1471,7 +1471,7 @@
                                      * @return {any}
                                      */
                                     processArgs: noop,
-                            
+
                                     /**
                                      * &lt;p&gt;Implementers MAY override this property.&lt;/p&gt;
                                      *
@@ -1486,7 +1486,7 @@
                                      * @default false
                                      */
                                     //preventDups  : false,
-                            
+
                                     /**
                                      * &lt;p&gt;Implementers SHOULD provide this method definition.&lt;/p&gt;
                                      *
@@ -1509,7 +1509,7 @@
                                      *              trigger the execution of the subscribers
                                      */
                                     on: noop,
-                            
+
                                     /**
                                      * &lt;p&gt;Implementers SHOULD provide this method definition.&lt;/p&gt;
                                      *
@@ -1524,7 +1524,7 @@
                                      *              trigger the execution of the subscribers
                                      */
                                     detach: noop,
-                            
+
                                     /**
                                      * &lt;p&gt;Implementers SHOULD provide this method definition.&lt;/p&gt;
                                      *
@@ -1553,7 +1553,7 @@
                                      * @since 3.2.0
                                      */
                                     delegate       : noop,
-                            
+
                                     /**
                                      * &lt;p&gt;Implementers SHOULD provide this method definition.&lt;/p&gt;
                                      *
@@ -1574,7 +1574,7 @@
                                      * @since 3.2.0
                                      */
                                     detachDelegate : noop,
-                            
+
                                     /**
                                      * Sets up the boilerplate for detaching the event and facilitating the
                                      * execution of subscriber callbacks.
@@ -1595,34 +1595,34 @@
                                             selector = args[2],
                                             method   = delegate ? &#x27;delegate&#x27; : &#x27;on&#x27;,
                                             nodes, handle;
-                            
+
                                         // Can&#x27;t just use Y.all because it doesn&#x27;t support window (yet?)
                                         nodes = (isString(selector)) ?
                                             query(selector) :
                                             toArray(selector || Y.one(Y.config.win));
-                            
+
                                         if (!nodes.length &amp;&amp; isString(selector)) {
                                             handle = Y.on(&#x27;available&#x27;, function () {
                                                 Y.mix(handle, Y[method].apply(Y, originalArgs), true);
                                             }, selector);
-                            
+
                                             return handle;
                                         }
-                            
+
                                         Y.Array.each(nodes, function (node) {
                                             var subArgs = args.slice(),
                                                 filter;
-                            
+
                                             node = Y.one(node);
-                            
+
                                             if (node) {
                                                 if (delegate) {
                                                     filter = subArgs.splice(3, 1)[0];
                                                 }
-                            
+
                                                 // (type, fn, el, thisObj, ...) =&gt; (fn, thisObj, ...)
                                                 subArgs.splice(0, 4, subArgs[1], subArgs[3]);
-                            
+
                                                 if (!this.preventDups ||
                                                     !this.getSubs(node, args, null, true))
                                                 {
@@ -1630,12 +1630,12 @@
                                                 }
                                             }
                                         }, this);
-                            
+
                                         return (handles.length === 1) ?
                                             handles[0] :
                                             new Y.EventHandle(handles);
                                     },
-                            
+
                                     /**
                                      * Creates a new Notifier object for use by this event&#x27;s
                                      * &lt;code&gt;on(...)&lt;/code&gt; or &lt;code&gt;delegate(...)&lt;/code&gt; implementation
@@ -1663,13 +1663,13 @@
                                             notifier   = new Notifier(handle, this.emitFacade),
                                             registry   = SyntheticEvent.getRegistry(node, this.type, true),
                                             sub        = handle.sub;
-                            
+
                                         sub.node   = node;
                                         sub.filter = filter;
                                         if (extra) {
                                             this.applyArgExtras(extra, sub);
                                         }
-                            
+
                                         Y.mix(dispatcher, {
                                             eventDef     : this,
                                             notifier     : notifier,
@@ -1677,20 +1677,20 @@
                                             currentTarget: node,       // for generating facades
                                             target       : node,       // for generating facades
                                             el           : node._node, // For category detach
-                            
+
                                             _delete      : SyntheticEvent._deleteSub
                                         }, true);
-                            
+
                                         handle.notifier = notifier;
-                            
+
                                         registry.register(handle);
-                            
+
                                         // Call the implementation&#x27;s &quot;on&quot; or &quot;delegate&quot; method
                                         this[method](node, sub, notifier, filter);
-                            
+
                                         return handle;
                                     },
-                            
+
                                     /**
                                      * &lt;p&gt;Implementers MAY provide this method definition.&lt;/p&gt;
                                      *
@@ -1712,7 +1712,7 @@
                                     applyArgExtras: function (extra, sub) {
                                         sub._extra = extra;
                                     },
-                            
+
                                     /**
                                      * Removes the subscription(s) from the internal subscription dispatch
                                      * mechanism.  See &lt;code&gt;SyntheticEvent._deleteSub&lt;/code&gt;.
@@ -1730,16 +1730,16 @@
                                             els    = (isString(target)) ?
                                                         query(target) : toArray(target),
                                             node, i, len, handles, j;
-                            
+
                                         // (type, fn, el, context, filter?) =&gt; (type, fn, context, filter?)
                                         args.splice(2, 1);
-                            
+
                                         for (i = 0, len = els.length; i &lt; len; ++i) {
                                             node = Y.one(els[i]);
-                            
+
                                             if (node) {
                                                 handles = this.getSubs(node, args);
-                            
+
                                                 if (handles) {
                                                     for (j = handles.length - 1; j &gt;= 0; --j) {
                                                         handles[j].detach();
@@ -1748,7 +1748,7 @@
                                             }
                                         }
                                     },
-                            
+
                                     /**
                                      * Returns the detach handles of subscriptions on a node that satisfy a
                                      * search/filter function.  By default, the filter used is the
@@ -1769,14 +1769,14 @@
                                         var registry = SyntheticEvent.getRegistry(node, this.type),
                                             handles  = [],
                                             allHandles, i, len, handle;
-                            
+
                                         if (registry) {
                                             allHandles = registry.handles;
-                            
+
                                             if (!filter) {
                                                 filter = this.subMatch;
                                             }
-                            
+
                                             for (i = 0, len = allHandles.length; i &lt; len; ++i) {
                                                 handle = allHandles[i];
                                                 if (filter.call(this, handle.sub, args)) {
@@ -1788,10 +1788,10 @@
                                                 }
                                             }
                                         }
-                            
+
                                         return handles.length &amp;&amp; handles;
                                     },
-                            
+
                                     /**
                                      * &lt;p&gt;Implementers MAY override this to define what constitutes a
                                      * &amp;quot;same&amp;quot; subscription.  Override implementations should
@@ -1817,9 +1817,9 @@
                                     }
                                 }
                             }, true);
-                            
+
                             Y.SyntheticEvent = SyntheticEvent;
-                            
+
                             /**
                              * &lt;p&gt;Defines a new event in the DOM event system.  Implementers are
                              * responsible for monitoring for a scenario whereby the event is fired.  A
@@ -1931,14 +1931,14 @@
                              */
                             Y.Event.define = function (type, config, force) {
                                 var eventDef, Impl, synth;
-                            
+
                                 if (type &amp;&amp; type.type) {
                                     eventDef = type;
                                     force = config;
                                 } else if (config) {
                                     eventDef = Y.merge({ type: type }, config);
                                 }
-                            
+
                                 if (eventDef) {
                                     if (force || !Y.Node.DOM_EVENTS[eventDef.type]) {
                                         Impl = function () {
@@ -1946,35 +1946,35 @@
                                         };
                                         Y.extend(Impl, SyntheticEvent, eventDef);
                                         synth = new Impl();
-                            
+
                                         type = synth.type;
-                            
+
                                         Y.Node.DOM_EVENTS[type] = Y.Env.evt.plugins[type] = {
                                             eventDef: synth,
-                            
+
                                             on: function () {
                                                 return synth._on(toArray(arguments));
                                             },
-                            
+
                                             delegate: function () {
                                                 return synth._on(toArray(arguments), true);
                                             },
-                            
+
                                             detach: function () {
                                                 return synth._detach(toArray(arguments));
                                             }
                                         };
-                            
+
                                     }
                                 } else if (isString(type) || isArray(type)) {
                                     Y.Array.each(toArray(type), function (t) {
                                         Y.Node.DOM_EVENTS[t] = 1;
                                     });
                                 }
-                            
+
                                 return synth;
                             };
-                            
+
                                 </pre>
                             </div>
                         </div>

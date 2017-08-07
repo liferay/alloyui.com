@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,19 +1122,19 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/test/js/Reporter.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
-                            
+
                                 /**
                                  * An object capable of sending test results to a server.
                                  * @param {String} url The URL to submit the results to.
@@ -1146,21 +1146,21 @@
                              * @class Reporter
                                  */
                                 YUITest.Reporter = function(url, format) {
-                            
+
                                     /**
                                      * The URL to submit the data to.
                                      * @type String
                                      * @property url
                                      */
                                     this.url = url;
-                            
+
                                     /**
                                      * The formatting function to call when submitting the data.
                                      * @type Function
                                      * @property format
                                      */
                                     this.format = format || YUITest.TestFormat.XML;
-                            
+
                                     /**
                                      * Extra fields to submit with the request.
                                      * @type Object
@@ -1168,7 +1168,7 @@
                                      * @private
                                      */
                                     this._fields = new Object();
-                            
+
                                     /**
                                      * The form element used to submit the results.
                                      * @type HTMLFormElement
@@ -1176,7 +1176,7 @@
                                      * @private
                                      */
                                     this._form = null;
-                            
+
                                     /**
                                      * Iframe used as a target for form submission.
                                      * @type HTMLIFrameElement
@@ -1185,12 +1185,12 @@
                                      */
                                     this._iframe = null;
                                 };
-                            
+
                                 YUITest.Reporter.prototype = {
-                            
+
                                     //restore missing constructor
                                     constructor: YUITest.Reporter,
-                            
+
                                     /**
                                      * Adds a field to the form that submits the results.
                                      * @param {String} name The name of the field.
@@ -1200,7 +1200,7 @@
                                     addField : function (name, value){
                                         this._fields[name] = value;
                                     },
-                            
+
                                     /**
                                      * Removes all previous defined fields.
                                      * @method clearFields
@@ -1208,7 +1208,7 @@
                                     clearFields : function(){
                                         this._fields = new Object();
                                     },
-                            
+
                                     /**
                                      * Cleans up the memory associated with the TestReporter, removing DOM elements
                                      * that were created.
@@ -1225,14 +1225,14 @@
                                         }
                                         this._fields = null;
                                     },
-                            
+
                                     /**
                                      * Sends the report to the server.
                                      * @param {Object} results The results object created by TestRunner.
                                      * @method report
                                      */
                                     report : function(results){
-                            
+
                                         //if the form hasn&#x27;t been created yet, create it
                                         if (!this._form){
                                             this._form = document.createElement(&quot;form&quot;);
@@ -1241,7 +1241,7 @@
                                             this._form.style.position = &quot;absolute&quot;;
                                             this._form.style.top = 0;
                                             document.body.appendChild(this._form);
-                            
+
                                             //IE won&#x27;t let you assign a name using the DOM, must do it the hacky way
                                             try {
                                                 this._iframe = document.createElement(&quot;&lt;iframe name=\&quot;yuiTestTarget\&quot; /&gt;&quot;);
@@ -1249,29 +1249,29 @@
                                                 this._iframe = document.createElement(&quot;iframe&quot;);
                                                 this._iframe.name = &quot;yuiTestTarget&quot;;
                                             }
-                            
+
                                             this._iframe.src = &quot;javascript:false&quot;;
                                             this._iframe.style.visibility = &quot;hidden&quot;;
                                             this._iframe.style.position = &quot;absolute&quot;;
                                             this._iframe.style.top = 0;
                                             document.body.appendChild(this._iframe);
-                            
+
                                             this._form.target = &quot;yuiTestTarget&quot;;
                                         }
-                            
+
                                         //set the form&#x27;s action
                                         this._form.action = this.url;
-                            
+
                                         //remove any existing fields
                                         while(this._form.hasChildNodes()){
                                             this._form.removeChild(this._form.lastChild);
                                         }
-                            
+
                                         //create default fields
                                         this._fields.results = this.format(results);
                                         this._fields.useragent = navigator.userAgent;
                                         this._fields.timestamp = (new Date()).toLocaleString();
-                            
+
                                         //add fields to the form
                                         for (var prop in this._fields){
                                             var value = this._fields[prop];
@@ -1283,20 +1283,20 @@
                                                 this._form.appendChild(input);
                                             }
                                         }
-                            
+
                                         //remove default fields
                                         delete this._fields.results;
                                         delete this._fields.useragent;
                                         delete this._fields.timestamp;
-                            
+
                                         if (arguments[1] !== false){
                                             this._form.submit();
                                         }
-                            
+
                                     }
-                            
+
                                 };
-                            
+
                                 </pre>
                             </div>
                         </div>

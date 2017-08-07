@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/slider/js/clickable-rail.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1141,7 +1141,7 @@
                              * @module slider
                              * @submodule clickable-rail
                              */
-                            
+
                             /**
                              * Slider extension that allows clicking on the Slider&#x27;s rail element,
                              * triggering the thumb to align with the location of the click.
@@ -1151,12 +1151,12 @@
                             function ClickableRail() {
                                 this._initClickableRail();
                             }
-                            
+
                             Y.ClickableRail = Y.mix(ClickableRail, {
-                            
+
                                 // Prototype methods added to host class
                                 prototype: {
-                            
+
                                     /**
                                      * Initializes the internal state and sets up events.
                                      *
@@ -1165,7 +1165,7 @@
                                      */
                                     _initClickableRail: function () {
                                         this._evtGuid = this._evtGuid || (Y.guid() + &#x27;|&#x27;);
-                            
+
                                         /**
                                          * Broadcasts when the rail has received a mousedown event and
                                          * triggers the thumb positioning.  Use
@@ -1179,11 +1179,11 @@
                                         this.publish(&#x27;railMouseDown&#x27;, {
                                             defaultFn: this._defRailMouseDownFn
                                         });
-                            
+
                                         this.after(&#x27;render&#x27;, this._bindClickableRail);
                                         this.on(&#x27;destroy&#x27;, this._unbindClickableRail);
                                     },
-                            
+
                                     /**
                                      * Attaches DOM event subscribers to support rail interaction.
                                      *
@@ -1192,11 +1192,11 @@
                                      */
                                     _bindClickableRail: function () {
                                         this._dd.addHandle(this.rail);
-                            
+
                                         this.rail.on(this._evtGuid + Y.DD.Drag.START_EVENT,
                                             Y.bind(this._onRailMouseDown, this));
                                     },
-                            
+
                                     /**
                                      * Detaches DOM event subscribers for cleanup/destruction cycle.
                                      *
@@ -1207,11 +1207,11 @@
                                         if (this.get(&#x27;rendered&#x27;)) {
                                             var contentBox = this.get(&#x27;contentBox&#x27;),
                                                 rail = contentBox.one(&#x27;.&#x27; + this.getClassName(&#x27;rail&#x27;));
-                            
+
                                             rail.detach(this.evtGuid + &#x27;*&#x27;);
                                         }
                                     },
-                            
+
                                     /**
                                      * Dispatches the railMouseDown event.
                                      *
@@ -1225,7 +1225,7 @@
                                             this.thumb.focus();
                                         }
                                     },
-                            
+
                                     /**
                                      * Default behavior for the railMouseDown event.  Centers the thumb at
                                      * the click location and passes control to the DDM to behave as though
@@ -1237,7 +1237,7 @@
                                      */
                                     _defRailMouseDownFn: function (e) {
                                         e = e.ev;
-                            
+
                                         // Logic that determines which thumb should be used is abstracted
                                         // to someday support multi-thumb sliders
                                         var dd     = this._resolveThumb(e),
@@ -1246,25 +1246,25 @@
                                             thumb,
                                             thumbSize,
                                             xy;
-                            
+
                                         if (dd) {
                                             thumb = dd.get(&#x27;dragNode&#x27;);
                                             thumbSize = parseFloat(thumb.getStyle(this._key.dim), 10);
-                            
+
                                             // Step 1. Allow for aligning to thumb center or edge, etc
                                             xy = this._getThumbDestination(e, thumb);
-                            
+
                                             // Step 2. Remove page offsets to give just top/left style val
                                             xy = xy[ i ] - this.rail.getXY()[i];
-                            
+
                                             // Step 3. Constrain within the rail in case of attempt to
                                             // center the thumb when clicking on the end of the rail
                                             xy = Math.min(
                                                     Math.max(xy, 0),
                                                     (length - thumbSize));
-                            
+
                                             this._uiMoveThumb(xy, { source: &#x27;rail&#x27; });
-                            
+
                                             // Set e.target for DD&#x27;s IE9 patch which calls
                                             // e.target._node.setCapture() to allow imgs to be dragged.
                                             // Without this, setCapture is called from the rail and rail
@@ -1272,16 +1272,16 @@
                                             // overridden by a different Slider (the thumb on the wrong
                                             // Slider moves).
                                             e.target = this.thumb.one(&#x27;img&#x27;) || this.thumb;
-                            
+
                                             // Delegate to DD&#x27;s natural behavior
                                             dd._handleMouseDownEvent(e);
-                            
+
                                             // TODO: this won&#x27;t trigger a slideEnd if the rail is clicked
                                             // check if dd._move(e); dd._dragThreshMet = true; dd.start();
                                             // will do the trick.  Is that even a good idea?
                                         }
                                     },
-                            
+
                                     /**
                                      * Resolves which thumb to actuate if any.  Override this if you want to
                                      * support multiple thumbs.  By default, returns the Drag instance for
@@ -1296,12 +1296,12 @@
                                         /* Temporary workaround
                                         var primaryOnly = this._dd.get(&#x27;primaryButtonOnly&#x27;),
                                             validClick  = !primaryOnly || e.button &lt;= 1;
-                            
+
                                         return (validClick) ? this._dd : null;
                                          */
                                         return this._dd;
                                     },
-                            
+
                                     /**
                                      * Calculates the top left position the thumb should be moved to to
                                      * align the click XY with the center of the specified node.
@@ -1315,16 +1315,16 @@
                                     _getThumbDestination: function (e, node) {
                                         var offsetWidth  = node.get(&#x27;offsetWidth&#x27;),
                                             offsetHeight = node.get(&#x27;offsetHeight&#x27;);
-                            
+
                                         // center
                                         return [
                                             (e.pageX - Math.round((offsetWidth  / 2))),
                                             (e.pageY - Math.round((offsetHeight / 2)))
                                         ];
                                     }
-                            
+
                                 },
-                            
+
                                 // Static properties added onto host class
                                 ATTRS: {
                                     /**
@@ -1339,9 +1339,9 @@
                                         validator: Y.Lang.isBoolean
                                     }
                                 }
-                            
+
                             }, true);
-                            
+
                                 </pre>
                             </div>
                         </div>

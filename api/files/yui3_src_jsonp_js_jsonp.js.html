@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,21 +1122,21 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/jsonp/js/jsonp.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /*jslint maxlen: 350 */
                             var isFunction = Y.Lang.isFunction;
-                            
+
                             /**
                              * &lt;p&gt;Provides a JSONPRequest class for repeated JSONP calls, and a convenience
                              * method Y.jsonp(url, callback) to instantiate and send a JSONP request.&lt;/p&gt;
@@ -1177,7 +1177,7 @@
                             function JSONPRequest() {
                                 this._init.apply(this, arguments);
                             }
-                            
+
                             JSONPRequest.prototype = {
                                 /**
                                  * Set up the success and failure handlers and the regex pattern used
@@ -1192,7 +1192,7 @@
                                  */
                                 _init : function (url, callback) {
                                     this.url = url;
-                            
+
                                     /**
                                      * Map of the number of requests currently pending responses per
                                      * generated proxy.  Used to ensure the proxy is not flushed if the
@@ -1205,7 +1205,7 @@
                                      * @type {Object}
                                      */
                                     this._requests = {};
-                            
+
                                     /**
                                      * Map of the number of timeouts received from the destination url
                                      * by generated proxy.  Used to ensure the proxy is not flushed if the
@@ -1218,20 +1218,20 @@
                                      * @type {Object}
                                      */
                                     this._timeouts = {};
-                            
+
                                     this._failures = {};
-                            
+
                                     // Accept a function, an object, or nothing
                                     callback = (isFunction(callback)) ?
                                         { on: { success: callback } } :
                                         callback || {};
-                            
+
                                     var subs = callback.on || {};
-                            
+
                                     if (!subs.success) {
                                         subs.success = this._defaultCallback(url, callback);
                                     }
-                            
+
                                     // Apply defaults and store
                                     this._config = Y.merge({
                                             context: this,
@@ -1240,7 +1240,7 @@
                                             allowCache: false
                                         }, callback, { on: subs });
                                 },
-                            
+
                                 /**
                                  * Override this method to provide logic to default the success callback if
                                  * it is not provided at construction.  This is overridden by jsonp-url to
@@ -1253,7 +1253,7 @@
                                  * @return {Function}
                                  */
                                 _defaultCallback: function () {},
-                            
+
                                 /**
                                  * Issues the JSONP request.
                                  *
@@ -1268,12 +1268,12 @@
                                         config = self._config,
                                         proxy  = self._proxy || Y.guid(),
                                         url;
-                            
+
                                     // TODO: support allowCache as time value
                                     if (config.allowCache) {
                                         self._proxy = proxy;
                                     }
-                            
+
                                     if (self._requests[proxy] === undefined) {
                                         self._requests[proxy] = 0;
                                     }
@@ -1284,23 +1284,23 @@
                                         self._failures[proxy] = 0;
                                     }
                                     self._requests[proxy]++;
-                            
+
                                     Y.log(&#x27;sending &#x27; + proxy);
-                            
+
                                     args.unshift(self.url, &#x27;YUI.Env.JSONP.&#x27; + proxy);
                                     url = config.format.apply(self, args);
-                            
+
                                     if (!config.on.success) {
                                         Y.log(&quot;No success handler defined.  Aborting JSONP request.&quot;, &quot;warn&quot;, &quot;jsonp&quot;);
                                         return self;
                                     }
-                            
+
                                     function wrap(fn, isTimeout, isFailure) {
                                         return (isFunction(fn)) ?
                                             function (data) {
                                                 var execute = true,
                                                     counter = &#x27;_requests&#x27;;
-                            
+
                                                 //if (config.allowCache) {
                                                     // A lot of wrangling to make sure timeouts result in
                                                     // fewer success callbacks, but the proxy is properly
@@ -1330,23 +1330,23 @@
                                                         Y.log(proxy + &#x27; response received - timeouts(&#x27; + self._timeouts[proxy] + &#x27;) failures(&#x27; + self._failures[proxy] + &#x27;) requests(&#x27; + self._requests[proxy] + &#x27;)&#x27;);
                                                     }
                                                 //}
-                            
+
                                                 if (!self._requests[proxy] &amp;&amp; !self._timeouts[proxy] &amp;&amp; !self._failures[proxy]) {
                                                     Y.log(&#x27;deleting &#x27; + proxy);
                                                     delete YUI.Env.JSONP[proxy];
                                                 }
-                            
+
                                                 if (execute) {
                                                     fn.apply(config.context, [data].concat(config.args));
                                                 }
                                             } :
                                             null;
                                     }
-                            
+
                                     // Temporary un-sandboxed function alias
                                     // TODO: queuing
                                     YUI.Env.JSONP[proxy] = wrap(config.on.success);
-                            
+
                                     // Y.Get transactions block each other by design, but can easily
                                     //  be made non-blocking by just calling execute() on the transaction.
                                     // https://github.com/yui/yui3/pull/393#issuecomment-11961608
@@ -1358,10 +1358,10 @@
                                         attributes: config.attributes,
                                         async     : config.async
                                     }).execute();
-                            
+
                                     return self;
                                 },
-                            
+
                                 /**
                                  * Default url formatter.  Looks for callback= in the url and appends it
                                  * if not present.  The supplied proxy name will be assigned to the query
@@ -1380,9 +1380,9 @@
                                     return url.replace(/\{callback\}/, proxy);
                                 }
                             };
-                            
+
                             Y.JSONPRequest = JSONPRequest;
-                            
+
                             /**
                              *
                              * @method jsonp
@@ -1399,11 +1399,11 @@
                                 var req = new Y.JSONPRequest(url,c);
                                 return req.send.apply(req, Y.Array(arguments, 2, true));
                             };
-                            
+
                             if (!YUI.Env.JSONP) {
                                 YUI.Env.JSONP = {};
                             }
-                            
+
                                 </pre>
                             </div>
                         </div>

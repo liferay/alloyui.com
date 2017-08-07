@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,19 +1122,19 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/editor/js/editor-base.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
-                            
+
                                 /**
                                  * Base class for Editor. Handles the business logic of Editor, no GUI involved only utility methods and events.
                                  *
@@ -1150,27 +1150,27 @@
                                  * @submodule editor-base
                                  * @constructor
                                  */
-                            
+
                                 var Lang = Y.Lang,
-                            
+
                                 EditorBase = function() {
                                     EditorBase.superclass.constructor.apply(this, arguments);
                                 }, LAST_CHILD = &#x27;:last-child&#x27;;
-                            
+
                                 Y.extend(EditorBase, Y.Base, {
                                     /**
                                     * Internal reference to the Y.ContentEditable instance
                                     * @property frame
                                     */
                                     frame: null,
-                            
+
                                     initializer: function() {
                                         this.publish(&#x27;nodeChange&#x27;, {
                                             emitFacade: true,
                                             bubbles: true,
                                             defaultFn: this._defNodeChangeFn
                                         });
-                            
+
                                         //this.plug(Y.Plugin.EditorPara);
                                     },
                                     destructor: function() {
@@ -1189,7 +1189,7 @@
                                         }
                                         var styles = [&#x27;color&#x27;, &#x27;fontSize&#x27;, &#x27;fontFamily&#x27;, &#x27;backgroundColor&#x27;, &#x27;fontStyle&#x27; ],
                                             newStyles = {};
-                            
+
                                         Y.each(styles, function(v) {
                                             newStyles[v] = from.getStyle(v);
                                         });
@@ -1219,7 +1219,7 @@
                                     */
                                     _resolveChangedNode: function(n) {
                                         var inst = this.getInstance(), lc, lc2, found, root = this._getRoot(), sel;
-                            
+
                                         if (n &amp;&amp; n.compareTo(root)) {
                                             sel = new inst.EditorSelection();
                                             if (sel &amp;&amp; sel.anchorNode) {
@@ -1281,7 +1281,7 @@
                                             fColor = &#x27;&#x27;, bColor = &#x27;&#x27;, bq,
                                             normal = false,
                                             root = this._getRoot();
-                            
+
                                         if (Y.UA.ie &amp;&amp; Y.UA.ie &lt; 11) {
                                             try {
                                                 sel = inst.config.doc.selection.createRange();
@@ -1290,17 +1290,17 @@
                                                 }
                                             } catch (ie) {}
                                         }
-                            
+
                                         e.changedNode = this._resolveChangedNode(e.changedNode);
-                            
-                            
+
+
                                         /*
                                         * @TODO
                                         * This whole method needs to be fixed and made more dynamic.
                                         * Maybe static functions for the e.changeType and an object bag
                                         * to walk through and filter to pass off the event to before firing..
                                         */
-                            
+
                                         if (e.changedType === &#x27;tab&#x27;) {
                                             if (!e.changedNode.test(&#x27;li, li *&#x27;) &amp;&amp; !e.changedEvent.shiftKey) {
                                                 e.changedEvent.frameEvent.preventDefault();
@@ -1314,7 +1314,7 @@
                                                 }
                                             }
                                         }
-                                        
+
                                         if (Y.UA.webkit &amp;&amp; e.commands &amp;&amp; (e.commands.indent || e.commands.outdent)) {
                                             /*
                                             * When executing execCommand &#x27;indent or &#x27;outdent&#x27; Webkit applies
@@ -1326,26 +1326,26 @@
                                                 bq.setStyle(&#x27;margin&#x27;, &#x27;&#x27;);
                                             }
                                         }
-                            
+
                                         changed = this.getDomPath(e.changedNode, false);
-                            
+
                                         if (e.commands) {
                                             cmds = e.commands;
                                         }
-                            
-                            
+
+
                                         Y.each(changed, function(el) {
                                             var tag = el.tagName.toLowerCase(),
                                                 cmd = EditorBase.TAG2CMD[tag], s,
                                                 n, family2, cls, bColor2;
-                            
+
                                             if (cmd) {
                                                 cmds[cmd] = 1;
                                             }
-                            
+
                                             //Bold and Italic styles
                                             s = el.currentStyle || el.style;
-                            
+
                                             if ((&#x27;&#x27;+s.fontWeight) === &#x27;normal&#x27;) {
                                                 normal = true;
                                             }
@@ -1360,14 +1360,14 @@
                                             if (s.fontStyle === &#x27;italic&#x27;) {
                                                 cmds.italic = 1;
                                             }
-                            
+
                                             if (s.textDecoration.indexOf(&#x27;underline&#x27;) &gt; -1) {
                                                 cmds.underline = 1;
                                             }
                                             if (s.textDecoration.indexOf(&#x27;line-through&#x27;) &gt; -1) {
                                                 cmds.strikethrough = 1;
                                             }
-                            
+
                                             n = inst.one(el);
                                             if (n.getStyle(&#x27;fontFamily&#x27;)) {
                                                 family2 = n.getStyle(&#x27;fontFamily&#x27;).split(&#x27;,&#x27;)[0].toLowerCase();
@@ -1378,17 +1378,17 @@
                                                     family = family.replace(/&#x27;/g, &#x27;&#x27;).replace(/&quot;/g, &#x27;&#x27;);
                                                 }
                                             }
-                            
+
                                             fsize = EditorBase.NORMALIZE_FONTSIZE(n);
-                            
-                            
+
+
                                             cls = el.className.split(&#x27; &#x27;);
                                             Y.each(cls, function(v) {
                                                 if (v !== &#x27;&#x27; &amp;&amp; (v.substr(0, 4) !== &#x27;yui_&#x27;)) {
                                                     classes.push(v);
                                                 }
                                             });
-                            
+
                                             fColor = EditorBase.FILTER_RGB(n.getStyle(&#x27;color&#x27;));
                                             bColor2 = EditorBase.FILTER_RGB(s.backgroundColor);
                                             if (bColor2 !== &#x27;transparent&#x27;) {
@@ -1396,18 +1396,18 @@
                                                     bColor = bColor2;
                                                 }
                                             }
-                            
+
                                         });
-                            
+
                                         if (normal) {
                                             delete cmds.bold;
                                             delete cmds.italic;
                                         }
-                            
+
                                         e.dompath = inst.all(changed);
                                         e.classNames = classes;
                                         e.commands = cmds;
-                            
+
                                         //TODO Dont&#x27; like this, not dynamic enough..
                                         if (!e.fontFamily) {
                                             e.fontFamily = family;
@@ -1421,7 +1421,7 @@
                                         if (!e.backgroundColor) {
                                             e.backgroundColor = bColor;
                                         }
-                            
+
                                         endTime = (new Date()).getTime();
                                         Y.log(&#x27;_defNodeChangeTimer 2: &#x27; + (endTime - startTime) + &#x27;ms&#x27;, &#x27;info&#x27;, &#x27;selection&#x27;);
                                     },
@@ -1434,36 +1434,36 @@
                                         var domPath = [], domNode, rootNode,
                                             root = this._getRoot(),
                                             inst = this.frame.getInstance();
-                            
+
                                         domNode = inst.Node.getDOMNode(node);
                                         rootNode = inst.Node.getDOMNode(root);
                                         //return inst.all(domNode);
-                            
+
                                         while (domNode !== null) {
-                            
+
                                             if ((domNode === inst.config.doc.documentElement) || (domNode === inst.config.doc) || !domNode.tagName) {
                                                 domNode = null;
                                                 break;
                                             }
-                            
+
                                             if (!inst.DOM.inDoc(domNode)) {
                                                 domNode = null;
                                                 break;
                                             }
-                            
+
                                             //Check to see if we get el.nodeName and nodeType
                                             if (domNode.nodeName &amp;&amp; domNode.nodeType &amp;&amp; (domNode.nodeType === 1)) {
                                                 domPath.push(domNode);
                                             }
-                            
+
                                             if (domNode === rootNode) {
                                                 domNode = null;
                                                 break;
                                             }
-                            
+
                                             domNode = domNode.parentNode;
                                         }
-                            
+
                                         /*{{{ Using Node
                                         while (node !== null) {
                                             if (node.test(&#x27;html&#x27;) || node.test(&#x27;doc&#x27;) || !node.get(&#x27;tagName&#x27;)) {
@@ -1478,26 +1478,26 @@
                                             if (node.get(&#x27;nodeName&#x27;) &amp;&amp; node.get(&#x27;nodeType&#x27;) &amp;&amp; (node.get(&#x27;nodeType&#x27;) == 1)) {
                                                 domPath.push(inst.Node.getDOMNode(node));
                                             }
-                            
+
                                             if (node.test(&#x27;body&#x27;)) {
                                                 node = null;
                                                 break;
                                             }
-                            
+
                                             node = node.get(&#x27;parentNode&#x27;);
                                         }
                                         }}}*/
-                            
+
                                         if (domPath.length === 0) {
                                             domPath[0] = inst.config.doc.body;
                                         }
-                            
+
                                         if (nodeList) {
                                             return inst.all(domPath.reverse());
                                         } else {
                                             return domPath.reverse();
                                         }
-                            
+
                                     },
                                     /**
                                     * After frame ready, bind mousedown &amp; keyup listeners
@@ -1506,11 +1506,11 @@
                                     */
                                     _afterFrameReady: function() {
                                         var inst = this.frame.getInstance();
-                            
+
                                         this.frame.on(&#x27;dom:mouseup&#x27;, Y.bind(this._onFrameMouseUp, this));
                                         this.frame.on(&#x27;dom:mousedown&#x27;, Y.bind(this._onFrameMouseDown, this));
                                         this.frame.on(&#x27;dom:keydown&#x27;, Y.bind(this._onFrameKeyDown, this));
-                            
+
                                         if (Y.UA.ie &amp;&amp; Y.UA.ie &lt; 11) {
                                             this.frame.on(&#x27;dom:activate&#x27;, Y.bind(this._onFrameActivate, this));
                                             this.frame.on(&#x27;dom:beforedeactivate&#x27;, Y.bind(this._beforeFrameDeactivate, this));
@@ -1518,7 +1518,7 @@
                                         this.frame.on(&#x27;dom:keyup&#x27;, Y.bind(this._onFrameKeyUp, this));
                                         this.frame.on(&#x27;dom:keypress&#x27;, Y.bind(this._onFrameKeyPress, this));
                                         this.frame.on(&#x27;dom:paste&#x27;, Y.bind(this._onPaste, this));
-                            
+
                                         inst.EditorSelection.filter();
                                         this.fire(&#x27;ready&#x27;);
                                     },
@@ -1533,7 +1533,7 @@
                                         }
                                         var inst = this.getInstance(),
                                             sel = inst.config.doc.selection.createRange();
-                            
+
                                         if (sel.compareEndPoints &amp;&amp; !sel.compareEndPoints(&#x27;StartToEnd&#x27;, sel)) {
                                             sel.pasteHTML(&#x27;&lt;var id=&quot;yui-ie-cursor&quot;&gt;&#x27;);
                                         }
@@ -1552,7 +1552,7 @@
                                             range = sel.createRange(),
                                             root = this._getRoot(),
                                             cur = root.all(&#x27;#yui-ie-cursor&#x27;);
-                            
+
                                         if (cur.size()) {
                                             cur.each(function(n) {
                                                 n.set(&#x27;id&#x27;, &#x27;&#x27;);
@@ -1627,20 +1627,20 @@
                                             this._currentSelectionTimer = Y.later(850, this, function() {
                                                 this._currentSelectionClear = true;
                                             });
-                            
+
                                             inst = this.frame.getInstance();
                                             sel = new inst.EditorSelection(e);
-                            
+
                                             this._currentSelection = sel;
                                         } else {
                                             sel = this._currentSelection;
                                         }
-                            
+
                                         inst = this.frame.getInstance();
                                         sel = new inst.EditorSelection();
-                            
+
                                         this._currentSelection = sel;
-                            
+
                                         if (sel &amp;&amp; sel.anchorNode) {
                                             this.fire(&#x27;nodeChange&#x27;, { changedNode: sel.anchorNode, changedType: &#x27;keydown&#x27;, changedEvent: e.frameEvent });
                                             if (EditorBase.NC_KEYS[e.keyCode]) {
@@ -1664,7 +1664,7 @@
                                     */
                                     _onFrameKeyPress: function(e) {
                                         var sel = this._currentSelection;
-                            
+
                                         if (sel &amp;&amp; sel.anchorNode) {
                                             this.fire(&#x27;nodeChange&#x27;, { changedNode: sel.anchorNode, changedType: &#x27;keypress&#x27;, changedEvent: e.frameEvent });
                                             if (EditorBase.NC_KEYS[e.keyCode]) {
@@ -1684,7 +1684,7 @@
                                     _onFrameKeyUp: function(e) {
                                         var inst = this.frame.getInstance(),
                                             sel = new inst.EditorSelection(e);
-                            
+
                                         if (sel &amp;&amp; sel.anchorNode) {
                                             this.fire(&#x27;nodeChange&#x27;, { changedNode: sel.anchorNode, changedType: &#x27;keyup&#x27;, selection: sel, changedEvent: e.frameEvent  });
                                             if (EditorBase.NC_KEYS[e.keyCode]) {
@@ -1721,7 +1721,7 @@
                                             inst = this.frame.getInstance(),
                                             sel = new inst.EditorSelection(), cmds = {},
                                             e = { changedNode: sel.anchorNode, changedType: &#x27;execcommand&#x27;, nodes: ret };
-                            
+
                                         switch (cmd) {
                                             case &#x27;forecolor&#x27;:
                                                 e.fontColor = val;
@@ -1736,12 +1736,12 @@
                                                 e.fontFamily = val;
                                                 break;
                                         }
-                            
+
                                         cmds[cmd] = 1;
                                         e.commands = cmds;
-                            
+
                                         this.fire(&#x27;nodeChange&#x27;, e);
-                            
+
                                         return ret;
                                     },
                                     /**
@@ -1761,7 +1761,7 @@
                                     */
                                     render: function(node) {
                                         var frame = this.frame;
-                            
+
                                         if (!frame) {
                                             this.plug(Y.Plugin.Frame, {
                                                 designMode: true,
@@ -1772,22 +1772,22 @@
                                                 linkedcss: this.get(&#x27;linkedcss&#x27;),
                                                 defaultblock: this.get(&#x27;defaultblock&#x27;)
                                             });
-                            
+
                                             frame = this.frame;
                                         }
-                            
+
                                         if (!frame.hasPlugin(&#x27;exec&#x27;)) {
                                             frame.plug(Y.Plugin.ExecCommand);
                                         }
-                            
+
                                         frame.after(&#x27;ready&#x27;, Y.bind(this._afterFrameReady, this));
-                            
+
                                         frame.addTarget(this);
-                            
+
                                         frame.set(&#x27;content&#x27;, this.get(&#x27;content&#x27;));
-                            
+
                                         frame.render(node);
-                            
+
                                         return this;
                                     },
                                     /**
@@ -1845,7 +1845,7 @@
                                     */
                                     NORMALIZE_FONTSIZE: function(n) {
                                         var size = n.getStyle(&#x27;fontSize&#x27;), oSize = size;
-                            
+
                                         switch (size) {
                                             case &#x27;-webkit-xxx-large&#x27;:
                                                 size = &#x27;48px&#x27;;
@@ -1892,16 +1892,16 @@
                                             var exp = new RegExp(&quot;(.*?)rgb\\s*?\\(\\s*?([0-9]+).*?,\\s*?([0-9]+).*?,\\s*?([0-9]+).*?\\)(.*?)&quot;, &quot;gi&quot;),
                                                 rgb = css.replace(exp, &quot;$1,$2,$3,$4,$5&quot;).split(&#x27;,&#x27;),
                                                 r, g, b;
-                            
+
                                             if (rgb.length === 5) {
                                                 r = parseInt(rgb[1], 10).toString(16);
                                                 g = parseInt(rgb[2], 10).toString(16);
                                                 b = parseInt(rgb[3], 10).toString(16);
-                            
+
                                                 r = r.length === 1 ? &#x27;0&#x27; + r : r;
                                                 g = g.length === 1 ? &#x27;0&#x27; + g : g;
                                                 b = b.length === 1 ? &#x27;0&#x27; + b : b;
-                            
+
                                                 css = &quot;#&quot; + r + g + b;
                                             }
                                         }
@@ -2046,9 +2046,9 @@
                                         }
                                     }
                                 });
-                            
+
                                 Y.EditorBase = EditorBase;
-                            
+
                                 /**
                                 * @event nodeChange
                                 * @description Fired from several mouse/key/paste event points.
@@ -2066,16 +2066,16 @@
                                 *   &lt;dt&gt;fontSize&lt;/dt&gt;&lt;dd&gt;The cascaded fontSize of the changedNode&lt;/dd&gt;
                                 * &lt;/dl&gt;
                                 */
-                            
+
                                 /**
                                 * @event ready
                                 * @description Fired after the frame is ready.
                                 * @param {EventFacade} event An Event Facade object.
                                 */
-                            
-                            
-                            
-                            
+
+
+
+
                                 </pre>
                             </div>
                         </div>

@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,89 +1122,89 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/paginator/js/paginator.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
                              The Paginator utility allows you to display an item or a group of items
                              depending on the number of items you wish to display at one time.
-                            
+
                              Paginator&#x27;s primary functionality is contained in &#x60;paginator-core&#x60; and is mixed
                              into &#x60;paginator&#x60; to allow &#x60;paginator&#x60; to have extra functionality added to it
                              while leaving the core functionality untouched. This allows &#x60;paginator-core&#x60; to
                              remain available for use later on or used in isolation if it is the only piece
                              you need.
-                            
+
                              Due to the vast number of interfaces a paginator could possibly consist of,
                              &#x60;Paginator&#x60; does not contain any ready to use UIs. However, &#x60;Paginator&#x60; is
                              ready to be used in any Based-based, module such as a Widget, by extending your
                              desired class and mixing in &#x60;Paginator&#x60;. This is displayed in the following
                              example:
-                            
+
                              &lt;pre&gt;&lt;code&gt;
                              YUI().use(&#x27;paginator-url&#x27;, &#x27;widget&#x27;, function (Y){
                                  var MyPaginator = Y.Base.create(&#x27;my-paginator&#x27;, Y.Widget, [Y.Paginator], {
-                            
+
                                     renderUI: function () {
                                         var numbers = &#x27;&#x27;,
                                             i, numberOfPages = this.get(&#x27;totalPages&#x27;);
-                            
+
                                         for (i = 1; i &lt;= numberOfPages; i++) {
                                             // use paginator-url&#x27;s formatUrl method
                                             numbers += &#x27;&amp;lt;a href=&quot;&#x27; + this.formatUrl(i) + &#x27;&quot;&gt;&#x27; + i + &#x27;&amp;lt;/a&gt;&#x27;;
                                         }
-                            
+
                                         this.get(&#x27;boundingBox&#x27;).append(numbers);
                                     },
-                            
+
                                     bindUI: function () {
                                         this.get(&#x27;boundingBox&#x27;).delegate(&#x27;click&#x27;, function (e) {
                                             // let&#x27;s not go to the page, just update internally
                                             e.preventDefault();
                                             this.set(&#x27;page&#x27;, parseInt(e.currentTarget.getContent(), 10));
                                         }, &#x27;a&#x27;, this);
-                            
+
                                         this.after(&#x27;pageChange&#x27;, function (e) {
                                             // mark the link selected when it&#x27;s the page being displayed
                                             var bb = this.get(&#x27;boundingBox&#x27;),
                                                 activeClass = &#x27;selected&#x27;;
-                            
+
                                             bb.all(&#x27;a&#x27;).removeClass(activeClass).item(e.newVal).addClass(activeClass);
                                         });
                                     }
-                            
+
                                  });
-                            
+
                                  var myPg = new MyPaginator({
                                                 totalItems: 100,
                                                 pageUrl: &#x27;?pg={page}&#x27;
                                             });
-                            
+
                                  myPg.render();
                              });
                              &lt;/code&gt;&lt;/pre&gt;
-                            
+
                              @module paginator
                              @main paginator
                              @class Paginator
                              @constructor
                              @since 3.11.0
                              */
-                            
+
                             Y.Paginator = Y.mix(
                                 Y.Base.create(&#x27;paginator&#x27;, Y.Base, [Y.Paginator.Core]),
                                 Y.Paginator
                             );
-                            
+
                                 </pre>
                             </div>
                         </div>

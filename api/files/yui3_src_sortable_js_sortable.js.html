@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,19 +1122,19 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/sortable/js/sortable.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
-                            
+
                                 /**
                                  * The class allows you to create a Drag &amp; Drop reordered list.
                                  * @module sortable
@@ -1145,8 +1145,8 @@
                                  * @extends Base
                                  * @constructor
                                  */
-                            
-                            
+
+
                                 var Sortable = function() {
                                     Sortable.superclass.constructor.apply(this, arguments);
                                 },
@@ -1159,8 +1159,8 @@
                                 PARENT_NODE = &#x27;parentNode&#x27;,
                                 NODES = &#x27;nodes&#x27;,
                                 NODE = &#x27;node&#x27;;
-                            
-                            
+
+
                                 Y.extend(Sortable, Y.Base, {
                                     /**
                                     * @property delegate
@@ -1185,33 +1185,33 @@
                                                     groups: [ id ]
                                                 }
                                             }, del;
-                            
+
                                         if (this.get(&#x27;handles&#x27;)) {
                                             delConfig.handles = this.get(&#x27;handles&#x27;);
                                         }
                                         del = new Y.DD.Delegate(delConfig);
-                            
+
                                         this.set(ID, id);
-                            
+
                                         del.dd.plug(Y.Plugin.DDProxy, {
                                             moveOnEnd: false,
                                             cloneNode: true
                                         });
-                            
+
                                         this.drop =  new Y.DD.Drop({
                                             node: this.get(CONT),
                                             bubbleTarget: del,
                                             groups: del.dd.get(&#x27;groups&#x27;)
                                         });
                                         this.drop.on(&#x27;drop:enter&#x27;, Y.bind(this._onDropEnter, this));
-                            
+
                                         del.on({
                                             &#x27;drag:start&#x27;: Y.bind(this._onDragStart, this),
                                             &#x27;drag:end&#x27;: Y.bind(this._onDragEnd, this),
                                             &#x27;drag:over&#x27;: Y.bind(this._onDragOver, this),
                                             &#x27;drag:drag&#x27;: Y.bind(this._onDrag, this)
                                         });
-                            
+
                                         this.delegate = del;
                                         Sortable.reg(this, id);
                                     },
@@ -1223,7 +1223,7 @@
                                         } else if (e.pageY &gt; this._y) {
                                             this._up = false;
                                         }
-                            
+
                                         this._y = e.pageY;
                                     },
                                     /**
@@ -1235,7 +1235,7 @@
                                     _onDropEnter: function(e) {
                                         var dropNode = e.drop.get(NODE),
                                             dragNode = e.drag.get(NODE);
-                            
+
                                         if (!dropNode.test(this.get(NODES)) &amp;&amp;
                                             !dragNode.get(PARENT_NODE).compareTo(dropNode)) {
                                             dropNode.append(dragNode);
@@ -1260,7 +1260,7 @@
                                         }
                                         var same = false, dir, oldNode, newNode, dropsort, dropNode,
                                             moveType = this.get(&#x27;moveType&#x27;).toLowerCase();
-                            
+
                                         if (e.drag.get(NODE).get(PARENT_NODE).contains(e.drop.get(NODE))) {
                                             same = true;
                                         }
@@ -1283,14 +1283,14 @@
                                             case &#x27;move&#x27;:
                                             case &#x27;copy&#x27;:
                                                 dropsort = Y.Sortable.getSortable(e.drop.get(NODE).get(PARENT_NODE));
-                            
+
                                                 if (!dropsort) {
                                                     Y.log(&#x27;No delegate parent found&#x27;, &#x27;error&#x27;, &#x27;sortable&#x27;);
                                                     return;
                                                 }
-                            
+
                                                 Y.DD.DDM.getDrop(e.drag.get(NODE)).addToGroup(dropsort.get(ID));
-                            
+
                                                 //Same List
                                                 if (same) {
                                                     Y.DD.DDM.swapNode(e.drag, e.drop);
@@ -1299,7 +1299,7 @@
                                                         //New List
                                                         oldNode = e.drag.get(NODE);
                                                         newNode = oldNode.cloneNode(true);
-                            
+
                                                         newNode.set(ID, &#x27;&#x27;);
                                                         e.drag.set(NODE, newNode);
                                                         dropsort.delegate.createDrop(newNode, [dropsort.get(ID)]);
@@ -1312,7 +1312,7 @@
                                                 }
                                                 break;
                                         }
-                            
+
                                         this.fire(moveType, { same: same, drag: e.drag, drop: e.drop });
                                         this.fire(&#x27;moved&#x27;, { same: same, drag: e.drag, drop: e.drop });
                                     },
@@ -1399,11 +1399,11 @@
                                         }
                                         type = type.toLowerCase();
                                         var method = &#x27;_join_&#x27; + type;
-                            
+
                                         if (this[method]) {
                                             this[method](sel);
                                         }
-                            
+
                                         return this;
                                     },
                                     /**
@@ -1453,13 +1453,13 @@
                                     */
                                     getOrdering: function(callback) {
                                         var ordering = [];
-                            
+
                                         if (!Y.Lang.isFunction(callback)) {
                                             callback = function (node) {
                                                 return node;
                                             };
                                         }
-                            
+
                                         Y.one(this.get(CONT)).all(this.get(NODES)).each(function(node) {
                                             ordering.push(callback(node));
                                         });
@@ -1613,9 +1613,9 @@
                                         });
                                     }
                                 });
-                            
+
                                 Y.Sortable = Sortable;
-                            
+
                                 /**
                                 * @event copy
                                 * @description A Sortable node was moved with a copy.
@@ -1656,8 +1656,8 @@
                                 * @param {DD.Drag} event.drag The drag instance.
                                 * @param {DD.Drop} event.drop The drop instance.
                                 */
-                            
-                            
+
+
                                 </pre>
                             </div>
                         </div>

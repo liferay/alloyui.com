@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,28 +1122,28 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/pluginhost/js/PluginHost.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                                 /**
                                  * Provides the augmentable PluginHost interface, which can be added to any class.
                                  * @module pluginhost
                                  */
-                            
+
                                 /**
                                  * Provides the augmentable PluginHost interface, which can be added to any class.
                                  * @module pluginhost-base
                                  */
-                            
+
                                 /**
                                  * &lt;p&gt;
                                  * An augmentable class, which provides the augmented class with the ability to host plugins.
@@ -1166,15 +1166,15 @@
                                  *
                                  * @class Plugin.Host
                                  */
-                            
+
                                 var L = Y.Lang;
-                            
+
                                 function PluginHost() {
                                     this._plugins = {};
                                 }
-                            
+
                                 PluginHost.prototype = {
-                            
+
                                     /**
                                      * Adds a plugin to the host object. This will instantiate the
                                      * plugin and attach it to the configured namespace on the host object.
@@ -1194,7 +1194,7 @@
                                      */
                                     plug: function(Plugin, config) {
                                         var i, ln, ns;
-                            
+
                                         if (L.isArray(Plugin)) {
                                             for (i = 0, ln = Plugin.length; i &lt; ln; i++) {
                                                 this.plug(Plugin[i]);
@@ -1204,14 +1204,14 @@
                                                 config = Plugin.cfg;
                                                 Plugin = Plugin.fn;
                                             }
-                            
+
                                             // Plugin should be fn by now
                                             if (Plugin &amp;&amp; Plugin.NS) {
                                                 ns = Plugin.NS;
-                            
+
                                                 config = config || {};
                                                 config.host = this;
-                            
+
                                                 if (this.hasPlugin(ns)) {
                                                     // Update config
                                                     if (this[ns].setAttrs) {
@@ -1232,7 +1232,7 @@
                                         }
                                         return this;
                                     },
-                            
+
                                     /**
                                      * Removes a plugin from the host object. This will destroy the
                                      * plugin instance and delete the namespace from the host object.
@@ -1246,7 +1246,7 @@
                                     unplug: function(plugin) {
                                         var ns = plugin,
                                             plugins = this._plugins;
-                            
+
                                         if (plugin) {
                                             if (L.isFunction(plugin)) {
                                                 ns = plugin.NS;
@@ -1254,7 +1254,7 @@
                                                     ns = null;
                                                 }
                                             }
-                            
+
                                             if (ns) {
                                                 if (this[ns]) {
                                                     if (this[ns].destroy) {
@@ -1275,7 +1275,7 @@
                                         }
                                         return this;
                                     },
-                            
+
                                     /**
                                      * Determines if a plugin has plugged into this host.
                                      *
@@ -1286,7 +1286,7 @@
                                     hasPlugin : function(ns) {
                                         return (this._plugins[ns] &amp;&amp; this[ns]);
                                     },
-                            
+
                                     /**
                                      * Initializes static plugins registered on the host (using the
                                      * Base.plug static method) and any plugins passed to the
@@ -1296,15 +1296,15 @@
                                      * @param {Object} config The configuration object with property name/value pairs.
                                      * @private
                                      */
-                            
+
                                     _initPlugins: function(config) {
                                         this._plugins = this._plugins || {};
-                            
+
                                         if (this._initConfigPlugins) {
                                             this._initConfigPlugins(config);
                                         }
                                     },
-                            
+
                                     /**
                                      * Unplugs and destroys all plugins on the host
                                      * @method _destroyPlugins
@@ -1314,9 +1314,9 @@
                                         this.unplug();
                                     }
                                 };
-                            
+
                                 Y.namespace(&quot;Plugin&quot;).Host = PluginHost;
-                            
+
                                 </pre>
                             </div>
                         </div>

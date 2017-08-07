@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>alloy-ui/src/aui-datepicker/js/aui-datepicker-delegate.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1140,20 +1140,20 @@
                              * @module aui-datepicker
                              * @submodule aui-datepicker-delegate
                              */
-                            
+
                             var Lang = A.Lang,
                                 isString = Lang.isString,
-                            
+
                                 EVENT_ENTER_KEY = &#x27;enterKey&#x27;,
-                            
+
                                 _DOCUMENT = A.one(A.config.doc);
-                            
+
                             /**
                              * Fired when then enter key is pressed on an input node.
                              *
                              * @event enterKey
                              */
-                            
+
                             /**
                              * A base class for &#x60;DatePickerDelegate&#x60;.
                              *
@@ -1162,14 +1162,14 @@
                              *     properties.
                              * @constructor
                              */
-                            
+
                             function DatePickerDelegate() {}
-                            
+
                             DatePickerDelegate.prototype = {
                                 _eventHandles: null,
-                            
+
                                 _userInteractionInProgress: false,
-                            
+
                                 /**
                                  * Construction logic executed during &#x60;DatePickerDelegate&#x60; instantiation.
                                  * Lifecycle.
@@ -1179,10 +1179,10 @@
                                  */
                                 initializer: function() {
                                     var instance = this;
-                            
+
                                     instance.bindDelegateUI();
                                 },
-                            
+
                                 /**
                                  * Destructor logic implementation for the &#x60;DatePickerDelegate&#x60; class.
                                  *
@@ -1191,10 +1191,10 @@
                                  */
                                 destroy: function() {
                                     var instance = this;
-                            
+
                                     (new A.EventHandle(instance._eventHandles)).detach();
                                 },
-                            
+
                                 /**
                                  * Bind the events on the &#x60;DatePickerDelegate&#x60; UI. Lifecycle.
                                  *
@@ -1205,35 +1205,35 @@
                                     var instance = this,
                                         container = instance.get(&#x27;container&#x27;),
                                         trigger = instance.get(&#x27;trigger&#x27;);
-                            
+
                                     instance._eventHandles = [
                                         container.delegate(
                                             [&#x27;focus&#x27;, &#x27;mousedown&#x27;],
                                             A.bind(&#x27;_onceUserInteraction&#x27;, instance), trigger),
-                            
+
                                         container.delegate(
                                             &#x27;blur&#x27;,
                                             A.bind(&#x27;_onUserInteractionRelease&#x27;, instance), trigger),
-                            
+
                                         container.delegate(
                                             &#x27;click&#x27;,
                                             A.bind(&#x27;_onceUserInteractionRelease&#x27;, instance), trigger),
-                            
+
                                         container.delegate(
                                             &#x27;key&#x27;, A.bind(&#x27;_handleTabKeyEvent&#x27;, instance), &#x27;tab&#x27;, trigger)
-                            
+
                                     ];
-                            
+
                                     instance.after(
                                         &#x27;activeInputChange&#x27;,
                                         A.bind(&#x27;_afterActiveInputChange&#x27;, instance));
-                            
+
                                     instance.publish(
                                         &#x27;selectionChange&#x27;, {
                                             defaultFn: instance._defSelectionChangeFn
                                         });
                                 },
-                            
+
                                 /**
                                  * Gets the selected dates.
                                  *
@@ -1245,14 +1245,14 @@
                                     var instance = this,
                                         activeInput = node || instance.get(&#x27;activeInput&#x27;),
                                         selectedDates = activeInput.getData(&#x27;datepickerSelection&#x27;);
-                            
+
                                     if (selectedDates) {
                                         return selectedDates;
                                     }
-                            
+
                                     return null;
                                 },
-                            
+
                                 /**
                                  * Gets parsed dates from input value.
                                  *
@@ -1264,23 +1264,23 @@
                                     var instance = this,
                                         valueExtractor = instance.get(&#x27;valueExtractor&#x27;),
                                         parsedDates = valueExtractor.call(instance, opt_value);
-                            
+
                                     if (parsedDates) {
                                         return A.Array.filter(parsedDates, function(parsed) {
                                             return parsed !== false;
                                         });
                                     }
-                            
+
                                     return null;
                                 },
-                            
+
                                 /**
                                  * Method not implemented.
                                  *
                                  * @method useInputNode
                                  */
                                 useInputNode: function() {},
-                            
+
                                 /**
                                  * Triggers &#x60;useInputNode&#x60; method once.
                                  *
@@ -1289,12 +1289,12 @@
                                  */
                                 useInputNodeOnce: function(node) {
                                     var instance = this;
-                            
+
                                     if (!instance._userInteractionInProgress) {
                                         instance.useInputNode(node);
                                     }
                                 },
-                            
+
                                 /**
                                 * Fires when the &#x27;activeInput&#x27; attribute changes.  The keydown listener is
                                 * removed from the old active input and is attached to the new one.
@@ -1305,17 +1305,17 @@
                                 */
                                 _afterActiveInputChange: function(event) {
                                     var instance = this;
-                            
+
                                     if (event.prevVal) {
                                         event.prevVal.detach(
                                             &#x27;keydown&#x27;, instance._handleKeydownEvent, instance);
                                     }
-                            
+
                                     if (event.newVal) {
                                         event.newVal.on(&#x27;keydown&#x27;, instance._handleKeydownEvent, instance);
                                     }
                                 },
-                            
+
                                 /**
                                  * Default behavior for selection change.
                                  *
@@ -1328,12 +1328,12 @@
                                         selection = event.newSelection,
                                         activeInput = instance.get(&#x27;activeInput&#x27;),
                                         valueFormatter = instance.get(&#x27;valueFormatter&#x27;);
-                            
+
                                     valueFormatter.call(instance, selection);
-                            
+
                                     activeInput.setData(&#x27;datepickerSelection&#x27;, selection);
                                 },
-                            
+
                                 /**
                                  * Formats a date according to a mask.
                                  *
@@ -1345,12 +1345,12 @@
                                 _formatDate: function(date) {
                                     var instance = this,
                                         mask = instance.get(&#x27;mask&#x27;);
-                            
+
                                     return A.Date.format(date, {
                                         format: mask
                                     });
                                 },
-                            
+
                                 /**
                                 * Handles keydown events
                                 *
@@ -1360,12 +1360,12 @@
                                 */
                                 _handleKeydownEvent: function(event) {
                                     var instance = this;
-                            
+
                                     if (event.isKey(&#x27;enter&#x27;)) {
                                         instance.fire(EVENT_ENTER_KEY);
                                     }
                                 },
-                            
+
                                 /**
                                 * Handles tab key events
                                 *
@@ -1375,7 +1375,7 @@
                                 _handleTabKeyEvent: function() {
                                     this.hide();
                                 },
-                            
+
                                 /**
                                  * Fires once user interacts.
                                  *
@@ -1385,12 +1385,12 @@
                                  */
                                 _onceUserInteraction: function(event) {
                                     var instance = this;
-                            
+
                                     instance.useInputNodeOnce(event.currentTarget);
-                            
+
                                     instance._userInteractionInProgress = true;
                                 },
-                            
+
                                 /**
                                  * Fires once user interaction releases.
                                  *
@@ -1400,12 +1400,12 @@
                                  */
                                 _onceUserInteractionRelease: function(event) {
                                     var instance = this;
-                            
+
                                     instance.useInputNodeOnce(event.currentTarget);
-                            
+
                                     instance._userInteractionInProgress = false;
                                 },
-                            
+
                                 /**
                                  * Fires when user interaction releases.
                                  *
@@ -1415,12 +1415,12 @@
                                  */
                                 _onUserInteractionRelease: function(event) {
                                     var instance = this;
-                            
+
                                     instance.useInputNode(event.currentTarget);
-                            
+
                                     instance._userInteractionInProgress = false;
                                 },
-                            
+
                                 /**
                                  * Extracts the input value.
                                  *
@@ -1435,7 +1435,7 @@
                                             dateSeparator = instance.get(&#x27;dateSeparator&#x27;),
                                             mask = instance.get(&#x27;mask&#x27;),
                                             dates;
-                            
+
                                         if (activeInputValue) {
                                             dates = [];
                                             A.Array.each(
@@ -1447,11 +1447,11 @@
                                                     }
                                                 });
                                         }
-                            
+
                                         return dates;
                                     };
                                 },
-                            
+
                                 /**
                                  * Formats a date value.
                                  *
@@ -1465,16 +1465,16 @@
                                             activeInput = instance.get(&#x27;activeInput&#x27;),
                                             dateSeparator = instance.get(&#x27;dateSeparator&#x27;),
                                             values = [];
-                            
+
                                         A.Array.each(dates, function(date) {
                                             values.push(instance._formatDate(date));
                                         });
-                            
+
                                         activeInput.val(values.join(dateSeparator));
                                     };
                                 }
                             };
-                            
+
                             /**
                              * Static property used to define the default attribute configuration for the
                              * &#x60;DatePickerDelegate&#x60;.
@@ -1484,14 +1484,14 @@
                              * @static
                              */
                             DatePickerDelegate.ATTRS = {
-                            
+
                                 /**
                                  * The active input element that holds the calendar instance.
                                  *
                                  * @attribute activeInput
                                  */
                                 activeInput: {},
-                            
+
                                 /**
                                  * Contains an element.
                                  *
@@ -1503,7 +1503,7 @@
                                     value: _DOCUMENT,
                                     writeOnce: true
                                 },
-                            
+
                                 /**
                                  * Character that separate dates.
                                  *
@@ -1515,7 +1515,7 @@
                                     value: &#x27; \u2014 &#x27;,
                                     validator: Lang.isString
                                 },
-                            
+
                                 /**
                                  * Defines the date format.
                                  *
@@ -1527,7 +1527,7 @@
                                     value: &#x27;%m/%d/%Y&#x27;,
                                     validator: Lang.isString
                                 },
-                            
+
                                 /**
                                  * Stores a trigger.
                                  *
@@ -1539,7 +1539,7 @@
                                     validator: isString,
                                     writeOnce: true
                                 },
-                            
+
                                 /**
                                  * Extracts a value from a function.
                                  *
@@ -1550,7 +1550,7 @@
                                     valueFn: &#x27;_valueExtractorFn&#x27;,
                                     validator: Lang.isFunction
                                 },
-                            
+
                                 /**
                                  * Formats a value from a function.
                                  *
@@ -1562,9 +1562,9 @@
                                     validator: Lang.isFunction
                                 }
                             };
-                            
+
                             A.DatePickerDelegate = DatePickerDelegate;
-                            
+
                                 </pre>
                             </div>
                         </div>

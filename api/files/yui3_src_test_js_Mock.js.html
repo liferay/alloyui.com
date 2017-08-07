@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/test/js/Mock.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1144,13 +1144,13 @@
                              *      should be stubbed out on the mock object.
                              */
                             YUITest.Mock = function(template){
-                            
+
                                 //use blank object is nothing is passed in
                                 template = template || {};
-                            
+
                                 var mock,
                                     name;
-                            
+
                                 //try to create mock that keeps prototype chain intact
                                 //fails in the case of ActiveX objects
                                 try {
@@ -1160,7 +1160,7 @@
                                 } catch (ex) {
                                     mock = {};
                                 }
-                            
+
                                 //create stubs for all methods
                                 for (name in template){
                                     if (template.hasOwnProperty(name)){
@@ -1173,11 +1173,11 @@
                                         }
                                     }
                                 }
-                            
+
                                 //return it
                                 return mock;
                             };
-                            
+
                             /**
                              * Assigns an expectation to a mock object. This is used to create
                              * methods and properties on the mock object that are monitored for
@@ -1198,12 +1198,12 @@
                              * @static
                              */
                             YUITest.Mock.expect = function(mock /*:Object*/, expectation /*:Object*/){
-                            
+
                                 //make sure there&#x27;s a place to store the expectations
                                 if (!mock.__expectations) {
                                     mock.__expectations = {};
                                 }
-                            
+
                                 //method expectation
                                 if (expectation.method){
                                     var name = expectation.method,
@@ -1214,19 +1214,19 @@
                                         run = expectation.run || function(){},
                                         runResult,
                                         i;
-                            
+
                                     //save expectations
                                     mock.__expectations[name] = expectation;
                                     expectation.callCount = callCount;
                                     expectation.actualCallCount = 0;
-                            
+
                                     //process arguments
                                     for (i=0; i &lt; args.length; i++){
                                          if (!(args[i] instanceof YUITest.Mock.Value)){
                                             args[i] = YUITest.Mock.Value(YUITest.Assert.areSame, [args[i]], &quot;Argument &quot; + i + &quot; of &quot; + name + &quot;() is incorrect.&quot;);
                                         }
                                     }
-                            
+
                                     //if the method is expected to be called
                                     if (callCount &gt; 0){
                                         mock[name] = function(){
@@ -1236,9 +1236,9 @@
                                                 for (var i=0, len=args.length; i &lt; len; i++){
                                                     args[i].verify(arguments[i]);
                                                 }
-                            
+
                                                 runResult = run.apply(this, arguments);
-                            
+
                                                 if (error){
                                                     throw error;
                                                 }
@@ -1246,13 +1246,13 @@
                                                 //route through TestRunner for proper handling
                                                 YUITest.TestRunner._handleError(ex);
                                             }
-                            
+
                                             // Any value provided for &#x27;returns&#x27; overrides any value returned
                                             // by our &#x27;run&#x27; function.
                                             return expectation.hasOwnProperty(&#x27;returns&#x27;) ? result : runResult;
                                         };
                                     } else {
-                            
+
                                         //method should fail if called when not expected
                                         mock[name] = function(){
                                             try {
@@ -1268,7 +1268,7 @@
                                     mock.__expectations[expectation.property] = expectation;
                                 }
                             };
-                            
+
                             /**
                              * Verifies that all expectations of a mock object have been met and
                              * throws an assertion error if not.
@@ -1278,7 +1278,7 @@
                              */
                             YUITest.Mock.verify = function(mock){
                                 try {
-                            
+
                                     for (var name in mock.__expectations){
                                         if (mock.__expectations.hasOwnProperty(name)){
                                             var expectation = mock.__expectations[name];
@@ -1289,13 +1289,13 @@
                                             }
                                         }
                                     }
-                            
+
                                 } catch (ex){
                                     //route through TestRunner for proper handling
                                     YUITest.TestRunner._handleError(ex);
                                 }
                             };
-                            
+
                             /**
                              * Creates a new value matcher.
                              * @param {Function} method The function to call on the value.
@@ -1318,7 +1318,7 @@
                                     return new YUITest.Mock.Value(method, originalArgs, message);
                                 }
                             };
-                            
+
                             /**
                              * Predefined matcher to match any value.
                              * @property Any
@@ -1326,7 +1326,7 @@
                              * @type Function
                              */
                             YUITest.Mock.Value.Any        = YUITest.Mock.Value(function(){});
-                            
+
                             /**
                              * Predefined matcher to match boolean values.
                              * @property Boolean
@@ -1334,7 +1334,7 @@
                              * @type Function
                              */
                             YUITest.Mock.Value.Boolean    = YUITest.Mock.Value(YUITest.Assert.isBoolean);
-                            
+
                             /**
                              * Predefined matcher to match number values.
                              * @property Number
@@ -1342,7 +1342,7 @@
                              * @type Function
                              */
                             YUITest.Mock.Value.Number     = YUITest.Mock.Value(YUITest.Assert.isNumber);
-                            
+
                             /**
                              * Predefined matcher to match string values.
                              * @property String
@@ -1350,7 +1350,7 @@
                              * @type Function
                              */
                             YUITest.Mock.Value.String     = YUITest.Mock.Value(YUITest.Assert.isString);
-                            
+
                             /**
                              * Predefined matcher to match object values.
                              * @property Object
@@ -1358,7 +1358,7 @@
                              * @type Function
                              */
                             YUITest.Mock.Value.Object     = YUITest.Mock.Value(YUITest.Assert.isObject);
-                            
+
                             /**
                              * Predefined matcher to match function values.
                              * @property Function
@@ -1366,7 +1366,7 @@
                              * @type Function
                              */
                             YUITest.Mock.Value.Function   = YUITest.Mock.Value(YUITest.Assert.isFunction);
-                            
+
                                 </pre>
                             </div>
                         </div>

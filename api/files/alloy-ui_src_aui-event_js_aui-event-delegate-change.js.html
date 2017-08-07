@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>alloy-ui/src/aui-event/js/aui-event-delegate-change.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1140,10 +1140,10 @@
                              * @module aui-event
                              * @submodule aui-event-delegate-change
                              */
-                            
+
                             var AObject = A.Object,
                                 Selector = A.Selector;
-                            
+
                             /**
                              * Defines a new &#x60;change&#x60; event in the DOM event system.
                              *
@@ -1162,10 +1162,10 @@
                                      */
                                     delegate: function(node, subscription, notifier, filter) {
                                         var instance = this;
-                            
+
                                         instance._attachEvents(node, subscription, notifier, filter);
                                     },
-                            
+
                                     /**
                                      * Implementation logic for cleaning up a detached subscription.
                                      *
@@ -1176,10 +1176,10 @@
                                      */
                                     detach: function(node, subscription, notifier) {
                                         var instance = this;
-                            
+
                                         instance._detachEvents(node, subscription, notifier);
                                     },
-                            
+
                                     /**
                                      * Implementation logic for cleaning up a detached delegate
                                      * subscription.
@@ -1191,10 +1191,10 @@
                                      */
                                     detachDelegate: function(node, subscription, notifier) {
                                         var instance = this;
-                            
+
                                         instance._detachEvents(node, subscription, notifier);
                                     },
-                            
+
                                     /**
                                      * Implementation logic for event subscription.
                                      *
@@ -1205,10 +1205,10 @@
                                      */
                                     on: function(node, subscription, notifier) {
                                         var instance = this;
-                            
+
                                         instance._attachEvent(node, subscription, notifier);
                                     },
-                            
+
                                     /**
                                      * Adds an event subscription.
                                      *
@@ -1222,44 +1222,44 @@
                                      */
                                     _attachEvent: function(node, subscription, notifier, delegateNode, filter) {
                                         var instance = this;
-                            
+
                                         var type = instance._getEventName(node);
-                            
+
                                         var handles = instance._prepareHandles(subscription, node);
-                            
+
                                         if (!AObject.owns(handles, type)) {
                                             var fireFn = notifier.fire;
-                            
+
                                             if (delegateNode) {
                                                 fireFn = function(event) {
                                                     var delegateEl = delegateNode.getDOM();
-                            
+
                                                     var result = true;
-                            
+
                                                     var tmpEl = node.getDOM();
-                            
+
                                                     var tmpEvent = A.clone(event);
-                            
+
                                                     do {
                                                         if (tmpEl &amp;&amp; Selector.test(tmpEl, filter)) {
                                                             tmpEvent.currentTarget = A.one(tmpEl);
                                                             tmpEvent.container = delegateNode;
-                            
+
                                                             result = notifier.fire(tmpEvent);
                                                         }
-                            
+
                                                         tmpEl = tmpEl.parentNode;
                                                     }
                                                     while (result !== false &amp;&amp; !tmpEvent.stopped &amp;&amp; tmpEl &amp;&amp; tmpEl !== delegateEl);
-                            
+
                                                     return ((result !== false) &amp;&amp; (tmpEvent.stopped !== 2));
                                                 };
                                             }
-                            
+
                                             handles[type] = A.Event._attach([type, fireFn, node, notifier]);
                                         }
                                     },
-                            
+
                                     /**
                                      * Adds an event subscription.
                                      *
@@ -1272,20 +1272,20 @@
                                      */
                                     _attachEvents: function(node, subscription, notifier, filter) {
                                         var instance = this;
-                            
+
                                         var handles = instance._prepareHandles(subscription, node);
-                            
+
                                         handles.beforeactivate = node.delegate(
                                             &#x27;beforeactivate&#x27;,
                                             function(event) {
                                                 var activeElement = event.target;
-                            
+
                                                 instance._attachEvent(activeElement, subscription, notifier, node, filter);
                                             },
                                             filter
                                         );
                                     },
-                            
+
                                     /**
                                      * Deletes a group of event subscriptions.
                                      *
@@ -1307,10 +1307,10 @@
                                                 );
                                             }
                                         );
-                            
+
                                         delete subscription._handles;
                                     },
-                            
+
                                     /**
                                      * Gets an event name.
                                      *
@@ -1320,19 +1320,19 @@
                                     _getEventName: A.cached(
                                         function(activeElement) {
                                             var eventName = &#x27;change&#x27;;
-                            
+
                                             var tagName = activeElement.attr(&#x27;tagName&#x27;).toLowerCase();
-                            
+
                                             var type = activeElement.attr(&#x27;type&#x27;).toLowerCase();
-                            
+
                                             if (tagName === &#x27;input&#x27; &amp;&amp; (type === &#x27;checkbox&#x27; || type === &#x27;radio&#x27;)) {
                                                 eventName = &#x27;click&#x27;;
                                             }
-                            
+
                                             return eventName;
                                         }
                                     ),
-                            
+
                                     /**
                                      * Prepares event handles.
                                      *
@@ -1345,19 +1345,19 @@
                                         if (!AObject.owns(subscription, &#x27;_handles&#x27;)) {
                                             subscription._handles = {};
                                         }
-                            
+
                                         var handles = subscription._handles;
-                            
+
                                         if (!AObject.owns(handles, node)) {
                                             handles[node] = {};
                                         }
-                            
+
                                         return handles[node];
                                     }
                                 },
                                 true
                             );
-                            
+
                                 </pre>
                             </div>
                         </div>

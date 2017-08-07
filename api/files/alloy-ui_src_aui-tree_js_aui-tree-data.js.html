@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>alloy-ui/src/aui-tree/js/aui-tree-data.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1140,24 +1140,24 @@
                              * @module aui-tree
                              * @submodule aui-tree-data
                              */
-                            
+
                             var L = A.Lang,
                                 isArray = L.isArray,
                                 isObject = L.isObject,
                                 isUndefined = L.isUndefined,
-                            
+
                                 isTreeNode = function(v) {
                                     return (A.instanceOf(v, A.TreeNode));
                                 },
-                            
+
                                 isTreeView = function(v) {
                                     return (A.instanceOf(v, A.TreeView));
                                 },
-                            
+
                                 getCN = A.getClassName,
-                            
+
                                 CSS_TREE_NODE = getCN(&#x27;tree&#x27;, &#x27;node&#x27;);
-                            
+
                             /**
                              * A base class for TreeData, providing:
                              *
@@ -1172,9 +1172,9 @@
                              *     properties.
                              * @constructor
                              */
-                            
+
                             var TreeData = function() {};
-                            
+
                             /**
                              * Static property used to define the default attribute
                              * configuration for the TreeData.
@@ -1184,7 +1184,7 @@
                              * @static
                              */
                             TreeData.ATTRS = {
-                            
+
                                 /**
                                  * Container to nest children nodes. If it has a container it&#x27;s not a leaf.
                                  *
@@ -1195,7 +1195,7 @@
                                 container: {
                                     setter: A.one
                                 },
-                            
+
                                 /**
                                  * Array of children (i.e. could be a JSON metadata object or a TreeNode
                                  * instance).
@@ -1209,7 +1209,7 @@
                                     validator: isArray,
                                     setter: &#x27;_setChildren&#x27;
                                 },
-                            
+
                                 /**
                                  * Index the nodes.
                                  *
@@ -1221,12 +1221,12 @@
                                     value: {}
                                 }
                             };
-                            
+
                             A.mix(TreeData.prototype, {
                                 _indexPrimed: false,
-                            
+
                                 childrenLength: 0,
-                            
+
                                 /**
                                  * Construction logic executed during TreeData instantiation. Lifecycle.
                                  *
@@ -1235,7 +1235,7 @@
                                  */
                                 initializer: function() {
                                     var instance = this;
-                            
+
                                     // binding on initializer, needed before .render() phase
                                     instance.publish(&#x27;move&#x27;);
                                     instance.publish(&#x27;append&#x27;, {
@@ -1245,7 +1245,7 @@
                                         defaultFn: instance._removeChild
                                     });
                                 },
-                            
+
                                 /**
                                  * Destructor lifecycle implementation for the &#x60;TreeData&#x60; class.
                                  * Purges events attached to the node (and all child nodes).
@@ -1255,12 +1255,12 @@
                                  */
                                 destructor: function() {
                                     var instance = this;
-                            
+
                                     instance.eachChildren(function(node) {
                                         node.destroy();
                                     }, true);
                                 },
-                            
+
                                 /**
                                  * Get a TreeNode by id.
                                  *
@@ -1270,14 +1270,14 @@
                                  */
                                 getNodeById: function(uid) {
                                     var instance = this;
-                            
+
                                     if (!instance._indexPrimed) {
                                         instance.refreshIndex();
                                     }
-                            
+
                                     return instance.get(&#x27;index&#x27;)[uid];
                                 },
-                            
+
                                 /**
                                  * Whether the TreeNode is registered on this TreeData.
                                  *
@@ -1287,10 +1287,10 @@
                                  */
                                 isRegistered: function(node) {
                                     var instance = this;
-                            
+
                                     return !!(instance.get(&#x27;index&#x27;)[node.get(&#x27;id&#x27;)]);
                                 },
-                            
+
                                 /**
                                  * Update the references of the passed TreeNode.
                                  *
@@ -1304,62 +1304,62 @@
                                     var oldParent = node.get(&#x27;parentNode&#x27;);
                                     var oldOwnerTree = node.get(&#x27;ownerTree&#x27;);
                                     var moved = oldParent &amp;&amp; (oldParent !== parentNode);
-                            
+
                                     if (oldParent) {
                                         if (moved) {
                                             // when moved update the oldParent children
                                             var children = oldParent.get(&#x27;children&#x27;);
-                            
+
                                             A.Array.removeItem(children, node);
-                            
+
                                             oldParent.set(&#x27;children&#x27;, children);
                                         }
-                            
+
                                         oldParent.unregisterNode(node);
                                     }
-                            
+
                                     if (oldOwnerTree) {
                                         oldOwnerTree.unregisterNode(node);
                                     }
-                            
+
                                     // update parent reference when registered
                                     node.set(&#x27;parentNode&#x27;, parentNode);
-                            
+
                                     // update the ownerTree of the node
                                     node.set(&#x27;ownerTree&#x27;, ownerTree);
-                            
+
                                     if (parentNode) {
                                         // register the new node on the parentNode index
                                         parentNode.registerNode(node);
                                     }
-                            
+
                                     if (ownerTree) {
                                         // register the new node to the ownerTree index
                                         ownerTree.registerNode(node);
                                     }
-                            
+
                                     if (oldOwnerTree !== ownerTree) {
                                         // when change the OWNER_TREE update the children references also
                                         node.eachChildren(function(child) {
                                             instance.updateReferences(child, child.get(&#x27;parentNode&#x27;), ownerTree);
                                         });
                                     }
-                            
+
                                     // trigger move event
                                     if (moved) {
                                         var output = instance.getEventOutputMap(node);
-                            
+
                                         if (!oldParent.get(&#x27;children&#x27;).length) {
                                             oldParent.collapse();
                                         }
-                            
+
                                         output.tree.oldParent = oldParent;
                                         output.tree.oldOwnerTree = oldOwnerTree;
-                            
+
                                         instance.bubbleEvent(&#x27;move&#x27;, output);
                                     }
                                 },
-                            
+
                                 /**
                                  * Refresh the index (i.e. re-index all nodes).
                                  *
@@ -1367,16 +1367,16 @@
                                  */
                                 refreshIndex: function() {
                                     var instance = this;
-                            
+
                                     // reset index
                                     instance.updateIndex({});
-                            
+
                                     // get all descendent children - deep
                                     instance.eachChildren(function(node) {
                                         instance.registerNode(node);
                                     }, true);
                                 },
-                            
+
                                 /**
                                  * Register the passed TreeNode on this TreeData.
                                  *
@@ -1387,23 +1387,23 @@
                                     var instance = this;
                                     var uid = node.get(&#x27;id&#x27;);
                                     var index = instance.get(&#x27;index&#x27;);
-                            
+
                                     if (uid) {
                                         index[uid] = node;
                                     }
-                            
+
                                     if (isTreeView(instance)) {
                                         node.addTarget(instance);
-                            
+
                                         // when the node is appended to the TreeView set the OWNER_TREE
                                         node.set(&#x27;ownerTree&#x27;, instance);
                                     }
-                            
+
                                     node._inheritOwnerTreeAttrs();
-                            
+
                                     instance.updateIndex(index);
                                 },
-                            
+
                                 /**
                                  * Update the [index](A.TreeData.html#attr_index) attribute value.
                                  *
@@ -1412,14 +1412,14 @@
                                  */
                                 updateIndex: function(index) {
                                     var instance = this;
-                            
+
                                     if (index) {
                                         instance._indexPrimed = true;
-                            
+
                                         instance.set(&#x27;index&#x27;, index);
                                     }
                                 },
-                            
+
                                 /**
                                  * Unregister the passed TreeNode from this TreeData.
                                  *
@@ -1429,16 +1429,16 @@
                                 unregisterNode: function(node) {
                                     var instance = this;
                                     var index = instance.get(&#x27;index&#x27;);
-                            
+
                                     delete index[node.get(&#x27;id&#x27;)];
-                            
+
                                     if (isTreeView(instance)) {
                                         node.removeTarget(instance);
                                     }
-                            
+
                                     instance.updateIndex(index);
                                 },
-                            
+
                                 /**
                                  * Collapse all children of the TreeData.
                                  *
@@ -1446,12 +1446,12 @@
                                  */
                                 collapseAll: function() {
                                     var instance = this;
-                            
+
                                     instance.eachChildren(function(node) {
                                         node.collapse();
                                     }, true);
                                 },
-                            
+
                                 /**
                                  * Expand all children of the TreeData.
                                  *
@@ -1459,12 +1459,12 @@
                                  */
                                 expandAll: function() {
                                     var instance = this;
-                            
+
                                     instance.eachChildren(function(node) {
                                         node.expand();
                                     }, true);
                                 },
-                            
+
                                 /**
                                  * Select all children of the TreeData.
                                  *
@@ -1472,12 +1472,12 @@
                                  */
                                 selectAll: function() {
                                     var instance = this;
-                            
+
                                     instance.eachChildren(function(child) {
                                         child.select();
                                     }, true);
                                 },
-                            
+
                                 /**
                                  * Unselect all children of the TreeData.
                                  *
@@ -1485,12 +1485,12 @@
                                  */
                                 unselectAll: function() {
                                     var instance = this;
-                            
+
                                     instance.eachChildren(function(child) {
                                         child.unselect();
                                     }, true);
                                 },
-                            
+
                                 /**
                                  * Loop each children and execute the &#x60;fn&#x60; callback.
                                  *
@@ -1501,14 +1501,14 @@
                                 eachChildren: function(fn, deep) {
                                     var instance = this;
                                     var children = instance.getChildren(deep);
-                            
+
                                     A.Array.each(children, function(node) {
                                         if (node) {
                                             fn.apply(instance, arguments);
                                         }
                                     });
                                 },
-                            
+
                                 /**
                                  * Loop each parent node and execute the &#x60;fn&#x60; callback.
                                  *
@@ -1518,7 +1518,7 @@
                                 eachParent: function(fn) {
                                     var instance = this;
                                     var parentNode = instance.get(&#x27;parentNode&#x27;);
-                            
+
                                     while (parentNode) {
                                         if (parentNode) {
                                             fn.call(instance, parentNode);
@@ -1526,7 +1526,7 @@
                                         parentNode = parentNode.get(&#x27;parentNode&#x27;);
                                     }
                                 },
-                            
+
                                 /**
                                  * Bubble event to all parent nodes.
                                  *
@@ -1538,33 +1538,33 @@
                                  */
                                 bubbleEvent: function(eventType, args, cancelBubbling, stopActionPropagation) {
                                     var instance = this;
-                            
+
                                     // event.stopActionPropagation === undefined, invoke the event native
                                     // action
                                     instance.fire(eventType, args);
-                            
+
                                     if (!cancelBubbling) {
                                         var parentNode = instance.get(&#x27;parentNode&#x27;);
-                            
+
                                         // Avoid execution of the native action (private methods) while
                                         // propagate for example: private _appendChild() is invoked only on
                                         // the first level of the bubbling the intention is only invoke the
                                         // user callback on parent nodes.
                                         args = args || {};
-                            
+
                                         if (isUndefined(stopActionPropagation)) {
                                             stopActionPropagation = true;
                                         }
-                            
+
                                         args.stopActionPropagation = stopActionPropagation;
-                            
+
                                         while (parentNode) {
                                             parentNode.fire(eventType, args);
                                             parentNode = parentNode.get(&#x27;parentNode&#x27;);
                                         }
                                     }
                                 },
-                            
+
                                 /**
                                  * Create a TreeNode instance.
                                  *
@@ -1574,12 +1574,12 @@
                                  */
                                 createNode: function(options) {
                                     var ClassType = A.TreeNode.nodeTypes[isObject(options) ? options.type : options] || A.TreeNode;
-                            
+
                                     return new ClassType(
                                         isObject(options) ? options : {}
                                     );
                                 },
-                            
+
                                 /**
                                  * Append a child node to the TreeData.
                                  *
@@ -1590,10 +1590,10 @@
                                 appendChild: function(node, cancelBubbling) {
                                     var instance = this;
                                     var output = instance.getEventOutputMap(node);
-                            
+
                                     instance.bubbleEvent(&#x27;append&#x27;, output, cancelBubbling);
                                 },
-                            
+
                                 /**
                                  * Append a child node to the TreeData.
                                  *
@@ -1607,31 +1607,31 @@
                                     if (event.stopActionPropagation) {
                                         return false;
                                     }
-                            
+
                                     var instance = this;
                                     var node = event.tree.node;
                                     var ownerTree = instance.get(&#x27;ownerTree&#x27;);
                                     var children = instance.get(&#x27;children&#x27;);
-                            
+
                                     // updateReferences first
                                     instance.updateReferences(node, instance, ownerTree);
                                     // and then set the children, to have the appendChild propagation
                                     // the PARENT_NODE references should be updated
                                     var length = children.push(node);
-                            
+
                                     instance.childrenLength = children.length;
-                            
+
                                     // updating prev/nextSibling attributes
                                     var prevIndex = length - 2;
                                     var prevSibling = instance.item(prevIndex);
-                            
+
                                     node._nextSibling = null;
                                     node._prevSibling = prevSibling;
-                            
+
                                     // render node
                                     node.render(instance.get(&#x27;container&#x27;));
                                 },
-                            
+
                                 /**
                                  * Get a TreeNode children by index.
                                  *
@@ -1641,10 +1641,10 @@
                                  */
                                 item: function(index) {
                                     var instance = this;
-                            
+
                                     return instance.get(&#x27;children&#x27;)[index];
                                 },
-                            
+
                                 /**
                                  * Index of the passed TreeNode on the
                                  * [children](A.TreeData.html#attr_children) attribute.
@@ -1655,10 +1655,10 @@
                                  */
                                 indexOf: function(node) {
                                     var instance = this;
-                            
+
                                     return A.Array.indexOf(instance.get(&#x27;children&#x27;), node);
                                 },
-                            
+
                                 /**
                                  * Whether the TreeData contains children or not.
                                  *
@@ -1667,10 +1667,10 @@
                                  */
                                 hasChildNodes: function() {
                                     var instance = this;
-                            
+
                                     return (instance.getChildrenLength() &gt; 0);
                                 },
-                            
+
                                 /**
                                  * Get an Array of the children nodes of the current TreeData.
                                  *
@@ -1682,24 +1682,24 @@
                                     var instance = this;
                                     var cNodes = [];
                                     var children = instance.get(&#x27;children&#x27;);
-                            
+
                                     cNodes = cNodes.concat(children);
-                            
+
                                     if (deep) {
                                         instance.eachChildren(function(child) {
                                             cNodes = cNodes.concat(child.getChildren(deep));
                                         });
                                     }
-                            
+
                                     return cNodes;
                                 },
-                            
+
                                 getChildrenLength: function() {
                                     var instance = this;
-                            
+
                                     return (instance.childrenLength || instance.get(&#x27;children&#x27;).length);
                                 },
-                            
+
                                 /**
                                  * Get an object containing metadata for the custom events.
                                  *
@@ -1709,7 +1709,7 @@
                                  */
                                 getEventOutputMap: function(node) {
                                     var instance = this;
-                            
+
                                     return {
                                         tree: {
                                             instance: instance,
@@ -1717,7 +1717,7 @@
                                         }
                                     };
                                 },
-                            
+
                                 /**
                                  * Remove the passed &#x60;node&#x60; from the current TreeData.
                                  *
@@ -1727,10 +1727,10 @@
                                 removeChild: function(node) {
                                     var instance = this;
                                     var output = instance.getEventOutputMap(node);
-                            
+
                                     instance.bubbleEvent(&#x27;remove&#x27;, output);
                                 },
-                            
+
                                 /**
                                  * Remove the passed &#x60;node&#x60; from the current TreeData.
                                  *
@@ -1742,36 +1742,36 @@
                                     if (event.stopActionPropagation) {
                                         return false;
                                     }
-                            
+
                                     var instance = this;
                                     var node = event.tree.node;
                                     var ownerTree = instance.get(&#x27;ownerTree&#x27;);
-                            
+
                                     if (instance.isRegistered(node)) {
                                         // update parent reference when removed
                                         node.set(&#x27;parentNode&#x27;, null);
-                            
+
                                         // unregister the node
                                         instance.unregisterNode(node);
-                            
+
                                         // no parent, no ownerTree
                                         node.set(&#x27;ownerTree&#x27;, null);
-                            
+
                                         if (ownerTree) {
                                             // unregister the removed node from the tree index
                                             ownerTree.unregisterNode(node);
                                         }
-                            
+
                                         // remove child from the container
                                         node.get(&#x27;boundingBox&#x27;).remove();
-                            
+
                                         var children = instance.get(&#x27;children&#x27;);
-                            
+
                                         A.Array.removeItem(children, node);
                                         instance.set(&#x27;children&#x27;, children);
                                     }
                                 },
-                            
+
                                 /**
                                  * Delete all children of the current TreeData.
                                  *
@@ -1779,16 +1779,16 @@
                                  */
                                 empty: function() {
                                     var instance = this;
-                            
+
                                     instance.eachChildren(function(node) {
                                         var parentNode = node.get(&#x27;parentNode&#x27;);
-                            
+
                                         if (parentNode) {
                                             parentNode.removeChild(node);
                                         }
                                     });
                                 },
-                            
+
                                 /**
                                  * Insert &#x60;treeNode&#x60; before or after the &#x60;refTreeNode&#x60;.
                                  *
@@ -1799,61 +1799,61 @@
                                  */
                                 insert: function(treeNode, refTreeNode, where) {
                                     refTreeNode = refTreeNode || this;
-                            
+
                                     if (refTreeNode === treeNode) {
                                         return false; // NOTE: return
                                     }
-                            
+
                                     var refParentTreeNode = refTreeNode.get(&#x27;parentNode&#x27;);
-                            
+
                                     if (treeNode &amp;&amp; refParentTreeNode) {
                                         var nodeBoundingBox = treeNode.get(&#x27;boundingBox&#x27;);
                                         var refBoundingBox = refTreeNode.get(&#x27;boundingBox&#x27;);
                                         var ownerTree = refTreeNode.get(&#x27;ownerTree&#x27;);
-                            
+
                                         if (where === &#x27;before&#x27;) {
                                             refBoundingBox.placeBefore(nodeBoundingBox);
                                         }
                                         else if (where === &#x27;after&#x27;) {
                                             refBoundingBox.placeAfter(nodeBoundingBox);
                                         }
-                            
+
                                         var refSiblings = [];
                                         // using the YUI selector to regenerate the index based on the real dom
                                         // this avoid misscalculations on the nodes index number
                                         var DOMChildren = refParentTreeNode.get(&#x27;boundingBox&#x27;).all(&#x27;&gt; ul &gt; li&#x27;);
-                            
+
                                         DOMChildren.each(function(child) {
                                             refSiblings.push(child.getData(&#x27;tree-node&#x27;));
                                         });
-                            
+
                                         // updating prev/nextSibling attributes
                                         var nextSiblingNode = nodeBoundingBox.get(&#x27;nextSibling&#x27;);
-                            
+
                                         treeNode.set(&#x27;nextSibling&#x27;, nextSiblingNode &amp;&amp; nextSiblingNode.getData(&#x27;tree-node&#x27;));
-                            
+
                                         var prevSiblingNode = nodeBoundingBox.get(&#x27;previousSibling&#x27;);
-                            
+
                                         treeNode.set(&#x27;prevSibling&#x27;, prevSiblingNode &amp;&amp; prevSiblingNode.getData(&#x27;tree-node&#x27;));
-                            
+
                                         // update all references
                                         refTreeNode.updateReferences(treeNode, refParentTreeNode, ownerTree);
-                            
+
                                         // updating refParentTreeNode childTreeNodes
                                         refParentTreeNode.set(&#x27;children&#x27;, refSiblings);
                                     }
-                            
+
                                     // render treeNode after it&#x27;s inserted
                                     treeNode.render();
-                            
+
                                     // invoking insert event
                                     var output = refTreeNode.getEventOutputMap(treeNode);
-                            
+
                                     output.tree.refTreeNode = refTreeNode;
-                            
+
                                     refTreeNode.bubbleEvent(&#x27;insert&#x27;, output);
                                 },
-                            
+
                                 /**
                                  * Insert &#x60;treeNode&#x60; after the &#x60;refTreeNode&#x60;.
                                  *
@@ -1863,10 +1863,10 @@
                                  */
                                 insertAfter: function(treeNode, refTreeNode) {
                                     var instance = this;
-                            
+
                                     instance.insert(treeNode, refTreeNode, &#x27;after&#x27;);
                                 },
-                            
+
                                 /**
                                  * Insert &#x60;treeNode&#x60; before the &#x60;refTreeNode&#x60;.
                                  *
@@ -1876,10 +1876,10 @@
                                  */
                                 insertBefore: function(treeNode, refTreeNode) {
                                     var instance = this;
-                            
+
                                     instance.insert(treeNode, refTreeNode, &#x27;before&#x27;);
                                 },
-                            
+
                                 /**
                                  * Get a TreeNode instance by a child DOM Node.
                                  *
@@ -1889,16 +1889,16 @@
                                  */
                                 getNodeByChild: function(child) {
                                     var treeNodeEl = child.ancestor(&#x27;.&#x27; + CSS_TREE_NODE);
-                            
+
                                     if (treeNodeEl) {
                                         return treeNodeEl.getData(&#x27;tree-node&#x27;);
                                     }
-                            
+
                                     return null;
                                 },
-                            
+
                                 _inheritOwnerTreeAttrs: L.emptyFn,
-                            
+
                                 /**
                                  * Setter for [children](A.TreeData.html#attr_children).
                                  *
@@ -1911,36 +1911,36 @@
                                     var instance = this;
                                     var childNodes = [];
                                     var container = instance.get(&#x27;container&#x27;);
-                            
+
                                     if (!container) {
                                         container = instance._createNodeContainer();
                                     }
-                            
+
                                     instance.childrenLength = v.length;
-                            
+
                                     // before render the node, make sure the PARENT_NODE and OWNER_TREE
                                     // references are updated this is required on the render phase of the
                                     // TreeNode (_createNodeContainer) to propagate the events callback
                                     // (appendChild/expand)
                                     var ownerTree = instance;
-                            
+
                                     if (isTreeNode(instance)) {
                                         ownerTree = instance.get(&#x27;ownerTree&#x27;);
                                     }
-                            
+
                                     var hasOwnerTree = isTreeView(ownerTree);
                                     var lazyLoad = true;
-                            
+
                                     if (hasOwnerTree) {
                                         lazyLoad = ownerTree.get(&#x27;lazyLoad&#x27;);
                                     }
-                            
+
                                     instance.updateIndex({});
-                            
+
                                     if (instance.childrenLength &gt; 0) {
                                         instance.set(&#x27;leaf&#x27;, false);
                                     }
-                            
+
                                     A.Array.each(v, function(node) {
                                         if (node) {
                                             if (!isTreeNode(node) &amp;&amp; isObject(node)) {
@@ -1948,51 +1948,51 @@
                                                 // performance reasons
                                                 var children = node.children;
                                                 var hasChildren = children &amp;&amp; children.length;
-                            
+
                                                 node.ownerTree = ownerTree;
                                                 node.parentNode = instance;
-                            
+
                                                 if (hasChildren &amp;&amp; lazyLoad) {
                                                     delete node.children;
                                                 }
-                            
+
                                                 // creating node from json
                                                 var jsonNode = node;
-                            
+
                                                 node = instance.createNode(node);
-                            
+
                                                 if (hasChildren &amp;&amp; lazyLoad) {
                                                     jsonNode.children = children;
-                            
+
                                                     node.childrenLength = children.length;
-                            
+
                                                     A.setTimeout(function() {
                                                         node.set(&#x27;children&#x27;, children);
                                                     }, 50);
                                                 }
                                             }
-                            
+
                                             instance.registerNode(node);
-                            
+
                                             if (hasOwnerTree) {
                                                 ownerTree.registerNode(node);
                                             }
-                            
+
                                             node.render(container);
-                            
+
                                             // avoid duplicated children on the childNodes list
                                             if (A.Array.indexOf(childNodes, node) === -1) {
                                                 childNodes.push(node);
                                             }
                                         }
                                     });
-                            
+
                                     return childNodes;
                                 }
                             });
-                            
+
                             A.TreeData = TreeData;
-                            
+
                                 </pre>
                             </div>
                         </div>

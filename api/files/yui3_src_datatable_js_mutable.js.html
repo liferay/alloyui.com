@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,21 +1122,21 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/datatable/js/mutable.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
                             Adds mutation convenience methods such as &#x60;table.addRow(data)&#x60; to &#x60;Y.DataTable&#x60;. (or other built class).
-                            
+
                             @module datatable
                             @submodule datatable-mutable
                             @since 3.5.0
@@ -1149,38 +1149,38 @@
                                 isNumber = YLang.isNumber,
                                 arrayIndex = Y.Array.indexOf,
                                 Mutable;
-                            
+
                             /**
                             _API docs for this extension are included in the DataTable class._
-                            
+
                             Class extension to add mutation convenience methods to &#x60;Y.DataTable&#x60; (or other
                             built class).
-                            
+
                             Column mutation methods are paired with new custom events:
-                            
+
                              * addColumn
                              * removeColumn
                              * modifyColumn
                              * moveColumn
-                            
+
                             Row mutation events are bubbled from the DataTable&#x27;s &#x60;data&#x60; ModelList through
                             the DataTable instance.
-                            
+
                             @class DataTable.Mutable
                             @for DataTable
                             @since 3.5.0
                             **/
                             Y.namespace(&#x27;DataTable&#x27;).Mutable = Mutable = function () {};
-                            
+
                             Mutable.ATTRS = {
                                 /**
                                 Controls whether &#x60;addRow&#x60;, &#x60;removeRow&#x60;, and &#x60;modifyRow&#x60; should trigger the
                                 underlying Model&#x27;s sync layer by default.
-                            
+
                                 When &#x60;true&#x60;, it is unnecessary to pass the &quot;sync&quot; configuration property to
                                 those methods to trigger per-operation sync.
-                            
-                            
+
+
                                 @attribute autoSync
                                 @type {Boolean}
                                 @default &#x60;false&#x60;
@@ -1191,29 +1191,29 @@
                                     validator: YLang.isBoolean
                                 }
                             };
-                            
+
                             Y.mix(Mutable.prototype, {
                                 /**
                                 Adds the column configuration to the DataTable&#x27;s &#x60;columns&#x60; configuration.
                                 If the &#x60;index&#x60; parameter is supplied, it is injected at that index.  If the
                                 table has nested headers, inject a subcolumn by passing an array of indexes
                                 to identify the new column&#x27;s final location.
-                            
+
                                 The &#x60;index&#x60; parameter is required if adding a nested column.
-                            
+
                                 This method is a convienience method for fetching the DataTable&#x27;s &#x60;columns&#x60;
                                 attribute, updating it, and calling
                                 &#x60;table.set(&#x27;columns&#x27;, _updatedColumnsDefs_)&#x60;
-                            
+
                                 For example:
-                            
+
                                 &lt;pre&gt;&lt;code&gt;// Becomes last column
                                 table.addColumn(&#x27;name&#x27;);
-                            
+
                                 // Inserted after the current second column, moving the current third column
                                 // to index 4
                                 table.addColumn({ key: &#x27;price&#x27;, formatter: currencyFormatter }, 2 );
-                            
+
                                 // Insert a new column in a set of headers three rows deep.  The index array
                                 // translates to
                                 // [ 2, --  in the third column&#x27;s children
@@ -1221,7 +1221,7 @@
                                 //   3 ] -- as the fourth child column
                                 table.addColumn({ key: &#x27;age&#x27;, sortable: true }, [ 2, 1, 3 ]);
                                 &lt;/code&gt;&lt;/pre&gt;
-                            
+
                                 @method addColumn
                                 @param {Object|String} config The new column configuration object
                                 @param {Number|Number[]} [index] the insertion index
@@ -1233,12 +1233,12 @@
                                     if (isString(config)) {
                                         config = { key: config };
                                     }
-                            
+
                                     if (config) {
                                         if (arguments.length &lt; 2 || (!isNumber(index) &amp;&amp; !isArray(index))) {
                                             index = this.get(&#x27;columns&#x27;).length;
                                         }
-                            
+
                                         this.fire(&#x27;addColumn&#x27;, {
                                             column: config,
                                             index: index
@@ -1246,15 +1246,15 @@
                                     }
                                     return this;
                                 },
-                            
+
                                 /**
                                 Updates an existing column definition. Fires the &#x60;modifyColumn&#x60; event.
-                            
+
                                 For example:
-                            
+
                                 &lt;pre&gt;&lt;code&gt;// Add a formatter to the existing &#x27;price&#x27; column definition
                                 table.modifyColumn(&#x27;price&#x27;, { formatter: currencyFormatter });
-                            
+
                                 // Change the label on a header cell in a set of nested headers three rows
                                 // deep.  The index array translates to
                                 // [ 2,  -- in the third column&#x27;s children
@@ -1262,7 +1262,7 @@
                                 //   3 ] -- the fourth child column
                                 table.modifyColumn([2, 1, 3], { label: &#x27;Experience&#x27; });
                                 &lt;/code&gt;&lt;/pre&gt;
-                            
+
                                 @method modifyColumn
                                 @param {String|Number|Number[]|Object} name The column key, name, index, or
                                             current configuration object
@@ -1275,23 +1275,23 @@
                                     if (isString(config)) {
                                         config = { key: config };
                                     }
-                            
+
                                     if (isObject(config)) {
                                         this.fire(&#x27;modifyColumn&#x27;, {
                                             column: name,
                                             newColumnDef: config
                                         });
                                     }
-                            
+
                                     return this;
                                 },
-                            
+
                                 /**
                                 Moves an existing column to a new location. Fires the &#x60;moveColumn&#x60; event.
-                            
+
                                 The destination index can be a number or array of numbers to place a column
                                 header in a nested header row.
-                            
+
                                 @method moveColumn
                                 @param {String|Number|Number[]|Object} name The column key, name, index, or
                                             current configuration object
@@ -1307,13 +1307,13 @@
                                             index: index
                                         });
                                     }
-                            
+
                                     return this;
                                 },
-                            
+
                                 /**
                                 Removes an existing column. Fires the &#x60;removeColumn&#x60; event.
-                            
+
                                 @method removeColumn
                                 @param {String|Number|Number[]|Object} name The column key, name, index, or
                                             current configuration object
@@ -1327,26 +1327,26 @@
                                             column: name
                                         });
                                     }
-                            
+
                                     return this;
                                 },
-                            
+
                                 /**
                                 Adds a new record to the DataTable&#x27;s &#x60;data&#x60; ModelList.  Record data can be
                                 an object of field values or an instance of the DataTable&#x27;s configured
                                 &#x60;recordType&#x60; class.
-                            
+
                                 This relays all parameters to the &#x60;data&#x60; ModelList&#x27;s &#x60;add&#x60; method.
-                            
+
                                 If a configuration object is passed as a second argument, and that object
                                 has &#x60;sync: true&#x60; set, the underlying Model will be &#x60;save()&#x60;d.
-                            
+
                                 If the DataTable&#x27;s &#x60;autoSync&#x60; attribute is set to &#x60;true&#x60;, the additional
                                 argument is not needed.
-                            
+
                                 If syncing and the last argument is a function, that function will be used
                                 as a callback to the Model&#x27;s &#x60;save()&#x60; method.
-                            
+
                                 @method addRow
                                 @param {Object} data The data or Model instance for the new record
                                 @param {Object} [config] Configuration to pass along
@@ -1367,45 +1367,45 @@
                                             config.sync :
                                             this.get(&#x27;autoSync&#x27;),
                                         models, model, i, len, args;
-                            
+
                                     if (data &amp;&amp; this.data) {
                                         models = this.data.add.apply(this.data, arguments);
-                            
+
                                         if (sync) {
                                             models = toArray(models);
                                             args   = toArray(arguments, 1, true);
-                            
+
                                             for (i = 0, len = models.length; i &lt; len; ++i) {
                                                 model = models[i];
-                            
+
                                                 if (model.isNew()) {
                                                     models[i].save.apply(models[i], args);
                                                 }
                                             }
                                         }
                                     }
-                            
+
                                     return this;
                                 },
-                            
+
                                 /**
                                 Removes a record from the DataTable&#x27;s &#x60;data&#x60; ModelList.  The record can be
                                 provided explicitly or targeted by it&#x27;s &#x60;id&#x60; (see ModelList&#x27;s &#x60;getById&#x60;
                                 method), &#x60;clientId&#x60;, or index in the ModelList.
-                            
+
                                 After locating the target Model, this relays the Model and all other passed
                                 arguments to the &#x60;data&#x60; ModelList&#x27;s &#x60;remove&#x60; method.
-                            
+
                                 If a configuration object is passed as a second argument, and that object
                                 has &#x60;sync: true&#x60; set, the underlying Model will be destroyed, passing
                                 &#x60;{ delete: true }&#x60; to trigger calling the Model&#x27;s sync layer.
-                            
+
                                 If the DataTable&#x27;s &#x60;autoSync&#x60; attribute is set to &#x60;true&#x60;, the additional
                                 argument is not needed.
-                            
+
                                 If syncing and the last argument is a function, that function will be used
                                 as a callback to the Model&#x27;s &#x60;destroy()&#x60; method.
-                            
+
                                 @method removeRow
                                 @param {Object|String|Number} id The Model instance or identifier
                                 @param {Object} [config] Configuration to pass along
@@ -1427,7 +1427,7 @@
                                                         config.sync :
                                                         this.get(&#x27;autoSync&#x27;),
                                         models, model, i, len, args;
-                            
+
                                     // TODO: support removing via DOM element. This should be relayed to View
                                     if (isObject(id) &amp;&amp; id instanceof this.get(&#x27;recordType&#x27;)) {
                                         model = id;
@@ -1436,49 +1436,49 @@
                                                 modelList.getByClientId(id) ||
                                                 modelList.item(id);
                                     }
-                            
+
                                     if (model) {
                                         args = toArray(arguments, 1, true);
-                            
+
                                         models = modelList.remove.apply(modelList,
                                             [model].concat(args));
-                            
+
                                         if (sync) {
                                             if (!isObject(args[0])) {
                                                 args.unshift({});
                                             }
-                            
+
                                             args[0][&#x27;delete&#x27;] = true;
-                            
+
                                             models = toArray(models);
-                            
+
                                             for (i = 0, len = models.length; i &lt; len; ++i) {
                                                 model = models[i];
                                                 model.destroy.apply(model, args);
                                             }
                                         }
                                     }
-                            
+
                                     return this;
                                 },
-                            
+
                                 /**
                                 Updates an existing record in the DataTable&#x27;s &#x60;data&#x60; ModelList.  The record
                                 can be provided explicitly or targeted by it&#x27;s &#x60;id&#x60; (see ModelList&#x27;s
                                 &#x60;getById&#x60; method), &#x60;clientId&#x60;, or index in the ModelList.
-                            
+
                                 After locating the target Model, this relays the all other passed
                                 arguments to the Model&#x27;s &#x60;setAttrs&#x60; method.
-                            
+
                                 If a configuration object is passed as a second argument, and that object
                                 has &#x60;sync: true&#x60; set, the underlying Model will be &#x60;save()&#x60;d.
-                            
+
                                 If the DataTable&#x27;s &#x60;autoSync&#x60; attribute is set to &#x60;true&#x60;, the additional
                                 argument is not needed.
-                            
+
                                 If syncing and the last argument is a function, that function will be used
                                 as a callback to the Model&#x27;s &#x60;save()&#x60; method.
-                            
+
                                 @method modifyRow
                                 @param {Object|String|Number} id The Model instance or identifier
                                 @param {Object} data New data values for the Model
@@ -1501,7 +1501,7 @@
                                                         config.sync :
                                                         this.get(&#x27;autoSync&#x27;),
                                         model, args;
-                            
+
                                     if (isObject(id) &amp;&amp; id instanceof this.get(&#x27;recordType&#x27;)) {
                                         model = id;
                                     } else if (modelList &amp;&amp; id !== undefined) {
@@ -1509,29 +1509,29 @@
                                                 modelList.getByClientId(id) ||
                                                 modelList.item(id);
                                     }
-                            
+
                                     if (model &amp;&amp; isObject(data)) {
                                         args = toArray(arguments, 1, true);
-                            
+
                                         model.setAttrs.apply(model, args);
-                            
+
                                         if (sync &amp;&amp; !model.isNew()) {
                                             model.save.apply(model, args);
                                         }
                                     }
-                            
+
                                     return this;
                                 },
-                            
+
                                 // --------------------------------------------------------------------------
                                 // Protected properties and methods
                                 // --------------------------------------------------------------------------
-                            
+
                                 /**
                                 Default function for the &#x60;addColumn&#x60; event.
-                            
+
                                 Inserts the specified column at the provided index.
-                            
+
                                 @method _defAddColumnFn
                                 @param {EventFacade} e The &#x60;addColumn&#x60; event
                                     @param {Object} e.column The new column definition object
@@ -1544,24 +1544,24 @@
                                         columns = this.get(&#x27;columns&#x27;),
                                         cols    = columns,
                                         i, len;
-                            
+
                                     for (i = 0, len = index.length - 1; cols &amp;&amp; i &lt; len; ++i) {
                                         cols = cols[index[i]] &amp;&amp; cols[index[i]].children;
                                     }
-                            
+
                                     if (cols) {
                                         cols.splice(index[i], 0, e.column);
-                            
+
                                         this.set(&#x27;columns&#x27;, columns, { originEvent: e });
                                     } else { Y.log(&#x27;addColumn index not findable&#x27;, &#x27;warn&#x27;, &#x27;datatable&#x27;);
                                     }
                                 },
-                            
+
                                 /**
                                 Default function for the &#x60;modifyColumn&#x60; event.
-                            
+
                                 Mixes the new column properties into the specified column definition.
-                            
+
                                 @method _defModifyColumnFn
                                 @param {EventFacade} e The &#x60;modifyColumn&#x60; event
                                     @param {Object|String|Number|Number[]} e.column The column definition object or identifier
@@ -1572,21 +1572,21 @@
                                 _defModifyColumnFn: function (e) {
                                     var columns = this.get(&#x27;columns&#x27;),
                                         column  = this.getColumn(e.column);
-                            
+
                                     if (column) {
                                         Y.mix(column, e.newColumnDef, true);
-                            
+
                                         this.set(&#x27;columns&#x27;, columns, { originEvent: e });
                                     } else { Y.log(&#x27;Could not locate column index to modify column&#x27;, &#x27;warn&#x27;, &#x27;datatable&#x27;);
                                     }
                                 },
-                            
+
                                 /**
                                 Default function for the &#x60;moveColumn&#x60; event.
-                            
+
                                 Removes the specified column from its current location and inserts it at the
                                 specified array index (may be an array of indexes for nested headers).
-                            
+
                                 @method _defMoveColumnFn
                                 @param {EventFacade} e The &#x60;moveColumn&#x60; event
                                     @param {Object|String|Number|Number[]} e.column The column definition object or identifier
@@ -1599,23 +1599,23 @@
                                         column  = this.getColumn(e.column),
                                         toIndex = toArray(e.index),
                                         fromCols, fromIndex, toCols, i, len;
-                            
+
                                     if (column) {
                                         fromCols  = column._parent ? column._parent.children : columns;
                                         fromIndex = arrayIndex(fromCols, column);
-                            
+
                                         if (fromIndex &gt; -1) {
                                             toCols = columns;
-                            
+
                                             for (i = 0, len = toIndex.length - 1; toCols &amp;&amp; i &lt; len; ++i) {
                                                 toCols = toCols[toIndex[i]] &amp;&amp; toCols[toIndex[i]].children;
                                             }
-                            
+
                                             if (toCols) {
                                                 len = toCols.length;
                                                 fromCols.splice(fromIndex, 1);
                                                 toIndex = toIndex[i];
-                            
+
                                                 if (len &gt; toCols.lenth) {
                                                     // spliced off the same array, so adjust destination
                                                     // index if necessary
@@ -1623,9 +1623,9 @@
                                                         toIndex--;
                                                     }
                                                 }
-                            
+
                                                 toCols.splice(toIndex, 0, column);
-                            
+
                                                 this.set(&#x27;columns&#x27;, columns, { originEvent: e });
                                             } else { Y.log(&#x27;Column [&#x27; + e.column + &#x27;] could not be moved. Destination index invalid for moveColumn&#x27;, &#x27;warn&#x27;, &#x27;datatable&#x27;);
                                             }
@@ -1633,12 +1633,12 @@
                                     } else { Y.log(&#x27;Column [&#x27; + e.column + &#x27;] not found for moveColumn&#x27;, &#x27;warn&#x27;, &#x27;datatable&#x27;);
                                     }
                                 },
-                            
+
                                 /**
                                 Default function for the &#x60;removeColumn&#x60; event.
-                            
+
                                 Splices the specified column from its containing columns array.
-                            
+
                                 @method _defRemoveColumnFn
                                 @param {EventFacade} e The &#x60;removeColumn&#x60; event
                                     @param {Object|String|Number|Number[]} e.column The column definition object or identifier
@@ -1649,28 +1649,28 @@
                                     var columns = this.get(&#x27;columns&#x27;),
                                         column  = this.getColumn(e.column),
                                         cols, index;
-                            
+
                                     if (column) {
                                         cols = column._parent ? column._parent.children : columns;
                                         index = Y.Array.indexOf(cols, column);
-                            
+
                                         if (index &gt; -1) {
                                             cols.splice(index, 1);
-                            
+
                                             this.set(&#x27;columns&#x27;, columns, { originEvent: e });
                                         }
                                     } else { Y.log(&#x27;Could not locate column [&#x27; + e.column + &#x27;] for removeColumn&#x27;, &#x27;warn&#x27;, &#x27;datatable&#x27;);
                                     }
                                 },
-                            
+
                                 /**
                                 Publishes the events used by the mutation methods:
-                            
+
                                  * addColumn
                                  * removeColumn
                                  * modifyColumn
                                  * moveColumn
-                            
+
                                 @method initializer
                                 @protected
                                 @since 3.5.0
@@ -1684,26 +1684,26 @@
                                     });
                                 }
                             });
-                            
+
                             /**
                             Adds an array of new records to the DataTable&#x27;s &#x60;data&#x60; ModelList.  Record data
                             can be an array of objects containing field values or an array of instance of
                             the DataTable&#x27;s configured &#x60;recordType&#x60; class.
-                            
+
                             This relays all parameters to the &#x60;data&#x60; ModelList&#x27;s &#x60;add&#x60; method.
-                            
+
                             Technically, this is an alias to &#x60;addRow&#x60;, but please use the appropriately
                             named method for readability.
-                            
+
                             If a configuration object is passed as a second argument, and that object
                             has &#x60;sync: true&#x60; set, the underlying Models will be &#x60;save()&#x60;d.
-                            
+
                             If the DataTable&#x27;s &#x60;autoSync&#x60; attribute is set to &#x60;true&#x60;, the additional
                             argument is not needed.
-                            
+
                             If syncing and the last argument is a function, that function will be used
                             as a callback to each Model&#x27;s &#x60;save()&#x60; method.
-                            
+
                             @method addRows
                             @param {Object[]} data The data or Model instances to add
                             @param {Object} [config] Configuration to pass along
@@ -1719,52 +1719,52 @@
                             @since 3.5.0
                             **/
                             Mutable.prototype.addRows = Mutable.prototype.addRow;
-                            
+
                             // Add feature APIs to public Y.DataTable class
                             if (YLang.isFunction(Y.DataTable)) {
                                 Y.Base.mix(Y.DataTable, [Mutable]);
                             }
-                            
+
                             /**
                             Fired by the &#x60;addColumn&#x60; method.
-                            
+
                             @event addColumn
                             @preventable _defAddColumnFn
                             @param {Object} column The new column definition object
                             @param {Number|Number[]} index The array index to insert the new column
                             @since 3.5.0
                             **/
-                            
+
                             /**
                             Fired by the &#x60;removeColumn&#x60; method.
-                            
+
                             @event removeColumn
                             @preventable _defRemoveColumnFn
                             @param {Object|String|Number|Number[]} column The column definition object or identifier
                             @since 3.5.0
                             **/
-                            
+
                             /**
                             Fired by the &#x60;modifyColumn&#x60; method.
-                            
+
                             @event modifyColumn
                             @preventable _defModifyColumnFn
                             @param {Object|String|Number|Number[]} column The column definition object or identifier
                             @param {Object} newColumnDef The properties to assign to the column
                             @since 3.5.0
                             **/
-                            
+
                             /**
                             Fired by the &#x60;moveColumn&#x60; method.
-                            
+
                             @event moveColumn
                             @preventable _defMoveColumnFn
                             @param {Object|String|Number|Number[]} column The column definition object or identifier
                             @param {Object} index The destination index to move to
                             @since 3.5.0
                             **/
-                            
-                            
+
+
                                 </pre>
                             </div>
                         </div>

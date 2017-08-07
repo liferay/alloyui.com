@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/stylesheet/js/stylesheet.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1153,13 +1153,13 @@
                                 OPACITY = &#x27;opacity&#x27;,
                                 FLOAT   = &#x27;float&#x27;,
                                 EMPTY   = &#x27;&#x27;;
-                            
+
                             // Normalizes the removal of an assigned style for opacity.  IE uses the filter
                             // property.
                             _unsetOpacity = (OPACITY in workerStyle) ?
                                 function (style) { style.opacity = EMPTY; } :
                                 function (style) { style.filter = EMPTY; };
-                            
+
                             // Normalizes the removal of an assigned style for a given property.  Expands
                             // shortcut properties if necessary and handles the various names for the float
                             // property.
@@ -1201,7 +1201,7 @@
                                         }
                                     }
                                 };
-                            
+
                             /**
                              * Create an instance of StyleSheet to encapsulate a css stylesheet.
                              * The constructor can be called using function or constructor syntax.
@@ -1247,12 +1247,12 @@
                                     _insertRule,
                                     _deleteRule,
                                     i,r,sel;
-                            
+
                                 // Factory or constructor
                                 if (!(Y.instanceOf(this, StyleSheet))) {
                                     return new StyleSheet(seed,name);
                                 }
-                            
+
                                 // Extract the DOM node from Node instances
                                 if (seed) {
                                     if (Y.Node &amp;&amp; seed instanceof Y.Node) {
@@ -1266,20 +1266,20 @@
                                         }
                                         node = d.getElementById(seed.replace(/^#/,EMPTY));
                                     }
-                            
+
                                     // Check for the StyleSheet in the static registry
                                     if (node &amp;&amp; sheets[Y.stamp(node)]) {
                                         return sheets[Y.stamp(node)];
                                     }
                                 }
-                            
-                            
+
+
                                 // Create a style node if necessary
                                 if (!node || !/^(?:style|link)$/i.test(node.nodeName)) {
                                     node = d.createElement(&#x27;style&#x27;);
                                     node.type = &#x27;text/css&#x27;;
                                 }
-                            
+
                                 if (isString(seed)) {
                                     // Create entire sheet from seed cssText
                                     if (seed.indexOf(&#x27;{&#x27;) != -1) {
@@ -1294,7 +1294,7 @@
                                         name = seed;
                                     }
                                 }
-                            
+
                                 // Make sure the node is attached to the appropriate head element
                                 if (!node.parentNode || node.parentNode.nodeName.toLowerCase() !== &#x27;head&#x27;) {
                                     head = (node.ownerDocument || d).getElementsByTagName(&#x27;head&#x27;)[0];
@@ -1303,29 +1303,29 @@
                                     // change in Safari.
                                     head.appendChild(node);
                                 }
-                            
+
                                 // Begin setting up private aliases to the important moving parts
                                 // 1. The stylesheet object
                                 // IE stores StyleSheet under the &quot;styleSheet&quot; property
                                 // Safari doesn&#x27;t populate sheet for xdomain link elements
                                 sheet = node.sheet || node.styleSheet;
-                            
+
                                 // 2. The style rules collection
                                 // IE stores the rules collection under the &quot;rules&quot; property
                                 _rules = sheet &amp;&amp; (&#x27;cssRules&#x27; in sheet) ? &#x27;cssRules&#x27; : &#x27;rules&#x27;;
-                            
+
                                 // 3. The method to remove a rule from the stylesheet
                                 // IE supports removeRule
                                 _deleteRule = (&#x27;deleteRule&#x27; in sheet) ?
                                     function (i) { sheet.deleteRule(i); } :
                                     function (i) { sheet.removeRule(i); };
-                            
+
                                 // 4. The method to add a new rule to the stylesheet
                                 // IE supports addRule with different signature
                                 _insertRule = (&#x27;insertRule&#x27; in sheet) ?
                                     function (sel,css,i) { sheet.insertRule(sel+&#x27; {&#x27;+css+&#x27;}&#x27;,i); } :
                                     function (sel,css,i) { sheet.addRule(sel,css,i); };
-                            
+
                                 // 5. Initialize the cssRules map from the node
                                 // xdomain link nodes forbid access to the cssRules collection, so this
                                 // will throw an error.
@@ -1333,7 +1333,7 @@
                                 for (i = sheet[_rules].length - 1; i &gt;= 0; --i) {
                                     r   = sheet[_rules][i];
                                     sel = r.selectorText;
-                            
+
                                     if (cssRules[sel]) {
                                         cssRules[sel].style.cssText += &#x27;;&#x27; + r.style.cssText;
                                         _deleteRule(i);
@@ -1341,15 +1341,15 @@
                                         cssRules[sel] = r;
                                     }
                                 }
-                            
+
                                 // Cache the instance by the generated Id
                                 StyleSheet.register(Y.stamp(node),this);
-                            
+
                                 // Register the instance by name if provided or defaulted from seed
                                 if (name) {
                                     StyleSheet.register(name,this);
                                 }
-                            
+
                                 // Public API
                                 Y.mix(this,{
                                     /**
@@ -1359,7 +1359,7 @@
                                      * @return {Number} the static id
                                      */
                                     getId : function () { return Y.stamp(node); },
-                            
+
                                     /**
                                      * Enable all the rules in the sheet
                                      *
@@ -1368,7 +1368,7 @@
                                      * @chainable
                                      */
                                     enable : function () { sheet.disabled = false; return this; },
-                            
+
                                     /**
                                      * Disable all the rules in the sheet.  Rules may be changed while the
                                      * StyleSheet is disabled.
@@ -1378,7 +1378,7 @@
                                      * @chainable
                                      */
                                     disable : function () { sheet.disabled = true; return this; },
-                            
+
                                     /**
                                      * Returns false if the StyleSheet is disabled.  Otherwise true.
                                      *
@@ -1386,7 +1386,7 @@
                                      * @return {Boolean}
                                      */
                                     isEnabled : function () { return !sheet.disabled; },
-                            
+
                                     /**
                                      * &lt;p&gt;Set style properties for a provided selector string.
                                      * If the selector includes commas, it will be split into individual
@@ -1409,7 +1409,7 @@
                                         var rule = cssRules[sel],
                                             multi = sel.split(/\s*,\s*/),i,
                                             idx;
-                            
+
                                         // IE&#x27;s addRule doesn&#x27;t support multiple comma delimited selectors
                                         if (multi.length &gt; 1) {
                                             for (i = multi.length - 1; i &gt;= 0; --i) {
@@ -1417,13 +1417,13 @@
                                             }
                                             return this;
                                         }
-                            
+
                                         // Some selector values can cause IE to hang
                                         if (!StyleSheet.isValidSelector(sel)) {
                                             Y.log(&quot;Invalid selector &#x27;&quot;+sel+&quot;&#x27; passed to set (ignoring).&quot;,&#x27;error&#x27;,&#x27;StyleSheet&#x27;);
                                             return this;
                                         }
-                            
+
                                         // Opera throws an error if there&#x27;s a syntax error in assigned
                                         // cssText. Avoid this using a worker style collection, then
                                         // assigning the resulting cssText.
@@ -1432,12 +1432,12 @@
                                         } else {
                                             idx = sheet[_rules].length;
                                             css = StyleSheet.toCssText(css);
-                            
+
                                             // IE throws an error when attempting to addRule(sel,&#x27;&#x27;,n)
                                             // which would crop up if no, or only invalid values are used
                                             if (css) {
                                                 _insertRule(sel, css, idx);
-                            
+
                                                 // Safari replaces the rules collection, but maintains the
                                                 // rule instances in the new collection when rules are
                                                 // added/removed
@@ -1446,7 +1446,7 @@
                                         }
                                         return this;
                                     },
-                            
+
                                     /**
                                      * &lt;p&gt;Unset style properties for a provided selector string, removing
                                      * their effect from the style cascade.&lt;/p&gt;
@@ -1472,7 +1472,7 @@
                                             multi = sel.split(/\s*,\s*/),
                                             remove = !css,
                                             rules, i;
-                            
+
                                         // IE&#x27;s addRule doesn&#x27;t support multiple comma delimited selectors
                                         // so rules are mapped internally by atomic selectors
                                         if (multi.length &gt; 1) {
@@ -1481,23 +1481,23 @@
                                             }
                                             return this;
                                         }
-                            
+
                                         if (rule) {
                                             if (!remove) {
                                                 css = Y.Array(css);
-                            
+
                                                 workerStyle.cssText = rule.style.cssText;
                                                 for (i = css.length - 1; i &gt;= 0; --i) {
                                                     _unsetProperty(workerStyle,css[i]);
                                                 }
-                            
+
                                                 if (workerStyle.cssText) {
                                                     rule.style.cssText = workerStyle.cssText;
                                                 } else {
                                                     remove = true;
                                                 }
                                             }
-                            
+
                                             if (remove) { // remove the rule altogether
                                                 rules = sheet[_rules];
                                                 for (i = rules.length - 1; i &gt;= 0; --i) {
@@ -1511,7 +1511,7 @@
                                         }
                                         return this;
                                     },
-                            
+
                                     /**
                                      * Get the current cssText for a rule or the entire sheet.  If the
                                      * selector param is supplied, only the cssText for that rule will be
@@ -1526,12 +1526,12 @@
                                      */
                                     getCssText : function (sel) {
                                         var rule, css, selector;
-                            
+
                                         if (isString(sel)) {
                                             // IE&#x27;s addRule doesn&#x27;t support multiple comma delimited
                                             // selectors so rules are mapped internally by atomic selectors
                                             rule = cssRules[sel.split(/\s*,\s*/)[0]];
-                            
+
                                             return rule ? rule.style.cssText : null;
                                         } else {
                                             css = [];
@@ -1545,14 +1545,14 @@
                                         }
                                     }
                                 });
-                            
+
                             }
-                            
+
                             _toCssText = function (css,base) {
                                 var f    = css.styleFloat || css.cssFloat || css[FLOAT],
                                     trim = Y.Lang.trim,
                                     prop;
-                            
+
                                 // A very difficult to repro/isolate IE 9 beta (and Platform Preview 7) bug
                                 // was reduced to this line throwing the error:
                                 // &quot;Invalid this pointer used as target for method call&quot;
@@ -1567,13 +1567,13 @@
                                     workerStyle = p.style;
                                     workerStyle.cssText = base || EMPTY;
                                 }
-                            
+
                                 if (f &amp;&amp; !css[floatAttr]) {
                                     css = Y.merge(css);
                                     delete css.styleFloat; delete css.cssFloat; delete css[FLOAT];
                                     css[floatAttr] = f;
                                 }
-                            
+
                                 for (prop in css) {
                                     if (css.hasOwnProperty(prop)) {
                                         try {
@@ -1589,7 +1589,7 @@
                                 }
                                 return workerStyle.cssText;
                             };
-                            
+
                             Y.mix(StyleSheet, {
                                 /**
                                  * &lt;p&gt;Converts an object literal of style properties and values into a string
@@ -1619,7 +1619,7 @@
                                         }
                                         return _toCssText(css,cssText);
                                     }),
-                            
+
                                 /**
                                  * Registers a StyleSheet instance in the static registry by the given name
                                  *
@@ -1634,7 +1634,7 @@
                                     return !!(name &amp;&amp; sheet instanceof StyleSheet &amp;&amp;
                                               !sheets[name] &amp;&amp; (sheets[name] = sheet));
                                 },
-                            
+
                                 /**
                                  * &lt;p&gt;Determines if a selector string is safe to use.  Used internally
                                  * in set to prevent IE from locking up when attempting to add a rule for a
@@ -1653,9 +1653,9 @@
                                  */
                                 isValidSelector : function (sel) {
                                     var valid = false;
-                            
+
                                     if (sel &amp;&amp; isString(sel)) {
-                            
+
                                         if (!selectors.hasOwnProperty(sel)) {
                                             // TEST: there should be nothing but white-space left after
                                             // these destructive regexs
@@ -1674,18 +1674,18 @@
                                                 // class and id identifiers
                                                 replace(/[.#]\w[\w\-]*/g,EMPTY));
                                         }
-                            
+
                                         valid = selectors[sel];
                                     }
-                            
+
                                     return valid;
                                 }
                             },true);
-                            
+
                             Y.StyleSheet = StyleSheet;
-                            
+
                             /*
-                            
+
                             NOTES
                              * Style node must be added to the head element.  Safari does not honor styles
                                applied to StyleSheet objects on style nodes in the body.
@@ -1762,7 +1762,7 @@
                                list-style  -type              YES  YES  YES             YES     YES
                                            -position          YES  YES  YES             YES     YES
                                overflow    -x                 NO   NO   YES             n/a     YES
-                            
+
                                ??? - unsetting font-size-adjust has the same effect as unsetting font-size
                              * FireFox and WebKit populate rule.cssText as &quot;SELECTOR { CSSTEXT }&quot;, but
                                Opera and IE do not.
@@ -1770,8 +1770,8 @@
                                color:#000}&#x27;,0).  IE8 does not and creates an empty rule.
                              * IE6-8 addRule(&#x27;.foo&#x27;,&#x27;&#x27;,n) throws an error.  Must supply *some* cssText
                             */
-                            
-                            
+
+
                                 </pre>
                             </div>
                         </div>

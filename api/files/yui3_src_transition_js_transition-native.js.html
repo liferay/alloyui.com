@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/transition/js/transition-native.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1141,7 +1141,7 @@
                             * @module transition
                             * @requires node-style
                             */
-                            
+
                             var CAMEL_VENDOR_PREFIX = &#x27;&#x27;,
                                 VENDOR_PREFIX = &#x27;&#x27;,
                                 DOCUMENT = Y.config.doc,
@@ -1155,59 +1155,59 @@
                                 TRANSITION_DELAY,
                                 TRANSITION_END,
                                 ON_TRANSITION_END,
-                            
+
                                 EMPTY_OBJ = {},
-                            
+
                                 VENDORS = [
                                     &#x27;Webkit&#x27;,
                                     &#x27;Moz&#x27;
                                 ],
-                            
+
                                 VENDOR_TRANSITION_END = {
                                     Webkit: &#x27;webkitTransitionEnd&#x27;
                                 },
-                            
+
                             /**
                              * A class for constructing transition instances.
                              * Adds the &quot;transition&quot; method to Node.
                              * @class Transition
                              * @constructor
                              */
-                            
+
                             Transition = function() {
                                 this.init.apply(this, arguments);
                             };
-                            
+
                             // One off handling of transform-prefixing.
                             Transition._TRANSFORM = &#x27;transform&#x27;;
-                            
+
                             Transition._toCamel = function(property) {
                                 property = property.replace(/-([a-z])/gi, function(m0, m1) {
                                     return m1.toUpperCase();
                                 });
-                            
+
                                 return property;
                             };
-                            
+
                             Transition._toHyphen = function(property) {
                                 property = property.replace(/([A-Z]?)([a-z]+)([A-Z]?)/g, function(m0, m1, m2, m3) {
                                     var str = ((m1) ? &#x27;-&#x27; + m1.toLowerCase() : &#x27;&#x27;) + m2;
-                            
+
                                     if (m3) {
                                         str += &#x27;-&#x27; + m3.toLowerCase();
                                     }
-                            
+
                                     return str;
                                 });
-                            
+
                                 return property;
                             };
-                            
+
                             Transition.SHOW_TRANSITION = &#x27;fadeIn&#x27;;
                             Transition.HIDE_TRANSITION = &#x27;fadeOut&#x27;;
-                            
+
                             Transition.useNative = false;
-                            
+
                             // Map transition properties to vendor-specific versions.
                             if (&#x27;transition&#x27; in DOCUMENT_STYLE
                                 &amp;&amp; &#x27;transitionProperty&#x27; in DOCUMENT_STYLE
@@ -1222,14 +1222,14 @@
                                     if (property in DOCUMENT[DOCUMENT_ELEMENT].style) {
                                         CAMEL_VENDOR_PREFIX = val;
                                         VENDOR_PREFIX       = Transition._toHyphen(val) + &#x27;-&#x27;;
-                            
+
                                         Transition.useNative = true;
                                         Transition.supported = true; // TODO: remove
                                         Transition._VENDOR_PREFIX = val;
                                     }
                                 });
                             }
-                            
+
                             // Map transform property to vendor-specific versions.
                             // One-off required for cssText injection.
                             if (typeof DOCUMENT_STYLE.transform === &#x27;undefined&#x27;) {
@@ -1240,38 +1240,38 @@
                                     }
                                 });
                             }
-                            
+
                             if (CAMEL_VENDOR_PREFIX) {
                                 TRANSITION_CAMEL          = CAMEL_VENDOR_PREFIX + &#x27;Transition&#x27;;
                                 TRANSITION_PROPERTY_CAMEL = CAMEL_VENDOR_PREFIX + &#x27;TransitionProperty&#x27;;
                             }
-                            
+
                             TRANSITION_PROPERTY        = VENDOR_PREFIX + &#x27;transition-property&#x27;;
                             TRANSITION_DURATION        = VENDOR_PREFIX + &#x27;transition-duration&#x27;;
                             TRANSITION_TIMING_FUNCTION = VENDOR_PREFIX + &#x27;transition-timing-function&#x27;;
                             TRANSITION_DELAY           = VENDOR_PREFIX + &#x27;transition-delay&#x27;;
-                            
+
                             TRANSITION_END    = &#x27;transitionend&#x27;;
                             ON_TRANSITION_END = &#x27;on&#x27; + CAMEL_VENDOR_PREFIX.toLowerCase() + &#x27;transitionend&#x27;;
                             TRANSITION_END    = VENDOR_TRANSITION_END[CAMEL_VENDOR_PREFIX] || TRANSITION_END;
-                            
+
                             Transition.fx = {};
                             Transition.toggles = {};
-                            
+
                             Transition._hasEnd = {};
-                            
+
                             Transition._reKeywords = /^(?:node|duration|iterations|easing|delay|on|onstart|onend)$/i;
-                            
+
                             Y.Node.DOM_EVENTS[TRANSITION_END] = 1;
-                            
+
                             Transition.NAME = &#x27;transition&#x27;;
-                            
+
                             Transition.DEFAULT_EASING = &#x27;ease&#x27;;
                             Transition.DEFAULT_DURATION = 0.5;
                             Transition.DEFAULT_DELAY = 0;
-                            
+
                             Transition._nodeAttrs = {};
-                            
+
                             Transition.prototype = {
                                 constructor: Transition,
                                 init: function(node, config) {
@@ -1280,22 +1280,22 @@
                                     if (!anim._running &amp;&amp; config) {
                                         anim._config = config;
                                         node._transition = anim; // cache for reuse
-                            
+
                                         anim._duration = (&#x27;duration&#x27; in config) ?
                                             config.duration: anim.constructor.DEFAULT_DURATION;
-                            
+
                                         anim._delay = (&#x27;delay&#x27; in config) ?
                                             config.delay: anim.constructor.DEFAULT_DELAY;
-                            
+
                                         anim._easing = config.easing || anim.constructor.DEFAULT_EASING;
                                         anim._count = 0; // track number of animated properties
                                         anim._running = false;
-                            
+
                                     }
-                            
+
                                     return anim;
                                 },
-                            
+
                                 addProperty: function(prop, config) {
                                     var anim = this,
                                         node = this._node,
@@ -1307,13 +1307,13 @@
                                         dur,
                                         attr,
                                         val;
-                            
+
                                     if (!attrs) {
                                         attrs = Transition._nodeAttrs[uid] = {};
                                     }
-                            
+
                                     attr = attrs[prop];
-                            
+
                                     // might just be a value
                                     if (config &amp;&amp; config.value !== undefined) {
                                         val = config.value;
@@ -1321,41 +1321,41 @@
                                         val = config;
                                         config = EMPTY_OBJ;
                                     }
-                            
+
                                     if (typeof val === &#x27;function&#x27;) {
                                         val = val.call(nodeInstance, nodeInstance);
                                     }
-                            
+
                                     if (attr &amp;&amp; attr.transition) {
                                         // take control if another transition owns this property
                                         if (attr.transition !== anim) {
                                             attr.transition._count--; // remapping attr to this transition
                                         }
                                     }
-                            
+
                                     anim._count++; // properties per transition
-                            
+
                                     // make 0 async and fire events
                                     dur = ((typeof config.duration !== &#x27;undefined&#x27;) ? config.duration :
                                                 anim._duration) || 0.0001;
-                            
+
                                     attrs[prop] = {
                                         value: val,
                                         duration: dur,
                                         delay: (typeof config.delay !== &#x27;undefined&#x27;) ? config.delay :
                                                 anim._delay,
-                            
+
                                         easing: config.easing || anim._easing,
-                            
+
                                         transition: anim
                                     };
-                            
+
                                     // native end event doesnt fire when setting to same value
                                     // supplementing with timer
                                     // val may be a string or number (height: 0, etc), but computedStyle is always string
                                     computed = Y.DOM.getComputedStyle(node, prop);
                                     compareVal = (typeof val === &#x27;string&#x27;) ? computed : parseFloat(computed);
-                            
+
                                     if (Transition.useNative &amp;&amp; compareVal === val) {
                                         setTimeout(function() {
                                             anim._onNativeEnd.call(node, {
@@ -1365,31 +1365,31 @@
                                         }, dur * 1000);
                                     }
                                 },
-                            
+
                                 removeProperty: function(prop) {
                                     var anim = this,
                                         attrs = Transition._nodeAttrs[Y.stamp(anim._node)];
-                            
+
                                     if (attrs &amp;&amp; attrs[prop]) {
                                         delete attrs[prop];
                                         anim._count--;
                                     }
-                            
+
                                 },
-                            
+
                                 initAttrs: function(config) {
                                     var attr,
                                         node = this._node;
-                            
+
                                     if (config.transform &amp;&amp; !config[Transition._TRANSFORM]) {
                                         config[Transition._TRANSFORM] = config.transform;
                                         delete config.transform; // TODO: copy
                                     }
-                            
+
                                     for (attr in config) {
                                         if (config.hasOwnProperty(attr) &amp;&amp; !Transition._reKeywords.test(attr)) {
                                             this.addProperty(attr, config[attr]);
-                            
+
                                             // when size is auto or % webkit starts from zero instead of computed
                                             // (https://bugs.webkit.org/show_bug.cgi?id=16020)
                                             // TODO: selective set
@@ -1399,7 +1399,7 @@
                                         }
                                     }
                                 },
-                            
+
                                 /**
                                  * Starts or an animation.
                                  * @method run
@@ -1414,35 +1414,35 @@
                                             type: &#x27;transition:start&#x27;,
                                             config: config
                                         };
-                            
-                            
+
+
                                     if (!anim._running) {
                                         anim._running = true;
-                            
+
                                         if (config.on &amp;&amp; config.on.start) {
                                             config.on.start.call(Y.one(node), data);
                                         }
-                            
+
                                         anim.initAttrs(anim._config);
-                            
+
                                         anim._callback = callback;
                                         anim._start();
                                     }
-                            
-                            
+
+
                                     return anim;
                                 },
-                            
+
                                 _start: function() {
                                     this._runNative();
                                 },
-                            
+
                                 _prepDur: function(dur) {
                                     dur = parseFloat(dur) * 1000;
-                            
+
                                     return dur + &#x27;ms&#x27;;
                                 },
-                            
+
                                 _runNative: function() {
                                     var anim = this,
                                         node = anim._node,
@@ -1452,7 +1452,7 @@
                                         attrs = Transition._nodeAttrs[uid],
                                         cssText = &#x27;&#x27;,
                                         cssTransition = computed[Transition._toCamel(TRANSITION_PROPERTY)],
-                            
+
                                         transitionText = TRANSITION_PROPERTY + &#x27;: &#x27;,
                                         duration = TRANSITION_DURATION + &#x27;: &#x27;,
                                         easing = TRANSITION_TIMING_FUNCTION + &#x27;: &#x27;,
@@ -1460,16 +1460,16 @@
                                         hyphy,
                                         attr,
                                         name;
-                            
+
                                     // preserve existing transitions
                                     if (cssTransition !== &#x27;all&#x27;) {
                                         transitionText += cssTransition + &#x27;,&#x27;;
                                         duration += computed[Transition._toCamel(TRANSITION_DURATION)] + &#x27;,&#x27;;
                                         easing += computed[Transition._toCamel(TRANSITION_TIMING_FUNCTION)] + &#x27;,&#x27;;
                                         delay += computed[Transition._toCamel(TRANSITION_DELAY)] + &#x27;,&#x27;;
-                            
+
                                     }
-                            
+
                                     // run transitions mapped to this instance
                                     for (name in attrs) {
                                         hyphy = Transition._toHyphen(name);
@@ -1479,7 +1479,7 @@
                                                 duration += anim._prepDur(attr.duration) + &#x27;,&#x27;;
                                                 delay += anim._prepDur(attr.delay) + &#x27;,&#x27;;
                                                 easing += (attr.easing) + &#x27;,&#x27;;
-                            
+
                                                 transitionText += hyphy + &#x27;,&#x27;;
                                                 cssText += hyphy + &#x27;: &#x27; + attr.value + &#x27;; &#x27;;
                                             } else {
@@ -1487,23 +1487,23 @@
                                             }
                                         }
                                     }
-                            
+
                                     transitionText = transitionText.replace(/,$/, &#x27;;&#x27;);
                                     duration = duration.replace(/,$/, &#x27;;&#x27;);
                                     easing = easing.replace(/,$/, &#x27;;&#x27;);
                                     delay = delay.replace(/,$/, &#x27;;&#x27;);
-                            
+
                                     // only one native end event per node
                                     if (!Transition._hasEnd[uid]) {
                                         node.addEventListener(TRANSITION_END, anim._onNativeEnd, &#x27;&#x27;);
                                         Transition._hasEnd[uid] = true;
-                            
+
                                     }
-                            
+
                                     style.cssText += transitionText + duration + easing + delay + cssText;
-                            
+
                                 },
-                            
+
                                 _end: function(elapsed) {
                                     var anim = this,
                                         node = anim._node,
@@ -1514,22 +1514,22 @@
                                             config: config,
                                             elapsedTime: elapsed
                                         },
-                            
+
                                         nodeInstance = Y.one(node);
-                            
+
                                     anim._running = false;
                                     anim._callback = null;
-                            
+
                                     if (node) {
                                         if (config.on &amp;&amp; config.on.end) {
                                             setTimeout(function() { // IE: allow previous update to finish
                                                 config.on.end.call(nodeInstance, data);
-                            
+
                                                 // nested to ensure proper fire order
                                                 if (callback) {
                                                     callback.call(nodeInstance, data);
                                                 }
-                            
+
                                             }, 1);
                                         } else if (callback) {
                                             setTimeout(function() { // IE: allow previous update to finish
@@ -1537,13 +1537,13 @@
                                             }, 1);
                                         }
                                     }
-                            
+
                                 },
-                            
+
                                 _endNative: function(name) {
                                     var node = this._node,
                                         value = node.ownerDocument.defaultView.getComputedStyle(node, &#x27;&#x27;)[Transition._toCamel(TRANSITION_PROPERTY)];
-                            
+
                                     name = Transition._toHyphen(name);
                                     if (typeof value === &#x27;string&#x27;) {
                                         value = value.replace(new RegExp(&#x27;(?:^|,\\s)&#x27; + name + &#x27;,?&#x27;), &#x27;,&#x27;);
@@ -1551,7 +1551,7 @@
                                         node.style[TRANSITION_CAMEL] = value;
                                     }
                                 },
-                            
+
                                 _onNativeEnd: function(e) {
                                     var node = this,
                                         uid = Y.stamp(node),
@@ -1563,44 +1563,44 @@
                                         anim = (attr) ? attr.transition : null,
                                         data,
                                         config;
-                            
+
                                     if (anim) {
                                         anim.removeProperty(name);
                                         anim._endNative(name);
                                         config = anim._config[name];
-                            
+
                                         data = {
                                             type: &#x27;propertyEnd&#x27;,
                                             propertyName: name,
                                             elapsedTime: elapsed,
                                             config: config
                                         };
-                            
+
                                         if (config &amp;&amp; config.on &amp;&amp; config.on.end) {
                                             config.on.end.call(Y.one(node), data);
                                         }
-                            
+
                                         if (anim._count &lt;= 0)  { // after propertyEnd fires
                                             anim._end(elapsed);
                                             node.style[TRANSITION_PROPERTY_CAMEL] = &#x27;&#x27;; // clean up style
                                         }
                                     }
                                 },
-                            
+
                                 destroy: function() {
                                     var anim = this,
                                         node = anim._node;
-                            
+
                                     if (node) {
                                         node.removeEventListener(TRANSITION_END, anim._onNativeEnd, false);
                                         anim._node = null;
                                     }
                                 }
                             };
-                            
+
                             Y.Transition = Transition;
                             Y.TransitionNative = Transition; // TODO: remove
-                            
+
                             /**
                              *   Animate one or more css properties to a given value. Requires the &quot;transition&quot; module.
                              *   &lt;pre&gt;example usage:
@@ -1632,18 +1632,18 @@
                                     anim = (transitionAttrs) ? transitionAttrs.transition || null : null,
                                     fxConfig,
                                     prop;
-                            
+
                                 if (typeof name === &#x27;string&#x27;) { // named effect, pull config from registry
                                     if (typeof config === &#x27;function&#x27;) {
                                         callback = config;
                                         config = null;
                                     }
-                            
+
                                     fxConfig = Transition.fx[name];
-                            
+
                                     if (config &amp;&amp; typeof config === &#x27;object&#x27;) {
                                         config = Y.clone(config);
-                            
+
                                         for (prop in fxConfig) {
                                             if (fxConfig.hasOwnProperty(prop)) {
                                                 if (! (prop in config)) {
@@ -1654,22 +1654,22 @@
                                     } else {
                                         config = fxConfig;
                                     }
-                            
+
                                 } else { // name is a config, config is a callback or undefined
                                     callback = config;
                                     config = name;
                                 }
-                            
+
                                 if (anim &amp;&amp; !anim._running) {
                                     anim.init(this, config);
                                 } else {
                                     anim = new Transition(this._node, config);
                                 }
-                            
+
                                 anim.run(callback);
                                 return this;
                             };
-                            
+
                             Y.Node.prototype.show = function(name, config, callback) {
                                 this._show(); // show prior to transition
                                 if (name &amp;&amp; Y.Transition) {
@@ -1685,21 +1685,21 @@
                                 else if (name &amp;&amp; !Y.Transition) { Y.log(&#x27;unable to transition show; missing transition module&#x27;, &#x27;warn&#x27;, &#x27;node&#x27;); }
                                 return this;
                             };
-                            
+
                             Y.NodeList.prototype.show = function(name, config, callback) {
                                 var nodes = this._nodes,
                                     i = 0,
                                     node;
-                            
+
                                 while ((node = nodes[i++])) {
                                     Y.one(node).show(name, config, callback);
                                 }
-                            
+
                                 return this;
                             };
-                            
-                            
-                            
+
+
+
                             var _wrapCallBack = function(anim, fn, callback) {
                                 return function() {
                                     if (fn) {
@@ -1710,14 +1710,14 @@
                                     }
                                 };
                             };
-                            
+
                             Y.Node.prototype.hide = function(name, config, callback) {
                                 if (name &amp;&amp; Y.Transition) {
                                     if (typeof config === &#x27;function&#x27;) {
                                         callback = config;
                                         config = null;
                                     }
-                            
+
                                     callback = _wrapCallBack(this, this._hide, callback); // wrap with existing callback
                                     if (typeof name !== &#x27;string&#x27; &amp;&amp; !name.push) { // named effect or array of effects supercedes default
                                         if (typeof config === &#x27;function&#x27;) {
@@ -1733,19 +1733,19 @@
                                 }
                                 return this;
                             };
-                            
+
                             Y.NodeList.prototype.hide = function(name, config, callback) {
                                 var nodes = this._nodes,
                                     i = 0,
                                     node;
-                            
+
                                 while ((node = nodes[i++])) {
                                     Y.one(node).hide(name, config, callback);
                                 }
-                            
+
                                 return this;
                             };
-                            
+
                             /**
                              *   Animate one or more css properties to a given value. Requires the &quot;transition&quot; module.
                              *   &lt;pre&gt;example usage:
@@ -1780,7 +1780,7 @@
                                      i = 0,
                                     callbackOnce = callbackOnce === true,
                                     node;
-                            
+
                                 while ((node = nodes[i++])) {
                                     if (i &lt; size &amp;&amp; callbackOnce){
                                         Y.one(node).transition(config);
@@ -1788,74 +1788,74 @@
                                         Y.one(node).transition(config, callback);
                                     }
                                 }
-                            
+
                                 return this;
                             };
-                            
+
                             Y.Node.prototype.toggleView = function(name, on, callback) {
                                 this._toggles = this._toggles || [];
                                 callback = arguments[arguments.length - 1];
-                            
+
                                 if (typeof name !== &#x27;string&#x27;) { // no transition, just toggle
                                     on = name;
                                     this._toggleView(on, callback); // call original _toggleView in Y.Node
                                     return;
                                 }
-                            
+
                                 if (typeof on === &#x27;function&#x27;) { // Ignore &quot;on&quot; if used for callback argument.
                                     on = undefined;
                                 }
-                            
+
                                 if (typeof on === &#x27;undefined&#x27; &amp;&amp; name in this._toggles) { // reverse current toggle
                                     on = ! this._toggles[name];
                                 }
-                            
+
                                 on = (on) ? 1 : 0;
                                 if (on) {
                                     this._show();
                                 }  else {
                                     callback = _wrapCallBack(this, this._hide, callback);
                                 }
-                            
+
                                 this._toggles[name] = on;
                                 this.transition(Y.Transition.toggles[name][on], callback);
-                            
+
                                 return this;
                             };
-                            
+
                             Y.NodeList.prototype.toggleView = function(name, on, callback) {
                                 var nodes = this._nodes,
                                     i = 0,
                                     node;
-                            
+
                                 while ((node = nodes[i++])) {
                                     node = Y.one(node);
                                     node.toggleView.apply(node, arguments);
                                 }
-                            
+
                                 return this;
                             };
-                            
+
                             Y.mix(Transition.fx, {
                                 fadeOut: {
                                     opacity: 0,
                                     duration: 0.5,
                                     easing: &#x27;ease-out&#x27;
                                 },
-                            
+
                                 fadeIn: {
                                     opacity: 1,
                                     duration: 0.5,
                                     easing: &#x27;ease-in&#x27;
                                 },
-                            
+
                                 sizeOut: {
                                     height: 0,
                                     width: 0,
                                     duration: 0.75,
                                     easing: &#x27;ease-out&#x27;
                                 },
-                            
+
                                 sizeIn: {
                                     height: function(node) {
                                         return node.get(&#x27;scrollHeight&#x27;) + &#x27;px&#x27;;
@@ -1865,7 +1865,7 @@
                                     },
                                     duration: 0.5,
                                     easing: &#x27;ease-in&#x27;,
-                            
+
                                     on: {
                                         start: function() {
                                             var overflow = this.getStyle(&#x27;overflow&#x27;);
@@ -1874,7 +1874,7 @@
                                                 this._transitionOverflow = overflow;
                                             }
                                         },
-                            
+
                                         end: function() {
                                             if (this._transitionOverflow) { // revert overridden value
                                                 this.setStyle(&#x27;overflow&#x27;, this._transitionOverflow);
@@ -1884,12 +1884,12 @@
                                     }
                                 }
                             });
-                            
+
                             Y.mix(Transition.toggles, {
                                 size: [&#x27;sizeOut&#x27;, &#x27;sizeIn&#x27;],
                                 fade: [&#x27;fadeOut&#x27;, &#x27;fadeIn&#x27;]
                             });
-                            
+
                                 </pre>
                             </div>
                         </div>

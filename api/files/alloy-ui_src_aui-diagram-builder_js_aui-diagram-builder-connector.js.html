@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>alloy-ui/src/aui-diagram-builder/js/aui-diagram-builder-connector.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1140,15 +1140,15 @@
                              * @module aui-diagram-builder
                              * @submodule aui-diagram-builder-connector
                              */
-                            
+
                             var Lang = A.Lang,
                                 isArray = Lang.isArray,
                                 isBoolean = Lang.isBoolean,
                                 isObject = Lang.isObject,
                                 isString = Lang.isString,
-                            
+
                                 AArray = A.Array,
-                            
+
                                 // The first Bernstein basis polynomials (n=3),
                                 // http://en.wikipedia.org/wiki/B%C3%A9zier_curve The t in the function for
                                 // a linear Bézier curve can be thought of as describing how far B(t) is
@@ -1167,7 +1167,7 @@
                                 B4 = function(t) {
                                     return ((1 - t) * (1 - t) * (1 - t));
                                 },
-                            
+
                                 // Find a Cubic Bézier point based on the control points. Consider the first
                                 // two control points as the start and end point respectively.
                                 getCubicBezier = function(t, startPos, endPos, cp1, cp2) {
@@ -1175,86 +1175,86 @@
                                     var y = startPos[1] * B1(t) + cp1[1] * B2(t) + cp2[1] * B3(t) + endPos[1] * B4(t);
                                     return [x, y];
                                 },
-                            
+
                                 isGraphic = function(val) {
                                     return A.instanceOf(val, A.Graphic);
                                 },
-                            
+
                                 toDegrees = function(angleRadians) {
                                     return angleRadians * 180 / Math.PI;
                                 },
-                            
+
                                 sign = function(x) {
                                     return x === 0 ? 0 : (x &lt; 0 ? -1 : 1);
                                 },
-                            
+
                                 getCN = A.getClassName,
-                            
+
                                 CSS_DIAGRAM_BUILDER_CONNECTOR_NAME = getCN(&#x27;diagram&#x27;, &#x27;builder&#x27;, &#x27;connector&#x27;, &#x27;name&#x27;),
                                 CSS_HIDE = getCN(&#x27;hide&#x27;);
-                            
+
                             A.PolygonUtil = {
                                 ARROW_POINTS: [
                                   [-12, -6], [-8, 0], [-12, 6], [6, 0]
                                 ],
-                            
+
                                 drawArrow: function(shape, x1, y1, x2, y2, arrowPoints) {
                                     var instance = this;
-                            
+
                                     var angle = Math.atan2(y2 - y1, x2 - x1);
-                            
+
                                     shape.moveTo(x2, y2);
-                            
+
                                     // Slide the arrow position along the line in 5px in polar coordinates
                                     x2 = x2 - 5 * Math.cos(angle);
                                     y2 = y2 - 5 * Math.sin(angle);
-                            
+
                                     instance.drawPolygon(
                                         shape,
                                         instance.translatePoints(instance.rotatePoints(arrowPoints || instance.ARROW_POINTS, angle), x2, y2)
                                     );
                                 },
-                            
+
                                 drawPolygon: function(shape, points) {
                                     shape.moveTo(points[0][0], points[0][1]);
-                            
+
                                     AArray.each(points, function(p, i) {
                                         if (i &gt; 0) {
                                             shape.lineTo(points[i][0], points[i][1]);
                                         }
                                     });
-                            
+
                                     shape.lineTo(points[0][0], points[0][1]);
                                 },
-                            
+
                                 translatePoints: function(points, x, y) {
                                     var xy = [];
-                            
+
                                     AArray.each(points, function(p, i) {
                                         xy.push([points[i][0] + x, points[i][1] + y]);
                                     });
-                            
+
                                     return xy;
                                 },
-                            
+
                                 rotatePoints: function(points, angle) {
                                     var instance = this;
                                     var xy = [];
-                            
+
                                     AArray.each(points, function(p, i) {
                                         xy.push(instance.rotatePoint(angle, points[i][0], points[i][1]));
                                     });
-                            
+
                                     return xy;
                                 },
-                            
+
                                 rotatePoint: function(angle, x, y) {
                                     return [
                                         (x * Math.cos(angle)) - (y * Math.sin(angle)), (x * Math.sin(angle)) + (y * Math.cos(angle))
                                         ];
                                 }
                             };
-                            
+
                             /**
                              * A base class for Connector.
                              *
@@ -1266,10 +1266,10 @@
                              */
                             A.Connector = A.Base.create(&#x27;line&#x27;, A.Base, [], {
                                 SERIALIZABLE_ATTRS: [&#x27;color&#x27;, &#x27;lazyDraw&#x27;, &#x27;name&#x27;, &#x27;shapeSelected&#x27;, &#x27;shapeHover&#x27;, /*SHAPE,*/ &#x27;p1&#x27;, &#x27;p2&#x27;],
-                            
+
                                 shape: null,
                                 shapeArrow: null,
-                            
+
                                 /**
                                  * Construction logic executed during &#x60;A.Connector&#x60; instantiation. Lifecycle.
                                  *
@@ -1280,7 +1280,7 @@
                                 initializer: function() {
                                     var instance = this;
                                     var lazyDraw = instance.get(&#x27;lazyDraw&#x27;);
-                            
+
                                     instance.after({
                                         nameChange: instance._afterNameChange,
                                         p1Change: instance.draw,
@@ -1289,19 +1289,19 @@
                                         showNameChange: instance._afterShowNameChange,
                                         visibleChange: instance._afterVisibleChange
                                     });
-                            
+
                                     instance._initShapes();
-                            
+
                                     if (!lazyDraw) {
                                         instance.draw();
                                     }
-                            
+
                                     instance._uiSetVisible(instance.get(&#x27;visible&#x27;));
                                     instance._uiSetName(instance.get(&#x27;name&#x27;));
                                     instance._uiSetSelected(instance.get(&#x27;selected&#x27;), !lazyDraw);
                                     instance._uiSetShowName(instance.get(&#x27;showName&#x27;));
                                 },
-                            
+
                                 /**
                                  * Destructor lifecycle implementation for the &#x60;A.Connector&#x60; class.
                                  *
@@ -1310,12 +1310,12 @@
                                  */
                                 destructor: function() {
                                     var instance = this;
-                            
+
                                     instance.shape.destroy();
                                     instance.shapeArrow.destroy();
                                     instance.get(&#x27;nodeName&#x27;).remove();
                                 },
-                            
+
                                 /**
                                  * Responsible for drawing the connectors.
                                  *
@@ -1325,7 +1325,7 @@
                                     var instance = this;
                                     var shape = instance.shape;
                                     var shapeArrow = instance.shapeArrow;
-                            
+
                                     var p1 = instance.get(&#x27;p1&#x27;),
                                         p2 = instance.get(&#x27;p2&#x27;),
                                         c1 = instance.toCoordinate(p1),
@@ -1336,12 +1336,12 @@
                                         y2 = c2[1],
                                         dx = Math.max(Math.abs(x1 - x2) / 2, 10),
                                         dy = Math.max(Math.abs(y1 - y2) / 2, 10),
-                            
+
                                         curveArgs = null,
                                         nQuadrantSections = 8,
                                         angle = toDegrees(Math.atan2(y2 - y1, x2 - x1)),
                                         pseudoQuadrant = Math.round(Math.abs(angle) / (360 / nQuadrantSections));
-                            
+
                                     if (sign(angle) &lt; 0) {
                                         curveArgs = [
                                             [x1 + dx, y1, x2 - dx, y2, x2, y2], // 3,6
@@ -1360,32 +1360,32 @@
                                             [x1 - dx, y1, x2 + dx, y2, x2, y2] // 2,7
                                         ];
                                     }
-                            
+
                                     var cp = curveArgs[pseudoQuadrant];
-                            
+
                                     shape.clear();
                                     shape.moveTo(x1, y1);
                                     shape.curveTo.apply(shape, cp);
                                     shape.end();
-                            
+
                                     // Extract the angle from a segment of the current Cubic Bezier curve to
                                     // rotate the arrow. The segment should be an extremities for better
                                     // angle extraction, on this particular case t = [0 to 0.025].
                                     var xy1 = getCubicBezier(0, [x1, y1], [x2, y2], [cp[0], cp[1]], [cp[2], cp[3]]),
                                         xy2 = getCubicBezier(0.075, [x1, y1], [x2, y2], [cp[0], cp[1]], [cp[2], cp[3]]),
                                         centerXY = getCubicBezier(0.5, [x1, y1], [x2, y2], [cp[0], cp[1]], [cp[2], cp[3]]);
-                            
+
                                     shapeArrow.clear();
                                     A.PolygonUtil.drawArrow(shapeArrow, xy2[0], xy2[1], xy1[0], xy1[1], instance.get(&#x27;arrowPoints&#x27;));
                                     shapeArrow.end();
-                            
+
                                     if (instance.get(&#x27;showName&#x27;)) {
                                         instance.get(&#x27;nodeName&#x27;).center(instance.toXY(centerXY));
                                     }
-                            
+
                                     return instance;
                                 },
-                            
+
                                 /**
                                  * Gets the list of properties from the property model.
                                  *
@@ -1395,14 +1395,14 @@
                                 getProperties: function() {
                                     var instance = this;
                                     var propertyModel = instance.getPropertyModel();
-                            
+
                                     AArray.each(propertyModel, function(property) {
                                         property.value = instance.get(property.attributeName);
                                     });
-                            
+
                                     return propertyModel;
                                 },
-                            
+
                                 /**
                                  * Gets the model defition of a property.
                                  *
@@ -1412,7 +1412,7 @@
                                 getPropertyModel: function() {
                                     var instance = this;
                                     var strings = instance.getStrings();
-                            
+
                                     return [{
                                         attributeName: &#x27;name&#x27;,
                                         editor: new A.TextCellEditor({
@@ -1427,7 +1427,7 @@
                                         name: strings.name
                                     }];
                                 },
-                            
+
                                 /**
                                  * Gets the collection of strings used to label elements of the UI.
                                  *
@@ -1436,7 +1436,7 @@
                                 getStrings: function() {
                                     return A.Connector.STRINGS;
                                 },
-                            
+
                                 /**
                                  * Sets the visibility to &#x60;false&#x60;.
                                  *
@@ -1444,12 +1444,12 @@
                                  */
                                 hide: function() {
                                     var instance = this;
-                            
+
                                     instance.set(&#x27;visible&#x27;, false);
-                            
+
                                     return instance;
                                 },
-                            
+
                                 /**
                                  * Sets the visibility to &#x60;true&#x60;.
                                  *
@@ -1457,12 +1457,12 @@
                                  */
                                 show: function() {
                                     var instance = this;
-                            
+
                                     instance.set(&#x27;visible&#x27;, true);
-                            
+
                                     return instance;
                                 },
-                            
+
                                 /**
                                  * Converts X and Y positions to a coordinate.
                                  *
@@ -1471,10 +1471,10 @@
                                  */
                                 toCoordinate: function(coord) {
                                     var instance = this;
-                            
+
                                     return instance._offsetXY(coord, -1);
                                 },
-                            
+
                                 /**
                                  * Converts serializable attributes to JSON format.
                                  *
@@ -1484,14 +1484,14 @@
                                 toJSON: function() {
                                     var instance = this;
                                     var output = {};
-                            
+
                                     AArray.each(instance.SERIALIZABLE_ATTRS, function(attributeName) {
                                         output[attributeName] = instance.get(attributeName);
                                     });
-                            
+
                                     return output;
                                 },
-                            
+
                                 /**
                                  * Converts a coordinate to X and Y positions.
                                  *
@@ -1500,10 +1500,10 @@
                                  */
                                 toXY: function(coord) {
                                     var instance = this;
-                            
+
                                     return instance._offsetXY(coord, 1);
                                 },
-                            
+
                                 /**
                                  * Fires after &#x60;name&#x60; attribute value change.
                                  *
@@ -1513,12 +1513,12 @@
                                  */
                                 _afterNameChange: function(event) {
                                     var instance = this;
-                            
+
                                     instance._uiSetName(event.newVal);
-                            
+
                                     instance.draw();
                                 },
-                            
+
                                 /**
                                  * Fires after &#x60;selected&#x60; attribute value change.
                                  *
@@ -1528,10 +1528,10 @@
                                  */
                                 _afterSelectedChange: function(event) {
                                     var instance = this;
-                            
+
                                     instance._uiSetSelected(event.newVal);
                                 },
-                            
+
                                 /**
                                  * Fires after &#x60;showName&#x60; attribute value change.
                                  *
@@ -1541,10 +1541,10 @@
                                  */
                                 _afterShowNameChange: function(event) {
                                     var instance = this;
-                            
+
                                     instance._uiSetShowName(event.newVal);
                                 },
-                            
+
                                 /**
                                  * Fires after &#x60;visible&#x60; attribute value change.
                                  *
@@ -1554,10 +1554,10 @@
                                  */
                                 _afterVisibleChange: function(event) {
                                     var instance = this;
-                            
+
                                     instance._uiSetVisible(event.newVal);
                                 },
-                            
+
                                 /**
                                  * Adds shapes in the UI and bind its events.
                                  *
@@ -1566,22 +1566,22 @@
                                  */
                                 _initShapes: function() {
                                     var instance = this;
-                            
+
                                     var shape = instance.shape = instance.get(&#x27;graphic&#x27;).addShape(
                                         instance.get(&#x27;shape&#x27;)
                                     );
-                            
+
                                     var shapeArrow = instance.shapeArrow = instance.get(&#x27;graphic&#x27;).addShape(
                                         instance.get(&#x27;shapeArrow&#x27;)
                                     );
-                            
+
                                     shape.on(&#x27;click&#x27;, A.bind(instance._onShapeClick, instance));
                                     shape.on(&#x27;mouseenter&#x27;, A.bind(instance._onShapeMouseEnter, instance));
                                     shape.on(&#x27;mouseleave&#x27;, A.bind(instance._onShapeMouseLeave, instance));
                                     shapeArrow.on(&#x27;click&#x27;, A.bind(instance._onShapeClick, instance));
                                     instance.get(&#x27;nodeName&#x27;).on(&#x27;click&#x27;, A.bind(instance._onShapeClick, instance));
                                 },
-                            
+
                                 /**
                                  * Calculates the distance relative to the graphic.
                                  *
@@ -1593,10 +1593,10 @@
                                 _offsetXY: function(xy, sign) {
                                     var instance = this;
                                     var offsetXY = instance.get(&#x27;graphic&#x27;).getXY();
-                            
+
                                     return [xy[0] + offsetXY[0] * sign, xy[1] + offsetXY[1] * sign];
                                 },
-                            
+
                                 /**
                                  * Fires when shape is clicked.
                                  *
@@ -1608,14 +1608,14 @@
                                     var instance = this;
                                     var builder = instance.get(&#x27;builder&#x27;);
                                     var selected = instance.get(&#x27;selected&#x27;);
-                            
+
                                     if (builder) {
                                         if (event.hasModifier()) {
                                             builder.closeEditProperties();
                                         }
                                         else {
                                             builder.unselectConnectors();
-                            
+
                                             if (selected) {
                                                 builder.closeEditProperties();
                                             }
@@ -1624,12 +1624,12 @@
                                             }
                                         }
                                     }
-                            
+
                                     instance.set(&#x27;selected&#x27;, !selected);
-                            
+
                                     event.halt();
                                 },
-                            
+
                                 /**
                                  * Fires when mouse enters a shape.
                                  *
@@ -1639,21 +1639,21 @@
                                  */
                                 _onShapeMouseEnter: function() {
                                     var instance = this;
-                            
+
                                     if (!instance.get(&#x27;selected&#x27;)) {
                                         var shapeHover = instance.get(&#x27;shapeHover&#x27;);
                                         var shapeArrowHover = instance.get(&#x27;shapeArrowHover&#x27;);
-                            
+
                                         if (shapeHover) {
                                             instance._updateShape(instance.shape, shapeHover, false);
                                         }
-                            
+
                                         if (shapeArrowHover) {
                                             instance._updateShape(instance.shapeArrow, shapeArrowHover, false);
                                         }
                                     }
                                 },
-                            
+
                                 /**
                                  * Fires when mouse leaves a shape.
                                  *
@@ -1663,13 +1663,13 @@
                                  */
                                 _onShapeMouseLeave: function() {
                                     var instance = this;
-                            
+
                                     if (!instance.get(&#x27;selected&#x27;)) {
                                         instance._updateShape(instance.shape, instance.get(&#x27;shape&#x27;), false);
                                         instance._updateShape(instance.shapeArrow, instance.get(&#x27;shapeArrow&#x27;), false);
                                     }
                                 },
-                            
+
                                 /**
                                  * Set the &#x60;nodeName&#x60; attribute.
                                  *
@@ -1679,15 +1679,15 @@
                                  */
                                 _setNodeName: function(val) {
                                     var instance = this;
-                            
+
                                     if (!A.instanceOf(val, A.Node)) {
                                         val = new A.Node.create(val);
                                         instance.get(&#x27;builder&#x27;).dropContainer.append(val.unselectable());
                                     }
-                            
+
                                     return val;
                                 },
-                            
+
                                 /**
                                  * Set the &#x60;shape&#x60; attribute.
                                  *
@@ -1697,7 +1697,7 @@
                                  */
                                 _setShape: function(val) {
                                     var instance = this;
-                            
+
                                     return A.merge({
                                             type: &#x27;path&#x27;,
                                             stroke: {
@@ -1709,7 +1709,7 @@
                                         val
                                     );
                                 },
-                            
+
                                 /**
                                  * Set the &#x60;shapeArrow&#x60; attribute.
                                  *
@@ -1719,7 +1719,7 @@
                                  */
                                 _setShapeArrow: function(val) {
                                     var instance = this;
-                            
+
                                     return A.merge({
                                             type: &#x27;path&#x27;,
                                             fill: {
@@ -1735,7 +1735,7 @@
                                         val
                                     );
                                 },
-                            
+
                                 /**
                                  * Sets the &#x60;name&#x60; attribute in the UI.
                                  *
@@ -1745,10 +1745,10 @@
                                  */
                                 _uiSetName: function(val) {
                                     var instance = this;
-                            
+
                                     instance.get(&#x27;nodeName&#x27;).html(A.Escape.html(val));
                                 },
-                            
+
                                 /**
                                  * Sets the &#x60;selected&#x60; attribute in the UI.
                                  *
@@ -1759,14 +1759,14 @@
                                  */
                                 _uiSetSelected: function(val, draw) {
                                     var instance = this;
-                            
+
                                     instance._updateShape(
                                         instance.shape, val ? instance.get(&#x27;shapeSelected&#x27;) : instance.get(&#x27;shape&#x27;), draw);
-                            
+
                                     instance._updateShape(
                                         instance.shapeArrow, val ? instance.get(&#x27;shapeArrowSelected&#x27;) : instance.get(&#x27;shapeArrow&#x27;), draw);
                                 },
-                            
+
                                 /**
                                  * Sets the &#x60;showName&#x60; attribute in the UI.
                                  *
@@ -1776,10 +1776,10 @@
                                  */
                                 _uiSetShowName: function(val) {
                                     var instance = this;
-                            
+
                                     instance.get(&#x27;nodeName&#x27;).toggleClass(CSS_HIDE, !val);
                                 },
-                            
+
                                 /**
                                  * Sets the &#x60;visible&#x60; attribute in the UI.
                                  *
@@ -1789,12 +1789,12 @@
                                  */
                                 _uiSetVisible: function(val) {
                                     var instance = this;
-                            
+
                                     instance.shape.set(&#x27;visible&#x27;, val);
                                     instance.shapeArrow.set(&#x27;visible&#x27;, val);
                                     instance._uiSetShowName(val &amp;&amp; instance.get(&#x27;showName&#x27;));
                                 },
-                            
+
                                 /**
                                  * Updates shape&#x27;s fill and stroke.
                                  *
@@ -1806,15 +1806,15 @@
                                  */
                                 _updateShape: function(shape, cShape, draw) {
                                     var instance = this;
-                            
+
                                     if (cShape.hasOwnProperty(&#x27;fill&#x27;)) {
                                         shape.set(&#x27;fill&#x27;, cShape.fill);
                                     }
-                            
+
                                     if (cShape.hasOwnProperty(&#x27;stroke&#x27;)) {
                                         shape.set(&#x27;stroke&#x27;, cShape.stroke);
                                     }
-                            
+
                                     if (draw !== false) {
                                         instance.draw();
                                     }
@@ -1829,7 +1829,7 @@
                                  * @static
                                  */
                                 ATTRS: {
-                            
+
                                     /**
                                      * Arrow points from &#x60;A.PolygonUtil&#x60; instance.
                                      *
@@ -1840,14 +1840,14 @@
                                     arrowPoints: {
                                         value: A.PolygonUtil.ARROW_POINTS
                                     },
-                            
+
                                     /**
                                      * Stores an instance of &#x60;A.DiagramBuilder&#x60;.
                                      *
                                      * @attribute builder
                                      */
                                     builder: {},
-                            
+
                                     /**
                                      * The color used in the connector.
                                      *
@@ -1859,7 +1859,7 @@
                                         value: &#x27;#27aae1&#x27;,
                                         validator: isString
                                     },
-                            
+
                                     /**
                                      * Graphic used to represent the connector.
                                      *
@@ -1869,7 +1869,7 @@
                                     graphic: {
                                         validator: isGraphic
                                     },
-                            
+
                                     /**
                                      * Determine if the draw should be delayed or not.
                                      *
@@ -1881,7 +1881,7 @@
                                         value: false,
                                         validator: isBoolean
                                     },
-                            
+
                                     /**
                                      * The name of the connector.
                                      *
@@ -1894,7 +1894,7 @@
                                         },
                                         validator: isString
                                     },
-                            
+
                                     /**
                                      * The connector node name.
                                      *
@@ -1907,7 +1907,7 @@
                                         value: &#x27;&lt;span class=&quot;&#x27; + CSS_DIAGRAM_BUILDER_CONNECTOR_NAME + &#x27;&quot;&gt;&lt;/span&gt;&#x27;,
                                         writeOnce: true
                                     },
-                            
+
                                     /**
                                      * Origin connector position.
                                      *
@@ -1919,7 +1919,7 @@
                                         value: [0, 0],
                                         validator: isArray
                                     },
-                            
+
                                     /**
                                      * Destination connector position.
                                      *
@@ -1931,7 +1931,7 @@
                                         value: [0, 0],
                                         validator: isArray
                                     },
-                            
+
                                     /**
                                      * Checks if a connector is selected or not.
                                      *
@@ -1943,7 +1943,7 @@
                                         value: false,
                                         validator: isBoolean
                                     },
-                            
+
                                     /**
                                      * Graphic used to represent the connector&#x27;s shape.
                                      *
@@ -1954,7 +1954,7 @@
                                         value: null,
                                         setter: &#x27;_setShape&#x27;
                                     },
-                            
+
                                     /**
                                      * Graphic used to represent the connector&#x27;s shape arrow.
                                      *
@@ -1965,7 +1965,7 @@
                                         value: null,
                                         setter: &#x27;_setShapeArrow&#x27;
                                     },
-                            
+
                                     /**
                                      * Collection of styles applied when mouse is over the shape arrow.
                                      *
@@ -1984,7 +1984,7 @@
                                             }
                                         }
                                     },
-                            
+
                                     /**
                                      * Collection of styles applied when shape arrow is selected.
                                      *
@@ -2003,7 +2003,7 @@
                                             }
                                         }
                                     },
-                            
+
                                     /**
                                      * Collection of styles applied when mouse is over the shape.
                                      *
@@ -2019,7 +2019,7 @@
                                             }
                                         }
                                     },
-                            
+
                                     /**
                                      * Collection of styles applied when shape is selected.
                                      *
@@ -2035,7 +2035,7 @@
                                             }
                                         }
                                     },
-                            
+
                                     /**
                                      * Sets the visibility of the connector name.
                                      *
@@ -2047,7 +2047,7 @@
                                         validator: isBoolean,
                                         value: true
                                     },
-                            
+
                                     /**
                                      * Stores the uid, source and target data from a connector.
                                      *
@@ -2059,7 +2059,7 @@
                                         value: {},
                                         validator: isObject
                                     },
-                            
+
                                     /**
                                      * Indicates whether or not the connector is visible.
                                      *
@@ -2072,7 +2072,7 @@
                                         value: true
                                     }
                                 },
-                            
+
                                 /**
                                  * Collection of strings used to label elements of the UI.
                                  *
@@ -2084,7 +2084,7 @@
                                     name: &#x27;Name&#x27;
                                 }
                             });
-                            
+
                                 </pre>
                             </div>
                         </div>

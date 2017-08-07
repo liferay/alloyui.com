@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/io/js/io-xdr.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1142,47 +1142,47 @@
                             @for IO
                             @deprecated
                             **/
-                            
+
                             // Helpful resources when working with the mess that is XDomainRequest:
                             // http://www.cypressnorth.com/blog/web-programming-and-development/internet-explorer-aborting-ajax-requests-fixed/
                             // http://blogs.msdn.com/b/ieinternals/archive/2010/05/13/xdomainrequest-restrictions-limitations-and-workarounds.aspx
-                            
+
                             /**
                             Fires when the XDR transport is ready for use.
                             @event io:xdrReady
                             **/
                             var E_XDR_READY = Y.publish(&#x27;io:xdrReady&#x27;, { fireOnce: true }),
-                            
+
                             /**
                             Map of stored configuration objects when using
                             Flash as the transport for cross-domain requests.
-                            
+
                             @property _cB
                             @private
                             @type {Object}
                             **/
                             _cB = {},
-                            
+
                             /**
                             Map of transaction simulated readyState values
                             when XDomainRequest is the transport.
-                            
+
                             @property _rS
                             @private
                             @type {Object}
                             **/
                             _rS = {},
-                            
+
                             // Document reference
                             d = Y.config.doc,
                             // Window reference
                             w = Y.config.win,
                             // XDomainRequest cross-origin request detection
                             xdr = w &amp;&amp; w.XDomainRequest;
-                            
+
                             /**
                             Method that creates the Flash transport swf.
-                            
+
                             @method _swf
                             @private
                             @param {String} uri - location of io.swf.
@@ -1197,21 +1197,21 @@
                                         &#x27;&lt;param name=&quot;allowScriptAccess&quot; value=&quot;always&quot;&gt;&#x27; +
                                         &#x27;&lt;/object&gt;&#x27;,
                                     c = d.createElement(&#x27;div&#x27;);
-                            
+
                                 d.body.appendChild(c);
                                 c.innerHTML = o;
                             }
-                            
+
                             /**
                             Creates a response object for XDR transactions, for success
                             and failure cases.
-                            
+
                             @method _data
                             @private
                             @param {Object} o - Transaction object generated by _create() in io-base.
                             @param {Boolean} u - Configuration xdr.use.
                             @param {Boolean} d - Configuration xdr.dataType.
-                            
+
                             @return {Object}
                             **/
                             function _data(o, u, d) {
@@ -1221,13 +1221,13 @@
                                 if (d === &#x27;xml&#x27;) {
                                     o.c.responseXML = Y.DataType.XML.parse(o.c.responseText);
                                 }
-                            
+
                                 return o;
                             }
-                            
+
                             /**
                             Method for intiating an XDR transaction abort.
-                            
+
                             @method _abort
                             @private
                             @param {Object} o - Transaction object generated by _create() in io-base.
@@ -1236,11 +1236,11 @@
                             function _abort(o, c) {
                                 return o.c.abort(o.id, c);
                             }
-                            
+
                             /**
                             Method for determining if an XDR transaction has completed
                             and all data are received.
-                            
+
                             @method _isInProgress
                             @private
                             @param {Object} o - Transaction object generated by _create() in io-base.
@@ -1248,21 +1248,21 @@
                             function _isInProgress(o) {
                                 return xdr ? _rS[o.id] !== 4 : o.c.isInProgress(o.id);
                             }
-                            
+
                             Y.mix(Y.IO.prototype, {
-                            
+
                                 /**
                                 Map of io transports.
-                            
+
                                 @property _transport
                                 @private
                                 @type {Object}
                                 **/
                                 _transport: {},
-                            
+
                                 /**
                                 Sets event handlers for XDomainRequest transactions.
-                            
+
                                 @method _ieEvt
                                 @private
                                 @static
@@ -1273,7 +1273,7 @@
                                     var io = this,
                                         i = o.id,
                                         t = &#x27;timeout&#x27;;
-                            
+
                                     o.c.onprogress = function() { _rS[i] = 3; };
                                     o.c.onload = function() {
                                         _rS[i] = 4;
@@ -1289,11 +1289,11 @@
                                     };
                                     o.c[t] = c[t] || 0;
                                 },
-                            
+
                                 /**
                                 Method for accessing the transport&#x27;s interface for making a
                                 cross-domain transaction.
-                            
+
                                 @method xdr
                                 @param {String} uri - qualified path to transaction resource.
                                 @param {Object} o - Transaction object generated by _create() in io-base.
@@ -1301,7 +1301,7 @@
                                 **/
                                 xdr: function(uri, o, c) {
                                     var io = this;
-                            
+
                                     if (c.xdr.use === &#x27;flash&#x27;) {
                                         // The configuration object cannot be serialized safely
                                         // across Flash&#x27;s ExternalInterface.
@@ -1323,7 +1323,7 @@
                                     else if (xdr) {
                                         io._ieEvt(o, c);
                                         o.c.open(c.method || &#x27;GET&#x27;, uri);
-                            
+
                                         // Make async to protect against IE 8 oddities.
                                         setTimeout(function() {
                                             o.c.send(c.data);
@@ -1332,7 +1332,7 @@
                                     else {
                                         o.c.send(uri, o, c);
                                     }
-                            
+
                                     return {
                                         id: o.id,
                                         abort: function() {
@@ -1344,11 +1344,11 @@
                                         io: io
                                     };
                                 },
-                            
+
                                 /**
                                 Response controller for cross-domain requests when using the
                                 Flash transport or IE8&#x27;s XDomainRequest object.
-                            
+
                                 @method xdrResponse
                                 @param {String} e Event name
                                 @param {Object} o Transaction object generated by _create() in io-base.
@@ -1361,7 +1361,7 @@
                                         m = xdr ? _rS : _cB,
                                         u = c.xdr.use,
                                         d = c.xdr.dataType;
-                            
+
                                     switch (e) {
                                         case &#x27;start&#x27;:
                                             io.start(o, c);
@@ -1384,10 +1384,10 @@
                                             break;
                                     }
                                 },
-                            
+
                                 /**
                                 Fires event &quot;io:xdrReady&quot;
-                            
+
                                 @method _xdrReady
                                 @private
                                 @param {Number} yid - YUI sandbox id.
@@ -1396,10 +1396,10 @@
                                 _xdrReady: function(yid, uid) {
                                     Y.fire(E_XDR_READY, yid, uid);
                                 },
-                            
+
                                 /**
                                 Initializes the desired transport.
-                            
+
                                 @method transport
                                 @param {Object} o - object of transport configurations.
                                 **/
@@ -1410,10 +1410,10 @@
                                     }
                                 }
                             });
-                            
+
                             /**
                             Fires event &quot;io:xdrReady&quot;
-                            
+
                             @method xdrReady
                             @protected
                             @static
@@ -1425,29 +1425,29 @@
                                 Y.io.xdr.delay = 0;
                                 io._xdrReady.apply(io, [yid, uid]);
                             };
-                            
+
                             Y.io.xdrResponse = function(e, o, c){
                                 var io = Y.io._map[o.uid];
                                 io.xdrResponse.apply(io, [e, o, c]);
                             };
-                            
+
                             Y.io.transport = function(c){
                                 var io = Y.io._map[&#x27;io:0&#x27;] || new Y.IO();
                                 c.uid = io._uid;
                                 io.transport.apply(io, [c]);
                             };
-                            
+
                             /**
                             Delay value to calling the Flash transport, in the
                             event io.swf has not finished loading.  Once the E_XDR_READY
                             event is fired, this value will be set to 0.
-                            
+
                             @property delay
                             @static
                             @type {Number}
                             **/
                             Y.io.xdr = { delay : 100 };
-                            
+
                                 </pre>
                             </div>
                         </div>

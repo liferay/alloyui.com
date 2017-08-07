@@ -4,8 +4,8 @@ YUI().use(
     new Y.Audio(
       {
         boundingBox: '#myAudio',
-        url: 'http://alloyui.com/audio/zelda.mp3',
-        oggUrl: 'http://alloyui.com/audio/zelda.ogg'
+        url: 'https://alloyui.com/audio/zelda.mp3',
+        oggUrl: 'https://alloyui.com/audio/zelda.ogg'
       }
     ).render();
   }

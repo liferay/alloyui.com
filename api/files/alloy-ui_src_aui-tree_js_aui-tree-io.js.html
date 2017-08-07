@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>alloy-ui/src/aui-tree/js/aui-tree-io.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1140,15 +1140,15 @@
                              * @module aui-tree
                              * @submodule aui-tree-io
                              */
-                            
+
                             var Lang = A.Lang,
                                 isFunction = Lang.isFunction,
                                 isString = Lang.isString,
-                            
+
                                 getCN = A.getClassName,
-                            
+
                                 CSS_TREE_NODE_IO_LOADING = getCN(&#x27;tree&#x27;, &#x27;node&#x27;, &#x27;io&#x27;, &#x27;loading&#x27;);
-                            
+
                             /**
                              * A base class for TreeViewIO.
                              *
@@ -1157,17 +1157,17 @@
                              *     properties.
                              * @constructor
                              */
-                            
+
                             function TreeViewIO() {
                                 var instance = this;
-                            
+
                                 instance.publish(
                                     &#x27;ioRequestSuccess&#x27;, {
                                         defaultFn: instance._onIOSuccessDefault
                                     }
                                 );
                             }
-                            
+
                             /**
                              * Static property used to define the default attribute
                              * configuration for the TreeViewIO.
@@ -1177,7 +1177,7 @@
                              * @static
                              */
                             TreeViewIO.ATTRS = {
-                            
+
                                 /**
                                  * IO options for the current TreeNode load the children.
                                  *
@@ -1193,9 +1193,9 @@
                                     }
                                 }
                             };
-                            
+
                             TreeViewIO.prototype = {
-                            
+
                                 /**
                                  * Construction logic executed during TreeViewIO instantiation. Lifecycle.
                                  *
@@ -1204,12 +1204,12 @@
                                  */
                                 initializer: function() {
                                     var instance = this;
-                            
+
                                     instance.publish(
-                            
+
                                     );
                                 },
-                            
+
                                 /**
                                  * Create nodes.
                                  *
@@ -1219,22 +1219,22 @@
                                 createNodes: function(nodes) {
                                     var instance = this,
                                         paginator = instance.get(&#x27;paginator&#x27;);
-                            
+
                                     A.Array.each(A.Array(nodes), function(node) {
                                         var childrenLength = instance.getChildrenLength();
-                            
+
                                         if (paginator &amp;&amp; (paginator.total &lt;= childrenLength)) {
                                             return;
                                         }
-                            
+
                                         instance.appendChild(
                                             instance.createNode(node)
                                         );
                                     });
-                            
+
                                     instance._syncPaginatorUI(nodes);
                                 },
-                            
+
                                 /**
                                  * Initialize the IO transaction setup on the
                                  * [io](A.TreeViewIO.html#attr_io) attribute.
@@ -1243,18 +1243,18 @@
                                  */
                                 initIO: function() {
                                     var instance = this;
-                            
+
                                     var io = instance.get(&#x27;io&#x27;);
-                            
+
                                     if (isFunction(io.cfg.data)) {
                                         io.cfg.data = io.cfg.data.call(instance, instance);
                                     }
-                            
+
                                     instance._syncPaginatorIOData(io);
-                            
+
                                     if (isFunction(io.loader)) {
                                         var loader = A.bind(io.loader, instance);
-                            
+
                                         // apply loader in the TreeNodeIO scope
                                         loader(io.url, io.cfg, instance);
                                     }
@@ -1262,7 +1262,7 @@
                                         A.io.request(io.url, io.cfg);
                                     }
                                 },
-                            
+
                                 /**
                                  * IO Start handler.
                                  *
@@ -1270,14 +1270,14 @@
                                  */
                                 ioStartHandler: function() {
                                     var instance = this;
-                            
+
                                     var contentBox = instance.get(&#x27;contentBox&#x27;);
-                            
+
                                     instance.set(&#x27;loading&#x27;, true);
-                            
+
                                     contentBox.addClass(CSS_TREE_NODE_IO_LOADING);
                                 },
-                            
+
                                 /**
                                  * IO Complete handler.
                                  *
@@ -1285,15 +1285,15 @@
                                  */
                                 ioCompleteHandler: function() {
                                     var instance = this;
-                            
+
                                     var contentBox = instance.get(&#x27;contentBox&#x27;);
-                            
+
                                     instance.set(&#x27;loading&#x27;, false);
                                     instance.set(&#x27;loaded&#x27;, true);
-                            
+
                                     contentBox.removeClass(CSS_TREE_NODE_IO_LOADING);
                                 },
-                            
+
                                 /**
                                  * IO Success handler.
                                  *
@@ -1301,15 +1301,15 @@
                                  */
                                 ioSuccessHandler: function() {
                                     var instance = this;
-                            
+
                                     var io = instance.get(&#x27;io&#x27;);
-                            
+
                                     var args = Array.prototype.slice.call(arguments);
                                     var length = args.length;
-                            
+
                                     // if using the first argument as the JSON object
                                     var nodes = args[1];
-                            
+
                                     // if using (event, id, o) yui callback syntax
                                     if (length &gt;= 3) {
                                         var o = args[2];
@@ -1319,18 +1319,18 @@
                                         }
                                         catch (e) {}
                                     }
-                            
+
                                     var formatter = io.formatter;
-                            
+
                                     if (formatter) {
                                         nodes = formatter(nodes);
                                     }
-                            
+
                                     instance.createNodes(nodes);
-                            
+
                                     instance.fire(&#x27;ioRequestSuccess&#x27;, nodes);
                                 },
-                            
+
                                 /**
                                  * IO Failure handler.
                                  *
@@ -1338,13 +1338,13 @@
                                  */
                                 ioFailureHandler: function() {
                                     var instance = this;
-                            
+
                                     instance.fire(&#x27;ioRequestFailure&#x27;);
-                            
+
                                     instance.set(&#x27;loading&#x27;, false);
                                     instance.set(&#x27;loaded&#x27;, false);
                                 },
-                            
+
                                 /**
                                  * Fire after IO success default.
                                  *
@@ -1354,14 +1354,14 @@
                                  */
                                 _onIOSuccessDefault: function() {
                                     var instance = this;
-                            
+
                                     var ownerTree = instance.get(&#x27;ownerTree&#x27;);
-                            
+
                                     if (ownerTree &amp;&amp; ownerTree.ddDelegate) {
                                         ownerTree.ddDelegate.syncTargets();
                                     }
                                 },
-                            
+
                                 /**
                                  * Setter for [io](A.TreeViewIO.html#attr_io).
                                  *
@@ -1372,7 +1372,7 @@
                                  */
                                 _setIO: function(v) {
                                     var instance = this;
-                            
+
                                     if (!v) {
                                         return null;
                                     }
@@ -1381,23 +1381,23 @@
                                             url: v
                                         };
                                     }
-                            
+
                                     v = v || {};
                                     v.cfg = v.cfg || {};
                                     v.cfg.on = v.cfg.on || {};
-                            
+
                                     var defCallbacks = {
                                         start: A.bind(instance.ioStartHandler, instance),
                                         complete: A.bind(instance.ioCompleteHandler, instance),
                                         success: A.bind(instance.ioSuccessHandler, instance),
                                         failure: A.bind(instance.ioFailureHandler, instance)
                                     };
-                            
+
                                     A.each(defCallbacks, function(fn, name) {
                                         var userFn = v.cfg.on[name];
-                            
+
                                         fn.defaultFn = true;
-                            
+
                                         if (isFunction(userFn)) {
                                             // wrapping user callback and default callback, invoking both
                                             // handlers
@@ -1408,24 +1408,24 @@
                                                 },
                                                 instance
                                             );
-                            
+
                                             wrappedFn.wrappedFn = true;
-                            
+
                                             v.cfg.on[name] = wrappedFn;
                                         }
                                         else {
                                             // get from defCallbacks map
                                             v.cfg.on[name] = fn;
                                         }
-                            
+
                                     });
-                            
+
                                     return v;
                                 }
                             };
-                            
+
                             A.TreeViewIO = TreeViewIO;
-                            
+
                                 </pre>
                             </div>
                         </div>

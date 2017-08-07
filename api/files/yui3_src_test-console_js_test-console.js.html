@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,56 +1122,56 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/test-console/js/test-console.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
                             Provides a specialized log console widget that&#x27;s pre-configured to display YUI
                             Test output with no extra configuration.
-                            
+
                             @example
-                            
+
                                 &lt;div id=&quot;log&quot; class=&quot;yui3-skin-sam&quot;&gt;&lt;/div&gt;
-                            
+
                                 &lt;script&gt;
                                 YUI().use(&#x27;test-console&#x27;, function (Y) {
                                     // ... set up your test cases here ...
-                            
+
                                     // Render the console inside the #log div, then run the tests.
                                     new Y.Test.Console().render(&#x27;#log&#x27;);
                                     Y.Test.Runner.run();
                                 });
                                 &lt;/script&gt;
-                            
+
                             @module test-console
                             @namespace Test
                             @class Console
                             @extends Console
                             @constructor
-                            
+
                             @param {Object} [config] Config attributes.
                                 @param {Object} [config.filters] Category filter configuration.
-                            
+
                             @since 3.5.0
                             **/
-                            
+
                             function TestConsole() {
                                 TestConsole.superclass.constructor.apply(this, arguments);
                             }
-                            
+
                             Y.namespace(&#x27;Test&#x27;).Console = Y.extend(TestConsole, Y.Console, {
                                 initializer: function (config) {
                                     this.on(&#x27;entry&#x27;, this._onEntry);
-                            
+
                                     this.plug(Y.Plugin.ConsoleFilters, {
                                         category: Y.merge({
                                             info  : true,
@@ -1179,17 +1179,17 @@
                                             fail  : true,
                                             status: false
                                         }, (config &amp;&amp; config.filters) || {}),
-                            
+
                                         defaultVisibility: false,
-                            
+
                                         source: {
                                             TestRunner: true
                                         }
                                     });
-                            
+
                                     Y.Test.Runner.on(&#x27;complete&#x27;, Y.bind(this._parseCoverage, this));
                                 },
-                            
+
                                 // -- Protected Coverage Parser ---------------------------------------------
                                 /**
                                 * Scans the coverage data to determine if it&#x27;s an Istanbul coverage object.
@@ -1200,11 +1200,11 @@
                                 _isIstanbul: function(json) {
                                     var first = Y.Object.keys(json)[0],
                                         ret = false;
-                            
+
                                     if (json[first].s !== undefined &amp;&amp; json[first].fnMap !== undefined) {
                                         ret = true;
                                     }
-                            
+
                                     if (json.s !== undefined &amp;&amp; json.fnMap !== undefined) {
                                         ret = true;
                                     }
@@ -1230,23 +1230,23 @@
                                             percent: 0
                                         }
                                     }, coverageLog;
-                            
+
                                     Y.Object.each(coverage, function(info) {
                                         cov.lines.total += info.coveredLines;
                                         cov.lines.hit += info.calledLines;
                                         cov.lines.miss += (info.coveredLines - info.calledLines);
                                         cov.lines.percent = Math.floor((cov.lines.hit / cov.lines.total) * 100);
-                            
+
                                         cov.functions.total += info.coveredFunctions;
                                         cov.functions.hit += info.calledFunctions;
                                         cov.functions.miss += (info.coveredFunctions - info.calledFunctions);
                                         cov.functions.percent = Math.floor((cov.functions.hit / cov.functions.total) * 100);
                                     });
-                            
-                            
+
+
                                     coverageLog = &#x27;Lines: Hit:&#x27; + cov.lines.hit + &#x27; Missed:&#x27; + cov.lines.miss + &#x27; Total:&#x27; + cov.lines.total + &#x27; Percent:&#x27; + cov.lines.percent + &#x27;%\n&#x27;;
                                     coverageLog += &#x27;Functions: Hit:&#x27; + cov.functions.hit + &#x27; Missed:&#x27; + cov.functions.miss + &#x27; Total:&#x27; + cov.functions.total + &#x27; Percent:&#x27; + cov.functions.percent + &#x27;%&#x27;;
-                            
+
                                     this.log(&#x27;Coverage: &#x27; + coverageLog, &#x27;info&#x27;, &#x27;TestRunner&#x27;);
                                 },
                                 /**
@@ -1288,7 +1288,7 @@
                                     var statementMap = fileCoverage.statementMap,
                                         statements = fileCoverage.s,
                                         lineMap;
-                            
+
                                     if (!fileCoverage.l) {
                                         fileCoverage.l = lineMap = {};
                                         Y.Object.each(statements, function (value, st) {
@@ -1326,7 +1326,7 @@
                                 _computeSimpleTotals: function (fileCoverage, property) {
                                     var stats = fileCoverage[property],
                                         ret = { total: 0, covered: 0 };
-                            
+
                                     Y.Object.each(stats, function(val) {
                                         ret.total += 1;
                                         if (val) {
@@ -1345,7 +1345,7 @@
                                 _computeBranchTotals: function (fileCoverage) {
                                     var stats = fileCoverage.b,
                                         ret = { total: 0, covered: 0 };
-                            
+
                                     Y.Object.each(stats, function (branches) {
                                         var covered = Y.Array.filter(branches, function (num) { return num &gt; 0; });
                                         ret.total += branches.length;
@@ -1362,10 +1362,10 @@
                                 parseIstanbul: function (coverage) {
                                     var self = this,
                                         str = &#x27;Coverage Report:\n&#x27;;
-                            
+
                                     Y.Object.each(coverage, function(fileCoverage, file) {
                                         var ret = self._blankSummary();
-                            
+
                                         self._addDerivedInfoForFile(fileCoverage);
                                         ret.lines = self._computeSimpleTotals(fileCoverage, &#x27;l&#x27;);
                                         ret.functions = self._computeSimpleTotals(fileCoverage, &#x27;f&#x27;);
@@ -1375,10 +1375,10 @@
                                         Y.Array.each([&#x27;lines&#x27;,&#x27;functions&#x27;,&#x27;statements&#x27;,&#x27;branches&#x27;], function(key) {
                                             str += &#x27;    &#x27; + key +&#x27;: &#x27; + ret[key].covered + &#x27;/&#x27; + ret[key].total + &#x27; : &#x27; + ret[key].pct + &#x27;%\n&#x27;;
                                         });
-                            
+
                                     });
                                     this.log(str, &#x27;info&#x27;, &#x27;TestRunner&#x27;);
-                            
+
                                 },
                                 /**
                                 * Parses YUITest or Istanbul coverage results if they are available and logs them.
@@ -1396,11 +1396,11 @@
                                         this.parseYUITestCoverage(coverage);
                                     }
                                 },
-                            
+
                                 // -- Protected Event Handlers ---------------------------------------------
                                 _onEntry: function (e) {
                                     var msg = e.message;
-                            
+
                                     if (msg.category === &#x27;info&#x27;
                                             &amp;&amp; /\s(?:case|suite)\s|yuitests\d+|began/.test(msg.message)) {
                                         msg.category = &#x27;status&#x27;;
@@ -1410,7 +1410,7 @@
                                 }
                             }, {
                                 NAME: &#x27;testConsole&#x27;,
-                            
+
                                 ATTRS: {
                                     entryTemplate: {
                                         value:
@@ -1418,25 +1418,25 @@
                                                 &#x27;&lt;div class=&quot;{entry_content_class}&quot;&gt;{message}&lt;/div&gt;&#x27; +
                                             &#x27;&lt;/div&gt;&#x27;
                                     },
-                            
+
                                     height: {
                                         value: &#x27;350px&#x27;
                                     },
-                            
+
                                     newestOnTop: {
                                         value: false
                                     },
-                            
+
                                     style: {
                                         value: &#x27;block&#x27;
                                     },
-                            
+
                                     width: {
                                         value: Y.UA.ie &amp;&amp; Y.UA.ie &lt; 9 ? &#x27;100%&#x27; : &#x27;inherit&#x27;
                                     }
                                 }
                             });
-                            
+
                                 </pre>
                             </div>
                         </div>

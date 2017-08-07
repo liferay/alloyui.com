@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/graphics/js/GraphicBase.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1173,7 +1173,7 @@
                                 WRITE_ONCE = &quot;writeOnce&quot;,
                                 GraphicBase,
                                 AttributeLite;
-                            
+
                                 /**
                             	 * AttributeLite provides Attribute-like getters and setters for shape classes in the Graphics module.
                                  * It provides a get/set API without the event infastructure. This class is temporary and a work in progress.
@@ -1184,15 +1184,15 @@
                                 AttributeLite = function()
                                 {
                                     var host = this; // help compression
-                            
+
                                     // Perf tweak - avoid creating event literals if not required.
                                     host._ATTR_E_FACADE = {};
-                            
+
                                     Y.EventTarget.call(this, {emitFacade:true});
                                     host._state = {};
                                     host.prototype = Y.mix(AttributeLite.prototype, host.prototype);
                                 };
-                            
+
                                 AttributeLite.prototype = {
                             		/**
                             		 * Initializes the attributes for a shape. If an attribute config is passed into the constructor of the host,
@@ -1242,12 +1242,12 @@
                             					{
                             						continue;
                             					}
-                            
+
                             					if(attr.hasOwnProperty(WRITE_ONCE) &amp;&amp; attr.writeOnce)
                             					{
                             						attr.readOnly = true;
                             					}
-                            
+
                             					if(cfg &amp;&amp; cfg.hasOwnProperty(i))
                             					{
                             						if(attr.hasOwnProperty(SETTER))
@@ -1262,7 +1262,7 @@
                             				}
                             			}
                             		},
-                            
+
                                     /**
                                      * For a given item, returns the value of the property requested, or undefined if not found.
                                      *
@@ -1286,12 +1286,12 @@
                                                 }
                                                 return attrConfig[attr].getter.apply(host);
                                             }
-                            
+
                                             return host._state[attr];
                                         }
                                         return null;
                                     },
-                            
+
                                     /**
                                      * Sets the value of an attribute.
                                      *
@@ -1320,7 +1320,7 @@
                                             this._set.apply(this, arguments);
                                         }
                                     },
-                            
+
                             		/**
                                      * Provides setter logic. Used by &#x60;set&#x60;.
                                      *
@@ -1358,7 +1358,7 @@
                             	};
                                 Y.mix(AttributeLite, Y.EventTarget, false, null, 1);
                             	Y.AttributeLite = AttributeLite;
-                            
+
                                 /**
                                  * GraphicBase serves as the base class for the graphic layer. It serves the same purpose as
                                  * Base but uses a lightweight getter/setter class instead of Attribute.
@@ -1375,7 +1375,7 @@
                                     if (host._initPlugins &amp;&amp; PluginHost) {
                                         PluginHost.call(host);
                                     }
-                            
+
                                     host.name = host.constructor.NAME;
                                     host._eventPrefix = host.constructor.EVENT_PREFIX || host.constructor.NAME;
                                     AttributeLite.call(host);
@@ -1387,9 +1387,9 @@
                                     }
                                     host.initialized = true;
                                 };
-                            
+
                                 GraphicBase.NAME = &quot;baseGraphic&quot;;
-                            
+
                                 GraphicBase.prototype = {
                                     /**
                                      * Init method, invoked during construction.
@@ -1406,7 +1406,7 @@
                                         this.initializer.apply(this, arguments);
                                         this.fire(&quot;init&quot;, {cfg: arguments[0]});
                                     },
-                            
+
                                     /**
                                      * Camel case concatanates two strings.
                                      *
@@ -1428,8 +1428,8 @@
                             GraphicBase.plug = PluginHost.plug;
                             GraphicBase.unplug = PluginHost.unplug;
                             Y.GraphicBase = GraphicBase;
-                            
-                            
+
+
                             /**
                              * &#x60;Drawing&#x60; provides a set of drawing methods used by &#x60;Path&#x60; and custom shape classes.
                              * &#x60;Drawing&#x60; has the following implementations based on browser capability.
@@ -1773,7 +1773,7 @@
                                             transform: &quot;rotate(45)&quot;
                                         };
                                  * &lt;p&gt;The code below would apply &#x60;translate&#x60; and &#x60;rotate&#x60; to an existing shape.&lt;/p&gt;
-                            
+
                                     myRect.set(&quot;transform&quot;, &quot;translate(40, 50) rotate(45)&quot;);
                             	 * @config transform
                                  * @type String
@@ -1910,7 +1910,7 @@
                             	 * @type Graphic
                             	 * @readOnly
                             	 */
-                            
+
                             /**
                              * &lt;p&gt;Creates circle shape with editable attributes.&lt;/p&gt;
                              * &lt;p&gt;&#x60;Circle&#x60; instances can be created using the &lt;a href=&quot;Graphic.html#method_addShape&quot;&gt;&#x60;addShape&#x60;&lt;/a&gt; method of the
@@ -1929,7 +1929,7 @@
                              *  &lt;/ul&gt;
                              *
                              * The below code creates a circle by defining the &#x60;type&#x60; attribute as &quot;circle&quot;:&lt;/p&gt;
-                            
+
                                     var myCircle = myGraphic.addShape({
                                         type: &quot;circle&quot;,
                                         radius: 10,
@@ -1941,7 +1941,7 @@
                                             color: &quot;#000&quot;
                                         }
                                     });
-                            
+
                              * Below, this same circle is created by defining the &#x60;type&#x60; attribute with a class reference:
                              *
                                     var myCircle = myGraphic.addShape({
@@ -1993,7 +1993,7 @@
                              *  &lt;/ul&gt;
                              *
                              * The below code creates an ellipse by defining the &#x60;type&#x60; attribute as &quot;ellipse&quot;:&lt;/p&gt;
-                            
+
                                     var myEllipse = myGraphic.addShape({
                                         type: &quot;ellipse&quot;,
                                         width: 20,
@@ -2006,7 +2006,7 @@
                                             color: &quot;#000&quot;
                                         }
                                     });
-                            
+
                              * Below, the same ellipse is created by defining the &#x60;type&#x60; attribute with a class reference:
                              *
                                     var myEllipse = myGraphic.addShape({
@@ -2053,7 +2053,7 @@
                              *  &lt;/ul&gt;
                              *
                              * The below code creates a rectangle by defining the &#x60;type&#x60; attribute as &quot;rect&quot;:&lt;/p&gt;
-                            
+
                                     var myRect = myGraphic.addShape({
                                         type: &quot;rect&quot;,
                                         width: 20,
@@ -2066,7 +2066,7 @@
                                             color: &quot;#000&quot;
                                         }
                                     });
-                            
+
                              * Below, the same rectangle is created by defining the &#x60;type&#x60; attribute with a class reference:
                              *
                                     var myRect = myGraphic.addShape({
@@ -2113,7 +2113,7 @@
                              *  Assigning &quot;path&quot; or &#x60;Y.Path&#x60; to this attribute will create a &#x60;Path&#x60; instance. After instantiation, a series of drawing
                              *  operations must be performed in order to render a shape. The below code instantiates a path element by defining the
                              *  &#x60;type&#x60; attribute as &quot;path&quot;:&lt;/p&gt;
-                            
+
                                     var myPath = myGraphic.addShape({
                                         type: &quot;path&quot;,
                                         fill: {
@@ -2124,7 +2124,7 @@
                                             color: &quot;#000&quot;
                                         }
                                     });
-                            
+
                              * Below a &#x60;Path&#x60; element with the same properties is instantiated by defining the &#x60;type&#x60; attribute with a class reference:
                              *
                                     var myPath = myGraphic.addShape({
@@ -2137,10 +2137,10 @@
                                             color: &quot;#000&quot;
                                         }
                                     });
-                            
+
                              * After instantiation, a shape or segment needs to be drawn for an element to render. After all draw operations are performed,
                              * the &lt;a href=&quot;#method_end&quot;&gt;&#x60;end&#x60;&lt;/a&gt; method will render the shape. The code below will draw a triangle:
-                            
+
                                     myPath.moveTo(35, 5);
                                     myPath.lineTo(65, 65);
                                     myPath.lineTo(5, 65);
@@ -2170,13 +2170,13 @@
                             /**
                              * &#x60;Graphic&#x60; acts a factory and container for shapes. You need at least one &#x60;Graphic&#x60; instance to create shapes for your application.
                              * &lt;p&gt;The code block below creates a &#x60;Graphic&#x60; instance and appends it to an HTMLElement with the id &#x27;mygraphiccontainer&#x27;.&lt;/p&gt;
-                            
+
                                     var myGraphic = new Y.Graphic({render:&quot;#mygraphiccontainer&quot;});
-                            
+
                              * &lt;p&gt;Alternatively, you can add a &#x60;Graphic&#x60; instance to the DOM using the &lt;a href=&quot;#method_render&quot;&gt;&#x60;render&#x60;&lt;/a&gt; method.&lt;/p&gt;
                                     var myGraphic = new Y.Graphic();
                                     myGraphic.render(&quot;#mygraphiccontainer&quot;);
-                            
+
                              * &#x60;Graphic&#x60; has the following implementations based on browser capability.
                              *  &lt;ul&gt;
                              *      &lt;li&gt;&lt;a href=&quot;SVGGraphic.html&quot;&gt;&#x60;SVGGraphic&#x60;&lt;/a&gt;&lt;/li&gt;
@@ -2399,7 +2399,7 @@
                             	 * @method batch
                             	 * @param {Function} method Method to execute.
                             	 */
-                            
+
                                 </pre>
                             </div>
                         </div>

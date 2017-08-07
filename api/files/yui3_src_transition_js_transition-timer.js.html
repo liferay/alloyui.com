@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/transition/js/transition-timer.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1140,10 +1140,10 @@
                             * @module transition
                             * @submodule transition-timer
                             */
-                            
-                            
+
+
                             var Transition = Y.Transition;
-                            
+
                             Y.mix(Transition.prototype, {
                                 _start: function() {
                                     if (Transition.useNative) {
@@ -1152,27 +1152,27 @@
                                         this._runTimer();
                                     }
                                 },
-                            
+
                                 _runTimer: function() {
                                     var anim = this;
                                     anim._initAttrs();
-                            
+
                                     Transition._running[Y.stamp(anim)] = anim;
                                     anim._startTime = new Date();
                                     Transition._startTimer();
                                 },
-                            
+
                                 _endTimer: function() {
                                     var anim = this;
                                     delete Transition._running[Y.stamp(anim)];
                                     anim._startTime = null;
                                 },
-                            
+
                                 _runFrame: function() {
                                     var t = new Date() - this._startTime;
                                     this._runAttrs(t);
                                 },
-                            
+
                                 _runAttrs: function(time) {
                                     var anim = this,
                                         node = anim._node,
@@ -1191,7 +1191,7 @@
                                         d,
                                         t,
                                         i;
-                            
+
                                     for (name in attrs) {
                                         if ((attribute = attrs[name]) &amp;&amp; attribute.transition === anim) {
                                             d = attribute.duration;
@@ -1204,30 +1204,30 @@
                                                 config: config,
                                                 elapsedTime: elapsed
                                             };
-                            
+
                                             setter = (i in customAttr &amp;&amp; &#x27;set&#x27; in customAttr[i]) ?
                                                     customAttr[i].set : Transition.DEFAULT_SETTER;
-                            
+
                                             done = (t &gt;= d);
-                            
+
                                             if (t &gt; d) {
                                                 t = d;
                                             }
-                            
+
                                             if (!delay || time &gt;= delay) {
                                                 setter(anim, name, attribute.from, attribute.to, t - delay, d - delay,
                                                     attribute.easing, attribute.unit);
-                            
+
                                                 if (done) {
                                                     delete attrs[name];
                                                     anim._count--;
-                            
+
                                                     if (config[name] &amp;&amp; config[name].on &amp;&amp; config[name].on.end) {
                                                         config[name].on.end.call(Y.one(node), data);
                                                     }
-                            
+
                                                     //node.fire(&#x27;transition:propertyEnd&#x27;, data);
-                            
+
                                                     if (!allDone &amp;&amp; anim._count &lt;= 0) {
                                                         allDone = true;
                                                         anim._end(elapsed);
@@ -1235,11 +1235,11 @@
                                                     }
                                                 }
                                             }
-                            
+
                                         }
                                     }
                                 },
-                            
+
                                 _initAttrs: function() {
                                     var anim = this,
                                         customAttr = Transition.behaviors,
@@ -1254,30 +1254,30 @@
                                         mTo,
                                         mFrom,
                                         unit, begin, end;
-                            
+
                                     for (name in attrs) {
                                         if ((attribute = attrs[name]) &amp;&amp; attribute.transition === anim) {
                                             duration = attribute.duration * 1000;
                                             delay = attribute.delay * 1000;
                                             easing = attribute.easing;
                                             val = attribute.value;
-                            
+
                                             // only allow supported properties
                                             if (name in anim._node.style || name in Y.DOM.CUSTOM_STYLES) {
                                                 begin = (name in customAttr &amp;&amp; &#x27;get&#x27; in customAttr[name])  ?
                                                         customAttr[name].get(anim, name) : Transition.DEFAULT_GETTER(anim, name);
-                            
+
                                                 mFrom = Transition.RE_UNITS.exec(begin);
                                                 mTo = Transition.RE_UNITS.exec(val);
-                            
+
                                                 begin = mFrom ? mFrom[1] : begin;
                                                 end = mTo ? mTo[1] : val;
                                                 unit = mTo ? mTo[2] : mFrom ?  mFrom[2] : &#x27;&#x27;; // one might be zero TODO: mixed units
-                            
+
                                                 if (!unit &amp;&amp; Transition.RE_DEFAULT_UNIT.test(name)) {
                                                     unit = Transition.DEFAULT_UNIT;
                                                 }
-                            
+
                                                 if (typeof easing === &#x27;string&#x27;) {
                                                     if (easing.indexOf(&#x27;cubic-bezier&#x27;) &gt; -1) {
                                                         easing = easing.substring(13, easing.length - 1).split(&#x27;,&#x27;);
@@ -1285,7 +1285,7 @@
                                                         easing = Transition.easings[easing];
                                                     }
                                                 }
-                            
+
                                                 attribute.from = Number(begin);
                                                 attribute.to = Number(end);
                                                 attribute.unit = unit;
@@ -1299,13 +1299,13 @@
                                         }
                                     }
                                 },
-                            
+
                                 destroy: function() {
                                     this.detachAll();
                                     this._node = null;
                                 }
                             }, true);
-                            
+
                             Y.mix(Y.Transition, {
                                 _runtimeAttrs: {},
                                 /*
@@ -1315,7 +1315,7 @@
                                  * @static
                                  */
                                 RE_DEFAULT_UNIT: /^width|height|top|right|bottom|left|margin.*|padding.*|border.*$/i,
-                            
+
                                 /*
                                  * The default unit to use with properties that pass the RE_DEFAULT_UNIT test.
                                  *
@@ -1323,7 +1323,7 @@
                                  * @static
                                  */
                                 DEFAULT_UNIT: &#x27;px&#x27;,
-                            
+
                                 /*
                                  * Time in milliseconds passed to setInterval for frame processing
                                  *
@@ -1332,7 +1332,7 @@
                                  * @static
                                  */
                                 intervalTime: 20,
-                            
+
                                 /*
                                  * Bucket for custom getters and setters
                                  *
@@ -1346,7 +1346,7 @@
                                         }
                                     }
                                 },
-                            
+
                                 /*
                                  * The default setter to use when setting object properties.
                                  *
@@ -1356,12 +1356,12 @@
                                 DEFAULT_SETTER: function(anim, att, from, to, elapsed, duration, fn, unit) {
                                     from = Number(from);
                                     to = Number(to);
-                            
+
                                     var node = anim._node,
                                         val = Transition.cubicBezier(fn, elapsed / duration);
-                            
+
                                     val = from + val[0] * (to - from);
-                            
+
                                     if (node) {
                                         if (att in node.style || att in Y.DOM.CUSTOM_STYLES) {
                                             unit = unit || &#x27;&#x27;;
@@ -1371,7 +1371,7 @@
                                         anim._end();
                                     }
                                 },
-                            
+
                                 /*
                                  * The default getter to use when getting object properties.
                                  *
@@ -1381,25 +1381,25 @@
                                 DEFAULT_GETTER: function(anim, att) {
                                     var node = anim._node,
                                         val = &#x27;&#x27;;
-                            
+
                                     if (att in node.style || att in Y.DOM.CUSTOM_STYLES) {
                                         val = Y.DOM.getComputedStyle(node, att);
                                     }
-                            
+
                                     return val;
                                 },
-                            
+
                                 _startTimer: function() {
                                     if (!Transition._timer) {
                                         Transition._timer = setInterval(Transition._runFrame, Transition.intervalTime);
                                     }
                                 },
-                            
+
                                 _stopTimer: function() {
                                     clearInterval(Transition._timer);
                                     Transition._timer = null;
                                 },
-                            
+
                                 /*
                                  * Called per Interval to handle each animation frame.
                                  * @method _runFrame
@@ -1415,12 +1415,12 @@
                                             Transition._running[anim]._runFrame();
                                         }
                                     }
-                            
+
                                     if (done) {
                                         Transition._stopTimer();
                                     }
                                 },
-                            
+
                                 cubicBezier: function(p, t) {
                                     var x0 = 0,
                                         y0 = 0,
@@ -1430,7 +1430,7 @@
                                         y2 = p[3],
                                         x3 = 1,
                                         y3 = 0,
-                            
+
                                         A = x3 - 3 * x2 + 3 * x1 - x0,
                                         B = 3 * x2 - 6 * x1 + 3 * x0,
                                         C = 3 * x1 - 3 * x0,
@@ -1439,13 +1439,13 @@
                                         F = 3 * y2 - 6 * y1 + 3 * y0,
                                         G = 3 * y1 - 3 * y0,
                                         H = y0,
-                            
+
                                         x = (((A*t) + B)*t + C)*t + D,
                                         y = (((E*t) + F)*t + G)*t + H;
-                            
+
                                     return [x, y];
                                 },
-                            
+
                                 easings: {
                                     ease: [0.25, 0, 1, 0.25],
                                     linear: [0, 0, 1, 1],
@@ -1453,17 +1453,17 @@
                                     &#x27;ease-out&#x27;: [0, 0, 0.58, 1],
                                     &#x27;ease-in-out&#x27;: [0.42, 0, 0.58, 1]
                                 },
-                            
+
                                 _running: {},
                                 _timer: null,
-                            
+
                                 RE_UNITS: /^(-?\d*\.?\d*){1}(em|ex|px|in|cm|mm|pt|pc|%)*$/
                             }, true);
-                            
+
                             Transition.behaviors.top = Transition.behaviors.bottom = Transition.behaviors.right = Transition.behaviors.left;
-                            
+
                             Y.Transition = Transition;
-                            
+
                                 </pre>
                             </div>
                         </div>

@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,40 +1122,40 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/base/js/BaseObservable.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                                 /**
                                 The &#x60;base-observable&#x60; submodule adds observability to Base&#x27;s lifecycle and
                                 attributes, and also make it an &#x60;EventTarget&#x60;.
-                            
+
                                 @module base
                                 @submodule base-observable
                                 **/
                                 var L = Y.Lang,
-                            
+
                                     DESTROY = &quot;destroy&quot;,
                                     INIT = &quot;init&quot;,
-                            
+
                                     BUBBLETARGETS = &quot;bubbleTargets&quot;,
                                     _BUBBLETARGETS = &quot;_bubbleTargets&quot;,
-                            
+
                                     AttributeObservable = Y.AttributeObservable,
                                     BaseCore            = Y.BaseCore;
-                            
+
                                 /**
                                 Provides an augmentable implementation of lifecycle and attribute events for
                                 &#x60;BaseCore&#x60;.
-                            
+
                                 @class BaseObservable
                                 @extensionfor BaseCore
                                 @uses AttributeObservable
@@ -1163,12 +1163,12 @@
                                 @since 3.8.0
                                 **/
                                 function BaseObservable() {}
-                            
+
                                 BaseObservable._ATTR_CFG      = AttributeObservable._ATTR_CFG.concat();
                                 BaseObservable._NON_ATTRS_CFG = [&quot;on&quot;, &quot;after&quot;, &quot;bubbleTargets&quot;];
-                            
+
                                 BaseObservable.prototype = {
-                            
+
                                     /**
                                      * Initializes Attribute
                                      *
@@ -1178,11 +1178,11 @@
                                     _initAttribute: function() {
                                         BaseCore.prototype._initAttribute.apply(this, arguments);
                                         AttributeObservable.call(this);
-                            
+
                                         this._eventPrefix = this.constructor.EVENT_PREFIX || this.constructor.NAME;
                                         this._yuievt.config.prefix = this._eventPrefix;
                                     },
-                            
+
                                     /**
                                      * Init lifecycle method, invoked during construction.
                                      * Fires the init event prior to setting up attributes and
@@ -1194,7 +1194,7 @@
                                      * @return {Base} A reference to this object
                                      */
                                     init: function(config) {
-                            
+
                                         /**
                                          * &lt;p&gt;
                                          * Lifecycle event for the init phase, fired prior to initialization.
@@ -1212,26 +1212,26 @@
                                          * @param {EventFacade} e Event object, with a cfg property which
                                          * refers to the configuration object passed to the constructor.
                                          */
-                            
+
                                         // PERF: Using lower level _publish() for
                                         // critical path performance
-                            
+
                                         var type = this._getFullType(INIT),
                                             e = this._publish(type);
-                            
+
                                         e.emitFacade = true;
                                         e.fireOnce = true;
                                         e.defaultTargetOnly = true;
                                         e.defaultFn = this._defInitFn;
-                            
+
                                         this._preInitEventCfg(config);
-                            
+
                                         if (e._hasPotentialSubscribers()) {
                                             this.fire(type, {cfg: config});
                                         } else {
-                            
+
                                             this._baseInit(config);
-                            
+
                                             // HACK. Major hack actually. But really fast for no-listeners.
                                             // Since it&#x27;s fireOnce, subscribers may come along later, so since we&#x27;re
                                             // bypassing the event stack the first time, we need to tell the published
@@ -1239,10 +1239,10 @@
                                             e.fired = true;
                                             e.firedWith = [{cfg:config}];
                                         }
-                            
+
                                         return this;
                                     },
-                            
+
                                     /**
                                      * Handles the special on, after and target properties which allow the user to
                                      * easily configure on and after listeners as well as bubble targets during
@@ -1261,13 +1261,13 @@
                                                 this.after(config.after);
                                             }
                                         }
-                            
+
                                         var i, l, target,
                                             userTargets = (config &amp;&amp; BUBBLETARGETS in config);
-                            
+
                                         if (userTargets || _BUBBLETARGETS in this) {
                                             target = userTargets ? (config &amp;&amp; config.bubbleTargets) : this._bubbleTargets;
-                            
+
                                             if (L.isArray(target)) {
                                                 for (i = 0, l = target.length; i &lt; l; i++) {
                                                     this.addTarget(target[i]);
@@ -1277,7 +1277,7 @@
                                             }
                                         }
                                     },
-                            
+
                                     /**
                                      * &lt;p&gt;
                                      * Destroy lifecycle method. Fires the destroy
@@ -1295,7 +1295,7 @@
                                      */
                                     destroy: function() {
                                         Y.log(&#x27;destroy called&#x27;, &#x27;life&#x27;, &#x27;base&#x27;);
-                            
+
                                         /**
                                          * &lt;p&gt;
                                          * Lifecycle event for the destroy phase,
@@ -1318,11 +1318,11 @@
                                             defaultFn: this._defDestroyFn
                                         });
                                         this.fire(DESTROY);
-                            
+
                                         this.detachAll();
                                         return this;
                                     },
-                            
+
                                     /**
                                      * Default init event handler
                                      *
@@ -1334,7 +1334,7 @@
                                     _defInitFn : function(e) {
                                         this._baseInit(e.cfg);
                                     },
-                            
+
                                     /**
                                      * Default destroy event handler
                                      *
@@ -1346,11 +1346,11 @@
                                         this._baseDestroy(e.cfg);
                                     }
                                 };
-                            
+
                                 Y.mix(BaseObservable, AttributeObservable, false, null, 1);
-                            
+
                                 Y.BaseObservable = BaseObservable;
-                            
+
                                 </pre>
                             </div>
                         </div>

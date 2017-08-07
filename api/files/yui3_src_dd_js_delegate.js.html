@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,19 +1122,19 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/dd/js/delegate.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
-                            
+
                                 /**
                                  * Provides the ability to drag multiple nodes under a container element using only one Y.DD.Drag instance as a delegate.
                                  * @module dd
@@ -1147,16 +1147,16 @@
                                  * @constructor
                                  * @namespace DD
                                  */
-                            
-                            
+
+
                                 var Delegate = function() {
                                     Delegate.superclass.constructor.apply(this, arguments);
                                 },
                                 CONT = &#x27;container&#x27;,
                                 NODES = &#x27;nodes&#x27;,
                                 _tmpNode = Y.Node.create(&#x27;&lt;div&gt;Temp Node&lt;/div&gt;&#x27;);
-                            
-                            
+
+
                                 Y.extend(Delegate, Y.Base, {
                                     /**
                                     * The default bubbleTarget for this object. Default: Y.DD.DDM
@@ -1198,7 +1198,7 @@
                                     */
                                     _afterDragEnd: function() {
                                         Y.DD.DDM._noShim = this._shimState;
-                            
+
                                         this.set(&#x27;lastNode&#x27;, this.dd.get(&#x27;node&#x27;));
                                         this.get(&#x27;lastNode&#x27;).removeClass(Y.DD.DDM.CSS_PREFIX + &#x27;-dragging&#x27;);
                                         this.dd._unprep();
@@ -1215,7 +1215,7 @@
                                             dd = this.dd,
                                             dNode = tar,
                                             config = this.get(&#x27;dragConfig&#x27;);
-                            
+
                                         if (tar.test(this.get(NODES)) &amp;&amp; !tar.test(this.get(&#x27;invalid&#x27;))) {
                                             this._shimState = Y.DD.DDM._noShim;
                                             Y.DD.DDM._noShim = true;
@@ -1228,7 +1228,7 @@
                                             }
                                             dd.set(&#x27;dragNode&#x27;, dNode);
                                             dd._prep();
-                            
+
                                             dd.fire(&#x27;drag:mouseDown&#x27;, { ev: e });
                                         }
                                     },
@@ -1257,30 +1257,30 @@
                                         //var conf = Y.clone(this.get(&#x27;dragConfig&#x27;) || {}),
                                         var conf = this.get(&#x27;dragConfig&#x27;) || {},
                                             cont = this.get(CONT);
-                            
+
                                         conf.node = _tmpNode.cloneNode(true);
                                         conf.bubbleTargets = this;
-                            
+
                                         if (this.get(&#x27;handles&#x27;)) {
                                             conf.handles = this.get(&#x27;handles&#x27;);
                                         }
-                            
+
                                         this.dd = new Y.DD.Drag(conf);
-                            
+
                                         //On end drag, detach the listeners
                                         this.dd.after(&#x27;drag:end&#x27;, Y.bind(this._afterDragEnd, this));
                                         this.dd.on(&#x27;dragNodeChange&#x27;, Y.bind(this._onNodeChange, this));
                                         this.dd.after(&#x27;drag:mouseup&#x27;, function() {
                                             this._unprep();
                                         });
-                            
+
                                         //Attach the delegate to the container
                                         this._handles.push(Y.delegate(Y.DD.Drag.START_EVENT, Y.bind(this._delMouseDown, this), cont, this.get(NODES)));
-                            
+
                                         this._handles.push(Y.on(&#x27;mouseenter&#x27;, Y.bind(this._onMouseEnter, this), cont));
-                            
+
                                         this._handles.push(Y.on(&#x27;mouseleave&#x27;, Y.bind(this._onMouseLeave, this), cont));
-                            
+
                                         Y.later(50, this, this.syncTargets);
                                         Y.DD.DDM.regDelegate(this);
                                     },
@@ -1294,16 +1294,16 @@
                                             return;
                                         }
                                         var items, groups, config;
-                            
+
                                         if (this.get(&#x27;target&#x27;)) {
                                             items = Y.one(this.get(CONT)).all(this.get(NODES));
                                             groups = this.dd.get(&#x27;groups&#x27;);
                                             config = this.get(&#x27;dragConfig&#x27;);
-                            
+
                                             if (config &amp;&amp; config.groups) {
                                                 groups = config.groups;
                                             }
-                            
+
                                             items.each(function(i) {
                                                 this.createDrop(i, groups);
                                             }, this);
@@ -1322,7 +1322,7 @@
                                             useShim: false,
                                             bubbleTargets: this
                                         };
-                            
+
                                         if (!node.drop) {
                                             node.plug(Y.Plugin.Drop, config);
                                         }
@@ -1426,7 +1426,7 @@
                                         }
                                     }
                                 });
-                            
+
                                 Y.mix(Y.DD.DDM, {
                                     /**
                                     * Holder for all Y.DD.Delegate instances
@@ -1461,12 +1461,12 @@
                                         return del;
                                     }
                                 });
-                            
+
                                 Y.namespace(&#x27;DD&#x27;);
                                 Y.DD.Delegate = Delegate;
-                            
-                            
-                            
+
+
+
                                 </pre>
                             </div>
                         </div>

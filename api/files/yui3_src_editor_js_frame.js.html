@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/editor/js/frame.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                                 /*jshint maxlen: 500 */
@@ -1145,18 +1145,18 @@
                                  * @module editor
                                  * @submodule frame
                                  */
-                            
+
                                 var Lang = Y.Lang,
-                            
+
                                     EVENT_CONTENT_READY = &#x27;contentready&#x27;,
-                            
+
                                     HOST = &#x27;host&#x27;,
-                            
+
                                 Frame = function() {
                                     Frame.superclass.constructor.apply(this, arguments);
                                 };
-                            
-                            
+
+
                                 Y.extend(Frame, Y.Plugin.Base, {
                                     /**
                                     * @private
@@ -1197,15 +1197,15 @@
                                             //if the src attr is different than the default, don&#x27;t create the document
                                             create = (this.get(&#x27;src&#x27;) === Frame.ATTRS.src.value),
                                             extra_css = ((this.get(&#x27;extracss&#x27;)) ? &#x27;&lt;style id=&quot;extra_css&quot;&gt;&#x27; + this.get(&#x27;extracss&#x27;) + &#x27;&lt;/style&gt;&#x27; : &#x27;&#x27;);
-                            
+
                                         this._iframe = Y.one(Y.config.doc.createElement(&#x27;iframe&#x27;));
                                         this._iframe.setAttrs(Frame.IFRAME_ATTRS);
-                            
+
                                         this._iframe.setStyle(&#x27;visibility&#x27;, &#x27;hidden&#x27;);
                                         this._iframe.set(&#x27;src&#x27;, this.get(&#x27;src&#x27;));
                                         this.get(&#x27;container&#x27;).append(this._iframe);
                                         this._iframe.set(&#x27;height&#x27;, &#x27;99%&#x27;);
-                            
+
                                         if (create) {
                                             Y.log(&#x27;Creating the document from javascript&#x27;, &#x27;info&#x27;, &#x27;frame&#x27;);
                                             html = Y.Lang.sub(Frame.PAGE_HTML, {
@@ -1221,25 +1221,25 @@
                                             });
                                             if (Y.config.doc.compatMode !== &#x27;BackCompat&#x27;) {
                                                 Y.log(&#x27;Adding Doctype to frame: &#x27; + Frame.getDocType(), &#x27;info&#x27;, &#x27;frame&#x27;);
-                            
+
                                                 //html = Frame.DOC_TYPE + &quot;\n&quot; + html;
                                                 html = Frame.getDocType() + &quot;\n&quot; + html;
                                             } else {
                                                 Y.log(&#x27;DocType skipped because we are in BackCompat Mode.&#x27;, &#x27;warn&#x27;, &#x27;frame&#x27;);
                                             }
-                            
+
                                             Y.log(&#x27;Injecting content into iframe&#x27;, &#x27;info&#x27;, &#x27;frame&#x27;);
                                         }
-                            
+
                                         res = this._resolveWinDoc();
-                            
+
                                         if (html) {
                                             Y.log(&#x27;Writing HTML to new document&#x27;, &#x27;info&#x27;, &#x27;frame&#x27;);
                                             res.doc.open();
                                             res.doc.write(html);
                                             res.doc.close();
                                         }
-                            
+
                                         if (!res.doc.documentElement) {
                                             Y.log(&#x27;document.documentElement was not found, running timer&#x27;, &#x27;warn&#x27;, &#x27;frame&#x27;);
                                             timer = Y.later(1, this, function() {
@@ -1253,7 +1253,7 @@
                                             Y.log(&#x27;document.documentElement found&#x27;, &#x27;info&#x27;, &#x27;frame&#x27;);
                                             cb(res);
                                         }
-                            
+
                                     },
                                     /**
                                     * @private
@@ -1285,15 +1285,15 @@
                                     */
                                     _onDomEvent: function(e) {
                                         var xy, node;
-                            
+
                                         if (!Y.Node.getDOMNode(this._iframe)) {
                                             //The iframe is null for some reason, bail on sending events.
                                             return;
                                         }
-                            
+
                                         //Y.log(&#x27;onDOMEvent: &#x27; + e.type, &#x27;info&#x27;, &#x27;frame&#x27;);
                                         e.frameX = e.frameY = 0;
-                            
+
                                         if (e.pageX &gt; 0 || e.pageY &gt; 0) {
                                             if (e.type.substring(0, 3) !== &#x27;key&#x27;) {
                                                 node = this._instance.one(&#x27;win&#x27;);
@@ -1302,20 +1302,20 @@
                                                 e.frameY = xy[1] + e.pageY - node.get(&#x27;scrollTop&#x27;);
                                             }
                                         }
-                            
+
                                         e.frameTarget = e.target;
                                         e.frameCurrentTarget = e.currentTarget;
                                         e.frameEvent = e;
-                            
+
                                         this.fire(&#x27;dom:&#x27; + e.type, e);
                                     },
                                     initializer: function() {
                                         var host = this.get(HOST);
-                            
+
                                         if (host) {
                                             host.frame = this;
                                         }
-                            
+
                                         this.publish(&#x27;ready&#x27;, {
                                             emitFacade: true,
                                             defaultFn: this._defReadyFn
@@ -1323,7 +1323,7 @@
                                     },
                                     destructor: function() {
                                         var inst = this.getInstance();
-                            
+
                                         inst.one(&#x27;doc&#x27;).detachAll();
                                         inst = null;
                                         this._iframe.remove();
@@ -1337,14 +1337,14 @@
                                     _DOMPaste: function(e) {
                                         var inst = this.getInstance(),
                                             data = &#x27;&#x27;, win = inst.config.win;
-                            
+
                                         if (e._event.originalTarget) {
                                             data = e._event.originalTarget;
                                         }
                                         if (e._event.clipboardData) {
                                             data = e._event.clipboardData.getData(&#x27;Text&#x27;);
                                         }
-                            
+
                                         if (win.clipboardData) {
                                             data = win.clipboardData.getData(&#x27;Text&#x27;);
                                             if (data === &#x27;&#x27;) { // Could be empty, or failed
@@ -1354,12 +1354,12 @@
                                                 }
                                             }
                                         }
-                            
-                            
+
+
                                         e.frameTarget = e.target;
                                         e.frameCurrentTarget = e.currentTarget;
                                         e.frameEvent = e;
-                            
+
                                         if (data) {
                                             e.clipboardData = {
                                                 data: data,
@@ -1371,7 +1371,7 @@
                                             Y.log(&#x27;Failed to collect clipboard data&#x27;, &#x27;warn&#x27;, &#x27;frame&#x27;);
                                             e.clipboardData = null;
                                         }
-                            
+
                                         this.fire(&#x27;dom:paste&#x27;, e);
                                     },
                                     /**
@@ -1381,11 +1381,11 @@
                                     */
                                     _defReadyFn: function() {
                                         var inst = this.getInstance();
-                            
+
                                         Y.each(Frame.DOM_EVENTS, function(v, k) {
                                             var fn = Y.bind(this._onDomEvent, this),
                                                 kfn = ((Y.UA.ie &amp;&amp; Frame.THROTTLE_TIME &gt; 0) ? Y.throttle(fn, Frame.THROTTLE_TIME) : fn);
-                            
+
                                             if (!inst.Node.DOM_EVENTS[k]) {
                                                 inst.Node.DOM_EVENTS[k] = 1;
                                             }
@@ -1401,15 +1401,15 @@
                                                 }
                                             }
                                         }, this);
-                            
+
                                         inst.Node.DOM_EVENTS.paste = 1;
-                            
+
                                         inst.on(&#x27;paste&#x27;, Y.bind(this._DOMPaste, this), inst.one(&#x27;body&#x27;));
-                            
+
                                         //Adding focus/blur to the window object
                                         inst.on(&#x27;focus&#x27;, Y.bind(this._onDomEvent, this), inst.config.win);
                                         inst.on(&#x27;blur&#x27;, Y.bind(this._onDomEvent, this), inst.config.win);
-                            
+
                                         inst.__use = inst.use;
                                         inst.use = Y.bind(this.use, this);
                                         this._iframe.setStyles({
@@ -1430,14 +1430,14 @@
                                         var inst = this.getInstance(),
                                             tables = inst.all(&#x27;table&#x27;),
                                             brs = inst.all(&#x27;br&#x27;), si;
-                            
+
                                         if (tables.size() &amp;&amp; brs.size()) {
                                             //First Table
                                             si = tables.item(0).get(&#x27;sourceIndex&#x27;);
                                             brs.each(function(n) {
                                                 var p = n.get(&#x27;parentNode&#x27;),
                                                     c = p.get(&#x27;children&#x27;), b = p.all(&#x27;&gt;br&#x27;);
-                            
+
                                                 if (p.test(&#x27;div&#x27;)) {
                                                     if (c.size() &gt; 2) {
                                                         n.replace(inst.Node.create(&#x27;&lt;wbr&gt;&#x27;));
@@ -1453,7 +1453,7 @@
                                                         }
                                                     }
                                                 }
-                            
+
                                             });
                                         }
                                     },
@@ -1468,9 +1468,9 @@
                                             this._ready = true;
                                             var inst = this.getInstance(),
                                                 args = Y.clone(this.get(&#x27;use&#x27;));
-                            
+
                                             this.fire(&#x27;contentready&#x27;);
-                            
+
                                             Y.log(&#x27;On available for body of iframe&#x27;, &#x27;info&#x27;, &#x27;frame&#x27;);
                                             if (e) {
                                                 inst.config.doc = Y.Node.getDOMNode(e.target);
@@ -1495,7 +1495,7 @@
                                             }, this));
                                             Y.log(&#x27;Calling use on internal instance: &#x27; + args, &#x27;info&#x27;, &#x27;frame&#x27;);
                                             inst.use.apply(inst, args);
-                            
+
                                             inst.one(&#x27;doc&#x27;).get(&#x27;documentElement&#x27;).addClass(&#x27;yui-js-enabled&#x27;);
                                         }
                                     },
@@ -1592,7 +1592,7 @@
                                         } else {
                                             this.once(EVENT_CONTENT_READY, Y.bind(this._setHTML, this, html));
                                         }
-                            
+
                                         return html;
                                     },
                                     /**
@@ -1637,17 +1637,17 @@
                                         if (this._ready) {
                                             var inst = this.getInstance(),
                                                 node = inst.one(&#x27;#extra_css&#x27;);
-                            
+
                                             if (node) {
                                                 node.remove();
                                             }
-                            
+
                                             inst.one(&#x27;head&#x27;).append(&#x27;&lt;style id=&quot;extra_css&quot;&gt;&#x27; + css + &#x27;&lt;/style&gt;&#x27;);
                                         } else {
                                             //This needs to be wrapped in a contentready callback for the !_ready state
                                             this.once(EVENT_CONTENT_READY, Y.bind(this._setExtraCSS, this, css));
                                         }
-                            
+
                                         return css;
                                     },
                                     /**
@@ -1660,9 +1660,9 @@
                                     _instanceLoaded: function(inst) {
                                         this._instance = inst;
                                         this._onContentReady();
-                            
+
                                         var doc = this._instance.config.doc;
-                            
+
                                         if (this.get(&#x27;designMode&#x27;)) {
                                             if (!Y.UA.ie) {
                                                 try {
@@ -1684,7 +1684,7 @@
                                         var inst = this.getInstance(),
                                             args = Y.Array(arguments),
                                             cb = false;
-                            
+
                                         if (Y.Lang.isFunction(args[args.length - 1])) {
                                             cb = args.pop();
                                         }
@@ -1692,10 +1692,10 @@
                                             args.push(function() {
                                                 Y.log(&#x27;Internal callback from augmented use&#x27;, &#x27;info&#x27;, &#x27;frame&#x27;);
                                                 cb.apply(inst, arguments);
-                            
+
                                             });
                                         }
-                            
+
                                         return inst.__use.apply(inst, args);
                                     },
                                     /**
@@ -1743,9 +1743,9 @@
                                         if (node) {
                                             this.set(&#x27;container&#x27;, node);
                                         }
-                            
+
                                         this._create(Y.bind(function(res) {
-                            
+
                                             var inst, timer,
                                                 cb = Y.bind(function(i) {
                                                     Y.log(&#x27;Internal instance loaded with node-base&#x27;, &#x27;info&#x27;, &#x27;frame&#x27;);
@@ -1763,7 +1763,7 @@
                                                     inst = YUI(config);
                                                     inst.host = this.get(HOST); //Cross reference to Editor
                                                     inst.log = Y.log; //Dump the instance logs to the parent instance.
-                            
+
                                                     Y.log(&#x27;Creating new internal instance with node-base only&#x27;, &#x27;info&#x27;, &#x27;frame&#x27;);
                                                     try {
                                                         inst.use(&#x27;node-base&#x27;, cb);
@@ -1778,14 +1778,14 @@
                                                         Y.log(&#x27;Internal use call failed, retrying&#x27;, &#x27;info&#x27;, &#x27;frame&#x27;);
                                                     }
                                                 }, this);
-                            
+
                                             args.push(fn);
-                            
+
                                             Y.log(&#x27;Adding new modules to main instance: &#x27; + args, &#x27;info&#x27;, &#x27;frame&#x27;);
                                             Y.use.apply(Y, args);
-                            
+
                                         }, this));
-                            
+
                                         return this;
                                     },
                                     /**
@@ -1797,16 +1797,16 @@
                                         var inst = this.getInstance(),
                                             sel = new inst.EditorSelection(),
                                             n, c, b, par;
-                            
+
                                         if (sel.anchorNode) {
                                             Y.log(&#x27;_handleFocus being called..&#x27;, &#x27;info&#x27;, &#x27;frame&#x27;);
                                             n = sel.anchorNode;
-                            
+
                                             if (n.test(&#x27;p&#x27;) &amp;&amp; n.get(&#x27;innerHTML&#x27;) === &#x27;&#x27;) {
                                                 n = n.get(&#x27;parentNode&#x27;);
                                             }
                                             c = n.get(&#x27;childNodes&#x27;);
-                            
+
                                             if (c.size()) {
                                                 if (c.item(0).test(&#x27;br&#x27;)) {
                                                     sel.selectNode(n, true, false);
@@ -1956,7 +1956,7 @@
                                         focusin: 1,
                                         focusout: 1
                                     },
-                            
+
                                     /**
                                     * @static
                                     * @property DEFAULT_CSS
@@ -1996,7 +1996,7 @@
                                     * @type String
                                     */
                                     PAGE_HTML: &#x27;&lt;html dir=&quot;{DIR}&quot; lang=&quot;{LANG}&quot;&gt;&lt;head&gt;&lt;title&gt;{TITLE}&lt;/title&gt;{META}&lt;base href=&quot;{BASE_HREF}&quot;/&gt;{LINKED_CSS}&lt;style id=&quot;editor_css&quot;&gt;{DEFAULT_CSS}&lt;/style&gt;{EXTRA_CSS}&lt;/head&gt;&lt;body&gt;{CONTENT}&lt;/body&gt;&lt;/html&gt;&#x27;,
-                            
+
                                     /**
                                     * @static
                                     * @method getDocType
@@ -2007,7 +2007,7 @@
                                     getDocType: function() {
                                         var dt = Y.config.doc.doctype,
                                             str = Frame.DOC_TYPE;
-                            
+
                                         if (dt) {
                                             str = &#x27;&lt;!DOCTYPE &#x27; + dt.name + ((dt.publicId) ? &#x27; &#x27; + dt.publicId : &#x27;&#x27;) + ((dt.systemId) ? &#x27; &#x27; + dt.systemId : &#x27;&#x27;) + &#x27;&gt;&#x27;;
                                         } else {
@@ -2198,14 +2198,14 @@
                                         }
                                     }
                                 });
-                            
+
                                 Y.namespace(&#x27;Plugin&#x27;);
-                            
+
                                 Y.Plugin.Frame = Frame;
-                            
+
                                 Y.Frame = Frame;
-                            
-                            
+
+
                                 </pre>
                             </div>
                         </div>

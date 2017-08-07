@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,103 +1122,103 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/app/js/lazy-model-list.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
                             Provides the LazyModelList class, which is a ModelList subclass that manages
                             plain objects instead of fully instantiated model instances.
-                            
+
                             @module app
                             @submodule lazy-model-list
                             @since 3.6.0
                             **/
-                            
+
                             /**
                             LazyModelList is a subclass of ModelList that maintains a list of plain
                             JavaScript objects rather than a list of Model instances. This makes it
                             well-suited for managing large amounts of data (on the order of thousands of
                             items) that would tend to bog down a vanilla ModelList.
-                            
+
                             The API presented by LazyModelList is the same as that of ModelList, except that
                             in every case where ModelList would provide a Model instance, LazyModelList
                             provides a plain JavaScript object. LazyModelList also provides a &#x60;revive()&#x60;
                             method that can convert the plain object at a given index into a full Model
                             instance.
-                            
+
                             Since the items stored in a LazyModelList are plain objects and not full Model
                             instances, there are a few caveats to be aware of:
-                            
+
                               * Since items are plain objects and not Model instances, they contain
                                 properties rather than Model attributes. To retrieve a property, use
                                 &#x60;item.foo&#x60; rather than &#x60;item.get(&#x27;foo&#x27;)&#x60;. To set a property, use
                                 &#x60;item.foo = &#x27;bar&#x27;&#x60; rather than &#x60;item.set(&#x27;foo&#x27;, &#x27;bar&#x27;)&#x60;.
-                            
+
                               * Model attribute getters and setters aren&#x27;t supported, since items in the
                                 LazyModelList are stored and manipulated as plain objects with simple
                                 properties rather than YUI attributes.
-                            
+
                               * Changes made to the plain object version of an item will not trigger or
                                 bubble up Model &#x60;change&#x60; events. However, once an item is revived into a
                                 full Model using the &#x60;revive()&#x60; method, changes to that Model instance
                                 will trigger and bubble change events as expected.
-                            
+
                               * Custom &#x60;idAttribute&#x60; fields are not supported.
-                            
+
                               * &#x60;id&#x60; and &#x60;clientId&#x60; properties _are_ supported. If an item doesn&#x27;t have a
                                 &#x60;clientId&#x60; property, one will be generated automatically when the item is
                                 added to a LazyModelList.
-                            
+
                             LazyModelList is generally much more memory efficient than ModelList when
                             managing large numbers of items, and adding/removing items is significantly
                             faster. However, the tradeoff is that LazyModelList is only well-suited for
                             storing very simple items without complex attributes, and consumers must
                             explicitly revive items into full Model instances as needed (this is not done
                             transparently for performance reasons).
-                            
+
                             @class LazyModelList
                             @extends ModelList
                             @constructor
                             @since 3.6.0
                             **/
-                            
+
                             var AttrProto = Y.Attribute.prototype,
                                 GlobalEnv = YUI.namespace(&#x27;Env.Model&#x27;),
                                 Lang      = Y.Lang,
                                 YArray    = Y.Array,
-                            
+
                                 EVT_ADD   = &#x27;add&#x27;,
                                 EVT_ERROR = &#x27;error&#x27;,
                                 EVT_RESET = &#x27;reset&#x27;;
-                            
+
                             Y.LazyModelList = Y.Base.create(&#x27;lazyModelList&#x27;, Y.ModelList, [], {
                                 // -- Lifecycle ------------------------------------------------------------
                                 initializer: function () {
                                     this.after(&#x27;*:change&#x27;, this._afterModelChange);
                                 },
-                            
+
                                 // -- Public Methods -------------------------------------------------------
-                            
+
                                 /**
                                 Deletes the specified model from the model cache to release memory. The
                                 model won&#x27;t be destroyed or removed from the list, just freed from the
                                 cache; it can still be instantiated again using &#x60;revive()&#x60;.
-                            
+
                                 If no model or model index is specified, all cached models in this list will
                                 be freed.
-                            
+
                                 Note: Specifying an index is faster than specifying a model instance, since
                                 the latter requires an &#x60;indexOf()&#x60; call.
-                            
+
                                 @method free
                                 @param {Model|Number} [model] Model or index of the model to free. If not
                                     specified, all instantiated models in this list will be freed.
@@ -1227,10 +1227,10 @@
                                 **/
                                 free: function (model) {
                                     var index;
-                            
+
                                     if (model) {
                                         index = Lang.isNumber(model) ? model : this.indexOf(model);
-                            
+
                                         if (index &gt;= 0) {
                                             // We don&#x27;t detach the model because it&#x27;s not being removed from
                                             // the list, just being freed from memory. If something else
@@ -1245,14 +1245,14 @@
                                     } else {
                                         this._models = [];
                                     }
-                            
+
                                     return this;
                                 },
-                            
+
                                 /**
                                 Overrides ModelList#get() to return a map of property values rather than
                                 performing attribute lookups.
-                            
+
                                 @method get
                                 @param {String} name Property name.
                                 @return {String[]} Array of property values.
@@ -1262,16 +1262,16 @@
                                     if (this.attrAdded(name)) {
                                         return AttrProto.get.apply(this, arguments);
                                     }
-                            
+
                                     return YArray.map(this._items, function (item) {
                                         return item[name];
                                     });
                                 },
-                            
+
                                 /**
                                 Overrides ModelList#getAsHTML() to return a map of HTML-escaped property
                                 values rather than performing attribute lookups.
-                            
+
                                 @method getAsHTML
                                 @param {String} name Property name.
                                 @return {String[]} Array of HTML-escaped property values.
@@ -1281,16 +1281,16 @@
                                     if (this.attrAdded(name)) {
                                         return Y.Escape.html(AttrProto.get.apply(this, arguments));
                                     }
-                            
+
                                     return YArray.map(this._items, function (item) {
                                         return Y.Escape.html(item[name]);
                                     });
                                 },
-                            
+
                                 /**
                                 Overrides ModelList#getAsURL() to return a map of URL-encoded property
                                 values rather than performing attribute lookups.
-                            
+
                                 @method getAsURL
                                 @param {String} name Property name.
                                 @return {String[]} Array of URL-encoded property values.
@@ -1300,16 +1300,16 @@
                                     if (this.attrAdded(name)) {
                                         return encodeURIComponent(AttrProto.get.apply(this, arguments));
                                     }
-                            
+
                                     return YArray.map(this._items, function (item) {
                                         return encodeURIComponent(item[name]);
                                     });
                                 },
-                            
+
                                 /**
                                 Returns the index of the given object or Model instance in this
                                 LazyModelList.
-                            
+
                                 @method indexOf
                                 @param {Model|Object} needle The object or Model instance to search for.
                                 @return {Number} Item index, or &#x60;-1&#x60; if not found.
@@ -1319,10 +1319,10 @@
                                     return YArray.indexOf(model &amp;&amp; model._isYUIModel ?
                                         this._models : this._items, model);
                                 },
-                            
+
                                 /**
                                 Overrides ModelList#reset() to work with plain objects.
-                            
+
                                 @method reset
                                 @param {Object[]|Model[]|ModelList} [models] Models to add.
                                 @param {Object} [options] Options.
@@ -1332,16 +1332,16 @@
                                 reset: function (items, options) {
                                     items || (items  = []);
                                     options || (options = {});
-                            
+
                                     var facade = Y.merge({src: &#x27;reset&#x27;}, options);
-                            
+
                                     // Convert &#x60;items&#x60; into an array of plain objects, since we don&#x27;t want
                                     // model instances.
                                     items = items._isYUIModelList ? items.map(this._modelToObject) :
                                         YArray.map(items, this._modelToObject);
-                            
+
                                     facade.models = items;
-                            
+
                                     if (options.silent) {
                                         this._defResetFn(facade);
                                     } else {
@@ -1349,26 +1349,26 @@
                                         if (this.comparator) {
                                             items.sort(Y.bind(this._sort, this));
                                         }
-                            
+
                                         this.fire(EVT_RESET, facade);
                                     }
-                            
+
                                     return this;
                                 },
-                            
+
                                 /**
                                 Revives an item (or all items) into a full Model instance. The _item_
                                 argument may be the index of an object in this list, an actual object (which
                                 must exist in the list), or may be omitted to revive all items in the list.
-                            
+
                                 Once revived, Model instances are attached to this list and cached so that
                                 reviving them in the future doesn&#x27;t require another Model instantiation. Use
                                 the &#x60;free()&#x60; method to explicitly uncache and detach a previously revived
                                 Model instance.
-                            
+
                                 Note: Specifying an index rather than an object will be faster, since
                                 objects require an &#x60;indexOf()&#x60; lookup in order to retrieve the index.
-                            
+
                                 @method revive
                                 @param {Number|Object} [item] Index of the object to revive, or the object
                                     itself. If an object, that object must exist in this list. If not
@@ -1381,25 +1381,25 @@
                                 **/
                                 revive: function (item) {
                                     var i, len, models;
-                            
+
                                     if (item || item === 0) {
                                         return this._revive(Lang.isNumber(item) ? item :
                                             this.indexOf(item));
                                     } else {
                                         models = [];
-                            
+
                                         for (i = 0, len = this._items.length; i &lt; len; i++) {
                                             models.push(this._revive(i));
                                         }
-                            
+
                                         return models;
                                     }
                                 },
-                            
+
                                 /**
                                 Overrides ModelList#toJSON() to use toArray() instead, since it&#x27;s more
                                 efficient for LazyModelList.
-                            
+
                                 @method toJSON
                                 @return {Object[]} Array of objects.
                                 @see ModelList.toJSON()
@@ -1407,12 +1407,12 @@
                                 toJSON: function () {
                                     return this.toArray();
                                 },
-                            
+
                                 // -- Protected Methods ----------------------------------------------------
-                            
+
                                 /**
                                 Overrides ModelList#add() to work with plain objects.
-                            
+
                                 @method _add
                                 @param {Object|Model} item Object or model to add.
                                 @param {Object} [options] Options.
@@ -1422,56 +1422,56 @@
                                 **/
                                 _add: function (item, options) {
                                     var facade;
-                            
+
                                     options || (options = {});
-                            
+
                                     // If the item is a model instance, convert it to a plain object.
                                     item = this._modelToObject(item);
-                            
+
                                     // Ensure that the item has a clientId.
                                     if (!(&#x27;clientId&#x27; in item)) {
                                         item.clientId = this._generateClientId();
                                     }
-                            
+
                                     if (this._isInList(item)) {
                                         this.fire(EVT_ERROR, {
                                             error: &#x27;Model is already in the list.&#x27;,
                                             model: item,
                                             src  : &#x27;add&#x27;
                                         });
-                            
+
                                         return;
                                     }
-                            
+
                                     facade = Y.merge(options, {
                                         index: &#x27;index&#x27; in options ? options.index : this._findIndex(item),
                                         model: item
                                     });
-                            
+
                                     options.silent ? this._defAddFn(facade) : this.fire(EVT_ADD, facade);
-                            
+
                                     return item;
                                 },
-                            
+
                                 /**
                                 Overrides ModelList#clear() to support &#x60;this._models&#x60;.
-                            
+
                                 @method _clear
                                 @protected
                                 @see ModelList.clear()
                                 **/
                                 _clear: function () {
                                     YArray.each(this._models, this._detachList, this);
-                            
+
                                     this._clientIdMap = {};
                                     this._idMap       = {};
                                     this._items       = [];
                                     this._models      = [];
                                 },
-                            
+
                                 /**
                                 Generates an ad-hoc clientId for a non-instantiated Model.
-                            
+
                                 @method _generateClientId
                                 @return {String} Unique clientId.
                                 @protected
@@ -1480,10 +1480,10 @@
                                     GlobalEnv.lastId || (GlobalEnv.lastId = 0);
                                     return this.model.NAME + &#x27;_&#x27; + (GlobalEnv.lastId += 1);
                                 },
-                            
+
                                 /**
                                 Returns &#x60;true&#x60; if the given item is in this list, &#x60;false&#x60; otherwise.
-                            
+
                                 @method _isInList
                                 @param {Object} item Plain object item.
                                 @return {Boolean} &#x60;true&#x60; if the item is in this list, &#x60;false&#x60; otherwise.
@@ -1493,14 +1493,14 @@
                                     return !!((&#x27;clientId&#x27; in item &amp;&amp; this._clientIdMap[item.clientId]) ||
                                             (&#x27;id&#x27; in item &amp;&amp; this._idMap[item.id]));
                                 },
-                            
+
                                 /**
                                 Converts a Model instance into a plain object. If _model_ is not a Model
                                 instance, it will be returned as is.
-                            
+
                                 This method differs from Model#toJSON() in that it doesn&#x27;t delete the
                                 &#x60;clientId&#x60; property.
-                            
+
                                 @method _modelToObject
                                 @param {Model|Object} model Model instance to convert.
                                 @return {Object} Plain object.
@@ -1512,14 +1512,14 @@
                                         delete model.destroyed;
                                         delete model.initialized;
                                     }
-                            
+
                                     return model;
                                 },
-                            
+
                                 /**
                                 Overrides ModelList#_remove() to convert Model instances to indices
                                 before removing to ensure consistency in the &#x60;remove&#x60; event facade.
-                            
+
                                 @method _remove
                                 @param {Object|Model} item Object or model to remove.
                                 @param {Object} [options] Options.
@@ -1533,14 +1533,14 @@
                                     if (item._isYUIModel) {
                                         item = this.indexOf(item);
                                     }
-                            
+
                                     return Y.ModelList.prototype._remove.call(this, item, options);
                                 },
-                            
+
                                 /**
                                 Revives a single model at the specified index and returns it. This is the
                                 underlying implementation for &#x60;revive()&#x60;.
-                            
+
                                 @method _revive
                                 @param {Number} index Index of the item to revive.
                                 @return {Model} Revived model.
@@ -1548,40 +1548,40 @@
                                 **/
                                 _revive: function (index) {
                                     var item, model;
-                            
+
                                     if (index &lt; 0) {
                                         return null;
                                     }
-                            
+
                                     item = this._items[index];
-                            
+
                                     if (!item) {
                                         return null;
                                     }
-                            
+
                                     model = this._models[index];
-                            
+
                                     if (!model) {
                                         model = new this.model(item);
-                            
+
                                         // The clientId attribute is read-only, but revived models should
                                         // have the same clientId as the original object, so we need to set
                                         // it manually.
                                         model._set(&#x27;clientId&#x27;, item.clientId);
-                            
+
                                         this._attachList(model);
                                         this._models[index] = model;
                                     }
-                            
+
                                     return model;
                                 },
-                            
+
                                 // -- Event Handlers -------------------------------------------------------
-                            
+
                                 /**
                                 Handles &#x60;change&#x60; events on revived models and updates the original objects
                                 with the changes.
-                            
+
                                 @method _afterModelChange
                                 @param {EventFacade} e
                                 @protected
@@ -1590,7 +1590,7 @@
                                     var changed = e.changed,
                                         item    = this._clientIdMap[e.target.get(&#x27;clientId&#x27;)],
                                         name;
-                            
+
                                     if (item) {
                                         for (name in changed) {
                                             if (changed.hasOwnProperty(name)) {
@@ -1599,31 +1599,31 @@
                                         }
                                     }
                                 },
-                            
+
                                 // -- Default Event Handlers -----------------------------------------------
-                            
+
                                 /**
                                 Overrides ModelList#_defAddFn() to support plain objects.
-                            
+
                                 @method _defAddFn
                                 @param {EventFacade} e
                                 @protected
                                 **/
                                 _defAddFn: function (e) {
                                     var item = e.model;
-                            
+
                                     this._clientIdMap[item.clientId] = item;
-                            
+
                                     if (Lang.isValue(item.id)) {
                                         this._idMap[item.id] = item;
                                     }
-                            
+
                                     this._items.splice(e.index, 0, item);
                                 },
-                            
+
                                 /**
                                 Overrides ModelList#_defRemoveFn() to support plain objects.
-                            
+
                                 @method _defRemoveFn
                                 @param {EventFacade} e
                                 @protected
@@ -1632,22 +1632,22 @@
                                     var index = e.index,
                                         item  = e.model,
                                         model = this._models[index];
-                            
+
                                     delete this._clientIdMap[item.clientId];
-                            
+
                                     if (&#x27;id&#x27; in item) {
                                         delete this._idMap[item.id];
                                     }
-                            
+
                                     if (model) {
                                         this._detachList(model);
                                     }
-                            
+
                                     this._items.splice(index, 1);
                                     this._models.splice(index, 1);
                                 }
                             });
-                            
+
                                 </pre>
                             </div>
                         </div>

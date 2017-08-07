@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/dom/js/selector-css3.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1140,16 +1140,16 @@
                              * @submodule selector-css3
                              * @for Selector
                              */
-                            
+
                             /*
                                 an+b = get every _a_th node starting at the _b_th
                                 0n+b = no repeat (&quot;0&quot; and &quot;n&quot; may both be omitted (together) , e.g. &quot;0n+1&quot; or &quot;1&quot;, not &quot;0+1&quot;), return only the _b_th element
                                 1n+b =  get every element starting from b (&quot;1&quot; may may be omitted, e.g. &quot;1n+0&quot; or &quot;n+0&quot; or &quot;n&quot;)
                                 an+0 = get every _a_th element, &quot;0&quot; may be omitted
                             */
-                            
+
                             Y.Selector._reNth = /^(?:([\-]?\d*)(n){1}|(odd|even)$)*([\-+]?\d*)$/;
-                            
+
                             Y.Selector._getNth = function(node, expr, tag, reverse) {
                                 Y.Selector._reNth.test(expr);
                                 var a = parseInt(RegExp.$1, 10), // include every _a_ elements (zero means no repeat, just first _a_)
@@ -1159,7 +1159,7 @@
                                     result = [],
                                     siblings = Y.DOM._children(node.parentNode, tag),
                                     op;
-                            
+
                                 if (oddeven) {
                                     a = 2; // always every other
                                     op = &#x27;+&#x27;;
@@ -1168,23 +1168,23 @@
                                 } else if ( isNaN(a) ) {
                                     a = (n) ? 1 : 0; // start from the first or no repeat
                                 }
-                            
+
                                 if (a === 0) { // just the first
                                     if (reverse) {
                                         b = siblings.length - b + 1;
                                     }
-                            
+
                                     if (siblings[b - 1] === node) {
                                         return true;
                                     } else {
                                         return false;
                                     }
-                            
+
                                 } else if (a &lt; 0) {
                                     reverse = !!reverse;
                                     a = Math.abs(a);
                                 }
-                            
+
                                 if (!reverse) {
                                     for (var i = b - 1, len = siblings.length; i &lt; len; i += a) {
                                         if ( i &gt;= 0 &amp;&amp; siblings[i] === node ) {
@@ -1200,88 +1200,88 @@
                                 }
                                 return false;
                             };
-                            
+
                             Y.mix(Y.Selector.pseudos, {
                                 &#x27;root&#x27;: function(node) {
                                     return node === node.ownerDocument.documentElement;
                                 },
-                            
+
                                 &#x27;nth-child&#x27;: function(node, expr) {
                                     return Y.Selector._getNth(node, expr);
                                 },
-                            
+
                                 &#x27;nth-last-child&#x27;: function(node, expr) {
                                     return Y.Selector._getNth(node, expr, null, true);
                                 },
-                            
+
                                 &#x27;nth-of-type&#x27;: function(node, expr) {
                                     return Y.Selector._getNth(node, expr, node.tagName);
                                 },
-                            
+
                                 &#x27;nth-last-of-type&#x27;: function(node, expr) {
                                     return Y.Selector._getNth(node, expr, node.tagName, true);
                                 },
-                            
+
                                 &#x27;last-child&#x27;: function(node) {
                                     var children = Y.DOM._children(node.parentNode);
                                     return children[children.length - 1] === node;
                                 },
-                            
+
                                 &#x27;first-of-type&#x27;: function(node) {
                                     return Y.DOM._children(node.parentNode, node.tagName)[0] === node;
                                 },
-                            
+
                                 &#x27;last-of-type&#x27;: function(node) {
                                     var children = Y.DOM._children(node.parentNode, node.tagName);
                                     return children[children.length - 1] === node;
                                 },
-                            
+
                                 &#x27;only-child&#x27;: function(node) {
                                     var children = Y.DOM._children(node.parentNode);
                                     return children.length === 1 &amp;&amp; children[0] === node;
                                 },
-                            
+
                                 &#x27;only-of-type&#x27;: function(node) {
                                     var children = Y.DOM._children(node.parentNode, node.tagName);
                                     return children.length === 1 &amp;&amp; children[0] === node;
                                 },
-                            
+
                                 &#x27;empty&#x27;: function(node) {
                                     return node.childNodes.length === 0;
                                 },
-                            
+
                                 &#x27;not&#x27;: function(node, expr) {
                                     return !Y.Selector.test(node, expr);
                                 },
-                            
+
                                 &#x27;contains&#x27;: function(node, expr) {
                                     var text = node.innerText || node.textContent || &#x27;&#x27;;
                                     return text.indexOf(expr) &gt; -1;
                                 },
-                            
+
                                 &#x27;checked&#x27;: function(node) {
                                     return (node.checked === true || node.selected === true);
                                 },
-                            
+
                                 enabled: function(node) {
                                     return (node.disabled !== undefined &amp;&amp; !node.disabled);
                                 },
-                            
+
                                 disabled: function(node) {
                                     return (node.disabled);
                                 }
                             });
-                            
+
                             Y.mix(Y.Selector.operators, {
                                 &#x27;^=&#x27;: &#x27;^{val}&#x27;, // Match starts with value
                                 &#x27;$=&#x27;: &#x27;{val}$&#x27;, // Match ends with value
                                 &#x27;*=&#x27;: &#x27;{val}&#x27; // Match contains value as substring
                             });
-                            
+
                             Y.Selector.combinators[&#x27;~&#x27;] = {
                                 axis: &#x27;previousSibling&#x27;
                             };
-                            
+
                                 </pre>
                             </div>
                         </div>

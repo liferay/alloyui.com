@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/resize/js/resize-proxy.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             var ACTIVE_HANDLE_NODE = &#x27;activeHandleNode&#x27;,
@@ -1144,22 +1144,22 @@
                                 RESIZE = &#x27;resize&#x27;,
                                 RESIZE_PROXY = &#x27;resize-proxy&#x27;,
                                 WRAPPER = &#x27;wrapper&#x27;,
-                            
+
                                 getCN = Y.ClassNameManager.getClassName,
-                            
+
                                 CSS_RESIZE_PROXY = getCN(RESIZE, PROXY);
-                            
-                            
+
+
                             /**
                             Adds a &#x60;proxyNode&#x60; attribute and resizes it instead of the actual node. __very similar to DDProxy__
-                            
+
                                 var resize = new Y.Resize({
                                     //Selector of the node to resize
                                     node: &#x27;#demo&#x27;
                                 });
                                 resize.plug(Y.Plugin.ResizeProxy);
-                            
-                            
+
+
                             @class ResizeProxy
                             @module resize
                             @submodule resize-proxy
@@ -1167,17 +1167,17 @@
                             @extends Plugin.Base
                             @namespace Plugin
                             */
-                            
-                            
+
+
                             function ResizeProxy() {
                                 ResizeProxy.superclass.constructor.apply(this, arguments);
                             }
-                            
+
                             Y.mix(ResizeProxy, {
                                 NAME: RESIZE_PROXY,
-                            
+
                                 NS: PROXY,
-                            
+
                                 ATTRS: {
                                     /**
                                      * The Resize proxy element.
@@ -1194,7 +1194,7 @@
                                     }
                                 }
                             });
-                            
+
                             Y.extend(ResizeProxy, Y.Plugin.Base, {
                                 /**
                                  * Template used to create the resize proxy.
@@ -1203,52 +1203,52 @@
                                  * @type {String}
                                  */
                                 PROXY_TEMPLATE: &#x27;&lt;div class=&quot;&#x27;+CSS_RESIZE_PROXY+&#x27;&quot;&gt;&lt;/div&gt;&#x27;,
-                            
+
                                 initializer: function() {
                                     var instance = this;
-                            
+
                                     instance.afterHostEvent(&#x27;resize:start&#x27;, instance._afterResizeStart);
                                     instance.beforeHostMethod(&#x27;_resize&#x27;, instance._beforeHostResize);
                                     instance.afterHostMethod(&#x27;_resizeEnd&#x27;, instance._afterHostResizeEnd);
                                 },
-                            
+
                                 destructor: function() {
                                     var instance = this;
-                            
+
                                     instance.get(PROXY_NODE).remove(true);
                                 },
-                            
+
                                 _afterHostResizeEnd: function(event) {
                                     var instance = this,
                                         drag = event.dragEvent.target;
-                            
+
                                     // reseting actXY from drag when drag end
                                     drag.actXY = [];
-                            
+
                                     // if proxy is true, hide it on resize end
                                     instance._syncProxyUI();
-                            
+
                                     instance.get(PROXY_NODE).hide();
                                 },
-                            
+
                                 _afterResizeStart: function() {
                                     var instance = this;
-                            
+
                                     instance._renderProxy();
                                 },
-                            
+
                                 _beforeHostResize: function(event) {
                                     var instance = this,
                                         host = this.get(HOST);
-                            
+
                                     host._handleResizeAlignEvent(event.dragEvent);
-                            
+
                                     // if proxy is true _syncProxyUI instead of _syncUI
                                     instance._syncProxyUI();
-                            
+
                                     return new Y.Do.Prevent();
                                 },
-                            
+
                                 /**
                                   * Render the &lt;a href=&quot;ResizeProxy.html#attr_proxyNode&quot;&gt;proxyNode&lt;/a&gt; element and
                                   * make it sibling of the &lt;a href=&quot;Resize.html#attr_node&quot;&gt;node&lt;/a&gt;.
@@ -1260,14 +1260,14 @@
                                     var instance = this,
                                         host = this.get(HOST),
                                         proxyNode = instance.get(PROXY_NODE);
-                            
+
                                     if (!proxyNode.inDoc()) {
                                         host.get(WRAPPER).get(PARENT_NODE).append(
                                             proxyNode.hide()
                                         );
                                     }
                                 },
-                            
+
                                 /**
                                  * Sync the proxy UI with internal values from
                                  * &lt;a href=&quot;ResizeProxy.html#property_info&quot;&gt;info&lt;/a&gt;.
@@ -1282,20 +1282,20 @@
                                         activeHandleNode = host.get(ACTIVE_HANDLE_NODE),
                                         proxyNode = instance.get(PROXY_NODE),
                                         cursor = activeHandleNode.getStyle(CURSOR);
-                            
+
                                     proxyNode.show().setStyle(CURSOR, cursor);
-                            
+
                                     host.delegate.dd.set(DRAG_CURSOR, cursor);
-                            
+
                                     proxyNode.sizeTo(info.offsetWidth, info.offsetHeight);
-                            
+
                                     proxyNode.setXY([ info.left, info.top ]);
                                 }
                             });
-                            
+
                             Y.namespace(&#x27;Plugin&#x27;);
                             Y.Plugin.ResizeProxy = ResizeProxy;
-                            
+
                                 </pre>
                             </div>
                         </div>

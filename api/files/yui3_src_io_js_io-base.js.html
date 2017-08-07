@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,62 +1122,62 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/io/js/io-base.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
                             Base IO functionality. Provides basic XHR transport support.
-                            
+
                             @module io
                             @submodule io-base
                             @for IO
                             **/
-                            
+
                             var // List of events that comprise the IO event lifecycle.
                                 EVENTS = [&#x27;start&#x27;, &#x27;complete&#x27;, &#x27;end&#x27;, &#x27;success&#x27;, &#x27;failure&#x27;, &#x27;progress&#x27;],
-                            
+
                                 // Whitelist of used XHR response object properties.
                                 XHR_PROPS = [&#x27;status&#x27;, &#x27;statusText&#x27;, &#x27;responseText&#x27;, &#x27;responseXML&#x27;],
-                            
+
                                 win = Y.config.win,
                                 uid = 0;
-                            
+
                             /**
                             The IO class is a utility that brokers HTTP requests through a simplified
                             interface.  Specifically, it allows JavaScript to make HTTP requests to
                             a resource without a page reload.  The underlying transport for making
                             same-domain requests is the XMLHttpRequest object.  IO can also use
                             Flash, if specified as a transport, for cross-domain requests.
-                            
+
                             @class IO
                             @constructor
                             @param {Object} config Object of EventTarget&#x27;s publish method configurations
                                                 used to configure IO&#x27;s events.
-                            
+
                             IO can be called statically using {{#crossLink &quot;YUI/io:method&quot;}}YUI.io{{/crossLink}}.
                             **/
                             function IO (config) {
                                 var io = this;
-                            
+
                                 io._uid = &#x27;io:&#x27; + uid++;
                                 io._init(config);
                                 Y.io._map[io._uid] = io;
                             }
-                            
+
                             IO.prototype = {
                                 //--------------------------------------
                                 //  Properties
                                 //--------------------------------------
-                            
+
                                /**
                                 * A counter that increments for each transaction.
                                 *
@@ -1186,7 +1186,7 @@
                                 * @type {Number}
                                 */
                                 _id: 0,
-                            
+
                                /**
                                 * Object of IO HTTP headers sent with each transaction.
                                 *
@@ -1197,7 +1197,7 @@
                                 _headers: {
                                     &#x27;X-Requested-With&#x27; : &#x27;XMLHttpRequest&#x27;
                                 },
-                            
+
                                /**
                                 * Object that stores timeout values for any transaction with a defined
                                 * &quot;timeout&quot; configuration property.
@@ -1207,16 +1207,16 @@
                                 * @type {Object}
                                 */
                                 _timeout: {},
-                            
+
                                 //--------------------------------------
                                 //  Methods
                                 //--------------------------------------
-                            
+
                                 _init: function(config) {
                                     var io = this, i, len;
-                            
+
                                     io.cfg = config || {};
-                            
+
                                     Y.augment(io, Y.EventTarget);
                                     for (i = 0, len = EVENTS.length; i &lt; len; ++i) {
                                         // Publish IO global events with configurations, if any.
@@ -1228,7 +1228,7 @@
                                         io.publish(&#x27;io-trn:&#x27; + EVENTS[i], config);
                                     }
                                 },
-                            
+
                                /**
                                 * Method that creates a unique transaction object for each request.
                                 *
@@ -1249,26 +1249,26 @@
                                         alt = config.xdr ? config.xdr.use : null,
                                         form = config.form &amp;&amp; config.form.upload ? &#x27;iframe&#x27; : null,
                                         use;
-                            
+
                                     if (alt === &#x27;native&#x27;) {
                                         // Non-IE and IE &gt;= 10  can use XHR level 2 and not rely on an
                                         // external transport.
                                         alt = Y.UA.ie &amp;&amp; !SUPPORTS_CORS ? &#x27;xdr&#x27; : null;
-                            
+
                                         // Prevent &quot;pre-flight&quot; OPTIONS request by removing the
                                         // &#x60;X-Requested-With&#x60; HTTP header from CORS requests. This header
                                         // can be added back on a per-request basis, if desired.
                                         io.setHeader(&#x27;X-Requested-With&#x27;);
                                     }
-                            
+
                                     use = alt || form;
                                     transaction = use ? Y.merge(Y.IO.customTransport(use), transaction) :
                                                         Y.merge(Y.IO.defaultTransport(), transaction);
-                            
+
                                     if (transaction.notify) {
                                         config.notify = function (e, t, c) { io.notify(e, t, c); };
                                     }
-                            
+
                                     if (!use) {
                                         if (win &amp;&amp; win.FormData &amp;&amp; config.data instanceof win.FormData) {
                                             transaction.c.upload.onprogress = function (e) {
@@ -1283,10 +1283,10 @@
                                             transaction.upload = true;
                                         }
                                     }
-                            
+
                                     return transaction;
                                 },
-                            
+
                                 _destroy: function(transaction) {
                                     if (win &amp;&amp; !transaction.notify &amp;&amp; !transaction.xdr) {
                                         if (XHR &amp;&amp; !transaction.upload) {
@@ -1301,10 +1301,10 @@
                                             transaction.c.abort();
                                         }
                                     }
-                            
+
                                     transaction = transaction.c = null;
                                 },
-                            
+
                                /**
                                 * Method for creating and firing events.
                                 *
@@ -1320,14 +1320,14 @@
                                         emitFacade  = io.cfg.emitFacade,
                                         globalEvent = &quot;io:&quot; + eventName,
                                         trnEvent    = &quot;io-trn:&quot; + eventName;
-                            
+
                                     // Workaround for #2532107
                                     this.detach(trnEvent);
-                            
+
                                     if (transaction.e) {
                                         transaction.c = { status: 0, statusText: transaction.e };
                                     }
-                            
+
                                     // Fire event with parameters or an Event Facade.
                                     params = [ emitFacade ?
                                         {
@@ -1338,7 +1338,7 @@
                                         } :
                                         transaction.id
                                     ];
-                            
+
                                     if (!emitFacade) {
                                         if (eventName === EVENTS[0] || eventName === EVENTS[2]) {
                                             if (args) {
@@ -1355,7 +1355,7 @@
                                             }
                                         }
                                     }
-                            
+
                                     params.unshift(globalEvent);
                                     // Fire global events.
                                     io.fire.apply(io, params);
@@ -1366,7 +1366,7 @@
                                         io.fire.apply(io, params);
                                     }
                                 },
-                            
+
                                /**
                                 * Fires event &quot;io:start&quot; and creates, fires a transaction-specific
                                 * start event, if &#x60;config.on.start&#x60; is defined.
@@ -1382,7 +1382,7 @@
                                     */
                                     this._evt(EVENTS[0], transaction, config);
                                 },
-                            
+
                                /**
                                 * Fires event &quot;io:complete&quot; and creates, fires a
                                 * transaction-specific &quot;complete&quot; event, if config.on.complete is
@@ -1401,7 +1401,7 @@
                                     */
                                     this._evt(EVENTS[1], transaction, config);
                                 },
-                            
+
                                /**
                                 * Fires event &quot;io:end&quot; and creates, fires a transaction-specific &quot;end&quot;
                                 * event, if config.on.end is defined.
@@ -1418,7 +1418,7 @@
                                     this._evt(EVENTS[2], transaction, config);
                                     this._destroy(transaction);
                                 },
-                            
+
                                /**
                                 * Fires event &quot;io:success&quot; and creates, fires a transaction-specific
                                 * &quot;success&quot; event, if config.on.success is defined.
@@ -1436,7 +1436,7 @@
                                     this._evt(EVENTS[3], transaction, config);
                                     this.end(transaction, config);
                                 },
-                            
+
                                /**
                                 * Fires event &quot;io:failure&quot; and creates, fires a transaction-specific
                                 * &quot;failure&quot; event, if config.on.failure is defined.
@@ -1454,7 +1454,7 @@
                                     this._evt(EVENTS[4], transaction, config);
                                     this.end(transaction, config);
                                 },
-                            
+
                                /**
                                 * Fires event &quot;io:progress&quot; and creates, fires a transaction-specific
                                 * &quot;progress&quot; event -- for XMLHttpRequest file upload -- if
@@ -1474,7 +1474,7 @@
                                     transaction.evt = e;
                                     this._evt(EVENTS[5], transaction, config);
                                 },
-                            
+
                                /**
                                 * Fires event &quot;io:complete&quot; and creates, fires a transaction-specific
                                 * &quot;complete&quot; event -- for XMLHttpRequest file upload -- if
@@ -1489,7 +1489,7 @@
                                     transaction.evt = e.target;
                                     this._evt(EVENTS[1], transaction, config);
                                 },
-                            
+
                                /**
                                 * Fires event &quot;io:failure&quot; and creates, fires a transaction-specific
                                 * &quot;failure&quot; event -- for XMLHttpRequest file upload -- if
@@ -1504,7 +1504,7 @@
                                     transaction.evt = e;
                                     this._evt(EVENTS[4], transaction, config);
                                 },
-                            
+
                                /**
                                 * Retry an XDR transaction, using the Flash tranport, if the native
                                 * transport fails.
@@ -1520,7 +1520,7 @@
                                     config.xdr.use = &#x27;flash&#x27;;
                                     return this.send(uri, config, transaction.id);
                                 },
-                            
+
                                /**
                                 * Method that concatenates string data for HTTP GET transactions.
                                 *
@@ -1534,7 +1534,7 @@
                                     uri += (uri.indexOf(&#x27;?&#x27;) === -1 ? &#x27;?&#x27; : &#x27;&amp;&#x27;) + data;
                                     return uri;
                                 },
-                            
+
                                /**
                                 * Stores default client headers for all transactions. If a label is
                                 * passed with no value argument, the header will be deleted.
@@ -1550,7 +1550,7 @@
                                         delete this._headers[name];
                                     }
                                 },
-                            
+
                                /**
                                 * Method that sets all HTTP headers to be sent in a transaction.
                                 *
@@ -1568,7 +1568,7 @@
                                         }
                                     });
                                 },
-                            
+
                                /**
                                 * Starts timeout count if the configuration object has a defined
                                 * timeout property.
@@ -1580,12 +1580,12 @@
                                 */
                                 _startTimeout: function(transaction, timeout) {
                                     var io = this;
-                            
+
                                     io._timeout[transaction.id] = setTimeout(function() {
                                         io._abort(transaction, &#x27;timeout&#x27;);
                                     }, timeout);
                                 },
-                            
+
                                /**
                                 * Clears the timeout interval started by _startTimeout().
                                 *
@@ -1597,7 +1597,7 @@
                                     clearTimeout(this._timeout[id]);
                                     delete this._timeout[id];
                                 },
-                            
+
                                /**
                                 * Method that determines if a transaction response qualifies as success
                                 * or failure, based on the response HTTP status code, and fires the
@@ -1618,7 +1618,7 @@
                                     } catch(e) {
                                         status = 0;
                                     }
-                            
+
                                     // IE reports HTTP 204 as HTTP 1223.
                                     if (status &gt;= 200 &amp;&amp; status &lt; 300 || status === 304 || status === 1223) {
                                         this.success(transaction, config);
@@ -1626,7 +1626,7 @@
                                         this.failure(transaction, config);
                                     }
                                 },
-                            
+
                                /**
                                 * Event handler bound to onreadystatechange.
                                 *
@@ -1637,12 +1637,12 @@
                                 */
                                 _rS: function(transaction, config) {
                                     var io = this;
-                            
+
                                     if (transaction.c.readyState === 4) {
                                         if (config.timeout) {
                                             io._clearTimeout(transaction.id);
                                         }
-                            
+
                                         // Yield in the event of request timeout or abort.
                                         setTimeout(function() {
                                             io.complete(transaction, config);
@@ -1650,7 +1650,7 @@
                                         }, 0);
                                     }
                                 },
-                            
+
                                /**
                                 * Terminates a transaction due to an explicit abort or timeout.
                                 *
@@ -1665,7 +1665,7 @@
                                         transaction.c.abort();
                                     }
                                 },
-                            
+
                                /**
                                 * Requests a transaction. &#x60;send()&#x60; is implemented as &#x60;Y.io()&#x60;.  Each
                                 * transaction may include a configuration object.  Its properties are:
@@ -1800,13 +1800,13 @@
                                         io = this,
                                         u = uri,
                                         response = {};
-                            
+
                                     config = config ? Y.Object(config) : {};
                                     transaction = io._create(config, id);
                                     method = config.method ? config.method.toUpperCase() : &#x27;GET&#x27;;
                                     sync = config.sync;
                                     data = config.data;
-                            
+
                                     // Serialize a map object into a key-value string using
                                     // querystring-stringify-simple.
                                     if ((Y.Lang.isObject(data) &amp;&amp; !data.nodeType) &amp;&amp; !transaction.upload) {
@@ -1817,7 +1817,7 @@
                                             Y.log(&#x27;Failed to stringify config.data object, likely because &#x60;querystring-stringify-simple&#x60; is missing.&#x27;, &#x27;warn&#x27;, &#x27;io&#x27;);
                                         }
                                     }
-                            
+
                                     if (config.form) {
                                         if (config.form.upload) {
                                             // This is a file upload transaction, calling
@@ -1828,11 +1828,11 @@
                                             data = io._serialize(config.form, data);
                                         }
                                     }
-                            
+
                                     // Convert falsy values to an empty string. This way IE can&#x27;t be
                                     // rediculous and translate &#x60;undefined&#x60; to &quot;undefined&quot;.
                                     data || (data = &#x27;&#x27;);
-                            
+
                                     if (data) {
                                         switch (method) {
                                             case &#x27;GET&#x27;:
@@ -1853,7 +1853,7 @@
                                                 break;
                                         }
                                     }
-                            
+
                                     if (transaction.xdr) {
                                         // Route data to io-xdr module for flash and XDomainRequest.
                                         return io.xdr(u, transaction, config);
@@ -1862,30 +1862,30 @@
                                         // Route data to custom transport
                                         return transaction.c.send(transaction, uri, config);
                                     }
-                            
+
                                     if (!sync &amp;&amp; !transaction.upload) {
                                         transaction.c.onreadystatechange = function() {
                                             io._rS(transaction, config);
                                         };
                                     }
-                            
+
                                     try {
                                         // Determine if request is to be set as
                                         // synchronous or asynchronous.
                                         transaction.c.open(method, u, !sync, config.username || null, config.password || null);
                                         io._setHeaders(transaction.c, config.headers || {});
                                         io.start(transaction, config);
-                            
+
                                         // Will work only in browsers that implement the
                                         // Cross-Origin Resource Sharing draft.
                                         if (config.xdr &amp;&amp; config.xdr.credentials &amp;&amp; SUPPORTS_CORS) {
                                             transaction.c.withCredentials = true;
                                         }
-                            
+
                                         // Using &quot;null&quot; with HTTP POST will result in a request
                                         // with no Content-Length header defined.
                                         transaction.c.send(data);
-                            
+
                                         if (sync) {
                                             // Create a response object for synchronous transactions,
                                             // mixing id and arguments properties with the xhr
@@ -1893,18 +1893,18 @@
                                             for (i = 0, len = XHR_PROPS.length; i &lt; len; ++i) {
                                                 response[XHR_PROPS[i]] = transaction.c[XHR_PROPS[i]];
                                             }
-                            
+
                                             response.getAllResponseHeaders = function() {
                                                 return transaction.c.getAllResponseHeaders();
                                             };
-                            
+
                                             response.getResponseHeader = function(name) {
                                                 return transaction.c.getResponseHeader(name);
                                             };
-                            
+
                                             io.complete(transaction, config);
                                             io._result(transaction, config);
-                            
+
                                             return response;
                                         }
                                     } catch(e) {
@@ -1921,14 +1921,14 @@
                                             io._result(transaction, config);
                                         }
                                     }
-                            
+
                                     // If config.timeout is defined, and the request is standard XHR,
                                     // initialize timeout polling.
                                     if (config.timeout) {
                                         io._startTimeout(transaction, config.timeout);
                                         Y.log(&#x27;Configuration timeout set to: &#x27; + config.timeout, &#x27;info&#x27;, &#x27;io&#x27;);
                                     }
-                            
+
                                     return {
                                         id: transaction.id,
                                         abort: function() {
@@ -1941,24 +1941,24 @@
                                     };
                                 }
                             };
-                            
+
                             /**
                             Method for initiating an ajax call.  The first argument is the url end
                             point for the call.  The second argument is an object to configure the
                             transaction and attach event subscriptions.  The configuration object
                             supports the following properties:
-                            
+
                             &lt;dl&gt;
                               &lt;dt&gt;method&lt;/dt&gt;
                                 &lt;dd&gt;HTTP method verb (e.g., GET or POST). If this property is not
                                     not defined, the default value will be GET.&lt;/dd&gt;
-                            
+
                               &lt;dt&gt;data&lt;/dt&gt;
                                 &lt;dd&gt;This is the name-value string that will be sent as the
                                 transaction data. If the request is HTTP GET, the data become
                                 part of querystring. If HTTP POST, the data are sent in the
                                 message body.&lt;/dd&gt;
-                            
+
                               &lt;dt&gt;xdr&lt;/dt&gt;
                                 &lt;dd&gt;Defines the transport to be used for cross-domain requests.
                                 By setting this property, the transaction will use the specified
@@ -1971,7 +1971,7 @@
                                     &lt;dd&gt;Set the value to &#x27;XML&#x27; if that is the expected response
                                     content type.&lt;/dd&gt;
                                 &lt;/dl&gt;&lt;/dd&gt;
-                            
+
                               &lt;dt&gt;form&lt;/dt&gt;
                                 &lt;dd&gt;Form serialization configuration object.  Its properties are:
                                 &lt;dl&gt;
@@ -1981,7 +1981,7 @@
                                     &lt;dd&gt;&#x60;true&#x60; to also serialize disabled form field values
                                     (defaults to &#x60;false&#x60;)&lt;/dd&gt;
                                 &lt;/dl&gt;&lt;/dd&gt;
-                            
+
                               &lt;dt&gt;on&lt;/dt&gt;
                                 &lt;dd&gt;Assigns transaction event subscriptions. Available events are:
                                 &lt;dl&gt;
@@ -2000,7 +2000,7 @@
                                     &lt;dd&gt;Fires at the conclusion of the transaction
                                        lifecycle, after &#x60;success&#x60; or &#x60;failure&#x60;.&lt;/dd&gt;
                                 &lt;/dl&gt;
-                            
+
                                 &lt;p&gt;Callback functions for &#x60;start&#x60; and &#x60;end&#x60; receive the id of the
                                 transaction as a first argument. For &#x60;complete&#x60;, &#x60;success&#x60;, and
                                 &#x60;failure&#x60;, callbacks receive the id and the response object
@@ -2009,27 +2009,27 @@
                                 &#x60;Y.io()&#x60;, the configured data will be passed to all callbacks as
                                 the last argument.&lt;/p&gt;
                                 &lt;/dd&gt;
-                            
+
                               &lt;dt&gt;sync&lt;/dt&gt;
                                 &lt;dd&gt;Pass &#x60;true&#x60; to make a same-domain transaction synchronous.
                                 &lt;strong&gt;CAVEAT&lt;/strong&gt;: This will negatively impact the user
                                 experience. Have a &lt;em&gt;very&lt;/em&gt; good reason if you intend to use
                                 this.&lt;/dd&gt;
-                            
+
                               &lt;dt&gt;context&lt;/dt&gt;
                                 &lt;dd&gt;The &quot;&#x60;this&#x27;&quot; object for all configured event handlers. If a
                                 specific context is needed for individual callbacks, bind the
                                 callback to a context using &#x60;Y.bind()&#x60;.&lt;/dd&gt;
-                            
+
                               &lt;dt&gt;headers&lt;/dt&gt;
                                 &lt;dd&gt;Object map of transaction headers to send to the server. The
                                 object keys are the header names and the values are the header
                                 values.&lt;/dd&gt;
-                            
+
                               &lt;dt&gt;timeout&lt;/dt&gt;
                                 &lt;dd&gt;Millisecond threshold for the transaction before being
                                 automatically aborted.&lt;/dd&gt;
-                            
+
                               &lt;dt&gt;arguments&lt;/dt&gt;
                                 &lt;dd&gt;User-defined data passed to all registered event handlers.
                                 This value is available as the second argument in the &quot;start&quot; and
@@ -2039,7 +2039,7 @@
                                 &quot;arguments&quot; is a reserved word in JavaScript&lt;/strong&gt; (e.g.
                                 &#x60;Y.io({ ..., &quot;arguments&quot;: stuff })&#x60;).&lt;/dd&gt;
                             &lt;/dl&gt;
-                            
+
                             @method io
                             @static
                             @param {String} url qualified path to transaction resource.
@@ -2063,7 +2063,7 @@
                                A reference to the IO object for this transaction.
                              &lt;/dd&gt;
                             &lt;/dl&gt;
-                            
+
                             @for YUI
                             **/
                             Y.io = function(url, config) {
@@ -2072,13 +2072,13 @@
                                 var transaction = Y.io._map[&#x27;io:0&#x27;] || new IO();
                                 return transaction.send.apply(transaction, [url, config]);
                             };
-                            
+
                             /**
                             Method for setting and deleting IO HTTP headers to be sent with every
                             request.
-                            
+
                             Hosted as a property on the &#x60;io&#x60; function (e.g. &#x60;Y.io.header&#x60;).
-                            
+
                             @method header
                             @param {String} name HTTP header
                             @param {String} value HTTP header value
@@ -2090,11 +2090,11 @@
                                 var transaction = Y.io._map[&#x27;io:0&#x27;] || new IO();
                                 transaction.setHeader(name, value);
                             };
-                            
+
                             Y.IO = IO;
                             // Map of all IO instances created.
                             Y.io._map = {};
-                            
+
                                 </pre>
                             </div>
                         </div>

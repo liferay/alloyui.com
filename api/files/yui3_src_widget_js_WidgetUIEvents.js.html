@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/widget/js/WidgetUIEvents.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1140,19 +1140,19 @@
                              * @module widget
                              * @submodule widget-uievents
                              */
-                            
+
                             var BOUNDING_BOX = &quot;boundingBox&quot;,
                                 Widget = Y.Widget,
                                 RENDER = &quot;render&quot;,
                                 L = Y.Lang,
                                 EVENT_PREFIX_DELIMITER = &quot;:&quot;,
-                            
+
                                 //  Map of Node instances serving as a delegation containers for a specific
                                 //  event type to Widget instances using that delegation container.
                                 _uievts = Y.Widget._uievts = Y.Widget._uievts || {};
-                            
+
                             Y.mix(Widget.prototype, {
-                            
+
                                 /**
                                  * Destructor logic for UI event infrastructure,
                                  * invoked during Widget destruction.
@@ -1162,21 +1162,21 @@
                                  * @private
                                  */
                                 _destroyUIEvents: function() {
-                            
+
                                     var widgetGuid = Y.stamp(this, true);
-                            
+
                                     Y.each(_uievts, function (info, key) {
                                         if (info.instances[widgetGuid]) {
                                             //  Unregister this Widget instance as needing this delegated
                                             //  event listener.
                                             delete info.instances[widgetGuid];
-                            
+
                                             //  There are no more Widget instances using this delegated
                                             //  event listener, so detach it.
-                            
+
                                             if (Y.Object.isEmpty(info.instances)) {
                                                 info.handle.detach();
-                            
+
                                                 if (_uievts[key]) {
                                                     delete _uievts[key];
                                                 }
@@ -1184,7 +1184,7 @@
                                         }
                                     });
                                 },
-                            
+
                                 /**
                                  * Map of DOM events that should be fired as Custom Events by the
                                  * Widget instance.
@@ -1194,7 +1194,7 @@
                                  * @type Object
                                  */
                                 UI_EVENTS: Y.Node.DOM_EVENTS,
-                            
+
                                 /**
                                  * Returns the node on which to bind delegate listeners.
                                  *
@@ -1205,7 +1205,7 @@
                                 _getUIEventNode: function () {
                                     return this.get(BOUNDING_BOX);
                                 },
-                            
+
                                 /**
                                  * Binds a delegated DOM event listener of the specified type to the
                                  * Widget&#x27;s outtermost DOM element to facilitate the firing of a Custom
@@ -1217,39 +1217,39 @@
                                  * @private
                                  */
                                 _createUIEvent: function (type) {
-                            
+
                                     var uiEvtNode = this._getUIEventNode(),
                                         key = (Y.stamp(uiEvtNode) + type),
                                         info = _uievts[key],
                                         handle;
-                            
+
                                     //  For each Node instance: Ensure that there is only one delegated
                                     //  event listener used to fire Widget UI events.
-                            
+
                                     if (!info) {
-                            
+
                                         handle = uiEvtNode.delegate(type, function (evt) {
-                            
+
                                             var widget = Widget.getByNode(this);
-                            
+
                                             // Widget could be null if node instance belongs to
                                             // another Y instance.
-                            
+
                                             if (widget) {
                                                 if (widget._filterUIEvent(evt)) {
                                                     widget.fire(evt.type, { domEvent: evt });
                                                 }
                                             }
-                            
+
                                         }, &quot;.&quot; + Y.Widget.getClassName());
-                            
+
                                         _uievts[key] = info = { instances: {}, handle: handle };
                                     }
-                            
+
                                     //  Register this Widget as using this Node as a delegation container.
                                     info.instances[Y.stamp(this)] = 1;
                                 },
-                            
+
                                 /**
                                  * This method is used to determine if we should fire
                                  * the UI Event or not. The default implementation makes sure
@@ -1275,7 +1275,7 @@
                                     // or the container it&#x27;s hitting is handling this widget&#x27;s ui events.
                                     return (evt.currentTarget.compareTo(evt.container) || evt.container.compareTo(this._getUIEventNode()));
                                 },
-                            
+
                                 /**
                                  * Determines if the specified event is a UI event.
                                  *
@@ -1287,28 +1287,28 @@
                                  * undefined.
                                  */
                                 _getUIEvent: function (type) {
-                            
+
                                     if (L.isString(type)) {
                                         var sType = this.parseType(type)[1],
                                             iDelim,
                                             returnVal;
-                            
+
                                         if (sType) {
                                             // TODO: Get delimiter from ET, or have ET support this.
                                             iDelim = sType.indexOf(EVENT_PREFIX_DELIMITER);
                                             if (iDelim &gt; -1) {
                                                 sType = sType.substring(iDelim + EVENT_PREFIX_DELIMITER.length);
                                             }
-                            
+
                                             if (this.UI_EVENTS[sType]) {
                                                 returnVal = sType;
                                             }
                                         }
-                            
+
                                         return returnVal;
                                     }
                                 },
-                            
+
                                 /**
                                  * Sets up infrastructure required to fire a UI event.
                                  *
@@ -1321,19 +1321,19 @@
                                 _initUIEvent: function (type) {
                                     var sType = this._getUIEvent(type),
                                         queue = this._uiEvtsInitQueue || {};
-                            
+
                                     if (sType &amp;&amp; !queue[sType]) {
                                         Y.log(&quot;Deferring creation of &quot; + type + &quot; delegate until render.&quot;, &quot;info&quot;, &quot;widget&quot;);
-                            
+
                                         this._uiEvtsInitQueue = queue[sType] = 1;
-                            
+
                                         this.after(RENDER, function() {
                                             this._createUIEvent(sType);
                                             delete this._uiEvtsInitQueue[sType];
                                         });
                                     }
                                 },
-                            
+
                                 //  Override of &quot;on&quot; from Base to facilitate the firing of Widget events
                                 //  based on DOM events of the same name/type (e.g. &quot;click&quot;, &quot;mouseover&quot;).
                                 //  Temporary solution until we have the ability to listen to when
@@ -1342,7 +1342,7 @@
                                     this._initUIEvent(type);
                                     return Widget.superclass.on.apply(this, arguments);
                                 },
-                            
+
                                 //  Override of &quot;publish&quot; from Base to facilitate the firing of Widget events
                                 //  based on DOM events of the same name/type (e.g. &quot;click&quot;, &quot;mouseover&quot;).
                                 //  Temporary solution until we have the ability to listen to when
@@ -1354,9 +1354,9 @@
                                     }
                                     return Widget.superclass.publish.apply(this, arguments);
                                 }
-                            
+
                             }, true); // overwrite existing EventTarget methods
-                            
+
                                 </pre>
                             </div>
                         </div>

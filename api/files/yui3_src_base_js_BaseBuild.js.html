@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/base/js/BaseBuild.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                                 /**
@@ -1146,13 +1146,13 @@
                                 var BaseCore = Y.BaseCore,
                                     Base     = Y.Base,
                                     L        = Y.Lang,
-                            
+
                                     INITIALIZER = &quot;initializer&quot;,
                                     DESTRUCTOR  = &quot;destructor&quot;,
                                     AGGREGATES  = [&quot;_PLUG&quot;, &quot;_UNPLUG&quot;],
-                            
+
                                     build;
-                            
+
                                 // Utility function used in &#x60;_buildCfg&#x60; to aggregate array values into a new
                                 // array from the sender constructor to the receiver constructor.
                                 function arrayAggregator(prop, r, s) {
@@ -1160,7 +1160,7 @@
                                         r[prop] = (r[prop] || []).concat(s[prop]);
                                     }
                                 }
-                            
+
                                 // Utility function used in &#x60;_buildCfg&#x60; to aggregate &#x60;_ATTR_CFG&#x60; array
                                 // values from the sender constructor into a new array on receiver&#x27;s
                                 // constructor, and clear the cached hash.
@@ -1168,105 +1168,105 @@
                                     if (s._ATTR_CFG) {
                                         // Clear cached hash.
                                         r._ATTR_CFG_HASH = null;
-                            
+
                                         arrayAggregator.apply(null, arguments);
                                     }
                                 }
-                            
+
                                 // Utility function used in &#x60;_buildCfg&#x60; to aggregate ATTRS configs from one
                                 // the sender constructor to the receiver constructor.
                                 function attrsAggregator(prop, r, s) {
                                     BaseCore.modifyAttrs(r, s.ATTRS);
                                 }
-                            
+
                                 Base._build = function(name, main, extensions, px, sx, cfg) {
-                            
+
                                     var build = Base._build,
-                            
+
                                         builtClass = build._ctor(main, cfg),
                                         buildCfg = build._cfg(main, cfg, extensions),
-                            
+
                                         _mixCust = build._mixCust,
-                            
+
                                         dynamic = builtClass._yuibuild.dynamic,
-                            
+
                                         i, l, extClass, extProto,
                                         initializer,
                                         destructor;
-                            
+
                                     // Augment/Aggregate
                                     for (i = 0, l = extensions.length; i &lt; l; i++) {
                                         extClass = extensions[i];
-                            
+
                                         extProto = extClass.prototype;
-                            
+
                                         initializer = extProto[INITIALIZER];
                                         destructor = extProto[DESTRUCTOR];
                                         delete extProto[INITIALIZER];
                                         delete extProto[DESTRUCTOR];
-                            
+
                                         // Prototype, old non-displacing augment
                                         Y.mix(builtClass, extClass, true, null, 1);
-                            
+
                                         // Custom Statics
                                         _mixCust(builtClass, extClass, buildCfg);
-                            
+
                                         if (initializer) {
                                             extProto[INITIALIZER] = initializer;
                                         }
-                            
+
                                         if (destructor) {
                                             extProto[DESTRUCTOR] = destructor;
                                         }
-                            
+
                                         builtClass._yuibuild.exts.push(extClass);
                                     }
-                            
+
                                     if (px) {
                                         Y.mix(builtClass.prototype, px, true);
                                     }
-                            
+
                                     if (sx) {
                                         Y.mix(builtClass, build._clean(sx, buildCfg), true);
                                         _mixCust(builtClass, sx, buildCfg);
                                     }
-                            
+
                                     builtClass.prototype.hasImpl = build._impl;
-                            
+
                                     if (dynamic) {
                                         builtClass.NAME = name;
                                         builtClass.prototype.constructor = builtClass;
-                            
+
                                         // Carry along the reference to &#x60;modifyAttrs()&#x60; from &#x60;main&#x60;.
                                         builtClass.modifyAttrs = main.modifyAttrs;
                                     }
-                            
+
                                     return builtClass;
                                 };
-                            
+
                                 build = Base._build;
-                            
+
                                 Y.mix(build, {
-                            
+
                                     _mixCust: function(r, s, cfg) {
-                            
+
                                         var aggregates,
                                             custom,
                                             statics,
                                             aggr,
                                             l,
                                             i;
-                            
+
                                         if (cfg) {
                                             aggregates = cfg.aggregates;
                                             custom = cfg.custom;
                                             statics = cfg.statics;
                                         }
-                            
+
                                         if (statics) {
                                             Y.mix(r, s, true, statics);
                                         }
-                            
+
                                         if (aggregates) {
                                             for (i = 0, l = aggregates.length; i &lt; l; i++) {
                                                 aggr = aggregates[i];
@@ -1276,7 +1276,7 @@
                                                 Y.aggregate(r, s, true, [aggr]);
                                             }
                                         }
-                            
+
                                         if (custom) {
                                             for (i in custom) {
                                                 if (custom.hasOwnProperty(i)) {
@@ -1284,19 +1284,19 @@
                                                 }
                                             }
                                         }
-                            
+
                                     },
-                            
+
                                     _tmpl: function(main) {
-                            
+
                                         function BuiltClass() {
                                             BuiltClass.superclass.constructor.apply(this, arguments);
                                         }
                                         Y.extend(BuiltClass, main);
-                            
+
                                         return BuiltClass;
                                     },
-                            
+
                                     _impl : function(extClass) {
                                         var classes = this._getClasses(), i, l, cls, exts, ll, j;
                                         for (i = 0, l = classes.length; i &lt; l; i++) {
@@ -1304,7 +1304,7 @@
                                             if (cls._yuibuild) {
                                                 exts = cls._yuibuild.exts;
                                                 ll = exts.length;
-                            
+
                                                 for (j = 0; j &lt; ll; j++) {
                                                     if (exts[j] === extClass) {
                                                         return true;
@@ -1314,24 +1314,24 @@
                                         }
                                         return false;
                                     },
-                            
+
                                     _ctor : function(main, cfg) {
-                            
+
                                        var dynamic = (cfg &amp;&amp; false === cfg.dynamic) ? false : true,
                                            builtClass = (dynamic) ? build._tmpl(main) : main,
                                            buildCfg = builtClass._yuibuild;
-                            
+
                                         if (!buildCfg) {
                                             buildCfg = builtClass._yuibuild = {};
                                         }
-                            
+
                                         buildCfg.id = buildCfg.id || null;
                                         buildCfg.exts = buildCfg.exts || [];
                                         buildCfg.dynamic = dynamic;
-                            
+
                                         return builtClass;
                                     },
-                            
+
                                     _cfg : function(main, cfg, exts) {
                                         var aggr = [],
                                             cust = {},
@@ -1343,7 +1343,7 @@
                                             c = main,
                                             i,
                                             l;
-                            
+
                                         // Prototype Chain
                                         while (c &amp;&amp; c.prototype) {
                                             buildCfg = c._buildCfg;
@@ -1360,7 +1360,7 @@
                                             }
                                             c = c.superclass ? c.superclass.constructor : null;
                                         }
-                            
+
                                         // Exts
                                         if (exts) {
                                             for (i = 0, l = exts.length; i &lt; l; i++) {
@@ -1379,48 +1379,48 @@
                                                 }
                                             }
                                         }
-                            
+
                                         if (cfgAggr) {
                                             aggr = aggr.concat(cfgAggr);
                                         }
-                            
+
                                         if (cfgCustBuild) {
                                             Y.mix(cust, cfg.cfgBuild, true);
                                         }
-                            
+
                                         if (cfgStatics) {
                                             statics = statics.concat(cfgStatics);
                                         }
-                            
+
                                         return {
                                             aggregates: aggr,
                                             custom: cust,
                                             statics: statics
                                         };
                                     },
-                            
+
                                     _clean : function(sx, cfg) {
                                         var prop, i, l, sxclone = Y.merge(sx),
                                             aggregates = cfg.aggregates,
                                             custom = cfg.custom;
-                            
+
                                         for (prop in custom) {
                                             if (sxclone.hasOwnProperty(prop)) {
                                                 delete sxclone[prop];
                                             }
                                         }
-                            
+
                                         for (i = 0, l = aggregates.length; i &lt; l; i++) {
                                             prop = aggregates[i];
                                             if (sxclone.hasOwnProperty(prop)) {
                                                 delete sxclone[prop];
                                             }
                                         }
-                            
+
                                         return sxclone;
                                     }
                                 });
-                            
+
                                 /**
                                  * &lt;p&gt;
                                  * Builds a custom constructor function (class) from the
@@ -1461,7 +1461,7 @@
                                 Base.build = function(name, main, extensions, cfg) {
                                     return build(name, main, extensions, null, null, cfg);
                                 };
-                            
+
                                 /**
                                  * Creates a new class (constructor function) which extends the base class passed in as the second argument,
                                  * and mixes in the array of extensions provided.
@@ -1530,7 +1530,7 @@
                                 Base.create = function(name, base, extensions, px, sx) {
                                     return build(name, base, extensions, px, sx);
                                 };
-                            
+
                                 /**
                                  * &lt;p&gt;Mixes in a list of extensions to an existing class.&lt;/p&gt;
                                  * @method mix
@@ -1541,14 +1541,14 @@
                                  * @return {Function} The modified main class, with extensions mixed in.
                                  */
                                 Base.mix = function(main, extensions) {
-                            
+
                                     if (main._CACHED_CLASS_DATA) {
                                         main._CACHED_CLASS_DATA = null;
                                     }
-                            
+
                                     return build(null, main, extensions, null, null, {dynamic:false});
                                 };
-                            
+
                                 /**
                                  * The build configuration for the Base class.
                                  *
@@ -1564,25 +1564,25 @@
                                  */
                                 BaseCore._buildCfg = {
                                     aggregates: AGGREGATES.concat(),
-                            
+
                                     custom: {
                                         ATTRS         : attrsAggregator,
                                         _ATTR_CFG     : attrCfgAggregator,
                                         _NON_ATTRS_CFG: arrayAggregator
                                     }
                                 };
-                            
+
                                 // Makes sure Base and BaseCore use separate &#x60;_buildCfg&#x60; objects.
                                 Base._buildCfg = {
                                     aggregates: AGGREGATES.concat(),
-                            
+
                                     custom: {
                                         ATTRS         : attrsAggregator,
                                         _ATTR_CFG     : attrCfgAggregator,
                                         _NON_ATTRS_CFG: arrayAggregator
                                     }
                                 };
-                            
+
                                 </pre>
                             </div>
                         </div>

@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/history/js/history-hash.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1149,44 +1149,44 @@
                              * @param {Object} config (optional) Configuration object. See the HistoryBase
                              *   documentation for details.
                              */
-                            
+
                             var HistoryBase = Y.HistoryBase,
                                 Lang        = Y.Lang,
                                 YArray      = Y.Array,
                                 YObject     = Y.Object,
                                 GlobalEnv   = YUI.namespace(&#x27;Env.HistoryHash&#x27;),
-                            
+
                                 SRC_HASH    = &#x27;hash&#x27;,
-                            
+
                                 hashNotifiers,
                                 oldHash,
                                 oldUrl,
                                 win             = Y.config.win,
                                 useHistoryHTML5 = Y.config.useHistoryHTML5;
-                            
+
                             function HistoryHash() {
                                 HistoryHash.superclass.constructor.apply(this, arguments);
                             }
-                            
+
                             Y.extend(HistoryHash, HistoryBase, {
                                 // -- Initialization -------------------------------------------------------
                                 _init: function (config) {
                                     var bookmarkedState = HistoryHash.parseHash();
-                            
+
                                     // If an initialState was provided, merge the bookmarked state into it
                                     // (the bookmarked state wins).
                                     config = config || {};
-                            
+
                                     this._initialState = config.initialState ?
                                             Y.merge(config.initialState, bookmarkedState) : bookmarkedState;
-                            
+
                                     // Subscribe to the synthetic hashchange event (defined below) to handle
                                     // changes.
                                     Y.after(&#x27;hashchange&#x27;, Y.bind(this._afterHashChange, this), win);
-                            
+
                                     HistoryHash.superclass._init.apply(this, arguments);
                                 },
-                            
+
                                 // -- Protected Methods ----------------------------------------------------
                                 _change: function (src, state, options) {
                                     // Stringify all values to ensure that comparisons don&#x27;t fail after
@@ -1196,16 +1196,16 @@
                                             state[key] = value.toString();
                                         }
                                     });
-                            
+
                                     return HistoryHash.superclass._change.call(this, src, state, options);
                                 },
-                            
+
                                 _storeState: function (src, newState) {
                                     var decode  = HistoryHash.decode,
                                         newHash = HistoryHash.createHash(newState);
-                            
+
                                     HistoryHash.superclass._storeState.apply(this, arguments);
-                            
+
                                     // Update the location hash with the changes, but only if the new hash
                                     // actually differs from the current hash (this avoids creating multiple
                                     // history entries for a single state).
@@ -1217,9 +1217,9 @@
                                         HistoryHash[src === HistoryBase.SRC_REPLACE ? &#x27;replaceHash&#x27; : &#x27;setHash&#x27;](newHash);
                                     }
                                 },
-                            
+
                                 // -- Protected Event Handlers ---------------------------------------------
-                            
+
                                 /**
                                  * Handler for hashchange events.
                                  *
@@ -1233,7 +1233,7 @@
                             }, {
                                 // -- Public Static Properties ---------------------------------------------
                                 NAME: &#x27;historyHash&#x27;,
-                            
+
                                 /**
                                  * Constant used to identify state changes originating from
                                  * &lt;code&gt;hashchange&lt;/code&gt; events.
@@ -1244,7 +1244,7 @@
                                  * @final
                                  */
                                 SRC_HASH: SRC_HASH,
-                            
+
                                 /**
                                  * &lt;p&gt;
                                  * Prefix to prepend when setting the hash fragment. For example, if the
@@ -1267,9 +1267,9 @@
                                  * @static
                                  */
                                 hashPrefix: &#x27;&#x27;,
-                            
+
                                 // -- Protected Static Properties ------------------------------------------
-                            
+
                                 /**
                                  * Regular expression used to parse location hash/query strings.
                                  *
@@ -1280,9 +1280,9 @@
                                  * @final
                                  */
                                 _REGEX_HASH: /([^\?#&amp;=]+)=?([^&amp;=]*)/g,
-                            
+
                                 // -- Public Static Methods ------------------------------------------------
-                            
+
                                 /**
                                  * Creates a location hash string from the specified object of key/value
                                  * pairs.
@@ -1295,16 +1295,16 @@
                                 createHash: function (params) {
                                     var encode = HistoryHash.encode,
                                         hash   = [];
-                            
+
                                     YObject.each(params, function (value, key) {
                                         if (Lang.isValue(value)) {
                                             hash.push(encode(key) + &#x27;=&#x27; + encode(value));
                                         }
                                     });
-                            
+
                                     return hash.join(&#x27;&amp;&#x27;);
                                 },
-                            
+
                                 /**
                                  * Wrapper around &lt;code&gt;decodeURIComponent()&lt;/code&gt; that also converts +
                                  * chars into spaces.
@@ -1317,7 +1317,7 @@
                                 decode: function (string) {
                                     return decodeURIComponent(string.replace(/\+/g, &#x27; &#x27;));
                                 },
-                            
+
                                 /**
                                  * Wrapper around &lt;code&gt;encodeURIComponent()&lt;/code&gt; that converts spaces to
                                  * + chars.
@@ -1330,7 +1330,7 @@
                                 encode: function (string) {
                                     return encodeURIComponent(string).replace(/%20/g, &#x27;+&#x27;);
                                 },
-                            
+
                                 /**
                                  * Gets the raw (not decoded) current location hash, minus the preceding &#x27;#&#x27;
                                  * character and the hashPrefix (if one is set).
@@ -1349,14 +1349,14 @@
                                         matches  = /#(.*)$/.exec(location.href),
                                         hash     = matches &amp;&amp; matches[1] || &#x27;&#x27;,
                                         prefix   = HistoryHash.hashPrefix;
-                            
+
                                     return prefix &amp;&amp; hash.indexOf(prefix) === 0 ?
                                                 hash.replace(prefix, &#x27;&#x27;) : hash;
                                 } : function () {
                                     var location = Y.getLocation(),
                                         hash     = location.hash.substring(1),
                                         prefix   = HistoryHash.hashPrefix;
-                            
+
                                     // Slight code duplication here, but execution speed is of the essence
                                     // since getHash() is called every 50ms to poll for changes in browsers
                                     // that don&#x27;t support native onhashchange. An additional function call
@@ -1364,7 +1364,7 @@
                                     return prefix &amp;&amp; hash.indexOf(prefix) === 0 ?
                                                 hash.replace(prefix, &#x27;&#x27;) : hash;
                                 }),
-                            
+
                                 /**
                                  * Gets the current bookmarkable URL.
                                  *
@@ -1375,7 +1375,7 @@
                                 getUrl: function () {
                                     return location.href;
                                 },
-                            
+
                                 /**
                                  * Parses a location hash string into an object of key/value parameter
                                  * pairs. If &lt;i&gt;hash&lt;/i&gt; is not specified, the current location hash will
@@ -1396,34 +1396,34 @@
                                         params = {},
                                         prefix = HistoryHash.hashPrefix,
                                         prefixIndex;
-                            
+
                                     hash = Lang.isValue(hash) ? hash : HistoryHash.getHash();
-                            
+
                                     if (prefix) {
                                         prefixIndex = hash.indexOf(prefix);
-                            
+
                                         if (prefixIndex === 0 || (prefixIndex === 1 &amp;&amp; hash.charAt(0) === &#x27;#&#x27;)) {
                                             hash = hash.replace(prefix, &#x27;&#x27;);
                                         }
                                     }
-                            
+
                                     matches = hash.match(HistoryHash._REGEX_HASH) || [];
-                            
+
                                     for (i = 0, len = matches.length; i &lt; len; ++i) {
                                         match = matches[i];
-                            
+
                                         param = match.split(&#x27;=&#x27;);
-                            
+
                                         if (param.length &gt; 1) {
                                             params[decode(param[0])] = decode(param[1]);
                                         } else {
                                             params[decode(match)] = &#x27;&#x27;;
                                         }
                                     }
-                            
+
                                     return params;
                                 },
-                            
+
                                 /**
                                  * Replaces the browser&#x27;s current location hash with the specified hash
                                  * and removes all forward navigation states, without creating a new browser
@@ -1437,14 +1437,14 @@
                                 replaceHash: function (hash) {
                                     var location = Y.getLocation(),
                                         base     = location.href.replace(/#.*$/, &#x27;&#x27;);
-                            
+
                                     if (hash.charAt(0) === &#x27;#&#x27;) {
                                         hash = hash.substring(1);
                                     }
-                            
+
                                     location.replace(base + &#x27;#&#x27; + (HistoryHash.hashPrefix || &#x27;&#x27;) + hash);
                                 },
-                            
+
                                 /**
                                  * Sets the browser&#x27;s location hash to the specified string. Automatically
                                  * prepends the &lt;code&gt;hashPrefix&lt;/code&gt; if one is set.
@@ -1455,57 +1455,57 @@
                                  */
                                 setHash: function (hash) {
                                     var location = Y.getLocation();
-                            
+
                                     if (hash.charAt(0) === &#x27;#&#x27;) {
                                         hash = hash.substring(1);
                                     }
-                            
+
                                     location.hash = (HistoryHash.hashPrefix || &#x27;&#x27;) + hash;
                                 }
                             });
-                            
+
                             // -- Synthetic hashchange Event -----------------------------------------------
-                            
+
                             // TODO: YUIDoc currently doesn&#x27;t provide a good way to document synthetic DOM
                             // events. For now, we&#x27;re just documenting the hashchange event on the YUI
                             // object, which is about the best we can do until enhancements are made to
                             // YUIDoc.
-                            
+
                             /**
                             Synthetic &lt;code&gt;window.onhashchange&lt;/code&gt; event that normalizes differences
                             across browsers and provides support for browsers that don&#x27;t natively support
                             &lt;code&gt;onhashchange&lt;/code&gt;.
-                            
+
                             This event is provided by the &lt;code&gt;history-hash&lt;/code&gt; module.
-                            
+
                             @example
-                            
+
                                 YUI().use(&#x27;history-hash&#x27;, function (Y) {
                                   Y.on(&#x27;hashchange&#x27;, function (e) {
                                     // Handle hashchange events on the current window.
                                   }, Y.config.win);
                                 });
-                            
+
                             @event hashchange
                             @param {EventFacade} e Event facade with the following additional
                               properties:
-                            
+
                             &lt;dl&gt;
                               &lt;dt&gt;oldHash&lt;/dt&gt;
                               &lt;dd&gt;
                                 Previous hash fragment value before the change.
                               &lt;/dd&gt;
-                            
+
                               &lt;dt&gt;oldUrl&lt;/dt&gt;
                               &lt;dd&gt;
                                 Previous URL (including the hash fragment) before the change.
                               &lt;/dd&gt;
-                            
+
                               &lt;dt&gt;newHash&lt;/dt&gt;
                               &lt;dd&gt;
                                 New hash fragment value after the change.
                               &lt;/dd&gt;
-                            
+
                               &lt;dt&gt;newUrl&lt;/dt&gt;
                               &lt;dd&gt;
                                 New URL (including the hash fragment) after the change.
@@ -1514,13 +1514,13 @@
                             @for YUI
                             @since 3.2.0
                             **/
-                            
+
                             hashNotifiers = GlobalEnv._notifiers;
-                            
+
                             if (!hashNotifiers) {
                                 hashNotifiers = GlobalEnv._notifiers = [];
                             }
-                            
+
                             Y.Event.define(&#x27;hashchange&#x27;, {
                                 on: function (node, subscriber, notifier) {
                                     // Ignore this subscription if the node is anything other than the
@@ -1531,19 +1531,19 @@
                                         hashNotifiers.push(notifier);
                                     }
                                 },
-                            
+
                                 detach: function (node, subscriber, notifier) {
                                     var index = YArray.indexOf(hashNotifiers, notifier);
-                            
+
                                     if (index !== -1) {
                                         hashNotifiers.splice(index, 1);
                                     }
                                 }
                             });
-                            
+
                             oldHash = HistoryHash.getHash();
                             oldUrl  = HistoryHash.getUrl();
-                            
+
                             if (HistoryBase.nativeHashChange) {
                                 // Wrap the browser&#x27;s native hashchange event if there&#x27;s not already a
                                 // global listener.
@@ -1551,7 +1551,7 @@
                                     GlobalEnv._hashHandle = Y.Event.attach(&#x27;hashchange&#x27;, function (e) {
                                         var newHash = HistoryHash.getHash(),
                                             newUrl  = HistoryHash.getUrl();
-                            
+
                                         // Iterate over a copy of the hashNotifiers array since a subscriber
                                         // could detach during iteration and cause the array to be re-indexed.
                                         YArray.each(hashNotifiers.concat(), function (notifier) {
@@ -1563,7 +1563,7 @@
                                                 newUrl : newUrl
                                             });
                                         });
-                            
+
                                         oldHash = newHash;
                                         oldUrl  = newUrl;
                                     }, win);
@@ -1575,20 +1575,20 @@
                                     GlobalEnv._hashPoll = Y.later(50, null, function () {
                                         var newHash = HistoryHash.getHash(),
                                             facade, newUrl;
-                            
+
                                         if (oldHash !== newHash) {
                                             newUrl = HistoryHash.getUrl();
-                            
+
                                             facade = {
                                                 oldHash: oldHash,
                                                 oldUrl : oldUrl,
                                                 newHash: newHash,
                                                 newUrl : newUrl
                                             };
-                            
+
                                             oldHash = newHash;
                                             oldUrl  = newUrl;
-                            
+
                                             YArray.each(hashNotifiers.concat(), function (notifier) {
                                                 notifier.fire(facade);
                                             });
@@ -1596,15 +1596,15 @@
                                     }, null, true);
                                 }
                             }
-                            
+
                             Y.HistoryHash = HistoryHash;
-                            
+
                             // HistoryHash will never win over HistoryHTML5 unless useHistoryHTML5 is false.
                             if (useHistoryHTML5 === false || (!Y.History &amp;&amp; useHistoryHTML5 !== true &amp;&amp;
                                     (!HistoryBase.html5 || !Y.HistoryHTML5))) {
                                 Y.History = HistoryHash;
                             }
-                            
+
                                 </pre>
                             </div>
                         </div>

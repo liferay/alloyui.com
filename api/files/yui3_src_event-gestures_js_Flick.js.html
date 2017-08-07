@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/event-gestures/js/Flick.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1144,17 +1144,17 @@
                              *
                              *
                              @example
-                            
+
                                  YUI().use(&#x27;event-flick&#x27;, function (Y) {
                                      Y.one(&#x27;#myNode&#x27;).on(&#x27;flick&#x27;, function (e) {
                                          Y.log(&#x27;flick event fired. The event payload has goodies.&#x27;);
                                      });
                                  });
-                            
+
                              *
                              * @module event-gestures
                              */
-                            
+
                             /**
                              * Adds support for a &quot;flick&quot; event, which is fired at the end of a touch or mouse based flick gesture, and provides
                              * velocity of the flick, along with distance and time information.
@@ -1174,19 +1174,19 @@
                                 START = &quot;start&quot;,
                                 END = &quot;end&quot;,
                                 MOVE = &quot;move&quot;,
-                            
+
                                 OWNER_DOCUMENT = &quot;ownerDocument&quot;,
                                 MIN_VELOCITY = &quot;minVelocity&quot;,
                                 MIN_DISTANCE = &quot;minDistance&quot;,
                                 PREVENT_DEFAULT = &quot;preventDefault&quot;,
-                            
+
                                 _FLICK_START = &quot;_fs&quot;,
                                 _FLICK_START_HANDLE = &quot;_fsh&quot;,
                                 _FLICK_END_HANDLE = &quot;_feh&quot;,
                                 _FLICK_MOVE_HANDLE = &quot;_fmh&quot;,
-                            
+
                                 NODE_TYPE = &quot;nodeType&quot;;
-                            
+
                             /**
                              * Sets up a &quot;flick&quot; event, that is fired whenever the user initiates a flick gesture on the node
                              * where the listener is attached. The subscriber can specify a minimum distance or velocity for
@@ -1217,107 +1217,107 @@
                              * &lt;/dl&gt;
                              * @return {EventHandle} the detach handle
                              */
-                            
+
                             Y.Event.define(&#x27;flick&#x27;, {
-                            
+
                                 on: function (node, subscriber, ce) {
-                            
+
                                     var startHandle = node.on(EVENT[START],
                                         this._onStart,
                                         this,
                                         node,
                                         subscriber,
                                         ce);
-                            
+
                                     subscriber[_FLICK_START_HANDLE] = startHandle;
                                 },
-                            
+
                                 detach: function (node, subscriber, ce) {
-                            
+
                                     var startHandle = subscriber[_FLICK_START_HANDLE],
                                         endHandle = subscriber[_FLICK_END_HANDLE];
-                            
+
                                     if (startHandle) {
                                         startHandle.detach();
                                         subscriber[_FLICK_START_HANDLE] = null;
                                     }
-                            
+
                                     if (endHandle) {
                                         endHandle.detach();
                                         subscriber[_FLICK_END_HANDLE] = null;
                                     }
                                 },
-                            
+
                                 processArgs: function(args) {
                                     var params = (args.length &gt; 3) ? Y.merge(args.splice(3, 1)[0]) : {};
-                            
+
                                     if (!(MIN_VELOCITY in params)) {
                                         params[MIN_VELOCITY] = this.MIN_VELOCITY;
                                     }
-                            
+
                                     if (!(MIN_DISTANCE in params)) {
                                         params[MIN_DISTANCE] = this.MIN_DISTANCE;
                                     }
-                            
+
                                     if (!(PREVENT_DEFAULT in params)) {
                                         params[PREVENT_DEFAULT] = this.PREVENT_DEFAULT;
                                     }
-                            
+
                                     return params;
                                 },
-                            
+
                                 _onStart: function(e, node, subscriber, ce) {
-                            
+
                                     var start = true, // always true for mouse
                                         endHandle,
                                         moveHandle,
                                         doc,
                                         preventDefault = subscriber._extra.preventDefault,
                                         origE = e;
-                            
+
                                     if (e.touches) {
                                         start = (e.touches.length === 1);
                                         e = e.touches[0];
                                     }
-                            
+
                                     if (start) {
-                            
+
                                         if (preventDefault) {
                                             // preventDefault is a boolean or function
                                             if (!preventDefault.call || preventDefault(e)) {
                                                 origE.preventDefault();
                                             }
                                         }
-                            
+
                                         e.flick = {
                                             time : new Date().getTime()
                                         };
-                            
+
                                         subscriber[_FLICK_START] = e;
-                            
+
                                         endHandle = subscriber[_FLICK_END_HANDLE];
-                            
+
                                         doc = (node.get(NODE_TYPE) === 9) ? node : node.get(OWNER_DOCUMENT);
                                         if (!endHandle) {
                                             endHandle = doc.on(EVENT[END], Y.bind(this._onEnd, this), null, node, subscriber, ce);
                                             subscriber[_FLICK_END_HANDLE] = endHandle;
                                         }
-                            
+
                                         subscriber[_FLICK_MOVE_HANDLE] = doc.once(EVENT[MOVE], Y.bind(this._onMove, this), null, node, subscriber, ce);
                                     }
                                 },
-                            
+
                                 _onMove: function(e, node, subscriber, ce) {
                                     var start = subscriber[_FLICK_START];
-                            
+
                                     // Start timing from first move.
                                     if (start &amp;&amp; start.flick) {
                                         start.flick.time = new Date().getTime();
                                     }
                                 },
-                            
+
                                 _onEnd: function(e, node, subscriber, ce) {
-                            
+
                                     var endTime = new Date().getTime(),
                                         start = subscriber[_FLICK_START],
                                         valid = !!start,
@@ -1331,14 +1331,14 @@
                                         velocity,
                                         axis,
                                         moveHandle = subscriber[_FLICK_MOVE_HANDLE];
-                            
+
                                     if (moveHandle) {
                                         moveHandle.detach();
                                         delete subscriber[_FLICK_MOVE_HANDLE];
                                     }
-                            
+
                                     if (valid) {
-                            
+
                                         if (e.changedTouches) {
                                             if (e.changedTouches.length === 1 &amp;&amp; e.touches.length === 0) {
                                                 endEvent = e.changedTouches[0];
@@ -1346,39 +1346,39 @@
                                                 valid = false;
                                             }
                                         }
-                            
+
                                         if (valid) {
-                            
+
                                             params = subscriber._extra;
                                             preventDefault = params[PREVENT_DEFAULT];
-                            
+
                                             if (preventDefault) {
                                                 // preventDefault is a boolean or function
                                                 if (!preventDefault.call || preventDefault(e)) {
                                                     e.preventDefault();
                                                 }
                                             }
-                            
+
                                             startTime = start.flick.time;
                                             endTime = new Date().getTime();
                                             time = endTime - startTime;
-                            
+
                                             xyDistance = [
                                                 endEvent.pageX - start.pageX,
                                                 endEvent.pageY - start.pageY
                                             ];
-                            
+
                                             if (params.axis) {
                                                 axis = params.axis;
                                             } else {
                                                 axis = (Math.abs(xyDistance[0]) &gt;= Math.abs(xyDistance[1])) ? &#x27;x&#x27; : &#x27;y&#x27;;
                                             }
-                            
+
                                             distance = xyDistance[(axis === &#x27;x&#x27;) ? 0 : 1];
                                             velocity = (time !== 0) ? distance/time : 0;
-                            
+
                                             if (isFinite(velocity) &amp;&amp; (Math.abs(distance) &gt;= params[MIN_DISTANCE]) &amp;&amp; (Math.abs(velocity)  &gt;= params[MIN_VELOCITY])) {
-                            
+
                                                 e.type = &quot;flick&quot;;
                                                 e.flick = {
                                                     time:time,
@@ -1387,21 +1387,21 @@
                                                     axis: axis,
                                                     start : start
                                                 };
-                            
+
                                                 ce.fire(e);
-                            
+
                                             }
-                            
+
                                             subscriber[_FLICK_START] = null;
                                         }
                                     }
                                 },
-                            
+
                                 MIN_VELOCITY : 0,
                                 MIN_DISTANCE : 0,
                                 PREVENT_DEFAULT : false
                             });
-                            
+
                                 </pre>
                             </div>
                         </div>

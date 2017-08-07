@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/node/js/nodelist.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1139,7 +1139,7 @@
                              * @module node
                              * @submodule node-core
                              */
-                            
+
                             /**
                              * The NodeList class provides a wrapper for manipulating DOM NodeLists.
                              * NodeList properties can be accessed via the set/get methods.
@@ -1149,10 +1149,10 @@
                              * @constructor
                              * @param nodes {String|element|Node|Array} A selector, DOM element, Node, list of DOM elements, or list of Nodes with which to populate this NodeList.
                              */
-                            
+
                             var NodeList = function(nodes) {
                                 var tmp = [];
-                            
+
                                 if (nodes) {
                                     if (typeof nodes === &#x27;string&#x27;) { // selector query
                                         this._query = nodes;
@@ -1172,7 +1172,7 @@
                                         nodes = Y.Array(nodes, 0, true);
                                     }
                                 }
-                            
+
                                 /**
                                  * The underlying array of DOM nodes bound to the Y.NodeList instance
                                  * @property _nodes
@@ -1180,9 +1180,9 @@
                                  */
                                 this._nodes = nodes || [];
                             };
-                            
+
                             NodeList.NAME = &#x27;NodeList&#x27;;
-                            
+
                             /**
                              * Retrieves the DOM nodes bound to a NodeList instance
                              * @method getDOMNodes
@@ -1194,7 +1194,7 @@
                             NodeList.getDOMNodes = function(nodelist) {
                                 return (nodelist &amp;&amp; nodelist._nodes) ? nodelist._nodes : nodelist;
                             };
-                            
+
                             NodeList.each = function(instance, fn, context) {
                                 var nodes = instance._nodes;
                                 if (nodes &amp;&amp; nodes.length) {
@@ -1203,19 +1203,19 @@
                                     Y.log(&#x27;no nodes bound to &#x27; + this, &#x27;warn&#x27;, &#x27;NodeList&#x27;);
                                 }
                             };
-                            
+
                             NodeList.addMethod = function(name, fn, context) {
                                 if (name &amp;&amp; fn) {
                                     NodeList.prototype[name] = function() {
                                         var ret = [],
                                             args = arguments;
-                            
+
                                         Y.Array.each(this._nodes, function(node) {
                                             var UID = (node.uniqueID &amp;&amp; node.nodeType !== 9 ) ? &#x27;uniqueID&#x27; : &#x27;_yuid&#x27;,
                                                 instance = Y.Node._instances[node[UID]],
                                                 ctx,
                                                 result;
-                            
+
                                             if (!instance) {
                                                 instance = NodeList._getTempNode(node);
                                             }
@@ -1225,7 +1225,7 @@
                                                 ret[ret.length] = result;
                                             }
                                         });
-                            
+
                                         // TODO: remove tmp pointer
                                         return ret.length ? ret : this;
                                     };
@@ -1233,7 +1233,7 @@
                                     Y.log(&#x27;unable to add method: &#x27; + name + &#x27; to NodeList&#x27;, &#x27;warn&#x27;, &#x27;node&#x27;);
                                 }
                             };
-                            
+
                             /**
                              * Import the named method, or methods from the host onto NodeList.
                              *
@@ -1254,33 +1254,33 @@
                                     });
                                 }
                             };
-                            
+
                             NodeList._getTempNode = function(node) {
                                 var tmp = NodeList._tempNode;
                                 if (!tmp) {
                                     tmp = Y.Node.create(&#x27;&lt;div&gt;&lt;/div&gt;&#x27;);
                                     NodeList._tempNode = tmp;
                                 }
-                            
+
                                 tmp._node = node;
                                 tmp._stateProxy = node;
                                 return tmp;
                             };
-                            
+
                             Y.mix(NodeList.prototype, {
                                 _invoke: function(method, args, getter) {
                                     var ret = (getter) ? [] : this;
-                            
+
                                     this.each(function(node) {
                                         var val = node[method].apply(node, args);
                                         if (getter) {
                                             ret.push(val);
                                         }
                                     });
-                            
+
                                     return ret;
                                 },
-                            
+
                                 /**
                                  * Retrieves the Node instance at the given index.
                                  * @method item
@@ -1291,7 +1291,7 @@
                                 item: function(index) {
                                     return Y.one((this._nodes || [])[index]);
                                 },
-                            
+
                                 /**
                                  * Applies the given function to each Node in the NodeList.
                                  * @method each
@@ -1309,21 +1309,21 @@
                                     });
                                     return instance;
                                 },
-                            
+
                                 batch: function(fn, context) {
                                     var nodelist = this;
-                            
+
                                     Y.Array.each(this._nodes, function(node, index) {
                                         var instance = Y.Node._instances[node[UID]];
                                         if (!instance) {
                                             instance = NodeList._getTempNode(node);
                                         }
-                            
+
                                         return fn.call(context || instance, instance, index, nodelist);
                                     });
                                     return nodelist;
                                 },
-                            
+
                                 /**
                                  * Executes the function once for each node until a true value is returned.
                                  * @method some
@@ -1341,7 +1341,7 @@
                                         return fn.call(context, node, index, instance);
                                     });
                                 },
-                            
+
                                 /**
                                  * Creates a documenFragment from the nodes bound to the NodeList instance
                                  * @method toFrag
@@ -1350,7 +1350,7 @@
                                 toFrag: function() {
                                     return Y.one(Y.DOM._nl2frag(this._nodes));
                                 },
-                            
+
                                 /**
                                  * Returns the index of the node in the NodeList instance
                                  * or -1 if the node isn&#x27;t found.
@@ -1361,7 +1361,7 @@
                                 indexOf: function(node) {
                                     return Y.Array.indexOf(this._nodes, Y.Node.getDOMNode(node));
                                 },
-                            
+
                                 /**
                                  * Filters the NodeList instance down to only nodes matching the given selector.
                                  * @method filter
@@ -1372,8 +1372,8 @@
                                 filter: function(selector) {
                                     return Y.all(Y.Selector.filter(this._nodes, selector));
                                 },
-                            
-                            
+
+
                                 /**
                                  * Creates a new NodeList containing all nodes at every n indices, where
                                  * remainder n % index equals r.
@@ -1391,10 +1391,10 @@
                                             nodes.push(node);
                                         }
                                     });
-                            
+
                                     return Y.all(nodes);
                                 },
-                            
+
                                 /**
                                  * Creates a new NodeList containing all nodes at odd indices
                                  * (zero-based index).
@@ -1404,7 +1404,7 @@
                                 odd: function() {
                                     return this.modulus(2, 1);
                                 },
-                            
+
                                 /**
                                  * Creates a new NodeList containing all nodes at even indices
                                  * (zero-based index), including zero.
@@ -1414,10 +1414,10 @@
                                 even: function() {
                                     return this.modulus(2);
                                 },
-                            
+
                                 destructor: function() {
                                 },
-                            
+
                                 /**
                                  * Reruns the initial query, when created using a selector query
                                  * @method refresh
@@ -1428,20 +1428,20 @@
                                         nodes = this._nodes,
                                         query = this._query,
                                         root = this._queryRoot;
-                            
+
                                     if (query) {
                                         if (!root) {
                                             if (nodes &amp;&amp; nodes[0] &amp;&amp; nodes[0].ownerDocument) {
                                                 root = nodes[0].ownerDocument;
                                             }
                                         }
-                            
+
                                         this._nodes = Y.Selector.query(query, root);
                                     }
-                            
+
                                     return this;
                                 },
-                            
+
                                 /**
                                  * Returns the current number of items in the NodeList.
                                  * @method size
@@ -1450,7 +1450,7 @@
                                 size: function() {
                                     return this._nodes.length;
                                 },
-                            
+
                                 /**
                                  * Determines if the instance is bound to any nodes
                                  * @method isEmpty
@@ -1459,31 +1459,31 @@
                                 isEmpty: function() {
                                     return this._nodes.length &lt; 1;
                                 },
-                            
+
                                 toString: function() {
                                     var str = &#x27;&#x27;,
                                         errorMsg = this[UID] + &#x27;: not bound to any nodes&#x27;,
                                         nodes = this._nodes,
                                         node;
-                            
+
                                     if (nodes &amp;&amp; nodes[0]) {
                                         node = nodes[0];
                                         str += node[NODE_NAME];
                                         if (node.id) {
                                             str += &#x27;#&#x27; + node.id;
                                         }
-                            
+
                                         if (node.className) {
                                             str += &#x27;.&#x27; + node.className.replace(&#x27; &#x27;, &#x27;.&#x27;);
                                         }
-                            
+
                                         if (nodes.length &gt; 1) {
                                             str += &#x27;...[&#x27; + nodes.length + &#x27; items]&#x27;;
                                         }
                                     }
                                     return str || errorMsg;
                                 },
-                            
+
                                 /**
                                  * Returns the DOM node bound to the Node instance
                                  * @method getDOMNodes
@@ -1493,7 +1493,7 @@
                                     return this._nodes;
                                 }
                             }, true);
-                            
+
                             NodeList.importMethod(Y.Node.prototype, [
                                  /**
                                   * Called on each Node instance. Nulls internal node references,
@@ -1504,7 +1504,7 @@
                                   * @see Node.destroy
                                   */
                                 &#x27;destroy&#x27;,
-                            
+
                                  /**
                                   * Called on each Node instance. Removes and destroys all of the nodes
                                   * within the node
@@ -1513,7 +1513,7 @@
                                   * @see Node.empty
                                   */
                                 &#x27;empty&#x27;,
-                            
+
                                  /**
                                   * Called on each Node instance. Removes the node from its parent.
                                   * Shortcut for myNode.get(&#x27;parentNode&#x27;).removeChild(myNode);
@@ -1524,7 +1524,7 @@
                                   * @see Node.remove
                                   */
                                 &#x27;remove&#x27;,
-                            
+
                                  /**
                                   * Called on each Node instance. Sets an attribute on the Node instance.
                                   * Unless pre-configured (via Node.ATTRS), set hands
@@ -1539,10 +1539,10 @@
                                   */
                                 &#x27;set&#x27;
                             ]);
-                            
+
                             // one-off implementation to convert array of Nodes to NodeList
                             // e.g. Y.all(&#x27;input&#x27;).get(&#x27;parentNode&#x27;);
-                            
+
                             /** Called on each Node instance
                               * @method get
                               * @see Node
@@ -1554,7 +1554,7 @@
                                     getTemp = NodeList._getTempNode,
                                     instance,
                                     val;
-                            
+
                                 if (nodes[0]) {
                                     instance = Y.Node._instances[nodes[0]._yuid] || getTemp(nodes[0]);
                                     val = instance._get(attr);
@@ -1562,33 +1562,33 @@
                                         isNodeList = true;
                                     }
                                 }
-                            
+
                                 Y.Array.each(nodes, function(node) {
                                     instance = Y.Node._instances[node._yuid];
-                            
+
                                     if (!instance) {
                                         instance = getTemp(node);
                                     }
-                            
+
                                     val = instance._get(attr);
                                     if (!isNodeList) { // convert array of Nodes to NodeList
                                         val = Y.Node.scrubVal(val, instance);
                                     }
-                            
+
                                     ret.push(val);
                                 });
-                            
+
                                 return (isNodeList) ? Y.all(ret) : ret;
                             };
-                            
+
                             Y.NodeList = NodeList;
-                            
+
                             Y.all = function(nodes) {
                                 return new NodeList(nodes);
                             };
-                            
+
                             Y.Node.all = Y.all;
-                            
+
                                 </pre>
                             </div>
                         </div>

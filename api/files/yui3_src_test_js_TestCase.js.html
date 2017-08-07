@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/test/js/TestCase.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1143,44 +1143,44 @@
                              * @namespace Test
                              * @constructor
                              */
-                            
-                            
-                            
+
+
+
                             YUITest.TestCase = function (template) {
-                            
+
                                 /*
                                  * Special rules for the test case. Possible subobjects
                                  * are fail, for tests that should fail, and error, for
                                  * tests that should throw an error.
                                  */
                                 this._should = {};
-                            
+
                                 //copy over all properties from the template to this object
                                 for (var prop in template) {
                                     this[prop] = template[prop];
                                 }
-                            
+
                                 //check for a valid name
                                 if (typeof this.name != &quot;string&quot;) {
                                     this.name = YUITest.guid(&quot;testCase_&quot;);
                                 }
-                            
+
                             };
-                            
+
                             /**
                             Default delay for a test failure when &#x60;wait()&#x60; is called without a _delay_.
-                            
+
                             @property DEFAULT_WAIT
                             @type {Number}
                             @default 10000
                             @static
                             **/
                             YUITest.TestCase.DEFAULT_WAIT = 10000;
-                            
+
                             /**
                             Calls &#x60;YUITest.Assert.fail()&#x60; with a message indicating &#x60;wait()&#x60; was called,
                             but &#x60;resume()&#x60; was never called.
-                            
+
                             @method _waitTimeout
                             @static
                             @protected
@@ -1188,12 +1188,12 @@
                             YUITest.TestCase._waitTimeout = function () {
                                  YUITest.Assert.fail(&quot;Timeout: wait() called but resume() never called.&quot;);
                             };
-                            
+
                             YUITest.TestCase.prototype = {
-                            
+
                                 //restore constructor
                                 constructor: YUITest.TestCase,
-                            
+
                                 /**
                                  * Method to call from an async init method to
                                  * restart the test case. When called, returns a function
@@ -1204,7 +1204,7 @@
                                 callback: function(){
                                     return YUITest.TestRunner.callback.apply(YUITest.TestRunner,arguments);
                                 },
-                            
+
                                 /**
                                  * Resumes a paused test and runs the given function.
                                  * @param {Function} segment (Optional) The function to run.
@@ -1214,7 +1214,7 @@
                                 resume : function (segment) {
                                     YUITest.TestRunner.resume(segment);
                                 },
-                            
+
                                 /**
                                  * Causes the test case to wait a specified amount of time and then
                                  * continue executing the given code.
@@ -1228,18 +1228,18 @@
                                     delay = (typeof segment === &#x27;number&#x27;) ? segment :
                                             (typeof delay   === &#x27;number&#x27;) ? delay :
                                             YUITest.TestCase.DEFAULT_WAIT;
-                            
+
                                     if (typeof segment !== &#x27;function&#x27;) {
                                         segment = YUITest.TestCase._waitTimeout;
                                     }
-                            
+
                                     throw new YUITest.Wait(segment, delay);
                                 },
-                            
+
                                 /**
                                 Creates a callback that automatically resumes the test. Parameters as passed
                                 on to the callback.
-                            
+
                                 @method next
                                 @param {Function} callback Callback to call after resuming the test.
                                 @param {Object} [context] The value of &#x60;this&#x60; inside the callback.
@@ -1254,7 +1254,7 @@
                                     });
                                 });
                                 test.wait();
-                            
+
                                 // using test.next()
                                 Y.jsonp(uri, test.next(function (response) {
                                     Y.Assert.isObject(response);
@@ -1275,14 +1275,14 @@
                                         });
                                     };
                                 },
-                            
+
                                 /**
                                 Delays the current test until _condition_ returns a truthy value. If
                                 _condition_ fails to return a truthy value before _timeout_ milliseconds
                                 have passed, the test fails. Default _timeout_ is 10s.
-                            
+
                                 _condition_ will be executed every _increment_ milliseconds (default 100).
-                            
+
                                 @method waitFor
                                 @param {Function} condition Function executed to indicate whether to
                                                     execute _segment_
@@ -1296,30 +1296,30 @@
                                 waitFor: function (condition, segment, timeout, increment) {
                                     var self = this,
                                         endTime;
-                            
+
                                     if ((typeof condition !== &#x27;function&#x27;) ||
                                         (typeof segment !== &#x27;function&#x27;)) {
                                         self.fail(&#x27;waitFor() called with invalid parameters.&#x27;);
                                     }
-                            
+
                                     if (typeof timeout !== &#x27;number&#x27;) {
                                         timeout = YUITest.TestCase.DEFAULT_WAIT;
                                     }
-                            
+
                                     endTime = (+new Date()) + timeout;
-                            
+
                                     if (typeof increment !== &#x27;number&#x27;) {
                                         increment = 100;
                                     }
-                            
+
                                     self.wait(function () {
                                         var now;
-                            
+
                                         if (condition.call(self)) {
                                             segment.call(self);
                                         } else {
                                             now = (+new Date());
-                            
+
                                             if (now &gt; endTime) {
                                                 YUITest.TestCase._waitTimeout();
                                             } else {
@@ -1328,11 +1328,11 @@
                                         }
                                     }, increment);
                                 },
-                            
+
                                 //-------------------------------------------------------------------------
                                 // Assertion Methods
                                 //-------------------------------------------------------------------------
-                            
+
                                 /**
                                  * Asserts that a given condition is true. If not, then a YUITest.AssertionError object is thrown
                                  * and the test fails.
@@ -1346,7 +1346,7 @@
                                         throw new YUITest.AssertionError(YUITest.Assert._formatMessage(message, &quot;Assertion failed.&quot;));
                                     }
                                 },
-                            
+
                                 /**
                                  * Forces an assertion error to occur. Shortcut for YUITest.Assert.fail().
                                  * @method fail
@@ -1355,11 +1355,11 @@
                                 fail: function (message) {
                                     YUITest.Assert.fail(message);
                                 },
-                            
+
                                 //-------------------------------------------------------------------------
                                 // Stub Methods
                                 //-------------------------------------------------------------------------
-                            
+
                                 /**
                                  * Function to run once before tests start to run.
                                  * This executes before the first call to setUp().
@@ -1368,7 +1368,7 @@
                                 init: function(){
                                     //noop
                                 },
-                            
+
                                 /**
                                  * Function to run once after tests finish running.
                                  * This executes after the last call to tearDown().
@@ -1377,7 +1377,7 @@
                                 destroy: function(){
                                     //noop
                                 },
-                            
+
                                 /**
                                  * Function to run before each test is executed.
                                  * @method setUp
@@ -1385,7 +1385,7 @@
                                 setUp : function () {
                                     //noop
                                 },
-                            
+
                                 /**
                                  * Function to run after each test is executed.
                                  * @method tearDown
@@ -1394,7 +1394,7 @@
                                     //noop
                                 }
                             };
-                            
+
                                 </pre>
                             </div>
                         </div>

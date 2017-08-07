@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/event/js/event-facade-dom.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1140,7 +1140,7 @@
                              * @module event
                              * @submodule event-base
                              */
-                            
+
                             /**
                              * Wraps a DOM event, properties requiring browser abstraction are
                              * fixed here.  Provids a security layer when required.
@@ -1149,11 +1149,11 @@
                              * @param currentTarget {HTMLElement} the element the listener was attached to
                              * @param wrapper {CustomEvent} the custom event wrapper for this DOM event
                              */
-                            
+
                                 var ua = Y.UA,
-                            
+
                                 EMPTY = {},
-                            
+
                                 /**
                                  * webkit key remapping required for Safari &lt; 3.1
                                  * @property webkitKeymap
@@ -1172,7 +1172,7 @@
                                     63273: 36, // home
                                     63275: 35  // end
                                 },
-                            
+
                                 /**
                                  * Returns a wrapped node.  Intended to be used on event targets,
                                  * so it will return the node&#x27;s parent if the target is a text
@@ -1200,30 +1200,30 @@
                                     } catch(e) {
                                         return null;
                                     }
-                            
+
                                     return Y.one(n);
                                 },
-                            
+
                                 DOMEventFacade = function(ev, currentTarget, wrapper) {
                                     this._event = ev;
                                     this._currentTarget = currentTarget;
                                     this._wrapper = wrapper || EMPTY;
-                            
+
                                     // if not lazy init
                                     this.init();
                                 };
-                            
+
                             Y.extend(DOMEventFacade, Object, {
-                            
+
                                 init: function() {
-                            
+
                                     var e = this._event,
                                         overrides = this._wrapper.overrides,
                                         x = e.pageX,
                                         y = e.pageY,
                                         c,
                                         currentTarget = this._currentTarget;
-                            
+
                                     this.altKey   = e.altKey;
                                     this.ctrlKey  = e.ctrlKey;
                                     this.metaKey  = e.metaKey;
@@ -1231,10 +1231,10 @@
                                     this.type     = (overrides &amp;&amp; overrides.type) || e.type;
                                     this.clientX  = e.clientX;
                                     this.clientY  = e.clientY;
-                            
+
                                     this.pageX = x;
                                     this.pageY = y;
-                            
+
                                     // charCode is unknown in keyup, keydown. keyCode is unknown in keypress.
                                     // FF 3.6 - 8+? pass 0 for keyCode in keypress events.
                                     // Webkit, FF 3.6-8+?, and IE9+? pass 0 for charCode in keydown, keyup.
@@ -1248,11 +1248,11 @@
                                     // known code for that key event phase. e.keyCode is often different in
                                     // keypress from keydown and keyup.
                                     c = e.keyCode || e.charCode;
-                            
+
                                     if (ua.webkit &amp;&amp; (c in webkitKeymap)) {
                                         c = webkitKeymap[c];
                                     }
-                            
+
                                     this.keyCode = c;
                                     this.charCode = c;
                                     // Fill in e.which for IE - implementers should always use this over
@@ -1260,26 +1260,26 @@
                                     this.which = e.which || e.charCode || c;
                                     // this.button = e.button;
                                     this.button = this.which;
-                            
+
                                     this.target = resolve(e.target);
                                     this.currentTarget = resolve(currentTarget);
                                     this.relatedTarget = resolve(e.relatedTarget);
-                            
+
                                     if (e.type == &quot;mousewheel&quot; || e.type == &quot;DOMMouseScroll&quot;) {
                                         this.wheelDelta = (e.detail) ? (e.detail * -1) : Math.round(e.wheelDelta / 80) || ((e.wheelDelta &lt; 0) ? -1 : 1);
                                     }
-                            
+
                                     if (this._touch) {
                                         this._touch(e, currentTarget, this._wrapper);
                                     }
                                 },
-                            
+
                                 stopPropagation: function() {
                                     this._event.stopPropagation();
                                     this._wrapper.stopped = 1;
                                     this.stopped = 1;
                                 },
-                            
+
                                 stopImmediatePropagation: function() {
                                     var e = this._event;
                                     if (e.stopImmediatePropagation) {
@@ -1290,7 +1290,7 @@
                                     this._wrapper.stopped = 2;
                                     this.stopped = 2;
                                 },
-                            
+
                                 preventDefault: function(returnValue) {
                                     var e = this._event;
                                     e.preventDefault();
@@ -1300,152 +1300,152 @@
                                     this._wrapper.prevented = 1;
                                     this.prevented = 1;
                                 },
-                            
+
                                 halt: function(immediate) {
                                     if (immediate) {
                                         this.stopImmediatePropagation();
                                     } else {
                                         this.stopPropagation();
                                     }
-                            
+
                                     this.preventDefault();
                                 }
-                            
+
                             });
-                            
+
                             DOMEventFacade.resolve = resolve;
                             Y.DOM2EventFacade = DOMEventFacade;
                             Y.DOMEventFacade = DOMEventFacade;
-                            
+
                                 /**
                                  * The native event
                                  * @property _event
                                  * @type {DOMEvent}
                                  * @private
                                  */
-                            
+
                                 /**
                                 The name of the event (e.g. &quot;click&quot;)
-                            
+
                                 @property type
                                 @type {String}
                                 **/
-                            
+
                                 /**
                                 &#x60;true&#x60; if the &quot;alt&quot; or &quot;option&quot; key is pressed.
-                            
+
                                 @property altKey
                                 @type {Boolean}
                                 **/
-                            
+
                                 /**
                                 &#x60;true&#x60; if the shift key is pressed.
-                            
+
                                 @property shiftKey
                                 @type {Boolean}
                                 **/
-                            
+
                                 /**
                                 &#x60;true&#x60; if the &quot;Windows&quot; key on a Windows keyboard, &quot;command&quot; key on an
                                 Apple keyboard, or &quot;meta&quot; key on other keyboards is pressed.
-                            
+
                                 @property metaKey
                                 @type {Boolean}
                                 **/
-                            
+
                                 /**
                                 &#x60;true&#x60; if the &quot;Ctrl&quot; or &quot;control&quot; key is pressed.
-                            
+
                                 @property ctrlKey
                                 @type {Boolean}
                                 **/
-                            
+
                                 /**
                                  * The X location of the event on the page (including scroll)
                                  * @property pageX
                                  * @type {Number}
                                  */
-                            
+
                                 /**
                                  * The Y location of the event on the page (including scroll)
                                  * @property pageY
                                  * @type {Number}
                                  */
-                            
+
                                 /**
                                  * The X location of the event in the viewport
                                  * @property clientX
                                  * @type {Number}
                                  */
-                            
+
                                 /**
                                  * The Y location of the event in the viewport
                                  * @property clientY
                                  * @type {Number}
                                  */
-                            
+
                                 /**
                                  * The keyCode for key events.  Uses charCode if keyCode is not available
                                  * @property keyCode
                                  * @type {Number}
                                  */
-                            
+
                                 /**
                                  * The charCode for key events.  Same as keyCode
                                  * @property charCode
                                  * @type {Number}
                                  */
-                            
+
                                 /**
                                  * The button that was pushed. 1 for left click, 2 for middle click, 3 for
                                  * right click.  This is only reliably populated on &#x60;mouseup&#x60; events.
                                  * @property button
                                  * @type {Number}
                                  */
-                            
+
                                 /**
                                  * The button that was pushed.  Same as button.
                                  * @property which
                                  * @type {Number}
                                  */
-                            
+
                                 /**
                                  * Node reference for the targeted element
                                  * @property target
                                  * @type {Node}
                                  */
-                            
+
                                 /**
                                  * Node reference for the element that the listener was attached to.
                                  * @property currentTarget
                                  * @type {Node}
                                  */
-                            
+
                                 /**
                                  * Node reference to the relatedTarget
                                  * @property relatedTarget
                                  * @type {Node}
                                  */
-                            
+
                                 /**
                                  * Number representing the direction and velocity of the movement of the mousewheel.
                                  * Negative is down, the higher the number, the faster.  Applies to the mousewheel event.
                                  * @property wheelDelta
                                  * @type {Number}
                                  */
-                            
+
                                 /**
                                  * Stops the propagation to the next bubble target
                                  * @method stopPropagation
                                  */
-                            
+
                                 /**
                                  * Stops the propagation to the next bubble target and
                                  * prevents any additional listeners from being exectued
                                  * on the current target.
                                  * @method stopImmediatePropagation
                                  */
-                            
+
                                 /**
                                  * Prevents the event&#x27;s default behavior
                                  * @method preventDefault
@@ -1453,7 +1453,7 @@
                                  * (rather than the default false value).  This can be used to add a customized
                                  * confirmation query to the beforeunload event).
                                  */
-                            
+
                                 /**
                                  * Stops the event propagation and prevents the default
                                  * event behavior.
@@ -1461,7 +1461,7 @@
                                  * @param immediate {boolean} if true additional listeners
                                  * on the current target will not be executed
                                  */
-                            
+
                                 </pre>
                             </div>
                         </div>

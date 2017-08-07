@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/recordset/js/recordset-sort.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1139,26 +1139,26 @@
                              * @module recordset
                              * @submodule recordset-sort
                              */
-                            
+
                             var Compare = Y.ArraySort.compare,
                             isValue = Y.Lang.isValue;
-                            
+
                             /**
                              * Plugin that adds default and custom sorting functionality to the Recordset utility
                              * @class RecordsetSort
                              */
-                            
+
                             function RecordsetSort(field, desc, sorter) {
                                 RecordsetSort.superclass.constructor.apply(this, arguments);
                             }
-                            
+
                             Y.mix(RecordsetSort, {
                                 NS: &quot;sort&quot;,
-                            
+
                                 NAME: &quot;recordsetSort&quot;,
-                            
+
                                 ATTRS: {
-                            
+
                                     /**
                                     * @description The last properties used to sort. Consists of an object literal with the keys &quot;field&quot;, &quot;desc&quot;, and &quot;sorter&quot;
                                     *
@@ -1176,7 +1176,7 @@
                                             return (isValue(v.field) &amp;&amp; isValue(v.desc) &amp;&amp; isValue(v.sorter));
                                         }
                                     },
-                            
+
                                     /**
                                     * @description Default sort function to use if none is specified by the user.
                                     * Takes two records, the key to sort by, and whether sorting direction is descending or not (boolean).
@@ -1197,7 +1197,7 @@
                                             }
                                         }
                                     },
-                            
+
                                     /**
                                     * @description A boolean telling if the recordset is in a sorted state.
                                     *
@@ -1210,9 +1210,9 @@
                                     }
                                 }
                             });
-                            
+
                             Y.extend(RecordsetSort, Y.Plugin.Base, {
-                            
+
                                 /**
                                  * @description Sets up the default function to use when the &quot;sort&quot; event is fired.
                                  *
@@ -1220,22 +1220,22 @@
                                  * @protected
                                  */
                                 initializer: function(config) {
-                            
+
                                     var self = this,
                                     host = this.get(&#x27;host&#x27;);
-                            
-                            
+
+
                                     this.publish(&quot;sort&quot;, {
                                         defaultFn: Y.bind(&quot;_defSortFn&quot;, this)
                                     });
-                            
+
                                     //Toggle the isSorted ATTR based on events.
                                     //Remove events dont affect isSorted, as they are just popped/sliced out
                                     this.on(&quot;sort&quot;,
                                     function() {
                                         self.set(&#x27;isSorted&#x27;, true);
                                     });
-                            
+
                                     this.onHostEvent(&#x27;add&#x27;,
                                     function() {
                                         self.set(&#x27;isSorted&#x27;, false);
@@ -1246,12 +1246,12 @@
                                         self.set(&#x27;isSorted&#x27;, false);
                                     },
                                     host);
-                            
+
                                 },
-                            
+
                                 destructor: function(config) {
                                     },
-                            
+
                                 /**
                                  * @description Method that all sort calls go through.
                                  * Sets up the lastSortProperties object with the details of the sort, and passes in parameters
@@ -1265,10 +1265,10 @@
                                     this.get(&quot;host&quot;)._items.sort(function(a, b) {
                                         return (e.sorter)(a, b, e.field, e.desc);
                                     });
-                            
+
                                     this.set(&#x27;lastSortProperties&#x27;, e);
                                 },
-                            
+
                                 /**
                                  * @description Sorts the recordset.
                                  *
@@ -1284,7 +1284,7 @@
                                         sorter: sorter || this.get(&quot;defaultSorter&quot;)
                                     });
                                 },
-                            
+
                                 /**
                                  * @description Resorts the recordset based on the last-used sort parameters (stored in &#x27;lastSortProperties&#x27; ATTR)
                                  *
@@ -1299,7 +1299,7 @@
                                         sorter: p.sorter || this.get(&quot;defaultSorter&quot;)
                                     });
                                 },
-                            
+
                                 /**
                                  * @description Reverses the recordset calling the standard array.reverse() method.
                                  *
@@ -1309,7 +1309,7 @@
                                 reverse: function() {
                                     this.get(&#x27;host&#x27;)._items.reverse();
                                 },
-                            
+
                                 /**
                                  * @description Sorts the recordset based on the last-used sort parameters, but flips the order. (ie: Descending becomes ascending, and vice versa).
                                  *
@@ -1318,7 +1318,7 @@
                                  */
                                 flip: function() {
                                     var p = this.get(&#x27;lastSortProperties&#x27;);
-                            
+
                                     //If a predefined field is not provided by which to sort by, throw an error
                                     if (isValue(p.field)) {
                                         this.fire(&quot;sort&quot;, {
@@ -1332,10 +1332,10 @@
                                     }
                                 }
                             });
-                            
+
                             Y.namespace(&quot;Plugin&quot;).RecordsetSort = RecordsetSort;
-                            
-                            
+
+
                                 </pre>
                             </div>
                         </div>

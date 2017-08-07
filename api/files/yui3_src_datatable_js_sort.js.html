@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,22 +1122,22 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/datatable/js/sort.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
                             Adds support for sorting the table data by API methods &#x60;table.sort(...)&#x60; or
                             &#x60;table.toggleSort(...)&#x60; or by clicking on column headers in the rendered UI.
-                            
+
                             @module datatable
                             @submodule datatable-sort
                             @since 3.5.0
@@ -1147,44 +1147,44 @@
                                 isString  = YLang.isString,
                                 isArray   = YLang.isArray,
                                 isObject  = YLang.isObject,
-                            
+
                                 toArray = Y.Array,
                                 sub     = YLang.sub,
-                            
+
                                 dirMap = {
                                     asc : 1,
                                     desc: -1,
                                     &quot;1&quot; : 1,
                                     &quot;-1&quot;: -1
                                 };
-                            
-                            
+
+
                             /**
                             _API docs for this extension are included in the DataTable class._
-                            
+
                             This DataTable class extension adds support for sorting the table data by API
                             methods &#x60;table.sort(...)&#x60; or &#x60;table.toggleSort(...)&#x60; or by clicking on column
                             headers in the rendered UI.
-                            
+
                             Sorting by the API is enabled automatically when this module is &#x60;use()&#x60;d.  To
                             enable UI triggered sorting, set the DataTable&#x27;s &#x60;sortable&#x60; attribute to
                             &#x60;true&#x60;.
-                            
+
                             &lt;pre&gt;&lt;code&gt;
                             var table = new Y.DataTable({
                                 columns: [ &#x27;id&#x27;, &#x27;username&#x27;, &#x27;name&#x27;, &#x27;birthdate&#x27; ],
                                 data: [ ... ],
                                 sortable: true
                             });
-                            
+
                             table.render(&#x27;#table&#x27;);
                             &lt;/code&gt;&lt;/pre&gt;
-                            
+
                             Setting &#x60;sortable&#x60; to &#x60;true&#x60; will enable UI sorting for all columns.  To enable
                             UI sorting for certain columns only, set &#x60;sortable&#x60; to an array of column keys,
                             or just add &#x60;sortable: true&#x60; to the respective column configuration objects.
                             This uses the default setting of &#x60;sortable: auto&#x60; for the DataTable instance.
-                            
+
                             &lt;pre&gt;&lt;code&gt;
                             var table = new Y.DataTable({
                                 columns: [
@@ -1196,7 +1196,7 @@
                                 data: [ ... ]
                                 // sortable: &#x27;auto&#x27; is the default
                             });
-                            
+
                             // OR
                             var table = new Y.DataTable({
                                 columns: [ &#x27;id&#x27;, &#x27;username&#x27;, &#x27;name&#x27;, &#x27;birthdate&#x27; ],
@@ -1204,57 +1204,57 @@
                                 sortable: [ &#x27;username&#x27;, &#x27;name&#x27;, &#x27;birthdate&#x27; ]
                             });
                             &lt;/code&gt;&lt;/pre&gt;
-                            
+
                             To disable UI sorting for all columns, set &#x60;sortable&#x60; to &#x60;false&#x60;.  This still
                             permits sorting via the API methods.
-                            
+
                             As new records are inserted into the table&#x27;s &#x60;data&#x60; ModelList, they will be inserted at the correct index to preserve the sort order.
-                            
+
                             The current sort order is stored in the &#x60;sortBy&#x60; attribute.  Assigning this value at instantiation will automatically sort your data.
-                            
+
                             Sorting is done by a simple value comparison using &amp;lt; and &amp;gt; on the field
                             value.  If you need custom sorting, add a sort function in the column&#x27;s
                             &#x60;sortFn&#x60; property.  Columns whose content is generated by formatters, but don&#x27;t
                             relate to a single &#x60;key&#x60;, require a &#x60;sortFn&#x60; to be sortable.
-                            
+
                             &lt;pre&gt;&lt;code&gt;
                             function nameSort(a, b, desc) {
                                 var aa = a.get(&#x27;lastName&#x27;) + a.get(&#x27;firstName&#x27;),
                                     bb = a.get(&#x27;lastName&#x27;) + b.get(&#x27;firstName&#x27;),
                                     order = (aa &gt; bb) ? 1 : -(aa &lt; bb);
-                            
+
                                 return desc ? -order : order;
                             }
-                            
+
                             var table = new Y.DataTable({
                                 columns: [ &#x27;id&#x27;, &#x27;username&#x27;, { key: name, sortFn: nameSort }, &#x27;birthdate&#x27; ],
                                 data: [ ... ],
                                 sortable: [ &#x27;username&#x27;, &#x27;name&#x27;, &#x27;birthdate&#x27; ]
                             });
                             &lt;/code&gt;&lt;/pre&gt;
-                            
+
                             See the user guide for more details.
-                            
+
                             @class DataTable.Sortable
                             @for DataTable
                             @since 3.5.0
                             **/
                             function Sortable() {}
-                            
+
                             Sortable.ATTRS = {
                                 // Which columns in the UI should suggest and respond to sorting interaction
                                 // pass an empty array if no UI columns should show sortable, but you want the
                                 // table.sort(...) API
                                 /**
                                 Controls which column headers can trigger sorting by user clicks.
-                            
+
                                 Acceptable values are:
-                            
+
                                  * &quot;auto&quot; - (default) looks for &#x60;sortable: true&#x60; in the column configurations
                                  * &#x60;true&#x60; - all columns are enabled
                                  * &#x60;false - no UI sortable is enabled
                                  * {String[]} - array of key names to give sortable headers
-                            
+
                                 @attribute sortable
                                 @type {String|String[]|Boolean}
                                 @default &quot;auto&quot;
@@ -1264,16 +1264,16 @@
                                     value: &#x27;auto&#x27;,
                                     validator: &#x27;_validateSortable&#x27;
                                 },
-                            
+
                                 /**
                                 The current sort configuration to maintain in the data.
-                            
+
                                 Accepts column &#x60;key&#x60; strings or objects with a single property, the column
                                 &#x60;key&#x60;, with a value of 1, -1, &quot;asc&quot;, or &quot;desc&quot;.  E.g. &#x60;{ username: &#x27;asc&#x27;
                                 }&#x60;.  String values are assumed to be ascending.
-                            
+
                                 Example values would be:
-                            
+
                                  * &#x60;&quot;username&quot;&#x60; - sort by the data&#x27;s &#x60;username&#x60; field or the &#x60;key&#x60;
                                    associated to a column with that &#x60;name&#x60;.
                                  * &#x60;{ username: &quot;desc&quot; }&#x60; - sort by &#x60;username&#x60; in descending order.
@@ -1283,7 +1283,7 @@
                                    Array can have as many items as you want.
                                  * &#x60;[{ lastName: -1 }, &quot;firstName&quot;]&#x60; - descending sort by &#x60;lastName&#x60;,
                                    ascending subsort by &#x60;firstName&#x60;. Mixed types are ok.
-                            
+
                                 @attribute sortBy
                                 @type {String|String[]|Object|Object[]}
                                 @since 3.5.0
@@ -1292,10 +1292,10 @@
                                     validator: &#x27;_validateSortBy&#x27;,
                                     getter: &#x27;_getSortBy&#x27;
                                 },
-                            
+
                                 /**
                                 Strings containing language for sorting tooltips.
-                            
+
                                 @attribute strings
                                 @type {Object}
                                 @default (strings for current lang configured in the YUI instance config)
@@ -1303,19 +1303,19 @@
                                 **/
                                 strings: {}
                             };
-                            
+
                             Y.mix(Sortable.prototype, {
-                            
+
                                 /**
                                 Sort the data in the &#x60;data&#x60; ModelList and refresh the table with the new
                                 order.
-                            
+
                                 Acceptable values for &#x60;fields&#x60; are &#x60;key&#x60; strings or objects with a single
                                 property, the column &#x60;key&#x60;, with a value of 1, -1, &quot;asc&quot;, or &quot;desc&quot;.  E.g.
                                 &#x60;{ username: &#x27;asc&#x27; }&#x60;.  String values are assumed to be ascending.
-                            
+
                                 Example values would be:
-                            
+
                                  * &#x60;&quot;username&quot;&#x60; - sort by the data&#x27;s &#x60;username&#x60; field or the &#x60;key&#x60;
                                    associated to a column with that &#x60;name&#x60;.
                                  * &#x60;{ username: &quot;desc&quot; }&#x60; - sort by &#x60;username&#x60; in descending order.
@@ -1325,7 +1325,7 @@
                                    Array can have as many items as you want.
                                  * &#x60;[{ lastName: -1 }, &quot;firstName&quot;]&#x60; - descending sort by &#x60;lastName&#x60;,
                                    ascending subsort by &#x60;firstName&#x60;. Mixed types are ok.
-                            
+
                                 @method sort
                                 @param {String|String[]|Object|Object[]} fields The field(s) to sort by
                                 @param {Object} [payload] Extra &#x60;sort&#x60; event payload you want to send along
@@ -1337,11 +1337,11 @@
                                     /**
                                     Notifies of an impending sort, either from clicking on a column
                                     header, or from a call to the &#x60;sort&#x60; or &#x60;toggleSort&#x60; method.
-                            
+
                                     The requested sort is available in the &#x60;sortBy&#x60; property of the event.
-                            
+
                                     The default behavior of this event sets the table&#x27;s &#x60;sortBy&#x60; attribute.
-                            
+
                                     @event sort
                                     @param {String|String[]|Object|Object[]} sortBy The requested sort
                                     @preventable _defSortFn
@@ -1350,25 +1350,25 @@
                                         sortBy: fields || this.get(&#x27;sortBy&#x27;)
                                     }));
                                 },
-                            
+
                                 /**
                                 Template for the node that will wrap the header content for sortable
                                 columns.
-                            
+
                                 @property SORTABLE_HEADER_TEMPLATE
                                 @type {String}
                                 @value &#x27;&lt;div class=&quot;{className}&quot; tabindex=&quot;0&quot;&gt;&lt;span class=&quot;{indicatorClass}&quot;&gt;&lt;/span&gt;&lt;/div&gt;&#x27;
                                 @since 3.5.0
                                 **/
                                 SORTABLE_HEADER_TEMPLATE: &#x27;&lt;div class=&quot;{className}&quot; tabindex=&quot;0&quot; unselectable=&quot;on&quot;&gt;&lt;span class=&quot;{indicatorClass}&quot;&gt;&lt;/span&gt;&lt;/div&gt;&#x27;,
-                            
+
                                 /**
                                 Reverse the current sort direction of one or more fields currently being
                                 sorted by.
-                            
+
                                 Pass the &#x60;key&#x60; of the column or columns you want the sort order reversed
                                 for.
-                            
+
                                 @method toggleSort
                                 @param {String|String[]} fields The field(s) to reverse sort order for
                                 @param {Object} [payload] Extra &#x60;sort&#x60; event payload you want to send along
@@ -1380,21 +1380,21 @@
                                     var current = this._sortBy,
                                         sortBy = [],
                                         i, len, j, col, index;
-                            
+
                                     // To avoid updating column configs or sortBy directly
                                     for (i = 0, len = current.length; i &lt; len; ++i) {
                                         col = {};
                                         col[current[i]._id] = current[i].sortDir;
                                         sortBy.push(col);
                                     }
-                            
+
                                     if (columns) {
                                         columns = toArray(columns);
-                            
+
                                         for (i = 0, len = columns.length; i &lt; len; ++i) {
                                             col = columns[i];
                                             index = -1;
-                            
+
                                             for (j = sortBy.length - 1; i &gt;= 0; --i) {
                                                 if (sortBy[j][col]) {
                                                     sortBy[j][col] *= -1;
@@ -1412,18 +1412,18 @@
                                             }
                                         }
                                     }
-                            
+
                                     return this.fire(&#x27;sort&#x27;, Y.merge((payload || {}), {
                                         sortBy: sortBy
                                     }));
                                 },
-                            
+
                                 //--------------------------------------------------------------------------
                                 // Protected properties and methods
                                 //--------------------------------------------------------------------------
                                 /**
                                 Sorts the &#x60;data&#x60; ModelList based on the new &#x60;sortBy&#x60; configuration.
-                            
+
                                 @method _afterSortByChange
                                 @param {EventFacade} e The &#x60;sortByChange&#x60; event
                                 @protected
@@ -1435,21 +1435,21 @@
                                     // from Core&#x27;s initializer.  So construction-time assignment would
                                     // fail.
                                     this._setSortBy();
-                            
+
                                     // Don&#x27;t sort unless sortBy has been set
                                     if (this._sortBy.length) {
                                         if (!this.data.comparator) {
                                              this.data.comparator = this._sortComparator;
                                         }
-                            
+
                                         this.data.sort();
                                     }
                                 },
-                            
+
                                 /**
                                 Applies the sorting logic to the new ModelList if the &#x60;newVal&#x60; is a new
                                 ModelList.
-                            
+
                                 @method _afterSortDataChange
                                 @param {EventFacade} e the &#x60;dataChange&#x60; event
                                 @protected
@@ -1464,11 +1464,11 @@
                                         this._initSortFn();
                                     }
                                 },
-                            
+
                                 /**
                                 Checks if any of the fields in the modified record are fields that are
                                 currently being sorted by, and if so, resorts the &#x60;data&#x60; ModelList.
-                            
+
                                 @method _afterSortRecordChange
                                 @param {EventFacade} e The Model&#x27;s &#x60;change&#x60; event
                                 @protected
@@ -1476,7 +1476,7 @@
                                 **/
                                 _afterSortRecordChange: function (e) {
                                     var i, len;
-                            
+
                                     for (i = 0, len = this._sortBy.length; i &lt; len; ++i) {
                                         if (e.changed[this._sortBy[i].key]) {
                                             this.data.sort();
@@ -1484,34 +1484,34 @@
                                         }
                                     }
                                 },
-                            
+
                                 /**
                                 Subscribes to state changes that warrant updating the UI, and adds the
                                 click handler for triggering the sort operation from the UI.
-                            
+
                                 @method _bindSortUI
                                 @protected
                                 @since 3.5.0
                                 **/
                                 _bindSortUI: function () {
                                     var handles = this._eventHandles;
-                            
+
                                     if (!handles.sortAttrs) {
                                         handles.sortAttrs = this.after(
                                             [&#x27;sortableChange&#x27;, &#x27;sortByChange&#x27;, &#x27;columnsChange&#x27;],
                                             Y.bind(&#x27;_uiSetSortable&#x27;, this));
                                     }
-                            
+
                                     if (!handles.sortUITrigger &amp;&amp; this._theadNode) {
                                         handles.sortUITrigger = this.delegate([&#x27;click&#x27;,&#x27;keydown&#x27;],
                                             Y.rbind(&#x27;_onUITriggerSort&#x27;, this),
                                             &#x27;.&#x27; + this.getClassName(&#x27;sortable&#x27;, &#x27;column&#x27;));
                                     }
                                 },
-                            
+
                                 /**
                                 Sets the &#x60;sortBy&#x60; attribute from the &#x60;sort&#x60; event&#x27;s &#x60;e.sortBy&#x60; value.
-                            
+
                                 @method _defSortFn
                                 @param {EventFacade} e The &#x60;sort&#x60; event
                                 @protected
@@ -1520,30 +1520,30 @@
                                 _defSortFn: function (e) {
                                     this.set.apply(this, [&#x27;sortBy&#x27;, e.sortBy].concat(e.details));
                                 },
-                            
+
                                 /**
                                 Getter for the &#x60;sortBy&#x60; attribute.
-                            
+
                                 Supports the special subattribute &quot;sortBy.state&quot; to get a normalized JSON
                                 version of the current sort state.  Otherwise, returns the last assigned
                                 value.
-                            
+
                                 For example:
-                            
+
                                 &lt;pre&gt;&lt;code&gt;var table = new Y.DataTable({
                                     columns: [ ... ],
                                     data: [ ... ],
                                     sortBy: &#x27;username&#x27;
                                 });
-                            
+
                                 table.get(&#x27;sortBy&#x27;); // &#x27;username&#x27;
                                 table.get(&#x27;sortBy.state&#x27;); // { key: &#x27;username&#x27;, dir: 1 }
-                            
+
                                 table.sort([&#x27;lastName&#x27;, { firstName: &quot;desc&quot; }]);
                                 table.get(&#x27;sortBy&#x27;); // [&#x27;lastName&#x27;, { firstName: &quot;desc&quot; }]
                                 table.get(&#x27;sortBy.state&#x27;); // [{ key: &quot;lastName&quot;, dir: 1 }, { key: &quot;firstName&quot;, dir: -1 }]
                                 &lt;/code&gt;&lt;/pre&gt;
-                            
+
                                 @method _getSortBy
                                 @param {String|String[]|Object|Object[]} val The current sortBy value
                                 @param {String} detail String passed to &#x60;get(HERE)&#x60;. to parse subattributes
@@ -1552,14 +1552,14 @@
                                 **/
                                 _getSortBy: function (val, detail) {
                                     var state, i, len, col;
-                            
+
                                     // &quot;sortBy.&quot; is 7 characters. Used to catch
                                     detail = detail.slice(7);
-                            
+
                                     // TODO: table.get(&#x27;sortBy.asObject&#x27;)? table.get(&#x27;sortBy.json&#x27;)?
                                     if (detail === &#x27;state&#x27;) {
                                         state = [];
-                            
+
                                         for (i = 0, len = this._sortBy.length; i &lt; len; ++i) {
                                             col = this._sortBy[i];
                                             state.push({
@@ -1567,33 +1567,33 @@
                                                 dir: col.sortDir
                                             });
                                         }
-                            
+
                                         // TODO: Always return an array?
                                         return { state: (state.length === 1) ? state[0] : state };
                                     } else {
                                         return val;
                                     }
                                 },
-                            
+
                                 /**
                                 Sets up the initial sort state and instance properties.  Publishes events
                                 and subscribes to attribute change events to maintain internal state.
-                            
+
                                 @method initializer
                                 @protected
                                 @since 3.5.0
                                 **/
                                 initializer: function () {
                                     var boundParseSortable = Y.bind(&#x27;_parseSortable&#x27;, this);
-                            
+
                                     this._parseSortable();
-                            
+
                                     this._setSortBy();
-                            
+
                                     this._initSortFn();
-                            
+
                                     this._initSortStrings();
-                            
+
                                     this.after({
                                         &#x27;table:renderHeader&#x27;: Y.bind(&#x27;_renderSortable&#x27;, this),
                                         dataChange          : Y.bind(&#x27;_afterSortDataChange&#x27;, this),
@@ -1603,24 +1603,24 @@
                                     });
                                     this.data.after(this.data.model.NAME + &quot;:change&quot;,
                                         Y.bind(&#x27;_afterSortRecordChange&#x27;, this));
-                            
+
                                     // TODO: this event needs magic, allowing async remote sorting
                                     this.publish(&#x27;sort&#x27;, {
                                         defaultFn: Y.bind(&#x27;_defSortFn&#x27;, this)
                                     });
                                 },
-                            
+
                                 /**
                                 Creates a &#x60;_compare&#x60; function for the &#x60;data&#x60; ModelList to allow custom
                                 sorting by multiple fields.
-                            
+
                                 @method _initSortFn
                                 @protected
                                 @since 3.5.0
                                 **/
                                 _initSortFn: function () {
                                     var self = this;
-                            
+
                                     // TODO: This should be a ModelList extension.
                                     // FIXME: Modifying a component of the host seems a little smelly
                                     // FIXME: Declaring inline override to leverage closure vs
@@ -1630,12 +1630,12 @@
                                     this.data._compare = function (a, b) {
                                         var cmp = 0,
                                             i, len, col, dir, cs, aa, bb;
-                            
+
                                         for (i = 0, len = self._sortBy.length; !cmp &amp;&amp; i &lt; len; ++i) {
                                             col = self._sortBy[i];
                                             dir = col.sortDir,
                                             cs = col.caseSensitive;
-                            
+
                                             if (col.sortFn) {
                                                 cmp = col.sortFn(a, b, (dir === -1));
                                             } else {
@@ -1649,13 +1649,13 @@
                                                 cmp = (aa &gt; bb) ? dir : ((aa &lt; bb) ? -dir : 0);
                                             }
                                         }
-                            
+
                                         return cmp;
                                     };
-                            
+
                                     if (this._sortBy.length) {
                                         this.data.comparator = this._sortComparator;
-                            
+
                                         // TODO: is this necessary? Should it be elsewhere?
                                         this.data.sort();
                                     } else {
@@ -1664,10 +1664,10 @@
                                         delete this.data.comparator;
                                     }
                                 },
-                            
+
                                 /**
                                 Add the sort related strings to the &#x60;strings&#x60; map.
-                            
+
                                 @method _initSortStrings
                                 @protected
                                 @since 3.5.0
@@ -1677,11 +1677,11 @@
                                     this.set(&#x27;strings&#x27;, Y.mix((this.get(&#x27;strings&#x27;) || {}),
                                         Y.Intl.get(&#x27;datatable-sort&#x27;)));
                                 },
-                            
+
                                 /**
                                 Fires the &#x60;sort&#x60; event in response to user clicks on sortable column
                                 headers.
-                            
+
                                 @method _onUITriggerSort
                                 @param {DOMEventFacade} e The &#x60;click&#x60; event
                                 @protected
@@ -1691,50 +1691,50 @@
                                     var id = e.currentTarget.getAttribute(&#x27;data-yui3-col-id&#x27;),
                                         column = id &amp;&amp; this.getColumn(id),
                                         sortBy, i, len;
-                            
+
                                     if (e.type === &#x27;keydown&#x27; &amp;&amp; e.keyCode !== 32) {
                                         return;
                                     }
-                            
+
                                     // In case a headerTemplate injected a link
                                     // TODO: Is this overreaching?
                                     e.preventDefault();
-                            
+
                                     if (column) {
                                         if (e.shiftKey) {
                                             sortBy = this.get(&#x27;sortBy&#x27;) || [];
-                            
+
                                             for (i = 0, len = sortBy.length; i &lt; len; ++i) {
                                                 if (id === sortBy[i]  || Math.abs(sortBy[i][id]) === 1) {
                                                     if (!isObject(sortBy[i])) {
                                                         sortBy[i] = {};
                                                     }
-                            
+
                                                     sortBy[i][id] = -(column.sortDir||0) || 1;
                                                     break;
                                                 }
                                             }
-                            
+
                                             if (i &gt;= len) {
                                                 sortBy.push(column._id);
                                             }
                                         } else {
                                             sortBy = [{}];
-                            
+
                                             sortBy[0][id] = -(column.sortDir||0) || 1;
                                         }
-                            
+
                                         this.fire(&#x27;sort&#x27;, {
                                             originEvent: e,
                                             sortBy: sortBy
                                         });
                                     }
                                 },
-                            
+
                                 /**
                                 Normalizes the possible input values for the &#x60;sortable&#x60; attribute, storing
                                 the results in the &#x60;_sortable&#x60; property.
-                            
+
                                 @method _parseSortable
                                 @protected
                                 @since 3.5.0
@@ -1743,24 +1743,24 @@
                                     var sortable = this.get(&#x27;sortable&#x27;),
                                         columns  = [],
                                         i, len, col;
-                            
+
                                     if (isArray(sortable)) {
                                         for (i = 0, len = sortable.length; i &lt; len; ++i) {
                                             col = sortable[i];
-                            
+
                                             // isArray is called because arrays are objects, but will rely
                                             // on getColumn to nullify them for the subsequent if (col)
                                             if (!isObject(col, true) || isArray(col)) {
                                                 col = this.getColumn(col);
                                             }
-                            
+
                                             if (col) {
                                                 columns.push(col);
                                             }
                                         }
                                     } else if (sortable) {
                                         columns = this._displayColumns.slice();
-                            
+
                                         if (sortable === &#x27;auto&#x27;) {
                                             for (i = columns.length - 1; i &gt;= 0; --i) {
                                                 if (!columns[i].sortable) {
@@ -1769,28 +1769,28 @@
                                             }
                                         }
                                     }
-                            
+
                                     this._sortable = columns;
                                 },
-                            
+
                                 /**
                                 Initial application of the sortable UI.
-                            
+
                                 @method _renderSortable
                                 @protected
                                 @since 3.5.0
                                 **/
                                 _renderSortable: function () {
                                     this._uiSetSortable();
-                            
+
                                     this._bindSortUI();
                                 },
-                            
+
                                 /**
                                 Parses the current &#x60;sortBy&#x60; attribute into a normalized structure for the
                                 &#x60;data&#x60; ModelList&#x27;s &#x60;_compare&#x60; method.  Also updates the column
                                 configurations&#x27; &#x60;sortDir&#x60; properties.
-                            
+
                                 @method _setSortBy
                                 @protected
                                 @since 3.5.0
@@ -1800,27 +1800,27 @@
                                         sortBy      = this.get(&#x27;sortBy&#x27;) || [],
                                         sortedClass = &#x27; &#x27; + this.getClassName(&#x27;sorted&#x27;),
                                         i, len, name, dir, field, column;
-                            
+
                                     this._sortBy = [];
-                            
+
                                     // Purge current sort state from column configs
                                     for (i = 0, len = columns.length; i &lt; len; ++i) {
                                         column = columns[i];
-                            
+
                                         delete column.sortDir;
-                            
+
                                         if (column.className) {
                                             // TODO: be more thorough
                                             column.className = column.className.replace(sortedClass, &#x27;&#x27;);
                                         }
                                     }
-                            
+
                                     sortBy = toArray(sortBy);
-                            
+
                                     for (i = 0, len = sortBy.length; i &lt; len; ++i) {
                                         name = sortBy[i];
                                         dir  = 1;
-                            
+
                                         if (isObject(name)) {
                                             field = name;
                                             // Have to use a for-in loop to process sort({ foo: -1 })
@@ -1831,56 +1831,56 @@
                                                 }
                                             }
                                         }
-                            
+
                                         if (name) {
                                             // Allow sorting of any model field and any column
                                             // FIXME: this isn&#x27;t limited to model attributes, but there&#x27;s no
                                             // convenient way to get a list of the attributes for a Model
                                             // subclass *including* the attributes of its superclasses.
                                             column = this.getColumn(name) || { _id: name, key: name };
-                            
+
                                             if (column) {
                                                 column.sortDir = dir;
-                            
+
                                                 if (!column.className) {
                                                     column.className = &#x27;&#x27;;
                                                 }
-                            
+
                                                 column.className += sortedClass;
-                            
+
                                                 this._sortBy.push(column);
                                             }
                                         }
                                     }
                                 },
-                            
+
                                 /**
                                 Array of column configuration objects of those columns that need UI setup
                                 for user interaction.
-                            
+
                                 @property _sortable
                                 @type {Object[]}
                                 @protected
                                 @since 3.5.0
                                 **/
                                 //_sortable: null,
-                            
+
                                 /**
                                 Array of column configuration objects for those columns that are currently
                                 being used to sort the data.  Fake column objects are used for fields that
                                 are not rendered as columns.
-                            
+
                                 @property _sortBy
                                 @type {Object[]}
                                 @protected
                                 @since 3.5.0
                                 **/
                                 //_sortBy: null,
-                            
+
                                 /**
                                 Replacement &#x60;comparator&#x60; for the &#x60;data&#x60; ModelList that defers sorting logic
                                 to the &#x60;_compare&#x60; method.  The deferral is accomplished by returning &#x60;this&#x60;.
-                            
+
                                 @method _sortComparator
                                 @param {Model} item The record being evaluated for sort position
                                 @return {Model} The record
@@ -1891,14 +1891,14 @@
                                     // Defer sorting to ModelList&#x27;s _compare
                                     return item;
                                 },
-                            
+
                                 /**
                                 Applies the appropriate classes to the &#x60;boundingBox&#x60; and column headers to
                                 indicate sort state and sortability.
-                            
+
                                 Also currently wraps the header content of sortable columns in a &#x60;&lt;div&gt;&#x60;
                                 liner to give a CSS anchor for sort indicators.
-                            
+
                                 @method _uiSetSortable
                                 @protected
                                 @since 3.5.0
@@ -1912,21 +1912,21 @@
                                         indicatorClass= this.getClassName(&#x27;sort&#x27;, &#x27;indicator&#x27;),
                                         sortableCols  = {},
                                         i, len, col, node, liner, title, desc;
-                            
+
                                     this.get(&#x27;boundingBox&#x27;).toggleClass(
                                         this.getClassName(&#x27;sortable&#x27;),
                                         columns.length);
-                            
+
                                     for (i = 0, len = columns.length; i &lt; len; ++i) {
                                         sortableCols[columns[i].id] = columns[i];
                                     }
-                            
+
                                     // TODO: this.head.render() + decorate cells?
                                     this._theadNode.all(&#x27;.&#x27; + sortableClass).each(function (node) {
                                         var col       = sortableCols[node.get(&#x27;id&#x27;)],
                                             liner     = node.one(&#x27;.&#x27; + linerClass),
                                             indicator;
-                            
+
                                         if (col) {
                                             if (!col.sortDir) {
                                                 node.removeClass(ascClass)
@@ -1936,50 +1936,50 @@
                                             node.removeClass(sortableClass)
                                                 .removeClass(ascClass)
                                                 .removeClass(descClass);
-                            
+
                                             if (liner) {
                                                 liner.replace(liner.get(&#x27;childNodes&#x27;).toFrag());
                                             }
-                            
+
                                             indicator = node.one(&#x27;.&#x27; + indicatorClass);
-                            
+
                                             if (indicator) {
                                                 indicator.remove().destroy(true);
                                             }
                                         }
                                     });
-                            
+
                                     for (i = 0, len = columns.length; i &lt; len; ++i) {
                                         col  = columns[i];
                                         node = this._theadNode.one(&#x27;#&#x27; + col.id);
                                         desc = col.sortDir === -1;
-                            
+
                                         if (node) {
                                             liner = node.one(&#x27;.&#x27; + linerClass);
-                            
+
                                             node.addClass(sortableClass);
-                            
+
                                             if (col.sortDir) {
                                                 node.addClass(ascClass);
-                            
+
                                                 node.toggleClass(descClass, desc);
-                            
+
                                                 node.setAttribute(&#x27;aria-sort&#x27;, desc ?
                                                     &#x27;descending&#x27; : &#x27;ascending&#x27;);
                                             }
-                            
+
                                             if (!liner) {
                                                 liner = Y.Node.create(Y.Lang.sub(
                                                     this.SORTABLE_HEADER_TEMPLATE, {
                                                         className: linerClass,
                                                         indicatorClass: indicatorClass
                                                     }));
-                            
+
                                                 liner.prepend(node.get(&#x27;childNodes&#x27;).toFrag());
-                            
+
                                                 node.append(liner);
                                             }
-                            
+
                                             title = sub(this.getString(
                                                 (col.sortDir === 1) ? &#x27;reverseSortBy&#x27; : &#x27;sortBy&#x27;), // get string
                                                 {
@@ -1991,7 +1991,7 @@
                                                             col.key  || (&#x27;column &#x27; + i)
                                                 }
                                             );
-                            
+
                                             node.setAttribute(&#x27;title&#x27;, title);
                                             // To combat VoiceOver from reading the sort title as the
                                             // column header
@@ -1999,10 +1999,10 @@
                                         }
                                     }
                                 },
-                            
+
                                 /**
                                 Allows values &#x60;true&#x60;, &#x60;false&#x60;, &quot;auto&quot;, or arrays of column names through.
-                            
+
                                 @method _validateSortable
                                 @param {Any} val The input value to &#x60;set(&quot;sortable&quot;, VAL)&#x60;
                                 @return {Boolean}
@@ -2012,10 +2012,10 @@
                                 _validateSortable: function (val) {
                                     return val === &#x27;auto&#x27; || isBoolean(val) || isArray(val);
                                 },
-                            
+
                                 /**
                                 Allows strings, arrays of strings, objects, or arrays of objects.
-                            
+
                                 @method _validateSortBy
                                 @param {String|String[]|Object|Object[]} val The new &#x60;sortBy&#x60; value
                                 @return {Boolean}
@@ -2028,20 +2028,20 @@
                                            isObject(val, true) ||
                                            (isArray(val) &amp;&amp; (isString(val[0]) || isObject(val, true)));
                                 }
-                            
+
                             }, true);
-                            
+
                             Y.DataTable.Sortable = Sortable;
                             /**
                             Used when the instance&#x27;s &#x60;sortable&#x60; attribute is set to
                             &quot;auto&quot; (the default) to determine which columns will support
                             user sorting by clicking on the header.
-                            
+
                             If the instance&#x27;s &#x60;key&#x60; attribute is not set, this
                             configuration is ignored.
-                            
+
                                 { key: &#x27;lastLogin&#x27;, sortable: true }
-                            
+
                             @property sortable
                             @type Boolean
                             @for DataTable.Column
@@ -2049,12 +2049,12 @@
                             /**
                             When the instance&#x27;s &#x60;caseSensitive&#x60; attribute is set to
                             &#x60;true&#x60; the sort order is case sensitive (relevant to string columns only).
-                            
+
                             Case sensitive sort is marginally more efficient and should be considered
                             for large data sets when case insensitive sort is not required.
-                            
+
                                 { key: &#x27;lastLogin&#x27;, sortable: true, caseSensitive: true }
-                            
+
                             @property caseSensitive
                             @type Boolean
                             @for DataTable.Column
@@ -2064,30 +2064,30 @@
                             function receives three parameters, the first two being the
                             two record Models to compare, and the third being a boolean
                             &#x60;true&#x60; if the sort order should be descending.
-                            
+
                             The function should return &#x60;1&#x60; to sort &#x60;a&#x60; above &#x60;b&#x60;, &#x60;-1&#x60;
                             to sort &#x60;a&#x60; below &#x60;b&#x60;, and &#x60;0&#x60; if they are equal.  Keep in
                             mind that the order should be reversed when &#x60;desc&#x60; is
                             &#x60;true&#x60;.
-                            
+
                             The &#x60;desc&#x60; parameter is provided to allow &#x60;sortFn&#x60;s to
                             always sort certain values above or below others, such as
                             always sorting &#x60;null&#x60;s on top.
-                            
+
                                 {
                                   label: &#x27;Name&#x27;,
                                   sortFn: function (a, b, desc) {
                                     var an = a.get(&#x27;lname&#x27;) + b.get(&#x27;fname&#x27;),
                                         bn = a.get(&#x27;lname&#x27;) + b.get(&#x27;fname&#x27;),
                                         order = (an &gt; bn) ? 1 : -(an &lt; bn);
-                            
+
                                     return desc ? -order : order;
                                   },
                                   formatter: function (o) {
                                     return o.data.lname + &#x27;, &#x27; + o.data.fname;
                                   }
                                 }
-                            
+
                             @property sortFn
                             @type Function
                             @for DataTable.Column
@@ -2100,15 +2100,15 @@
                             sort direction of the column.  Use the table&#x27;s
                             [sortBy](DataTable.html#attr_sortBy)
                             attribute for that.
-                            
+
                             @property sortDir
                             @type {Number}
                             @readOnly
                             @for DataTable.Column
                             */
-                            
+
                             Y.Base.mix(Y.DataTable, [Sortable]);
-                            
+
                                 </pre>
                             </div>
                         </div>

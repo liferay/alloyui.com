@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/tabview/js/tab.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1147,15 +1147,15 @@
                                 BOUNDING_TEMPLATE: &#x27;&lt;li&gt;&lt;/li&gt;&#x27;,
                                 CONTENT_TEMPLATE: &#x27;&lt;a&gt;&lt;/a&gt;&#x27;,
                                 PANEL_TEMPLATE: &#x27;&lt;div&gt;&lt;/div&gt;&#x27;,
-                            
+
                                 _uiSetSelectedPanel: function(selected) {
                                     this.get(&#x27;panelNode&#x27;).toggleClass(Y.TabviewBase._classNames.selectedPanel, selected);
                                 },
-                            
+
                                 _afterTabSelectedChange: function(event) {
                                    this._uiSetSelectedPanel(event.newVal);
                                 },
-                            
+
                                 _afterParentChange: function(e) {
                                     if (!e.newVal) {
                                         this._remove();
@@ -1163,12 +1163,12 @@
                                         this._add();
                                     }
                                 },
-                            
+
                                 _initAria: function() {
                                     var anchor = this.get(&#x27;contentBox&#x27;),
                                         id = anchor.get(&#x27;id&#x27;),
                                         panel = this.get(&#x27;panelNode&#x27;);
-                            
+
                                     if (!id) {
                                         id = Y.guid();
                                         anchor.set(&#x27;id&#x27;, id);
@@ -1176,58 +1176,58 @@
                                     //  Apply the ARIA roles, states and properties to each tab
                                     anchor.set(&#x27;role&#x27;, &#x27;tab&#x27;);
                                     anchor.get(&#x27;parentNode&#x27;).set(&#x27;role&#x27;, &#x27;presentation&#x27;);
-                            
+
                                     //  Apply the ARIA roles, states and properties to each panel
                                     panel.setAttrs({
                                         role: &#x27;tabpanel&#x27;,
                                         &#x27;aria-labelledby&#x27;: id
                                     });
                                 },
-                            
+
                                 syncUI: function() {
                                     var _classNames = Y.TabviewBase._classNames;
-                            
+
                                     this.get(&#x27;boundingBox&#x27;).addClass(_classNames.tab);
                                     this.get(&#x27;contentBox&#x27;).addClass(_classNames.tabLabel);
                                     this.set(&#x27;label&#x27;, this.get(&#x27;label&#x27;));
                                     this.set(&#x27;content&#x27;, this.get(&#x27;content&#x27;));
                                     this._uiSetSelectedPanel(this.get(&#x27;selected&#x27;));
                                 },
-                            
+
                                 bindUI: function() {
                                    this.after(&#x27;selectedChange&#x27;, this._afterTabSelectedChange);
                                    this.after(&#x27;parentChange&#x27;, this._afterParentChange);
                                 },
-                            
+
                                 renderUI: function() {
                                     this._renderPanel();
                                     this._initAria();
                                 },
-                            
+
                                 _renderPanel: function() {
                                     this.get(&#x27;parent&#x27;).get(&#x27;panelNode&#x27;)
                                         .appendChild(this.get(&#x27;panelNode&#x27;));
                                 },
-                            
+
                                 _add: function() {
                                     var parent = this.get(&#x27;parent&#x27;).get(&#x27;contentBox&#x27;),
                                         list = parent.get(&#x27;listNode&#x27;),
                                         panel = parent.get(&#x27;panelNode&#x27;);
-                            
+
                                     if (list) {
                                         list.appendChild(this.get(&#x27;boundingBox&#x27;));
                                     }
-                            
+
                                     if (panel) {
                                         panel.appendChild(this.get(&#x27;panelNode&#x27;));
                                     }
                                 },
-                            
+
                                 _remove: function() {
                                     this.get(&#x27;boundingBox&#x27;).remove();
                                     this.get(&#x27;panelNode&#x27;).remove();
                                 },
-                            
+
                                 _onActivate: function(e) {
                                      if (e.target === this) {
                                          //  Prevent the browser from navigating to the URL specified by the
@@ -1236,17 +1236,17 @@
                                          e.target.set(&#x27;selected&#x27;, 1);
                                      }
                                 },
-                            
+
                                 initializer: function() {
                                    this.publish(this.get(&#x27;triggerEvent&#x27;), {
                                        defaultFn: this._onActivate
                                    });
                                 },
-                            
+
                                 _defLabelGetter: function() {
                                     return this.get(&#x27;contentBox&#x27;).getHTML();
                                 },
-                            
+
                                 _defLabelSetter: function(label) {
                                     var labelNode = this.get(&#x27;contentBox&#x27;);
                                     if (labelNode.getHTML() !== label) { // Avoid rewriting existing label.
@@ -1254,7 +1254,7 @@
                                     }
                                     return label;
                                 },
-                            
+
                                 _defContentSetter: function(content) {
                                     var panel = this.get(&#x27;panelNode&#x27;);
                                     if (panel.getHTML() !== content) { // Avoid rewriting existing content.
@@ -1262,11 +1262,11 @@
                                     }
                                     return content;
                                 },
-                            
+
                                 _defContentGetter: function() {
                                     return this.get(&#x27;panelNode&#x27;).getHTML();
                                 },
-                            
+
                                 // find panel by ID mapping from label href
                                 _defPanelNodeValueFn: function() {
                                     var _classNames = Y.TabviewBase._classNames,
@@ -1274,22 +1274,22 @@
                                         parent = this.get(&#x27;parent&#x27;),
                                         hashIndex = href.indexOf(&#x27;#&#x27;),
                                         panel;
-                            
+
                                     href = href.substr(hashIndex);
-                            
+
                                     if (href.charAt(0) === &#x27;#&#x27;) { // in-page nav, find by ID
                                         panel = Y.one(href);
                                         if (panel) {
                                             panel.addClass(_classNames.tabPanel);
                                         }
                                     }
-                            
+
                                     // use the one found by id, or else try matching indices
                                     if (!panel &amp;&amp; parent) {
                                         panel = parent.get(&#x27;panelNode&#x27;)
                                                 .get(&#x27;children&#x27;).item(this.get(&#x27;index&#x27;));
                                     }
-                            
+
                                     if (!panel) { // create if none found
                                         panel = Y.Node.create(this.PANEL_TEMPLATE);
                                         panel.addClass(_classNames.tabPanel);
@@ -1306,7 +1306,7 @@
                                     triggerEvent: {
                                         value: &#x27;click&#x27;
                                     },
-                            
+
                                     /**
                                      * @attribute label
                                      * @type HTML
@@ -1315,7 +1315,7 @@
                                         setter: &#x27;_defLabelSetter&#x27;,
                                         getter: &#x27;_defLabelGetter&#x27;
                                     },
-                            
+
                                     /**
                                      * @attribute content
                                      * @type HTML
@@ -1324,7 +1324,7 @@
                                         setter: &#x27;_defContentSetter&#x27;,
                                         getter: &#x27;_defContentGetter&#x27;
                                     },
-                            
+
                                     /**
                                      * @attribute panelNode
                                      * @type Y.Node
@@ -1339,14 +1339,14 @@
                                         },
                                         valueFn: &#x27;_defPanelNodeValueFn&#x27;
                                     },
-                            
+
                                     tabIndex: {
                                         value: null,
                                         validator: &#x27;_validTabIndex&#x27;
                                     }
-                            
+
                                 },
-                            
+
                                 HTML_PARSER: {
                                     selected: function() {
                                         var ret = (this.get(&#x27;boundingBox&#x27;).hasClass(Y.TabviewBase._classNames.selectedTab)) ?
@@ -1354,9 +1354,9 @@
                                         return ret;
                                     }
                                 }
-                            
+
                             });
-                            
+
                                 </pre>
                             </div>
                         </div>

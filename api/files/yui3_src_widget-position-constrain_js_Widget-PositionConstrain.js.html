@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/widget-position-constrain/js/Widget-PositionConstrain.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1144,25 +1144,25 @@
                             var CONSTRAIN = &quot;constrain&quot;,
                                 CONSTRAIN_XYCHANGE = &quot;constrain|xyChange&quot;,
                                 CONSTRAIN_CHANGE = &quot;constrainChange&quot;,
-                            
+
                                 PREVENT_OVERLAP = &quot;preventOverlap&quot;,
                                 ALIGN = &quot;align&quot;,
-                            
+
                                 EMPTY_STR = &quot;&quot;,
-                            
+
                                 BINDUI = &quot;bindUI&quot;,
-                            
+
                                 XY = &quot;xy&quot;,
                                 X_COORD = &quot;x&quot;,
                                 Y_COORD = &quot;y&quot;,
-                            
+
                                 Node = Y.Node,
-                            
+
                                 VIEWPORT_REGION = &quot;viewportRegion&quot;,
                                 REGION = &quot;region&quot;,
-                            
+
                                 PREVENT_OVERLAP_MAP;
-                            
+
                             /**
                              * A widget extension, which can be used to add constrained xy positioning support to the base Widget class,
                              * through the &lt;a href=&quot;Base.html#method_build&quot;&gt;Base.build&lt;/a&gt; method. This extension requires that
@@ -1173,7 +1173,7 @@
                              * @param {Object} User configuration object
                              */
                             function PositionConstrain(config) {}
-                            
+
                             /**
                              * Static property used to define the default attribute
                              * configuration introduced by WidgetPositionConstrain.
@@ -1183,7 +1183,7 @@
                              * @static
                              */
                             PositionConstrain.ATTRS = {
-                            
+
                                 /**
                                  * @attribute constrain
                                  * @type boolean | Node
@@ -1195,7 +1195,7 @@
                                     value: null,
                                     setter: &quot;_setConstrain&quot;
                                 },
-                            
+
                                 /**
                                  * @attribute preventOverlap
                                  * @type boolean
@@ -1208,7 +1208,7 @@
                                     value:false
                                 }
                             };
-                            
+
                             /**
                              * @property _PREVENT_OVERLAP
                              * @static
@@ -1231,16 +1231,16 @@
                                     &quot;brtr&quot;: 1
                                 }
                             };
-                            
+
                             PositionConstrain.prototype = {
-                            
+
                                 initializer : function() {
                                     if (!this._posNode) {
                                         Y.error(&quot;WidgetPosition needs to be added to the Widget, before WidgetPositionConstrain is added&quot;);
                                     }
                                     Y.after(this._bindUIPosConstrained, this, BINDUI);
                                 },
-                            
+
                                 /**
                                  * Calculates the constrained positions for the XY positions provided, using
                                  * the provided node argument is passed in. If no node value is passed in, the value of
@@ -1253,16 +1253,16 @@
                                  */
                                 getConstrainedXY : function(xy, node) {
                                     node = node || this.get(CONSTRAIN);
-                            
+
                                     var constrainingRegion = this._getRegion((node === true) ? null : node),
                                         nodeRegion = this._posNode.get(REGION);
-                            
+
                                     return [
                                         this._constrain(xy[0], X_COORD, nodeRegion, constrainingRegion),
                                         this._constrain(xy[1], Y_COORD, nodeRegion, constrainingRegion)
                                     ];
                                 },
-                            
+
                                 /**
                                  * Constrains the widget&#x27;s bounding box to a node (or the viewport). If xy or node are not
                                  * passed in, the current position and the value of &quot;constrain&quot; will be used respectively.
@@ -1277,17 +1277,17 @@
                                     var currentXY,
                                         constrainedXY,
                                         constraint = node || this.get(CONSTRAIN);
-                            
+
                                     if (constraint) {
                                         currentXY = xy || this.get(XY);
                                         constrainedXY = this.getConstrainedXY(currentXY, constraint);
-                            
+
                                         if (constrainedXY[0] !== currentXY[0] || constrainedXY[1] !== currentXY[1]) {
                                             this.set(XY, constrainedXY, { constrained:true });
                                         }
                                     }
                                 },
-                            
+
                                 /**
                                  * The setter implementation for the &quot;constrain&quot; attribute.
                                  *
@@ -1298,7 +1298,7 @@
                                 _setConstrain : function(val) {
                                     return (val === true) ? val : Node.one(val);
                                 },
-                            
+
                                 /**
                                  * The method which performs the actual constrain calculations for a given axis (&quot;x&quot; or &quot;y&quot;) based
                                  * on the regions provided.
@@ -1315,18 +1315,18 @@
                                  */
                                 _constrain: function(val, axis, nodeRegion, constrainingRegion) {
                                     if (constrainingRegion) {
-                            
+
                                         if (this.get(PREVENT_OVERLAP)) {
                                             val = this._preventOverlap(val, axis, nodeRegion, constrainingRegion);
                                         }
-                            
+
                                         var x = (axis == X_COORD),
-                            
+
                                             regionSize    = (x) ? constrainingRegion.width : constrainingRegion.height,
                                             nodeSize      = (x) ? nodeRegion.width : nodeRegion.height,
                                             minConstraint = (x) ? constrainingRegion.left : constrainingRegion.top,
                                             maxConstraint = (x) ? constrainingRegion.right - nodeSize : constrainingRegion.bottom - nodeSize;
-                            
+
                                         if (val &lt; minConstraint || val &gt; maxConstraint) {
                                             if (nodeSize &lt; regionSize) {
                                                 if (val &lt; minConstraint) {
@@ -1339,10 +1339,10 @@
                                             }
                                         }
                                     }
-                            
+
                                     return val;
                                 },
-                            
+
                                 /**
                                  * The method which performs the preventOverlap calculations for a given axis (&quot;x&quot; or &quot;y&quot;) based
                                  * on the value and regions provided.
@@ -1358,7 +1358,7 @@
                                  * @return {Number} The constrained value
                                  */
                                 _preventOverlap : function(val, axis, nodeRegion, constrainingRegion) {
-                            
+
                                     var align = this.get(ALIGN),
                                         x = (axis === X_COORD),
                                         nodeSize,
@@ -1367,11 +1367,11 @@
                                         farEdge,
                                         spaceOnNearSide,
                                         spaceOnFarSide;
-                            
+
                                     if (align &amp;&amp; align.points &amp;&amp; PREVENT_OVERLAP_MAP[axis][align.points.join(EMPTY_STR)]) {
-                            
+
                                         alignRegion = this._getRegion(align.node);
-                            
+
                                         if (alignRegion) {
                                             nodeSize        = (x) ? nodeRegion.width : nodeRegion.height;
                                             nearEdge        = (x) ? alignRegion.left : alignRegion.top;
@@ -1379,7 +1379,7 @@
                                             spaceOnNearSide = (x) ? alignRegion.left - constrainingRegion.left : alignRegion.top - constrainingRegion.top;
                                             spaceOnFarSide  = (x) ? constrainingRegion.right - alignRegion.right : constrainingRegion.bottom - alignRegion.bottom;
                                         }
-                            
+
                                         if (val &gt; nearEdge) {
                                             if (spaceOnFarSide &lt; nodeSize &amp;&amp; spaceOnNearSide &gt; nodeSize) {
                                                 val = nearEdge - nodeSize;
@@ -1390,10 +1390,10 @@
                                             }
                                         }
                                     }
-                            
+
                                     return val;
                                 },
-                            
+
                                 /**
                                  * Binds event listeners responsible for updating the UI state in response to
                                  * Widget constrained positioning related state changes.
@@ -1409,7 +1409,7 @@
                                     this.after(CONSTRAIN_CHANGE, this._afterConstrainChange);
                                     this._enableConstraints(this.get(CONSTRAIN));
                                 },
-                            
+
                                 /**
                                  * After change listener for the &quot;constrain&quot; attribute, responsible
                                  * for updating the UI, in response to attribute changes.
@@ -1421,7 +1421,7 @@
                                 _afterConstrainChange : function(e) {
                                     this._enableConstraints(e.newVal);
                                 },
-                            
+
                                 /**
                                  * Updates the UI if enabling constraints, and sets up the xyChange event listeners
                                  * to constrain whenever the widget is moved. Disabling constraints removes the listeners.
@@ -1439,7 +1439,7 @@
                                         this._cxyHandle = null;
                                     }
                                 },
-                            
+
                                 /**
                                  * The on change listener for the &quot;xy&quot; attribute. Modifies the event facade&#x27;s
                                  * newVal property with the constrained XY value.
@@ -1453,7 +1453,7 @@
                                         e.newVal = this.getConstrainedXY(e.newVal);
                                     }
                                 },
-                            
+
                                 /**
                                  * Utility method to normalize region retrieval from a node instance,
                                  * or the viewport, if no node is provided.
@@ -1475,9 +1475,9 @@
                                     return region;
                                 }
                             };
-                            
+
                             Y.WidgetPositionConstrain = PositionConstrain;
-                            
+
                                 </pre>
                             </div>
                         </div>

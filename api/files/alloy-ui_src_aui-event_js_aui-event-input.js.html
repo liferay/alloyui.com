@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>alloy-ui/src/aui-event/js/aui-event-input.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /**
@@ -1142,9 +1142,9 @@
                              * @module aui-event
                              * @submodule aui-event-input
                              */
-                            
+
                             var DOM_EVENTS = A.Node.DOM_EVENTS;
-                            
+
                             // Input event feature check should be done on textareas. WebKit before
                             // version 531 (3.0.182.2) did not support input events for textareas.
                             // See http://dev.chromium.org/developers/webkit-version-table
@@ -1153,13 +1153,13 @@
                                 DOM_EVENTS.input = 1;
                                 return;
                             }
-                            
+
                             DOM_EVENTS.cut = 1;
                             DOM_EVENTS.dragend = 1;
                             DOM_EVENTS.paste = 1;
-                            
+
                             var KeyMap = A.Event.KeyMap,
-                            
+
                                 _HANDLER_DATA_KEY = &#x27;~~aui|input|event~~&#x27;,
                                 _INPUT_EVENT_TYPE = [&#x27;keydown&#x27;, &#x27;paste&#x27;, &#x27;drop&#x27;, &#x27;cut&#x27;],
                                 _SKIP_FOCUS_CHECK_MAP = {
@@ -1167,14 +1167,14 @@
                                     drop: 1,
                                     paste: 1
                                 };
-                            
+
                             /**
                              * Defines a new &#x60;input&#x60; event in the DOM event system.
                              *
                              * @event input
                              */
                             A.Event.define(&#x27;input&#x27;, {
-                            
+
                                 /**
                                  * Implementation logic for event subscription.
                                  *
@@ -1185,11 +1185,11 @@
                                  */
                                 on: function(node, subscription, notifier) {
                                     var instance = this;
-                            
+
                                     subscription._handler = node.on(
                                         _INPUT_EVENT_TYPE, A.bind(instance._dispatchEvent, instance, subscription, notifier));
                                 },
-                            
+
                                 /**
                                  * Implementation logic for subscription via &#x60;node.delegate&#x60;.
                                  *
@@ -1201,23 +1201,23 @@
                                  */
                                 delegate: function(node, subscription, notifier, filter) {
                                     var instance = this;
-                            
+
                                     subscription._handles = [];
                                     subscription._handler = node.delegate(&#x27;focus&#x27;, function(event) {
                                         var element = event.target,
                                             handler = element.getData(_HANDLER_DATA_KEY);
-                            
+
                                         if (!handler) {
                                             handler = element.on(
                                                 _INPUT_EVENT_TYPE,
                                                 A.bind(instance._dispatchEvent, instance, subscription, notifier));
-                            
+
                                             subscription._handles.push(handler);
                                             element.setData(_HANDLER_DATA_KEY, handler);
                                         }
                                     }, filter);
                                 },
-                            
+
                                 /**
                                  * Implementation logic for cleaning up a detached subscription.
                                  *
@@ -1229,7 +1229,7 @@
                                 detach: function(node, subscription) {
                                     subscription._handler.detach();
                                 },
-                            
+
                                 /**
                                  * Implementation logic for cleaning up a detached delegate subscription.
                                  *
@@ -1248,7 +1248,7 @@
                                     });
                                     subscription._handler.detach();
                                 },
-                            
+
                                 /**
                                  * Dispatches an &#x60;input&#x60; event.
                                  *
@@ -1262,29 +1262,29 @@
                                     var instance = this,
                                         input,
                                         valueBeforeKey;
-                            
+
                                     input = event.target;
-                            
+
                                     // Since cut, drop and paste events fires before the element is focused,
                                     // skip focus checking.
                                     if (_SKIP_FOCUS_CHECK_MAP[event.type] ||
                                         (input.get(&#x27;ownerDocument&#x27;).get(&#x27;activeElement&#x27;) === input)) {
-                            
+
                                         if (KeyMap.isModifyingKey(event.keyCode)) {
                                             if (subscription._timer) {
                                                 subscription._timer.cancel();
                                                 subscription._timer = null;
                                             }
-                            
+
                                             valueBeforeKey = KeyMap.isKey(event.keyCode, &#x27;WIN_IME&#x27;) ? null : input.get(&#x27;value&#x27;);
-                            
+
                                             subscription._timer = A.soon(
                                                 A.bind(&#x27;_fireEvent&#x27;, instance, subscription, notifier, event, valueBeforeKey)
                                             );
                                         }
                                     }
                                 },
-                            
+
                                 /**
                                  * Fires an event.
                                  *
@@ -1297,15 +1297,15 @@
                                  */
                                 _fireEvent: function(subscription, notifier, event, valueBeforeKey) {
                                     var input = event.target;
-                            
+
                                     subscription._timer = null;
-                            
+
                                     if (input.get(&#x27;value&#x27;) !== valueBeforeKey) {
                                         notifier.fire(event);
                                     }
                                 }
                             });
-                            
+
                                 </pre>
                             </div>
                         </div>

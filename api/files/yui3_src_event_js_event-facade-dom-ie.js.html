@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 
     <!-- AlloyUI -->
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
-    <script src="http://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.alloyui.com/2.0.x/aui-css/css/bootstrap-responsive.min.css">
+    <script src="https://cdn.alloyui.com/2.0.x/aui/aui-min.js"></script>
 
 </head>
 <body class="yui3-skin-sam">
@@ -49,11 +49,11 @@
                                 <li><a href="#api-classes">Classes</a></li>
                                 <li><a href="#api-modules">Modules</a></li>
                             </ul>
-                    
+
                             <div id="api-tabview-filter">
                                 <input type="search" id="api-filter" placeholder="Type to filter APIs">
                             </div>
-                    
+
                             <div id="api-tabview-panel">
                                 <ul id="api-classes" class="apis classes tab-pane">
                                     <li><a href="../classes/A.AceEditor.html">A.AceEditor</a></li>
@@ -585,7 +585,7 @@
                                     <li><a href="../classes/YUI.html">YUI</a></li>
                                     <li><a href="../classes/YUI~substitute.html">YUI~substitute</a></li>
                                 </ul>
-                    
+
                                 <ul id="api-modules" class="apis modules tab-pane">
                                     <li><a href="../modules/align-plugin.html">align-plugin</a></li>
                                     <li><a href="../modules/anim.html">anim</a></li>
@@ -1108,12 +1108,12 @@
                             <input type="checkbox" id="api-show-inherited" checked>
                             Inherited
                         </label>
-                
+
                         <label for="api-show-protected">
                             <input type="checkbox" id="api-show-protected">
                             Protected
                         </label>
-                
+
                         <label for="api-show-private">
                             <input type="checkbox" id="api-show-private">
                             Private
@@ -1122,16 +1122,16 @@
                             <input type="checkbox" id="api-show-deprecated">
                             Deprecated
                         </label>
-                
+
                     </div>
-                
+
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
                             <div class="page-header">
                               <h1><small>File</small> <code>yui3/src/event/js/event-facade-dom-ie.js</code></h1>
                             </div>
-                            
+
                             <div class="file">
                                 <pre class="code prettyprint linenums">
                             /*
@@ -1140,12 +1140,12 @@
                              * @module event
                              * @submodule event-base
                              */
-                            
+
                             function IEEventFacade() {
                                 // IEEventFacade.superclass.constructor.apply(this, arguments);
                                 Y.DOM2EventFacade.apply(this, arguments);
                             }
-                            
+
                             /*
                              * (intentially left out of API docs)
                              * Alternate Facade implementation that is based on Object.defineProperty, which
@@ -1155,25 +1155,25 @@
                             function IELazyFacade(e) {
                                 var proxy = Y.config.doc.createEventObject(e),
                                     proto = IELazyFacade.prototype;
-                            
+
                                 // TODO: necessary?
                                 proxy.hasOwnProperty = function () { return true; };
-                            
+
                                 proxy.init = proto.init;
                                 proxy.halt = proto.halt;
                                 proxy.preventDefault           = proto.preventDefault;
                                 proxy.stopPropagation          = proto.stopPropagation;
                                 proxy.stopImmediatePropagation = proto.stopImmediatePropagation;
-                            
+
                                 Y.DOM2EventFacade.apply(proxy, arguments);
-                            
+
                                 return proxy;
                             }
-                            
-                            
+
+
                             var imp = Y.config.doc &amp;&amp; Y.config.doc.implementation,
                                 useLazyFacade = Y.config.lazyEventFacade,
-                            
+
                                 buttonMap = {
                                     0: 1, // left click
                                     4: 2, // middle click
@@ -1183,73 +1183,73 @@
                                     mouseout: &#x27;toElement&#x27;,
                                     mouseover: &#x27;fromElement&#x27;
                                 },
-                            
+
                                 resolve = Y.DOM2EventFacade.resolve,
-                            
+
                                 proto = {
                                     init: function() {
-                            
+
                                         IEEventFacade.superclass.init.apply(this, arguments);
-                            
+
                                         var e = this._event,
                                             x, y, d, b, de, t;
-                            
+
                                         this.target = resolve(e.srcElement);
-                            
+
                                         if ((&#x27;clientX&#x27; in e) &amp;&amp; (!x) &amp;&amp; (0 !== x)) {
                                             x = e.clientX;
                                             y = e.clientY;
-                            
+
                                             d = Y.config.doc;
                                             b = d.body;
                                             de = d.documentElement;
-                            
+
                                             x += (de.scrollLeft || (b &amp;&amp; b.scrollLeft) || 0);
                                             y += (de.scrollTop  || (b &amp;&amp; b.scrollTop)  || 0);
-                            
+
                                             this.pageX = x;
                                             this.pageY = y;
                                         }
-                            
+
                                         if (e.type == &quot;mouseout&quot;) {
                                             t = e.toElement;
                                         } else if (e.type == &quot;mouseover&quot;) {
                                             t = e.fromElement;
                                         }
-                            
+
                                         // fallback to t.relatedTarget to support simulated events.
                                         // IE doesn&#x27;t support setting toElement or fromElement on generic
                                         // events, so Y.Event.simulate sets relatedTarget instead.
                                         this.relatedTarget = resolve(t || e.relatedTarget);
-                            
+
                                         // which should contain the unicode key code if this is a key event.
                                         // For click events, which is normalized for which mouse button was
                                         // clicked.
                                         this.which = // chained assignment
                                         this.button = e.keyCode || buttonMap[e.button] || e.button;
                                     },
-                            
+
                                     stopPropagation: function() {
                                         this._event.cancelBubble = true;
                                         this._wrapper.stopped = 1;
                                         this.stopped = 1;
                                     },
-                            
+
                                     stopImmediatePropagation: function() {
                                         this.stopPropagation();
                                         this._wrapper.stopped = 2;
                                         this.stopped = 2;
                                     },
-                            
+
                                     preventDefault: function(returnValue) {
                                         this._event.returnValue = returnValue || false;
                                         this._wrapper.prevented = 1;
                                         this.prevented = 1;
                                     }
                                 };
-                            
+
                             Y.extend(IEEventFacade, Y.DOM2EventFacade, proto);
-                            
+
                             Y.extend(IELazyFacade, Y.DOM2EventFacade, proto);
                             IELazyFacade.prototype.init = function () {
                                 var e         = this._event,
@@ -1257,7 +1257,7 @@
                                     define    = IELazyFacade._define,
                                     lazyProperties = IELazyFacade._lazyProperties,
                                     prop;
-                            
+
                                 this.altKey   = e.altKey;
                                 this.ctrlKey  = e.ctrlKey;
                                 this.metaKey  = e.metaKey;
@@ -1269,18 +1269,18 @@
                                 this.charCode = e.keyCode;
                                 this.which    = // chained assignment
                                 this.button   = e.keyCode || buttonMap[e.button] || e.button;
-                            
+
                                 for (prop in lazyProperties) {
                                     if (lazyProperties.hasOwnProperty(prop)) {
                                         define(this, prop, lazyProperties[prop]);
                                     }
                                 }
-                            
+
                                 if (this._touch) {
                                     this._touch(e, this._currentTarget, this._wrapper);
                                 }
                             };
-                            
+
                             IELazyFacade._lazyProperties = {
                                 target: function () {
                                     return resolve(this._event.srcElement);
@@ -1288,7 +1288,7 @@
                                 relatedTarget: function () {
                                     var e = this._event,
                                         targetProp = relatedTargetMap[e.type] || &#x27;relatedTarget&#x27;;
-                            
+
                                     // fallback to t.relatedTarget to support simulated events.
                                     // IE doesn&#x27;t support setting toElement or fromElement on generic
                                     // events, so Y.Event.simulate sets relatedTarget instead.
@@ -1297,10 +1297,10 @@
                                 currentTarget: function () {
                                     return resolve(this._currentTarget);
                                 },
-                            
+
                                 wheelDelta: function () {
                                     var e = this._event;
-                            
+
                                     if (e.type === &quot;mousewheel&quot; || e.type === &quot;DOMMouseScroll&quot;) {
                                         return (e.detail) ?
                                             (e.detail * -1) :
@@ -1308,40 +1308,40 @@
                                             Math.round(e.wheelDelta / 80) || ((e.wheelDelta &lt; 0) ? -1 : 1);
                                     }
                                 },
-                            
+
                                 pageX: function () {
                                     var e = this._event,
                                         val = e.pageX,
                                         doc, bodyScroll, docScroll;
-                            
+
                                     if (val === undefined) {
                                         doc = Y.config.doc;
                                         bodyScroll = doc.body &amp;&amp; doc.body.scrollLeft;
                                         docScroll = doc.documentElement.scrollLeft;
-                            
+
                                         val = e.clientX + (docScroll || bodyScroll || 0);
                                     }
-                            
+
                                     return val;
                                 },
                                 pageY: function () {
                                     var e = this._event,
                                         val = e.pageY,
                                         doc, bodyScroll, docScroll;
-                            
+
                                     if (val === undefined) {
                                         doc = Y.config.doc;
                                         bodyScroll = doc.body &amp;&amp; doc.body.scrollTop;
                                         docScroll = doc.documentElement.scrollTop;
-                            
+
                                         val = e.clientY + (docScroll || bodyScroll || 0);
                                     }
-                            
+
                                     return val;
                                 }
                             };
-                            
-                            
+
+
                             /**
                              * Wrapper function for Object.defineProperty that creates a property whose
                              * value will be calulated only when asked for.  After calculating the value,
@@ -1364,7 +1364,7 @@
                             IELazyFacade._define = function (o, prop, valueFn) {
                                 function val(v) {
                                     var ret = (arguments.length) ? v : valueFn.call(this);
-                            
+
                                     delete o[prop];
                                     Object.defineProperty(o, prop, {
                                         value: ret,
@@ -1379,7 +1379,7 @@
                                     configurable: true
                                 });
                             };
-                            
+
                             if (imp &amp;&amp; (!imp.hasFeature(&#x27;Events&#x27;, &#x27;2.0&#x27;))) {
                                 if (useLazyFacade) {
                                     // Make sure we can use the lazy facade logic
@@ -1389,10 +1389,10 @@
                                         useLazyFacade = false;
                                     }
                                 }
-                            
+
                                 Y.DOMEventFacade = (useLazyFacade) ? IELazyFacade : IEEventFacade;
                             }
-                            
+
                                 </pre>
                             </div>
                         </div>
