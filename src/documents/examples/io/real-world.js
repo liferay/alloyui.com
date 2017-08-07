@@ -4,7 +4,7 @@ YUI().use(
   function(Y) {
     // create a new asynchonous request to grab all states
     Y.io.request(
-      'http://alloyui.com/io/data/states.json',
+      'https://alloyui.com/io/data/states.json',
       {
         dataType: 'json',
         on: {
@@ -30,7 +30,7 @@ YUI().use(
         if (cityCode !== '') {
           // creates a new asynchronous request to grab the cities corresponding to that state
           Y.io.request(
-            'http://alloyui.com/io/data/' + cityCode + '.json',
+            'https://alloyui.com/io/data/' + cityCode + '.json',
             {
               dataType: 'json',
               on: {
