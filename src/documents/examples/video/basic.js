@@ -4,8 +4,8 @@ YUI().use(
     new Y.Video(
       {
         boundingBox: '#myVideo',
-        ogvUrl: 'http://alloyui.com/video/movie.ogg',
-        url: 'http://alloyui.com/video/movie.mp4'
+        ogvUrl: 'https://alloyui.com/video/movie.ogg',
+        url: 'https://alloyui.com/video/movie.mp4'
       }
     ).render();
   }
