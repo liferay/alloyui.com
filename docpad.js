@@ -16,7 +16,7 @@ module.exports = {
       version: '1.0.3',
 
       // CDN domain
-      cdnDomain: 'http://cdn.alloyui.com'
+      cdnDomain: 'https://cdn.alloyui.com'
     },
 
     /* -----------------------------
@@ -29,7 +29,7 @@ module.exports = {
       isLastVersion: false,
 
       // Production URL
-      url: 'http://alloyui.com',
+      url: '',
 
       // Github branch
       githubUrl: 'https://github.com/liferay/alloy-ui/tree/1.0.x',
