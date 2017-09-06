@@ -4,8 +4,8 @@ YUI().use(
     var audio = new Y.Audio(
       {
         boundingBox: '#myAudio',
-        url: 'http://alloyui.com/audio/zelda.mp3',
-        oggUrl: 'http://alloyui.com/audio/zelda.ogg'
+        url: 'https://alloyui.com/audio/zelda.mp3',
+        oggUrl: 'https://alloyui.com/audio/zelda.ogg'
       }
     ).render();
 
@@ -33,8 +33,8 @@ YUI().use(
         e.preventDefault();
 
         audio.pause();
-        audio.set('url', 'http://alloyui.com/audio/bc.mp3');
-        audio.set('oggUrl', 'http://alloyui.com/audio/bc.ogg');
+        audio.set('url', 'https://alloyui.com/audio/bc.mp3');
+        audio.set('oggUrl', 'https://alloyui.com/audio/bc.ogg');
         audio.load();
         audio.play();
       }
