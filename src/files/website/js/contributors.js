@@ -1,7 +1,7 @@
 AUI().use('jsonp', 'aui-node', function (A) {
 
   var githubAPI = 'https://api.github.com/repos/liferay/alloy-ui/contributors?callback={callback}',
-      template  = '<a href="http://github.com/{login}" title="@{login}">' +
+      template  = '<a href="https://github.com/{login}" title="@{login}">' +
                   '  <img src="{avatar_url}" width="50" height="50" alt="@{login}">' +
                   '</a>';
 
