@@ -4,7 +4,7 @@ AUI().use(
     new A.Audio(
       {
         boundingBox: '#myAudio',
-        url: 'http://alloyui.com/audio/zelda.mp3'
+        url: 'https://alloyui.com/audio/zelda.mp3'
       }
     ).render();
   }

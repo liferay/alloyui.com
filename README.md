@@ -26,7 +26,7 @@ For now, you can help us with the website by writing tutorials or examples for t
 * [How to create a new tutorial](https://github.com/liferay/alloyui.com/wiki/How-to-create-a-new-tutorial)
 * [How to create a new example](https://github.com/liferay/alloyui.com/wiki/How-to-create-a-new-example)
 
-Or go ahead and [read our main guide](http://liferay.github.com/alloyui.com/contributing).
+Or go ahead and [read our main guide](https://liferay.github.com/alloyui.com/contributing).
 
 **Remember:** Before any pull request don't forget to run: `ant jshint`. If you find any error please fix it before sending your pull request.
 
@@ -105,7 +105,7 @@ List NodeJS modules dependencies.
 
 ## Deploy
 
-Just run `ant deploy` and then go to [alloyui.com](http://alloyui.com/).
+Just run `ant deploy` and then go to [alloyui.com](https://alloyui.com/).
 
 ## History
 
