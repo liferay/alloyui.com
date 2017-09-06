@@ -1,11 +1,11 @@
-# [AlloyUI.com](http://alloyui.com/)
+# [AlloyUI.com](https://alloyui.com/)
 
 [![Build Status](http://img.shields.io/travis/liferay/alloyui.com/master.svg?style=flat)](https://travis-ci.org/liferay/alloyui.com)
 [![Dependencies Status](http://img.shields.io/david/liferay/alloyui.com.svg?style=flat)](https://david-dm.org/liferay/alloyui.com)
 
 ![AlloyUI Robo Suit](http://f.cl.ly/items/1c1z23343G2e2I3X3a3P/Screen-Shot-2013-04-08-at-9.37.36-AM.png)
 
-If you want to report an issue about [AlloyUI's website](http://alloyui.com) you are in the right place. But if you're facing problems with AlloyUI's source code, please visit [liferay/alloy-ui](https://github.com/liferay/alloy-ui/) repository.
+If you want to report an issue about [AlloyUI's website](https://alloyui.com) you are in the right place. But if you're facing problems with AlloyUI's source code, please visit [liferay/alloy-ui](https://github.com/liferay/alloy-ui/) repository.
 
 ## Table of contents
 
