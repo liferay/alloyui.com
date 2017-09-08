@@ -29,7 +29,7 @@ module.exports = {
       isLastVersion: false,
 
       // Production URL
-      url: '',
+      url: 'https://alloyui.com',
 
       // Github branch
       githubUrl: 'https://github.com/liferay/alloy-ui/tree/1.0.x',
