@@ -1,22 +1,23 @@
-AUI().use('jsonp', 'node',function (A) {
-
+YUI().use('jsonp', 'node', 'aui-tooltip', function(Y) {
   var githubAPI = 'https://api.github.com/repos/liferay/alloy-ui/contributors?callback={callback}',
-      template  = '<a href="http://github.com/{login}" title="@{login}">' +
+      template  = '<a href="https://github.com/{login}" title="@{login}">' +
                   '  <img src="{avatar_url}" width="50" height="50" alt="@{login}">' +
                   '</a>';
 
   function handleJSONP(response) {
-
     var contributorsHTML = '';
 
-    for( var i = 0; i < response.data.length; i++ ) {
-      contributorsHTML += A.Lang.sub(template, response.data[i]);
+    for (var i = 0; i < response.data.length; i++) {
+      contributorsHTML += Y.Lang.sub(template, response.data[i]);
     }
 
-    A.one("#contributors").setHTML(contributorsHTML);
+    Y.one("#contributors").setHTML(contributorsHTML);
 
+    new Y.TooltipDelegate({
+        trigger: '#contributors a',
+        zIndex: 1
+    });
   }
 
-  A.jsonp(githubAPI, handleJSONP);
-
+  Y.jsonp(githubAPI, handleJSONP);
 });

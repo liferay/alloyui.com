@@ -1,7 +1,10 @@
-AUI().use('aui-rating', function(A) {
-
-  new A.ThumbRating({
-    boundingBox: '#myRating'
-  }).render();
-
-});
+YUI().use(
+  'aui-rating',
+  function(Y) {
+    new Y.ThumbRating(
+      {
+        boundingBox: '#myRating'
+      }
+    ).render();
+  }
+);

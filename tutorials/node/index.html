@@ -1,0 +1,944 @@
+<!doctype html>
+<html>
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+
+  <title>Tutorial - Node | AlloyUI</title>
+
+  <meta charset="utf-8">
+  <meta name="author" content="Eduardo Lundgren, Nate Cavanaugh">
+  <meta name="description" content="Allows for interaction with the DOM through a set of utility methods.">
+
+  <!-- Facebook Tags -->
+  <meta property="fb:app_id" content="176947299114210">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://alloyui.com">
+  <meta property="og:image" content="https://alloyui.com/website/img/facebook-share.jpg">
+  <meta property="og:title" content="Tutorial - Node | AlloyUI">
+  <meta property="og:description" content="Allows for interaction with the DOM through a set of utility methods.">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="https://alloyui.com/website/img/favicon.ico">
+
+  <!-- CSS: Alloy Bootstrap -->
+  <link href="https://alloyui.com/alloy-ui/aui-css/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- CSS: Website style -->
+  <link href="https://alloyui.com/website/css/main.css" rel="stylesheet">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,700" rel="stylesheet">
+
+  <!-- JS -->
+  <script src="https://cdn.alloyui.com/3.0.1/aui/aui-min.js"></script>
+
+</head>
+<body class="yui3-skin-sam">
+
+  <div id="wrap">
+
+    <a class="github-ribbon" href="https://github.com/liferay/alloy-ui/">
+      <img src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
+    </a>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top" id="siteNavigation">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="https://alloyui.com">
+            <img src="https://alloyui.com/website/img/logo.png" alt="AlloyUI Logo" width="149" height="34">
+          </a>
+          <a href="#" id="version">
+            v3.0.x
+            <span class="caret"></span>
+          </a>
+          <ul id="version-dropdown" class="dropdown-menu" role="menu" aria-labelledby="drop">
+            <li><a tabindex="-1" href="/versions/2.5.x">v2.5.x</a></li>
+            <li><a tabindex="-1" href="/versions/2.0.x">v2.0.x</a></li>
+            <li><a tabindex="-1" href="/versions/1.5.x">v1.5.x</a></li>
+            <li><a tabindex="-1" href="/versions/1.0.x">v1.0.x</a></li>
+          </ul>
+        </div>
+
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="https://alloyui.com/examples/">Examples</a></li>
+          <li><a href="https://alloyui.com/tutorials/">Tutorials</a></li>
+          <li><a href="https://alloyui.com/api/" target="_blank">API Docs</a></li>
+          <li><a href="https://alloyui.com/rosetta-stone/" target="_blank">Rosetta Stone</a></li>
+          <li><a href="http://getbootstrap.com/" target="_blank">Bootstrap</a></li>
+          <li><a href="https://alloyui.com/contributing/">Contributing</a></li>
+          <li><a href="https://alloyui.com/about/">About</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div id="content">
+      <div class="banner page-banner">
+  <div class="container">
+    <div class="presentation">
+      <h2>Tutorials</h2>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="col-xs-3 bs-docs-sidebar">
+
+    <p class="related">General</p>
+    <ul class="list-group bs-docs-sidenav affix-top">
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/index.html"><span class="glyphicon glyphicon-chevron-right"></span> How to use it?</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/unit-test.html"><span class="glyphicon glyphicon-chevron-right"></span> Unit Tests.</a>
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </ul>
+
+    <p class="related">List of modules</p>
+    <ul class="list-group bs-docs-sidenav affix-top">
+      
+        
+      
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/ace-editor/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Ace Editor</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/affix/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Affix</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/alert/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Alert</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/audio/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Audio</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/button/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Button</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/carousel/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Carousel</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/char-counter/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Char Counter</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/color-picker/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Color Picker</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/datatable/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Data Table</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/datepicker/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Datepicker</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/diagram-builder/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Diagram Builder</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/dropdown/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Dropdown</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/form-builder/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Form Builder</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/form-validator/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Form Validator</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/io/index.html"><span class="glyphicon glyphicon-chevron-right"></span> I/O</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/image-cropper/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Image Cropper</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/image-viewer/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Image Viewer</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/modal/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Modal</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item active" href="https://alloyui.com/tutorials/node/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Node</a>
+            
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/pagination/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Pagination</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/popover/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Popover</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/progress-bar/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Progress Bar</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/rating/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Rating</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/scheduler/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Scheduler</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/scrollspy/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Scrollspy</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/sortable-layout/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Sortable Layout</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/sortable-list/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Sortable List</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/tabview/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Tabview</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/timepicker/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Timepicker</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/toggler/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Toggler</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/toolbar/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Toolbar</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/tooltip/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Tooltip</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/tree/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Tree View</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/video/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Video</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/viewport/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Viewport</a>
+          
+        
+      
+    </ul>
+
+  </div>
+
+  <div class="col-xs-9">
+
+    <h1>Node</h1>
+
+    
+      <ul class="nav nav-tabs">
+        <li class="active">
+          <a href="#">Introduction</a>
+        </li>
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://alloyui.com/examples/node/index.html">Basic Example</a></li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://alloyui.com/examples/node/full.html">Full Example</a></li>
+          
+        
+          
+            <li><a href="https://alloyui.com/examples/node/real-world.html">Real World Example</a></li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    
+
+    
+      <p>Allows for interaction with the DOM through a set of utility methods.</p>
+      <hr>
+    
+
+    <h4 id="what-does-node-do-exactly-">What Does Node Do, Exactly?</h4>
+<p>Node supplies a set of methods that assists in DOM manipulation. Simple DOM interaction is possible without the node component, with <code>Y.one</code>, <code>Y.all</code>, and such commands being supplied in the YUI base code.</p>
+<p>However, more complicated actions which would be quite difficult with that code alone (e.g., finding ancestors and siblings, changing attributes, or modifying content) are made much simpler with the node component.</p>
+<hr>
+<h4 id="getting-started">Getting Started</h4>
+<p>First load the seed and CSS files, if you haven&#39;t yet.</p>
+<pre class="highlight"><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://cdn.alloyui.com/3.0.1/aui/aui-min.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"https://cdn.alloyui.com/3.0.1/aui-css/css/bootstrap.min.css"</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">"stylesheet"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">link</span>&gt;</span></code></pre>
+<p>Then initialize AlloyUI and load the Node module.</p>
+<pre class="highlight"><code class="hljs javascript">YUI().use(
+  <span class="hljs-string">'aui-node'</span>,
+  <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">Y</span>) </span>{
+    <span class="hljs-comment">// code goes here</span>
+  }
+);</code></pre>
+<hr>
+<h4 id="using-node">Using Node</h4>
+<p>Let&#39;s make a <code>&lt;div&gt;</code> element so we have something to work with:</p>
+<pre class="highlight"><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"box"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
+<p>Now we can do all sorts of things with this box, using the utility methods that the node component provides.</p>
+<p>We can find all of the ancestors of our box, or all the ancestors that are <code>div</code> elements:</p>
+<pre class="highlight"><code class="hljs javascript">YUI().use(
+  <span class="hljs-string">'aui-node'</span>,
+  <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">Y</span>) </span>{
+    <span class="hljs-keyword">var</span> ancestors = Y.one(<span class="hljs-string">'.box'</span>).ancestors();
+    <span class="hljs-comment">// or</span>
+    <span class="hljs-keyword">var</span> divAncestors = Y.one(<span class="hljs-string">'.box'</span>).ancestors(<span class="hljs-string">'div'</span>);
+  }
+);</code></pre>
+<p>We can add content to our box:</p>
+<pre class="highlight"><code class="hljs javascript">YUI().use(
+  <span class="hljs-string">'aui-node'</span>,
+  <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">Y</span>) </span>{
+    Y.one(<span class="hljs-string">'.box'</span>).html(<span class="hljs-string">'&lt;p&gt;I just love boxes! Do you?&lt;/p&gt;'</span>);
+  }
+);</code></pre>
+<p>And then add more content:</p>
+<pre class="highlight"><code class="hljs javascript">YUI().use(
+  <span class="hljs-string">'aui-node'</span>,
+  <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">Y</span>) </span>{
+    Y.one(<span class="hljs-string">'.box p'</span>).placeAfter(<span class="hljs-string">'&lt;p&gt;Especially when they are filled to the brim!&lt;/p&gt;'</span>);
+  }
+);</code></pre>
+<p>Or, we could empty it of all content:</p>
+<pre class="highlight"><code class="hljs javascript">YUI().use(
+  <span class="hljs-string">'aui-node'</span>,
+  <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">Y</span>) </span>{
+    Y.one(<span class="hljs-string">'.box'</span>).empty();
+  }
+);</code></pre>
+<p>Node allows you to interact with the DOM in all sorts of ways that would usually be quite difficult. You can get the margin or padding on a certain element, change an element&#39;s ID, center an element in an ancestor container, get or set an attribute of an element, or many other useful things.</p>
+<p>For a full list of the utilities that the node component supplies, check out the <a href="https://github.com/liferay/alloy-ui/blob/master/src/aui-node/js/aui-node-base.js">source code</a>! Most methods explain what they do right there in the code for you.</p>
+
+
+    
+    <div class="alert alert-success">
+        For more information about configuration, check out our <a href="https://alloyui.com/api/modules/aui-node.html" target="_blank">API Docs</a>.
+    </div>
+    
+
+  </div>
+
+</div>
+    </div>
+
+    <div id="push"></div>
+
+  </div>
+
+
+  <div class="footer">
+    <div class="container">
+      <p class="col-xs-6">
+        <a href="http://liferay.com/">
+          <img src="https://alloyui.com/website/img/liferay-logo.png" alt="Liferay Logo" id="liferay-logo">
+        </a>
+      </p>
+      <p class="copyright col-xs-6"><a href="https://github.com/liferay/alloy-ui/blob/master/LICENSE.md">BSD</a> License.</p>
+    </div>
+  </div>
+
+  <script src="https://alloyui.com/website/js/version-dropdown.js"></script>
+
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-37033501-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+  </script>
+
+</body>
+</html>

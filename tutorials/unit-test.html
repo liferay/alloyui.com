@@ -1,0 +1,591 @@
+<!doctype html>
+<html>
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+
+  <title>Tutorial - Unit Tests. | AlloyUI</title>
+
+  <meta charset="utf-8">
+  <meta name="author" content="Eduardo Lundgren, Nate Cavanaugh">
+  <meta name="description" content="Write browser-based JavaScript tests to easily ensure code functionality through unit testing.">
+
+  <!-- Facebook Tags -->
+  <meta property="fb:app_id" content="176947299114210">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://alloyui.com">
+  <meta property="og:image" content="https://alloyui.com/website/img/facebook-share.jpg">
+  <meta property="og:title" content="Tutorial - Unit Tests. | AlloyUI">
+  <meta property="og:description" content="Write browser-based JavaScript tests to easily ensure code functionality through unit testing.">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="https://alloyui.com/website/img/favicon.ico">
+
+  <!-- CSS: Alloy Bootstrap -->
+  <link href="https://alloyui.com/alloy-ui/aui-css/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- CSS: Website style -->
+  <link href="https://alloyui.com/website/css/main.css" rel="stylesheet">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,700" rel="stylesheet">
+
+  <!-- JS -->
+  <script src="https://cdn.alloyui.com/3.0.1/aui/aui-min.js"></script>
+
+</head>
+<body class="yui3-skin-sam">
+
+  <div id="wrap">
+
+    <a class="github-ribbon" href="https://github.com/liferay/alloy-ui/">
+      <img src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
+    </a>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top" id="siteNavigation">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="https://alloyui.com">
+            <img src="https://alloyui.com/website/img/logo.png" alt="AlloyUI Logo" width="149" height="34">
+          </a>
+          <a href="#" id="version">
+            v3.0.x
+            <span class="caret"></span>
+          </a>
+          <ul id="version-dropdown" class="dropdown-menu" role="menu" aria-labelledby="drop">
+            <li><a tabindex="-1" href="/versions/2.5.x">v2.5.x</a></li>
+            <li><a tabindex="-1" href="/versions/2.0.x">v2.0.x</a></li>
+            <li><a tabindex="-1" href="/versions/1.5.x">v1.5.x</a></li>
+            <li><a tabindex="-1" href="/versions/1.0.x">v1.0.x</a></li>
+          </ul>
+        </div>
+
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="https://alloyui.com/examples/">Examples</a></li>
+          <li><a href="https://alloyui.com/tutorials/">Tutorials</a></li>
+          <li><a href="https://alloyui.com/api/" target="_blank">API Docs</a></li>
+          <li><a href="https://alloyui.com/rosetta-stone/" target="_blank">Rosetta Stone</a></li>
+          <li><a href="http://getbootstrap.com/" target="_blank">Bootstrap</a></li>
+          <li><a href="https://alloyui.com/contributing/">Contributing</a></li>
+          <li><a href="https://alloyui.com/about/">About</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div id="content">
+      <div class="banner page-banner">
+  <div class="container">
+    <div class="presentation">
+      <h2>Tutorials</h2>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="col-xs-3 bs-docs-sidebar">
+
+    <p class="related">General</p>
+    <ul class="list-group bs-docs-sidenav affix-top">
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/index.html"><span class="glyphicon glyphicon-chevron-right"></span> How to use it?</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item active" href="https://alloyui.com/tutorials/unit-test.html"><span class="glyphicon glyphicon-chevron-right"></span> Unit Tests.</a>
+            
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </ul>
+
+    <p class="related">List of modules</p>
+    <ul class="list-group bs-docs-sidenav affix-top">
+      
+        
+      
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/ace-editor/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Ace Editor</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/affix/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Affix</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/alert/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Alert</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/audio/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Audio</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/button/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Button</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/carousel/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Carousel</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/char-counter/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Char Counter</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/color-picker/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Color Picker</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/datatable/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Data Table</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/datepicker/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Datepicker</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/diagram-builder/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Diagram Builder</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/dropdown/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Dropdown</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/form-builder/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Form Builder</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/form-validator/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Form Validator</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/io/index.html"><span class="glyphicon glyphicon-chevron-right"></span> I/O</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/image-cropper/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Image Cropper</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/image-viewer/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Image Viewer</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/modal/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Modal</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/node/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Node</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/pagination/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Pagination</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/popover/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Popover</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/progress-bar/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Progress Bar</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/rating/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Rating</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/scheduler/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Scheduler</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/scrollspy/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Scrollspy</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/sortable-layout/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Sortable Layout</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/sortable-list/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Sortable List</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/tabview/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Tabview</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/timepicker/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Timepicker</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/toggler/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Toggler</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/toolbar/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Toolbar</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/tooltip/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Tooltip</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/tree/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Tree View</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/video/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Video</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/viewport/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Viewport</a>
+          
+        
+      
+    </ul>
+
+  </div>
+
+  <div class="col-xs-9">
+
+    <h1>Unit Tests.</h1>
+
+    
+
+    
+      <p>Write browser-based JavaScript tests to easily ensure code functionality through unit testing.</p>
+      <hr>
+    
+
+    <h4>1. Copy and paste</h4>
+
+<pre class="highlight"><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://cdn.alloyui.com/3.0.1/aui/aui-min.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
+
+<p>This ultra-small bit of JavaScript gives us access to all AlloyUI modules. You are going to need this.</p>
+
+<hr>
+
+<h4>2. Getting started!</h4>
+
+<p>Let's create a YUI instance and load the <code>test</code> module to begin.</p>
+
+<pre class="highlight"><code class="hljs javascript">YUI.use(
+    <span class="hljs-string">'test'</span>,
+    <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">Y</span>) </span>{
+        <span class="hljs-comment">// Test cases are written here</span>
+    }
+);</code></pre>
+
+<hr>
+
+<h4>3. Writing Test Cases</h4>
+
+<p>Create a <code>TestCase</code> object with <code>Y.Test.Case</code> constructor and pass it an object with individual test cases. Keep in mind that each test should test a specific piece of functional code.</p>
+
+<p>Test methods can be named using the traditional manner of prepending the word <em>test</em> to the method name, or using a "friendly name," which is a sentence containing at least one space that describes the test's purpose.</p>
+
+<pre class="highlight"><code class="hljs javascript"><span class="hljs-keyword">var</span> yourTestCase = <span class="hljs-keyword">new</span> Y.Test.Case(
+    {
+        <span class="hljs-attr">name</span>: <span class="hljs-string">"TestCase Name"</span>,
+
+        <span class="hljs-comment">// ------ Tests ------</span>
+        testSomething: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            <span class="hljs-comment">// code goes here</span>
+        },
+
+        <span class="hljs-string">"something should is going to be tested here"</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            <span class="hljs-comment">// code goes here</span>
+        }
+    }
+);</code></pre>
+
+<h4>setUp() and tearDown()</h4>
+
+<p>Sometimes it is necessary to setup information before a test is run and clean up the information after the test is run. The <code>setUp()</code> method is run before each and every test in the test case and likewise the <code>tearDown()</code> method is run after each test is run. </p>
+
+<pre class="highlight"><code class="hljs javascript"><span class="hljs-keyword">var</span> yourTestCase = <span class="hljs-keyword">new</span> Y.Test.Case(
+    {
+        <span class="hljs-attr">name</span>: <span class="hljs-string">"TestCase Name"</span>,
+
+        <span class="hljs-comment">// ------ Setup and Tear Down ------</span>
+        setUp: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            <span class="hljs-comment">// initialize data to be used in each test</span>
+        },
+
+        <span class="hljs-attr">tearDown</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            <span class="hljs-comment">// remove data after each test</span>
+        },
+
+        <span class="hljs-comment">// ------ Tests ------</span>
+        testSomething: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            <span class="hljs-comment">// code goes here</span>
+        },
+
+        <span class="hljs-string">"something should is going to be tested here"</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            <span class="hljs-comment">// code goes here</span>
+        }
+    }
+);</code></pre>
+
+<h4>Assertions</h4>
+
+<p>We now have the basic structure of a test, but have not actually tested anything. Assertions allow us to check the validity of a particular action or function. In general, they accept a test condition and an optional message to display if the test fails.</p>
+
+<p>There are many types of assertions available, all of which can be found at <a href="http://yuilibrary.com/yui/docs/test/#assertions" target="_blank">http://yuilibrary.com/yui/docs/test/#assertions</a>. But for now, we will just look at some of the basics.</p>
+
+<pre class="highlight"><code class="hljs javascript"><span class="hljs-keyword">var</span> carsTestCase = <span class="hljs-keyword">new</span> Y.Test.Case(
+    {
+        <span class="hljs-attr">name</span>: <span class="hljs-string">"Cars Test"</span>,
+
+        <span class="hljs-attr">setUp</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            <span class="hljs-keyword">this</span>.car = {
+                <span class="hljs-attr">color</span>: [<span class="hljs-string">'red'</span>, <span class="hljs-string">'black'</span>, <span class="hljs-string">'silver'</span>, <span class="hljs-string">'white'</span>],
+                <span class="hljs-attr">make</span>: <span class="hljs-string">"Toyota"</span>,
+                <span class="hljs-attr">model</span>: <span class="hljs-string">'Camry'</span>,
+                <span class="hljs-attr">year</span>: <span class="hljs-number">2013</span>
+            };
+        },
+
+        <span class="hljs-attr">tearDown</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            <span class="hljs-keyword">delete</span> <span class="hljs-keyword">this</span>.car;
+        },
+
+        <span class="hljs-string">'car colors should be listed in an array'</span> <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            Y.Assert.isArray(<span class="hljs-keyword">this</span>.car.color);
+        },
+
+        <span class="hljs-attr">testCarMake</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            Y.Assert.isEqual(<span class="hljs-string">"Toyota"</span>, <span class="hljs-keyword">this</span>.car.make, <span class="hljs-string">"The car make should be 'Toyota'"</span>);
+        },
+
+        <span class="hljs-attr">testCarModel</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+            Y.assert(<span class="hljs-string">"Camry"</span> == <span class="hljs-keyword">this</span>.car.model, <span class="hljs-string">"Model should be 'Camry'"</span>);
+        },
+
+        <span class="hljs-string">'year should be a number'</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            Y.Assert.isNumber(<span class="hljs-keyword">this</span>.car.year, <span class="hljs-string">"Year should be a number"</span>);
+        }
+    }
+);</code></pre>
+
+<p>Great! Now that we have a <code>TestCase</code> set up, we can add it to a <code>TestSuite</code>.</p>
+
+<hr>
+
+<h4>4. Test Suites</h4>
+
+<p>If we are testing a large application that requires many test cases, a <code>TestSuite</code> allows us to organize a collection of <code>TestCase</code> together. Initializing <code>TestSuite</code> and adding <code>TestCase</code> to them is easy.</p>
+
+<pre class="highlight"><code class="hljs javascript"><span class="hljs-keyword">var</span> suite = <span class="hljs-keyword">new</span> Y.Test.Suite(<span class="hljs-string">"Name of Your TestSuite"</span>);
+
+suite.add(
+    <span class="hljs-keyword">new</span> Y.TestCase(
+        {
+            <span class="hljs-comment">// code goes here</span>
+        }
+    )
+);
+
+<span class="hljs-comment">// Adding carsTestCase to the testSuite:</span>
+suite.add(carsTestCase);</code></pre>
+
+<p>Multiple <code>TestSuite</code> can also be organized together into a parent <code>TestSuite</code> in the same way.</p>
+
+<hr>
+
+<h4>5. Running Tests</h4>
+
+<p>Congratulations! You now have all the tools to write a unit test. All we have to do is run it!</p>
+
+<pre class="highlight"><code class="hljs javascript">Y.Test.Runner.add(suite);
+
+Y.Test.Runner.run();</code></pre>
+
+<hr>
+
+<p>For more information about writing unit tests, checkout out <a href="http://yuilibrary.com/yui/docs/test/" target="_blank">YUI's test</a> documentation.</p>
+
+    
+
+  </div>
+
+</div>
+    </div>
+
+    <div id="push"></div>
+
+  </div>
+
+
+  <div class="footer">
+    <div class="container">
+      <p class="col-xs-6">
+        <a href="http://liferay.com/">
+          <img src="https://alloyui.com/website/img/liferay-logo.png" alt="Liferay Logo" id="liferay-logo">
+        </a>
+      </p>
+      <p class="copyright col-xs-6"><a href="https://github.com/liferay/alloy-ui/blob/master/LICENSE.md">BSD</a> License.</p>
+    </div>
+  </div>
+
+  <script src="https://alloyui.com/website/js/version-dropdown.js"></script>
+
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-37033501-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+  </script>
+
+</body>
+</html>

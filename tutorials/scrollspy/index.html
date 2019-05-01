@@ -1,0 +1,947 @@
+<!doctype html>
+<html>
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+
+  <title>Tutorial - Scrollspy | AlloyUI</title>
+
+  <meta charset="utf-8">
+  <meta name="author" content="Eduardo Lundgren, Nate Cavanaugh">
+  <meta name="description" content="Allows updating of navigation targets based on scroll position.">
+
+  <!-- Facebook Tags -->
+  <meta property="fb:app_id" content="176947299114210">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://alloyui.com">
+  <meta property="og:image" content="https://alloyui.com/website/img/facebook-share.jpg">
+  <meta property="og:title" content="Tutorial - Scrollspy | AlloyUI">
+  <meta property="og:description" content="Allows updating of navigation targets based on scroll position.">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="https://alloyui.com/website/img/favicon.ico">
+
+  <!-- CSS: Alloy Bootstrap -->
+  <link href="https://alloyui.com/alloy-ui/aui-css/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- CSS: Website style -->
+  <link href="https://alloyui.com/website/css/main.css" rel="stylesheet">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,700" rel="stylesheet">
+
+  <!-- JS -->
+  <script src="https://cdn.alloyui.com/3.0.1/aui/aui-min.js"></script>
+
+</head>
+<body class="yui3-skin-sam">
+
+  <div id="wrap">
+
+    <a class="github-ribbon" href="https://github.com/liferay/alloy-ui/">
+      <img src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
+    </a>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top" id="siteNavigation">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="https://alloyui.com">
+            <img src="https://alloyui.com/website/img/logo.png" alt="AlloyUI Logo" width="149" height="34">
+          </a>
+          <a href="#" id="version">
+            v3.0.x
+            <span class="caret"></span>
+          </a>
+          <ul id="version-dropdown" class="dropdown-menu" role="menu" aria-labelledby="drop">
+            <li><a tabindex="-1" href="/versions/2.5.x">v2.5.x</a></li>
+            <li><a tabindex="-1" href="/versions/2.0.x">v2.0.x</a></li>
+            <li><a tabindex="-1" href="/versions/1.5.x">v1.5.x</a></li>
+            <li><a tabindex="-1" href="/versions/1.0.x">v1.0.x</a></li>
+          </ul>
+        </div>
+
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="https://alloyui.com/examples/">Examples</a></li>
+          <li><a href="https://alloyui.com/tutorials/">Tutorials</a></li>
+          <li><a href="https://alloyui.com/api/" target="_blank">API Docs</a></li>
+          <li><a href="https://alloyui.com/rosetta-stone/" target="_blank">Rosetta Stone</a></li>
+          <li><a href="http://getbootstrap.com/" target="_blank">Bootstrap</a></li>
+          <li><a href="https://alloyui.com/contributing/">Contributing</a></li>
+          <li><a href="https://alloyui.com/about/">About</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div id="content">
+      <div class="banner page-banner">
+  <div class="container">
+    <div class="presentation">
+      <h2>Tutorials</h2>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="col-xs-3 bs-docs-sidebar">
+
+    <p class="related">General</p>
+    <ul class="list-group bs-docs-sidenav affix-top">
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/index.html"><span class="glyphicon glyphicon-chevron-right"></span> How to use it?</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/unit-test.html"><span class="glyphicon glyphicon-chevron-right"></span> Unit Tests.</a>
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </ul>
+
+    <p class="related">List of modules</p>
+    <ul class="list-group bs-docs-sidenav affix-top">
+      
+        
+      
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/ace-editor/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Ace Editor</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/affix/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Affix</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/alert/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Alert</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/audio/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Audio</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/button/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Button</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/carousel/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Carousel</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/char-counter/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Char Counter</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/color-picker/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Color Picker</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/datatable/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Data Table</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/datepicker/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Datepicker</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/diagram-builder/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Diagram Builder</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/dropdown/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Dropdown</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/form-builder/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Form Builder</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/form-validator/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Form Validator</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/io/index.html"><span class="glyphicon glyphicon-chevron-right"></span> I/O</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/image-cropper/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Image Cropper</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/image-viewer/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Image Viewer</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/modal/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Modal</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/node/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Node</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/pagination/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Pagination</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/popover/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Popover</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/progress-bar/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Progress Bar</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/rating/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Rating</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/scheduler/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Scheduler</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item active" href="https://alloyui.com/tutorials/scrollspy/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Scrollspy</a>
+            
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/sortable-layout/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Sortable Layout</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/sortable-list/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Sortable List</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/tabview/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Tabview</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/timepicker/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Timepicker</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/toggler/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Toggler</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/toolbar/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Toolbar</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/tooltip/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Tooltip</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/tree/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Tree View</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/video/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Video</a>
+          
+        
+      
+        
+          
+            <a class="list-group-item" href="https://alloyui.com/tutorials/viewport/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Viewport</a>
+          
+        
+      
+    </ul>
+
+  </div>
+
+  <div class="col-xs-9">
+
+    <h1>Scrollspy</h1>
+
+    
+      <ul class="nav nav-tabs">
+        <li class="active">
+          <a href="#">Introduction</a>
+        </li>
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://alloyui.com/examples/scrollspy/index.html">Basic Example</a></li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    
+
+    
+      <p>Allows updating of navigation targets based on scroll position.</p>
+      <hr>
+    
+
+    <h4 id="getting-started">Getting Started</h4>
+<p>First load the seed and CSS files, if you haven&#39;t yet.</p>
+<pre class="highlight"><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://cdn.alloyui.com/3.0.1/aui/aui-min.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"https://cdn.alloyui.com/3.0.1/aui-css/css/bootstrap.min.css"</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">"stylesheet"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">link</span>&gt;</span></code></pre>
+<p>Then initialize AlloyUI and load the Scrollspy module.</p>
+<pre class="highlight"><code class="hljs javascript">YUI().use(
+  <span class="hljs-string">'aui-scrollspy'</span>,
+  <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">Y</span>) </span>{
+    <span class="hljs-comment">// code goes here</span>
+  }
+);</code></pre>
+<hr>
+<h4 id="using-scrollspy">Using Scrollspy</h4>
+<p>Start by adding the markup that you would like to spy:</p>
+<pre class="highlight"><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"navbar"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"navbar navbar-default"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"nav navbar-nav"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"#first"</span>&gt;</span>First<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"#second"</span>&gt;</span>Second<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"#third"</span>&gt;</span>Third<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"scrollNode"</span> <span class="hljs-attr">style</span>=<span class="hljs-string">"overflow-y: scroll; height: 300px"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">h4</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"first"</span>&gt;</span>First<span class="hljs-tag">&lt;/<span class="hljs-name">h4</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Etiam nulla eruditi eu quo, facer postulant an mea. Eos at legimus deseruisse adipiscing. Amet iriure torquatos ex mei. Sumo purto propriae nam ne, eam ferri diceret deseruisse ea, cum ubique constituam suscipiantur an. Alii brute legendos ut pri, epicuri voluptaria contentiones an eos. Pri ut feugiat ornatus consequuntur, ubique euismod patrioque id duo. Etiam nulla eruditi eu quo, facer postulant an mea. Eos at legimus deseruisse adipiscing. Amet iriure torquatos ex mei. Sumo purto propriae nam ne, eam ferri diceret deseruisse ea, cum ubique constituam suscipiantur an. Alii brute legendos ut pri, epicuri voluptaria contentiones an eos. Pri ut feugiat ornatus consequuntur, ubique euismod patrioque id duo. Etiam nulla eruditi eu quo, facer postulant an mea. Eos at legimus deseruisse adipiscing. Amet iriure torquatos ex mei. Sumo purto propriae nam ne, eam ferri diceret deseruisse ea, cum ubique constituam suscipiantur an. Alii brute legendos ut pri, epicuri voluptaria contentiones an eos. Pri ut feugiat ornatus consequuntur, ubique euismod patrioque id duo.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">h4</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"second"</span>&gt;</span>Second<span class="hljs-tag">&lt;/<span class="hljs-name">h4</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Pri ea diam persius dissentias, simul assentior ut sed. An illum hendrerit ius, pri aeterno nominati delicata at. Usu fugit facer et, nec in vivendo appellantur interpretaris. Petentium euripidis te vim, ex minimum appareat eam. Etiam nulla eruditi eu quo, facer postulant an mea. Eos at legimus deseruisse adipiscing. Amet iriure torquatos ex mei. Sumo purto propriae nam ne, eam ferri diceret deseruisse ea, cum ubique constituam suscipiantur an. Alii brute legendos ut pri, epicuri voluptaria contentiones an eos. Pri ut feugiat ornatus consequuntur, ubique euismod patrioque id duo. Etiam nulla eruditi eu quo, facer postulant an mea. Eos at legimus deseruisse adipiscing. Amet iriure torquatos ex mei. Sumo purto propriae nam ne, eam ferri diceret deseruisse ea, cum ubique constituam suscipiantur an. Alii brute legendos ut pri, epicuri voluptaria contentiones an eos. Pri ut feugiat ornatus consequuntur, ubique euismod patrioque id duo.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">h4</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"third"</span>&gt;</span>Third<span class="hljs-tag">&lt;/<span class="hljs-name">h4</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Etiam nulla eruditi eu quo, facer postulant an mea. Eos at legimus deseruisse adipiscing. Amet iriure torquatos ex mei. Sumo purto propriae nam ne, eam ferri diceret deseruisse ea, cum ubique constituam suscipiantur an. Alii brute legendos ut pri, epicuri voluptaria contentiones an eos. Pri ut feugiat ornatus consequuntur, ubique euismod patrioque id duo. Etiam nulla eruditi eu quo, facer postulant an mea. Eos at legimus deseruisse adipiscing. Amet iriure torquatos ex mei. Sumo purto propriae nam ne, eam ferri diceret deseruisse ea, cum ubique constituam suscipiantur an. Alii brute legendos ut pri, epicuri voluptaria contentiones an eos. Pri ut feugiat ornatus consequuntur, ubique euismod patrioque id duo. Etiam nulla eruditi eu quo, facer postulant an mea. Eos at legimus deseruisse adipiscing. Amet iriure torquatos ex mei. Sumo purto propriae nam ne, eam ferri diceret deseruisse ea, cum ubique constituam suscipiantur an. Alii brute legendos ut pri, epicuri voluptaria contentiones an eos. Pri ut feugiat ornatus consequuntur, ubique euismod patrioque id duo.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
+<p>Next, create an instance of scrollspy and target the appropriate elements. Navigation elements in the <code>target</code> will change as the user scrolls the <code>scrollNode</code>:</p>
+<pre class="highlight"><code class="hljs javascript">YUI().use(
+  <span class="hljs-string">'aui-scrollspy'</span>,
+  <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">Y</span>) </span>{
+    <span class="hljs-keyword">new</span> Y.Scrollspy(
+      {
+        <span class="hljs-attr">scrollNode</span>: <span class="hljs-string">'#scrollNode'</span>,
+        <span class="hljs-attr">target</span>: <span class="hljs-string">'#navbar'</span>
+      }
+    );
+  }
+);</code></pre>
+<hr>
+<h4 id="configuring-scrollspy">Configuring Scrollspy</h4>
+<p>You can also adjust the pixel <code>offset</code> when calculating the scroll position:</p>
+<pre class="highlight"><code class="hljs javascript">YUI().use(
+  <span class="hljs-string">'aui-scrollspy'</span>,
+  <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">Y</span>) </span>{
+    <span class="hljs-keyword">new</span> Y.Scrollspy(
+      {
+        <span class="hljs-attr">offset</span>: <span class="hljs-number">50</span>,
+        <span class="hljs-attr">scrollNode</span>: <span class="hljs-string">'#scrollNode'</span>,
+        <span class="hljs-attr">target</span>: <span class="hljs-string">'#target'</span>
+      }
+    );
+  }
+);</code></pre>
+
+
+    
+    <div class="alert alert-success">
+        For more information about configuration, check out our <a href="https://alloyui.com/api/modules/aui-scrollspy.html" target="_blank">API Docs</a>.
+    </div>
+    
+
+  </div>
+
+</div>
+    </div>
+
+    <div id="push"></div>
+
+  </div>
+
+
+  <div class="footer">
+    <div class="container">
+      <p class="col-xs-6">
+        <a href="http://liferay.com/">
+          <img src="https://alloyui.com/website/img/liferay-logo.png" alt="Liferay Logo" id="liferay-logo">
+        </a>
+      </p>
+      <p class="copyright col-xs-6"><a href="https://github.com/liferay/alloy-ui/blob/master/LICENSE.md">BSD</a> License.</p>
+    </div>
+  </div>
+
+  <script src="https://alloyui.com/website/js/version-dropdown.js"></script>
+
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-37033501-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+  </script>
+
+</body>
+</html>

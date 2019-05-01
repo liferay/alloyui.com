@@ -1,8 +1,12 @@
-AUI().use('aui-audio', function(A) {
-
-  new A.Audio({
-    boundingBox: '#myAudio',
-    url: 'http://liferay.github.com/alloyui.com/audio/zelda.mp3'
-  }).render();
-
-});
+YUI().use(
+  'aui-audio',
+  function(Y) {
+    new Y.Audio(
+      {
+        boundingBox: '#myAudio',
+        url: 'https://alloyui.com/audio/zelda.mp3',
+        oggUrl: 'https://alloyui.com/audio/zelda.ogg'
+      }
+    ).render();
+  }
+);
